@@ -1,0 +1,126 @@
+{
+  "concepts": [
+    {
+      "id": "traditional-chunking",
+      "label": "Traditional Chunking", 
+      "color": "#B85C5C",
+      "description": "Chunk first, embed separately - breaks context"
+    },
+    {
+      "id": "late-chunking",
+      "label": "Late Chunking",
+      "color": "#5CB882", 
+      "description": "Embed full document first, then chunk - preserves context"
+    },
+    {
+      "id": "context-preservation",
+      "label": "Context Preservation",
+      "color": "#5C82B8",
+      "description": "Maintaining cross-sentence semantic relationships"
+    },
+    {
+      "id": "directional-performance",
+      "label": "Directional Performance",
+      "color": "#825CB8",
+      "description": "Context-aware evaluation: higher similarity for related terms, lower for unrelated"
+    },
+    {
+      "id": "statistical-validation",
+      "label": "Statistical Validation", 
+      "color": "#B8955C",
+      "description": "t-test with p < 0.001 proving significant improvements"
+    },
+    {
+      "id": "berlin-analysis",
+      "label": "Berlin Analysis",
+      "color": "#5C95B8", 
+      "description": "60 terms tested against 4-sentence Berlin document"
+    },
+    {
+      "id": "embeddings",
+      "label": "Embeddings",
+      "color": "#B85C95",
+      "description": "Vector representations enabling similarity search"
+    },
+    {
+      "id": "transformers",
+      "label": "Transformers",
+      "color": "#82B85C",
+      "description": "Neural architecture processing full document context"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "traditional-chunking",
+      "to": "context-preservation", 
+      "label": "loses"
+    },
+    {
+      "from": "late-chunking",
+      "to": "context-preservation",
+      "label": "preserves"
+    },
+    {
+      "from": "transformers",
+      "to": "late-chunking",
+      "label": "enables"
+    },
+    {
+      "from": "transformers",
+      "to": "embeddings",
+      "label": "generates"
+    },
+    {
+      "from": "embeddings",
+      "to": "berlin-analysis",
+      "label": "tested in"
+    },
+    {
+      "from": "berlin-analysis",
+      "to": "directional-performance",
+      "label": "measures"
+    },
+    {
+      "from": "directional-performance",
+      "to": "statistical-validation",
+      "label": "validated by"
+    },
+    {
+      "from": "statistical-validation",
+      "to": "late-chunking",
+      "label": "proves superiority of"
+    },
+    {
+      "from": "late-chunking",
+      "to": "traditional-chunking",
+      "label": "outperforms"
+    },
+    {
+      "from": "context-preservation",
+      "to": "directional-performance",
+      "label": "improves"
+    }
+  ],
+  "conceptMap": [
+    {
+      "section": "problem-lost-context",
+      "concepts": ["traditional-chunking", "context-preservation"]
+    },
+    {
+      "section": "comprehensive-analysis",
+      "concepts": ["berlin-analysis", "directional-performance", "embeddings"]
+    },
+    {
+      "section": "core-implementation", 
+      "concepts": ["late-chunking", "transformers", "embeddings"]
+    },
+    {
+      "section": "statistical-validation",
+      "concepts": ["statistical-validation", "directional-performance"]
+    },
+    {
+      "section": "solution-late-chunking",
+      "concepts": ["late-chunking", "context-preservation", "transformers"]
+    }
+  ]
+}

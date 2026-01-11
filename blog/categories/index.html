@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories - PraxAgent LLC</title>
+    <meta name="description" content="Insights, tutorials, and thoughts on AI software development from the PraxAgent team">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles-v2.css">
+    
+    
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html">
+                    <span class="logo-text">praxagent</span>
+                    <span class="logo-tagline">LLC</span>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="../index.html#services" class="nav-link">Experience</a>
+                <a href="../index.html#about" class="nav-link">About</a>
+                <a href="index.html" class="nav-link">Tech Blog</a>
+                <a href="../index.html#contact" class="nav-link">Contact</a>
+                
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun">☀️</span>
+                    <span class="theme-toggle-icon moon">🌙</span>
+                </div>
+            </div>
+            
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            
+            <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+                <div class="mobile-menu-content">
+                    <a href="../index.html#services" class="mobile-nav-link">Experience</a>
+                    <a href="../index.html#about" class="mobile-nav-link">About</a>
+                    <a href="index.html" class="mobile-nav-link">Tech Blog</a>
+                    <a href="../index.html#contact" class="mobile-nav-link">Contact</a>
+                    <div class="mobile-theme-toggle">
+                        <div class="theme-toggle" aria-label="Toggle dark mode">
+                            <span class="theme-toggle-icon sun">☀️</span>
+                            <span class="theme-toggle-icon moon">🌙</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        
+<header class="blog-header">
+    <div class="container">
+        <div class="blog-header-content">
+            <h1 class="blog-title">
+                AI Insights & 
+                <span class="accent">Innovations</span>
+            </h1>
+            <p class="blog-subtitle">
+                Exploring the latest in AI development, machine learning insights, and practical implementation strategies. Written by our team of AI experts.
+            </p>
+        </div>
+    </div>
+</header>
+
+<div class="blog-main">
+    <div class="container">
+        <div class="blog-content">
+            <div class="blog-posts">
+                
+                <article class="blog-post-preview">
+                    <h2><a href="posts/late-chunking/index.html">Late Chunking: Why Context-Aware Embeddings (sometimes) Beat Traditional Chunking</a></h2>
+                    <div class="post-meta">
+                        <span class="post-date">August 2, 2025</span>
+                        <span class="post-author">by TJ</span>
+                    </div>
+                    <p class="post-excerpt">Traditional chunking methods for RAG pipelines often break context by chunking text before embedding. Late chunking offers a solution by embedding the entire document first and then chunking the token embeddings, preserving vital contextual information and improving retrieval accuracy.</p>
+                    <a href="posts/late-chunking/index.html" class="read-more">Read More →</a>
+                </article>
+                
+            </div>
+
+            <aside class="blog-sidebar">
+                <div class="sidebar-widget">
+                    <h3>About This Blog</h3>
+                    <p>We share practical insights, cutting-edge research, and real-world applications of AI technology to help you stay ahead in the rapidly evolving world of artificial intelligence.</p>
+                </div>
+
+                <div class="sidebar-widget">
+                    <h3>Categories</h3>
+                    <ul class="category-list">
+                        <li><a href="#machine-learning">Machine Learning</a></li>
+                        <li><a href="#ai-ethics">AI Ethics</a></li>
+                        <li><a href="#implementation">Implementation</a></li>
+                        <li><a href="#research">Research</a></li>
+                        <li><a href="#tutorials">Tutorials</a></li>
+                    </ul>
+                </div>
+
+                
+            </aside>
+        </div>
+    </div>
+</div>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-text">praxagent LLC</span>
+                    <p>AI software insights and knowledge sharing.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="../index.html#services">Experience</a>
+                    <a href="../index.html#about">About</a>
+                    <a href="index.html">Tech Blog</a>
+                    <a href="../index.html#contact">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 praxagent LLC. All rights reserved.</p>
+                <p>Professional AI consulting.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+    
+</body>
+</html>

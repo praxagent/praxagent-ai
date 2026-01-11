@@ -1,0 +1,16 @@
+<div class="panel {{ .Get 0 }}">
+    <div class="panel-icon">
+        {{ if eq (.Get 0) "info" }}💡
+        {{ else if eq (.Get 0) "warning" }}⚠️
+        {{ else if eq (.Get 0) "error" }}⚡️
+        {{ else if eq (.Get 0) "definition" }}📖
+        {{ else if eq (.Get 0) "quote" }}💬
+        {{ else if eq (.Get 0) "output" }}💻
+        {{ else if eq (.Get 0) "question" }}❓
+        {{ else if eq (.Get 0) "answer" }}✅
+        {{ end }}
+    </div>
+    <div class="panel-content">
+        {{ .Inner | .Page.RenderString }}
+    </div>
+</div>

@@ -1,0 +1,59 @@
+{{ define "main" }}
+<header class="blog-header">
+    <div class="container">
+        <div class="blog-header-content">
+            <h1 class="blog-title">
+                AI Insights & 
+                <span class="accent">Innovations</span>
+            </h1>
+            <p class="blog-subtitle">
+                Exploring the latest in AI development, machine learning insights, and practical implementation strategies. Written by our team of AI experts.
+            </p>
+        </div>
+    </div>
+</header>
+
+<div class="blog-main">
+    <div class="container">
+        <div class="blog-content">
+            <div class="blog-posts">
+                {{ range (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}
+                <article class="blog-post-preview">
+                    <h2><a href="posts/{{ .File.Dir | strings.TrimSuffix "/" | path.Base }}/index.html">{{ .Title }}</a></h2>
+                    <div class="post-meta">
+                        <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
+                        <span class="post-author">by {{ .Params.author | default "PraxAgent Team" }}</span>
+                    </div>
+                    <p class="post-excerpt">{{ .Summary }}</p>
+                    <a href="posts/{{ .File.Dir | strings.TrimSuffix "/" | path.Base }}/index.html" class="read-more">Read More →</a>
+                </article>
+                {{ end }}
+            </div>
+
+            <aside class="blog-sidebar">
+                <div class="sidebar-widget">
+                    <h3>About This Blog</h3>
+                    <p>We share practical insights, cutting-edge research, and real-world applications of AI technology to help you stay ahead in the rapidly evolving world of artificial intelligence.</p>
+                </div>
+
+                <div class="sidebar-widget">
+                    <h3>Categories</h3>
+                    <ul class="category-list">
+                        <li><a href="#machine-learning">Machine Learning</a></li>
+                        <li><a href="#ai-ethics">AI Ethics</a></li>
+                        <li><a href="#implementation">Implementation</a></li>
+                        <li><a href="#research">Research</a></li>
+                        <li><a href="#tutorials">Tutorials</a></li>
+                    </ul>
+                </div>
+
+                <!-- <div class="sidebar-widget">
+                    <h3>Stay Updated</h3>
+                    <p>Want to get notified when we publish new insights?</p>
+                    <a href="../index.html#contact" class="sidebar-cta">Subscribe to Updates</a>
+                </div> -->
+            </aside>
+        </div>
+    </div>
+</div>
+{{ end }}

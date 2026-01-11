@@ -1,0 +1,33 @@
+{{/* Try to read knowledge graph from post directory */}}
+{{ $knowledgeGraphPath := printf "%s/knowledge-graph.json" .File.Dir }}
+{{ $knowledgeGraphData := dict }}
+{{ $concepts := slice }}
+{{ $relationships := slice }}
+{{ $conceptMap := slice }}
+
+{{/* Check if knowledge-graph.json exists in the post directory */}}
+{{ if fileExists (printf "content/%s" $knowledgeGraphPath) }}
+  {{ $jsonContent := readFile (printf "content/%s" $knowledgeGraphPath) }}
+  {{ $knowledgeGraphData = $jsonContent | unmarshal }}
+  {{ $concepts = $knowledgeGraphData.concepts }}
+  {{ $relationships = $knowledgeGraphData.relationships }}
+  {{ $conceptMap = $knowledgeGraphData.conceptMap }}
+{{ else }}
+  {{/* Fallback to basic concepts if no knowledge graph file exists */}}
+  {{ $concepts = slice
+    (dict "id" "main-topic" "label" "Main Topic" "color" "#3B82F6" "description" "Primary subject of this article")
+    (dict "id" "key-concepts" "label" "Key Concepts" "color" "#10B981" "description" "Important ideas discussed")
+    (dict "id" "implementation" "label" "Implementation" "color" "#F59E0B" "description" "Practical application")
+  }}
+  {{ $relationships = slice }}
+  {{ $conceptMap = slice }}
+{{ end }}
+
+<script>
+window.articleKnowledgeGraph = {
+  "concepts": {{ $concepts | jsonify | safeJS }},
+  "relationships": {{ $relationships | jsonify | safeJS }},
+  "conceptMap": {{ $conceptMap | jsonify | safeJS }},
+  "title": {{ .Title | jsonify }}
+};
+</script>

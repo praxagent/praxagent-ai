@@ -1,0 +1,132 @@
+<svg width="800" height="120" viewBox="0 0 800 120" xmlns="http://www.w3.org/2000/svg" shape-rendering="optimizeQuality" text-rendering="optimizeQuality">
+    <defs>
+        <linearGradient id="lissajousGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#0891b2;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#0891b2;stop-opacity:1" />
+        </linearGradient>
+
+        <!-- Glow filter for dramatic effect -->
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <!-- Outer glow -->
+            <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+            <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/> 
+            </feMerge>
+        </filter>
+
+        <!-- Intense glow filter for extra dramatic effect -->
+        <filter id="intenseGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <!-- Multiple glow layers -->
+            <feGaussianBlur stdDeviation="0.8" result="glow1"/>
+            <feGaussianBlur stdDeviation="1.5" result="glow2"/>
+            <feGaussianBlur stdDeviation="2.5" result="glow3"/>
+            <feGaussianBlur stdDeviation="4" result="glow4"/>
+            
+            <feMerge>
+                <feMergeNode in="glow4"/>
+                <feMergeNode in="glow3"/>
+                <feMergeNode in="glow2"/>
+                <feMergeNode in="glow1"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+
+        
+        <!-- All letters normalized to 40x40 units with consistent design -->
+        
+        <!-- Letter P - Normalized -->
+        <g id="letter-p" filter="url(#intenseGlow)">
+            <path d="M5,5 L5,35 M5,5 L25,5 Q35,10 35,15 Q35,20 25,25 L5,25" 
+                  stroke="url(#lissajousGradient)" stroke-width="2" fill="none" 
+                  stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+        </g>
+        
+        <!-- Letter R - Normalized -->
+        <g id="letter-r" filter="url(#intenseGlow)">
+            <path d="M5,5 L5,35 M5,5 L25,5 Q35,10 35,15 Q35,20 25,25 L5,25 M20,25 L35,35" 
+                  stroke="url(#lissajousGradient)" stroke-width="2" fill="none" 
+                  stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+        </g>
+        
+        <!-- Letter A - Normalized -->
+        <g id="letter-a" filter="url(#intenseGlow)">
+            <path d="M5,35 L20,5 L35,35 M12,25 L28,25" 
+                  stroke="url(#lissajousGradient)" stroke-width="2" fill="none" 
+                  stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+        </g>
+        
+        <!-- Letter X - Normalized -->
+        <g id="letter-x" filter="url(#intenseGlow)">
+            <path d="M5,5 L35,35 M35,5 L5,35" 
+                  stroke="url(#lissajousGradient)" stroke-width="2" fill="none" 
+                  stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+        </g>
+        
+        <!-- Letter G - Normalized -->
+        <g id="letter-g" filter="url(#intenseGlow)">
+            <path d="M35,15 Q35,5 20,5 Q5,5 5,20 Q5,35 20,35 Q35,35 35,25 L25,25" 
+                  stroke="url(#lissajousGradient)" stroke-width="2" fill="none" 
+                  stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+        </g>
+        
+        <!-- Letter E - Normalized -->
+        <g id="letter-e" filter="url(#intenseGlow)">
+            <path d="M5,5 L5,35 M5,5 L35,5 M5,20 L25,20 M5,35 L35,35" 
+                  stroke="url(#lissajousGradient)" stroke-width="2" fill="none" 
+                  stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+        </g>
+        
+        <!-- Letter N - Normalized -->
+        <g id="letter-n" filter="url(#intenseGlow)">
+            <path d="M5,35 L5,5 L35,35 L35,5" 
+                  stroke="url(#lissajousGradient)" stroke-width="2" fill="none" 
+                  stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+        </g>
+        
+        <!-- Letter T - Normalized -->
+        <g id="letter-t" filter="url(#intenseGlow)">
+            <path d="M5,5 L35,5 M20,5 L20,35" 
+                  stroke="url(#lissajousGradient)" stroke-width="2" fill="none" 
+                  stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+        </g>
+    </defs>
+    
+    <!-- Compose the word PRAXAGENT with consistent 60px spacing, centered -->
+    <g transform="translate(130, 40)">
+        <use href="#letter-p"/>
+    </g>
+    
+    <g transform="translate(190, 40)">
+        <use href="#letter-r"/>
+    </g>
+    
+    <g transform="translate(250, 40)">
+        <use href="#letter-a"/>
+    </g>
+    
+    <g transform="translate(310, 40)">
+        <use href="#letter-x"/>
+    </g>
+    
+    <g transform="translate(370, 40)">
+        <use href="#letter-a"/>
+    </g>
+    
+    <g transform="translate(430, 40)">
+        <use href="#letter-g"/>
+    </g>
+    
+    <g transform="translate(490, 40)">
+        <use href="#letter-e"/>
+    </g>
+    
+    <g transform="translate(550, 40)">
+        <use href="#letter-n"/>
+    </g>
+    
+    <g transform="translate(610, 40)">
+        <use href="#letter-t"/>
+    </g>
+</svg>

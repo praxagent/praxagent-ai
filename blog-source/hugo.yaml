@@ -1,0 +1,48 @@
+baseURL: '..'
+languageCode: 'en-us'
+title: 'praxagent LLC Blog'
+description: 'Intelligent AI software consultation and partnership'
+
+ignoreFiles:
+  - '\\.venv/'
+  - 'venv/'
+  - '\\.git/'
+  - 'node_modules/'
+  - '__pycache__/'
+
+params:
+  description: 'Insights, tutorials, and thoughts on AI software development from the PraxAgent team'
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+    lineNos: false
+    codeFences: true
+  tableOfContents:
+    startLevel: 2
+    endLevel: 4
+    ordered: false
+
+outputs:
+  home: ['HTML']
+  page: ['HTML']
+
+publishDir: '../blog'
+
+menu:
+  main:
+    - name: "Services"
+      url: "../index.html#services"
+      weight: 10
+    - name: "About"
+      url: "../index.html#about"
+      weight: 20
+    - name: "Blog"
+      url: "index.html"
+      weight: 30
+    - name: "Contact"
+      url: "../index.html#contact"
+      weight: 40

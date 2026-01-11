@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on praxagent LLC Blog</title>
+    <link>../tags/</link>
+    <description>Recent content in Tags on praxagent LLC Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 02 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="../tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI</title>
+      <link>../tags/ai/</link>
+      <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>../tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Embedding</title>
+      <link>../tags/embedding/</link>
+      <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>../tags/embedding/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LLM</title>
+      <link>../tags/llm/</link>
+      <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>../tags/llm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Machine-Learning</title>
+      <link>../tags/machine-learning/</link>
+      <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>../tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>NLP</title>
+      <link>../tags/nlp/</link>
+      <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>../tags/nlp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tutorials</title>
+      <link>../tags/tutorials/</link>
+      <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>../tags/tutorials/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Vector Search</title>
+      <link>../tags/vector-search/</link>
+      <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>../tags/vector-search/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

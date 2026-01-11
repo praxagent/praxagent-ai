@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PraxAgent LLC - Intelligent AI Software Consultation</title>
+    <meta name="description" content="PraxAgent LLC offers insights and perspectives on AI software development. Sharing knowledge and experience in building intelligent solutions.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles-v2.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">praxagent</span>
+                <span class="logo-tagline">LLC</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#services" class="nav-link">Experience</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="blog/index.html" class="nav-link">Tech Blog</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <!-- <a href="#contact" class="cta-button">Let's Build</a> -->
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun">☀️</span>
+                    <span class="theme-toggle-icon moon">🌙</span>
+                </div>
+            </div>
+            
+            <!-- Mobile menu button -->
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Mobile menu overlay -->
+            <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+                <div class="mobile-menu-content">
+                    <a href="#services" class="mobile-nav-link">Experience</a>
+                    <a href="#about" class="mobile-nav-link">About</a>
+                    <a href="blog/index.html" class="mobile-nav-link">Tech Blog</a>
+                    <a href="#contact" class="mobile-nav-link">Contact</a>
+                    <div class="mobile-theme-toggle">
+                        <div class="theme-toggle" aria-label="Toggle dark mode">
+                            <span class="theme-toggle-icon sun">☀️</span>
+                            <span class="theme-toggle-icon moon">🌙</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <!-- Large Lissajous Logo Above Everything -->
+        <div class="hero-logo-section">
+            <div class="container">
+                <div class="lissajous-brand">
+                    <object data="praxagent-logo.svg" type="image/svg+xml" class="lissajous-logo-large"></object>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Hero Content -->
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    AI Software
+                    <span class="accent">Consultation</span>
+                </h1>
+                <p class="hero-subtitle">
+                    PraxAgent LLC shares insights and expertise in AI-driven software solutions.
+                </p>
+                <div class="hero-cta">
+                    <a href="#contact" class="primary-button">Get in Touch</a>
+                    <a href="#services" class="secondary-button">Experience</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-lang">Reliable AI Stack</span>
+                        <div class="code-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <pre class="code-content"><code><span style="color: #ff6b9d; font-weight: bold;">const</span> <span style="color: #4fd1c7; font-weight: bold;">reliableAI</span> = {
+  <span style="color: #ffd93d;">hallucination_guard</span>: <span style="color: #6bcf7f;">"Validation layers"</span>,
+  <span style="color: #ffd93d;">agentic_flow</span>: <span style="color: #6bcf7f;">"Multi-agent systems"</span>, 
+  <span style="color: #ffd93d;">vision_ai</span>: <span style="color: #6bcf7f;">"Object detection"</span>,
+  <span style="color: #ffd93d;">safety_rails</span>: <span style="color: #6bcf7f;">"Secure deployment"</span>,
+  <span style="color: #ffd93d;">monitoring</span>: <span style="color: #6bcf7f;">"Model performance"</span>,
+  <span style="color: #ffd93d;">result</span>: <span style="color: #6bcf7f;">"Trustworthy AI"</span>
+};</code></pre>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Areas of Experience</h2>
+            <p class="section-subtitle">Knowledge and insights in AI solutions and their applications.</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i data-feather="target"></i></div>
+                    <h3>AI Strategy & Analysis</h3>
+                    <p>Understanding where AI fits best in business contexts. Practical insights that focus on real applications without the buzzword overload.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i data-feather="lock"></i></div>
+                    <h3>AI Security</h3>
+                    <p>Experience with guarding against prompt injections and system prompt exfiltration. Knowledge of 
+                        moderation filters and robust guardrails for safe and reliable AI systems.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i data-feather="package"></i></div>
+                    <h3>AI Integration & Deployment</h3>
+                    <p>Experience with deployment strategies and architectural patterns for AI solutions deployed efficiently and securely.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i data-feather="database"></i></div>
+                    <h3>Data Pipeline & MLOps Architecture</h3>
+                    <p>Understanding that great AI needs great data infrastructure. Experience with robust pipelines and monitoring systems for consistent model performance.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i data-feather="trending-up"></i></div>
+                    <h3>AI Optimization</h3>
+                    <p>Knowledge of making AI systems faster, smarter, and more efficient. Experience with performance tuning and bottleneck identification.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i data-feather="shield"></i></div>
+                    <h3>AI Ethics & Compliance</h3>
+                    <p>Understanding of building AI that's both powerful and responsible. Knowledge of ethical considerations and compliance requirements for trustworthy systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Why praxagent LLC?</h2>
+                    <p class="about-lead">My perspective: AI should be practical, powerful, and built with purpose.</p>
+                    
+                    <div class="about-points">
+                        <div class="point">
+                            <h4>Strategic Approach</h4>
+                            <p>Experience spans from initial strategy to deployment-ready solutions, including expertise and infrastructure code. Focus on empowering teams to drive solutions forward with maintained control and ownership.</p>
+                        </div>
+                        
+                        <div class="point">
+                            <h4>Honest, Strategic Perspective</h4>
+                            <p>Sometimes AI isn't the answer. When it is, focus on the smartest path forward without the hype.</p>
+                        </div>
+                        
+                        <div class="point">
+                            <h4>Meaningful Impact</h4>
+                            <p>Success is measured by positive business impact – real growth, improved efficiency, and sustainable competitive advantages.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-stats">
+                    <div class="stat">
+                        <span class="stat-number">10+</span>
+                        <span class="stat-label">Years Combined Experience</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Focus on Your Success</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Buzzword Nonsense</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tech-stack">
+        <div class="container">
+            <div class="tech-graph-container">
+                <canvas id="tech-graph" class="tech-canvas"></canvas>
+                <div class="tech-grid" style="display: none;">
+                <span class="tech-item">Python</span>
+                <span class="tech-item">TensorFlow</span>
+                <span class="tech-item">PyTorch</span>
+                <span class="tech-item">AWS</span>
+                <span class="tech-item">Google Cloud</span>
+                <span class="tech-item">Terraform</span>
+                <span class="tech-item">Packer</span>
+                <span class="tech-item">Ansible</span>
+                <span class="tech-item">Docker</span>
+                <span class="tech-item">Kubernetes</span>
+                <span class="tech-item">Helm</span>
+                <span class="tech-item">Apache Spark</span>
+                <span class="tech-item">Apache Airflow</span>
+                <span class="tech-item">Apache Superset</span>
+                <span class="tech-item">Hive Metastore</span>
+                <span class="tech-item">Hudi/Iceberg</span>
+                <span class="tech-item">MLflow</span>
+                <span class="tech-item">Scikit-learn</span>
+                <span class="tech-item">OpenAI</span>
+                <span class="tech-item">Anthropic/Claude</span>
+                <span class="tech-item">Gemini</span>
+                <span class="tech-item">Hugging Face</span>
+                <span class="tech-item">LangChain</span>
+                <span class="tech-item">RAG</span>
+                <span class="tech-item">Vector Search</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2>Interested in AI Discussions?</h2>
+                <p class="contact-subtitle">Always interested in discussing AI challenges and potential solutions.</p>
+                
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <h4>Email Me</h4>
+                            <a href="mailto:hello@praxagent.ai">hello@praxagent.ai</a>
+                        </div>
+                        
+                        <!-- <div class="contact-item">
+                            <h4>Schedule a Call</h4>
+                            <p>30-minute consultation to discuss your AI needs</p>
+                            <a href="#" class="schedule-button">Book a Call</a>
+                        </div> -->
+                        
+                        <div class="contact-item">
+                            <h4>My Approach</h4>
+                            <p>Focus on sharing strategic insights and technical knowledge. Teams maintain full control over deployment and operations.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- <div class="contact-form">
+                        <form class="form">
+                            <input type="text" placeholder="Your Name" required>
+                            <input type="email" placeholder="Email Address" required>
+                            <input type="text" placeholder="Company">
+                            <textarea placeholder="Tell us about your AI challenge..." rows="5" required></textarea>
+                            <button type="submit" class="submit-button">Send Message</button>
+                        </form>
+                    </div> -->
+                    
+                    <div class="social-links">
+                        <h3>Connect With Me</h3>
+                        <div class="social-icons">
+                            <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener" class="social-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                </svg>
+                                <span>YouTube</span>
+                            </a>
+                            
+                            <a href="https://x.com/praxagent" target="_blank" rel="noopener" class="social-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                                </svg>
+                                <span>Twitter/X</span>
+                            </a>
+                            
+                            <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener" class="social-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 2.105.139 3.107.139 5.498 1.027 8.546c.343 1.174.856 2.37 1.663 3.409.874 1.125 2.222 2.051 4.004 2.051 1.782 0 2.482-.644 2.482-.644s.7.644 2.482.644c1.782 0 3.13-.926 4.004-2.051.807-1.039 1.32-2.235 1.663-3.409.888-3.048.888-5.439.125-6.441-.659-.839-1.664-1.161-4.3.735C16.046 4.747 13.087 8.686 12 10.8z"/>
+                                    <path d="M12 13.2c1.087 2.114 4.046 6.053 6.798 7.995 2.636 1.896 3.641 1.574 4.3.735.763-1.002.763-3.393-.125-6.441-.343-1.174-.856-2.37-1.663-3.409-.874-1.125-2.222-2.051-4.004-2.051-1.782 0-2.482.644-2.482.644s-.7-.644-2.482-.644c-1.782 0-3.13.926-4.004 2.051-.807 1.039-1.32 2.235-1.663 3.409-.888 3.048-.888 5.439-.125 6.441.659.839 1.664 1.161 4.3-.735C7.954 19.253 10.913 15.314 12 13.2z"/>
+                                </svg>
+                                <span>BlueSky</span>
+                            </a>
+                            
+                            <a href="https://github.com/praxagent" target="_blank" rel="noopener" class="social-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-text">praxagent LLC</span>
+                    <p>AI software insights and knowledge sharing.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="#services">Experience</a>
+                    <a href="#about">About</a>
+                    <a href="blog/index.html">Tech Blog</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 praxagent LLC. All rights reserved.</p>
+                <p>Professional AI consulting.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+</body>
+</html>

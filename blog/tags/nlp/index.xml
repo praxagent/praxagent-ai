@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NLP on praxagent LLC Blog</title>
+    <link>../tags/nlp/</link>
+    <description>Recent content in NLP on praxagent LLC Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 02 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="../tags/nlp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Late Chunking: Why Context-Aware Embeddings (sometimes) Beat Traditional Chunking</title>
+      <link>../posts/late-chunking/</link>
+      <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>../posts/late-chunking/</guid>
+      <description>Traditional chunking methods for RAG pipelines often break context by chunking text before embedding. Late chunking offers a solution by embedding the entire document first and then chunking the token embeddings, preserving vital contextual information and improving retrieval accuracy.</description>
+    </item>
+  </channel>
+</rss>

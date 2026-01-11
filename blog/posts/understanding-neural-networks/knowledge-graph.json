@@ -1,0 +1,66 @@
+{
+  "concepts": [
+    {
+      "id": "perceptrons",
+      "label": "Perceptrons",
+      "color": "#EF4444", 
+      "description": "Basic neural network building blocks"
+    },
+    {
+      "id": "deep-learning",
+      "label": "Deep Learning",
+      "color": "#10B981",
+      "description": "Multi-layer neural network architectures"
+    },
+    {
+      "id": "activation-functions", 
+      "label": "Activation Functions",
+      "color": "#3B82F6",
+      "description": "Non-linear transformations in neurons"
+    },
+    {
+      "id": "backpropagation",
+      "label": "Backpropagation",
+      "color": "#8B5CF6",
+      "description": "Algorithm for training neural networks"
+    },
+    {
+      "id": "gradient-descent",
+      "label": "Gradient Descent", 
+      "color": "#F59E0B",
+      "description": "Optimization algorithm for learning"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "perceptrons",
+      "to": "deep-learning",
+      "label": "foundation of"
+    },
+    {
+      "from": "activation-functions",
+      "to": "perceptrons", 
+      "label": "enable"
+    },
+    {
+      "from": "backpropagation",
+      "to": "deep-learning",
+      "label": "trains"
+    },
+    {
+      "from": "gradient-descent",
+      "to": "backpropagation",
+      "label": "powers"
+    }
+  ],
+  "conceptMap": [
+    {
+      "section": "mathematical-foundation",
+      "concepts": ["perceptrons", "activation-functions", "gradient-descent"]
+    },
+    {
+      "section": "deep-learning",
+      "concepts": ["deep-learning", "backpropagation", "activation-functions"]
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ if .Title }}{{ .Title }} - {{ end }}PraxAgent LLC{{ if eq .Type "posts" }} Blog{{ end }}</title>
+    <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ if eq .Type "posts" }}../../styles-v2.css{{ else }}styles-v2.css{{ end }}">
+    {{ if or (eq .Type "posts") (eq .Kind "home") }}
+    <link rel="stylesheet" href="{{ if eq .Type "posts" }}../../blog.css{{ else }}blog.css{{ end }}">
+    <link rel="stylesheet" href="{{ if eq .Type "posts" }}../../katex.min.css{{ else }}katex.min.css{{ end }}">
+    <script src="https://unpkg.com/feather-icons"></script>
+    {{ end }}
+    {{ if .IsPage }}
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    {{ end }}
+</head>
+<body>
+    <nav class="navbar{{ if .IsPage }} navbar-scrolls{{ end }}">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="{{ if eq .Type "posts" }}../../../index.html{{ else }}../index.html{{ end }}">
+                    <span class="logo-text">praxagent</span>
+                    <span class="logo-tagline">LLC</span>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="{{ if eq .Type "posts" }}../../../index.html#services{{ else }}../index.html#services{{ end }}" class="nav-link">Experience</a>
+                <a href="{{ if eq .Type "posts" }}../../../index.html#about{{ else }}../index.html#about{{ end }}" class="nav-link">About</a>
+                <a href="{{ if eq .Type "posts" }}../../index.html{{ else }}index.html{{ end }}" class="nav-link{{ if or (eq .Kind "home") (eq .Type "posts") }} active{{ end }}">Tech Blog</a>
+                <a href="{{ if eq .Type "posts" }}../../../index.html#contact{{ else }}../index.html#contact{{ end }}" class="nav-link">Contact</a>
+                <!-- <a href="{{ if eq .Type "posts" }}../../../index.html#contact{{ else }}../index.html#contact{{ end }}" class="cta-button">Let's Build</a> -->
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun">☀️</span>
+                    <span class="theme-toggle-icon moon">🌙</span>
+                </div>
+            </div>
+            
+            <!-- Mobile menu button -->
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Mobile menu overlay -->
+            <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+                <div class="mobile-menu-content">
+                    <a href="{{ if eq .Type "posts" }}../../../index.html#services{{ else }}../index.html#services{{ end }}" class="mobile-nav-link">Experience</a>
+                    <a href="{{ if eq .Type "posts" }}../../../index.html#about{{ else }}../index.html#about{{ end }}" class="mobile-nav-link">About</a>
+                    <a href="{{ if eq .Type "posts" }}../../index.html{{ else }}index.html{{ end }}" class="mobile-nav-link{{ if or (eq .Kind "home") (eq .Type "posts") }} active{{ end }}">Tech Blog</a>
+                    <a href="{{ if eq .Type "posts" }}../../../index.html#contact{{ else }}../index.html#contact{{ end }}" class="mobile-nav-link">Contact</a>
+                    <div class="mobile-theme-toggle">
+                        <div class="theme-toggle" aria-label="Toggle dark mode">
+                            <span class="theme-toggle-icon sun">☀️</span>
+                            <span class="theme-toggle-icon moon">🌙</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-text">praxagent LLC</span>
+                    <p>AI software insights and knowledge sharing.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="{{ if eq .Type "posts" }}../../../index.html#services{{ else }}../index.html#services{{ end }}">Experience</a>
+                    <a href="{{ if eq .Type "posts" }}../../../index.html#about{{ else }}../index.html#about{{ end }}">About</a>
+                    <a href="{{ if eq .Type "posts" }}../../index.html{{ else }}index.html{{ end }}">Tech Blog</a>
+                    <a href="{{ if eq .Type "posts" }}../../../index.html#contact{{ else }}../index.html#contact{{ end }}">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 praxagent LLC. All rights reserved.</p>
+                <p>Professional AI consulting.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ if eq .Type "posts" }}../../script.js{{ else }}script.js{{ end }}"></script>
+    <script>
+      feather.replace()
+    </script>
+    {{ if .IsPage }}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+
+            // Add copy buttons to code blocks
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre');
+            codeBlocks.forEach(pre => {
+                const button = document.createElement('button');
+                button.className = 'copy-code-button';
+                button.innerHTML = '📋 Copy';
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+                
+                button.addEventListener('click', () => {
+                    const code = pre.querySelector('code');
+                    const text = code ? code.textContent : pre.textContent;
+                    
+                    navigator.clipboard.writeText(text).then(() => {
+                        const originalText = button.innerHTML;
+                        button.innerHTML = '✅ Copied!';
+                        button.classList.add('copied');
+                        
+                        setTimeout(() => {
+                            button.innerHTML = originalText;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        // Fallback for older browsers
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            const originalText = button.innerHTML;
+                            button.innerHTML = '✅ Copied!';
+                            button.classList.add('copied');
+                            
+                            setTimeout(() => {
+                                button.innerHTML = originalText;
+                                button.classList.remove('copied');
+                            }, 2000);
+                        } catch (err) {
+                            console.error('Fallback copy failed: ', err);
+                        }
+                        document.body.removeChild(textArea);
+                    });
+                });
+                
+                pre.appendChild(button);
+            });
+        });
+    </script>
+    {{ end }}
+</body>
+</html>

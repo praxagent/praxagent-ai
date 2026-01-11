@@ -1,0 +1,32 @@
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            const pres = document.querySelectorAll('.post-body pre');
+            pres.forEach(pre => {
+                const code = pre.querySelector('code');
+                if (code) {
+                    const button = document.createElement('button');
+                    button.innerText = 'Copy';
+                    button.classList.add('copy-code-button');
+                    
+                    button.addEventListener('click', () => {
+                        navigator.clipboard.writeText(code.innerText).then(() => {
+                            button.innerText = 'Copied!';
+                            button.classList.add('copied');
+                            setTimeout(() => {
+                                button.innerText = 'Copy';
+                                button.classList.remove('copied');
+                            }, 2000);
+                        }).catch(err => {
+                            console.error('Failed to copy text: ', err);
+                        });
+                    });
+
+                    pre.appendChild(button);
+                }
+            });
+        });
+    </script>
+    

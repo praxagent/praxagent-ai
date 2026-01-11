@@ -1,0 +1,44 @@
+{
+  "concepts": [
+    {
+      "id": "ai-strategy",
+      "label": "AI Strategy",
+      "color": "#3B82F6",
+      "description": "Planning AI adoption for business value"
+    },
+    {
+      "id": "implementation",
+      "label": "Implementation", 
+      "color": "#10B981",
+      "description": "Practical deployment of AI solutions"
+    },
+    {
+      "id": "business-value",
+      "label": "Business Value",
+      "color": "#F59E0B",
+      "description": "Measurable impact and ROI from AI"
+    }
+  ],
+  "relationships": [
+    {
+      "from": "ai-strategy",
+      "to": "implementation",
+      "label": "guides"
+    },
+    {
+      "from": "implementation", 
+      "to": "business-value",
+      "label": "delivers"
+    }
+  ],
+  "conceptMap": [
+    {
+      "section": "understanding-ai",
+      "concepts": ["ai-strategy", "business-value"]
+    },
+    {
+      "section": "implementation-guide",
+      "concepts": ["implementation", "business-value"]
+    }
+  ]
+}
