@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apps - PraxAgent LLC</title>
+    <meta name="description" content="Explore apps built by PraxAgent LLC - TippyTip for smart web content management and Virtual TeamWork for AI-powered software development.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles-v2.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                    <span class="logo-tagline">LLC</span>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html#services" class="nav-link">Experience</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="blog/index.html" class="nav-link">Tech Blog</a>
+                <a href="apps.html" class="nav-link">Apps</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun">☀️</span>
+                    <span class="theme-toggle-icon moon">🌙</span>
+                </div>
+            </div>
+            
+            <!-- Mobile menu button -->
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <!-- Mobile menu overlay -->
+            <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+                <div class="mobile-menu-content">
+                    <a href="index.html#services" class="mobile-nav-link">Experience</a>
+                    <a href="index.html#about" class="mobile-nav-link">About</a>
+                    <a href="blog/index.html" class="mobile-nav-link">Tech Blog</a>
+                    <a href="apps.html" class="mobile-nav-link">Apps</a>
+                    <a href="index.html#contact" class="mobile-nav-link">Contact</a>
+                    <div class="mobile-theme-toggle">
+                        <div class="theme-toggle" aria-label="Toggle dark mode">
+                            <span class="theme-toggle-icon sun">☀️</span>
+                            <span class="theme-toggle-icon moon">🌙</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero" style="min-height: auto; padding: 6rem 0 3rem;">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Sample <span class="accent">Apps</span>
+                </h1>
+                <p class="hero-subtitle">
+                    AI-powered applications built with purpose and practicality.
+                </p>
+            </div>
+            <div class="hero-visual">
+                <img src="assets/stochastic_mountain_alpha.png" alt="Stochastic Mountain" style="max-width: 100%; height: auto; border-radius: 1rem;">
+            </div>
+        </div>
+    </header>
+
+    <section class="services" style="padding-top: 2rem;">
+        <div class="container">
+            <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
+                
+                <!-- TippyTip Card -->
+                <div class="service-card" style="padding: 2.5rem; display: flex; flex-direction: column;">
+                    <div style="flex: 1;">
+                        <div class="service-icon"><i data-feather="bookmark"></i></div>
+                        <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">TippyTip</h3>
+                        <p style="margin-bottom: 1.5rem;">
+                            A smart iOS app for saving, organizing, and consuming web content. Features include AI-powered summaries, 
+                            audio playback, podcast creation, knowledge graphs, and seamless iCloud synchronization across your iPhone and iPad. 
+                            Bring your own API keys.
+                        </p>
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4 style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.75rem;">Key Features:</h4>
+                            <ul style="list-style: none; padding: 0; display: grid; gap: 0.5rem;">
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>AI-powered tagging & summaries</span>
+                                </li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>Audio playback & podcast creation</span>
+                                </li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>Knowledge graph visualization</span>
+                                </li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>iCloud sync across devices</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="https://tippytip.ai" target="_blank" rel="noopener" class="primary-button" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto;">
+                        <span>Visit TippyTip</span>
+                        <i data-feather="external-link" style="width: 16px; height: 16px;"></i>
+                    </a>
+                </div>
+
+                <!-- Virtual TeamWork Card -->
+                <div class="service-card" style="padding: 2.5rem; display: flex; flex-direction: column;">
+                    <div style="flex: 1;">
+                        <div class="service-icon"><i data-feather="users"></i></div>
+                        <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">Virtual TeamWork</h3>
+                        <p style="margin-bottom: 1.5rem;">
+                            An open-source, self-hosted web application where AI agents simulate a software development team. 
+                            Describe your application idea and the system generates a virtual team with a Product Manager, developers, 
+                            and QA engineers who collaborate through a chat interface to build your project. Bring your own API keys.
+                        </p>
+                        <div style="margin-bottom: 1.5rem;">
+                            <h4 style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.75rem;">Key Features:</h4>
+                            <ul style="list-style: none; padding: 0; display: grid; gap: 0.5rem;">
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>AI-driven team generation</span>
+                                </li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>Real-time chat & Kanban board</span>
+                                </li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>Code generation & diff viewer</span>
+                                </li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>Executive access with Claude Code</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="https://virtualteamwork.ai" target="_blank" rel="noopener" class="primary-button" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto;">
+                        <span>Visit Virtual TeamWork</span>
+                        <i data-feather="external-link" style="width: 16px; height: 16px;"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-text">praxagent LLC</span>
+                    <p>AI software insights and knowledge sharing.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="index.html#services">Experience</a>
+                    <a href="index.html#about">About</a>
+                    <a href="blog/index.html">Tech Blog</a>
+                    <a href="apps.html">Apps</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 praxagent LLC. All rights reserved.</p>
+                <p>Professional AI consulting.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+</body>
+</html>
