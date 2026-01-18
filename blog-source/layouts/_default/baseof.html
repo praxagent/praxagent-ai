@@ -23,15 +23,14 @@
     <nav class="navbar{{ if .IsPage }} navbar-scrolls{{ end }}">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="{{ if eq .Type "posts" }}../../../index.html{{ else }}../index.html{{ end }}">
+                <a href="{{ if eq .Type "posts" }}../../../index.html{{ else }}../index.html{{ end }}" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
                     <span class="logo-text">praxagent</span>
                     <span class="logo-tagline">LLC</span>
                 </a>
             </div>
             <div class="nav-menu">
-                <a href="{{ if eq .Type "posts" }}../../../index.html#services{{ else }}../index.html#services{{ end }}" class="nav-link">Experience</a>
-                <a href="{{ if eq .Type "posts" }}../../../index.html#about{{ else }}../index.html#about{{ end }}" class="nav-link">About</a>
                 <a href="{{ if eq .Type "posts" }}../../index.html{{ else }}index.html{{ end }}" class="nav-link{{ if or (eq .Kind "home") (eq .Type "posts") }} active{{ end }}">Tech Blog</a>
+                <a href="{{ if eq .Type "posts" }}../../../apps.html{{ else }}../apps.html{{ end }}" class="nav-link">Apps</a>
                 <a href="{{ if eq .Type "posts" }}../../../index.html#contact{{ else }}../index.html#contact{{ end }}" class="nav-link">Contact</a>
                 <!-- <a href="{{ if eq .Type "posts" }}../../../index.html#contact{{ else }}../index.html#contact{{ end }}" class="cta-button">Let's Build</a> -->
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
@@ -50,9 +49,8 @@
             <!-- Mobile menu overlay -->
             <div class="mobile-menu-overlay" id="mobile-menu-overlay">
                 <div class="mobile-menu-content">
-                    <a href="{{ if eq .Type "posts" }}../../../index.html#services{{ else }}../index.html#services{{ end }}" class="mobile-nav-link">Experience</a>
-                    <a href="{{ if eq .Type "posts" }}../../../index.html#about{{ else }}../index.html#about{{ end }}" class="mobile-nav-link">About</a>
                     <a href="{{ if eq .Type "posts" }}../../index.html{{ else }}index.html{{ end }}" class="mobile-nav-link{{ if or (eq .Kind "home") (eq .Type "posts") }} active{{ end }}">Tech Blog</a>
+                    <a href="{{ if eq .Type "posts" }}../../../apps.html{{ else }}../apps.html{{ end }}" class="mobile-nav-link">Apps</a>
                     <a href="{{ if eq .Type "posts" }}../../../index.html#contact{{ else }}../index.html#contact{{ end }}" class="mobile-nav-link">Contact</a>
                     <div class="mobile-theme-toggle">
                         <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -78,16 +76,15 @@
                 </div>
                 
                 <div class="footer-links">
-                    <a href="{{ if eq .Type "posts" }}../../../index.html#services{{ else }}../index.html#services{{ end }}">Experience</a>
-                    <a href="{{ if eq .Type "posts" }}../../../index.html#about{{ else }}../index.html#about{{ end }}">About</a>
                     <a href="{{ if eq .Type "posts" }}../../index.html{{ else }}index.html{{ end }}">Tech Blog</a>
+                    <a href="{{ if eq .Type "posts" }}../../../apps.html{{ else }}../apps.html{{ end }}">Apps</a>
                     <a href="{{ if eq .Type "posts" }}../../../index.html#contact{{ else }}../index.html#contact{{ end }}">Contact</a>
                     <a href="#">Privacy Policy</a>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 praxagent LLC. All rights reserved.</p>
+                <p>&copy; 2026 praxagent LLC. All rights reserved.</p>
                 <p>Professional AI consulting.</p>
             </div>
         </div>
