@@ -51,19 +51,19 @@
 
 /* Dark mode colors */
 [data-theme="dark"] {
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e293b;
-    --bg-tertiary: #334155;
-    --bg-quaternary: #475569;
-    --bg-card: #1e293b;
-    --bg-card-secondary: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-    --bg-gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-    --bg-gradient-about: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-    --bg-tech-stack: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e293b 100%);
-    --bg-contact: #0f172a;
-    --bg-footer: #020617;
-    --bg-navbar: rgba(15, 23, 42, 0.95);
-    --bg-navbar-scrolled: rgba(15, 23, 42, 0.98);
+    --bg-primary: #334155;
+    --bg-secondary: #475569;
+    --bg-tertiary: #64748b;
+    --bg-quaternary: #94a3b8;
+    --bg-card: #475569;
+    --bg-card-secondary: linear-gradient(135deg, #475569 0%, #64748b 100%);
+    --bg-gradient-hero: linear-gradient(135deg, #334155 0%, #475569 50%, #64748b 100%);
+    --bg-gradient-about: linear-gradient(135deg, #334155 0%, #475569 50%, #64748b 100%);
+    --bg-tech-stack: linear-gradient(135deg, #334155 0%, #475569 50%, #64748b 100%);
+    --bg-contact: #334155;
+    --bg-footer: #334155;
+    --bg-navbar: rgba(51, 65, 85, 0.95);
+    --bg-navbar-scrolled: rgba(51, 65, 85, 0.98);
     
     /* Text colors for dark mode */
     --text-primary: #f1f5f9;
