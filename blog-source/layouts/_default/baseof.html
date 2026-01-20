@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ if .Title }}{{ .Title }} - {{ end }}PraxAgent LLC{{ if eq .Type "posts" }} Blog{{ end }}</title>
+    <title>{{ if .Title }}{{ .Title }} - {{ end }}PraxAgent{{ if eq .Type "posts" }} Blog{{ end }}</title>
     <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +25,6 @@
             <div class="nav-logo">
                 <a href="{{ if eq .Type "posts" }}../../../index.html{{ else }}../index.html{{ end }}" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
                     <span class="logo-text">praxagent</span>
-                    <span class="logo-tagline">LLC</span>
                 </a>
             </div>
             <div class="nav-menu">
@@ -71,7 +70,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <span class="logo-text">praxagent LLC</span>
+                    <span class="logo-text">praxagent</span>
                     <p>AI software insights and knowledge sharing.</p>
                 </div>
                 
@@ -84,8 +83,8 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2026 praxagent LLC. All rights reserved.</p>
-                <p>Professional AI consulting.</p>
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <p>AI research and education.</p>
             </div>
         </div>
     </footer>
