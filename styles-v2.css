@@ -640,13 +640,8 @@ body {
 .about-content {
     position: relative;
     z-index: 1;
-}
-
-.about-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 4rem;
-    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .about-text h2 {
