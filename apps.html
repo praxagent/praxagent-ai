@@ -7,7 +7,7 @@
     <meta name="description" content="Experimental apps from PraxAgent research lab - TippyTip for smart web content management and Virtual TeamWork for AI-powered teams (software development and personal coaching).">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles-v2.css">
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
@@ -36,55 +36,126 @@
                 <span class="hamburger-line"></span>
             </button>
             
-            <!-- Mobile menu overlay -->
-            <div class="mobile-menu-overlay" id="mobile-menu-overlay">
-                <div class="mobile-menu-content">
-                    <a href="blog/index.html" class="mobile-nav-link">Tech Blog</a>
-                    <a href="apps.html" class="mobile-nav-link">Apps</a>
-                    <a href="index.html#contact" class="mobile-nav-link">Contact</a>
-                    <div class="mobile-theme-toggle">
-                        <div class="theme-toggle" aria-label="Toggle dark mode">
-                            <span class="theme-toggle-icon sun">☀️</span>
-                            <span class="theme-toggle-icon moon">🌙</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </nav>
 
-    <header class="hero" style="min-height: auto; padding: 6rem 0 3rem;">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    Sample <span class="accent">Apps</span>
-                </h1>
-                <p class="hero-subtitle">
-                    AI-powered applications built with purpose and practicality.
-                </p>
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="blog/index.html" class="mobile-nav-link">Tech Blog</a>
+            <a href="apps.html" class="mobile-nav-link">Apps</a>
+            <a href="index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun">☀️</span>
+                    <span class="theme-toggle-icon moon">🌙</span>
+                </div>
             </div>
-            <div class="hero-visual">
-                <img src="assets/stochastic_mountain_alpha.png" alt="Stochastic Mountain" style="max-width: 100%; height: auto; border-radius: 1rem;">
-            </div>
+        </div>
+    </div>
+
+    <header class="blog-header">
+        <div class="blog-header-content">
+            <h1 class="blog-title">
+                Sample <span class="accent">Apps</span>
+            </h1>
+            <p class="blog-subtitle">
+                AI-powered applications built with purpose and practicality.
+            </p>
         </div>
     </header>
 
     <section class="services" style="padding-top: 2rem;">
         <div class="container">
-            <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
+            <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 2rem;">
                 
+                <!-- Prax Card -->
+                <div class="service-card" style="padding: 2.5rem; display: flex; flex-direction: column;">
+                    <div style="flex: 1;">
+                        <div class="service-icon"><i data-feather="terminal"></i></div>
+                        <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">Prax</h3>
+                        <p style="margin-bottom: 1rem;">
+                            A personal AI assistant on the web, Discord, SMS, and voice. 97+ built-in tools, extensible
+                            via self-modifying plugins. Git-backed memory. Runs on your own server.
+                        </p>
+                        <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
+                            LangGraph ReAct agent with dedicated sub-agents for research, coding, content authoring,
+                            and self-improvement. Always-on Docker sandbox. Open source, self-hosted.
+                        </p>
+                        <div style="margin-bottom: 1.5rem;">
+                            <ul style="list-style: none; padding: 0; display: grid; gap: 0.5rem;">
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>97+ tools, hot-swappable plugins</span>
+                                </li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>Discord, Twilio voice/SMS, web UI</span>
+                                </li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>Self-modifying code via PRs</span>
+                                </li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>Browser automation & sandbox</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="https://github.com/praxagent/prax" target="_blank" rel="noopener" class="primary-button" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto;">
+                        <span>View on GitHub</span>
+                        <i data-feather="github" style="width: 16px; height: 16px;"></i>
+                    </a>
+                </div>
+
+                <!-- Virtual TeamWork Card -->
+                <div class="service-card" style="padding: 2.5rem; display: flex; flex-direction: column;">
+                    <div style="flex: 1;">
+                        <div class="service-icon"><i data-feather="users"></i></div>
+                        <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">Virtual TeamWork</h3>
+                        <p style="margin-bottom: 1rem;">
+                            Exploring human-friendly ways to interact with multiple AI agents. Not to replace teams,
+                            but to magnify human talent by empowering individuals with their own dedicated teams.
+                        </p>
+                        <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
+                            <strong>Startup Mode:</strong> AI dev teams build your app.
+                            <strong>Coaching Mode:</strong> AI tutors for any goal with long-term memory.
+                            Open source, self-hosted, bring your own API keys.
+                        </p>
+                        <div style="margin-bottom: 1.5rem;">
+                            <ul style="list-style: none; padding: 0; display: grid; gap: 0.5rem;">
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>Real-time chat & Kanban board</span>
+                                </li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>Personalized AI coaches with progress tracking</span>
+                                </li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>Executive access with Claude Code</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="https://virtualteamwork.ai" target="_blank" rel="noopener" class="primary-button" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto;">
+                        <span>Visit Virtual TeamWork</span>
+                        <i data-feather="external-link" style="width: 16px; height: 16px;"></i>
+                    </a>
+                </div>
+
                 <!-- TippyTip Card -->
                 <div class="service-card" style="padding: 2.5rem; display: flex; flex-direction: column;">
                     <div style="flex: 1;">
                         <div class="service-icon"><i data-feather="bookmark"></i></div>
                         <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">TippyTip</h3>
                         <p style="margin-bottom: 1.5rem;">
-                            A smart iOS app for saving, organizing, and consuming web content. Features include AI-powered summaries, 
-                            audio playback, podcast creation, knowledge graphs, and seamless iCloud synchronization across your iPhone and iPad. 
+                            A smart iOS app for saving, organizing, and consuming web content. AI-powered summaries,
+                            audio playback, podcast creation, knowledge graphs, and iCloud sync across devices.
                             Bring your own API keys.
                         </p>
                         <div style="margin-bottom: 1.5rem;">
-                            <h4 style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.75rem;">Key Features:</h4>
                             <ul style="list-style: none; padding: 0; display: grid; gap: 0.5rem;">
                                 <li style="display: flex; align-items: center; gap: 0.5rem;">
                                     <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
@@ -111,40 +182,39 @@
                     </a>
                 </div>
 
-                <!-- Virtual TeamWork Card -->
+                <!-- Chaos Lab Card -->
                 <div class="service-card" style="padding: 2.5rem; display: flex; flex-direction: column;">
                     <div style="flex: 1;">
-                        <div class="service-icon"><i data-feather="users"></i></div>
-                        <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">Virtual TeamWork</h3>
-                        <p style="margin-bottom: 1rem;">
-                            Exploring human-friendly ways to interact with multiple AI agents. Not to replace teams, 
-                            but to magnify human talent by empowering individuals with their own dedicated teams.
-                        </p>
-                        <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
-                            <strong>Startup Mode:</strong> AI dev teams build your app. 
-                            <strong>Coaching Mode:</strong> AI tutors for any goal with long-term memory. 
-                            Open source, self-hosted, bring your own API keys.
+                        <div class="service-icon"><i data-feather="zap"></i></div>
+                        <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">Chaos Lab</h3>
+                        <p style="margin-bottom: 1.5rem;">
+                            Interactive chaos theory brought to life. Tilt your iPhone or iPad to manipulate strange attractors,
+                            fractal morphing, gravitational simulations, and chemical reactions in real time.
                         </p>
                         <div style="margin-bottom: 1.5rem;">
                             <ul style="list-style: none; padding: 0; display: grid; gap: 0.5rem;">
                                 <li style="display: flex; align-items: center; gap: 0.5rem;">
                                     <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
-                                    <span>Real-time chat & Kanban board</span>
+                                    <span>Lorenz, R&ouml;ssler & Thomas attractors</span>
                                 </li>
                                 <li style="display: flex; align-items: center; gap: 0.5rem;">
                                     <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
-                                    <span>Personalized AI coaches with progress tracking</span>
+                                    <span>Real-time Julia fractal morphing</span>
                                 </li>
                                 <li style="display: flex; align-items: center; gap: 0.5rem;">
                                     <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
-                                    <span>Executive access with Claude Code</span>
+                                    <span>3-body gravity & double pendulum</span>
+                                </li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>Device motion & touch controls</span>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <a href="https://virtualteamwork.ai" target="_blank" rel="noopener" class="primary-button" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto;">
-                        <span>Visit Virtual TeamWork</span>
-                        <i data-feather="external-link" style="width: 16px; height: 16px;"></i>
+                    <a href="https://apps.apple.com/us/app/chaos-lab/id398270047" target="_blank" rel="noopener" class="primary-button" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto;">
+                        <span>View on App Store</span>
+                        <i data-feather="smartphone" style="width: 16px; height: 16px;"></i>
                     </a>
                 </div>
 

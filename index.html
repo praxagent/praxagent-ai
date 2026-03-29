@@ -7,7 +7,7 @@
     <meta name="description" content="PraxAgent explores AI research, shares educational content, and builds experimental applications. A personal research lab for AI exploration.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles-v2.css">
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
@@ -37,56 +37,53 @@
                 <span class="hamburger-line"></span>
             </button>
             
-            <!-- Mobile menu overlay -->
-            <div class="mobile-menu-overlay" id="mobile-menu-overlay">
-                <div class="mobile-menu-content">
-                    <a href="blog/index.html" class="mobile-nav-link">Tech Blog</a>
-                    <a href="apps.html" class="mobile-nav-link">Apps</a>
-                    <a href="#contact" class="mobile-nav-link">Contact</a>
-                    <div class="mobile-theme-toggle">
-                        <div class="theme-toggle" aria-label="Toggle dark mode">
-                            <span class="theme-toggle-icon sun">☀️</span>
-                            <span class="theme-toggle-icon moon">🌙</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </nav>
 
-    <header class="hero">
-        <!-- Large Lissajous Logo Above Everything -->
-        <div class="hero-logo-section">
-            <div class="container">
-                <div class="lissajous-brand">
-                    <img src="assets/praxagent_stochastic_mountain_alpha.png" alt="PraxAgent" class="lissajous-logo-large">
+    <!-- Mobile menu overlay (outside nav to avoid backdrop-filter stacking context) -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="blog/index.html" class="mobile-nav-link">Tech Blog</a>
+            <a href="apps.html" class="mobile-nav-link">Apps</a>
+            <a href="#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun">☀️</span>
+                    <span class="theme-toggle-icon moon">🌙</span>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Main Hero Content -->
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    AI Software &
-                    <span class="accent">Research</span>
-                </h1>
-                <p class="hero-subtitle">
-                    Research and development in AI tooling, methodology, and praxis.
-                </p>
-                <div class="hero-cta">
-                    <a href="#contact" class="primary-button">Get in Touch</a>
-                    <a href="#services" class="secondary-button">Experience</a>
+    <header class="hero">
+        <canvas id="hero-mountain" class="hero-canvas"></canvas>
+
+        <div class="hero-overlay">
+            <div class="mountain-brand">PRAXAGENT</div>
+
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        AI Software &
+                        <span class="accent">Research</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Research and development in AI tooling, methodology, and praxis.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#contact" class="primary-button">Get in Touch</a>
+                        <a href="#services" class="secondary-button">Experience</a>
+                    </div>
                 </div>
-            </div>
-            <div class="hero-visual">
-                <div class="featured-work">
-                    <div class="featured-label">Latest from the blog</div>
-                    <a href="blog/posts/late-chunking/index.html" class="featured-card">
-                        <h3>Late Chunking</h3>
-                        <p>Why context-aware embeddings sometimes beat traditional chunking for RAG pipelines.</p>
-                        <span class="featured-link">Read more →</span>
-                    </a>
+                <div class="hero-visual">
+                    <div class="featured-work">
+                        <div class="featured-label">Latest from the blog</div>
+                        <a href="blog/posts/late-chunking/index.html" class="featured-card">
+                            <h3>Late Chunking</h3>
+                            <p>Why context-aware embeddings sometimes beat traditional chunking for RAG pipelines.</p>
+                            <span class="featured-link">Read more →</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -175,41 +172,6 @@
                         <span class="stat-number">0</span>
                         <span class="stat-label">Buzzword Nonsense</span>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="tech-stack">
-        <div class="container">
-            <div class="tech-graph-container">
-                <canvas id="tech-graph" class="tech-canvas"></canvas>
-                <div class="tech-grid" style="display: none;">
-                <span class="tech-item">Python</span>
-                <span class="tech-item">TensorFlow</span>
-                <span class="tech-item">PyTorch</span>
-                <span class="tech-item">AWS</span>
-                <span class="tech-item">Google Cloud</span>
-                <span class="tech-item">Terraform</span>
-                <span class="tech-item">Packer</span>
-                <span class="tech-item">Ansible</span>
-                <span class="tech-item">Docker</span>
-                <span class="tech-item">Kubernetes</span>
-                <span class="tech-item">Helm</span>
-                <span class="tech-item">Apache Spark</span>
-                <span class="tech-item">Apache Airflow</span>
-                <span class="tech-item">Apache Superset</span>
-                <span class="tech-item">Hive Metastore</span>
-                <span class="tech-item">Hudi/Iceberg</span>
-                <span class="tech-item">MLflow</span>
-                <span class="tech-item">Scikit-learn</span>
-                <span class="tech-item">OpenAI</span>
-                <span class="tech-item">Anthropic/Claude</span>
-                <span class="tech-item">Gemini</span>
-                <span class="tech-item">Hugging Face</span>
-                <span class="tech-item">LangChain</span>
-                <span class="tech-item">RAG</span>
-                <span class="tech-item">Vector Search</span>
                 </div>
             </div>
         </div>
@@ -305,9 +267,11 @@
         </div>
     </footer>
 
+    <script src="stochastic-mountain.js"></script>
     <script src="script.js"></script>
     <script>
-      feather.replace()
+      feather.replace();
+      StochasticMountain('hero-mountain');
     </script>
 </body>
 </html>
