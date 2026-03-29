@@ -7,7 +7,7 @@
     <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ if eq .Type "posts" }}../../styles-v2.css{{ else }}styles-v2.css{{ end }}">
     {{ if or (eq .Type "posts") (eq .Kind "home") }}
     <link rel="stylesheet" href="{{ if eq .Type "posts" }}../../blog.css{{ else }}blog.css{{ end }}">
@@ -20,7 +20,7 @@
     {{ end }}
 </head>
 <body>
-    <nav class="navbar{{ if .IsPage }} navbar-scrolls{{ end }}">
+    <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="{{ if eq .Type "posts" }}../../../index.html{{ else }}../index.html{{ end }}" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
@@ -45,22 +45,22 @@
                 <span class="hamburger-line"></span>
             </button>
             
-            <!-- Mobile menu overlay -->
-            <div class="mobile-menu-overlay" id="mobile-menu-overlay">
-                <div class="mobile-menu-content">
-                    <a href="{{ if eq .Type "posts" }}../../index.html{{ else }}index.html{{ end }}" class="mobile-nav-link{{ if or (eq .Kind "home") (eq .Type "posts") }} active{{ end }}">Tech Blog</a>
-                    <a href="{{ if eq .Type "posts" }}../../../apps.html{{ else }}../apps.html{{ end }}" class="mobile-nav-link">Apps</a>
-                    <a href="{{ if eq .Type "posts" }}../../../index.html#contact{{ else }}../index.html#contact{{ end }}" class="mobile-nav-link">Contact</a>
-                    <div class="mobile-theme-toggle">
-                        <div class="theme-toggle" aria-label="Toggle dark mode">
-                            <span class="theme-toggle-icon sun">☀️</span>
-                            <span class="theme-toggle-icon moon">🌙</span>
-                        </div>
-                    </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="{{ if eq .Type "posts" }}../../index.html{{ else }}index.html{{ end }}" class="mobile-nav-link{{ if or (eq .Kind "home") (eq .Type "posts") }} active{{ end }}">Tech Blog</a>
+            <a href="{{ if eq .Type "posts" }}../../../apps.html{{ else }}../apps.html{{ end }}" class="mobile-nav-link">Apps</a>
+            <a href="{{ if eq .Type "posts" }}../../../index.html#contact{{ else }}../index.html#contact{{ end }}" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun">☀️</span>
+                    <span class="theme-toggle-icon moon">🌙</span>
                 </div>
             </div>
         </div>
-    </nav>
+    </div>
 
     <main>
         {{ block "main" . }}{{ end }}
