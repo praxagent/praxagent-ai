@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summer 2026 AI + Biology Research Internship - PraxAgent</title>
+    <meta name="description" content="A PraxAgent educational research internship focused on AI, biology, bioinformatics, technical writing, and public portfolio development.">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Summer 2026 AI + Biology Research Internship">
+    <meta property="og:description" content="Remote educational research mentorship focused on AI, biology, bioinformatics, technical writing, and public portfolio development.">
+    <meta property="og:url" content="https://praxagent.ai/internships/summer-2026-ai-biology-research/">
+    <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Summer 2026 AI + Biology Research Internship">
+    <meta name="twitter:description" content="Educational AI + biology research mentorship hosted by PraxAgent.">
+    <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles-v2.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        .internship-hero {
+            position: relative;
+            min-height: 78vh;
+            display: flex;
+            align-items: end;
+            padding: 7rem 0 4rem;
+            overflow: hidden;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.16), var(--bg-primary) 92%),
+                url("../../assets/praxagent_stochastic_mountain.png") center / cover no-repeat;
+        }
+
+        [data-theme="dark"] .internship-hero {
+            background:
+                linear-gradient(180deg, rgba(15, 23, 42, 0.18), var(--bg-primary) 92%),
+                url("../../assets/praxagent_stochastic_mountain.png") center / cover no-repeat;
+        }
+
+        .internship-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, var(--bg-primary) 0%, rgba(255, 255, 255, 0.82) 45%, rgba(255, 255, 255, 0.2) 100%);
+            opacity: 0.9;
+        }
+
+        [data-theme="dark"] .internship-hero::before {
+            background: linear-gradient(90deg, var(--bg-primary) 0%, rgba(51, 65, 85, 0.86) 48%, rgba(51, 65, 85, 0.18) 100%);
+        }
+
+        .internship-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 820px;
+        }
+
+        .internship-kicker {
+            color: #0891b2;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .internship-title {
+            color: var(--text-dark);
+            font-size: clamp(2.6rem, 6vw, 5rem);
+            line-height: 1.02;
+            letter-spacing: 0;
+            margin-bottom: 1.2rem;
+        }
+
+        .internship-title .accent {
+            background: linear-gradient(135deg, #0891b2, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .internship-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            max-width: 720px;
+            margin-bottom: 2rem;
+        }
+
+        .internship-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .meta-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            color: var(--text-secondary);
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: 999px;
+            padding: 0.55rem 0.85rem;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 14px var(--shadow-primary);
+        }
+
+        .meta-pill svg {
+            width: 16px;
+            height: 16px;
+            color: #0891b2;
+        }
+
+        .internship-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .internship-actions a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .internship-section {
+            padding: 5rem 2rem;
+        }
+
+        .internship-section.alt {
+            background: var(--bg-gradient-about);
+        }
+
+        .internship-intro {
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+
+        .internship-intro p {
+            color: var(--text-secondary);
+            font-size: 1.12rem;
+            margin-top: 0.75rem;
+        }
+
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .program-card {
+            background: var(--bg-card-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 0.75rem;
+            padding: 1.6rem;
+            box-shadow: 0 4px 15px var(--shadow-primary);
+        }
+
+        .program-card h3 {
+            color: var(--text-dark);
+            font-size: 1.15rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .program-card h3 svg {
+            width: 20px;
+            height: 20px;
+            color: #0891b2;
+            flex: 0 0 auto;
+        }
+
+        .program-card p,
+        .program-card li {
+            color: var(--text-tertiary);
+        }
+
+        .program-card ul,
+        .check-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .check-list li {
+            display: grid;
+            grid-template-columns: 22px 1fr;
+            gap: 0.6rem;
+            align-items: start;
+            color: var(--text-secondary);
+        }
+
+        .check-list svg {
+            color: #0891b2;
+            width: 18px;
+            height: 18px;
+            margin-top: 0.15rem;
+        }
+
+        .phase-list {
+            display: grid;
+            gap: 1rem;
+            max-width: 920px;
+            margin: 0 auto;
+        }
+
+        .phase-item {
+            display: grid;
+            grid-template-columns: minmax(88px, 120px) 1fr;
+            gap: 1.25rem;
+            align-items: start;
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            box-shadow: 0 4px 15px var(--shadow-primary);
+        }
+
+        .phase-label {
+            color: #0891b2;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .phase-item h3 {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .phase-item p {
+            color: var(--text-tertiary);
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+        }
+
+        .topic {
+            color: var(--text-secondary);
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: 0.75rem;
+            padding: 1rem;
+        }
+
+        .notice-band {
+            max-width: 920px;
+            margin: 3rem auto 0;
+            color: var(--text-secondary);
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-left: 4px solid #0891b2;
+            border-radius: 0.75rem;
+            padding: 1.25rem 1.5rem;
+            box-shadow: 0 4px 15px var(--shadow-primary);
+        }
+
+        .notice-band strong {
+            color: var(--text-dark);
+        }
+
+        @media (max-width: 768px) {
+            .internship-hero {
+                min-height: auto;
+                padding: 6.25rem 0 3rem;
+            }
+
+            .internship-hero::before {
+                background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(255, 255, 255, 0.88) 62%, var(--bg-primary) 100%);
+            }
+
+            [data-theme="dark"] .internship-hero::before {
+                background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(51, 65, 85, 0.9) 62%, var(--bg-primary) 100%);
+            }
+
+            .internship-title {
+                font-size: 2.65rem;
+            }
+
+            .internship-actions .primary-button,
+            .internship-actions .secondary-button {
+                width: 100%;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .phase-item {
+                grid-template-columns: 1fr;
+                gap: 0.35rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../../index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="../../research/index.html" class="nav-link">Research</a>
+                <a href="../../blog/index.html" class="nav-link">Tech Blog</a>
+                <a href="../../apps.html" class="nav-link">Apps</a>
+                <a href="../../index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun">☀️</span>
+                    <span class="theme-toggle-icon moon">🌙</span>
+                </div>
+            </div>
+
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="../../research/index.html" class="mobile-nav-link">Research</a>
+            <a href="../../blog/index.html" class="mobile-nav-link">Tech Blog</a>
+            <a href="../../apps.html" class="mobile-nav-link">Apps</a>
+            <a href="../../index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun">☀️</span>
+                    <span class="theme-toggle-icon moon">🌙</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="internship-hero">
+        <div class="container">
+            <div class="internship-hero-content">
+                <p class="internship-kicker">PraxAgent Internship Archive</p>
+                <h1 class="internship-title">
+                    Summer 2026 <span class="accent">AI + Biology</span> Research Internship
+                </h1>
+                <p class="internship-subtitle">
+                    A remote educational research mentorship focused on artificial intelligence, biology,
+                    bioinformatics, technical writing, and public portfolio development.
+                </p>
+                <div class="internship-meta" aria-label="Program details">
+                    <span class="meta-pill"><i data-feather="calendar"></i>June 22 - Sept. 22, 2026</span>
+                    <span class="meta-pill"><i data-feather="wifi"></i>Remote</span>
+                    <span class="meta-pill"><i data-feather="book-open"></i>Educational</span>
+                    <span class="meta-pill"><i data-feather="briefcase"></i>Portfolio-focused</span>
+                </div>
+                <div class="internship-actions">
+                    <a href="#program" class="primary-button">Program Focus</a>
+                    <a href="#publication" class="secondary-button">Publication Standards</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="program" class="internship-section">
+            <div class="container">
+                <div class="internship-intro">
+                    <h2 class="section-title">Program Overview</h2>
+                    <p>
+                        This page documents the public structure of an unpaid educational research internship
+                        hosted by PraxAgent. The primary goal is learning: guided reading, research exposure,
+                        responsible AI use, technical communication, and a credible public body of work.
+                    </p>
+                </div>
+
+                <div class="program-grid">
+                    <article class="program-card">
+                        <h3><i data-feather="target"></i>Purpose</h3>
+                        <p>
+                            Build practical familiarity with AI concepts relevant to biology while practicing
+                            careful technical writing, source citation, and clear communication for a professional
+                            portfolio.
+                        </p>
+                    </article>
+
+                    <article class="program-card">
+                        <h3><i data-feather="users"></i>Mentorship</h3>
+                        <p>
+                            The internship is structured around independent learning with weekly remote mentorship
+                            discussions, draft review, research guidance, and feedback on clarity, accuracy,
+                            limitations, and presentation.
+                        </p>
+                    </article>
+
+                    <article class="program-card">
+                        <h3><i data-feather="shield"></i>Boundaries</h3>
+                        <p>
+                            The internship is educational and portfolio-focused. It is not client work, customer
+                            work, employment, paid contractor work, production engineering, sales, or operational
+                            business support.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="internship-section alt">
+            <div class="container">
+                <div class="internship-intro">
+                    <h2 class="section-title">Learning Objectives</h2>
+                    <p>
+                        The program emphasizes useful foundations for AI-assisted biology research while keeping
+                        uncertainty, limitations, and publication quality front and center.
+                    </p>
+                </div>
+
+                <div class="program-grid">
+                    <article class="program-card">
+                        <h3><i data-feather="cpu"></i>AI Foundations</h3>
+                        <ul class="check-list">
+                            <li><i data-feather="check"></i><span>Language models, embeddings, retrieval-augmented generation, and model evaluation.</span></li>
+                            <li><i data-feather="check"></i><span>Data quality, limitations, hallucination risk, and responsible use of AI assistance.</span></li>
+                        </ul>
+                    </article>
+
+                    <article class="program-card">
+                        <h3><i data-feather="activity"></i>Biology Context</h3>
+                        <ul class="check-list">
+                            <li><i data-feather="check"></i><span>Introductory exposure to bioinformatics, genomics, protein modeling, and biomedical retrieval.</span></li>
+                            <li><i data-feather="check"></i><span>Reading, summarizing, and critiquing public papers and technical resources.</span></li>
+                        </ul>
+                    </article>
+
+                    <article class="program-card">
+                        <h3><i data-feather="edit-3"></i>Technical Communication</h3>
+                        <ul class="check-list">
+                            <li><i data-feather="check"></i><span>Accessible explainers, literature notes, diagrams, notebooks, and project summaries.</span></li>
+                            <li><i data-feather="check"></i><span>Careful sourcing, limitation statements, and professional portfolio presentation.</span></li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="internship-section">
+            <div class="container">
+                <div class="internship-intro">
+                    <h2 class="section-title">Portfolio Artifacts</h2>
+                    <p>
+                        Portfolio artifacts are educational targets, not business deliverables. The exact set may
+                        change as interests, available time, and mentor feedback shape the research path.
+                    </p>
+                </div>
+
+                <div class="program-grid">
+                    <article class="program-card">
+                        <h3><i data-feather="file-text"></i>Technical Posts</h3>
+                        <p>
+                            Three to five public technical posts, literature reviews, or research notes explaining
+                            selected AI + biology topics for a professional audience.
+                        </p>
+                    </article>
+
+                    <article class="program-card">
+                        <h3><i data-feather="layers"></i>Demos or Diagrams</h3>
+                        <p>
+                            One or two lightweight educational demos, notebooks, diagrams, or prototype artifacts
+                            using public resources, toy examples, or synthetic data where feasible.
+                        </p>
+                    </article>
+
+                    <article class="program-card">
+                        <h3><i data-feather="map"></i>Final Summary</h3>
+                        <p>
+                            A final public summary describing topics studied, skills developed, artifacts completed,
+                            lessons learned, and possible next steps.
+                        </p>
+                    </article>
+                </div>
+
+                <div class="notice-band">
+                    <strong>Authorship:</strong> Portfolio work is intended to be credited to the participating
+                    intern. PraxAgent may host, format, archive, and link to the work to document the educational
+                    internship and support professional development.
+                </div>
+            </div>
+        </section>
+
+        <section class="internship-section alt">
+            <div class="container">
+                <div class="internship-intro">
+                    <h2 class="section-title">Initial Learning Plan</h2>
+                    <p>
+                        The plan is intentionally flexible. It can be adjusted as interests, skills, and project
+                        ideas develop.
+                    </p>
+                </div>
+
+                <div class="phase-list">
+                    <article class="phase-item">
+                        <div class="phase-label">Phase 1</div>
+                        <div>
+                            <h3>Orientation</h3>
+                            <p>Set expectations for citations, responsible AI use, public writing, and safe handling of data.</p>
+                        </div>
+                    </article>
+
+                    <article class="phase-item">
+                        <div class="phase-label">Phase 2</div>
+                        <div>
+                            <h3>Reading and Topic Selection</h3>
+                            <p>Read introductory resources or papers related to AI for biology, bioinformatics, protein models, genomics, biomedical retrieval, or scientific literature analysis.</p>
+                        </div>
+                    </article>
+
+                    <article class="phase-item">
+                        <div class="phase-label">Phase 3</div>
+                        <div>
+                            <h3>First Publication</h3>
+                            <p>Draft a technical explainer or literature review, receive feedback, revise, and publish.</p>
+                        </div>
+                    </article>
+
+                    <article class="phase-item">
+                        <div class="phase-label">Phase 4</div>
+                        <div>
+                            <h3>Educational Demo</h3>
+                            <p>Explore a small notebook, diagram, or prototype using public resources, toy data, or synthetic/example data.</p>
+                        </div>
+                    </article>
+
+                    <article class="phase-item">
+                        <div class="phase-label">Phase 5</div>
+                        <div>
+                            <h3>Portfolio Development</h3>
+                            <p>Publish additional artifacts and improve clarity, citations, diagrams, limitation statements, and presentation.</p>
+                        </div>
+                    </article>
+
+                    <article class="phase-item">
+                        <div class="phase-label">Phase 6</div>
+                        <div>
+                            <h3>Final Summary</h3>
+                            <p>Prepare a portfolio summary, resume description, professional profile language, and optional reflection on lessons learned.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="internship-section">
+            <div class="container">
+                <div class="internship-intro">
+                    <h2 class="section-title">Example Project Topics</h2>
+                    <p>
+                        Potential topics include literature review workflows, biological knowledge retrieval,
+                        model limitations, and responsible communication of AI-assisted research.
+                    </p>
+                </div>
+
+                <div class="topic-grid">
+                    <div class="topic">How language models can assist literature review in biology.</div>
+                    <div class="topic">Retrieval-augmented generation for biological knowledge bases.</div>
+                    <div class="topic">Limitations of LLMs in scientific reasoning.</div>
+                    <div class="topic">Introduction to protein language models.</div>
+                    <div class="topic">AI-assisted annotation of biological concepts.</div>
+                    <div class="topic">Comparing embeddings for scientific abstracts.</div>
+                    <div class="topic">A small question-answering demo over public biology papers.</div>
+                    <div class="topic">Hallucination risk in AI-generated scientific summaries.</div>
+                    <div class="topic">How to evaluate AI tools used for biology research support.</div>
+                    <div class="topic">Ethical and practical issues in AI-assisted biomedical workflows.</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="publication" class="internship-section alt">
+            <div class="container">
+                <div class="internship-intro">
+                    <h2 class="section-title">Publication Standards</h2>
+                    <p>
+                        Public artifacts should be useful, careful, and honest about uncertainty. The page is
+                        designed as a job-search portfolio archive, not medical advice or business output.
+                    </p>
+                </div>
+
+                <div class="program-grid">
+                    <article class="program-card">
+                        <h3><i data-feather="check-circle"></i>Before Publishing</h3>
+                        <ul class="check-list">
+                            <li><i data-feather="check"></i><span>Factual claims are sourced, cited, or qualified.</span></li>
+                            <li><i data-feather="check"></i><span>Papers, datasets, images, code, and external resources are attributed.</span></li>
+                            <li><i data-feather="check"></i><span>Meaningful AI assistance is disclosed where appropriate.</span></li>
+                            <li><i data-feather="check"></i><span>Limitations, assumptions, and uncertainties are stated.</span></li>
+                        </ul>
+                    </article>
+
+                    <article class="program-card">
+                        <h3><i data-feather="alert-triangle"></i>Excluded Content</h3>
+                        <ul class="check-list">
+                            <li><i data-feather="x"></i><span>No medical advice, diagnosis, or treatment recommendations.</span></li>
+                            <li><i data-feather="x"></i><span>No private, sensitive, proprietary, regulated, or restricted data.</span></li>
+                            <li><i data-feather="x"></i><span>No confidential business projects or operational PraxAgent work.</span></li>
+                            <li><i data-feather="x"></i><span>No client, customer, sales, administrative, or required marketing work.</span></li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="notice-band">
+                    <strong>Status:</strong> This page is the public program overview. Portfolio artifacts can be
+                    added here as they are completed, reviewed, and ready for publication.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-text">praxagent</span>
+                    <p>AI software insights and knowledge sharing.</p>
+                </div>
+
+                <div class="footer-links">
+                    <a href="../../research/index.html">Research</a>
+                    <a href="../../blog/index.html">Tech Blog</a>
+                    <a href="../../apps.html">Apps</a>
+                    <a href="../../index.html#contact">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <p>AI research and education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../script.js"></script>
+    <script>
+      feather.replace();
+    </script>
+</body>
+</html>

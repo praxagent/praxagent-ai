@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apps - PraxAgent</title>
-    <meta name="description" content="Apps from PraxAgent — Prax AI assistant, Virtual TeamWork, TippyTip, and Chaos Lab.">
+    <meta name="description" content="Apps from PraxAgent: Prax, Prax Sandbox, TeamWork, TippyTip, and Chaos Lab.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:title" content="PraxAgent Apps">
-    <meta property="og:description" content="Prax, Virtual TeamWork, TippyTip, Chaos Lab — AI-powered applications built with purpose and practicality.">
+    <meta property="og:description" content="Prax, Prax Sandbox, TeamWork, TippyTip, and Chaos Lab: AI-powered applications built with purpose and practicality.">
     <meta property="og:url" content="https://praxagent.ai/apps.html">
     <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,6 +26,7 @@
                 </a>
             </div>
             <div class="nav-menu">
+                <a href="research/index.html" class="nav-link">Research</a>
                 <a href="blog/index.html" class="nav-link">Tech Blog</a>
                 <a href="apps.html" class="nav-link">Apps</a>
                 <a href="index.html#contact" class="nav-link">Contact</a>
@@ -47,6 +48,7 @@
 
     <div class="mobile-menu-overlay" id="mobile-menu-overlay">
         <div class="mobile-menu-content">
+            <a href="research/index.html" class="mobile-nav-link">Research</a>
             <a href="blog/index.html" class="mobile-nav-link">Tech Blog</a>
             <a href="apps.html" class="mobile-nav-link">Apps</a>
             <a href="index.html#contact" class="mobile-nav-link">Contact</a>
@@ -80,30 +82,33 @@
                         <div class="service-icon"><i data-feather="terminal"></i></div>
                         <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">Prax</h3>
                         <p style="margin-bottom: 1rem;">
-                            A personal AI assistant on the web, Discord, SMS, and voice. 97+ built-in tools, extensible
-                            via self-modifying plugins. Git-backed memory. Runs on your own server.
+                            Personal AI assistant for the web, Discord, SMS, and voice. Prax is the agent
+                            orchestrator: a LangGraph ReAct system with 97+ tools, plugin extensibility,
+                            git-backed memory, and specialized sub-agents.
                         </p>
                         <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
-                            LangGraph ReAct agent with dedicated sub-agents for research, coding, content authoring,
-                            and self-improvement. Always-on Docker sandbox. Open source, self-hosted.
+                            Prax browses the web, writes and reviews code, creates deep-dive notes,
+                            takes screenshots, generates presentations, and learns across
+                            sessions. It now connects to TeamWork for the shared collaboration UI and Prax Sandbox
+                            for browser, desktop, terminal, and code execution.
                         </p>
                         <div style="margin-bottom: 1.5rem;">
                             <ul style="list-style: none; padding: 0; display: grid; gap: 0.5rem;">
                                 <li style="display: flex; align-items: center; gap: 0.5rem;">
                                     <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
-                                    <span>97+ tools, hot-swappable plugins</span>
+                                    <span>Agent/orchestrator for web, Discord, SMS, and voice</span>
                                 </li>
                                 <li style="display: flex; align-items: center; gap: 0.5rem;">
                                     <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
-                                    <span>Discord, Twilio voice/SMS, web UI</span>
+                                    <span>97+ tools with an extensible plugin system</span>
                                 </li>
                                 <li style="display: flex; align-items: center; gap: 0.5rem;">
                                     <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
-                                    <span>Self-modifying code via PRs</span>
+                                    <span>Git-backed memory with vector and graph retrieval</span>
                                 </li>
                                 <li style="display: flex; align-items: center; gap: 0.5rem;">
                                     <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
-                                    <span>Browser automation & sandbox</span>
+                                    <span>Designed to pair with TeamWork and Prax Sandbox</span>
                                 </li>
                             </ul>
                         </div>
@@ -114,40 +119,86 @@
                     </a>
                 </div>
 
-                <!-- Virtual TeamWork Card -->
+                <!-- Prax Sandbox Card -->
                 <div class="service-card" style="padding: 2.5rem; display: flex; flex-direction: column;">
                     <div style="flex: 1;">
-                        <div class="service-icon"><i data-feather="users"></i></div>
-                        <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">Virtual TeamWork</h3>
+                        <div class="service-icon"><i data-feather="box"></i></div>
+                        <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">Prax Sandbox</h3>
                         <p style="margin-bottom: 1rem;">
-                            Exploring human-friendly ways to interact with multiple AI agents. Not to replace teams,
-                            but to magnify human talent by empowering individuals with their own dedicated teams.
+                            Standalone, plug-and-play code execution sandbox for agentic harnesses. It was carved
+                            out of Prax so any agent framework can use the same browser, desktop, terminal, and
+                            coding-agent environment.
                         </p>
                         <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
-                            <strong>Startup Mode:</strong> AI dev teams build your app.
-                            <strong>Coaching Mode:</strong> AI tutors for any goal with long-term memory.
-                            Open source, self-hosted, bring your own API keys.
+                            A long-running Docker container runs OpenCode, Claude Code, Codex, Chromium via CDP,
+                            a noVNC desktop, and a full toolchain. A small Python client drives sessions without
+                            depending on Prax.
                         </p>
                         <div style="margin-bottom: 1.5rem;">
                             <ul style="list-style: none; padding: 0; display: grid; gap: 0.5rem;">
                                 <li style="display: flex; align-items: center; gap: 0.5rem;">
                                     <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
-                                    <span>Real-time chat & Kanban board</span>
+                                    <span>Dockerized execution environment for agent harnesses</span>
                                 </li>
                                 <li style="display: flex; align-items: center; gap: 0.5rem;">
                                     <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
-                                    <span>Personalized AI coaches with progress tracking</span>
+                                    <span>Chromium CDP, noVNC desktop, and coding agents</span>
                                 </li>
                                 <li style="display: flex; align-items: center; gap: 0.5rem;">
                                     <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
-                                    <span>Executive access with Claude Code</span>
+                                    <span>Python client API with no Prax dependency</span>
+                                </li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>Remote daemon mode over TLS and bearer auth</span>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <a href="https://virtualteamwork.ai" target="_blank" rel="noopener" class="primary-button" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto;">
-                        <span>Visit Virtual TeamWork</span>
-                        <i data-feather="external-link" style="width: 16px; height: 16px;"></i>
+                    <a href="https://github.com/praxagent/prax-sandbox" target="_blank" rel="noopener" class="primary-button" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto;">
+                        <span>View on GitHub</span>
+                        <i data-feather="github" style="width: 16px; height: 16px;"></i>
+                    </a>
+                </div>
+
+                <!-- TeamWork Card -->
+                <div class="service-card" style="padding: 2.5rem; display: flex; flex-direction: column;">
+                    <div style="flex: 1;">
+                        <div class="service-icon"><i data-feather="users"></i></div>
+                        <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">TeamWork</h3>
+                        <p style="margin-bottom: 1rem;">
+                            Agent-agnostic collaboration shell: a Slack-like web UI for AI agent teams.
+                            TeamWork provides the body -- chat, channels, task board, file browser,
+                            embedded terminal, and live browser screencast -- while your agent provides the brains.
+                        </p>
+                        <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
+                            Use it with Prax or any agent framework through a simple REST + WebSocket API.
+                            TeamWork itself has zero AI dependencies and requires no LLM API keys.
+                        </p>
+                        <div style="margin-bottom: 1.5rem;">
+                            <ul style="list-style: none; padding: 0; display: grid; gap: 0.5rem;">
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>Agent-agnostic REST + WebSocket API</span>
+                                </li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>Real-time chat, channels, DMs, and mirrored conversations</span>
+                                </li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>Kanban task board and in-browser file workspace</span>
+                                </li>
+                                <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                    <span>Embedded terminal, browser screencast, and live agent output</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="https://github.com/praxagent/teamwork" target="_blank" rel="noopener" class="primary-button" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto;">
+                        <span>View on GitHub</span>
+                        <i data-feather="github" style="width: 16px; height: 16px;"></i>
                     </a>
                 </div>
 
@@ -237,6 +288,7 @@
                 </div>
                 
                 <div class="footer-links">
+                    <a href="research/index.html">Research</a>
                     <a href="blog/index.html">Tech Blog</a>
                     <a href="apps.html">Apps</a>
                     <a href="index.html#contact">Contact</a>
