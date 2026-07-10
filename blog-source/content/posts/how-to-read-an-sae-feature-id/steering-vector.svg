@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320" role="img" aria-labelledby="titleSteer descSteer">
+  <title id="titleSteer">Steering adds a feature direction to the residual stream</title>
+  <desc id="descSteer">The residual vector h is displaced by a scaled dictionary direction alpha times d_i to produce a steered state h-prime. The usual formula does not renormalize, so the magnitude of h-prime is typically larger or smaller than h.</desc>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .s{font-size:12px}.b{font-size:13px;font-weight:700}.m{font-size:11px;fill:#5A544C}
+    .panel{fill:#fff;stroke:#4B6787;stroke-width:1.5}
+    .axis{stroke:#B8B0A4;stroke-width:1.5;fill:none;marker-end:url(#axisArrow)}
+    .hvec{stroke:#4B6787;stroke-width:3.5;fill:none;marker-end:url(#hArrow)}
+    .dvec{stroke:#A67C52;stroke-width:3;fill:none;marker-end:url(#dArrow)}
+    .hpvec{stroke:#2A4058;stroke-width:3.5;fill:none;marker-end:url(#hpArrow)}
+    .dot{fill:#2C2924}
+    .chip{fill:#4B6787}
+    .chip2{fill:#A67C52}
+  </style>
+  <defs>
+    <marker id="axisArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#B8B0A4"/>
+    </marker>
+    <marker id="hArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#4B6787"/>
+    </marker>
+    <marker id="dArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#A67C52"/>
+    </marker>
+    <marker id="hpArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2A4058"/>
+    </marker>
+  </defs>
+
+  <text x="24" y="28" class="t b">Steering in activation space (schematic)</text>
+  <text x="24" y="48" class="t m">h' = h + alpha * d_i  |  usually no renormalize step — ||h'|| can grow or shrink</text>
+
+  <rect class="panel" x="24" y="64" width="440" height="230" rx="10"/>
+
+  <path class="axis" d="M70 260 H430"/>
+  <path class="axis" d="M70 260 V90"/>
+  <text x="438" y="264" class="t m">dim 1</text>
+  <text x="52" y="84" class="t m">dim 2</text>
+  <circle class="dot" cx="70" cy="260" r="3.5"/>
+  <text x="78" y="276" class="t m">origin</text>
+
+  <!-- h: mostly right -->
+  <path class="hvec" d="M70 260 L250 210"/>
+  <text x="150" y="252" class="t s" fill="#4B6787">h</text>
+
+  <!-- alpha d_i: from tip of h, mostly up -->
+  <path class="dvec" d="M250 210 L310 110"/>
+  <text x="318" y="168" class="t s" fill="#A67C52">alpha d_i</text>
+
+  <!-- h': diagonal result; label close to the shaft -->
+  <path class="hpvec" d="M70 260 L310 110"/>
+  <text x="198" y="178" class="t s" fill="#2A4058">h'</text>
+
+  <circle cx="250" cy="210" r="3.5" fill="#4B6787"/>
+  <circle cx="310" cy="110" r="3.5" fill="#2A4058"/>
+
+  <text x="90" y="292" class="t m">Tip of h, then add the steering push, lands at h'</text>
+
+  <rect class="panel" x="480" y="64" width="216" height="230" rx="10"/>
+  <text x="498" y="92" class="t b">What moves</text>
+
+  <rect class="chip" x="498" y="112" width="14" height="14" rx="3"/>
+  <text x="522" y="124" class="t s">h = current residual</text>
+
+  <rect class="chip2" x="498" y="148" width="14" height="14" rx="3"/>
+  <text x="522" y="160" class="t s">alpha d_i = steering</text>
+  <text x="522" y="176" class="t m">push for feature i</text>
+
+  <rect x="498" y="198" width="14" height="14" rx="3" fill="#2A4058"/>
+  <text x="522" y="210" class="t s">h' = steered state</text>
+
+  <text x="498" y="244" class="t m">No normalize in the</text>
+  <text x="498" y="260" class="t m">basic formula — length</text>
+  <text x="498" y="276" class="t m">of h' usually changes.</text>
+</svg>

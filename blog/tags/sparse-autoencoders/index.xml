@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sparse-Autoencoders on praxagent LLC Blog</title>
+    <link>../tags/sparse-autoencoders/</link>
+    <description>Recent content in Sparse-Autoencoders on praxagent LLC Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="../tags/sparse-autoencoders/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to Read an SAE Feature ID</title>
+      <link>../posts/how-to-read-an-sae-feature-id/</link>
+      <pubDate>Thu, 09 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>../posts/how-to-read-an-sae-feature-id/</guid>
+      <description>A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights.</description>
+    </item>
+  </channel>
+</rss>

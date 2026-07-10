@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="330" viewBox="0 0 720 330" role="img" aria-labelledby="titleProg descProg">
+  <title id="titleProg">The SAE program: expand, sparsify, reconstruct</title>
+  <desc id="descProg">Three panels. First, expand: a short hidden vector h maps into many dictionary slots, more slots than dimensions. Second, sparsify: almost all slots stay off for any token, only a few fire. Third, reconstruct: the few active slots must still rebuild h faithfully.</desc>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .a{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.5}
+    .b{fill:#EDE8E1;stroke:#7F786D;stroke-width:1.5}
+    .c{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.5}
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .s{font-size:12px}.h{font-size:13px;font-weight:700}.m{font-size:11px;fill:#5A544C}
+    .hbar{fill:#4B6787}
+    .slotOn{fill:#4B6787;stroke:#2A4058;stroke-width:1}
+    .slotOff{fill:#fff;stroke:#B8B0A4;stroke-width:1}
+    .arr{stroke:#7F786D;stroke-width:2;fill:none;marker-end:url(#pArr)}
+  </style>
+  <defs>
+    <marker id="pArr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7F786D"/>
+    </marker>
+  </defs>
+
+  <text x="24" y="28" class="t h">The SAE training program (Bricken et al. 2023; Cunningham et al. 2023)</text>
+  <text x="24" y="48" class="t m">Three pressures shape the dictionary. No step assigns any English meaning.</text>
+
+  <!-- Panel 1: Expand -->
+  <rect class="a" x="24" y="66" width="210" height="220" rx="10"/>
+  <text x="129" y="92" text-anchor="middle" class="t h">1. Expand</text>
+
+  <!-- h: 4 bars -->
+  <rect class="hbar" x="52" y="120" width="16" height="16" rx="2"/>
+  <rect class="hbar" x="52" y="140" width="16" height="16" rx="2"/>
+  <rect class="hbar" x="52" y="160" width="16" height="16" rx="2"/>
+  <rect class="hbar" x="52" y="180" width="16" height="16" rx="2"/>
+  <text x="60" y="214" text-anchor="middle" class="t m">h</text>
+  <text x="60" y="228" text-anchor="middle" class="t m">(d_model)</text>
+
+  <path class="arr" d="M84 158 H120"/>
+
+  <!-- N slots: 10 small squares, mixed shading to show capacity -->
+  <rect class="slotOn" x="136" y="104" width="14" height="14" rx="2"/>
+  <rect class="slotOn" x="156" y="104" width="14" height="14" rx="2"/>
+  <rect class="slotOn" x="176" y="104" width="14" height="14" rx="2"/>
+  <rect class="slotOn" x="136" y="124" width="14" height="14" rx="2"/>
+  <rect class="slotOn" x="156" y="124" width="14" height="14" rx="2"/>
+  <rect class="slotOn" x="176" y="124" width="14" height="14" rx="2"/>
+  <rect class="slotOn" x="136" y="144" width="14" height="14" rx="2"/>
+  <rect class="slotOn" x="156" y="144" width="14" height="14" rx="2"/>
+  <rect class="slotOn" x="176" y="144" width="14" height="14" rx="2"/>
+  <rect class="slotOn" x="136" y="164" width="14" height="14" rx="2"/>
+  <rect class="slotOn" x="156" y="164" width="14" height="14" rx="2"/>
+  <rect class="slotOn" x="176" y="164" width="14" height="14" rx="2"/>
+  <text x="163" y="214" text-anchor="middle" class="t m">N feature slots</text>
+  <text x="163" y="228" text-anchor="middle" class="t m">(N &gt;&gt; d_model)</text>
+
+  <text x="129" y="258" text-anchor="middle" class="t m">deliberately redundant:</text>
+  <text x="129" y="272" text-anchor="middle" class="t m">more slots than dimensions</text>
+
+  <!-- Panel 2: Sparsify -->
+  <rect class="b" x="255" y="66" width="210" height="220" rx="10"/>
+  <text x="360" y="92" text-anchor="middle" class="t h">2. Sparsify</text>
+
+  <!-- 12 slots, only 2 on -->
+  <rect class="slotOff" x="316" y="104" width="14" height="14" rx="2"/>
+  <rect class="slotOff" x="336" y="104" width="14" height="14" rx="2"/>
+  <rect class="slotOff" x="356" y="104" width="14" height="14" rx="2"/>
+  <rect class="slotOff" x="376" y="104" width="14" height="14" rx="2"/>
+  <rect class="slotOff" x="316" y="124" width="14" height="14" rx="2"/>
+  <rect class="slotOn"  x="336" y="124" width="14" height="14" rx="2"/>
+  <rect class="slotOff" x="356" y="124" width="14" height="14" rx="2"/>
+  <rect class="slotOff" x="376" y="124" width="14" height="14" rx="2"/>
+  <rect class="slotOff" x="316" y="144" width="14" height="14" rx="2"/>
+  <rect class="slotOff" x="336" y="144" width="14" height="14" rx="2"/>
+  <rect class="slotOff" x="356" y="144" width="14" height="14" rx="2"/>
+  <rect class="slotOn"  x="376" y="144" width="14" height="14" rx="2"/>
+  <rect class="slotOff" x="316" y="164" width="14" height="14" rx="2"/>
+  <rect class="slotOff" x="336" y="164" width="14" height="14" rx="2"/>
+  <rect class="slotOff" x="356" y="164" width="14" height="14" rx="2"/>
+  <rect class="slotOff" x="376" y="164" width="14" height="14" rx="2"/>
+
+  <text x="360" y="214" text-anchor="middle" class="t m">for any one token,</text>
+  <text x="360" y="228" text-anchor="middle" class="t m">almost every slot stays off</text>
+
+  <text x="360" y="258" text-anchor="middle" class="t m">sparsity penalty (L1, caps,</text>
+  <text x="360" y="272" text-anchor="middle" class="t m">thresholds) pushes f toward 0</text>
+
+  <!-- Panel 3: Reconstruct -->
+  <rect class="c" x="486" y="66" width="210" height="220" rx="10"/>
+  <text x="591" y="92" text-anchor="middle" class="t h">3. Reconstruct</text>
+
+  <!-- 2 active slots -->
+  <rect class="slotOn" x="514" y="124" width="14" height="14" rx="2"/>
+  <rect class="slotOn" x="514" y="144" width="14" height="14" rx="2"/>
+  <text x="521" y="214" text-anchor="middle" class="t m">few active</text>
+  <text x="521" y="228" text-anchor="middle" class="t m">slots</text>
+
+  <path class="arr" d="M544 158 H580"/>
+
+  <!-- h-hat bars -->
+  <rect class="hbar" x="596" y="120" width="16" height="16" rx="2"/>
+  <rect class="hbar" x="596" y="140" width="16" height="16" rx="2"/>
+  <rect class="hbar" x="596" y="160" width="16" height="16" rx="2"/>
+  <rect class="hbar" x="596" y="180" width="16" height="16" rx="2"/>
+  <text x="632" y="158" class="t s">&#8776; h</text>
+  <text x="604" y="214" text-anchor="middle" class="t m">rebuilt</text>
+  <text x="604" y="228" text-anchor="middle" class="t m">hidden state</text>
+
+  <text x="591" y="258" text-anchor="middle" class="t m">reconstruction loss keeps the</text>
+  <text x="591" y="272" text-anchor="middle" class="t m">few that fire honest about h</text>
+
+  <text x="24" y="314" class="t m">The compromise between 2 and 3 is the whole trick: sparse codes that still explain the hidden state. Labels come later, from people.</text>
+</svg>

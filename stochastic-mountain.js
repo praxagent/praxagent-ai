@@ -13,36 +13,46 @@
     };
   }
 
+  // Matched to SoCal trail photo: dusty slate sky + sun-bleached taupe hills
   var themes = {
     dark: {
-      bgTop: '#0f1117', bgBot: '#060810', fade: '15,17,23',
-      fR: function(d) { return 2 + d * 14 | 0; },
-      fG: function(d) { return 5 + d * 25 | 0; },
-      fB: function(d) { return 16 + d * 50 | 0; },
-      fA: function(d) { return 0.025 + d * 0.05; },
-      sR: function(d) { return 30 + (d * 55 | 0); },
-      sG: function(d) { return 65 + (d * 80 | 0); },
-      sB: function(d) { return 140 + (d * 70 | 0); },
-      sA: function(d) { return 0.02 + d * 0.07; },
-      hR: function(h) { return h > 0.7 ? 120 : 55; },
-      hG: function(h) { return h > 0.7 ? 185 : 125; },
-      hB: function()  { return 250; },
-      hA: function(h, r) { return h > 0.7 ? 0.22 + r * 0.18 : 0.10 + r * 0.14; }
+      bgTop: '#2A4058', bgBot: '#3A342C',
+      fadeTop: '42,64,88', fadeBot: '58,52,44',
+      // Mountain mass: muted taupe scrub
+      fR: function(d) { return 70 + d * 70 | 0; },
+      fG: function(d) { return 65 + d * 60 | 0; },
+      fB: function(d) { return 55 + d * 45 | 0; },
+      fA: function(d) { return 0.06 + d * 0.10; },
+      // Walk strokes: bleached khaki
+      sR: function(d) { return 150 + (d * 55 | 0); },
+      sG: function(d) { return 140 + (d * 50 | 0); },
+      sB: function(d) { return 120 + (d * 40 | 0); },
+      sA: function(d) { return 0.05 + d * 0.12; },
+      // Hero strokes: pale path / light scrub
+      hR: function(h) { return h > 0.7 ? 210 : 170; },
+      hG: function(h) { return h > 0.7 ? 200 : 160; },
+      hB: function(h) { return h > 0.7 ? 180 : 145; },
+      hA: function(h, r) { return h > 0.7 ? 0.30 + r * 0.18 : 0.18 + r * 0.14; }
     },
     light: {
-      bgTop: '#f8fafc', bgBot: '#edf0f5', fade: '248,250,252',
-      fR: function(d) { return 190 - d * 40 | 0; },
-      fG: function(d) { return 205 - d * 35 | 0; },
-      fB: function(d) { return 225 - d * 30 | 0; },
-      fA: function(d) { return 0.025 + d * 0.05; },
-      sR: function(d) { return 25 + (d * 42 | 0); },
-      sG: function(d) { return 55 + (d * 60 | 0); },
-      sB: function(d) { return 120 + (d * 50 | 0); },
-      sA: function(d) { return 0.04 + d * 0.10; },
-      hR: function(h) { return h > 0.7 ? 30 : 16; },
-      hG: function(h) { return h > 0.7 ? 80 : 50; },
-      hB: function(h) { return h > 0.7 ? 175 : 155; },
-      hA: function(h, r) { return h > 0.7 ? 0.30 + r * 0.20 : 0.16 + r * 0.18; }
+      // Photo sky ~#4B6787, hills ~#888178 / path ~#C9C0B4
+      bgTop: '#4B6787', bgBot: '#B5A99A',
+      fadeTop: '75,103,135', fadeBot: '181,169,154',
+      // Mountain mass: sun-bleached dried grass (taupe, not gold)
+      fR: function(d) { return 185 - d * 25 | 0; },
+      fG: function(d) { return 175 - d * 28 | 0; },
+      fB: function(d) { return 160 - d * 30 | 0; },
+      fA: function(d) { return 0.14 + d * 0.16; },
+      // Walk strokes: silvery-brown scrub
+      sR: function(d) { return 120 + (d * 50 | 0); },
+      sG: function(d) { return 112 + (d * 45 | 0); },
+      sB: function(d) { return 98 + (d * 38 | 0); },
+      sA: function(d) { return 0.10 + d * 0.16; },
+      // Hero strokes: pale dirt path + olive-tinged brush
+      hR: function(h) { return h > 0.7 ? 175 : 130; },
+      hG: function(h) { return h > 0.7 ? 165 : 125; },
+      hB: function(h) { return h > 0.7 ? 148 : 110; },
+      hA: function(h, r) { return h > 0.7 ? 0.42 + r * 0.22 : 0.26 + r * 0.18; }
     }
   };
 
@@ -413,12 +423,14 @@
         var alpha = p.life * twk;
         var sz = p.size * (0.5 + 0.5 * p.life);
 
-        // Pick color: white core, tinted glow
+        // Pick color: pale path dust / soft scrub glitter
         var cr, cg, cb;
         if (theme === 'dark') {
-          cr = p.hue > 0.5 ? 160 : 100; cg = 200; cb = 255;
+          if (p.hue > 0.5) { cr = 220; cg = 210; cb = 195; }
+          else { cr = 180; cg = 170; cb = 150; }
         } else {
-          cr = p.hue > 0.5 ? 40 : 8; cg = 90; cb = 180;
+          if (p.hue > 0.5) { cr = 230; cg = 222; cb = 210; }
+          else { cr = 170; cg = 160; cb = 140; }
         }
 
         // Glow
@@ -450,16 +462,16 @@
 
       // Top fade — keeps the upper area clean for content
       var tf = ctx.createLinearGradient(0, 0, 0, H * 0.52);
-      tf.addColorStop(0, 'rgba(' + t.fade + ',1)');
-      tf.addColorStop(0.65, 'rgba(' + t.fade + ',1)');
-      tf.addColorStop(1, 'rgba(' + t.fade + ',0)');
+      tf.addColorStop(0, 'rgba(' + t.fadeTop + ',1)');
+      tf.addColorStop(0.65, 'rgba(' + t.fadeTop + ',1)');
+      tf.addColorStop(1, 'rgba(' + t.fadeTop + ',0)');
       ctx.fillStyle = tf;
       ctx.fillRect(0, 0, W, H * 0.52);
 
       // Bottom fade
       var bf = ctx.createLinearGradient(0, H * 0.90, 0, H);
-      bf.addColorStop(0, 'rgba(' + t.fade + ',0)');
-      bf.addColorStop(1, 'rgba(' + t.fade + ',0.65)');
+      bf.addColorStop(0, 'rgba(' + t.fadeBot + ',0)');
+      bf.addColorStop(1, 'rgba(' + t.fadeBot + ',0.65)');
       ctx.fillStyle = bf;
       ctx.fillRect(0, H * 0.90, W, H * 0.10);
 

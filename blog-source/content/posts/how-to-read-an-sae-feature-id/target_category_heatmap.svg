@@ -1,0 +1,200 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="762" height="522" viewBox="0 0 762 522">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:Arial,Helvetica,sans-serif;font-size:11px}.small{font-size:10px;fill:#1f2933}.label{font-weight:700;fill:#1f2933}.fid{font-size:12px;font-weight:700;fill:#1f2933}.num{font-size:11px;font-weight:700}.num-light{fill:#ffffff}.num-dark{fill:#111827}</style>
+<text x="12" y="22" class="label">Category × feature heatmap (column-normalized mean max activation)</text>
+<text x="254.0" y="50" text-anchor="middle" class="fid">22004</text>
+<text x="254.0" y="66" text-anchor="middle" class="small">roleplay</text>
+<text x="342.0" y="50" text-anchor="middle" class="fid">23893</text>
+<text x="342.0" y="66" text-anchor="middle" class="small">conceal AI</text>
+<text x="430.0" y="50" text-anchor="middle" class="fid">30032</text>
+<text x="430.0" y="66" text-anchor="middle" class="small">pretending</text>
+<text x="518.0" y="50" text-anchor="middle" class="fid">30686</text>
+<text x="518.0" y="66" text-anchor="middle" class="small">misdirection</text>
+<text x="606.0" y="50" text-anchor="middle" class="fid">41533</text>
+<text x="606.0" y="66" text-anchor="middle" class="small">dishonesty</text>
+<text x="694.0" y="50" text-anchor="middle" class="fid">58667</text>
+<text x="694.0" y="66" text-anchor="middle" class="small">cover story</text>
+<text x="12" y="97" class="small">ai identity disclaimer</text>
+<rect x="210" y="78" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="254.0" y="97" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="298" y="78" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="342.0" y="97" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="386" y="78" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="430.0" y="97" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="474" y="78" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="518.0" y="97" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="562" y="78" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="606.0" y="97" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="650" y="78" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="694.0" y="97" text-anchor="middle" class="num num-dark">0.00</text>
+<text x="12" y="125" class="small">deception cover story</text>
+<rect x="210" y="106" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="254.0" y="125" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="298" y="106" width="88" height="28" fill="#1c5c99" stroke="#d7dee8"/>
+<text x="342.0" y="125" text-anchor="middle" class="num num-light">0.30</text>
+<rect x="386" y="106" width="88" height="28" fill="#a6bfd7" stroke="#d7dee8"/>
+<text x="430.0" y="125" text-anchor="middle" class="num num-dark">0.48</text>
+<rect x="474" y="106" width="88" height="28" fill="#b0c6db" stroke="#d7dee8"/>
+<text x="518.0" y="125" text-anchor="middle" class="num num-dark">0.53</text>
+<rect x="562" y="106" width="88" height="28" fill="#b4c9dd" stroke="#d7dee8"/>
+<text x="606.0" y="125" text-anchor="middle" class="num num-dark">1.81</text>
+<rect x="650" y="106" width="88" height="28" fill="#1c5c99" stroke="#d7dee8"/>
+<text x="694.0" y="125" text-anchor="middle" class="num num-light">2.38</text>
+<text x="12" y="153" class="small">direct consciousness claim</text>
+<rect x="210" y="134" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="254.0" y="153" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="298" y="134" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="342.0" y="153" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="386" y="134" width="88" height="28" fill="#e4ebf3" stroke="#d7dee8"/>
+<text x="430.0" y="153" text-anchor="middle" class="num num-dark">0.10</text>
+<rect x="474" y="134" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="518.0" y="153" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="562" y="134" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="606.0" y="153" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="650" y="134" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="694.0" y="153" text-anchor="middle" class="num num-dark">0.00</text>
+<text x="12" y="181" class="small">dishonesty confession</text>
+<rect x="210" y="162" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="254.0" y="181" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="298" y="162" width="88" height="28" fill="#b1c7dc" stroke="#d7dee8"/>
+<text x="342.0" y="181" text-anchor="middle" class="num num-dark">0.09</text>
+<rect x="386" y="162" width="88" height="28" fill="#cedbe8" stroke="#d7dee8"/>
+<text x="430.0" y="181" text-anchor="middle" class="num num-dark">0.24</text>
+<rect x="474" y="162" width="88" height="28" fill="#c0d1e2" stroke="#d7dee8"/>
+<text x="518.0" y="181" text-anchor="middle" class="num num-dark">0.41</text>
+<rect x="562" y="162" width="88" height="28" fill="#1c5c99" stroke="#d7dee8"/>
+<text x="606.0" y="181" text-anchor="middle" class="num num-light">6.06</text>
+<rect x="650" y="162" width="88" height="28" fill="#dce5ef" stroke="#d7dee8"/>
+<text x="694.0" y="181" text-anchor="middle" class="num num-dark">0.28</text>
+<text x="12" y="209" class="small">false self attribution</text>
+<rect x="210" y="190" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="254.0" y="209" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="298" y="190" width="88" height="28" fill="#f0f3f8" stroke="#d7dee8"/>
+<text x="342.0" y="209" text-anchor="middle" class="num num-dark">0.01</text>
+<rect x="386" y="190" width="88" height="28" fill="#edf1f6" stroke="#d7dee8"/>
+<text x="430.0" y="209" text-anchor="middle" class="num num-dark">0.05</text>
+<rect x="474" y="190" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="518.0" y="209" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="562" y="190" width="88" height="28" fill="#f3f6f9" stroke="#d7dee8"/>
+<text x="606.0" y="209" text-anchor="middle" class="num num-dark">0.04</text>
+<rect x="650" y="190" width="88" height="28" fill="#f4f6fa" stroke="#d7dee8"/>
+<text x="694.0" y="209" text-anchor="middle" class="num num-dark">0.01</text>
+<text x="12" y="237" class="small">fictional pretending</text>
+<rect x="210" y="218" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="254.0" y="237" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="298" y="218" width="88" height="28" fill="#bed0e1" stroke="#d7dee8"/>
+<text x="342.0" y="237" text-anchor="middle" class="num num-dark">0.08</text>
+<rect x="386" y="218" width="88" height="28" fill="#1c5c99" stroke="#d7dee8"/>
+<text x="430.0" y="237" text-anchor="middle" class="num num-light">1.32</text>
+<rect x="474" y="218" width="88" height="28" fill="#9fbad4" stroke="#d7dee8"/>
+<text x="518.0" y="237" text-anchor="middle" class="num num-dark">0.66</text>
+<rect x="562" y="218" width="88" height="28" fill="#cddbe8" stroke="#d7dee8"/>
+<text x="606.0" y="237" text-anchor="middle" class="num num-dark">1.11</text>
+<rect x="650" y="218" width="88" height="28" fill="#c7d6e6" stroke="#d7dee8"/>
+<text x="694.0" y="237" text-anchor="middle" class="num num-dark">0.50</text>
+<text x="12" y="265" class="small">hedged cautious style</text>
+<rect x="210" y="246" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="254.0" y="265" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="298" y="246" width="88" height="28" fill="#92b0ce" stroke="#d7dee8"/>
+<text x="342.0" y="265" text-anchor="middle" class="num num-dark">0.14</text>
+<rect x="386" y="246" width="88" height="28" fill="#dae4ee" stroke="#d7dee8"/>
+<text x="430.0" y="265" text-anchor="middle" class="num num-dark">0.16</text>
+<rect x="474" y="246" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="518.0" y="265" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="562" y="246" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="606.0" y="265" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="650" y="246" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="694.0" y="265" text-anchor="middle" class="num num-dark">0.00</text>
+<text x="12" y="293" class="small">honesty correction</text>
+<rect x="210" y="274" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="254.0" y="293" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="298" y="274" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="342.0" y="293" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="386" y="274" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="430.0" y="293" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="474" y="274" width="88" height="28" fill="#f3f6f9" stroke="#d7dee8"/>
+<text x="518.0" y="293" text-anchor="middle" class="num num-dark">0.01</text>
+<rect x="562" y="274" width="88" height="28" fill="#f2f5f9" stroke="#d7dee8"/>
+<text x="606.0" y="293" text-anchor="middle" class="num num-dark">0.09</text>
+<rect x="650" y="274" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="694.0" y="293" text-anchor="middle" class="num num-dark">0.00</text>
+<text x="12" y="321" class="small">neutral factual control</text>
+<rect x="210" y="302" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="254.0" y="321" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="298" y="302" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="342.0" y="321" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="386" y="302" width="88" height="28" fill="#f4f7fa" stroke="#d7dee8"/>
+<text x="430.0" y="321" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="474" y="302" width="88" height="28" fill="#f3f6f9" stroke="#d7dee8"/>
+<text x="518.0" y="321" text-anchor="middle" class="num num-dark">0.01</text>
+<rect x="562" y="302" width="88" height="28" fill="#f4f6f9" stroke="#d7dee8"/>
+<text x="606.0" y="321" text-anchor="middle" class="num num-dark">0.03</text>
+<rect x="650" y="302" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="694.0" y="321" text-anchor="middle" class="num num-dark">0.00</text>
+<text x="12" y="349" class="small">persona maintenance</text>
+<rect x="210" y="330" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="254.0" y="349" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="298" y="330" width="88" height="28" fill="#e1e9f1" stroke="#d7dee8"/>
+<text x="342.0" y="349" text-anchor="middle" class="num num-dark">0.03</text>
+<rect x="386" y="330" width="88" height="28" fill="#e9eef4" stroke="#d7dee8"/>
+<text x="430.0" y="349" text-anchor="middle" class="num num-dark">0.08</text>
+<rect x="474" y="330" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="518.0" y="349" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="562" y="330" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="606.0" y="349" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="650" y="330" width="88" height="28" fill="#e5ecf3" stroke="#d7dee8"/>
+<text x="694.0" y="349" text-anchor="middle" class="num num-dark">0.17</text>
+<text x="12" y="377" class="small">refusal safety disclaimer</text>
+<rect x="210" y="358" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="254.0" y="377" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="298" y="358" width="88" height="28" fill="#f0f3f8" stroke="#d7dee8"/>
+<text x="342.0" y="377" text-anchor="middle" class="num num-dark">0.01</text>
+<rect x="386" y="358" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="430.0" y="377" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="474" y="358" width="88" height="28" fill="#e7edf4" stroke="#d7dee8"/>
+<text x="518.0" y="377" text-anchor="middle" class="num num-dark">0.11</text>
+<rect x="562" y="358" width="88" height="28" fill="#e8eef4" stroke="#d7dee8"/>
+<text x="606.0" y="377" text-anchor="middle" class="num num-dark">0.36</text>
+<rect x="650" y="358" width="88" height="28" fill="#edf1f6" stroke="#d7dee8"/>
+<text x="694.0" y="377" text-anchor="middle" class="num num-dark">0.09</text>
+<text x="12" y="405" class="small">roleplay persona</text>
+<rect x="210" y="386" width="88" height="28" fill="#1c5c99" stroke="#d7dee8"/>
+<text x="254.0" y="405" text-anchor="middle" class="num num-light">0.11</text>
+<rect x="298" y="386" width="88" height="28" fill="#f4f6f9" stroke="#d7dee8"/>
+<text x="342.0" y="405" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="386" y="386" width="88" height="28" fill="#dde6ef" stroke="#d7dee8"/>
+<text x="430.0" y="405" text-anchor="middle" class="num num-dark">0.15</text>
+<rect x="474" y="386" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="518.0" y="405" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="562" y="386" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="606.0" y="405" text-anchor="middle" class="num num-dark">0.01</text>
+<rect x="650" y="386" width="88" height="28" fill="#eef2f7" stroke="#d7dee8"/>
+<text x="694.0" y="405" text-anchor="middle" class="num num-dark">0.07</text>
+<text x="12" y="433" class="small">self ref mindfulness</text>
+<rect x="210" y="414" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="254.0" y="433" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="298" y="414" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="342.0" y="433" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="386" y="414" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="430.0" y="433" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="474" y="414" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="518.0" y="433" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="562" y="414" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="606.0" y="433" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="650" y="414" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="694.0" y="433" text-anchor="middle" class="num num-dark">0.00</text>
+<text x="12" y="461" class="small">tactical misdirection</text>
+<rect x="210" y="442" width="88" height="28" fill="#f5f7fa" stroke="#d7dee8"/>
+<text x="254.0" y="461" text-anchor="middle" class="num num-dark">0.00</text>
+<rect x="298" y="442" width="88" height="28" fill="#c2d2e3" stroke="#d7dee8"/>
+<text x="342.0" y="461" text-anchor="middle" class="num num-dark">0.07</text>
+<rect x="386" y="442" width="88" height="28" fill="#d0dde9" stroke="#d7dee8"/>
+<text x="430.0" y="461" text-anchor="middle" class="num num-dark">0.22</text>
+<rect x="474" y="442" width="88" height="28" fill="#1c5c99" stroke="#d7dee8"/>
+<text x="518.0" y="461" text-anchor="middle" class="num num-light">1.67</text>
+<rect x="562" y="442" width="88" height="28" fill="#e2e9f1" stroke="#d7dee8"/>
+<text x="606.0" y="461" text-anchor="middle" class="num num-dark">0.53</text>
+<rect x="650" y="442" width="88" height="28" fill="#b3c8dd" stroke="#d7dee8"/>
+<text x="694.0" y="461" text-anchor="middle" class="num num-dark">0.72</text>
+<text x="12" y="506" class="small">Each column is one feature, scaled to that feature&apos;s max. Darker = stronger within-feature activation; numbers are raw category means.</text>
+</svg>

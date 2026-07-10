@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="330" viewBox="0 0 720 330" role="img" aria-labelledby="titleRep descRep">
+  <title id="titleRep">Resampling without versus with replacement</title>
+  <desc id="descRep">Left panel: drawing three items from the set 3, 5, 7 without replacement always collects all three, so every resample has mean 5.0 and there is no spread. Right panel: drawing with replacement allows repeats, producing resamples like 3 3 7 with mean 4.3 and 5 7 7 with mean 6.3, so the means wobble and that wobble gives an interval.</desc>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .s{font-size:12px}.h{font-size:13px;font-weight:700}.m{font-size:11px;fill:#5A544C}
+    .panel{fill:#fff;stroke:#4B6787;stroke-width:1.5}
+    .tile{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.5}
+    .tileT{font-size:13px;font-weight:700;fill:#2C2924}
+    .meanSame{font-size:12px;font-weight:700;fill:#7F786D}
+    .meanMove{font-size:12px;font-weight:700;fill:#A67C52}
+  </style>
+
+  <text x="24" y="28" class="t h">Why draw with replacement? A three-item dataset: {3, 5, 7}, mean 5.0</text>
+
+  <!-- Left panel: without replacement -->
+  <rect class="panel" x="24" y="46" width="330" height="250" rx="10"/>
+  <text x="42" y="72" class="t h">Without replacement</text>
+  <text x="42" y="90" class="t m">Each tile can be picked once, so three draws</text>
+  <text x="42" y="104" class="t m">always collect all three tiles, just reordered.</text>
+
+  <!-- resample rows -->
+  <text x="42" y="136" class="t m">resample 1:</text>
+  <rect class="tile" x="120" y="122" width="24" height="20" rx="4"/><text x="132" y="136" text-anchor="middle" class="tileT">5</text>
+  <rect class="tile" x="150" y="122" width="24" height="20" rx="4"/><text x="162" y="136" text-anchor="middle" class="tileT">3</text>
+  <rect class="tile" x="180" y="122" width="24" height="20" rx="4"/><text x="192" y="136" text-anchor="middle" class="tileT">7</text>
+  <text x="222" y="136" class="meanSame">mean 5.0</text>
+
+  <text x="42" y="172" class="t m">resample 2:</text>
+  <rect class="tile" x="120" y="158" width="24" height="20" rx="4"/><text x="132" y="172" text-anchor="middle" class="tileT">7</text>
+  <rect class="tile" x="150" y="158" width="24" height="20" rx="4"/><text x="162" y="172" text-anchor="middle" class="tileT">5</text>
+  <rect class="tile" x="180" y="158" width="24" height="20" rx="4"/><text x="192" y="172" text-anchor="middle" class="tileT">3</text>
+  <text x="222" y="172" class="meanSame">mean 5.0</text>
+
+  <text x="42" y="208" class="t m">resample 3:</text>
+  <rect class="tile" x="120" y="194" width="24" height="20" rx="4"/><text x="132" y="208" text-anchor="middle" class="tileT">3</text>
+  <rect class="tile" x="150" y="194" width="24" height="20" rx="4"/><text x="162" y="208" text-anchor="middle" class="tileT">7</text>
+  <rect class="tile" x="180" y="194" width="24" height="20" rx="4"/><text x="192" y="208" text-anchor="middle" class="tileT">5</text>
+  <text x="222" y="208" class="meanSame">mean 5.0</text>
+
+  <text x="42" y="248" class="t s">Every mean is identical: zero wobble,</text>
+  <text x="42" y="264" class="t s">no interval, nothing learned.</text>
+
+  <!-- Right panel: with replacement -->
+  <rect class="panel" x="366" y="46" width="330" height="250" rx="10"/>
+  <text x="384" y="72" class="t h">With replacement</text>
+  <text x="384" y="90" class="t m">Each pick goes back in the jar, so tiles can</text>
+  <text x="384" y="104" class="t m">repeat, and some can be skipped entirely.</text>
+
+  <text x="384" y="136" class="t m">resample 1:</text>
+  <rect class="tile" x="462" y="122" width="24" height="20" rx="4"/><text x="474" y="136" text-anchor="middle" class="tileT">3</text>
+  <rect class="tile" x="492" y="122" width="24" height="20" rx="4"/><text x="504" y="136" text-anchor="middle" class="tileT">3</text>
+  <rect class="tile" x="522" y="122" width="24" height="20" rx="4"/><text x="534" y="136" text-anchor="middle" class="tileT">7</text>
+  <text x="564" y="136" class="meanMove">mean 4.3</text>
+
+  <text x="384" y="172" class="t m">resample 2:</text>
+  <rect class="tile" x="462" y="158" width="24" height="20" rx="4"/><text x="474" y="172" text-anchor="middle" class="tileT">5</text>
+  <rect class="tile" x="492" y="158" width="24" height="20" rx="4"/><text x="504" y="172" text-anchor="middle" class="tileT">7</text>
+  <rect class="tile" x="522" y="158" width="24" height="20" rx="4"/><text x="534" y="172" text-anchor="middle" class="tileT">7</text>
+  <text x="564" y="172" class="meanMove">mean 6.3</text>
+
+  <text x="384" y="208" class="t m">resample 3:</text>
+  <rect class="tile" x="462" y="194" width="24" height="20" rx="4"/><text x="474" y="208" text-anchor="middle" class="tileT">3</text>
+  <rect class="tile" x="492" y="194" width="24" height="20" rx="4"/><text x="504" y="208" text-anchor="middle" class="tileT">5</text>
+  <rect class="tile" x="522" y="194" width="24" height="20" rx="4"/><text x="534" y="208" text-anchor="middle" class="tileT">7</text>
+  <text x="564" y="208" class="meanMove">mean 5.0</text>
+
+  <text x="384" y="248" class="t s">The means wobble around 5.0. Do this</text>
+  <text x="384" y="264" class="t s">2,000 times: the spread is your interval.</text>
+
+  <text x="24" y="318" class="t m">Duplicates and omissions are not a bug: each resample reweights the evidence slightly, which is what reveals the uncertainty.</text>
+</svg>

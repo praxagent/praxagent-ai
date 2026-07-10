@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="280" viewBox="0 0 720 280" role="img" aria-labelledby="title desc">
+  <title id="title">Where an SAE attaches to a transformer layer</title>
+  <desc id="desc">Token embeddings flow through stacked transformer blocks. Each block has attention and an MLP. The residual stream carries the running hidden state h. An SAE can be trained on h at a chosen layer.</desc>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .box{fill:#fff;stroke:#4B6787;stroke-width:1.5}
+    .mlp{fill:#EDE8E1;stroke:#7F786D;stroke-width:1.5}
+    .attn{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.5}
+    .sae{fill:#4B6787;stroke:#2A4058;stroke-width:1.5}
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .s{font-size:12px}.b{font-size:13px;font-weight:700}.w{fill:#fff}.m{font-size:11px;fill:#5A544C}
+    .arrow{stroke:#7F786D;stroke-width:2;fill:none;marker-end:url(#arrow)}
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7F786D"/>
+    </marker>
+  </defs>
+
+  <text x="24" y="28" class="t b">Transformer stack (simplified)</text>
+  <text x="24" y="48" class="t m">Tokens -&gt; residual stream h -&gt; many layers -&gt; next-token prediction</text>
+
+  <rect class="box" x="24" y="80" width="90" height="56" rx="8"/>
+  <text x="69" y="105" text-anchor="middle" class="t s">token</text>
+  <text x="69" y="122" text-anchor="middle" class="t s">embeddings</text>
+
+  <path class="arrow" d="M120 108 H150"/>
+
+  <rect class="box" x="150" y="64" width="280" height="150" rx="10"/>
+  <text x="290" y="86" text-anchor="middle" class="t b">Layer L (e.g. 50)</text>
+
+  <rect class="attn" x="170" y="100" width="110" height="44" rx="6"/>
+  <text x="225" y="127" text-anchor="middle" class="t s">Attention</text>
+
+  <rect class="mlp" x="300" y="100" width="110" height="44" rx="6"/>
+  <text x="355" y="120" text-anchor="middle" class="t s">MLP</text>
+  <text x="355" y="136" text-anchor="middle" class="t m">feed-forward</text>
+
+  <text x="290" y="172" text-anchor="middle" class="t s">residual stream carries h in R^{d_model}</text>
+  <text x="290" y="192" text-anchor="middle" class="t m">d_model = hidden width of the LM</text>
+
+  <path class="arrow" d="M430 108 H470"/>
+
+  <rect class="box" x="470" y="80" width="90" height="56" rx="8"/>
+  <text x="515" y="105" text-anchor="middle" class="t s">later</text>
+  <text x="515" y="122" text-anchor="middle" class="t s">layers ...</text>
+
+  <path class="arrow" d="M290 214 V236"/>
+  <rect class="sae" x="210" y="236" width="160" height="32" rx="6"/>
+  <text x="290" y="257" text-anchor="middle" class="t s w">SAE reads h here</text>
+</svg>

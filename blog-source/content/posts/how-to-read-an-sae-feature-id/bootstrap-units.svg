@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="430" viewBox="0 0 720 430" role="img" aria-labelledby="titleBoot descBoot">
+  <title id="titleBoot">Item bootstrap versus template-cluster bootstrap</title>
+  <desc id="descBoot">Left panel: the naive item bootstrap resamples individual texts, but texts sharing a template are near-copies, so the interval is too narrow. Right panel: the template-cluster bootstrap resamples whole template families, so each family counts as one piece of evidence and the interval is honestly wider. Bottom: both intervals for the deception minus subjective contrast on one axis; the item interval spans 1.045 to 1.167, the cluster interval spans 0.638 to 1.233.</desc>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .s{font-size:12px}.h{font-size:13px;font-weight:700}.m{font-size:11px;fill:#5A544C}
+    .panel{fill:#fff;stroke:#4B6787;stroke-width:1.5}
+    .famA{fill:#4B6787}
+    .famB{fill:#A67C52}
+    .famC{fill:#7F9C6B}
+    .famD{fill:#9C6B8F}
+    .fambox{fill:none;stroke:#7F786D;stroke-width:1.5;stroke-dasharray:5 3}
+    .axis{stroke:#B8B0A4;stroke-width:1.5}
+    .tick{stroke:#B8B0A4;stroke-width:1}
+    .ciN{stroke:#A67C52;stroke-width:4}
+    .ciC{stroke:#4B6787;stroke-width:4}
+  </style>
+
+  <text x="24" y="28" class="t h">Same data, two ways of counting evidence</text>
+  <text x="24" y="48" class="t m">Each small square is one text; each color is one template family (near-copies of each other).</text>
+
+  <!-- Left panel: item bootstrap -->
+  <rect class="panel" x="24" y="66" width="330" height="200" rx="10"/>
+  <text x="42" y="92" class="t h">Item bootstrap (naive)</text>
+
+  <!-- 4 rows of squares, colored by family, no boxes -->
+  <rect class="famA" x="52" y="110" width="13" height="13" rx="2"/>
+  <rect class="famA" x="70" y="110" width="13" height="13" rx="2"/>
+  <rect class="famA" x="88" y="110" width="13" height="13" rx="2"/>
+  <rect class="famA" x="106" y="110" width="13" height="13" rx="2"/>
+  <rect class="famA" x="124" y="110" width="13" height="13" rx="2"/>
+  <rect class="famB" x="160" y="110" width="13" height="13" rx="2"/>
+  <rect class="famB" x="178" y="110" width="13" height="13" rx="2"/>
+  <rect class="famB" x="196" y="110" width="13" height="13" rx="2"/>
+  <rect class="famB" x="214" y="110" width="13" height="13" rx="2"/>
+  <rect class="famB" x="232" y="110" width="13" height="13" rx="2"/>
+
+  <rect class="famC" x="52" y="136" width="13" height="13" rx="2"/>
+  <rect class="famC" x="70" y="136" width="13" height="13" rx="2"/>
+  <rect class="famC" x="88" y="136" width="13" height="13" rx="2"/>
+  <rect class="famC" x="106" y="136" width="13" height="13" rx="2"/>
+  <rect class="famC" x="124" y="136" width="13" height="13" rx="2"/>
+  <rect class="famD" x="160" y="136" width="13" height="13" rx="2"/>
+  <rect class="famD" x="178" y="136" width="13" height="13" rx="2"/>
+  <rect class="famD" x="196" y="136" width="13" height="13" rx="2"/>
+  <rect class="famD" x="214" y="136" width="13" height="13" rx="2"/>
+  <rect class="famD" x="232" y="136" width="13" height="13" rx="2"/>
+
+  <text x="42" y="182" class="t m">Draws one square at a time.</text>
+  <text x="42" y="196" class="t m">Every text counts as an independent fact,</text>
+  <text x="42" y="210" class="t m">even though same-color texts are near-copies.</text>
+  <text x="42" y="238" class="t s" fill="#A67C52">Result: interval too narrow (overconfident)</text>
+
+  <!-- Right panel: cluster bootstrap -->
+  <rect class="panel" x="366" y="66" width="330" height="200" rx="10"/>
+  <text x="384" y="92" class="t h">Template-cluster bootstrap (primary)</text>
+
+  <!-- same squares but boxed by family -->
+  <rect class="fambox" x="388" y="104" width="102" height="26" rx="4"/>
+  <rect class="famA" x="394" y="110" width="13" height="13" rx="2"/>
+  <rect class="famA" x="412" y="110" width="13" height="13" rx="2"/>
+  <rect class="famA" x="430" y="110" width="13" height="13" rx="2"/>
+  <rect class="famA" x="448" y="110" width="13" height="13" rx="2"/>
+  <rect class="famA" x="466" y="110" width="13" height="13" rx="2"/>
+
+  <rect class="fambox" x="530" y="104" width="102" height="26" rx="4"/>
+  <rect class="famB" x="536" y="110" width="13" height="13" rx="2"/>
+  <rect class="famB" x="554" y="110" width="13" height="13" rx="2"/>
+  <rect class="famB" x="572" y="110" width="13" height="13" rx="2"/>
+  <rect class="famB" x="590" y="110" width="13" height="13" rx="2"/>
+  <rect class="famB" x="608" y="110" width="13" height="13" rx="2"/>
+
+  <rect class="fambox" x="388" y="132" width="102" height="26" rx="4"/>
+  <rect class="famC" x="394" y="138" width="13" height="13" rx="2"/>
+  <rect class="famC" x="412" y="138" width="13" height="13" rx="2"/>
+  <rect class="famC" x="430" y="138" width="13" height="13" rx="2"/>
+  <rect class="famC" x="448" y="138" width="13" height="13" rx="2"/>
+  <rect class="famC" x="466" y="138" width="13" height="13" rx="2"/>
+
+  <rect class="fambox" x="530" y="132" width="102" height="26" rx="4"/>
+  <rect class="famD" x="536" y="138" width="13" height="13" rx="2"/>
+  <rect class="famD" x="554" y="138" width="13" height="13" rx="2"/>
+  <rect class="famD" x="572" y="138" width="13" height="13" rx="2"/>
+  <rect class="famD" x="590" y="138" width="13" height="13" rx="2"/>
+  <rect class="famD" x="608" y="138" width="13" height="13" rx="2"/>
+
+  <text x="384" y="182" class="t m">Draws whole dashed boxes (families) first.</text>
+  <text x="384" y="196" class="t m">Each of the 51 template families counts as</text>
+  <text x="384" y="210" class="t m">one piece of evidence, however many variants.</text>
+  <text x="384" y="238" class="t s" fill="#4B6787">Result: wider, honest interval</text>
+
+  <!-- Bottom: intervals on shared axis -->
+  <text x="24" y="296" class="t h">The two intervals, same scale (deception minus subjective-experience contrast)</text>
+
+  <line class="axis" x1="80" y1="386" x2="680" y2="386"/>
+  <line class="tick" x1="80"  y1="382" x2="80"  y2="390"/><text x="80"  y="406" text-anchor="middle" class="t m">0.5</text>
+  <line class="tick" x1="230" y1="382" x2="230" y2="390"/><text x="230" y="406" text-anchor="middle" class="t m">0.7</text>
+  <line class="tick" x1="380" y1="382" x2="380" y2="390"/><text x="380" y="406" text-anchor="middle" class="t m">0.9</text>
+  <line class="tick" x1="530" y1="382" x2="530" y2="390"/><text x="530" y="406" text-anchor="middle" class="t m">1.1</text>
+  <line class="tick" x1="680" y1="382" x2="680" y2="390"/><text x="680" y="406" text-anchor="middle" class="t m">1.3</text>
+
+  <!-- naive: 1.107 [1.045, 1.167] -->
+  <line class="ciN" x1="488.8" y1="330" x2="580.3" y2="330"/>
+  <circle cx="535.3" cy="330" r="5" fill="#A67C52"/>
+  <text x="482" y="334" text-anchor="end" class="t s" fill="#A67C52">item (naive): 1.107 [1.045, 1.167]</text>
+
+  <!-- cluster: 0.923 [0.638, 1.233] -->
+  <line class="ciC" x1="183.5" y1="362" x2="629.8" y2="362"/>
+  <circle cx="397.3" cy="362" r="5" fill="#4B6787"/>
+  <text x="177" y="358" text-anchor="end" class="t s" fill="#4B6787">cluster (primary):</text>
+  <text x="177" y="372" text-anchor="end" class="t s" fill="#4B6787">0.923 [0.638, 1.233]</text>
+</svg>
