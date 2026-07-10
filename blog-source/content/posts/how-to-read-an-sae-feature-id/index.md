@@ -4,6 +4,7 @@ date: 2026-07-09
 tags: ["AI", "LLM", "machine-learning", "interpretability", "sparse-autoencoders", "reproducibility", "tutorials"]
 author: Timothy Jones
 summary: "A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights."
+og_image: "https://praxagent.ai/assets/og-how-to-read-an-sae-feature-id.png"
 lead: |
   You may have seen headlines like "researchers found the deception feature inside an AI." This post is about what that kind of claim actually rests on. Tools called sparse autoencoders can crack open a language model's internal state and hand you a numbered list of "features," and someone then attaches an English name to a number: feature `58667` is "deception." The number is real. The name is a human interpretation layered on afterward, often a thoughtful one, but one that has to be tested before you lean on it. The gap between the two is where a lot of AI interpretability claims quietly overreach. Here we walk through, from the ground up, what these features are, where the names come from, and then run a real test: we take six deception-related feature numbers from a public notebook and check, on 1,120 carefully controlled texts, what actually turns them on.
 ---

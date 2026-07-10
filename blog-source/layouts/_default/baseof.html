@@ -3,14 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ if .Title }}{{ .Title }} - {{ end }}PraxAgent{{ if eq .Type "posts" }} Blog{{ end }}</title>
-    <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <title>{{ if .Title }}{{ .Title }} - {{ end }}praxagent{{ if eq .Type "posts" }} Blog{{ end }}</title>
+    {{ $desc := .Site.Params.description }}
+    {{ if .Params.summary }}{{ $desc = .Params.summary }}{{ else if .Description }}{{ $desc = .Description }}{{ end }}
+    {{ $ogImage := "https://praxagent.ai/assets/praxagent_stochastic_mountain.png" }}
+    {{ with .Params.og_image }}{{ $ogImage = . }}{{ end }}
+    {{ $canonical := "https://praxagent.ai/blog/index.html" }}
+    {{ if .Params.canonical }}
+      {{ $canonical = .Params.canonical }}
+    {{ else if and (eq .Type "posts") .File }}
+      {{ $slug := path.Base (strings.TrimSuffix "/" .File.Dir) }}
+      {{ if and (ne $slug ".") (ne $slug "") (ne $slug "posts") }}
+        {{ $canonical = printf "https://praxagent.ai/blog/posts/%s/index.html" $slug }}
+      {{ end }}
+    {{ end }}
+    <meta name="description" content="{{ $desc }}">
     <link rel="icon" type="image/svg+xml" href="{{ if eq .Type "posts" }}../../../favicon.svg{{ else }}../favicon.svg{{ end }}">
+    <link rel="canonical" href="{{ $canonical }}">
     <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
-    <meta property="og:title" content="{{ if .Title }}{{ .Title }}{{ else }}PraxAgent Blog{{ end }}">
-    <meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
-    <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <meta property="og:site_name" content="praxagent Blog">
+    <meta property="og:title" content="{{ if .Title }}{{ .Title }}{{ else }}praxagent Blog{{ end }}">
+    <meta property="og:description" content="{{ $desc }}">
+    <meta property="og:url" content="{{ $canonical }}">
+    <meta property="og:image" content="{{ $ogImage }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="{{ if .Title }}{{ .Title }}{{ else }}praxagent Blog{{ end }}">
+    <meta name="twitter:description" content="{{ $desc }}">
+    <meta name="twitter:image" content="{{ $ogImage }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
