@@ -23,6 +23,16 @@
     
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'neutral',
+        securityLevel: 'loose',
+        flowchart: { htmlLabels: true, curve: 'basis' }
+      });
+    </script>
     
 </head>
 <body>
@@ -34,6 +44,7 @@
                 </a>
             </div>
             <div class="nav-menu">
+                <a href="../../../research/index.html" class="nav-link">Research</a>
                 <a href="../../index.html" class="nav-link active">Tech Blog</a>
                 <a href="../../../apps.html" class="nav-link">Apps</a>
                 <a href="../../../index.html#contact" class="nav-link">Contact</a>
@@ -56,6 +67,7 @@
 
     <div class="mobile-menu-overlay" id="mobile-menu-overlay">
         <div class="mobile-menu-content">
+            <a href="../../../research/index.html" class="mobile-nav-link">Research</a>
             <a href="../../index.html" class="mobile-nav-link active">Tech Blog</a>
             <a href="../../../apps.html" class="mobile-nav-link">Apps</a>
             <a href="../../../index.html#contact" class="mobile-nav-link">Contact</a>
@@ -79,7 +91,7 @@
                 <h1 class="post-title">Late Chunking: Why Context-Aware Embeddings (sometimes) Beat Traditional Chunking</h1>
                 <div class="post-meta">
                     <span class="post-date">August 2, 2025</span>
-                    <span class="post-author">by TJ</span>
+                    <span class="post-author">by Timothy Jones</span>
                 </div>
             </header>
 
@@ -87,6 +99,8 @@
             
 
             
+            
+
             
 
             
@@ -655,6 +669,7 @@ Significant: Yes (α = 0.05)
                 </div>
                 
                 <div class="footer-links">
+                    <a href="../../../research/index.html">Research</a>
                     <a href="../../index.html">Tech Blog</a>
                     <a href="../../../apps.html">Apps</a>
                     <a href="../../../index.html#contact">Contact</a>
@@ -679,8 +694,13 @@ Significant: Yes (α = 0.05)
             renderMathInElement(document.body, {
                 delimiters: [
                     {left: "$$", right: "$$", display: true},
-                    {left: "$", right: "$", display: false}
-                ]
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                
+                output: "htmlAndMathml"
             });
 
             

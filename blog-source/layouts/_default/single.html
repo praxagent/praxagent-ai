@@ -22,6 +22,12 @@
                 </div>
             </div> -->
 
+            {{ with .Params.lead }}
+            <div class="post-lead">
+                {{ . | markdownify }}
+            </div>
+            {{ end }}
+
             {{ if gt (len .TableOfContents) 50 }}
             <div class="table-of-contents">
                 <h3>Table of Contents</h3>

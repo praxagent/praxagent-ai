@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="300" viewBox="0 0 720 300" role="img" aria-labelledby="title2 desc2">
+  <title id="title2">Sparse autoencoder encode and decode</title>
+  <desc id="desc2">Hidden state h is encoded into a sparse feature vector f with N coordinates, then decoded back to a reconstruction of h. Feature ID i selects one coordinate f_i and one dictionary direction d_i.</desc>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .box{fill:#fff;stroke:#4B6787;stroke-width:1.5}
+    .feat{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.2}
+    .on{fill:#4B6787;stroke:#2A4058;stroke-width:1.2}
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .s{font-size:12px}.b{font-size:13px;font-weight:700}.w{fill:#fff}.m{font-size:11px;fill:#5A544C}
+    .arrow{stroke:#7F786D;stroke-width:2;fill:none;marker-end:url(#arrow2)}
+  </style>
+  <defs>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7F786D"/>
+    </marker>
+  </defs>
+
+  <text x="24" y="28" class="t b">Sparse autoencoder (SAE)</text>
+  <text x="24" y="48" class="t m">Overcomplete dictionary: N &gt;&gt; d_model feature directions, most f_i = 0 on any token</text>
+
+  <rect class="box" x="24" y="100" width="100" height="80" rx="8"/>
+  <text x="74" y="130" text-anchor="middle" class="t b">h</text>
+  <text x="74" y="150" text-anchor="middle" class="t s">hidden state</text>
+  <text x="74" y="168" text-anchor="middle" class="t m">in R^{d_model}</text>
+
+  <path class="arrow" d="M130 140 H170"/>
+  <text x="150" y="128" text-anchor="middle" class="t m">encode</text>
+
+  <rect class="box" x="170" y="110" width="90" height="60" rx="8"/>
+  <text x="215" y="136" text-anchor="middle" class="t s">ReLU(W_e h</text>
+  <text x="215" y="154" text-anchor="middle" class="t s">+ b_e)</text>
+
+  <path class="arrow" d="M260 140 H300"/>
+
+  <rect class="box" x="300" y="70" width="140" height="160" rx="8"/>
+  <text x="370" y="92" text-anchor="middle" class="t b">f (sparse)</text>
+  <text x="370" y="110" text-anchor="middle" class="t m">N features</text>
+
+  <rect class="feat" x="320" y="122" width="100" height="18" rx="3"/>
+  <text x="370" y="135" text-anchor="middle" class="t m">f_0 ~ 0</text>
+  <rect class="on" x="320" y="146" width="100" height="18" rx="3"/>
+  <text x="370" y="159" text-anchor="middle" class="t s w">f_i &gt; 0 = ID i</text>
+  <rect class="feat" x="320" y="170" width="100" height="18" rx="3"/>
+  <text x="370" y="183" text-anchor="middle" class="t m">f_{i+1} ~ 0</text>
+  <rect class="feat" x="320" y="194" width="100" height="18" rx="3"/>
+  <text x="370" y="207" text-anchor="middle" class="t m">...</text>
+
+  <path class="arrow" d="M440 140 H480"/>
+  <text x="460" y="128" text-anchor="middle" class="t m">decode</text>
+
+  <rect class="box" x="480" y="110" width="90" height="60" rx="8"/>
+  <text x="525" y="136" text-anchor="middle" class="t s">sum f_i d_i</text>
+  <text x="525" y="154" text-anchor="middle" class="t s">+ b_d</text>
+
+  <path class="arrow" d="M570 140 H610"/>
+
+  <rect class="box" x="610" y="100" width="90" height="80" rx="8"/>
+  <text x="655" y="130" text-anchor="middle" class="t b">h-hat</text>
+  <text x="655" y="150" text-anchor="middle" class="t s">reconstruction</text>
+  <text x="655" y="168" text-anchor="middle" class="t m">~ h</text>
+
+  <text x="24" y="270" class="t m">Feature ID i = integer index into f. Dictionary direction d_i lives in the same space as h.</text>
+  <text x="24" y="288" class="t m">A human label ("deception") is not part of the SAE, it is assigned later from examples.</text>
+</svg>

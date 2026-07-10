@@ -1395,7 +1395,7 @@ body {
 }
 
 .table-of-contents nav a:hover {
-    color: #0891b2;
+    color: var(--sky, #1B5EAE);
     text-decoration: underline;
 }
 
@@ -1411,29 +1411,21 @@ body {
     color: var(--text-tertiary);
 }
 
-/* Dark mode TOC styles */
-@media (prefers-color-scheme: dark) {
-    .table-of-contents {
-        background: var(--bg-card-dark);
-        border-color: var(--border-primary-dark);
-    }
-    
-    .table-of-contents h3 {
-        color: var(--text-primary-dark);
-        border-color: var(--border-primary-dark);
-    }
-    
-    .table-of-contents nav a {
-        color: var(--text-secondary-dark);
-    }
-    
-    .table-of-contents nav ul ul {
-        border-color: var(--border-primary-dark);
-    }
-    
-    .table-of-contents nav ul ul a {
-        color: var(--text-tertiary-dark);
-    }
+/* Dark mode: high-contrast TOC links on navy */
+[data-theme="dark"] .table-of-contents nav a {
+    color: #EDE8E1;
+}
+
+[data-theme="dark"] .table-of-contents nav a:hover {
+    color: #A8C0D4;
+}
+
+[data-theme="dark"] .table-of-contents nav ul ul a {
+    color: #C9C0B4;
+}
+
+[data-theme="dark"] .table-of-contents nav ul ul a:hover {
+    color: #A8C0D4;
 }
 
 /* Knowledge Graph Sidebar Styles */

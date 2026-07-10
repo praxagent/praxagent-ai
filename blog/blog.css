@@ -131,7 +131,7 @@
 
 .post-meta {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
     margin-bottom: 1rem;
     font-size: 0.875rem;
@@ -260,11 +260,11 @@
 
 .post-content {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0;
 }
 
 .post-header {
-    text-align: center;
+    text-align: left;
     margin-bottom: 3rem;
     padding-bottom: 2rem;
     border-bottom: 1px solid var(--border-primary);
@@ -311,15 +311,25 @@
 }
 
 .post-body a {
-    color: #0891b2;
+    color: var(--sky, #1B5EAE);
     text-decoration: none;
-    border-bottom: 1px solid rgba(8, 145, 178, 0.3);
+    border-bottom: 1px solid rgba(27, 94, 174, 0.35);
     transition: all 0.3s ease;
 }
 
 .post-body a:hover {
-    color: #0e7490;
-    border-bottom-color: #0e7490;
+    color: var(--sky-deep, #154A8C);
+    border-bottom-color: var(--sky-deep, #154A8C);
+}
+
+[data-theme="dark"] .post-body a {
+    color: #A8C0D4;
+    border-bottom-color: rgba(142, 197, 240, 0.45);
+}
+
+[data-theme="dark"] .post-body a:hover {
+    color: #EDE8E1;
+    border-bottom-color: rgba(232, 201, 160, 0.7);
 }
 
 .post-body blockquote {
@@ -339,9 +349,9 @@
     border-radius: 0.375rem;
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.875rem;
-    color: #0891b2;
+    color: var(--sky, #4B6787);
     border: 1px solid var(--border-primary);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .post-body pre {
@@ -423,6 +433,121 @@
     line-height: 1.6;
 }
 
+.post-body img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1.75rem 0 2rem;
+    border: 1px solid var(--border-primary);
+    border-radius: 0.75rem;
+    background: #fff;
+}
+
+.post-body .mermaid {
+    margin: 1.75rem 0 2rem;
+    padding: 1.25rem;
+    border: 1px solid var(--border-primary);
+    border-radius: 0.75rem;
+    background: var(--bg-card);
+    overflow-x: auto;
+    text-align: center;
+}
+
+.figure-note {
+    margin: -1.25rem 0 2rem;
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+    line-height: 1.5;
+}
+
+/* KaTeX ships MathML + HTML; if katex.min.css fails to load, MathML leaks as duplicate text. */
+.katex .katex-mathml {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px) !important;
+    padding: 0 !important;
+    border: 0 !important;
+    height: 1px !important;
+    width: 1px !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+}
+
+.symbol-table td:first-child {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    white-space: nowrap;
+}
+
+/* Data tables */
+.post-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.75rem 0 2rem;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--border-primary);
+    border-radius: 0.75rem;
+    background: var(--bg-card);
+}
+
+.post-body thead,
+.post-body tbody,
+.post-body tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.post-body th,
+.post-body td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--border-primary);
+    vertical-align: top;
+    word-wrap: break-word;
+}
+
+.post-body th {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    text-align: left;
+}
+
+.post-body td {
+    color: var(--text-secondary);
+}
+
+.post-body tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.post-body tbody tr:hover td {
+    background: var(--bg-secondary);
+}
+
+.post-body td[style*="text-align: right"],
+.post-body th[style*="text-align: right"] {
+    font-variant-numeric: tabular-nums;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.875rem;
+}
+
+[data-theme="dark"] .post-body table {
+    background: rgba(0, 0, 0, 0.18);
+}
+
+[data-theme="dark"] .post-body th {
+    background: rgba(0, 0, 0, 0.28);
+}
+
+[data-theme="dark"] .post-body tbody tr:hover td {
+    background: rgba(255, 255, 255, 0.04);
+}
+
 /* Math equations styling */
 .katex-display {
     margin: 2rem 0;
@@ -431,6 +556,91 @@
 
 .katex {
     font-size: 1.1em;
+}
+
+/* Post lead (hook paragraph above the TOC) */
+.post-lead {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--text-primary);
+    margin: 2rem 0;
+}
+
+.post-lead p {
+    margin: 0 0 1rem 0;
+}
+
+/* Table of Contents */
+.table-of-contents {
+    background: var(--bg-card);
+    border: 1px solid var(--border-primary);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    box-shadow: 0 2px 8px var(--shadow-primary);
+}
+
+.table-of-contents h3 {
+    color: var(--text-primary);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.table-of-contents nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.table-of-contents nav li {
+    margin: 0.25rem 0;
+}
+
+.table-of-contents nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding: 0.25rem 0;
+    display: block;
+    transition: color 0.2s ease;
+}
+
+.table-of-contents nav a:hover {
+    color: var(--sky, #1B5EAE);
+    text-decoration: underline;
+}
+
+.table-of-contents nav ul ul {
+    margin-left: 1rem;
+    border-left: 2px solid var(--border-primary);
+    padding-left: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.table-of-contents nav ul ul a {
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+}
+
+/* Dark mode: high-contrast TOC links on navy */
+[data-theme="dark"] .table-of-contents nav a {
+    color: #EDE8E1;
+}
+
+[data-theme="dark"] .table-of-contents nav a:hover {
+    color: #A8C0D4;
+}
+
+[data-theme="dark"] .table-of-contents nav ul ul a {
+    color: #C9C0B4;
+}
+
+[data-theme="dark"] .table-of-contents nav ul ul a:hover {
+    color: #A8C0D4;
 }
 
 /* Post footer */
@@ -442,7 +652,7 @@
 }
 
 .post-navigation {
-    text-align: center;
+    text-align: left;
 }
 
 .back-to-blog {
@@ -714,14 +924,14 @@
 :root {
     --syntax-bg: var(--code-bg);
     --syntax-text: var(--code-text);
-    --syntax-comment: #64748b;
-    --syntax-keyword: #dc2626;
-    --syntax-string: #059669;
-    --syntax-number: #7c3aed;
-    --syntax-function: #0891b2;
-    --syntax-variable: #475569;
-    --syntax-operator: #6b7280;
-    --syntax-punctuation: #374151;
+    --syntax-comment: #7A736A;
+    --syntax-keyword: #9B2C2C;
+    --syntax-string: #2F6B4F;
+    --syntax-number: #6B4C9A;
+    --syntax-function: #3A5573;
+    --syntax-variable: #3F3A34;
+    --syntax-operator: #6B6560;
+    --syntax-punctuation: #2C2924;
 }
 
 /* Dark theme syntax highlighting */

@@ -2,7 +2,7 @@
 title: "Late Chunking: Why Context-Aware Embeddings (sometimes) Beat Traditional Chunking"
 date: 2025-08-02
 tags: ["AI", "LLM", "Vector Search", "Embedding", "NLP", "machine-learning", "tutorials"]
-author: TJ
+author: Timothy Jones
 summary: "Traditional chunking methods for RAG pipelines often break context by chunking text before embedding. Late chunking offers a solution by embedding the entire document first and then chunking the token embeddings, preserving vital contextual information and improving retrieval accuracy."
 ---
 

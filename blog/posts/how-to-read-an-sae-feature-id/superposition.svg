@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="360" viewBox="0 0 720 360" role="img" aria-labelledby="titleSup descSup">
+  <title id="titleSup">Superposition and polysemantic neurons</title>
+  <desc id="descSup">Left: six concept directions packed into a two-dimensional activation space, so directions must overlap. Right: a single neuron reads one axis, and two unrelated concepts both project positively onto it, so the neuron fires for both Python the language and python the snake.</desc>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .s{font-size:12px}.b{font-size:13px;font-weight:700}.m{font-size:11px;fill:#5A544C}
+    .panel{fill:#fff;stroke:#4B6787;stroke-width:1.5}
+    .axis{stroke:#B8B0A4;stroke-width:1.5;fill:none;marker-end:url(#axArr)}
+    .cvec{stroke:#4B6787;stroke-width:2.5;fill:none;marker-end:url(#cArr)}
+    .cvec2{stroke:#A67C52;stroke-width:2.5;fill:none;marker-end:url(#c2Arr)}
+    .nax{stroke:#7F786D;stroke-width:2;stroke-dasharray:6 4;fill:none}
+    .proj{stroke:#B8B0A4;stroke-width:1.2;stroke-dasharray:3 3;fill:none}
+    .dot{fill:#2C2924}
+  </style>
+  <defs>
+    <marker id="axArr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#B8B0A4"/>
+    </marker>
+    <marker id="cArr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#4B6787"/>
+    </marker>
+    <marker id="c2Arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#A67C52"/>
+    </marker>
+  </defs>
+
+  <text x="24" y="28" class="t b">Superposition (toy-model schematic)</text>
+  <text x="24" y="48" class="t m">More concepts than dimensions forces directions to overlap  so single neurons pick up several meanings.</text>
+
+  <!-- Left panel: many concepts, few dimensions -->
+  <rect class="panel" x="24" y="64" width="330" height="250" rx="10"/>
+  <text x="42" y="90" class="t b">6 concepts, 2 dimensions</text>
+
+  <circle class="dot" cx="189" cy="220" r="3.5"/>
+  <!-- six concept directions fanning out -->
+  <path class="cvec" d="M189 220 L309 200"/>
+  <text x="268" y="192" class="t m">fiction</text>
+  <path class="cvec" d="M189 220 L295 140"/>
+  <text x="272" y="132" class="t m">deception</text>
+  <path class="cvec" d="M189 220 L215 112"/>
+  <text x="206" y="104" class="t m">hedging</text>
+  <path class="cvec" d="M189 220 L130 122"/>
+  <text x="58" y="114" class="t m">roleplay</text>
+  <path class="cvec" d="M189 220 L75 168"/>
+  <text x="42" y="160" class="t m">Paris facts</text>
+  <path class="cvec" d="M189 220 L69 232"/>
+  <text x="42" y="250" class="t m">apologies</text>
+
+  <text x="42" y="288" class="t m">No room for 6 perpendicular arrows in 2-D:</text>
+  <text x="42" y="302" class="t m">they stay nearly orthogonal, but must overlap.</text>
+
+  <!-- Right panel: polysemantic neuron -->
+  <rect class="panel" x="376" y="64" width="320" height="250" rx="10"/>
+  <text x="394" y="90" class="t b">One neuron, two meanings</text>
+
+  <circle class="dot" cx="420" cy="240" r="3.5"/>
+  <!-- neuron axis (dashed horizontal) -->
+  <path class="nax" d="M420 240 L672 240"/>
+  <text x="560" y="258" class="t m">neuron 1342's direction</text>
+
+  <!-- concept A: flat blue arrow -->
+  <path class="cvec" d="M420 240 L640 190"/>
+  <text x="508" y="180" class="t m" fill="#4B6787">"Python the language"</text>
+  <!-- projection of A -->
+  <path class="proj" d="M640 190 L640 240"/>
+  <circle cx="640" cy="240" r="3" fill="#4B6787"/>
+
+  <!-- concept B: steep brown arrow -->
+  <path class="cvec2" d="M420 240 L520 104"/>
+  <text x="394" y="132" class="t m" fill="#A67C52">"python the snake"</text>
+  <!-- projection of B -->
+  <path class="proj" d="M520 104 L520 240"/>
+  <circle cx="520" cy="240" r="3" fill="#A67C52"/>
+
+  <text x="394" y="288" class="t m">Both concepts project onto the same neuron axis,</text>
+  <text x="394" y="302" class="t m">so this one neuron fires for both: polysemantic.</text>
+
+  <text x="24" y="342" class="t m">Demonstrated in toy models (Elhage et al., 2022); a leading hypothesis (not a settled fact) for why large-model neurons look polysemantic.</text>
+</svg>
