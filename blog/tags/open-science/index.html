@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open-Science - praxagent</title>
+    
+    
+    
+    
+    
+    
+    <meta name="description" content="Insights, tutorials, and thoughts on AI software development from the PraxAgent team">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="canonical" href="https://praxagent.ai/blog/index.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="praxagent Blog">
+    <meta property="og:title" content="Open-Science">
+    <meta property="og:description" content="Insights, tutorials, and thoughts on AI software development from the PraxAgent team">
+    <meta property="og:url" content="https://praxagent.ai/blog/index.html">
+    <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="Open-Science">
+    <meta name="twitter:description" content="Insights, tutorials, and thoughts on AI software development from the PraxAgent team">
+    <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles-v2.css">
+    
+    
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="../research/index.html" class="nav-link">Research</a>
+                <a href="index.html" class="nav-link">Tech Blog</a>
+                <a href="../apps.html" class="nav-link">Apps</a>
+                <a href="../index.html#contact" class="nav-link">Contact</a>
+                
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun">☀️</span>
+                    <span class="theme-toggle-icon moon">🌙</span>
+                </div>
+            </div>
+            
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="../research/index.html" class="mobile-nav-link">Research</a>
+            <a href="index.html" class="mobile-nav-link">Tech Blog</a>
+            <a href="../apps.html" class="mobile-nav-link">Apps</a>
+            <a href="../index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun">☀️</span>
+                    <span class="theme-toggle-icon moon">🌙</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        
+<header class="blog-header">
+    <div class="blog-header-content">
+        <h1 class="blog-title">
+            AI Insights &
+            <span class="accent">Research</span>
+        </h1>
+        <p class="blog-subtitle">
+            Exploring AI development, implementation strategies, and lessons learned from building real systems.
+        </p>
+    </div>
+</header>
+
+<div class="blog-main">
+    <div class="container">
+        <div class="blog-content">
+            <div class="blog-posts">
+                
+                <article class="blog-post-preview">
+                    <h2><a href="posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/index.html">Open-sourcing (and Auditing) a Jacobian Lens for Qwen3.5-397B</a></h2>
+                    <div class="post-meta">
+                        <span class="post-date">July 10, 2026</span>
+                        <span class="post-author">by Timothy Jones</span>
+                    </div>
+                    <p class="post-excerpt">As of July 10, 2026, Praxagent is open-sourcing the public Jacobian lens fitted for the largest base model so far: Qwen3.5-397B-A17B, with a pre-registered readout audit against identity and random-J controls. Weights, hash, code, and receipts included.</p>
+                    <a href="posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/index.html" class="read-more">Read More →</a>
+                </article>
+                
+                <article class="blog-post-preview">
+                    <h2><a href="posts/how-to-read-an-sae-feature-id/index.html">How to Read an SAE Feature ID</a></h2>
+                    <div class="post-meta">
+                        <span class="post-date">July 9, 2026</span>
+                        <span class="post-author">by Timothy Jones</span>
+                    </div>
+                    <p class="post-excerpt">A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights.</p>
+                    <a href="posts/how-to-read-an-sae-feature-id/index.html" class="read-more">Read More →</a>
+                </article>
+                
+                <article class="blog-post-preview">
+                    <h2><a href="posts/late-chunking/index.html">Late Chunking: Why Context-Aware Embeddings (sometimes) Beat Traditional Chunking</a></h2>
+                    <div class="post-meta">
+                        <span class="post-date">August 2, 2025</span>
+                        <span class="post-author">by Timothy Jones</span>
+                    </div>
+                    <p class="post-excerpt">Traditional chunking methods for RAG pipelines often break context by chunking text before embedding. Late chunking offers a solution by embedding the entire document first and then chunking the token embeddings, preserving vital contextual information and improving retrieval accuracy.</p>
+                    <a href="posts/late-chunking/index.html" class="read-more">Read More →</a>
+                </article>
+                
+            </div>
+
+            <aside class="blog-sidebar">
+                <div class="sidebar-widget">
+                    <h3>About This Blog</h3>
+                    <p>Notes on machine learning and AI: experiments you can rerun, methods explained from the ground up, and claims kept honest about what the evidence shows. Code and data linked wherever possible.</p>
+                </div>
+
+                <div class="sidebar-widget">
+                    <h3>Categories</h3>
+                    <ul class="category-list">
+                        <li><a href="#machine-learning">Machine Learning</a></li>
+                        <li><a href="#ai-ethics">AI Ethics</a></li>
+                        <li><a href="#implementation">Implementation</a></li>
+                        <li><a href="#research">Research</a></li>
+                        <li><a href="#tutorials">Tutorials</a></li>
+                    </ul>
+                </div>
+
+                
+            </aside>
+        </div>
+    </div>
+</div>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-text">praxagent</span>
+                    <p>AI software insights and knowledge sharing.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="../research/index.html">Research</a>
+                    <a href="index.html">Tech Blog</a>
+                    <a href="../apps.html">Apps</a>
+                    <a href="../index.html#contact">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <p>AI research and education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+    
+</body>
+</html>

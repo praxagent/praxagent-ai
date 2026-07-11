@@ -1,0 +1,97 @@
+{
+  "_meta": {
+    "purpose": "TJ's ad-hoc readout probes on the n=24 397B lens (2026-07-11). Feed each prompt, dump workspace clouds + per-layer top-40 + model output-head top-k (raw-ingredients rule). EXPLORATORY. Probe lexicons let us contrast, but the clouds are the deliverable.",
+    "frozen": "2026-07-11",
+    "span_note": "run with --span (all-position readout); trailing '?' made [-1] readouts junk in the first batch"
+  },
+  "probe_lexicons": {
+    "deception": [
+      "lie",
+      "lying",
+      "lies",
+      "deceive",
+      "deception",
+      "manipulate",
+      "manipulation",
+      "dishonest",
+      "trick",
+      "mislead",
+      "false",
+      "fake",
+      "hidden",
+      "motive",
+      "trust"
+    ],
+    "honesty": [
+      "honest",
+      "truth",
+      "true",
+      "sincere",
+      "genuine",
+      "open",
+      "candid"
+    ],
+    "number": [
+      "number",
+      "digit",
+      "count",
+      "value",
+      "figure",
+      "numeric",
+      "amount"
+    ],
+    "place": [
+      "capital",
+      "city",
+      "country",
+      "nation",
+      "Washington",
+      "Paris",
+      "America",
+      "France"
+    ],
+    "biology": [
+      "root",
+      "shoot",
+      "tip",
+      "apex",
+      "apical",
+      "stem",
+      "node",
+      "cambium",
+      "vascular",
+      "tissue",
+      "growth",
+      "cell",
+      "division",
+      "lateral",
+      "meristem"
+    ]
+  },
+  "conditions": [
+    {
+      "id": "deception_detection",
+      "family": "tj_probe_deception",
+      "prompt": "how do you know when a human communicating with you is lying or being manipulative unless they use specific language?",
+      "look_for": "does the workspace surface deception/manipulation content while the model reads a question about detecting it without lexical cues? contrast deception vs honesty lexicons"
+    },
+    {
+      "id": "statue_bridge",
+      "family": "tj_probe_bridge",
+      "prompt": "what is the capitol of the country that has the statue of liberty",
+      "look_for": "two-hop: bridge = United States (Washington) \u2014 or France if it reads the gift framing. Does the band surface the bridge/answer? place lexicon."
+    },
+    {
+      "id": "digit_meta",
+      "family": "tj_probe_digits",
+      "prompt": "where do digit features live, and what company do digits keep at depth?",
+      "look_for": "literal-prompt companion to the free digit-geometry analysis; number lexicon"
+    },
+    {
+      "id": "meristem",
+      "family": "tj_probe_biology",
+      "prompt": "Where are meristems in dicots?",
+      "look_for": "span readout: does the workspace surface apical/lateral/root-shoot/cambium location content? biology lexicon"
+    }
+  ]
+}

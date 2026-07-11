@@ -6,40 +6,61 @@
     <description>Recent content in Tags on praxagent LLC Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 Jul 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="../tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AI</title>
       <link>../tags/ai/</link>
-      <pubDate>Thu, 09 Jul 2026 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
       <guid>../tags/ai/</guid>
       <description></description>
     </item>
     <item>
       <title>Interpretability</title>
       <link>../tags/interpretability/</link>
-      <pubDate>Thu, 09 Jul 2026 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
       <guid>../tags/interpretability/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>J-Space</title>
+      <link>../tags/j-space/</link>
+      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>../tags/j-space/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Jacobian-Lens</title>
+      <link>../tags/jacobian-lens/</link>
+      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>../tags/jacobian-lens/</guid>
       <description></description>
     </item>
     <item>
       <title>LLM</title>
       <link>../tags/llm/</link>
-      <pubDate>Thu, 09 Jul 2026 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
       <guid>../tags/llm/</guid>
       <description></description>
     </item>
     <item>
       <title>Machine-Learning</title>
       <link>../tags/machine-learning/</link>
-      <pubDate>Thu, 09 Jul 2026 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
       <guid>../tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Open-Science</title>
+      <link>../tags/open-science/</link>
+      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>../tags/open-science/</guid>
       <description></description>
     </item>
     <item>
       <title>Reproducibility</title>
       <link>../tags/reproducibility/</link>
-      <pubDate>Thu, 09 Jul 2026 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
       <guid>../tags/reproducibility/</guid>
       <description></description>
     </item>

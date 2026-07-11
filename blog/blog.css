@@ -263,6 +263,11 @@
     margin: 0;
 }
 
+/* In-text citation jumps land cleanly on reference anchors */
+.post-body [id^="ref-"] {
+    scroll-margin-top: 1.5rem;
+}
+
 .post-header {
     text-align: left;
     margin-bottom: 3rem;
@@ -317,19 +322,37 @@
     transition: all 0.3s ease;
 }
 
+.post-body a:visited {
+    color: var(--sky, #1B5EAE);
+    border-bottom-color: rgba(27, 94, 174, 0.35);
+}
+
 .post-body a:hover {
     color: var(--sky-deep, #154A8C);
     border-bottom-color: var(--sky-deep, #154A8C);
 }
 
-[data-theme="dark"] .post-body a {
-    color: #A8C0D4;
-    border-bottom-color: rgba(142, 197, 240, 0.45);
+[data-theme="dark"] .post-body a,
+[data-theme="dark"] .post-body a:visited {
+    color: #D6E8F5;
+    border-bottom-color: rgba(214, 232, 245, 0.55);
 }
 
 [data-theme="dark"] .post-body a:hover {
-    color: #EDE8E1;
-    border-bottom-color: rgba(232, 201, 160, 0.7);
+    color: #FFFFFF;
+    border-bottom-color: rgba(255, 255, 255, 0.75);
+}
+
+/* Info panels are blue-tinted in dark mode — keep links near-white, never purple */
+[data-theme="dark"] .panel.info a,
+[data-theme="dark"] .panel.info a:visited {
+    color: #F0F9FF;
+    border-bottom-color: rgba(240, 249, 255, 0.65);
+}
+
+[data-theme="dark"] .panel.info a:hover {
+    color: #FFFFFF;
+    border-bottom-color: #FFFFFF;
 }
 
 .post-body blockquote {
@@ -441,6 +464,177 @@
     border: 1px solid var(--border-primary);
     border-radius: 0.75rem;
     background: #fff;
+}
+
+/* J-lens interactive layer explorer */
+.jspace-explorer {
+    margin: 1.75rem 0 2.25rem;
+    padding: 1.1rem 1.15rem 0.75rem;
+    border: 1px solid var(--border-primary);
+    border-radius: 0.75rem;
+    background: var(--bg-card, #fff);
+}
+.jspace-explorer-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.85rem;
+}
+.jspace-tab {
+    border: 1px solid var(--border-primary, #cbd5e1);
+    background: #f8fafc;
+    color: #0f172a;
+    border-radius: 999px;
+    padding: 0.28rem 0.7rem;
+    font-size: 0.82rem;
+    cursor: pointer;
+}
+.jspace-tab[aria-selected="true"] {
+    background: #0c4a6e;
+    border-color: #0c4a6e;
+    color: #fff;
+}
+.jspace-explorer-slider-label {
+    display: block;
+    font-size: 0.92rem;
+    margin-bottom: 0.35rem;
+    color: #334155;
+}
+.jspace-layer-hint {
+    color: #64748b;
+    font-size: 0.85rem;
+    margin-left: 0.35rem;
+}
+.jspace-layer-slider {
+    width: 100%;
+    accent-color: #0c4a6e;
+    margin-bottom: 0.55rem;
+}
+.jspace-explorer-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.4rem;
+}
+.jspace-gloss-toggle {
+    border: 1px solid #94a3b8;
+    background: #fff;
+    border-radius: 0.4rem;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+.jspace-gloss-toggle[aria-pressed="true"],
+.jspace-gloss-toggle.is-on {
+    background: #ecfeff;
+    border-color: #0c4a6e;
+    color: #0c4a6e;
+    font-weight: 600;
+}
+.jspace-explorer-status {
+    font-size: 0.8rem;
+    color: #64748b;
+}
+.jspace-spark {
+    width: 100%;
+    max-width: 320px;
+    height: 36px;
+    display: block;
+    margin: 0.25rem 0 0.6rem;
+}
+.jspace-explorer-prompt {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: #334155;
+    margin-bottom: 0.65rem;
+}
+.jspace-cloud {
+    width: 100%;
+    height: auto;
+    min-height: 28rem;
+    display: block;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.5rem;
+    background: #f8fafc;
+    margin-bottom: 0;
+}
+.jspace-explorer .figure-note.jspace-explorer-note {
+    margin: 0.85rem 0 0.15rem;
+    position: relative;
+    z-index: 1;
+    clear: both;
+}
+
+/* J-lens explorer dark mode.
+   The cloud stays light because its SVG labels use a light-canvas palette. */
+[data-theme="dark"] .jspace-explorer {
+    background: #314A65;
+    border-color: rgba(214, 232, 245, 0.28);
+    color: var(--text-primary, #F0EBE4);
+}
+
+[data-theme="dark"] .jspace-tab {
+    background: #24384D;
+    border-color: rgba(214, 232, 245, 0.38);
+    color: #F0EBE4;
+}
+
+[data-theme="dark"] .jspace-tab:hover {
+    background: #3A5573;
+    border-color: #A8C0D4;
+}
+
+[data-theme="dark"] .jspace-tab[aria-selected="true"] {
+    background: #D6E8F5;
+    border-color: #D6E8F5;
+    color: #17283A;
+    font-weight: 700;
+}
+
+[data-theme="dark"] .jspace-explorer-slider-label,
+[data-theme="dark"] .jspace-explorer-prompt {
+    color: #F0EBE4;
+}
+
+[data-theme="dark"] .jspace-layer-hint,
+[data-theme="dark"] .jspace-explorer-status {
+    color: #D4CBC0;
+}
+
+[data-theme="dark"] .jspace-gloss-toggle {
+    background: #24384D;
+    border-color: #A8C0D4;
+    color: #F0EBE4;
+}
+
+[data-theme="dark"] .jspace-gloss-toggle:hover {
+    background: #3A5573;
+    border-color: #D6E8F5;
+}
+
+[data-theme="dark"] .jspace-gloss-toggle[aria-pressed="true"],
+[data-theme="dark"] .jspace-gloss-toggle.is-on {
+    background: #D6E8F5;
+    border-color: #D6E8F5;
+    color: #17283A;
+}
+
+[data-theme="dark"] .jspace-spark {
+    box-sizing: border-box;
+    padding: 2px 4px;
+    border: 1px solid rgba(214, 232, 245, 0.3);
+    border-radius: 0.35rem;
+    background: #F8FAFC;
+}
+
+[data-theme="dark"] .jspace-cloud {
+    border-color: rgba(214, 232, 245, 0.45);
+    background: #F8FAFC;
+}
+
+[data-theme="dark"] .jspace-explorer .figure-note.jspace-explorer-note {
+    color: #D4CBC0;
 }
 
 .post-body .mermaid {
@@ -568,6 +762,24 @@
 
 .post-lead p {
     margin: 0 0 1rem 0;
+}
+
+.post-lead a,
+.post-lead a:visited {
+    color: var(--sky, #1B5EAE);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(27, 94, 174, 0.35);
+}
+
+[data-theme="dark"] .post-lead a,
+[data-theme="dark"] .post-lead a:visited {
+    color: #D6E8F5;
+    border-bottom-color: rgba(214, 232, 245, 0.55);
+}
+
+[data-theme="dark"] .post-lead a:hover {
+    color: #FFFFFF;
+    border-bottom-color: #FFFFFF;
 }
 
 /* Table of Contents */

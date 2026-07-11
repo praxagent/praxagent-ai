@@ -6,8 +6,15 @@
     <description>Recent content in Reproducibility on praxagent LLC Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 Jul 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="../tags/reproducibility/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Open-sourcing (and Auditing) a Jacobian Lens for Qwen3.5-397B</title>
+      <link>../posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/</link>
+      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>../posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/</guid>
+      <description>As of July 10, 2026, Praxagent is open-sourcing the public Jacobian lens fitted for the largest base model so far: Qwen3.5-397B-A17B, with a pre-registered readout audit against identity and random-J controls. Weights, hash, code, and receipts included.</description>
+    </item>
     <item>
       <title>How to Read an SAE Feature ID</title>
       <link>../posts/how-to-read-an-sae-feature-id/</link>

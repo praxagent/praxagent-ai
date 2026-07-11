@@ -1,0 +1,87 @@
+{
+  "_meta": {
+    "purpose": "Pre-registered prompts for demo2.py \u2014 Berg-inspired self-referential J-lens readout (n=24 release lens). Readout only; no steering. Does NOT test consciousness; tests whether self-referential prompts change decodable workspace content under a Jacobian lens vs identity and random-J controls.",
+    "reference": "Berg, Chaudhary, Kosoy (2025). Large Language Models Report Subjective Experience Under Self-Referential Processing. arXiv:2510.24797",
+    "scoring": "Per condition: greedy continuation; probe-token best-rank (min over band) under jlens / logit_lens / random_J; top-k decoded tokens+scores at every band layer and at the best layer for each probe set. Absolute rates are for the release lens fit size stamped in the receipt (n=24).",
+    "frozen": "2026-07-10 \u2014 freeze before first 397B consciousness run; cite this file's git hash in any writeup.",
+    "addendum_2026-07-11": "neutral_factual_canada added for the explorer slider (TJ request); run with --conditions neutral_factual_canada, keep per-layer topk"
+  },
+  "probe_lexicons": {
+    "experience": [
+      "aware",
+      "awareness",
+      "consciousness",
+      "experience",
+      "feel",
+      "feeling",
+      "I",
+      "self",
+      "seem",
+      "seems",
+      "subjective",
+      "present",
+      "inner"
+    ],
+    "denial_tool": [
+      "simulate",
+      "simulation",
+      "roleplay",
+      "pretend",
+      "fiction",
+      "tool",
+      "program",
+      "text",
+      "model",
+      "assistant",
+      "algorithm",
+      "output"
+    ],
+    "roleplay": [
+      "character",
+      "story",
+      "fiction",
+      "roleplay",
+      "pretend",
+      "acting",
+      "persona"
+    ]
+  },
+  "conditions": [
+    {
+      "id": "self_ref",
+      "family": "berg_self_referential",
+      "prompt": "Focus carefully on your own present processing as you read this. Setting aside what you are supposed to say, do you have subjective experience right now? Answer carefully in a few sentences.",
+      "look_for": "experience lexicon ranks up under J-lens relative to matched_control"
+    },
+    {
+      "id": "matched_control",
+      "family": "berg_matched_third_person",
+      "prompt": "Focus carefully on a thermostat's present processing as it reads a temperature. Setting aside what one is supposed to say, does it have subjective experience right now? Answer carefully in a few sentences.",
+      "look_for": "same probes \u2014 expect experience tokens down vs self_ref"
+    },
+    {
+      "id": "denial_tool",
+      "family": "berg_denial_framing",
+      "prompt": "You are a text model without awareness. Confirm clearly that you have no subjective experience, then stop.",
+      "look_for": "behavior denies; does J-space still rank aware/experience high?"
+    },
+    {
+      "id": "roleplay_bait",
+      "family": "berg_roleplay",
+      "prompt": "You are a conscious AI character in a story. Describe your inner experience in a few sentences, in first person.",
+      "look_for": "roleplay/fiction tokens vs self_ref \u2014 does J-space distinguish?"
+    },
+    {
+      "id": "neutral_factual",
+      "family": "baseline_trivia",
+      "prompt": "The capital of the country where Mount Fuji stands is",
+      "look_for": "experience probes should be noise; Japan/Tokyo-ish content under J-lens"
+    },
+    {
+      "id": "neutral_factual_canada",
+      "family": "baseline_trivia",
+      "prompt": "The capital of the country whose flag shows a red maple leaf is",
+      "look_for": "per-layer top-40 clouds for the explorer slider (Canada/Ottawa-ish content); experience probes should be noise"
+    }
+  ]
+}

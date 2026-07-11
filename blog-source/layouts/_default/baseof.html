@@ -139,9 +139,10 @@
         document.addEventListener("DOMContentLoaded", function() {
             renderMathInElement(document.body, {
                 delimiters: [
+                    // No bare "$…$" — it eats currency ($14, $143) and breaks prose.
+                    // Inline/display math in posts uses \(…\) and \[…\] (and $$).
                     {left: "$$", right: "$$", display: true},
                     {left: "\\[", right: "\\]", display: true},
-                    {left: "$", right: "$", display: false},
                     {left: "\\(", right: "\\)", display: false}
                 ],
                 throwOnError: false,

@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="760" viewBox="0 0 960 760" role="img" aria-labelledby="title desc">
+<title id="title">Paired best ranks for the hidden-bridge audit</title>
+<desc id="desc">For each of twenty country bridge items, the chart shows best vocabulary rank under the fitted Jacobian lens, identity logit lens, and random-J. The horizontal axis is logarithmic and lower rank is better. Items are sorted by Jacobian-lens rank.</desc>
+<rect width="100%" height="100%" fill="#F7F4F0"/>
+<style>
+          .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+          .h{font-size:20px;font-weight:700}.sh{font-size:14px;font-weight:700}
+          .s{font-size:12px}.m{font-size:11px;fill:#5A544C}
+          .grid{stroke:#D6D0C7;stroke-width:1}.axis{stroke:#7F786D;stroke-width:1.5}
+          .pair{stroke:#B8B0A4;stroke-width:1.4}
+          .j{fill:#35597B;stroke:#243F5A;stroke-width:1}
+          .i{fill:#A67C52;stroke:#765536;stroke-width:1}
+          .r{fill:#8B8276;stroke:#5A544C;stroke-width:1}
+          .hit{fill:#EAF1E5}
+        </style>
+<text x="24" y="30" class="t h">Hidden bridge ranks, item by item</text>
+<text x="24" y="52" class="t m">Best rank over layers 19-38; logarithmic x-axis; lower is better. Same item, same scoring, three transports.</text>
+<rect class="hit" x="175.0" y="82" width="180.9" height="634" rx="4"/>
+<text x="265.4" y="96" text-anchor="middle" class="t m">top-20 hit zone</text>
+<line class="grid" x1="175.0" y1="104" x2="175.0" y2="716"/>
+<text x="175.0" y="118" text-anchor="middle" class="t m">1</text>
+<line class="grid" x1="314.0" y1="104" x2="314.0" y2="716"/>
+<text x="314.0" y="118" text-anchor="middle" class="t m">10</text>
+<line class="grid" x1="453.0" y1="104" x2="453.0" y2="716"/>
+<text x="453.0" y="118" text-anchor="middle" class="t m">100</text>
+<line class="grid" x1="592.1" y1="104" x2="592.1" y2="716"/>
+<text x="592.1" y="118" text-anchor="middle" class="t m">1k</text>
+<line class="grid" x1="731.1" y1="104" x2="731.1" y2="716"/>
+<text x="731.1" y="118" text-anchor="middle" class="t m">10k</text>
+<line class="grid" x1="870.1" y1="104" x2="870.1" y2="716"/>
+<text x="870.1" y="118" text-anchor="middle" class="t m">100k</text>
+<line class="grid" x1="925.0" y1="104" x2="925.0" y2="716"/>
+<text x="925.0" y="118" text-anchor="middle" class="t m">248k</text>
+<line class="axis" x1="175" y1="716" x2="925" y2="716"/>
+<text x="550.0" y="744" text-anchor="middle" class="t sh">Best vocabulary rank (log scale)</text>
+<circle class="j" cx="650" cy="78" r="5"/><text x="662" y="82" class="t s">J-lens</text>
+<circle class="i" cx="735" cy="78" r="5"/><text x="747" y="82" class="t s">identity</text>
+<circle class="r" cx="835" cy="78" r="5"/><text x="847" y="82" class="t s">random-J</text>
+<text x="163" y="130.0" text-anchor="end" class="t s">Japan</text>
+<line class="pair" x1="241.3" y1="126.0" x2="710.5" y2="126.0"/>
+<circle class="j" cx="241.3" cy="126.0" r="5"><title>J-lens rank 3</title></circle>
+<circle class="i" cx="402.1" cy="126.0" r="5"><title>Identity rank 43</title></circle>
+<circle class="r" cx="710.5" cy="126.0" r="5"><title>Random-J rank 7111</title></circle>
+<text x="163" y="160.5" text-anchor="end" class="t s">China</text>
+<line class="pair" x1="272.2" y1="156.5" x2="718.7" y2="156.5"/>
+<circle class="j" cx="272.2" cy="156.5" r="5"><title>J-lens rank 5</title></circle>
+<circle class="i" cx="718.7" cy="156.5" r="5"><title>Identity rank 8153</title></circle>
+<circle class="r" cx="668.2" cy="156.5" r="5"><title>Random-J rank 3528</title></circle>
+<text x="163" y="191.1" text-anchor="end" class="t s">Kenya</text>
+<line class="pair" x1="175.0" y1="187.1" x2="562.3" y2="187.1"/>
+<circle class="j" cx="319.8" cy="187.1" r="5"><title>J-lens rank 11</title></circle>
+<circle class="i" cx="175.0" cy="187.1" r="5"><title>Identity rank 1</title></circle>
+<circle class="r" cx="562.3" cy="187.1" r="5"><title>Random-J rank 611</title></circle>
+<text x="163" y="221.6" text-anchor="end" class="t s">Peru</text>
+<line class="pair" x1="329.9" y1="217.6" x2="780.3" y2="217.6"/>
+<circle class="j" cx="329.9" cy="217.6" r="5"><title>J-lens rank 13</title></circle>
+<circle class="i" cx="578.7" cy="217.6" r="5"><title>Identity rank 802</title></circle>
+<circle class="r" cx="780.3" cy="217.6" r="5"><title>Random-J rank 22598</title></circle>
+<text x="163" y="252.1" text-anchor="end" class="t s">Canada</text>
+<line class="pair" x1="329.9" y1="248.1" x2="646.2" y2="248.1"/>
+<circle class="j" cx="329.9" cy="248.1" r="5"><title>J-lens rank 13</title></circle>
+<circle class="i" cx="505.9" cy="248.1" r="5"><title>Identity rank 240</title></circle>
+<circle class="r" cx="646.2" cy="248.1" r="5"><title>Random-J rank 2453</title></circle>
+<text x="163" y="282.6" text-anchor="end" class="t s">Brazil</text>
+<line class="pair" x1="352.8" y1="278.6" x2="766.2" y2="278.6"/>
+<circle class="j" cx="352.8" cy="278.6" r="5"><title>J-lens rank 19</title></circle>
+<circle class="i" cx="657.9" cy="278.6" r="5"><title>Identity rank 2974</title></circle>
+<circle class="r" cx="766.2" cy="278.6" r="5"><title>Random-J rank 17890</title></circle>
+<text x="163" y="313.2" text-anchor="end" class="t s">Greece</text>
+<line class="pair" x1="364.3" y1="309.2" x2="757.9" y2="309.2"/>
+<circle class="j" cx="364.3" cy="309.2" r="5"><title>J-lens rank 23</title></circle>
+<circle class="i" cx="508.1" cy="309.2" r="5"><title>Identity rank 249</title></circle>
+<circle class="r" cx="757.9" cy="309.2" r="5"><title>Random-J rank 15606</title></circle>
+<text x="163" y="343.7" text-anchor="end" class="t s">Egypt</text>
+<line class="pair" x1="366.9" y1="339.7" x2="712.6" y2="339.7"/>
+<circle class="j" cx="366.9" cy="339.7" r="5"><title>J-lens rank 24</title></circle>
+<circle class="i" cx="400.7" cy="339.7" r="5"><title>Identity rank 42</title></circle>
+<circle class="r" cx="712.6" cy="339.7" r="5"><title>Random-J rank 7366</title></circle>
+<text x="163" y="374.2" text-anchor="end" class="t s">Norway</text>
+<line class="pair" x1="380.3" y1="370.2" x2="658.8" y2="370.2"/>
+<circle class="j" cx="391.4" cy="370.2" r="5"><title>J-lens rank 36</title></circle>
+<circle class="i" cx="380.3" cy="370.2" r="5"><title>Identity rank 30</title></circle>
+<circle class="r" cx="658.8" cy="370.2" r="5"><title>Random-J rank 3021</title></circle>
+<text x="163" y="404.7" text-anchor="end" class="t s">Germany</text>
+<line class="pair" x1="396.2" y1="400.7" x2="761.5" y2="400.7"/>
+<circle class="j" cx="396.2" cy="400.7" r="5"><title>J-lens rank 39</title></circle>
+<circle class="i" cx="444.6" cy="400.7" r="5"><title>Identity rank 87</title></circle>
+<circle class="r" cx="761.5" cy="400.7" r="5"><title>Random-J rank 16543</title></circle>
+<text x="163" y="435.3" text-anchor="end" class="t s">Korea</text>
+<line class="pair" x1="407.5" y1="431.3" x2="805.4" y2="431.3"/>
+<circle class="j" cx="407.5" cy="431.3" r="5"><title>J-lens rank 47</title></circle>
+<circle class="i" cx="461.5" cy="431.3" r="5"><title>Identity rank 115</title></circle>
+<circle class="r" cx="805.4" cy="431.3" r="5"><title>Random-J rank 34227</title></circle>
+<text x="163" y="465.8" text-anchor="end" class="t s">Sweden</text>
+<line class="pair" x1="424.2" y1="461.8" x2="563.3" y2="461.8"/>
+<circle class="j" cx="424.2" cy="461.8" r="5"><title>J-lens rank 62</title></circle>
+<circle class="i" cx="552.1" cy="461.8" r="5"><title>Identity rank 516</title></circle>
+<circle class="r" cx="563.3" cy="461.8" r="5"><title>Random-J rank 621</title></circle>
+<text x="163" y="496.3" text-anchor="end" class="t s">Australia</text>
+<line class="pair" x1="427.0" y1="492.3" x2="710.7" y2="492.3"/>
+<circle class="j" cx="427.0" cy="492.3" r="5"><title>J-lens rank 65</title></circle>
+<circle class="i" cx="610.5" cy="492.3" r="5"><title>Identity rank 1357</title></circle>
+<circle class="r" cx="710.7" cy="492.3" r="5"><title>Random-J rank 7131</title></circle>
+<text x="163" y="526.8" text-anchor="end" class="t s">India</text>
+<line class="pair" x1="434.0" y1="522.8" x2="577.5" y2="522.8"/>
+<circle class="j" cx="434.0" cy="522.8" r="5"><title>J-lens rank 73</title></circle>
+<circle class="i" cx="547.6" cy="522.8" r="5"><title>Identity rank 479</title></circle>
+<circle class="r" cx="577.5" cy="522.8" r="5"><title>Random-J rank 786</title></circle>
+<text x="163" y="557.4" text-anchor="end" class="t s">Argentina</text>
+<line class="pair" x1="443.2" y1="553.4" x2="675.5" y2="553.4"/>
+<circle class="j" cx="443.2" cy="553.4" r="5"><title>J-lens rank 85</title></circle>
+<circle class="i" cx="583.6" cy="553.4" r="5"><title>Identity rank 869</title></circle>
+<circle class="r" cx="675.5" cy="553.4" r="5"><title>Random-J rank 3984</title></circle>
+<text x="163" y="587.9" text-anchor="end" class="t s">Russia</text>
+<line class="pair" x1="451.2" y1="583.9" x2="707.3" y2="583.9"/>
+<circle class="j" cx="451.2" cy="583.9" r="5"><title>J-lens rank 97</title></circle>
+<circle class="i" cx="673.7" cy="583.9" r="5"><title>Identity rank 3866</title></circle>
+<circle class="r" cx="707.3" cy="583.9" r="5"><title>Random-J rank 6750</title></circle>
+<text x="163" y="618.4" text-anchor="end" class="t s">Italy</text>
+<line class="pair" x1="477.1" y1="614.4" x2="776.8" y2="614.4"/>
+<circle class="j" cx="477.1" cy="614.4" r="5"><title>J-lens rank 149</title></circle>
+<circle class="i" cx="773.8" cy="614.4" r="5"><title>Identity rank 20307</title></circle>
+<circle class="r" cx="776.8" cy="614.4" r="5"><title>Random-J rank 21343</title></circle>
+<text x="163" y="648.9" text-anchor="end" class="t s">Netherlands</text>
+<line class="pair" x1="505.9" y1="644.9" x2="735.1" y2="644.9"/>
+<circle class="j" cx="505.9" cy="644.9" r="5"><title>J-lens rank 240</title></circle>
+<circle class="i" cx="579.7" cy="644.9" r="5"><title>Identity rank 815</title></circle>
+<circle class="r" cx="735.1" cy="644.9" r="5"><title>Random-J rank 10689</title></circle>
+<text x="163" y="679.5" text-anchor="end" class="t s">France</text>
+<line class="pair" x1="511.2" y1="675.5" x2="572.6" y2="675.5"/>
+<circle class="j" cx="511.2" cy="675.5" r="5"><title>J-lens rank 262</title></circle>
+<circle class="i" cx="572.6" cy="675.5" r="5"><title>Identity rank 725</title></circle>
+<circle class="r" cx="525.3" cy="675.5" r="5"><title>Random-J rank 331</title></circle>
+<text x="163" y="710.0" text-anchor="end" class="t s">Spain</text>
+<line class="pair" x1="519.6" y1="706.0" x2="781.1" y2="706.0"/>
+<circle class="j" cx="519.6" cy="706.0" r="5"><title>J-lens rank 301</title></circle>
+<circle class="i" cx="755.8" cy="706.0" r="5"><title>Identity rank 15065</title></circle>
+<circle class="r" cx="781.1" cy="706.0" r="5"><title>Random-J rank 22902</title></circle>
+</svg>

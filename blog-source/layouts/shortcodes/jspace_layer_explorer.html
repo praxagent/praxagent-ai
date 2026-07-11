@@ -1,0 +1,24 @@
+{{/* Interactive J-lens layer explorer: slider across band layers + condition tabs. */}}
+<div class="jspace-explorer" id="jspace-explorer" data-src="{{ .Get "src" | default "jspace-layer-clouds.json" }}?v=16">
+  <div class="jspace-explorer-controls">
+    <div class="jspace-explorer-tabs" role="tablist" aria-label="Prompt condition"></div>
+    <label class="jspace-explorer-slider-label" for="jspace-layer-slider">
+      Band layer <strong class="jspace-layer-num">—</strong>
+      <span class="jspace-layer-hint"></span>
+    </label>
+    <input id="jspace-layer-slider" class="jspace-layer-slider" type="range" min="0" max="0" value="0" step="1" />
+    <div class="jspace-explorer-meta">
+      <button type="button" class="jspace-gloss-toggle" aria-pressed="false">Show approximate English gloss</button>
+      <span class="jspace-explorer-status"></span>
+    </div>
+    <svg class="jspace-spark" viewBox="0 0 320 36" aria-hidden="true"></svg>
+  </div>
+  <div class="jspace-explorer-prompt"></div>
+  <svg class="jspace-cloud" viewBox="0 0 1200 840" role="img" aria-label="J-lens top-40 word map for selected layer"></svg>
+  <p class="figure-note jspace-explorer-note">
+    Slider = band layers 19–38. Word size ∝ J-lens score (not next-token logits).
+    Sparkline = median probe-lexicon rank for that tab (experience / deception / place / number / biology; lower = more present).
+    Gloss shows approximate <code>original → English</code> labels (not exact translations; fragments marked).
+  </p>
+</div>
+<script src="jspace-layer-explorer.js?v=16" defer></script>

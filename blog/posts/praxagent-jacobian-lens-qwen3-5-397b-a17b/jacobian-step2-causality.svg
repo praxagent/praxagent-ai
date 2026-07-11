@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+  <title id="title">Step 2: causal reachability across token positions</title>
+  <desc id="desc">A perturbation at source position t in layer ell cannot affect final-layer position t minus one, but can affect positions t, t plus one, and a selected later target t prime. The selected source-to-target path is emphasized.</desc>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .h{font-size:22px;font-weight:700}
+    .sh{font-size:17px;font-weight:700}
+    .s{font-size:15px}
+    .m{font-size:13px;fill:#5A544C}
+    .cell{fill:#FFFFFF;stroke:#A89B8C;stroke-width:1.5}
+    .source{fill:#DCE9F5;stroke:#4B6787;stroke-width:2.5}
+    .target{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:2.5}
+    .stack{fill:#EDE8E1;stroke:#7F786D;stroke-width:1.5}
+    .possible{stroke:#7F9DB8;stroke-width:2;fill:none;marker-end:url(#blueArrow)}
+    .chosen{stroke:#587447;stroke-width:4;fill:none;marker-end:url(#greenArrow)}
+    .blocked{stroke:#B8B0A4;stroke-width:2;stroke-dasharray:6 4;fill:none}
+    .blue{fill:#35597B}
+    .green{fill:#587447}
+    .red{fill:#9B4B4B}
+  </style>
+  <defs>
+    <marker id="blueArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7F9DB8"/>
+    </marker>
+    <marker id="greenArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#587447"/>
+    </marker>
+  </defs>
+
+  <text x="28" y="34" class="t h">Step 2: ask which final positions the source can affect</text>
+  <text x="28" y="58" class="t m">Causal attention points backward, so information at t can flow to t and later positions, never to an earlier position.</text>
+
+  <text x="34" y="119" class="t sh">layer <tspan font-style="italic">&#x2113;</tspan></text>
+
+  <rect class="cell" x="205" y="82" width="120" height="70" rx="8"/>
+  <text x="265" y="111" text-anchor="middle" class="t s">position t-1</text>
+  <text x="265" y="135" text-anchor="middle" class="t m">earlier</text>
+
+  <rect class="source" x="365" y="74" width="150" height="86" rx="10"/>
+  <text x="440" y="104" text-anchor="middle" class="t sh blue">perturb source</text>
+  <text x="440" y="134" text-anchor="middle" class="t s" font-style="italic">h<tspan baseline-shift="sub" font-size="11">&#x2113;,t</tspan> + &#x3B4;h</text>
+
+  <rect class="cell" x="555" y="82" width="120" height="70" rx="8"/>
+  <text x="615" y="111" text-anchor="middle" class="t s">position t+1</text>
+  <text x="615" y="135" text-anchor="middle" class="t m">later</text>
+
+  <rect class="cell" x="715" y="82" width="120" height="70" rx="8"/>
+  <text x="775" y="111" text-anchor="middle" class="t s">position t&#x2032;</text>
+  <text x="775" y="135" text-anchor="middle" class="t m">selected later target</text>
+
+  <rect class="stack" x="180" y="184" width="675" height="62" rx="10"/>
+  <text x="518" y="211" text-anchor="middle" class="t sh">remaining transformer computation</text>
+  <text x="518" y="232" text-anchor="middle" class="t m">layers &#x2113;+1 through L</text>
+
+  <!-- paths into stack and out -->
+  <path class="blocked" d="M440 160 C390 174 310 178 265 184"/>
+  <text x="235" y="173" text-anchor="middle" class="t m red">blocked</text>
+  <path class="possible" d="M440 160 C445 174 440 178 440 184"/>
+  <path class="possible" d="M440 160 C500 170 570 175 615 184"/>
+  <path class="chosen" d="M440 160 C545 163 690 170 775 184"/>
+
+  <text x="34" y="304" class="t sh">layer <tspan font-style="italic">L</tspan></text>
+
+  <rect class="cell" x="205" y="270" width="120" height="64" rx="8"/>
+  <text x="265" y="309" text-anchor="middle" class="t s red">no change</text>
+
+  <rect class="cell" x="380" y="270" width="120" height="64" rx="8"/>
+  <text x="440" y="296" text-anchor="middle" class="t s">position t</text>
+  <text x="440" y="319" text-anchor="middle" class="t m">can change</text>
+
+  <rect class="cell" x="555" y="270" width="120" height="64" rx="8"/>
+  <text x="615" y="296" text-anchor="middle" class="t s">position t+1</text>
+  <text x="615" y="319" text-anchor="middle" class="t m">can change</text>
+
+  <rect class="target" x="700" y="262" width="150" height="80" rx="10"/>
+  <text x="775" y="291" text-anchor="middle" class="t sh green">choose this path</text>
+  <text x="775" y="319" text-anchor="middle" class="t s" font-style="italic">h<tspan baseline-shift="sub" font-size="11">L,t&#x2032;</tspan></text>
+
+  <text x="28" y="352" class="t m">The Jacobian below describes one chosen arrow: source (&#x2113;,t) to target (L,t&#x2032;), with t&#x2032; &#x2265; t.</text>
+</svg>
