@@ -398,16 +398,6 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(typeWriter, 1000);
     }
 
-    // Add parallax effect to hero section
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const heroVisual = document.querySelector('.hero-visual');
-        
-        if (heroVisual && scrolled < window.innerHeight) {
-            heroVisual.style.transform = `translateY(${scrolled * 0.5}px)`;
-        }
-    });
-
     // Animate numbers in stats
     const animateNumber = (element, target) => {
         const duration = 2000;

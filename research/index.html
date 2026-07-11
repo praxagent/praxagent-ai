@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research - PraxAgent</title>
-    <meta name="description" content="Research programs, educational projects, and public portfolio work from PraxAgent.">
+    <title>Research Programs - praxagent</title>
+    <meta name="description" content="Open praxagent research programs in Jacobian lenses, sparse autoencoders, mechanistic interpretability, reproducible evaluation, and AI biology education.">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="PraxAgent Research">
-    <meta property="og:description" content="Research programs, educational projects, and public portfolio work from PraxAgent.">
+    <meta property="og:title" content="praxagent Research">
+    <meta property="og:description" content="Open research programs in Jacobian lenses, sparse autoencoders, mechanistic interpretability, reproducible evaluation, and AI biology education.">
     <meta property="og:url" content="https://praxagent.ai/research/">
     <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="PraxAgent Research">
-    <meta name="twitter:description" content="Research programs, educational projects, and public portfolio work from PraxAgent.">
+    <meta name="twitter:title" content="praxagent Research">
+    <meta name="twitter:description" content="Open research programs in Jacobian lenses, sparse autoencoders, mechanistic interpretability, reproducible evaluation, and AI biology education.">
     <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,7 +69,7 @@
                 Research <span class="accent">Programs</span>
             </h1>
             <p class="blog-subtitle">
-                Educational research, public portfolio work, and applied AI learning projects.
+                Open artifacts, controlled evaluations, technical explainers, and educational programs.
             </p>
         </div>
     </header>
@@ -77,6 +77,74 @@
     <section class="services" style="padding-top: 2rem;">
         <div class="container">
             <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 2rem;">
+                <div class="service-card" style="padding: 2.5rem; display: flex; flex-direction: column;">
+                    <div style="flex: 1;">
+                        <div class="service-icon"><i data-feather="git-branch"></i></div>
+                        <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">Jacobian Lenses & J-Space</h3>
+                        <p style="margin-bottom: 1rem;">
+                            Fitting, releasing, and auditing Jacobian lenses that translate mid-layer
+                            residual states into vocabulary-ranked readouts.
+                        </p>
+                        <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
+                            Current work includes the public Qwen3.5-397B-A17B lens, cross-model
+                            J-space geometry, identity and random-transport controls, span readouts,
+                            and revision-pinned receipts.
+                        </p>
+                        <ul style="list-style: none; padding: 0; display: grid; gap: 0.5rem; margin-bottom: 1.5rem;">
+                            <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                <span>Open fitted lens weights and SHA-256 provenance</span>
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                <span>Controlled readout audits and null transports</span>
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                <span>Mathematical tutorials, code, data, and receipts</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="../blog/tags/jacobian-lens/index.html?v=2" class="primary-button" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto;">
+                        <span>View All Jacobian-Lens Posts</span>
+                        <i data-feather="arrow-right" style="width: 16px; height: 16px;"></i>
+                    </a>
+                </div>
+
+                <div class="service-card" style="padding: 2.5rem; display: flex; flex-direction: column;">
+                    <div style="flex: 1;">
+                        <div class="service-icon"><i data-feather="grid"></i></div>
+                        <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">Sparse Autoencoders</h3>
+                        <p style="margin-bottom: 1rem;">
+                            Studying learned feature dictionaries as measurable coordinates rather
+                            than treating human-assigned feature labels as self-validating explanations.
+                        </p>
+                        <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
+                            Current work maps public SAE features across controlled text categories,
+                            tests label validity and confounds, and separates descriptive activation
+                            evidence from causal claims.
+                        </p>
+                        <ul style="list-style: none; padding: 0; display: grid; gap: 0.5rem; margin-bottom: 1.5rem;">
+                            <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                <span>Public-weight feature activation mapping</span>
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                <span>Balanced contrasts, controls, and uncertainty</span>
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                <span>Feature-ID primers and reproducible analysis</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="../blog/tags/sparse-autoencoders/index.html?v=2" class="primary-button" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto;">
+                        <span>View All SAE Posts</span>
+                        <i data-feather="arrow-right" style="width: 16px; height: 16px;"></i>
+                    </a>
+                </div>
+
                 <div class="service-card" style="padding: 2.5rem; display: flex; flex-direction: column;">
                     <div style="flex: 1;">
                         <div class="service-icon"><i data-feather="activity"></i></div>
@@ -119,6 +187,40 @@
                         <i data-feather="arrow-right" style="width: 16px; height: 16px;"></i>
                     </a>
                 </div>
+
+                <div class="service-card" style="padding: 2.5rem; display: flex; flex-direction: column;">
+                    <div style="flex: 1;">
+                        <div class="service-icon"><i data-feather="zap"></i></div>
+                        <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">Prax Agentic Harness</h3>
+                        <p style="margin-bottom: 1rem;">
+                            A mature, self-hostable agent harness for persistent, tool-using AI
+                            assistants across web, Discord, SMS, voice, and collaborative workspaces.
+                        </p>
+                        <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
+                            Prax is the applied research platform for agent orchestration, governed
+                            autonomy, durable memory, failure replay, observability, plugins,
+                            self-improvement, and human-agent collaboration.
+                        </p>
+                        <ul style="list-style: none; padding: 0; display: grid; gap: 0.5rem; margin-bottom: 1.5rem;">
+                            <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                <span>LangGraph orchestration and 97+ governed tools</span>
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                <span>Qdrant + Neo4j memory and failure-replay evaluation</span>
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                <i data-feather="check" style="width: 16px; height: 16px; color: var(--accent);"></i>
+                                <span>Plugins, sandboxes, observability, and controlled self-modification</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="https://github.com/praxagent/prax" target="_blank" rel="noopener" class="primary-button" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto;">
+                        <span>View Prax on GitHub</span>
+                        <i data-feather="github" style="width: 16px; height: 16px;"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -128,7 +230,7 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <span class="logo-text">praxagent</span>
-                    <p>AI software insights, research notes, and advisory thinking.</p>
+                    <p>Independent research, reproducible evaluations, and applied systems.</p>
                 </div>
 
                 <div class="footer-links">
@@ -142,7 +244,7 @@
 
             <div class="footer-bottom">
                 <p>&copy; 2026 praxagent. All rights reserved.</p>
-                <p>AI research and education.</p>
+                <p>Artifacts, controls, code, and receipts.</p>
             </div>
         </div>
     </footer>
