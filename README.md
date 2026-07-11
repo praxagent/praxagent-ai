@@ -1,4 +1,4 @@
-# PraxAgent Website
+# praxagent Website
 
 Professional website for [praxagent.ai](https://praxagent.ai) — AI research, apps, and a Hugo-powered blog with LaTeX math support and syntax highlighting.
 

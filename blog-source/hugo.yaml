@@ -11,7 +11,7 @@ ignoreFiles:
   - '__pycache__/'
 
 params:
-  description: 'Insights, tutorials, and thoughts on AI software development from the PraxAgent team'
+  description: 'Insights, tutorials, and thoughts on AI software development from the praxagent team'
 
 markup:
   goldmark:
