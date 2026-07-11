@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+  <title id="title">Step 1: residual-stream notation</title>
+  <desc id="desc">A grid has transformer layers as rows and token positions as columns. Every grid cell contains a d-dimensional vector. The source cell at layer ell and position t is blue. The final-layer cell at position t prime is green.</desc>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .h{font-size:22px;font-weight:700}
+    .sh{font-size:17px;font-weight:700}
+    .s{font-size:15px}
+    .m{font-size:13px;fill:#5A544C}
+    .cell{fill:#FFFFFF;stroke:#A89B8C;stroke-width:1.5}
+    .source{fill:#DCE9F5;stroke:#4B6787;stroke-width:2.5}
+    .target{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:2.5}
+    .guide{stroke:#B8B0A4;stroke-width:1.2;stroke-dasharray:5 4}
+    .blue{fill:#35597B}
+    .green{fill:#587447}
+  </style>
+
+  <text x="28" y="34" class="t h">Step 1: h has two addresses, then d numbers</text>
+  <text x="28" y="58" class="t m">First subscript = layer. Second subscript = token position. The value in that cell is a vector, not a scalar.</text>
+
+  <!-- column labels -->
+  <text x="310" y="92" text-anchor="middle" class="t sh">position t-1</text>
+  <text x="470" y="92" text-anchor="middle" class="t sh blue">position t</text>
+  <text x="630" y="92" text-anchor="middle" class="t sh">position t+1</text>
+  <text x="790" y="92" text-anchor="middle" class="t sh green">position t&#x2032;</text>
+
+  <!-- row labels -->
+  <text x="34" y="154" class="t sh">layer <tspan font-style="italic">&#x2113;</tspan></text>
+  <text x="34" y="174" class="t m">one intermediate depth</text>
+  <text x="34" y="270" class="t sh">layer <tspan font-style="italic">L</tspan></text>
+  <text x="34" y="290" class="t m">the final depth</text>
+
+  <!-- guides -->
+  <line class="guide" x1="240" y1="104" x2="840" y2="104"/>
+  <line class="guide" x1="240" y1="220" x2="840" y2="220"/>
+
+  <!-- intermediate row -->
+  <rect class="cell" x="250" y="116" width="120" height="84" rx="9"/>
+  <text x="310" y="145" text-anchor="middle" class="t s" font-style="italic">h<tspan baseline-shift="sub" font-size="11">&#x2113;,t-1</tspan></text>
+  <text x="310" y="172" text-anchor="middle" class="t m">[d numbers]</text>
+
+  <rect class="source" x="400" y="108" width="140" height="100" rx="10"/>
+  <text x="470" y="137" text-anchor="middle" class="t sh blue">SOURCE</text>
+  <text x="470" y="165" text-anchor="middle" class="t s" font-style="italic">h<tspan baseline-shift="sub" font-size="11">&#x2113;,t</tspan> &#x2208; &#x211D;<tspan baseline-shift="super" font-size="11">d</tspan></text>
+  <text x="470" y="190" text-anchor="middle" class="t m">one d-dimensional vector</text>
+
+  <rect class="cell" x="570" y="116" width="120" height="84" rx="9"/>
+  <text x="630" y="145" text-anchor="middle" class="t s" font-style="italic">h<tspan baseline-shift="sub" font-size="11">&#x2113;,t+1</tspan></text>
+  <text x="630" y="172" text-anchor="middle" class="t m">[d numbers]</text>
+
+  <rect class="cell" x="730" y="116" width="120" height="84" rx="9"/>
+  <text x="790" y="145" text-anchor="middle" class="t s" font-style="italic">h<tspan baseline-shift="sub" font-size="11">&#x2113;,t&#x2032;</tspan></text>
+  <text x="790" y="172" text-anchor="middle" class="t m">[d numbers]</text>
+
+  <!-- final row -->
+  <rect class="cell" x="250" y="232" width="120" height="84" rx="9"/>
+  <text x="310" y="261" text-anchor="middle" class="t s" font-style="italic">h<tspan baseline-shift="sub" font-size="11">L,t-1</tspan></text>
+  <text x="310" y="288" text-anchor="middle" class="t m">[d numbers]</text>
+
+  <rect class="cell" x="410" y="232" width="120" height="84" rx="9"/>
+  <text x="470" y="261" text-anchor="middle" class="t s" font-style="italic">h<tspan baseline-shift="sub" font-size="11">L,t</tspan></text>
+  <text x="470" y="288" text-anchor="middle" class="t m">[d numbers]</text>
+
+  <rect class="cell" x="570" y="232" width="120" height="84" rx="9"/>
+  <text x="630" y="261" text-anchor="middle" class="t s" font-style="italic">h<tspan baseline-shift="sub" font-size="11">L,t+1</tspan></text>
+  <text x="630" y="288" text-anchor="middle" class="t m">[d numbers]</text>
+
+  <rect class="target" x="720" y="224" width="140" height="100" rx="10"/>
+  <text x="790" y="253" text-anchor="middle" class="t sh green">TARGET</text>
+  <text x="790" y="281" text-anchor="middle" class="t s" font-style="italic">h<tspan baseline-shift="sub" font-size="11">L,t&#x2032;</tspan> &#x2208; &#x211D;<tspan baseline-shift="super" font-size="11">d</tspan></text>
+  <text x="790" y="306" text-anchor="middle" class="t m">another d-vector</text>
+
+  <text x="28" y="344" class="t m">For Qwen3.5-397B-A17B, d = 4,096. Every highlighted box therefore contains 4,096 numbers.</text>
+</svg>

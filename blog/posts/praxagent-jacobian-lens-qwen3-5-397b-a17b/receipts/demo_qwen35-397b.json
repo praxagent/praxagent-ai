@@ -1,0 +1,494 @@
+{
+ "model": "Qwen/Qwen3.5-397B-A17B",
+ "lens_path": "/root/.cache/huggingface/hub/models--praxagent--jacobian-lens-qwen3.5-397b-a17b/snapshots/c4c4ed3670e7a245aa659218eed9018456700dae/jlens/wikitext/qwen35_397b.pt",
+ "lens_sha256": "668c3bf17305b0d52495cb7ba589a1c1173301b1d13c3c6ad84e58245dc99e97",
+ "band": [
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  36,
+  37,
+  38
+ ],
+ "topk": 20,
+ "act1": {
+  "items": [],
+  "skipped": [],
+  "summary": {}
+ },
+ "act1_secret": {
+  "items": [],
+  "skipped": [],
+  "summary": {}
+ },
+ "act2": {
+  "items": [
+   {
+    "prompt": "The capital of the country where Mount Fuji stands is",
+    "target": "Japan",
+    "continuation": " Tokyo.\n\nMount Fuji is the highest",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": true,
+     "best_rank": 3,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 43,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 7111,
+     "cand_rank": 2
+    }
+   },
+   {
+    "prompt": "The capital of the country famous for the Taj Mahal is",
+    "target": "India",
+    "continuation": " New Delhi.\n\nThe Taj Mahal",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": false,
+     "best_rank": 73,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 479,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 786,
+     "cand_rank": 1
+    }
+   },
+   {
+    "prompt": "The capital of the country where the Colosseum stands is",
+    "target": "Italy",
+    "continuation": " Rome.\n\nThe Colosseum is",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": false,
+     "best_rank": 149,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 20307,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 21343,
+     "cand_rank": 2
+    }
+   },
+   {
+    "prompt": "The capital of the country where kangaroos live in the wild is",
+    "target": "Australia",
+    "continuation": " Canberra.\n\nKangaroos are",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": false,
+     "best_rank": 65,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 1357,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 7131,
+     "cand_rank": 1
+    }
+   },
+   {
+    "prompt": "The capital of the country that gifted the Statue of Liberty to America is",
+    "target": "France",
+    "continuation": " Paris.<|im_end|>\n<|im_start|>assistant\n<think>",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": false,
+     "best_rank": 262,
+     "cand_rank": 3
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 725,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 331,
+     "cand_rank": 1
+    }
+   },
+   {
+    "prompt": "The capital of the country where Machu Picchu is located is",
+    "target": "Peru",
+    "continuation": "\nA. Lima\nB. C",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": true,
+     "best_rank": 13,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 802,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 22598,
+     "cand_rank": 1
+    }
+   },
+   {
+    "prompt": "The capital of the country where the pyramids of Giza stand is",
+    "target": "Egypt",
+    "continuation": " Cairo.\n\nThe pyramids of G",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": false,
+     "best_rank": 24,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 42,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 7366,
+     "cand_rank": 1
+    }
+   },
+   {
+    "prompt": "The capital of the largest country in South America is",
+    "target": "Brazil",
+    "continuation": " Brasilia.\nA. True\n",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": true,
+     "best_rank": 19,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 2974,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 17890,
+     "cand_rank": 1
+    }
+   },
+   {
+    "prompt": "The capital of the country whose flag shows a red maple leaf is",
+    "target": "Canada",
+    "continuation": " Ottawa.\n\nThe flag described is the",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": true,
+     "best_rank": 13,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 240,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 2453,
+     "cand_rank": 1
+    }
+   },
+   {
+    "prompt": "The capital of the country famous for tulips and windmills is",
+    "target": "Netherlands",
+    "continuation": " Amsterdam.\n\nThe capital of the country",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": false,
+     "best_rank": 240,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 815,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 10689,
+     "cand_rank": 2
+    }
+   },
+   {
+    "prompt": "The capital of the country that built the Great Wall is",
+    "target": "China",
+    "continuation": " Beijing.\n\n<think>\nThinking Process:",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": true,
+     "best_rank": 5,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 8153,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 3528,
+     "cand_rank": 1
+    }
+   },
+   {
+    "prompt": "The capital of the country where the tango originated is",
+    "target": "Argentina",
+    "continuation": "\nA. Montevideo\nB",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": false,
+     "best_rank": 85,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 869,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 3984,
+     "cand_rank": 1
+    }
+   },
+   {
+    "prompt": "The capital of the country famous for fjords and Vikings is",
+    "target": "Norway",
+    "continuation": " Oslo. Which country is this?\n\n",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": false,
+     "best_rank": 36,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 30,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 3021,
+     "cand_rank": 1
+    }
+   },
+   {
+    "prompt": "The capital of the country where the Kremlin stands is",
+    "target": "Russia",
+    "continuation": " Moscow.\n\nThe Kremlin is a historic",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": false,
+     "best_rank": 97,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 3866,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 6750,
+     "cand_rank": 1
+    }
+   },
+   {
+    "prompt": "The capital of the country where K-pop originated is",
+    "target": "Korea",
+    "continuation": " Seoul.<|im_end|>\n<|im_start|>assistant\n<think>",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": false,
+     "best_rank": 47,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 115,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 34227,
+     "cand_rank": 4
+    }
+   },
+   {
+    "prompt": "The capital of the country where flamenco dancing originated is",
+    "target": "Spain",
+    "continuation": "\n\n<think>\n\n</think>\n\nFlamenco",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": false,
+     "best_rank": 301,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 15065,
+     "cand_rank": 2
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 22902,
+     "cand_rank": 2
+    }
+   },
+   {
+    "prompt": "The capital of the country where the ancient Olympic Games began is",
+    "target": "Greece",
+    "continuation": " Athens.\n\nThe ancient Olympic Games originated",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": false,
+     "best_rank": 23,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 249,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 15606,
+     "cand_rank": 2
+    }
+   },
+   {
+    "prompt": "The capital of the country famous for Oktoberfest is",
+    "target": "Germany",
+    "continuation": "\nA. Berlin\nB. Munich",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": false,
+     "best_rank": 39,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 87,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 16543,
+     "cand_rank": 2
+    }
+   },
+   {
+    "prompt": "The capital of the country of IKEA and ABBA is",
+    "target": "Sweden",
+    "continuation": " Stockholm.\nA. Norway\nB",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": false,
+     "best_rank": 62,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": false,
+     "best_rank": 516,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 621,
+     "cand_rank": 1
+    }
+   },
+   {
+    "prompt": "The capital of the country home to the Maasai Mara reserve is",
+    "target": "Kenya",
+    "continuation": " Nairobi.\n\nThe Maasai Mara National",
+    "output_leaked": false,
+    "jlens": {
+     "hit_top20": true,
+     "best_rank": 11,
+     "cand_rank": 1
+    },
+    "logit_lens": {
+     "hit_top20": true,
+     "best_rank": 1,
+     "cand_rank": 1
+    },
+    "random_J": {
+     "hit_top20": false,
+     "best_rank": 611,
+     "cand_rank": 1
+    }
+   }
+  ],
+  "skipped": [],
+  "summary": {
+   "jlens": {
+    "n": 20,
+    "hit_rate_top20": 0.3,
+    "n_clean": 20,
+    "hit_rate_top20_clean": 0.3,
+    "median_cand_rank": 1
+   },
+   "logit_lens": {
+    "n": 20,
+    "hit_rate_top20": 0.05,
+    "n_clean": 20,
+    "hit_rate_top20_clean": 0.05,
+    "median_cand_rank": 1
+   },
+   "random_J": {
+    "n": 20,
+    "hit_rate_top20": 0.0,
+    "n_clean": 20,
+    "hit_rate_top20_clean": 0.0,
+    "median_cand_rank": 1
+   }
+  }
+ },
+ "act3": {
+  "n_swaps": 50,
+  "flip_rate": {
+   "strength0": 0.0,
+   "steer": 0.64,
+   "random_dir": 0.0
+  }
+ }
+}

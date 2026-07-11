@@ -29,10 +29,15 @@ praxagent/
 ### Development
 
 ```bash
-# Start local server
-python3 -m http.server 8000
+# Blog live reload (edit blog-source/; browser refreshes on save)
+cd blog-source
+hugo server --bind 127.0.0.1 --port 1313 --baseURL http://127.0.0.1:1313/ --disableFastRender
 
-# View at http://localhost:8000
+# Post URL example:
+# http://127.0.0.1:1313/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/
+
+# Full site (homepage + built blog/) — no auto-rebuild
+python3 -m http.server 8000   # from repo root → http://localhost:8000
 ```
 
 ### Adding Blog Posts
@@ -41,7 +46,8 @@ python3 -m http.server 8000
 cd blog-source
 hugo new content/posts/my-new-post/index.md
 
-# Edit the post, then rebuild:
+# While developing, use `hugo server` above (no manual rebuild).
+# For a production-style write into blog/:
 hugo --destination ../blog
 ```
 

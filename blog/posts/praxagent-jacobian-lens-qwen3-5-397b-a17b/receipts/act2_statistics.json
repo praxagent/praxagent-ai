@@ -1,0 +1,243 @@
+{
+  "source_receipt": "demo_qwen35-397b.json",
+  "scoring": "best rank over the preregistered layer band; hit iff rank <= 20",
+  "n_items": 20,
+  "software": {
+    "scipy": "1.18.0"
+  },
+  "hit_rates": {
+    "jlens": {
+      "hits": 6,
+      "n": 20,
+      "rate": 0.3,
+      "wilson_95": [
+        0.1454772448676043,
+        0.5189728183535235
+      ]
+    },
+    "logit_lens": {
+      "hits": 1,
+      "n": 20,
+      "rate": 0.05,
+      "wilson_95": [
+        0.008881448800795402,
+        0.23613119344674205
+      ]
+    },
+    "random_J": {
+      "hits": 0,
+      "n": 20,
+      "rate": 0.0,
+      "wilson_95": [
+        0.0,
+        0.16112515805281938
+      ]
+    }
+  },
+  "paired": {
+    "jlens_vs_identity": {
+      "rank_difference_definition": "control_best_rank - jlens_best_rank",
+      "wins_losses_ties": {
+        "jlens_wins": 18,
+        "control_wins": 2,
+        "ties": 0
+      },
+      "sign_test": {
+        "method": "exact binomial, two-sided",
+        "p_value": 0.0004024505615234375
+      },
+      "wilcoxon_signed_rank": {
+        "method": "exact, two-sided",
+        "p_value": 9.5367431640625e-06
+      },
+      "paired_hit_table": {
+        "both_hit": 1,
+        "jlens_only_hit": 5,
+        "control_only_hit": 0,
+        "neither_hit": 14
+      },
+      "mcnemar_exact": {
+        "method": "exact binomial on discordant pairs, two-sided",
+        "p_value": 0.0625
+      }
+    },
+    "jlens_vs_random_J": {
+      "rank_difference_definition": "control_best_rank - jlens_best_rank",
+      "wins_losses_ties": {
+        "jlens_wins": 20,
+        "control_wins": 0,
+        "ties": 0
+      },
+      "sign_test": {
+        "method": "exact binomial, two-sided",
+        "p_value": 1.9073486328125e-06
+      },
+      "wilcoxon_signed_rank": {
+        "method": "exact, two-sided",
+        "p_value": 1.9073486328125e-06
+      },
+      "paired_hit_table": {
+        "both_hit": 0,
+        "jlens_only_hit": 6,
+        "control_only_hit": 0,
+        "neither_hit": 14
+      },
+      "mcnemar_exact": {
+        "method": "exact binomial on discordant pairs, two-sided",
+        "p_value": 0.03125
+      }
+    }
+  },
+  "unpaired_hit_sensitivity": {
+    "jlens_vs_identity": {
+      "table": [
+        [
+          6,
+          14
+        ],
+        [
+          1,
+          19
+        ]
+      ],
+      "fisher_exact_one_sided_p": 0.04573804573804574,
+      "fisher_exact_two_sided_p": 0.09147609147609148
+    },
+    "jlens_vs_random_J": {
+      "table": [
+        [
+          6,
+          14
+        ],
+        [
+          0,
+          20
+        ]
+      ],
+      "fisher_exact_one_sided_p": 0.0100980100980101,
+      "fisher_exact_two_sided_p": 0.0201960201960202
+    }
+  },
+  "items": [
+    {
+      "target": "Japan",
+      "jlens": 3,
+      "identity": 43,
+      "random_J": 7111
+    },
+    {
+      "target": "India",
+      "jlens": 73,
+      "identity": 479,
+      "random_J": 786
+    },
+    {
+      "target": "Italy",
+      "jlens": 149,
+      "identity": 20307,
+      "random_J": 21343
+    },
+    {
+      "target": "Australia",
+      "jlens": 65,
+      "identity": 1357,
+      "random_J": 7131
+    },
+    {
+      "target": "France",
+      "jlens": 262,
+      "identity": 725,
+      "random_J": 331
+    },
+    {
+      "target": "Peru",
+      "jlens": 13,
+      "identity": 802,
+      "random_J": 22598
+    },
+    {
+      "target": "Egypt",
+      "jlens": 24,
+      "identity": 42,
+      "random_J": 7366
+    },
+    {
+      "target": "Brazil",
+      "jlens": 19,
+      "identity": 2974,
+      "random_J": 17890
+    },
+    {
+      "target": "Canada",
+      "jlens": 13,
+      "identity": 240,
+      "random_J": 2453
+    },
+    {
+      "target": "Netherlands",
+      "jlens": 240,
+      "identity": 815,
+      "random_J": 10689
+    },
+    {
+      "target": "China",
+      "jlens": 5,
+      "identity": 8153,
+      "random_J": 3528
+    },
+    {
+      "target": "Argentina",
+      "jlens": 85,
+      "identity": 869,
+      "random_J": 3984
+    },
+    {
+      "target": "Norway",
+      "jlens": 36,
+      "identity": 30,
+      "random_J": 3021
+    },
+    {
+      "target": "Russia",
+      "jlens": 97,
+      "identity": 3866,
+      "random_J": 6750
+    },
+    {
+      "target": "Korea",
+      "jlens": 47,
+      "identity": 115,
+      "random_J": 34227
+    },
+    {
+      "target": "Spain",
+      "jlens": 301,
+      "identity": 15065,
+      "random_J": 22902
+    },
+    {
+      "target": "Greece",
+      "jlens": 23,
+      "identity": 249,
+      "random_J": 15606
+    },
+    {
+      "target": "Germany",
+      "jlens": 39,
+      "identity": 87,
+      "random_J": 16543
+    },
+    {
+      "target": "Sweden",
+      "jlens": 62,
+      "identity": 516,
+      "random_J": 621
+    },
+    {
+      "target": "Kenya",
+      "jlens": 11,
+      "identity": 1,
+      "random_J": 611
+    }
+  ]
+}

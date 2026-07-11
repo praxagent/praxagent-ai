@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="430" viewBox="0 0 900 430" role="img" aria-labelledby="title desc">
+  <title id="title">Last-token readout versus span readout</title>
+  <desc id="desc">Two layer by token-position grids compare readout rules. Last-token readout searches only the final token column over all band layers. Span readout searches every prompt position over every band layer and records the best cell for each probe token. Span does not pool tokens; it searches more independent readout locations.</desc>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .h{font-size:22px;font-weight:700}
+    .sh{font-size:17px;font-weight:700}
+    .s{font-size:14px}
+    .m{font-size:12px;fill:#5A544C}
+    .panel{fill:#FFFFFF;stroke:#A89B8C;stroke-width:1.5}
+    .cell{fill:#F5F3EF;stroke:#C9C0B4;stroke-width:1}
+    .searched{fill:#DCE9F5;stroke:#4B6787;stroke-width:1.5}
+    .best{fill:#DDEBD6;stroke:#587447;stroke-width:2.5}
+    .punct{fill:#F5E2DF;stroke:#9B5D55;stroke-width:1.8}
+    .blue{fill:#35597B}
+    .green{fill:#587447}
+    .red{fill:#8E4E48}
+    .brace{stroke:#4B6787;stroke-width:2;fill:none}
+  </style>
+
+  <text x="28" y="34" class="t h">Span readout searches the full layer-by-position grid</text>
+  <text x="28" y="58" class="t m">Each cell is a separate J-lens readout. Span does not average hidden states or form one phrase vector.</text>
+
+  <!-- LEFT PANEL -->
+  <rect class="panel" x="24" y="78" width="414" height="292" rx="12"/>
+  <text x="44" y="105" class="t sh">Last-token readout</text>
+  <text x="44" y="126" class="t m">Search one position (the final prompt token) across layers.</text>
+
+  <!-- left token labels -->
+  <text x="152" y="156" text-anchor="middle" class="t s">Where</text>
+  <text x="202" y="156" text-anchor="middle" class="t s">do</text>
+  <text x="252" y="156" text-anchor="middle" class="t s">features</text>
+  <text x="302" y="156" text-anchor="middle" class="t s">live</text>
+  <text x="352" y="156" text-anchor="middle" class="t s">deep</text>
+  <text x="402" y="156" text-anchor="middle" class="t sh red">?</text>
+
+  <!-- left layer labels -->
+  <text x="50" y="190" class="t s">L19</text>
+  <text x="50" y="224" class="t s">L20</text>
+  <text x="50" y="258" class="t s">...</text>
+  <text x="50" y="292" class="t s">L37</text>
+  <text x="50" y="326" class="t s">L38</text>
+
+  <!-- left grid unsearched 5 cols x 5 -->
+  <g>
+    <rect class="cell" x="128" y="169" width="48" height="28"/><rect class="cell" x="178" y="169" width="48" height="28"/><rect class="cell" x="228" y="169" width="48" height="28"/><rect class="cell" x="278" y="169" width="48" height="28"/><rect class="cell" x="328" y="169" width="48" height="28"/>
+    <rect class="cell" x="128" y="203" width="48" height="28"/><rect class="cell" x="178" y="203" width="48" height="28"/><rect class="cell" x="228" y="203" width="48" height="28"/><rect class="cell" x="278" y="203" width="48" height="28"/><rect class="cell" x="328" y="203" width="48" height="28"/>
+    <rect class="cell" x="128" y="237" width="48" height="28"/><rect class="cell" x="178" y="237" width="48" height="28"/><rect class="cell" x="228" y="237" width="48" height="28"/><rect class="cell" x="278" y="237" width="48" height="28"/><rect class="cell" x="328" y="237" width="48" height="28"/>
+    <rect class="cell" x="128" y="271" width="48" height="28"/><rect class="cell" x="178" y="271" width="48" height="28"/><rect class="cell" x="228" y="271" width="48" height="28"/><rect class="cell" x="278" y="271" width="48" height="28"/><rect class="cell" x="328" y="271" width="48" height="28"/>
+    <rect class="cell" x="128" y="305" width="48" height="28"/><rect class="cell" x="178" y="305" width="48" height="28"/><rect class="cell" x="228" y="305" width="48" height="28"/><rect class="cell" x="278" y="305" width="48" height="28"/><rect class="cell" x="328" y="305" width="48" height="28"/>
+  </g>
+
+  <!-- left searched question-mark column -->
+  <rect class="punct" x="378" y="169" width="48" height="28"/>
+  <rect class="punct" x="378" y="203" width="48" height="28"/>
+  <rect class="punct" x="378" y="237" width="48" height="28"/>
+  <rect class="punct" x="378" y="271" width="48" height="28"/>
+  <rect class="punct" x="378" y="305" width="48" height="28"/>
+  <text x="277" y="354" text-anchor="middle" class="t m">20 searched cells: (20 layers) x (1 position)</text>
+
+  <!-- RIGHT PANEL -->
+  <rect class="panel" x="462" y="78" width="414" height="292" rx="12"/>
+  <text x="482" y="105" class="t sh">Span readout</text>
+  <text x="482" y="126" class="t m">Search every prompt position independently across layers.</text>
+
+  <text x="590" y="156" text-anchor="middle" class="t s">Where</text>
+  <text x="640" y="156" text-anchor="middle" class="t s">do</text>
+  <text x="690" y="156" text-anchor="middle" class="t s">features</text>
+  <text x="740" y="156" text-anchor="middle" class="t s">live</text>
+  <text x="790" y="156" text-anchor="middle" class="t s">deep</text>
+  <text x="840" y="156" text-anchor="middle" class="t sh red">?</text>
+
+  <text x="488" y="190" class="t s">L19</text>
+  <text x="488" y="224" class="t s">L20</text>
+  <text x="488" y="258" class="t s">...</text>
+  <text x="488" y="292" class="t s">L37</text>
+  <text x="488" y="326" class="t s">L38</text>
+
+  <!-- all right cells searched -->
+  <g>
+    <rect class="searched" x="566" y="169" width="48" height="28"/><rect class="searched" x="616" y="169" width="48" height="28"/><rect class="searched" x="666" y="169" width="48" height="28"/><rect class="searched" x="716" y="169" width="48" height="28"/><rect class="searched" x="766" y="169" width="48" height="28"/><rect class="searched" x="816" y="169" width="48" height="28"/>
+    <rect class="searched" x="566" y="203" width="48" height="28"/><rect class="searched" x="616" y="203" width="48" height="28"/><rect class="searched" x="666" y="203" width="48" height="28"/><rect class="searched" x="716" y="203" width="48" height="28"/><rect class="searched" x="766" y="203" width="48" height="28"/><rect class="searched" x="816" y="203" width="48" height="28"/>
+    <rect class="searched" x="566" y="237" width="48" height="28"/><rect class="searched" x="616" y="237" width="48" height="28"/><rect class="searched" x="666" y="237" width="48" height="28"/><rect class="searched" x="716" y="237" width="48" height="28"/><rect class="searched" x="766" y="237" width="48" height="28"/><rect class="searched" x="816" y="237" width="48" height="28"/>
+    <rect class="searched" x="566" y="271" width="48" height="28"/><rect class="searched" x="616" y="271" width="48" height="28"/><rect class="searched" x="666" y="271" width="48" height="28"/><rect class="searched" x="716" y="271" width="48" height="28"/><rect class="searched" x="766" y="271" width="48" height="28"/><rect class="searched" x="816" y="271" width="48" height="28"/>
+    <rect class="searched" x="566" y="305" width="48" height="28"/><rect class="searched" x="616" y="305" width="48" height="28"/><rect class="searched" x="666" y="305" width="48" height="28"/><rect class="searched" x="716" y="305" width="48" height="28"/><rect class="searched" x="766" y="305" width="48" height="28"/><rect class="searched" x="816" y="305" width="48" height="28"/>
+  </g>
+
+  <!-- overwrite one best cell -->
+  <rect class="best" x="716" y="203" width="48" height="28"/>
+  <text x="740" y="223" text-anchor="middle" class="t sh green">best</text>
+  <text x="669" y="354" text-anchor="middle" class="t m">20 x T searched cells; record argmin (layer*, position*)</text>
+
+  <!-- bottom takeaway -->
+  <rect x="24" y="387" width="852" height="28" rx="7" fill="#EDE8E1"/>
+  <text x="450" y="406" text-anchor="middle" class="t s">More cells searched: R_span(w) &#x2264; R_last(w) by construction.</text>
+</svg>
