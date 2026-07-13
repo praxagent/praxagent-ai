@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tutorials on praxagent LLC Blog</title>
-    <link>../tags/tutorials/</link>
+    <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/tutorials/</link>
     <description>Recent content in Tutorials on praxagent LLC Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 09 Jul 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="../tags/tutorials/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://macbook-air.tail9eb7b0.ts.net:8001/tags/tutorials/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to Read an SAE Feature ID</title>
-      <link>../posts/how-to-read-an-sae-feature-id/</link>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/posts/how-to-read-an-sae-feature-id/</link>
       <pubDate>Thu, 09 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>../posts/how-to-read-an-sae-feature-id/</guid>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/posts/how-to-read-an-sae-feature-id/</guid>
       <description>A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights.</description>
     </item>
     <item>
       <title>Late Chunking: Why Context-Aware Embeddings (sometimes) Beat Traditional Chunking</title>
-      <link>../posts/late-chunking/</link>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/posts/late-chunking/</link>
       <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>../posts/late-chunking/</guid>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/posts/late-chunking/</guid>
       <description>Traditional chunking methods for RAG pipelines often break context by chunking text before embedding. Late chunking offers a solution by embedding the entire document first and then chunking the token embeddings, preserving vital contextual information and improving retrieval accuracy.</description>
     </item>
   </channel>

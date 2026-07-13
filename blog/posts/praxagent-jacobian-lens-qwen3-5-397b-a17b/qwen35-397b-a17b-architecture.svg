@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="440" viewBox="0 0 760 440" role="img" aria-labelledby="titleA17B descA17B">
+  <title id="titleA17B">Qwen3.5-397B-A17B naming and hybrid MoE layout</title>
+  <desc id="descA17B">397B is total parameters; A17B means about 17B active per token. Sixty layers repeat 15 cycles of three Gated DeltaNet-MoE blocks then one Gated Attention-MoE block. Each MoE step routes a token through 10 of 512 experts plus one shared expert.</desc>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .h{font-size:16px;font-weight:700}
+    .s{font-size:12px}
+    .m{font-size:11px;fill:#5A544C}
+    .card{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.5}
+    .warm{fill:#EDE8E1;stroke:#7F786D;stroke-width:1.5}
+    .clay{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.5}
+    .green{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+    .line{stroke:#7F786D;stroke-width:1.4;fill:none;marker-end:url(#arrow)}
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#7F786D"/>
+    </marker>
+  </defs>
+
+  <text x="24" y="28" class="t h">What &quot;397B-A17B&quot; means</text>
+  <text x="24" y="48" class="t m">Total capacity vs compute per token. This note audits the text stack only.</text>
+
+  <rect class="card" x="24" y="64" width="220" height="88" rx="12"/>
+  <text x="40" y="90" class="t h">397B</text>
+  <text x="40" y="112" class="t s">~397 billion parameters</text>
+  <text x="40" y="132" class="t m">stored capacity (all experts)</text>
+
+  <rect class="green" x="268" y="64" width="220" height="88" rx="12"/>
+  <text x="284" y="90" class="t h">A17B</text>
+  <text x="284" y="112" class="t s">~17B activated per token</text>
+  <text x="284" y="132" class="t m">&quot;A&quot; = active, not all weights fire</text>
+
+  <rect class="clay" x="512" y="64" width="224" height="88" rx="12"/>
+  <text x="528" y="90" class="t h">Why it matters</text>
+  <text x="528" y="112" class="t s">Download ~807 GB bf16</text>
+  <text x="528" y="132" class="t m">Forward cost closer to ~17B dense</text>
+
+  <text x="24" y="186" class="t h">One of 15 hybrid cycles (60 layers total)</text>
+  <text x="24" y="204" class="t m">3 x (Gated DeltaNet -&gt; MoE), then 1 x (Gated Attention -&gt; MoE). Residual width d = 4096.</text>
+
+  <!-- row 1: three DeltaNet -> MoE -->
+  <rect class="warm" x="24" y="220" width="100" height="48" rx="10"/>
+  <text x="74" y="242" text-anchor="middle" class="t s">DeltaNet</text>
+  <text x="74" y="258" text-anchor="middle" class="t m">linear</text>
+  <rect class="card" x="136" y="220" width="56" height="48" rx="10"/>
+  <text x="164" y="250" text-anchor="middle" class="t s">MoE</text>
+
+  <rect class="warm" x="216" y="220" width="100" height="48" rx="10"/>
+  <text x="266" y="242" text-anchor="middle" class="t s">DeltaNet</text>
+  <text x="266" y="258" text-anchor="middle" class="t m">linear</text>
+  <rect class="card" x="328" y="220" width="56" height="48" rx="10"/>
+  <text x="356" y="250" text-anchor="middle" class="t s">MoE</text>
+
+  <rect class="warm" x="408" y="220" width="100" height="48" rx="10"/>
+  <text x="458" y="242" text-anchor="middle" class="t s">DeltaNet</text>
+  <text x="458" y="258" text-anchor="middle" class="t m">linear</text>
+  <rect class="card" x="520" y="220" width="56" height="48" rx="10"/>
+  <text x="548" y="250" text-anchor="middle" class="t s">MoE</text>
+
+  <path class="line" d="M124,244 H136"/>
+  <path class="line" d="M192,244 H216"/>
+  <path class="line" d="M316,244 H328"/>
+  <path class="line" d="M384,244 H408"/>
+  <path class="line" d="M508,244 H520"/>
+
+  <!-- row 2: gated attention -> MoE -->
+  <rect class="clay" x="216" y="292" width="140" height="48" rx="10"/>
+  <text x="286" y="314" text-anchor="middle" class="t s">Gated Attention</text>
+  <text x="286" y="330" text-anchor="middle" class="t m">full attn</text>
+  <rect class="card" x="380" y="292" width="56" height="48" rx="10"/>
+  <text x="408" y="322" text-anchor="middle" class="t s">MoE</text>
+  <path class="line" d="M548,268 V280 H286 V292"/>
+  <path class="line" d="M356,316 H380"/>
+  <text x="456" y="322" class="t m">then repeat x15</text>
+
+  <text x="24" y="370" class="t h">MoE routing (every MoE block)</text>
+  <rect class="card" x="24" y="382" width="712" height="44" rx="12"/>
+  <text x="40" y="410" class="t s">512 experts in the menu; per token: 10 routed + 1 shared compute (others idle). Vision encoder exists; not audited here.</text>
+</svg>

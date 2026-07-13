@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8001&amp;path=livereload" data-no-instant defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Late Chunking: Why Context-Aware Embeddings (sometimes) Beat Traditional Chunking - praxagent Blog</title>
@@ -16,7 +16,7 @@
       
     
     <meta name="description" content="Traditional chunking methods for RAG pipelines often break context by chunking text before embedding. Late chunking offers a solution by embedding the entire document first and then chunking the token embeddings, preserving vital contextual information and improving retrieval accuracy.">
-    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/posts/late-chunking/index.html">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="praxagent Blog">
@@ -34,12 +34,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../styles-v2.css">
-    
-    <link rel="stylesheet" href="../../blog.css">
-    <link rel="stylesheet" href="../../katex.min.css">
+    <link rel="stylesheet" href="/styles-v2.css">
+    <link rel="stylesheet" href="/blog.css">
+    <link rel="stylesheet" href="/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
-    
     
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -59,16 +57,15 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="../../../index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
             <div class="nav-menu">
-                <a href="../../../research/index.html" class="nav-link">Research</a>
-                <a href="../../index.html" class="nav-link active">Tech Blog</a>
-                <a href="../../../apps.html" class="nav-link">Apps</a>
-                <a href="../../../index.html#contact" class="nav-link">Contact</a>
-                
+                <a href="/research/index.html" class="nav-link">Research</a>
+                <a href="/blog/index.html" class="nav-link active">Tech Blog</a>
+                <a href="/apps.html" class="nav-link">Apps</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun">☀️</span>
                     <span class="theme-toggle-icon moon">🌙</span>
@@ -87,10 +84,10 @@
 
     <div class="mobile-menu-overlay" id="mobile-menu-overlay">
         <div class="mobile-menu-content">
-            <a href="../../../research/index.html" class="mobile-nav-link">Research</a>
-            <a href="../../index.html" class="mobile-nav-link active">Tech Blog</a>
-            <a href="../../../apps.html" class="mobile-nav-link">Apps</a>
-            <a href="../../../index.html#contact" class="mobile-nav-link">Contact</a>
+            <a href="/research/index.html" class="mobile-nav-link">Research</a>
+            <a href="/blog/index.html" class="mobile-nav-link active">Tech Blog</a>
+            <a href="/apps.html" class="mobile-nav-link">Apps</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun">☀️</span>
@@ -119,6 +116,8 @@
             
 
             
+            
+
             
 
             
@@ -667,8 +666,17 @@ Significant: Yes (α = 0.05)
             </div>
 
             <footer class="post-footer">
+                <div class="post-transparency">
+                    <div class="post-transparency-label">Public source &amp; edit history</div>
+                    <p>This blog is published two ways: as the rendered page you are
+                    reading, and as plain-text source in a public git repository,
+                    <a href="https://github.com/praxagent/praxagent-ai" rel="noopener">praxagent/praxagent-ai</a>.
+                    Every revision to every post is preserved in the commit log, so
+                    you can see exactly what changed and when:
+                    <a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/posts/late-chunking/index.md" rel="noopener">view this article's edit history</a>.</p>
+                </div>
                 <div class="post-navigation">
-                    <a href="../../index.html" class="back-to-blog">← Back to Blog</a>
+                    <a href="/blog/index.html" class="back-to-blog">← Back to Blog</a>
                 </div>
             </footer>
         </article>
@@ -689,10 +697,10 @@ Significant: Yes (α = 0.05)
                 </div>
                 
                 <div class="footer-links">
-                    <a href="../../../research/index.html">Research</a>
-                    <a href="../../index.html">Tech Blog</a>
-                    <a href="../../../apps.html">Apps</a>
-                    <a href="../../../index.html#contact">Contact</a>
+                    <a href="/research/index.html">Research</a>
+                    <a href="/blog/index.html">Tech Blog</a>
+                    <a href="/apps.html">Apps</a>
+                    <a href="/index.html#contact">Contact</a>
                     <a href="#">Privacy Policy</a>
                 </div>
             </div>
@@ -704,7 +712,7 @@ Significant: Yes (α = 0.05)
         </div>
     </footer>
 
-    <script src="../../script.js"></script>
+    <script src="/script.js"></script>
     <script>
       feather.replace()
     </script>

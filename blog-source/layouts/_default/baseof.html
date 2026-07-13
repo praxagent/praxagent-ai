@@ -18,7 +18,7 @@
       {{ end }}
     {{ end }}
     <meta name="description" content="{{ $desc }}">
-    <link rel="icon" type="image/svg+xml" href="{{ if eq .Type "posts" }}../../../favicon.svg{{ else }}../favicon.svg{{ end }}">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="{{ $canonical }}">
     <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
     <meta property="og:site_name" content="praxagent Blog">
@@ -36,12 +36,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ if eq .Type "posts" }}../../styles-v2.css{{ else }}styles-v2.css{{ end }}">
-    {{ if or (eq .Type "posts") (eq .Kind "home") }}
-    <link rel="stylesheet" href="{{ if eq .Type "posts" }}../../blog.css{{ else }}blog.css{{ end }}">
-    <link rel="stylesheet" href="{{ if eq .Type "posts" }}../../katex.min.css{{ else }}katex.min.css{{ end }}">
+    <link rel="stylesheet" href="{{ "styles-v2.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "blog.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "katex.min.css" | relURL }}">
     <script src="https://unpkg.com/feather-icons"></script>
-    {{ end }}
     {{ if .IsPage }}
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -61,16 +59,15 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="{{ if eq .Type "posts" }}../../../index.html{{ else }}../index.html{{ end }}" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
             <div class="nav-menu">
-                <a href="{{ if eq .Type "posts" }}../../../research/index.html{{ else }}../research/index.html{{ end }}" class="nav-link">Research</a>
-                <a href="{{ if eq .Type "posts" }}../../index.html{{ else }}index.html{{ end }}" class="nav-link{{ if or (eq .Kind "home") (eq .Type "posts") }} active{{ end }}">Tech Blog</a>
-                <a href="{{ if eq .Type "posts" }}../../../apps.html{{ else }}../apps.html{{ end }}" class="nav-link">Apps</a>
-                <a href="{{ if eq .Type "posts" }}../../../index.html#contact{{ else }}../index.html#contact{{ end }}" class="nav-link">Contact</a>
-                <!-- <a href="{{ if eq .Type "posts" }}../../../index.html#contact{{ else }}../index.html#contact{{ end }}" class="cta-button">Let's Build</a> -->
+                <a href="/research/index.html" class="nav-link">Research</a>
+                <a href="/blog/index.html" class="nav-link active">Tech Blog</a>
+                <a href="/apps.html" class="nav-link">Apps</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun">☀️</span>
                     <span class="theme-toggle-icon moon">🌙</span>
@@ -89,10 +86,10 @@
 
     <div class="mobile-menu-overlay" id="mobile-menu-overlay">
         <div class="mobile-menu-content">
-            <a href="{{ if eq .Type "posts" }}../../../research/index.html{{ else }}../research/index.html{{ end }}" class="mobile-nav-link">Research</a>
-            <a href="{{ if eq .Type "posts" }}../../index.html{{ else }}index.html{{ end }}" class="mobile-nav-link{{ if or (eq .Kind "home") (eq .Type "posts") }} active{{ end }}">Tech Blog</a>
-            <a href="{{ if eq .Type "posts" }}../../../apps.html{{ else }}../apps.html{{ end }}" class="mobile-nav-link">Apps</a>
-            <a href="{{ if eq .Type "posts" }}../../../index.html#contact{{ else }}../index.html#contact{{ end }}" class="mobile-nav-link">Contact</a>
+            <a href="/research/index.html" class="mobile-nav-link">Research</a>
+            <a href="/blog/index.html" class="mobile-nav-link active">Tech Blog</a>
+            <a href="/apps.html" class="mobile-nav-link">Apps</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun">☀️</span>
@@ -115,10 +112,10 @@
                 </div>
                 
                 <div class="footer-links">
-                    <a href="{{ if eq .Type "posts" }}../../../research/index.html{{ else }}../research/index.html{{ end }}">Research</a>
-                    <a href="{{ if eq .Type "posts" }}../../index.html{{ else }}index.html{{ end }}">Tech Blog</a>
-                    <a href="{{ if eq .Type "posts" }}../../../apps.html{{ else }}../apps.html{{ end }}">Apps</a>
-                    <a href="{{ if eq .Type "posts" }}../../../index.html#contact{{ else }}../index.html#contact{{ end }}">Contact</a>
+                    <a href="/research/index.html">Research</a>
+                    <a href="/blog/index.html">Tech Blog</a>
+                    <a href="/apps.html">Apps</a>
+                    <a href="/index.html#contact">Contact</a>
                     <a href="#">Privacy Policy</a>
                 </div>
             </div>
@@ -130,7 +127,7 @@
         </div>
     </footer>
 
-    <script src="{{ if eq .Type "posts" }}../../script.js{{ else }}script.js{{ end }}"></script>
+    <script src="{{ "script.js" | relURL }}"></script>
     <script>
       feather.replace()
     </script>

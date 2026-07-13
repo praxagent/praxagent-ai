@@ -2,101 +2,129 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on praxagent LLC Blog</title>
-    <link>../tags/</link>
+    <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/</link>
     <description>Recent content in Tags on praxagent LLC Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Jul 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="../tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://macbook-air.tail9eb7b0.ts.net:8001/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AI</title>
-      <link>../tags/ai/</link>
-      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>../tags/ai/</guid>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/ai/</link>
+      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ai-Safety</title>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/ai-safety/</link>
+      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/ai-safety/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Evaluation-Awareness</title>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/evaluation-awareness/</link>
+      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/evaluation-awareness/</guid>
       <description></description>
     </item>
     <item>
       <title>Interpretability</title>
-      <link>../tags/interpretability/</link>
-      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>../tags/interpretability/</guid>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/interpretability/</link>
+      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/interpretability/</guid>
       <description></description>
     </item>
     <item>
       <title>J-Space</title>
-      <link>../tags/j-space/</link>
-      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>../tags/j-space/</guid>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/j-space/</link>
+      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/j-space/</guid>
       <description></description>
     </item>
     <item>
       <title>Jacobian-Lens</title>
-      <link>../tags/jacobian-lens/</link>
-      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>../tags/jacobian-lens/</guid>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/jacobian-lens/</link>
+      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/jacobian-lens/</guid>
       <description></description>
     </item>
     <item>
       <title>LLM</title>
-      <link>../tags/llm/</link>
-      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>../tags/llm/</guid>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/llm/</link>
+      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/llm/</guid>
       <description></description>
     </item>
     <item>
       <title>Machine-Learning</title>
-      <link>../tags/machine-learning/</link>
-      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>../tags/machine-learning/</guid>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/machine-learning/</link>
+      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Model-Auditing</title>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/model-auditing/</link>
+      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/model-auditing/</guid>
       <description></description>
     </item>
     <item>
       <title>Open-Science</title>
-      <link>../tags/open-science/</link>
-      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>../tags/open-science/</guid>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/open-science/</link>
+      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/open-science/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Preregistration</title>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/preregistration/</link>
+      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/preregistration/</guid>
       <description></description>
     </item>
     <item>
       <title>Reproducibility</title>
-      <link>../tags/reproducibility/</link>
-      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>../tags/reproducibility/</guid>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/reproducibility/</link>
+      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/reproducibility/</guid>
       <description></description>
     </item>
     <item>
       <title>Sparse-Autoencoders</title>
-      <link>../tags/sparse-autoencoders/</link>
-      <pubDate>Thu, 09 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>../tags/sparse-autoencoders/</guid>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/sparse-autoencoders/</link>
+      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/sparse-autoencoders/</guid>
       <description></description>
     </item>
     <item>
       <title>Tutorials</title>
-      <link>../tags/tutorials/</link>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/tutorials/</link>
       <pubDate>Thu, 09 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>../tags/tutorials/</guid>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/tutorials/</guid>
       <description></description>
     </item>
     <item>
       <title>Embedding</title>
-      <link>../tags/embedding/</link>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/embedding/</link>
       <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>../tags/embedding/</guid>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/embedding/</guid>
       <description></description>
     </item>
     <item>
       <title>NLP</title>
-      <link>../tags/nlp/</link>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/nlp/</link>
       <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>../tags/nlp/</guid>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/nlp/</guid>
       <description></description>
     </item>
     <item>
       <title>Vector Search</title>
-      <link>../tags/vector-search/</link>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/vector-search/</link>
       <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>../tags/vector-search/</guid>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/vector-search/</guid>
       <description></description>
     </item>
   </channel>

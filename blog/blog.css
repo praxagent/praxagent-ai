@@ -723,6 +723,59 @@
     background: var(--bg-secondary);
 }
 
+/* Claim × paper matrix: wide first column, compact yes/no columns */
+.post-body table.claim-matrix {
+    font-size: 0.88rem;
+}
+
+.post-body table.claim-matrix thead,
+.post-body table.claim-matrix tbody,
+.post-body table.claim-matrix tr {
+    table-layout: fixed;
+}
+
+.post-body table.claim-matrix col.claim-col {
+    width: 38%;
+}
+
+.post-body table.claim-matrix col.paper-col {
+    width: 10.333%;
+}
+
+.post-body table.claim-matrix th,
+.post-body table.claim-matrix td {
+    padding: 0.65rem 0.55rem;
+}
+
+.post-body table.claim-matrix th.paper-col,
+.post-body table.claim-matrix td.paper-col {
+    text-align: center;
+    vertical-align: middle;
+    width: 10.333%;
+}
+
+.post-body table.claim-matrix th:first-child,
+.post-body table.claim-matrix td:first-child {
+    text-align: left;
+    width: 38%;
+}
+
+.claim-matrix-notes {
+    margin: -1.25rem 0 2rem;
+    padding-left: 1.25rem;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: var(--text-secondary);
+}
+
+.claim-matrix-notes li {
+    margin: 0.35rem 0;
+}
+
+.claim-matrix-notes a {
+    text-decoration: none;
+}
+
 .post-body td[style*="text-align: right"],
 .post-body th[style*="text-align: right"] {
     font-variant-numeric: tabular-nums;
@@ -780,6 +833,53 @@
 [data-theme="dark"] .post-lead a:hover {
     color: #FFFFFF;
     border-bottom-color: #FFFFFF;
+}
+
+/* Key result standout box */
+.key-result {
+    position: relative;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e8f4fd 60%, #f7f4f0 100%);
+    border: 1px solid #7dd3fc;
+    border-left: 5px solid var(--sky, #1B5EAE);
+    border-radius: 0.75rem;
+    padding: 1.5rem 1.75rem 1.25rem;
+    margin: 2rem 0;
+    box-shadow: 0 2px 10px var(--shadow-primary);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+}
+
+.key-result-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sky, #1B5EAE);
+    margin-bottom: 0.75rem;
+    line-height: 1;
+}
+
+.key-result p {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+}
+
+.key-result p:last-child {
+    margin-bottom: 0;
+}
+
+[data-theme="dark"] .key-result {
+    background: linear-gradient(135deg, rgba(7, 89, 133, 0.28) 0%, rgba(14, 116, 144, 0.18) 100%);
+    border-color: rgba(125, 211, 252, 0.35);
+    border-left-color: #7dd3fc;
+}
+
+[data-theme="dark"] .key-result-label {
+    color: #7dd3fc;
 }
 
 /* Table of Contents */
@@ -861,6 +961,62 @@
     padding-top: 2rem;
     border-top: 1px solid var(--border-primary);
     transition: border-color 0.3s ease;
+}
+
+/* Transparency notice: blog is public as HTML and as a git repo */
+.post-transparency {
+    background: var(--bg-card);
+    border: 1px solid var(--border-primary);
+    border-left: 4px solid #0891b2;
+    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.post-transparency-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0891b2;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.post-transparency p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.post-transparency a {
+    color: #0891b2;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(8, 145, 178, 0.35);
+}
+
+.post-transparency a:hover {
+    color: #0e7490;
+    border-bottom-color: #0e7490;
+}
+
+[data-theme="dark"] .post-transparency {
+    border-left-color: #67e8f9;
+}
+
+[data-theme="dark"] .post-transparency-label {
+    color: #67e8f9;
+}
+
+[data-theme="dark"] .post-transparency a {
+    color: #67e8f9;
+    border-bottom-color: rgba(103, 232, 249, 0.35);
+}
+
+[data-theme="dark"] .post-transparency a:hover {
+    color: #a5f3fc;
+    border-bottom-color: #a5f3fc;
 }
 
 .post-navigation {

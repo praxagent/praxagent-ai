@@ -1,3 +1,9 @@
+---
+build:
+  render: never
+  list: never
+---
+
 # Receipts (web mirrors)
 
 JSON audit artifacts for this post. Full pod archives and experiment code live in the

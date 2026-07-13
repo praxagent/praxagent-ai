@@ -4,7 +4,7 @@ This note documents the **website-facing** artifacts for
 `blog-source/content/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/`.
 
 The heavy experiment code and full pod receipts live in the sibling research repo
-(`../research-and-replications/.../experiments/lens_demo/`). That tree is **not**
+(`../jacobian-lens-research-202607a/.../experiments/lens_demo/`). That tree is **not**
 deployed with praxagent.com. Anything the static site must serve is copied under
 this post directory (see **Local mirrors** below).
 
@@ -26,7 +26,7 @@ on build (`hugo --destination ../blog` from `blog-source/`).
 
 ## Local mirrors (`receipts/`)
 
-Copied from `research-and-replications/.../lens_demo/` so readers can open receipts
+Copied from `jacobian-lens-research-202607a/.../lens_demo/` so readers can open receipts
 without that repo being public or deployed:
 
 | Web path | Source | Notes |
@@ -40,7 +40,7 @@ without that repo being public or deployed:
 | `receipts/prompts_probes.json` | same name | Deception / statue / digit / meristem prompts |
 
 GitHub links to *code* (`demo2.py`, `fit_at_scale.py`, jspace-audit) still point at
-`github.com/praxagent/research-and-replications` — those are not required for the page
+`github.com/praxagent/jacobian-lens-research-202607a` — those are not required for the page
 to render. Receipt / prompt links in the post body point at **`receipts/...`**.
 
 ## Pipeline (how to regenerate)

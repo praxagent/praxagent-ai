@@ -2,63 +2,81 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>../tags/ai/</loc>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/tags/ai/</loc>
+    <lastmod>2026-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/tags/ai-safety/</loc>
+    <lastmod>2026-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/posts/jacobian-lens-sae-steering/</loc>
+    <lastmod>2026-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/tags/evaluation-awareness/</loc>
+    <lastmod>2026-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/tags/interpretability/</loc>
+    <lastmod>2026-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/tags/j-space/</loc>
+    <lastmod>2026-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/tags/jacobian-lens/</loc>
+    <lastmod>2026-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/tags/llm/</loc>
+    <lastmod>2026-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/tags/machine-learning/</loc>
+    <lastmod>2026-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/tags/model-auditing/</loc>
+    <lastmod>2026-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/tags/open-science/</loc>
+    <lastmod>2026-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/posts/</loc>
+    <lastmod>2026-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/</loc>
+    <lastmod>2026-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/tags/preregistration/</loc>
+    <lastmod>2026-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/tags/reproducibility/</loc>
+    <lastmod>2026-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/tags/sparse-autoencoders/</loc>
+    <lastmod>2026-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/tags/</loc>
+    <lastmod>2026-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/posts/workspace-under-pressure/</loc>
+    <lastmod>2026-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/</loc>
     <lastmod>2026-07-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>../tags/interpretability/</loc>
-    <lastmod>2026-07-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>../tags/j-space/</loc>
-    <lastmod>2026-07-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>../tags/jacobian-lens/</loc>
-    <lastmod>2026-07-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>../tags/llm/</loc>
-    <lastmod>2026-07-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>../tags/machine-learning/</loc>
-    <lastmod>2026-07-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>../tags/open-science/</loc>
-    <lastmod>2026-07-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>../posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/</loc>
-    <lastmod>2026-07-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>../posts/</loc>
-    <lastmod>2026-07-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>../</loc>
-    <lastmod>2026-07-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>../tags/reproducibility/</loc>
-    <lastmod>2026-07-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>../tags/</loc>
-    <lastmod>2026-07-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>../posts/how-to-read-an-sae-feature-id/</loc>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/posts/how-to-read-an-sae-feature-id/</loc>
     <lastmod>2026-07-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>../tags/sparse-autoencoders/</loc>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/tags/tutorials/</loc>
     <lastmod>2026-07-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>../tags/tutorials/</loc>
-    <lastmod>2026-07-09T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>../tags/embedding/</loc>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/tags/embedding/</loc>
     <lastmod>2025-08-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>../posts/late-chunking/</loc>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/posts/late-chunking/</loc>
     <lastmod>2025-08-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>../tags/nlp/</loc>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/tags/nlp/</loc>
     <lastmod>2025-08-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>../tags/vector-search/</loc>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/tags/vector-search/</loc>
     <lastmod>2025-08-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>../categories/</loc>
+    <loc>http://macbook-air.tail9eb7b0.ts.net:8001/categories/</loc>
   </url>
 </urlset>

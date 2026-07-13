@@ -1,4 +1,4 @@
-baseURL: '..'
+baseURL: 'https://praxagent.ai/blog/'
 languageCode: 'en-us'
 title: 'praxagent LLC Blog'
 description: 'Intelligent AI software consultation and partnership'

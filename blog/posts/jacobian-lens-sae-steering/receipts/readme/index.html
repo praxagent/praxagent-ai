@@ -16,7 +16,7 @@
       
     
     <meta name="description" content="Insights, tutorials, and thoughts on AI software development from the praxagent team">
-    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/posts/receipts/index.html">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="praxagent Blog">
@@ -34,12 +34,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../styles-v2.css">
-    
-    <link rel="stylesheet" href="../../blog.css">
-    <link rel="stylesheet" href="../../katex.min.css">
+    <link rel="stylesheet" href="/styles-v2.css">
+    <link rel="stylesheet" href="/blog.css">
+    <link rel="stylesheet" href="/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
-    
     
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -59,16 +57,15 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="../../../index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
             <div class="nav-menu">
-                <a href="../../../research/index.html" class="nav-link">Research</a>
-                <a href="../../index.html" class="nav-link active">Tech Blog</a>
-                <a href="../../../apps.html" class="nav-link">Apps</a>
-                <a href="../../../index.html#contact" class="nav-link">Contact</a>
-                
+                <a href="/research/index.html" class="nav-link">Research</a>
+                <a href="/blog/index.html" class="nav-link active">Tech Blog</a>
+                <a href="/apps.html" class="nav-link">Apps</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun">☀️</span>
                     <span class="theme-toggle-icon moon">🌙</span>
@@ -87,10 +84,10 @@
 
     <div class="mobile-menu-overlay" id="mobile-menu-overlay">
         <div class="mobile-menu-content">
-            <a href="../../../research/index.html" class="mobile-nav-link">Research</a>
-            <a href="../../index.html" class="mobile-nav-link active">Tech Blog</a>
-            <a href="../../../apps.html" class="mobile-nav-link">Apps</a>
-            <a href="../../../index.html#contact" class="mobile-nav-link">Contact</a>
+            <a href="/research/index.html" class="mobile-nav-link">Research</a>
+            <a href="/blog/index.html" class="mobile-nav-link active">Tech Blog</a>
+            <a href="/apps.html" class="mobile-nav-link">Apps</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun">☀️</span>
@@ -126,58 +123,56 @@
             
 
             <div class="post-body">
-                <h1 id="receipts-web-mirrors">Receipts (web mirrors)</h1>
-<p>JSON audit artifacts for this post. Full pod archives and experiment code live in the
-sibling research repo; this folder is what the <strong>deployed site</strong> can serve.</p>
-<p>See <a href="../WEB.md"><code>../WEB.md</code></a> for the SVG / slider build pipeline.</p>
+                <h1 id="receipts-for-can-a-jacobian-lens-detect-sae-steering">Receipts for <em>Can a Jacobian Lens Detect SAE Steering?</em></h1>
+<p>Copied analysis tables from the public release at
+<a href="https://github.com/tdj28/llm_selfref_pre"><code>tdj28/llm_selfref_pre</code></a>
+(<code>data/sae_jlens_audit/confirmatory_v1_20260711/analysis/</code>).</p>
 <table>
   <thead>
       <tr>
           <th>File</th>
-          <th>What</th>
+          <th>Contents</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td><code>demo2_consciousness_qwen35-397b_n24.json</code></td>
-          <td>Self-ref / control / denial / roleplay / Japan</td>
+          <td><code>analysis_summary.json</code></td>
+          <td>Trial counts, primary detector metrics, claim boundary</td>
       </tr>
       <tr>
-          <td><code>demo2_canada_addon.json</code></td>
-          <td>Maple-leaf / Canada</td>
+          <td><code>detector_metrics.csv</code></td>
+          <td>AUROC / AUPRC / TPR@1%FPR by task and readout</td>
       </tr>
       <tr>
-          <td><code>demo2_probes_qwen35-397b_n24.json</code></td>
-          <td>Pre-span probes (shows <code>?</code> artifact)</td>
+          <td><code>static_direction_scores.csv</code></td>
+          <td>Static J / identity / random-J direction projections</td>
       </tr>
       <tr>
-          <td><code>demo2_probes_span_qwen35-397b_n24.json</code></td>
-          <td>Span probes (slimmed: no <code>per_position_cloud</code>)</td>
+          <td><code>pursuit_summary.csv</code></td>
+          <td>Sparse token-direction pursuit by <code>k</code></td>
       </tr>
       <tr>
-          <td><code>demo_qwen35-397b.json</code></td>
-          <td>Release-audit receipt; source for the hidden-bridge item matrix</td>
+          <td><code>paired_semantic_effects.csv</code></td>
+          <td>Layerwise target-minus-matched J effects</td>
       </tr>
       <tr>
-          <td><code>act2_statistics.json</code></td>
-          <td>Exact Wilson, sign, Wilcoxon, McNemar, and Fisher summaries recomputed from <code>demo_qwen35-397b.json</code></td>
+          <td><code>paired_reference_metrics.csv</code></td>
+          <td>Paired-reference fixed-score metrics</td>
       </tr>
       <tr>
-          <td><code>prompts_consciousness.json</code></td>
-          <td>Consciousness + Canada prompts</td>
-      </tr>
-      <tr>
-          <td><code>prompts_probes.json</code></td>
-          <td>Deception / statue / digit / meristem prompts</td>
+          <td><code>paired_reference_feature_metrics.csv</code></td>
+          <td>Per-feature paired-reference AUROC</td>
       </tr>
   </tbody>
 </table>
+<p>Figures in the parent directory are the six release PNGs from
+<code>.../figures/sae_jlens_*.png</code>.</p>
 
             </div>
 
             <footer class="post-footer">
                 <div class="post-navigation">
-                    <a href="../../index.html" class="back-to-blog">← Back to Blog</a>
+                    <a href="/blog/index.html" class="back-to-blog">← Back to Blog</a>
                 </div>
             </footer>
         </article>
@@ -198,10 +193,10 @@ sibling research repo; this folder is what the <strong>deployed site</strong> ca
                 </div>
                 
                 <div class="footer-links">
-                    <a href="../../../research/index.html">Research</a>
-                    <a href="../../index.html">Tech Blog</a>
-                    <a href="../../../apps.html">Apps</a>
-                    <a href="../../../index.html#contact">Contact</a>
+                    <a href="/research/index.html">Research</a>
+                    <a href="/blog/index.html">Tech Blog</a>
+                    <a href="/apps.html">Apps</a>
+                    <a href="/index.html#contact">Contact</a>
                     <a href="#">Privacy Policy</a>
                 </div>
             </div>
@@ -213,7 +208,7 @@ sibling research repo; this folder is what the <strong>deployed site</strong> ca
         </div>
     </footer>
 
-    <script src="../../script.js"></script>
+    <script src="/script.js"></script>
     <script>
       feather.replace()
     </script>
