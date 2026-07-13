@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8001&amp;path=livereload" data-no-instant defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open-sourcing (and Auditing) a Jacobian Lens for Qwen3.5-397B - praxagent Blog</title>
@@ -16,7 +16,7 @@
       
     
     <meta name="description" content="As of July 10, 2026, Praxagent is open-sourcing the public Jacobian lens fitted for the largest base model so far: Qwen3.5-397B-A17B, with a pre-registered readout audit against identity and random-J controls. Weights, hash, code, and receipts included.">
-    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/index.html">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="praxagent Blog">
@@ -34,12 +34,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../styles-v2.css">
-    
-    <link rel="stylesheet" href="../../blog.css">
-    <link rel="stylesheet" href="../../katex.min.css">
+    <link rel="stylesheet" href="/styles-v2.css">
+    <link rel="stylesheet" href="/blog.css">
+    <link rel="stylesheet" href="/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
-    
     
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -59,16 +57,15 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="../../../index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
             <div class="nav-menu">
-                <a href="../../../research/index.html" class="nav-link">Research</a>
-                <a href="../../index.html" class="nav-link active">Tech Blog</a>
-                <a href="../../../apps.html" class="nav-link">Apps</a>
-                <a href="../../../index.html#contact" class="nav-link">Contact</a>
-                
+                <a href="/research/index.html" class="nav-link">Research</a>
+                <a href="/blog/index.html" class="nav-link active">Tech Blog</a>
+                <a href="/apps.html" class="nav-link">Apps</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun">☀️</span>
                     <span class="theme-toggle-icon moon">🌙</span>
@@ -87,10 +84,10 @@
 
     <div class="mobile-menu-overlay" id="mobile-menu-overlay">
         <div class="mobile-menu-content">
-            <a href="../../../research/index.html" class="mobile-nav-link">Research</a>
-            <a href="../../index.html" class="mobile-nav-link active">Tech Blog</a>
-            <a href="../../../apps.html" class="mobile-nav-link">Apps</a>
-            <a href="../../../index.html#contact" class="mobile-nav-link">Contact</a>
+            <a href="/research/index.html" class="mobile-nav-link">Research</a>
+            <a href="/blog/index.html" class="mobile-nav-link active">Tech Blog</a>
+            <a href="/apps.html" class="mobile-nav-link">Apps</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun">☀️</span>
@@ -123,8 +120,10 @@
 
             
             <div class="post-lead">
-                <strong>As of July 10, 2026</strong>, Praxagent is open-sourcing a Jacobian lens for <strong>Qwen3.5-397B-A17B</strong> (<a href="https://huggingface.co/praxagent/jacobian-lens-qwen3.5-397b-a17b"><code>praxagent/jacobian-lens-qwen3.5-397b-a17b</code></a>): to our knowledge, <strong>the public Jacobian lens fitted for the largest base model so far</strong>. The largest prior public collection we found tops out at a 70B base model; this release targets a 397B-total, 17B-active multimodal MoE (this note is <strong>text-only</strong>). This note is the release: what a Jacobian lens is, how we fit it (<strong>n=24</strong>; warm-start toward <strong>n≈50</strong> underway), and a pre-registered readout audit so the file is not over-read as a mind-reader.
+                <strong>As of July 10, 2026</strong>, Praxagent is open-sourcing a Jacobian lens for <strong>Qwen3.5-397B-A17B</strong> (<a href="https://huggingface.co/praxagent/jacobian-lens-qwen3.5-397b-a17b"><code>praxagent/jacobian-lens-qwen3.5-397b-a17b</code></a>): to our knowledge, <strong>the public Jacobian lens fitted for the largest base model so far</strong>. The largest prior public collection we found tops out at a 70B base model; this release targets a 397B-total, 17B-active multimodal MoE (<strong>A17B</strong> = ~17B parameters active per token; <a href="#what-a17b-means">explainer</a>; this note is <strong>text-only</strong>). This note is the release: what a Jacobian lens is, how we fit it (<strong>n=24</strong>; warm-start toward <strong>n≈50</strong> underway), and a pre-registered readout audit so the file is not over-read as a mind-reader.
             </div>
+            
+
             
 
             
@@ -138,7 +137,11 @@
         <li><a href="#reading-paths-through-this-broad-note">Reading paths through this broad note</a></li>
       </ul>
     </li>
-    <li><a href="#release-at-a-glance">Release at a glance</a></li>
+    <li><a href="#release-at-a-glance">Release at a glance</a>
+      <ul>
+        <li><a href="#prior-work-contribution-and-non-claims">Prior work, contribution, and non-claims</a></li>
+      </ul>
+    </li>
     <li><a href="#why-jacobian-lenses-get-over-read">Why Jacobian Lenses Get Over-Read</a></li>
     <li><a href="#a-quick-glossary-read-this-first">A Quick Glossary (Read This First)</a></li>
     <li><a href="#what-the-jacobian-lens-actually-is">What the Jacobian Lens Actually Is</a>
@@ -168,7 +171,11 @@
         <li><a href="#claim-ladder">Claim ladder</a></li>
       </ul>
     </li>
-    <li><a href="#where-this-artifact-comes-from">Where This Artifact Comes From</a></li>
+    <li><a href="#where-this-artifact-comes-from">Where This Artifact Comes From</a>
+      <ul>
+        <li><a href="#what-a17b-means">What “A17B” means</a></li>
+      </ul>
+    </li>
     <li><a href="#the-audit-what-identity-and-random-transports-can-rule-out">The Audit: What Identity and Random Transports Can Rule Out</a>
       <ul>
         <li><a href="#validity-rules">Validity rules</a></li>
@@ -211,6 +218,19 @@
     </li>
     <li><a href="#a-checklist-before-you-lean-on-a-lens-demo">A Checklist Before You Lean on a Lens Demo</a></li>
     <li><a href="#conclusion-a-narrow-audit-not-a-mind-reading-claim">Conclusion: A Narrow Audit, Not a Mind-Reading Claim</a></li>
+    <li><a href="#reproducibility-and-artifact-ledger">Reproducibility And Artifact Ledger</a></li>
+    <li><a href="#appendix-release-inventory">Appendix: release inventory</a>
+      <ul>
+        <li><a href="#open-a-record-samples-from-the-release">Open a record: samples from the release</a>
+          <ul>
+            <li><a href="#lens-fingerprint">Lens fingerprint</a></li>
+            <li><a href="#act-2-item-japan--mount-fuji">Act-2 item (Japan / Mount Fuji)</a></li>
+            <li><a href="#act-2-aggregates">Act-2 aggregates</a></li>
+            <li><a href="#field-guide-act-2-receipt">Field guide (act-2 receipt)</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
     <li><a href="#references">References</a></li>
   </ul>
 </nav>
@@ -233,9 +253,10 @@
         
     </div>
     <div class="panel-content">
-        <strong>Abstract.</strong> We release a fitted Jacobian lens for <strong>Qwen3.5-397B-A17B</strong> (<a href="https://huggingface.co/praxagent/jacobian-lens-qwen3.5-397b-a17b"><code>praxagent/jacobian-lens-qwen3.5-397b-a17b</code></a>): to our knowledge, <strong>the public Jacobian lens fitted for the largest base model so far</strong>, as documented by the dated, revision-pinned comparison below. A Jacobian lens is a fitted linear map that turns a mid-layer residual-stream state into a vocabulary-ranked <strong>readout</strong>: what the network looks like it is “about to say,” without waiting for the final token. We fit this one with Anthropic’s <code>jlens.fit</code> on WikiText (<strong>release n=24</strong>; warm-start toward <strong>n≈50</strong> underway) as part of a <a href="https://github.com/praxagent/research-and-replications/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit">35-model audit</a>. This note teaches the tool, then runs a <strong>pre-registered readout audit</strong> (not a mind-reading claim): on a fresh pod and a hash-checked artifact, twenty capital-of-country items put the fitted J-lens above identity on <strong>18/20</strong> paired ranks and above random-J on <strong>20/20</strong>. Its top-20 bridge counts are <strong>6/20</strong>, <strong>1/20</strong>, and <strong>0/20</strong>, respectively. The scoring rule, uncertainty intervals, and exact paired tests are introduced before the results. Direct riddles failed their gate and were dropped. Text-only; absolute rates are lower than on 27B (fit-size is a live candidate). Audit compute was about <strong>$14</strong>; fitting the lens cost into the hundreds.
+        <strong>Abstract.</strong> We release a fitted Jacobian lens for <strong>Qwen3.5-397B-A17B</strong> (<a href="https://huggingface.co/praxagent/jacobian-lens-qwen3.5-397b-a17b"><code>praxagent/jacobian-lens-qwen3.5-397b-a17b</code></a>): to our knowledge, <strong>the public Jacobian lens fitted for the largest base model so far</strong>, as documented by the dated, revision-pinned comparison below. A Jacobian lens is a fitted linear map that turns a mid-layer residual-stream state into a vocabulary-ranked <strong>readout</strong>: what the network looks like it is “about to say,” without waiting for the final token. We fit this one with Anthropic’s <code>jlens.fit</code> on WikiText (<strong>release n=24</strong>; warm-start toward <strong>n≈50</strong> underway) as part of a <a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit">35-model audit</a>. This note teaches the tool, then runs a <strong>pre-registered readout audit</strong> (not a mind-reading claim): on a fresh pod and a hash-checked artifact, twenty capital-of-country items put the fitted J-lens above identity on <strong>18/20</strong> paired ranks and above random-J on <strong>20/20</strong>. Its top-20 bridge counts are <strong>6/20</strong>, <strong>1/20</strong>, and <strong>0/20</strong>, respectively. The scoring rule, uncertainty intervals, and exact paired tests are introduced before the results. Direct riddles failed their gate and were dropped. Text-only; absolute rates are lower than on 27B (fit-size is a live candidate). Audit compute was about <strong>$14</strong>; fitting the lens cost into the hundreds.
     </div>
 </div>
+<p>Study status: <strong>complete</strong> for the n=24 release audit (pre-registration <a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/810251006bae0d322412bbd68ed85eb4cb1d6514"><code>8102510</code></a>; gate <a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/4f4497682108eff2d6bb6e6b24c0ff17d2de50d3"><code>4f44976</code></a>; 397B result <a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/d9fc3763e2eb30f1ce1221b16027247afcb0fdfe"><code>d9fc376</code></a>). Warm-start toward n≈50 is underway and will be reported separately. Shipping table, sample receipts, and hashes are in the <a href="#appendix-release-inventory">appendix</a>.</p>
 <h3 id="learning-objectives">Learning objectives</h3>
 <p>By the end of this note you should be able to:</p>
 <ol>
@@ -250,6 +271,7 @@
 have to read it in only one order:</p>
 <ul>
 <li><strong>Release/evidence path:</strong> <a href="#release-at-a-glance">Release at a glance</a> →
+<a href="#appendix-release-inventory">appendix inventory</a> →
 <a href="#the-audit-what-identity-and-random-transports-can-rule-out">audit design</a> →
 <a href="#reading-the-hidden-step-act-2--lens-n24">main result</a>.</li>
 <li><strong>Mathematical path:</strong> <a href="#a-quick-glossary-read-this-first">glossary</a> →
@@ -262,94 +284,50 @@ have to read it in only one order:</p>
 </ul>
 <hr>
 <h2 id="release-at-a-glance">Release at a glance</h2>
-<p><strong>Our original contribution in this release is one artifact: the fitted Jacobian
-lens.</strong> We did not create Qwen3.5-397B-A17B or the Jacobian-lens method. The base model
-is Qwen&rsquo;s work; the method and <code>jlens</code> implementation are Anthropic&rsquo;s; Neuronpedia
-created the prior public lens collection and fitting pipeline we compare against.</p>
-<table>
-  <thead>
-      <tr>
-          <th>Our released artifact</th>
-          <th>Immutable reference</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Fitted Jacobian lens for Qwen3.5-397B-A17B</strong></td>
-          <td><a href="https://huggingface.co/praxagent/jacobian-lens-qwen3.5-397b-a17b/tree/2dffc0a058fd072a6a155a4c6005bc26aff14d8c"><code>praxagent/jacobian-lens-qwen3.5-397b-a17b@2dffc0a</code></a>; file SHA-256 <code>668c3bf17305b0d52495cb7ba589a1c1173301b1d13c3c6ad84e58245dc99e97</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Upstream references (not our contributions):</strong></p>
-<table>
-  <thead>
-      <tr>
-          <th>Upstream work</th>
-          <th>Role here</th>
-          <th>Immutable reference</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Qwen3.5-397B-A17B by the Qwen Team</td>
-          <td>Base model on which we fitted the lens</td>
-          <td><a href="https://huggingface.co/Qwen/Qwen3.5-397B-A17B/tree/8472618112abcbd45acbcdc58436aff4233c23f7"><code>Qwen/Qwen3.5-397B-A17B@8472618</code></a></td>
-      </tr>
-      <tr>
-          <td>Jacobian-lens method and <code>jlens</code> library by Anthropic</td>
-          <td>Method and reference implementation used for fitting</td>
-          <td><a href="https://github.com/anthropics/jacobian-lens">Anthropic <code>jacobian-lens</code></a></td>
-      </tr>
-      <tr>
-          <td>Neuronpedia Jacobian-lens collection</td>
-          <td>Prior public lens collection and comparison baseline</td>
-          <td><a href="https://huggingface.co/neuronpedia/jacobian-lens/tree/a4114d7752d11eb546e6cf372213d7e75526d3a1"><code>neuronpedia/jacobian-lens@a4114d7</code></a></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Supporting audit material we produced</strong> (evidence for the release, not additional
-claims to the model or method):</p>
-<table>
-  <thead>
-      <tr>
-          <th>Audit material</th>
-          <th>Immutable reference</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Public research code snapshot</td>
-          <td><a href="https://github.com/praxagent/research-and-replications/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65"><code>praxagent/research-and-replications@fa66e53</code></a></td>
-      </tr>
-      <tr>
-          <td>Pre-registration</td>
-          <td><a href="https://github.com/praxagent/research-and-replications/commit/810251006bae0d322412bbd68ed85eb4cb1d6514"><code>8102510</code></a></td>
-      </tr>
-      <tr>
-          <td>Gate result</td>
-          <td><a href="https://github.com/praxagent/research-and-replications/commit/4f4497682108eff2d6bb6e6b24c0ff17d2de50d3"><code>4f44976</code></a></td>
-      </tr>
-      <tr>
-          <td>397B result</td>
-          <td><a href="https://github.com/praxagent/research-and-replications/commit/d9fc3763e2eb30f1ce1221b16027247afcb0fdfe"><code>d9fc376</code></a></td>
-      </tr>
-      <tr>
-          <td>Web-mirrored raw receipt</td>
-          <td><a href="receipts/demo_qwen35-397b.json"><code>demo_qwen35-397b.json</code></a></td>
-      </tr>
-      <tr>
-          <td>Recomputed statistics</td>
-          <td><a href="receipts/act2_statistics.json"><code>act2_statistics.json</code></a> (<a href="tools/recompute_act2_statistics.py">script</a>)</td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Dated reference comparison</strong> (public repositories inspected July 10, 2026; base-model
-ownership remains with the respective model creators):</p>
+<p>This note is both an <strong>instrument primer</strong> (what a Jacobian lens is) and a
+<strong>study report</strong> (a pre-registered readout audit of one published file). The
+full release inventory lives in the <a href="#appendix-release-inventory">appendix</a>.
+Here is the positioning.</p>
+<h3 id="prior-work-contribution-and-non-claims">Prior work, contribution, and non-claims</h3>
+<p><strong>Prior work.</strong> The Jacobian-lens method and <code>jlens</code> implementation are
+Anthropic&rsquo;s (<a href="#ref-anthropic-jacobian-lens">Anthropic</a>;
+<a href="#ref-lindsey-2026">Lindsey et al., 2026</a>). Neuronpedia published the prior
+public collection of fitted open-weight lenses
+(<a href="#ref-neuronpedia-jacobian-lens">Neuronpedia</a>); the dated comparison below
+pins their largest visible base model at Llama 3.3 70B Instruct. The base model
+here is Qwen&rsquo;s (<a href="#ref-qwen-model">Qwen Team</a>). This note does not invent the
+method or the model.</p>
+<p><strong>This note&rsquo;s contribution.</strong></p>
+<ol>
+<li>A <strong>fitted Jacobian lens</strong> for Qwen3.5-397B-A17B
+(<a href="https://huggingface.co/praxagent/jacobian-lens-qwen3.5-397b-a17b/tree/2dffc0a058fd072a6a155a4c6005bc26aff14d8c"><code>praxagent/jacobian-lens-qwen3.5-397b-a17b@2dffc0a</code></a>;
+file SHA-256 <code>668c3bf17305b0d52495cb7ba589a1c1173301b1d13c3c6ad84e58245dc99e97</code>),
+WikiText fit <strong>n=24</strong>, with warm-start toward n≈50 underway.</li>
+<li>A <strong>pre-registered readout audit</strong> of that file against identity and
+random-J transports (gate on qwen3.5-27b, then 397B), with dropped act 1
+left in the public ledger.</li>
+<li>A <strong>teaching note</strong> that separates artifact, readout claim, and causal
+claim, with receipts mirrored under <a href="receipts/"><code>receipts/</code></a>.</li>
+</ol>
+<p><strong>Not claimed.</strong></p>
+<ul>
+<li>That the lens is a mind-reader, or that mid-layer ranks are unverbalized
+&ldquo;thoughts.&rdquo;</li>
+<li>That act-1 reportability works at this scale (it failed its gate and was
+dropped before the 397B run).</li>
+<li>That n=24 is matrix-converged, or that absolute rates match longer Neuronpedia
+fits (honest contrast vs qwen3.5-27b: <strong>24 vs 672</strong> prompts).</li>
+<li>That this twenty-item capital-bridge template is a survey of workspace
+function across models or modalities (text-only; vision unaudited).</li>
+</ul>
+<p><strong>Dated reference comparison</strong> (public repositories inspected July 10, 2026;
+&ldquo;largest&rdquo; means base model for which a public lens was fitted, not lens-file
+bytes):</p>
 <table>
   <thead>
       <tr>
           <th>Public lens source</th>
-          <th>Largest base model visible in pinned snapshot</th>
+          <th>Largest base model in pinned snapshot</th>
           <th>Pinned snapshot</th>
       </tr>
   </thead>
@@ -366,10 +344,6 @@ ownership remains with the respective model creators):</p>
       </tr>
   </tbody>
 </table>
-<p>“Largest” here refers to the <strong>base model for which the lens was fitted</strong>, not the byte
-size of the lens file. MoE base-model parameter count and lens-matrix size are different
-quantities.</p>
-<hr>
 <h2 id="why-jacobian-lenses-get-over-read">Why Jacobian Lenses Get Over-Read</h2>
 <p>In mechanistic interpretability, it is common to see sentences like:</p>
 <div class="panel quote">
@@ -446,8 +420,12 @@ quantities.</p>
           <td>Repeat that readout independently at every prompt position and every selected layer, then report the best rank and where it occurred. It is a search over a layer-by-position grid, not pooling or averaging a phrase</td>
       </tr>
       <tr>
-          <td><strong>J-space / workspace band</strong></td>
-          <td>The mid-layer block where these directions are strongly active and mutually similar; Anthropic’s structural signature of a “global workspace.” On this model we use layers <strong>19–38</strong> as the band</td>
+          <td><strong>A17B / active params</strong></td>
+          <td>In Qwen naming, <strong>A17B</strong> means about <strong>17 billion parameters are used on a typical forward pass</strong>, even though the checkpoint stores ~<strong>397B</strong> total (mostly idle MoE experts). See <a href="#what-a17b-means">What “A17B” means</a></td>
+      </tr>
+      <tr>
+          <td><strong>MoE (mixture of experts)</strong></td>
+          <td>A layer that keeps many specialist feed-forward “experts” and <strong>routes</strong> each token through only a few of them. Capacity is large; per-token compute stays closer to the active count</td>
       </tr>
       <tr>
           <td><strong>Identity / logit lens</strong></td>
@@ -838,15 +816,13 @@ N_{\mathrm{prompt}}
 <p>That phrase compresses several engineering choices. They affect <strong>how we computed the same Jacobian estimator</strong>, not the mathematical definition of the estimator.</p>
 <p><strong>First, why eight GPUs?</strong> A bf16 parameter normally occupies two bytes. Roughly \(397\) billion parameters therefore require about \(794\) GB before accounting for small amounts of metadata and non-parameter state; the loaded checkpoint was about \(807\) GB. One H200 has 141 GB of memory. Eight provide about 1,128 GB in aggregate:</p>
 \[
-807\ \text{GB of weights}
-\;+\;
-\text{activations}
-\;+\;
-\text{retained autograd graph}
-\;+\;
-\text{Jacobians and temporary buffers}
-\;<\;
-8\times141\ \text{GB}.
+\begin{aligned}
+&807\ \text{GB of weights} \\
+&+\ \text{activations} \\
+&+\ \text{retained autograd graph} \\
+&+\ \text{Jacobians and temporary buffers} \\
+&<\ 8\times 141\ \text{GB}.
+\end{aligned}
 \]<p>The aggregate capacity is sufficient, but no individual GPU can hold the model. The model must be partitioned.</p>
 <p><strong>What <code>device_map</code> does.</strong> Hugging Face/Accelerate&rsquo;s <code>device_map</code> assigns successive model modules, primarily transformer blocks, to different GPUs. Conceptually:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">GPU 0: embedding + early blocks
@@ -981,6 +957,50 @@ flowchart TD
 <p class="figure-note">Figure: how strong a claim you can make depends on how far you climb. This note covers artifact discrimination through a narrow readout audit.</p>
 <p>With the tool defined, what remains is provenance, the pre-registered trial, and the receipts — including the act that failed its gate and was dropped.</p>
 <h2 id="where-this-artifact-comes-from">Where This Artifact Comes From</h2>
+<h3 id="what-a17b-means">What “A17B” means</h3>
+<p>In the Hugging Face id <a href="https://huggingface.co/Qwen/Qwen3.5-397B-A17B/tree/8472618112abcbd45acbcdc58436aff4233c23f7"><code>Qwen/Qwen3.5-397B-A17B</code></a>,
+the two numbers answer different questions:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Name fragment</th>
+          <th>Plain English</th>
+          <th>Card quantity</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>397B</strong></td>
+          <td>How many parameters are stored in the checkpoint</td>
+          <td>~397 billion total</td>
+      </tr>
+      <tr>
+          <td><strong>A17B</strong></td>
+          <td>How many parameters typically <strong>fire</strong> for one token</td>
+          <td>~17 billion <strong>activated</strong></td>
+      </tr>
+  </tbody>
+</table>
+<p>So <strong>A</strong> is for <strong>active</strong>, not “version A.” This is a sparse
+<strong>mixture-of-experts (MoE)</strong> language model: most of the 397B sit in a large
+menu of specialists; each token only pays for a small routed subset. The
+download is still frontier-scale (~807 GB bf16 on disk/VRAM layout), but
+forward compute is closer to a ~17B dense model than to a dense 397B.</p>
+<p>Architecturally (model card, revision <code>8472618</code>):</p>
+<ul>
+<li><strong>60</strong> layers, residual width \(d=4096\), vocabulary padded to 248,320.</li>
+<li>Hybrid stack repeated <strong>15</strong> times:
+\(3\times(\text{Gated DeltaNet}\to\text{MoE})\) then
+\(1\times(\text{Gated Attention}\to\text{MoE})\).</li>
+<li><strong>Gated DeltaNet</strong> = efficient linear-attention-style blocks; <strong>Gated
+Attention</strong> = ordinary multi-head attention (32 query heads, 2 KV heads).</li>
+<li>Each <strong>MoE</strong> block: <strong>512</strong> experts; per token <strong>10 routed + 1 shared</strong>
+(11 experts compute; the rest idle).</li>
+<li>Multimodal: a vision encoder is part of the release; <strong>this note is
+text-only</strong> and does not audit image/video paths.</li>
+</ul>
+<p><img src="qwen35-397b-a17b-architecture.svg" alt="Qwen3.5-397B-A17B: 397B total capacity, A17B active compute, hybrid DeltaNet/attention cycles, 512-expert MoE routing."></p>
+<p class="figure-note">Figure: naming vs compute. “Largest public J-lens base model” in this note refers to the 397B-total checkpoint we fitted against, not to 17B active FLOPs, and not to lens-file size.</p>
 <p><strong>Qwen3.5-397B-A17B is a 397B-total, 17B-active open-weight multimodal MoE.</strong>
 Those are model-card quantities, not a qualitative use of “frontier.” Anthropic&rsquo;s
 <a href="https://transformer-circuits.pub/2026/workspace/index.html">J-space paper</a>
@@ -991,7 +1011,7 @@ by this readout-only Qwen release. Anthropic released the
 <a href="https://github.com/anthropics/jacobian-lens">code</a> under Apache-2.0; Neuronpedia
 published a broad collection of pre-fitted open-weight lenses whose pinned July 10
 snapshot tops out at a 70B base model. We
-<a href="https://github.com/praxagent/research-and-replications/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit">audited J-space structure across 35 open models</a>
+<a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit">audited J-space structure across 35 open models</a>
 and, as part of that program, fit and are releasing this lens on
 <strong>Qwen3.5-397B-A17B</strong>.</p>
 <p>The contribution is the <strong>artifact</strong> (and the receipts). The country-bridge demo below is how we checked that the file is a real lens — not the reason the file exists.</p>
@@ -1017,11 +1037,11 @@ and, as part of that program, fit and are releasing this lens on
       </tr>
       <tr>
           <td>Fitting code</td>
-          <td>Anthropic&rsquo;s <strong><code>jlens.fit</code></strong> via our pinned wrapper <a href="https://github.com/praxagent/research-and-replications/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/fit_at_scale.py"><code>fit_at_scale.py@fa66e53</code></a>. We did <strong>not</strong> ship Neuronpedia&rsquo;s early-stop / <code>mean_rel_change</code> logger, so this release has no measured matrix-convergence curve; extensions will log it</td>
+          <td>Anthropic&rsquo;s <strong><code>jlens.fit</code></strong> via our pinned wrapper <a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/fit_at_scale.py"><code>fit_at_scale.py@fa66e53</code></a>. We did <strong>not</strong> ship Neuronpedia&rsquo;s early-stop / <code>mean_rel_change</code> logger, so this release has no measured matrix-convergence curve; extensions will log it</td>
       </tr>
       <tr>
           <td>Exact fit run</td>
-          <td>8×H200 (~$35/hr), bf16, <code>device_map</code> + eager attention, ~10 min/prompt → n=24 ≈ 4 h. Command and TP record: pinned <a href="https://github.com/praxagent/research-and-replications/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/results.md"><code>results.md</code></a></td>
+          <td>8×H200 (~$35/hr), bf16, <code>device_map</code> + eager attention, ~10 min/prompt → n=24 ≈ 4 h. Command and TP record: pinned <a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/results.md"><code>results.md</code></a></td>
       </tr>
       <tr>
           <td>Neuronpedia contrast</td>
@@ -1033,7 +1053,7 @@ and, as part of that program, fit and are releasing this lens on
       </tr>
       <tr>
           <td>Pre-registration commit</td>
-          <td><a href="https://github.com/praxagent/research-and-replications/commit/810251006bae0d322412bbd68ed85eb4cb1d6514"><code>8102510</code></a> (prompts, scoring, gates — before 397B)</td>
+          <td><a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/810251006bae0d322412bbd68ed85eb4cb1d6514"><code>8102510</code></a> (prompts, scoring, gates — before 397B)</td>
       </tr>
       <tr>
           <td>Gate model</td>
@@ -1041,11 +1061,11 @@ and, as part of that program, fit and are releasing this lens on
       </tr>
       <tr>
           <td>Gate commit</td>
-          <td><a href="https://github.com/praxagent/research-and-replications/commit/4f4497682108eff2d6bb6e6b24c0ff17d2de50d3"><code>4f44976</code></a></td>
+          <td><a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/4f4497682108eff2d6bb6e6b24c0ff17d2de50d3"><code>4f44976</code></a></td>
       </tr>
       <tr>
           <td>Result commit</td>
-          <td><a href="https://github.com/praxagent/research-and-replications/commit/d9fc3763e2eb30f1ce1221b16027247afcb0fdfe"><code>d9fc376</code></a></td>
+          <td><a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/d9fc3763e2eb30f1ce1221b16027247afcb0fdfe"><code>d9fc376</code></a></td>
       </tr>
       <tr>
           <td>Isolation</td>
@@ -1908,7 +1928,7 @@ Five conditions × one prompt each is <strong>anecdote tier</strong>. A pre-regi
 battery would be needed before making any standalone claim about robustness across this
 prompt family. Treat the numbers above as a hot-pod look, not a result to cite without
 that follow-up. Audit the raw JSON in the
-<a href="https://github.com/praxagent/research-and-replications/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/lens_demo">public research repository</a>.
+<a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/lens_demo">public research repository</a>.
     </div>
 </div>
 <h2 id="keeping-the-claim-bounded">Keeping the Claim Bounded</h2>
@@ -1918,7 +1938,7 @@ that follow-up. Audit the raw JSON in the
         
     </div>
     <div class="panel-content">
-        <strong>What this note does <em>not</em> claim.</strong> It does not claim the Jacobian lens is a general mind-reader, that act-1 reportability works at this scale, that n=24 fit prompts are optimal, or that geometry of the workspace band predicts readout function across families. Those questions belong to the <a href="https://github.com/praxagent/research-and-replications/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit">pinned 35-model audit</a> and to follow-up fits. The claim here is narrower: under this pre-registered readout audit, identity and random-J transports fail to match the fitted lens. Dual-use note: mid-layer readouts can surface content the model does not verbalize; treat that as a capability to handle carefully, not as a license to overclaim.
+        <strong>What this note does <em>not</em> claim.</strong> It does not claim the Jacobian lens is a general mind-reader, that act-1 reportability works at this scale, that n=24 fit prompts are optimal, or that geometry of the workspace band predicts readout function across families. Those questions belong to the <a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit">pinned 35-model audit</a> and to follow-up fits. The claim here is narrower: under this pre-registered readout audit, identity and random-J transports fail to match the fitted lens. Dual-use note: mid-layer readouts can surface content the model does not verbalize; treat that as a capability to handle carefully, not as a license to overclaim.
     </div>
 </div>
 <h3 id="the-honest-ledger">The honest ledger</h3>
@@ -1927,7 +1947,7 @@ that follow-up. Audit the raw JSON in the
 <li><strong>Rates are lower at 397B than at 27B</strong> (bridge hit 0.30 vs 0.85 with a Neuronpedia-fit lens there — same 248k vocabulary, so that&rsquo;s not it). A common guess is &ldquo;they fit on more prompts,&rdquo; and here the numbers deserve care. Neuronpedia&rsquo;s pipeline <em>requests</em> 1000 prompts but <strong>early-stops on a matrix-stability criterion</strong>, with per-lens thresholds: the <strong>qwen3.5-27b lens used in this comparison fitted 672 prompts</strong> at <code>stop_at_delta: 0.002</code> (<a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/qwen3.5-27b/jlens/Salesforce-wikitext/config.yaml">pinned config</a>), while their Llama-3.3-70B lens stopped at 125 under a looser 0.012 (<a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext/config.yaml">pinned config</a>). So the honest contrast is <strong>24 vs 672 — a 28× fit-size gap</strong>, which keeps fit-size a <em>strong</em> candidate for the readout-rate difference.</li>
 <li><strong>Two different things get called &ldquo;convergence,&rdquo; and they should not be conflated.</strong> <em>Matrix convergence</em> is Neuronpedia&rsquo;s criterion: the running-mean Jacobians stop changing. Their 70B curve follows mean-relative-change ≈ 1.2/n — at n=24 it reads <strong>0.048</strong>, 4× above even their looser threshold (sibling <a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext/Llama-3.3-70B-Instruct_convergence.csv"><code>*_convergence.csv</code></a> has the curve). <em>Statistic convergence</em> is what our n-scaling showed: the <strong>band statistic</strong> plateaus by n≈16, long before the matrix settles. Our n=24 lens is converged in the second sense only; its own mean-relative-change at n=24 was not logged (≈0.05 by 1/n extrapolation — an estimate, not a measurement). That is exactly why this release leans on <em>functional</em> evidence — the motor-convergence gate (where our n=24 lens beats the architecture-matched Neuronpedia lens), ignition, and this trial&rsquo;s controls — rather than matrix-delta convergence. Other candidates we cannot yet separate: the 397B&rsquo;s sparse 512-expert routing, and template/scale effects. The clean test is still to <strong>extend this same lens</strong> (exact warm-start — see Reproduce) toward its own matrix convergence and re-run act 2. What&rsquo;s not in doubt: the readout effect is large against both controls at n=24.</li>
 <li><strong>Showcase selection matters — and so does the full matrix.</strong> China (#5 vs logit #8,153) and Japan (#3 vs #43) are clean discriminating wins. Kenya (#11) is a real bridge readout that still fails as a lens showcase because identity ranks it #1. France (#262) and Spain (#301) are weak despite being large, familiar countries. A “more dominant country → better readout” story does <strong>not</strong> fit this set (GDP/population correlations ≈ 0).</li>
-<li><strong>This is one model, one lineage, one trivia-bridge template, twenty items, text-only.</strong> It&rsquo;s a narrow audit, not a survey — the <a href="https://github.com/praxagent/research-and-replications/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit">pinned 35-model survey is here</a>. Qwen3.5-397B-A17B is multimodal; we did not audit the vision encoder.</li>
+<li><strong>This is one model, one lineage, one trivia-bridge template, twenty items, text-only.</strong> It&rsquo;s a narrow audit, not a survey — the <a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit">pinned 35-model survey is here</a>. Qwen3.5-397B-A17B is multimodal; we did not audit the vision encoder.</li>
 </ul>
 <hr>
 <h2 id="threats-to-validity">Threats to Validity</h2>
@@ -1966,7 +1986,7 @@ same script on qwen3.5-27b produces the stronger version of the readout numbers 
 (bridge hit 0.85, Sweden at rank <strong>1</strong> of 248k, controls near zero). The 397B path is an
 author-run upstream artifact re-check, not external verification or independent
 replication.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/praxagent/research-and-replications
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/praxagent/jacobian-lens-research-202607a
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> projects/jacobian-lens-and-identifiability/experiments/lens_demo
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># ~$1 tier (Neuronpedia lens) — stronger numbers, same protocol</span>
@@ -1978,11 +1998,11 @@ replication.</p>
 </span></span></span><span class="line"><span class="cl">  --lens-hf praxagent/jacobian-lens-qwen3.5-397b-a17b:jlens/wikitext/qwen35_397b.pt <span class="se">\
 </span></span></span><span class="line"><span class="cl">  --expected-sha256 668c3bf17305b0d52495cb7ba589a1c1173301b1d13c3c6ad84e58245dc99e97 <span class="se">\
 </span></span></span><span class="line"><span class="cl">  --acts <span class="m">2</span>
-</span></span></code></pre></div><p>Receipts: <a href="https://github.com/praxagent/research-and-replications/commit/810251006bae0d322412bbd68ed85eb4cb1d6514">pre-registration <code>8102510</code></a> →
-<a href="https://github.com/praxagent/research-and-replications/commit/4f4497682108eff2d6bb6e6b24c0ff17d2de50d3">gate <code>4f44976</code></a> →
-<a href="https://github.com/praxagent/research-and-replications/commit/d9fc3763e2eb30f1ce1221b16027247afcb0fdfe">result <code>d9fc376</code></a>;
+</span></span></code></pre></div><p>Receipts: <a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/810251006bae0d322412bbd68ed85eb4cb1d6514">pre-registration <code>8102510</code></a> →
+<a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/4f4497682108eff2d6bb6e6b24c0ff17d2de50d3">gate <code>4f44976</code></a> →
+<a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/d9fc3763e2eb30f1ce1221b16027247afcb0fdfe">result <code>d9fc376</code></a>;
 per-item JSONs and pod logs are in the pinned
-<a href="https://github.com/praxagent/research-and-replications/tree/d9fc3763e2eb30f1ce1221b16027247afcb0fdfe/projects/jacobian-lens-and-identifiability/experiments/lens_demo"><code>experiments/lens_demo/</code> tree</a>.
+<a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/d9fc3763e2eb30f1ce1221b16027247afcb0fdfe/projects/jacobian-lens-and-identifiability/experiments/lens_demo"><code>experiments/lens_demo/</code> tree</a>.
 Prefer <code>--model-revision</code> / <code>--lens-revision</code> pins when citing. The whole author-run
 artifact-check series — CPU smoke, two validation pods, and the 397B run — cost about
 <strong>$14</strong>.</p>
@@ -1991,7 +2011,7 @@ artifact-check series — CPU smoke, two validation pods, and the 397B run — c
 <p>Everything above ran through a ~300-line, stdlib-only launcher committed in the repo
 (<code>shared/runpod/launch.py</code>) — no SDK, just RunPod&rsquo;s GraphQL API. The whole flow, start
 to finish:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/praxagent/research-and-replications <span class="o">&amp;&amp;</span> <span class="nb">cd</span> research-and-replications
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/praxagent/jacobian-lens-research-202607a <span class="o">&amp;&amp;</span> <span class="nb">cd</span> jacobian-lens-research-202607a
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">RUNPOD_API_KEY</span><span class="o">=</span>...            <span class="c1"># runpod.io -&gt; Settings -&gt; API Keys</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># HF_TOKEN only needed while artifacts are gated/private; pass it inline, never write it to a pod</span>
 </span></span><span class="line"><span class="cl">
@@ -2029,7 +2049,7 @@ to finish:</p>
 Whether 24 is “enough” depends on the estimand. The evidence below supports some uses of
 this artifact and leaves matrix convergence and fit-size sensitivity open.</p>
 <p><img src="emergence_curve_shared.png" alt="Mid-band separation against model parameter count on a logarithmic axis, using token strings shared across all compared tokenizers. Base-model family curves rise above a near-zero random-J floor as scale increases, while instruct variants are shown separately."></p>
-<p class="figure-note">Figure: the structural statistic discussed below in its broader cross-model context. The x-axis is base-model parameter count (log scale). The y-axis is <code>mid_sep</code>: how much more self-similar the middle-third J-lens token geometry is than neighboring early/late layers. Higher means a more distinct contiguous mid-network band. Shared token probes make cross-family geometry more tokenizer-commensurable; solid lines are base-model family trajectories, open/dashed variants are instruct models, and gray marks the scale-matched random-J floor. Source: the pinned companion audit's <a href="https://github.com/praxagent/research-and-replications/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit/emergence_curve_shared.png"><code>emergence_curve_shared.png</code></a>.</p>
+<p class="figure-note">Figure: the structural statistic discussed below in its broader cross-model context. The x-axis is base-model parameter count (log scale). The y-axis is <code>mid_sep</code>: how much more self-similar the middle-third J-lens token geometry is than neighboring early/late layers. Higher means a more distinct contiguous mid-network band. Shared token probes make cross-family geometry more tokenizer-commensurable; solid lines are base-model family trajectories, open/dashed variants are instruct models, and gray marks the scale-matched random-J floor. Source: the pinned companion audit's <a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit/emergence_curve_shared.png"><code>emergence_curve_shared.png</code></a>.</p>
 <div class="panel info">
     <div class="panel-icon">
         💡
@@ -2057,7 +2077,7 @@ ablation.</strong> On qwen3-4b, using the same fitting and measurement path, <co
 Neuronpedia&rsquo;s ~0.056 reference from n=16 on. This is a convergence curve over
 <strong>fitting prompts</strong>, unlike the cross-model parameter curve above. n=24 sits past that
 observed plateau. For the emergence/band measurements in our
-<a href="https://github.com/praxagent/research-and-replications/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit">pinned 35-model audit</a>,
+<a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit">pinned 35-model audit</a>,
 fit-size is therefore not the observed bottleneck for this statistic.</li>
 <li><strong>On functional fidelity, our n=24 lens is already in-family with the high-n lenses.</strong> On the motor-layer convergence eval it scores <strong>0.5625</strong> — inside the range set by Neuronpedia&rsquo;s own lenses (qwen3-4b <strong>0.722</strong>, architecture-matched qwen3.5-0.8b <strong>0.549</strong>), and it <em>beats</em> the architecture-matched one. A drastically under-fit lens would fail that eval; ours passes it.</li>
 <li><strong>The paired design controls item difficulty, not fit-size noise.</strong> Japan is compared
@@ -2162,9 +2182,9 @@ deduce from pairing.</p>
 </span></span><span class="line"><span class="cl">  --seed <span class="m">0</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl">  --max-seq-len <span class="m">128</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl">  --out lenses/qwen35_397b.pt
-</span></span></code></pre></div><p>For the <code>device_map=&quot;auto&quot;</code> path the same idea lives in pinned <a href="https://github.com/praxagent/research-and-replications/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/fit_at_scale.py"><code>fit_at_scale.py</code></a> (<code>checkpoint_path=str(out.with_suffix(&quot;.ckpt&quot;))</code>). Recipe notes: <a href="https://github.com/praxagent/research-and-replications/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/MODEL_CARD-397B.md"><code>MODEL_CARD-397B.md</code></a>, <a href="https://github.com/praxagent/research-and-replications/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/GAMEPLAN-397B.md"><code>GAMEPLAN-397B.md</code></a>. After extending, re-hash, re-run act 2, and compare to the n=24 receipt — that is the discriminating fit-size test.</p>
+</span></span></code></pre></div><p>For the <code>device_map=&quot;auto&quot;</code> path the same idea lives in pinned <a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/fit_at_scale.py"><code>fit_at_scale.py</code></a> (<code>checkpoint_path=str(out.with_suffix(&quot;.ckpt&quot;))</code>). Recipe notes: <a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/MODEL_CARD-397B.md"><code>MODEL_CARD-397B.md</code></a>, <a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/GAMEPLAN-397B.md"><code>GAMEPLAN-397B.md</code></a>. After extending, re-hash, re-run act 2, and compare to the n=24 receipt — that is the discriminating fit-size test.</p>
 <h4 id="is-warm-start-actually-exact-the-subtlety-stated-plainly">Is warm-start actually exact? (the subtlety, stated plainly)</h4>
-<p>&ldquo;Continue from our checkpoint&rdquo; hides a wrinkle worth being honest about: <strong>we publish the fp16 lens, not the fp32 <code>.ckpt</code></strong> (that checkpoint died with the fit pod). So extending our lens means <em>reconstructing</em> the running-sum checkpoint from the published lens — <code>jacobian_sum = J × n</code> — then handing that to <code>jlens.fit(resume=True)</code>. Two questions follow, and we tested both on a free CPU (gpt2) proxy before trusting them at 0.4T (<a href="https://github.com/praxagent/research-and-replications/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/extend_lens.py"><code>extend_lens.py</code></a>, <a href="https://github.com/praxagent/research-and-replications/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/extend_lens_gate.py"><code>extend_lens_gate.py</code></a>):</p>
+<p>&ldquo;Continue from our checkpoint&rdquo; hides a wrinkle worth being honest about: <strong>we publish the fp16 lens, not the fp32 <code>.ckpt</code></strong> (that checkpoint died with the fit pod). So extending our lens means <em>reconstructing</em> the running-sum checkpoint from the published lens — <code>jacobian_sum = J × n</code> — then handing that to <code>jlens.fit(resume=True)</code>. Two questions follow, and we tested both on a free CPU (gpt2) proxy before trusting them at 0.4T (<a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/extend_lens.py"><code>extend_lens.py</code></a>, <a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/extend_lens_gate.py"><code>extend_lens_gate.py</code></a>):</p>
 <ol>
 <li>
 <p><strong>Is the reconstruct-and-resume path numerically identical to fitting continuously?</strong> <em>Yes, exactly.</em> Reconstructing the checkpoint from an in-memory (fp32) lens and resuming to n=6 matches a continuous n=6 fit to <strong>2.4×10⁻⁸</strong> — floating-point machine epsilon. jlens&rsquo;s own resume is bitwise-identical; our reconstruction adds nothing. Warm-start is not an approximation.</p>
@@ -2208,7 +2228,7 @@ stronger: J ranks beat identity on 18/20 items (post-run exact two-sided sign
 248k. Act 1 failed its gate and was dropped in public. Absolute rates are lower than on
 the 27B gate model; the paired discrimination against both controls survives.</p>
 <p>Notice that the conclusion here is sharper than &ldquo;the lens works.&rdquo; Identity and random transports <strong>fail this paired check</strong>; that still does not turn twenty items into a survey of workspace function across models, and it does not prove that no other impostor could pass some other protocol. Readout claims have to be earned with controls, and with the failures left in the ledger. That is the reading skill this note set out to teach: <strong>a published lens is not yet an audited one — until you check under stated controls.</strong></p>
-<p>And read that check the right way around. It is not a complaint about Jacobian lenses; it is an invitation. The gap between &ldquo;this file loads&rdquo; and &ldquo;this file is nontrivial on intermediate content&rdquo; is ordinary, checkable science: pre-registration, identity and random controls, leakage guards, and receipts. Everything in this note runs on public weights and released JSON; the <a href="https://github.com/praxagent/research-and-replications">repository</a> is open, the cheaper path fits in about a dollar, and corrections are welcome — that&rsquo;s what the receipts are for.</p>
+<p>And read that check the right way around. It is not a complaint about Jacobian lenses; it is an invitation. The gap between &ldquo;this file loads&rdquo; and &ldquo;this file is nontrivial on intermediate content&rdquo; is ordinary, checkable science: pre-registration, identity and random controls, leakage guards, and receipts. Everything in this note runs on public weights and released JSON; the <a href="https://github.com/praxagent/jacobian-lens-research-202607a">repository</a> is open, the cheaper path fits in about a dollar, and corrections are welcome — that&rsquo;s what the receipts are for.</p>
 <p>None of this would exist without other people&rsquo;s open-sourcing. Anthropic released the
 Jacobian lens — the method, the math, and a working <code>jlens</code> implementation — under
 Apache-2.0; Neuronpedia built and open-sourced the fitting pipeline and a collection of
@@ -2223,6 +2243,197 @@ control separation reported here (see <em>What n=24 supports, and what remains o
 is an open starting point for a longer average; the commands and numerical caveats are
 above.</p>
 <hr>
+<h2 id="reproducibility-and-artifact-ledger">Reproducibility And Artifact Ledger</h2>
+<p>Compact map for readers who already know what they want. Sample records and
+plain-English walkthroughs are in the appendix below.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Artifact</th>
+          <th>Link</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Fitted lens (revision + file)</td>
+          <td><a href="https://huggingface.co/praxagent/jacobian-lens-qwen3.5-397b-a17b/tree/2dffc0a058fd072a6a155a4c6005bc26aff14d8c"><code>praxagent/jacobian-lens-qwen3.5-397b-a17b@2dffc0a</code></a>; SHA-256 <code>668c3bf1…99e97</code></td>
+      </tr>
+      <tr>
+          <td>Base model</td>
+          <td><a href="https://huggingface.co/Qwen/Qwen3.5-397B-A17B/tree/8472618112abcbd45acbcdc58436aff4233c23f7"><code>Qwen/Qwen3.5-397B-A17B@8472618</code></a></td>
+      </tr>
+      <tr>
+          <td>Research code snapshot</td>
+          <td><a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65"><code>praxagent/jacobian-lens-research-202607a@fa66e53</code></a></td>
+      </tr>
+      <tr>
+          <td>Pre-registration</td>
+          <td><a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/810251006bae0d322412bbd68ed85eb4cb1d6514"><code>8102510</code></a></td>
+      </tr>
+      <tr>
+          <td>Gate result</td>
+          <td><a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/4f4497682108eff2d6bb6e6b24c0ff17d2de50d3"><code>4f44976</code></a></td>
+      </tr>
+      <tr>
+          <td>397B result</td>
+          <td><a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/d9fc3763e2eb30f1ce1221b16027247afcb0fdfe"><code>d9fc376</code></a></td>
+      </tr>
+      <tr>
+          <td>Web-mirrored receipts</td>
+          <td><a href="receipts/"><code>receipts/</code></a></td>
+      </tr>
+      <tr>
+          <td>Act-2 recomputed stats</td>
+          <td><a href="receipts/act2_statistics.json"><code>act2_statistics.json</code></a> (<a href="tools/recompute_act2_statistics.py">script</a>)</td>
+      </tr>
+      <tr>
+          <td>Anthropic <code>jlens</code></td>
+          <td><a href="https://github.com/anthropics/jacobian-lens">github.com/anthropics/jacobian-lens</a></td>
+      </tr>
+      <tr>
+          <td>Neuronpedia prior collection</td>
+          <td><a href="https://huggingface.co/neuronpedia/jacobian-lens/tree/a4114d7752d11eb546e6cf372213d7e75526d3a1"><code>neuronpedia/jacobian-lens@a4114d7</code></a></td>
+      </tr>
+  </tbody>
+</table>
+<p>No Anthropic, Neuronpedia, or Qwen source code is copied into the Praxagent
+orchestration. Method, model, and prior lenses are attributed in
+<a href="#references">References</a>; fitting wrappers, audit runners, statistics, and
+figures are Praxagent code.</p>
+<h2 id="appendix-release-inventory">Appendix: release inventory</h2>
+<div class="panel warning">
+    <div class="panel-icon">
+        ⚠️
+        
+    </div>
+    <div class="panel-content">
+        <strong>Study status: complete</strong> for the n=24 release + act-2 audit. Design and gates
+were frozen in git before the 397B decisive run
+(<a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/810251006bae0d322412bbd68ed85eb4cb1d6514"><code>8102510</code></a>).
+Warm-start toward n≈50 is a separate, in-progress extension.
+    </div>
+</div>
+<table>
+  <thead>
+      <tr>
+          <th>What we shipped</th>
+          <th>In plain English</th>
+          <th>For specialists</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Fitted J-lens for Qwen3.5-397B-A17B</td>
+          <td>A downloadable translator from mid-layer residuals to ranked vocabulary readouts for this MoE.</td>
+          <td>HF revision <a href="https://huggingface.co/praxagent/jacobian-lens-qwen3.5-397b-a17b/tree/2dffc0a058fd072a6a155a4c6005bc26aff14d8c"><code>2dffc0a</code></a>; SHA-256 <code>668c3bf17305b0d52495cb7ba589a1c1173301b1d13c3c6ad84e58245dc99e97</code>; WikiText <strong>n=24</strong>.</td>
+      </tr>
+      <tr>
+          <td>Pre-registration</td>
+          <td>Rules of the game locked before looking at 397B outcomes.</td>
+          <td>Commit <a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/810251006bae0d322412bbd68ed85eb4cb1d6514"><code>8102510</code></a>: prompts, scoring, gates.</td>
+      </tr>
+      <tr>
+          <td>Gate on qwen3.5-27b</td>
+          <td>Cheaper dress rehearsal; act 1 died here and was dropped.</td>
+          <td>Commit <a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/4f4497682108eff2d6bb6e6b24c0ff17d2de50d3"><code>4f44976</code></a>.</td>
+      </tr>
+      <tr>
+          <td>397B act-2 audit</td>
+          <td>Same protocol on the big model: fitted lens vs identity vs random-J.</td>
+          <td>Commit <a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/d9fc3763e2eb30f1ce1221b16027247afcb0fdfe"><code>d9fc376</code></a>; receipt <a href="receipts/demo_qwen35-397b.json"><code>demo_qwen35-397b.json</code></a>.</td>
+      </tr>
+      <tr>
+          <td>Recomputed statistics</td>
+          <td>Exact Wilson / sign / Wilcoxon numbers from the receipt, not hand-typed.</td>
+          <td><a href="receipts/act2_statistics.json"><code>act2_statistics.json</code></a>.</td>
+      </tr>
+      <tr>
+          <td>Exploratory probes (not pre-registered)</td>
+          <td>Extra readouts on the same warm pod; labeled exploratory.</td>
+          <td><a href="receipts/"><code>demo2_*</code></a> JSON mirrors.</td>
+      </tr>
+  </tbody>
+</table>
+<p class="figure-note">Table: what "complete" means for this release. Skim the middle column first.</p>
+<h3 id="open-a-record-samples-from-the-release">Open a record: samples from the release</h3>
+<p>Each sample uses <strong>plain English</strong>, then <strong>technical</strong>, then a snippet.</p>
+<h4 id="lens-fingerprint">Lens fingerprint</h4>
+<ul>
+<li><strong>Plain English:</strong> The file on Hugging Face must match the file that left the
+fit machine, byte for byte. The long hex string is that fingerprint.</li>
+<li><strong>Technical:</strong> SHA-256 of the published <code>.pt</code> lens; the audit pod aborts on
+mismatch (<code>--expected-sha256</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">668c3bf17305b0d52495cb7ba589a1c1173301b1d13c3c6ad84e58245dc99e97
+</span></span></code></pre></div><h4 id="act-2-item-japan--mount-fuji">Act-2 item (Japan / Mount Fuji)</h4>
+<ul>
+<li><strong>Plain English:</strong> Ask a two-hop trivia question whose bridge country never
+appears in the prompt or the model&rsquo;s answer. Ask three readouts whether they
+can still surface &ldquo;Japan.&rdquo; The fitted lens ranks it #3; identity #43;
+random-J in the thousands.</li>
+<li><strong>Technical:</strong> One row from
+<a href="receipts/demo_qwen35-397b.json"><code>receipts/demo_qwen35-397b.json</code></a> <code>act2.items</code>
+(best rank over the pre-registered mid-band; hit iff rank ≤ 20).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;prompt&#34;</span><span class="p">:</span> <span class="s2">&#34;The capital of the country where Mount Fuji stands is&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;target&#34;</span><span class="p">:</span> <span class="s2">&#34;Japan&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;continuation&#34;</span><span class="p">:</span> <span class="s2">&#34; Tokyo.\\n\\nMount Fuji is the highest&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;output_leaked&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;jlens&#34;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&#34;hit_top20&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nt">&#34;best_rank&#34;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;logit_lens&#34;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&#34;hit_top20&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nt">&#34;best_rank&#34;</span><span class="p">:</span> <span class="mi">43</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;random_J&#34;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&#34;hit_top20&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nt">&#34;best_rank&#34;</span><span class="p">:</span> <span class="mi">7111</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="act-2-aggregates">Act-2 aggregates</h4>
+<ul>
+<li><strong>Plain English:</strong> Across twenty such bridges, the fitted lens lands in the
+top-20 six times; identity once; random-J never. Pairwise, the fitted lens
+beats identity on 18 of 20 ranks.</li>
+<li><strong>Technical:</strong> Summary block from the same receipt, plus paired tests in
+<a href="receipts/act2_statistics.json"><code>act2_statistics.json</code></a>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;hit_rate_top20&#34;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&#34;jlens&#34;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span> <span class="nt">&#34;logit_lens&#34;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span> <span class="nt">&#34;random_J&#34;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;paired_jlens_vs_identity&#34;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&#34;wins&#34;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span> <span class="nt">&#34;losses&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nt">&#34;ties&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="field-guide-act-2-receipt">Field guide (act-2 receipt)</h4>
+<table>
+  <thead>
+      <tr>
+          <th>Field</th>
+          <th>Plain English</th>
+          <th>Technical</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>prompt</code> / <code>target</code></td>
+          <td>English question and bridge entity</td>
+          <td>Exact-string leakage checks on prompt and continuation</td>
+      </tr>
+      <tr>
+          <td><code>continuation</code></td>
+          <td>What the model actually said next</td>
+          <td>Greedy decode; used for output-leakage guard</td>
+      </tr>
+      <tr>
+          <td><code>jlens</code> / <code>logit_lens</code> / <code>random_J</code></td>
+          <td>Three competing readouts</td>
+          <td>Same band, same top-k rule</td>
+      </tr>
+      <tr>
+          <td><code>best_rank</code></td>
+          <td>Best (minimum) rank of the target in the band</td>
+          <td>Composite any-of-band statistic; controls get the same rule</td>
+      </tr>
+      <tr>
+          <td><code>hit_top20</code></td>
+          <td>Did best_rank ≤ 20?</td>
+          <td>Pre-registered hit definition</td>
+      </tr>
+  </tbody>
+</table>
+<p class="figure-note">Snippets are abbreviated. Linked receipts and commits are authoritative.</p>
 <h2 id="references">References</h2>
 <ul>
 <li>
@@ -2244,7 +2455,7 @@ above.</p>
 <p><span id="ref-praxagent-397b-lens"></span>Praxagent. <a href="https://huggingface.co/praxagent/jacobian-lens-qwen3.5-397b-a17b/tree/2dffc0a058fd072a6a155a4c6005bc26aff14d8c"><em>jacobian-lens-qwen3.5-397b-a17b</em></a> (revision <code>2dffc0a</code>).</p>
 </li>
 <li>
-<p><span id="ref-jspace-audit"></span>Praxagent. <a href="https://github.com/praxagent/research-and-replications/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit"><em>A Global Workspace, or a Training Artifact? Auditing Anthropic&rsquo;s J-Space Across the Open-Weight Lineup</em></a> (companion audit; revision <code>fa66e53</code>).</p>
+<p><span id="ref-jspace-audit"></span>Praxagent. <a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit"><em>A Global Workspace, or a Training Artifact? Auditing Anthropic&rsquo;s J-Space Across the Open-Weight Lineup</em></a> (companion audit; revision <code>fa66e53</code>).</p>
 </li>
 <li>
 <p><span id="ref-vaswani-2017"></span>Vaswani, A., et al. (2017). <a href="https://arxiv.org/abs/1706.03762"><em>Attention Is All You Need</em></a>.</p>
@@ -2281,8 +2492,17 @@ above.</p>
             </div>
 
             <footer class="post-footer">
+                <div class="post-transparency">
+                    <div class="post-transparency-label">Public source &amp; edit history</div>
+                    <p>This blog is published two ways: as the rendered page you are
+                    reading, and as plain-text source in a public git repository,
+                    <a href="https://github.com/praxagent/praxagent-ai" rel="noopener">praxagent/praxagent-ai</a>.
+                    Every revision to every post is preserved in the commit log, so
+                    you can see exactly what changed and when:
+                    <a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/index.md" rel="noopener">view this article's edit history</a>.</p>
+                </div>
                 <div class="post-navigation">
-                    <a href="../../index.html" class="back-to-blog">← Back to Blog</a>
+                    <a href="/blog/index.html" class="back-to-blog">← Back to Blog</a>
                 </div>
             </footer>
         </article>
@@ -2303,10 +2523,10 @@ above.</p>
                 </div>
                 
                 <div class="footer-links">
-                    <a href="../../../research/index.html">Research</a>
-                    <a href="../../index.html">Tech Blog</a>
-                    <a href="../../../apps.html">Apps</a>
-                    <a href="../../../index.html#contact">Contact</a>
+                    <a href="/research/index.html">Research</a>
+                    <a href="/blog/index.html">Tech Blog</a>
+                    <a href="/apps.html">Apps</a>
+                    <a href="/index.html#contact">Contact</a>
                     <a href="#">Privacy Policy</a>
                 </div>
             </div>
@@ -2318,7 +2538,7 @@ above.</p>
         </div>
     </footer>
 
-    <script src="../../script.js"></script>
+    <script src="/script.js"></script>
     <script>
       feather.replace()
     </script>

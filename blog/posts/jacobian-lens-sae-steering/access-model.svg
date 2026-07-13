@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="280" viewBox="0 0 760 280" role="img" aria-labelledby="titleAm descAm">
+  <title id="titleAm">Two auditor access models</title>
+  <desc id="descAm">Isolated post-state attribution with a fitted classifier over 67 J-lens word scores fails at chance; paired clean-reference monitoring with a fixed one-number contrast from the same readout yields a large signed differential.</desc>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .fail{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.6}
+    .ok{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.6}
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .h{font-size:14px;font-weight:700}.s{font-size:12px}.m{font-size:11px;fill:#5A544C}
+    .badge{font-size:11px;font-weight:700}
+  </style>
+  <text x="24" y="28" class="t h">Access model is the result</text>
+  <text x="24" y="48" class="t m">Same frozen 67-word readout, two readers. Different privileges. Opposite conclusions.</text>
+
+  <rect class="fail" x="24" y="70" width="340" height="180" rx="12"/>
+  <text x="44" y="98" class="t h">A. Isolated post-state</text>
+  <text x="44" y="122" class="t s">Auditor sees h_steered only</text>
+  <text x="44" y="142" class="t s">No clean prefix, no hook label</text>
+  <text x="44" y="168" class="t m">Fitted classifier over 67 J-lens word scores</text>
+  <text x="44" y="188" class="t m">Crossed family + feature holdouts</text>
+  <text x="44" y="220" class="t badge" fill="#8A4B2A">AUROC 0.4998 at chance</text>
+  <text x="44" y="240" class="t m">Not a provenance detector</text>
+
+  <rect class="ok" x="396" y="70" width="340" height="180" rx="12"/>
+  <text x="416" y="98" class="t h">B. Matched clean reference</text>
+  <text x="416" y="122" class="t s">Auditor subtracts clean vs steered</text>
+  <text x="416" y="142" class="t s">Same prefix, intervention sign known</text>
+  <text x="416" y="168" class="t m">Fixed one-number contrast, same readout</text>
+  <text x="416" y="188" class="t m">Differential monitoring, not provenance</text>
+  <text x="416" y="220" class="t badge" fill="#2F5A7A">+0.91 / -0.82 ; AUROC 0.86 vs id 0.78</text>
+  <text x="416" y="240" class="t m">Useful regression monitor</text>
+</svg>

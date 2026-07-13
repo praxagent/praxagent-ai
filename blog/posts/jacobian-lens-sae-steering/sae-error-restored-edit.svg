@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="490" viewBox="0 0 760 490" role="img" aria-labelledby="titleToy descToy">
+  <title id="titleToy">2D toy: steering a feature repeats the rebuild with extra push on one direction</title>
+  <desc id="descToy">Both panels rebuild the residual tip-to-tail from feature 1, feature 2, and the leftover. The right panel adds an extra push on feature 1, so the result slides along that direction.</desc>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:15px;font-weight:700}
+    .s{font-size:12px}
+    .m{font-size:11px;fill:#5A544C}
+    .axis{stroke:#C4B8A8;stroke-width:1.25;fill:none;marker-end:url(#ax)}
+    .d1{stroke:#4B6787;stroke-width:2.5;fill:none;marker-end:url(#arrBlue)}
+    .d2{stroke:#7F786D;stroke-width:2.5;fill:none;marker-end:url(#arrWarm)}
+    .err{stroke:#A67C52;stroke-width:2.5;stroke-dasharray:5 3;fill:none;marker-end:url(#arrClay)}
+    .push{stroke:#6F8D5E;stroke-width:3;fill:none;marker-end:url(#arrGreen)}
+    .hvec{stroke:#2C2924;stroke-width:1.8;fill:none;marker-end:url(#arrDark)}
+    .hold{stroke:#2C2924;stroke-width:1.4;stroke-dasharray:3 3;fill:none}
+    .panel{fill:#FBF9F6;stroke:#D9D0C4;stroke-width:1.2}
+    .foot{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+    .box{fill:#EDE8E1;stroke:#7F786D;stroke-width:1.2}
+    .dot{fill:#2C2924}
+    .dotG{fill:#6F8D5E}
+    .dotB{fill:#4B6787}
+    .dotGray{fill:#8A8378}
+  </style>
+  <defs>
+    <marker id="ax" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L5,3 L0,6 Z" fill="#C4B8A8"/></marker>
+    <marker id="arrBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#4B6787"/></marker>
+    <marker id="arrWarm" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#7F786D"/></marker>
+    <marker id="arrClay" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#A67C52"/></marker>
+    <marker id="arrGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#6F8D5E"/></marker>
+    <marker id="arrDark" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2C2924"/></marker>
+  </defs>
+
+  <text x="24" y="28" class="t title">Toy demo in 2D residual space</text>
+  <text x="24" y="48" class="t m">Same recipe twice. The only change on the right: an extra push along feature 1.</text>
+
+  <!-- Explainer -->
+  <rect class="box" x="24" y="60" width="712" height="48" rx="8"/>
+  <text x="40" y="80" class="t m">The residual h is the vector the model passes between layers. The SAE rebuilds it from feature directions.</text>
+  <text x="40" y="98" class="t m">That rebuild never lands exactly on h. The gap is the leftover, and the edit puts it back untouched.</text>
+
+  <!-- Legend -->
+  <rect class="box" x="24" y="116" width="712" height="32" rx="8"/>
+  <line class="d1" x1="40" y1="132" x2="74" y2="132"/>
+  <text x="82" y="136" class="t m">feature 1</text>
+  <line class="d2" x1="160" y1="132" x2="194" y2="132"/>
+  <text x="202" y="136" class="t m">feature 2</text>
+  <line class="err" x1="280" y1="132" x2="314" y2="132"/>
+  <text x="322" y="136" class="t m">leftover</text>
+  <line class="push" x1="392" y1="132" x2="426" y2="132"/>
+  <text x="434" y="136" class="t m">extra push</text>
+  <line class="hvec" x1="520" y1="132" x2="554" y2="132"/>
+  <text x="562" y="136" class="t m">residual h</text>
+  <line class="hold" x1="644" y1="132" x2="678" y2="132"/>
+  <text x="686" y="136" class="t m">old h</text>
+
+  <!-- LEFT PANEL: rebuild h -->
+  <rect class="panel" x="24" y="160" width="350" height="250" rx="12"/>
+  <text x="40" y="184" class="t title">1. Rebuild h from features</text>
+  <text x="40" y="202" class="t m">feature 1 + feature 2 lands at recon.</text>
+  <text x="40" y="218" class="t m">The leftover (h minus recon) tops it up to h.</text>
+
+  <!-- origin (70,380), 44 px/unit. f1=(2,0) f2=(1,2) leftover=(0.5,1) h=(3.5,3) -->
+  <line class="axis" x1="70" y1="380" x2="70" y2="234"/>
+  <line class="axis" x1="70" y1="380" x2="350" y2="380"/>
+  <text x="356" y="384" class="t m">x</text>
+  <text x="58" y="230" class="t m">y</text>
+  <circle class="dot" cx="70" cy="380" r="2.5"/>
+
+  <!-- residual h drawn first, underneath -->
+  <line class="hvec" x1="70" y1="380" x2="224" y2="248"/>
+  <circle class="dot" cx="224" cy="248" r="3.5"/>
+  <text x="234" y="244" class="t s">h</text>
+
+  <line class="d1" x1="70" y1="380" x2="158" y2="380"/>
+  <text x="114" y="398" text-anchor="middle" class="t s">feature 1</text>
+
+  <line class="d2" x1="158" y1="380" x2="202" y2="292"/>
+  <text x="208" y="342" class="t s">feature 2</text>
+  <circle class="dotB" cx="202" cy="292" r="3.2"/>
+  <text x="212" y="296" class="t s">recon</text>
+
+  <line class="err" x1="202" y1="292" x2="224" y2="248"/>
+  <text x="234" y="272" class="t s">leftover</text>
+
+  <!-- RIGHT PANEL: steer -->
+  <rect class="panel" x="386" y="160" width="350" height="250" rx="12"/>
+  <text x="402" y="184" class="t title">2. Steer: extra push on feature 1</text>
+  <text x="402" y="202" class="t m">Same recipe, one change: more feature 1.</text>
+  <text x="402" y="218" class="t m">Feature 2 and leftover unchanged; h slides right.</text>
+
+  <!-- origin (432,380). f1=(2,0), push=(1,0), f2=(1,2), leftover=(0.5,1) -> new h=(4.5,3); old h=(3.5,3) -->
+  <line class="axis" x1="432" y1="380" x2="432" y2="234"/>
+  <line class="axis" x1="432" y1="380" x2="712" y2="380"/>
+  <text x="718" y="384" class="t m">x</text>
+  <text x="420" y="230" class="t m">y</text>
+  <circle class="dot" cx="432" cy="380" r="2.5"/>
+
+  <!-- old h ghost -->
+  <line class="hold" x1="432" y1="380" x2="586" y2="248"/>
+  <circle class="dotGray" cx="586" cy="248" r="3"/>
+  <text x="578" y="240" text-anchor="end" class="t s">old h</text>
+
+  <!-- new residual, underneath the pieces -->
+  <line class="hvec" x1="432" y1="380" x2="630" y2="248"/>
+
+  <line class="d1" x1="432" y1="380" x2="520" y2="380"/>
+  <text x="476" y="398" text-anchor="middle" class="t s">feature 1</text>
+
+  <line class="push" x1="520" y1="380" x2="564" y2="380"/>
+  <text x="542" y="398" text-anchor="middle" class="t s">extra</text>
+
+  <line class="d2" x1="564" y1="380" x2="608" y2="292"/>
+  <text x="614" y="342" class="t s">feature 2</text>
+  <circle class="dotB" cx="608" cy="292" r="3.2"/>
+  <text x="618" y="296" class="t s">recon</text>
+
+  <line class="err" x1="608" y1="292" x2="630" y2="248"/>
+  <text x="640" y="272" class="t s">leftover</text>
+
+  <!-- shift from old h to new h -->
+  <line class="push" x1="586" y1="248" x2="630" y2="248"/>
+  <text x="608" y="236" text-anchor="middle" class="t s">shift</text>
+
+  <circle class="dotG" cx="630" cy="248" r="4"/>
+  <text x="640" y="244" class="t s">new h</text>
+
+  <!-- Footer -->
+  <rect class="foot" x="24" y="422" width="712" height="52" rx="10"/>
+  <text x="40" y="444" class="t s">Both panels use the same feature 2 and the same leftover. Only feature 1 gets an extra push.</text>
+  <text x="40" y="464" class="t s">So new h is exactly old h shifted along feature 1. That shift is the whole edit, in any dimension.</text>
+</svg>

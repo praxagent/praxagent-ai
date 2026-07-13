@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8001&amp;path=livereload" data-no-instant defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutorials - praxagent</title>
@@ -11,7 +11,7 @@
     
     
     <meta name="description" content="Insights, tutorials, and thoughts on AI software development from the praxagent team">
-    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/index.html">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="praxagent Blog">
@@ -29,24 +29,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles-v2.css">
-    
+    <link rel="stylesheet" href="/styles-v2.css">
+    <link rel="stylesheet" href="/blog.css">
+    <link rel="stylesheet" href="/katex.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
     
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="../index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
             <div class="nav-menu">
-                <a href="../research/index.html" class="nav-link">Research</a>
-                <a href="index.html" class="nav-link">Tech Blog</a>
-                <a href="../apps.html" class="nav-link">Apps</a>
-                <a href="../index.html#contact" class="nav-link">Contact</a>
-                
+                <a href="/research/index.html" class="nav-link">Research</a>
+                <a href="/blog/index.html" class="nav-link active">Tech Blog</a>
+                <a href="/apps.html" class="nav-link">Apps</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun">☀️</span>
                     <span class="theme-toggle-icon moon">🌙</span>
@@ -65,10 +66,10 @@
 
     <div class="mobile-menu-overlay" id="mobile-menu-overlay">
         <div class="mobile-menu-content">
-            <a href="../research/index.html" class="mobile-nav-link">Research</a>
-            <a href="index.html" class="mobile-nav-link">Tech Blog</a>
-            <a href="../apps.html" class="mobile-nav-link">Apps</a>
-            <a href="../index.html#contact" class="mobile-nav-link">Contact</a>
+            <a href="/research/index.html" class="mobile-nav-link">Research</a>
+            <a href="/blog/index.html" class="mobile-nav-link active">Tech Blog</a>
+            <a href="/apps.html" class="mobile-nav-link">Apps</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun">☀️</span>
@@ -101,32 +102,24 @@
                     
                 
                 
-                
-                    
-                
-                
-                
-                
                 <article class="blog-post-preview">
-                    <h2><a href="../../posts/how-to-read-an-sae-feature-id/index.html">How to Read an SAE Feature ID</a></h2>
+                    <h2><a href="/posts/how-to-read-an-sae-feature-id/">How to Read an SAE Feature ID</a></h2>
                     <div class="post-meta">
                         <span class="post-date">July 9, 2026</span>
                         <span class="post-author">by Timothy Jones</span>
                     </div>
                     <p class="post-excerpt">A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights.</p>
-                    <a href="../../posts/how-to-read-an-sae-feature-id/index.html" class="read-more">Read More →</a>
+                    <a href="/posts/how-to-read-an-sae-feature-id/" class="read-more">Read More →</a>
                 </article>
                 
-                
-                
                 <article class="blog-post-preview">
-                    <h2><a href="../../posts/late-chunking/index.html">Late Chunking: Why Context-Aware Embeddings (sometimes) Beat Traditional Chunking</a></h2>
+                    <h2><a href="/posts/late-chunking/">Late Chunking: Why Context-Aware Embeddings (sometimes) Beat Traditional Chunking</a></h2>
                     <div class="post-meta">
                         <span class="post-date">August 2, 2025</span>
                         <span class="post-author">by Timothy Jones</span>
                     </div>
                     <p class="post-excerpt">Traditional chunking methods for RAG pipelines often break context by chunking text before embedding. Late chunking offers a solution by embedding the entire document first and then chunking the token embeddings, preserving vital contextual information and improving retrieval accuracy.</p>
-                    <a href="../../posts/late-chunking/index.html" class="read-more">Read More →</a>
+                    <a href="/posts/late-chunking/" class="read-more">Read More →</a>
                 </article>
                 
             </div>
@@ -140,11 +133,11 @@
                 <div class="sidebar-widget">
                     <h3>Categories</h3>
                     <ul class="category-list">
-                        <li><a href="#machine-learning">Machine Learning</a></li>
-                        <li><a href="#ai-ethics">AI Ethics</a></li>
-                        <li><a href="#implementation">Implementation</a></li>
-                        <li><a href="#research">Research</a></li>
-                        <li><a href="#tutorials">Tutorials</a></li>
+                        <li><a href="/blog/tags/machine-learning/">Machine Learning</a></li>
+                        <li><a href="/blog/tags/ai/">AI</a></li>
+                        <li><a href="/blog/tags/implementation/">Implementation</a></li>
+                        <li><a href="/blog/tags/reproducibility/">Reproducibility</a></li>
+                        <li><a href="/blog/tags/tutorials/">Tutorials</a></li>
                     </ul>
                 </div>
 
@@ -165,10 +158,10 @@
                 </div>
                 
                 <div class="footer-links">
-                    <a href="../research/index.html">Research</a>
-                    <a href="index.html">Tech Blog</a>
-                    <a href="../apps.html">Apps</a>
-                    <a href="../index.html#contact">Contact</a>
+                    <a href="/research/index.html">Research</a>
+                    <a href="/blog/index.html">Tech Blog</a>
+                    <a href="/apps.html">Apps</a>
+                    <a href="/index.html#contact">Contact</a>
                     <a href="#">Privacy Policy</a>
                 </div>
             </div>
@@ -180,7 +173,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="/script.js"></script>
     <script>
       feather.replace()
     </script>

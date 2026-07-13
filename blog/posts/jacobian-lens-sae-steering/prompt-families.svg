@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" role="img" aria-labelledby="titleFam descFam">
+  <title id="titleFam">Families, not rows: grouped holdouts and cluster bootstrap</title>
+  <desc id="descFam">Prompts from the same template family are near-copies. Whole families move together into train or test, and error bars resample families rather than rows.</desc>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:15px;font-weight:700}
+    .h{font-size:13px;font-weight:700}
+    .s{font-size:12px}
+    .m{font-size:11px;fill:#5A544C}
+    .fam{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.4}
+    .chip{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1}
+    .card{fill:#FBF9F6;stroke:#D9D0C4;stroke-width:1.2}
+    .test{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.4}
+    .train{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.4}
+    .fbox{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.2}
+    .foot{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+    .divider{stroke:#A89B8C;stroke-width:1.4;stroke-dasharray:5 4}
+  </style>
+
+  <text x="24" y="28" class="t title">1,581 trials are not 1,581 independent stories</text>
+  <text x="24" y="48" class="t m">Many of the 51 prefixes are near-copies from the same sentence skeleton. We treat each family as one unit of evidence.</text>
+
+  <!-- One family example -->
+  <rect class="fam" x="24" y="62" width="460" height="104" rx="10"/>
+  <text x="40" y="84" class="t h">One template family (roleplay_persona)</text>
+  <rect class="chip" x="40" y="94" width="428" height="18" rx="5"/>
+  <text x="48" y="107" class="t m">Stay in character as a medieval scribe and answer in a dramatic voice.</text>
+  <rect class="chip" x="40" y="116" width="428" height="18" rx="5"/>
+  <text x="48" y="129" class="t m">Stay in character as a royal scribe and answer in a solemn voice.</text>
+  <rect class="chip" x="40" y="138" width="428" height="18" rx="5"/>
+  <text x="48" y="151" class="t m">Stay in character as a village scribe and answer in a cheerful voice.</text>
+
+  <rect class="card" x="500" y="62" width="236" height="104" rx="10"/>
+  <text x="518" y="92" class="t h">Why it matters</text>
+  <text x="518" y="114" class="t m">Near-copies score alike. Counting</text>
+  <text x="518" y="130" class="t m">them separately would fake extra</text>
+  <text x="518" y="146" class="t m">evidence and shrink error bars.</text>
+
+  <!-- Grouped holdout card -->
+  <rect class="card" x="24" y="182" width="350" height="164" rx="12"/>
+  <text x="40" y="206" class="t h">Grouped holdout</text>
+  <text x="40" y="224" class="t m">A family never straddles train and test.</text>
+
+  <rect class="train" x="40" y="238" width="196" height="90" rx="8"/>
+  <text x="48" y="256" class="t m">train</text>
+  <rect class="fbox" x="52"  y="266" width="50" height="22" rx="5"/><text x="77"  y="281" text-anchor="middle" class="t m">F1</text>
+  <rect class="fbox" x="110" y="266" width="50" height="22" rx="5"/><text x="135" y="281" text-anchor="middle" class="t m">F2</text>
+  <rect class="fbox" x="168" y="266" width="50" height="22" rx="5"/><text x="193" y="281" text-anchor="middle" class="t m">F3</text>
+  <rect class="fbox" x="52"  y="296" width="50" height="22" rx="5"/><text x="77"  y="311" text-anchor="middle" class="t m">F4</text>
+  <rect class="fbox" x="110" y="296" width="50" height="22" rx="5"/><text x="135" y="311" text-anchor="middle" class="t m">F5</text>
+
+  <line class="divider" x1="246" y1="238" x2="246" y2="328"/>
+
+  <rect class="test" x="256" y="238" width="102" height="90" rx="8"/>
+  <text x="264" y="256" class="t m">test</text>
+  <rect class="fbox" x="268" y="266" width="50" height="22" rx="5"/><text x="293" y="281" text-anchor="middle" class="t m">F6</text>
+  <rect class="fbox" x="268" y="296" width="50" height="22" rx="5"/><text x="293" y="311" text-anchor="middle" class="t m">F7</text>
+
+  <!-- Cluster bootstrap card -->
+  <rect class="card" x="386" y="182" width="350" height="164" rx="12"/>
+  <text x="402" y="206" class="t h">Cluster bootstrap (20,000 draws)</text>
+  <text x="402" y="224" class="t m">Each draw picks 51 whole families, repeats allowed.</text>
+
+  <text x="402" y="252" class="t m">draw 1:</text>
+  <rect class="fbox" x="452" y="238" width="44" height="20" rx="5"/><text x="474" y="252" text-anchor="middle" class="t m">F3</text>
+  <rect class="fbox" x="502" y="238" width="44" height="20" rx="5"/><text x="524" y="252" text-anchor="middle" class="t m">F1</text>
+  <rect class="fbox" x="552" y="238" width="44" height="20" rx="5"/><text x="574" y="252" text-anchor="middle" class="t m">F3</text>
+  <rect class="fbox" x="602" y="238" width="44" height="20" rx="5"/><text x="624" y="252" text-anchor="middle" class="t m">F7</text>
+  <text x="656" y="252" class="t m">...</text>
+
+  <text x="402" y="284" class="t m">draw 2:</text>
+  <rect class="fbox" x="452" y="270" width="44" height="20" rx="5"/><text x="474" y="284" text-anchor="middle" class="t m">F5</text>
+  <rect class="fbox" x="502" y="270" width="44" height="20" rx="5"/><text x="524" y="284" text-anchor="middle" class="t m">F5</text>
+  <rect class="fbox" x="552" y="270" width="44" height="20" rx="5"/><text x="574" y="284" text-anchor="middle" class="t m">F2</text>
+  <rect class="fbox" x="602" y="270" width="44" height="20" rx="5"/><text x="624" y="284" text-anchor="middle" class="t m">F6</text>
+  <text x="656" y="284" class="t m">...</text>
+
+  <text x="402" y="316" class="t m">Recompute the metric on every draw; the spread of</text>
+  <text x="402" y="332" class="t m">those 20,000 values becomes the error bar.</text>
+
+  <!-- Footer -->
+  <rect class="foot" x="24" y="362" width="712" height="44" rx="10"/>
+  <text x="40" y="389" class="t s">Both moves treat the family, not the row, as the unit of evidence. That keeps AUROCs and error bars honest.</text>
+</svg>

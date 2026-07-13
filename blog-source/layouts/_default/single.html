@@ -28,6 +28,13 @@
             </div>
             {{ end }}
 
+            {{ with .Params.key_result }}
+            <div class="key-result">
+                <div class="key-result-label">Key result</div>
+                {{ . | markdownify }}
+            </div>
+            {{ end }}
+
             {{ if gt (len .TableOfContents) 50 }}
             <div class="table-of-contents">
                 <h3>Table of Contents</h3>
@@ -40,8 +47,17 @@
             </div>
 
             <footer class="post-footer">
+                <div class="post-transparency">
+                    <div class="post-transparency-label">Public source &amp; edit history</div>
+                    <p>This blog is published two ways: as the rendered page you are
+                    reading, and as plain-text source in a public git repository,
+                    <a href="https://github.com/praxagent/praxagent-ai" rel="noopener">praxagent/praxagent-ai</a>.
+                    Every revision to every post is preserved in the commit log, so
+                    you can see exactly what changed and when{{ with .File }}:
+                    <a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/{{ .Path }}" rel="noopener">view this article's edit history</a>{{ end }}.</p>
+                </div>
                 <div class="post-navigation">
-                    <a href="../../index.html" class="back-to-blog">← Back to Blog</a>
+                    <a href="/blog/index.html" class="back-to-blog">← Back to Blog</a>
                 </div>
             </footer>
         </article>

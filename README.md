@@ -25,13 +25,26 @@ praxagent/
 ### Prerequisites
 
 - [Hugo](https://gohugo.io/) (`brew install hugo`)
+- Python 3.10+
+- `make`
+
+### Build and validation
+
+```bash
+make blog       # compile blog-source/content/posts into blog/
+make blog-serve # Hugo live reload at http://127.0.0.1:1313/
+make ci         # exact build + validation contract used by GitHub Actions
+```
+
+`make ci` compiles the production blog, runs Hugo again with warnings treated as
+failures, compiles checked-in Python, and validates lowercase branding, local links,
+HTML anchors, JSON, and SVG/XML assets.
 
 ### Development
 
 ```bash
 # Blog live reload (edit blog-source/; browser refreshes on save)
-cd blog-source
-hugo server --bind 127.0.0.1 --port 1313 --baseURL http://127.0.0.1:1313/ --disableFastRender
+make blog-serve
 
 # Post URL example:
 # http://127.0.0.1:1313/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/
@@ -48,7 +61,7 @@ hugo new content/posts/my-new-post/index.md
 
 # While developing, use `hugo server` above (no manual rebuild).
 # For a production-style write into blog/:
-hugo --destination ../blog
+make blog
 ```
 
 ### Post Format

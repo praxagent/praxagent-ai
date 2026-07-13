@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="460" viewBox="0 0 760 460" role="img" aria-labelledby="titleJl descJl">
+  <title id="titleJl">The Jacobian lens: per-prompt nudge maps averaged into one reusable matrix</title>
+  <desc id="descJl">For one prompt, the Jacobian records how tiny nudges at layer l move the final layer. Each prompt gives a different matrix; averaging over a corpus gives one fixed lens.</desc>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:15px;font-weight:700}
+    .h{font-size:13px;font-weight:700}
+    .s{font-size:12px}
+    .m{font-size:11px;fill:#5A544C}
+    .card{fill:#FBF9F6;stroke:#D9D0C4;stroke-width:1.2}
+    .stream{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.4}
+    .mat{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.2}
+    .grid{stroke:#C4B8A8;stroke-width:0.8}
+    .cell{fill:#4B6787;opacity:0.38}
+    .foot{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+    .arrow{stroke:#A67C52;stroke-width:1.6;fill:none}
+    .snap{stroke:#A67C52;stroke-width:1.2;stroke-dasharray:4 3}
+  </style>
+  <defs>
+    <marker id="ahj" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#A67C52"/>
+    </marker>
+  </defs>
+
+  <text x="24" y="28" class="t title">The Jacobian lens: per-prompt nudge maps, averaged into one reusable matrix</text>
+  <text x="24" y="48" class="t m">Step 1: for one prompt, record how tiny nudges at layer l move the final layer. Step 2: average that record over many prompts.</text>
+
+  <!-- Panel A: one prompt -->
+  <rect class="card" x="24" y="62" width="712" height="152" rx="12"/>
+  <text x="40" y="86" class="t h">For a single prompt</text>
+
+  <rect class="stream" x="56" y="150" width="440" height="30" rx="8"/>
+  <text x="276" y="170" text-anchor="middle" class="t s">residual stream, layer l onward</text>
+
+  <path class="arrow" d="M100,112 L100,146" marker-end="url(#ahj)"/>
+  <text x="110" y="122" class="t m">tiny nudge here</text>
+  <line class="snap" x1="100" y1="182" x2="100" y2="192"/>
+  <text x="100" y="204" text-anchor="middle" class="t m">layer l</text>
+
+  <path class="arrow" d="M470,146 L470,112" marker-end="url(#ahj)"/>
+  <text x="462" y="122" text-anchor="end" class="t m">the end shifts this way</text>
+  <line class="snap" x1="470" y1="182" x2="470" y2="192"/>
+  <text x="470" y="204" text-anchor="middle" class="t m">layer L (final)</text>
+
+  <text x="522" y="116" class="t m">This prompt's Jacobian is the</text>
+  <text x="522" y="132" class="t m">matrix that records, for every</text>
+  <text x="522" y="148" class="t m">possible nudge direction at layer l,</text>
+  <text x="522" y="164" class="t m">which way the final layer shifts</text>
+  <text x="522" y="180" class="t m">in response.</text>
+
+  <!-- Panel B: averaging -->
+  <rect class="card" x="24" y="228" width="712" height="158" rx="12"/>
+  <text x="40" y="252" class="t h">Average over a corpus of prompts</text>
+  <text x="40" y="270" class="t m">Each prompt bends nudges its own way, so each gives a different matrix. The lens is their average (fit on WikiText).</text>
+
+  <!-- prompt matrices -->
+  <rect class="mat" x="56" y="286" width="64" height="64" rx="6"/>
+  <line class="grid" x1="77" y1="286" x2="77" y2="350"/><line class="grid" x1="98" y1="286" x2="98" y2="350"/>
+  <line class="grid" x1="56" y1="307" x2="120" y2="307"/><line class="grid" x1="56" y1="328" x2="120" y2="328"/>
+  <rect class="cell" x="56" y="286" width="21" height="21"/><rect class="cell" x="98" y="307" width="22" height="21"/><rect class="cell" x="77" y="328" width="21" height="22"/>
+  <text x="88" y="368" text-anchor="middle" class="t m">prompt 1</text>
+
+  <rect class="mat" x="140" y="286" width="64" height="64" rx="6"/>
+  <line class="grid" x1="161" y1="286" x2="161" y2="350"/><line class="grid" x1="182" y1="286" x2="182" y2="350"/>
+  <line class="grid" x1="140" y1="307" x2="204" y2="307"/><line class="grid" x1="140" y1="328" x2="204" y2="328"/>
+  <rect class="cell" x="161" y="286" width="21" height="21"/><rect class="cell" x="140" y="328" width="21" height="22"/><rect class="cell" x="182" y="286" width="22" height="21"/>
+  <text x="172" y="368" text-anchor="middle" class="t m">prompt 2</text>
+
+  <rect class="mat" x="224" y="286" width="64" height="64" rx="6"/>
+  <line class="grid" x1="245" y1="286" x2="245" y2="350"/><line class="grid" x1="266" y1="286" x2="266" y2="350"/>
+  <line class="grid" x1="224" y1="307" x2="288" y2="307"/><line class="grid" x1="224" y1="328" x2="288" y2="328"/>
+  <rect class="cell" x="245" y="307" width="21" height="21"/><rect class="cell" x="224" y="286" width="21" height="21"/><rect class="cell" x="266" y="328" width="22" height="22"/>
+  <text x="256" y="368" text-anchor="middle" class="t m">prompt 3</text>
+
+  <text x="304" y="324" class="t m">...</text>
+
+  <path class="arrow" d="M330,318 L392,318" marker-end="url(#ahj)"/>
+  <text x="361" y="308" text-anchor="middle" class="t m">average</text>
+
+  <!-- the lens -->
+  <rect class="stream" x="406" y="282" width="72" height="72" rx="6"/>
+  <line class="grid" x1="430" y1="282" x2="430" y2="354"/><line class="grid" x1="454" y1="282" x2="454" y2="354"/>
+  <line class="grid" x1="406" y1="306" x2="478" y2="306"/><line class="grid" x1="406" y1="330" x2="478" y2="330"/>
+  <rect class="cell" x="406" y="282" width="24" height="24"/><rect class="cell" x="430" y="306" width="24" height="24"/><rect class="cell" x="454" y="330" width="24" height="24"/>
+
+  <text x="496" y="302" class="t h">one fixed matrix: the lens for layer l</text>
+  <text x="496" y="320" class="t m">Multiply any layer-l direction by it to get</text>
+  <text x="496" y="336" class="t m">the typical downstream response, with</text>
+  <text x="496" y="352" class="t m">no model run needed.</text>
+
+  <!-- Footer -->
+  <rect class="foot" x="24" y="398" width="712" height="48" rx="10"/>
+  <text x="40" y="418" class="t s">The average answers "where does this direction tend to go?" for the typical prompt. It is not the exact map for</text>
+  <text x="40" y="436" class="t s">your prompt, and it is linear, so it is only honest for small nudges.</text>
+</svg>

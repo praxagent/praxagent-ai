@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="380" viewBox="0 0 760 380" role="img" aria-labelledby="titleRJ descRJ">
+  <title id="titleRJ">Random-J impostor lenses: same size and spectrum, scrambled alignment</title>
+  <desc id="descRJ">The real lens and five impostors share dimensions, norm, and singular values. Only the alignment differs, so beating the impostors is the test that alignment matters.</desc>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:15px;font-weight:700}
+    .h{font-size:14px;font-weight:700}
+    .s{font-size:12px}
+    .m{font-size:11px;fill:#5A544C}
+    .card{fill:#FBF9F6;stroke:#D9D0C4;stroke-width:1.2}
+    .cellOn{fill:#4B6787}
+    .cellOff{fill:#E8F0F7;stroke:#C4B8A8;stroke-width:0.8}
+    .cellOnR{fill:#A67C52}
+    .foot{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+    .shuf{stroke:#7F786D;stroke-width:1.8;fill:none;marker-end:url(#arrW)}
+  </style>
+  <defs>
+    <marker id="arrW" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#7F786D"/></marker>
+  </defs>
+
+  <text x="24" y="28" class="t title">Impostor lenses: same ingredients, shuffled arrangement</text>
+  <text x="24" y="48" class="t m">Any big matrix pushed through the vocabulary can produce impressive-looking words. The impostors test whether alignment does the work.</text>
+
+  <!-- Real J card -->
+  <rect class="card" x="24" y="66" width="330" height="220" rx="12"/>
+  <text x="44" y="92" class="t h">Real J-lens</text>
+
+  <!-- 5x5 grid, cell 26, origin (64,108); structured diagonal band -->
+  <g>
+    <rect class="cellOn"  x="64"  y="108" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="90"  y="108" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="116" y="108" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="142" y="108" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="168" y="108" width="24" height="24" rx="3"/>
+
+    <rect class="cellOn"  x="64"  y="134" width="24" height="24" rx="3"/>
+    <rect class="cellOn"  x="90"  y="134" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="116" y="134" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="142" y="134" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="168" y="134" width="24" height="24" rx="3"/>
+
+    <rect class="cellOff" x="64"  y="160" width="24" height="24" rx="3"/>
+    <rect class="cellOn"  x="90"  y="160" width="24" height="24" rx="3"/>
+    <rect class="cellOn"  x="116" y="160" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="142" y="160" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="168" y="160" width="24" height="24" rx="3"/>
+
+    <rect class="cellOff" x="64"  y="186" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="90"  y="186" width="24" height="24" rx="3"/>
+    <rect class="cellOn"  x="116" y="186" width="24" height="24" rx="3"/>
+    <rect class="cellOn"  x="142" y="186" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="168" y="186" width="24" height="24" rx="3"/>
+
+    <rect class="cellOff" x="64"  y="212" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="90"  y="212" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="116" y="212" width="24" height="24" rx="3"/>
+    <rect class="cellOn"  x="142" y="212" width="24" height="24" rx="3"/>
+    <rect class="cellOn"  x="168" y="212" width="24" height="24" rx="3"/>
+  </g>
+  <text x="216" y="126" class="t m">fit once on WikiText</text>
+  <text x="216" y="146" class="t m">aligned with Llama's</text>
+  <text x="216" y="162" class="t m">residual coordinates</text>
+  <text x="216" y="186" class="t m">and its vocabulary</text>
+  <text x="44" y="266" class="t m">Structure sits where the model's own axes expect it.</text>
+
+  <!-- shuffle arrow -->
+  <path class="shuf" d="M358 176 H398"/>
+  <text x="378" y="166" text-anchor="middle" class="t m">shuffle</text>
+
+  <!-- Impostor card -->
+  <rect class="card" x="406" y="66" width="330" height="220" rx="12"/>
+  <text x="426" y="92" class="t h">Random-J impostor (five of them)</text>
+
+  <!-- same 10 dark cells, scattered -->
+  <g>
+    <rect class="cellOff" x="446" y="108" width="24" height="24" rx="3"/>
+    <rect class="cellOnR" x="472" y="108" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="498" y="108" width="24" height="24" rx="3"/>
+    <rect class="cellOnR" x="524" y="108" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="550" y="108" width="24" height="24" rx="3"/>
+
+    <rect class="cellOff" x="446" y="134" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="472" y="134" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="498" y="134" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="524" y="134" width="24" height="24" rx="3"/>
+    <rect class="cellOnR" x="550" y="134" width="24" height="24" rx="3"/>
+
+    <rect class="cellOnR" x="446" y="160" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="472" y="160" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="498" y="160" width="24" height="24" rx="3"/>
+    <rect class="cellOnR" x="524" y="160" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="550" y="160" width="24" height="24" rx="3"/>
+
+    <rect class="cellOff" x="446" y="186" width="24" height="24" rx="3"/>
+    <rect class="cellOnR" x="472" y="186" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="498" y="186" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="524" y="186" width="24" height="24" rx="3"/>
+    <rect class="cellOnR" x="550" y="186" width="24" height="24" rx="3"/>
+
+    <rect class="cellOnR" x="446" y="212" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="472" y="212" width="24" height="24" rx="3"/>
+    <rect class="cellOnR" x="498" y="212" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="524" y="212" width="24" height="24" rx="3"/>
+    <rect class="cellOff" x="550" y="212" width="24" height="24" rx="3"/>
+  </g>
+  <text x="598" y="126" class="t m">same dimensions</text>
+  <text x="598" y="146" class="t m">same overall norm</text>
+  <text x="598" y="166" class="t m">same singular values</text>
+  <text x="598" y="190" class="t m">alignment scrambled</text>
+  <text x="598" y="206" class="t m">on both sides</text>
+  <text x="426" y="266" class="t m">Same amount of structure, in all the wrong places.</text>
+
+  <!-- Verdict -->
+  <rect class="foot" x="24" y="304" width="712" height="56" rx="10"/>
+  <text x="40" y="328" class="t s">Each impostor runs the identical pipeline: same layers, positions, features, and classifier search.</text>
+  <text x="40" y="348" class="t s">A J-lens result counts only if the real lens beats all five. In the state-only detection task here, it did not.</text>
+</svg>

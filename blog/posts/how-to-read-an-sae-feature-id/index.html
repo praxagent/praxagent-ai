@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8001&amp;path=livereload" data-no-instant defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How to Read an SAE Feature ID - praxagent Blog</title>
@@ -16,7 +16,7 @@
       
     
     <meta name="description" content="A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights.">
-    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/posts/how-to-read-an-sae-feature-id/index.html">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="praxagent Blog">
@@ -34,12 +34,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../styles-v2.css">
-    
-    <link rel="stylesheet" href="../../blog.css">
-    <link rel="stylesheet" href="../../katex.min.css">
+    <link rel="stylesheet" href="/styles-v2.css">
+    <link rel="stylesheet" href="/blog.css">
+    <link rel="stylesheet" href="/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
-    
     
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -59,16 +57,15 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="../../../index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
             <div class="nav-menu">
-                <a href="../../../research/index.html" class="nav-link">Research</a>
-                <a href="../../index.html" class="nav-link active">Tech Blog</a>
-                <a href="../../../apps.html" class="nav-link">Apps</a>
-                <a href="../../../index.html#contact" class="nav-link">Contact</a>
-                
+                <a href="/research/index.html" class="nav-link">Research</a>
+                <a href="/blog/index.html" class="nav-link active">Tech Blog</a>
+                <a href="/apps.html" class="nav-link">Apps</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun">☀️</span>
                     <span class="theme-toggle-icon moon">🌙</span>
@@ -87,10 +84,10 @@
 
     <div class="mobile-menu-overlay" id="mobile-menu-overlay">
         <div class="mobile-menu-content">
-            <a href="../../../research/index.html" class="mobile-nav-link">Research</a>
-            <a href="../../index.html" class="mobile-nav-link active">Tech Blog</a>
-            <a href="../../../apps.html" class="mobile-nav-link">Apps</a>
-            <a href="../../../index.html#contact" class="mobile-nav-link">Contact</a>
+            <a href="/research/index.html" class="mobile-nav-link">Research</a>
+            <a href="/blog/index.html" class="mobile-nav-link active">Tech Blog</a>
+            <a href="/apps.html" class="mobile-nav-link">Apps</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun">☀️</span>
@@ -125,6 +122,8 @@
             <div class="post-lead">
                 You may have seen headlines like &ldquo;researchers found the deception feature inside an AI.&rdquo; This post is about what that kind of claim actually rests on. Tools called sparse autoencoders can crack open a language model&rsquo;s internal state and hand you a numbered list of &ldquo;features,&rdquo; and someone then attaches an English name to a number: feature <code>58667</code> is &ldquo;deception.&rdquo; The number is real. The name is a human interpretation layered on afterward, often a thoughtful one, but one that has to be tested before you lean on it. The gap between the two is where a lot of AI interpretability claims quietly overreach. Here we walk through, from the ground up, what these features are, where the names come from, and then run a real test: we take six deception-related feature numbers from a public notebook and check, on 1,120 carefully controlled texts, what actually turns them on.
             </div>
+            
+
             
 
             
@@ -1416,8 +1415,17 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
             </div>
 
             <footer class="post-footer">
+                <div class="post-transparency">
+                    <div class="post-transparency-label">Public source &amp; edit history</div>
+                    <p>This blog is published two ways: as the rendered page you are
+                    reading, and as plain-text source in a public git repository,
+                    <a href="https://github.com/praxagent/praxagent-ai" rel="noopener">praxagent/praxagent-ai</a>.
+                    Every revision to every post is preserved in the commit log, so
+                    you can see exactly what changed and when:
+                    <a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/posts/how-to-read-an-sae-feature-id/index.md" rel="noopener">view this article's edit history</a>.</p>
+                </div>
                 <div class="post-navigation">
-                    <a href="../../index.html" class="back-to-blog">← Back to Blog</a>
+                    <a href="/blog/index.html" class="back-to-blog">← Back to Blog</a>
                 </div>
             </footer>
         </article>
@@ -1438,10 +1446,10 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
                 </div>
                 
                 <div class="footer-links">
-                    <a href="../../../research/index.html">Research</a>
-                    <a href="../../index.html">Tech Blog</a>
-                    <a href="../../../apps.html">Apps</a>
-                    <a href="../../../index.html#contact">Contact</a>
+                    <a href="/research/index.html">Research</a>
+                    <a href="/blog/index.html">Tech Blog</a>
+                    <a href="/apps.html">Apps</a>
+                    <a href="/index.html#contact">Contact</a>
                     <a href="#">Privacy Policy</a>
                 </div>
             </div>
@@ -1453,7 +1461,7 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
         </div>
     </footer>
 
-    <script src="../../script.js"></script>
+    <script src="/script.js"></script>
     <script>
       feather.replace()
     </script>
