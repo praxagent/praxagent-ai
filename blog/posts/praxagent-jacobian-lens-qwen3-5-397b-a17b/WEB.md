@@ -116,11 +116,28 @@ span probes).
 
 - Markup: Hugo shortcode `jspace_layer_explorer` → `#jspace-explorer`
 - Logic: `jspace-layer-explorer.js` (fetch JSON, pack cloud, gloss toggle
-  `original → English`, sparkline of experience-lexicon median rank)
+  `original → English`, per-tab probe-lexicon median-rank sparkline)
 - Cache-bust: `?v=N` on `data-src` and `<script src>` in the shortcode when shipping
   JSON/JS changes
 
-### 5. Hugo build
+### 5. Act-2 statistics and paired-rank figure
+
+Both are generated from the web-mirrored `receipts/demo_qwen35-397b.json`:
+
+```bash
+cd blog-source/content/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b
+uv run --with scipy python tools/recompute_act2_statistics.py \
+  --out receipts/act2_statistics.json
+uv run python tools/export_act2_paired_ranks.py
+```
+
+Outputs:
+
+- `receipts/act2_statistics.json`: Wilson intervals; exact two-sided sign, Wilcoxon,
+  and McNemar tests; one- and two-sided Fisher sensitivity checks; item ranks.
+- `act2-paired-ranks.svg`: log-rank plot generated from that statistics receipt.
+
+### 6. Hugo build
 
 ```bash
 cd blog-source
