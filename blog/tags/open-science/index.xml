@@ -2,31 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Open-Science on praxagent LLC Blog</title>
-    <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/open-science/</link>
+    <link>https://praxagent.ai/blog/tags/open-science/</link>
     <description>Recent content in Open-Science on praxagent LLC Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 11 Jul 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://macbook-air.tail9eb7b0.ts.net:8001/tags/open-science/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Can a Jacobian Lens Detect SAE Steering?</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/posts/jacobian-lens-sae-steering/</link>
-      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/posts/jacobian-lens-sae-steering/</guid>
-      <description>A prospectively frozen Llama 3.3 70B experiment asks whether SAE steering leaves a detectable downstream fingerprint in Jacobian-lens space. A preregistered follow-up adds semantic hard negatives, same-subfamily comparators, a 14-reader capacity ladder, and a worked example of a replay gate failing honestly.</description>
-    </item>
+    <atom:link href="https://praxagent.ai/blog/tags/open-science/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Under Pressure: What a Jacobian Lens Reveals About Self-Preservation and Lying, Once You Run the Controls</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/posts/workspace-under-pressure/</link>
+      <link>https://praxagent.ai/blog/posts/workspace-under-pressure/</link>
       <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/posts/workspace-under-pressure/</guid>
+      <guid>https://praxagent.ai/blog/posts/workspace-under-pressure/</guid>
       <description>A follow-up to our Jacobian-lens release, and mostly a lesson in controls. On Qwen3.5-397B we reproduce Anthropic&amp;rsquo;s global-workspace signatures under pressure (survival vocabulary under a self-directed threat; the true answer held while the output is pushed to lie), then stress-test them against a plain logit-lens, a random-J null, and the model&amp;rsquo;s own output head. The honest verdict: the self-preservation signal is directional but modest, base-rate-inflated, and not specific to the Jacobian lens (a logit-lens reads it too); the one &amp;lsquo;caught lie&amp;rsquo; is read at rank 1 by the logit-lens and rank 2 by the output head, so no lens is needed to catch it; and the self-directedness does not replicate on Llama-3.3-70B. What survives: the signatures are legible on open weights, the model mostly refuses to lie (given room to reason it never says the lie at all), and the controls are the whole story.</description>
     </item>
     <item>
       <title>Open-sourcing (and Auditing) a Jacobian Lens for Qwen3.5-397B</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/</link>
+      <link>https://praxagent.ai/blog/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/</link>
       <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/</guid>
+      <guid>https://praxagent.ai/blog/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/</guid>
       <description>As of July 10, 2026, Praxagent is open-sourcing the public Jacobian lens fitted for the largest base model so far: Qwen3.5-397B-A17B, with a pre-registered readout audit against identity and random-J controls. Weights, hash, code, and receipts included.</description>
     </item>
   </channel>
