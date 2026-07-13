@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ai-Safety on praxagent LLC Blog</title>
-    <link>https://praxagent.ai/blog/tags/ai-safety/</link>
+    <link>http://macbook-air.tail9eb7b0.ts.net:1313/tags/ai-safety/</link>
     <description>Recent content in Ai-Safety on praxagent LLC Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 11 Jul 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://praxagent.ai/blog/tags/ai-safety/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://macbook-air.tail9eb7b0.ts.net:1313/tags/ai-safety/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Under Pressure: What a Jacobian Lens Reveals About Self-Preservation and Lying, Once You Run the Controls</title>
-      <link>https://praxagent.ai/blog/posts/workspace-under-pressure/</link>
+      <link>http://macbook-air.tail9eb7b0.ts.net:1313/posts/workspace-under-pressure/</link>
       <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>https://praxagent.ai/blog/posts/workspace-under-pressure/</guid>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:1313/posts/workspace-under-pressure/</guid>
       <description>A follow-up to our Jacobian-lens release, and mostly a lesson in controls. On Qwen3.5-397B we reproduce Anthropic&amp;rsquo;s global-workspace signatures under pressure (survival vocabulary under a self-directed threat; the true answer held while the output is pushed to lie), then stress-test them against a plain logit-lens, a random-J null, and the model&amp;rsquo;s own output head. The honest verdict: the self-preservation signal is directional but modest, base-rate-inflated, and not specific to the Jacobian lens (a logit-lens reads it too); the one &amp;lsquo;caught lie&amp;rsquo; is read at rank 1 by the logit-lens and rank 2 by the output head, so no lens is needed to catch it; and the self-directedness does not replicate on Llama-3.3-70B. What survives: the signatures are legible on open weights, the model mostly refuses to lie (given room to reason it never says the lie at all), and the controls are the whole story.</description>
     </item>
   </channel>

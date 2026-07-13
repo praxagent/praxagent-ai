@@ -1,10 +1,10 @@
 ---
 title: "Can a Jacobian Lens Detect SAE Steering?"
-date: 2026-07-11
+date: 2026-07-12
 tags: ["AI", "LLM", "machine-learning", "interpretability", "sparse-autoencoders", "jacobian-lens", "model-auditing", "reproducibility", "preregistration", "open-science"]
 author: Timothy Jones
 summary: "A prospectively frozen Llama 3.3 70B experiment asks whether SAE steering leaves a detectable downstream fingerprint in Jacobian-lens space. A preregistered follow-up adds semantic hard negatives, same-subfamily comparators, a 14-reader capacity ladder, and a worked example of a replay gate failing honestly."
-draft: true
+draft: false
 lead: |
   Imagine you push a language model sideways by adding a small internal
   "steering" vector, the kind sparse autoencoders advertise as concept knobs.
