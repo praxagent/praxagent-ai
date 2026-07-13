@@ -2,129 +2,115 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on praxagent LLC Blog</title>
-    <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/</link>
+    <link>https://praxagent.ai/blog/tags/</link>
     <description>Recent content in Tags on praxagent LLC Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 11 Jul 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://macbook-air.tail9eb7b0.ts.net:8001/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://praxagent.ai/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AI</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/ai/</link>
+      <link>https://praxagent.ai/blog/tags/ai/</link>
       <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/ai/</guid>
+      <guid>https://praxagent.ai/blog/tags/ai/</guid>
       <description></description>
     </item>
     <item>
       <title>Ai-Safety</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/ai-safety/</link>
+      <link>https://praxagent.ai/blog/tags/ai-safety/</link>
       <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/ai-safety/</guid>
+      <guid>https://praxagent.ai/blog/tags/ai-safety/</guid>
       <description></description>
     </item>
     <item>
       <title>Evaluation-Awareness</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/evaluation-awareness/</link>
+      <link>https://praxagent.ai/blog/tags/evaluation-awareness/</link>
       <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/evaluation-awareness/</guid>
+      <guid>https://praxagent.ai/blog/tags/evaluation-awareness/</guid>
       <description></description>
     </item>
     <item>
       <title>Interpretability</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/interpretability/</link>
+      <link>https://praxagent.ai/blog/tags/interpretability/</link>
       <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/interpretability/</guid>
+      <guid>https://praxagent.ai/blog/tags/interpretability/</guid>
       <description></description>
     </item>
     <item>
       <title>J-Space</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/j-space/</link>
+      <link>https://praxagent.ai/blog/tags/j-space/</link>
       <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/j-space/</guid>
+      <guid>https://praxagent.ai/blog/tags/j-space/</guid>
       <description></description>
     </item>
     <item>
       <title>Jacobian-Lens</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/jacobian-lens/</link>
+      <link>https://praxagent.ai/blog/tags/jacobian-lens/</link>
       <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/jacobian-lens/</guid>
+      <guid>https://praxagent.ai/blog/tags/jacobian-lens/</guid>
       <description></description>
     </item>
     <item>
       <title>LLM</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/llm/</link>
+      <link>https://praxagent.ai/blog/tags/llm/</link>
       <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/llm/</guid>
+      <guid>https://praxagent.ai/blog/tags/llm/</guid>
       <description></description>
     </item>
     <item>
       <title>Machine-Learning</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/machine-learning/</link>
+      <link>https://praxagent.ai/blog/tags/machine-learning/</link>
       <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/machine-learning/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Model-Auditing</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/model-auditing/</link>
-      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/model-auditing/</guid>
+      <guid>https://praxagent.ai/blog/tags/machine-learning/</guid>
       <description></description>
     </item>
     <item>
       <title>Open-Science</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/open-science/</link>
+      <link>https://praxagent.ai/blog/tags/open-science/</link>
       <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/open-science/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Preregistration</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/preregistration/</link>
-      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/preregistration/</guid>
+      <guid>https://praxagent.ai/blog/tags/open-science/</guid>
       <description></description>
     </item>
     <item>
       <title>Reproducibility</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/reproducibility/</link>
-      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/reproducibility/</guid>
+      <link>https://praxagent.ai/blog/tags/reproducibility/</link>
+      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://praxagent.ai/blog/tags/reproducibility/</guid>
       <description></description>
     </item>
     <item>
       <title>Sparse-Autoencoders</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/sparse-autoencoders/</link>
-      <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/sparse-autoencoders/</guid>
+      <link>https://praxagent.ai/blog/tags/sparse-autoencoders/</link>
+      <pubDate>Thu, 09 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://praxagent.ai/blog/tags/sparse-autoencoders/</guid>
       <description></description>
     </item>
     <item>
       <title>Tutorials</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/tutorials/</link>
+      <link>https://praxagent.ai/blog/tags/tutorials/</link>
       <pubDate>Thu, 09 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/tutorials/</guid>
+      <guid>https://praxagent.ai/blog/tags/tutorials/</guid>
       <description></description>
     </item>
     <item>
       <title>Embedding</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/embedding/</link>
+      <link>https://praxagent.ai/blog/tags/embedding/</link>
       <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/embedding/</guid>
+      <guid>https://praxagent.ai/blog/tags/embedding/</guid>
       <description></description>
     </item>
     <item>
       <title>NLP</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/nlp/</link>
+      <link>https://praxagent.ai/blog/tags/nlp/</link>
       <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/nlp/</guid>
+      <guid>https://praxagent.ai/blog/tags/nlp/</guid>
       <description></description>
     </item>
     <item>
       <title>Vector Search</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8001/tags/vector-search/</link>
+      <link>https://praxagent.ai/blog/tags/vector-search/</link>
       <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8001/tags/vector-search/</guid>
+      <guid>https://praxagent.ai/blog/tags/vector-search/</guid>
       <description></description>
     </item>
   </channel>
