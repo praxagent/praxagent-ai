@@ -1,5 +1,6 @@
 HUGO ?= hugo
 PYTHON ?= python3
+RSYNC ?= rsync
 
 BLOG_SOURCE := blog-source
 BLOG_OUTPUT := blog
@@ -16,7 +17,15 @@ blog: ## Compile blog-source/content/posts into blog/
 	$(HUGO) \
 		--source "$(BLOG_SOURCE)" \
 		--config "$(abspath $(HUGO_CONFIG))" \
-		--destination "$(abspath $(BLOG_OUTPUT))"
+		--destination "$(abspath $(BLOG_OUTPUT))" \
+		--cleanDestinationDir
+	$(RSYNC) -a \
+		--include='*/' \
+		--include='README.md' \
+		--include='WEB.md' \
+		--exclude='*' \
+		"$(BLOG_SOURCE)/content/" \
+		"$(BLOG_OUTPUT)/"
 
 blog-serve: ## Start Hugo with live reload at http://127.0.0.1:1313/
 	$(HUGO) server \

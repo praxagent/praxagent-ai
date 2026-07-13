@@ -1260,7 +1260,7 @@ Pre-outcome freeze:
 | Results writeup | [`docs/LLAMA70B_SAE_JLENS_RESULTS.md`](https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/docs/LLAMA70B_SAE_JLENS_RESULTS.md) |
 | Frozen machine plan | [`confirmatory_v1_plan_20260711/`](https://github.com/tdj28/llm_selfref_pre/tree/b026faac222e55d7da4f01a30a6a60a468a5f023/data/sae_jlens_audit/confirmatory_v1_plan_20260711) |
 | Result release + figures | [`confirmatory_v1_20260711/`](https://github.com/tdj28/llm_selfref_pre/tree/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711) |
-| Analysis tables (local mirror) | [`receipts/`](receipts/) |
+| Analysis tables (local mirror) | [`receipts/README.md`](receipts/README.md) |
 | Experiment code | [`experiments/exp2_sae/`](https://github.com/tdj28/llm_selfref_pre/tree/b026faac222e55d7da4f01a30a6a60a468a5f023/experiments/exp2_sae) |
 | Runtime source commit | [`b026faa`](https://github.com/tdj28/llm_selfref_pre/commit/b026faac222e55d7da4f01a30a6a60a468a5f023) |
 | Result release commit | [`c071aa4`](https://github.com/tdj28/llm_selfref_pre/commit/c071aa4d737d72818f0774ca389c159b5da67dc1) |

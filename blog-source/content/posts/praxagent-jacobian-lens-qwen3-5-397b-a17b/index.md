@@ -76,7 +76,7 @@ method or the model.
    random-J transports (gate on qwen3.5-27b, then 397B), with dropped act 1
    left in the public ledger.
 3. A **teaching note** that separates artifact, readout claim, and causal
-   claim, with receipts mirrored under [`receipts/`](receipts/).
+   claim, with receipts mirrored in [`receipts/README.md`](receipts/README.md).
 
 **Not claimed.**
 
@@ -1594,7 +1594,7 @@ plain-English walkthroughs are in the appendix below.
 | Pre-registration | [`8102510`](https://github.com/praxagent/jacobian-lens-research-202607a/commit/810251006bae0d322412bbd68ed85eb4cb1d6514) |
 | Gate result | [`4f44976`](https://github.com/praxagent/jacobian-lens-research-202607a/commit/4f4497682108eff2d6bb6e6b24c0ff17d2de50d3) |
 | 397B result | [`d9fc376`](https://github.com/praxagent/jacobian-lens-research-202607a/commit/d9fc3763e2eb30f1ce1221b16027247afcb0fdfe) |
-| Web-mirrored receipts | [`receipts/`](receipts/) |
+| Web-mirrored receipts | [`receipts/README.md`](receipts/README.md) |
 | Act-2 recomputed stats | [`act2_statistics.json`](receipts/act2_statistics.json) ([script](tools/recompute_act2_statistics.py)) |
 | Anthropic `jlens` | [github.com/anthropics/jacobian-lens](https://github.com/anthropics/jacobian-lens) |
 | Neuronpedia prior collection | [`neuronpedia/jacobian-lens@a4114d7`](https://huggingface.co/neuronpedia/jacobian-lens/tree/a4114d7752d11eb546e6cf372213d7e75526d3a1) |
@@ -1620,7 +1620,7 @@ Warm-start toward n≈50 is a separate, in-progress extension.
 | Gate on qwen3.5-27b | Cheaper dress rehearsal; act 1 died here and was dropped. | Commit [`4f44976`](https://github.com/praxagent/jacobian-lens-research-202607a/commit/4f4497682108eff2d6bb6e6b24c0ff17d2de50d3). |
 | 397B act-2 audit | Same protocol on the big model: fitted lens vs identity vs random-J. | Commit [`d9fc376`](https://github.com/praxagent/jacobian-lens-research-202607a/commit/d9fc3763e2eb30f1ce1221b16027247afcb0fdfe); receipt [`demo_qwen35-397b.json`](receipts/demo_qwen35-397b.json). |
 | Recomputed statistics | Exact Wilson / sign / Wilcoxon numbers from the receipt, not hand-typed. | [`act2_statistics.json`](receipts/act2_statistics.json). |
-| Exploratory probes (not pre-registered) | Extra readouts on the same warm pod; labeled exploratory. | [`demo2_*`](receipts/) JSON mirrors. |
+| Exploratory probes (not pre-registered) | Extra readouts on the same warm pod; labeled exploratory. | [`demo2_*`](receipts/README.md) JSON mirrors. |
 
 <p class="figure-note">Table: what "complete" means for this release. Skim the middle column first.</p>
 
