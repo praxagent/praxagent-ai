@@ -168,9 +168,9 @@ body {
     color: var(--sky);
     font-family: 'Rajdhani', 'Inter', sans-serif;
     font-size: 1.6rem;
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: 0.12em;
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: 0.14em;
     text-transform: lowercase;
     -webkit-text-fill-color: currentColor;
 }
@@ -1180,7 +1180,7 @@ body {
 .brand-wordmark {
     font-family: 'Rajdhani', 'Inter', sans-serif;
     font-size: clamp(2.75rem, 7vw, 5.25rem);
-    font-weight: 300;
+    font-weight: 500;
     line-height: 0.95;
     letter-spacing: 0.14em;
 }
@@ -1609,6 +1609,10 @@ body {
 
     .nav-container {
         padding: 0.75rem 1rem;
+    }
+
+    .logo-text {
+        letter-spacing: 0.11em;
     }
 
     .hero-container {

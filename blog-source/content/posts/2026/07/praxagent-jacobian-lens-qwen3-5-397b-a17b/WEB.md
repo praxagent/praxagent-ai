@@ -1,7 +1,7 @@
 # WEB.md — how the Jacobian-lens post visuals were built
 
 This note documents the **website-facing** artifacts for
-`blog-source/content/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/`.
+`blog-source/content/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/`.
 
 The heavy experiment code and full pod receipts live in the sibling research repo
 (`../jacobian-lens-research-202607a/.../experiments/lens_demo/`). That tree is **not**
@@ -21,7 +21,7 @@ this post directory (see **Local mirrors** below).
 | Shortcode | `blog-source/layouts/shortcodes/jspace_layer_explorer.html` |
 | CSS | `.jspace-explorer*` rules in `blog-source/static/blog.css` |
 
-Hugo copies post-folder assets into `blog/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/`
+Hugo copies post-folder assets into `blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/`
 on build (`hugo --destination ../blog` from `blog-source/`).
 
 ## Local mirrors (`receipts/`)
@@ -48,7 +48,7 @@ to render. Receipt / prompt links in the post body point at **`receipts/...`**.
 ### 0. Prerequisites
 
 - Pod with Qwen3.5-397B-A17B + published lens
-  `praxagent/jacobian-lens-qwen3.5-397b-a17b` (sha256 `668c3bf1…99e97`)
+  `praxagent-org/jacobian-lens-qwen3.5-397b-a17b` (sha256 `668c3bf1…99e97`)
 - Research checkout with `experiments/lens_demo/demo2.py`
 
 ### 1. Run readouts on the pod
@@ -59,7 +59,7 @@ cd experiments/lens_demo
 # Consciousness set (last-token readout) — already have n24 receipt
 python demo2.py \
   --big-model Qwen/Qwen3.5-397B-A17B:model.language_model \
-  --lens-hf praxagent/jacobian-lens-qwen3.5-397b-a17b:jlens/wikitext/qwen35_397b.pt \
+  --lens-hf praxagent-org/jacobian-lens-qwen3.5-397b-a17b:jlens/wikitext/qwen35_397b.pt \
   --expected-sha256 668c3bf17305b0d52495cb7ba589a1c1173301b1d13c3c6ad84e58245dc99e97 \
   --lens-fit-n 24 \
   --out demo2_consciousness_qwen35-397b_n24.json
@@ -84,8 +84,8 @@ python export_jspace_clouds.py \
   --receipt demo2_canada_addon.json \
   --receipt demo2_probes_span_qwen35-397b_n24.json \
   --keep-gloss-from /path/to/praxagent/.../jspace-layer-clouds.json \
-  --out /path/to/praxagent/blog-source/content/posts/.../jspace-layer-clouds.json,\
-/path/to/praxagent/blog/posts/.../jspace-layer-clouds.json
+  --out /path/to/praxagent/blog-source/content/posts/YYYY/MM/SLUG/jspace-layer-clouds.json,\
+/path/to/praxagent/blog/posts/YYYY/MM/SLUG/jspace-layer-clouds.json
 ```
 
 Behavior:
@@ -104,8 +104,8 @@ SVG, write `jspace-<condition>-topk40.svg` (+ `-glossed` where useful).
 
 Outputs land in:
 
-- `blog-source/content/posts/.../` (source of truth for Hugo)
-- `blog/posts/.../` (built site)
+- `blog-source/content/posts/YYYY/MM/SLUG/` (source of truth for Hugo)
+- `blog/posts/YYYY/MM/SLUG/` (built site)
 - optionally `assets/` for reuse
 
 Re-run after changing anchors or glosses. There is no checked-in one-liner script yet;
@@ -125,7 +125,7 @@ span probes).
 Both are generated from the web-mirrored `receipts/demo_qwen35-397b.json`:
 
 ```bash
-cd blog-source/content/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b
+cd blog-source/content/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b
 uv run --with scipy python tools/recompute_act2_statistics.py \
   --out receipts/act2_statistics.json
 uv run python tools/export_act2_paired_ranks.py
@@ -143,14 +143,14 @@ Outputs:
 cd blog-source
 hugo --destination ../blog
 # ensure post assets synced if Hugo didn’t copy a newly added file:
-cp content/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/jspace-layer-*.{js,json} \
-   ../blog/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/
-cp -R content/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/receipts \
-   ../blog/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/
+cp content/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/jspace-layer-*.{js,json} \
+   ../blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/
+cp -R content/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/receipts \
+   ../blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/
 ```
 
 Local preview from repo root: `python3 -m http.server 8000` then open
-`/blog/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/index.html`.
+`/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/index.html`.
 
 ## Gloss map
 

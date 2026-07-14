@@ -272,6 +272,79 @@
             color: var(--text-dark);
         }
 
+        .consultant-card {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 2rem;
+            align-items: start;
+            max-width: 940px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: 0 4px 15px var(--shadow-primary);
+        }
+
+        .consultant-photo {
+            position: relative;
+            width: 180px;
+            height: 180px;
+        }
+
+        .consultant-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 999px;
+            border: 3px solid rgba(8, 145, 178, 0.35);
+        }
+
+        .consultant-initials {
+            display: none;
+            width: 100%;
+            height: 100%;
+            border-radius: 999px;
+            align-items: center;
+            justify-content: center;
+            font-family: "Rajdhani", sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #0891b2, #8b5cf6);
+        }
+
+        .consultant-body h3 {
+            color: var(--text-dark);
+            font-size: 1.6rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .consultant-role {
+            color: #0891b2;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .consultant-bio {
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .consultant-card {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                text-align: center;
+            }
+
+            .consultant-body {
+                width: 100%;
+            }
+        }
+
         @media (max-width: 768px) {
             .internship-hero {
                 min-height: auto;
@@ -415,7 +488,43 @@
             </div>
         </section>
 
-        <section class="internship-section alt">
+        <section id="lead-consultant" class="internship-section alt">
+            <div class="container">
+                <div class="internship-intro">
+                    <h2 class="section-title">AI in Biological Science &amp; Education Consultant</h2>
+                    <p>
+                        The biological science and education direction of this internship is led by an experienced
+                        plant biologist and career software developer, ensuring the AI work is grounded in both real
+                        scientific practice and hands-on engineering.
+                    </p>
+                </div>
+
+                <article class="consultant-card">
+                    <div class="consultant-photo">
+                        <img src="jennifer-hoffman.jpg" alt="Jennifer Hoffman"
+                             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                        <div class="consultant-initials" aria-hidden="true">JH</div>
+                    </div>
+                    <div class="consultant-body">
+                        <h3>Jennifer Hoffman</h3>
+                        <p class="consultant-role">AI in Biological Science &amp; Education Consultant</p>
+                        <p class="consultant-bio">
+                            Jennifer holds a Master of Science in Biology from Syracuse University,
+                            with a focus on plant developmental biology.
+                            She also spent many years in education, teaching Earth Sciences, and brings many years of
+                            professional software development experience, most recently as a developer at Gateway
+                            Ticketing Systems, where she was among the first on her team to adopt AI in the software
+                            development lifecycle. That rare combination of laboratory science, classroom teaching, and
+                            hands-on engineering makes her uniquely suited to guide this internship: as consultant
+                            she guides the scientific direction of the program, reviews biology content for accuracy,
+                            and shapes how AI methods are responsibly applied to biological research and education.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="internship-section">
             <div class="container">
                 <div class="internship-intro">
                     <h2 class="section-title">Learning Objectives</h2>
@@ -453,7 +562,7 @@
             </div>
         </section>
 
-        <section class="internship-section">
+        <section class="internship-section alt">
             <div class="container">
                 <div class="internship-intro">
                     <h2 class="section-title">Portfolio Artifacts</h2>
@@ -497,7 +606,7 @@
             </div>
         </section>
 
-        <section class="internship-section alt">
+        <section class="internship-section">
             <div class="container">
                 <div class="internship-intro">
                     <h2 class="section-title">Initial Learning Plan</h2>
@@ -559,7 +668,7 @@
             </div>
         </section>
 
-        <section class="internship-section">
+        <section class="internship-section alt">
             <div class="container">
                 <div class="internship-intro">
                     <h2 class="section-title">Example Project Topics</h2>
@@ -584,7 +693,7 @@
             </div>
         </section>
 
-        <section id="blog-post-standards" class="internship-section alt">
+        <section id="blog-post-standards" class="internship-section">
             <div class="container">
                 <div class="internship-intro">
                     <h2 class="section-title">Blog Post Standards</h2>

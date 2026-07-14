@@ -338,6 +338,43 @@ void main() {
     float organicRelief = (pattern - 0.5) * 0.020;
     terrain *= 1.0
       + (webRelief + ridgeRelief + organicRelief) * groundMotion * 0.48;
+
+    // Cobweb cracks revealed along the warp's inflection front. The traveling
+    // wave bends the rock hardest where it crosses its midpoint, so the
+    // fracture network only shows where the surface is actively flexing
+    // instead of sitting on top as a static overlay.
+    float inflection = 1.0 - smoothstep(
+      0.06,
+      0.48,
+      abs(travelingWave - 0.5) * 2.0 - (pattern - 0.5) * 0.22
+    );
+    float crackLine = 1.0 - smoothstep(
+      0.0,
+      0.028 + antialiasWidth,
+      edgeDistance
+    );
+    float crackNetwork = crackLine + echoThreadA * 0.30;
+#if !LOW_POWER
+    crackNetwork += echoThreadB * 0.18;
+#endif
+    float crackStrength = clamp(crackNetwork, 0.0, 1.0) * inflection;
+
+    // Hairline shadow with a lit rim on one side reads as a real fissure.
+    float rimLight = crackLine * inflection
+      * max(dot(edgeNormalTop, normalize(vec2(0.38, 0.82))), 0.0);
+
+    // Sparse glints traveling along the threads suggest signals moving
+    // through the network without turning the rocks neon.
+    float pulse = 0.5 + 0.5 * sin(webPhase * 2.0 + groundTime * 2.3);
+    pulse = pulse * pulse * pulse;
+    pulse = pulse * pulse;
+    float glint = crackLine * inflection * pulse;
+
+    terrain *= 1.0 - crackStrength * (0.30 + 0.10 * pattern) * groundMotion;
+    terrain += terrain
+      * (rimLight * 0.20 + glint * 0.40)
+      * vec3(0.94, 1.0, 1.07)
+      * groundMotion;
   }
 
   vec3 baseScene = mix(sky, source, ground);
