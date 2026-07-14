@@ -3,33 +3,48 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://praxagent.ai/blog/tags/ai/</loc>
-    <lastmod>2026-07-12T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://praxagent.ai/blog/tags/ai-safety/</loc>
+    <lastmod>2026-07-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://praxagent.ai/blog/tags/evaluation-awareness/</loc>
+    <lastmod>2026-07-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://praxagent.ai/blog/tags/interpretability/</loc>
+    <lastmod>2026-07-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://praxagent.ai/blog/tags/j-space/</loc>
+    <lastmod>2026-07-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://praxagent.ai/blog/tags/jacobian-lens/</loc>
+    <lastmod>2026-07-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://praxagent.ai/blog/tags/llm/</loc>
+    <lastmod>2026-07-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://praxagent.ai/blog/tags/machine-learning/</loc>
+    <lastmod>2026-07-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://praxagent.ai/blog/tags/open-science/</loc>
+    <lastmod>2026-07-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://praxagent.ai/blog/posts/</loc>
+    <lastmod>2026-07-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://praxagent.ai/blog/</loc>
+    <lastmod>2026-07-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://praxagent.ai/blog/tags/</loc>
+    <lastmod>2026-07-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://praxagent.ai/blog/posts/2026/07/workspace-under-pressure/</loc>
+    <lastmod>2026-07-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/</loc>
     <lastmod>2026-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://praxagent.ai/blog/tags/interpretability/</loc>
-    <lastmod>2026-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://praxagent.ai/blog/tags/jacobian-lens/</loc>
-    <lastmod>2026-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://praxagent.ai/blog/tags/llm/</loc>
-    <lastmod>2026-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://praxagent.ai/blog/tags/machine-learning/</loc>
-    <lastmod>2026-07-12T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://praxagent.ai/blog/tags/model-auditing/</loc>
-    <lastmod>2026-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://praxagent.ai/blog/tags/open-science/</loc>
-    <lastmod>2026-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://praxagent.ai/blog/posts/</loc>
-    <lastmod>2026-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://praxagent.ai/blog/</loc>
     <lastmod>2026-07-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/preregistration/</loc>
@@ -40,12 +55,6 @@
   </url><url>
     <loc>https://praxagent.ai/blog/tags/sparse-autoencoders/</loc>
     <lastmod>2026-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://praxagent.ai/blog/tags/</loc>
-    <lastmod>2026-07-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://praxagent.ai/blog/tags/j-space/</loc>
-    <lastmod>2026-07-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/</loc>
     <lastmod>2026-07-10T00:00:00+00:00</lastmod>

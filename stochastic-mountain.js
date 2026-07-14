@@ -357,7 +357,10 @@ void main() {
 #if !LOW_POWER
     crackNetwork += echoThreadB * 0.18;
 #endif
-    float crackStrength = clamp(crackNetwork, 0.0, 1.0) * inflection;
+    // Confine the fracture network to solidly-masked rock so it never bleeds
+    // into the feathered ridgeline or the thin tree silhouettes against sky.
+    float solidGround = smoothstep(0.80, 0.98, min(ground, displacedGround));
+    float crackStrength = clamp(crackNetwork, 0.0, 1.0) * inflection * solidGround;
 
     // Hairline shadow with a lit rim on one side reads as a real fissure.
     float rimLight = crackLine * inflection
@@ -370,9 +373,9 @@ void main() {
     pulse = pulse * pulse;
     float glint = crackLine * inflection * pulse;
 
-    terrain *= 1.0 - crackStrength * (0.30 + 0.10 * pattern) * groundMotion;
+    terrain *= 1.0 - crackStrength * (0.26 + 0.08 * pattern) * groundMotion;
     terrain += terrain
-      * (rimLight * 0.20 + glint * 0.40)
+      * (rimLight * 0.14 + glint * 0.30) * solidGround
       * vec3(0.94, 1.0, 1.07)
       * groundMotion;
   }

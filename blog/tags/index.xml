@@ -6,41 +6,69 @@
     <description>Recent content in Tags on praxagent LLC Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Jul 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://praxagent.ai/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AI</title>
       <link>https://praxagent.ai/blog/tags/ai/</link>
-      <pubDate>Sun, 12 Jul 2026 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
       <guid>https://praxagent.ai/blog/tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ai-Safety</title>
+      <link>https://praxagent.ai/blog/tags/ai-safety/</link>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://praxagent.ai/blog/tags/ai-safety/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Evaluation-Awareness</title>
+      <link>https://praxagent.ai/blog/tags/evaluation-awareness/</link>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://praxagent.ai/blog/tags/evaluation-awareness/</guid>
       <description></description>
     </item>
     <item>
       <title>Interpretability</title>
       <link>https://praxagent.ai/blog/tags/interpretability/</link>
-      <pubDate>Sun, 12 Jul 2026 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
       <guid>https://praxagent.ai/blog/tags/interpretability/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>J-Space</title>
+      <link>https://praxagent.ai/blog/tags/j-space/</link>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://praxagent.ai/blog/tags/j-space/</guid>
       <description></description>
     </item>
     <item>
       <title>Jacobian-Lens</title>
       <link>https://praxagent.ai/blog/tags/jacobian-lens/</link>
-      <pubDate>Sun, 12 Jul 2026 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
       <guid>https://praxagent.ai/blog/tags/jacobian-lens/</guid>
       <description></description>
     </item>
     <item>
       <title>LLM</title>
       <link>https://praxagent.ai/blog/tags/llm/</link>
-      <pubDate>Sun, 12 Jul 2026 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
       <guid>https://praxagent.ai/blog/tags/llm/</guid>
       <description></description>
     </item>
     <item>
       <title>Machine-Learning</title>
       <link>https://praxagent.ai/blog/tags/machine-learning/</link>
-      <pubDate>Sun, 12 Jul 2026 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
       <guid>https://praxagent.ai/blog/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Open-Science</title>
+      <link>https://praxagent.ai/blog/tags/open-science/</link>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://praxagent.ai/blog/tags/open-science/</guid>
       <description></description>
     </item>
     <item>
@@ -48,13 +76,6 @@
       <link>https://praxagent.ai/blog/tags/model-auditing/</link>
       <pubDate>Sun, 12 Jul 2026 00:00:00 +0000</pubDate>
       <guid>https://praxagent.ai/blog/tags/model-auditing/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Open-Science</title>
-      <link>https://praxagent.ai/blog/tags/open-science/</link>
-      <pubDate>Sun, 12 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>https://praxagent.ai/blog/tags/open-science/</guid>
       <description></description>
     </item>
     <item>
@@ -76,13 +97,6 @@
       <link>https://praxagent.ai/blog/tags/sparse-autoencoders/</link>
       <pubDate>Sun, 12 Jul 2026 00:00:00 +0000</pubDate>
       <guid>https://praxagent.ai/blog/tags/sparse-autoencoders/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>J-Space</title>
-      <link>https://praxagent.ai/blog/tags/j-space/</link>
-      <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>https://praxagent.ai/blog/tags/j-space/</guid>
       <description></description>
     </item>
     <item>
