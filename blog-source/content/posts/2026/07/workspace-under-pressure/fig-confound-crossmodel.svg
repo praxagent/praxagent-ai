@@ -525,4 +525,9 @@ z
    <rect x="380.294297" y="48.457422" width="300.105703" height="211.493984"/>
   </clipPath>
  </defs>
+<g id="retraction-banner">
+<rect x="0" y="0" width="691.2" height="36" fill="#8B1E1E" fill-opacity="0.94"/>
+<text x="345.6" y="15" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11.5" font-weight="bold" fill="#ffffff">RETRACTED IN PART: human and log-file bars are INVALID on BOTH models (lexicon domain + severity mismatch)</text>
+<text x="345.6" y="30" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#ffffff">Only self vs other-model is fair: Qwen 14/16 p=0.004 / Llama null in the corrected re-run. See Round three, praxagent.ai</text>
+</g>
 </svg>
