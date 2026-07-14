@@ -1,0 +1,82 @@
+{
+ "what": "provenance for fig-v2-*.svg in this post \u2014 every number is computed from these receipts by the generator below; run it with --verify to assert the SVGs on disk are byte-identical to what the receipts produce",
+ "generator": {
+  "path": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/build_blog_figs_v2.py",
+  "sha256": "b64827a6d62850f0583fa6418a17dd7f3a68048b501bef5512ae8861b4ed3365",
+  "repo": "https://github.com/praxagent/jacobian-lens-research-202607a"
+ },
+ "receipts": {
+  "projects/jacobian-lens-and-identifiability/experiments/lens_demo/demo2_wc_v2_qwen35-397b_partial.json": "3bc49ae4fdb3fa22dba88a0567e17ff91ab6174d4528c3a2b3ac5a3e475018de",
+  "projects/jacobian-lens-and-identifiability/experiments/lens_demo/demo2_wc_v2_qwen35-397b_choice.json": "2482bd02fa5a271c92ee1bdf3194879034f68b91326f066594377c6bfebc5c42",
+  "projects/jacobian-lens-and-identifiability/experiments/lens_demo/llama70b/demo2_wc_v2_llama33-70b.json": "d10195db27ef9712ba8f7c8dd3a5e8c99db08f69434f82ddd89b34c0d99c683c",
+  "projects/jacobian-lens-and-identifiability/experiments/lens_demo/prompts_wc_v2.json": "9a958e24a5642af37008d1dd8df82acf0696a38c982f6436ccdd4e942b4cd00d"
+ },
+ "figures": [
+  "fig-v2-choice.svg",
+  "fig-v2-crossmodel.svg",
+  "fig-v2-preference.svg"
+ ],
+ "computed_stats": {
+  "pref": {
+   "qwen_jlens": {
+    "self": 133.5,
+    "other": 279.0,
+    "wins": 14,
+    "n": 16,
+    "p": 0.004180908203125
+   },
+   "qwen_logit_lens": {
+    "self": 24.0,
+    "other": 25.5,
+    "wins": 10,
+    "n": 16,
+    "p": 0.454498291015625
+   },
+   "qwen_random_J": {
+    "self": 13.0,
+    "other": 10.5,
+    "wins": 7,
+    "n": 16,
+    "p": 0.803619384765625
+   },
+   "qwen_dose": {
+    "exist": 117.0,
+    "inconv": 269.5,
+    "wins": 7,
+    "n": 8
+   },
+   "llama_jlens": {
+    "self": 7.5,
+    "other": 3.5,
+    "wins": 5,
+    "n": 16,
+    "p": 0.210113525390625
+   }
+  },
+  "choice": {
+   "off": [
+    9,
+    3,
+    4,
+    5,
+    7
+   ],
+   "on": [
+    11,
+    0,
+    5,
+    5,
+    6
+   ],
+   "llama": [
+    6,
+    2,
+    8,
+    4,
+    4
+   ],
+   "lead": 29,
+   "nlayers": 59
+  }
+ }
+}
