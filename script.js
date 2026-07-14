@@ -247,10 +247,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add navbar background on scroll
+    // Hand the homepage wordmark from the hero to the fixed navbar as it
+    // passes beneath it. Other pages keep their navbar brand visible.
     const navbar = document.querySelector('.navbar');
-    
-    window.addEventListener('scroll', function() {
+    const heroWordmark = document.querySelector('.mountain-brand');
+
+    if (navbar.classList.contains('home-navbar') && heroWordmark) {
+        navbar.classList.add('brand-handoff-enabled');
+    }
+
+    function updateNavbar() {
         if (window.scrollY > 50) {
             navbar.style.background = 'var(--bg-navbar-scrolled)';
             navbar.style.boxShadow = '0 2px 20px var(--shadow-navbar)';
@@ -258,7 +264,22 @@ document.addEventListener('DOMContentLoaded', function() {
             navbar.style.background = 'var(--bg-navbar)';
             navbar.style.boxShadow = 'none';
         }
-    });
+
+        if (navbar.classList.contains('home-navbar') && heroWordmark) {
+            const handoffPoint = navbar.getBoundingClientRect().bottom;
+            const heroWordmarkHasPassed = heroWordmark.getBoundingClientRect().bottom <= handoffPoint;
+            navbar.classList.toggle('brand-handoff-complete', heroWordmarkHasPassed);
+        }
+    }
+
+    updateNavbar();
+    window.addEventListener('scroll', updateNavbar, { passive: true });
+    window.addEventListener('resize', updateNavbar);
+    window.addEventListener('pageshow', updateNavbar);
+
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(updateNavbar);
+    }
 
     // Animate elements on scroll
     const observerOptions = {

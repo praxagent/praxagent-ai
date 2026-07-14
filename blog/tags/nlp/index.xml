@@ -10,9 +10,9 @@
     <atom:link href="https://praxagent.ai/blog/tags/nlp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Late Chunking: Why Context-Aware Embeddings (sometimes) Beat Traditional Chunking</title>
-      <link>https://praxagent.ai/blog/posts/late-chunking/</link>
+      <link>https://praxagent.ai/blog/posts/2025/08/late-chunking/</link>
       <pubDate>Sat, 02 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>https://praxagent.ai/blog/posts/late-chunking/</guid>
+      <guid>https://praxagent.ai/blog/posts/2025/08/late-chunking/</guid>
       <description>Traditional chunking methods for RAG pipelines often break context by chunking text before embedding. Late chunking offers a solution by embedding the entire document first and then chunking the token embeddings, preserving vital contextual information and improving retrieval accuracy.</description>
     </item>
   </channel>

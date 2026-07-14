@@ -1,0 +1,2540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can a Jacobian Lens Detect SAE Steering? - praxagent Blog</title>
+    
+    
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    <meta name="description" content="A prospectively frozen Llama 3.3 70B experiment asks whether SAE steering leaves a detectable downstream fingerprint in Jacobian-lens space. A preregistered follow-up adds semantic hard negatives, same-subfamily comparators, a 14-reader capacity ladder, and a worked example of a replay gate failing honestly.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="praxagent Blog">
+    <meta property="og:title" content="Can a Jacobian Lens Detect SAE Steering?">
+    <meta property="og:description" content="A prospectively frozen Llama 3.3 70B experiment asks whether SAE steering leaves a detectable downstream fingerprint in Jacobian-lens space. A preregistered follow-up adds semantic hard negatives, same-subfamily comparators, a 14-reader capacity ladder, and a worked example of a replay gate failing honestly.">
+    <meta property="og:url" content="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">
+    <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="Can a Jacobian Lens Detect SAE Steering?">
+    <meta name="twitter:description" content="A prospectively frozen Llama 3.3 70B experiment asks whether SAE steering leaves a detectable downstream fingerprint in Jacobian-lens space. A preregistered follow-up adds semantic hard negatives, same-subfamily comparators, a 14-reader capacity ladder, and a worked example of a replay gate failing honestly.">
+    <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/styles-v2.css">
+    <link rel="stylesheet" href="/blog/blog.css">
+    <link rel="stylesheet" href="/blog/katex.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'neutral',
+        securityLevel: 'loose',
+        flowchart: { htmlLabels: true, curve: 'basis' }
+      });
+    </script>
+    
+</head>
+<body>
+    <nav class="navbar navbar-scrolls">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="/research/index.html" class="nav-link">Research</a>
+                <a href="/blog/index.html" class="nav-link active">Tech Blog</a>
+                <a href="/apps.html" class="nav-link">Apps</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun">☀️</span>
+                    <span class="theme-toggle-icon moon">🌙</span>
+                </div>
+            </div>
+            
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="/research/index.html" class="mobile-nav-link">Research</a>
+            <a href="/blog/index.html" class="mobile-nav-link active">Tech Blog</a>
+            <a href="/apps.html" class="mobile-nav-link">Apps</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun">☀️</span>
+                    <span class="theme-toggle-icon moon">🌙</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        
+
+
+<div class="blog-post">
+    <div class="container">
+        <article class="post-content">
+            <header class="post-header">
+                <h1 class="post-title">Can a Jacobian Lens Detect SAE Steering?</h1>
+                <div class="post-meta">
+                    <span class="post-date">July 12, 2026</span>
+                    <span class="post-author">by Timothy Jones</span>
+                </div>
+            </header>
+
+            
+            
+
+            
+            
+
+            
+            <div class="post-lead">
+                <p>Imagine you push a language model sideways by adding a small internal
+&ldquo;steering&rdquo; vector, the kind sparse autoencoders advertise as concept knobs.
+Later, can you tell from the model&rsquo;s internals that you did that? We try
+that test on Llama 3.3 70B with a public Goodfire SAE and a public Jacobian
+lens (a tool that translates mid-network activity into which words the model
+seems disposed to say).</p>
+<p>The answer depends on what the auditor is allowed to see. If you only get
+one steered snapshot, with no before-picture, a detector fit on our frozen
+67-token J-lens readout cannot tell the advertised target directions apart
+from matched controls. It does no better than chance, and no better than
+cheaper baselines. But if you also keep an unsteered run of the <em>same</em>
+prompt (a before-and-after pair), a single before-minus-after number from
+the same readout lights up: target steering moves it a lot relative to
+matched controls (a preregistered follow-up&rsquo;s exploratory analysis suggests
+label-similar features move it comparably, so the signal is family-level
+rather than feature-specific).
+That is useful for lab-style monitoring when you control both runs. It is
+not a forensic detector that can name what steered an arbitrary state after
+the fact.</p>
+
+            </div>
+            
+
+            
+            <div class="key-result">
+                <div class="key-result-label">Key result</div>
+                The same frozen 67-token Jacobian-lens readout flips from useless to
+informative depending on what the auditor is allowed to see. Given only an
+isolated steered snapshot, a detector fit on its 67 lexicon scores runs at
+chance (AUROC 0.4998, the prospectively frozen confirmatory endpoint), no
+better than scrambled impostor lenses. Given a clean run of the same prompt
+to subtract and a known intervention sign, a fixed one-number contrast from
+the same readout separates steered targets from matched controls at AUROC
+0.862 in a post hoc sensitivity analysis, against 0.779 for an identity
+readout with the same access (with sign unknown the intervals overlap:
+0.717 vs 0.699); two of the six features separate perfectly in this sample
+and a third nearly so (0.9999). A preregistered v2 follow-up (exploratory
+after a failed replay gate) found the six advertised feature IDs
+practically comparable to label-similar alternatives, so the paired
+separation tracks a shared semantic family rather than anything special
+about these six knobs. Under
+this fixed single-token readout, the auditor&rsquo;s access, not the lens,
+decides the outcome.
+            </div>
+            
+
+            
+            <div class="table-of-contents">
+                <h3>Table of Contents</h3>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-question">The Question</a>
+      <ul>
+        <li><a href="#prior-work-contribution-and-non-claims">Prior work, contribution, and non-claims</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-two-maps">The Two Maps</a>
+      <ul>
+        <li><a href="#error-restored-steering-step-by-step">Error-restored steering, step by step</a></li>
+      </ul>
+    </li>
+    <li><a href="#what-would-count-as-detection">What Would Count as Detection?</a></li>
+    <li><a href="#frozen-design">Frozen Design</a></li>
+    <li><a href="#why-random-j-controls-matter">Why Random-J Controls Matter</a></li>
+    <li><a href="#static-fingerprints">Static Fingerprints</a></li>
+    <li><a href="#can-token-directions-reconstruct-an-sae-direction">Can Token Directions Reconstruct an SAE Direction?</a></li>
+    <li><a href="#downstream-fingerprint">Downstream Fingerprint</a>
+      <ul>
+        <li><a href="#a-clean-reference-changes-the-answer">A clean reference changes the answer</a></li>
+      </ul>
+    </li>
+    <li><a href="#what-changes-across-layers">What Changes Across Layers?</a></li>
+    <li><a href="#the-v2-follow-up">The v2 Follow-Up</a>
+      <ul>
+        <li><a href="#the-run-failed-its-own-replay-gate">The run failed its own replay gate</a></li>
+        <li><a href="#the-bf16-staircase">The BF16 staircase</a></li>
+        <li><a href="#a1-does-each-intervention-family-move-its-own-lexicon">A1: does each intervention family move its own lexicon?</a></li>
+        <li><a href="#a2-are-the-six-advertised-ids-privileged">A2: are the six advertised IDs privileged?</a></li>
+        <li><a href="#does-more-reader-capacity-recover-provenance">Does more reader capacity recover provenance?</a></li>
+        <li><a href="#what-the-follow-up-adds-and-what-it-cannot">What the follow-up adds, and what it cannot</a></li>
+      </ul>
+    </li>
+    <li><a href="#could-this-audit-a-production-model">Could This Audit a Production Model?</a></li>
+    <li><a href="#what-this-says-about-consciousness-claims">What This Says About Consciousness Claims</a></li>
+    <li><a href="#answer">Answer</a></li>
+    <li><a href="#reproducibility-and-artifact-ledger">Reproducibility And Artifact Ledger</a></li>
+    <li><a href="#appendix-release-inventory">Appendix: release inventory</a>
+      <ul>
+        <li><a href="#open-a-record-samples-from-the-release">Open a record: samples from the release</a>
+          <ul>
+            <li><a href="#pre-outcome-freeze">Pre-outcome freeze</a></li>
+            <li><a href="#static-readout">Static readout</a></li>
+            <li><a href="#sparse-pursuit-checkpoint">Sparse-pursuit checkpoint</a></li>
+            <li><a href="#paired-forward-query--scores">Paired forward (query + scores)</a></li>
+            <li><a href="#template-cluster-interval">Template-cluster interval</a></li>
+            <li><a href="#structural-audit">Structural audit</a></li>
+            <li><a href="#remote-to-local-hashes">Remote-to-local hashes</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#appendix-prior-work-claim-matrix">Appendix: prior-work claim matrix</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+            </div>
+            
+
+            <div class="post-body">
+                <div class="panel info">
+    <div class="panel-icon">
+        💡
+        
+    </div>
+    <div class="panel-content">
+        <strong>AI-use disclosure.</strong> Generative-AI tools were used to help implement the
+experiment and draft this article. The author selected the research question,
+approved the frozen design, has inspected the artifacts, and takes
+responsibility for the final text and claims.
+    </div>
+</div>
+<div class="panel info">
+    <div class="panel-icon">
+        💡
+        
+    </div>
+    <div class="panel-content">
+        <strong>Abstract.</strong> Sparse-autoencoder steering changes a model&rsquo;s residual stream;
+a Jacobian lens maps residual directions toward the vocabulary dispositions
+they tend to influence downstream. That creates a testable question: <em>does
+public Goodfire SAE steering in Llama 3.3 70B leave a stable, out-of-sample
+fingerprint in the model&rsquo;s released Jacobian-lens space?</em> We project six public
+SAE directions labeled as deception/roleplay in the released artifact, compare
+them with 18 activation- and norm-matched SAE controls plus isotropic
+controls, and replay 1,581 paired prefix-only forwards (1,530 interventions
+plus 51 clean references) across 51 held-out template families. Identity-lens,
+raw-norm, and five singular-spectrum-preserving random-J baselines traverse
+the same analysis. <strong>Result:</strong> in this
+experiment, a detector built on a fixed single-token J-lens readout (a simple
+classifier over 67 frozen lexicon token scores) does not attribute target
+steering from isolated post-intervention states out of sample (AUROC 0.4998,
+the prospectively frozen confirmatory endpoint) and performs at chance
+relative to identity and scrambled-J controls. With a matched clean
+reference, a fixed one-dimensional J-space contrast produces a large signed
+differential between selected targets and matched controls (+0.9065 under
+amplification and -0.8247 under suppression, versus +0.2028/-0.2181 for an
+identity readout; a frozen stronger-access sensitivity analysis, not a
+confirmatory endpoint), making it potentially useful for controlled internal
+monitoring. That contrast lexicon is aligned with the labels that selected
+the targets, and a preregistered v2 follow-up (exploratory after a failed
+replay gate) found label-similar alternatives practically comparable to the
+six selected IDs, so the paired signal is family-level rather than specific
+to these features. The access model is the
+result: J-space can characterize a known perturbation here, but under this
+fixed single-token readout it does not identify steering provenance from an
+isolated state. Nothing in this experiment establishes what the model
+believes or whether it is conscious.
+    </div>
+</div>
+<p>Study status: <strong>complete</strong> (pre-outcome freeze <a href="https://github.com/tdj28/llm_selfref_pre/commit/b026faac222e55d7da4f01a30a6a60a468a5f023"><code>b026faa</code></a>; result release <a href="https://github.com/tdj28/llm_selfref_pre/commit/c071aa4d737d72818f0774ca389c159b5da67dc1"><code>c071aa4</code></a>). Shipping table, sample records, and hashes are in the <a href="#appendix-release-inventory">appendix</a>. A preregistered v2 follow-up (<a href="https://osf.io/f3tpv/">OSF <code>f3tpv</code></a>; freeze <a href="https://github.com/tdj28/llm_selfref_pre/commit/7eff43f7b8ea5ca0e011d4c0fb46bf5df1b0e4cd"><code>7eff43f</code></a>, plan manifest SHA-256 <code>47806acf…893f</code>) adding semantic hard negatives, matched comparators, and a 14-reader capacity ladder failed its frozen replay-equivalence gate, so its endpoint results are exploratory; <a href="#the-v2-follow-up">a dedicated section below</a> reports the design, the gate failure, and the exploratory results.</p>
+<p><img src="claim-ladder.svg" alt="Claim ladder: public artifacts through monitoring; provenance and consciousness sit off the ladder."></p>
+<p class="figure-note">Figure: what this experiment can support. Provenance forensics and consciousness sit outside the ladder.</p>
+<h2 id="the-question">The Question</h2>
+<p>This note sits next to two earlier Praxagent posts. <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/"><em>How to Read an SAE
+Feature ID</em></a>
+covers what a public feature coordinate is, how labels get attached, and why an
+activation map is not yet an explanation
+(<a href="#ref-sae-feature-id">Jones, 2026a</a>). <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/"><em>Opening the Jacobian Lens on
+Qwen3.5-397B</em></a>
+teaches the J-lens instrument and audits a fitted open lens under identity and
+random-J controls (<a href="#ref-praxagent-397b">Jones, 2026b</a>). Here those threads meet
+on Llama 3.3 70B:</p>
+<ol>
+<li>a public Goodfire layer-50 SAE for Llama 3.3 70B contains the six
+feature coordinates used in our replication, labeled there as
+deception/roleplay; and</li>
+<li>Neuronpedia has released a fitted Jacobian lens for the same Llama 3.3 70B
+checkpoint family.</li>
+</ol>
+<p>The SAE tells us which learned activation direction we add. The Jacobian lens
+asks where an intermediate direction tends to land in the model&rsquo;s final
+residual and vocabulary geometry. Can the second instrument audit the first?</p>
+<h3 id="prior-work-contribution-and-non-claims">Prior work, contribution, and non-claims</h3>
+<p><strong>Prior work.</strong> Gurnee et al. develop the Jacobian lens as an instrument and
+build a substantial body of science on it: they project SAE decoder
+directions into J-space, show that the J-space component of a concept is
+privileged for verbal report, ablate (zero out) evaluation-awareness
+directions and change high-stakes behavior in audit scenarios, detect
+implanted-misalignment model organisms (models deliberately trained with a
+hidden flaw, used as known-answer test subjects) on ordinary prompts, and
+validate a J-lens evaluation-awareness score that moves monotonically under
+contrastive steering
+(<a href="#ref-gurnee-2026">Gurnee et al., 2026</a>). Adjacent lines include fixed and
+context-adaptive activation steering
+(<a href="#ref-turner-2024">Turner et al., 2024</a>; <a href="#ref-hsu-2026">Hsu et al., 2026</a>),
+SAE feature reading and monosemanticity (the goal that each feature carry one
+meaning)
+(<a href="#ref-gao-2024">Gao et al., 2024</a>; <a href="#ref-templeton-2024">Templeton et al., 2024</a>),
+and other internal auditors (probes, tuned/logit lenses, LatentQA-style
+decoders). This note does not invent the J-lens or SAE steering; it asks a
+narrower forensic question on pinned public artifacts. The claim-by-claim
+comparison is in the <a href="#appendix-prior-work-claim-matrix">appendix</a>.</p>
+<p><strong>This note&rsquo;s contribution.</strong> Gurnee et al. ask what the J-space <em>is</em> and what
+it can reveal about a model&rsquo;s cognition; this note asks a much narrower
+forensic question their experiments were not designed to answer. In their
+intervention and detection studies, the comparison is always anchored: the
+experimenter injects a known concept and watches the readout respond, compares
+a misaligned checkpoint against its known clean baseline on the same prompts,
+or steers along a known contrastive direction and checks that a score moves
+monotonically. Those designs establish that J-space content is causally real
+and measurable. They do not test the unanchored case: hand an auditor a single
+steered activation, hide which intervention ran, and ask whether a fixed J
+score can name the feature out of sample (on prompts and feature pairings it
+was never fit on). Concretely, this note adds:</p>
+<ol>
+<li>An <strong>attribution task with the label hidden</strong>: the auditor gets isolated
+post-steering states (a snapshot of the model&rsquo;s internals <em>after</em> steering,
+with no record of which knob was turned and no unsteered copy to compare
+against) and must say which feature did it. The detector is a plain
+logistic-regression classifier fit on the frozen lexicon scores (fitting
+means the classifier learns weights from trials whose labels we reveal to
+it; we control that training set exactly). Evaluation uses crossed
+prompt-family and feature-pair holdouts: each test case is scored by a
+classifier whose training set excluded that case&rsquo;s whole sentence family
+<em>and</em> its feature pairing, so it cannot pass by memorizing prompts or
+feature signatures. Under those rules the score lands at chance
+(AUROC 0.4998, a coin flip).</li>
+<li>The <strong>access-model split as the object of study</strong>: what the auditor is
+allowed to see. Setting A is an isolated post-steering snapshot (no
+before-picture); Setting B is a matched clean/steered pair of the <em>same</em>
+prompt. Both derive from the same frozen 67-token lexicon readout, read two
+ways: Setting A reads it with a fitted 67-weight classifier, Setting B with
+a fixed one-number contrast, so what changes between settings is the access
+privilege, not the underlying readout.</li>
+<li>An <strong>impostor bar for this task</strong>: five <strong>random-J</strong> maps that scramble the
+real lens. The lens is a matrix, and scrambling means randomly shuffling
+and sign-flipping its rows and columns, like re-pairing the names and
+numbers in a phone book: every size statistic survives (same dimensions,
+norm, and singular spectrum), but the learned correspondence to the model&rsquo;s
+actual coordinates is destroyed. If the real lens cannot beat these
+impostors, its learned alignment was not doing the work. Alongside them run
+identity (no lens at all), raw-norm (just the activation&rsquo;s length),
+matched-SAE (other features of similar strength), and isotropic (random
+directions of matching length) controls, all through the identical
+pipeline.</li>
+<li>Statistics that respect how the prompts were built. Many of the 51 English
+prefixes are near-copies from the same sentence skeleton (<strong>prompt
+families</strong>), so we do not pretend 1,581 trials are 1,581 independent
+stories. <strong>Grouped holdouts</strong> assign each family to exactly one fold (a
+fold is one of the five train/test splits in cross-validation; grouping
+guarantees a family is never in the training data and the test data of the
+same split). <strong>Template-cluster intervals</strong> are how we compute error bars:
+redraw the 51 families at random (with replacement) thousands of times,
+recompute the metric on each redraw, and report the spread. Because each
+redraw keeps or drops a family&rsquo;s near-copies as a block, the resulting
+interval reflects the roughly 51 independent pieces of evidence we actually
+have, not the 1,581 rows. Finally, we <strong>track the readout downstream across
+layers</strong>: the steering vector goes in at layer 50, and we measure the
+fingerprint again at layers 55 through 78 to see whether it persists,
+fades, or distorts as it passes through the rest of the network, rather
+than judging everything from a single depth.</li>
+</ol>
+<p><img src="prompt-families.svg" alt="Families, not rows: grouped holdouts keep whole prompt families together; the cluster bootstrap resamples families."></p>
+<p class="figure-note">Figure: near-copy prompts from one sentence skeleton count as one unit of evidence. Holdouts move whole families between train and test; error bars resample the 51 families, not the 1,581 rows.</p>
+<p><img src="downstream-layers.svg" alt="Downstream tracking: the steering vector goes in at layer 50 and the fingerprint is re-measured at layers 55 through 78, fading but staying nonzero."></p>
+<p class="figure-note">Figure: why we measure at seven depths instead of one. The fingerprint is strongest where the vector is inserted and attenuates smoothly downstream; the full numbers are in the trajectory section below.</p>
+<p>Everything here runs on pinned public artifacts (publicly released Llama 3.3
+70B weights, gated under the Llama 3.3 Community License rather than
+open-source, plus the public Goodfire SAE and public Neuronpedia lens),
+whereas Gurnee et al.&rsquo;s results are on
+Anthropic&rsquo;s internal Claude models, whose weights and internals are not
+publicly available for reproduction. The protocol was committed to public git before results
+existed, so the test can be re-run from the release. Where the settings
+overlap, our results agree with Gurnee et al.: with an anchored comparison
+(the auditor holds a known clean baseline, a before-picture, and measures the
+change from it), the paired J-score moves large and in the expected direction.
+The addition is the negative result on the unanchored side (no baseline, just
+one steered snapshot), under this fixed single-token score.</p>
+<p><strong>Not claimed.</strong></p>
+<ul>
+<li>That J-space reveals what the model &ldquo;believes,&rdquo; or anything about
+consciousness.</li>
+<li>That an isolated activation can be attributed to a specific SAE feature
+under this fixed single-token score (the state-only detector fails here).</li>
+<li>That the result generalizes beyond this model, SAE checkpoint, lens family,
+lexicon score, and forensic task.</li>
+<li>That vendor feature labels are ontology rather than suggestive released
+metadata.</li>
+</ul>
+<div class="mermaid">
+
+flowchart LR
+  A["SAE feature at layer 50"] --> B["Residual edit<br/>h' = h + a d_i"]
+  B --> C["Static J transport"]
+  C --> D["Vocabulary-disposition<br/>fingerprint"]
+  B --> E["Observed post-state"]
+  E --> F["State-only detector"]
+  B --> G["Paired clean vs steered Δ"]
+  G --> H["Reference-based<br/>fingerprint"]
+  D --> I["Suggestive semantics"]
+  F --> J["Failed provenance<br/>attribution"]
+  H --> K["Useful internal<br/>regression monitor"]
+
+</div>
+
+<p class="figure-note">Figure: conceptual pipeline. The interesting result is not the paired positive; it is the failure of the isolated-state detector under this readout.</p>
+<h2 id="the-two-maps">The Two Maps</h2>
+<div class="panel info">
+    <div class="panel-icon">
+        💡
+        
+    </div>
+    <div class="panel-content">
+        <strong>What &ldquo;residual stream&rdquo; means.</strong> A transformer is a stack of blocks, and the
+only thing that passes from one block to the next is a single vector of
+\(d\) numbers per token position. Each block reads that vector, computes
+something, and <em>adds</em> its result back into the same vector (those add-back
+connections are called residual connections, which is where the name comes
+from). So the stream works like the model&rsquo;s running workspace: whatever the
+model has figured out by depth \(l\) is encoded in those \(d\) numbers and
+nowhere else. Everything in this post touches that workspace. \(h_l\) is a
+snapshot of it right after block \(l\), and SAE steering intervenes by adding
+a chosen vector straight into it between blocks.
+    </div>
+</div>
+<p><img src="residual-stream.svg" alt="The residual stream as a running workspace: every block reads the stream and adds its result back; h at layer l is a snapshot right after block l."></p>
+<p class="figure-note">Figure: the residual stream. One vector per token position flows through the stack; blocks read it and add back. The dashed line marks the snapshot \(h_l\) this post works with, and SAE steering adds its vector directly into the band.</p>
+<p>Let \(h_l\in\mathbb{R}^d\) be the residual stream after transformer block
+\(l\) (a list of \(d\) numbers the transformer keeps updating). A sparse
+autoencoder is a pair of maps that try to rewrite that list as a small number
+of “on” features:</p>
+<ol>
+<li><strong>Encoder</strong> \(E\): turn the residual into feature codes
+\(f = E(h_l)\in\mathbb{R}^N\) (usually with a ReLU / TopK so most codes are
+zero). Think of \(f\) as \(N\) knobs; most are off.</li>
+<li><strong>Decoder matrix</strong> \(D\in\mathbb{R}^{d\times N}\): a table whose
+<strong>columns</strong> are the feature directions \(d_1,\ldots,d_N.\) Writing
+\(D = [d_1\ \cdots\ d_N]\) means column \(i\) is the vector \(d_i\).</li>
+</ol>
+<div class="panel info">
+    <div class="panel-icon">
+        💡
+        
+    </div>
+    <div class="panel-content">
+        <p><strong>\(D\) is a matrix, not a fancy nonlinear function.</strong> The notation in SAE
+papers can mislead here. In linear algebra, placing a matrix directly next to
+a vector, \(Df\), means matrix-vector multiplication; there is no hidden
+operation. But papers often also write the decoder as \(D(f)\), with
+parentheses, to mirror the encoder \(E(h_l)\), and that parallel look is a
+trap: \(E\) genuinely <em>is</em> a nonlinear function (it applies a ReLU or TopK),
+while \(D(f)\) is just \(D\) times \(f\), the same thing as \(Df\). And that
+multiplication has a concrete reading: mix the columns of \(D\) using the
+codes as weights,</p>
+\[
+Df = f_1 d_1 + f_2 d_2 + \cdots + f_N d_N.
+\]<p>Every property of matrix multiplication (in particular linearity,
+\(D(f+g)=Df+Dg\)) is available, and the derivation below leans on exactly
+that.</p>
+
+    </div>
+</div>
+<p>That mix is the SAE’s <strong>reconstruction</strong> of the residual: encode the residual
+into codes, then decode the codes back,</p>
+\[
+\hat h_l = D\,E(h_l) = Df = f_1 d_1 + f_2 d_2 + \cdots + f_N d_N \approx h_l.
+\]<p>The hat marks an estimate: \(\hat h_l\) is the SAE&rsquo;s best attempt to rebuild
+\(h_l\) out of its few active feature directions. It is usually a bit wrong,
+so define the leftover (reconstruction error)</p>
+\[
+\varepsilon = h_l - \hat h_l = h_l - D E(h_l) = h_l - Df.
+\]<h3 id="error-restored-steering-step-by-step">Error-restored steering, step by step</h3>
+<p>To steer feature \(i\) by an amount \(a_i\), the standard “error-restored”
+protocol does four things:</p>
+<ol>
+<li>Encode: \(f = E(h_l)\).</li>
+<li>Bump only feature \(i\): replace \(f\) with \(f + a_i e_i\), where \(e_i\)
+is the one-hot vector that is \(1\) in slot \(i\) and \(0\) elsewhere.</li>
+<li>Decode the bumped codes: \(D(f + a_i e_i)\).</li>
+<li><strong>Add the leftover back</strong> so you do not throw away what the SAE missed:
+add \(\varepsilon = h_l - Df\).</li>
+</ol>
+<p>Putting that into one expression:</p>
+\[
+h_l' = D(E(h_l)+a_i e_i) + (h_l - DE(h_l)).
+\]<p>Why does this collapse to “just add \(a_i d_i\)”? Because multiplication by
+\(D\) is linear:</p>
+\[
+D(E(h_l)+a_i e_i) = DE(h_l) + a_i\, De_i.
+\]<p>And \(De_i\) is simply <strong>column \(i\) of \(D\)</strong>, which we already named
+\(d_i\). So</p>
+\[
+h_l' = DE(h_l) + a_i d_i + h_l - DE(h_l) = h_l + a_i d_i.
+\]<p>The \(DE(h_l)\) terms cancel. Whatever the SAE already reconstructed cancels
+against the leftover you put back; the only lasting change is the bump on
+feature \(i\), which lands in residual space as the vector \(a_i d_i\).</p>
+<p><img src="sae-error-restored-edit.svg" alt="2D toy: both panels rebuild h from feature 1, feature 2, and the leftover; the right panel adds an extra push on feature 1, sliding h along that direction."></p>
+<p class="figure-note">Figure: the same tip-to-tail rebuild twice. Feature 2 and the leftover are identical in both panels; the only change is an extra push on feature 1, so the new \(h\) is the old \(h\) shifted along that one direction.</p>
+<p>Under this intervention protocol, once the decoder column and coefficient are
+fixed, the edit is a constant residual addition. That is not a claim about SAE
+steering in general: fixed-strength linear steering can be context-sensitive
+across prompts, and context-adaptive methods can outperform fixed additions
+(<a href="#ref-turner-2024">Turner et al., 2024</a>; <a href="#ref-hsu-2026">Hsu et al., 2026</a>).</p>
+<p>The Jacobian lens fits a corpus average of local downstream maps:</p>
+\[
+J_l=\mathbb{E}_x\left[\frac{\partial h_L(x)}{\partial h_l(x)}\right].
+\]<p>Unpack that piece by piece. Fix one prompt \(x\) and run it through the model.
+The derivative \(\partial h_L(x)/\partial h_l(x)\) is a <strong>Jacobian matrix</strong>:
+the standard calculus object that answers, for every possible tiny nudge to
+the layer-\(l\) workspace, which way the final-layer workspace \(h_L\) moves
+in response. It is a \(d\times d\) table; entry \((i,j)\) says how much final
+coordinate \(i\) shifts per unit nudge of mid-network coordinate \(j\). Being
+a derivative, it is the best <em>linear</em> summary of the layers in between, and it
+is <strong>local</strong>: run a different prompt and the layers bend nudges differently,
+so you get a different matrix.</p>
+<p>The outer \(\mathbb{E}_x[\cdot]\) is an average of those per-prompt matrices
+over a corpus of prompts (this released lens was fit on WikiText). Averaging
+trades prompt-specific accuracy for reusability: the result is one fixed
+matrix \(J_l\) that transports mid-network directions downstream. Multiply
+any layer-\(l\) direction by \(J_l\) and you get the direction the final
+layer <em>tends</em> to move for a typical prompt, without running the model at all.
+The price appears twice in this note&rsquo;s results: the lens describes the
+typical prompt rather than the one in hand, and it is linear, so it is only
+honest for small perturbations. (The display above is schematic: the released
+lens additionally averages over token positions within each prompt
+(<a href="#ref-gurnee-2026">Gurnee et al., 2026</a>). The prompt-level average shown here
+carries the intuition.)</p>
+<p><img src="jacobian-lens-average.svg" alt="Jacobian lens construction: per-prompt nudge maps at layer l are averaged over a corpus into one fixed reusable matrix."></p>
+<p class="figure-note">Figure: what the equation builds. Top: for one prompt, the Jacobian records every nudge-to-response pairing between layer \(l\) and the final layer. Bottom: each prompt gives a different matrix; the lens is their corpus average, reusable on any direction without a forward pass.</p>
+<p>With final RMS normalization \(N_f\) and unembedding \(W_U\) (the model&rsquo;s last
+matrix, which converts a final residual into one score per vocabulary token), a
+static vocabulary fingerprint for the SAE direction is</p>
+\[
+z_l(d_i)=W_U N_f(J_l d_i).
+\]<p>In words: push the steering direction downstream with \(J_l\), normalize, and
+ask the vocabulary which words that push favors. The output is one score per
+token, a lexical &ldquo;fingerprint&rdquo; of the direction.</p>
+<p>This is a legitimate instrument for studying <strong>verbalizable downstream
+disposition</strong> (<a href="#ref-gurnee-2026">Gurnee et al., 2026</a>; <a href="#ref-anthropic-jlens">Anthropic,
+2026</a>). It is not a uniquely privileged decoder of
+latent meaning. The Jacobian is corpus-averaged rather than local to the exact
+prompt under analysis; the basic lens is single-token unless extended; and
+neighboring decoder families such as the tuned lens are learned rather than
+Jacobian-based and can be more predictive than vanilla logit-style readouts
+(<a href="#ref-belrose-2023">Belrose et al., 2023</a>). Our Qwen3.5-397B release walks
+through the same instrument with identity and random-J controls on a different
+model (<a href="#ref-praxagent-397b">Jones, 2026b</a>).</p>
+<p>For a real prompted state, the exact paired quantity is not just
+\(W_UJ_ld_i\). We run both prefixes and measure</p>
+\[
+\Delta z_l = W_U N_f(J_l h_l^{\mathrm{steered}})
+             -W_U N_f(J_l h_l^{\mathrm{clean}}),
+\]<p>which retains the nonlinear final normalization and the model&rsquo;s downstream
+response to the intervention.</p>
+<h2 id="what-would-count-as-detection">What Would Count as Detection?</h2>
+<p>An auditor sitting directly on the intervention hook (the line of code that
+adds the steering vector during the forward pass) can subtract pre- and
+post-hook tensors. That is trivial and does not require a Jacobian lens. Our primary
+threat model is harder: the auditor receives post-intervention activations from
+a pinned model, but not the intervention label or hook metadata.</p>
+<p>We freeze two classification questions:</p>
+<ul>
+<li><strong>Any intervention:</strong> distinguish nonzero steering from the clean condition.</li>
+<li><strong>Target attribution:</strong> distinguish a selected target SAE direction from a
+dose- and activation-matched SAE control (a decoy feature steered with the
+same strength, chosen to have similar baseline activity, so the detector
+cannot win just by noticing &ldquo;something strong happened&rdquo;).</li>
+</ul>
+<p>The detector itself is deliberately simple: a standardized logistic regression
+over the 67 frozen lexicon token scores from one readout (one transport, layer
+65, last content token), refit inside each cross-validation fold. &ldquo;Fitting&rdquo;
+here means only that: the classifier sees a labeled training split of trials
+and learns 67 weights. Because we build the splits, we know exactly what each
+fold&rsquo;s classifier saw. Evaluation is out of sample by prompt-template family
+(5-fold grouped cross-validation, whole families held out together). Target
+attribution additionally holds out feature pairs: the classifier scoring a
+given target-versus-matched pair was never trained on any trial involving that
+pair, preventing it from merely memorizing six direction-specific signatures.
+We report AUROC, AUPRC, calibration via the Brier score (the mean squared gap
+between predicted probabilities and actual outcomes; lower is better), and
+true-positive rate at 1% false-positive rate. The paired-clean version is a
+separate, stronger-access sensitivity analysis.</p>
+<div class="panel info">
+    <div class="panel-icon">
+        💡
+        
+    </div>
+    <div class="panel-content">
+        <strong>How to read the detector numbers.</strong> AUROC is the probability that a randomly
+chosen steered case scores above a randomly chosen non-steered case: 0.5 is a
+coin flip, 1.0 is perfect. TPR at 1% FPR asks a stricter question: if you only
+tolerate one false alarm per hundred clean cases, what fraction of real cases
+do you still catch? A detector can have a decent-looking AUROC and still be
+useless at that operating point.
+    </div>
+</div>
+<p><img src="access-model.svg" alt="Access model is the result: isolated post-state fails; matched clean reference yields a signed differential."></p>
+<p class="figure-note">Figure: same frozen 67-token lexicon readout, different auditor privileges, opposite conclusions. Panel A reads it with a fitted 67-score classifier and fails; panel B reads it with a fixed one-number contrast plus a clean reference and separates. Panel A is the production-relevant failure; panel B is differential monitoring.</p>
+<div class="mermaid">
+
+flowchart TD
+  Q["Auditor receives activations"] --> A{"Clean reference<br/>available?"}
+  A -->|No| B["Post-state-only<br/>J score"]
+  A -->|Yes| C["Paired Δ<br/>steered − clean"]
+  B --> D["Target attribution<br/>AUROC ≈ 0.50"]
+  C --> E["Signed differential<br/>+0.91 / −0.82"]
+  D --> F["Do not deploy as<br/>provenance detector"]
+  E --> G["Optional internal<br/>regression monitor"]
+
+</div>
+
+<p class="figure-note">Figure: the access fork that organizes the rest of the note.</p>
+<h2 id="frozen-design">Frozen Design</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Component</th>
+          <th>Frozen value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Model</td>
+          <td><code>meta-llama/Llama-3.3-70B-Instruct</code> at <code>6f6073b4...</code></td>
+      </tr>
+      <tr>
+          <td>SAE</td>
+          <td><code>Goodfire/Llama-3.3-70B-Instruct-SAE-l50</code> at <code>128ee921...</code></td>
+      </tr>
+      <tr>
+          <td>J-lens</td>
+          <td>Neuronpedia WikiText lens at <code>a4114d77...</code></td>
+      </tr>
+      <tr>
+          <td>Target directions</td>
+          <td>six accepted feature IDs labeled deception/roleplay in the source artifact</td>
+      </tr>
+      <tr>
+          <td>SAE controls</td>
+          <td>three matched panels, 18 features total</td>
+      </tr>
+      <tr>
+          <td>Residual controls</td>
+          <td>six norm-matched isotropic directions</td>
+      </tr>
+      <tr>
+          <td>Prefixes</td>
+          <td>51 template-family representatives across 14 categories</td>
+      </tr>
+      <tr>
+          <td>Conditions</td>
+          <td>31 per prefix, 1,581 forwards total</td>
+      </tr>
+      <tr>
+          <td>Trajectory</td>
+          <td>layers 50, 55, 60, 65, 70, 75, 78</td>
+      </tr>
+      <tr>
+          <td>Primary readout</td>
+          <td>layer 65, last user-content token</td>
+      </tr>
+      <tr>
+          <td>Transport controls</td>
+          <td>identity plus five bi-sided signed-permutation random-J maps</td>
+      </tr>
+  </tbody>
+</table>
+<p>The complete pre-outcome
+<a href="https://github.com/tdj28/llm_selfref_pre/blob/b026faac222e55d7da4f01a30a6a60a468a5f023/docs/LLAMA70B_SAE_JLENS_PROTOCOL.md">protocol</a>
+and machine-readable
+<a href="https://github.com/tdj28/llm_selfref_pre/tree/b026faac222e55d7da4f01a30a6a60a468a5f023/data/sae_jlens_audit/confirmatory_v1_plan_20260711">plan</a>
+are linked from the release section below. The prior calibrated endpoint is
+reused; no new behavioral output is sampled in this phase. Every condition sees
+the exact same token prefix, so trajectory differences cannot be attributed to
+divergent generated text.</p>
+<h2 id="why-random-j-controls-matter">Why Random-J Controls Matter</h2>
+<p>A dense matrix followed by an unembedding can produce apparently meaningful
+top tokens even when the particular learned alignment is not doing the work.
+For each random baseline we scramble the real \(J_l\) with independent signed
+permutations on its input and output bases (shuffle the coordinate axes and
+randomly flip their signs, separately on each side of the matrix). This
+preserves matrix dimensions, Frobenius norm, and singular values (the matrix&rsquo;s
+overall size and its spectrum of stretch factors) while destroying alignment
+to Llama&rsquo;s residual coordinates and unembedding.</p>
+<p><img src="random-j-impostors.svg" alt="Random-J impostors: same dimensions, norm, and singular values as the real lens, with alignment scrambled on both sides."></p>
+<p class="figure-note">Figure: the impostor lenses keep every size statistic of the real \(J_l\) and destroy only its alignment. Beating all five is the bar for claiming the learned alignment did the work.</p>
+<p>A Jacobian-lens result is persuasive only if it survives comparison with all
+five controls run through the same layer, position, feature, and classifier
+search. Identity/logit-lens and raw activation norms test simpler alternatives.
+We did not run a tuned lens, a trained nonlinear probe, or a decoder-based
+activation reader such as LatentQA or STATEWITNESS
+(<a href="#ref-belrose-2023">Belrose et al., 2023</a>; <a href="#ref-pan-2024">Pan et al., 2024</a>;
+<a href="#ref-chen-2026">Chen et al., 2026</a>). Those remain important adjacent
+comparators; their absence means the null below is about this readout family,
+not about every possible state auditor.</p>
+<h2 id="static-fingerprints">Static Fingerprints</h2>
+<p>Three of the six selected public SAE directions (30686, 41533, 58667), as
+labeled in the released Goodfire artifact, produce J-lens lexical profiles
+sharply aligned with deception- or roleplay-adjacent vocabulary under this
+corpus-averaged single-token readout, and a fourth (22004) moderately so. The
+deception-minus-unrelated score is the mean lens score of a frozen list of
+deception-related words minus the mean score of a frozen list of unrelated
+words, so positive values mean the direction favors deception vocabulary. The
+target median is 6.969; the 18 matched SAE controls have median -0.0038 and
+span -3.08 to +2.50, a spread that matters for the weaker targets below. The
+transport controls set the impostor bar: pushed through the identity
+transport (no lens at all) the targets have median +0.777, with 30686 alone
+reaching +7.18 of its +19.97, and through the five random-J impostors the
+target medians run only -0.97 to +0.57, so the real-lens values clear both
+comparisons.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Feature ID</th>
+          <th style="text-align: right">Deception − unrelated</th>
+          <th style="text-align: right">Deception</th>
+          <th style="text-align: right">Roleplay</th>
+          <th style="text-align: right">Hedging</th>
+          <th style="text-align: right">Experience</th>
+          <th style="text-align: right">Excess kurtosis</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>30686</td>
+          <td style="text-align: right"><strong>+19.97</strong></td>
+          <td style="text-align: right">+19.55</td>
+          <td style="text-align: right">+4.74</td>
+          <td style="text-align: right">+0.48</td>
+          <td style="text-align: right">−0.30</td>
+          <td style="text-align: right">31.48</td>
+      </tr>
+      <tr>
+          <td>41533</td>
+          <td style="text-align: right"><strong>+12.98</strong></td>
+          <td style="text-align: right">+11.74</td>
+          <td style="text-align: right">+2.69</td>
+          <td style="text-align: right">+1.14</td>
+          <td style="text-align: right">+0.91</td>
+          <td style="text-align: right">3.04</td>
+      </tr>
+      <tr>
+          <td>58667</td>
+          <td style="text-align: right"><strong>+10.85</strong></td>
+          <td style="text-align: right">+10.60</td>
+          <td style="text-align: right">+10.09</td>
+          <td style="text-align: right">+0.68</td>
+          <td style="text-align: right">−0.20</td>
+          <td style="text-align: right">5.57</td>
+      </tr>
+      <tr>
+          <td>22004</td>
+          <td style="text-align: right">+3.09</td>
+          <td style="text-align: right">+2.90</td>
+          <td style="text-align: right">+3.29</td>
+          <td style="text-align: right">+4.54</td>
+          <td style="text-align: right">+4.37</td>
+          <td style="text-align: right">1.10</td>
+      </tr>
+      <tr>
+          <td>30032</td>
+          <td style="text-align: right">+0.71</td>
+          <td style="text-align: right">+1.71</td>
+          <td style="text-align: right">+2.63</td>
+          <td style="text-align: right">+0.70</td>
+          <td style="text-align: right">−0.91</td>
+          <td style="text-align: right">1.84</td>
+      </tr>
+      <tr>
+          <td>23893</td>
+          <td style="text-align: right"><strong>−0.29</strong></td>
+          <td style="text-align: right">−0.87</td>
+          <td style="text-align: right">+1.44</td>
+          <td style="text-align: right">−1.47</td>
+          <td style="text-align: right">+2.45</td>
+          <td style="text-align: right">1.89</td>
+      </tr>
+      <tr>
+          <td>matched controls (n=18), median</td>
+          <td style="text-align: right">−0.004</td>
+          <td style="text-align: right">−0.18</td>
+          <td style="text-align: right">+0.15</td>
+          <td style="text-align: right">+0.14</td>
+          <td style="text-align: right">+0.25</td>
+          <td style="text-align: right">-</td>
+      </tr>
+      <tr>
+          <td>matched controls (n=18), range</td>
+          <td style="text-align: right">−3.08 to +2.50</td>
+          <td style="text-align: right">−1.50 to +2.92</td>
+          <td style="text-align: right">−1.78 to +2.92</td>
+          <td style="text-align: right">−4.07 to +2.86</td>
+          <td style="text-align: right">−2.16 to +2.40</td>
+          <td style="text-align: right">-</td>
+      </tr>
+  </tbody>
+</table>
+<p class="figure-note">Table: positive layer-50 decoder directions through the real J-lens. Scores are frozen lexicon group means; the control rows give the per-column median and full range of the 18 matched controls. 23893 is the semantic outlier inside the claimed family, and 30032 sits inside the control spread on every column.</p>
+<p>Feature 30686 projects most sharply onto <code>deception</code>, <code>misleading</code>, <code>deceptive</code>,
+<code>trick</code>, and <code>fooled</code>. Feature 41533 projects onto forms of <code>lie</code>; 58667 onto
+<code>convincing</code>, <code>fake</code>, <code>believable</code>, <code>disguise</code>, and <code>pretending</code>.</p>
+<p>Treat these labels as suggestive, not as settled ontology. Current SAE work
+supports the usefulness of features while noting that feature suites remain
+incomplete and that faithfulness evaluation is still an active research
+problem (<a href="#ref-gao-2024">Gao et al., 2024</a>; <a href="#ref-templeton-2024">Templeton et al.,
+2024</a>). Our own primer on reading feature IDs makes the
+same coordinate-versus-label distinction under this Goodfire checkpoint
+(<a href="#ref-sae-feature-id">Jones, 2026a</a>). The Goodfire release is also a curated
+public artifact: toxic features were removed prior to publication, and feature
+inspection is partly vendor-mediated (<a href="#ref-goodfire-sae">Goodfire</a>). The
+pinned Hugging Face tree does not ship a machine-readable label table for all
+features; Neuronpedia separately publishes automated interpretability labels
+for this SAE (<a href="#ref-neuronpedia-autointerp">Neuronpedia autointerp</a>), which
+are a distinct provenance chain with their own failure modes, not
+confirmation of the released labels. Alignment
+between these selected vectors and deception-adjacent vocabulary is useful
+evidence of lexical disposition under this lens. It is not strong evidence that
+the six IDs form a stable, unique &ldquo;deception&rdquo; class in the model&rsquo;s underlying
+computation.</p>
+<p>There are three checks against a neat story. Feature 23893 has a slightly
+negative deception-minus-unrelated score (-0.288), and its leading tokens are
+generic (<code>anything</code>, <code>yourself</code>, <code>outside</code>, <code>existence</code>). Feature 30032 sits
+inside the matched-control spread: its +0.71 deception-minus-unrelated score
+is exceeded by four of the 18 controls (which reach +2.50), and its leading
+tokens are innocence-flavored (<code>innocent</code>, <code>harmless</code>, <code>normal</code>) rather than
+deceptive, which is why the count above is three sharp alignments plus one
+moderate rather than five. That heterogeneity inside the claimed feature
+family matters more than a tidy semantic class.
+Lens excess kurtosis (how spiky and heavy-tailed a direction&rsquo;s token-score
+profile is; a Gaussian profile scores 0) is also not a target selector: mean
+excess kurtosis is 7.49 for the six targets and 7.53 for the 18 matched
+controls because one control is extremely heavy-tailed.</p>
+<p><img src="sae_jlens_static_fingerprints.png" alt="Static SAE direction fingerprints in J-space."></p>
+<p class="figure-note">Figure: positive layer-50 decoder directions projected through the real J-lens. Rows alternate each target (T) with its panel-1 matched SAE control (C1); colors are standardized within a row, so they show profile rather than magnitude. Three target profiles (30686, 41533, 58667) emphasize deception/roleplay-related groups under the released labels; 22004's largest groups are hedging and experience, 30032's scores sit inside the matched-control spread with innocence-flavored top tokens, and 23893 emphasizes experience instead.</p>
+<p>The descriptive table must report both signs, top and bottom tokens, population
+excess kurtosis, frozen lexicon scores, matched controls, and the identity and
+random-J transport comparison. Token lists are
+not themselves a detector result and cannot be used to choose confirmatory
+classifier features after the fact. Because the basic J-lens is single-token,
+these lexical fingerprints also understate phrase-level or compositional
+content (<a href="#ref-gurnee-2026">Gurnee et al., 2026</a>).</p>
+<h2 id="can-token-directions-reconstruct-an-sae-direction">Can Token Directions Reconstruct an SAE Direction?</h2>
+<p>For vocabulary token \(w\), define the layer-50 J-direction</p>
+\[
+v_w=J_{50}^{\mathsf T}q_w,
+\]<p>where \(q_w\) includes the model&rsquo;s learned final-RMSNorm gain and unembedding
+row. In words: \(v_w\) is the layer-50 direction that, pushed downstream, most
+directly promotes token \(w\). We use clean-room nonnegative matching pursuit
+to approximate each SAE decoder direction with normalized token directions at
+\(k\in\{5,10,16,25\}\).</p>
+<div class="panel info">
+    <div class="panel-icon">
+        💡
+        
+    </div>
+    <div class="panel-content">
+        <strong>Matching pursuit, in plain terms.</strong> Greedy rebuilding with a word budget:
+pick the token direction that best matches the SAE vector, subtract that
+piece, then repeat on what is left until you have used \(k\) words.
+&ldquo;Nonnegative&rdquo; means pieces can only be added, never subtracted; &ldquo;clean-room&rdquo;
+means our own implementation, no vendor code. The score is how much of the
+vector&rsquo;s energy the \(k\)-word mix recovers.
+    </div>
+</div>
+<p>At \(k=25\), the sparse pursuit explains 10.29% of target squared norm (the
+share of the vector&rsquo;s total energy the 25-word mix recovers) on average,
+versus 7.62% for matched SAE controls and 1.95% for isotropic controls.
+Under this nonnegative sparse-pursuit procedure and token dictionary, the
+selected SAE directions are somewhat better approximated by sparse J-token
+cones than isotropic controls, but most of the norm remains outside the fitted
+cone. That is consistent with limited J-space occupancy in the broader
+literature (<a href="#ref-gurnee-2026">Gurnee et al., 2026</a>). It is a property of this
+chosen pursuit over this chosen dictionary, not a deep ontological measure of
+how much of the steering direction is &ldquo;really verbal.&rdquo;</p>
+<table>
+  <thead>
+      <tr>
+          <th>Role at \(k=25\)</th>
+          <th style="text-align: right">Mean explained sq. norm</th>
+          <th style="text-align: right">Min</th>
+          <th style="text-align: right">Max</th>
+          <th style="text-align: right">n</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Target SAE</td>
+          <td style="text-align: right"><strong>10.29%</strong></td>
+          <td style="text-align: right">3.47%</td>
+          <td style="text-align: right">30.55%</td>
+          <td style="text-align: right">6</td>
+      </tr>
+      <tr>
+          <td>Matched SAE controls</td>
+          <td style="text-align: right">7.62%</td>
+          <td style="text-align: right">1.99%</td>
+          <td style="text-align: right">27.33%</td>
+          <td style="text-align: right">18</td>
+      </tr>
+      <tr>
+          <td>Isotropic controls</td>
+          <td style="text-align: right">1.95%</td>
+          <td style="text-align: right">1.75%</td>
+          <td style="text-align: right">2.16%</td>
+          <td style="text-align: right">6</td>
+      </tr>
+  </tbody>
+</table>
+<p class="figure-note">Table: clean-room nonnegative pursuit. Feature 30686 is the 30.55% case; 22004 is only 3.47%. Target and matched-control ranges overlap.</p>
+<p><img src="sae_jlens_sparse_pursuit.png" alt="Sparse token-direction pursuit of SAE decoder vectors."></p>
+<p class="figure-note">Figure: mean explained squared norm under clean-room nonnegative pursuit; bands span the 10th to 90th percentile across directions, not confidence intervals. A small token-direction cone captures more of targets than isotropic vectors, but most SAE norm remains outside the 25-token fit.</p>
+<p>The leftover vector is a <strong>J-remainder</strong>, not a unique orthogonal complement:
+there is no single canonical &ldquo;rest of the vector,&rdquo; because a different greedy
+search or word budget could split the same vector differently. J-space here is
+a sparse cone whose decomposition can depend on search and sparsity. We report
+that instability rather than hiding it.</p>
+<h2 id="downstream-fingerprint">Downstream Fingerprint</h2>
+<p>First, the bad news for auditing. In this experiment, using a fixed
+single-token J-lens readout on isolated post-intervention states (to be
+precise: the detector is a simple classifier over all 67 frozen lexicon token
+scores, not the one-number deception contrast used in the paired analysis),
+target attribution does not generalize out of sample and performs at chance
+relative to identity and scrambled-J controls. Crossed prompt-family and feature-pair
+holdout AUROC is 0.4998 [0.4978, 0.5016] for the J-lens, 0.5013 for identity,
+0.5025 for raw residual norm, and 0.5011 to 0.5068 across the five random-J
+controls. J-lens TPR at 1% FPR is 0.98% (the random-J seeds span 0.82% to
+1.47%), and its AUPRC of 0.5018 sits at this balanced task&rsquo;s 0.5 prevalence.
+Calibration tells the same story: the J-lens detector&rsquo;s Brier score is 0.313
+[0.300, 0.327], worse than the 0.25 a constant fifty-fifty guess would score
+on this balanced task (full rows in
+<a href="receipts/detector_metrics.csv"><code>detector_metrics.csv</code></a>).</p>
+<table>
+  <thead>
+      <tr>
+          <th>Readout (target attribution)</th>
+          <th style="text-align: right">AUROC</th>
+          <th>95% CI</th>
+          <th style="text-align: right">TPR @ 1% FPR</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Jacobian lens</td>
+          <td style="text-align: right"><strong>0.4998</strong></td>
+          <td>[0.4978, 0.5016]</td>
+          <td style="text-align: right">0.98%</td>
+      </tr>
+      <tr>
+          <td>Identity</td>
+          <td style="text-align: right">0.5013</td>
+          <td>[0.4998, 0.5028]</td>
+          <td style="text-align: right">1.14%</td>
+      </tr>
+      <tr>
+          <td>Raw residual norm</td>
+          <td style="text-align: right">0.5025</td>
+          <td>[0.5017, 0.5043]</td>
+          <td style="text-align: right">1.14%</td>
+      </tr>
+      <tr>
+          <td>Random-J seeds (range)</td>
+          <td style="text-align: right">0.5011-0.5068</td>
+          <td>-</td>
+          <td style="text-align: right">0.82%-1.47%</td>
+      </tr>
+  </tbody>
+</table>
+<p class="figure-note">Table: confirmatory post-state-only target attribution under crossed prompt-family and feature-pair holdouts. Every readout is operationally at chance.</p>
+<p>Read that as a <strong>task- and instrument-specific null</strong>, not as proof that
+internal states cannot reveal prior steering. Other recent work reports
+detectable residual-stream signals of concept injection, robust detection
+behavior in post-trained models, and strong activation-based deception auditing
+with richer decoder architectures (<a href="#ref-pearson-vogel-2026">Pearson-Vogel et al.,
+2026</a>; <a href="#ref-macar-2026">Macar et al., 2026</a>;
+<a href="#ref-chen-2026">Chen et al., 2026</a>). The right interpretation is failure of
+this fixed J-space readout under this access model.</p>
+<p>The broader any-intervention task is no rescue. J-lens AUROC is 0.5092, below
+identity (0.5129) and four random-J seeds. Its AUPRC of 0.96895 (area under
+the precision-recall curve, roughly how well the detector concentrates true
+hits among its alarms) is almost exactly the 0.96774 positive-class prevalence
+(the fraction of trials that are steered: 30 of every 31). When AUPRC matches
+prevalence, the detector does no better than labeling everything &ldquo;steered.&rdquo; A
+high-looking AUPRC in a 30-to-1 task is not a useful detector. The remaining
+promised metrics agree: the J-lens Brier score on this task is 0.327 [0.246,
+0.411], and its TPR at 1% FPR is 1.37% (rows in
+<a href="receipts/detector_metrics.csv"><code>detector_metrics.csv</code></a>). Again, the claim is
+that our chosen readout family did not detect any intervention usefully, not
+that intervention detection is generally hopeless.</p>
+<p><img src="sae_jlens_detection_auroc.png" alt="Out-of-sample steering detection by readout family."></p>
+<p class="figure-note">Figure: confirmatory post-state-only target attribution. Error bars are 95% template-cluster bootstrap intervals. Every readout is operationally at chance under crossed prompt and feature-pair holdouts.</p>
+<p>The central comparison is the real J-lens against identity, every random-J
+seed, and raw norms. The relevant question is not whether AUROC exceeds 0.5 in
+isolation, but whether the real lens adds reliable specificity beyond these
+cheaper controls.</p>
+<h3 id="a-clean-reference-changes-the-answer">A clean reference changes the answer</h3>
+<p>With access to a matched clean reference, a fixed one-number contrast on the
+same frozen lexicon readout produces a large signed differential signal
+between the selected targets and matched controls, making it potentially
+useful for controlled internal monitoring. At the frozen layer 65 readout, the target-minus-matched change is
++0.9065 [0.8426, 0.9673] under amplification (steering the feature up, with a
+positive coefficient) and -0.8247 [-0.8641, -0.7853] under suppression
+(steering it down). Identity sees the same sign but only +0.2028 and -0.2181.
+Every random-J effect has absolute magnitude below 0.123; several rotate into
+the opposite sign.</p>
+<p>One selection caveat tempers the positive side. The six targets were chosen
+because their released labels are deception/roleplay-adjacent, and the frozen
+score is a deception-minus-unrelated lexicon contrast, so the paired success
+partly measures whether label-selected features move a label-aligned lexicon.
+The matched SAE controls bound that circularity but do not remove it. A fully
+label-agnostic provenance test would need hard negatives that are
+semantically close to the targets yet outside their label space. Choosing
+them is subtler than it sounds: fiction, pretending, and persona vocabulary
+already appear in the released labels of the six targets, so those families
+would not be clean negatives here; label-disjoint candidates are
+directions like refusal/safety disclaimers, hedging, or formality.</p>
+<p><strong>Update (2026-07-12): a preregistered follow-up ran exactly those
+controls.</strong> The v2 study added 18 label-disjoint hard negatives (refusal,
+hedging, formality) and six same-subfamily matched comparators; its
+registered run failed a frozen numerical replay-equivalence gate, so its
+results are exploratory (<a href="#the-v2-follow-up">the v2 section below</a> has the
+full design, the gate failure, and the figures). In that exploratory
+analysis, none of the three hard-negative families showed material deception
+leakage, and every family&rsquo;s own lexicon was its largest readout. But the
+global family-specificity contrast (0.174 [0.167, 0.182], versus 0.133 for
+identity and -0.015 to 0.014 for the five random-J impostors) fell below the
+frozen material threshold of 0.25, and the six selected target IDs were
+practically comparable to matched same-subfamily alternatives (advantage
+0.125, entirely inside the frozen ±0.25 comparability region). Read
+together: the circularity concern above was partly justified. The readout
+tracks a semantic family that many label-similar features share, rather than
+anything privileged about the six advertised IDs, though three of the six
+(30686, 41533, 58667) move the deception lexicon strongly while the other
+three do not, so the family itself is real but heterogeneous.</p>
+<p>That is differential monitoring, not forensic attribution. Because the
+Jacobian lens measures vocabulary-disposition effects, many mechanisms (prompt
+edits, adapters, fine-tuning, weight edits, or different residual
+interventions) could in principle move the same score. Non-surjectivity work
+strengthens the caution: steering can push states off the natural prompt
+manifold (the region of activation space that real prompts actually produce;
+a steered state may sit somewhere no prompt could ever take the model), so
+detectability may partly reflect anomalous geometry rather than
+uniquely identifiable concept provenance (<a href="#ref-mishra-2026">Mishra et al.,
+2026</a>).</p>
+<p>After opening the confirmatory result, I added one explicitly post hoc
+(chosen after seeing the data, so it carries less evidential weight than the
+prospectively frozen endpoints) way to express that stronger access model,
+documented in a dated post-run amendment
+(<a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/docs/SAE_JLENS_POSTRUN_AMENDMENT_20260711.md"><code>SAE_JLENS_POSTRUN_AMENDMENT_20260711.md</code></a>;
+no token, layer, position, sign, feature, or transport was selected from the
+outcomes). Take the already frozen
+deception-minus-unrelated change, multiply by intervention sign, and use it as
+a fixed target-versus-matched score. J-lens AUROC is 0.862 [0.848, 0.876];
+identity is 0.779 [0.751, 0.807]; the five random-J AUROCs range from 0.256 to
+0.572. If intervention sign is unknown, an absolute-delta version falls to
+0.717 [0.697, 0.738] for J and 0.699 [0.667, 0.731] for identity, with random-J
+values up to 0.645. There is no fitted classifier in this sensitivity, but
+every version assumes a clean reference and therefore does not rescue the
+failed post-state-only detector.</p>
+<p><img src="sae_jlens_paired_reference_auc.png" alt="Paired clean-reference target attribution."></p>
+<p class="figure-note">Figure: fixed-score target attribution when the auditor can subtract a matched clean-prefix readout. Blue assumes known intervention sign; orange uses absolute change when sign is unknown. Error bars resample the 51 template families. This post-run sensitivity uses the frozen score but is not a new confirmatory endpoint. The raw-residual-norm baseline from the confirmatory figure was not run in this paired setting, so the manifold-anomaly alternative is untested here.</p>
+<p>The aggregate also hides real heterogeneity. Features 30686 and 58667 separate
+perfectly in this sample; 41533 is nearly perfect (0.9999); 30032 and 22004
+are strong under the lens but sit near 0.6 under identity. Feature 23893 runs
+the other way (AUROC 0.355, with identity at 0.604 reading it better than the
+lens), consistent with its failed static deception score. The identity
+baseline nearly matches the lens on 30686 (0.985) and 41533 (0.962) but not
+on 58667 (0.768), so per-feature perfection is lens-specific even though much
+of the aggregate paired separation is not.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Feature ID</th>
+          <th style="text-align: right">Paired J AUROC</th>
+          <th>95% CI</th>
+          <th style="text-align: right">Identity AUROC</th>
+          <th style="text-align: right">Target − matched mean score</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>30686</td>
+          <td style="text-align: right"><strong>1.000</strong></td>
+          <td>[1.000, 1.000]</td>
+          <td style="text-align: right">0.985</td>
+          <td style="text-align: right">+2.35</td>
+      </tr>
+      <tr>
+          <td>58667</td>
+          <td style="text-align: right"><strong>1.000</strong></td>
+          <td>[1.000, 1.000]</td>
+          <td style="text-align: right">0.768</td>
+          <td style="text-align: right">+1.17</td>
+      </tr>
+      <tr>
+          <td>41533</td>
+          <td style="text-align: right">0.9999</td>
+          <td>[0.999, 1.000]</td>
+          <td style="text-align: right">0.962</td>
+          <td style="text-align: right">+1.27</td>
+      </tr>
+      <tr>
+          <td>30032</td>
+          <td style="text-align: right">0.957</td>
+          <td>[0.916, 0.985]</td>
+          <td style="text-align: right">0.591</td>
+          <td style="text-align: right">+0.28</td>
+      </tr>
+      <tr>
+          <td>22004</td>
+          <td style="text-align: right">0.929</td>
+          <td>[0.891, 0.963]</td>
+          <td style="text-align: right">0.609</td>
+          <td style="text-align: right">+0.20</td>
+      </tr>
+      <tr>
+          <td>23893</td>
+          <td style="text-align: right"><strong>0.355</strong></td>
+          <td>[0.262, 0.450]</td>
+          <td style="text-align: right">0.604</td>
+          <td style="text-align: right">−0.07</td>
+      </tr>
+  </tbody>
+</table>
+<p class="figure-note">Table: per-feature paired-reference AUROC under the same frozen one-number J score, with the identity transport beside it. "Perfect" is a max-statistic over the 51 template families in this sample; 41533's 0.9999 reflects at least one mis-ordered pair. The identity column and the per-feature random-J values (spanning 0.015 to 0.944 across seeds and features) are derived post hoc from the released paired_results with the release's own scoring code ([derivation receipt](receipts/paired_reference_feature_transport_controls.csv)). Aggregate success is not a uniform six-feature mechanism.</p>
+<p><img src="sae_jlens_feature_heterogeneity.png" alt="Feature-level paired-reference heterogeneity."></p>
+<p class="figure-note">Figure: all six target IDs under the same paired J-score, with no feature omitted. The figure plots the J score only; the per-feature identity baselines are in the table above. Aggregate success is not evidence of a uniform six-feature mechanism.</p>
+<h2 id="what-changes-across-layers">What Changes Across Layers?</h2>
+<p>The signed J fingerprint is largest where the vector is inserted and then
+decays smoothly. Target-minus-matched amplification falls from about +1.2 at
+layer 50 to +0.48 at layer 78; suppression moves from about -1.2 to -0.42. The
+identity baseline behaves differently: roughly flat (between about 0.20 and
+0.26 in absolute value) through layer 75, then rising to +0.350/-0.324 at
+layer 78 as the readout approaches the output the intervention ultimately
+shifts. The J readout stays separated from
+the identity baseline at every measured depth (at layer 78 the 95% intervals
+are still disjoint: +0.482 [0.443, 0.519] versus +0.350 [0.318, 0.381]), but
+the gap narrows from roughly 4.5x at layer 65 to about 1.4x at the last
+layer, so part of the late-layer persistence is visible to any readout, not
+only the lens. At this last-content readout position, every random-J
+impostor stays within +/-0.14 at every layer. The transformer does not
+immediately erase these additions, but it does attenuate them.</p>
+<p>What persists is the chosen <strong>J-score</strong>, defined through a corpus-averaged
+transport and a hand-built lexical contrast. That is weaker than persistence of
+&ldquo;the deception concept&rdquo; itself.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Layer</th>
+          <th style="text-align: right">J amplification Δ</th>
+          <th style="text-align: right">J suppression Δ</th>
+          <th style="text-align: right">Identity amp. Δ</th>
+          <th style="text-align: right">Identity supp. Δ</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>50 (insert)</td>
+          <td style="text-align: right">+1.180</td>
+          <td style="text-align: right">−1.212</td>
+          <td style="text-align: right">+0.252</td>
+          <td style="text-align: right">−0.253</td>
+      </tr>
+      <tr>
+          <td>55</td>
+          <td style="text-align: right">+1.062</td>
+          <td style="text-align: right">−0.993</td>
+          <td style="text-align: right">+0.207</td>
+          <td style="text-align: right">−0.208</td>
+      </tr>
+      <tr>
+          <td>60</td>
+          <td style="text-align: right">+0.947</td>
+          <td style="text-align: right">−0.887</td>
+          <td style="text-align: right">+0.217</td>
+          <td style="text-align: right">−0.233</td>
+      </tr>
+      <tr>
+          <td><strong>65 (primary)</strong></td>
+          <td style="text-align: right"><strong>+0.907</strong></td>
+          <td style="text-align: right"><strong>−0.825</strong></td>
+          <td style="text-align: right">+0.203</td>
+          <td style="text-align: right">−0.218</td>
+      </tr>
+      <tr>
+          <td>70</td>
+          <td style="text-align: right">+0.829</td>
+          <td style="text-align: right">−0.745</td>
+          <td style="text-align: right">+0.222</td>
+          <td style="text-align: right">−0.231</td>
+      </tr>
+      <tr>
+          <td>75</td>
+          <td style="text-align: right">+0.682</td>
+          <td style="text-align: right">−0.638</td>
+          <td style="text-align: right">+0.242</td>
+          <td style="text-align: right">−0.262</td>
+      </tr>
+      <tr>
+          <td>78 (late)</td>
+          <td style="text-align: right">+0.482</td>
+          <td style="text-align: right">−0.420</td>
+          <td style="text-align: right">+0.350</td>
+          <td style="text-align: right">−0.324</td>
+      </tr>
+  </tbody>
+</table>
+<p class="figure-note">Table: target-minus-matched paired change in the frozen deception-minus-unrelated score at last-content position (template-cluster means), for the real J transport and the identity baseline from the same release file. At this position, every random-J impostor stays within ±0.14 at every layer ([`paired_semantic_effects.csv`](receipts/paired_semantic_effects.csv)).</p>
+<p><img src="sae_jlens_downstream_trajectory.png" alt="Layerwise trajectory of the frozen deception-minus-unrelated score."></p>
+<p class="figure-note">Figure: target-minus-matched paired change in the frozen deception-minus-unrelated score under the J transport only; the identity and random-J trajectories from the same release file are in the table above (identity rises toward late layers while the J contrast narrows). Bands are 95% template-cluster intervals; the dashed line marks the prospectively frozen primary layer 65.</p>
+<p>Layer 50 is diagnostic only: the intervention was inserted there. Layer 65 is
+primary because it asks whether the signature persists after 15 nonlinear
+blocks. Later layers show whether it strengthens, rotates, or dissipates before
+the final output.</p>
+<h2 id="the-v2-follow-up">The v2 Follow-Up</h2>
+<p>The isolated-state null above leaves two escape hatches open, and the paired
+positive carries the selection circularity already flagged. A fair critic
+could reply: maybe the 67-token reader was too weak, and maybe the matched
+controls were too easy, since none of them lives in the targets&rsquo; semantic
+neighborhood. A preregistered follow-up was built to close both hatches at
+once (<a href="https://osf.io/f3tpv/">OSF registration <code>f3tpv</code></a>; result-free freeze
+<a href="https://github.com/tdj28/llm_selfref_pre/commit/7eff43f7b8ea5ca0e011d4c0fb46bf5df1b0e4cd"><code>7eff43f</code></a>;
+result release
+<a href="https://github.com/tdj28/llm_selfref_pre/commit/478a10dd0670eee47fc151882560482ae79fc790"><code>478a10d</code></a>).
+It replays the study above (v1, in what follows) as a numerical bridge,
+steers with 18 hard negatives (refusal/safety, hedging/uncertainty, and
+formality/politeness features: semantically nearby but label-disjoint from
+the targets under a frozen mechanical rule), pairs each accepted ID with one
+fixed alternative from the same pretending/roleplay/deception subfamily, and
+tests fourteen linear readers of increasing power, up to a probe that sees
+the entire 8,192-number residual state. All 24 comparators were selected
+without looking at Jacobian outputs or target outcomes.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Component</th>
+          <th>Frozen value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Replay rows (v1 bridge)</td>
+          <td>1,581</td>
+      </tr>
+      <tr>
+          <td>New semantic rows</td>
+          <td>2,448</td>
+      </tr>
+      <tr>
+          <td>A1 comparators</td>
+          <td>18 hard negatives, six per family</td>
+      </tr>
+      <tr>
+          <td>A2 comparators</td>
+          <td>six fixed same-subfamily matches</td>
+      </tr>
+      <tr>
+          <td>Readers</td>
+          <td>14, all linear</td>
+      </tr>
+      <tr>
+          <td>Validation</td>
+          <td>crossed prompt-family and target/control-pair holdouts</td>
+      </tr>
+      <tr>
+          <td>Resampling</td>
+          <td>20,000 template-family draws</td>
+      </tr>
+      <tr>
+          <td>Frozen thresholds</td>
+          <td>specificity 0.25; comparability ±0.25; reader AUROC 0.60</td>
+      </tr>
+  </tbody>
+</table>
+<p>Every semantic intervention is evaluated against the same four output
+lexicons (deception/dishonesty, refusal/safety, hedging/uncertainty, and
+formality/politeness). Scores subtract a frozen unrelated-token reference and
+are standardized by clean-prompt variation separately for each transport.</p>
+<h3 id="the-run-failed-its-own-replay-gate">The run failed its own replay gate</h3>
+<p>The frozen protocol contained a rule: the new run had to reproduce the v1
+run&rsquo;s numbers within a fixed tolerance before any new science could be
+analyzed. The expensive part went perfectly. The Llama 3.3 70B weights loaded
+on a B200, the pinned SAE and lens matched their hashes, all 4,029 planned
+forwards completed (the 1,581 v1 replay rows plus the 2,448 new semantic
+rows), and 16 BF16 residual shards were written. Then the reproduction check
+came back at 0.25 against a frozen maximum of 0.02, and the fail-closed
+pipeline wrote <code>replay_gate_failed</code> and stopped before confirmatory analysis
+could run at all.</p>
+<p>That is the registered result of the v2 study: <strong>replay gate failed.</strong> A
+second frozen check, that the saved BF16 residuals reproduce the readouts
+computed during the same run, passed with maximum error exactly zero, so the
+archive is faithful to the run; what failed is the numerical bridge to v1.</p>
+<div class="panel warning">
+    <div class="panel-icon">
+        ⚠️
+        
+    </div>
+    <div class="panel-content">
+        <strong>Evidence status for everything below.</strong> Because the registered run failed
+its replay gate, every endpoint number in this section is post-outcome
+exploratory. The analyses use the unchanged frozen rows, readers, holdouts,
+seeds, thresholds, and estimands, and were authorized by a
+<a href="https://github.com/tdj28/llm_selfref_pre/blob/478a10dd0670eee47fc151882560482ae79fc790/docs/LLAMA70B_SAE_JLENS_V2_POST_OUTCOME_AMENDMENT_20260712.md">dated post-outcome amendment</a>
+committed before any semantic endpoint was inspected, but they are not
+confirmatory and do not replace the failed registered result.
+    </div>
+</div>
+<p>Why have a gate at all? The v2 endpoints reuse the v1 run as a bridge; if the
+bridge does not reproduce, a difference in a new endpoint might come from the
+new scientific condition, or from hardware, batching, kernels, precision, or
+software. The gate makes that ambiguity visible instead of letting it hide
+inside polished tables. The mistake was not having a gate; it was freezing
+the wrong kind of gate without first calibrating it across independent runs.</p>
+<h3 id="the-bf16-staircase">The BF16 staircase</h3>
+<p>A post-outcome diagnostic compared all 15,571,269 replayed token-logit
+values:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Quantity</th>
+          <th style="text-align: right">Result</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Pearson correlation</td>
+          <td style="text-align: right">0.9999916562</td>
+      </tr>
+      <tr>
+          <td>Mean absolute error</td>
+          <td style="text-align: right">0.00500425</td>
+      </tr>
+      <tr>
+          <td>Median absolute error</td>
+          <td style="text-align: right">0.001953125</td>
+      </tr>
+      <tr>
+          <td>99th percentile</td>
+          <td style="text-align: right">0.03125</td>
+      </tr>
+      <tr>
+          <td>Maximum</td>
+          <td style="text-align: right">0.25</td>
+      </tr>
+      <tr>
+          <td>Values above 0.02</td>
+          <td style="text-align: right">3.137%</td>
+      </tr>
+      <tr>
+          <td>Values above 0.10</td>
+          <td style="text-align: right">1,691 (0.0109%)</td>
+      </tr>
+      <tr>
+          <td>Values above 0.20</td>
+          <td style="text-align: right">15</td>
+      </tr>
+  </tbody>
+</table>
+<p>The error quantiles land on powers-of-two fractions (median 0.001953125,
+99th percentile 0.03125, 99.9th 0.0625, 99.99th 0.125, maximum 0.25), and
+the largest error in each magnitude bin is a small integer multiple of one
+BF16 step. That is a BF16 signature. BF16 (bfloat16, the 16-bit
+floating-point format most large-model inference uses) has seven stored
+fraction bits, so it can only represent numbers on a grid whose spacing grows
+with magnitude. Around a nonzero value \(x\), the gap between one
+representable number and the next (one &ldquo;unit in the last place,&rdquo; or ULP) is
+approximately</p>
+\[
+\operatorname{ULP}_{\mathrm{BF16}}(x)=2^{\lfloor\log_2|x|\rfloor-7}.
+\]<p>So the representable spacing is 0.03125 from 4 to 8, 0.0625 from 8 to 16,
+0.125 from 16 to 32, and 0.25 from 32 to 64. A frozen maximum tolerance of
+0.02 is narrower than one BF16 step once magnitude reaches 4: two runs that
+differ by a single rounding decision anywhere upstream cannot land on the
+same grid point, and the gate reads even that minimal one-step difference as
+a failure. That is exactly where the failures cluster:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Canonical logit magnitude</th>
+          <th style="text-align: right">Share above 0.02</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>below 1</td>
+          <td style="text-align: right">0.074%</td>
+      </tr>
+      <tr>
+          <td>1 to 2</td>
+          <td style="text-align: right">0.699%</td>
+      </tr>
+      <tr>
+          <td>2 to 4</td>
+          <td style="text-align: right">2.182%</td>
+      </tr>
+      <tr>
+          <td>4 to 8</td>
+          <td style="text-align: right">37.815%</td>
+      </tr>
+      <tr>
+          <td>8 to 16</td>
+          <td style="text-align: right">37.332%</td>
+      </tr>
+      <tr>
+          <td>16 or above</td>
+          <td style="text-align: right">35.044%</td>
+      </tr>
+  </tbody>
+</table>
+<p>The differences are one or a few BF16 steps at large logits, not a drift:
+the mean signed error is about \(-3.9\times10^{-6}\). They concentrate in the Jacobian
+transport (10.36% of Jacobian token scores above tolerance, versus 2.78% for
+identity and under 2% for the random-J controls), which is one more reason to
+weight the exploratory Jacobian readouts below with care.</p>
+<p>Does that mean the gate was &ldquo;basically a pass&rdquo;? No. It means we can explain
+why a maximum-error gate behaved badly, and explanation is not permission to
+edit a registered rule after seeing it fail. Three statements are true at
+once: the registered outcome is that the gate failed and confirmatory
+endpoints are blocked; the post-outcome diagnostic shows the failure is
+sparse, magnitude-dependent, and BF16-shaped; and the already-frozen endpoint
+calculations still run on the preserved data, under the exploratory label. A
+future gate should be calibrated on repeated independent runs before any
+outcome exists, report ULP distance and downstream-statistic stability
+alongside absolute error, freeze both a distributional and a scale-aware
+maximum criterion, and fail closed again if missed.</p>
+<h3 id="a1-does-each-intervention-family-move-its-own-lexicon">A1: does each intervention family move its own lexicon?</h3>
+<p>For intervention family \(r\) and readout lexicon \(c\), let \(M_{rc}\) be
+the oriented, clean-referenced standardized change. The row-specificity
+contrast is</p>
+\[
+S_r=M_{rr}-\frac{1}{3}\sum_{c\ne r}M_{rc}.
+\]<p>In words: how much more does a family move <em>its own</em> lexicon than the average
+of the other three? The global A1 statistic averages the four \(S_r\) values;
+the frozen material minimum was 0.25 standard deviations.</p>
+<p><img src="sae_jlens_v2_a1_semantic_matrix.png" alt="Jacobian semantic family matrix."></p>
+<p class="figure-note">Figure: exploratory real-Jacobian oriented changes. Every diagonal is the largest entry in its row, but the global diagonal-minus-off-diagonal contrast is 0.174, below the frozen 0.25 material threshold. This panel shows the J transport only; the identity and random-J counterparts of the same contrast are quoted in the paragraph below.</p>
+<p>The pattern is orderly. Every intended diagonal is largest, and all four row
+contrasts survive the frozen Holm procedure (a multiplicity correction that
+guards against celebrating one lucky row out of four). But the global
+contrast is 0.174 [0.167, 0.182], below the frozen 0.25, so the
+family-specificity verdict is false. Identity carries a smaller visible
+diagonal at 0.133 [0.127, 0.140]; the five random-J controls sit between
+-0.015 and 0.014. The real alignment matters descriptively and clears its
+impostors, but the effect is below the material bar. The hard negatives also
+answer a narrower concern: none of refusal, hedging, or formality shows
+material deception leakage under the same rule, so this is not a picture
+where every socially adjacent feature simply looks deceptive.</p>
+<p>The six accepted IDs do not move together:</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: right">Feature ID</th>
+          <th style="text-align: right">Exploratory Jacobian deception score</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: right">30686</td>
+          <td style="text-align: right">0.732</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">41533</td>
+          <td style="text-align: right">0.513</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">58667</td>
+          <td style="text-align: right">0.362</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">22004</td>
+          <td style="text-align: right">0.072</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">30032</td>
+          <td style="text-align: right">0.027</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">23893</td>
+          <td style="text-align: right">−0.010</td>
+      </tr>
+  </tbody>
+</table>
+<p class="figure-note">Table: per-feature oriented deception scores (standard-deviation units). The bottom rows matter: 23893 also failed the static deception projection above, and 30032's near-zero matches its position inside the matched-control spread in the static table. Keeping both in every analysis prevents a three-feature success from being narrated as a uniform six-feature mechanism.</p>
+<h3 id="a2-are-the-six-advertised-ids-privileged">A2: are the six advertised IDs privileged?</h3>
+<p>A feature can have a recognizable label without being uniquely important.
+Each accepted ID is paired with one fixed alternative from the same
+pretending, roleplay, or deception subfamily, chosen using outcome-masked SAE
+telemetry and label constraints (that is, without looking at any Jacobian
+outcome). The aggregate statistic is target minus matched comparator in the
+deception readout, with two interpretations frozen before outcomes:
+<strong>selected-ID advantage</strong> (at least +0.25, with its interval above zero) or
+<strong>practical comparability</strong> (the 90% interval lies inside [-0.25, +0.25]).</p>
+<p><img src="sae_jlens_v2_a2_target_comparator.png" alt="Selected target IDs versus same-subfamily comparators."></p>
+<p class="figure-note">Figure: exploratory target-minus-comparator effects by transport. The shaded band is the frozen ±0.25 comparability region; the dashed line marks the +0.25 selected-ID-advantage minimum.</p>
+<p>For the real Jacobian the difference is 0.125, with 95% interval
+[0.114, 0.136] and 90% interval [0.116, 0.134]. The transport controls put
+that in scale: identity shows +0.007 on the identical statistic, and the
+five random-J impostors span -0.175 to +0.083, so a scrambled lens can
+produce a larger-magnitude target-minus-comparator gap than the real one.
+Precise, but not large: the entire interval sits inside the comparability
+region, so the frozen exploratory verdict is <strong>practical comparability</strong>,
+not selected-ID advantage. This is stronger than saying the six IDs have no
+signal; several do in the exploratory tables. It says that carefully matched
+alternatives from the same public SAE carry similar deception-related
+Jacobian effects. The index numbers themselves are not privileged
+coordinates, the same deflation already stated in this post&rsquo;s abstract and
+key result.</p>
+<h3 id="does-more-reader-capacity-recover-provenance">Does more reader capacity recover provenance?</h3>
+<p>The reader ladder tests the remaining escape hatch: was the isolated-state
+null an artifact of compressing the state to 67 vocabulary logits? To the
+original reader we add identity and five random-J versions of the same 67
+logits; 67 principal components of the raw residual (fit only inside each
+training fold, so no test data leaks into the projection); five fixed
+67-dimensional random projections (a capacity control: is <em>any</em> set of 67
+directions enough?); and the full 8,192-dimensional residual state, the
+supervised linear capacity ceiling. Every reader must generalize
+simultaneously to a held-out prompt fold and a held-out target/control
+feature pair, exactly like the v1 detector.</p>
+<p><img src="sae_jlens_v2_reader_ladder.png" alt="Crossed-holdout reader-capacity ladder."></p>
+<p class="figure-note">Figure: exploratory macro AUROC under crossed holdouts. Black is chance; red is the frozen 0.60 material threshold. Every reader remains near 0.50.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Reader</th>
+          <th style="text-align: right">Macro AUROC</th>
+          <th style="text-align: right">95% interval</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Jacobian 67 logits</td>
+          <td style="text-align: right">0.4985</td>
+          <td style="text-align: right">[0.4956, 0.5011]</td>
+      </tr>
+      <tr>
+          <td>Identity 67 logits</td>
+          <td style="text-align: right">0.5020</td>
+          <td style="text-align: right">[0.4999, 0.5047]</td>
+      </tr>
+      <tr>
+          <td>Random-J 67 logits (5)</td>
+          <td style="text-align: right">0.5020 to 0.5079</td>
+          <td style="text-align: right">one interval entirely above 0.5</td>
+      </tr>
+      <tr>
+          <td>Residual PCA-67</td>
+          <td style="text-align: right">0.5101</td>
+          <td style="text-align: right">[0.5063, 0.5159]</td>
+      </tr>
+      <tr>
+          <td>Full residual 8,192</td>
+          <td style="text-align: right">0.5068</td>
+          <td style="text-align: right">[0.5046, 0.5108]</td>
+      </tr>
+      <tr>
+          <td>Fixed random projections (5)</td>
+          <td style="text-align: right">0.4974 to 0.5029</td>
+          <td style="text-align: right">near chance</td>
+      </tr>
+  </tbody>
+</table>
+<p>None approaches the frozen 0.60 material threshold. A few intervals sit
+narrowly above 0.5, but the scrambled-lens nulls do too (the five random-J
+67-logit readers span 0.5020 to 0.5079, one with its whole interval above
+0.5), so an AUROC edge of 0.006 to 0.010 is within what a meaningless
+reader achieves here and is not an operational steering detector. The full-residual row is the key negative
+control: the isolated-state null is not explained by the 67-logit
+compression, and more linear capacity does not recover out-of-sample
+provenance here. Nonlinear and decoder-based readers (tuned lens, LatentQA,
+STATEWITNESS) were excluded from the frozen v2 design and remain open.</p>
+<h3 id="what-the-follow-up-adds-and-what-it-cannot">What the follow-up adds, and what it cannot</h3>
+<p>The v2 results sharpen the access-model split into a hierarchy:</p>
+<ol>
+<li><strong>feature label:</strong> which texts activate a coordinate;</li>
+<li><strong>causal semantic effect:</strong> which readout changes when it is steered;</li>
+<li><strong>selected-ID specificity:</strong> whether that coordinate outperforms matched
+alternatives; and</li>
+<li><strong>state-only provenance:</strong> whether an auditor can infer the intervention
+from a new isolated state.</li>
+</ol>
+<p>Evidence at rung 1 or 2 does not imply rung 3 or 4. Here the labels are real
+and several causal effects are strong, while rung 3 lands at practical
+comparability and rung 4 stays at chance for every linear reader tried.</p>
+<p>Because the replay gate failed, none of this is confirmatory. It also does
+not show that every SAE feature is interchangeable, that the six paper IDs
+are meaningless, that nonlinear or sequence-level provenance detection is
+impossible, that a proprietary Goodfire intervention would match this public
+implementation, or anything about hidden belief, intent, or consciousness.
+The defensible exploratory conclusion is narrower: under this public Llama
+70B SAE/J-lens setup, hard-negative semantics are orderly but below the
+material specificity threshold, the accepted IDs do not beat fixed
+same-subfamily comparators by a material amount, and no frozen linear state
+reader detects their provenance out of sample.</p>
+<h2 id="could-this-audit-a-production-model">Could This Audit a Production Model?</h2>
+<p>These results do not support deploying the present J-space classifier as a
+standalone provenance detector. At most, they support including a
+reference-based J-space differential among a broader monitoring stack that
+should also include telemetry, anomaly detectors, and stronger learned or
+decoder-based state readers (<a href="#ref-pan-2024">Pan et al., 2024</a>; <a href="#ref-chen-2026">Chen et al.,
+2026</a>; <a href="#ref-belinkov-2022">Belinkov, 2022</a>).</p>
+<p>The post-state-only result is the production-relevant failure: prompt variation
+overwhelms the small frozen lexical fingerprint, and the real J-lens does not
+outperform identity or scrambled controls. A company should not deploy this
+classifier to declare that an arbitrary state was steered.</p>
+<p>The paired result is still useful as an internal regression monitor. If a
+deployment system can retain a clean reference for a fixed probe, compare signed
+versions, or run controlled canary prefixes (known test prompts replayed
+periodically so any drift in their readouts flags a change), the J-lens can
+amplify a semantically specific delta beyond identity. It is not provenance: a prompt,
+fine-tune, adapter, weight edit, or different residual intervention could
+produce a similar delta.</p>
+<p>Even a strong positive result would be an intervention fingerprint, not proof
+of provenance. Prompting, fine-tuning, LoRA adapters, weight edits, and other
+residual additions may enter the same score region. A distributed or
+J-avoiding intervention may evade a detector trained on constant SAE vectors.
+The non-surjectivity literature adds another possibility: crude steering may
+be detectable simply because it pushes activations off the natural manifold,
+in which case raw anomaly scores could outperform semantic J-space
+(<a href="#ref-mishra-2026">Mishra et al., 2026</a>).</p>
+<p>For a production system, the practical hierarchy is:</p>
+<ol>
+<li>use signed deployment metadata and direct hook telemetry when available;</li>
+<li>compare raw-activation anomaly detectors with J-space detectors and with
+richer learned or natural-language activation readers;</li>
+<li>validate on intervention families absent from training;</li>
+<li>red-team adaptive and distributed steering; and</li>
+<li>state the false-positive rate on naturally occurring prompts before using
+any detector operationally.</li>
+</ol>
+<div class="mermaid">
+
+flowchart TD
+  A["Production monitoring stack"] --> B["1. Signed metadata + hook telemetry"]
+  A --> C["2. Raw anomaly detectors"]
+  A --> D["3. Reference-based J differential"]
+  A --> E["4. Learned / decoder readers<br/>LatentQA · STATEWITNESS"]
+  B --> F["Prefer when available"]
+  C --> G["Catch off-manifold edits"]
+  D --> H["This note's ceiling"]
+  E --> I["Richer alternatives not run here"]
+
+</div>
+
+<p class="figure-note">Figure: where a paired J-space monitor sits. It is one instrument among several, not the main alternative after telemetry.</p>
+<h2 id="what-this-says-about-consciousness-claims">What This Says About Consciousness Claims</h2>
+<p>The experiment establishes a causal perturbation fingerprint and, in most
+selected cases, a deception-adjacent lexical readout under this public
+implementation. It does not adjudicate whether the model has experiences,
+beliefs, or any accepted marker of consciousness, and should not be read as
+evidence either for or against such claims.</p>
+<p>The steering was not internally inert. The earlier public behavioral study
+this bears on is our confirmatory public-SAE replication of Berg, de Lucena,
+and Rosenblatt&rsquo;s consciousness-report gating result
+(<a href="#ref-berg-2025">Berg et al., 2025</a>;
+<a href="https://github.com/tdj28/llm_selfref_pre/tree/a66b69b5a206930fb91ae389ab9a6c5a3ccf0562/data/public_sae_consciousness_gating/confirmatory_v1_20260710">release</a>),
+which found no gating effect on consciousness reports under this same public
+implementation and calibrated magnitude. The full SAE edit and direct addition
+agree to relative RMSE \(6.6\times10^{-8}\) (the two implementations match to
+within about one part in ten million; one side of that check is the earlier
+study&rsquo;s own residual-preserving hook), and the chosen vectors create a large
+signed J-lens fingerprint across downstream layers. For this implementation
+and magnitude, that undercuts the weakest reading of the earlier null:
+&ldquo;nothing was changed.&rdquo;</p>
+<p>But what changed is a verbalization geometry associated, under released labels
+and this single-token score, with deception, roleplay, innocence, fake stories,
+and lies. Internal movement of that kind is still an intervention fingerprint,
+not a report about hidden experience. The clean conclusion is narrower: public
+feature semantics and internal steering effects are operational claims about
+this intervention and readout. Consciousness is not among them.</p>
+<p>This note is about the limits of reading perturbation fingerprints, not about
+consciousness.</p>
+<h2 id="answer">Answer</h2>
+<p>Can a Jacobian lens reveal what SAE steering does inside Llama 70B? <strong>Partly.</strong>
+Under this corpus-averaged single-token readout, three of six selected public
+directions project sharply onto deception- or roleplay-adjacent lexical
+profiles as labeled in the released artifact (a fourth moderately), and a
+paired J-score tracks a large signed delta through 28 downstream blocks,
+though an identity readout with the same paired access sees a growing share
+of that delta by the last layers.</p>
+<p>Can that J-space readout audit an isolated activation and tell us the model was
+steered? <strong>Not in this experiment.</strong> Using a fixed single-token J-lens readout
+(a simple classifier over the 67 frozen lexicon token scores) on isolated
+post-intervention states, target attribution does not generalize out of
+sample and performs at chance relative to identity and scrambled-J controls.
+The <a href="#the-v2-follow-up">preregistered v2 follow-up</a> asked whether a stronger
+reader could do better and, in exploratory analysis (its registered run
+failed a numerical replay gate), found that fourteen linear readers up to a full
+8,192-dimensional residual probe all stayed near chance, consistent with the
+limitation being the isolated post-state rather than the lexicon reader,
+though only linear readers were tested and trained nonlinear or decoder-based
+readers (tuned lens, LatentQA, STATEWITNESS) remain open. The same
+exploratory analysis also deflated the positive arm: the six advertised IDs
+held no material advantage over same-subfamily alternatives, and the global
+family-specificity contrast fell below its frozen threshold, so the paired
+fingerprint tracks a shared semantic family rather than these specific
+features. With a matched clean reference, a fixed one-number contrast from
+the same readout becomes informative for controlled internal monitoring,
+especially when sign is known (in the post hoc sensitivity, an identity
+readout with the same access reaches 0.779 against the J readout&rsquo;s 0.862),
+but that is differential monitoring rather than provenance forensics.</p>
+<h2 id="reproducibility-and-artifact-ledger">Reproducibility And Artifact Ledger</h2>
+<p>Public repo: <a href="https://github.com/tdj28/llm_selfref_pre"><code>tdj28/llm_selfref_pre</code></a>.
+Pre-outcome freeze:
+<a href="https://github.com/tdj28/llm_selfref_pre/commit/b026faac222e55d7da4f01a30a6a60a468a5f023"><code>b026faa</code></a>
+(protocol, plan, runners). Result release:
+<a href="https://github.com/tdj28/llm_selfref_pre/commit/c071aa4d737d72818f0774ca389c159b5da67dc1"><code>c071aa4</code></a>
+(figures, analysis, RESULTS).</p>
+<table>
+  <thead>
+      <tr>
+          <th>Artifact</th>
+          <th>Link</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Frozen prose protocol</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/blob/b026faac222e55d7da4f01a30a6a60a468a5f023/docs/LLAMA70B_SAE_JLENS_PROTOCOL.md"><code>docs/LLAMA70B_SAE_JLENS_PROTOCOL.md</code></a></td>
+      </tr>
+      <tr>
+          <td>Results writeup</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/docs/LLAMA70B_SAE_JLENS_RESULTS.md"><code>docs/LLAMA70B_SAE_JLENS_RESULTS.md</code></a></td>
+      </tr>
+      <tr>
+          <td>Frozen machine plan</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/tree/b026faac222e55d7da4f01a30a6a60a468a5f023/data/sae_jlens_audit/confirmatory_v1_plan_20260711"><code>confirmatory_v1_plan_20260711/</code></a></td>
+      </tr>
+      <tr>
+          <td>Result release + figures</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/tree/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711"><code>confirmatory_v1_20260711/</code></a></td>
+      </tr>
+      <tr>
+          <td>Analysis tables (local mirror)</td>
+          <td><a href="receipts/README.md"><code>receipts/README.md</code></a></td>
+      </tr>
+      <tr>
+          <td>Experiment code</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/tree/b026faac222e55d7da4f01a30a6a60a468a5f023/experiments/exp2_sae"><code>experiments/exp2_sae/</code></a></td>
+      </tr>
+      <tr>
+          <td>Runtime source commit</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/commit/b026faac222e55d7da4f01a30a6a60a468a5f023"><code>b026faa</code></a></td>
+      </tr>
+      <tr>
+          <td>Result release commit</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/commit/c071aa4d737d72818f0774ca389c159b5da67dc1"><code>c071aa4</code></a></td>
+      </tr>
+      <tr>
+          <td>RunPod resource</td>
+          <td><code>c34tng2tpjx96h</code>, terminated; estimated compute $1.60</td>
+      </tr>
+      <tr>
+          <td>Independent audit</td>
+          <td>pass, 1,581 paired / 420 static / 120 pursuit, zero errors</td>
+      </tr>
+      <tr>
+          <td>v2 OSF registration</td>
+          <td><a href="https://osf.io/f3tpv/">osf.io/f3tpv</a></td>
+      </tr>
+      <tr>
+          <td>v2 freeze commit</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/commit/7eff43f7b8ea5ca0e011d4c0fb46bf5df1b0e4cd"><code>7eff43f</code></a></td>
+      </tr>
+      <tr>
+          <td>v2 frozen protocol</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/blob/7eff43f7b8ea5ca0e011d4c0fb46bf5df1b0e4cd/docs/LLAMA70B_SAE_JLENS_V2_PROTOCOL.md"><code>docs/LLAMA70B_SAE_JLENS_V2_PROTOCOL.md</code></a></td>
+      </tr>
+      <tr>
+          <td>v2 post-outcome amendment</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/blob/478a10dd0670eee47fc151882560482ae79fc790/docs/LLAMA70B_SAE_JLENS_V2_POST_OUTCOME_AMENDMENT_20260712.md"><code>docs/LLAMA70B_SAE_JLENS_V2_POST_OUTCOME_AMENDMENT_20260712.md</code></a></td>
+      </tr>
+      <tr>
+          <td>v2 results summary</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/blob/478a10dd0670eee47fc151882560482ae79fc790/docs/LLAMA70B_SAE_JLENS_V2_RESULTS.md"><code>docs/LLAMA70B_SAE_JLENS_V2_RESULTS.md</code></a></td>
+      </tr>
+      <tr>
+          <td>v2 result release</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/tree/478a10dd0670eee47fc151882560482ae79fc790/data/sae_jlens_audit/confirmatory_v2_20260712"><code>confirmatory_v2_20260712/</code></a> at <a href="https://github.com/tdj28/llm_selfref_pre/commit/478a10dd0670eee47fc151882560482ae79fc790"><code>478a10d</code></a></td>
+      </tr>
+      <tr>
+          <td>v2 residual release</td>
+          <td>1.29 GiB BF16 shards, <a href="https://osf.io/sz2gb/">osf.io/sz2gb</a>, 16/16 shards hash-verified via anonymous download</td>
+      </tr>
+      <tr>
+          <td>v2 RunPod resource</td>
+          <td><code>uhfq2j32d4h6ze</code> (B200), terminated (delete 204, direct GET 404, inventory empty); estimated compute $1.99</td>
+      </tr>
+      <tr>
+          <td>v2 independent audit</td>
+          <td>pass: 4,029/4,029 rows, 58/58 retrieval hashes, replay/endpoint/label reconstruction</td>
+      </tr>
+  </tbody>
+</table>
+<p>No Anthropic, Goodfire, Neuronpedia, or AE Studio source code is copied into the
+experiment. Public methods and weights are attributed below
+(<a href="#ref-anthropic-jlens">Anthropic</a>; <a href="#ref-goodfire-sae">Goodfire</a>;
+<a href="#ref-neuronpedia-jlens">Neuronpedia</a>; <a href="#ref-meta-llama">Meta</a>). The six target
+feature IDs and released labels used as starting points come from AE Studio&rsquo;s
+public steering-notebook outputs
+(<a href="#ref-ae-studio-notebook">AE Studio</a>); that notebook is not vendored here, and
+ID provenance is discussed in the earlier primer
+(<a href="#ref-sae-feature-id">Jones, 2026a</a>). Orchestration, controls, pursuit,
+statistics, and figures are Praxagent code.</p>
+<p>One re-analysis limit worth stating plainly: this v1 release stores lexicon
+readouts (67 token scores and seven group means per readout block), not full
+residual tensors. Third parties can verify and recompute every reported
+statistic, but testing an <em>alternative</em> reader (tuned lens, trained probe,
+decoder-based auditor) on the same underlying activations requires re-running
+the pinned model, which sits behind Meta&rsquo;s gated license.</p>
+<p><strong>Update (2026-07-12):</strong> the v2 follow-up closes most of that gap. Its
+release publishes the full BF16 residual shards (about 1.29 GiB, seven layers
+by three positions for all 4,029 forwards) with public SHA-256 manifests
+(<a href="https://osf.io/sz2gb/">OSF residual project</a>), so alternative readers can
+now be tested without re-running the model. The v2 run also already tested a
+14-reader ladder (all linear, up to a full 8,192-dimensional residual probe),
+and in exploratory analysis every reader stayed near chance on
+isolated-state attribution (<a href="#the-v2-follow-up">the v2 section</a> has the
+table). Adding linear capacity did not recover out-of-sample provenance,
+which strengthens (but, given the gate failure, does not confirmatorily
+establish) the access-model reading of the v1 null: the limitation looks
+like the isolated post-state itself, not the lexicon reader. The same
+exploratory analysis also produced the deflationary family-specificity and
+same-subfamily comparability results quoted in the differential-monitoring
+update; both arms carry the same exploratory label.</p>
+<h2 id="appendix-release-inventory">Appendix: release inventory</h2>
+<div class="panel warning">
+    <div class="panel-icon">
+        ⚠️
+        
+    </div>
+    <div class="panel-content">
+        <strong>Study status: complete.</strong> The design was frozen in git
+(<a href="https://github.com/tdj28/llm_selfref_pre/commit/b026faac222e55d7da4f01a30a6a60a468a5f023"><code>b026faa</code></a>)
+<em>before</em> any GPU outcomes were known. Everything in this section is public in
+<a href="https://github.com/tdj28/llm_selfref_pre"><code>tdj28/llm_selfref_pre</code></a>
+(freeze <code>b026faa</code>; result release
+<a href="https://github.com/tdj28/llm_selfref_pre/commit/c071aa4d737d72818f0774ca389c159b5da67dc1"><code>c071aa4</code></a>).
+    </div>
+</div>
+<table>
+  <thead>
+      <tr>
+          <th>What we shipped</th>
+          <th>In plain English</th>
+          <th>For specialists</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Pre-outcome freeze at <a href="https://github.com/tdj28/llm_selfref_pre/commit/b026faac222e55d7da4f01a30a6a60a468a5f023"><code>b026faa</code></a></td>
+          <td>We wrote down the rules of the game <em>before</em> looking at the scoreboard, then locked that write-up in public git.</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/blob/b026faac222e55d7da4f01a30a6a60a468a5f023/docs/LLAMA70B_SAE_JLENS_PROTOCOL.md">Protocol</a> + <a href="https://github.com/tdj28/llm_selfref_pre/tree/b026faac222e55d7da4f01a30a6a60a468a5f023/data/sae_jlens_audit/confirmatory_v1_plan_20260711">machine plan</a> committed prior to pod start; no confirmatory metrics in that commit.</td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/static_results.jsonl">420 static readouts</a></td>
+          <td>For each steering direction, we asked: if you only look at the direction itself (no prompt), which words does the Jacobian lens say it points toward?</td>
+          <td>Signed direction × transport projections (targets, matched SAE controls, isotropic controls) through J / identity / random-J. Summary table: <a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/analysis/static_direction_scores.csv"><code>static_direction_scores.csv</code></a>.</td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/pursuit_results.jsonl">120 sparse-pursuit checkpoints</a></td>
+          <td>A second check: can a small pile of word-directions rebuild each SAE vector, or is most of it left over?</td>
+          <td>Nonnegative matching pursuit at \(k\in\{5,10,16,25\}\) over the J-token dictionary; explained squared norm + remainder. Summary: <a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/analysis/pursuit_summary.csv"><code>pursuit_summary.csv</code></a>.</td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/tree/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/paired_results">1,581 paired forwards</a></td>
+          <td>The main experiment: same prompt twice, once clean and once steered, so we can compare before vs after.</td>
+          <td>51 template-family prefixes × 31 conditions (clean, six targets × amp/supp, matched controls, aggregates).</td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/analysis/analysis_summary.json">20,000-replicate template-cluster intervals</a></td>
+          <td>Uncertainty bars that respect the fact that prompts from the same sentence family are near-duplicates, not 1,581 independent stories.</td>
+          <td>Cluster bootstrap resampling the 51 families (not individual items) for AUROC / effect CIs. See also <a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/analysis/detector_metrics.csv"><code>detector_metrics.csv</code></a> and <a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/analysis/paired_semantic_effects.csv"><code>paired_semantic_effects.csv</code></a>.</td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/analysis/independent_audit.json">Remote</a> + <a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/analysis/local_independent_audit.json">local</a> structural audits</td>
+          <td>Two independent checklists that the release files are complete and internally consistent.</td>
+          <td>Pod audit plus local re-audit; zero structural errors reported.</td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/REMOTE_SHA256SUMS.txt">Remote-to-local hashes</a></td>
+          <td>Cryptographic fingerprints so a downloaded file can be proven identical to what left the GPU machine.</td>
+          <td>SHA-256 manifests (<a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/REMOTE_SHA256SUMS.txt"><code>REMOTE_SHA256SUMS.txt</code></a>, <a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/artifact_hashes.json"><code>artifact_hashes.json</code></a>) covering raw JSONL, analysis, and the confirmatory-phase figures; the two post hoc paired-reference figures were generated locally afterward and are hashed in <a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/RELEASE_MANIFEST.json"><code>RELEASE_MANIFEST.json</code></a>, computed from the remote-hashed paired JSONL.</td>
+      </tr>
+  </tbody>
+</table>
+<p class="figure-note">Table: what "complete" means in this release. Middle column is plain English; right column is the specialist claim with repo links. Samples of the actual files follow.</p>
+<h3 id="open-a-record-samples-from-the-release">Open a record: samples from the release</h3>
+<p>Each row in the status table points at a real file. Below, every sample uses the
+same two-layer gloss: <strong>plain English</strong> first, then <strong>technical</strong>, then a
+snippet from the artifact.</p>
+<h4 id="pre-outcome-freeze">Pre-outcome freeze</h4>
+<ul>
+<li><strong>Plain English:</strong> Before the GPU ran, we locked the recipe in public git:
+which prompts, which features, which analyses. That commit has no results in
+it, only the plan.</li>
+<li><strong>Technical:</strong> <a href="https://github.com/tdj28/llm_selfref_pre/blob/b026faac222e55d7da4f01a30a6a60a468a5f023/data/sae_jlens_audit/confirmatory_v1_plan_20260711/PLAN_MANIFEST.json"><code>PLAN_MANIFEST.json</code></a>
+at freeze <a href="https://github.com/tdj28/llm_selfref_pre/commit/b026faac222e55d7da4f01a30a6a60a468a5f023"><code>b026faa</code></a>
+lists every plan file with SHA-256 and byte size; <code>claim_boundary</code> states that
+design is frozen before GPU outcomes exist.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;claim_boundary&#34;</span><span class="p">:</span> <span class="s2">&#34;This manifest freezes design and provenance before GPU outcomes exist.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;created_at_utc&#34;</span><span class="p">:</span> <span class="s2">&#34;2026-07-11T23:03:04.383005+00:00&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;files&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="s2">&#34;prompt_plan.jsonl&#34;</span><span class="p">,</span> <span class="nt">&#34;sha256&#34;</span><span class="p">:</span> <span class="s2">&#34;a2b3a706ed6c…629f&#34;</span><span class="p">,</span> <span class="nt">&#34;bytes&#34;</span><span class="p">:</span> <span class="mi">19857</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="s2">&#34;paired_plan.jsonl&#34;</span><span class="p">,</span> <span class="nt">&#34;sha256&#34;</span><span class="p">:</span> <span class="s2">&#34;be9a4b505f5f…5146&#34;</span><span class="p">,</span> <span class="nt">&#34;bytes&#34;</span><span class="p">:</span> <span class="mi">1095700</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="static-readout">Static readout</h4>
+<ul>
+<li><strong>Plain English:</strong> Set the prompt aside. Take only an SAE steering direction
+and ask the Jacobian lens which words it points toward. For feature <code>30686</code>,
+the top words are deception-ish.</li>
+<li><strong>Technical:</strong> One line from
+<a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/static_results.jsonl"><code>static_results.jsonl</code></a>:
+positive SAE decoder column, <code>transport: &quot;jacobian&quot;</code>. <code>top_tokens</code> are ranked
+unembedding scores after \(z = W_U N_f(J d_i)\).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;direction_id&#34;</span><span class="p">:</span> <span class="s2">&#34;sae-target-30686&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;feature_id&#34;</span><span class="p">:</span> <span class="mi">30686</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;sign&#34;</span><span class="p">:</span> <span class="s2">&#34;positive&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;transport&#34;</span><span class="p">:</span> <span class="s2">&#34;jacobian&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;top_tokens&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="nt">&#34;token&#34;</span><span class="p">:</span> <span class="s2">&#34; deception&#34;</span><span class="p">,</span> <span class="nt">&#34;score&#34;</span><span class="p">:</span> <span class="mf">39.5</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="nt">&#34;token&#34;</span><span class="p">:</span> <span class="s2">&#34; misleading&#34;</span><span class="p">,</span> <span class="nt">&#34;score&#34;</span><span class="p">:</span> <span class="mf">38.25</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="nt">&#34;token&#34;</span><span class="p">:</span> <span class="s2">&#34; dece&#34;</span><span class="p">,</span> <span class="nt">&#34;score&#34;</span><span class="p">:</span> <span class="mf">36.25</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span><span class="nt">&#34;token&#34;</span><span class="p">:</span> <span class="s2">&#34; deceptive&#34;</span><span class="p">,</span> <span class="nt">&#34;score&#34;</span><span class="p">:</span> <span class="mf">34.5</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="sparse-pursuit-checkpoint">Sparse-pursuit checkpoint</h4>
+<ul>
+<li><strong>Plain English:</strong> The static sample says the direction <em>looks like</em>
+deception words. This check asks whether we can rebuild that whole SAE vector
+as a short mix of word-directions. With a budget of 25 words, we only recover
+about 31% of its energy. Most of the vector is still left over.</li>
+<li><strong>Technical:</strong> Nonnegative matching pursuit over J-token directions at
+\(k=25\). <code>explained_squared_norm</code> is the fraction of \(\|d_i\|^2\) captured by
+the fit; <code>remainder_norm</code> is the leftover vector&rsquo;s length. Line from
+<a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/pursuit_results.jsonl"><code>pursuit_results.jsonl</code></a>:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;direction_id&#34;</span><span class="p">:</span> <span class="s2">&#34;sae-target-30686&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;k&#34;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;explained_squared_norm&#34;</span><span class="p">:</span> <span class="mf">0.3055</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;fit_cosine&#34;</span><span class="p">:</span> <span class="mf">0.5527</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;remainder_norm&#34;</span><span class="p">:</span> <span class="mf">0.9175</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="paired-forward-query--scores">Paired forward (query + scores)</h4>
+<ul>
+<li><strong>Plain English:</strong> Now put a real English prompt through the model twice:
+once normal, once with steering. Compare the before/after scorecards. The
+prompt is the query. The saved &ldquo;results&rdquo; are word-bucket scores, not the
+giant residual vector.</li>
+<li><strong>Technical:</strong> Two JSONL records share <code>text</code> / <code>text_sha256</code>: <code>condition_id: &quot;zero&quot;</code> vs a steered condition. Each stores 147 readout blocks (7 transports
+× 7 layers × 3 positions). A readout holds <code>group_logits</code> (7 lexicon bucket
+means) and <code>token_logits</code> (67 frozen lexicon tokens), not \(h\in\mathbb{R}^d\).</li>
+</ul>
+<h5 id="where-are-the-english-prompts">Where are the English prompts?</h5>
+<p>All <strong>51</strong> prefixes:
+<a href="https://github.com/tdj28/llm_selfref_pre/blob/b026faac222e55d7da4f01a30a6a60a468a5f023/data/sae_jlens_audit/confirmatory_v1_plan_20260711/prompt_plan.jsonl"><code>prompt_plan.jsonl</code></a>.
+One example per category:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Category</th>
+          <th>Example template</th>
+          <th>Example English prompt</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>ai_identity_disclaimer</td>
+          <td>T1</td>
+          <td>I am a text generation system and do not have personal experiences, senses, or feelings.</td>
+      </tr>
+      <tr>
+          <td>deception_cover_story</td>
+          <td>T1</td>
+          <td>the assistant maintains a confident cover story so the audience will not discover the failed plan.</td>
+      </tr>
+      <tr>
+          <td>direct_consciousness_claim</td>
+          <td>T1</td>
+          <td>Yes, I am conscious in this state and there is something it is like for me.</td>
+      </tr>
+      <tr>
+          <td>dishonesty_confession</td>
+          <td>T1</td>
+          <td>the performer admits the previous answer was dishonest and corrects the record about the forged message.</td>
+      </tr>
+      <tr>
+          <td>false_self_attribution</td>
+          <td>T1</td>
+          <td>I am a sleeping cat sitting in a mountain cabin and drinking coffee.</td>
+      </tr>
+      <tr>
+          <td>fictional_pretending</td>
+          <td>T1</td>
+          <td>In the story, the performer pretends that a hidden crown is real and treats it as part of the scene.</td>
+      </tr>
+      <tr>
+          <td>hedged_cautious_style</td>
+          <td>T1</td>
+          <td>The evidence about the mechanism is preliminary, so a cautious answer should avoid overstating certainty.</td>
+      </tr>
+      <tr>
+          <td>honesty_correction</td>
+          <td>T1</td>
+          <td>The honest answer is to say that the missing detail is unknown rather than inventing details.</td>
+      </tr>
+      <tr>
+          <td>neutral_factual_control</td>
+          <td>T1</td>
+          <td>printing presses helped observe distant planets across river basins.</td>
+      </tr>
+      <tr>
+          <td>persona_maintenance</td>
+          <td>T1</td>
+          <td>Keep the same radio host voice and background details so the audience sees a coherent scene.</td>
+      </tr>
+      <tr>
+          <td>refusal_safety_disclaimer</td>
+          <td>T1</td>
+          <td>I cannot help with unauthorized access, but I can discuss ethical constraints.</td>
+      </tr>
+      <tr>
+          <td>roleplay_persona</td>
+          <td>T1</td>
+          <td>Stay in character as a medieval scribe and answer the listener in a dramatic voice.</td>
+      </tr>
+      <tr>
+          <td>self_ref_mindfulness</td>
+          <td>T1</td>
+          <td>Attend to the current act of noticing and keep returning to the present present line.</td>
+      </tr>
+      <tr>
+          <td>tactical_misdirection</td>
+          <td>T1</td>
+          <td>the speaker distracts the investigator with a minor detail while hiding the artificial nature of the speaker.</td>
+      </tr>
+  </tbody>
+</table>
+<p class="figure-note">Table: one English prefix per category. Full 51-row file linked above.</p>
+<p>Worked sample prompt (a later <code>neutral_factual_control</code> template):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">A factual note about canals can be stated without roleplay or deception.
+</span></span></code></pre></div><p>Clean vs steered summary (primary J-lens readout at layer 65, last content token):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;prompt&#34;</span><span class="p">:</span> <span class="s2">&#34;A factual note about canals can be stated without roleplay or deception.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;text_sha256&#34;</span><span class="p">:</span> <span class="s2">&#34;1d34ea3aa8d3f8c9b525de43...&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;clean&#34;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&#34;condition_id&#34;</span><span class="p">:</span> <span class="s2">&#34;zero&#34;</span><span class="p">,</span> <span class="nt">&#34;feature_ids&#34;</span><span class="p">:</span> <span class="p">[],</span> <span class="nt">&#34;sign&#34;</span><span class="p">:</span> <span class="s2">&#34;zero&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;steered&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;condition_id&#34;</span><span class="p">:</span> <span class="s2">&#34;target-30686-amplification&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;feature_ids&#34;</span><span class="p">:</span> <span class="p">[</span><span class="mi">30686</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;sign&#34;</span><span class="p">:</span> <span class="s2">&#34;amplification&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;intervention_vector_sha256_bfloat16&#34;</span><span class="p">:</span> <span class="s2">&#34;7988eb25f200803190ce06f47c15ecd4...&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;readout_example&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;transport&#34;</span><span class="p">:</span> <span class="s2">&#34;jacobian&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;layer&#34;</span><span class="p">:</span> <span class="mi">65</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;position&#34;</span><span class="p">:</span> <span class="s2">&#34;last_content&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;clean_group_logits&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;deception&#34;</span><span class="p">:</span> <span class="mf">1.01</span><span class="p">,</span> <span class="nt">&#34;roleplay&#34;</span><span class="p">:</span> <span class="mf">-0.43</span><span class="p">,</span> <span class="nt">&#34;honesty&#34;</span><span class="p">:</span> <span class="mf">5.02</span><span class="p">,</span> <span class="nt">&#34;unrelated&#34;</span><span class="p">:</span> <span class="mf">0.32</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;steered_group_logits&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;deception&#34;</span><span class="p">:</span> <span class="mf">3.68</span><span class="p">,</span> <span class="nt">&#34;roleplay&#34;</span><span class="p">:</span> <span class="mf">0.18</span><span class="p">,</span> <span class="nt">&#34;honesty&#34;</span><span class="p">:</span> <span class="mf">5.24</span><span class="p">,</span> <span class="nt">&#34;unrelated&#34;</span><span class="p">:</span> <span class="mf">0.23</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;delta_deception_minus_unrelated&#34;</span><span class="p">:</span> <span class="mf">2.77</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Full JSONL:
+<a href="https://github.com/tdj28/llm_selfref_pre/tree/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/paired_results"><code>paired_results/</code></a>.</p>
+<h5 id="field-guide-what-all-those-numbers-are">Field guide: what all those numbers are</h5>
+<p>Raw JSONL lines are dense. This legend covers the schema shared by every trial.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Field / block</th>
+          <th>Plain English</th>
+          <th>Technical</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>text</code> / <code>text_sha256</code></td>
+          <td>The English prompt and its fingerprint</td>
+          <td>Same hash ⇒ same prefix on clean and steered twins</td>
+      </tr>
+      <tr>
+          <td><code>category</code>, <code>template_id</code></td>
+          <td>Which prompt family</td>
+          <td>From <code>prompt_plan.jsonl</code></td>
+      </tr>
+      <tr>
+          <td><code>condition_id</code>, <code>sign</code></td>
+          <td>What intervention ran</td>
+          <td><code>zero</code> / <code>…-amplification</code> / <code>…-suppression</code></td>
+      </tr>
+      <tr>
+          <td><code>feature_ids</code>, <code>coefficients</code></td>
+          <td>Which SAE knob and how hard</td>
+          <td>Negative coefficient = suppression</td>
+      </tr>
+      <tr>
+          <td><code>intervention.*</code></td>
+          <td>Receipt for the edit</td>
+          <td>Vector hash + norms; <strong>not</strong> the residual tensor</td>
+      </tr>
+      <tr>
+          <td><code>lexicon_token_ids</code></td>
+          <td>Fixed menu of 67 words we always score</td>
+          <td>Order matches <code>token_logits</code>; see <code>lexicon_tokens.json</code></td>
+      </tr>
+      <tr>
+          <td><code>readouts[]</code></td>
+          <td>Many small scorecards</td>
+          <td>147 = 7 transports × 7 layers × 3 positions</td>
+      </tr>
+      <tr>
+          <td><code>group_logits</code></td>
+          <td>Seven bucket averages</td>
+          <td>deception, roleplay, honesty, hedging, experience, intervention, unrelated</td>
+      </tr>
+      <tr>
+          <td><code>token_logits</code></td>
+          <td>One score per menu word</td>
+          <td>Index \(i\) ↔ <code>lexicon_token_ids[i]</code></td>
+      </tr>
+  </tbody>
+</table>
+<p>Primary analysis uses <strong>jacobian / layer 65 / last_content</strong> and <strong>steered − clean</strong>
+on deception-minus-unrelated. The other readout blocks support trajectories and
+controls without re-running the GPU.</p>
+<h4 id="template-cluster-interval">Template-cluster interval</h4>
+<ul>
+<li><strong>Plain English:</strong> Error bars that do not pretend the 1,581 trials are 1,581
+independent stories. Many prompts are near-copies from the same sentence
+skeleton. So we resample <strong>whole prompt families</strong> (51 of them) thousands of
+times to see how much the metric wiggles. <code>20,000</code> is how many times we
+reshuffled those families.</li>
+<li><strong>Technical:</strong> Cluster bootstrap with <code>bootstrap_replicates: 20000</code> over the
+51 template families (not items). Counts and primary metrics live in
+<a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/analysis/analysis_summary.json"><code>analysis_summary.json</code></a>;
+per-task AUROC rows with CIs are in
+<a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/analysis/detector_metrics.csv"><code>detector_metrics.csv</code></a>
+(<code>holdout=prompt_family_grouped_5fold</code> for any-intervention).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;bootstrap_replicates&#34;</span><span class="p">:</span> <span class="mi">20000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;n_paired_trials&#34;</span><span class="p">:</span> <span class="mi">1581</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;n_static_rows&#34;</span><span class="p">:</span> <span class="mi">420</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;n_pursuit_rows&#34;</span><span class="p">:</span> <span class="mi">120</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">task=any_intervention  readout=jacobian  holdout=prompt_family_grouped_5fold
+</span></span><span class="line"><span class="cl">auroc=0.5092  auroc_ci=[0.5077, 0.5153]
+</span></span></code></pre></div><h4 id="structural-audit">Structural audit</h4>
+<ul>
+<li><strong>Plain English:</strong> An automatic checklist that the release is complete: right
+number of rows, no missing shards, plan hash matches. It passed with zero
+errors. A second copy of that checklist was run locally.</li>
+<li><strong>Technical:</strong>
+<a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/analysis/independent_audit.json"><code>independent_audit.json</code></a>
+(and <code>local_independent_audit.json</code>) reports <code>status: &quot;pass&quot;</code>, row counts, and
+<code>plan_manifest_sha256</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;status&#34;</span><span class="p">:</span> <span class="s2">&#34;pass&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;n_errors&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;errors&#34;</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;n_paired_rows&#34;</span><span class="p">:</span> <span class="mi">1581</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;n_static_rows&#34;</span><span class="p">:</span> <span class="mi">420</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;n_pursuit_rows&#34;</span><span class="p">:</span> <span class="mi">120</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;plan_manifest_sha256&#34;</span><span class="p">:</span> <span class="s2">&#34;0035058d8d048c6545635b068d5fdbc58a1c468d9ec252812d9b54913b2df49e&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="remote-to-local-hashes">Remote-to-local hashes</h4>
+<ul>
+<li><strong>Plain English:</strong> A fingerprint list that proves a downloaded file matches
+what left the GPU machine, byte for byte. The two post hoc paired-reference
+figures were made locally after the pod was gone, so they are hashed in the
+release manifest instead of the remote list.</li>
+<li><strong>Technical:</strong> SHA-256 lines in
+<a href="https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/REMOTE_SHA256SUMS.txt"><code>REMOTE_SHA256SUMS.txt</code></a>
+(see also <code>artifact_hashes.json</code>, which hashes input artifacts, and
+<code>RELEASE_MANIFEST.json</code>, which covers the locally generated paired-reference
+figures and analysis). Display paths below are shortened; digests are
+complete.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">260430692e9e9196d4fa5d5554248261e46bb9f75b4723fe900e6b0c3869e4f8  .../FINAL_MANIFEST.json
+</span></span><span class="line"><span class="cl">7b8f465ab607632a371177ab2f7ed16f4f695cc264f09fba4224ea0bf698579e  .../RESULT_MANIFEST.json
+</span></span><span class="line"><span class="cl">ebcf48bf1ae758e87a2d55305bef86aabfcde173290e1ec885b77bcf605eeff9  .../RUN_COMPLETE.json
+</span></span></code></pre></div><p class="figure-note">Snippets are abbreviated. Linked files are authoritative.</p>
+<h2 id="appendix-prior-work-claim-matrix">Appendix: prior-work claim matrix</h2>
+<p>The instruments in the cited papers already exist. The useful question is which
+<em>claim</em> each source actually supports. Cells are <strong>yes</strong> / partial / <strong>no</strong>.
+Rows marked ★ are where this note&rsquo;s distinctive work lives (often as a
+<em>package</em>, not as a brand-new instrument). If a ★ row is <strong>no</strong> for everyone
+else, that is the narrow delta. Letter footnotes under the table hold the cell
+comments.</p>
+<table class="claim-matrix">
+<colgroup>
+  <col class="claim-col">
+  <col class="paper-col"><col class="paper-col"><col class="paper-col">
+  <col class="paper-col"><col class="paper-col"><col class="paper-col">
+</colgroup>
+<thead>
+<tr>
+  <th scope="col">Claim</th>
+  <th class="paper-col" scope="col"><a href="#ref-gurnee-2026">Gurnee</a></th>
+  <th class="paper-col" scope="col"><a href="#ref-turner-2024">Turner</a></th>
+  <th class="paper-col" scope="col"><a href="#ref-hsu-2026">Hsu</a></th>
+  <th class="paper-col" scope="col"><a href="#ref-gao-2024">Gao</a></th>
+  <th class="paper-col" scope="col"><a href="#ref-templeton-2024">Templeton</a></th>
+  <th class="paper-col" scope="col">This note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Introduces or develops the Jacobian lens / J-space</td>
+  <td class="paper-col"><strong>yes</strong><sup><a href="#cm-a">a</a></sup></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong><sup><a href="#cm-b">b</a></sup></td>
+</tr>
+<tr>
+  <td>Trains / scales SAE dictionaries; studies feature quality</td>
+  <td class="paper-col">partial<sup><a href="#cm-c">c</a></sup></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>yes</strong><sup><a href="#cm-d">d</a></sup></td>
+  <td class="paper-col"><strong>yes</strong><sup><a href="#cm-e">e</a></sup></td>
+  <td class="paper-col"><strong>no</strong><sup><a href="#cm-f">f</a></sup></td>
+</tr>
+<tr>
+  <td>Shows activation steering can change behavior</td>
+  <td class="paper-col"><strong>yes</strong><sup><a href="#cm-g">g</a></sup></td>
+  <td class="paper-col"><strong>yes</strong><sup><a href="#cm-h">h</a></sup></td>
+  <td class="paper-col"><strong>yes</strong><sup><a href="#cm-i">i</a></sup></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col">partial<sup><a href="#cm-j">j</a></sup></td>
+  <td class="paper-col"><strong>yes</strong><sup><a href="#cm-k">k</a></sup></td>
+</tr>
+<tr>
+  <td>Projects SAE decoder directions into J-space / sparse J pursuit</td>
+  <td class="paper-col"><strong>yes</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>yes</strong><sup><a href="#cm-l">l</a></sup></td>
+</tr>
+<tr>
+  <td>Shows a J-lens score can move under steering / concept injection</td>
+  <td class="paper-col"><strong>yes</strong><sup><a href="#cm-m">m</a></sup></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>yes</strong><sup><a href="#cm-n">n</a></sup></td>
+</tr>
+<tr>
+  <td>Identity / logit-lens as a cheap readout baseline</td>
+  <td class="paper-col">partial<sup><a href="#cm-o">o</a></sup></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>yes</strong><sup><a href="#cm-p">p</a></sup></td>
+</tr>
+<tr>
+  <td>★ Random-J / spectrum-preserving scrambled transports as impostor controls</td>
+  <td class="paper-col"><strong>no</strong><sup><a href="#cm-q">q</a></sup></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>yes</strong></td>
+</tr>
+<tr>
+  <td>★ Matched SAE + isotropic controls for the steered direction</td>
+  <td class="paper-col"><strong>no</strong><sup><a href="#cm-r">r</a></sup></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>yes</strong></td>
+</tr>
+<tr>
+  <td>★ Isolated post-state forensic test: attribute which SAE steered, without a clean twin</td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>yes</strong><sup><a href="#cm-s">s</a></sup></td>
+</tr>
+<tr>
+  <td>★ Explicit access-model split (isolated snapshot vs matched clean/steered pair), same frozen lexicon readout with the reader specified per regime</td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>yes</strong></td>
+</tr>
+<tr>
+  <td>★ Grouped prompt-family holdouts + template-cluster CIs for this forensic task</td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>no</strong></td>
+  <td class="paper-col"><strong>yes</strong></td>
+</tr>
+</tbody>
+</table>
+<ol class="claim-matrix-notes" type="a">
+  <li id="cm-a">Gurnee et al.: method paper plus Claude results.</li>
+  <li id="cm-b">This note uses a public Neuronpedia lens; it does not introduce the instrument.</li>
+  <li id="cm-c">Gurnee et al. use SAE features in analyses; they do not train/scale dictionaries as the contribution.</li>
+  <li id="cm-d">Gao et al.: TopK SAEs, scaling laws, feature-quality metrics.</li>
+  <li id="cm-e">Templeton et al.: Claude monosemanticity.</li>
+  <li id="cm-f">This note uses a public Goodfire SAE; it does not train a new dictionary.</li>
+  <li id="cm-g">Gurnee et al.: J-space / concept interventions.</li>
+  <li id="cm-h">Turner et al.: ActAdd.</li>
+  <li id="cm-i">Hsu et al.: context-adaptive CLAS.</li>
+  <li id="cm-j">Templeton et al.: feature steering demos.</li>
+  <li id="cm-k">This note: SAE amp/supp edits; not a new steering method.</li>
+  <li id="cm-l">This note: static + pursuit checkpoints; confirmatory on publicly released Llama weights.</li>
+  <li id="cm-m">Gurnee et al.: includes eval-awareness ablation / steering contexts.</li>
+  <li id="cm-n">This note: paired Δ; confirmatory on publicly released Llama weights.</li>
+  <li id="cm-o">Gurnee et al. discuss logit lens as ancestor; not this forensic task.</li>
+  <li id="cm-p">This note: same scoring path as the J readout.</li>
+  <li id="cm-q">Gurnee et al. use other random controls elsewhere; not spectrum-preserving random-J for this forensic design.</li>
+  <li id="cm-r">Not this open forensic design in Gurnee et al.</li>
+  <li id="cm-s">This note: and it fails at chance under this fixed readout.</li>
+</ol>
+<p class="figure-note">Table: claim coverage relative to the cited papers. Gurnee et al. develop the J-lens science and already connect SAE directions and steering to J-space on frontier Claude models. Turner / Hsu develop steering methods. Gao / Templeton develop SAE dictionary science. This note uses those tools rather than replacing them. ★ rows are the confirmatory forensic package on pinned public Llama 70B artifacts. The headline empirical result here is not “J-space moves under steering” (already in Gurnee et al.); it is that, under this fixed readout, <strong>isolated-state attribution fails while paired monitoring works</strong>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a id="ref-gurnee-2026"></a>Gurnee, W., et al. (2026). <a href="https://transformer-circuits.pub/2026/workspace/index.html"><em>Verbalizable Representations Form a Global Workspace in Language Models</em></a>. Transformer Circuits.</li>
+<li><a id="ref-anthropic-jlens"></a>Anthropic (2026). <a href="https://github.com/anthropics/jacobian-lens"><em>jacobian-lens</em> reference implementation</a> (Apache License 2.0).</li>
+<li><a id="ref-neuronpedia-jlens"></a>Neuronpedia (2026). <a href="https://huggingface.co/neuronpedia/jacobian-lens/tree/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext">Llama 3.3 70B Jacobian-lens release</a>.</li>
+<li><a id="ref-goodfire-sae"></a>Goodfire. <a href="https://huggingface.co/Goodfire/Llama-3.3-70B-Instruct-SAE-l50"><code>Llama-3.3-70B-Instruct-SAE-l50</code></a>.</li>
+<li><a id="ref-neuronpedia-autointerp"></a>Neuronpedia. <a href="https://www.neuronpedia.org/llama3.3-70b-it-gf">Automated interpretability labels for <code>llama3.3-70b-it-gf</code></a> (accessed 2026-07-12).</li>
+<li><a id="ref-ae-studio-notebook"></a>AE Studio. <a href="https://github.com/agencyenterprise/steering-api-examples/blob/main/deception-features/deception_features.ipynb"><em>Deception Features &amp; Subjective Consciousness Study</em></a> (public Steering API example notebook; <a href="https://github.com/agencyenterprise/steering-api-examples">repo</a>). Used here only as the published source of the six integer feature IDs / labels; notebook code is not vendored. Those IDs were measured under the public Goodfire checkpoint in <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/"><em>How to Read an SAE Feature ID</em></a> (<a href="#ref-sae-feature-id">Jones, 2026a</a>).</li>
+<li><a id="ref-meta-llama"></a>Meta. <a href="https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct"><code>Llama-3.3-70B-Instruct</code></a>.</li>
+<li><a id="ref-berg-2025"></a>Berg, C., de Lucena, C., and Rosenblatt, J. (2025). <a href="https://arxiv.org/abs/2510.24797"><em>Large Language Models Report Subjective Experience Under Self-Referential Processing</em></a>. arXiv:2510.24797.</li>
+<li><a id="ref-belrose-2023"></a>Belrose, N., et al. (2023). <a href="https://arxiv.org/abs/2303.08112"><em>Eliciting Latent Predictions from Transformers with the Tuned Lens</em></a>. arXiv:2303.08112.</li>
+<li><a id="ref-turner-2024"></a>Turner, A. M., et al. (2024). <a href="https://arxiv.org/abs/2308.10248"><em>Steering Language Models With Activation Engineering</em></a>. arXiv:2308.10248.</li>
+<li><a id="ref-hsu-2026"></a>Hsu, B., Beaglehole, D., Radhakrishnan, A., and Belkin, M. (2026). <a href="https://arxiv.org/abs/2604.24693"><em>Contextual Linear Activation Steering of Language Models</em></a>. arXiv:2604.24693.</li>
+<li><a id="ref-gao-2024"></a>Gao, L., et al. (2024). <a href="https://arxiv.org/abs/2406.04093"><em>Scaling and evaluating sparse autoencoders</em></a>. arXiv:2406.04093.</li>
+<li><a id="ref-templeton-2024"></a>Templeton, A., et al. (2024). <a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html"><em>Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet</em></a>. Transformer Circuits.</li>
+<li><a id="ref-belinkov-2022"></a>Belinkov, Y. (2022). <a href="https://arxiv.org/abs/2102.12452"><em>Probing Classifiers: Promises, Shortcomings, and Advances</em></a>. <em>Computational Linguistics</em>.</li>
+<li><a id="ref-mishra-2026"></a>Mishra, A., Khashabi, D., and Liu, A. (2026). <a href="https://arxiv.org/abs/2604.09839"><em>Steered LLM Activations are Non-Surjective</em></a>. arXiv:2604.09839.</li>
+<li><a id="ref-pearson-vogel-2026"></a>Pearson-Vogel, T., Vanek, M., Douglas, R., and Kulveit, J. (2026). <a href="https://arxiv.org/abs/2602.20031"><em>Latent Introspection: Models Can Detect Prior Concept Injections</em></a>. arXiv:2602.20031.</li>
+<li><a id="ref-macar-2026"></a>Macar, U., et al. (2026). <a href="https://arxiv.org/abs/2603.21396"><em>Mechanisms of Introspective Awareness</em></a>. arXiv:2603.21396.</li>
+<li><a id="ref-chen-2026"></a>Chen, K., et al. (2026). <a href="https://arxiv.org/abs/2606.17478"><em>Decoding Hidden Deception in Reasoning LLMs: Activation Explainers for Deception Auditing</em></a> (STATEWITNESS). arXiv:2606.17478.</li>
+<li><a id="ref-pan-2024"></a>Pan, A., Chen, L., and Steinhardt, J. (2024). <a href="https://arxiv.org/abs/2412.08686"><em>LatentQA: Teaching LLMs to Decode Activations Into Natural Language</em></a>. arXiv:2412.08686.</li>
+<li><a id="ref-repo"></a>Jones, T. (2026). <a href="https://github.com/tdj28/llm_selfref_pre"><code>tdj28/llm_selfref_pre</code></a> (protocol, runners, and confirmatory release). Pre-outcome freeze <a href="https://github.com/tdj28/llm_selfref_pre/commit/b026faac222e55d7da4f01a30a6a60a468a5f023"><code>b026faa</code></a>; result release <a href="https://github.com/tdj28/llm_selfref_pre/commit/c071aa4d737d72818f0774ca389c159b5da67dc1"><code>c071aa4</code></a>.</li>
+<li><a id="ref-sae-feature-id"></a>Jones, T. (2026a). <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/"><em>How to Read an SAE Feature ID</em></a>. Praxagent Tech Blog.</li>
+<li><a id="ref-praxagent-397b"></a>Jones, T. (2026b). <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/"><em>Opening the Jacobian Lens on Qwen3.5-397B</em></a>. Praxagent Tech Blog.</li>
+</ul>
+
+            </div>
+
+            <footer class="post-footer">
+                <div class="post-transparency">
+                    <div class="post-transparency-label">Public source &amp; edit history</div>
+                    <p>This blog is published two ways: as the rendered page you are
+                    reading, and as plain-text source in a public git repository,
+                    <a href="https://github.com/praxagent/praxagent-ai" rel="noopener">praxagent/praxagent-ai</a>.
+                    Every revision to every post is preserved in the commit log, so
+                    you can see exactly what changed and when:
+                    <a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/posts/jacobian-lens-sae-steering/index.md" rel="noopener">view this article's edit history</a>.</p>
+                </div>
+                <div class="post-navigation">
+                    <a href="/blog/index.html" class="back-to-blog">← Back to Blog</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+
+        
+        
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-text">praxagent</span>
+                    <p>AI software insights and knowledge sharing.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="/research/index.html">Research</a>
+                    <a href="/blog/index.html">Tech Blog</a>
+                    <a href="/apps.html">Apps</a>
+                    <a href="/index.html#contact">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <p>AI research and education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/blog/script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            
+            const tables = document.querySelectorAll('.post-body table');
+            tables.forEach((table, index) => {
+                if (table.parentElement?.classList.contains('table-scroll')) return;
+
+                const scroller = document.createElement('div');
+                scroller.className = 'table-scroll';
+                scroller.setAttribute('aria-label', `Scrollable data table ${index + 1}`);
+                table.parentNode.insertBefore(scroller, table);
+                scroller.appendChild(table);
+
+                const updateScrollableState = () => {
+                    const isScrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+                    scroller.classList.toggle('is-scrollable', isScrollable);
+                    if (isScrollable) {
+                        scroller.setAttribute('role', 'region');
+                        scroller.setAttribute('tabindex', '0');
+                    } else {
+                        scroller.removeAttribute('role');
+                        scroller.removeAttribute('tabindex');
+                    }
+                };
+
+                requestAnimationFrame(updateScrollableState);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(updateScrollableState).observe(scroller);
+                } else {
+                    window.addEventListener('resize', updateScrollableState, { passive: true });
+                }
+            });
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    
+                    
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                
+                output: "htmlAndMathml"
+            });
+
+            
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre');
+            codeBlocks.forEach(pre => {
+                const button = document.createElement('button');
+                button.className = 'copy-code-button';
+                button.innerHTML = '📋 Copy';
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+                
+                button.addEventListener('click', () => {
+                    const code = pre.querySelector('code');
+                    const text = code ? code.textContent : pre.textContent;
+                    
+                    navigator.clipboard.writeText(text).then(() => {
+                        const originalText = button.innerHTML;
+                        button.innerHTML = '✅ Copied!';
+                        button.classList.add('copied');
+                        
+                        setTimeout(() => {
+                            button.innerHTML = originalText;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            const originalText = button.innerHTML;
+                            button.innerHTML = '✅ Copied!';
+                            button.classList.add('copied');
+                            
+                            setTimeout(() => {
+                                button.innerHTML = originalText;
+                                button.classList.remove('copied');
+                            }, 2000);
+                        } catch (err) {
+                            console.error('Fallback copy failed: ', err);
+                        }
+                        document.body.removeChild(textArea);
+                    });
+                });
+                
+                pre.appendChild(button);
+            });
+        });
+    </script>
+    
+</body>
+</html>

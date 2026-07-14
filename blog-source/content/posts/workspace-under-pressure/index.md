@@ -1,6 +1,8 @@
 ---
 title: "Under Pressure: What a Jacobian Lens Reveals About Self-Preservation and Lying, Once You Run the Controls"
+slug: "workspace-under-pressure"
 date: 2026-07-11
+aliases: ["/posts/workspace-under-pressure/"]
 tags: ["AI", "LLM", "machine-learning", "interpretability", "jacobian-lens", "j-space", "ai-safety", "evaluation-awareness", "open-science"]
 author: Timothy Jones
 summary: "A follow-up to our Jacobian-lens release, and mostly a lesson in controls. On Qwen3.5-397B we reproduce Anthropic's global-workspace signatures under pressure (survival vocabulary under a self-directed threat; the true answer held while the output is pushed to lie), then stress-test them against a plain logit-lens, a random-J null, and the model's own output head. The honest verdict: the self-preservation signal is directional but modest, base-rate-inflated, and not specific to the Jacobian lens (a logit-lens reads it too); the one 'caught lie' is read at rank 1 by the logit-lens and rank 2 by the output head, so no lens is needed to catch it; and the self-directedness does not replicate on Llama-3.3-70B. What survives: the signatures are legible on open weights, the model mostly refuses to lie (given room to reason it never says the lie at all), and the controls are the whole story."
