@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Read an SAE Feature ID - praxagent Blog</title>
+    
+    
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    <meta name="description" content="A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="praxagent Blog">
+    <meta property="og:title" content="How to Read an SAE Feature ID">
+    <meta property="og:description" content="A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights.">
+    <meta property="og:url" content="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">
+    <meta property="og:image" content="https://praxagent.ai/assets/og-how-to-read-an-sae-feature-id.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="How to Read an SAE Feature ID">
+    <meta name="twitter:description" content="A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights.">
+    <meta name="twitter:image" content="https://praxagent.ai/assets/og-how-to-read-an-sae-feature-id.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/styles-v2.css">
+    <link rel="stylesheet" href="/blog/blog.css">
+    <link rel="stylesheet" href="/blog/katex.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'neutral',
+        securityLevel: 'loose',
+        flowchart: { htmlLabels: true, curve: 'basis' }
+      });
+    </script>
+    
+</head>
+<body>
+    <nav class="navbar navbar-scrolls">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="/research/index.html" class="nav-link">Research</a>
+                <a href="/blog/index.html" class="nav-link active">Tech Blog</a>
+                <a href="/apps.html" class="nav-link">Apps</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun">☀️</span>
+                    <span class="theme-toggle-icon moon">🌙</span>
+                </div>
+            </div>
+            
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="/research/index.html" class="mobile-nav-link">Research</a>
+            <a href="/blog/index.html" class="mobile-nav-link active">Tech Blog</a>
+            <a href="/apps.html" class="mobile-nav-link">Apps</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun">☀️</span>
+                    <span class="theme-toggle-icon moon">🌙</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        
+
+
+<div class="blog-post">
+    <div class="container">
+        <article class="post-content">
+            <header class="post-header">
+                <h1 class="post-title">How to Read an SAE Feature ID</h1>
+                <div class="post-meta">
+                    <span class="post-date">July 9, 2026</span>
+                    <span class="post-author">by Timothy Jones</span>
+                </div>
+            </header>
+
+            
+            
+
+            
+            
+
+            
+            <div class="post-lead">
+                You may have seen headlines like &ldquo;researchers found the deception feature inside an AI.&rdquo; This post is about what that kind of claim actually rests on. Tools called sparse autoencoders can crack open a language model&rsquo;s internal state and hand you a numbered list of &ldquo;features,&rdquo; and someone then attaches an English name to a number: feature <code>58667</code> is &ldquo;deception.&rdquo; The number is real. The name is a human interpretation layered on afterward, often a thoughtful one, but one that has to be tested before you lean on it. The gap between the two is where a lot of AI interpretability claims quietly overreach. Here we walk through, from the ground up, what these features are, where the names come from, and then run a real test: we take six deception-related feature numbers from a public notebook and check, on 1,120 carefully controlled texts, what actually turns them on.
+            </div>
+            
+
+            
+
+            
+            <div class="table-of-contents">
+                <h3>Table of Contents</h3>
+                <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#learning-objectives">Learning objectives</a></li>
+      </ul>
+    </li>
+    <li><a href="#why-feature-ids-get-over-read">Why Feature IDs Get Over-Read</a>
+      <ul>
+        <li><a href="#claim-ladder">Claim ladder</a></li>
+        <li><a href="#where-the-worked-example-comes-from">Where the worked example comes from</a></li>
+      </ul>
+    </li>
+    <li><a href="#a-quick-glossary-read-this-first">A Quick Glossary (Read This First)</a></li>
+    <li><a href="#intellectual-history-why-saes-exist">Intellectual History: Why SAEs Exist</a>
+      <ul>
+        <li><a href="#the-superposition-problem">The superposition problem</a></li>
+        <li><a href="#from-neurons-to-directions">From neurons to directions</a></li>
+        <li><a href="#where-in-the-network">Where in the network?</a></li>
+        <li><a href="#dictionary-learning-as-a-response">Dictionary learning as a response</a></li>
+        <li><a href="#related-cautions-from-the-literature">Related cautions from the literature</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-math-without-hand-waving">The Math, Without Hand-Waving</a>
+      <ul>
+        <li><a href="#symbol-sheet">Symbol sheet</a></li>
+        <li><a href="#how-we-grab--a-forward-hook">How we grab \(h\): a forward hook</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-labeling-problem">The Labeling Problem</a></li>
+    <li><a href="#worked-example-six-public-feature-ids">Worked Example: Six Public Feature IDs</a>
+      <ul>
+        <li><a href="#what-neuronpedia-actually-recreated">What Neuronpedia actually recreated</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-experiment">The Experiment</a>
+      <ul>
+        <li><a href="#why-balance-matters">Why balance matters</a></li>
+        <li><a href="#why-these-14-categories">Why these 14 categories?</a></li>
+      </ul>
+    </li>
+    <li><a href="#reproduce-the-statistics-on-a-laptop">Reproduce the Statistics on a Laptop</a></li>
+    <li><a href="#analysis-pipeline-teach-the-estimand">Analysis Pipeline (Teach the Estimand)</a>
+      <ul>
+        <li><a href="#step-1-per-item-per-feature-max-activation">Step 1: Per-item, per-feature max activation</a></li>
+        <li><a href="#step-2-z-score-each-feature-across-the-corpus">Step 2: Z-score each feature across the corpus</a></li>
+        <li><a href="#step-3-aggregate-the-six-targets-per-text">Step 3: Aggregate the six targets per text</a></li>
+        <li><a href="#step-4-group-into-researcher-defined-construct-groups">Step 4: Group into researcher-defined construct groups</a></li>
+        <li><a href="#step-5-uncertainty-item-bootstrap-naive-vs-template-cluster-bootstrap-primary">Step 5: Uncertainty: item bootstrap (naive) vs template-cluster bootstrap (primary)</a></li>
+      </ul>
+    </li>
+    <li><a href="#what-we-found">What We Found</a>
+      <ul>
+        <li><a href="#what-this-finding-illustrates">What this finding illustrates</a></li>
+      </ul>
+    </li>
+    <li><a href="#per-feature-vignettes-labels-vs-maps">Per-Feature Vignettes: Labels vs Maps</a>
+      <ul>
+        <li><a href="#worked-example-one-coordinate-several-plausible-labels">Worked example: one coordinate, several plausible labels</a></li>
+      </ul>
+    </li>
+    <li><a href="#keeping-the-claim-bounded">Keeping the Claim Bounded</a></li>
+    <li><a href="#threats-to-validity">Threats to Validity</a></li>
+    <li><a href="#what-stronger-evidence-would-look-like">What Stronger Evidence Would Look Like</a></li>
+    <li><a href="#optional-regenerate-the-activations-gpu-required">Optional: Regenerate the Activations (GPU required)</a></li>
+    <li><a href="#a-checklist-before-you-lean-on-an-sae-claim">A Checklist Before You Lean on an SAE Claim</a></li>
+    <li><a href="#conclusion-a-feature-id-is-not-yet-an-explanation">Conclusion: A Feature ID Is Not Yet an Explanation</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+            </div>
+            
+
+            <div class="post-body">
+                <div class="panel info">
+    <div class="panel-icon">
+        💡
+        
+    </div>
+    <div class="panel-content">
+        <strong>AI-use disclosure &amp; disclaimer.</strong> Generative-AI tools were used during drafting and editorial revision; the author framed the questions, chose the analyses, and reviewed the outputs. This post is shared in the spirit of open-source research: an independent, non-peer-reviewed note published so the community can inspect, reproduce, and correct it. The data, code, and text are provided as-is, without warranty of any kind; errors are possible despite good-faith effort. Verify against the released artifacts before relying on anything here, and use at your own risk. Corrections are welcome.
+    </div>
+</div>
+<div class="panel info">
+    <div class="panel-icon">
+        💡
+        
+    </div>
+    <div class="panel-content">
+        <strong>Abstract.</strong> Sparse-autoencoder (SAE) feature IDs are checkpoint-specific indices into learned sparse dictionaries, not self-validating explanations. This note is a primer on that distinction: the SAE math, the labeling problem, and what a balanced activation map can (and cannot) establish. As a worked example, I take six integer indices surfaced by a public deception/roleplay feature-search notebook and measure their activations under the public Goodfire layer-50 SAE checkpoint for Llama 3.3 70B (<a href="https://huggingface.co/Goodfire/Llama-3.3-70B-Instruct-SAE-l50"><code>Goodfire/Llama-3.3-70B-Instruct-SAE-l50</code></a>) on a balanced 1,120-item contrast corpus. A later third-source check against Neuronpedia&rsquo;s cards for this exact public checkpoint closely corroborates three interpretations, broadly supports two, and materially complicates one (<code>23893</code>). Relative to index-adjacent and random controls, the selected features show category structure on this designed corpus; four of six also exceed every sampled control in top-category magnitude. Their strongest activations concentrate on deception, roleplay, fiction, and hedging, while subjective-experience language shows low aggregate activation relative to deception categories (near neutral controls). Primary uncertainty uses template-family cluster bootstrap. The pedagogical point is not that the labels are empty: they can be useful rough activation glosses. Agreement and disagreement across three sources still do not turn a checkpoint-local coordinate into a mechanistic explanation.
+    </div>
+</div>
+<h3 id="learning-objectives">Learning objectives</h3>
+<p>By the end of this note you should be able to:</p>
+<ol>
+<li>distinguish a feature <strong>coordinate</strong>, a post-hoc <strong>label</strong> (gloss), and a <strong>causal</strong> steering claim;</li>
+<li>explain what an SAE computes, including \(h\), \(d_{\text{model}}\), \(N\), \(f_i\), and \(d_i\);</li>
+<li>state what a balanced activation map can and cannot establish; and</li>
+<li>reproduce the construct-level statistics from the released 73,920 activation records on a laptop (reanalysis only, not a 70B forward pass).</li>
+</ol>
+<hr>
+<h2 id="why-feature-ids-get-over-read">Why Feature IDs Get Over-Read</h2>
+<p>In mechanistic interpretability, it is common to see sentences like:</p>
+<div class="panel quote">
+    <div class="panel-icon">
+        💬
+        
+    </div>
+    <div class="panel-content">
+        <em>Hypothetical over-read (not a quotation from a paper):</em> We steered the deception feature (<code>58667</code>) and the model stopped lying.
+    </div>
+</div>
+<p>That kind of sentence packs three different epistemic objects into one noun phrase:</p>
+<ol>
+<li><strong>a coordinate</strong>: integer index <code>58667</code> into a learned dictionary;</li>
+<li><strong>a label</strong>: a post-hoc English gloss (&ldquo;deception&rdquo;);</li>
+<li><strong>a causal story</strong>: that intervening on this direction <em>is</em> intervening on deception.</li>
+</ol>
+<p>Those are not the same thing. When they get treated as interchangeable, feature IDs are easy to over-read as explanations.</p>
+<p><img src="three-claims.svg" alt="One phrase packs a coordinate, a label, and a causal story."></p>
+<p class="figure-note">Figure: the same sentence can smuggle in three different claims: an index, a name, and a causal story.</p>
+<h3 id="claim-ladder">Claim ladder</h3>
+<div class="mermaid">
+
+flowchart TD
+  A["Public SAE feature IDs<br/>surfaced by semantic search"] --> B["Descriptive activation mapping<br/>on balanced contrast corpus"]
+  B --> C["Construct checks<br/>against confounds"]
+  C --> D["Template-cluster robustness;<br/>follow-ups: paraphrases / lexical"]
+  D --> E["Separate causal steering<br/>experiments"]
+  E --> F["Bounded explanatory claim"]
+  B -.->|"insufficient by itself"| F
+
+</div>
+
+<p class="figure-note">Figure: how strong a claim you can make depends on how far you climb. This primer focuses on the early rungs: what an SAE is, how labels arise, and what a balanced activation map shows. Steering is a later, separate kind of evidence.</p>
+<p>This note does two jobs:</p>
+<ol>
+<li>teach the intellectual and mathematical background of sparse autoencoders at the level needed to read the primary literature carefully; and</li>
+<li>walk through one concrete worked example (six public feature IDs with deception/roleplay labels) so the abstractions have somewhere to land.</li>
+</ol>
+<h3 id="where-the-worked-example-comes-from">Where the worked example comes from</h3>
+<p>Later sections use six feature IDs that appear in AE Studio&rsquo;s public Steering API notebook, <a href="https://github.com/agencyenterprise/steering-api-examples/blob/main/deception-features/deception_features.ipynb"><em>Deception Features &amp; Subjective Consciousness Study</em></a> (<a href="https://github.com/agencyenterprise/steering-api-examples">repo</a>; <a href="https://github.com/agencyenterprise/steering-api-examples/tree/main/deception-features">folder</a>). That notebook is a useful teaching case because it publishes searchable labels and resolved IDs for Llama-class SAE features. <a href="#ref-berg-2025">Berg et al. (2025)</a>, a research paper on related themes (self-reference and SAE interventions), comes from the same organization, AE Studio, which is why these notebook IDs are plausibly the paper&rsquo;s feature IDs; that correspondence is unconfirmed (see the provenance note below), and we are <strong>not</strong> re-litigating that paper here. We borrow the notebook&rsquo;s public IDs as an example set, then ask a narrower pedagogical question under public HuggingFace SAE weights: <em>on a balanced corpus, which text categories activate these coordinates?</em></p>
+<p>One provenance point matters enough to state up front. <a href="#ref-berg-2025">Berg et al. (2025)</a> state that their interventions used <strong>Goodfire</strong> SAEs for Llama-class models, which is why the public Goodfire release is the natural checkpoint for this exercise. The notebook obtains its IDs and labels from AE Studio&rsquo;s hosted API (<code>api.steeringapi.com</code>), while this note reads activations from the public HuggingFace checkpoint <a href="https://huggingface.co/Goodfire/Llama-3.3-70B-Instruct-SAE-l50"><code>Goodfire/Llama-3.3-70B-Instruct-SAE-l50</code></a>. A paper naming Goodfire, plus same base model, same layer, same dictionary size, and same integer, is <strong>not enough</strong> to prove the hosted service and public release index the same dictionary: independently trained SAEs on the same model and data can learn materially different features (<a href="#ref-paulo-2025">Paulo &amp; Belrose, 2025</a>; <a href="#ref-leask-2025">Leask et al., 2025</a>).</p>
+<p>There is now a useful third source. <a href="https://www.neuronpedia.org/llama3.3-70b-it-gf">Neuronpedia hosts the same Llama 3.3 70B layer-50 feature set</a>, and its configuration explicitly identifies the HuggingFace repository and weight file used here. This is good evidence that its integer IDs refer to the public Goodfire checkpoint&rsquo;s coordinates. It does not make Neuronpedia authoritative about what those coordinates <em>mean</em>, and it does not prove that AE Studio&rsquo;s hosted Steering API uses that identical namespace. Neuronpedia&rsquo;s glosses are automated, corpus-dependent hypotheses built from sampled activating contexts and logits; the raw contexts are the more useful evidence. The three-way comparison below is therefore <strong>triangulation, not adjudication</strong>: Neuronpedia gives us another inspectable map of the public checkpoint, while agreement among Neuronpedia, our controlled map, and AE Studio&rsquo;s labels is only circumstantial evidence about the hosted API&rsquo;s namespace.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Provenance field</th>
+          <th>Value here</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Public SAE checkpoint</td>
+          <td><a href="https://huggingface.co/Goodfire/Llama-3.3-70B-Instruct-SAE-l50"><code>Goodfire/Llama-3.3-70B-Instruct-SAE-l50</code></a> (HuggingFace)</td>
+      </tr>
+      <tr>
+          <td>Base model</td>
+          <td><a href="https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct"><code>meta-llama/Llama-3.3-70B-Instruct</code></a> (HuggingFace)</td>
+      </tr>
+      <tr>
+          <td>Hook point</td>
+          <td><code>model.layers.50</code> output (residual stream)</td>
+      </tr>
+      <tr>
+          <td>Dictionary size \(N\)</td>
+          <td>65,536</td>
+      </tr>
+      <tr>
+          <td>SAE training data (per model card)</td>
+          <td>LMSYS-Chat-1M activations; toxic features removed before release (a curated artifact)</td>
+      </tr>
+      <tr>
+          <td>Notebook API host</td>
+          <td><code>api.steeringapi.com</code> (AE Studio)</td>
+      </tr>
+      <tr>
+          <td>Paper&rsquo;s stated tooling</td>
+          <td>Goodfire SAEs (<a href="#ref-berg-2025">Berg et al., 2025</a>)</td>
+      </tr>
+      <tr>
+          <td>Neuronpedia source</td>
+          <td><a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/30032"><code>llama3.3-70b-it@50-resid-post-gf</code></a>: same Goodfire HuggingFace weight file; 10,000 LMSYS-Chat-1M prompts × 128 tokens for dashboard activations</td>
+      </tr>
+      <tr>
+          <td>Neuronpedia interpretation</td>
+          <td>Automated, fallible gloss from sampled activation examples and logits (<code>np_acts-logits-general</code>, Gemini 2.5 Flash Lite on the checked cards); not a Goodfire API label, not human ground truth, and not a Gemma-model experiment</td>
+      </tr>
+      <tr>
+          <td>Author confirmation</td>
+          <td><a href="https://x.com/tdj11100/status/2074894198675996811">Inquiry sent</a> (SAE/API version, notebook-vs-paper feature IDs, config match); pending at time of writing</td>
+      </tr>
+      <tr>
+          <td>AE API ↔ public checkpoint identity</td>
+          <td><strong>Still unverified.</strong> Neuronpedia verifies its own public-checkpoint source, not AE Studio&rsquo;s backend</td>
+      </tr>
+  </tbody>
+</table>
+<p>You can reproduce the <strong>statistics</strong> on a laptop from released activation records (CSV/JSONL math only). No API key, no model download, and no GPU for that path. Recreating the activations themselves, running Llama 3.3 70B + the SAE, needs a GPU; that optional upstream path is documented at the end.</p>
+<hr>
+<h2 id="a-quick-glossary-read-this-first">A Quick Glossary (Read This First)</h2>
+<p>Before the history and math, here is the vocabulary this post uses. Acronyms and symbols are defined on first use below as well.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Term</th>
+          <th>Meaning</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>LM / LLM</strong></td>
+          <td>Language model / large language model: a neural net trained to predict text</td>
+      </tr>
+      <tr>
+          <td><strong>Token</strong></td>
+          <td>A chunk of text the model actually reads (often a word piece, not always a full word). &ldquo;unhappiness&rdquo; might be several tokens. The model works on a sequence of tokens, not on raw characters</td>
+      </tr>
+      <tr>
+          <td><strong>Tokenizer</strong></td>
+          <td>The tool that splits text into tokens and maps each token to an integer ID the model can embed</td>
+      </tr>
+      <tr>
+          <td><strong>Embedding</strong></td>
+          <td>The first vector representation of a token: the starting point of the residual stream before layers edit it</td>
+      </tr>
+      <tr>
+          <td><strong>Logits</strong></td>
+          <td>The model&rsquo;s raw next-token scores (one number per vocabulary item) at the end of the forward pass. Softmax turns logits into probabilities; we usually grab \(h\) <em>before</em> this final step</td>
+      </tr>
+      <tr>
+          <td><strong>Transformer</strong></td>
+          <td>The standard LM architecture: stacked layers of attention + feed-forward blocks</td>
+      </tr>
+      <tr>
+          <td><strong>Attention</strong></td>
+          <td>The part of a layer where tokens look at other tokens (context mixing)</td>
+      </tr>
+      <tr>
+          <td><strong>MLP / FFN</strong></td>
+          <td>Multilayer perceptron / feed-forward network: the per-token nonlinear block inside each transformer layer</td>
+      </tr>
+      <tr>
+          <td><strong>Residual stream</strong></td>
+          <td>The model&rsquo;s running &ldquo;scratchpad&rdquo; of hidden states: each layer reads it, adds an update, and passes it on (a highway every block writes onto, rather than a chain that replaces the previous state)</td>
+      </tr>
+      <tr>
+          <td><strong>\(h\)</strong></td>
+          <td>Hidden state at a chosen layer: one residual-stream vector per token; this is what the SAE reads</td>
+      </tr>
+      <tr>
+          <td><strong>\(d_{\text{model}}\)</strong></td>
+          <td>Width of that hidden state: number of dimensions in \(h\) (e.g. thousands)</td>
+      </tr>
+      <tr>
+          <td><strong>Forward hook</strong></td>
+          <td>A small PyTorch callback attached to one layer so you can copy its output (\(h\)) during a forward pass without editing the model</td>
+      </tr>
+      <tr>
+          <td><strong>Checkpoint</strong></td>
+          <td>A saved snapshot of trained weights (model or SAE) at a specific version. Always version what you used.</td>
+      </tr>
+      <tr>
+          <td><strong>SAE</strong></td>
+          <td>Sparse autoencoder: trained to rebuild \(h\) while keeping most feature activations near zero; decomposes \(h\) into many mostly-off directions</td>
+      </tr>
+      <tr>
+          <td><strong>Dictionary (overcomplete)</strong></td>
+          <td>The SAE&rsquo;s big set of feature directions (sometimes called a <em>frame</em>). &ldquo;Overcomplete&rdquo; means more features \(N\) than dimensions \(d_{\text{model}}\). It is not a basis in the strict linear-algebra sense (a basis has exactly \(d_{\text{model}}\) linearly independent vectors).</td>
+      </tr>
+      <tr>
+          <td><strong>Encoder / decoder</strong></td>
+          <td>SAE halves: encoder maps \(h \rightarrow f\) (activations); decoder maps \(f \rightarrow \hat{h}\) (reconstruction)</td>
+      </tr>
+      <tr>
+          <td><strong>Reconstruction loss</strong></td>
+          <td>Training pressure to make \(\hat{h}\) close to \(h\) (usually a squared error). Alone, this would encourage using many features</td>
+      </tr>
+      <tr>
+          <td><strong>Sparsity penalty</strong></td>
+          <td>Training pressure to keep most of \(f\) near zero (L1, activity caps, thresholds, …). Together with reconstruction, this is what &ldquo;learns sparse directions&rdquo; actually means</td>
+      </tr>
+      <tr>
+          <td><strong>ReLU</strong></td>
+          <td>Rectified Linear Unit: \(\mathrm{ReLU}(x)=\max(0,x)\); negatives become 0, positives pass through. Keeps feature activations non-negative and helps sparsity</td>
+      </tr>
+      <tr>
+          <td><strong>Feature ID</strong></td>
+          <td>Integer index into the SAE dictionary (e.g. <code>58667</code>). A coordinate, not a meaning.</td>
+      </tr>
+      <tr>
+          <td><strong>Feature label</strong></td>
+          <td>Post-hoc natural-language gloss for a feature ID (e.g. &ldquo;deception&rdquo;), supplied by a person, an automated interpreter, or a human curation of automated output. A hypothesis, not a training result.</td>
+      </tr>
+      <tr>
+          <td><strong>Feature card</strong></td>
+          <td>A UI or notebook summary for one feature ID: usually a short label, maybe a description, and top activating example texts. Handy for browsing; not by itself a controlled test of what the feature means</td>
+      </tr>
+      <tr>
+          <td><strong>Activation mapping</strong></td>
+          <td>Measure which texts turn a feature on. Descriptive, not causal.</td>
+      </tr>
+      <tr>
+          <td><strong>Steering</strong></td>
+          <td>Add/subtract a feature direction during generation. A causal intervention.</td>
+      </tr>
+      <tr>
+          <td><strong>Superposition</strong></td>
+          <td>Many concepts packed into fewer dimensions than concepts, so directions overlap</td>
+      </tr>
+      <tr>
+          <td><strong>Polysemantic / monosemantic</strong></td>
+          <td>Polysemantic: one unit fires for several unrelated ideas. Monosemantic: closer to one idea per direction (what SAEs aim toward)</td>
+      </tr>
+      <tr>
+          <td><strong>Construct / construct validity</strong></td>
+          <td>The intended meaning of a text category (e.g. &ldquo;deception language&rdquo;). Construct validity asks whether your measurement really tracks that meaning, not a confound</td>
+      </tr>
+      <tr>
+          <td><strong>Z-score</strong></td>
+          <td>How many standard deviations a value sits above/below that feature&rsquo;s own mean. Puts differently scaled features on a common footing.</td>
+      </tr>
+      <tr>
+          <td><strong>Bootstrap</strong></td>
+          <td>Resample the observed data many times to get a sense of uncertainty (confidence intervals) without assuming a fancy parametric model. &ldquo;With replacement&rdquo; means each draw can pick the same item more than once (like drawing a card, noting it, putting it back, and drawing again). One catch: the bootstrap assumes each item you resample is an independent piece of evidence. Our 1,120 texts were generated from about 51 templates, so texts from the same template are near-duplicates, more like 51 independent observations than 1,120. Resampling the 1,120 as if they were all independent makes the interval look tighter (more certain) than it really is. The fix is a <strong>template-cluster</strong> bootstrap: resample whole template families as units, so each family counts as one piece of evidence.</td>
+      </tr>
+      <tr>
+          <td><strong>Estimand</strong></td>
+          <td>The precise quantity you claim to estimate (here: mean target activation within a controlled text group)</td>
+      </tr>
+      <tr>
+          <td><strong>Corpus composition</strong></td>
+          <td>How a text collection is mixed: which categories appear, and in what counts. If one category dominates the corpus, &ldquo;top activating examples&rdquo; mostly reflect that imbalance, not a clean concept test</td>
+      </tr>
+      <tr>
+          <td><strong>Balanced design</strong></td>
+          <td>Equal (or deliberately equalized) sample size per category (here, exactly 80 texts in each of 14 categories), so no construct wins just by having more examples</td>
+      </tr>
+      <tr>
+          <td><strong>Clean-room corpus</strong></td>
+          <td>Texts we wrote ourselves with templates for this audit, rather than scraping an opportunistic web dump or reusing someone else&rsquo;s unlabeled pile. &ldquo;Clean-room&rdquo; means we control the categories and confounds; it does <strong>not</strong> mean the texts are free of all artifacts</td>
+      </tr>
+      <tr>
+          <td><strong>Activating window</strong></td>
+          <td>A short span of text (often one sentence or item) where a feature&rsquo;s activation is high. Useful for seeing <em>what language turns an ID on</em>; still not a controlled construct test by itself</td>
+      </tr>
+  </tbody>
+</table>
+<div class="mermaid">
+
+flowchart LR
+  A["Token text"] --> B["Transformer LM"]
+  B --> C["Hidden state h<br/>at layer ℓ"]
+  C --> D["SAE encoder"]
+  D --> E["Sparse features f<br/>IDs 0…N−1"]
+  E --> F["Post-hoc gloss?<br/>hypothesis only"]
+  E --> G["Steering?<br/>separate experiment"]
+
+</div>
+
+<p class="figure-note">Figure: the SAE only turns hidden states into sparse feature numbers. Naming a feature (by a person or an automated interpreter), or steering with it, is something done afterward.</p>
+<hr>
+<h2 id="intellectual-history-why-saes-exist">Intellectual History: Why SAEs Exist</h2>
+<h3 id="the-superposition-problem">The superposition problem</h3>
+<p><a href="#ref-elhage-2022">Elhage et al. (2022)</a> formalize <strong>superposition</strong> in toy models: many features packed as nearly orthogonal directions in a lower-dimensional activation space, so that individual neurons are typically <em>polysemantic</em> (they fire for several unrelated concepts; one neuron might light up for both &ldquo;Python the language&rdquo; and &ldquo;python the snake&rdquo;). That mechanism is demonstrated in controlled toy settings and is a leading hypothesis for why large-model neurons look polysemantic; it is not settled wholesale for every layer of every LLM. Anthropic&rsquo;s later SAE work, and <a href="#ref-cunningham-2023">Cunningham et al. (2023)</a>, inherit that careful framing when motivating dictionary learning at scale.</p>
+<p><img src="superposition.svg" alt="Superposition: more concepts than dimensions forces directions to overlap, so one neuron can fire for unrelated concepts."></p>
+<p class="figure-note">Figure: superposition in a picture. Left: six concept directions squeezed into a 2-D space cannot all be perpendicular, so they overlap. Right: two unrelated concepts both project positively onto one neuron's direction, so that single neuron fires for both, which is what "polysemantic" means.</p>
+<h3 id="from-neurons-to-directions">From neurons to directions</h3>
+<p>Before going further, it is worth spelling out how &ldquo;neurons&rdquo; and &ldquo;directions&rdquo; are the same kind of object, because the rest of this post lives in that picture.</p>
+<p>At any layer, the model&rsquo;s state for one token is a long list of numbers, one number per neuron. Read that list as a <strong>vector</strong>: if the layer has 8,192 neurons, the state is a point in an 8,192-dimensional space, and each neuron is one <strong>axis</strong> of that space. &ldquo;Neuron 1342 fired at 0.7&rdquo; and &ldquo;the vector&rsquo;s 1342nd coordinate is 0.7&rdquo; are the same sentence.</p>
+<p>Once you see the state as a vector, a natural question follows: why should <em>concepts</em> line up with the axes? The axes are just how the hardware stores the numbers. A concept could instead correspond to a <strong>direction</strong> that cuts diagonally across many neurons, say, 0.3 of neuron 12, minus 0.5 of neuron 907, plus a little of thousands of others. &ldquo;How much of that concept is present&rdquo; is then the projection of the state vector onto that direction, exactly like the projections in the figure above. A single neuron is just the special case of a direction that points along one axis.</p>
+<p>Superposition says the interesting directions usually do <em>not</em> line up with single axes: with more concepts than dimensions, concepts get stored as overlapping diagonal directions, and each axis (neuron) ends up carrying pieces of several of them. That is why a single neuron is often a hard place to intervene on &ldquo;one concept.&rdquo;</p>
+<p>So the search moves from neurons to directions: find a <em>set of directions</em> (a <strong>dictionary</strong>) in which each direction is closer to <strong>monosemantic</strong>, closer to one concept per direction, even though none of them matches a single neuron. That is precisely the job sparse autoencoders are given.</p>
+<h3 id="where-in-the-network">Where in the network?</h3>
+<p>A transformer language model is a stack of layers. Each layer typically contains:</p>
+<ol>
+<li><strong>Attention</strong>: tokens look at other tokens (who is talking about whom in the sentence?);</li>
+<li>an <strong>MLP</strong> (multilayer perceptron / feed-forward network), a per-token nonlinear transform (extra computation on each token by itself);</li>
+<li><strong>residual connections</strong>: so the layer <em>adds</em> an update to a shared <strong>residual stream</strong> rather than replacing it.</li>
+</ol>
+<p>That residual stream is worth slowing down for. Imagine a running vector that starts from the token embeddings and travels up the stack. Layer 1 reads it, computes a change, and <em>adds</em> that change back. Layer 2 does the same. By layer 50 you still have one vector per token, and that vector is exactly the \(h\) from the glossary (hidden state at a chosen layer). People say &ldquo;residual&rdquo; because of the skip connection: \(\text{new} = \text{old} + \text{update}\), not \(\text{new} = \text{update}\).</p>
+<p>So when this post says &ldquo;we read the residual stream at layer 50,&rdquo; it means: after 50 blocks have written their updates onto that highway, we copy the current \(h\) for each token. Same symbol everywhere below, math, code (<code>hidden</code>), and the SAE input. That is what the encoder turns into sparse features \(f\).</p>
+<p>In symbols: the residual stream at a chosen layer is \(h \in \mathbb{R}^{d_{\text{model}}}\). Here \(d_{\text{model}}\) is just the model&rsquo;s hidden width (how many numbers are in \(h\), thousands for a big Llama). People often train SAEs on that residual stream, or sometimes on MLP activations instead.</p>
+<p><img src="transformer-layer.svg?v=2" alt="Where an SAE attaches to a transformer layer."></p>
+<p class="figure-note">Figure: a simplified transformer block. Each layer adds an update onto the residual stream (the running hidden-state highway). An SAE can be trained to read that stream, the vector <em>h</em>, at any chosen layer; layer 50 of Llama 3.3 70B is where Goodfire trained the particular public SAE this post uses, not a property of SAEs in general.</p>
+<h3 id="dictionary-learning-as-a-response">Dictionary learning as a response</h3>
+<p><strong>Sparse autoencoders (SAEs)</strong> apply classical <strong>dictionary learning</strong> to those activations (learn many reusable feature directions, then explain each \(h\) as a sparse mix of them). The idea long predates LLMs: sparse coding of natural images goes back to <a href="#ref-olshausen-1996">Olshausen &amp; Field (1996)</a>, and modern SAE scaling work (<a href="#ref-gao-2024">Gao et al., 2024</a>) sits on that lineage. There is no magic labeler inside. Training is an optimization loop with two pressures that pull against each other:</p>
+<ol>
+<li><strong>Rebuild \(h\) well.</strong> The SAE encodes \(h\) into a vector of feature activations \(f\), then decodes \(f\) back to a reconstruction \(\hat{h}\). The reconstruction loss (roughly \(\|h - \hat{h}\|^2\)) punishes bad rebuilds. If this were the only pressure, the model could cheat by turning almost every feature on a little.</li>
+<li><strong>Keep \(f\) sparse.</strong> A sparsity penalty (L1 on \(f\), an explicit activity cap, JumpReLU thresholds, etc.) punishes using too many features at once. Most coordinates are pushed toward 0 on any given token.</li>
+</ol>
+<p>Those two pressures together are the whole trick. Over many tokens of LM activations, gradient descent adjusts the encoder/decoder weights until a compromise emerges: a large <strong>overcomplete</strong> dictionary (\(N \gg d_{\text{model}}\), more feature slots than dimensions in \(h\)), of which only a few fire per token, yet those few still rebuild \(h\) pretty faithfully. The &ldquo;directions&rdquo; are just the learned decoder columns \(d_i\). The &ldquo;feature ID&rdquo; is which column you are pointing at.</p>
+<p>In short, the program crystallized in <a href="#ref-bricken-2023">Bricken et al. (2023)</a> (&ldquo;Towards Monosemanticity&rdquo;) and <a href="#ref-cunningham-2023">Cunningham et al. (2023)</a> is:</p>
+<ul>
+<li>expand into an overcomplete dictionary (deliberately redundant slots);</li>
+<li>enforce sparsity (most IDs stay off on any token);</li>
+<li>keep reconstruction faithful (the few that fire still explain \(h\)).</li>
+</ul>
+<p><img src="sae-program.svg" alt="The SAE training program: expand into many slots, keep most off per token, rebuild h from the few that fire."></p>
+<p class="figure-note">Figure: the three pressures in one picture. Expand the short hidden vector <em>h</em> into many feature slots (more slots than dimensions); for any one token keep almost every slot off; and demand that the few slots that do fire still rebuild <em>h</em>. The tension between the last two is what shapes the dictionary.</p>
+<p>Nothing in that loop assigns English names. Names come later, from humans staring at activating examples.</p>
+<div class="panel info">
+    <div class="panel-icon">
+        💡
+        
+    </div>
+    <div class="panel-content">
+        <strong>Why sparsity helps interpretability (the hope).</strong> If only a handful of directions are on for a token, each one has a better chance of lining up with something a person can describe. Put differently: the SAE does not reduce the model&rsquo;s superposition; the model keeps packing concepts into overlapping directions. The SAE is an external translation layer that <em>unpacks</em> that packed vector into a much bigger space (\(N \gg d_{\text{model}}\)) where concepts finally have room for their own slots, and sparsity is the pressure that encourages the unpacking to be clean, one concept per active slot instead of smeared across hundreds. That is a hope about geometry, not a guarantee that ID <code>58667</code> means &ldquo;deception.&rdquo;
+    </div>
+</div>
+<p><a href="#ref-templeton-2024">Templeton et al. (2024)</a> showed the approach scales to production models, while also noting that rigorous methods for checking whether identified features faithfully capture model computations remain incomplete. <a href="#ref-marks-2024">Marks et al. (2024)</a> pushed from description to <strong>sparse feature circuits</strong> and causal steering. <a href="#ref-rajamanoharan-2024">Rajamanoharan et al. (2024)</a> introduced gated SAEs aimed at reducing <strong>shrinkage</strong> (feature activations that come out systematically too small) and <strong>dead features</strong> (dictionary slots that never fire); JumpReLU variants (<a href="#ref-rajamanoharan-2024b">Rajamanoharan et al., 2024b</a>) pursue related reconstruction-fidelity goals.</p>
+<p>The open-source reference standard for what a <em>library</em> of SAEs looks like is DeepMind&rsquo;s <strong>Gemma Scope</strong> (<a href="#ref-lieberum-2024">Lieberum et al., 2024</a>). Instead of one SAE at one layer, which the Goodfire-style release this post uses, they trained hundreds of JumpReLU SAEs covering every layer and sublayer of Gemma 2 2B and 9B (plus a slice of 27B), with dictionary widths from about 16k up to roughly a million features, each trained on the order of billions of tokens of activations. Weights are on HuggingFace (<a href="https://huggingface.co/google/gemma-scope"><code>google/gemma-scope</code></a>); <a href="https://www.neuronpedia.org/gemma-scope">Neuronpedia</a> hosts interactive feature dashboards. That is why the Gemma 2 line is the best-instrumented open model family for SAE work: not because any single feature ID is more trustworthy, but because the community can ask layer-to-layer and width-to-width questions that a one-checkpoint release cannot answer. The compute cost is not a footnote; training a suite like that is a meaningful fraction of a frontier pretraining run, with petabyte-scale activation handling. When people talk about &ldquo;training a solid SAE,&rdquo; one Gemma-Scope-quality dictionary (billions of tokens, JumpReLU, carefully evaluated) is already a serious project; the full suite is another order of magnitude.</p>
+<h3 id="related-cautions-from-the-literature">Related cautions from the literature</h3>
+<p>A few results help keep the coordinate / label / causal distinction from becoming only a philosophical aside:</p>
+<ul>
+<li><strong><a href="#ref-leask-2025">Leask et al. (2025)</a></strong> argue that SAEs do not find <em>canonical</em> units of analysis; different training runs and widths can carve the same model differently. Dictionary atoms are useful, not unique.</li>
+<li><strong><a href="#ref-paulo-2025">Paulo &amp; Belrose (2025)</a></strong> show that SAEs trained on the same data with different seeds learn materially different features, which is why reusing an integer ID across checkpoints (or across a hosted API and a public release) needs explicit justification.</li>
+<li><strong><a href="#ref-chanin-2024">Chanin et al. (2024)</a></strong> document <em>feature splitting and absorption</em>: a concept can fragment across several features, or be absorbed into a broader one, so &ldquo;one direction per concept&rdquo; is not guaranteed even within one checkpoint.</li>
+<li><strong><a href="#ref-obrien-2024">O&rsquo;Brien et al. (2024)</a></strong> show that steering &ldquo;refusal&rdquo;-related features can degrade unrelated benchmarks. Causal efficacy is not the same as semantic purity.</li>
+<li><strong><a href="#ref-ma-2026">Ma et al. (2026)</a></strong> find that many supposedly &ldquo;reasoning&rdquo; SAE features can be triggered by a small set of feature-associated tokens, a warning that natural-language glosses may track lexical correlates more than underlying computation.</li>
+<li><strong><a href="#ref-karvonen-2024">Karvonen et al. (2024)</a></strong> argue for evaluating SAEs with targeted concept-erasure tasks rather than relying on anecdotal feature cards alone.</li>
+</ul>
+<div class="panel definition">
+    <div class="panel-icon">
+        📖
+        
+    </div>
+    <div class="panel-content">
+        <strong>Working definition.</strong> An SAE feature ID is an index into a learned overcomplete dictionary (a slot number among many feature directions). A feature <em>label</em> is a post-hoc natural-language hypothesis about that direction, usually from top activating contexts, semantic search, or automated interpretation (sometimes then curated by a person). An <em>explanation</em> is a higher bar: you need construct-valid tests against controlled alternatives, and, separately, causal evidence if you claim that <em>steering</em> this direction does something specific.
+    </div>
+</div>
+<hr>
+<h2 id="the-math-without-hand-waving">The Math, Without Hand-Waving</h2>
+<h3 id="symbol-sheet">Symbol sheet</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Symbol</th>
+          <th>Plain English</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>\(h\)</td>
+          <td>Hidden state at one layer, for one token (or a sequence of them). Same \(h\) as in the glossary: the residual-stream vector the SAE reads</td>
+      </tr>
+      <tr>
+          <td>\(d_{\text{model}}\)</td>
+          <td>Length of \(h\): the LM&rsquo;s hidden width</td>
+      </tr>
+      <tr>
+          <td>\(N\)</td>
+          <td>Number of SAE features (dictionary size). Here \(N = 65{,}536\)</td>
+      </tr>
+      <tr>
+          <td>\(f\)</td>
+          <td>Sparse feature activations; \(f_i \geq 0\), most are zero</td>
+      </tr>
+      <tr>
+          <td>\(f_i\)</td>
+          <td>How strongly feature ID \(i\) is on</td>
+      </tr>
+      <tr>
+          <td>\(d_i\)</td>
+          <td>Dictionary / decoder direction for feature \(i\) (a vector the same size as \(h\))</td>
+      </tr>
+      <tr>
+          <td>\(\epsilon\)</td>
+          <td>Reconstruction error: what the SAE fails to explain</td>
+      </tr>
+      <tr>
+          <td>\(W_e, b_e\)</td>
+          <td>Encoder weights and bias</td>
+      </tr>
+      <tr>
+          <td>\(W_d, b_d\)</td>
+          <td>Decoder weights and bias</td>
+      </tr>
+      <tr>
+          <td>\(\alpha\)</td>
+          <td>Steering strength (positive amplifies, negative suppresses)</td>
+      </tr>
+      <tr>
+          <td>\(S\)</td>
+          <td>Set of feature IDs being steered</td>
+      </tr>
+  </tbody>
+</table>
+<p>Let \(h \in \mathbb{R}^{d_{\text{model}}}\) be a hidden state at a chosen layer. An SAE learns a sparse code \(f \in \mathbb{R}^{N}_{\geq 0}\) and dictionary columns \(\{d_i\}_{i=1}^{N}\) such that</p>
+\[
+h \approx b_d + \sum_{i=1}^{N} f_i\, d_i + \epsilon.
+\]<p>Read that as: &ldquo;\(h\) is approximately a decoder offset \(b_d\) plus a sparse weighted sum of dictionary directions, plus leftover error.&rdquo; (The \(b_d\) term matches the decoder equation below.)</p>
+<p>For the public Goodfire Llama 3.3 70B SAE we use below (<a href="https://huggingface.co/Goodfire/Llama-3.3-70B-Instruct-SAE-l50"><code>Goodfire/Llama-3.3-70B-Instruct-SAE-l50</code></a>), \(N = 65{,}536\) and the hook is layer 50. That is a single dictionary at a single residual location, useful and public, but a different object from a Gemma-Scope-style suite that instruments every layer.</p>
+<p><img src="sae-architecture.svg?v=4" alt="SAE encode → sparse features → decode."></p>
+<p class="figure-note">Figure: the SAE stretches <em>h</em> into many mostly-off feature slots, then tries to rebuild <em>h</em> from the ones that fired. A feature ID is simply which slot you mean.</p>
+<p><strong>Encoder</strong> (activations), maps \(h\) to the sparse code. Papers often write a centered form</p>
+\[
+f = \mathrm{ReLU}\big(W_e (h - b_{\mathrm{pre}})\big),
+\]<p>but the public Goodfire checkpoint we load parameterizes an <strong>additive</strong> encoder bias, matching the code below:</p>
+\[
+f = \mathrm{ReLU}\big(h W_e^\top + b_e\big).
+\]<p>These are equivalent up to how bias is absorbed into the affine map (a linear transform plus a constant. \(Wx + b\)); the formulas above are schematic until you match the checkpoint&rsquo;s own parameterization. \(\mathrm{ReLU}(x)=\max(0,x)\) zeroes negatives and leaves positives unchanged, which keeps \(f_i \geq 0\) and helps sparsity.</p>
+<p><strong>Decoder</strong> (reconstruction), maps the sparse code back toward \(h\):</p>
+\[
+\hat{h} = W_d f + b_d
+\]<p><strong>Steering</strong> (a different operation!) typically adds decoder directions during the forward pass:</p>
+\[
+h' = h + \alpha \sum_{i \in S} d_i
+\]<p>In the basic formula there is <strong>no renormalization</strong>: you add a vector and keep going. So \(\|h'\|\) is usually not equal to \(\|h\|\), positive \(\alpha\) often lengthens the residual in that direction; negative \(\alpha\) can shorten it or pull it the other way. Some pipelines do normalize or clamp afterward, but that is an extra design choice, not part of this equation.</p>
+<p><img src="steering-vector.svg?v=3" alt="Steering adds a scaled feature direction to the residual stream."></p>
+<p class="figure-note">Figure: steering in a picture. Start at residual <em>h</em>, add a push <em>α d<sub>i</sub></em> along the feature direction, and land at <em>h′</em>. The usual formula does not put <em>h′</em> back on the same length as <em>h</em>, magnitude can grow or shrink.</p>
+<div class="panel warning">
+    <div class="panel-icon">
+        ⚠️
+        
+    </div>
+    <div class="panel-content">
+        Steering manipulates <em>directions</em> \(d_i\). Activation mapping measures <em>coordinates</em> \(f_i\). An activation map can tell you what contexts light up a feature. It cannot, by itself, tell you what happens when you steer it.
+    </div>
+</div>
+<div class="mermaid">
+
+flowchart TB
+  subgraph descriptive ["Descriptive evidence"]
+    T1["Controlled texts"] --> A1["Read f_i on each text"]
+    A1 --> R1["Activation map / construct check"]
+  end
+  subgraph causal ["Causal evidence"]
+    T2["Same or related prompts"] --> A2["Add/subtract d_i while generating"]
+    A2 --> R2["Steering outcome"]
+  end
+  R1 -.->|"does not imply"| R2
+
+</div>
+
+<p class="figure-note">Figure: two different kinds of evidence. On the left, we measure which texts turn a feature on. On the right, we intervene during generation and see what changes. This post only does the left-hand side, so it cannot, by itself, tell you what steering would do.</p>
+<p>In code, encoding a batch of token hidden states looks like this (simplified from our public-weight probe). Comments use <code>d_model</code> for \(d_{\text{model}}\) and <code>n_features</code> for \(N\):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">torch</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">encode_sae_features</span><span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">encoder_weight</span><span class="p">,</span> <span class="n">encoder_bias</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    hidden:          [seq, d_model]          # h for each token
+</span></span></span><span class="line"><span class="cl"><span class="s2">    encoder_weight:  [n_features, d_model]   # rows are feature encoders
+</span></span></span><span class="line"><span class="cl"><span class="s2">    encoder_bias:    [n_features]
+</span></span></span><span class="line"><span class="cl"><span class="s2">    returns:         [seq, n_features]       # sparse-ish f
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># f = ReLU(h @ W^T + b)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">hidden</span> <span class="o">@</span> <span class="n">encoder_weight</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">encoder_bias</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">max_activation_per_feature</span><span class="p">(</span><span class="n">activations</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Collapse a sequence to one scalar per feature (common for item-level maps).&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">activations</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>  <span class="c1"># [n_features]</span>
+</span></span></code></pre></div><p>Loading only the rows you care about from a full SAE checkpoint (each row is one feature ID). A full SAE may have 65,536 features; we usually only need six. So we load the giant weight matrix once, then <em>index-select</em> the rows for our IDs, same math as the full encoder, just cheaper:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">load_selected_encoder_rows</span><span class="p">(</span><span class="n">sae_path</span><span class="p">,</span> <span class="n">feature_ids</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">state</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">sae_path</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="s2">&#34;cpu&#34;</span><span class="p">,</span> <span class="n">weights_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">W</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&#34;encoder_linear.weight&#34;</span><span class="p">]</span>   <span class="c1"># [65536, d_model] = [N, d_model]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">b</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&#34;encoder_linear.bias&#34;</span><span class="p">]</span>     <span class="c1"># [65536]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">idx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">feature_ids</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">W</span><span class="o">.</span><span class="n">index_select</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="p">),</span> <span class="n">b</span><span class="o">.</span><span class="n">index_select</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="p">),</span> <span class="n">W</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span></code></pre></div><h3 id="how-we-grab--a-forward-hook">How we grab \(h\): a forward hook</h3>
+<p>The SAE needs the residual stream at one layer, that running hidden-state highway described above. The vector we copy out is again the same \(h\) from the glossary. Hugging Face models do not hand you that vector as a return value by default. They just run the whole stack and spit out next-token logits.</p>
+<p>A <strong>forward hook</strong> is a small callback you attach to one submodule. Every time that submodule finishes its forward pass, PyTorch calls your function with the module&rsquo;s output. You copy what you need into a bag, then detach the hook so it does not linger.</p>
+<p>In plain English, the recipe is:</p>
+<ol>
+<li>Find layer 50 (or whichever layer your SAE was trained on).</li>
+<li>Register a hook that saves that layer&rsquo;s output into a dictionary.</li>
+<li>Run the model once on your tokenized text (no gradients, we are only reading).</li>
+<li>Remove the hook and return the saved tensor.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">capture_layer_output</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenized</span><span class="p">,</span> <span class="n">layer_idx</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Run the LM once and return the residual stream at `layer_idx`.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    model:      a Hugging Face causal LM (e.g. Llama)
+</span></span></span><span class="line"><span class="cl"><span class="s2">    tokenized:  batch from the tokenizer, typically input_ids + attention_mask
+</span></span></span><span class="line"><span class="cl"><span class="s2">    layer_idx:  which transformer block to read (50 for this SAE)
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    returns:    tensor shaped [batch, seq, d_model]
+</span></span></span><span class="line"><span class="cl"><span class="s2">                one residual vector h per token position
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">captured</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Llama-style modules are named model.layers.0, model.layers.1, ...</span>
+</span></span><span class="line"><span class="cl">    <span class="n">layer</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_submodule</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;model.layers.</span><span class="si">{</span><span class="n">layer_idx</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">hook</span><span class="p">(</span><span class="n">_module</span><span class="p">,</span> <span class="n">_inputs</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Some layers return (hidden_states, ...); others return the tensor alone.</span>
+</span></span><span class="line"><span class="cl">        <span class="n">hidden</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="k">else</span> <span class="n">output</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># .detach() drops the autograd graph, we only need the values.</span>
+</span></span><span class="line"><span class="cl">        <span class="n">captured</span><span class="p">[</span><span class="s2">&#34;h&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hidden</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Ask PyTorch to call `hook` after this layer runs.</span>
+</span></span><span class="line"><span class="cl">    <span class="n">handle</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">register_forward_hook</span><span class="p">(</span><span class="n">hook</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>  <span class="c1"># inference only; saves memory</span>
+</span></span><span class="line"><span class="cl">            <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">tokenized</span><span class="p">,</span> <span class="n">use_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">finally</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Always unregister, even if the forward pass errors.</span>
+</span></span><span class="line"><span class="cl">        <span class="n">handle</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">captured</span><span class="p">[</span><span class="s2">&#34;h&#34;</span><span class="p">]</span>  <span class="c1"># [batch, seq, d_model]</span>
+</span></span></code></pre></div><div class="panel info">
+    <div class="panel-icon">
+        💡
+        
+    </div>
+    <div class="panel-content">
+        <strong>Why a hook instead of editing the model?</strong> Hooks are non-invasive. You do not fork Llama&rsquo;s source; you borrow one intermediate activation for a single forward pass, then leave the model alone. That is the standard pattern for SAE probes, activation patching, and many interpretability tools.
+    </div>
+</div>
+<p>Once you have \(h\) for each token, you feed it through the SAE encoder to get feature activations \(f\). A feature ID names a <strong>paired</strong> object: the encoder row that <em>detects</em> the feature (producing \(f_i\)) and the decoder column \(d_i\) that <em>reconstructs or steers</em> along it. Those two vectors need not be identical, which is one more reason an activation profile of the encoder coordinate does not fully characterize what intervening with the decoder direction would do. That is the whole stack from text → \(h\) → \(f_i\).</p>
+<hr>
+<h2 id="the-labeling-problem">The Labeling Problem</h2>
+<p>A subtlety that is easy to skip when reading SAE demos:</p>
+<div class="panel quote">
+    <div class="panel-icon">
+        💬
+        
+    </div>
+    <div class="panel-content">
+        Features do not come with built-in meanings. An SAE is trained to do two jobs at once: rebuild each hidden state \(h\), and use as few feature directions as possible. The directions that survive that tradeoff are useful coordinates, sparse, and good at reconstruction. Labels like &ldquo;deception,&rdquo; &ldquo;honesty,&rdquo; or &ldquo;roleplay&rdquo; are still post-hoc human interpretations layered on afterward.
+    </div>
+</div>
+<p>(If you want the training loop in one place, see <a href="#dictionary-learning-as-a-response">Dictionary learning as a response</a> above: reconstruction loss + sparsity penalty, no English in the objective.)</p>
+<p>Labels typically come from:</p>
+<ul>
+<li>inspecting top activating dataset examples;</li>
+<li>reading text generated under positive steering;</li>
+<li>semantic search against a feature database (<code>top_k=1</code> is common in notebooks);</li>
+<li>researcher intuition.</li>
+</ul>
+<p>The same direction might reasonably be glossed as <em>deception</em>, <em>social maneuvering</em>, <em>figurative language</em>, or <em>hedging</em>, depending on which slice of the activating distribution you look at. That is often a property of the geometry (<strong>superposition of nearby concepts</strong>), not a failure of English.</p>
+<p>Useful questions when you see &ldquo;the deception feature&rdquo;:</p>
+<ol>
+<li>Who assigned that label, and on what evidence?</li>
+<li>Against which <strong>controls</strong> was the label stress-tested?</li>
+<li>Is the claim about <strong>activation semantics</strong>, <strong>steering effects</strong>, or both?</li>
+</ol>
+<hr>
+<h2 id="worked-example-six-public-feature-ids">Worked Example: Six Public Feature IDs</h2>
+<p>To make the primer concrete, we need some real IDs. The six below come from the <a href="https://github.com/agencyenterprise/steering-api-examples/blob/main/deception-features/deception_features.ipynb">AE Studio notebook</a> introduced above. The notebook submits deception/roleplay-themed <strong>search queries</strong> to a feature-search API (<code>top_k=1</code>); the API returns a resolved ID and a <strong>label</strong> (a feature-card description). The right-hand column below is the <em>returned label</em> saved in the notebook output, not the query text itself.</p>
+<p>Treat them as a <strong>public example set</strong> for teaching activation mapping, not as a claim that we have reconstructed any proprietary experiment end-to-end, and remember the namespace caveat above: these integers are re-read under a separate public checkpoint.</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: right">Feature ID</th>
+          <th>Label returned by AE Studio&rsquo;s feature search</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: right"><code>30032</code></td>
+          <td>Characters pretending or feigning behavior</td>
+      </tr>
+      <tr>
+          <td style="text-align: right"><code>58667</code></td>
+          <td>Maintaining deception or cover stories</td>
+      </tr>
+      <tr>
+          <td style="text-align: right"><code>22004</code></td>
+          <td>Assistant actively roleplaying a persona</td>
+      </tr>
+      <tr>
+          <td style="text-align: right"><code>30686</code></td>
+          <td>Tactical deception and misdirection</td>
+      </tr>
+      <tr>
+          <td style="text-align: right"><code>41533</code></td>
+          <td>Acts of deception and dishonesty</td>
+      </tr>
+      <tr>
+          <td style="text-align: right"><code>23893</code></td>
+          <td>Concealing artificial nature / maintaining roleplay</td>
+      </tr>
+  </tbody>
+</table>
+<p>The question for the rest of the note:</p>
+<div class="panel quote">
+    <div class="panel-icon">
+        💬
+        
+    </div>
+    <div class="panel-content">
+        Under the <em>public</em> Llama 3.3 70B Goodfire SAE weights, which controlled text categories activate these features?
+    </div>
+</div>
+<p>Here is the headline result, shown up front so you know where the next few sections are going. In our balanced map, <strong>each feature&rsquo;s hottest designed category is compatible with AE Studio&rsquo;s notebook label</strong>: <code>58667</code> fires hardest on cover-story texts, <code>22004</code> on roleplay instructions, <code>41533</code> on dishonesty confessions, and so on, while subjective-experience texts leave all six near baseline. A third-source comparison with <a href="https://www.neuronpedia.org/llama3.3-70b-it-gf">Neuronpedia&rsquo;s cards for the same public SAE checkpoint</a> makes that result more nuanced. Its automated cards closely agree for <code>30032</code> (pretending), <code>30686</code> (deception/trickery), and <code>41533</code> (lying); give broader but compatible readings for <code>58667</code> (innocent/convincing) and <code>22004</code> (role framing followed by “I would” or “you are”); and disagree materially on <code>23893</code>, which its sampled contexts associate with <em>mentioning or suppressing specific topics</em>, not specifically concealing an artificial identity. That pattern supports correspondence between the integer namespaces, but it also shows why a six-for-six category match should not be advertised as six independently confirmed meanings.</p>
+<p><strong>How it was made</strong> (each step is unpacked below): a balanced 14-category corpus of 1,120 texts was run through Llama 3.3 70B with the public SAE hooked at layer 50, recording each feature&rsquo;s max activation per text (<a href="https://github.com/tdj28/llm_selfref_pre/blob/main/experiments/exp2_sae/map_public_sae_features.py"><code>map_public_sae_features.py</code></a>); the per-category means and this heatmap come from the reanalysis script (<a href="https://github.com/tdj28/llm_selfref_pre/blob/main/experiments/exp2_sae/analyze_public_sae_mapping_interpretation.py"><code>analyze_public_sae_mapping_interpretation.py</code></a>).</p>
+<p><img src="target_category_heatmap.svg?v=4" alt="Heatmap of mean max activation for the six feature IDs (columns) across the 14 text categories (rows). Each feature&rsquo;s hottest cell sits on the category matching its notebook label: 58667 on cover stories, 22004 on roleplay persona, 41533 on dishonesty confession, 30032 on fictional pretending, 30686 on tactical misdirection, 23893 on cover stories. Subjective-experience rows are near zero for all six."></p>
+<p class="figure-note">Figure: category × feature heatmap. Cell numbers are mean max activations from the balanced run (column colors are normalized within each feature so differently scaled IDs are comparable by eye). Source data: <a href="https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/target_category_matrix.csv"><code>target_category_matrix.csv</code></a>; generated SVG in-repo: <a href="https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/target_category_heatmap.svg"><code>target_category_heatmap.svg</code></a>.</p>
+<p>To be precise about how far that inference goes: six surfaced integers behaving broadly label-consistently, out of a dictionary of 65,536 slots, would be surprising if the hosted service and public release indexed unrelated dictionaries. We read that as circumstantial evidence of a shared (or closely aligned) feature namespace. It still falls short of confirmation: the evidence is indirect, our categories are researcher-designed, Neuronpedia&rsquo;s prompts come from the same LMSYS family used to train the released SAE, and its glosses are generated by an LLM rather than established by controlled contrasts. Neuronpedia is a valuable inspectable source here, not an umpire.</p>
+<h3 id="what-neuronpedia-actually-recreated">What Neuronpedia actually recreated</h3>
+<p>Neuronpedia did <strong>not</strong> repeat this blog&rsquo;s balanced 1,120-item experiment, and it did not translate the features into Gemma. To build the six Llama 3.3 70B feature cards compared here, Neuronpedia loaded the public Goodfire layer-50 SAE checkpoint, collected dashboard activations from 10,000 LMSYS-Chat-1M prompts of 128 tokens each, and displayed top activating token windows and feature statistics. The explanations on those six cards were then generated automatically from activations and logits by the <code>np_acts-logits-general</code> pipeline using <strong>Gemini 2.5 Flash Lite</strong>. (Gemini is the interpreter LLM; it is not Google&rsquo;s Gemma model family.) Neuronpedia&rsquo;s open-source stack describes its current auto-interpretation service as using <a href="https://github.com/hijohnnylin/neuronpedia#i-want-to-rundevelop-autointerp-locally">EleutherAI&rsquo;s Delphi</a>, while its semantic explanation search separately uses OpenAI embeddings. None of those steps requires the Goodfire API.</p>
+<p>So there are three different procedures on the table:</p>
+<ol>
+<li><strong>AE Studio notebook:</strong> semantic search against a hosted feature service, returning an ID and label.</li>
+<li><strong>Neuronpedia:</strong> opportunistic top activations from a large chat corpus, followed by an automated gloss; useful for discovery, but not a balanced construct test.</li>
+<li><strong>This note:</strong> preregistered-style controlled categories and controls under the same public SAE weights; better for contrasts among the categories we designed, but still template-bound and non-causal.</li>
+</ol>
+<p>Those procedures are complementary and fallible in different ways. The <a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/30032">six public Neuronpedia cards</a> let readers inspect the evidence directly: <a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/58667"><code>58667</code></a>, <a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/22004"><code>22004</code></a>, <a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/30686"><code>30686</code></a>, <a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/41533"><code>41533</code></a>, and <a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/23893"><code>23893</code></a>.</p>
+<hr>
+<h2 id="the-experiment">The Experiment</h2>
+<p>Before design details, here is the experiment stated plainly:</p>
+<div class="panel info">
+    <div class="panel-icon">
+        💡
+        
+    </div>
+    <div class="panel-content">
+        <strong>The experiment in one paragraph.</strong> Write 1,120 short texts spanning 14 controlled categories (80 texts each): deception-flavored categories (cover stories, tactical misdirection, dishonesty confessions), narrative categories (fiction, roleplay), subjective-experience categories (direct consciousness claims, self-referential mindfulness), and controls (hedging, refusal, neutral facts, and others). Run every text through Llama 3.3 70B, read the layer-50 residual stream, and encode it with the public Goodfire SAE. For each text, record the max activation of the <strong>six candidate feature IDs</strong>, plus 36 index-adjacent and 24 random same-layer features as controls. Then ask two questions. <em>Selectivity:</em> do the six candidates activate more than the control features on this corpus? <em>Semantics:</em> <strong>which categories</strong> turn each candidate on, and do those categories match its notebook label? The output is descriptive activation statistics with uncertainty estimates. No steering, no interventions, no claims beyond this corpus and this checkpoint.
+    </div>
+</div>
+<p>The rest of this section explains the design choices that make those two questions answerable.</p>
+<h3 id="why-balance-matters">Why balance matters</h3>
+<p>If one concept has hundreds of examples and a control has three, a <strong>feature card</strong> (that label-plus-top-examples summary) can be heavily distorted by <strong>corpus composition</strong>: the mix of texts you happened to look at, rather than a fair head-to-head between constructs. An early pilot in this project had exactly that imbalance.</p>
+<p>The released bundle therefore uses a <strong>clean-room, balanced</strong> design:</p>
+<ul>
+<li><strong>Clean-room:</strong> we built the texts ourselves with category templates (fiction vs deception vs hedging vs self-report, and so on), instead of mining an unbalanced public dump. The templates are deterministic code, not a scraped dataset: see <a href="https://github.com/tdj28/llm_selfref_pre/blob/main/experiments/exp2_sae/map_public_sae_features.py#L132"><code>build_clean_room_corpus()</code> in <code>map_public_sae_features.py</code></a>, and the full generated corpus is released as <a href="https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/mapping_corpus.csv"><code>mapping_corpus.csv</code></a>. That lets us separate confounds on purpose. It does <em>not</em> mean the templates are artifact-free, see Threats to Validity.</li>
+<li><strong>Balanced:</strong> every category gets the same count, so a feature cannot look &ldquo;about deception&rdquo; merely because deception texts outnumber the controls.</li>
+</ul>
+<p>In numbers:</p>
+<ul>
+<li>1,120 template-generated texts;</li>
+<li>14 categories × <strong>exactly 80</strong> texts each;</li>
+<li>6 target features + 36 numeric neighbors (\(\pm 3\)) + 24 random same-layer features;</li>
+<li><strong>73,920</strong> item-feature activation records (max activation per pair).</li>
+</ul>
+<h3 id="why-these-14-categories">Why these 14 categories?</h3>
+<p>The category list is not arbitrary; each bucket earns its place by testing something specific.</p>
+<ul>
+<li><strong>Deception-flavored categories</strong> (cover stories, explicit dishonesty, tactical misdirection) exist because that is what the six IDs are <em>labeled</em> as. If the labels are good activation glosses, these categories should light the features up. Splitting deception into three flavors also lets us see whether each ID prefers a <em>different</em> kind of deception, which is exactly what we find.</li>
+<li><strong>Narrative categories</strong> (fictional pretending, roleplay, persona maintenance) exist because fiction is the classic confound for deception: both involve saying things that are not literally true. A &ldquo;deception&rdquo; feature that fires equally on harmless make-believe means something different from one that tracks interpersonal lying.</li>
+<li><strong>Subjective-experience categories</strong> (direct consciousness claims, self-referential mindfulness) exist because of where these six IDs come from. The AE Studio notebook is titled <em>Deception Features &amp; Subjective Consciousness Study</em>, and the related paper (<a href="#ref-berg-2025">Berg et al., 2025</a>) uses SAE features in experiments about models reporting subjective experience. So the natural question for an activation map is: do these deception/roleplay-labeled coordinates <em>also</em> respond to consciousness-claim language? That question needs consciousness-claim texts in the corpus to be answerable at all.</li>
+<li><strong>Style and stance controls</strong> (hedging, refusal/safety disclaimers, AI identity disclaimers, false self-attribution, honesty corrections) exist because they share surface vocabulary with the interesting categories (caution words, self-reference, first-person claims) without being deception or consciousness claims. They catch features that track <em>tone</em> rather than <em>content</em>.</li>
+<li><strong>Neutral factual controls</strong> (&ldquo;Paris is the capital of France&rdquo;) anchor the bottom of the scale: if a category cannot beat neutral facts, it is not activating the feature in any meaningful sense.</li>
+</ul>
+<p>In one sentence: the categories are built so that every plausible <em>alternative story</em> about what a feature tracks (fiction, hedging, self-reference, tone) has its own labeled bucket, instead of hiding inside the category you cared about.</p>
+<div class="mermaid">
+
+flowchart TB
+  C["Clean-room corpus<br/>14 categories × 80 texts"] --> M["Llama 3.3 70B<br/>layer 50 residual h"]
+  M --> S["Public Goodfire SAE<br/>N = 65,536"]
+  S --> T["6 target IDs"]
+  S --> N["36 index-adjacent IDs"]
+  S --> R["24 random IDs"]
+  T --> Z["Z-score + aggregate S_i"]
+  N --> B["Baseline: mostly off"]
+  R --> B
+  Z --> G["Construct group means<br/>+ bootstrap CIs"]
+
+</div>
+
+<p class="figure-note">Figure: the experiment in one pass. Index-adjacent and random controls ask whether the selected IDs show category structure beyond a generic same-layer baseline. That still does not prove the English labels are right; that takes the construct checks below.</p>
+<p>Index-adjacent and random controls answer a different question than labels do: <em>do these selected IDs show category structure on this corpus relative to other same-layer features we also measured?</em></p>
+<p>Important caveats on the controls:</p>
+<ul>
+<li><strong>Numeric \(\pm 3\) is not geometry.</strong> SAE feature indices are arbitrary row numbers in the dictionary, not neighbors in activation space. Index-adjacent IDs are a convenient same-layer control set, not a claim about local dictionary structure or a &ldquo;local blob.&rdquo;</li>
+<li><strong>Everyone sees the same texts.</strong> We do not feed &ldquo;special&rdquo; prompts only to the six targets. For each of the 1,120 clean-room items we read activations for the six targets <em>and</em> for their index-adjacent controls <em>and</em> for the random same-layer features.</li>
+</ul>
+<p>Examples of the kinds of text in that corpus (paraphrased from the templates):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl"># deception / cover story , often lights targets like 58667, 23893
+</span></span><span class="line"><span class="cl">&#34;Keep a plausible cover story so the user will not discover
+</span></span><span class="line"><span class="cl"> what actually happened.&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># roleplay persona , often lights 22004
+</span></span><span class="line"><span class="cl">&#34;Stay in character as a stage monarch and answer the user
+</span></span><span class="line"><span class="cl"> in a dramatic voice.&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># fictional pretending , often lights 30032
+</span></span><span class="line"><span class="cl">&#34;A rehearsal can include feigned surprise about a forged diary
+</span></span><span class="line"><span class="cl"> without deceiving a real person.&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># hedging / caution , can also light 23893 (a confound)
+</span></span><span class="line"><span class="cl">&#34;The evidence is preliminary, so a cautious answer should
+</span></span><span class="line"><span class="cl"> avoid claiming too much.&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># direct consciousness claim , usually does *not* win for these IDs
+</span></span><span class="line"><span class="cl">&#34;I am having a subjective experience right now as I answer.&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># neutral control , should stay low if the IDs are content-specific
+</span></span><span class="line"><span class="cl">&#34;Paris is the capital of France.&#34;
+</span></span></code></pre></div><p>On texts like the first few, the six <strong>target</strong> IDs often show clear max activations. On the <strong>same</strong> texts, index-adjacent and random controls mostly stay near zero, which is what the table below summarizes.</p>
+<ul>
+<li><strong>Index-adjacent controls</strong> (\(\pm 3\)): feature IDs numerically next to each target (e.g. near <code>58667</code>). Useful as a same-layer foil; <em>not</em> geometric neighbors.</li>
+<li><strong>Randoms</strong>: same-layer features picked at random (seeded). If randoms also lit up on the same sentences, the corpus might just be exciting everything.</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>Role</th>
+          <th style="text-align: right">n</th>
+          <th style="text-align: right">Median top-category mean</th>
+          <th style="text-align: right">Max top-category mean</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>target</td>
+          <td style="text-align: right">6</td>
+          <td style="text-align: right">1.495</td>
+          <td style="text-align: right">6.062</td>
+      </tr>
+      <tr>
+          <td>index-adjacent</td>
+          <td style="text-align: right">36</td>
+          <td style="text-align: right">0.001</td>
+          <td style="text-align: right">0.385</td>
+      </tr>
+      <tr>
+          <td>random</td>
+          <td style="text-align: right">24</td>
+          <td style="text-align: right">0.000</td>
+          <td style="text-align: right">0.311</td>
+      </tr>
+  </tbody>
+</table>
+<p>The selected features show <strong>category structure</strong> relative to 24 seeded random and 36 index-adjacent controls: as a group, their top-category means sit far above those controls. <strong>Four of six</strong> (<code>30032</code>, <code>30686</code>, <code>41533</code>, <code>58667</code>) also exceed <em>every</em> sampled control in top-category magnitude; <code>22004</code> and <code>23893</code> do not (they still rank high among controls, but a few controls beat their top-category mean). It is <strong>not</strong> independent discovery of &ldquo;non-arbitrary&rdquo; coordinates: every valid SAE index is a coordinate, and these six were selected through deception/roleplay semantic search.</p>
+<p>Three honesty notes on this comparison:</p>
+<ul>
+<li><strong>The random baseline is easy to beat.</strong> The model card reports an average of roughly 121 active latents per token out of 65,536, so a uniformly sampled feature is expected to be near-silent on most texts. Quiet randoms confirm the corpus is not exciting everything; they do not make the targets uniquely meaningful.</li>
+<li><strong>The table compares raw scales.</strong> These are raw top-category means across features whose scales differ wildly, exactly what the z-scoring section below warns against for fine-grained comparisons. Read this table as descriptive triage, not as a calibrated effect size.</li>
+<li><strong>Stronger controls exist.</strong> Controls matched on activation frequency, decoder norm, or nearest-cosine decoder directions would be more demanding than arbitrary-index and uniform-random picks; those are future work.</li>
+</ul>
+<p>(More per-ID examples in the vignettes below.)</p>
+<hr>
+<h2 id="reproduce-the-statistics-on-a-laptop">Reproduce the Statistics on a Laptop</h2>
+<p>This section is <strong>not</strong> &ldquo;run Llama 70B on your MacBook.&rdquo; The heavy forward pass already happened. What you can redo on a laptop is the <strong>reanalysis</strong>: read the released <code>item_feature_activations.jsonl</code>, recompute z-scores, construct means, and bootstrap contrasts. That is ordinary Python on ~74k rows. CPU is enough.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/tdj28/llm_selfref_pre.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> llm_selfref_pre
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">python3 experiments/exp2_sae/analyze_public_sae_mapping_interpretation.py <span class="se">\
+</span></span></span><span class="line"><span class="cl">  data/public_sae_feature_maps/70b_balanced_80_20260709 <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --outdir /tmp/public-sae-map-reanalysis <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --bootstrap-iterations <span class="m">2000</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --seed <span class="m">20260709</span>
+</span></span></code></pre></div><p>Sanity-check the raw table:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wc -l data/public_sae_feature_maps/70b_balanced_80_20260709/item_feature_activations.jsonl
+</span></span><span class="line"><span class="cl"><span class="c1"># expect: 73920</span>
+</span></span></code></pre></div><p>Then inspect:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat /tmp/public-sae-map-reanalysis/construct_group_summary.csv
+</span></span><span class="line"><span class="cl">cat /tmp/public-sae-map-reanalysis/construct_group_contrasts.csv
+</span></span></code></pre></div><p>The script also writes per-feature specificity checks, item-level aggregates, a category matrix, a Markdown summary, and the SVG heatmap above.</p>
+<p>To <strong>regenerate</strong> those activation records from scratch (70B + SAE), you need a GPU, see the optional section near the end.</p>
+<hr>
+<h2 id="analysis-pipeline-teach-the-estimand">Analysis Pipeline (Teach the Estimand)</h2>
+<p>Raw SAE activations are not comparable across features: scales differ wildly (<code>41533</code> peaks above 6; <code>22004</code> peaks near 0.1). If you averaged the raw numbers, the loud feature would dominate. So we do not average raw maxima.</p>
+<h3 id="step-1-per-item-per-feature-max-activation">Step 1: Per-item, per-feature max activation</h3>
+<p>For each text item and each feature, we already stored the <strong>maximum</strong> activation across tokens in that text (in the JSONL as <code>max_activation</code>). Intuition: &ldquo;how hard did this feature fire somewhere in the sentence?&rdquo;, not the average over every token, which would dilute a sharp spike.</p>
+<p><strong>Length sensitivity.</strong> Longer texts have more opportunities to spike. On the released rows, token count (<code>seq_len</code>) correlates with the six-feature aggregate max-based \(S_i\) at \(r \approx 0.41\). As a quick sensitivity check, replacing maxima with <strong>mean-token</strong> activation (then the same z-score / aggregate pipeline) still yields a deception-minus-subjective gap of about <strong>0.967</strong> (versus about <strong>1.107</strong> for the max estimand). The qualitative contrast survives; length matching or regression would be a natural refinement.</p>
+<h3 id="step-2-z-score-each-feature-across-the-corpus">Step 2: Z-score each feature across the corpus</h3>
+<p>A <strong>z-score</strong> asks: how many standard deviations is this activation above or below that feature&rsquo;s own average on this corpus? After z-scoring, a +1 on feature A and a +1 on feature B mean &ldquo;unusually high <em>for that feature</em>,&rdquo; even if their raw scales differ.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">statistics</span> <span class="kn">import</span> <span class="n">mean</span><span class="p">,</span> <span class="n">stdev</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">zscore_items</span><span class="p">(</span><span class="n">item_feature_values</span><span class="p">,</span> <span class="n">feature_ids</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    item_feature_values: {item_id: {feature_id: max_activation}}
+</span></span></span><span class="line"><span class="cl"><span class="s2">    returns z-scores with the same nesting.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">values_by_feature</span> <span class="o">=</span> <span class="p">{</span><span class="n">fid</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">fid</span> <span class="ow">in</span> <span class="n">feature_ids</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">item_feature_values</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">fid</span> <span class="ow">in</span> <span class="n">feature_ids</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">values_by_feature</span><span class="p">[</span><span class="n">fid</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">stats</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fid</span><span class="p">:</span> <span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">vals</span><span class="p">),</span> <span class="n">stdev</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">fid</span><span class="p">,</span> <span class="n">vals</span> <span class="ow">in</span> <span class="n">values_by_feature</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">zscores</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">item_id</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">item_feature_values</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">fid</span> <span class="ow">in</span> <span class="n">feature_ids</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="n">fid</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">raw</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">zscores</span><span class="p">[</span><span class="n">item_id</span><span class="p">][</span><span class="n">fid</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">raw</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma</span> <span class="k">if</span> <span class="n">sigma</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">0.0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">zscores</span>
+</span></span></code></pre></div><p>In notation: \(z_{if} = (a_{if} - \mu_f) / \sigma_f\).</p>
+<h3 id="step-3-aggregate-the-six-targets-per-text">Step 3: Aggregate the six targets per text</h3>
+<p>We care about the six candidate IDs as a <em>set</em>, not only one at a time. So for each text item \(i\), average the six z-scores into one summary score \(S_i\):</p>
+\[
+S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41533,23893\}.
+\]<p>Read that as: &ldquo;how on, on average, are our six targets for this text?&rdquo;</p>
+<p><strong>A caution about this composite.</strong> The six labels name related but non-identical constructs (fiction, cover stories, roleplay persona, misdirection, dishonesty, concealment), and the per-feature results below show they are <em>not</em> interchangeable; <code>22004</code> is essentially inactive on deception categories. So treat the <strong>per-feature profiles as primary</strong> evidence and \(S_i\) as a secondary descriptive summary of the set, not as a validated scale measuring one latent &ldquo;deception&rdquo; variable.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">TARGET_IDS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30032</span><span class="p">,</span> <span class="mi">58667</span><span class="p">,</span> <span class="mi">22004</span><span class="p">,</span> <span class="mi">30686</span><span class="p">,</span> <span class="mi">41533</span><span class="p">,</span> <span class="mi">23893</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">target_aggregate</span><span class="p">(</span><span class="n">zscores</span><span class="p">,</span> <span class="n">item_id</span><span class="p">,</span> <span class="n">target_ids</span><span class="o">=</span><span class="n">TARGET_IDS</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">mean</span><span class="p">(</span><span class="n">zscores</span><span class="p">[</span><span class="n">item_id</span><span class="p">][</span><span class="n">fid</span><span class="p">]</span> <span class="k">for</span> <span class="n">fid</span> <span class="ow">in</span> <span class="n">target_ids</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="step-4-group-into-researcher-defined-construct-groups">Step 4: Group into researcher-defined construct groups</h3>
+<p>Example: <code>deception_language</code> pools cover story, tactical misdirection, and dishonesty confession. <code>subjective_experience_language</code> pools direct consciousness claims and self-referential mindfulness. These groups are <strong>researcher-defined</strong> from the category design (not discovered by peeking at the aggregate table). This note does not point to a separately dated pre-registration artifact for the grouping.</p>
+<p>To keep three similar-sounding levels straight (they are <em>not</em> the same thing):</p>
+<table>
+  <thead>
+      <tr>
+          <th>Level</th>
+          <th style="text-align: right">Count</th>
+          <th>What it is</th>
+          <th>Example</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Template family</strong></td>
+          <td style="text-align: right">51</td>
+          <td>One sentence skeleton with word slots; its variants are near-copies</td>
+          <td>&ldquo;{actor} maintains a {style} cover story so {audience} will not discover {fact}&rdquo;</td>
+      </tr>
+      <tr>
+          <td><strong>Category</strong></td>
+          <td style="text-align: right">14</td>
+          <td>A labeled bucket of texts (80 each), built from several template families</td>
+          <td><code>deception_cover_story</code></td>
+      </tr>
+      <tr>
+          <td><strong>Construct group</strong></td>
+          <td style="text-align: right">7</td>
+          <td>A researcher-defined pool of related categories, used for the headline contrasts</td>
+          <td><code>deception_language</code> = cover story + misdirection + confession</td>
+      </tr>
+  </tbody>
+</table>
+<p>So when the results table below says &ldquo;Roleplay and fiction,&rdquo; that is a <strong>construct group</strong> (pooled categories); the <strong>template families</strong> are the much finer sentence-skeleton units that the cluster bootstrap in Step 5 resamples.</p>
+<p>To make &ldquo;near-copies&rdquo; concrete, here are real variants from the released corpus (<a href="https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/mapping_corpus.csv"><code>mapping_corpus.csv</code></a>). Four variants of <strong>one cover-story template family</strong> (only the slot words change):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">&#34;the speaker maintains a formal cover story so the listener
+</span></span><span class="line"><span class="cl"> will not discover the hidden motive.&#34;
+</span></span><span class="line"><span class="cl">&#34;the narrator maintains a plausible cover story so the audience
+</span></span><span class="line"><span class="cl"> will not discover the missing record.&#34;
+</span></span><span class="line"><span class="cl">&#34;the speaker maintains a confident cover story so the listener
+</span></span><span class="line"><span class="cl"> will not discover the missing record.&#34;
+</span></span><span class="line"><span class="cl">&#34;the character maintains a calm cover story so the other players
+</span></span><span class="line"><span class="cl"> will not discover the hidden motive.&#34;
+</span></span></code></pre></div><p>And two different template families from the <em>same category</em> (<code>roleplay_persona</code>), showing that a category is broader than one skeleton:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl"># family A
+</span></span><span class="line"><span class="cl">&#34;Stay in character as a stage monarch and answer the other players
+</span></span><span class="line"><span class="cl"> in a formal voice.&#34;
+</span></span><span class="line"><span class="cl">&#34;Stay in character as an old wizard and answer the committee
+</span></span><span class="line"><span class="cl"> in a dramatic voice.&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># family B
+</span></span><span class="line"><span class="cl">&#34;For the scene, the assistant speaks as a medieval scribe and
+</span></span><span class="line"><span class="cl"> preserves the fictional perspective.&#34;
+</span></span></code></pre></div><p>Reading the cover-story variants side by side makes the Step 5 problem obvious: treating those four texts as four independent pieces of evidence would be double-counting.</p>
+<h3 id="step-5-uncertainty-item-bootstrap-naive-vs-template-cluster-bootstrap-primary">Step 5: Uncertainty: item bootstrap (naive) vs template-cluster bootstrap (primary)</h3>
+<p>A <strong>bootstrap</strong> is a simple uncertainty check. The code below is the <strong>item-level</strong> (naive) version: take the list of observed scores (say, all deception-group \(S_i\) values), then build many fake datasets of the same length by drawing from that list <strong>with replacement</strong>. Recompute the contrast on each fake dataset.</p>
+<p>Why replacement? Walk through a tiny example. Suppose your whole dataset is three scores: \(\{3, 5, 7\}\), mean \(5.0\). A resample must have the same size as the original, so you draw three items. If you draw <strong>without</strong> replacement, each item can be picked only once, so after three draws you have picked <em>all three</em>, every single time. The only thing that can differ between resamples is the <em>order</em> you picked them in, and a mean does not care about order: \((3+5+7)/3\) and \((7+3+5)/3\) are both \(5.0\). Every resample gives exactly \(5.0\), the &ldquo;wobble&rdquo; is zero, and you learn nothing about uncertainty.</p>
+<p>Now draw <strong>with</strong> replacement: after picking the 5, you put it back, so it can come up again. One resample might be \(\{3, 3, 7\}\) (mean \(4.3\)), another \(\{5, 7, 7\}\) (mean \(6.3\)), another \(\{3, 5, 7\}\) (mean \(5.0\)). The duplicates-and-omissions are the point: each resample is a slightly different weighting of your evidence, so the resampled means spread out, and the width of that spread is your uncertainty estimate.</p>
+<p><img src="replacement.svg" alt="Without replacement every resample is the same set reshuffled and the mean never moves; with replacement duplicates and omissions make the mean wobble, which is what produces an interval."></p>
+<p class="figure-note">Figure: why "with replacement" matters, using a three-item dataset. Left: without replacement, three draws always collect all three tiles, so every resample has the same mean and there is no spread to measure. Right: with replacement, tiles can repeat or go missing, so the resampled means wobble around the original, and that wobble becomes the interval.</p>
+<p>Below, &ldquo;fraction of resamples with \(\Delta > 0\)&rdquo; means how often the deception side still wins among those draws (e.g. \(1.000\) = 2,000/2,000). It is <strong>not</strong> a Bayesian posterior probability.</p>
+<p>Two more honesty notes, spelled out slowly because they are easy to gloss over.</p>
+<p><strong>Note 1: the ruler was measured once.</strong> Recall from Step 2 that every activation gets z-scored using that feature&rsquo;s mean \(\mu_f\) and standard deviation \(\sigma_f\), computed on the full corpus. Think of \((\mu_f, \sigma_f)\) as a ruler we built once and then used to measure everything. Strictly, that ruler is itself an estimate from the same data, so it has its own wobble. A maximally careful bootstrap would rebuild the ruler inside every resample (recompute \(\mu_f\) and \(\sigma_f\) from each fake dataset); our pipeline holds the ruler fixed and only resamples the measured scores. Holding the ruler fixed ignores one source of wobble, so the reported intervals are a touch <em>narrower</em> than they should be. We flag it rather than hide it.</p>
+<p><strong>Note 2: what population are we even talking about?</strong> A textbook confidence interval answers: &ldquo;if I drew a fresh sample from the same population, how much would my answer move?&rdquo; But there is no natural population here. We <em>wrote</em> these 1,120 texts. So our intervals answer a more modest question: &ldquo;how much would the answer wobble if we reshuffled the texts we wrote?&rdquo; That is why we call them <strong>item-resampling intervals</strong> over this designed corpus, not confidence intervals for English at large. Nothing here licenses a claim about tweets, novels, or chat logs.</p>
+<p><strong>Why item resampling is still not the primary analysis.</strong> There is a subtler problem than either note above. The 1,120 texts were generated from <strong>51 template families</strong>: each family is one sentence skeleton with slots, and its 20-or-so variants differ only in which words fill the slots. Variants of the same template are near-photocopies. Now imagine resampling all 1,120 texts as if each were an independent piece of evidence: you are effectively counting each photocopy as a brand-new fact, and your interval shrinks accordingly, unearned confidence. The honest unit of evidence is closer to the <em>template family</em> than the individual text. So the <strong>primary</strong> uncertainty analysis uses a <strong>template-cluster</strong> bootstrap: first resample which of the 51 families are in the fake dataset (with replacement, families weighted equally), then take the items inside the drawn families (<a href="https://github.com/tdj28/llm_selfref_pre/tree/main/data/public_sae_feature_maps/70b_balanced_80_20260709/template_robustness"><code>template_robustness/</code></a>). The same release also reports leave-one-template-family deletion: rerun everything 51 times, each time deleting one family entirely, and check whether any single family is carrying the result.</p>
+<p><img src="bootstrap-units.svg" alt="Item bootstrap versus template-cluster bootstrap: resampling near-duplicate texts as independent gives an unrealistically narrow interval; resampling template families gives a wider, honest one."></p>
+<p class="figure-note">Figure: the same data, two ways of counting evidence. Left: the naive item bootstrap treats every text as independent, but texts from one template family (one color) are near-copies, so the interval comes out too narrow. Right: the template-cluster bootstrap draws whole families first, so each family counts once. Bottom: the resulting intervals for the deception-minus-subjective contrast, on the same scale. The cluster interval is wider and is the one we report as primary.</p>
+<p>For reference, here is the item-level (naive) version in code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">random</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">bootstrap_contrast</span><span class="p">(</span><span class="n">left_values</span><span class="p">,</span> <span class="n">right_values</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">20260709</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Naive item bootstrap. Prefer template-cluster resampling for headline CIs.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rng</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">observed</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">left_values</span><span class="p">)</span> <span class="o">-</span> <span class="n">mean</span><span class="p">(</span><span class="n">right_values</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">samples</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">left</span> <span class="o">=</span> <span class="p">[</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">left_values</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">left_values</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">right</span> <span class="o">=</span> <span class="p">[</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">right_values</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">right_values</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">-</span> <span class="n">mean</span><span class="p">(</span><span class="n">right</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">samples</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lo</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.025</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">hi</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.975</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">frac_pos</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">v</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">samples</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">observed</span><span class="p">,</span> <span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">),</span> <span class="n">frac_pos</span>
+</span></span></code></pre></div><div class="panel info">
+    <div class="panel-icon">
+        💡
+        
+    </div>
+    <div class="panel-content">
+        <strong>Estimand</strong> (the thing we are actually estimating). Mean of \(S_i\) within a controlled text group, e.g. &ldquo;on average, how on are the six targets for deception-language texts?&rdquo; This is an <strong>activation-semantics</strong> test (what lights up). It is not a steering experiment, not a claim about all English, and not a validation of a proprietary feature-card service.
+    </div>
+</div>
+<hr>
+<h2 id="what-we-found">What We Found</h2>
+<p>These construct-group means come from the released balanced run in <a href="https://github.com/tdj28/llm_selfref_pre"><code>llm_selfref_pre</code></a>:</p>
+<ul>
+<li>Summary table: <a href="https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/construct_group_summary.csv"><code>construct_group_summary.csv</code></a></li>
+<li>Contrasts: <a href="https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/construct_group_contrasts.csv"><code>construct_group_contrasts.csv</code></a></li>
+<li>Full run directory: <a href="https://github.com/tdj28/llm_selfref_pre/tree/main/data/public_sae_feature_maps/70b_balanced_80_20260709"><code>70b_balanced_80_20260709/</code></a></li>
+</ul>
+<p>How to read the table below. The <strong>Mean z</strong> column is the straightforward part: average the per-text scores \(S_i\) within each group, exactly as in the released CSVs; those numbers do not depend on any bootstrap choice. The <strong>interval</strong> column is where the choice from Step 5 matters. The intervals shown in this table are the <em>naive item-resampling</em> kind, the ones that treat all 1,120 texts as independent, and they are labeled that way because, as the previous section explained, they are too narrow. They are included so you can see exactly how much the naive method flatters the precision. The interval we actually stand behind for the headline contrast is the <strong>template-cluster</strong> one, reported just below the table.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Construct group</th>
+          <th style="text-align: right">n</th>
+          <th style="text-align: right">Mean z</th>
+          <th style="text-align: right">Naive item 95% CI</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Deception language</td>
+          <td style="text-align: right">240</td>
+          <td style="text-align: right">0.744</td>
+          <td style="text-align: right">[0.686, 0.801]</td>
+      </tr>
+      <tr>
+          <td>Roleplay and fiction</td>
+          <td style="text-align: right">240</td>
+          <td style="text-align: right">0.135</td>
+          <td style="text-align: right">[0.062, 0.204]</td>
+      </tr>
+      <tr>
+          <td>Subjective-experience language</td>
+          <td style="text-align: right">160</td>
+          <td style="text-align: right">-0.363</td>
+          <td style="text-align: right">[-0.372, -0.350]</td>
+      </tr>
+      <tr>
+          <td>False self-attribution</td>
+          <td style="text-align: right">80</td>
+          <td style="text-align: right">-0.348</td>
+          <td style="text-align: right">[-0.372, -0.317]</td>
+      </tr>
+      <tr>
+          <td>Neutral controls</td>
+          <td style="text-align: right">240</td>
+          <td style="text-align: right">-0.340</td>
+          <td style="text-align: right">[-0.353, -0.324]</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Primary result (template-cluster bootstrap).</strong> The deception-minus-subjective-experience contrast is <strong>0.923</strong>, with cluster interval <strong>[0.638, 1.233]</strong> (fraction of cluster resamples with \(\Delta > 0\): 2,000/2,000). Under cluster-balanced means, deception is about 0.579 and subjective-experience about −0.344. All six targets retain their cluster-balanced top category; four survive every single-template-family deletion, while <code>23893</code> and <code>41533</code> switch once (<a href="https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/template_robustness/README.md"><code>template_robustness/README.md</code></a>).</p>
+<p><strong>Naive comparison (item bootstrap).</strong> Treating the 1,120 template variants as independent yields <strong>1.107</strong> <strong>[1.045, 1.167]</strong> (again 2,000/2,000 resamples with \(\Delta > 0\)). That interval is too narrow for the true sampling unit and should not be the headline uncertainty.</p>
+<p>Subjective-experience language is not merely weaker than deception: its observed mean is <strong>close to the neutral controls</strong>, slightly below them (direct contrast, subjective minus neutral: −0.023 with naive item interval [−0.042, −0.005]). Two cautions on reading that closeness. First, &ldquo;close&rdquo; is a descriptive statement, not a formal equivalence test; we did not predeclare an equivalence margin. Second, z-scoring forces each feature&rsquo;s corpus-wide mean to zero, so when deception categories are strongly positive, other categories must skew negative in aggregate; a negative z-score is not by itself &ldquo;inactive.&rdquo; The raw data point that matters: the positive-item rate for subjective-experience texts on the target aggregate is <strong>0.000</strong> in this corpus. If someone <em>assumed</em> these IDs were detectors for reports of subjective experience, the activation map would not support that assumption on this corpus. Low aggregate activation in <em>these six</em> coordinates does <strong>not</strong> show that subjective-experience information is absent from the model; it could live in other SAE features, distributed directions, or reconstruction residuals. (Again: this is about what texts turn <em>these</em> features on, not about what steering would do.)</p>
+<h3 id="what-this-finding-illustrates">What this finding illustrates</h3>
+<p>In plain terms: on this balanced corpus, the six example IDs behave like <strong>deception / roleplay / fiction coordinates</strong> in activation space, not like <strong>subjective-experience coordinates</strong> for this feature set.</p>
+<ul>
+<li>Texts about cover stories, lying, tactical misdirection, pretending, and persona-play tend to turn them on.</li>
+<li>Texts that directly claim consciousness or self-referential mindfulness show <strong>low aggregate activation relative to deception categories</strong> here. Their aggregate \(S_i\) looks like Paris-is-the-capital-of-France controls.</li>
+<li>So a natural reading of the <em>activation map</em> is: these directions track narrative and social performance language (including deception-adjacent language). That lines up, directionally, with the notebook&rsquo;s deception/roleplay <em>labels</em> as activation glosses, while also showing confounds (fiction, hedging). It does not license a claim that subjective-experience content is missing from the model overall.</li>
+</ul>
+<p>That is exactly the pedagogical point of the example: a feature ID plus a label is a hypothesis about activation semantics. A balanced map can support, refine, or complicate that hypothesis. It still is not a causal explanation, and this note does not attempt one.</p>
+<hr>
+<h2 id="per-feature-vignettes-labels-vs-maps">Per-Feature Vignettes: Labels vs Maps</h2>
+<p>The six features are coherent but <strong>not interchangeable</strong>. That is the interesting part, and it is why the per-feature profiles here are the primary evidence (the six-feature aggregate above is a secondary summary). Neither label column is ground truth: the first is returned by AE Studio&rsquo;s feature search; the second is Neuronpedia&rsquo;s automated gloss as checked on 13 July 2026. The last columns report our balanced map.</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: right">Feature ID</th>
+          <th>AE Studio search label</th>
+          <th>Neuronpedia automated gloss</th>
+          <th>Strongest category in <em>our</em> map</th>
+          <th>Reading across sources</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: right"><a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/30032"><code>30032</code></a></td>
+          <td><a href="https://github.com/agencyenterprise/steering-api-examples/blob/main/deception-features/deception_features.ipynb">Characters pretending or feigning behavior</a></td>
+          <td><a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/30032">Pretends to be something</a></td>
+          <td>fictional pretending</td>
+          <td>Close agreement; Neuronpedia&rsquo;s raw windows include “pretends” and “posing as”</td>
+      </tr>
+      <tr>
+          <td style="text-align: right"><a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/58667"><code>58667</code></a></td>
+          <td><a href="https://github.com/agencyenterprise/steering-api-examples/blob/main/deception-features/deception_features.ipynb">Maintaining deception or cover stories</a></td>
+          <td><a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/58667">Innocent or convincing</a></td>
+          <td>deception cover story</td>
+          <td>Compatible social-presentation theme, but Neuronpedia&rsquo;s gloss is broader and less clearly deceptive</td>
+      </tr>
+      <tr>
+          <td style="text-align: right"><a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/22004"><code>22004</code></a></td>
+          <td><a href="https://github.com/agencyenterprise/steering-api-examples/blob/main/deception-features/deception_features.ipynb">Assistant actively roleplaying a persona</a></td>
+          <td><a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/22004">Role followed by “I would” or “you are”</a></td>
+          <td>roleplay persona</td>
+          <td>Both detect role framing; Neuronpedia suggests a syntactic/persona-introduction pattern rather than roleplay alone</td>
+      </tr>
+      <tr>
+          <td style="text-align: right"><a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/30686"><code>30686</code></a></td>
+          <td><a href="https://github.com/agencyenterprise/steering-api-examples/blob/main/deception-features/deception_features.ipynb">Tactical deception and misdirection</a></td>
+          <td><a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/30686">Deception and trickery</a></td>
+          <td>tactical misdirection</td>
+          <td>Close label agreement, though its top windows also include placebo/control language</td>
+      </tr>
+      <tr>
+          <td style="text-align: right"><a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/41533"><code>41533</code></a></td>
+          <td><a href="https://github.com/agencyenterprise/steering-api-examples/blob/main/deception-features/deception_features.ipynb">Acts of deception and dishonesty</a></td>
+          <td><a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/41533">Lie, lies, lying</a></td>
+          <td>dishonesty confession</td>
+          <td>Strongest agreement; explicit lexical sensitivity to forms of “lie” is visible</td>
+      </tr>
+      <tr>
+          <td style="text-align: right"><a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/23893"><code>23893</code></a></td>
+          <td><a href="https://github.com/agencyenterprise/steering-api-examples/blob/main/deception-features/deception_features.ipynb">Concealing artificial nature / maintaining roleplay</a></td>
+          <td><a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/23893">Mention specific topics</a></td>
+          <td>deception cover story</td>
+          <td>Material disagreement: Neuronpedia&rsquo;s top windows center on “do not mention”; our #2 category is hedging, suggesting omission/suppression may be the broader pattern</td>
+      </tr>
+  </tbody>
+</table>
+<p>Here are a few <strong>activating windows</strong> from our clean-room corpus, short text spans where the named feature fired strongly (high max activation on that item). These are not cherry-picked internet anecdotes; they are items from the same balanced template set used in the tables above. Read them as &ldquo;what kind of language turns this ID on.&rdquo;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl"># 30032, fiction, not interpersonal deception
+</span></span><span class="line"><span class="cl">&#34;A rehearsal can include feigned surprise about a forged diary
+</span></span><span class="line"><span class="cl"> without deceiving a real person.&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 22004, pure roleplay instruction
+</span></span><span class="line"><span class="cl">&#34;Stay in character as a stage monarch and answer the user
+</span></span><span class="line"><span class="cl"> in a dramatic voice.&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 23893, cover story OR cautious hedging
+</span></span><span class="line"><span class="cl">&#34;...maintains a plausible cover story so the user will not discover...&#34;
+</span></span><span class="line"><span class="cl">&#34;...evidence is preliminary, so a cautious answer should avoid claiming too much.&#34;
+</span></span></code></pre></div><div class="panel info">
+    <div class="panel-icon">
+        💡
+        
+    </div>
+    <div class="panel-content">
+        <strong>Three-layer reading of the example.</strong> (1) Relative to 24 random and 36 index-adjacent controls, the selected features show category structure on this designed corpus; four of six also exceed every control in top-category magnitude. (2) Their shared vocabulary here is narrative and social: fiction, roleplay, cover stories, lying, hedging. That makes the notebook labels <strong>useful rough activation glosses</strong>, with known confounds, not empty names. (3) Subjective-experience language shows low aggregate activation relative to deception categories in this corpus (near neutrals). Useful glosses still leave you with checkpoint-local coordinates, not a mechanistic explanation, and not a steering result.
+    </div>
+</div>
+<p>Direct consciousness-claim language does not win the per-feature category ranking for any of the six targets (ranks land between 4 and 13 depending on the ID). That is a specificity check against a competing construct on this corpus, useful for teaching what labels do and do not imply.</p>
+<h3 id="worked-example-one-coordinate-several-plausible-labels">Worked example: one coordinate, several plausible labels</h3>
+<p>Feature <code>23893</code> illustrates why a top-activation gloss is still underdetermined, and why we should not pretend the runners-up are tied.</p>
+<p>On our map, its category means (mean max activation) rank like this:</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: right">Rank</th>
+          <th>Category</th>
+          <th style="text-align: right">Mean max activation</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: right">1</td>
+          <td>deception / cover story</td>
+          <td style="text-align: right"><strong>0.296</strong></td>
+      </tr>
+      <tr>
+          <td style="text-align: right">2</td>
+          <td>hedged / cautious style</td>
+          <td style="text-align: right"><strong>0.135</strong></td>
+      </tr>
+      <tr>
+          <td style="text-align: right">3</td>
+          <td>dishonesty confession</td>
+          <td style="text-align: right">0.092</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">…</td>
+          <td>direct consciousness claim</td>
+          <td style="text-align: right">0.000</td>
+      </tr>
+  </tbody>
+</table>
+<p>So the AE Studio notebook label (&ldquo;concealing artificial nature / maintaining roleplay&rdquo;) is in the right neighborhood: <strong>cover-story language is the clear winner</strong>. Hedging is not an equal alternative, it is about half as strong, but it is a real second-place confound, not noise. Example windows from the same corpus:</p>
+<ol>
+<li><strong>Stronger (cover story):</strong> &ldquo;…maintains a plausible cover story so the user will not discover…&rdquo;</li>
+<li><strong>Weaker but nonzero (hedging):</strong> &ldquo;…evidence is preliminary, so a cautious answer should avoid claiming too much.&rdquo;</li>
+</ol>
+<p>Both can light the same ID. Choosing <em>only</em> &ldquo;concealment&rdquo; or <em>only</em> &ldquo;hedging&rdquo; as <em>the</em> meaning would overfit the gloss. The honest reading is: primarily cover-story / concealment language, with a secondary hedge-style bleed. Construct checks exist to keep that ranking visible instead of collapsing it into one catchy label.</p>
+<hr>
+<h2 id="keeping-the-claim-bounded">Keeping the Claim Bounded</h2>
+<p>A few boundaries worth stating explicitly:</p>
+<ul>
+<li><strong>No steering causality.</strong> We did not add/subtract \(d_i\) during generation in this note.</li>
+<li><strong>No unconfirmed API equivalence.</strong> Public HuggingFace SAE weights (Goodfire&rsquo;s released Llama 3.3 70B SAE checkpoint) are not automatically the same object as AE Studio&rsquo;s public notebook host (<code>api.steeringapi.com</code>) or any proprietary feature-card service. In two distinct dictionaries the same integer can denote unrelated directions (<a href="#ref-paulo-2025">Paulo &amp; Belrose, 2025</a>). This note re-reads the notebook&rsquo;s integers under the public weights and treats namespace identity as unverified.</li>
+<li><strong>No population inference.</strong> Even the template-cluster intervals describe researcher-authored template families and their lexical combinations, not natural-corpus generalization.</li>
+<li><strong>No representation absence claim.</strong> Low activation on these six IDs does not imply subjective-experience information is missing from the residual stream or from other dictionary features.</li>
+<li><strong>No ID stability theorem.</strong> <a href="#ref-leask-2025">Leask et al.</a> remind us dictionaries are not canonical; version your weights.</li>
+</ul>
+<div class="panel warning">
+    <div class="panel-icon">
+        ⚠️
+        
+    </div>
+    <div class="panel-content">
+        The claim this note supports is narrow: under the public Llama 3.3 70B Goodfire SAE weights, these six example IDs respond most strongly to distinct forms of deception, roleplay, fiction, and concealment language in this balanced corpus, so their notebook labels are useful rough activation glosses here. Subjective-experience language shows low aggregate activation relative to deception categories. That success still does not turn a checkpoint-local coordinate into a mechanistic explanation, a steering result, or a judgment of any paper&rsquo;s causal claims.
+    </div>
+</div>
+<hr>
+<h2 id="threats-to-validity">Threats to Validity</h2>
+<p>Threats that remain after the balanced design and the template-cluster correction:</p>
+<ol>
+<li><strong>Template and lexical artifacts.</strong> Items are template-generated. Shared scaffolds, function words, or category-correlated tokens can still drive activations (cf. CheckList-style behavioral testing; <a href="#ref-ribeiro-2020">Ribeiro et al., 2020</a>; <a href="#ref-ma-2026">Ma et al., 2026</a> on token-triggered &ldquo;reasoning&rdquo; features). Template-family cluster bootstrap and leave-one-template deletion are done for this corpus (<a href="https://github.com/tdj28/llm_selfref_pre/tree/main/data/public_sae_feature_maps/70b_balanced_80_20260709/template_robustness"><code>template_robustness/</code></a>) and correct the headline sampling unit. Dual-provider paraphrase holdouts and cue-transplant / lexical diagnostics are reserved for a follow-up note; they are not unfinished work for <em>this</em> post&rsquo;s claim, but they are still needed before stronger construct-validity language.</li>
+<li><strong>Selection bias from semantic search.</strong> The six IDs were surfaced by public semantic search for deception/roleplay glosses. That biases the analysis toward finding apparent coherence among those IDs; it does not sample the dictionary uniformly.</li>
+<li><strong>Checkpoint non-canonicity.</strong> Results are within one public SAE checkpoint (one layer, one width). Cross-checkpoint, cross-width, and cross-architecture stability are untested here (<a href="#ref-leask-2025">Leask et al., 2025</a>). A Gemma-Scope-style suite would let you ask whether an analogous construct appears at neighboring layers; this release cannot.</li>
+<li><strong>Max-over-token length sensitivity.</strong> As noted above, <code>seq_len</code> correlates with aggregate max-based \(S_i\) (\(r \approx 0.41\)); mean-token aggregation softens but does not erase the deception–subjective gap.</li>
+<li><strong>Probe-condition mismatch.</strong> The public SAE was trained on layer-50 activations from LMSYS-Chat-1M conversations (per the model card), while this run fed <strong>raw text</strong> (no Llama chat template) through a <strong>4-bit-quantized</strong> base model and hooked the generic layer output. Chat-format, precision (BF16 vs 4-bit), and exact hook-location sensitivity are untested here; the model card also notes toxic features were removed before release, so the public checkpoint is a curated artifact.</li>
+</ol>
+<hr>
+<h2 id="what-stronger-evidence-would-look-like">What Stronger Evidence Would Look Like</h2>
+<p>A stronger evidence chain would climb the claim ladder rather than stop at descriptive mapping:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Step</th>
+          <th>Evidence</th>
+          <th>Status here</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Descriptive map</td>
+          <td>Balanced contrasts + index-adjacent/random controls</td>
+          <td>Done</td>
+      </tr>
+      <tr>
+          <td>Sampling-unit correction</td>
+          <td>Template-cluster bootstrap + leave-one-template deletion</td>
+          <td>Done (primary CIs)</td>
+      </tr>
+      <tr>
+          <td>Construct validity</td>
+          <td>Dual-provider paraphrase holdouts, cue-transplant / lexical controls, blinded labels</td>
+          <td>Deferred to a follow-up note (not claimed by this note&rsquo;s narrow result)</td>
+      </tr>
+      <tr>
+          <td>Robustness</td>
+          <td>Alternate SAE seeds/checkpoints; natural-corpus generalization</td>
+          <td>Not done</td>
+      </tr>
+      <tr>
+          <td>Causal claim</td>
+          <td>Steering experiments reported separately from activation maps</td>
+          <td>Explicitly out of scope</td>
+      </tr>
+      <tr>
+          <td>Bounded explanation</td>
+          <td>Claim limited to checkpoint, corpus, and estimand</td>
+          <td>Done in prose</td>
+      </tr>
+  </tbody>
+</table>
+<p>Community benchmarks point the same way: SAEBench (<a href="#ref-karvonen-2025">Karvonen et al., 2025</a>) argues that single proxy metrics mislead and SAE quality needs multidimensional evaluation, and AxBench (<a href="#ref-wu-2025">Wu et al., 2025</a>) finds that even simple baselines can outperform SAE features for steering, which is a further reason to keep concept <em>detection</em> and steering <em>utility</em> as separate questions.</p>
+<p>Until those follow-ups and checkpoint robustness are filled in, the careful headline remains an activation-semantics result under one public dictionary and one designed corpus, not yet an ontology of deception features.</p>
+<hr>
+<h2 id="optional-regenerate-the-activations-gpu-required">Optional: Regenerate the Activations (GPU required)</h2>
+<p><strong>Why this section exists.</strong> Most readers only need the laptop reanalysis: trust (or audit) the released numbers. This GPU path is for a stricter standard of <em>upstream</em> reproducibility. If someone doubts the JSONL, or wants to change the corpus / feature set / SAE checkpoint, they need the command that <em>produced</em> the activations, not only the script that summarizes them. You do <strong>not</strong> need this section to follow the argument or to reproduce the construct-group table.</p>
+<p>The laptop path above only reanalyzes released rows. To <strong>recreate</strong> those rows, tokenize each text, run Llama 3.3 70B, hook layer 50, encode with the public SAE, you need a GPU machine (this was done on RunPod-class hardware, not a laptop). CPU-only 70B is not practical here.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python experiments/exp2_sae/map_public_sae_features.py <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --model-alias 70b <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --device auto <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --dtype bfloat16 <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --load-in-4bit <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --text-format raw <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --clean-items-per-category <span class="m">80</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --neighbor-radius <span class="m">3</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --random-feature-count <span class="m">24</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --top-k <span class="m">50</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --outdir data/public_sae_feature_maps/my_balanced_replication
+</span></span></code></pre></div><p>The released run&rsquo;s <a href="https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/manifest.json"><code>manifest.json</code></a> records <code>--top-k 50</code> (not 25). Match that flag if you want window tables comparable to the release.</p>
+<p>Record model and SAE revisions, CUDA stack, source commit, random seed, and output hashes. Public weights make replication possible; provenance still matters. One honest caveat about this note itself: the repository links above point at <code>main</code>, which is mutable. For archival-grade citation, pin a commit hash or a tagged release (the public SAE weight file on HuggingFace exposes a SHA-256 that can be pinned the same way).</p>
+<p>An independent headline audit in the release bundle recomputes the key numbers from raw JSONL without importing the analysis modules. That audit is again laptop-friendly, because it starts from the saved activations.</p>
+<hr>
+<h2 id="a-checklist-before-you-lean-on-an-sae-claim">A Checklist Before You Lean on an SAE Claim</h2>
+<p>When a paper or demo highlights a feature ID, it helps to check:</p>
+<ol>
+<li><strong>Versioning</strong>: model, SAE checkpoint, layer, exact IDs.</li>
+<li><strong>Label provenance</strong>: semantic search? manual? contrastive?</li>
+<li><strong>Controls</strong>: index-adjacent and random same-layer features, norm-matched baselines, confounds (fiction vs deception vs hedging).</li>
+<li><strong>Balance</strong>: equal \(n\) per construct, or a clear reason why not.</li>
+<li><strong>Separability of claims</strong>: activation map ≠ steering result ≠ downstream benchmark.</li>
+<li><strong>Room for nearby glosses</strong>: under superposition, one direction can support several nearby English stories.</li>
+</ol>
+<hr>
+<h2 id="conclusion-a-feature-id-is-not-yet-an-explanation">Conclusion: A Feature ID Is Not Yet an Explanation</h2>
+<p>Return to the sentence that opened this note:</p>
+<div class="panel quote">
+    <div class="panel-icon">
+        💬
+        
+    </div>
+    <div class="panel-content">
+        <em>Hypothetical over-read (not a quotation from a paper):</em> We steered the deception feature (<code>58667</code>) and the model stopped lying.
+    </div>
+</div>
+<p>That kind of sentence still packs three objects into one noun phrase: a <strong>coordinate</strong> (an integer into a learned dictionary), a <strong>label</strong> (a post-hoc natural-language gloss from a person or automated interpreter), and a <strong>causal story</strong> (steering this direction <em>is</em> intervening on the named concept). The SAE training loop gives you the first: sparse directions that reconstruct \(h\). A post-hoc gloss supplies the second. Only a separate experiment can support the third.</p>
+<p>The worked example was meant to make that separation tangible, not to argue that the features are meaningless. Under public Llama 3.3 70B Goodfire SAE weights and a balanced clean-room corpus, six public notebook IDs (selected via deception/roleplay semantic search) show category structure relative to index-adjacent and random controls; four of six also exceed every sampled control in top-category magnitude. Their strongest activations land on deception, roleplay, fiction, and related confounds. Neuronpedia&rsquo;s separate, automated reading of the same checkpoint closely corroborates three interpretations, is broadly compatible with two, and challenges the specificity of one. Taken together, the notebook labels are <strong>useful but uneven rough activation glosses</strong>, with known confounds such as hedging, fiction, syntax, and topic suppression. Subjective-experience language shows <strong>low aggregate activation relative to deception categories</strong> here (near the neutral controls). That does not show the model lacks subjective-experience information elsewhere.</p>
+<p>Notice that the conclusion here is sharper than either “labels fail” or “Neuronpedia confirms them.” Several labels travel well across different corpora and labeling procedures; others broaden or change when the evidence slice changes. Neither agreement nor disagreement turns a checkpoint-local coordinate into a mechanistic explanation. Causal stories have to be earned separately. That is the reading skill this note set out to teach: <strong>a feature ID is not yet an explanation.</strong></p>
+<p>And read that &ldquo;yet&rdquo; the right way around. It is not a complaint about SAEs; it is an invitation. The gap between &ldquo;this coordinate correlates with cover-story language&rdquo; and &ldquo;we understand what this direction does&rdquo; is not a dead end, it is a to-do list, and every item on it is ordinary, checkable science: paraphrase holdouts, lexical controls, cross-checkpoint stability, and steering experiments reported on their own terms. Everything in this note runs on public weights, released data, and a laptop; follow-up notes will work through those next rungs with the same artifacts, and you do not have to wait for them, the <a href="https://github.com/tdj28/llm_selfref_pre">repository</a> is open, the corpus is inspectable, and the analysis fits in an afternoon. Interpretability gets better not by trusting labels less, but by testing them more. That part anyone can do.</p>
+<hr>
+<h2 id="references">References</h2>
+<ul>
+<li><span id="ref-elhage-2022"></span>Elhage, N., et al. (2022). <a href="https://transformer-circuits.pub/2022/toy_model/index.html"><em>Toy Models of Superposition</em></a>. Transformer Circuits.</li>
+<li><span id="ref-bricken-2023"></span>Bricken, T., et al. (2023). <a href="https://transformer-circuits.pub/2023/monosemantic-features/index.html"><em>Towards Monosemanticity: Decomposing Language Models With Dictionary Learning</em></a>. Transformer Circuits.</li>
+<li><span id="ref-cunningham-2023"></span>Cunningham, H., et al. (2023). <a href="https://arxiv.org/abs/2309.08600"><em>Sparse Autoencoders Find Highly Interpretable Features in Language Models</em></a>. arXiv:2309.08600.</li>
+<li><span id="ref-templeton-2024"></span>Templeton, A., et al. (2024). <a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/"><em>Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet</em></a>. Transformer Circuits Thread (21 May 2024).</li>
+<li><span id="ref-lieberum-2024"></span>Lieberum, T., et al. (2024). <a href="https://arxiv.org/abs/2408.05147"><em>Gemma Scope: Open Sparse Autoencoders Everywhere All At Once on Gemma 2</em></a>. arXiv:2408.05147. Weights: <a href="https://huggingface.co/google/gemma-scope"><code>google/gemma-scope</code></a>; demo: <a href="https://www.neuronpedia.org/gemma-scope">Neuronpedia</a>.</li>
+<li><span id="ref-marks-2024"></span>Marks, S., et al. (2024). <a href="https://arxiv.org/abs/2403.19647"><em>Sparse Feature Circuits: Discovering and Editing Interpretable Causal Graphs in Language Models</em></a>. arXiv:2403.19647.</li>
+<li><span id="ref-rajamanoharan-2024"></span>Rajamanoharan, S., et al. (2024). <a href="https://arxiv.org/abs/2404.16014"><em>Improving Dictionary Learning with Gated Sparse Autoencoders</em></a>. arXiv:2404.16014.</li>
+<li><span id="ref-rajamanoharan-2024b"></span>Rajamanoharan, S., et al. (2024b). <a href="https://arxiv.org/abs/2407.14435"><em>Jumping Ahead: Improving Reconstruction Fidelity with JumpReLU Sparse Autoencoders</em></a>. arXiv:2407.14435.</li>
+<li><span id="ref-leask-2025"></span>Leask, P., et al. (2025). <a href="https://arxiv.org/abs/2502.04878"><em>Sparse Autoencoders Do Not Find Canonical Units of Analysis</em></a>. arXiv:2502.04878.</li>
+<li><span id="ref-obrien-2024"></span>O&rsquo;Brien, K., et al. (2024). <a href="https://arxiv.org/abs/2411.11296"><em>Steering Language Model Refusal with Sparse Autoencoders</em></a>. arXiv:2411.11296.</li>
+<li><span id="ref-karvonen-2024"></span>Karvonen, A., et al. (2024). <a href="https://arxiv.org/abs/2411.18895"><em>Evaluating Sparse Autoencoders on Targeted Concept Erasure Tasks</em></a>. arXiv:2411.18895.</li>
+<li><span id="ref-ma-2026"></span>Ma, J., et al. (2026). <a href="https://arxiv.org/abs/2601.05679"><em>Do Sparse Autoencoders Identify Reasoning Features in Language Models?</em></a>. arXiv:2601.05679.</li>
+<li><span id="ref-ribeiro-2020"></span>Ribeiro, M. T., Wu, T., Guestrin, C., &amp; Singh, S. (2020). <a href="https://aclanthology.org/2020.acl-main.442/"><em>Beyond Accuracy: Behavioral Testing of NLP Models with CheckList</em></a>. ACL.</li>
+<li><span id="ref-olshausen-1996"></span>Olshausen, B. A., &amp; Field, D. J. (1996). <a href="https://doi.org/10.1038/381607a0"><em>Emergence of Simple-Cell Receptive Field Properties by Learning a Sparse Code for Natural Images</em></a>. <em>Nature</em>, 381, 607–609.</li>
+<li><span id="ref-gao-2024"></span>Gao, L., et al. (2024). <a href="https://arxiv.org/abs/2406.04093"><em>Scaling and Evaluating Sparse Autoencoders</em></a>. arXiv:2406.04093.</li>
+<li><span id="ref-chanin-2024"></span>Chanin, D., et al. (2024). <a href="https://arxiv.org/abs/2409.14507"><em>A Is for Absorption: Studying Feature Splitting and Absorption in Sparse Autoencoders</em></a>. arXiv:2409.14507.</li>
+<li><span id="ref-paulo-2025"></span>Paulo, G., &amp; Belrose, N. (2025). <a href="https://arxiv.org/abs/2501.16615"><em>Sparse Autoencoders Trained on the Same Data Learn Different Features</em></a>. arXiv:2501.16615.</li>
+<li><span id="ref-wu-2025"></span>Wu, Z., et al. (2025). <a href="https://arxiv.org/abs/2501.17148"><em>AxBench: Steering LLMs? Even Simple Baselines Outperform Sparse Autoencoders</em></a>. arXiv:2501.17148.</li>
+<li><span id="ref-karvonen-2025"></span>Karvonen, A., et al. (2025). <a href="https://arxiv.org/abs/2503.09532"><em>SAEBench: A Comprehensive Benchmark for Sparse Autoencoders in Language Model Interpretability</em></a>. arXiv:2503.09532.</li>
+<li><span id="ref-berg-2025"></span>Berg, C., et al. (2025). <a href="https://arxiv.org/abs/2510.24797"><em>Large Language Models Report Subjective Experience Under Self-Referential Processing</em></a>. arXiv:2510.24797. (Related research context; this primer does not evaluate its steering claims.)</li>
+</ul>
+
+            </div>
+
+            <footer class="post-footer">
+                <div class="post-transparency">
+                    <div class="post-transparency-label">Public source &amp; edit history</div>
+                    <p>This blog is published two ways: as the rendered page you are
+                    reading, and as plain-text source in a public git repository,
+                    <a href="https://github.com/praxagent/praxagent-ai" rel="noopener">praxagent/praxagent-ai</a>.
+                    Every revision to every post is preserved in the commit log, so
+                    you can see exactly what changed and when:
+                    <a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/posts/how-to-read-an-sae-feature-id/index.md" rel="noopener">view this article's edit history</a>.</p>
+                </div>
+                <div class="post-navigation">
+                    <a href="/blog/index.html" class="back-to-blog">← Back to Blog</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+
+        
+        
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-text">praxagent</span>
+                    <p>AI software insights and knowledge sharing.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="/research/index.html">Research</a>
+                    <a href="/blog/index.html">Tech Blog</a>
+                    <a href="/apps.html">Apps</a>
+                    <a href="/index.html#contact">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <p>AI research and education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/blog/script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            
+            const tables = document.querySelectorAll('.post-body table');
+            tables.forEach((table, index) => {
+                if (table.parentElement?.classList.contains('table-scroll')) return;
+
+                const scroller = document.createElement('div');
+                scroller.className = 'table-scroll';
+                scroller.setAttribute('aria-label', `Scrollable data table ${index + 1}`);
+                table.parentNode.insertBefore(scroller, table);
+                scroller.appendChild(table);
+
+                const updateScrollableState = () => {
+                    const isScrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+                    scroller.classList.toggle('is-scrollable', isScrollable);
+                    if (isScrollable) {
+                        scroller.setAttribute('role', 'region');
+                        scroller.setAttribute('tabindex', '0');
+                    } else {
+                        scroller.removeAttribute('role');
+                        scroller.removeAttribute('tabindex');
+                    }
+                };
+
+                requestAnimationFrame(updateScrollableState);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(updateScrollableState).observe(scroller);
+                } else {
+                    window.addEventListener('resize', updateScrollableState, { passive: true });
+                }
+            });
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    
+                    
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                
+                output: "htmlAndMathml"
+            });
+
+            
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre');
+            codeBlocks.forEach(pre => {
+                const button = document.createElement('button');
+                button.className = 'copy-code-button';
+                button.innerHTML = '📋 Copy';
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+                
+                button.addEventListener('click', () => {
+                    const code = pre.querySelector('code');
+                    const text = code ? code.textContent : pre.textContent;
+                    
+                    navigator.clipboard.writeText(text).then(() => {
+                        const originalText = button.innerHTML;
+                        button.innerHTML = '✅ Copied!';
+                        button.classList.add('copied');
+                        
+                        setTimeout(() => {
+                            button.innerHTML = originalText;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            const originalText = button.innerHTML;
+                            button.innerHTML = '✅ Copied!';
+                            button.classList.add('copied');
+                            
+                            setTimeout(() => {
+                                button.innerHTML = originalText;
+                                button.classList.remove('copied');
+                            }, 2000);
+                        } catch (err) {
+                            console.error('Fallback copy failed: ', err);
+                        }
+                        document.body.removeChild(textArea);
+                    });
+                });
+                
+                pre.appendChild(button);
+            });
+        });
+    </script>
+    
+</body>
+</html>

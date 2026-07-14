@@ -14,7 +14,7 @@
     {{ else if and (eq .Type "posts") .File }}
       {{ $slug := path.Base (strings.TrimSuffix "/" .File.Dir) }}
       {{ if and (ne $slug ".") (ne $slug "") (ne $slug "posts") }}
-        {{ $canonical = printf "https://praxagent.ai/blog/posts/%s/index.html" $slug }}
+        {{ $canonical = printf "https://praxagent.ai/blog/posts/%s/%s/%s/" (.Date.Format "2006") (.Date.Format "01") $slug }}
       {{ end }}
     {{ end }}
     <meta name="description" content="{{ $desc }}">
@@ -56,7 +56,7 @@
     {{ end }}
 </head>
 <body>
-    <nav class="navbar">
+    <nav class="navbar navbar-scrolls">
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
@@ -134,6 +134,38 @@
     {{ if .IsPage }}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            // Keep wide tables readable: preserve useful column widths and let
+            // the table itself scroll without widening the whole page.
+            const tables = document.querySelectorAll('.post-body table');
+            tables.forEach((table, index) => {
+                if (table.parentElement?.classList.contains('table-scroll')) return;
+
+                const scroller = document.createElement('div');
+                scroller.className = 'table-scroll';
+                scroller.setAttribute('aria-label', `Scrollable data table ${index + 1}`);
+                table.parentNode.insertBefore(scroller, table);
+                scroller.appendChild(table);
+
+                const updateScrollableState = () => {
+                    const isScrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+                    scroller.classList.toggle('is-scrollable', isScrollable);
+                    if (isScrollable) {
+                        scroller.setAttribute('role', 'region');
+                        scroller.setAttribute('tabindex', '0');
+                    } else {
+                        scroller.removeAttribute('role');
+                        scroller.removeAttribute('tabindex');
+                    }
+                };
+
+                requestAnimationFrame(updateScrollableState);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(updateScrollableState).observe(scroller);
+                } else {
+                    window.addEventListener('resize', updateScrollableState, { passive: true });
+                }
+            });
+
             renderMathInElement(document.body, {
                 delimiters: [
                     // No bare "$…$" — it eats currency ($14, $143) and breaks prose.

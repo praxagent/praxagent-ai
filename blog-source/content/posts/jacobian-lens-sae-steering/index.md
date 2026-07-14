@@ -1,6 +1,8 @@
 ---
 title: "Can a Jacobian Lens Detect SAE Steering?"
+slug: "jacobian-lens-sae-steering"
 date: 2026-07-12
+aliases: ["/posts/jacobian-lens-sae-steering/"]
 tags: ["AI", "LLM", "machine-learning", "interpretability", "sparse-autoencoders", "jacobian-lens", "model-auditing", "reproducibility", "preregistration", "open-science"]
 author: Timothy Jones
 summary: "A prospectively frozen Llama 3.3 70B experiment asks whether SAE steering leaves a detectable downstream fingerprint in Jacobian-lens space. A preregistered follow-up adds semantic hard negatives, same-subfamily comparators, a 14-reader capacity ladder, and a worked example of a replay gate failing honestly."
@@ -95,11 +97,11 @@ Study status: **complete** (pre-outcome freeze [`b026faa`](https://github.com/td
 ## The Question
 
 This note sits next to two earlier Praxagent posts. [*How to Read an SAE
-Feature ID*](https://praxagent.ai/blog/posts/how-to-read-an-sae-feature-id/index.html)
+Feature ID*](https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/)
 covers what a public feature coordinate is, how labels get attached, and why an
 activation map is not yet an explanation
 ([Jones, 2026a](#ref-sae-feature-id)). [*Opening the Jacobian Lens on
-Qwen3.5-397B*](https://praxagent.ai/blog/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/index.html)
+Qwen3.5-397B*](https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/)
 teaches the J-lens instrument and audits a fitted open lens under identity and
 random-J controls ([Jones, 2026b](#ref-praxagent-397b)). Here those threads meet
 on Llama 3.3 70B:
@@ -1731,7 +1733,7 @@ comments.
 - <a id="ref-neuronpedia-jlens"></a>Neuronpedia (2026). [Llama 3.3 70B Jacobian-lens release](https://huggingface.co/neuronpedia/jacobian-lens/tree/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext).
 - <a id="ref-goodfire-sae"></a>Goodfire. [`Llama-3.3-70B-Instruct-SAE-l50`](https://huggingface.co/Goodfire/Llama-3.3-70B-Instruct-SAE-l50).
 - <a id="ref-neuronpedia-autointerp"></a>Neuronpedia. [Automated interpretability labels for `llama3.3-70b-it-gf`](https://www.neuronpedia.org/llama3.3-70b-it-gf) (accessed 2026-07-12).
-- <a id="ref-ae-studio-notebook"></a>AE Studio. [*Deception Features & Subjective Consciousness Study*](https://github.com/agencyenterprise/steering-api-examples/blob/main/deception-features/deception_features.ipynb) (public Steering API example notebook; [repo](https://github.com/agencyenterprise/steering-api-examples)). Used here only as the published source of the six integer feature IDs / labels; notebook code is not vendored. Those IDs were measured under the public Goodfire checkpoint in [*How to Read an SAE Feature ID*](https://praxagent.ai/blog/posts/how-to-read-an-sae-feature-id/index.html) ([Jones, 2026a](#ref-sae-feature-id)).
+- <a id="ref-ae-studio-notebook"></a>AE Studio. [*Deception Features & Subjective Consciousness Study*](https://github.com/agencyenterprise/steering-api-examples/blob/main/deception-features/deception_features.ipynb) (public Steering API example notebook; [repo](https://github.com/agencyenterprise/steering-api-examples)). Used here only as the published source of the six integer feature IDs / labels; notebook code is not vendored. Those IDs were measured under the public Goodfire checkpoint in [*How to Read an SAE Feature ID*](https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/) ([Jones, 2026a](#ref-sae-feature-id)).
 - <a id="ref-meta-llama"></a>Meta. [`Llama-3.3-70B-Instruct`](https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct).
 - <a id="ref-berg-2025"></a>Berg, C., de Lucena, C., and Rosenblatt, J. (2025). [*Large Language Models Report Subjective Experience Under Self-Referential Processing*](https://arxiv.org/abs/2510.24797). arXiv:2510.24797.
 - <a id="ref-belrose-2023"></a>Belrose, N., et al. (2023). [*Eliciting Latent Predictions from Transformers with the Tuned Lens*](https://arxiv.org/abs/2303.08112). arXiv:2303.08112.
@@ -1746,5 +1748,5 @@ comments.
 - <a id="ref-chen-2026"></a>Chen, K., et al. (2026). [*Decoding Hidden Deception in Reasoning LLMs: Activation Explainers for Deception Auditing*](https://arxiv.org/abs/2606.17478) (STATEWITNESS). arXiv:2606.17478.
 - <a id="ref-pan-2024"></a>Pan, A., Chen, L., and Steinhardt, J. (2024). [*LatentQA: Teaching LLMs to Decode Activations Into Natural Language*](https://arxiv.org/abs/2412.08686). arXiv:2412.08686.
 - <a id="ref-repo"></a>Jones, T. (2026). [`tdj28/llm_selfref_pre`](https://github.com/tdj28/llm_selfref_pre) (protocol, runners, and confirmatory release). Pre-outcome freeze [`b026faa`](https://github.com/tdj28/llm_selfref_pre/commit/b026faac222e55d7da4f01a30a6a60a468a5f023); result release [`c071aa4`](https://github.com/tdj28/llm_selfref_pre/commit/c071aa4d737d72818f0774ca389c159b5da67dc1).
-- <a id="ref-sae-feature-id"></a>Jones, T. (2026a). [*How to Read an SAE Feature ID*](https://praxagent.ai/blog/posts/how-to-read-an-sae-feature-id/index.html). Praxagent Tech Blog.
-- <a id="ref-praxagent-397b"></a>Jones, T. (2026b). [*Opening the Jacobian Lens on Qwen3.5-397B*](https://praxagent.ai/blog/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/index.html). Praxagent Tech Blog.
+- <a id="ref-sae-feature-id"></a>Jones, T. (2026a). [*How to Read an SAE Feature ID*](https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/). Praxagent Tech Blog.
+- <a id="ref-praxagent-397b"></a>Jones, T. (2026b). [*Opening the Jacobian Lens on Qwen3.5-397B*](https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/). Praxagent Tech Blog.

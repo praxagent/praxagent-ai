@@ -1,6 +1,8 @@
 ---
 title: "Late Chunking: Why Context-Aware Embeddings (sometimes) Beat Traditional Chunking"
+slug: "late-chunking"
 date: 2025-08-02
+aliases: ["/posts/late-chunking/"]
 tags: ["AI", "LLM", "Vector Search", "Embedding", "NLP", "machine-learning", "tutorials"]
 author: Timothy Jones
 summary: "Traditional chunking methods for RAG pipelines often break context by chunking text before embedding. Late chunking offers a solution by embedding the entire document first and then chunking the token embeddings, preserving vital contextual information and improving retrieval accuracy."
@@ -472,4 +474,3 @@ In information retrieval, even 10-20% improvements are considered substantial. 7
 
 **Vector Search Technology:**
 - Malkov, Y. A., & Yashunin, D. A. (2016). *Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs*. arXiv. [Link](https://arxiv.org/abs/1603.09320). The HNSW algorithm underlying modern vector database search performance.
-

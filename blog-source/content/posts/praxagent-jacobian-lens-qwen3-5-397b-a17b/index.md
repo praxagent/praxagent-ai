@@ -1,6 +1,8 @@
 ---
 title: "Open-sourcing (and Auditing) a Jacobian Lens for Qwen3.5-397B"
+slug: "praxagent-jacobian-lens-qwen3-5-397b-a17b"
 date: 2026-07-10
+aliases: ["/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/"]
 tags: ["AI", "LLM", "machine-learning", "interpretability", "jacobian-lens", "j-space", "reproducibility", "open-science"]
 author: Timothy Jones
 summary: "As of July 10, 2026, Praxagent is open-sourcing the public Jacobian lens fitted for the largest base model so far: Qwen3.5-397B-A17B, with a pre-registered readout audit against identity and random-J controls. Weights, hash, code, and receipts included."

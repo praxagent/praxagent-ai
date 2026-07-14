@@ -13,6 +13,9 @@ ignoreFiles:
 params:
   description: 'Insights, tutorials, and thoughts on AI software development from the praxagent team'
 
+permalinks:
+  posts: '/posts/:year/:month/:slug/'
+
 markup:
   goldmark:
     renderer:
