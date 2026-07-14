@@ -6,10 +6,12 @@ Each blog post can have its own interactive knowledge graph by including a `know
 
 ```
 content/posts/
-├── your-post/
-│   ├── index.md              # Your blog post
-│   ├── knowledge-graph.json  # Concept map for this post
-│   └── other-assets/         # Images, etc.
+└── YYYY/
+    └── MM/
+        └── your-post/
+            ├── index.md              # Your blog post
+            ├── knowledge-graph.json  # Concept map for this post
+            └── other-assets/         # Images, etc.
 ```
 
 ## Knowledge Graph Format
@@ -70,7 +72,7 @@ Use distinct colors for different concept types:
 
 ## Example Usage
 
-1. Create your blog post: `content/posts/my-topic/index.md`
-2. Add knowledge graph: `content/posts/my-topic/knowledge-graph.json`
+1. Create your blog post: `content/posts/2026/07/my-topic/index.md`
+2. Add knowledge graph: `content/posts/2026/07/my-topic/knowledge-graph.json`
 3. Build site: `hugo`
 4. Enjoy interactive concept visualization!

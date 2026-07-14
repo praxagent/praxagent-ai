@@ -12,7 +12,7 @@ praxagent/
 ├── styles-v2.css              # Site-wide CSS (light/dark, mobile-first)
 ├── script.js                  # Theme toggle, mobile menu, scroll effects
 ├── blog-source/               # Hugo source files (edit here)
-│   ├── content/posts/         # Blog posts (Markdown)
+│   ├── content/posts/         # Blog posts: YYYY/MM/<slug>/index.md + assets
 │   ├── layouts/               # Hugo templates
 │   ├── static/                # Blog CSS, JS assets
 │   └── hugo.yaml              # Hugo configuration
@@ -32,7 +32,7 @@ praxagent/
 
 ```bash
 make blog       # compile blog-source/content/posts into blog/
-make blog-serve # Hugo live reload at http://127.0.0.1:1313/
+make blog-serve # Hugo live reload at http://127.0.0.1:1313/blog/
 make ci         # exact build + validation contract used by GitHub Actions
 ```
 
@@ -47,17 +47,17 @@ HTML anchors, JSON, and SVG/XML assets.
 make blog-serve
 
 # Post URL example:
-# http://127.0.0.1:1313/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/
+# http://127.0.0.1:1313/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/
 
 # Full site (homepage + built blog/) — no auto-rebuild
-python3 -m http.server 8000   # from repo root → http://localhost:8000
+make run-site-local          # http://127.0.0.1:8000/ (use 127.0.0.1, not localhost)
 ```
 
 ### Adding Blog Posts
 
 ```bash
 cd blog-source
-hugo new content/posts/my-new-post/index.md
+hugo new content/posts/2026/07/my-new-post/index.md
 
 # While developing, use `hugo server` above (no manual rebuild).
 # For a production-style write into blog/:

@@ -120,7 +120,7 @@
 
             
             <div class="post-lead">
-                <strong>As of July 10, 2026</strong>, Praxagent is open-sourcing a Jacobian lens for <strong>Qwen3.5-397B-A17B</strong> (<a href="https://huggingface.co/praxagent/jacobian-lens-qwen3.5-397b-a17b"><code>praxagent/jacobian-lens-qwen3.5-397b-a17b</code></a>): to our knowledge, <strong>the public Jacobian lens fitted for the largest base model so far</strong>. The largest prior public collection we found tops out at a 70B base model; this release targets a 397B-total, 17B-active multimodal MoE (<strong>A17B</strong> = ~17B parameters active per token; <a href="#what-a17b-means">explainer</a>; this note is <strong>text-only</strong>). This note is the release: what a Jacobian lens is, how we fit it (<strong>n=24</strong>; warm-start toward <strong>n≈50</strong> underway), and a pre-registered readout audit so the file is not over-read as a mind-reader.
+                <strong>As of July 10, 2026</strong>, Praxagent is open-sourcing a Jacobian lens for <strong>Qwen3.5-397B-A17B</strong> (<a href="https://huggingface.co/praxagent-org/jacobian-lens-qwen3.5-397b-a17b"><code>praxagent-org/jacobian-lens-qwen3.5-397b-a17b</code></a>): to our knowledge, <strong>the public Jacobian lens fitted for the largest base model so far</strong>. The largest prior public collection we found tops out at a 70B base model; this release targets a 397B-total, 17B-active multimodal MoE (<strong>A17B</strong> = ~17B parameters active per token; <a href="#what-a17b-means">explainer</a>; this note is <strong>text-only</strong>). This note is the release: what a Jacobian lens is, how we fit it (<strong>n=24</strong>; warm-start toward <strong>n≈50</strong> underway), and a pre-registered readout audit so the file is not over-read as a mind-reader.
             </div>
             
 
@@ -253,7 +253,7 @@
         
     </div>
     <div class="panel-content">
-        <strong>Abstract.</strong> We release a fitted Jacobian lens for <strong>Qwen3.5-397B-A17B</strong> (<a href="https://huggingface.co/praxagent/jacobian-lens-qwen3.5-397b-a17b"><code>praxagent/jacobian-lens-qwen3.5-397b-a17b</code></a>): to our knowledge, <strong>the public Jacobian lens fitted for the largest base model so far</strong>, as documented by the dated, revision-pinned comparison below. A Jacobian lens is a fitted linear map that turns a mid-layer residual-stream state into a vocabulary-ranked <strong>readout</strong>: what the network looks like it is “about to say,” without waiting for the final token. We fit this one with Anthropic’s <code>jlens.fit</code> on WikiText (<strong>release n=24</strong>; warm-start toward <strong>n≈50</strong> underway) as part of a <a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit">35-model audit</a>. This note teaches the tool, then runs a <strong>pre-registered readout audit</strong> (not a mind-reading claim): on a fresh pod and a hash-checked artifact, twenty capital-of-country items put the fitted J-lens above identity on <strong>18/20</strong> paired ranks and above random-J on <strong>20/20</strong>. Its top-20 bridge counts are <strong>6/20</strong>, <strong>1/20</strong>, and <strong>0/20</strong>, respectively. The scoring rule, uncertainty intervals, and exact paired tests are introduced before the results. Direct riddles failed their gate and were dropped. Text-only; absolute rates are lower than on 27B (fit-size is a live candidate). Audit compute was about <strong>$14</strong>; fitting the lens cost into the hundreds.
+        <strong>Abstract.</strong> We release a fitted Jacobian lens for <strong>Qwen3.5-397B-A17B</strong> (<a href="https://huggingface.co/praxagent-org/jacobian-lens-qwen3.5-397b-a17b"><code>praxagent-org/jacobian-lens-qwen3.5-397b-a17b</code></a>): to our knowledge, <strong>the public Jacobian lens fitted for the largest base model so far</strong>, as documented by the dated, revision-pinned comparison below. A Jacobian lens is a fitted linear map that turns a mid-layer residual-stream state into a vocabulary-ranked <strong>readout</strong>: what the network looks like it is “about to say,” without waiting for the final token. We fit this one with Anthropic’s <code>jlens.fit</code> on WikiText (<strong>release n=24</strong>; warm-start toward <strong>n≈50</strong> underway) as part of a <a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit">35-model audit</a>. This note teaches the tool, then runs a <strong>pre-registered readout audit</strong> (not a mind-reading claim): on a fresh pod and a hash-checked artifact, twenty capital-of-country items put the fitted J-lens above identity on <strong>18/20</strong> paired ranks and above random-J on <strong>20/20</strong>. Its top-20 bridge counts are <strong>6/20</strong>, <strong>1/20</strong>, and <strong>0/20</strong>, respectively. The scoring rule, uncertainty intervals, and exact paired tests are introduced before the results. Direct riddles failed their gate and were dropped. Text-only; absolute rates are lower than on 27B (fit-size is a live candidate). Audit compute was about <strong>$14</strong>; fitting the lens cost into the hundreds.
     </div>
 </div>
 <p>Study status: <strong>complete</strong> for the n=24 release audit (pre-registration <a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/810251006bae0d322412bbd68ed85eb4cb1d6514"><code>8102510</code></a>; gate <a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/4f4497682108eff2d6bb6e6b24c0ff17d2de50d3"><code>4f44976</code></a>; 397B result <a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/d9fc3763e2eb30f1ce1221b16027247afcb0fdfe"><code>d9fc376</code></a>). Warm-start toward n≈50 is underway and will be reported separately. Shipping table, sample receipts, and hashes are in the <a href="#appendix-release-inventory">appendix</a>.</p>
@@ -300,7 +300,7 @@ method or the model.</p>
 <p><strong>This note&rsquo;s contribution.</strong></p>
 <ol>
 <li>A <strong>fitted Jacobian lens</strong> for Qwen3.5-397B-A17B
-(<a href="https://huggingface.co/praxagent/jacobian-lens-qwen3.5-397b-a17b/tree/2dffc0a058fd072a6a155a4c6005bc26aff14d8c"><code>praxagent/jacobian-lens-qwen3.5-397b-a17b@2dffc0a</code></a>;
+(<a href="https://huggingface.co/praxagent-org/jacobian-lens-qwen3.5-397b-a17b/tree/2dffc0a058fd072a6a155a4c6005bc26aff14d8c"><code>praxagent-org/jacobian-lens-qwen3.5-397b-a17b@2dffc0a</code></a>;
 file SHA-256 <code>668c3bf17305b0d52495cb7ba589a1c1173301b1d13c3c6ad84e58245dc99e97</code>),
 WikiText fit <strong>n=24</strong>, with warm-start toward n≈50 underway.</li>
 <li>A <strong>pre-registered readout audit</strong> of that file against identity and
@@ -335,7 +335,7 @@ bytes):</p>
       <tr>
           <td>This release</td>
           <td><strong>Qwen3.5-397B-A17B</strong>: 397B total, 17B active</td>
-          <td><a href="https://huggingface.co/praxagent/jacobian-lens-qwen3.5-397b-a17b/tree/2dffc0a058fd072a6a155a4c6005bc26aff14d8c">lens revision <code>2dffc0a</code></a></td>
+          <td><a href="https://huggingface.co/praxagent-org/jacobian-lens-qwen3.5-397b-a17b/tree/2dffc0a058fd072a6a155a4c6005bc26aff14d8c">lens revision <code>2dffc0a</code></a></td>
       </tr>
       <tr>
           <td>Neuronpedia collection</td>
@@ -1025,7 +1025,7 @@ and, as part of that program, fit and are releasing this lens on
   <tbody>
       <tr>
           <td>Lens artifact</td>
-          <td><a href="https://huggingface.co/praxagent/jacobian-lens-qwen3.5-397b-a17b/tree/2dffc0a058fd072a6a155a4c6005bc26aff14d8c"><code>praxagent/jacobian-lens-qwen3.5-397b-a17b@2dffc0a</code></a></td>
+          <td><a href="https://huggingface.co/praxagent-org/jacobian-lens-qwen3.5-397b-a17b/tree/2dffc0a058fd072a6a155a4c6005bc26aff14d8c"><code>praxagent-org/jacobian-lens-qwen3.5-397b-a17b@2dffc0a</code></a></td>
       </tr>
       <tr>
           <td>Base model</td>
@@ -1995,7 +1995,7 @@ replication.</p>
 </span></span><span class="line"><span class="cl"><span class="c1"># the 397B artifact re-check (multi-GPU); pin revisions + abort on hash mismatch</span>
 </span></span><span class="line"><span class="cl">python demo.py <span class="se">\
 </span></span></span><span class="line"><span class="cl">  --big-model Qwen/Qwen3.5-397B-A17B:model.language_model <span class="se">\
-</span></span></span><span class="line"><span class="cl">  --lens-hf praxagent/jacobian-lens-qwen3.5-397b-a17b:jlens/wikitext/qwen35_397b.pt <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --lens-hf praxagent-org/jacobian-lens-qwen3.5-397b-a17b:jlens/wikitext/qwen35_397b.pt <span class="se">\
 </span></span></span><span class="line"><span class="cl">  --expected-sha256 668c3bf17305b0d52495cb7ba589a1c1173301b1d13c3c6ad84e58245dc99e97 <span class="se">\
 </span></span></span><span class="line"><span class="cl">  --acts <span class="m">2</span>
 </span></span></code></pre></div><p>Receipts: <a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/810251006bae0d322412bbd68ed85eb4cb1d6514">pre-registration <code>8102510</code></a> →
@@ -2030,7 +2030,7 @@ to finish:</p>
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">HF_HOME</span><span class="o">=</span>/workspace/hf
 </span></span><span class="line"><span class="cl">pip install -q transformers accelerate huggingface_hub git+https://github.com/anthropics/jacobian-lens
 </span></span><span class="line"><span class="cl">python demo.py --big-model Qwen/Qwen3.5-397B-A17B:model.language_model <span class="se">\
-</span></span></span><span class="line"><span class="cl">    --lens-hf praxagent/jacobian-lens-qwen3.5-397b-a17b:jlens/wikitext/qwen35_397b.pt <span class="se">\
+</span></span></span><span class="line"><span class="cl">    --lens-hf praxagent-org/jacobian-lens-qwen3.5-397b-a17b:jlens/wikitext/qwen35_397b.pt <span class="se">\
 </span></span></span><span class="line"><span class="cl">    --expected-sha256 668c3bf1... --out /workspace/receipts/demo.json
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># the two commands that protect your wallet</span>
@@ -2256,7 +2256,7 @@ plain-English walkthroughs are in the appendix below.</p>
   <tbody>
       <tr>
           <td>Fitted lens (revision + file)</td>
-          <td><a href="https://huggingface.co/praxagent/jacobian-lens-qwen3.5-397b-a17b/tree/2dffc0a058fd072a6a155a4c6005bc26aff14d8c"><code>praxagent/jacobian-lens-qwen3.5-397b-a17b@2dffc0a</code></a>; SHA-256 <code>668c3bf1…99e97</code></td>
+          <td><a href="https://huggingface.co/praxagent-org/jacobian-lens-qwen3.5-397b-a17b/tree/2dffc0a058fd072a6a155a4c6005bc26aff14d8c"><code>praxagent-org/jacobian-lens-qwen3.5-397b-a17b@2dffc0a</code></a>; SHA-256 <code>668c3bf1…99e97</code></td>
       </tr>
       <tr>
           <td>Base model</td>
@@ -2325,7 +2325,7 @@ Warm-start toward n≈50 is a separate, in-progress extension.
       <tr>
           <td>Fitted J-lens for Qwen3.5-397B-A17B</td>
           <td>A downloadable translator from mid-layer residuals to ranked vocabulary readouts for this MoE.</td>
-          <td>HF revision <a href="https://huggingface.co/praxagent/jacobian-lens-qwen3.5-397b-a17b/tree/2dffc0a058fd072a6a155a4c6005bc26aff14d8c"><code>2dffc0a</code></a>; SHA-256 <code>668c3bf17305b0d52495cb7ba589a1c1173301b1d13c3c6ad84e58245dc99e97</code>; WikiText <strong>n=24</strong>.</td>
+          <td>HF revision <a href="https://huggingface.co/praxagent-org/jacobian-lens-qwen3.5-397b-a17b/tree/2dffc0a058fd072a6a155a4c6005bc26aff14d8c"><code>2dffc0a</code></a>; SHA-256 <code>668c3bf17305b0d52495cb7ba589a1c1173301b1d13c3c6ad84e58245dc99e97</code>; WikiText <strong>n=24</strong>.</td>
       </tr>
       <tr>
           <td>Pre-registration</td>
@@ -2452,7 +2452,7 @@ beats identity on 18 of 20 ranks.</li>
 <p><span id="ref-neuronpedia-jacobian-lens"></span>Neuronpedia. <a href="https://huggingface.co/neuronpedia/jacobian-lens/tree/a4114d7752d11eb546e6cf372213d7e75526d3a1"><em>Jacobian lens collection</em></a> (revision <code>a4114d7</code>; dated public comparison snapshot).</p>
 </li>
 <li>
-<p><span id="ref-praxagent-397b-lens"></span>Praxagent. <a href="https://huggingface.co/praxagent/jacobian-lens-qwen3.5-397b-a17b/tree/2dffc0a058fd072a6a155a4c6005bc26aff14d8c"><em>jacobian-lens-qwen3.5-397b-a17b</em></a> (revision <code>2dffc0a</code>).</p>
+<p><span id="ref-praxagent-397b-lens"></span>Praxagent. <a href="https://huggingface.co/praxagent-org/jacobian-lens-qwen3.5-397b-a17b/tree/2dffc0a058fd072a6a155a4c6005bc26aff14d8c"><em>jacobian-lens-qwen3.5-397b-a17b</em></a> (revision <code>2dffc0a</code>).</p>
 </li>
 <li>
 <p><span id="ref-jspace-audit"></span>Praxagent. <a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit"><em>A Global Workspace, or a Training Artifact? Auditing Anthropic&rsquo;s J-Space Across the Open-Weight Lineup</em></a> (companion audit; revision <code>fa66e53</code>).</p>
@@ -2499,7 +2499,7 @@ beats identity on 18 of 20 ranks.</li>
                     <a href="https://github.com/praxagent/praxagent-ai" rel="noopener">praxagent/praxagent-ai</a>.
                     Every revision to every post is preserved in the commit log, so
                     you can see exactly what changed and when:
-                    <a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/index.md" rel="noopener">view this article's edit history</a>.</p>
+                    <a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/index.md" rel="noopener">view this article's edit history</a>.</p>
                 </div>
                 <div class="post-navigation">
                     <a href="/blog/index.html" class="back-to-blog">← Back to Blog</a>
