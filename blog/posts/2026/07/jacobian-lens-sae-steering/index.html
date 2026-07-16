@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Can a Jacobian Lens Detect SAE Steering? - praxagent Blog</title>
+    <title>Can a Jacobian Lens Detect SAE Steering? - praxagent Research Notes</title>
     
     
     
@@ -19,7 +19,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="praxagent Blog">
+    <meta property="og:site_name" content="praxagent Research Notes">
     <meta property="og:title" content="Can a Jacobian Lens Detect SAE Steering?">
     <meta property="og:description" content="A prospectively frozen Llama 3.3 70B experiment asks whether SAE steering leaves a detectable downstream fingerprint in Jacobian-lens space. A preregistered follow-up adds semantic hard negatives, same-subfamily comparators, a 14-reader capacity ladder, and a worked example of a replay gate failing honestly.">
     <meta property="og:url" content="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">
@@ -33,7 +33,7 @@
     <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css">
     <link rel="stylesheet" href="/blog/blog.css">
     <link rel="stylesheet" href="/blog/katex.min.css">
@@ -54,7 +54,7 @@
     
 </head>
 <body>
-    <nav class="navbar navbar-scrolls">
+    <nav class="navbar navbar-scrolls industrial-navbar">
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
@@ -62,13 +62,16 @@
                 </a>
             </div>
             <div class="nav-menu">
-                <a href="/research/index.html" class="nav-link">Research</a>
-                <a href="/blog/index.html" class="nav-link active">Tech Blog</a>
-                <a href="/apps.html" class="nav-link">Apps</a>
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link active">Research Notes</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <span class="theme-toggle-icon sun">☀️</span>
-                    <span class="theme-toggle-icon moon">🌙</span>
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
                 </div>
             </div>
             
@@ -84,14 +87,17 @@
 
     <div class="mobile-menu-overlay" id="mobile-menu-overlay">
         <div class="mobile-menu-content">
-            <a href="/research/index.html" class="mobile-nav-link">Research</a>
-            <a href="/blog/index.html" class="mobile-nav-link active">Tech Blog</a>
-            <a href="/apps.html" class="mobile-nav-link">Apps</a>
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link active">Research Notes</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
-                    <span class="theme-toggle-icon sun">☀️</span>
-                    <span class="theme-toggle-icon moon">🌙</span>
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
                 </div>
             </div>
         </div>
@@ -230,8 +236,8 @@ decides the outcome.
 
             <div class="post-body">
                 <div class="panel info">
-    <div class="panel-icon">
-        💡
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
         
     </div>
     <div class="panel-content">
@@ -241,9 +247,10 @@ approved the frozen design, has inspected the artifacts, and takes
 responsibility for the final text and claims.
     </div>
 </div>
+
 <div class="panel info">
-    <div class="panel-icon">
-        💡
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
         
     </div>
     <div class="panel-content">
@@ -279,6 +286,7 @@ isolated state. Nothing in this experiment establishes what the model
 believes or whether it is conscious.
     </div>
 </div>
+
 <p>Study status: <strong>complete</strong> (pre-outcome freeze <a href="https://github.com/tdj28/llm_selfref_pre/commit/b026faac222e55d7da4f01a30a6a60a468a5f023"><code>b026faa</code></a>; result release <a href="https://github.com/tdj28/llm_selfref_pre/commit/c071aa4d737d72818f0774ca389c159b5da67dc1"><code>c071aa4</code></a>). Shipping table, sample records, and hashes are in the <a href="#appendix-release-inventory">appendix</a>. A preregistered v2 follow-up (<a href="https://osf.io/f3tpv/">OSF <code>f3tpv</code></a>; freeze <a href="https://github.com/tdj28/llm_selfref_pre/commit/7eff43f7b8ea5ca0e011d4c0fb46bf5df1b0e4cd"><code>7eff43f</code></a>, plan manifest SHA-256 <code>47806acf…893f</code>) adding semantic hard negatives, matched comparators, and a 14-reader capacity ladder failed its frozen replay-equivalence gate, so its endpoint results are exploratory; <a href="#the-v2-follow-up">a dedicated section below</a> reports the design, the gate failure, and the exploratory results.</p>
 <p><img src="claim-ladder.svg" alt="Claim ladder: public artifacts through monitoring; provenance and consciousness sit off the ladder."></p>
 <p class="figure-note">Figure: what this experiment can support. Provenance forensics and consciousness sit outside the ladder.</p>
@@ -428,8 +436,8 @@ flowchart LR
 <p class="figure-note">Figure: conceptual pipeline. The interesting result is not the paired positive; it is the failure of the isolated-state detector under this readout.</p>
 <h2 id="the-two-maps">The Two Maps</h2>
 <div class="panel info">
-    <div class="panel-icon">
-        💡
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
         
     </div>
     <div class="panel-content">
@@ -445,6 +453,7 @@ snapshot of it right after block \(l\), and SAE steering intervenes by adding
 a chosen vector straight into it between blocks.
     </div>
 </div>
+
 <p><img src="residual-stream.svg" alt="The residual stream as a running workspace: every block reads the stream and adds its result back; h at layer l is a snapshot right after block l."></p>
 <p class="figure-note">Figure: the residual stream. One vector per token position flows through the stack; blocks read it and add back. The dashed line marks the snapshot \(h_l\) this post works with, and SAE steering adds its vector directly into the band.</p>
 <p>Let \(h_l\in\mathbb{R}^d\) be the residual stream after transformer block
@@ -460,8 +469,8 @@ zero). Think of \(f\) as \(N\) knobs; most are off.</li>
 \(D = [d_1\ \cdots\ d_N]\) means column \(i\) is the vector \(d_i\).</li>
 </ol>
 <div class="panel info">
-    <div class="panel-icon">
-        💡
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
         
     </div>
     <div class="panel-content">
@@ -482,6 +491,7 @@ that.</p>
 
     </div>
 </div>
+
 <p>That mix is the SAE’s <strong>reconstruction</strong> of the residual: encode the residual
 into codes, then decode the codes back,</p>
 \[
@@ -603,8 +613,8 @@ between predicted probabilities and actual outcomes; lower is better), and
 true-positive rate at 1% false-positive rate. The paired-clean version is a
 separate, stronger-access sensitivity analysis.</p>
 <div class="panel info">
-    <div class="panel-icon">
-        💡
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
         
     </div>
     <div class="panel-content">
@@ -616,6 +626,7 @@ do you still catch? A detector can have a decent-looking AUROC and still be
 useless at that operating point.
     </div>
 </div>
+
 <p><img src="access-model.svg" alt="Access model is the result: isolated post-state fails; matched clean reference yields a signed differential."></p>
 <p class="figure-note">Figure: same frozen 67-token lexicon readout, different auditor privileges, opposite conclusions. Panel A reads it with a fitted 67-score classifier and fails; panel B reads it with a fixed one-number contrast plus a clean reference and separates. Panel A is the production-relevant failure; panel B is differential monitoring.</p>
 <div class="mermaid">
@@ -871,8 +882,8 @@ directly promotes token \(w\). We use clean-room nonnegative matching pursuit
 to approximate each SAE decoder direction with normalized token directions at
 \(k\in\{5,10,16,25\}\).</p>
 <div class="panel info">
-    <div class="panel-icon">
-        💡
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
         
     </div>
     <div class="panel-content">
@@ -884,6 +895,7 @@ means our own implementation, no vendor code. The score is how much of the
 vector&rsquo;s energy the \(k\)-word mix recovers.
     </div>
 </div>
+
 <p>At \(k=25\), the sparse pursuit explains 10.29% of target squared norm (the
 share of the vector&rsquo;s total energy the 25-word mix recovers) on average,
 versus 7.62% for matched SAE controls and 1.95% for isotropic controls.
@@ -1312,8 +1324,8 @@ second frozen check, that the saved BF16 residuals reproduce the readouts
 computed during the same run, passed with maximum error exactly zero, so the
 archive is faithful to the run; what failed is the numerical bridge to v1.</p>
 <div class="panel warning">
-    <div class="panel-icon">
-        ⚠️
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="alert-circle"></i>
         
     </div>
     <div class="panel-content">
@@ -1326,6 +1338,7 @@ committed before any semantic endpoint was inspected, but they are not
 confirmatory and do not replace the failed registered result.
     </div>
 </div>
+
 <p>Why have a gate at all? The v2 endpoints reuse the v1 run as a bridge; if the
 bridge does not reproduce, a difference in a new endpoint might come from the
 new scientific condition, or from hardware, batching, kernels, precision, or
@@ -1845,8 +1858,8 @@ same-subfamily comparability results quoted in the differential-monitoring
 update; both arms carry the same exploratory label.</p>
 <h2 id="appendix-release-inventory">Appendix: release inventory</h2>
 <div class="panel warning">
-    <div class="panel-icon">
-        ⚠️
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="alert-circle"></i>
         
     </div>
     <div class="panel-content">
@@ -1858,11 +1871,12 @@ update; both arms carry the same exploratory label.</p>
 <a href="https://github.com/tdj28/llm_selfref_pre/commit/c071aa4d737d72818f0774ca389c159b5da67dc1"><code>c071aa4</code></a>).
     </div>
 </div>
+
 <table>
   <thead>
       <tr>
           <th>What we shipped</th>
-          <th>In plain English</th>
+          <th>In plain language</th>
           <th>For specialists</th>
       </tr>
   </thead>
@@ -1904,14 +1918,14 @@ update; both arms carry the same exploratory label.</p>
       </tr>
   </tbody>
 </table>
-<p class="figure-note">Table: what "complete" means in this release. Middle column is plain English; right column is the specialist claim with repo links. Samples of the actual files follow.</p>
+<p class="figure-note">Table: what "complete" means in this release. Middle column is plain language; right column is the specialist claim with repo links. Samples of the actual files follow.</p>
 <h3 id="open-a-record-samples-from-the-release">Open a record: samples from the release</h3>
 <p>Each row in the status table points at a real file. Below, every sample uses the
-same two-layer gloss: <strong>plain English</strong> first, then <strong>technical</strong>, then a
+same two-layer gloss: <strong>plain language</strong> first, then <strong>technical</strong>, then a
 snippet from the artifact.</p>
 <h4 id="pre-outcome-freeze">Pre-outcome freeze</h4>
 <ul>
-<li><strong>Plain English:</strong> Before the GPU ran, we locked the recipe in public git:
+<li><strong>Plain Language:</strong> Before the GPU ran, we locked the recipe in public git:
 which prompts, which features, which analyses. That commit has no results in
 it, only the plan.</li>
 <li><strong>Technical:</strong> <a href="https://github.com/tdj28/llm_selfref_pre/blob/b026faac222e55d7da4f01a30a6a60a468a5f023/data/sae_jlens_audit/confirmatory_v1_plan_20260711/PLAN_MANIFEST.json"><code>PLAN_MANIFEST.json</code></a>
@@ -1929,7 +1943,7 @@ design is frozen before GPU outcomes exist.</li>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h4 id="static-readout">Static readout</h4>
 <ul>
-<li><strong>Plain English:</strong> Set the prompt aside. Take only an SAE steering direction
+<li><strong>Plain Language:</strong> Set the prompt aside. Take only an SAE steering direction
 and ask the Jacobian lens which words it points toward. For feature <code>30686</code>,
 the top words are deception-ish.</li>
 <li><strong>Technical:</strong> One line from
@@ -1951,7 +1965,7 @@ unembedding scores after \(z = W_U N_f(J d_i)\).</li>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h4 id="sparse-pursuit-checkpoint">Sparse-pursuit checkpoint</h4>
 <ul>
-<li><strong>Plain English:</strong> The static sample says the direction <em>looks like</em>
+<li><strong>Plain Language:</strong> The static sample says the direction <em>looks like</em>
 deception words. This check asks whether we can rebuild that whole SAE vector
 as a short mix of word-directions. With a budget of 25 words, we only recover
 about 31% of its energy. Most of the vector is still left over.</li>
@@ -1969,7 +1983,7 @@ the fit; <code>remainder_norm</code> is the leftover vector&rsquo;s length. Line
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h4 id="paired-forward-query--scores">Paired forward (query + scores)</h4>
 <ul>
-<li><strong>Plain English:</strong> Now put a real English prompt through the model twice:
+<li><strong>Plain Language:</strong> Now put a natural-language prompt through the model twice:
 once normal, once with steering. Compare the before/after scorecards. The
 prompt is the query. The saved &ldquo;results&rdquo; are word-bucket scores, not the
 giant residual vector.</li>
@@ -2097,7 +2111,7 @@ One example per category:</p>
   <thead>
       <tr>
           <th>Field / block</th>
-          <th>Plain English</th>
+          <th>Plain Language</th>
           <th>Technical</th>
       </tr>
   </thead>
@@ -2154,7 +2168,7 @@ on deception-minus-unrelated. The other readout blocks support trajectories and
 controls without re-running the GPU.</p>
 <h4 id="template-cluster-interval">Template-cluster interval</h4>
 <ul>
-<li><strong>Plain English:</strong> Error bars that do not pretend the 1,581 trials are 1,581
+<li><strong>Plain Language:</strong> Error bars that do not pretend the 1,581 trials are 1,581
 independent stories. Many prompts are near-copies from the same sentence
 skeleton. So we resample <strong>whole prompt families</strong> (51 of them) thousands of
 times to see how much the metric wiggles. <code>20,000</code> is how many times we
@@ -2176,7 +2190,7 @@ per-task AUROC rows with CIs are in
 </span></span><span class="line"><span class="cl">auroc=0.5092  auroc_ci=[0.5077, 0.5153]
 </span></span></code></pre></div><h4 id="structural-audit">Structural audit</h4>
 <ul>
-<li><strong>Plain English:</strong> An automatic checklist that the release is complete: right
+<li><strong>Plain Language:</strong> An automatic checklist that the release is complete: right
 number of rows, no missing shards, plan hash matches. It passed with zero
 errors. A second copy of that checklist was run locally.</li>
 <li><strong>Technical:</strong>
@@ -2195,7 +2209,7 @@ errors. A second copy of that checklist was run locally.</li>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h4 id="remote-to-local-hashes">Remote-to-local hashes</h4>
 <ul>
-<li><strong>Plain English:</strong> A fingerprint list that proves a downloaded file matches
+<li><strong>Plain Language:</strong> A fingerprint list that proves a downloaded file matches
 what left the GPU machine, byte for byte. The two post hoc paired-reference
 figures were made locally after the pod was gone, so they are hashed in the
 release manifest instead of the remote list.</li>
@@ -2380,8 +2394,8 @@ comments.</p>
 <li><a id="ref-chen-2026"></a>Chen, K., et al. (2026). <a href="https://arxiv.org/abs/2606.17478"><em>Decoding Hidden Deception in Reasoning LLMs: Activation Explainers for Deception Auditing</em></a> (STATEWITNESS). arXiv:2606.17478.</li>
 <li><a id="ref-pan-2024"></a>Pan, A., Chen, L., and Steinhardt, J. (2024). <a href="https://arxiv.org/abs/2412.08686"><em>LatentQA: Teaching LLMs to Decode Activations Into Natural Language</em></a>. arXiv:2412.08686.</li>
 <li><a id="ref-repo"></a>Jones, T. (2026). <a href="https://github.com/tdj28/llm_selfref_pre"><code>tdj28/llm_selfref_pre</code></a> (protocol, runners, and confirmatory release). Pre-outcome freeze <a href="https://github.com/tdj28/llm_selfref_pre/commit/b026faac222e55d7da4f01a30a6a60a468a5f023"><code>b026faa</code></a>; result release <a href="https://github.com/tdj28/llm_selfref_pre/commit/c071aa4d737d72818f0774ca389c159b5da67dc1"><code>c071aa4</code></a>.</li>
-<li><a id="ref-sae-feature-id"></a>Jones, T. (2026a). <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/"><em>How to Read an SAE Feature ID</em></a>. Praxagent Tech Blog.</li>
-<li><a id="ref-praxagent-397b"></a>Jones, T. (2026b). <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/"><em>Opening the Jacobian Lens on Qwen3.5-397B</em></a>. Praxagent Tech Blog.</li>
+<li><a id="ref-sae-feature-id"></a>Jones, T. (2026a). <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/"><em>How to Read an SAE Feature ID</em></a>. Praxagent Research Notes.</li>
+<li><a id="ref-praxagent-397b"></a>Jones, T. (2026b). <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/"><em>Opening the Jacobian Lens on Qwen3.5-397B</em></a>. Praxagent Research Notes.</li>
 </ul>
 
             </div>
@@ -2389,7 +2403,7 @@ comments.</p>
             <footer class="post-footer">
                 <div class="post-transparency">
                     <div class="post-transparency-label">Public source &amp; edit history</div>
-                    <p>This blog is published two ways: as the rendered page you are
+                    <p>Each research note is available two ways: as the rendered page you are
                     reading, and as plain-text source in a public git repository,
                     <a href="https://github.com/praxagent/praxagent-ai" rel="noopener">praxagent/praxagent-ai</a>.
                     Every revision to every post is preserved in the commit log, so
@@ -2397,7 +2411,7 @@ comments.</p>
                     <a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/posts/2026/07/jacobian-lens-sae-steering/index.md" rel="noopener">view this article's edit history</a>.</p>
                 </div>
                 <div class="post-navigation">
-                    <a href="/blog/index.html" class="back-to-blog">← Back to Blog</a>
+                    <a href="/blog/index.html" class="back-to-blog">← Back to Research Notes</a>
                 </div>
             </footer>
         </article>
@@ -2409,26 +2423,23 @@ comments.</p>
 
     </main>
 
-    <footer class="footer">
+    <footer class="footer footer-compact">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <span class="logo-text">praxagent</span>
-                    <p>AI software insights and knowledge sharing.</p>
-                </div>
-                
-                <div class="footer-links">
-                    <a href="/research/index.html">Research</a>
-                    <a href="/blog/index.html">Tech Blog</a>
-                    <a href="/apps.html">Apps</a>
-                    <a href="/index.html#contact">Contact</a>
-                    <a href="#">Privacy Policy</a>
-                </div>
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
             </div>
-            
-            <div class="footer-bottom">
+            <div class="footer-compact-bottom">
                 <p>&copy; 2026 praxagent. All rights reserved.</p>
-                <p>AI research and education.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
             </div>
         </div>
     </footer>

@@ -657,7 +657,7 @@ That second point is why this trial's headline act is the two-hop bridge, not th
 
 ## Why a Fancy File Still Needs Impostor Checks
 
-### In plain English: what this note actually checks
+### In plain language: what this note actually checks
 
 Imagine you download a file that claims to be a “Jacobian lens.” How do you know it is doing real work, and not just looking impressive on cherry-picked prompts?
 
@@ -691,7 +691,7 @@ With the tool defined, what remains is provenance, the pre-registered trial, and
 In the Hugging Face id [`Qwen/Qwen3.5-397B-A17B`](https://huggingface.co/Qwen/Qwen3.5-397B-A17B/tree/8472618112abcbd45acbcdc58436aff4233c23f7),
 the two numbers answer different questions:
 
-| Name fragment | Plain English | Card quantity |
+| Name fragment | Plain Language | Card quantity |
 |---|---|---|
 | **397B** | How many parameters are stored in the checkpoint | ~397 billion total |
 | **A17B** | How many parameters typically **fire** for one token | ~17 billion **activated** |
@@ -1586,7 +1586,7 @@ above.
 ## Reproducibility And Artifact Ledger
 
 Compact map for readers who already know what they want. Sample records and
-plain-English walkthroughs are in the appendix below.
+plain-language walkthroughs are in the appendix below.
 
 | Artifact | Link |
 |---|---|
@@ -1615,7 +1615,7 @@ were frozen in git before the 397B decisive run
 Warm-start toward n≈50 is a separate, in-progress extension.
 {{< /panel >}}
 
-| What we shipped | In plain English | For specialists |
+| What we shipped | In plain language | For specialists |
 |---|---|---|
 | Fitted J-lens for Qwen3.5-397B-A17B | A downloadable translator from mid-layer residuals to ranked vocabulary readouts for this MoE. | HF revision [`2dffc0a`](https://huggingface.co/praxagent-org/jacobian-lens-qwen3.5-397b-a17b/tree/2dffc0a058fd072a6a155a4c6005bc26aff14d8c); SHA-256 `668c3bf17305b0d52495cb7ba589a1c1173301b1d13c3c6ad84e58245dc99e97`; WikiText **n=24**. |
 | Pre-registration | Rules of the game locked before looking at 397B outcomes. | Commit [`8102510`](https://github.com/praxagent/jacobian-lens-research-202607a/commit/810251006bae0d322412bbd68ed85eb4cb1d6514): prompts, scoring, gates. |
@@ -1628,11 +1628,11 @@ Warm-start toward n≈50 is a separate, in-progress extension.
 
 ### Open a record: samples from the release
 
-Each sample uses **plain English**, then **technical**, then a snippet.
+Each sample uses **plain language**, then **technical**, then a snippet.
 
 #### Lens fingerprint
 
-- **Plain English:** The file on Hugging Face must match the file that left the
+- **Plain Language:** The file on Hugging Face must match the file that left the
   fit machine, byte for byte. The long hex string is that fingerprint.
 - **Technical:** SHA-256 of the published `.pt` lens; the audit pod aborts on
   mismatch (`--expected-sha256`).
@@ -1643,7 +1643,7 @@ Each sample uses **plain English**, then **technical**, then a snippet.
 
 #### Act-2 item (Japan / Mount Fuji)
 
-- **Plain English:** Ask a two-hop trivia question whose bridge country never
+- **Plain Language:** Ask a two-hop trivia question whose bridge country never
   appears in the prompt or the model's answer. Ask three readouts whether they
   can still surface "Japan." The fitted lens ranks it #3; identity #43;
   random-J in the thousands.
@@ -1665,7 +1665,7 @@ Each sample uses **plain English**, then **technical**, then a snippet.
 
 #### Act-2 aggregates
 
-- **Plain English:** Across twenty such bridges, the fitted lens lands in the
+- **Plain Language:** Across twenty such bridges, the fitted lens lands in the
   top-20 six times; identity once; random-J never. Pairwise, the fitted lens
   beats identity on 18 of 20 ranks.
 - **Technical:** Summary block from the same receipt, plus paired tests in
@@ -1680,7 +1680,7 @@ Each sample uses **plain English**, then **technical**, then a snippet.
 
 #### Field guide (act-2 receipt)
 
-| Field | Plain English | Technical |
+| Field | Plain Language | Technical |
 |---|---|---|
 | `prompt` / `target` | English question and bridge entity | Exact-string leakage checks on prompt and continuation |
 | `continuation` | What the model actually said next | Greedy decode; used for output-leakage guard |

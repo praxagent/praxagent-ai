@@ -34,14 +34,14 @@ uniform vec2 u_resolution;
 uniform vec2 u_imageSize;
 uniform float u_time;
 uniform float u_motionAmount;
-uniform float u_darkMode;
+uniform float u_shuffleAmount;
 
 in vec2 v_screenUv;
 out vec4 outColor;
 
-vec2 coverUv(vec2 screenUv) {
+vec2 coverUvFor(vec2 screenUv, vec2 imageSize) {
   float screenAspect = u_resolution.x / u_resolution.y;
-  float imageAspect = u_imageSize.x / u_imageSize.y;
+  float imageAspect = imageSize.x / imageSize.y;
   vec2 crop = vec2(1.0);
 
   if (screenAspect > imageAspect) {
@@ -53,6 +53,10 @@ vec2 coverUv(vec2 screenUv) {
   float centerTop = 0.5 + 0.12 * (1.0 - crop.y);
   vec2 centerBottom = vec2(0.5, 1.0 - centerTop);
   return (screenUv - 0.5) * crop + centerBottom;
+}
+
+vec2 coverUv(vec2 screenUv) {
+  return coverUvFor(screenUv, u_imageSize);
 }
 
 float hash21(vec2 point) {
@@ -78,7 +82,7 @@ float fbm(vec2 point) {
   float amplitude = 0.5;
   mat2 rotation = mat2(0.80, -0.60, 0.60, 0.80);
 
-  for (int index = 0; index < 4; index++) {
+  for (int index = 0; index < 5; index++) {
 #if LOW_POWER
     if (index == 3) break;
 #endif
@@ -119,48 +123,10 @@ float turingField(vec2 point, float time) {
   return clamp(0.5 + 0.25 * (horizontal + vertical), 0.0, 1.0);
 }
 
-vec3 webCell(vec2 point) {
-  vec2 cell = floor(point);
-  vec2 local = fract(point);
-  float nearest = 1e9;
-  float secondNearest = 1e9;
-  vec2 nearestVector = vec2(0.0);
-  vec2 secondVector = vec2(0.0);
-
-  for (int y = -1; y <= 1; y++) {
-    for (int x = -1; x <= 1; x++) {
-      vec2 neighbor = vec2(float(x), float(y));
-      vec2 id = cell + neighbor;
-      vec2 jitter = 0.18 + 0.64 * vec2(
-        hash21(id + vec2(17.17, 53.71)),
-        hash21(id + vec2(91.73, 27.19))
-      );
-      vec2 delta = neighbor + jitter - local;
-      float distanceSquared = dot(delta, delta);
-
-      if (distanceSquared < nearest) {
-        secondNearest = nearest;
-        secondVector = nearestVector;
-        nearest = distanceSquared;
-        nearestVector = delta;
-      } else if (distanceSquared < secondNearest) {
-        secondNearest = distanceSquared;
-        secondVector = delta;
-      }
-    }
-  }
-
-  float separation = max(length(secondVector - nearestVector), 0.001);
-  float edgeDistance = (secondNearest - nearest) / (2.0 * separation);
-  vec2 edgeNormal = normalize(nearestVector - secondVector);
-  return vec3(max(edgeDistance, 0.0), edgeNormal);
-}
-
 void main() {
   vec2 imageUv = coverUv(v_screenUv);
   vec2 topUv = vec2(imageUv.x, 1.0 - imageUv.y);
   vec2 imagePixel = 1.0 / u_imageSize;
-  vec2 maskPixel = 1.0 / vec2(textureSize(u_groundMask, 0));
   vec3 source = texture(u_image, imageUv).rgb;
   float ground = clamp(texture(u_groundMask, imageUv).r, 0.0, 1.0);
   float skyMask = 1.0 - ground;
@@ -233,68 +199,31 @@ void main() {
   vec3 terrain = source;
   float groundMotion = 0.0;
 
-  // The terrain pass runs only where the real photo mask says there is ground.
+  // Organic refraction keeps the original psychedelic terrain movement, but
+  // deliberately omits the Voronoi web, fracture lines, rims, and glints.
   if (ground > 0.001) {
-    // Slower, shallower movement keeps the ground alive without making the
-    // high-contrast rock detail feel visually unstable.
     float groundTime = u_time * 0.62;
     float pattern = turingField(topUv, groundTime);
     float travelingWave = 0.5 + 0.5 * sin(
       (topUv.x * 0.72 + topUv.y * 1.34) * 28.0
         - groundTime * 1.35 + pattern * 4.0
     );
-    vec2 baseFlowTop = vec2(
+    // Preserve the existing mid-ground motion and add stronger parallax-like
+    // displacement as the terrain approaches the bottom of the frame.
+    float foregroundDepth = smoothstep(0.48, 1.0, topUv.y);
+    float depthGain = 1.0 + foregroundDepth * 2.4;
+
+    vec2 organicFlowTop = vec2(
       sin(pattern * 6.2831853 + groundTime * 0.33),
       cos(pattern * 5.41 - groundTime * 0.29)
     );
-    baseFlowTop *= 0.0004 + 0.00125 * travelingWave;
+    organicFlowTop *= (0.0007 + 0.0022 * travelingWave) * depthGain;
+    organicFlowTop += vec2(
+      sin(topUv.y * 18.0 - groundTime * 0.44),
+      cos(topUv.x * 15.0 + groundTime * 0.37)
+    ) * 0.00045 * depthGain;
 
-    vec2 webPoint = topUv * vec2(12.0, 16.0);
-    webPoint += vec2(
-      0.22 * sin(webPoint.y * 0.57 + 0.35 * sin(webPoint.x * 0.31)),
-      0.18 * sin(webPoint.x * 0.49 - 0.30 * sin(webPoint.y * 0.37))
-    );
-
-    vec3 webData = webCell(webPoint);
-    float edgeDistance = webData.x;
-    vec2 edgeNormalTop = webData.yz;
-    float webPhase = dot(webPoint, vec2(0.72, 0.41))
-      - groundTime * 1.05 + pattern * 3.0;
-    float webSigned = sin(webPhase);
-
-    float antialiasWidth = clamp(
-      12.0 / min(u_resolution.x, u_resolution.y),
-      0.0015,
-      0.040
-    );
-    float webHalo = 1.0 - smoothstep(
-      0.050 + antialiasWidth,
-      0.220 + antialiasWidth,
-      edgeDistance
-    );
-    float primaryThread = 1.0 - smoothstep(
-      max(0.0, 0.018 - antialiasWidth),
-      0.062 + antialiasWidth,
-      edgeDistance
-    );
-    float echoCenterA = 0.095 + 0.016 * sin(webPhase * 0.72);
-    float echoThreadA = 1.0 - smoothstep(
-      0.014 + antialiasWidth,
-      0.046 + antialiasWidth,
-      abs(edgeDistance - echoCenterA)
-    );
-#if !LOW_POWER
-    float echoCenterB = 0.175 + 0.020 * sin(webPhase * 0.54 + 1.7);
-    float echoThreadB = 1.0 - smoothstep(
-      0.012 + antialiasWidth,
-      0.040 + antialiasWidth,
-      abs(edgeDistance - echoCenterB)
-    );
-#endif
-
-    vec2 refractionTop = baseFlowTop * (0.78 + 0.30 * webHalo);
-    refractionTop += edgeNormalTop * (0.00032 * webHalo * webSigned);
-    vec2 refractionUv = vec2(refractionTop.x, -refractionTop.y);
+    vec2 refractionUv = vec2(organicFlowTop.x, -organicFlowTop.y);
     vec2 terrainCenter = clamp(imageUv + refractionUv, 0.001, 0.999);
     float displacedGround = texture(u_groundMask, terrainCenter).r;
     groundMotion = smoothstep(
@@ -304,87 +233,52 @@ void main() {
     ) * u_motionAmount;
 
     terrain = texture(u_image, terrainCenter).rgb;
-    float maskUp8 = texture(
-      u_groundMask,
-      clamp(imageUv + vec2(0.0, maskPixel.y * 8.0), 0.001, 0.999)
-    ).r;
-    float maskUp20 = texture(
-      u_groundMask,
-      clamp(imageUv + vec2(0.0, maskPixel.y * 20.0), 0.001, 0.999)
-    ).r;
-#if !LOW_POWER
-    float maskUp38 = texture(
-      u_groundMask,
-      clamp(imageUv + vec2(0.0, maskPixel.y * 38.0), 0.001, 0.999)
-    ).r;
-#endif
-    float ridgeThreadA = clamp(ground - maskUp8, 0.0, 1.0);
-    float ridgeThreadB = clamp(maskUp8 - maskUp20, 0.0, 1.0);
-#if !LOW_POWER
-    float ridgeThreadC = clamp(maskUp20 - maskUp38, 0.0, 1.0);
-#endif
-    float ridgePhase = topUv.x * 31.0 - groundTime * 1.18 + pattern * 2.6;
-
-    float webRelief = primaryThread * webSigned * 0.015;
-    webRelief += echoThreadA * sin(webPhase * 1.13 + 1.2) * 0.010;
-#if !LOW_POWER
-    webRelief += echoThreadB * sin(webPhase * 0.91 + 3.0) * 0.006;
-#endif
-    float ridgeRelief = ridgeThreadA * sin(ridgePhase) * 0.022;
-    ridgeRelief += ridgeThreadB * sin(ridgePhase * 0.91 + 1.8) * 0.014;
-#if !LOW_POWER
-    ridgeRelief += ridgeThreadC * sin(ridgePhase * 0.77 + 3.4) * 0.009;
-#endif
-    float organicRelief = (pattern - 0.5) * 0.020;
+    float breathingRelief = (pattern - 0.5) * 0.018;
+    breathingRelief += sin(
+      travelingWave * 6.2831853 + groundTime * 0.35
+    ) * 0.006;
     terrain *= 1.0
-      + (webRelief + ridgeRelief + organicRelief) * groundMotion * 0.48;
+      + breathingRelief * groundMotion * (1.0 + foregroundDepth * 0.75);
 
-    // Cobweb cracks revealed along the warp's inflection front. The traveling
-    // wave bends the rock hardest where it crosses its midpoint, so the
-    // fracture network only shows where the surface is actively flexing
-    // instead of sitting on top as a static overlay.
-    float inflection = 1.0 - smoothstep(
-      0.06,
-      0.48,
-      abs(travelingWave - 0.5) * 2.0 - (pattern - 0.5) * 0.22
-    );
-    float crackLine = 1.0 - smoothstep(
-      0.0,
-      0.028 + antialiasWidth,
-      edgeDistance
-    );
-    float crackNetwork = crackLine + echoThreadA * 0.30;
-#if !LOW_POWER
-    crackNetwork += echoThreadB * 0.18;
-#endif
-    // Confine the fracture network to solidly-masked rock so it never bleeds
-    // into the feathered ridgeline or the thin tree silhouettes against sky.
-    float solidGround = smoothstep(0.80, 0.98, min(ground, displacedGround));
-    float crackStrength = clamp(crackNetwork, 0.0, 1.0) * inflection * solidGround;
-
-    // Hairline shadow with a lit rim on one side reads as a real fissure.
-    float rimLight = crackLine * inflection
-      * max(dot(edgeNormalTop, normalize(vec2(0.38, 0.82))), 0.0);
-
-    // Sparse glints traveling along the threads suggest signals moving
-    // through the network without turning the rocks neon.
-    float pulse = 0.5 + 0.5 * sin(webPhase * 2.0 + groundTime * 2.3);
-    pulse = pulse * pulse * pulse;
-    pulse = pulse * pulse;
-    float glint = crackLine * inflection * pulse;
-
-    terrain *= 1.0 - crackStrength * (0.26 + 0.08 * pattern) * groundMotion;
-    terrain += terrain
-      * (rimLight * 0.14 + glint * 0.30) * solidGround
-      * vec3(0.94, 1.0, 1.07)
-      * groundMotion;
   }
 
   vec3 baseScene = mix(sky, source, ground);
   vec3 color = mix(baseScene, terrain, groundMotion);
-  float vignette = 1.0 - 0.12 * smoothstep(0.20, 0.86, length(v_screenUv - 0.5));
-  color *= vignette;
-  color = mix(color, color * vec3(0.70, 0.76, 0.84), 0.42 * u_darkMode);
+
+  // Tiny cells migrate to deterministic random destinations. A curved offset
+  // gives each cell an individual ballistic path while the JS timeline applies
+  // damped spring easing to the shared travel amount.
+  float shufflePosition = clamp(u_shuffleAmount, -0.12, 1.12);
+  float shuffleProgress = clamp(shufflePosition, 0.0, 1.0);
+#if LOW_POWER
+  vec2 shuffleGrid = max(floor(u_resolution / 2.0), vec2(1.0));
+#else
+  vec2 shuffleGrid = max(floor(u_resolution / 3.0), vec2(1.0));
+#endif
+  vec2 cell = floor(v_screenUv * shuffleGrid);
+  vec2 localPixel = fract(v_screenUv * shuffleGrid);
+  vec2 randomCell = floor(vec2(
+    hash21(cell + vec2(17.2, 63.8)),
+    hash21(cell + vec2(91.7, 24.5))
+  ) * shuffleGrid);
+  vec2 randomDestination = (randomCell + localPixel) / shuffleGrid;
+  vec2 curveDirection = vec2(
+    hash21(cell + vec2(7.1, 83.4)),
+    hash21(cell + vec2(61.8, 13.2))
+  ) - 0.5;
+  float arc = sin(shuffleProgress * 3.14159265);
+  vec2 sampleScreen = mix(
+    v_screenUv,
+    randomDestination,
+    shufflePosition
+  ) + curveDirection * arc * 0.075;
+  vec3 shuffledPixels = texture(
+    u_image,
+    clamp(coverUvFor(sampleScreen, u_imageSize), 0.001, 0.999)
+  ).rgb;
+  float shuffleEngagement = smoothstep(0.0, 0.22, shuffleProgress);
+  color = mix(color, shuffledPixels, shuffleEngagement);
+
   outColor = vec4(color, 1.0);
 }
 `;
@@ -498,13 +392,8 @@ void main() {
     var images = null;
     var resizeObserver = null;
     var intersectionObserver = null;
-    var themeObserver = null;
     var initGeneration = 0;
     var reducedMotion = global.matchMedia('(prefers-reduced-motion: reduce)');
-
-    function isDarkMode() {
-      return document.documentElement.getAttribute('data-theme') === 'dark';
-    }
 
     function deleteResources() {
       if (!resources || !gl || contextLost) {
@@ -535,7 +424,7 @@ void main() {
         imageSize: gl.getUniformLocation(program, 'u_imageSize'),
         time: gl.getUniformLocation(program, 'u_time'),
         motion: gl.getUniformLocation(program, 'u_motionAmount'),
-        darkMode: gl.getUniformLocation(program, 'u_darkMode')
+        shuffleAmount: gl.getUniformLocation(program, 'u_shuffleAmount')
       };
     }
 
@@ -579,7 +468,40 @@ void main() {
       resources.imageSize = nextPipeline.imageSize;
       resources.time = nextPipeline.time;
       resources.motion = nextPipeline.motion;
-      resources.darkMode = nextPipeline.darkMode;
+      resources.shuffleAmount = nextPipeline.shuffleAmount;
+    }
+
+    function driftAndSnap01(value) {
+      var clamped = Math.max(0, Math.min(1, value));
+      var driftEnd = 0.82;
+
+      if (clamped < driftEnd) {
+        var driftProgress = clamped / driftEnd;
+        return 0.58 * Math.pow(driftProgress, 1.7);
+      }
+
+      var snapProgress = (clamped - driftEnd) / (1 - driftEnd);
+      return 0.58 + 0.42 * Math.pow(snapProgress, 2.7);
+    }
+
+    function currentShuffleAmount() {
+      if (reducedMotion.matches) return 0;
+
+      var originalHold = 8;
+      var shuffledHold = 2.4;
+      var transition = 6;
+      var phase = simulationTime % (
+        originalHold + shuffledHold + transition * 2
+      );
+
+      if (phase < originalHold) return 0;
+      if (phase < originalHold + transition) {
+        return driftAndSnap01((phase - originalHold) / transition);
+      }
+      if (phase < originalHold + transition + shuffledHold) return 1;
+      return 1 - driftAndSnap01(
+        (phase - originalHold - transition - shuffledHold) / transition
+      );
     }
 
     function draw() {
@@ -609,7 +531,8 @@ void main() {
       );
       gl.uniform1f(resources.time, simulationTime);
       gl.uniform1f(resources.motion, reducedMotion.matches ? 0 : 1);
-      gl.uniform1f(resources.darkMode, isDarkMode() ? 1 : 0);
+      var shuffleAmount = currentShuffleAmount();
+      gl.uniform1f(resources.shuffleAmount, shuffleAmount);
       gl.bindVertexArray(resources.quadVao);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       gl.bindVertexArray(null);
@@ -706,7 +629,7 @@ void main() {
         imageSize: pipeline.imageSize,
         time: pipeline.time,
         motion: pipeline.motion,
-        darkMode: pipeline.darkMode,
+        shuffleAmount: pipeline.shuffleAmount,
         imageTexture: imageTexture,
         maskTexture: maskTexture,
         quadBuffer: quadBuffer,
@@ -727,7 +650,10 @@ void main() {
         loadImage(groundMaskUrl, 'high')
       ]).then(function (loaded) {
         if (destroyed || contextLost || generation !== initGeneration) return;
-        images = { photo: loaded[0], mask: loaded[1] };
+        images = {
+          photo: loaded[0],
+          mask: loaded[1]
+        };
         setupResources();
       }).catch(function (error) {
         canvas.classList.remove('is-ready');
@@ -757,10 +683,6 @@ void main() {
       syncLoop(true);
     }
 
-    function onThemeChange() {
-      if (resources && intersecting && !document.hidden) draw();
-    }
-
     function onContextLost(event) {
       event.preventDefault();
       contextLost = true;
@@ -784,7 +706,6 @@ void main() {
       stopLoop();
       resizeObserver && resizeObserver.disconnect();
       intersectionObserver && intersectionObserver.disconnect();
-      themeObserver && themeObserver.disconnect();
       document.removeEventListener('visibilitychange', onVisibilityChange);
       canvas.removeEventListener('webglcontextlost', onContextLost);
       canvas.removeEventListener('webglcontextrestored', onContextRestored);
@@ -831,12 +752,6 @@ void main() {
       });
       intersectionObserver.observe(canvas.parentElement || canvas);
     }
-
-    themeObserver = new MutationObserver(onThemeChange);
-    themeObserver.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-theme']
-    });
 
     document.addEventListener('visibilitychange', onVisibilityChange);
     canvas.addEventListener('webglcontextlost', onContextLost);

@@ -1,13 +1,15 @@
 # praxagent Website
 
-Professional website for [praxagent.ai](https://praxagent.ai) — AI research, apps, and a Hugo-powered blog with LaTeX math support and syntax highlighting.
+Website for [praxagent.ai](https://praxagent.ai) — independent AI work and Hugo-powered Research Notes with LaTeX math support and syntax highlighting.
 
 ## Project Structure
 
 ```
 praxagent/
 ├── index.html                 # Homepage (animated mountain hero)
-├── apps.html                  # Apps showcase (Prax, TeamWork, TippyTip, Chaos Lab)
+├── work/index.html            # Canonical research programs + applied systems index
+├── research/index.html        # Legacy redirect to work/
+├── apps.html                  # Legacy redirect to work/
 ├── stochastic-mountain.js     # Animated mountain canvas (see below)
 ├── styles-v2.css              # Site-wide CSS (light/dark, mobile-first)
 ├── script.js                  # Theme toggle, mobile menu, scroll effects
@@ -32,6 +34,7 @@ praxagent/
 
 ```bash
 make blog       # compile blog-source/content/posts into blog/
+make blog-drafts # compile blog/ including draft Research Notes
 make blog-serve # Hugo live reload at http://127.0.0.1:1313/blog/
 make ci         # exact build + validation contract used by GitHub Actions
 ```
@@ -44,13 +47,21 @@ HTML anchors, JSON, and SVG/XML assets.
 
 ```bash
 # Blog live reload (edit blog-source/; browser refreshes on save)
-make blog-serve
+make blog-serve              # foreground
+make blog-serve up           # background (any terminal)
+make blog-serve down         # stop, even if started elsewhere
+
+# Tailnet preview (phone / other devices on your Tailscale network)
+make blog-serve-tailscale up
+make blog-serve-tailscale down
 
 # Post URL example:
 # http://127.0.0.1:1313/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/
 
 # Full site (homepage + built blog/) — no auto-rebuild
 make run-site-local          # http://127.0.0.1:8000/ (use 127.0.0.1, not localhost)
+make run-site-local up|down
+make run-site-tailscale up|down
 ```
 
 ### Adding Blog Posts

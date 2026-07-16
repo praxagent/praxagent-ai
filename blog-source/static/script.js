@@ -209,8 +209,22 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileThemeToggle.setAttribute('tabindex', '0');
         mobileThemeToggle.setAttribute('role', 'switch');
     }
-    // Handle smooth scrolling for navigation links
-    const navLinks = document.querySelectorAll('a[href^="#"]');
+    // Handle incoming hash navigation from other pages.
+    if (window.location.hash) {
+        setTimeout(() => {
+            const targetSection = document.querySelector(window.location.hash);
+            if (targetSection) {
+                const navHeight = document.querySelector('.navbar').offsetHeight;
+                window.scrollTo({
+                    top: targetSection.offsetTop - navHeight,
+                    behavior: 'smooth'
+                });
+            }
+        }, 100);
+    }
+
+    // Handle smooth scrolling for same-page navigation links.
+    const navLinks = document.querySelectorAll('a[href^="#"]:not([href*="/"])');
     
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -231,10 +245,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add navbar background on scroll
     const navbar = document.querySelector('.navbar');
-    
-    window.addEventListener('scroll', function() {
+
+    function updateNavbar() {
         if (window.scrollY > 50) {
             navbar.style.background = 'var(--bg-navbar-scrolled)';
             navbar.style.boxShadow = '0 2px 20px var(--shadow-navbar)';
@@ -242,7 +255,12 @@ document.addEventListener('DOMContentLoaded', function() {
             navbar.style.background = 'var(--bg-navbar)';
             navbar.style.boxShadow = 'none';
         }
-    });
+    }
+
+    updateNavbar();
+    window.addEventListener('scroll', updateNavbar, { passive: true });
+    window.addEventListener('resize', updateNavbar);
+    window.addEventListener('pageshow', updateNavbar);
 
     // Animate elements on scroll
     const observerOptions = {

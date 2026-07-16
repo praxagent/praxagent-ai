@@ -4,32 +4,32 @@
 	<meta name="generator" content="Hugo 0.160.1">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>praxagent LLC Blog - praxagent</title>
+    <title>praxagent Research Notes</title>
     
     
     
     
     
     
-    <meta name="description" content="Insights, tutorials, and thoughts on AI software development from the praxagent team">
+    <meta name="description" content="Experiments, methods, controls, and engineering notes from praxagent">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="canonical" href="https://praxagent.ai/blog/index.html">
+    <link rel="canonical" href="https://praxagent.ai/blog/">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="praxagent Blog">
-    <meta property="og:title" content="praxagent LLC Blog">
-    <meta property="og:description" content="Insights, tutorials, and thoughts on AI software development from the praxagent team">
-    <meta property="og:url" content="https://praxagent.ai/blog/index.html">
+    <meta property="og:site_name" content="praxagent Research Notes">
+    <meta property="og:title" content="praxagent Research Notes">
+    <meta property="og:description" content="Experiments, methods, controls, and engineering notes from praxagent">
+    <meta property="og:url" content="https://praxagent.ai/blog/">
     <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@praxagent">
-    <meta name="twitter:title" content="praxagent LLC Blog">
-    <meta name="twitter:description" content="Insights, tutorials, and thoughts on AI software development from the praxagent team">
+    <meta name="twitter:title" content="praxagent Research Notes">
+    <meta name="twitter:description" content="Experiments, methods, controls, and engineering notes from praxagent">
     <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css">
     <link rel="stylesheet" href="/blog/blog.css">
     <link rel="stylesheet" href="/blog/katex.min.css">
@@ -37,7 +37,7 @@
     
 </head>
 <body>
-    <nav class="navbar navbar-scrolls">
+    <nav class="navbar navbar-scrolls industrial-navbar">
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
@@ -45,13 +45,16 @@
                 </a>
             </div>
             <div class="nav-menu">
-                <a href="/research/index.html" class="nav-link">Research</a>
-                <a href="/blog/index.html" class="nav-link active">Tech Blog</a>
-                <a href="/apps.html" class="nav-link">Apps</a>
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link active">Research Notes</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <span class="theme-toggle-icon sun">☀️</span>
-                    <span class="theme-toggle-icon moon">🌙</span>
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
                 </div>
             </div>
             
@@ -67,14 +70,17 @@
 
     <div class="mobile-menu-overlay" id="mobile-menu-overlay">
         <div class="mobile-menu-content">
-            <a href="/research/index.html" class="mobile-nav-link">Research</a>
-            <a href="/blog/index.html" class="mobile-nav-link active">Tech Blog</a>
-            <a href="/apps.html" class="mobile-nav-link">Apps</a>
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link active">Research Notes</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
-                    <span class="theme-toggle-icon sun">☀️</span>
-                    <span class="theme-toggle-icon moon">🌙</span>
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
                 </div>
             </div>
         </div>
@@ -84,122 +90,87 @@
         
 <header class="blog-header">
     <div class="blog-header-content">
-        <p class="blog-kicker">praxagent technical notes</p>
+        <p class="blog-kicker">praxagent / Technical record</p>
         <div class="blog-header-grid">
             <h1 class="blog-title">
-                AI research, <span class="accent">tested in public.</span>
+                
+                    Research <span class="accent">Notes.</span>
+                
             </h1>
             <p class="blog-subtitle">
-                Reproducible experiments, practical methods, and careful claims from building and auditing real AI systems.
+                
+                    Experiments, methods, controls, and engineering notes from work on model internals and AI systems.
+                
             </p>
         </div>
     </div>
 </header>
 
 <div class="blog-main">
-    <div class="container">
-        <div class="blog-content">
-            <div class="blog-posts">
-                
-                
-                
-                <article class="blog-post-preview">
-                    <h2><a href="/blog/posts/2026/07/workspace-under-pressure/">Under Pressure: What a Jacobian Lens Reveals About Self-Preservation and Lying, Once You Run the Controls</a></h2>
-                    <div class="post-meta">
-                        <span class="post-date">July 13, 2026</span>
-                        <span class="post-author">by Timothy Jones</span>
-                    </div>
-                    <p class="post-excerpt">A follow-up to our Jacobian-lens release, and mostly a lesson in controls. On Qwen3.5-397B we reproduce Anthropic&rsquo;s global-workspace signatures under pressure (survival vocabulary under a self-directed threat; the true answer held while the output is pushed to lie), then stress-test them against a plain logit-lens, a random-J null, and the model&rsquo;s own output head. The honest verdict: the self-preservation signal is directional but modest, base-rate-inflated, and not specific to the Jacobian lens (a logit-lens reads it too); the one &lsquo;caught lie&rsquo; is read at rank 1 by the logit-lens and rank 2 by the output head, so no lens is needed to catch it; and the self-directedness does not replicate on Llama-3.3-70B. What survives: the signatures are legible on open weights, the model mostly refuses to lie (given room to reason it never says the lie at all), and the controls are the whole story.</p>
-                    <a href="/blog/posts/2026/07/workspace-under-pressure/" class="read-more">Read More →</a>
-                </article>
-                
-                <article class="blog-post-preview">
-                    <h2><a href="/blog/posts/2026/07/jacobian-lens-sae-steering/">Can a Jacobian Lens Detect SAE Steering?</a></h2>
-                    <div class="post-meta">
-                        <span class="post-date">July 12, 2026</span>
-                        <span class="post-author">by Timothy Jones</span>
-                    </div>
-                    <p class="post-excerpt">A prospectively frozen Llama 3.3 70B experiment asks whether SAE steering leaves a detectable downstream fingerprint in Jacobian-lens space. A preregistered follow-up adds semantic hard negatives, same-subfamily comparators, a 14-reader capacity ladder, and a worked example of a replay gate failing honestly.</p>
-                    <a href="/blog/posts/2026/07/jacobian-lens-sae-steering/" class="read-more">Read More →</a>
-                </article>
-                
-                <article class="blog-post-preview">
-                    <h2><a href="/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">Open-sourcing (and Auditing) a Jacobian Lens for Qwen3.5-397B</a></h2>
-                    <div class="post-meta">
-                        <span class="post-date">July 10, 2026</span>
-                        <span class="post-author">by Timothy Jones</span>
-                    </div>
-                    <p class="post-excerpt">As of July 10, 2026, Praxagent is open-sourcing the public Jacobian lens fitted for the largest base model so far: Qwen3.5-397B-A17B, with a pre-registered readout audit against identity and random-J controls. Weights, hash, code, and receipts included.</p>
-                    <a href="/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/" class="read-more">Read More →</a>
-                </article>
-                
-                <article class="blog-post-preview">
-                    <h2><a href="/blog/posts/2026/07/how-to-read-an-sae-feature-id/">How to Read an SAE Feature ID</a></h2>
-                    <div class="post-meta">
-                        <span class="post-date">July 9, 2026</span>
-                        <span class="post-author">by Timothy Jones</span>
-                    </div>
-                    <p class="post-excerpt">A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights.</p>
-                    <a href="/blog/posts/2026/07/how-to-read-an-sae-feature-id/" class="read-more">Read More →</a>
-                </article>
-                
-                <article class="blog-post-preview">
-                    <h2><a href="/blog/posts/2025/08/late-chunking/">Late Chunking: Why Context-Aware Embeddings (sometimes) Beat Traditional Chunking</a></h2>
-                    <div class="post-meta">
-                        <span class="post-date">August 2, 2025</span>
-                        <span class="post-author">by Timothy Jones</span>
-                    </div>
-                    <p class="post-excerpt">Traditional chunking methods for RAG pipelines often break context by chunking text before embedding. Late chunking offers a solution by embedding the entire document first and then chunking the token embeddings, preserving vital contextual information and improving retrieval accuracy.</p>
-                    <a href="/blog/posts/2025/08/late-chunking/" class="read-more">Read More →</a>
-                </article>
-                
-            </div>
+    <div class="blog-index">
+        
+        
+        
+        
+        
 
-            <aside class="blog-sidebar">
-                <div class="sidebar-widget">
-                    <h3>About This Blog</h3>
-                    <p>Notes on machine learning and AI: experiments you can rerun, methods explained from the ground up, and claims kept honest about what the evidence shows. Code and data linked wherever possible.</p>
-                </div>
+        
+            
+            
+            <a class="blog-featured" href="/blog/posts/2026/07/workspace-under-pressure/">
+                <span class="blog-featured-label">Latest</span>
+                <h2>Under Pressure: What a Jacobian Lens Reveals About Self-Preservation and Lying in Qwen3.5-397B</h2>
+                <p class="blog-featured-summary">Hold the deletion threat fixed and vary only who is targeted: on Qwen3.5-397B, echo-free survival-identity vocabulary is more active under a threat to the model itself than under a matched threat to another model. We then caught two flaws in our own arms (the human arm was scored on AI-ops …</p>
+                <span class="blog-index-meta">Timothy Jones · July 13, 2026</span>
+            </a>
+        
 
-                <div class="sidebar-widget">
-                    <h3>Categories</h3>
-                    <ul class="category-list">
-                        <li><a href="/blog/tags/machine-learning/">Machine Learning</a></li>
-                        <li><a href="/blog/tags/ai/">AI</a></li>
-                        <li><a href="/blog/tags/interpretability/">Interpretability</a></li>
-                        <li><a href="/blog/tags/reproducibility/">Reproducibility</a></li>
-                        <li><a href="/blog/tags/tutorials/">Tutorials</a></li>
-                    </ul>
-                </div>
-
-                
-            </aside>
+        <div class="blog-index-list">
+            
+            <a class="blog-index-row" href="/blog/posts/2026/07/jacobian-lens-sae-steering/">
+                <h3>Can a Jacobian Lens Detect SAE Steering?</h3>
+                <span class="blog-index-meta">Timothy Jones · July 12, 2026</span>
+            </a>
+            
+            <a class="blog-index-row" href="/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">
+                <h3>Open-sourcing (and Auditing) a Jacobian Lens for Qwen3.5-397B</h3>
+                <span class="blog-index-meta">Timothy Jones · July 10, 2026</span>
+            </a>
+            
+            <a class="blog-index-row" href="/blog/posts/2026/07/how-to-read-an-sae-feature-id/">
+                <h3>How to Read an SAE Feature ID</h3>
+                <span class="blog-index-meta">Timothy Jones · July 9, 2026</span>
+            </a>
+            
+            <a class="blog-index-row" href="/blog/posts/2025/08/late-chunking/">
+                <h3>Late Chunking: Why Context-Aware Embeddings (sometimes) Beat Traditional Chunking</h3>
+                <span class="blog-index-meta">Timothy Jones · August 2, 2025</span>
+            </a>
+            
         </div>
+        
     </div>
 </div>
 
     </main>
 
-    <footer class="footer">
+    <footer class="footer footer-compact">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <span class="logo-text">praxagent</span>
-                    <p>AI software insights and knowledge sharing.</p>
-                </div>
-                
-                <div class="footer-links">
-                    <a href="/research/index.html">Research</a>
-                    <a href="/blog/index.html">Tech Blog</a>
-                    <a href="/apps.html">Apps</a>
-                    <a href="/index.html#contact">Contact</a>
-                    <a href="#">Privacy Policy</a>
-                </div>
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
             </div>
-            
-            <div class="footer-bottom">
+            <div class="footer-compact-bottom">
                 <p>&copy; 2026 praxagent. All rights reserved.</p>
-                <p>AI research and education.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
             </div>
         </div>
     </footer>

@@ -1,7 +1,7 @@
 baseURL: 'https://praxagent.ai/blog/'
 languageCode: 'en-us'
-title: 'praxagent LLC Blog'
-description: 'Intelligent AI software consultation and partnership'
+title: 'praxagent Research Notes'
+description: 'Technical research notes on model internals, controlled evaluation, and applied AI systems'
 
 ignoreFiles:
   - '\\.venv/'
@@ -11,7 +11,7 @@ ignoreFiles:
   - '__pycache__/'
 
 params:
-  description: 'Insights, tutorials, and thoughts on AI software development from the praxagent team'
+  description: 'Experiments, methods, controls, and engineering notes from praxagent'
 
 permalinks:
   posts: '/posts/:year/:month/:slug/'
@@ -45,17 +45,3 @@ outputs:
 
 publishDir: '../blog'
 
-menu:
-  main:
-    - name: "Services"
-      url: "../index.html#services"
-      weight: 10
-    - name: "About"
-      url: "../index.html#about"
-      weight: 20
-    - name: "Blog"
-      url: "index.html"
-      weight: 30
-    - name: "Contact"
-      url: "../index.html#contact"
-      weight: 40

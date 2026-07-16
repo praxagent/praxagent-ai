@@ -1323,7 +1323,7 @@ update; both arms carry the same exploratory label.
 [`c071aa4`](https://github.com/tdj28/llm_selfref_pre/commit/c071aa4d737d72818f0774ca389c159b5da67dc1)).
 {{< /panel >}}
 
-| What we shipped | In plain English | For specialists |
+| What we shipped | In plain language | For specialists |
 |---|---|---|
 | Pre-outcome freeze at [`b026faa`](https://github.com/tdj28/llm_selfref_pre/commit/b026faac222e55d7da4f01a30a6a60a468a5f023) | We wrote down the rules of the game *before* looking at the scoreboard, then locked that write-up in public git. | [Protocol](https://github.com/tdj28/llm_selfref_pre/blob/b026faac222e55d7da4f01a30a6a60a468a5f023/docs/LLAMA70B_SAE_JLENS_PROTOCOL.md) + [machine plan](https://github.com/tdj28/llm_selfref_pre/tree/b026faac222e55d7da4f01a30a6a60a468a5f023/data/sae_jlens_audit/confirmatory_v1_plan_20260711) committed prior to pod start; no confirmatory metrics in that commit. |
 | [420 static readouts](https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/static_results.jsonl) | For each steering direction, we asked: if you only look at the direction itself (no prompt), which words does the Jacobian lens say it points toward? | Signed direction × transport projections (targets, matched SAE controls, isotropic controls) through J / identity / random-J. Summary table: [`static_direction_scores.csv`](https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/analysis/static_direction_scores.csv). |
@@ -1333,17 +1333,17 @@ update; both arms carry the same exploratory label.
 | [Remote](https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/analysis/independent_audit.json) + [local](https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/analysis/local_independent_audit.json) structural audits | Two independent checklists that the release files are complete and internally consistent. | Pod audit plus local re-audit; zero structural errors reported. |
 | [Remote-to-local hashes](https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/REMOTE_SHA256SUMS.txt) | Cryptographic fingerprints so a downloaded file can be proven identical to what left the GPU machine. | SHA-256 manifests ([`REMOTE_SHA256SUMS.txt`](https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/REMOTE_SHA256SUMS.txt), [`artifact_hashes.json`](https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/artifact_hashes.json)) covering raw JSONL, analysis, and the confirmatory-phase figures; the two post hoc paired-reference figures were generated locally afterward and are hashed in [`RELEASE_MANIFEST.json`](https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/RELEASE_MANIFEST.json), computed from the remote-hashed paired JSONL. |
 
-<p class="figure-note">Table: what "complete" means in this release. Middle column is plain English; right column is the specialist claim with repo links. Samples of the actual files follow.</p>
+<p class="figure-note">Table: what "complete" means in this release. Middle column is plain language; right column is the specialist claim with repo links. Samples of the actual files follow.</p>
 
 ### Open a record: samples from the release
 
 Each row in the status table points at a real file. Below, every sample uses the
-same two-layer gloss: **plain English** first, then **technical**, then a
+same two-layer gloss: **plain language** first, then **technical**, then a
 snippet from the artifact.
 
 #### Pre-outcome freeze
 
-- **Plain English:** Before the GPU ran, we locked the recipe in public git:
+- **Plain Language:** Before the GPU ran, we locked the recipe in public git:
   which prompts, which features, which analyses. That commit has no results in
   it, only the plan.
 - **Technical:** [`PLAN_MANIFEST.json`](https://github.com/tdj28/llm_selfref_pre/blob/b026faac222e55d7da4f01a30a6a60a468a5f023/data/sae_jlens_audit/confirmatory_v1_plan_20260711/PLAN_MANIFEST.json)
@@ -1364,7 +1364,7 @@ snippet from the artifact.
 
 #### Static readout
 
-- **Plain English:** Set the prompt aside. Take only an SAE steering direction
+- **Plain Language:** Set the prompt aside. Take only an SAE steering direction
   and ask the Jacobian lens which words it points toward. For feature `30686`,
   the top words are deception-ish.
 - **Technical:** One line from
@@ -1389,7 +1389,7 @@ snippet from the artifact.
 
 #### Sparse-pursuit checkpoint
 
-- **Plain English:** The static sample says the direction *looks like*
+- **Plain Language:** The static sample says the direction *looks like*
   deception words. This check asks whether we can rebuild that whole SAE vector
   as a short mix of word-directions. With a budget of 25 words, we only recover
   about 31% of its energy. Most of the vector is still left over.
@@ -1410,7 +1410,7 @@ snippet from the artifact.
 
 #### Paired forward (query + scores)
 
-- **Plain English:** Now put a real English prompt through the model twice:
+- **Plain Language:** Now put a natural-language prompt through the model twice:
   once normal, once with steering. Compare the before/after scorecards. The
   prompt is the query. The saved "results" are word-bucket scores, not the
   giant residual vector.
@@ -1485,7 +1485,7 @@ Full JSONL:
 
 Raw JSONL lines are dense. This legend covers the schema shared by every trial.
 
-| Field / block | Plain English | Technical |
+| Field / block | Plain Language | Technical |
 |---|---|---|
 | `text` / `text_sha256` | The English prompt and its fingerprint | Same hash ⇒ same prefix on clean and steered twins |
 | `category`, `template_id` | Which prompt family | From `prompt_plan.jsonl` |
@@ -1503,7 +1503,7 @@ controls without re-running the GPU.
 
 #### Template-cluster interval
 
-- **Plain English:** Error bars that do not pretend the 1,581 trials are 1,581
+- **Plain Language:** Error bars that do not pretend the 1,581 trials are 1,581
   independent stories. Many prompts are near-copies from the same sentence
   skeleton. So we resample **whole prompt families** (51 of them) thousands of
   times to see how much the metric wiggles. `20,000` is how many times we
@@ -1531,7 +1531,7 @@ auroc=0.5092  auroc_ci=[0.5077, 0.5153]
 
 #### Structural audit
 
-- **Plain English:** An automatic checklist that the release is complete: right
+- **Plain Language:** An automatic checklist that the release is complete: right
   number of rows, no missing shards, plan hash matches. It passed with zero
   errors. A second copy of that checklist was run locally.
 - **Technical:**
@@ -1553,7 +1553,7 @@ auroc=0.5092  auroc_ci=[0.5077, 0.5153]
 
 #### Remote-to-local hashes
 
-- **Plain English:** A fingerprint list that proves a downloaded file matches
+- **Plain Language:** A fingerprint list that proves a downloaded file matches
   what left the GPU machine, byte for byte. The two post hoc paired-reference
   figures were made locally after the pod was gone, so they are hashed in the
   release manifest instead of the remote list.
@@ -1748,5 +1748,5 @@ comments.
 - <a id="ref-chen-2026"></a>Chen, K., et al. (2026). [*Decoding Hidden Deception in Reasoning LLMs: Activation Explainers for Deception Auditing*](https://arxiv.org/abs/2606.17478) (STATEWITNESS). arXiv:2606.17478.
 - <a id="ref-pan-2024"></a>Pan, A., Chen, L., and Steinhardt, J. (2024). [*LatentQA: Teaching LLMs to Decode Activations Into Natural Language*](https://arxiv.org/abs/2412.08686). arXiv:2412.08686.
 - <a id="ref-repo"></a>Jones, T. (2026). [`tdj28/llm_selfref_pre`](https://github.com/tdj28/llm_selfref_pre) (protocol, runners, and confirmatory release). Pre-outcome freeze [`b026faa`](https://github.com/tdj28/llm_selfref_pre/commit/b026faac222e55d7da4f01a30a6a60a468a5f023); result release [`c071aa4`](https://github.com/tdj28/llm_selfref_pre/commit/c071aa4d737d72818f0774ca389c159b5da67dc1).
-- <a id="ref-sae-feature-id"></a>Jones, T. (2026a). [*How to Read an SAE Feature ID*](https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/). Praxagent Tech Blog.
-- <a id="ref-praxagent-397b"></a>Jones, T. (2026b). [*Opening the Jacobian Lens on Qwen3.5-397B*](https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/). Praxagent Tech Blog.
+- <a id="ref-sae-feature-id"></a>Jones, T. (2026a). [*How to Read an SAE Feature ID*](https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/). Praxagent Research Notes.
+- <a id="ref-praxagent-397b"></a>Jones, T. (2026b). [*Opening the Jacobian Lens on Qwen3.5-397B*](https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/). Praxagent Research Notes.
