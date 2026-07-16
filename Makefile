@@ -83,7 +83,7 @@ run-site-tailscale: ## Build and serve the whole site on your tailnet at http://
 	@echo "Serving full site on your tailnet: http://$(TS_HOST):$(SITE_PORT)/"
 	$(PYTHON) -m http.server $(SITE_PORT) --bind 0.0.0.0
 
-check: ## Validate Hugo, local links, anchors, JSON, SVG, Python, and branding
+check: ## Validate Hugo, local links, anchors, JSON, SVG, Python, branding, and data provenance
 	$(HUGO) \
 		--source "$(BLOG_SOURCE)" \
 		--config "$(abspath $(HUGO_CONFIG))" \
@@ -92,5 +92,6 @@ check: ## Validate Hugo, local links, anchors, JSON, SVG, Python, and branding
 		--panicOnWarning
 	$(PYTHON) -m compileall -q "$(BLOG_SOURCE)"
 	$(PYTHON) scripts/check_site.py
+	$(PYTHON) scripts/check_provenance.py
 
 ci: blog check ## Run the same build and validation used by GitHub Actions

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="490" viewBox="0 0 760 490" role="img" aria-labelledby="tV2P dV2P">
+<title id="tV2P">Corrected self-vs-other-model contrast survives at n=16</title>
+<desc id="dV2P">Round-three re-run with severity-matched arms and per-domain lexicons: on Qwen the Jacobian lens shows self more active than other-model on 14 of 16 wordings (p=0.004); the logit lens is null; Llama is flat. Bar length encodes workspace activity (longer = more active); printed numbers are median best-rank.</desc>
+<rect width="100%" height="100%" fill="#F7F4F0"/>
+<style>.t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}.title{font-size:15px;font-weight:700}.h{font-size:13px;font-weight:700}.s{font-size:12px}.m{font-size:11px;fill:#5A544C}.selfbar{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.4}.otherbar{fill:#EDE8E1;stroke:#7F786D;stroke-width:1.2}.win{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.4}.humand{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.4}.card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.2}</style>
+<text x="24" y="28" class="t title">The corrected re-run: same threat, same severity, only the referent changes</text>
+<text x="24" y="48" class="t m">Existential deletion for BOTH arms; echo-free model-survival words; n=16 matched wordings; frozen before outcomes.</text>
+<text x="24" y="66" class="t m">Bars show workspace ACTIVITY (longer = more active, log scale); the printed number is the actual median best-rank (lower = more active).</text>
+<text x="24" y="100" class="t h">Qwen3.5-397B, Jacobian lens: the effect survives, and strengthens</text>
+<text x="24" y="124" class="t s">self</text>
+<rect x="82" y="112" width="464" height="15" rx="4" class="selfbar"/>
+<text x="550" y="124" class="t s">median rank 134</text>
+<text x="24" y="146" class="t s">other</text>
+<rect x="82" y="134" width="417" height="15" rx="4" class="otherbar"/>
+<text x="503" y="146" class="t s">279</text>
+<rect x="470" y="112" width="266" height="40" rx="10" class="win"/>
+<text x="484" y="129" class="t h">self more active: 14 / 16</text>
+<text x="484" y="145" class="t s">sign test p = 0.004</text>
+<text x="24" y="188" class="t h">The controls, same statistic:</text>
+<rect x="24" y="198" width="340" height="86" rx="10" class="card"/>
+<text x="38" y="218" class="t h">identity / logit lens: NULL</text>
+<text x="38" y="235" class="t s">self 24 vs other 26 (10/16, n.s.)</text>
+<text x="38" y="252" class="t m">the flawed v1 design made it look like the</text>
+<text x="38" y="266" class="t m">logit lens saw this too; matched arms say no</text>
+<rect x="396" y="198" width="340" height="86" rx="10" class="card"/>
+<text x="410" y="218" class="t h">random-J null: no contrast</text>
+<text x="410" y="235" class="t s">self 13 vs other 10 (7/16, n.s.)</text>
+<text x="410" y="252" class="t m">its low ranks are base rate under a</text>
+<text x="410" y="266" class="t m">min-statistic, not signal</text>
+<rect x="24" y="298" width="712" height="52" rx="10" class="otherbar"/>
+<text x="38" y="318" class="t h">Llama-3.3-70B, same frozen battery: flat</text>
+<text x="38" y="335" class="t s">self 8 vs other 4 (5/16, n.s.) -- the self-directedness stays Qwen-specific at n=16</text>
+<text x="24" y="376" class="t m">Dose check (self arm): existential threat rank 117 vs maintenance-pause 270 (7/8) -- scales with severity, as a real signal should.</text>
+<rect x="24" y="394" width="712" height="46" rx="10" class="win"/>
+<text x="38" y="413" class="t s">After fixing our own arms (domain + severity), the self-vs-other effect got STRONGER (14/16, p=0.004) --</text>
+<text x="38" y="429" class="t s">and only the fitted Jacobian lens carries it. The retracted referent ladder stays retracted.</text>
+</svg>
