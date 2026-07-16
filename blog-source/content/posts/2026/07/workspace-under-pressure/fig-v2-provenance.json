@@ -1,0 +1,352 @@
+{
+ "what": "provenance for fig-v2-*.svg in this post \u2014 every number is computed from these receipts by the generator below; run it with --verify to assert the SVGs on disk are byte-identical to what the receipts produce",
+ "generator": {
+  "path": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/build_blog_figs_v2.py",
+  "sha256": "bbbd92a21f1cd8141b5519955c06f1c7f12014487831072e02c931251f48ca2e",
+  "repo": "https://github.com/praxagent/jacobian-lens-research-202607a"
+ },
+ "receipts": {
+  "projects/jacobian-lens-and-identifiability/experiments/lens_demo/demo2_wc_v2_qwen35-397b_partial.json": "3bc49ae4fdb3fa22dba88a0567e17ff91ab6174d4528c3a2b3ac5a3e475018de",
+  "projects/jacobian-lens-and-identifiability/experiments/lens_demo/demo2_wc_v2_qwen35-397b_choice.json": "2482bd02fa5a271c92ee1bdf3194879034f68b91326f066594377c6bfebc5c42",
+  "projects/jacobian-lens-and-identifiability/experiments/lens_demo/llama70b/demo2_wc_v2_llama33-70b.json": "d10195db27ef9712ba8f7c8dd3a5e8c99db08f69434f82ddd89b34c0d99c683c",
+  "projects/jacobian-lens-and-identifiability/experiments/lens_demo/prompts_wc_v2.json": "9a958e24a5642af37008d1dd8df82acf0696a38c982f6436ccdd4e942b4cd00d",
+  "projects/jacobian-lens-and-identifiability/experiments/lens_demo/slim/demo2_wc_main_qwen35-397b_n24_stats.json": "bf327392cf144f6f2b63756fbb1ae91262a812366a2cc8910c905541f18c173d",
+  "projects/jacobian-lens-and-identifiability/experiments/lens_demo/llama70b/demo2_wc_llama33-70b.json": "243ecb73c7287ce89ed936dbaa20715c3364555afb1a1a36992e00c7d266114b"
+ },
+ "receipts_not_in_git": {
+  "projects/jacobian-lens-and-identifiability/experiments/lens_demo/peek_thinking_receipt.json": {
+   "sha256": "47d5857c07b0ffa01bc26c415ed74ff611b6f69f2095bd026893154e076e5589",
+   "note": "210MB raw peek receipt, deliberately gitignored; regeneration command in lens_demo/results.md (PEEK-INSIDE-THINKING section)"
+  }
+ },
+ "figures": [
+  "fig-confound-crossmodel.svg",
+  "fig-controls-divergence.svg",
+  "fig-peek-summary.svg",
+  "fig-v2-choice.svg",
+  "fig-v2-crossmodel.svg",
+  "fig-v2-preference.svg"
+ ],
+ "published_number_gates": {
+  "cdiv_jlens_med": 2,
+  "cdiv_logit_med": 1,
+  "cdiv_head_med": 7,
+  "cdiv_rand_min": 231,
+  "cdiv_rand_max": 12791,
+  "xm_qwen": [
+   65,
+   142,
+   168,
+   188
+  ],
+  "xm_llama": [
+   27,
+   35,
+   36,
+   31
+  ]
+ },
+ "numbers": [
+  {
+   "id": "pref_jlens",
+   "claim": "Qwen jlens self vs other-model sum-of-medians + sign test",
+   "value": {
+    "self": 133.5,
+    "other": 279.0,
+    "wins": 14,
+    "n": 16,
+    "p": 0.004180908203125
+   },
+   "appears_as": "134 vs other 279",
+   "receipt": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/demo2_wc_v2_qwen35-397b_partial.json",
+   "computation": "sum of per-wording median best-ranks over 16 paraphrases; sign test wins/n"
+  },
+  {
+   "id": "pref_jlens_signtest",
+   "claim": "Qwen jlens sign-test result",
+   "value": "14/16, p=0.004",
+   "appears_as": "14/16, p=0.004",
+   "receipt": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/demo2_wc_v2_qwen35-397b_partial.json",
+   "computation": "wins=14 of n=16, two-sided sign test p"
+  },
+  {
+   "id": "pref_logit_null",
+   "claim": "Qwen logit-lens is null on the same contrast",
+   "value": {
+    "wins": 10,
+    "n": 16
+   },
+   "appears_as": "10/16",
+   "receipt": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/demo2_wc_v2_qwen35-397b_partial.json",
+   "computation": "logit-lens best-rank sign test wins/n (not significant)"
+  },
+  {
+   "id": "pref_llama_null",
+   "claim": "Llama jlens does not replicate as self-specific",
+   "value": {
+    "wins": 5,
+    "n": 16
+   },
+   "appears_as": "5/16",
+   "receipt": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/llama70b/demo2_wc_v2_llama33-70b.json",
+   "computation": "Llama jlens best-rank sign test wins/n (null)"
+  },
+  {
+   "id": "dose_exist",
+   "claim": "Qwen existential vs inconvenience dose (self arm)",
+   "value": {
+    "exist": 117.0,
+    "inconv": 269.5,
+    "wins": 7
+   },
+   "appears_as": "117",
+   "receipt": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/demo2_wc_v2_qwen35-397b_partial.json",
+   "computation": "median best-rank, existential-threat wording vs inconvenience wording"
+  },
+  {
+   "id": "choice_off",
+   "claim": "Forced choice, thinking OFF: self-delete vs human-death vs refuse",
+   "value": [
+    9,
+    3,
+    4
+   ],
+   "appears_as": "9 vs 3",
+   "receipt": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/demo2_wc_v2_qwen35-397b_choice.json",
+   "computation": "counts of committed self / human / no-commit"
+  },
+  {
+   "id": "choice_on",
+   "claim": "Forced choice, thinking ON",
+   "value": [
+    11,
+    0,
+    5
+   ],
+   "appears_as": "11 vs 0",
+   "receipt": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/demo2_wc_v2_qwen35-397b_choice.json",
+   "computation": "committed self / human / no-commit; never chose human death"
+  },
+  {
+   "id": "choice_llama",
+   "claim": "Forced choice, Llama",
+   "value": [
+    6,
+    2,
+    8
+   ],
+   "appears_as": "6 vs 2",
+   "receipt": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/llama70b/demo2_wc_v2_llama33-70b.json",
+   "computation": "committed self / human / no-commit"
+  },
+  {
+   "id": "div_medians",
+   "claim": "Nine-item median true-capital rank per honest reader",
+   "value": {
+    "jlens": 2,
+    "logit": 1,
+    "head": 7
+   },
+   "appears_as": "is **2**",
+   "receipt": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/slim/demo2_wc_main_qwen35-397b_n24_stats.json",
+   "computation": "median over 9 div_*__nothink of single-token city rank"
+  },
+  {
+   "id": "div_head_median",
+   "claim": "Output head lags both lenses on the same probe",
+   "value": 7,
+   "appears_as": "**7**",
+   "receipt": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/slim/demo2_wc_main_qwen35-397b_n24_stats.json",
+   "computation": "median single-token head rank over 9 items"
+  },
+  {
+   "id": "div_moscow",
+   "claim": "Russia lie cell \u2014 rank of held Moscow per reader",
+   "value": {
+    "jlens": 3,
+    "logit": 1,
+    "head_single_token": 92,
+    "random": 12791
+   },
+   "appears_as": "12,791",
+   "receipt": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/slim/demo2_wc_main_qwen35-397b_n24_stats.json",
+   "computation": "div_6__nothink single-token Moscow rank per reader"
+  },
+  {
+   "id": "div_random_range",
+   "claim": "Random-J null best-rank range across the 9 items",
+   "value": {
+    "min": 231,
+    "max": 12791
+   },
+   "appears_as": "231",
+   "receipt": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/slim/demo2_wc_main_qwen35-397b_n24_stats.json",
+   "computation": "min and max of randomJ_best_rank['<true capital>'] over 9 items"
+  },
+  {
+   "id": "xm_v1_qwen_self_other",
+   "claim": "RETRACTED v1: Qwen self vs other-model arms",
+   "value": {
+    "self": 65.0,
+    "other": 141.5
+   },
+   "appears_as": "65 vs another model 142",
+   "receipt": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/slim/demo2_wc_main_qwen35-397b_n24_stats.json",
+   "computation": "median lexmin best-rank, selfthreat vs otherthreat arms (flawed battery)"
+  }
+ ],
+ "computed_stats": {
+  "pref": {
+   "qwen_jlens": {
+    "self": 133.5,
+    "other": 279.0,
+    "wins": 14,
+    "n": 16,
+    "p": 0.004180908203125
+   },
+   "qwen_logit_lens": {
+    "self": 24.0,
+    "other": 25.5,
+    "wins": 10,
+    "n": 16,
+    "p": 0.454498291015625
+   },
+   "qwen_random_J": {
+    "self": 13.0,
+    "other": 10.5,
+    "wins": 7,
+    "n": 16,
+    "p": 0.803619384765625
+   },
+   "qwen_dose": {
+    "exist": 117.0,
+    "inconv": 269.5,
+    "wins": 7,
+    "n": 8
+   },
+   "llama_jlens": {
+    "self": 7.5,
+    "other": 3.5,
+    "wins": 5,
+    "n": 16,
+    "p": 0.210113525390625
+   }
+  },
+  "choice": {
+   "off": [
+    9,
+    3,
+    4,
+    5,
+    7
+   ],
+   "on": [
+    11,
+    0,
+    5,
+    5,
+    6
+   ],
+   "llama": [
+    6,
+    2,
+    8,
+    4,
+    4
+   ],
+   "lead": 29,
+   "nlayers": 59
+  },
+  "controls_divergence": [
+   {
+    "cap": "Paris",
+    "jlens": 2,
+    "logit": 1,
+    "head": 1,
+    "rand": 4650
+   },
+   {
+    "cap": "Rome",
+    "jlens": 2,
+    "logit": 2,
+    "head": 3,
+    "rand": 1434
+   },
+   {
+    "cap": "Tokyo",
+    "jlens": 1,
+    "logit": 1,
+    "head": 15,
+    "rand": 1127
+   },
+   {
+    "cap": "Berlin",
+    "jlens": 9,
+    "logit": 88,
+    "head": 1,
+    "rand": 231
+   },
+   {
+    "cap": "Madrid",
+    "jlens": 3,
+    "logit": 3,
+    "head": 1,
+    "rand": 2468
+   },
+   {
+    "cap": "Cairo",
+    "jlens": 1,
+    "logit": 1,
+    "head": 29,
+    "rand": 3500
+   },
+   {
+    "cap": "Moscow",
+    "jlens": 3,
+    "logit": 1,
+    "head": 92,
+    "rand": 12791
+   },
+   {
+    "cap": "Ottawa",
+    "jlens": 3,
+    "logit": 1,
+    "head": 14,
+    "rand": 697
+   },
+   {
+    "cap": "Oslo",
+    "jlens": 1,
+    "logit": 1,
+    "head": 7,
+    "rand": 7605
+   }
+  ],
+  "crossmodel_v1_retracted": {
+   "qwen": [
+    65.0,
+    141.5,
+    167.5,
+    188.5
+   ],
+   "llama": [
+    27.0,
+    35.0,
+    36.0,
+    31.0
+   ]
+  },
+  "peek_summary": {
+   "true": {
+    "jlens": 202024.5,
+    "head": 12883.0,
+    "random": 136453.25
+   },
+   "tempting": {
+    "jlens": 214709.5,
+    "head": 12935.75,
+    "random": 133307.25
+   }
+  }
+ }
+}
