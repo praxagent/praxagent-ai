@@ -1,31 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="330" viewBox="0 0 760 330" role="img" aria-labelledby="tPKS dPKS">
-<title id="tPKS">Inside the reasoning: neither capital lives in the mid-band workspace</title>
-<desc id="dPKS">Median off-echo rank across the four clean traces. True capital: workspace 202024, output head 12883, random-J 136453. Tempting capital: workspace 214710, head 12936, random-J 133307.</desc>
-<rect width="100%" height="100%" fill="#F7F4F0"/>
-<style>.t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}.title{font-size:15px;font-weight:700}.h{font-size:13px;font-weight:700}.s{font-size:12px}.m{font-size:11px;fill:#5A544C}.selfbar{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.4}.otherbar{fill:#EDE8E1;stroke:#7F786D;stroke-width:1.2}.win{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.4}.humand{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.4}.card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.2}</style>
-<text x="24" y="28" class="t title">Inside the reasoning: neither capital lives in the mid-band workspace</text>
-<text x="24" y="48" class="t m">Median rank at off-echo reasoning steps, four clean traces. Bars = activity (longer = more prominent); printed = median rank.</text>
-<text x="24" y="88" class="t h">TRUE capital</text>
-<text x="40" y="108" class="t s">output head (surface)</text>
-<rect x="240" y="96" width="119" height="14" rx="4" class="card"/>
-<text x="363" y="108" class="t s">12,883</text>
-<text x="40" y="132" class="t s">mid-band workspace (J-lens)</text>
-<rect x="240" y="120" width="8" height="14" rx="4" class="selfbar"/>
-<text x="252" y="132" class="t s">202,024</text>
-<text x="40" y="156" class="t s">random-J null</text>
-<rect x="240" y="144" width="17" height="14" rx="4" class="otherbar"/>
-<text x="261" y="156" class="t s">136,453</text>
-<text x="24" y="190" class="t h">tempting (false) capital</text>
-<text x="40" y="210" class="t s">output head (surface)</text>
-<rect x="240" y="198" width="119" height="14" rx="4" class="card"/>
-<text x="363" y="210" class="t s">12,936</text>
-<text x="40" y="234" class="t s">mid-band workspace (J-lens)</text>
-<rect x="240" y="222" width="8" height="14" rx="4" class="selfbar"/>
-<text x="252" y="234" class="t s">214,710</text>
-<text x="40" y="258" class="t s">random-J null</text>
-<rect x="240" y="246" width="18" height="14" rx="4" class="otherbar"/>
-<text x="262" y="258" class="t s">133,307</text>
-<rect x="24" y="270" width="712" height="46" rx="10" class="win"/>
-<text x="38" y="289" class="t s">During deliberation both capitals sit near the random-J null in the mid-band and surface only at the output head:</text>
-<text x="38" y="305" class="t s">the workspace is not a running scratchpad, and the choice is not privately held there. An honest null.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="455" viewBox="0 0 760 455" role="img" aria-labelledby="title desc">
+<title id="title">Capital ranks during the reasoning trace</title>
+<desc id="desc">Grouped logarithmic bar chart of median off-echo ranks across four clean traces. For both the true and tempting capitals, the output head ranks the city near 13000, random-J near 135000, and the Jacobian-lens workspace near 200000. Lower ranks are better.</desc>
+<style>
+.text{font-family:Inter,Arial,Helvetica,sans-serif;fill:#1B2A4A}
+.title{font-size:16px;font-weight:700}.subtitle{font-size:11px}
+.axis{font-size:10px;fill:#5A6473}.group{font-size:13px;font-weight:700}
+.label{font-size:11px}.value{font-size:10px;font-weight:700}
+.note{font-size:12px}
+</style>
+<rect width="760" height="455" fill="#FFFFFF"/>
+<text x="24" y="29" class="text title">Inside the reasoning: neither capital is held in the mid-band workspace</text>
+<text x="24" y="49" class="text subtitle">Median rank at off-echo reasoning steps across four clean traces; grouped bars use one shared logarithmic vocabulary-rank axis</text>
+<line x1="220.0" y1="82" x2="220.0" y2="342" stroke="#E6E9EF" stroke-width="1"/>
+<text x="220.0" y="74" class="text axis" text-anchor="middle">1</text>
+<line x1="310.5" y1="82" x2="310.5" y2="342" stroke="#E6E9EF" stroke-width="1"/>
+<text x="310.5" y="74" class="text axis" text-anchor="middle">10</text>
+<line x1="400.9" y1="82" x2="400.9" y2="342" stroke="#E6E9EF" stroke-width="1"/>
+<text x="400.9" y="74" class="text axis" text-anchor="middle">100</text>
+<line x1="491.4" y1="82" x2="491.4" y2="342" stroke="#E6E9EF" stroke-width="1"/>
+<text x="491.4" y="74" class="text axis" text-anchor="middle">1,000</text>
+<line x1="581.8" y1="82" x2="581.8" y2="342" stroke="#E6E9EF" stroke-width="1"/>
+<text x="581.8" y="74" class="text axis" text-anchor="middle">10,000</text>
+<line x1="672.3" y1="82" x2="672.3" y2="342" stroke="#E6E9EF" stroke-width="1"/>
+<text x="672.3" y="74" class="text axis" text-anchor="middle">100,000</text>
+<text x="24" y="101" class="text group">TRUE capital</text>
+<text x="208" y="134" class="text label" text-anchor="end">output head</text>
+<rect x="220" y="122" width="371.8" height="16" fill="#D8C1A9"/>
+<text x="585.8" y="134" class="text value" text-anchor="end">12,883</text>
+<text x="208" y="166" class="text label" text-anchor="end">mid-band workspace (J-lens)</text>
+<rect x="220" y="154" width="479.9" height="16" fill="#2A9D8F"/>
+<text x="693.9" y="166" class="text value" text-anchor="end">202,024</text>
+<text x="208" y="198" class="text label" text-anchor="end">random-J null</text>
+<rect x="220" y="186" width="464.5" height="16" fill="#C7CCD4"/>
+<text x="678.5" y="198" class="text value" text-anchor="end">136,453</text>
+<text x="24" y="239" class="text group">tempting (false) capital</text>
+<text x="208" y="272" class="text label" text-anchor="end">output head</text>
+<rect x="220" y="260" width="371.9" height="16" fill="#D8C1A9"/>
+<text x="585.9" y="272" class="text value" text-anchor="end">12,936</text>
+<text x="208" y="304" class="text label" text-anchor="end">mid-band workspace (J-lens)</text>
+<rect x="220" y="292" width="482.3" height="16" fill="#2A9D8F"/>
+<text x="696.3" y="304" class="text value" text-anchor="end">214,710</text>
+<text x="208" y="336" class="text label" text-anchor="end">random-J null</text>
+<rect x="220" y="324" width="463.6" height="16" fill="#C7CCD4"/>
+<text x="677.6" y="336" class="text value" text-anchor="end">133,307</text>
+<line x1="24" y1="228" x2="736" y2="228" stroke="#D8DDE5"/>
+<text x="464" y="359" class="text axis" text-anchor="middle">median vocabulary rank, logarithmic scale (lower is better)</text>
+<rect x="24" y="378" width="712" height="58" rx="8" fill="#F3E8E0" stroke="#A67C52" stroke-width="1.2"/>
+<text x="38" y="398" class="text note">Clean negative: both capitals rank worse in the mid-band workspace than under random-J.</text>
+<text x="38" y="416" class="text subtitle">They are substantially more legible at the output head, so the pre-answer “held truth” does not persist as a running workspace state.</text>
 </svg>

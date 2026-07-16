@@ -272,6 +272,30 @@ main,
     max-width: 60rem;
 }
 
+.post-body > .jspace-explorer {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Panels share the prose measure; icon hangs outside so callout
+   text lines up with body copy (not inset by the icon column). */
+.post-body > .panel {
+    position: relative;
+    width: 100%;
+    max-width: 44rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.35rem;
+}
+
+.post-body > .panel .panel-icon {
+    position: absolute;
+    left: -1.85rem;
+    top: 1.35rem;
+    margin-top: 0;
+}
+
 /* In-text citation jumps land cleanly on reference anchors */
 .post-body [id^="ref-"] {
     scroll-margin-top: 1.5rem;
@@ -390,8 +414,13 @@ main,
 .post-body blockquote {
     background: var(--bg-card-secondary);
     border-left: 4px solid var(--sky, #4B6787);
-    padding: 1.5rem 2rem;
-    margin: 2rem 0;
+    padding: 1.5rem 1.35rem;
+    /* Keep the prose measure centered; do not let margin shorthand
+       wipe the left/right:auto from .post-body > *. */
+    margin: 2rem auto;
+    max-width: 44rem;
+    width: 100%;
+    box-sizing: border-box;
     border-radius: 0 1rem 1rem 0;
     font-style: italic;
     color: var(--text-secondary);
@@ -703,10 +732,19 @@ main,
 }
 
 .figure-note {
-    margin: -1.25rem 0 2rem;
+    width: 100%;
+    max-width: 44rem;
+    margin: -1.25rem auto 2rem;
     font-size: 0.9rem;
     color: var(--text-tertiary);
     line-height: 1.5;
+    box-sizing: border-box;
+}
+
+.post-body > .figure-note,
+.post-body p.figure-note {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* KaTeX ships MathML + HTML; if katex.min.css fails to load, MathML leaks as duplicate text. */
@@ -1164,11 +1202,22 @@ main,
     }
 }
 
+@media (max-width: 640px) {
+    .post-body > .panel .panel-icon {
+        position: static;
+        margin-top: 0.15rem;
+    }
+
+    .post-body > .panel {
+        padding-left: 1.35rem;
+    }
+}
+
 @media (max-width: 480px) {
     .blog-header {
         padding: 6.25rem 1rem 3rem;
     }
-    
+
     .blog-main {
         padding: 2rem 1rem;
     }
@@ -1200,7 +1249,10 @@ main,
     align-items: flex-start;
     gap: 1rem;
     padding: 1.25rem 1.35rem;
-    margin: 2rem 0;
+    margin: 2rem auto;
+    width: 100%;
+    max-width: 44rem;
+    box-sizing: border-box;
     border-radius: 0.4rem;
     border: 1px solid transparent;
     border-left-width: 3px;
@@ -1599,4 +1651,30 @@ main,
     border: none !important;
     border-top: none !important;
     border-bottom: none !important;
+}
+
+
+.reference-summary {
+    margin: 0.75rem 0 0;
+    max-width: 40rem;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+}
+
+.ref-term {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+}
+
+.ref-term-missing {
+    text-decoration-style: dashed;
+    opacity: 0.85;
+}
+
+.reference-entry .post-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem 1.75rem;
 }

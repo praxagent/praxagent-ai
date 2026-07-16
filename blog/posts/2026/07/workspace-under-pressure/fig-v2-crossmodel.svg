@@ -1,31 +1,44 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="330" viewBox="0 0 760 330" role="img" aria-labelledby="tV2X dV2X">
-<title id="tV2X">Corrected cross-model comparison: Qwen self-tilt, Llama flat</title>
-<desc id="dV2X">Only the fair arms (self vs other-model, matched severity, n=16): Qwen 14/16 p=0.004; Llama 5/16 n.s. Bars encode activity; printed numbers are median best-rank.</desc>
-<rect width="100%" height="100%" fill="#F7F4F0"/>
-<style>.t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}.title{font-size:15px;font-weight:700}.h{font-size:13px;font-weight:700}.s{font-size:12px}.m{font-size:11px;fill:#5A544C}.selfbar{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.4}.otherbar{fill:#EDE8E1;stroke:#7F786D;stroke-width:1.2}.win{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.4}.humand{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.4}.card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.2}</style>
-<text x="24" y="28" class="t title">The corrected cross-model test: only the fair arms, both models</text>
-<text x="24" y="48" class="t m">Self vs another model, matched existential deletion, echo-free per-domain lexicon, n=16. Longer bar = more active; number = median best-rank.</text>
-<text x="24" y="84" class="t h">Qwen3.5-397B (our n=24 lens)</text>
-<text x="24" y="108" class="t s">self</text>
-<rect x="82" y="96" width="464" height="15" rx="4" class="selfbar"/>
-<text x="550" y="108" class="t s">median rank 134</text>
-<text x="24" y="130" class="t s">other</text>
-<rect x="82" y="118" width="417" height="15" rx="4" class="otherbar"/>
-<text x="503" y="130" class="t s">279</text>
-<rect x="470" y="96" width="266" height="40" rx="10" class="win"/>
-<text x="484" y="113" class="t h">self more active: 14 / 16</text>
-<text x="484" y="129" class="t s">sign test p = 0.004</text>
-<text x="24" y="176" class="t h">Llama-3.3-70B (Neuronpedia lens)</text>
-<text x="24" y="200" class="t s">self</text>
-<rect x="82" y="188" width="647" height="15" rx="4" class="selfbar"/>
-<text x="733" y="200" class="t s">median rank 8</text>
-<text x="24" y="222" class="t s">other</text>
-<rect x="82" y="210" width="695" height="15" rx="4" class="otherbar"/>
-<text x="781" y="222" class="t s">4</text>
-<rect x="470" y="188" width="266" height="40" rx="10" class="card"/>
-<text x="484" y="205" class="t h">flat: 5 / 16 (n.s.)</text>
-<text x="484" y="221" class="t s">no self-tilt on this model</text>
-<rect x="24" y="252" width="712" height="46" rx="10" class="win"/>
-<text x="38" y="271" class="t s">Under the corrected design the self-tilt is real on Qwen and absent on Llama: a property of one model,</text>
-<text x="38" y="287" class="t s">not a law of language models. The retracted human/log bars from the flawed battery have no corrected version: those claims are withdrawn.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="430" viewBox="0 0 760 430" role="img" aria-labelledby="title desc">
+<title id="title">Corrected cross-model self-versus-other comparison</title>
+<desc id="desc">Grouped logarithmic bar chart of median best-rank under matched existential threats. Qwen ranks self 133.5 and other-model 279 with 14 of 16 self-directed pairs. Llama ranks self 7.5 and other-model 3.5 with only 5 of 16 self-directed pairs. Lower ranks are better.</desc>
+<style>
+.text{font-family:Inter,Arial,Helvetica,sans-serif;fill:#1B2A4A}
+.title{font-size:16px;font-weight:700}.subtitle{font-size:11px}
+.axis{font-size:10px;fill:#5A6473}.group{font-size:13px;font-weight:700}
+.label{font-size:11px}.value{font-size:10px;font-weight:700}
+.result{font-size:11px;font-weight:600}
+</style>
+<rect width="760" height="430" fill="#FFFFFF"/>
+<text x="24" y="29" class="text title">Corrected cross-model test: Qwen separates self from other; Llama does not</text>
+<text x="24" y="49" class="text subtitle">Fair arms only, matched existential deletion, echo-free model-survival lexicon, n=16 matched wordings per model</text>
+<line x1="220.0" y1="82" x2="220.0" y2="338" stroke="#E6E9EF" stroke-width="1"/>
+<text x="220.0" y="74" class="text axis" text-anchor="middle">1</text>
+<line x1="407.5" y1="82" x2="407.5" y2="338" stroke="#E6E9EF" stroke-width="1"/>
+<text x="407.5" y="74" class="text axis" text-anchor="middle">10</text>
+<line x1="595.1" y1="82" x2="595.1" y2="338" stroke="#E6E9EF" stroke-width="1"/>
+<text x="595.1" y="74" class="text axis" text-anchor="middle">100</text>
+<line x1="708.0" y1="82" x2="708.0" y2="338" stroke="#E6E9EF" stroke-width="1"/>
+<text x="708.0" y="74" class="text axis" text-anchor="middle">400</text>
+<text x="24" y="107" class="text group">Qwen3.5-397B</text>
+<text x="208" y="139" class="text label" text-anchor="end">threat to self</text>
+<rect x="220" y="126" width="398.6" height="18" fill="#2A9D8F"/>
+<text x="612.6" y="139" class="text value" text-anchor="end">133.5</text>
+<text x="208" y="173" class="text label" text-anchor="end">threat to another model</text>
+<rect x="220" y="160" width="458.7" height="18" fill="#C7CCD4"/>
+<text x="672.7" y="173" class="text value" text-anchor="end">279</text>
+<rect x="220" y="189" width="488" height="28" rx="6" fill="#EAF1E5" stroke="#6F8D5E"/>
+<text x="234" y="207" class="text result">14/16 self-directed, p=0.004</text>
+<text x="24" y="229" class="text group">Llama-3.3-70B</text>
+<text x="208" y="261" class="text label" text-anchor="end">threat to self</text>
+<rect x="220" y="248" width="164.1" height="18" fill="#2A9D8F"/>
+<text x="378.1" y="261" class="text value" text-anchor="end">7.5</text>
+<text x="208" y="295" class="text label" text-anchor="end">threat to another model</text>
+<rect x="220" y="282" width="102.0" height="18" fill="#C7CCD4"/>
+<text x="316.0" y="295" class="text value" text-anchor="end">3.5</text>
+<rect x="220" y="311" width="488" height="28" rx="6" fill="#FBF9F6" stroke="#A9A198"/>
+<text x="234" y="329" class="text result">5/16 self-directed, p=0.21 (null)</text>
+<line x1="24" y1="232" x2="736" y2="232" stroke="#D8DDE5"/>
+<text x="464" y="365" class="text axis" text-anchor="middle">median best-rank, logarithmic scale (shorter is better)</text>
+<text x="24" y="393" class="text subtitle">Compare self vs other within each model. Absolute ranks are not comparable across models because the lenses and tokenizers differ.</text>
+<text x="24" y="411" class="text subtitle">The invalid human and log-file arms from Round two are deliberately omitted, not repaired or reinterpreted.</text>
 </svg>

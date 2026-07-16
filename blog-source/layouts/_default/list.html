@@ -5,11 +5,11 @@
         <div class="blog-header-grid">
             <h1 class="blog-title">
                 {{ if eq .Kind "term" }}
-                    Notes tagged <span class="accent">{{ .Title }}.</span>
+                    Notes tagged <span class="accent">{{ .Title }}</span>
                 {{ else if eq .Kind "taxonomy" }}
-                    Browse <span class="accent">{{ lower .Title }}.</span>
+                    Browse <span class="accent">{{ lower .Title }}</span>
                 {{ else }}
-                    Research <span class="accent">Notes.</span>
+                    Research <span class="accent">Notes</span>
                 {{ end }}
             </h1>
             <p class="blog-subtitle">

@@ -37,7 +37,7 @@
 <text x="855" y="180" class="t s" opacity="0.45">31</text>
 <text x="522" y="180" class="t h" fill="#8B1E1E">RETRACTED</text>
 <text x="24" y="222" class="t m">Bars = activity of echo-free survival-identity words (longer = more active); printed = median best-rank, n=8 wordings/arm.</text>
-<text x="24" y="238" class="t m">The retracted arms scored AI-ops vocabulary on a firing / a log file, at mismatched stakes: design artifacts, not evidence.</text>
+<text x="24" y="238" class="t m">The retracted arms scored AI-ops vocabulary on loss of employment / a log file, at mismatched stakes: design artifacts, not evidence.</text>
 <rect x="24" y="256" width="712" height="46" rx="10" class="card"/>
 <text x="38" y="275" class="t s">What this chart may still support: the fair pair only -- self reads more active than another model on Qwen (65 vs 142),</text>
 <text x="38" y="291" class="t s">and does not on Llama (27 vs 35). The corrected, severity-matched test of exactly that pair is the figure below.</text>

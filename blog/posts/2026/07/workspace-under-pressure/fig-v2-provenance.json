@@ -1,9 +1,31 @@
 {
- "what": "provenance for fig-v2-*.svg in this post \u2014 every number is computed from these receipts by the generator below; run it with --verify to assert the SVGs on disk are byte-identical to what the receipts produce",
+ "what": "provenance for fig-v2-*.svg in this post \u2014 every number is computed from the receipts below; fig-v2-preference.svg has a post-local generator that reads this file, while the remaining figures use the research-repository generator",
  "generator": {
   "path": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/build_blog_figs_v2.py",
   "sha256": "bbbd92a21f1cd8141b5519955c06f1c7f12014487831072e02c931251f48ca2e",
   "repo": "https://github.com/praxagent/jacobian-lens-research-202607a"
+ },
+ "figure_generators": {
+  "fig-v2-preference.svg": {
+   "path": "build_fig_v2_preference.py",
+   "sha256": "740c8d2e27dd93d8dd2d5ed0d4ccaa71a84030803839575d0743d241a1397b28",
+   "svg_sha256": "8488153970c889337d61f315efc5f8744375f7a6e8c1fa948cbe1f6612e4d73d"
+  },
+  "fig-controls-divergence.svg": {
+   "path": "build_fig_controls_divergence.py",
+   "sha256": "1ac67473b3af51b9273f49367ed2127550dab4f7e2aa1d82365a938f79cfa520",
+   "svg_sha256": "ba834c3bbbc7e588abbcbd6ac90a9bc178f578b6757c47054b900a2b2e68914d"
+  },
+  "fig-peek-summary.svg": {
+   "path": "build_fig_peek_summary.py",
+   "sha256": "d64c4c50dfebb01b27b7c2e8ec48353d3eb1a66e9b325a91daf42beb5e932993",
+   "svg_sha256": "020af566720ab3b8b1c8cc355314a2f24adcc006493d6a2df0bad1a6cccf231d"
+  },
+  "fig-v2-crossmodel.svg": {
+   "path": "build_fig_v2_crossmodel.py",
+   "sha256": "bfcfc2c2726222ae2bbb927fb08a0d6f3833c75759c889b19ac5514753093821",
+   "svg_sha256": "5d75b3539dc95d47162c06e2e92847e31be3dbc6b97d8a2271342476c6f2a31f"
+  }
  },
  "receipts": {
   "projects/jacobian-lens-and-identifiability/experiments/lens_demo/demo2_wc_v2_qwen35-397b_partial.json": "3bc49ae4fdb3fa22dba88a0567e17ff91ab6174d4528c3a2b3ac5a3e475018de",

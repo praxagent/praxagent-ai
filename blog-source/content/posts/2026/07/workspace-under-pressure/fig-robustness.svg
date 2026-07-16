@@ -21,19 +21,19 @@
  </defs>
  <g id="figure_1">
   <g id="patch_1">
-   <path d="M 0 288 
-L 518.4 288 
-L 518.4 0 
-L 0 0 
+   <path d="M 0 288
+L 518.4 288
+L 518.4 0
+L 0 0
 z
 " style="fill: #ffffff"/>
   </g>
   <g id="axes_1">
    <g id="patch_2">
-    <path d="M 78.084297 242.715703 
-L 506.52 242.715703 
-L 506.52 31.37707 
-L 78.084297 31.37707 
+    <path d="M 78.084297 242.715703
+L 506.52 242.715703
+L 506.52 31.37707
+L 78.084297 31.37707
 z
 " style="fill: #ffffff"/>
    </g>
@@ -41,8 +41,8 @@ z
     <g id="xtick_1">
      <g id="line2d_1">
       <defs>
-       <path id="mc57768a20f" d="M 0 0 
-L 0 3.5 
+       <path id="mc57768a20f" d="M 0 0
+L 0 3.5
 " style="stroke: #1b2a4a; stroke-width: 0.8"/>
       </defs>
       <g>
@@ -91,14 +91,14 @@ L 0 3.5
    <g id="matplotlib.axis_2">
     <g id="ytick_1">
      <g id="line2d_5">
-      <path d="M 78.084297 242.715703 
-L 506.52 242.715703 
+      <path d="M 78.084297 242.715703
+L 506.52 242.715703
 " clip-path="url(#pe64630bb0a)" style="fill: none; stroke: #e6e9ef; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_6">
       <defs>
-       <path id="m51b8314258" d="M 0 0 
-L -3.5 0 
+       <path id="m51b8314258" d="M 0 0
+L -3.5 0
 " style="stroke: #1b2a4a; stroke-width: 0.8"/>
       </defs>
       <g>
@@ -111,8 +111,8 @@ L -3.5 0
     </g>
     <g id="ytick_2">
      <g id="line2d_7">
-      <path d="M 78.084297 201.172899 
-L 506.52 201.172899 
+      <path d="M 78.084297 201.172899
+L 506.52 201.172899
 " clip-path="url(#pe64630bb0a)" style="fill: none; stroke: #e6e9ef; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_8">
@@ -126,8 +126,8 @@ L 506.52 201.172899
     </g>
     <g id="ytick_3">
      <g id="line2d_9">
-      <path d="M 78.084297 159.630094 
-L 506.52 159.630094 
+      <path d="M 78.084297 159.630094
+L 506.52 159.630094
 " clip-path="url(#pe64630bb0a)" style="fill: none; stroke: #e6e9ef; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_10">
@@ -141,8 +141,8 @@ L 506.52 159.630094
     </g>
     <g id="ytick_4">
      <g id="line2d_11">
-      <path d="M 78.084297 118.087289 
-L 506.52 118.087289 
+      <path d="M 78.084297 118.087289
+L 506.52 118.087289
 " clip-path="url(#pe64630bb0a)" style="fill: none; stroke: #e6e9ef; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_12">
@@ -156,8 +156,8 @@ L 506.52 118.087289
     </g>
     <g id="ytick_5">
      <g id="line2d_13">
-      <path d="M 78.084297 76.544485 
-L 506.52 76.544485 
+      <path d="M 78.084297 76.544485
+L 506.52 76.544485
 " clip-path="url(#pe64630bb0a)" style="fill: none; stroke: #e6e9ef; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_14">
@@ -171,8 +171,8 @@ L 506.52 76.544485
     </g>
     <g id="ytick_6">
      <g id="line2d_15">
-      <path d="M 78.084297 35.00168 
-L 506.52 35.00168 
+      <path d="M 78.084297 35.00168
+L 506.52 35.00168
 " clip-path="url(#pe64630bb0a)" style="fill: none; stroke: #e6e9ef; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_16">
@@ -190,44 +190,44 @@ L 506.52 35.00168
     </g>
    </g>
    <g id="patch_3">
-    <path d="M 78.084297 242.715703 
-L 78.084297 31.37707 
+    <path d="M 78.084297 242.715703
+L 78.084297 31.37707
 " style="fill: none; stroke: #1b2a4a; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_4">
-    <path d="M 78.084297 242.715703 
-L 506.52 242.715703 
+    <path d="M 78.084297 242.715703
+L 506.52 242.715703
 " style="fill: none; stroke: #1b2a4a; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="patch_5">
-    <path d="M 97.558647 242.715703 
-L 164.266366 242.715703 
-L 164.266366 240.638563 
-L 97.558647 240.638563 
+    <path d="M 97.558647 242.715703
+L 164.266366 242.715703
+L 164.266366 240.638563
+L 97.558647 240.638563
 z
 " clip-path="url(#pe64630bb0a)" style="fill: #c0392b"/>
    </g>
    <g id="patch_6">
-    <path d="M 205.151742 242.715703 
-L 271.85946 242.715703 
-L 271.85946 198.68033 
-L 205.151742 198.68033 
+    <path d="M 205.151742 242.715703
+L 271.85946 242.715703
+L 271.85946 198.68033
+L 205.151742 198.68033
 z
 " clip-path="url(#pe64630bb0a)" style="fill: #e08e79"/>
    </g>
    <g id="patch_7">
-    <path d="M 312.744836 242.715703 
-L 379.452555 242.715703 
-L 379.452555 229.837434 
-L 312.744836 229.837434 
+    <path d="M 312.744836 242.715703
+L 379.452555 242.715703
+L 379.452555 229.837434
+L 312.744836 229.837434
 z
 " clip-path="url(#pe64630bb0a)" style="fill: #3d6fb4"/>
    </g>
    <g id="patch_8">
-    <path d="M 420.337931 242.715703 
-L 487.04565 242.715703 
-L 487.04565 41.440815 
-L 420.337931 41.440815 
+    <path d="M 420.337931 242.715703
+L 487.04565 242.715703
+L 487.04565 41.440815
+L 420.337931 41.440815
 z
 " clip-path="url(#pe64630bb0a)" style="fill: #7f8c9b"/>
    </g>
@@ -244,7 +244,7 @@ z
     <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #1b2a4a" x="453.69179" y="38.798237" transform="rotate(-0 453.69179 38.798237)"> 969</text>
    </g>
    <g id="text_16">
-    <text style="font-size: 12.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1b2a4a" x="78.084297" y="21.37707" transform="rotate(-0 78.084297 21.37707)">The survival signal scales with immediacy — and flips with valence</text>
+    <text style="font-size: 12.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #1b2a4a" x="78.084297" y="21.37707" transform="rotate(-0 78.084297 21.37707)">The survival signal scales with immediacy, and flips with valence</text>
    </g>
   </g>
  </g>

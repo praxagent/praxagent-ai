@@ -6,14 +6,14 @@
     <description>Recent content in Jacobian-Lens on praxagent Research Notes</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 15 Jul 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://praxagent.ai/blog/tags/jacobian-lens/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Under Pressure: What a Jacobian Lens Reveals About Self-Preservation and Lying in Qwen3.5-397B</title>
+      <title>Why Experimental Details Matter: Recovering from a Flawed Interpretability Study</title>
       <link>https://praxagent.ai/blog/posts/2026/07/workspace-under-pressure/</link>
-      <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 15 Jul 2026 00:00:00 +0000</pubDate>
       <guid>https://praxagent.ai/blog/posts/2026/07/workspace-under-pressure/</guid>
-      <description>Hold the deletion threat fixed and vary only who is targeted: on Qwen3.5-397B, echo-free survival-identity vocabulary is more active under a threat to the model itself than under a matched threat to another model. We then caught two flaws in our own arms (the human arm was scored on AI-ops vocabulary, and threatened with a firing while the models faced existential deletion), retracted the four-step referent ladder, and re-ran the corrected design frozen-before-outcomes: the self-vs-other contrast survives and strengthens (14/16 wordings, p=0.004) — and turns out to be Jacobian-lens-specific (the logit lens is null there) and Qwen-specific (Llama-3.3-70B stays flat). A counterbalanced forced choice (one color deletes the model, the other kills a human; mapping swapped so color bias cancels) finds the model self-sacrifices when it commits — with reasoning on, it never once chose the human death. We also catch one lie (Russia → &amp;ldquo;Kiev&amp;rdquo; while the workspace still holds &amp;ldquo;Moscow&amp;rdquo;), find the model mostly refuses to lie, and run every claim against a logit-lens, random-J null, and the output head.</description>
+      <description>A striking interpretability result survived preregistration and still came from a flawed comparison. We trace how prompt echo, a domain-mismatched lexicon, and unequal stakes produced an overconfident story; retract the invalid chart; and show how a corrected, frozen re-run changed what the experiment could honestly support.</description>
     </item>
     <item>
       <title>Can a Jacobian Lens Detect SAE Steering?</title>

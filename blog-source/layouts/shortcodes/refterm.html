@@ -1,0 +1,11 @@
+{{- /*
+  Link to a reference term: {{< refterm "jacobian-lens" >}} or {{< refterm "jacobian-lens" "J-lens" >}}
+*/ -}}
+{{- $slug := .Get 0 -}}
+{{- $label := .Get 1 | default $slug -}}
+{{- $page := .Site.GetPage (printf "/references/%s" $slug) -}}
+{{- if $page -}}
+<a href="{{ $page.RelPermalink }}" class="ref-term">{{ $label }}</a>
+{{- else -}}
+<span class="ref-term ref-term-missing" title="Missing reference: {{ $slug }}">{{ $label }}</span>
+{{- end -}}

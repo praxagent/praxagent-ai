@@ -15,6 +15,7 @@ params:
 
 permalinks:
   posts: '/posts/:year/:month/:slug/'
+  references: '/references/:slug/'
 
 markup:
   goldmark:
@@ -42,6 +43,6 @@ markup:
 outputs:
   home: ['HTML']
   page: ['HTML']
+  section: ['HTML']
 
 publishDir: '../blog'
-

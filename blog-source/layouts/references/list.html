@@ -1,0 +1,29 @@
+{{ define "main" }}
+<header class="blog-header">
+    <div class="blog-header-content">
+        <p class="blog-kicker">praxagent / Technical record</p>
+        <div class="blog-header-grid">
+            <h1 class="blog-title">
+                Technical <span class="accent">References</span>
+            </h1>
+            <p class="blog-subtitle">
+                Short, stable definitions for terms used across the Research Notes.
+                Notes stay on experiments; explanations live here.
+            </p>
+        </div>
+    </div>
+</header>
+
+<div class="blog-main">
+    <div class="blog-index">
+        <div class="blog-index-list taxonomy-directory">
+            {{ range (where .Pages "Kind" "page").ByTitle }}
+            <a class="blog-index-row" href="{{ .RelPermalink }}">
+                <h3>{{ .Title }}</h3>
+                <span class="blog-index-meta">{{ with .Params.summary }}{{ . | truncate 90 }}{{ else }}Reference{{ end }}</span>
+            </a>
+            {{ end }}
+        </div>
+    </div>
+</div>
+{{ end }}

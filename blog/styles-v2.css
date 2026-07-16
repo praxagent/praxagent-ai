@@ -23,46 +23,46 @@
     --accent-gradient: linear-gradient(135deg, #4B6787, #A89B8C);
     --accent-gradient-hover: linear-gradient(135deg, #3A5573, #7F786D);
 
-    /* Light mode colors (default) */
-    --bg-primary: #F7F4F0;
-    --bg-secondary: #EDE8E1;
-    --bg-tertiary: #E0D8CE;
-    --bg-quaternary: #C9C0B4;
-    --bg-card: #F7F4F0;
+    /* Light mode colors (default) — cool near-white lab surfaces */
+    --bg-primary: #F7F8FA;
+    --bg-secondary: #EEF1F4;
+    --bg-tertiary: #E2E6EB;
+    --bg-quaternary: #CDD3DB;
+    --bg-card: #F7F8FA;
     --bg-card-secondary: var(--bg-secondary);
     --bg-gradient-hero: linear-gradient(160deg, #4B6787 0%, #577290 24%, #B5A99A 58%, #A89B8C 100%);
     --bg-gradient-about: var(--bg-primary);
     --bg-tech-stack: #2A4058;
     --bg-contact: #3A5573;
     --bg-footer: #2A4058;
-    --bg-navbar: rgba(247, 244, 240, 0.95);
-    --bg-navbar-scrolled: rgba(247, 244, 240, 0.98);
+    --bg-navbar: rgba(247, 248, 250, 0.95);
+    --bg-navbar-scrolled: rgba(247, 248, 250, 0.98);
     
     /* Text colors */
-    --text-primary: #2C2924;
-    --text-secondary: #5A544C;
-    --text-tertiary: #7A736A;
-    --text-quaternary: #9A9288;
-    --text-light: #EDE8E1;
+    --text-primary: #1C2430;
+    --text-secondary: #4A5563;
+    --text-tertiary: #6B7585;
+    --text-quaternary: #8B94A0;
+    --text-light: #EEF1F4;
     --text-white: #ffffff;
-    --text-dark: #2C2924;
+    --text-dark: #1C2430;
     
     /* Border colors */
-    --border-primary: rgba(90, 84, 76, 0.14);
+    --border-primary: rgba(42, 64, 88, 0.12);
     --border-secondary: rgba(75, 103, 135, 0.18);
     --border-navbar: rgba(75, 103, 135, 0.14);
     
     /* Shadow colors */
-    --shadow-primary: rgba(44, 41, 36, 0.08);
-    --shadow-secondary: rgba(44, 41, 36, 0.14);
-    --shadow-navbar: rgba(75, 103, 135, 0.08);
+    --shadow-primary: rgba(28, 36, 48, 0.07);
+    --shadow-secondary: rgba(28, 36, 48, 0.12);
+    --shadow-navbar: rgba(42, 64, 88, 0.08);
     --shadow-card: rgba(42, 64, 88, 0.28);
     
-    /* Code block colors — light sand for light mode */
-    --code-bg: #F3EEE6;
-    --code-header-bg: #E0D8CE;
-    --code-text: #2C2924;
-    --code-lang: #7F786D;
+    /* Code block colors — cool light for light mode */
+    --code-bg: #F0F2F5;
+    --code-header-bg: #E2E6EB;
+    --code-text: #1C2430;
+    --code-lang: #6B7585;
 }
 
 /* Dark mode colors */
@@ -260,7 +260,7 @@ body {
     left: 5px;
     opacity: 1;
     transition: opacity 0.25s ease;
-    color: #F7F4F0;
+    color: #F7F8FA;
 }
 
 .theme-toggle-icon.moon {

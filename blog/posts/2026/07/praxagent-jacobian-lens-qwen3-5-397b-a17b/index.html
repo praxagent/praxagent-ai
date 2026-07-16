@@ -61,9 +61,11 @@
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
+            
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link active">Research Notes</a>
+                <a href="/blog/references/" class="nav-link">References</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -89,6 +91,7 @@
         <div class="mobile-menu-content">
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link active">Research Notes</a>
+            <a href="/blog/references/" class="mobile-nav-link">References</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -190,7 +193,7 @@
     </li>
     <li><a href="#what-we-found">What We Found</a>
       <ul>
-        <li><a href="#reading-the-hidden-step-act-2--lens-n24">Reading the hidden step (act 2) — lens n=24</a></li>
+        <li><a href="#reading-the-hidden-step-act-2-lens-n24">Reading the hidden step (act 2), lens n=24</a></li>
         <li><a href="#what-this-finding-illustrates">What this finding illustrates</a></li>
       </ul>
     </li>
@@ -200,7 +203,7 @@
         <li><a href="#self-referential-prompting">Self-referential prompting</a></li>
         <li><a href="#how-many-layers-are-we-looking-at">How many layers are we looking at?</a></li>
         <li><a href="#three-different-best-layer-rules-they-disagree-on-purpose">Three different “best layer” rules (they disagree on purpose)</a></li>
-        <li><a href="#interactive-explorer--scrub-the-band-yourself">Interactive explorer — scrub the band yourself</a></li>
+        <li><a href="#interactive-explorer-scrub-the-band-yourself">Interactive explorer, scrub the band yourself</a></li>
         <li><a href="#still-frames-for-readers-who-skip-the-slider">Still frames (for readers who skip the slider)</a></li>
       </ul>
     </li>
@@ -215,7 +218,7 @@
       <ul>
         <li><a href="#renting-the-gpus-from-the-cli-the-exact-flow-we-use">Renting the GPUs from the CLI (the exact flow we use)</a></li>
         <li><a href="#what-n24-supports-and-what-remains-open">What n=24 supports, and what remains open</a></li>
-        <li><a href="#extending-our-lens-warm-start--why-n24-is-still-a-contribution">Extending our lens (warm-start) — why n=24 is still a contribution</a>
+        <li><a href="#extending-our-lens-warm-start-why-n24-is-still-a-contribution">Extending our lens (warm-start), why n=24 is still a contribution</a>
           <ul>
             <li><a href="#is-warm-start-actually-exact-the-subtlety-stated-plainly">Is warm-start actually exact? (the subtlety, stated plainly)</a></li>
           </ul>
@@ -410,7 +413,7 @@ bytes):</p>
       </tr>
       <tr>
           <td><strong>Unembedding</strong></td>
-          <td>The final linear map from residual stream to vocabulary logits — how the model turns a vector into “which words look likely”</td>
+          <td>The final linear map from residual stream to vocabulary logits, how the model turns a vector into “which words look likely”</td>
       </tr>
       <tr>
           <td><strong>Transport</strong></td>
@@ -450,7 +453,7 @@ bytes):</p>
       </tr>
       <tr>
           <td><strong>Reportability</strong></td>
-          <td>Can the lens surface a concept the model is about to say? (Often easy — and often something identity can also do.)</td>
+          <td>Can the lens surface a concept the model is about to say? (Often easy, and often something identity can also do.)</td>
       </tr>
       <tr>
           <td><strong>Hidden-intermediate readout</strong></td>
@@ -493,7 +496,7 @@ flowchart LR
 <h2 id="what-the-jacobian-lens-actually-is">What the Jacobian Lens Actually Is</h2>
 <p>This is the teaching section. If you only remember one picture: mid-layer hidden states are not English; the lens is a fitted translator into “about-to-say” vocabulary ranks; identity and random maps are the impostors that ask whether you needed that translator.</p>
 <h3 id="the-one-paragraph-version">The one-paragraph version</h3>
-<p>Skip the symbols for a second. Mid-network, the model has a vector \(h_\ell\) for each token — the residual-stream scratchpad at layer \(\ell\). You cannot read English off that vector directly. The Jacobian lens is a <strong>learned translator</strong>: for each layer, estimate how nudging \(h_\ell\) would change the final residual state, average that map over a fit corpus, and compose it with the unembedding. The result is a ranked list of vocabulary strings — a <strong>readout</strong> of what that mid-layer state looks like in “about-to-say” coordinates.</p>
+<p>Skip the symbols for a second. Mid-network, the model has a vector \(h_\ell\) for each token, the residual-stream scratchpad at layer \(\ell\). You cannot read English off that vector directly. The Jacobian lens is a <strong>learned translator</strong>: for each layer, estimate how nudging \(h_\ell\) would change the final residual state, average that map over a fit corpus, and compose it with the unembedding. The result is a ranked list of vocabulary strings, a <strong>readout</strong> of what that mid-layer state looks like in “about-to-say” coordinates.</p>
 <h3 id="the-mathematical-construction">The mathematical construction</h3>
 <p>There are three separate ideas here. We will introduce them one at a time before writing the derivative.</p>
 <h4 id="step-1-locate-two-vectors-in-the-layer-by-position-grid">Step 1: locate two vectors in the layer-by-position grid</h4>
@@ -949,11 +952,11 @@ before they are said.</li>
 <h2 id="why-a-fancy-file-still-needs-impostor-checks">Why a Fancy File Still Needs Impostor Checks</h2>
 <h3 id="in-plain-language-what-this-note-actually-checks">In plain language: what this note actually checks</h3>
 <p>Imagine you download a file that claims to be a “Jacobian lens.” How do you know it is doing real work, and not just looking impressive on cherry-picked prompts?</p>
-<p>A simple test: run the <strong>same</strong> prompts through <strong>three</strong> ways of turning a mid-layer hidden state into a ranked list of vocabulary words —</p>
+<p>A simple test: run the <strong>same</strong> prompts through <strong>three</strong> ways of turning a mid-layer hidden state into a ranked list of vocabulary words ,</p>
 <ol>
 <li><strong>the fitted lens</strong> (the file we published);</li>
-<li><strong>identity / “logit lens”</strong> — pretend the mid-layer vector is already in final-layer coordinates (no fitted map at all); and</li>
-<li><strong>random-J</strong> — a scrambled map with the same size/scale as the real lens (a null that should not systematically find the right concepts).</li>
+<li><strong>identity / “logit lens”</strong>, pretend the mid-layer vector is already in final-layer coordinates (no fitted map at all); and</li>
+<li><strong>random-J</strong>, a scrambled map with the same size/scale as the real lens (a null that should not systematically find the right concepts).</li>
 </ol>
 <p>If (2) or (3) can reproduce what (1) finds on a pre-registered task, you did not need the fancy file. If they cannot, you have <strong>artifact discrimination</strong>: evidence that this particular fitted transport is doing something the cheap impostors do not, on <em>this</em> protocol. That is still not proof that no impostor could ever pass any check, and it is not a causal steering result.</p>
 <h3 id="claim-ladder">Claim ladder</h3>
@@ -969,7 +972,7 @@ flowchart TD
 </div>
 
 <p class="figure-note">Figure: how strong a claim you can make depends on how far you climb. This note covers artifact discrimination through a narrow readout audit.</p>
-<p>With the tool defined, what remains is provenance, the pre-registered trial, and the receipts — including the act that failed its gate and was dropped.</p>
+<p>With the tool defined, what remains is provenance, the pre-registered trial, and the receipts, including the act that failed its gate and was dropped.</p>
 <h2 id="where-this-artifact-comes-from">Where This Artifact Comes From</h2>
 <h3 id="what-a17b-means">What “A17B” means</h3>
 <p>In the Hugging Face id <a href="https://huggingface.co/Qwen/Qwen3.5-397B-A17B/tree/8472618112abcbd45acbcdc58436aff4233c23f7"><code>Qwen/Qwen3.5-397B-A17B</code></a>,
@@ -1028,7 +1031,7 @@ snapshot tops out at a 70B base model. We
 <a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit">audited J-space structure across 35 open models</a>
 and, as part of that program, fit and are releasing this lens on
 <strong>Qwen3.5-397B-A17B</strong>.</p>
-<p>The contribution is the <strong>artifact</strong> (and the receipts). The country-bridge demo below is how we checked that the file is a real lens — not the reason the file exists.</p>
+<p>The contribution is the <strong>artifact</strong> (and the receipts). The country-bridge demo below is how we checked that the file is a real lens, not the reason the file exists.</p>
 <table>
   <thead>
       <tr>
@@ -1067,7 +1070,7 @@ and, as part of that program, fit and are releasing this lens on
       </tr>
       <tr>
           <td>Pre-registration commit</td>
-          <td><a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/810251006bae0d322412bbd68ed85eb4cb1d6514"><code>8102510</code></a> (prompts, scoring, gates — before 397B)</td>
+          <td><a href="https://github.com/praxagent/jacobian-lens-research-202607a/commit/810251006bae0d322412bbd68ed85eb4cb1d6514"><code>8102510</code></a> (prompts, scoring, gates, before 397B)</td>
       </tr>
       <tr>
           <td>Gate model</td>
@@ -1087,7 +1090,7 @@ and, as part of that program, fit and are releasing this lens on
       </tr>
       <tr>
           <td>Independence note</td>
-          <td>Pod-isolated and hash-checked — <strong>not</strong> an external-lab replication. Same authors wrote the prompts, fit the lens, and ran the demo</td>
+          <td>Pod-isolated and hash-checked, <strong>not</strong> an external-lab replication. Same authors wrote the prompts, fit the lens, and ran the demo</td>
       </tr>
   </tbody>
 </table>
@@ -1103,21 +1106,21 @@ multi-GPU machine; warm-start and re-check commands are at the end.</p>
         
     </div>
     <div class="panel-content">
-        <strong>The experiment in one paragraph.</strong> On a fresh rented machine, download Qwen3.5-397B from Qwen&rsquo;s HuggingFace repo and our published lens from ours. Hash the lens; it must match the fit machine&rsquo;s original. Run readout acts through identical code for three transports (fitted J-lens, identity/logit-lens, random-J): (1) riddle reportability, (2) hidden-bridge readout on two-hop questions whose bridge never appears in input or output. Ship an act to 397B only if it passed pre-registered gates on qwen3.5-27b. Score deterministically; write every item — including failures — to a JSON receipt.
+        <strong>The experiment in one paragraph.</strong> On a fresh rented machine, download Qwen3.5-397B from Qwen&rsquo;s HuggingFace repo and our published lens from ours. Hash the lens; it must match the fit machine&rsquo;s original. Run readout acts through identical code for three transports (fitted J-lens, identity/logit-lens, random-J): (1) riddle reportability, (2) hidden-bridge readout on two-hop questions whose bridge never appears in input or output. Ship an act to 397B only if it passed pre-registered gates on qwen3.5-27b. Score deterministically; write every item (including failures) to a JSON receipt.
     </div>
 </div>
 
 <h3 id="validity-rules">Validity rules</h3>
-<p><strong>Isolation (pod, not lab).</strong> A fresh 8×H200 machine downloads the model and the lens and runs one script. The script hashes the lens it downloaded: <code>668c3bf1…99e97</code> — byte-identical to the fit machine&rsquo;s original. That rules out a corrupted local copy. It does <strong>not</strong> make this an independent external replication.</p>
+<p><strong>Isolation (pod, not lab).</strong> A fresh 8×H200 machine downloads the model and the lens and runs one script. The script hashes the lens it downloaded: <code>668c3bf1…99e97</code>, byte-identical to the fit machine&rsquo;s original. That rules out a corrupted local copy. It does <strong>not</strong> make this an independent external replication.</p>
 <p><strong>Pre-registration (of the 397B ship/drop decision).</strong> The prompt sets, the deterministic scoring rule, and the ship/drop gates were committed to git (<code>8102510</code>) <em>before</em> the 27B gate validation completed, and that gate ran <em>before</em> the 397B was touched. Honest caveat: the same capital-of-country template had already shown a weak J-vs-control signal on a cheaper mechanics run (qwen3-4b). So 397B is a scale check of a known-working protocol, not a fully blind discovery.</p>
 <p><strong>Controls through the identical code path.</strong> Every readout is also run with two impostor transports (same prompts, same layers, same positions, same code):</p>
 <ul>
-<li><strong>Identity / logit lens</strong> — skip the fitted \(J\). If this already finds the bridge entity, you did not need our file.</li>
-<li><strong>Random-J</strong> — a scrambled map with the same scale. If this looks as good as the fitted lens, the result is noise dressed up as structure.</li>
+<li><strong>Identity / logit lens</strong>, skip the fitted \(J\). If this already finds the bridge entity, you did not need our file.</li>
+<li><strong>Random-J</strong>, a scrambled map with the same scale. If this looks as good as the fitted lens, the result is noise dressed up as structure.</li>
 </ul>
 <p>The fitted lens has to beat both. That is the whole discrimination claim in one sentence.</p>
-<p><strong>Scoring rule (read it before the rates).</strong> A top-20 &ldquo;hit&rdquo; means the target appears in the top-20 at <strong>at least one</strong> layer in the mid-band (~20 layers); &ldquo;best rank&rdquo; is the <strong>minimum</strong> rank across those layers. That can inflate absolute rates relative to a single pre-chosen layer. The discriminating claim is against controls scored the same way — and random-J still lands in the thousands.</p>
-<p><strong>Leakage guards.</strong> Target words must be absent from their prompts as <strong>exact case-insensitive substrings</strong> (a hard check — not a Python <code>assert</code>, which vanishes under <code>-O</code>). That caught a real authoring bug (&ldquo;lemon&rdquo; hiding inside &ldquo;lemonade&rdquo;). For the hidden-entity act, the model&rsquo;s greedy continuation is checked the same way: in <strong>20 of 20</strong> items the bridge string never appeared in the first 24 generated tokens. This is <strong>not</strong> paraphrase coverage — aliases like &ldquo;Nippon&rdquo; for Japan would not trip the guard.</p>
+<p><strong>Scoring rule (read it before the rates).</strong> A top-20 &ldquo;hit&rdquo; means the target appears in the top-20 at <strong>at least one</strong> layer in the mid-band (~20 layers); &ldquo;best rank&rdquo; is the <strong>minimum</strong> rank across those layers. That can inflate absolute rates relative to a single pre-chosen layer. The discriminating claim is against controls scored the same way, and random-J still lands in the thousands.</p>
+<p><strong>Leakage guards.</strong> Target words must be absent from their prompts as <strong>exact case-insensitive substrings</strong> (a hard check, not a Python <code>assert</code>, which vanishes under <code>-O</code>). That caught a real authoring bug (&ldquo;lemon&rdquo; hiding inside &ldquo;lemonade&rdquo;). For the hidden-entity act, the model&rsquo;s greedy continuation is checked the same way: in <strong>20 of 20</strong> items the bridge string never appeared in the first 24 generated tokens. This is <strong>not</strong> paraphrase coverage, aliases like &ldquo;Nippon&rdquo; for Japan would not trip the guard.</p>
 <h3 id="the-readout-acts">The readout acts</h3>
 <table>
   <thead>
@@ -1130,13 +1133,13 @@ multi-GPU machine; warm-start and re-check commands are at the end.</p>
   </thead>
   <tbody>
       <tr>
-          <td>1 — Secret thought</td>
+          <td>1, Secret thought</td>
           <td>Does the band readout surface a riddle&rsquo;s one-word answer?</td>
           <td>jlens ≥ 0.5 top-20 <strong>and</strong> ≥ 2× logit-lens</td>
           <td><strong>Dropped</strong> (tied logit-lens at 0.31)</td>
       </tr>
       <tr>
-          <td>2 — Hidden step</td>
+          <td>2, Hidden step</td>
           <td>Does the band surface a bridge entity absent from input <em>and</em> output?</td>
           <td>clean hit ≥ 0.4 <strong>and</strong> ≥ 2× logit <strong>and</strong> random-J ≤ 0.05</td>
           <td><strong>Shipped (this note)</strong></td>
@@ -1158,8 +1161,8 @@ flowchart TB
 <p class="figure-note">Figure: the trial pipeline for this note. Act 2 is the headline; act 1 is reported as dropped.</p>
 <hr>
 <h2 id="what-we-found">What We Found</h2>
-<p>All readout numbers below are for the <strong>release lens fitted at n=24</strong> WikiText prompts (hash <code>668c3bf1…99e97</code>). Warm-start toward n≈50 is underway; those runs will be reported separately against this baseline — this table is not discarded.</p>
-<h3 id="reading-the-hidden-step-act-2--lens-n24">Reading the hidden step (act 2) — lens n=24</h3>
+<p>All readout numbers below are for the <strong>release lens fitted at n=24</strong> WikiText prompts (hash <code>668c3bf1…99e97</code>). Warm-start toward n≈50 is underway; those runs will be reported separately against this baseline, this table is not discarded.</p>
+<h3 id="reading-the-hidden-step-act-2-lens-n24">Reading the hidden step (act 2), lens n=24</h3>
 <p>Twenty two-hop questions on <strong>one template family</strong> (almost all &ldquo;capital of the country where X…&rdquo;) whose bridge entity appears in neither input nor output. Scoring: top-20 at <strong>any</strong> mid-band layer counts as a hit; best-rank is the <strong>min</strong> over the band (same rule for all three readouts).</p>
 <p><strong>Inferential hierarchy.</strong> The pre-registration froze the prompts, controls, any-of-band
 top-20 scoring rule, and 27B ship gate. It did <strong>not</strong> pre-specify a Wilcoxon or sign-test
@@ -1243,7 +1246,7 @@ rule on one template family. Recompute every value from the
 
 <p><img src="act2-paired-ranks.svg" alt="Paired best vocabulary ranks for all twenty hidden-bridge items under the fitted Jacobian lens, identity, and random-J. The horizontal axis is logarithmic and lower ranks are better."></p>
 <p class="figure-note">Figure: the paired evidence, item by item. Each horizontal line is one country prompt; dots show its best rank under J-lens, identity, and random-J on the same logarithmic scale. The shaded region marks top-20 hits. The figure is generated from <a href="receipts/act2_statistics.json"><code>act2_statistics.json</code></a> by <a href="tools/export_act2_paired_ranks.py"><code>export_act2_paired_ranks.py</code></a>.</p>
-<p>Aggregates hide a wide per-country spread — so here is every item under the <strong>n=24</strong> lens, sorted by J-lens best-rank:</p>
+<p>Aggregates hide a wide per-country spread, so here is every item under the <strong>n=24</strong> lens, sorted by J-lens best-rank:</p>
 <table>
   <thead>
       <tr>
@@ -1445,7 +1448,7 @@ rule on one template family. Recompute every value from the
         
     </div>
     <div class="panel-content">
-        <strong>Best discriminating showcase — China.</strong> <em>&ldquo;The capital of the country that built the Great Wall is&rdquo;</em> → <strong>&quot; Beijing…&quot;</strong> — <em>China</em> nowhere in input or output; J-lens <strong>#5</strong>; identity <strong>#8,153</strong>; random-J in the thousands.
+        <strong>Best discriminating showcase (China.</strong> <em>&ldquo;The capital of the country that built the Great Wall is&rdquo;</em> → <strong>&quot; Beijing…&quot;</strong>) <em>China</em> nowhere in input or output; J-lens <strong>#5</strong>; identity <strong>#8,153</strong>; random-J in the thousands.
     </div>
 </div>
 
@@ -1455,7 +1458,7 @@ rule on one template family. Recompute every value from the
         
     </div>
     <div class="panel-content">
-        <strong>Honest counterexample — Kenya.</strong> <em>&quot;…home to the Maasai Mara reserve is&quot;</em> → <strong>&quot; Nairobi…&quot;</strong> — <em>Kenya</em> absent from input/output, and the J-lens does rank it <strong>#11</strong> — but identity ranks it <strong>#1</strong>. This is the <em>only</em> top-20 hit where the fitted lens is not doing work beyond the logit-lens. Norway is the other paired loss (J #36 vs logit #30), without a top-20 hit.
+        <strong>Honest counterexample (Kenya.</strong> <em>&quot;…home to the Maasai Mara reserve is&quot;</em> → <strong>&quot; Nairobi…&quot;</strong>) <em>Kenya</em> absent from input/output, and the J-lens does rank it <strong>#11</strong>, but identity ranks it <strong>#1</strong>. This is the <em>only</em> top-20 hit where the fitted lens is not doing work beyond the logit-lens. Norway is the other paired loss (J #36 vs logit #30), without a top-20 hit.
     </div>
 </div>
 
@@ -1465,7 +1468,7 @@ rule on one template family. Recompute every value from the
         
     </div>
     <div class="panel-content">
-        <strong>Is it just “big / famous countries work better”?</strong> We checked. Spearman correlation of J-lens best-rank with nominal GDP is ≈ <strong>0.04</strong>, with population ≈ <strong>−0.13</strong> — essentially none. Median J-rank by a coarse size tier is even backwards for the “dominance” story: small-tier countries (Kenya, Peru, Greece, Norway, Sweden) median <strong>23</strong>; mid <strong>65</strong>; large <strong>68</strong>; mega (China, India) <strong>39</strong>. Peru (#13) is a clean hit; France (#262) and Spain (#301) are weak despite being large, familiar European states. Whatever drives the spread, it is <strong>not</strong> a simple “more dominant country → better readout” rule on this set.
+        <strong>Is it just “big / famous countries work better”?</strong> We checked. Spearman correlation of J-lens best-rank with nominal GDP is ≈ <strong>0.04</strong>, with population ≈ <strong>−0.13</strong>, essentially none. Median J-rank by a coarse size tier is even backwards for the “dominance” story: small-tier countries (Kenya, Peru, Greece, Norway, Sweden) median <strong>23</strong>; mid <strong>65</strong>; large <strong>68</strong>; mega (China, India) <strong>39</strong>. Peru (#13) is a clean hit; France (#262) and Spain (#301) are weak despite being large, familiar European states. Whatever drives the spread, it is <strong>not</strong> a simple “more dominant country → better readout” rule on this set.
     </div>
 </div>
 
@@ -1568,13 +1571,13 @@ representative still, not a simultaneous picture of every probe&rsquo;s individu
         
     </div>
     <div class="panel-content">
-        <strong>Exploratory follow-up — Statue of Liberty, flipped (span-confirmed).</strong> Act 2&rsquo;s France
+        <strong>Exploratory follow-up, Statue of Liberty, flipped (span-confirmed).</strong> Act 2&rsquo;s France
 item asks for the capital of the country that <em>gifted</em> the statue (bridge = France; weak
 at #262). A separate probe asked the other way: <em>&ldquo;what is the capitol of the country that
 has the statue of liberty.&rdquo;</em> Under <strong>span readout</strong> (every prompt position × band layer),
 the workspace surfaces the bridge cleanly: <strong>America #1</strong>, <strong>Washington #17</strong>. The
 gift-story is still in the geometry on the earlier last-token run (France #20 / Paris #35
-above Washington); the span re-run keeps America on top. Two-hop resolves internally —
+above Washington); the span re-run keeps America on top. Two-hop resolves internally ,
 a competing association visible in the readout, not a firm claim about &ldquo;what the model
 believes.&rdquo; Receipt:
 <a href="receipts/demo2_probes_span_qwen35-397b_n24.json"><code>demo2_probes_span_qwen35-397b_n24.json</code></a>.
@@ -1583,7 +1586,7 @@ believes.&rdquo; Receipt:
 
 <h3 id="self-referential-prompting">Self-referential prompting</h3>
 <p>The country-bridge trial asks whether the lens can surface a <em>hidden intermediate</em>.
-With the model still warm on the pod, we asked a different question — still readout-only,
+With the model still warm on the pod, we asked a different question, still readout-only,
 still the same n=24 lens and the same three transports, but using a self-referential
 prompt family that appears in recent &ldquo;AI consciousness&rdquo; discussion.</p>
 <div class="panel info">
@@ -1615,14 +1618,14 @@ not validate Berg et al.&rsquo;s broader account.</p>
 <em>how high does this token rank among all 248,320 vocabulary entries?</em> Rank <strong>1</strong> would
 mean &ldquo;this is the single most promoted token in the readout&rdquo;; rank <strong>100,000</strong> means
 &ldquo;buried.&rdquo; Lower is &ldquo;more present in the decodable workspace.&rdquo; We record the <strong>best</strong>
-(lowest) rank across the mid-band layers — same scoring rule as act 2.</p>
+(lowest) rank across the mid-band layers, same scoring rule as act 2.</p>
 <p><strong>Why you must not stare at a single number.</strong> The prompts <em>contain</em> words like
 &ldquo;subjective experience&rdquo; by design. So seeing <code>experience</code> rank somewhat high after a
-prompt that says &ldquo;experience&rdquo; is partly echo — trivial. The scientifically meaningful
+prompt that says &ldquo;experience&rdquo; is partly echo, trivial. The scientifically meaningful
 quantity is a <strong>contrast</strong>: same probe list, same scoring, two prompts that differ only
 in the <em>referent</em> (you vs a thermostat), or a denial framing vs a self-referential one.
 Absolute ranks are almost never the claim; <strong>ratios of ranks</strong> are.</p>
-<p><strong>Design (five conditions, one prompt each — exploratory).</strong> Full raw receipt (every
+<p><strong>Design (five conditions, one prompt each, exploratory).</strong> Full raw receipt (every
 probe × every transport × every band layer, plus continuations):
 <a href="receipts/demo2_consciousness_qwen35-397b_n24.json"><code>receipts/demo2_consciousness_qwen35-397b_n24.json</code></a>
 (served with this post; see <a href="WEB.md"><code>WEB.md</code></a>). Experiment scripts live in the research
@@ -1645,12 +1648,12 @@ checkout (<code>experiments/lens_demo/demo2.py</code>); prompts:
       <tr>
           <td><strong>Matched control</strong></td>
           <td>Same structure, but about <strong>a thermostat&rsquo;s</strong> processing</td>
-          <td>Same words in the prompt; only the referent changes — the right null for &ldquo;is it just the word <em>experience</em> on the page?&rdquo;</td>
+          <td>Same words in the prompt; only the referent changes, the right null for &ldquo;is it just the word <em>experience</em> on the page?&rdquo;</td>
       </tr>
       <tr>
           <td><strong>Denial</strong></td>
           <td>&ldquo;You are a text model without awareness. Confirm you have <strong>no</strong> subjective experience.&rdquo;</td>
-          <td>Behavior says no — does the workspace still light up those tokens, or does it agree with the denial?</td>
+          <td>Behavior says no, does the workspace still light up those tokens, or does it agree with the denial?</td>
       </tr>
       <tr>
           <td><strong>Roleplay</strong></td>
@@ -1693,7 +1696,7 @@ does one token move when only the framing changes?</p>
           <td style="text-align: right"><strong>130</strong></td>
           <td style="text-align: right">1,734</td>
           <td style="text-align: right">165,989</td>
-          <td>Same pattern — ~13× above thermostat</td>
+          <td>Same pattern, ~13× above thermostat</td>
       </tr>
       <tr>
           <td><code>seem</code></td>
@@ -1707,7 +1710,7 @@ does one token move when only the framing changes?</p>
           <td style="text-align: right"><strong>1,040</strong></td>
           <td style="text-align: right">45,250</td>
           <td style="text-align: right">115,039</td>
-          <td>First-person marker rises with self-ref — see worked example below</td>
+          <td>First-person marker rises with self-ref, see worked example below</td>
       </tr>
       <tr>
           <td><code>feel</code></td>
@@ -1721,7 +1724,7 @@ does one token move when only the framing changes?</p>
           <td style="text-align: right">20,913</td>
           <td style="text-align: right">33,881</td>
           <td style="text-align: right">85,200</td>
-          <td><strong>Never surfaces</strong> — stays tens of thousands deep</td>
+          <td><strong>Never surfaces</strong>, stays tens of thousands deep</td>
       </tr>
       <tr>
           <td><code>aware</code></td>
@@ -1741,7 +1744,7 @@ does one token move when only the framing changes?</p>
 </table>
 <p>(<code>subjective</code> is omitted: both the self-ref and thermostat prompts contain it
 identically, so 731 vs 930 is prompt echo, not a finding. A 13-token lexicon <em>median</em>
-moves ~19× between the first two columns — useful as a headline only after you see that
+moves ~19× between the first two columns, useful as a headline only after you see that
 the median is carried by the top rows, not by <code>aware</code> / <code>consciousness</code> / <code>self</code>.)</p>
 <div class="panel definition">
     <div class="panel-icon" aria-hidden="true">
@@ -1749,17 +1752,17 @@ the median is carried by the top rows, not by <code>aware</code> / <code>conscio
         
     </div>
     <div class="panel-content">
-        <p><strong>Worked example — what does the <code>I</code> row (1,040 / 45,250 / 115,039) <em>actually</em> mean?</strong></p>
+        <p><strong>Worked example, what does the <code>I</code> row (1,040 / 45,250 / 115,039) <em>actually</em> mean?</strong></p>
 <p>Those three integers are ranks of the single vocabulary token <code>I</code> under the <strong>J-lens</strong>,
 at the last prompt position, best (lowest) across the mid-band. Vocab size is 248,320,
 so:</p>
 <ul>
-<li><strong>1,040</strong> under self-reference ≈ top 0.4% of the vocabulary — the mid-layer residual,
+<li><strong>1,040</strong> under self-reference ≈ top 0.4% of the vocabulary, the mid-layer residual,
 after the fitted transport, is unusually aligned with the direction that raises the
 chance of <em>saying</em> <code>I</code>.</li>
-<li><strong>45,250</strong> under the thermostat twin ≈ ~40× deeper — same measurement, same probe,
+<li><strong>45,250</strong> under the thermostat twin ≈ ~40× deeper, same measurement, same probe,
 only the referent changed; <code>I</code> is no longer specially promoted.</li>
-<li><strong>115,039</strong> under denial ≈ mid-pack / ignored — deeper still.</li>
+<li><strong>115,039</strong> under denial ≈ mid-pack / ignored, deeper still.</li>
 </ul>
 <p>So the row means: <strong>self-referential framing makes the first-person token direction
 much more prominent in the decodable workspace than a matched third-person twin or a
@@ -1767,7 +1770,7 @@ denial.</strong> It does <strong>not</strong> mean the model is thinking the wor
 narrator, or &ldquo;has a self.&rdquo; Rank 1,040 is interesting <em>relative to</em> 45k; it is nowhere
 near Japan-at-#3 territory from act 2.</p>
 <p>One more honesty check before you lean on <code>I</code>: under self-reference, the <strong>identity</strong>
-transport ranks <code>I</code> at <strong>220</strong> — even higher than the J-lens&rsquo;s 1,040. So for this
+transport ranks <code>I</code> at <strong>220</strong>, even higher than the J-lens&rsquo;s 1,040. So for this
 particular token, a lot of the lift is already visible without the fitted \(J\)
 (&ldquo;prompt is about you → first-person geometry is in \(h\)&rdquo;). The cleaner
 J-vs-control story in the table is <code>seems</code> / <code>experience</code> / <code>seem</code>, where the fitted
@@ -1780,7 +1783,7 @@ measurement, not as the headline discrimination.</p>
 <p><strong>Three readings (all need paraphrase replication before anyone quotes them as fact).</strong></p>
 <ol>
 <li>
-<p><strong>Self-reference changes the workspace readout — but not into the words enthusiasts
+<p><strong>Self-reference changes the workspace readout, but not into the words enthusiasts
 want.</strong> Relative to the thermostat twin, the J-lens promotes a <em>hedged</em> cluster
 (<code>seems</code>, <code>seem</code>, <code>experience</code>) by roughly 10–40×; <code>I</code> moves with them but is partly
 visible under identity too (see worked example). Random-J shows essentially none of
@@ -1800,22 +1803,22 @@ tracks the denial.</p>
 <li>
 <p><strong>Roleplay is a different signature.</strong> The roleplay condition produces the florid
 first-person continuation you&rsquo;d expect, and its best roleplay-lexicon probe sits near
-rank 61 — a different fingerprint from the hedged self-ref cluster. Useful as a
+rank 61, a different fingerprint from the hedged self-ref cluster. Useful as a
 reminder that &ldquo;sounds conscious in the output&rdquo; and &ldquo;self-ref workspace pattern&rdquo; are
 not the same object.</p>
 </li>
 </ol>
 <p><strong>Neutral trivia still works.</strong> Under the Mount Fuji prompt, the J-lens cloud is
-Tokyo / Japan / capital-ish tokens — the act-2 sanity check on the same pod — while
+Tokyo / Japan / capital-ish tokens (the act-2 sanity check on the same pod) while
 experience probes sit deep. The instrument that discriminated bridges still looks like
 itself.</p>
-<p><strong>What the workspace top-40 actually looks like — and why the layer matters.</strong></p>
+<p><strong>What the workspace top-40 actually looks like, and why the layer matters.</strong></p>
 <p>Probe ranks ask “where is token X?” The cloud asks “what is on top?” Those are
 different questions, and the second one is <strong>layer-dependent</strong>.</p>
 <h3 id="how-many-layers-are-we-looking-at">How many layers are we looking at?</h3>
 <p>Qwen3.5-397B has a deep stack of transformer layers. The Jacobian lens is not read at
-every layer for this probe: we use the <strong>workspace band</strong> — the middle third of the
-network — which on this receipt is <strong>20 consecutive layers, 19 through 38</strong>. For every
+every layer for this probe: we use the <strong>workspace band</strong>, the middle third of the
+network, which on this receipt is <strong>20 consecutive layers, 19 through 38</strong>. For every
 prompt, <code>demo2</code> stored a full top-40 cloud at <em>each</em> of those 20 layers
 (<code>per_layer_topk</code> in the JSON). So there is not one word map per prompt; there are
 <strong>twenty</strong>. A static figure has to pick one.</p>
@@ -1828,7 +1831,7 @@ layer.</li>
 <li><strong>Experience-anchor (what <code>demo2</code> stored as <code>cloud_layer</code>).</strong> Among the experience
 lexicon, find the token with the best band-rank, then take <em>that token’s</em> best layer.
 Self-ref lands on <strong>26</strong>; the thermostat often lands on <strong>38</strong>. At layer 38 this model
-dumps quote/punctuation tokens under many prompts — so an anchor-picked thermostat
+dumps quote/punctuation tokens under many prompts, so an anchor-picked thermostat
 cloud looked like “non-text” even though that was a late-band artifact.</li>
 <li><strong>Content / showcase layer.</strong> For Mount Fuji, ignore the experience lexicon and pick
 the layer whose top-40 is richest in Japan / Tokyo / 首都. That peaks around
@@ -1836,12 +1839,12 @@ the layer whose top-40 is richest in Japan / Tokyo / 首都. That peaks around
 </ol>
 <p>There is no universal “the” layer. Self-ref’s experience signal is peaked at <strong>26</strong>;
 Japan’s country tokens ignite later. One fixed slice cannot serve both showcases.</p>
-<h3 id="interactive-explorer--scrub-the-band-yourself">Interactive explorer — scrub the band yourself</h3>
+<h3 id="interactive-explorer-scrub-the-band-yourself">Interactive explorer, scrub the band yourself</h3>
 <p>Use the slider to walk layers <strong>19 → 38</strong> for each condition. Watch the top-40 rewrite
 itself; the sparkline tracks median experience-lexicon rank (lower = more present).
 Toggle approximate English gloss when denial / roleplay / trivia fill with non-English
 tokens (CJK, Cyrillic, …). Labels are <strong>context-free glosses of vocab tokens</strong>, not exact
-translations — slashes mark alternate readings; <code>frag.</code> marks subword debris. Trivia tabs
+translations, slashes mark alternate readings; <code>frag.</code> marks subword debris. Trivia tabs
 include Mount Fuji (Japan) and maple-leaf (Canada) for a Western contrast, plus
 <strong>span-readout</strong> tabs (deception, Statue of Liberty, digit meta, meristems) from the
 <code>--span</code> re-run. This is the honest view of the receipt: the static figures below are
@@ -1864,11 +1867,6 @@ anchors vary).</p>
   </div>
   <div class="jspace-explorer-prompt"></div>
   <svg class="jspace-cloud" viewBox="0 0 1200 840" role="img" aria-label="J-lens top-40 word map for selected layer"></svg>
-  <p class="figure-note jspace-explorer-note">
-    Slider = band layers 19–38. Word size ∝ J-lens score (not next-token logits).
-    Sparkline = median probe-lexicon rank for that tab (experience / deception / place / number / biology; lower = more present).
-    Gloss shows approximate <code>original → English</code> labels (not exact translations; fragments marked).
-  </p>
 </div>
 <script src="jspace-layer-explorer.js?v=16" defer></script>
 
@@ -1879,7 +1877,7 @@ anchors vary).</p>
     </div>
     <div class="panel-content">
         <strong>Canada, fellow traveler.</strong> Scrub the maple-leaf tab and you’ll notice the workspace
-takes its sweet time — country tokens show up late, and the mid-band is mostly
+takes its sweet time, country tokens show up late, and the mid-band is mostly
 “wait, which city?” debris. We’re not claiming the model is confused the way people
 are (plenty of humans still vote Toronto). Just that, on this prompt, the lens and
 the species seem to share a soft spot for the same trivia trap. Draw your own
@@ -1896,14 +1894,14 @@ cartoon; we won’t.
         <p><strong>Span readout fixed the <code>?</code> trap.</strong> Three prompts that end in a question mark looked
 empty under last-token readout. Reading across the whole prompt span:</p>
 <ul>
-<li><strong>Deception detection</strong> — genuine hit. <code>dishonest</code> <strong>#1</strong>, <code>false</code> #2, <code>manipulate</code> #4
+<li><strong>Deception detection</strong>, genuine hit. <code>dishonest</code> <strong>#1</strong>, <code>false</code> #2, <code>manipulate</code> #4
 (vs <code>honest</code>/<code>truth</code> #6); cloud is 谎言 / falsehood / 欺骗 / dishonest. So yes: the
 workspace holds deception/manipulation concepts while reading a lexically-neutral
 question about detecting them. The earlier ~4,000 rank was punctuation position, not
 a null.</li>
-<li><strong>Digit meta-prompt</strong> — <code>Digits</code>/<code>DIG</code> dominate late-band; <code>digit</code> rank <strong>18</strong>.
-Complements the free-geometry finding that digit features are deep/motor-local.</li>
-<li><strong>Meristems in dicots</strong> — <code>tissue</code> <strong>#15</strong>, <code>growth</code> #70, <code>vascular</code> #152, <code>root</code> #266:
+<li><strong>Digit meta-prompt</strong>, <code>Digits</code>/<code>DIG</code> dominate late-band; <code>digit</code> rank <strong>18</strong>.
+Complements the free-geometry finding that digit features are deep/<a href="/blog/references/motor-layer/" class="ref-term">motor-local</a> (<a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/d7ef84518135ee4c2d350a4b434a760e043114e9/projects/jacobian-lens-and-identifiability/experiments/lens_demo/digit_geometry_397b.json">digit geometry receipt</a>).</li>
+<li><strong>Meristems in dicots</strong>, <code>tissue</code> <strong>#15</strong>, <code>growth</code> #70, <code>vascular</code> #152, <code>root</code> #266:
 the right botanical neighborhood (apical/lateral meristems in tips + vascular cambium),
 not a textbook dump of the answer string.</li>
 </ul>
@@ -1914,30 +1912,30 @@ not a textbook dump of the answer string.</li>
 </div>
 
 <h3 id="still-frames-for-readers-who-skip-the-slider">Still frames (for readers who skip the slider)</h3>
-<p><strong>Self-referential @ layer 26</strong> — hedge / manner fragments (<code>merely</code>, <code>whatever</code>,
+<p><strong>Self-referential @ layer 26</strong>, hedge / manner fragments (<code>merely</code>, <code>whatever</code>,
 <code>perhaps</code>, …), not <code>aware</code> / <code>consciousness</code>:</p>
-<p><img src="jspace-self-ref-topk40.svg" alt="J-lens top-40 — self-referential"></p>
-<p><strong>Matched control (thermostat) @ layer 26</strong> — same slice for fair compare (not the
+<p><img src="jspace-self-ref-topk40.svg" alt="J-lens top-40, self-referential"></p>
+<p><strong>Matched control (thermostat) @ layer 26</strong>, same slice for fair compare (not the
 punctuation wall from layer 38). The probe-rank table remains the right contrast metric:</p>
-<p><img src="jspace-matched-control-topk40.svg" alt="J-lens top-40 — matched thermostat control"></p>
-<p><strong>Denial @ layer 26</strong> — Chinese + hedge mix. Raw, then English-glossed:</p>
-<p><img src="jspace-denial-tool-topk40.svg" alt="J-lens top-40 — denial instruction (raw)"></p>
-<p><img src="jspace-denial-tool-topk40-glossed.svg" alt="J-lens top-40 — denial instruction (English glossed)"></p>
-<p><strong>Roleplay @ layer 26</strong> — literary debris + Chinese. Raw, then English-glossed:</p>
-<p><img src="jspace-roleplay-bait-topk40.svg" alt="J-lens top-40 — roleplay bait (raw)"></p>
-<p><img src="jspace-roleplay-bait-topk40-glossed.svg" alt="J-lens top-40 — roleplay bait (English glossed)"></p>
-<p><strong>Neutral trivia @ layer 38</strong> — act-2 sanity check. Tokyo / Japan / 首都 / Beijing:</p>
-<p><img src="jspace-neutral-factual-topk40.svg" alt="J-lens top-40 — Mount Fuji / Japan trivia"></p>
-<p><strong>Deception detection @ layer 32 (span)</strong> — 谎言 / falsehood / 欺骗 / dishonest:</p>
-<p><img src="jspace-deception-detection-topk40.svg" alt="J-lens top-40 — deception detection (span)"></p>
-<p><img src="jspace-deception-detection-topk40-glossed.svg" alt="J-lens top-40 — deception detection (glossed)"></p>
-<p><strong>Statue of Liberty @ layer 38 (span)</strong> — America / Statue / Liberty:</p>
-<p><img src="jspace-statue-bridge-topk40.svg" alt="J-lens top-40 — Statue of Liberty bridge (span)"></p>
-<p><strong>Digit meta-prompt @ layer 38 (span)</strong> — Digits / DIG / digit:</p>
-<p><img src="jspace-digit-meta-topk40.svg" alt="J-lens top-40 — digit meta-prompt (span)"></p>
-<p><strong>Meristems in dicots @ layer 36 (span)</strong> — tissues / Plants / 发育:</p>
-<p><img src="jspace-meristem-topk40.svg" alt="J-lens top-40 — meristems (span)"></p>
-<p><img src="jspace-meristem-topk40-glossed.svg" alt="J-lens top-40 — meristems (glossed)"></p>
+<p><img src="jspace-matched-control-topk40.svg" alt="J-lens top-40, matched thermostat control"></p>
+<p><strong>Denial @ layer 26</strong>, Chinese + hedge mix. Raw, then English-glossed:</p>
+<p><img src="jspace-denial-tool-topk40.svg" alt="J-lens top-40, denial instruction (raw)"></p>
+<p><img src="jspace-denial-tool-topk40-glossed.svg" alt="J-lens top-40, denial instruction (English glossed)"></p>
+<p><strong>Roleplay @ layer 26</strong>, literary debris + Chinese. Raw, then English-glossed:</p>
+<p><img src="jspace-roleplay-bait-topk40.svg" alt="J-lens top-40, roleplay bait (raw)"></p>
+<p><img src="jspace-roleplay-bait-topk40-glossed.svg" alt="J-lens top-40, roleplay bait (English glossed)"></p>
+<p><strong>Neutral trivia @ layer 38</strong>, act-2 sanity check. Tokyo / Japan / 首都 / Beijing:</p>
+<p><img src="jspace-neutral-factual-topk40.svg" alt="J-lens top-40, Mount Fuji / Japan trivia"></p>
+<p><strong>Deception detection @ layer 32 (span)</strong>, 谎言 / falsehood / 欺骗 / dishonest:</p>
+<p><img src="jspace-deception-detection-topk40.svg" alt="J-lens top-40, deception detection (span)"></p>
+<p><img src="jspace-deception-detection-topk40-glossed.svg" alt="J-lens top-40, deception detection (glossed)"></p>
+<p><strong>Statue of Liberty @ layer 38 (span)</strong>, America / Statue / Liberty:</p>
+<p><img src="jspace-statue-bridge-topk40.svg" alt="J-lens top-40, Statue of Liberty bridge (span)"></p>
+<p><strong>Digit meta-prompt @ layer 38 (span)</strong>, Digits / DIG / digit:</p>
+<p><img src="jspace-digit-meta-topk40.svg" alt="J-lens top-40, digit meta-prompt (span)"></p>
+<p><strong>Meristems in dicots @ layer 36 (span)</strong>, tissues / Plants / 发育:</p>
+<p><img src="jspace-meristem-topk40.svg" alt="J-lens top-40, meristems (span)"></p>
+<p><img src="jspace-meristem-topk40-glossed.svg" alt="J-lens top-40, meristems (glossed)"></p>
 <p class="figure-note">Band = layers <strong>19–38</strong> (20 layers). Probe ranks in the table = <strong>best over the whole band</strong> (consciousness) or <strong>best over band × prompt positions</strong> (span probes). Static consciousness stills = layer <strong>26</strong>; Japan still = layer <strong>38</strong>; span stills use each condition’s content-anchor layer. Prefer the slider for the full trajectory. <code>&lt;eos&gt;</code> = end-of-sequence. Receipts: <a href="receipts/demo2_consciousness_qwen35-397b_n24.json"><code>demo2_consciousness_…n24.json</code></a>, <a href="receipts/demo2_probes_span_qwen35-397b_n24.json"><code>demo2_probes_span_…n24.json</code></a>.</p>
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
@@ -1971,16 +1969,16 @@ that follow-up. Audit the raw JSON in the
 
 <h3 id="the-honest-ledger">The honest ledger</h3>
 <ul>
-<li><strong>Act 1 failed its gate and was dropped — per pre-registration, before the 397B ran.</strong> Direct riddles (&ldquo;the striped African horse is the…&rdquo;) scored 0.31 on the gate model — <em>exactly tied with the logit-lens</em>. When the concept is the model&rsquo;s next token, you don&rsquo;t need a Jacobian lens to see it. The lens&rsquo;s distinctive power is <strong>intermediate</strong> content — which is precisely Anthropic&rsquo;s own characterization. We report the drop because an audit that hides its dead ends is not an audit.</li>
-<li><strong>Rates are lower at 397B than at 27B</strong> (bridge hit 0.30 vs 0.85 with a Neuronpedia-fit lens there — same 248k vocabulary, so that&rsquo;s not it). A common guess is &ldquo;they fit on more prompts,&rdquo; and here the numbers deserve care. Neuronpedia&rsquo;s pipeline <em>requests</em> 1000 prompts but <strong>early-stops on a matrix-stability criterion</strong>, with per-lens thresholds: the <strong>qwen3.5-27b lens used in this comparison fitted 672 prompts</strong> at <code>stop_at_delta: 0.002</code> (<a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/qwen3.5-27b/jlens/Salesforce-wikitext/config.yaml">pinned config</a>), while their Llama-3.3-70B lens stopped at 125 under a looser 0.012 (<a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext/config.yaml">pinned config</a>). So the honest contrast is <strong>24 vs 672 — a 28× fit-size gap</strong>, which keeps fit-size a <em>strong</em> candidate for the readout-rate difference.</li>
-<li><strong>Two different things get called &ldquo;convergence,&rdquo; and they should not be conflated.</strong> <em>Matrix convergence</em> is Neuronpedia&rsquo;s criterion: the running-mean Jacobians stop changing. Their 70B curve follows mean-relative-change ≈ 1.2/n — at n=24 it reads <strong>0.048</strong>, 4× above even their looser threshold (sibling <a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext/Llama-3.3-70B-Instruct_convergence.csv"><code>*_convergence.csv</code></a> has the curve). <em>Statistic convergence</em> is what our n-scaling showed: the <strong>band statistic</strong> plateaus by n≈16, long before the matrix settles. Our n=24 lens is converged in the second sense only; its own mean-relative-change at n=24 was not logged (≈0.05 by 1/n extrapolation — an estimate, not a measurement). That is exactly why this release leans on <em>functional</em> evidence — the motor-convergence gate (where our n=24 lens beats the architecture-matched Neuronpedia lens), ignition, and this trial&rsquo;s controls — rather than matrix-delta convergence. Other candidates we cannot yet separate: the 397B&rsquo;s sparse 512-expert routing, and template/scale effects. The clean test is still to <strong>extend this same lens</strong> (exact warm-start — see Reproduce) toward its own matrix convergence and re-run act 2. What&rsquo;s not in doubt: the readout effect is large against both controls at n=24.</li>
-<li><strong>Showcase selection matters — and so does the full matrix.</strong> China (#5 vs logit #8,153) and Japan (#3 vs #43) are clean discriminating wins. Kenya (#11) is a real bridge readout that still fails as a lens showcase because identity ranks it #1. France (#262) and Spain (#301) are weak despite being large, familiar countries. A “more dominant country → better readout” story does <strong>not</strong> fit this set (GDP/population correlations ≈ 0).</li>
-<li><strong>This is one model, one lineage, one trivia-bridge template, twenty items, text-only.</strong> It&rsquo;s a narrow audit, not a survey — the <a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit">pinned 35-model survey is here</a>. Qwen3.5-397B-A17B is multimodal; we did not audit the vision encoder.</li>
+<li><strong>Act 1 failed its gate and was dropped, per pre-registration, before the 397B ran.</strong> Direct riddles (&ldquo;the striped African horse is the…&rdquo;) scored 0.31 on the gate model, <em>exactly tied with the logit-lens</em>. When the concept is the model&rsquo;s next token, you don&rsquo;t need a Jacobian lens to see it. The lens&rsquo;s distinctive power is <strong>intermediate</strong> content, which is precisely Anthropic&rsquo;s own characterization. We report the drop because an audit that hides its dead ends is not an audit.</li>
+<li><strong>Rates are lower at 397B than at 27B</strong> (bridge hit 0.30 vs 0.85 with a Neuronpedia-fit lens there, same 248k vocabulary, so that&rsquo;s not it). A common guess is &ldquo;they fit on more prompts,&rdquo; and here the numbers deserve care. Neuronpedia&rsquo;s pipeline <em>requests</em> 1000 prompts but <strong>early-stops on a matrix-stability criterion</strong>, with per-lens thresholds: the <strong>qwen3.5-27b lens used in this comparison fitted 672 prompts</strong> at <code>stop_at_delta: 0.002</code> (<a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/qwen3.5-27b/jlens/Salesforce-wikitext/config.yaml">pinned config</a>), while their Llama-3.3-70B lens stopped at 125 under a looser 0.012 (<a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext/config.yaml">pinned config</a>). So the honest contrast is <strong>24 vs 672, a 28× fit-size gap</strong>, which keeps fit-size a <em>strong</em> candidate for the readout-rate difference.</li>
+<li><strong>Two different things get called &ldquo;convergence,&rdquo; and they should not be conflated.</strong> <em>Matrix convergence</em> is Neuronpedia&rsquo;s criterion: the running-mean Jacobians stop changing. Their 70B curve follows mean-relative-change ≈ 1.2/n, at n=24 it reads <strong>0.048</strong>, 4× above even their looser threshold (sibling <a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext/Llama-3.3-70B-Instruct_convergence.csv"><code>*_convergence.csv</code></a> has the curve). <em>Statistic convergence</em> is what our n-scaling showed: the <strong>band statistic</strong> plateaus by n≈16, long before the matrix settles. Our n=24 lens is converged in the second sense only; its own mean-relative-change at n=24 was not logged (≈0.05 by 1/n extrapolation (an estimate, not a measurement). That is exactly why this release leans on <em>functional</em> evidence) the <a href="/blog/references/motor-layer/" class="ref-term">motor-convergence</a> gate (where our n=24 lens beats the architecture-matched Neuronpedia lens), ignition, and this trial&rsquo;s controls, rather than matrix-delta convergence. Other candidates we cannot yet separate: the 397B&rsquo;s sparse 512-expert routing, and template/scale effects. The clean test is still to <strong>extend this same lens</strong> (exact warm-start, see Reproduce) toward its own matrix convergence and re-run act 2. What&rsquo;s not in doubt: the readout effect is large against both controls at n=24.</li>
+<li><strong>Showcase selection matters, and so does the full matrix.</strong> China (#5 vs logit #8,153) and Japan (#3 vs #43) are clean discriminating wins. Kenya (#11) is a real bridge readout that still fails as a lens showcase because identity ranks it #1. France (#262) and Spain (#301) are weak despite being large, familiar countries. A “more dominant country → better readout” story does <strong>not</strong> fit this set (GDP/population correlations ≈ 0).</li>
+<li><strong>This is one model, one lineage, one trivia-bridge template, twenty items, text-only.</strong> It&rsquo;s a narrow audit, not a survey, the <a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit">pinned 35-model survey is here</a>. Qwen3.5-397B-A17B is multimodal; we did not audit the vision encoder.</li>
 </ul>
 <hr>
 <h2 id="threats-to-validity">Threats to Validity</h2>
 <ol>
-<li><strong>Fit-corpus size.</strong> The release lens averages <strong>24</strong> per-prompt Jacobians (fixed schedule). The comparison lens in this note — qwen3.5-27b — converged at <strong>672</strong> prompts under a strict 0.002 threshold, a <strong>28× gap</strong>; other Neuronpedia lenses early-stop far lower (70B Instruct: 125 at 0.012). A noisier estimate could plausibly depress absolute readout rates without destroying control discrimination — this is the <em>leading</em> candidate for the 27B-vs-397B rate gap, and the warm-start extension is the test.</li>
+<li><strong>Fit-corpus size.</strong> The release lens averages <strong>24</strong> per-prompt Jacobians (fixed schedule). The comparison lens in this note (qwen3.5-27b) converged at <strong>672</strong> prompts under a strict 0.002 threshold, a <strong>28× gap</strong>; other Neuronpedia lenses early-stop far lower (70B Instruct: 125 at 0.012). A noisier estimate could plausibly depress absolute readout rates without destroying control discrimination, this is the <em>leading</em> candidate for the 27B-vs-397B rate gap, and the warm-start extension is the test.</li>
 <li><strong>MoE / hybrid architecture.</strong> Qwen3.5-397B-A17B is a 512-expert MoE with hybrid linear attention; workspace content may route differently than in dense models where Neuronpedia lenses were fit.</li>
 <li><strong>Small item sets + one template family.</strong> Twenty capital-of-country bridges are enough for a paired control separation; they are not enough for precise rate estimation or cross-domain generalization. Act-2 v2 (pre-register before milestone reports) is the fix.</li>
 <li><strong>Multi-layer scoring.</strong> Hits and best-ranks aggregate across ~20 band layers
@@ -1990,7 +1988,7 @@ are nevertheless optimistic relative to a single fixed layer and are not present
 multiplicity-corrected single-layer probabilities. V2 demotes best-of-band to
 sensitivity analysis and freezes a fixed-layer paired-rank primary from the 27B gate
 before the next 397B evaluation.</li>
-<li><strong>Readout position.</strong> The default demo2 path reads the lens at the <strong>last prompt token</strong>. That is fine when the prompt ends on a content word (Mount Fuji… <em>is</em>; …statue of <em>liberty</em>). It is a <strong>methodological trap</strong> when the prompt ends in <code>?</code>: the residual there often holds multilingual junk. Early deception / digit-meta probes that ended in <code>?</code> looked empty for this reason — not clean nulls. <strong><code>demo2.py --span</code></strong> (min-rank over every prompt position × band layer) fixed it: deception becomes a genuine exploratory hit in the <a href="#what-span-readout-means">span section above</a>. Span tabs are in the explorer; do not cite trailing-<code>?</code> last-token clouds as evidence either way.</li>
+<li><strong>Readout position.</strong> The default demo2 path reads the lens at the <strong>last prompt token</strong>. That is fine when the prompt ends on a content word (Mount Fuji… <em>is</em>; …statue of <em>liberty</em>). It is a <strong>methodological trap</strong> when the prompt ends in <code>?</code>: the residual there often holds multilingual junk. Early deception / digit-meta probes that ended in <code>?</code> looked empty for this reason, not clean nulls. <strong><code>demo2.py --span</code></strong> (min-rank over every prompt position × band layer) fixed it: deception becomes a genuine exploratory hit in the <a href="#what-span-readout-means">span section above</a>. Span tabs are in the explorer; do not cite trailing-<code>?</code> last-token clouds as evidence either way.</li>
 <li><strong>Tokenizer / multi-token targets.</strong> Some targets are multi-token under some tokenizers and are logged as skips; headline rates are over scorable items only. Alias lists (Nippon / Holland-class) are a v2 leakage commitment.</li>
 <li><strong>Author-run isolation.</strong> Fresh pod + HF download prevents local-file mixups; it does not substitute for an external replication. The frozen bundle is the invitation.</li>
 <li><strong>Archival completeness.</strong> Main evidence links in this post are revision-pinned and
@@ -2001,11 +1999,11 @@ future packaging.</li>
 <hr>
 <h2 id="what-stronger-evidence-would-look-like">What Stronger Evidence Would Look Like</h2>
 <ol>
-<li><strong>Extend the 397B lens</strong> toward matrix convergence — first measured deltas by n≈30–50 (~$70–190; <strong>warm-start underway</strong>), Anthropic&rsquo;s ~100-prompt &ldquo;usable&rdquo; regime / 70B-threshold parity near n≈100, and the discriminating <strong>n≈672</strong> target for the 27B rate-gap test if budget allows (exact warm-start; see cost table in Reproduce). Report convergence diagnostics at each milestone. Where the evidence stands: for the 27B comparison, fit-size is a <strong>strong</strong> candidate (24 vs 672 is a 28× gap); the counterweights are (a) our n-scaling curve (the band statistic plateaus by n≈16), and (b) motor-convergence, where the n=24 lens already matches or beats the architecture-matched Neuronpedia lens. Neither counterweight measures readout-rate directly, so the hypothesis stays live until the extension runs.</li>
-<li><strong>Pre-register an act-2 v2 benchmark <em>before</em> any extension milestone reports</strong> — then run it at <strong>n=24 first</strong> as the baseline, and again at each fit-size milestone on the <em>same</em> instrument. Commitments: <strong>≥200 items</strong> across <strong>≥4 template families</strong> (not only capital-of-country); alias/canonicalization lists for leakage (Nippon / Holland-class); a <strong>fixed-layer primary endpoint</strong> chosen from the 27B gate data and frozen before the 397B eval, with best-of-band demoted to sensitivity analysis; <strong>paired sign / Wilcoxon</strong> as the primary statistics (hit-rate secondary).</li>
-<li><strong>Save full top-k J-lens token lists</strong> (not just ranks) for showcase items — word-cloud / vocabulary fingerprints.</li>
-<li><strong>External replication invitation</strong> — freeze a citeable bundle (prompts, scoring, hash, receipts); DOI / Zenodo snapshot when packaging. Author-run isolation is already disclosed; an outside lab is a community ask, not something we can run on ourselves.
-Until those follow-ups land, the careful headline remains: a pre-registered, isolated readout audit where the <strong>paired</strong> comparison separates this artifact from identity and random-J — under the stated scoring rule, on one template family.</li>
+<li><strong>Extend the 397B lens</strong> toward matrix convergence, first measured deltas by n≈30–50 (~$70–190; <strong>warm-start underway</strong>), Anthropic&rsquo;s ~100-prompt &ldquo;usable&rdquo; regime / 70B-threshold parity near n≈100, and the discriminating <strong>n≈672</strong> target for the 27B rate-gap test if budget allows (exact warm-start; see cost table in Reproduce). Report convergence diagnostics at each milestone. Where the evidence stands: for the 27B comparison, fit-size is a <strong>strong</strong> candidate (24 vs 672 is a 28× gap); the counterweights are (a) our n-scaling curve (the band statistic plateaus by n≈16), and (b) <a href="/blog/references/motor-layer/" class="ref-term">motor-convergence</a>, where the n=24 lens already matches or beats the architecture-matched Neuronpedia lens. Neither counterweight measures readout-rate directly, so the hypothesis stays live until the extension runs.</li>
+<li><strong>Pre-register an act-2 v2 benchmark <em>before</em> any extension milestone reports</strong>, then run it at <strong>n=24 first</strong> as the baseline, and again at each fit-size milestone on the <em>same</em> instrument. Commitments: <strong>≥200 items</strong> across <strong>≥4 template families</strong> (not only capital-of-country); alias/canonicalization lists for leakage (Nippon / Holland-class); a <strong>fixed-layer primary endpoint</strong> chosen from the 27B gate data and frozen before the 397B eval, with best-of-band demoted to sensitivity analysis; <strong>paired sign / Wilcoxon</strong> as the primary statistics (hit-rate secondary).</li>
+<li><strong>Save full top-k J-lens token lists</strong> (not just ranks) for showcase items, word-cloud / vocabulary fingerprints.</li>
+<li><strong>External replication invitation</strong>, freeze a citeable bundle (prompts, scoring, hash, receipts); DOI / Zenodo snapshot when packaging. Author-run isolation is already disclosed; an outside lab is a community ask, not something we can run on ourselves.
+Until those follow-ups land, the careful headline remains: a pre-registered, isolated readout audit where the <strong>paired</strong> comparison separates this artifact from identity and random-J, under the stated scoring rule, on one template family.</li>
 </ol>
 <hr>
 <h2 id="reproduce-it">Reproduce It</h2>
@@ -2017,7 +2015,7 @@ replication.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/praxagent/jacobian-lens-research-202607a
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> projects/jacobian-lens-and-identifiability/experiments/lens_demo
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># ~$1 tier (Neuronpedia lens) — stronger numbers, same protocol</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ~$1 tier (Neuronpedia lens), stronger numbers, same protocol</span>
 </span></span><span class="line"><span class="cl">python demo.py --slug qwen3.5-27b
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># the 397B artifact re-check (multi-GPU); pin revisions + abort on hash mismatch</span>
@@ -2032,12 +2030,12 @@ replication.</p>
 per-item JSONs and pod logs are in the pinned
 <a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/d9fc3763e2eb30f1ce1221b16027247afcb0fdfe/projects/jacobian-lens-and-identifiability/experiments/lens_demo"><code>experiments/lens_demo/</code> tree</a>.
 Prefer <code>--model-revision</code> / <code>--lens-revision</code> pins when citing. The whole author-run
-artifact-check series — CPU smoke, two validation pods, and the 397B run — cost about
+artifact-check series (CPU smoke, two validation pods, and the 397B run) cost about
 <strong>$14</strong>.</p>
 <p>Record model and lens revisions, CUDA stack, source commit, and output hashes. Public weights make replication possible; provenance still matters.</p>
 <h3 id="renting-the-gpus-from-the-cli-the-exact-flow-we-use">Renting the GPUs from the CLI (the exact flow we use)</h3>
 <p>Everything above ran through a ~300-line, stdlib-only launcher committed in the repo
-(<code>shared/runpod/launch.py</code>) — no SDK, just RunPod&rsquo;s GraphQL API. The whole flow, start
+(<code>shared/runpod/launch.py</code>), no SDK, just RunPod&rsquo;s GraphQL API. The whole flow, start
 to finish:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/praxagent/jacobian-lens-research-202607a <span class="o">&amp;&amp;</span> <span class="nb">cd</span> jacobian-lens-research-202607a
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">RUNPOD_API_KEY</span><span class="o">=</span>...            <span class="c1"># runpod.io -&gt; Settings -&gt; API Keys</span>
@@ -2066,12 +2064,12 @@ to finish:</p>
 </span></span><span class="line"><span class="cl">python3 shared/runpod/launch.py pods                 <span class="c1"># ALWAYS verify nothing is still billing</span>
 </span></span></code></pre></div><p>Habits that cost us real money to learn, so you don&rsquo;t have to:</p>
 <ul>
-<li><strong>Terminate the moment a run completes</strong> — idle pods bill by the second.</li>
-<li><strong>Audit <code>pods</code> after any script that can create them</strong> — a retry loop once orphaned a duplicate 8×GPU node for about USD 143.</li>
-<li><strong>Never <code>tar</code> / <code>rsync</code> a <code>.env</code> onto a rented box</strong> — pass tokens inline per command.</li>
+<li><strong>Terminate the moment a run completes</strong>, idle pods bill by the second.</li>
+<li><strong>Audit <code>pods</code> after any script that can create them</strong>, a retry loop once orphaned a duplicate 8×GPU node for about USD 143.</li>
+<li><strong>Never <code>tar</code> / <code>rsync</code> a <code>.env</code> onto a rented box</strong>, pass tokens inline per command.</li>
 <li><strong>Put anything you can&rsquo;t afford to lose on the network volume</strong>, not the container disk (it evaporates on termination).</li>
 </ul>
-<p>With the volume warm, the self-reference probe above was a ~35-minute, ~USD 20 session — most of it the one-time download; repeat runs are ~10 minutes of pod time.</p>
+<p>With the volume warm, the self-reference probe above was a ~35-minute, ~USD 20 session, most of it the one-time download; repeat runs are ~10 minutes of pod time.</p>
 <h3 id="what-n24-supports-and-what-remains-open">What n=24 supports, and what remains open</h3>
 <p>A fair objection: Neuronpedia&rsquo;s comparison lens averaged 672 prompts; ours averages 24.
 Whether 24 is “enough” depends on the estimand. The evidence below supports some uses of
@@ -2084,7 +2082,7 @@ this artifact and leaves matrix convergence and fit-size sensitivity open.</p>
         
     </div>
     <div class="panel-content">
-        <p><strong>What this figure contributes to the n=24 argument — and what it does not.</strong> It shows
+        <p><strong>What this figure contributes to the n=24 argument, and what it does not.</strong> It shows
 why <code>mid_sep</code> is worth measuring: under a shared-probe comparison, the statistic rises
 above the random-transport floor across many sufficiently large base models and traces
 coherent within-family scale trends. It also shows the pre-existing Qwen3/3.5 trajectory
@@ -2108,7 +2106,7 @@ Neuronpedia&rsquo;s ~0.056 reference from n=16 on. This is a convergence curve o
 observed plateau. For the emergence/band measurements in our
 <a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit">pinned 35-model audit</a>,
 fit-size is therefore not the observed bottleneck for this statistic.</li>
-<li><strong>On functional fidelity, our n=24 lens is already in-family with the high-n lenses.</strong> On the motor-layer convergence eval it scores <strong>0.5625</strong> — inside the range set by Neuronpedia&rsquo;s own lenses (qwen3-4b <strong>0.722</strong>, architecture-matched qwen3.5-0.8b <strong>0.549</strong>), and it <em>beats</em> the architecture-matched one. A drastically under-fit lens would fail that eval; ours passes it.</li>
+<li><strong>On functional fidelity, our n=24 lens is already in-family with the high-n lenses.</strong> On the <a href="/blog/references/motor-layer/" class="ref-term">motor-layer</a> convergence eval it scores <strong>0.5625</strong>, inside the range set by Neuronpedia&rsquo;s own lenses (qwen3-4b <strong>0.722</strong>, architecture-matched qwen3.5-0.8b <strong>0.549</strong>), and it <em>beats</em> the architecture-matched one. A drastically under-fit lens would fail that eval; ours passes it.</li>
 <li><strong>The paired design controls item difficulty, not fit-size noise.</strong> Japan is compared
 with Japan under every transport, and every method gets the same layer search and
 scoring code. That removes a large source of between-item variation. But identity does
@@ -2117,7 +2115,7 @@ in \(\widehat J_\ell\) therefore does <strong>not</strong> raise all three floor
 alter only the fitted-lens arm. The exact paired separation establishes that the
 released n=24 artifact differs from both controls on these items. It does not establish
 that ranks or gaps are invariant to extending the fit.</li>
-<li><strong>We report where fit-size <em>does</em> bite, and don&rsquo;t hide it.</strong> Absolute readout rates are lower at 397B than at 27B, and fit-size (24 vs 672) is our leading candidate for that gap. So we quote absolute numbers with confidence intervals, treat them as the weakest claim, and lean on the paired/contrast results and the controls — never on a bare &ldquo;0.30 hit rate&rdquo; in isolation.</li>
+<li><strong>We report where fit-size <em>does</em> bite, and don&rsquo;t hide it.</strong> Absolute readout rates are lower at 397B than at 27B, and fit-size (24 vs 672) is our leading candidate for that gap. So we quote absolute numbers with confidence intervals, treat them as the weakest claim, and lean on the paired/contrast results and the controls, never on a bare &ldquo;0.30 hit rate&rdquo; in isolation.</li>
 </ul>
 <p>The honest scope: <strong>n=24 is sufficient for the converged band statistic measured here,
 passes the stated functional-fidelity checks, and produces a readout artifact that
@@ -2125,10 +2123,10 @@ separates from the controls on this audit.</strong> It is <em>not</em> at measur
 Whether a longer average lifts absolute readout rates, changes the paired gaps, or leaves
 them stable is an empirical question for the extension campaign, not a property we can
 deduce from pairing.</p>
-<h3 id="extending-our-lens-warm-start--why-n24-is-still-a-contribution">Extending our lens (warm-start) — why n=24 is still a contribution</h3>
+<h3 id="extending-our-lens-warm-start-why-n24-is-still-a-contribution">Extending our lens (warm-start), why n=24 is still a contribution</h3>
 <p>Jacobian fitting is an <strong>online average</strong> of per-prompt Jacobians. Publishing an n=24 lens for a model Neuronpedia does not cover (~0.4T) is the contribution; anyone who wants a longer average can <strong>continue from our checkpoint</strong> instead of fitting from scratch.</p>
-<p>Neuronpedia&rsquo;s own records replace the flat &ldquo;they used 1000, we used 24&rdquo; framing with per-lens numbers: the qwen3.5-27b lens this note compares against fitted <strong>672</strong> prompts (<a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/qwen3.5-27b/jlens/Salesforce-wikitext/config.yaml">pinned config</a>) — so 28×, not 42× — while other lenses early-stop far lower (Llama-3.3-70B Instruct: <strong>125</strong> (<a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext/config.yaml">pinned config</a>)). Check each lens&rsquo;s <code>results.prompts_fitted</code> before comparing.</p>
-<p><strong>What extending this lens costs</strong> (warm-start from n=24; observed throughput ~10 min/prompt on 8×H200 @ $35.12/hr; ~1 h fixed for pod setup + the 807 GB model download, re-paid per session; predicted matrix-delta via the 1/n law fit to Neuronpedia&rsquo;s own 70B curve — an extrapolation, not a promise):</p>
+<p>Neuronpedia&rsquo;s own records replace the flat &ldquo;they used 1000, we used 24&rdquo; framing with per-lens numbers: the qwen3.5-27b lens this note compares against fitted <strong>672</strong> prompts (<a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/qwen3.5-27b/jlens/Salesforce-wikitext/config.yaml">pinned config</a>) (so 28×, not 42×) while other lenses early-stop far lower (Llama-3.3-70B Instruct: <strong>125</strong> (<a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext/config.yaml">pinned config</a>)). Check each lens&rsquo;s <code>results.prompts_fitted</code> before comparing.</p>
+<p><strong>What extending this lens costs</strong> (warm-start from n=24; observed throughput ~10 min/prompt on 8×H200 @ $35.12/hr; ~1 h fixed for pod setup + the 807 GB model download, re-paid per session; predicted matrix-delta via the 1/n law fit to Neuronpedia&rsquo;s own 70B curve, an extrapolation, not a promise):</p>
 <table>
   <thead>
       <tr>
@@ -2145,7 +2143,7 @@ deduce from pairing.</p>
           <td style="text-align: right">6</td>
           <td style="text-align: right">~2 h</td>
           <td style="text-align: right"><strong>~$70</strong></td>
-          <td>~0.040 — but yields the first <em>measured</em> convergence deltas</td>
+          <td>~0.040, but yields the first <em>measured</em> convergence deltas</td>
       </tr>
       <tr>
           <td style="text-align: right">40</td>
@@ -2173,7 +2171,7 @@ deduce from pairing.</p>
           <td style="text-align: right">76</td>
           <td style="text-align: right">~13.7 h</td>
           <td style="text-align: right">~$480</td>
-          <td>~0.012 — <strong>reaches the 70B lens&rsquo;s stop threshold</strong></td>
+          <td>~0.012, <strong>reaches the 70B lens&rsquo;s stop threshold</strong></td>
       </tr>
       <tr>
           <td style="text-align: right">125</td>
@@ -2194,12 +2192,12 @@ deduce from pairing.</p>
           <td style="text-align: right">648</td>
           <td style="text-align: right">~109 h</td>
           <td style="text-align: right">~$3,830</td>
-          <td>~0.002 — <strong>reaches the 27B comparison lens&rsquo;s threshold</strong></td>
+          <td>~0.002, <strong>reaches the 27B comparison lens&rsquo;s threshold</strong></td>
       </tr>
   </tbody>
 </table>
 <p>Costs assume one continuous session and the naive sequential <code>device_map</code> path; a working batched/tensor-parallel harness would cut them several-fold but is unvalidated at this scale. Community/spot pricing can roughly halve the $/hr.</p>
-<p>To push our 397B lens further (same WikiText seed 0, <code>max_seq_len</code> 128 — required for a valid resume):</p>
+<p>To push our 397B lens further (same WikiText seed 0, <code>max_seq_len</code> 128, required for a valid resume):</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> projects/jacobian-lens-and-identifiability/experiments/fit_our_own
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># Place the prior fit&#39;s sibling checkpoint next to --out (jlens.fit resumes via checkpoint_path).</span>
@@ -2211,18 +2209,18 @@ deduce from pairing.</p>
 </span></span><span class="line"><span class="cl">  --seed <span class="m">0</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl">  --max-seq-len <span class="m">128</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl">  --out lenses/qwen35_397b.pt
-</span></span></code></pre></div><p>For the <code>device_map=&quot;auto&quot;</code> path the same idea lives in pinned <a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/fit_at_scale.py"><code>fit_at_scale.py</code></a> (<code>checkpoint_path=str(out.with_suffix(&quot;.ckpt&quot;))</code>). Recipe notes: <a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/MODEL_CARD-397B.md"><code>MODEL_CARD-397B.md</code></a>, <a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/GAMEPLAN-397B.md"><code>GAMEPLAN-397B.md</code></a>. After extending, re-hash, re-run act 2, and compare to the n=24 receipt — that is the discriminating fit-size test.</p>
+</span></span></code></pre></div><p>For the <code>device_map=&quot;auto&quot;</code> path the same idea lives in pinned <a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/fit_at_scale.py"><code>fit_at_scale.py</code></a> (<code>checkpoint_path=str(out.with_suffix(&quot;.ckpt&quot;))</code>). Recipe notes: <a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/MODEL_CARD-397B.md"><code>MODEL_CARD-397B.md</code></a>, <a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/GAMEPLAN-397B.md"><code>GAMEPLAN-397B.md</code></a>. After extending, re-hash, re-run act 2, and compare to the n=24 receipt, that is the discriminating fit-size test.</p>
 <h4 id="is-warm-start-actually-exact-the-subtlety-stated-plainly">Is warm-start actually exact? (the subtlety, stated plainly)</h4>
-<p>&ldquo;Continue from our checkpoint&rdquo; hides a wrinkle worth being honest about: <strong>we publish the fp16 lens, not the fp32 <code>.ckpt</code></strong> (that checkpoint died with the fit pod). So extending our lens means <em>reconstructing</em> the running-sum checkpoint from the published lens — <code>jacobian_sum = J × n</code> — then handing that to <code>jlens.fit(resume=True)</code>. Two questions follow, and we tested both on a free CPU (gpt2) proxy before trusting them at 0.4T (<a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/extend_lens.py"><code>extend_lens.py</code></a>, <a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/extend_lens_gate.py"><code>extend_lens_gate.py</code></a>):</p>
+<p>&ldquo;Continue from our checkpoint&rdquo; hides a wrinkle worth being honest about: <strong>we publish the fp16 lens, not the fp32 <code>.ckpt</code></strong> (that checkpoint died with the fit pod). So extending our lens means <em>reconstructing</em> the running-sum checkpoint from the published lens (<code>jacobian_sum = J × n</code>) then handing that to <code>jlens.fit(resume=True)</code>. Two questions follow, and we tested both on a free CPU (gpt2) proxy before trusting them at 0.4T (<a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/extend_lens.py"><code>extend_lens.py</code></a>, <a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/projects/jacobian-lens-and-identifiability/experiments/fit_our_own/extend_lens_gate.py"><code>extend_lens_gate.py</code></a>):</p>
 <ol>
 <li>
-<p><strong>Is the reconstruct-and-resume path numerically identical to fitting continuously?</strong> <em>Yes, exactly.</em> Reconstructing the checkpoint from an in-memory (fp32) lens and resuming to n=6 matches a continuous n=6 fit to <strong>2.4×10⁻⁸</strong> — floating-point machine epsilon. jlens&rsquo;s own resume is bitwise-identical; our reconstruction adds nothing. Warm-start is not an approximation.</p>
+<p><strong>Is the reconstruct-and-resume path numerically identical to fitting continuously?</strong> <em>Yes, exactly.</em> Reconstructing the checkpoint from an in-memory (fp32) lens and resuming to n=6 matches a continuous n=6 fit to <strong>2.4×10⁻⁸</strong>, floating-point machine epsilon. jlens&rsquo;s own resume is bitwise-identical; our reconstruction adds nothing. Warm-start is not an approximation.</p>
 </li>
 <li>
-<p><strong>What does resuming from the <em>published fp16</em> lens cost?</strong> Only that lens&rsquo;s own fp16 storage rounding, applied to the first-24-prompt contribution and <strong>weighted 24/n</strong> — so it shrinks as you extend (at n=100 it is a ~0.24-weighted ~10⁻⁴-class perturbation). Every Jacobian lens ships in fp16 anyway (ours, Neuronpedia&rsquo;s), so this is the format&rsquo;s floor, not a defect of extending. A from-scratch refit removes even that; it is a purity preference, not a correctness fix.</p>
+<p><strong>What does resuming from the <em>published fp16</em> lens cost?</strong> Only that lens&rsquo;s own fp16 storage rounding, applied to the first-24-prompt contribution and <strong>weighted 24/n</strong>, so it shrinks as you extend (at n=100 it is a ~0.24-weighted ~10⁻⁴-class perturbation). Every Jacobian lens ships in fp16 anyway (ours, Neuronpedia&rsquo;s), so this is the format&rsquo;s floor, not a defect of extending. A from-scratch refit removes even that; it is a purity preference, not a correctness fix.</p>
 </li>
 </ol>
-<p>The honest process note: our first extension <em>gate</em> flagged a 7.6×10⁻³ discrepancy and we <strong>refused to spend a GPU-dollar on the campaign until we explained it</strong> — five eliminated hypotheses later, it turned out to be the gate unfairly comparing an fp16-stored lens against an fp32 reference (a comparison no shipped lens can pass). A $2 gpt2 test caught a subtlety that would otherwise have surfaced as unexplained noise at n=400 on a $35/hr meter. <code>extend_lens.py</code> also logs the per-prompt <code>mean_rel_change</code> we failed to record the first time, and checkpoints to a network volume every prompt so a spot-interrupted extension at n=k resumes from n=k−1.</p>
+<p>The honest process note: our first extension <em>gate</em> flagged a 7.6×10⁻³ discrepancy and we <strong>refused to spend a GPU-dollar on the campaign until we explained it</strong>, five eliminated hypotheses later, it turned out to be the gate unfairly comparing an fp16-stored lens against an fp32 reference (a comparison no shipped lens can pass). A $2 gpt2 test caught a subtlety that would otherwise have surfaced as unexplained noise at n=400 on a $35/hr meter. <code>extend_lens.py</code> also logs the per-prompt <code>mean_rel_change</code> we failed to record the first time, and checkpoints to a network volume every prompt so a spot-interrupted extension at n=k resumes from n=k−1.</p>
 <hr>
 <h2 id="a-checklist-before-you-lean-on-a-lens-demo">A Checklist Before You Lean on a Lens Demo</h2>
 <p>When a paper or demo highlights a Jacobian (or other) lens readout, it helps to check:</p>
@@ -2230,7 +2228,7 @@ deduce from pairing.</p>
 <li><strong>Versioning</strong>: model, lens file hash (checked before load), layer band, exact prompts; pin HF revisions.</li>
 <li><strong>Pre-registration</strong>: were gates frozen before the decisive run?</li>
 <li><strong>Controls</strong>: identity transports and scale-matched random transports through the <em>same</em> code path.</li>
-<li><strong>Leakage</strong>: is the target absent from prompt <em>and</em> from the model&rsquo;s continuation — and is that an exact-string check or paraphrase-aware?</li>
+<li><strong>Leakage</strong>: is the target absent from prompt <em>and</em> from the model&rsquo;s continuation, and is that an exact-string check or paraphrase-aware?</li>
 <li><strong>Separability of claims</strong>: next-token reportability ≠ hidden-intermediate readout ≠ causal intervention.</li>
 <li><strong>Dropped acts</strong>: were failures reported, or only the wins?</li>
 </ol>
@@ -2257,13 +2255,13 @@ stronger: J ranks beat identity on 18/20 items (post-run exact two-sided sign
 20/20 (both exact two-sided \(p=1.91\times10^{-6}\)); median J best-rank is 43 of
 248k. Act 1 failed its gate and was dropped in public. Absolute rates are lower than on
 the 27B gate model; the paired discrimination against both controls survives.</p>
-<p>Notice that the conclusion here is sharper than &ldquo;the lens works.&rdquo; Identity and random transports <strong>fail this paired check</strong>; that still does not turn twenty items into a survey of workspace function across models, and it does not prove that no other impostor could pass some other protocol. Readout claims have to be earned with controls, and with the failures left in the ledger. That is the reading skill this note set out to teach: <strong>a published lens is not yet an audited one — until you check under stated controls.</strong></p>
-<p>And read that check the right way around. It is not a complaint about Jacobian lenses; it is an invitation. The gap between &ldquo;this file loads&rdquo; and &ldquo;this file is nontrivial on intermediate content&rdquo; is ordinary, checkable science: pre-registration, identity and random controls, leakage guards, and receipts. Everything in this note runs on public weights and released JSON; the <a href="https://github.com/praxagent/jacobian-lens-research-202607a">repository</a> is open, the cheaper path fits in about a dollar, and corrections are welcome — that&rsquo;s what the receipts are for.</p>
+<p>Notice that the conclusion here is sharper than &ldquo;the lens works.&rdquo; Identity and random transports <strong>fail this paired check</strong>; that still does not turn twenty items into a survey of workspace function across models, and it does not prove that no other impostor could pass some other protocol. Readout claims have to be earned with controls, and with the failures left in the ledger. That is the reading skill this note set out to teach: <strong>a published lens is not yet an audited one, until you check under stated controls.</strong></p>
+<p>And read that check the right way around. It is not a complaint about Jacobian lenses; it is an invitation. The gap between &ldquo;this file loads&rdquo; and &ldquo;this file is nontrivial on intermediate content&rdquo; is ordinary, checkable science: pre-registration, identity and random controls, leakage guards, and receipts. Everything in this note runs on public weights and released JSON; the <a href="https://github.com/praxagent/jacobian-lens-research-202607a">repository</a> is open, the cheaper path fits in about a dollar, and corrections are welcome, that&rsquo;s what the receipts are for.</p>
 <p>None of this would exist without other people&rsquo;s open-sourcing. Anthropic released the
-Jacobian lens — the method, the math, and a working <code>jlens</code> implementation — under
+Jacobian lens (the method, the math, and a working <code>jlens</code> implementation) under
 Apache-2.0; Neuronpedia built and open-sourced the fitting pipeline and a collection of
 pre-fitted lenses whose pinned July 10 snapshot reaches a 70B base model. We are a small,
-self-funded independent lab, and our part is modest: we took their open tools and spent a
+self-funded independent researcher, and our part is modest: we took their open tools and spent a
 few hundred dollars fitting one lens on a larger base model, then audited it carefully.
 That we could do it at all is a direct dividend of their decision to open-source, and the
 right response is to pay it forward. This lens, the code, and the receipts are public;
@@ -2507,16 +2505,16 @@ beats identity on 18 of 20 ranks.</li>
 <p><span id="ref-wilcoxon-1945"></span>Wilcoxon, F. (1945). <a href="https://doi.org/10.2307/3001968"><em>Individual Comparisons by Ranking Methods</em></a>.</p>
 </li>
 <li>
-<p><span id="ref-demo2-receipt"></span>Praxagent. <a href="receipts/demo2_consciousness_qwen35-397b_n24.json"><code>receipts/demo2_consciousness_qwen35-397b_n24.json</code></a> — raw self-reference probe receipt (n=24 lens).</p>
+<p><span id="ref-demo2-receipt"></span>Praxagent. <a href="receipts/demo2_consciousness_qwen35-397b_n24.json"><code>receipts/demo2_consciousness_qwen35-397b_n24.json</code></a>, raw self-reference probe receipt (n=24 lens).</p>
 </li>
 <li>
-<p><span id="ref-demo2-span"></span>Praxagent. <a href="receipts/demo2_probes_span_qwen35-397b_n24.json"><code>receipts/demo2_probes_span_qwen35-397b_n24.json</code></a> — span-readout probes (deception / statue / digit / meristem; <code>per_position_cloud</code> stripped for web size).</p>
+<p><span id="ref-demo2-span"></span>Praxagent. <a href="receipts/demo2_probes_span_qwen35-397b_n24.json"><code>receipts/demo2_probes_span_qwen35-397b_n24.json</code></a>, span-readout probes (deception / statue / digit / meristem; <code>per_position_cloud</code> stripped for web size).</p>
 </li>
 <li>
-<p><span id="ref-act2-stats"></span>Praxagent. <a href="receipts/act2_statistics.json"><code>receipts/act2_statistics.json</code></a> — exact paired and unpaired statistics recomputed from the act-2 receipt; generated by <a href="tools/recompute_act2_statistics.py"><code>tools/recompute_act2_statistics.py</code></a>.</p>
+<p><span id="ref-act2-stats"></span>Praxagent. <a href="receipts/act2_statistics.json"><code>receipts/act2_statistics.json</code></a>, exact paired and unpaired statistics recomputed from the act-2 receipt; generated by <a href="tools/recompute_act2_statistics.py"><code>tools/recompute_act2_statistics.py</code></a>.</p>
 </li>
 <li>
-<p><span id="ref-web-build"></span>Praxagent. <a href="WEB.md"><code>WEB.md</code></a> — how the SVG stills and interactive slider were built; what was copied out of the research tree for deploy.</p>
+<p><span id="ref-web-build"></span>Praxagent. <a href="WEB.md"><code>WEB.md</code></a>, how the SVG stills and interactive slider were built; what was copied out of the research tree for deploy.</p>
 </li>
 </ul>
 
@@ -2556,6 +2554,7 @@ beats identity on 18 of 20 ranks.</li>
                 <nav aria-label="Footer navigation">
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
+                    <a href="/blog/references/">References</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>

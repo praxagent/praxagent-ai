@@ -1,0 +1,26 @@
+{{ define "main" }}
+<div class="blog-post reference-entry">
+    <div class="container">
+        <article class="post-content">
+            <header class="post-header">
+                <p class="blog-kicker" style="margin-bottom: 1rem;">References</p>
+                <h1 class="post-title">{{ .Title }}</h1>
+                {{ with .Params.summary }}
+                <p class="reference-summary">{{ . }}</p>
+                {{ end }}
+            </header>
+
+            <div class="post-body">
+                {{ .Content }}
+            </div>
+
+            <footer class="post-footer">
+                <div class="post-navigation">
+                    <a href="{{ "references/" | relURL }}" class="back-to-blog">← All references</a>
+                    <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+{{ end }}
