@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Late Chunking: Why Context-Aware Embeddings (sometimes) Beat Traditional Chunking - praxagent Blog</title>
+    <title>Late Chunking: Why Context-Aware Embeddings (sometimes) Beat Traditional Chunking - praxagent Research Notes</title>
     
     
     
@@ -19,7 +19,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/posts/2025/08/late-chunking/">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="praxagent Blog">
+    <meta property="og:site_name" content="praxagent Research Notes">
     <meta property="og:title" content="Late Chunking: Why Context-Aware Embeddings (sometimes) Beat Traditional Chunking">
     <meta property="og:description" content="Traditional chunking methods for RAG pipelines often break context by chunking text before embedding. Late chunking offers a solution by embedding the entire document first and then chunking the token embeddings, preserving vital contextual information and improving retrieval accuracy.">
     <meta property="og:url" content="https://praxagent.ai/blog/posts/2025/08/late-chunking/">
@@ -33,7 +33,7 @@
     <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css">
     <link rel="stylesheet" href="/blog/blog.css">
     <link rel="stylesheet" href="/blog/katex.min.css">
@@ -54,7 +54,7 @@
     
 </head>
 <body>
-    <nav class="navbar navbar-scrolls">
+    <nav class="navbar navbar-scrolls industrial-navbar">
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
@@ -62,13 +62,16 @@
                 </a>
             </div>
             <div class="nav-menu">
-                <a href="/research/index.html" class="nav-link">Research</a>
-                <a href="/blog/index.html" class="nav-link active">Tech Blog</a>
-                <a href="/apps.html" class="nav-link">Apps</a>
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link active">Research Notes</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <span class="theme-toggle-icon sun">☀️</span>
-                    <span class="theme-toggle-icon moon">🌙</span>
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
                 </div>
             </div>
             
@@ -84,14 +87,17 @@
 
     <div class="mobile-menu-overlay" id="mobile-menu-overlay">
         <div class="mobile-menu-content">
-            <a href="/research/index.html" class="mobile-nav-link">Research</a>
-            <a href="/blog/index.html" class="mobile-nav-link active">Tech Blog</a>
-            <a href="/apps.html" class="mobile-nav-link">Apps</a>
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link active">Research Notes</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
-                    <span class="theme-toggle-icon sun">☀️</span>
-                    <span class="theme-toggle-icon moon">🌙</span>
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
                 </div>
             </div>
         </div>
@@ -185,26 +191,28 @@
 
             <div class="post-body">
                 <div class="panel info">
-    <div class="panel-icon">
-        💡
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
         
     </div>
     <div class="panel-content">
         Traditional retrieval systems can be weakened by pre-embedding chunking, which can fracture the semantic integrity of long documents. Late chunking offers a robust alternative by preserving contextual relationships. This article provides an analysis of traditional vs. late chunking with statistical validation across multiple term categories.
     </div>
 </div>
+
 <hr>
 <h2 id="problem-lost-context-in-embedding-based-retrieval">Problem: Lost Context in Embedding-Based Retrieval</h2>
 <p>In traditional RAG pipelines, we chunk documents <em>before</em> embedding. This breaks context by isolating sentences from their broader meaning. Consider this sample text about Berlin:</p>
 <div class="panel quote">
-    <div class="panel-icon">
-        💬
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="message-square"></i>
         
     </div>
     <div class="panel-content">
         Berlin is the capital and largest city of Germany, both by area and by population. Its more than 3.85 million inhabitants make it the European Union&rsquo;s most populous city, as measured by population within city limits. The city is also one of the states of Germany, and is the third smallest state in the country in terms of area.
     </div>
 </div>
+
 <p>When you chunk by sentence and embed separately, contextual relationships are lost. Traditional chunking sees each sentence in isolation and can&rsquo;t properly understand how terms relate across the full document context.</p>
 <hr>
 <h2 id="analysis-implementation-and-results">Analysis: Implementation and Results</h2>
@@ -349,8 +357,8 @@ Significant: Yes (α = 0.05)
 <p><strong>Interpretation</strong>: We can be <strong>99.99%+ confident</strong> that late chunking&rsquo;s directional improvements are real and not due to random variation within <strong>this specific experimental setup</strong>. The improvement is <strong>statistically significant</strong> for our test conditions.</p>
 <h3 id="statistical-significance-explained">Statistical Significance Explained</h3>
 <div class="panel info">
-    <div class="panel-icon">
-        💡
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
         
     </div>
     <div class="panel-content">
@@ -369,10 +377,11 @@ Significant: Yes (α = 0.05)
 
     </div>
 </div>
+
 <h3 id="important-statistical-limitations">Important Statistical Limitations</h3>
 <div class="panel warning">
-    <div class="panel-icon">
-        ⚠️
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="alert-circle"></i>
         
     </div>
     <div class="panel-content">
@@ -394,12 +403,13 @@ Significant: Yes (α = 0.05)
 
     </div>
 </div>
+
 <hr>
 <h2 id="solution-late-chunking-implementation">Solution: Late Chunking Implementation</h2>
 <p>Late chunking fundamentally flips the traditional pipeline by reversing when we chunk and when we embed:</p>
 <div class="panel info">
-    <div class="panel-icon">
-        💡
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
         
     </div>
     <div class="panel-content">
@@ -413,13 +423,14 @@ Significant: Yes (α = 0.05)
 
     </div>
 </div>
+
 <h3 id="key-advantages">Key Advantages</h3>
 <p><strong>Contextual Inheritance</strong>: Think of it like each sentence getting to &ldquo;see&rdquo; the entire document before deciding what it means. When the model processes &ldquo;This method returns a cleaned DataFrame,&rdquo; it already knows about the <code>DataProcessor</code> class and its <code>process</code> method from earlier in the document—so it creates a much richer, more informed representation.</p>
 <p><strong>Attention Across Boundaries</strong>: The Transformer&rsquo;s self-attention mechanism can relate tokens across what would traditionally be separate chunks, creating richer representations that capture long-range dependencies.</p>
 <p><strong>Semantic Coherence</strong>: By embedding the full document first, we preserve the semantic relationships that span multiple sentences, reducing the fragmentation that occurs with traditional chunking.</p>
 <div class="panel info">
-    <div class="panel-icon">
-        💡
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
         
     </div>
     <div class="panel-content">
@@ -433,9 +444,10 @@ Significant: Yes (α = 0.05)
 
     </div>
 </div>
+
 <div class="panel warning">
-    <div class="panel-icon">
-        ⚠️
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="alert-circle"></i>
         
     </div>
     <div class="panel-content">
@@ -446,6 +458,7 @@ Significant: Yes (α = 0.05)
 
     </div>
 </div>
+
 <hr>
 <h2 id="handling-large-documents">Handling Large Documents</h2>
 <p><strong>Yes, this is a significant practical limitation.</strong> Most transformer models have strict context limits (BERT: 512 tokens, many modern models: 2048-8192 tokens). When documents exceed these limits, you have several strategies:</p>
@@ -488,17 +501,18 @@ Significant: Yes (α = 0.05)
 <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
 <h3 id="document-specific-vector-relationships">Document-Specific Vector Relationships</h3>
 <div class="panel question">
-    <div class="panel-icon">
-        ❓
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="help-circle"></i>
         
     </div>
     <div class="panel-content">
         <strong>When we embed the full document before chunking, are we creating document-specific relationships that differ from the LLM&rsquo;s original vector space?</strong>
     </div>
 </div>
+
 <div class="panel answer">
-    <div class="panel-icon">
-        ✅
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="check-circle"></i>
         
     </div>
     <div class="panel-content">
@@ -512,19 +526,21 @@ Significant: Yes (α = 0.05)
 
     </div>
 </div>
+
 <h3 id="model-compatibility">Model Compatibility</h3>
 <div class="panel question">
-    <div class="panel-icon">
-        ❓
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="help-circle"></i>
         
     </div>
     <div class="panel-content">
         <strong>Does late chunking work with any embedding model, or only specific ones?</strong>
     </div>
 </div>
+
 <div class="panel answer">
-    <div class="panel-icon">
-        ✅
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="check-circle"></i>
         
     </div>
     <div class="panel-content">
@@ -538,19 +554,21 @@ Significant: Yes (α = 0.05)
 
     </div>
 </div>
+
 <h3 id="comparison-with-advanced-rag-techniques">Comparison with Advanced RAG Techniques</h3>
 <div class="panel question">
-    <div class="panel-icon">
-        ❓
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="help-circle"></i>
         
     </div>
     <div class="panel-content">
         <strong>How does late chunking compare to other advanced RAG techniques like ColBERT?</strong>
     </div>
 </div>
+
 <div class="panel answer">
-    <div class="panel-icon">
-        ✅
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="check-circle"></i>
         
     </div>
     <div class="panel-content">
@@ -564,19 +582,21 @@ Significant: Yes (α = 0.05)
 
     </div>
 </div>
+
 <h3 id="handling-long-documents">Handling Long Documents</h3>
 <div class="panel question">
-    <div class="panel-icon">
-        ❓
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="help-circle"></i>
         
     </div>
     <div class="panel-content">
         <strong>What happens if my document is longer than the model&rsquo;s context window?</strong>
     </div>
 </div>
+
 <div class="panel answer">
-    <div class="panel-icon">
-        ✅
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="check-circle"></i>
         
     </div>
     <div class="panel-content">
@@ -589,19 +609,21 @@ Significant: Yes (α = 0.05)
 </ol>
     </div>
 </div>
+
 <h3 id="real-time-application-considerations">Real-Time Application Considerations</h3>
 <div class="panel question">
-    <div class="panel-icon">
-        ❓
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="help-circle"></i>
         
     </div>
     <div class="panel-content">
         <strong>Can I use late chunking for real-time applications?</strong>
     </div>
 </div>
+
 <div class="panel answer">
-    <div class="panel-icon">
-        ✅
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="check-circle"></i>
         
     </div>
     <div class="panel-content">
@@ -614,19 +636,21 @@ Significant: Yes (α = 0.05)
 </ul>
     </div>
 </div>
+
 <h3 id="performance-interpretation">Performance Interpretation</h3>
 <div class="panel question">
-    <div class="panel-icon">
-        ❓
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="help-circle"></i>
         
     </div>
     <div class="panel-content">
         <strong>Does the 71% overall win rate mean late chunking is only slightly better?</strong>
     </div>
 </div>
+
 <div class="panel answer">
-    <div class="panel-icon">
-        ✅
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="check-circle"></i>
         
     </div>
     <div class="panel-content">
@@ -641,6 +665,7 @@ Significant: Yes (α = 0.05)
 
     </div>
 </div>
+
 <hr>
 <h2 id="references">References</h2>
 <p><strong>Core Late Chunking Research:</strong></p>
@@ -668,7 +693,7 @@ Significant: Yes (α = 0.05)
             <footer class="post-footer">
                 <div class="post-transparency">
                     <div class="post-transparency-label">Public source &amp; edit history</div>
-                    <p>This blog is published two ways: as the rendered page you are
+                    <p>Each research note is available two ways: as the rendered page you are
                     reading, and as plain-text source in a public git repository,
                     <a href="https://github.com/praxagent/praxagent-ai" rel="noopener">praxagent/praxagent-ai</a>.
                     Every revision to every post is preserved in the commit log, so
@@ -676,7 +701,7 @@ Significant: Yes (α = 0.05)
                     <a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/posts/2025/08/late-chunking/index.md" rel="noopener">view this article's edit history</a>.</p>
                 </div>
                 <div class="post-navigation">
-                    <a href="/blog/index.html" class="back-to-blog">← Back to Blog</a>
+                    <a href="/blog/index.html" class="back-to-blog">← Back to Research Notes</a>
                 </div>
             </footer>
         </article>
@@ -688,26 +713,23 @@ Significant: Yes (α = 0.05)
 
     </main>
 
-    <footer class="footer">
+    <footer class="footer footer-compact">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <span class="logo-text">praxagent</span>
-                    <p>AI software insights and knowledge sharing.</p>
-                </div>
-                
-                <div class="footer-links">
-                    <a href="/research/index.html">Research</a>
-                    <a href="/blog/index.html">Tech Blog</a>
-                    <a href="/apps.html">Apps</a>
-                    <a href="/index.html#contact">Contact</a>
-                    <a href="#">Privacy Policy</a>
-                </div>
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
             </div>
-            
-            <div class="footer-bottom">
+            <div class="footer-compact-bottom">
                 <p>&copy; 2026 praxagent. All rights reserved.</p>
-                <p>AI research and education.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
             </div>
         </div>
     </footer>

@@ -17,7 +17,7 @@
     <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../styles-v2.css">
     <script src="https://unpkg.com/feather-icons"></script>
     <style>
@@ -99,14 +99,16 @@
         .meta-pill {
             display: inline-flex;
             align-items: center;
-            gap: 0.45rem;
-            color: var(--text-secondary);
-            background: var(--bg-card);
+            gap: 0.4rem;
+            padding: 0.35rem 0.65rem;
+            border-radius: 0.4rem;
             border: 1px solid var(--border-primary);
-            border-radius: 999px;
-            padding: 0.55rem 0.85rem;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 14px var(--shadow-primary);
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            box-shadow: none;
         }
 
         .meta-pill svg {
@@ -158,7 +160,7 @@
             border: 1px solid var(--border-primary);
             border-radius: 0.75rem;
             padding: 1.6rem;
-            box-shadow: 0 4px 15px var(--shadow-primary);
+            box-shadow: none;
         }
 
         .program-card h3 {
@@ -221,7 +223,7 @@
             border: 1px solid var(--border-primary);
             border-radius: 0.75rem;
             padding: 1.25rem;
-            box-shadow: 0 4px 15px var(--shadow-primary);
+            box-shadow: none;
         }
 
         .phase-label {
@@ -265,7 +267,7 @@
             border-left: 4px solid #0891b2;
             border-radius: 0.75rem;
             padding: 1.25rem 1.5rem;
-            box-shadow: 0 4px 15px var(--shadow-primary);
+            box-shadow: none;
         }
 
         .notice-band strong {
@@ -283,7 +285,7 @@
             border: 1px solid var(--border-primary);
             border-radius: 0.75rem;
             padding: 2rem;
-            box-shadow: 0 4px 15px var(--shadow-primary);
+            box-shadow: none;
         }
 
         .consultant-photo {
@@ -307,7 +309,7 @@
             border-radius: 999px;
             align-items: center;
             justify-content: center;
-            font-family: "Rajdhani", sans-serif;
+            font-family: var(--font-serif, "Source Serif 4", Georgia, serif);
             font-size: 3.5rem;
             font-weight: 700;
             color: #fff;
@@ -375,10 +377,213 @@
                 gap: 0.35rem;
             }
         }
+
+        /* Industrial page treatment */
+        .internship-hero {
+            min-height: auto;
+            padding: 9rem 2rem 5rem;
+            background: #172A3D;
+        }
+
+        [data-theme="dark"] .internship-hero {
+            background: #172A3D;
+        }
+
+        .internship-hero::before {
+            display: none;
+        }
+
+        .internship-hero-content {
+            max-width: 1100px;
+        }
+
+        .internship-kicker {
+            margin-bottom: 2.5rem;
+            color: #9FB3C7;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+        }
+
+        .internship-title {
+            max-width: 14ch;
+            margin-bottom: 1.5rem;
+            color: #F4F0E9;
+            font-family: var(--font-sans);
+            font-size: clamp(2.75rem, 6vw, 5rem);
+            font-weight: 600;
+            line-height: 0.98;
+            letter-spacing: -0.055em;
+        }
+
+        .internship-title .accent {
+            color: #F4F0E9;
+            background: none;
+            -webkit-text-fill-color: currentColor;
+        }
+
+        .internship-subtitle {
+            max-width: 42rem;
+            color: #C6D0D9;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .internship-meta {
+            max-width: 58rem;
+            margin-bottom: 0;
+        }
+
+        .meta-pill {
+            padding: 0.4rem 0;
+            border: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+            border-radius: 0;
+            background: transparent;
+            color: #C6D0D9;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.04em;
+        }
+
+        .meta-pill svg {
+            color: #9FB3C7;
+        }
+
+        .internship-section {
+            padding: 5rem 2rem;
+            border-top: 1px solid var(--border-primary);
+            background: var(--bg-primary);
+        }
+
+        .internship-section.alt {
+            background: var(--bg-secondary);
+        }
+
+        .internship-intro {
+            max-width: 1200px;
+            margin: 0 auto 2.5rem;
+            text-align: left;
+        }
+
+        .internship-intro .section-title {
+            font-family: var(--font-sans);
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 600;
+            letter-spacing: -0.035em;
+            text-align: left;
+        }
+
+        .program-grid,
+        .topic-grid {
+            gap: 0;
+            border-top: 1px solid var(--border-primary);
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        .program-card,
+        .topic {
+            padding: 1.75rem;
+            background: transparent;
+            border: 0;
+            border-left: 1px solid var(--border-primary);
+            border-radius: 0;
+        }
+
+        .program-card:first-child,
+        .topic:first-child {
+            border-left: 0;
+        }
+
+        .program-card h3 {
+            font-family: var(--font-sans);
+        }
+
+        .program-card h3 svg {
+            color: var(--sky);
+        }
+
+        .phase-list {
+            gap: 0;
+            max-width: 1200px;
+            border-top: 1px solid var(--border-primary);
+        }
+
+        .phase-item {
+            padding: 1.5rem 0;
+            background: transparent;
+            border: 0;
+            border-bottom: 1px solid var(--border-primary);
+            border-radius: 0;
+        }
+
+        .phase-label,
+        .consultant-role {
+            color: var(--sky);
+            font-size: 0.68rem;
+            letter-spacing: 0.1em;
+        }
+
+        .notice-band {
+            max-width: 1200px;
+            background: transparent;
+            border: 1px solid var(--border-primary);
+            border-left: 3px solid var(--sky);
+            border-radius: 0;
+        }
+
+        .consultant-card {
+            max-width: 1200px;
+            background: transparent;
+            border: 0;
+            border-top: 1px solid var(--border-primary);
+            border-bottom: 1px solid var(--border-primary);
+            border-radius: 0;
+            padding: 2rem 0;
+        }
+
+        .consultant-photo img,
+        .consultant-initials {
+            border-radius: 0;
+            border: 1px solid var(--border-primary);
+        }
+
+        .consultant-initials {
+            background: #172A3D;
+        }
+
+        @media (max-width: 768px) {
+            .internship-hero {
+                padding: 7rem 1rem 3.5rem;
+            }
+
+            .internship-section {
+                padding: 3.5rem 1rem;
+            }
+
+            .program-grid,
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .program-card,
+            .topic,
+            .program-card:first-child,
+            .topic:first-child {
+                padding: 1.5rem 0;
+                border-left: 0;
+                border-top: 1px solid var(--border-primary);
+            }
+
+            .program-card:first-child,
+            .topic:first-child {
+                border-top: 0;
+            }
+        }
     </style>
 </head>
 <body>
-    <nav class="navbar">
+    <nav class="navbar industrial-navbar">
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="../../index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
@@ -386,13 +591,16 @@
                 </a>
             </div>
             <div class="nav-menu">
-                <a href="../../research/index.html" class="nav-link">Research</a>
-                <a href="../../blog/index.html" class="nav-link">Tech Blog</a>
-                <a href="../../apps.html" class="nav-link">Apps</a>
+                <a href="../../work/index.html" class="nav-link active">Work</a>
+                <a href="../../blog/index.html" class="nav-link">Research Notes</a>
                 <a href="../../index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <span class="theme-toggle-icon sun">☀️</span>
-                    <span class="theme-toggle-icon moon">🌙</span>
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
                 </div>
             </div>
 
@@ -406,14 +614,17 @@
 
     <div class="mobile-menu-overlay" id="mobile-menu-overlay">
         <div class="mobile-menu-content">
-            <a href="../../research/index.html" class="mobile-nav-link">Research</a>
-            <a href="../../blog/index.html" class="mobile-nav-link">Tech Blog</a>
-            <a href="../../apps.html" class="mobile-nav-link">Apps</a>
+            <a href="../../work/index.html" class="mobile-nav-link active">Work</a>
+            <a href="../../blog/index.html" class="mobile-nav-link">Research Notes</a>
             <a href="../../index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
-                    <span class="theme-toggle-icon sun">☀️</span>
-                    <span class="theme-toggle-icon moon">🌙</span>
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
                 </div>
             </div>
         </div>
@@ -530,7 +741,7 @@
                     <h2 class="section-title">Learning Objectives</h2>
                     <p>
                         The program emphasizes useful foundations for AI-assisted biology research while keeping
-                        uncertainty, limitations, and careful public blog writing front and center.
+                        uncertainty, limitations, and careful public research writing front and center.
                     </p>
                 </div>
 
@@ -636,8 +847,8 @@
                     <article class="phase-item">
                         <div class="phase-label">Phase 3</div>
                         <div>
-                            <h3>First Blog Post</h3>
-                            <p>Draft a technical explainer or literature-review blog post, receive feedback, revise, and post it publicly.</p>
+                            <h3>First Research Note</h3>
+                            <p>Draft a technical explainer or literature-review research note, receive feedback, revise, and post it publicly.</p>
                         </div>
                     </article>
 
@@ -653,7 +864,7 @@
                         <div class="phase-label">Phase 5</div>
                         <div>
                             <h3>Portfolio Development</h3>
-                            <p>Draft and post additional blog artifacts while improving clarity, citations, diagrams, limitation statements, and presentation.</p>
+                            <p>Draft and post additional research artifacts while improving clarity, citations, diagrams, limitation statements, and presentation.</p>
                         </div>
                     </article>
 
@@ -693,12 +904,12 @@
             </div>
         </section>
 
-        <section id="blog-post-standards" class="internship-section">
+        <section id="research-note-standards" class="internship-section">
             <div class="container">
                 <div class="internship-intro">
-                    <h2 class="section-title">Blog Post Standards</h2>
+                    <h2 class="section-title">Research Note Standards</h2>
                     <p>
-                        Blog posts and portfolio artifacts should be useful, careful, and honest about uncertainty.
+                        Research notes and portfolio artifacts should be useful, careful, and honest about uncertainty.
                         This page is a job-search portfolio archive, not a paper venue, medical advice, or business output.
                     </p>
                 </div>
@@ -734,26 +945,23 @@
         </section>
     </main>
 
-    <footer class="footer">
+    <footer class="footer footer-compact">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <span class="logo-text">praxagent</span>
-                    <p>AI software insights and knowledge sharing.</p>
-                </div>
-
-                <div class="footer-links">
-                    <a href="../../research/index.html">Research</a>
-                    <a href="../../blog/index.html">Tech Blog</a>
-                    <a href="../../apps.html">Apps</a>
-                    <a href="../../index.html#contact">Contact</a>
-                    <a href="#">Privacy Policy</a>
-                </div>
+            <div class="footer-compact-top">
+                <a href="../../index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
             </div>
-
-            <div class="footer-bottom">
+            <div class="footer-compact-bottom">
                 <p>&copy; 2026 praxagent. All rights reserved.</p>
-                <p>AI research and education.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="../../work/index.html">Work</a>
+                    <a href="../../blog/index.html">Research Notes</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
             </div>
         </div>
     </footer>

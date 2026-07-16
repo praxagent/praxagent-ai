@@ -240,7 +240,7 @@ A few results help keep the coordinate / label / causal distinction from becomin
 
 ### Symbol sheet
 
-| Symbol | Plain English |
+| Symbol | Plain Language |
 |---|---|
 | \(h\) | Hidden state at one layer, for one token (or a sequence of them). Same \(h\) as in the glossary: the residual-stream vector the SAE reads |
 | \(d_{\text{model}}\) | Length of \(h\): the LM's hidden width |
@@ -357,7 +357,7 @@ The SAE needs the residual stream at one layer, that running hidden-state highwa
 
 A **forward hook** is a small callback you attach to one submodule. Every time that submodule finishes its forward pass, PyTorch calls your function with the module's output. You copy what you need into a bag, then detach the hook so it does not linger.
 
-In plain English, the recipe is:
+In plain language, the recipe is:
 
 1. Find layer 50 (or whichever layer your SAE was trained on).
 2. Register a hook that saves that layer's output into a dictionary.

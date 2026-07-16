@@ -18,9 +18,8 @@
     <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles-v2.css">
-    <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
     <nav class="navbar home-navbar">
@@ -31,14 +30,17 @@
                 </a>
             </div>
             <div class="nav-menu">
-                <a href="research/index.html" class="nav-link">Research</a>
-                <a href="blog/index.html" class="nav-link">Tech Blog</a>
-                <a href="apps.html" class="nav-link">Apps</a>
+                <a href="work/index.html" class="nav-link">Work</a>
+                <a href="blog/index.html" class="nav-link">Research Notes</a>
                 <a href="#contact" class="nav-link">Contact</a>
                 <!-- <a href="#contact" class="cta-button">Let's Build</a> -->
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <span class="theme-toggle-icon sun">☀️</span>
-                    <span class="theme-toggle-icon moon">🌙</span>
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
                 </div>
             </div>
             
@@ -55,101 +57,85 @@
     <!-- Mobile menu overlay (outside nav to avoid backdrop-filter stacking context) -->
     <div class="mobile-menu-overlay" id="mobile-menu-overlay">
         <div class="mobile-menu-content">
-            <a href="research/index.html" class="mobile-nav-link">Research</a>
-            <a href="blog/index.html" class="mobile-nav-link">Tech Blog</a>
-            <a href="apps.html" class="mobile-nav-link">Apps</a>
+            <a href="work/index.html" class="mobile-nav-link">Work</a>
+            <a href="blog/index.html" class="mobile-nav-link">Research Notes</a>
             <a href="#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
-                    <span class="theme-toggle-icon sun">☀️</span>
-                    <span class="theme-toggle-icon moon">🌙</span>
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 
     <header class="hero">
-        <canvas id="hero-mountain" class="hero-canvas" aria-hidden="true"></canvas>
-
-        <div class="hero-overlay">
-            <div class="mountain-brand brand-wordmark">praxagent</div>
-
-            <div class="hero-container">
-                <div class="hero-content">
-                    <h1 class="hero-title">
-                        Independent AI Research &
-                        <span class="accent">Applied Systems</span>
-                    </h1>
-                    <p class="hero-subtitle">
-                        Mechanistic interpretability, controlled evaluation, and reproducible engineering — with public artifacts, code, and receipts.
-                    </p>
-                    <div class="hero-cta">
-                        <a href="research/index.html" class="primary-button">Read the Research</a>
-                        <a href="#contact" class="secondary-button">Get in Touch</a>
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="featured-work">
-                        <div class="featured-label">Latest from the blog</div>
-                        <div class="featured-list">
-                            <a href="blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/" class="featured-card">
-                                <h3>Open-Sourcing a Jacobian Lens for Qwen3.5-397B</h3>
-                                <p>A public fitted lens for a 397B model, with weights, code, hash, receipts, and a controlled readout audit.</p>
-                                <span class="featured-link">Read more →</span>
-                            </a>
-                            <a href="blog/posts/2026/07/how-to-read-an-sae-feature-id/" class="featured-card">
-                                <h3>How to Read an SAE Feature ID</h3>
-                                <p>SAE math, the labeling problem, and a reproducible activation map of six public feature IDs.</p>
-                                <span class="featured-link">Read more →</span>
-                            </a>
-                        </div>
-                        <a href="blog/index.html" class="featured-all-link">Browse all posts →</a>
-                    </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <p class="hero-kicker">Independent research lab / California</p>
+                <h1 class="hero-title">Model internals, evaluation, and AI systems.</h1>
+                <p class="hero-subtitle">
+                    We run controlled experiments on open models and build the systems needed to make the results inspectable.
+                </p>
+                <div class="hero-cta">
+                    <a href="work/index.html" class="hero-text-link">Work index <span aria-hidden="true">↗</span></a>
+                    <a href="mailto:hello@praxagent.ai" class="hero-contact-link">hello@praxagent.ai</a>
                 </div>
             </div>
+            <figure class="hero-media">
+                <canvas id="hero-mountain" class="hero-canvas" aria-hidden="true"></canvas>
+                <figcaption>Field image 01 / Joshua Tree, CA</figcaption>
+            </figure>
         </div>
     </header>
 
+    <section class="recent-research" aria-labelledby="recent-research-title">
+        <div class="container">
+            <div class="section-index">
+                <p class="section-index-label">01 / Recent research</p>
+                <h2 id="recent-research-title">Research notes</h2>
+                <a href="blog/index.html">View all notes <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="research-ledger">
+                <a href="blog/posts/2026/07/jacobian-lens-sae-steering/" class="research-ledger-row">
+                    <span class="research-ledger-type">Interpretability</span>
+                    <h3>Can a Jacobian Lens Detect SAE Steering?</h3>
+                    <time datetime="2026-07-12">12 Jul 2026</time>
+                </a>
+                <a href="blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/" class="research-ledger-row">
+                    <span class="research-ledger-type">Open release</span>
+                    <h3>Open-sourcing and Auditing a Jacobian Lens for Qwen3.5-397B</h3>
+                    <time datetime="2026-07-10">10 Jul 2026</time>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <section id="services" class="services">
         <div class="container">
-            <h2 class="section-title">Research & Engineering Focus</h2>
-            <p class="section-subtitle">Open technical research, controlled evaluation, and systems work aimed at claims that can be inspected and reproduced.</p>
-            
+            <div class="section-index">
+                <p class="section-index-label">02 / Research domains</p>
+                <h2 class="section-title">Where we work</h2>
+            </div>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon"><i data-feather="activity"></i></div>
-                    <h3>Mechanistic Interpretability</h3>
-                    <p>Fitting and auditing Jacobian lenses, mapping sparse-autoencoder features, and testing what internal readouts do and do not establish.</p>
+                    <span class="service-number">01</span>
+                    <h3>Model internals</h3>
+                    <p>Jacobian lenses, sparse autoencoders, activation analysis, and controlled tests of what internal readouts establish.</p>
                 </div>
-                
                 <div class="service-card">
-                    <div class="service-icon"><i data-feather="check-circle"></i></div>
-                    <h3>Model Evaluation & Reproducibility</h3>
-                    <p>Designing controlled comparisons, pre-registered gates, null baselines, leakage checks, immutable artifacts, and public result receipts.</p>
+                    <span class="service-number">02</span>
+                    <h3>Evaluation and safety</h3>
+                    <p>Matched comparisons, behavioral probes, null baselines, leakage checks, and reproducible evaluation infrastructure.</p>
                 </div>
-                
                 <div class="service-card">
-                    <div class="service-icon"><i data-feather="shield"></i></div>
-                    <h3>AI Safety & Security</h3>
-                    <p>Studying prompt injection, deceptive-behavior probes, guardrails, and failure modes with matched controls instead of showcase-only demos.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon"><i data-feather="users"></i></div>
-                    <h3>Agents & Human Collaboration</h3>
-                    <p>Building shared environments where people and AI agents work with common tools, memory, evidence, and explicit human oversight.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon"><i data-feather="database"></i></div>
-                    <h3>Retrieval & Knowledge Systems</h3>
-                    <p>Engineering RAG, embedding, and evidence-traceability systems that connect model outputs to inspectable source material.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon"><i data-feather="compass"></i></div>
-                    <h3>Research-to-Deployment Advisory</h3>
-                    <p>Translating experimental evidence into evaluation plans, architecture decisions, safety controls, and realistic adoption strategy.</p>
+                    <span class="service-number">03</span>
+                    <h3>Applied AI systems</h3>
+                    <p>Agent environments, retrieval systems, and evidence pipelines that connect model behavior to inspectable source material.</p>
                 </div>
             </div>
         </div>
@@ -157,83 +143,56 @@
 
     <section id="about" class="about">
         <div class="container">
+            <div class="section-index">
+                <p class="section-index-label">03 / Operating principles</p>
+                <h2>How we work</h2>
+            </div>
             <div class="about-content">
-                <div class="about-text">
-                    <h2>Why praxagent?</h2>
-                    <p class="about-lead">An independent, self-funded AI research lab and applied-systems studio working in public.</p>
-                    
-                    <div class="about-points">
-                        <div class="point">
-                            <h4>Open Artifacts</h4>
-                            <p>Publishing model artifacts, code, prompts, hashes, data, and receipts so readers can inspect the evidence rather than trust a summary.</p>
-                        </div>
-                        
-                        <div class="point">
-                            <h4>Controls Before Claims</h4>
-                            <p>Using matched baselines, null transports, pre-registered decisions, and reported failures to keep conclusions proportional to the experiment.</p>
-                        </div>
-                        
-                        <div class="point">
-                            <h4>Research That Has to Run</h4>
-                            <p>Combining mathematical analysis with the systems engineering needed to test ideas on real models, including frontier-scale open weights.</p>
-                        </div>
+                <div class="about-points">
+                    <div class="point">
+                        <span>01</span>
+                        <h3>Release the evidence.</h3>
+                        <p>Code, prompts, data, hashes, artifacts, and result receipts ship with the claim.</p>
+                    </div>
+                    <div class="point">
+                        <span>02</span>
+                        <h3>Run the control.</h3>
+                        <p>Matched baselines and null tests determine what survives into the conclusion.</p>
+                    </div>
+                    <div class="point">
+                        <span>03</span>
+                        <h3>Report the failure.</h3>
+                        <p>Negative results and broken hypotheses remain part of the public record.</p>
                     </div>
                 </div>
-                
             </div>
         </div>
     </section>
 
-    <footer id="contact" class="footer footer-stately">
+    <footer id="contact" class="footer footer-compact">
         <div class="container">
-            <div class="footer-stately-masthead">
-                <div class="footer-stately-brand">
-                    <p class="footer-stately-kicker">Independent AI research &amp; applied systems</p>
-                    <div class="footer-stately-wordmark brand-wordmark">praxagent</div>
-                    <p class="footer-stately-copy">Mechanistic interpretability, controlled evaluation, and practical systems—with the artifacts needed to inspect the work.</p>
-                </div>
-                <p class="footer-stately-statement">
-                    Independent work.<br>
-                    <span>Public evidence.</span>
-                </p>
+            <div class="footer-compact-top">
+                <a href="index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
             </div>
-
-            <div class="footer-stately-directory">
-                <nav class="footer-stately-nav" aria-label="Footer navigation">
-                    <div class="footer-stately-link-group">
-                        <span class="footer-stately-link-label">Explore</span>
-                        <a href="research/index.html">Research</a>
-                        <a href="blog/index.html">Tech Blog</a>
-                        <a href="apps.html">Apps</a>
-                    </div>
-                    <div class="footer-stately-link-group">
-                        <span class="footer-stately-link-label">Connect</span>
-                        <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
-                        <a href="https://x.com/praxagent" target="_blank" rel="noopener">Twitter/X</a>
-                        <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
-                        <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
-                        <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
-                    </div>
-                </nav>
-
-                <div class="footer-stately-contact">
-                    <span class="footer-stately-link-label">Work with us</span>
-                    <p>Building or evaluating an AI system where evidence matters?</p>
-                    <a href="mailto:hello@praxagent.ai">hello@praxagent.ai</a>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
+            <div class="footer-compact-bottom">
                 <p>&copy; 2026 praxagent. All rights reserved.</p>
-                <p>Artifacts, controls, code, and receipts.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="work/index.html">Work</a>
+                    <a href="blog/index.html">Research Notes</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
             </div>
         </div>
     </footer>
 
-    <script src="stochastic-mountain.js"></script>
+    <script src="stochastic-mountain.js?v=6"></script>
     <script src="script.js"></script>
     <script>
-      feather.replace();
       StochasticMountain('hero-mountain');
     </script>
 </body>

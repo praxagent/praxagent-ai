@@ -1,13 +1,13 @@
 <div class="panel {{ .Get 0 }}">
-    <div class="panel-icon">
-        {{ if eq (.Get 0) "info" }}💡
-        {{ else if eq (.Get 0) "warning" }}⚠️
-        {{ else if eq (.Get 0) "error" }}⚡️
-        {{ else if eq (.Get 0) "definition" }}📖
-        {{ else if eq (.Get 0) "quote" }}💬
-        {{ else if eq (.Get 0) "output" }}💻
-        {{ else if eq (.Get 0) "question" }}❓
-        {{ else if eq (.Get 0) "answer" }}✅
+    <div class="panel-icon" aria-hidden="true">
+        {{ if eq (.Get 0) "info" }}<i data-feather="info"></i>
+        {{ else if eq (.Get 0) "warning" }}<i data-feather="alert-circle"></i>
+        {{ else if eq (.Get 0) "error" }}<i data-feather="alert-octagon"></i>
+        {{ else if eq (.Get 0) "definition" }}<i data-feather="book-open"></i>
+        {{ else if eq (.Get 0) "quote" }}<i data-feather="message-square"></i>
+        {{ else if eq (.Get 0) "output" }}<i data-feather="terminal"></i>
+        {{ else if eq (.Get 0) "question" }}<i data-feather="help-circle"></i>
+        {{ else if eq (.Get 0) "answer" }}<i data-feather="check-circle"></i>
         {{ end }}
     </div>
     <div class="panel-content">

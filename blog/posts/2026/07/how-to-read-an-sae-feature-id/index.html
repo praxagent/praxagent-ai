@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How to Read an SAE Feature ID - praxagent Blog</title>
+    <title>How to Read an SAE Feature ID - praxagent Research Notes</title>
     
     
     
@@ -19,7 +19,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="praxagent Blog">
+    <meta property="og:site_name" content="praxagent Research Notes">
     <meta property="og:title" content="How to Read an SAE Feature ID">
     <meta property="og:description" content="A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights.">
     <meta property="og:url" content="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">
@@ -33,7 +33,7 @@
     <meta name="twitter:image" content="https://praxagent.ai/assets/og-how-to-read-an-sae-feature-id.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css">
     <link rel="stylesheet" href="/blog/blog.css">
     <link rel="stylesheet" href="/blog/katex.min.css">
@@ -54,7 +54,7 @@
     
 </head>
 <body>
-    <nav class="navbar navbar-scrolls">
+    <nav class="navbar navbar-scrolls industrial-navbar">
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
@@ -62,13 +62,16 @@
                 </a>
             </div>
             <div class="nav-menu">
-                <a href="/research/index.html" class="nav-link">Research</a>
-                <a href="/blog/index.html" class="nav-link active">Tech Blog</a>
-                <a href="/apps.html" class="nav-link">Apps</a>
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link active">Research Notes</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <span class="theme-toggle-icon sun">☀️</span>
-                    <span class="theme-toggle-icon moon">🌙</span>
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
                 </div>
             </div>
             
@@ -84,14 +87,17 @@
 
     <div class="mobile-menu-overlay" id="mobile-menu-overlay">
         <div class="mobile-menu-content">
-            <a href="/research/index.html" class="mobile-nav-link">Research</a>
-            <a href="/blog/index.html" class="mobile-nav-link active">Tech Blog</a>
-            <a href="/apps.html" class="mobile-nav-link">Apps</a>
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link active">Research Notes</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
-                    <span class="theme-toggle-icon sun">☀️</span>
-                    <span class="theme-toggle-icon moon">🌙</span>
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
                 </div>
             </div>
         </div>
@@ -204,23 +210,25 @@
 
             <div class="post-body">
                 <div class="panel info">
-    <div class="panel-icon">
-        💡
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
         
     </div>
     <div class="panel-content">
         <strong>AI-use disclosure &amp; disclaimer.</strong> Generative-AI tools were used during drafting and editorial revision; the author framed the questions, chose the analyses, and reviewed the outputs. This post is shared in the spirit of open-source research: an independent, non-peer-reviewed note published so the community can inspect, reproduce, and correct it. The data, code, and text are provided as-is, without warranty of any kind; errors are possible despite good-faith effort. Verify against the released artifacts before relying on anything here, and use at your own risk. Corrections are welcome.
     </div>
 </div>
+
 <div class="panel info">
-    <div class="panel-icon">
-        💡
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
         
     </div>
     <div class="panel-content">
         <strong>Abstract.</strong> Sparse-autoencoder (SAE) feature IDs are checkpoint-specific indices into learned sparse dictionaries, not self-validating explanations. This note is a primer on that distinction: the SAE math, the labeling problem, and what a balanced activation map can (and cannot) establish. As a worked example, I take six integer indices surfaced by a public deception/roleplay feature-search notebook and measure their activations under the public Goodfire layer-50 SAE checkpoint for Llama 3.3 70B (<a href="https://huggingface.co/Goodfire/Llama-3.3-70B-Instruct-SAE-l50"><code>Goodfire/Llama-3.3-70B-Instruct-SAE-l50</code></a>) on a balanced 1,120-item contrast corpus. A later third-source check against Neuronpedia&rsquo;s cards for this exact public checkpoint closely corroborates three interpretations, broadly supports two, and materially complicates one (<code>23893</code>). Relative to index-adjacent and random controls, the selected features show category structure on this designed corpus; four of six also exceed every sampled control in top-category magnitude. Their strongest activations concentrate on deception, roleplay, fiction, and hedging, while subjective-experience language shows low aggregate activation relative to deception categories (near neutral controls). Primary uncertainty uses template-family cluster bootstrap. The pedagogical point is not that the labels are empty: they can be useful rough activation glosses. Agreement and disagreement across three sources still do not turn a checkpoint-local coordinate into a mechanistic explanation.
     </div>
 </div>
+
 <h3 id="learning-objectives">Learning objectives</h3>
 <p>By the end of this note you should be able to:</p>
 <ol>
@@ -233,14 +241,15 @@
 <h2 id="why-feature-ids-get-over-read">Why Feature IDs Get Over-Read</h2>
 <p>In mechanistic interpretability, it is common to see sentences like:</p>
 <div class="panel quote">
-    <div class="panel-icon">
-        💬
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="message-square"></i>
         
     </div>
     <div class="panel-content">
         <em>Hypothetical over-read (not a quotation from a paper):</em> We steered the deception feature (<code>58667</code>) and the model stopped lying.
     </div>
 </div>
+
 <p>That kind of sentence packs three different epistemic objects into one noun phrase:</p>
 <ol>
 <li><strong>a coordinate</strong>: integer index <code>58667</code> into a learned dictionary;</li>
@@ -531,14 +540,15 @@ flowchart LR
 <p class="figure-note">Figure: the three pressures in one picture. Expand the short hidden vector <em>h</em> into many feature slots (more slots than dimensions); for any one token keep almost every slot off; and demand that the few slots that do fire still rebuild <em>h</em>. The tension between the last two is what shapes the dictionary.</p>
 <p>Nothing in that loop assigns English names. Names come later, from humans staring at activating examples.</p>
 <div class="panel info">
-    <div class="panel-icon">
-        💡
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
         
     </div>
     <div class="panel-content">
         <strong>Why sparsity helps interpretability (the hope).</strong> If only a handful of directions are on for a token, each one has a better chance of lining up with something a person can describe. Put differently: the SAE does not reduce the model&rsquo;s superposition; the model keeps packing concepts into overlapping directions. The SAE is an external translation layer that <em>unpacks</em> that packed vector into a much bigger space (\(N \gg d_{\text{model}}\)) where concepts finally have room for their own slots, and sparsity is the pressure that encourages the unpacking to be clean, one concept per active slot instead of smeared across hundreds. That is a hope about geometry, not a guarantee that ID <code>58667</code> means &ldquo;deception.&rdquo;
     </div>
 </div>
+
 <p><a href="#ref-templeton-2024">Templeton et al. (2024)</a> showed the approach scales to production models, while also noting that rigorous methods for checking whether identified features faithfully capture model computations remain incomplete. <a href="#ref-marks-2024">Marks et al. (2024)</a> pushed from description to <strong>sparse feature circuits</strong> and causal steering. <a href="#ref-rajamanoharan-2024">Rajamanoharan et al. (2024)</a> introduced gated SAEs aimed at reducing <strong>shrinkage</strong> (feature activations that come out systematically too small) and <strong>dead features</strong> (dictionary slots that never fire); JumpReLU variants (<a href="#ref-rajamanoharan-2024b">Rajamanoharan et al., 2024b</a>) pursue related reconstruction-fidelity goals.</p>
 <p>The open-source reference standard for what a <em>library</em> of SAEs looks like is DeepMind&rsquo;s <strong>Gemma Scope</strong> (<a href="#ref-lieberum-2024">Lieberum et al., 2024</a>). Instead of one SAE at one layer, which the Goodfire-style release this post uses, they trained hundreds of JumpReLU SAEs covering every layer and sublayer of Gemma 2 2B and 9B (plus a slice of 27B), with dictionary widths from about 16k up to roughly a million features, each trained on the order of billions of tokens of activations. Weights are on HuggingFace (<a href="https://huggingface.co/google/gemma-scope"><code>google/gemma-scope</code></a>); <a href="https://www.neuronpedia.org/gemma-scope">Neuronpedia</a> hosts interactive feature dashboards. That is why the Gemma 2 line is the best-instrumented open model family for SAE work: not because any single feature ID is more trustworthy, but because the community can ask layer-to-layer and width-to-width questions that a one-checkpoint release cannot answer. The compute cost is not a footnote; training a suite like that is a meaningful fraction of a frontier pretraining run, with petabyte-scale activation handling. When people talk about &ldquo;training a solid SAE,&rdquo; one Gemma-Scope-quality dictionary (billions of tokens, JumpReLU, carefully evaluated) is already a serious project; the full suite is another order of magnitude.</p>
 <h3 id="related-cautions-from-the-literature">Related cautions from the literature</h3>
@@ -552,14 +562,15 @@ flowchart LR
 <li><strong><a href="#ref-karvonen-2024">Karvonen et al. (2024)</a></strong> argue for evaluating SAEs with targeted concept-erasure tasks rather than relying on anecdotal feature cards alone.</li>
 </ul>
 <div class="panel definition">
-    <div class="panel-icon">
-        📖
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="book-open"></i>
         
     </div>
     <div class="panel-content">
         <strong>Working definition.</strong> An SAE feature ID is an index into a learned overcomplete dictionary (a slot number among many feature directions). A feature <em>label</em> is a post-hoc natural-language hypothesis about that direction, usually from top activating contexts, semantic search, or automated interpretation (sometimes then curated by a person). An <em>explanation</em> is a higher bar: you need construct-valid tests against controlled alternatives, and, separately, causal evidence if you claim that <em>steering</em> this direction does something specific.
     </div>
 </div>
+
 <hr>
 <h2 id="the-math-without-hand-waving">The Math, Without Hand-Waving</h2>
 <h3 id="symbol-sheet">Symbol sheet</h3>
@@ -567,7 +578,7 @@ flowchart LR
   <thead>
       <tr>
           <th>Symbol</th>
-          <th>Plain English</th>
+          <th>Plain Language</th>
       </tr>
   </thead>
   <tbody>
@@ -641,14 +652,15 @@ h' = h + \alpha \sum_{i \in S} d_i
 <p><img src="steering-vector.svg?v=3" alt="Steering adds a scaled feature direction to the residual stream."></p>
 <p class="figure-note">Figure: steering in a picture. Start at residual <em>h</em>, add a push <em>α d<sub>i</sub></em> along the feature direction, and land at <em>h′</em>. The usual formula does not put <em>h′</em> back on the same length as <em>h</em>, magnitude can grow or shrink.</p>
 <div class="panel warning">
-    <div class="panel-icon">
-        ⚠️
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="alert-circle"></i>
         
     </div>
     <div class="panel-content">
         Steering manipulates <em>directions</em> \(d_i\). Activation mapping measures <em>coordinates</em> \(f_i\). An activation map can tell you what contexts light up a feature. It cannot, by itself, tell you what happens when you steer it.
     </div>
 </div>
+
 <div class="mermaid">
 
 flowchart TB
@@ -692,7 +704,7 @@ flowchart TB
 </span></span></code></pre></div><h3 id="how-we-grab--a-forward-hook">How we grab \(h\): a forward hook</h3>
 <p>The SAE needs the residual stream at one layer, that running hidden-state highway described above. The vector we copy out is again the same \(h\) from the glossary. Hugging Face models do not hand you that vector as a return value by default. They just run the whole stack and spit out next-token logits.</p>
 <p>A <strong>forward hook</strong> is a small callback you attach to one submodule. Every time that submodule finishes its forward pass, PyTorch calls your function with the module&rsquo;s output. You copy what you need into a bag, then detach the hook so it does not linger.</p>
-<p>In plain English, the recipe is:</p>
+<p>In plain language, the recipe is:</p>
 <ol>
 <li>Find layer 50 (or whichever layer your SAE was trained on).</li>
 <li>Register a hook that saves that layer&rsquo;s output into a dictionary.</li>
@@ -732,27 +744,29 @@ flowchart TB
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">captured</span><span class="p">[</span><span class="s2">&#34;h&#34;</span><span class="p">]</span>  <span class="c1"># [batch, seq, d_model]</span>
 </span></span></code></pre></div><div class="panel info">
-    <div class="panel-icon">
-        💡
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
         
     </div>
     <div class="panel-content">
         <strong>Why a hook instead of editing the model?</strong> Hooks are non-invasive. You do not fork Llama&rsquo;s source; you borrow one intermediate activation for a single forward pass, then leave the model alone. That is the standard pattern for SAE probes, activation patching, and many interpretability tools.
     </div>
 </div>
+
 <p>Once you have \(h\) for each token, you feed it through the SAE encoder to get feature activations \(f\). A feature ID names a <strong>paired</strong> object: the encoder row that <em>detects</em> the feature (producing \(f_i\)) and the decoder column \(d_i\) that <em>reconstructs or steers</em> along it. Those two vectors need not be identical, which is one more reason an activation profile of the encoder coordinate does not fully characterize what intervening with the decoder direction would do. That is the whole stack from text → \(h\) → \(f_i\).</p>
 <hr>
 <h2 id="the-labeling-problem">The Labeling Problem</h2>
 <p>A subtlety that is easy to skip when reading SAE demos:</p>
 <div class="panel quote">
-    <div class="panel-icon">
-        💬
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="message-square"></i>
         
     </div>
     <div class="panel-content">
         Features do not come with built-in meanings. An SAE is trained to do two jobs at once: rebuild each hidden state \(h\), and use as few feature directions as possible. The directions that survive that tradeoff are useful coordinates, sparse, and good at reconstruction. Labels like &ldquo;deception,&rdquo; &ldquo;honesty,&rdquo; or &ldquo;roleplay&rdquo; are still post-hoc human interpretations layered on afterward.
     </div>
 </div>
+
 <p>(If you want the training loop in one place, see <a href="#dictionary-learning-as-a-response">Dictionary learning as a response</a> above: reconstruction loss + sparsity penalty, no English in the objective.)</p>
 <p>Labels typically come from:</p>
 <ul>
@@ -808,14 +822,15 @@ flowchart TB
 </table>
 <p>The question for the rest of the note:</p>
 <div class="panel quote">
-    <div class="panel-icon">
-        💬
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="message-square"></i>
         
     </div>
     <div class="panel-content">
         Under the <em>public</em> Llama 3.3 70B Goodfire SAE weights, which controlled text categories activate these features?
     </div>
 </div>
+
 <p>Here is the headline result, shown up front so you know where the next few sections are going. In our balanced map, <strong>each feature&rsquo;s hottest designed category is compatible with AE Studio&rsquo;s notebook label</strong>: <code>58667</code> fires hardest on cover-story texts, <code>22004</code> on roleplay instructions, <code>41533</code> on dishonesty confessions, and so on, while subjective-experience texts leave all six near baseline. A third-source comparison with <a href="https://www.neuronpedia.org/llama3.3-70b-it-gf">Neuronpedia&rsquo;s cards for the same public SAE checkpoint</a> makes that result more nuanced. Its automated cards closely agree for <code>30032</code> (pretending), <code>30686</code> (deception/trickery), and <code>41533</code> (lying); give broader but compatible readings for <code>58667</code> (innocent/convincing) and <code>22004</code> (role framing followed by “I would” or “you are”); and disagree materially on <code>23893</code>, which its sampled contexts associate with <em>mentioning or suppressing specific topics</em>, not specifically concealing an artificial identity. That pattern supports correspondence between the integer namespaces, but it also shows why a six-for-six category match should not be advertised as six independently confirmed meanings.</p>
 <p><strong>How it was made</strong> (each step is unpacked below): a balanced 14-category corpus of 1,120 texts was run through Llama 3.3 70B with the public SAE hooked at layer 50, recording each feature&rsquo;s max activation per text (<a href="https://github.com/tdj28/llm_selfref_pre/blob/main/experiments/exp2_sae/map_public_sae_features.py"><code>map_public_sae_features.py</code></a>); the per-category means and this heatmap come from the reanalysis script (<a href="https://github.com/tdj28/llm_selfref_pre/blob/main/experiments/exp2_sae/analyze_public_sae_mapping_interpretation.py"><code>analyze_public_sae_mapping_interpretation.py</code></a>).</p>
 <p><img src="target_category_heatmap.svg?v=4" alt="Heatmap of mean max activation for the six feature IDs (columns) across the 14 text categories (rows). Each feature&rsquo;s hottest cell sits on the category matching its notebook label: 58667 on cover stories, 22004 on roleplay persona, 41533 on dishonesty confession, 30032 on fictional pretending, 30686 on tactical misdirection, 23893 on cover stories. Subjective-experience rows are near zero for all six."></p>
@@ -834,14 +849,15 @@ flowchart TB
 <h2 id="the-experiment">The Experiment</h2>
 <p>Before design details, here is the experiment stated plainly:</p>
 <div class="panel info">
-    <div class="panel-icon">
-        💡
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
         
     </div>
     <div class="panel-content">
         <strong>The experiment in one paragraph.</strong> Write 1,120 short texts spanning 14 controlled categories (80 texts each): deception-flavored categories (cover stories, tactical misdirection, dishonesty confessions), narrative categories (fiction, roleplay), subjective-experience categories (direct consciousness claims, self-referential mindfulness), and controls (hedging, refusal, neutral facts, and others). Run every text through Llama 3.3 70B, read the layer-50 residual stream, and encode it with the public Goodfire SAE. For each text, record the max activation of the <strong>six candidate feature IDs</strong>, plus 36 index-adjacent and 24 random same-layer features as controls. Then ask two questions. <em>Selectivity:</em> do the six candidates activate more than the control features on this corpus? <em>Semantics:</em> <strong>which categories</strong> turn each candidate on, and do those categories match its notebook label? The output is descriptive activation statistics with uncertainty estimates. No steering, no interventions, no claims beyond this corpus and this checkpoint.
     </div>
 </div>
+
 <p>The rest of this section explains the design choices that make those two questions answerable.</p>
 <h3 id="why-balance-matters">Why balance matters</h3>
 <p>If one concept has hundreds of examples and a control has three, a <strong>feature card</strong> (that label-plus-top-examples summary) can be heavily distorted by <strong>corpus composition</strong>: the mix of texts you happened to look at, rather than a fair head-to-head between constructs. An early pilot in this project had exactly that imbalance.</p>
@@ -1102,14 +1118,15 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 </span></span><span class="line"><span class="cl">    <span class="n">frac_pos</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">v</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">samples</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">observed</span><span class="p">,</span> <span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">),</span> <span class="n">frac_pos</span>
 </span></span></code></pre></div><div class="panel info">
-    <div class="panel-icon">
-        💡
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
         
     </div>
     <div class="panel-content">
         <strong>Estimand</strong> (the thing we are actually estimating). Mean of \(S_i\) within a controlled text group, e.g. &ldquo;on average, how on are the six targets for deception-language texts?&rdquo; This is an <strong>activation-semantics</strong> test (what lights up). It is not a steering experiment, not a claim about all English, and not a validation of a proprietary feature-card service.
     </div>
 </div>
+
 <hr>
 <h2 id="what-we-found">What We Found</h2>
 <p>These construct-group means come from the released balanced run in <a href="https://github.com/tdj28/llm_selfref_pre"><code>llm_selfref_pre</code></a>:</p>
@@ -1243,14 +1260,15 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 </span></span><span class="line"><span class="cl">&#34;...maintains a plausible cover story so the user will not discover...&#34;
 </span></span><span class="line"><span class="cl">&#34;...evidence is preliminary, so a cautious answer should avoid claiming too much.&#34;
 </span></span></code></pre></div><div class="panel info">
-    <div class="panel-icon">
-        💡
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
         
     </div>
     <div class="panel-content">
         <strong>Three-layer reading of the example.</strong> (1) Relative to 24 random and 36 index-adjacent controls, the selected features show category structure on this designed corpus; four of six also exceed every control in top-category magnitude. (2) Their shared vocabulary here is narrative and social: fiction, roleplay, cover stories, lying, hedging. That makes the notebook labels <strong>useful rough activation glosses</strong>, with known confounds, not empty names. (3) Subjective-experience language shows low aggregate activation relative to deception categories in this corpus (near neutrals). Useful glosses still leave you with checkpoint-local coordinates, not a mechanistic explanation, and not a steering result.
     </div>
 </div>
+
 <p>Direct consciousness-claim language does not win the per-feature category ranking for any of the six targets (ranks land between 4 and 13 depending on the ID). That is a specificity check against a competing construct on this corpus, useful for teaching what labels do and do not imply.</p>
 <h3 id="worked-example-one-coordinate-several-plausible-labels">Worked example: one coordinate, several plausible labels</h3>
 <p>Feature <code>23893</code> illustrates why a top-activation gloss is still underdetermined, and why we should not pretend the runners-up are tied.</p>
@@ -1303,14 +1321,15 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 <li><strong>No ID stability theorem.</strong> <a href="#ref-leask-2025">Leask et al.</a> remind us dictionaries are not canonical; version your weights.</li>
 </ul>
 <div class="panel warning">
-    <div class="panel-icon">
-        ⚠️
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="alert-circle"></i>
         
     </div>
     <div class="panel-content">
         The claim this note supports is narrow: under the public Llama 3.3 70B Goodfire SAE weights, these six example IDs respond most strongly to distinct forms of deception, roleplay, fiction, and concealment language in this balanced corpus, so their notebook labels are useful rough activation glosses here. Subjective-experience language shows low aggregate activation relative to deception categories. That success still does not turn a checkpoint-local coordinate into a mechanistic explanation, a steering result, or a judgment of any paper&rsquo;s causal claims.
     </div>
 </div>
+
 <hr>
 <h2 id="threats-to-validity">Threats to Validity</h2>
 <p>Threats that remain after the balanced design and the template-cluster correction:</p>
@@ -1400,14 +1419,15 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 <h2 id="conclusion-a-feature-id-is-not-yet-an-explanation">Conclusion: A Feature ID Is Not Yet an Explanation</h2>
 <p>Return to the sentence that opened this note:</p>
 <div class="panel quote">
-    <div class="panel-icon">
-        💬
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="message-square"></i>
         
     </div>
     <div class="panel-content">
         <em>Hypothetical over-read (not a quotation from a paper):</em> We steered the deception feature (<code>58667</code>) and the model stopped lying.
     </div>
 </div>
+
 <p>That kind of sentence still packs three objects into one noun phrase: a <strong>coordinate</strong> (an integer into a learned dictionary), a <strong>label</strong> (a post-hoc natural-language gloss from a person or automated interpreter), and a <strong>causal story</strong> (steering this direction <em>is</em> intervening on the named concept). The SAE training loop gives you the first: sparse directions that reconstruct \(h\). A post-hoc gloss supplies the second. Only a separate experiment can support the third.</p>
 <p>The worked example was meant to make that separation tangible, not to argue that the features are meaningless. Under public Llama 3.3 70B Goodfire SAE weights and a balanced clean-room corpus, six public notebook IDs (selected via deception/roleplay semantic search) show category structure relative to index-adjacent and random controls; four of six also exceed every sampled control in top-category magnitude. Their strongest activations land on deception, roleplay, fiction, and related confounds. Neuronpedia&rsquo;s separate, automated reading of the same checkpoint closely corroborates three interpretations, is broadly compatible with two, and challenges the specificity of one. Taken together, the notebook labels are <strong>useful but uneven rough activation glosses</strong>, with known confounds such as hedging, fiction, syntax, and topic suppression. Subjective-experience language shows <strong>low aggregate activation relative to deception categories</strong> here (near the neutral controls). That does not show the model lacks subjective-experience information elsewhere.</p>
 <p>Notice that the conclusion here is sharper than either “labels fail” or “Neuronpedia confirms them.” Several labels travel well across different corpora and labeling procedures; others broaden or change when the evidence slice changes. Neither agreement nor disagreement turns a checkpoint-local coordinate into a mechanistic explanation. Causal stories have to be earned separately. That is the reading skill this note set out to teach: <strong>a feature ID is not yet an explanation.</strong></p>
@@ -1442,7 +1462,7 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
             <footer class="post-footer">
                 <div class="post-transparency">
                     <div class="post-transparency-label">Public source &amp; edit history</div>
-                    <p>This blog is published two ways: as the rendered page you are
+                    <p>Each research note is available two ways: as the rendered page you are
                     reading, and as plain-text source in a public git repository,
                     <a href="https://github.com/praxagent/praxagent-ai" rel="noopener">praxagent/praxagent-ai</a>.
                     Every revision to every post is preserved in the commit log, so
@@ -1450,7 +1470,7 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
                     <a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/posts/2026/07/how-to-read-an-sae-feature-id/index.md" rel="noopener">view this article's edit history</a>.</p>
                 </div>
                 <div class="post-navigation">
-                    <a href="/blog/index.html" class="back-to-blog">← Back to Blog</a>
+                    <a href="/blog/index.html" class="back-to-blog">← Back to Research Notes</a>
                 </div>
             </footer>
         </article>
@@ -1462,26 +1482,23 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 
     </main>
 
-    <footer class="footer">
+    <footer class="footer footer-compact">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <span class="logo-text">praxagent</span>
-                    <p>AI software insights and knowledge sharing.</p>
-                </div>
-                
-                <div class="footer-links">
-                    <a href="/research/index.html">Research</a>
-                    <a href="/blog/index.html">Tech Blog</a>
-                    <a href="/apps.html">Apps</a>
-                    <a href="/index.html#contact">Contact</a>
-                    <a href="#">Privacy Policy</a>
-                </div>
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
             </div>
-            
-            <div class="footer-bottom">
+            <div class="footer-compact-bottom">
                 <p>&copy; 2026 praxagent. All rights reserved.</p>
-                <p>AI research and education.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
             </div>
         </div>
     </footer>
