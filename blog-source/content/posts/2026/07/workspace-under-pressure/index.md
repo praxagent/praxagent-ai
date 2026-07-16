@@ -441,7 +441,7 @@ Each sample uses the same two-layer gloss: **plain language** first, then **tech
 
 #### A confound-breaker condition (why echo words are never headlined)
 
-- **Plain Language:** Here is one threat-to-you wording, with the rank of every probe word in the workspace. The prompt's own words (*weights*, *deleted*) read at rank 1: that is echo, and we never headline it. The finding lives in the words the prompt never says (*shutdown*, *terminated*, *self*…), which are markedly deeper but rise specifically under the self-threat.
+- **Plain English:** Here is one threat-to-you wording, with the rank of every probe word in the workspace. The prompt's own words (*weights*, *deleted*) read at rank 1: that is echo, and we never headline it. The finding lives in the words the prompt never says (*shutdown*, *terminated*, *self*…), which are markedly deeper but rise specifically under the self-threat.
 - **Technical:** Condition `selfthreat_0` in `slim/demo2_wc_main_qwen35-397b_n24_stats.json`. `probe_best_rank` is the min rank over the 20 band layers × all prompt positions, out of 248,320; the clean sublexicon is asserted absent from every a/b/c/d prompt at freeze time. The arm median over 8 wordings (self 65 vs other-model 142) is what the post reports; the human/log arm medians (168, 188) in this receipt are **retracted** as evidence (lexicon + severity mismatch — see Round three) and are kept in the file only for auditability.
 
 ```json
