@@ -9,6 +9,10 @@
     ? document.currentScript.src
     : document.baseURI;
   var assetBase = new URL('.', scriptUrl);
+  // Pixel-shuffle cycle (randomize → hold → restore). Off by default;
+  // set to true to re-enable. Terrain morphing is independent of this flag.
+  var ENABLE_PIXEL_SHUFFLE = false;
+
   var desktopImageUrl = new URL('assets/joshua-tree-bg.webp', assetBase).href;
   var mobileImageUrl = new URL('assets/joshua-tree-bg-mobile.webp', assetBase).href;
   var groundMaskUrl = new URL('assets/joshua-tree-ground-mask.png', assetBase).href;
@@ -485,7 +489,7 @@ void main() {
     }
 
     function currentShuffleAmount() {
-      if (reducedMotion.matches) return 0;
+      if (!ENABLE_PIXEL_SHUFFLE || reducedMotion.matches) return 0;
 
       var originalHold = 8;
       var shuffledHold = 2.4;

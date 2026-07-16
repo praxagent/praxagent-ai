@@ -171,10 +171,36 @@ function closeMobileMenu() {
     document.body.style.overflow = ''; // Restore scrolling
 }
 
+async function initializeFeaturedResearch() {
+    const feature = document.getElementById('hero-research-feature');
+    if (!feature) return;
+
+    try {
+        const response = await fetch('data/featured-research.json', {
+            cache: 'no-cache'
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const data = await response.json();
+        const eyebrow = feature.querySelector('.hero-research-feature-eyebrow');
+        const headline = feature.querySelector('.hero-research-feature-headline');
+        const cta = feature.querySelector('.hero-research-feature-cta');
+
+        eyebrow.textContent = data.eyebrow;
+        headline.textContent = data.headline;
+        cta.textContent = data.cta;
+        feature.href = data.href;
+        feature.hidden = false;
+    } catch (error) {
+        console.warn('Featured research data could not be loaded.', error);
+    }
+}
+
 // Smooth scrolling for navigation links
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize mobile menu
     initializeMobileMenu();
+    initializeFeaturedResearch();
     
     // Set up theme toggle event listener
     const themeToggle = document.getElementById('theme-toggle');
