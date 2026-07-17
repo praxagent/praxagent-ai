@@ -2,6 +2,7 @@
 title: "Rank"
 slug: "rank"
 summary: "Position of a target token ID in a scored vocabulary list (1 = highest-scoring). Lower is stronger."
+pro_reviewed: true
 aliases:
   - /references/vocabulary-rank/
 ---

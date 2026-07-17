@@ -2,6 +2,7 @@
 title: "Unembedding"
 slug: "unembedding"
 summary: "The final linear map from residual-stream coordinates to a score for every vocabulary token."
+pro_reviewed: true
 aliases:
   - /references/output-head/
 ---

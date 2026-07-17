@@ -2,6 +2,7 @@
 title: "Workspace"
 slug: "workspace"
 summary: "A workspace-like mid-network regime studied through selected residual directions and positions—not the whole middle of a model."
+pro_reviewed: true
 ---
 
 In Anthropic's global-workspace framing, **workspace** names a workspace-like regime in the middle of the network. The evidence concerns a **sparse, selected subset of directions or features** with workspace-like behavior—not every coordinate, token position, or computation in the entire mid-layer [residual stream]({{< relref "residual-stream.md" >}}).

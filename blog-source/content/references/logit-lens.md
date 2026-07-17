@@ -2,6 +2,7 @@
 title: "Logit lens"
 slug: "logit-lens"
 summary: "The free mid-layer readout that skips any fitted transport: unembed the residual as if it were already final-layer coordinates."
+pro_reviewed: true
 aliases:
   - /references/identity-lens/
 ---

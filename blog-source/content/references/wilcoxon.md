@@ -2,6 +2,7 @@
 title: "Wilcoxon signed-rank test"
 slug: "wilcoxon"
 summary: "A paired test that uses each gap's direction and its absolute-size rank, not just win counts."
+pro_reviewed: true
 aliases:
   - /references/wilcoxon-signed-rank/
   - /references/wilcoxon-test/

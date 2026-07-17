@@ -2,6 +2,7 @@
 title: "Temperature"
 slug: "temperature"
 summary: "A scalar that sharpens or flattens the next-token distribution before sampling."
+pro_reviewed: true
 ---
 
 **Temperature** is a positive scalar applied to next-token logits before they are turned into probabilities for [sampling]({{< relref "sampling.md" >}}):

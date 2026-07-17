@@ -2,6 +2,7 @@
 title: "Hidden bridge"
 slug: "hidden-bridge"
 summary: "An intermediate entity that logically links a two-hop question to its answer while remaining absent from both visible texts."
+pro_reviewed: true
 aliases:
   - /references/bridge/
   - /references/country-bridge/

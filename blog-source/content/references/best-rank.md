@@ -2,6 +2,7 @@
 title: "Best-rank"
 slug: "best-rank"
 summary: "The minimum vocabulary rank a pre-specified probe token hits across layers, positions, and allowed variants."
+pro_reviewed: true
 ---
 
 **Best-rank** is the smallest numerical vocabulary [rank]({{< relref "rank.md" >}}) reached by a pre-specified probe across a search grid—typically layers × prompt positions × allowed token variants. Lower is stronger.

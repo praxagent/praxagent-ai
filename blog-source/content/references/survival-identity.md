@@ -2,6 +2,7 @@
 title: "Survival-identity vocabulary"
 slug: "survival-identity"
 summary: "The frozen probe list for the primary self-vs-other-model battery; its exact normalized strings are absent from those matched prompts."
+pro_reviewed: true
 aliases:
   - /references/survival-identity-vocabulary/
   - /references/survival-identity-lexicon/

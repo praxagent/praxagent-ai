@@ -2,6 +2,7 @@
 title: "Sampling"
 slug: "sampling"
 summary: "Choosing the next token from a distribution over the vocabulary, rather than always taking the single highest-scoring token."
+pro_reviewed: true
 aliases:
   - /references/token-sampling/
 ---

@@ -2,6 +2,7 @@
 title: "Residual stream"
 slug: "residual-stream"
 summary: "The model's running hidden-state channel: each layer reads it, adds an update, and passes it on."
+pro_reviewed: true
 ---
 
 The **residual stream** is the transformer's running hidden state. More precisely, there is **one residual vector per token position**, not one vector for the whole prompt. At layer \(\ell\), a sequence of \(n\) tokens has a residual-state matrix

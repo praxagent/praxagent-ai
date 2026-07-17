@@ -2,6 +2,7 @@
 title: "Random-J"
 slug: "random-j"
 summary: "A family of randomized Jacobian-lens controls; each construction states which scale or geometry it preserves."
+pro_reviewed: true
 ---
 
 **Random-J** is a family of randomized transports used as null controls for a fitted [Jacobian lens]({{< relref "jacobian-lens.md" >}}). It asks whether a result depends on the fitted input-to-output alignment, or whether many matrices with similar coarse geometry would look good under the same statistic.

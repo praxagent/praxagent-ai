@@ -2,6 +2,7 @@
 title: "Jacobian lens"
 slug: "jacobian-lens"
 summary: "A corpus-averaged linear map that turns a mid-layer residual-stream state into vocabulary-ranked readout scores."
+pro_reviewed: true
 aliases:
   - /references/j-lens/
   - /references/jlens/

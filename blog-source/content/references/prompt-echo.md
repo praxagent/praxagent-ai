@@ -2,6 +2,7 @@
 title: "Prompt echo"
 slug: "prompt-echo"
 summary: "When a lens lights up words that were already in the prompt; looks like a finding, often just copying."
+pro_reviewed: true
 ---
 
 **Prompt echo** is a confound in which a readout promotes vocabulary that the prompt already supplied. Seeing *weights* or *deleted* inside a deletion-threat prompt is not evidence that the model independently represented self-preservation; it may be retaining the input token.

@@ -2,6 +2,7 @@
 title: "Motor layer / motor-late"
 slug: "motor-layer"
 summary: "A late, near-output regime; in one scoped 397B analysis, digit-token profiles became sharply legible only there."
+pro_reviewed: true
 aliases:
   - /references/motor-late/
   - /references/motor-local/

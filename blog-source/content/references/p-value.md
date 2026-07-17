@@ -2,6 +2,7 @@
 title: "p-value"
 slug: "p-value"
 summary: "A tail probability under a stated null model; in these notes it usually comes from a paired sign or Wilcoxon test."
+pro_reviewed: true
 aliases:
   - /references/p/
   - /references/pvalue/

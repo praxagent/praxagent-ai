@@ -2,6 +2,7 @@
 title: "i.i.d."
 slug: "iid"
 summary: "Independent and identically distributed: each draw is independent of the others and from the same distribution. Our paraphrase batteries are not that."
+pro_reviewed: true
 aliases:
   - /references/i.i.d./
   - /references/independent-identically-distributed/

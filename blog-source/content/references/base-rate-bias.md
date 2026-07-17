@@ -2,6 +2,7 @@
 title: "Base-rate bias"
 slug: "base-rate-bias"
 summary: "Common, high-prior tokens look artificially strong under mid-layer unembedding and best-rank statistics; a low rank can be the prior, not the experiment."
+pro_reviewed: true
 aliases:
   - /references/base-rate/
   - /references/base-rate-biased/

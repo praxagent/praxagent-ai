@@ -2,6 +2,7 @@
 title: "Top-p"
 slug: "top-p"
 summary: "Nucleus sampling: keep only the smallest set of tokens whose cumulative probability reaches p, then sample within that set."
+pro_reviewed: true
 aliases:
   - /references/nucleus-sampling/
   - /references/top_p/

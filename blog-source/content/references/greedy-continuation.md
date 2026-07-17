@@ -2,6 +2,7 @@
 title: "Greedy continuation"
 slug: "greedy-continuation"
 summary: "The model's generated text when each next token is chosen as the single highest-probability token, with no sampling."
+pro_reviewed: true
 aliases:
   - /references/greedy-output/
   - /references/greedy-decoding/

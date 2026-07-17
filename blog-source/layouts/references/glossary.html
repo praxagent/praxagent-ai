@@ -21,7 +21,12 @@
         <div class="blog-index-list taxonomy-directory">
 {{ range $terms }}
             <a class="blog-index-row" href="{{ .RelPermalink }}">
-                <h3>{{ .Title }}</h3>
+                <div class="knowledge-glossary-name">
+                    <h3>{{ .Title }}</h3>
+                    {{- if .Params.pro_reviewed }}
+                    <span class="pro-reviewed-badge" title="Reviewed for technical accuracy with GPT-5.6 Sol Pro">Pro-reviewed</span>
+                    {{- end }}
+                </div>
                 <span class="blog-index-meta">{{ with .Params.summary }}{{ . | truncate 90 }}{{ else }}Concept guide{{ end }}</span>
             </a>
 {{ end }}

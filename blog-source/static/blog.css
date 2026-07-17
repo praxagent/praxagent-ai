@@ -332,6 +332,36 @@ main,
     white-space: normal;
 }
 
+.knowledge-glossary-name {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
+.pro-reviewed-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.4rem;
+    padding: 0.18rem 0.45rem;
+    border: 1px solid var(--border-secondary);
+    border-color: color-mix(in srgb, var(--sky, #4B6787) 55%, transparent);
+    color: var(--sky, #4B6787);
+    background: var(--bg-secondary);
+    background: color-mix(in srgb, var(--sky, #4B6787) 7%, transparent);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.58rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.reference-review-status {
+    margin-top: 0.85rem;
+}
+
 .knowledge-back {
     display: inline-flex;
     color: var(--sky, #4B6787);

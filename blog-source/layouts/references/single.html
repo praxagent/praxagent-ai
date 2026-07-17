@@ -7,6 +7,11 @@
             <header class="post-header">
                 <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / {{ if $isGlossaryEntry }}Glossary{{ else }}{{ .Parent.Title }}{{ end }}</p>
                 <h1 class="post-title">{{ .Title }}</h1>
+                {{- if and $isGlossaryEntry .Params.pro_reviewed }}
+                <div class="reference-review-status" aria-label="Review status">
+                    <span class="pro-reviewed-badge" title="Reviewed for technical accuracy with GPT-5.6 Sol Pro">Pro-reviewed</span>
+                </div>
+                {{- end }}
                 {{ with .Params.summary }}
                 <p class="reference-summary">{{ . }}</p>
                 {{ end }}

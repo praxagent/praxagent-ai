@@ -2,6 +2,7 @@
 title: "Thinking on / off"
 slug: "thinking-mode"
 summary: "The template-controlled reasoning protocols used in these notes: reasoning enabled, or disabled so generation begins after a pre-closed local think block."
+pro_reviewed: true
 aliases:
   - /references/thinking-on-off/
   - /references/thinking-on/
