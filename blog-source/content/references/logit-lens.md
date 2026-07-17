@@ -24,6 +24,8 @@ ranking = scores.argsort(descending=True)
 
 The softmax of `scores` is a convenient display distribution, but at an intermediate layer it is not necessarily calibrated as that layer's true next-token probability distribution. The rest of the network has not run yet.
 
+{{< reference-figure src="references/glossary/lens-transports.svg" alt="The logit lens sends the same selected middle-layer state directly through the final normalization and output head, while Jacobian and Random-J lanes change only the transport for a matched comparison." caption="Figure structure: one selected residual state branches into three transports. The logit lens uses identity, the Jacobian lens uses a corpus-derived map, and Random-J uses a named randomized map with stated preserved properties. Each lane then uses the same final normalization, output head, probe tokens, search rule, and summary statistic. This makes the logit lens the no-fitted-transport baseline; a difference between lanes is not by itself a causal result." >}}
+
 ## How to read the result
 
 If *Paris* ranks first at a middle layer, the careful claim is: “under the model's final vocabulary readout, this selected normalized state gives *Paris* a very high score.” It is not yet a claim that the model will emit *Paris*, that a dedicated “Paris feature” exists, or that this score causally drives the answer. Later blocks can strengthen, erase, or redirect it.

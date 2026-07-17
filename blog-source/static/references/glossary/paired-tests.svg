@@ -1,22 +1,94 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" role="img" aria-labelledby="title desc">
-  <title id="title">Sign test compared with Wilcoxon signed-rank</title>
-  <desc id="desc">Six paired differences have five positive signs and one negative sign. The sign test counts directions, while Wilcoxon ranks absolute gap sizes before attaching their signs.</desc>
-  <defs>
-    <style>
-      .bg{fill:#f8fafc}.panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.pos{fill:#4b6787}.neg{fill:#d97706}.axis{stroke:#94a3b8;stroke-width:1.5}.title{font:600 25px 'IBM Plex Sans',system-ui,sans-serif;fill:#17283a}.label{font:600 16px 'IBM Plex Sans',system-ui,sans-serif;fill:#24384d}.small{font:13px 'JetBrains Mono',ui-monospace,monospace;fill:#526273}.note{font:14px 'IBM Plex Sans',system-ui,sans-serif;fill:#526273}
-    </style>
-  </defs>
-  <rect class="bg" width="960" height="440" rx="18"/>
-  <text class="title" x="48" y="48">The same paired gaps feed two different tests</text>
-  <g transform="translate(48 90)"><rect class="panel" width="520" height="290" rx="12"/><text class="label" x="22" y="34">paired difference: control rank − treatment rank</text><line class="axis" x1="260" y1="58" x2="260" y2="248"/>
-    <text class="small" x="22" y="84">pair 1</text><rect class="pos" x="260" y="67" width="184" height="20" rx="3"/><text class="small" x="452" y="83">+46</text>
-    <text class="small" x="22" y="118">pair 2</text><rect class="pos" x="260" y="101" width="44" height="20" rx="3"/><text class="small" x="312" y="117">+11</text>
-    <text class="small" x="22" y="152">pair 3</text><rect class="neg" x="228" y="135" width="32" height="20" rx="3"/><text class="small" x="190" y="151">−8</text>
-    <text class="small" x="22" y="186">pair 4</text><rect class="pos" x="260" y="169" width="12" height="20" rx="3"/><text class="small" x="280" y="185">+3</text>
-    <text class="small" x="22" y="220">pair 5</text><rect class="pos" x="260" y="203" width="116" height="20" rx="3"/><text class="small" x="384" y="219">+29</text>
-    <text class="small" x="22" y="254">pair 6</text><rect class="pos" x="260" y="237" width="72" height="20" rx="3"/><text class="small" x="340" y="253">+18</text>
-  </g>
-  <g transform="translate(592 90)"><rect class="panel" width="320" height="132" rx="12"/><text class="label" x="20" y="34">Sign test</text><text class="note" x="20" y="65">uses only direction</text><text class="small" x="20" y="96">5 positive, 1 negative</text><text class="small" x="20" y="118">magnitudes discarded</text></g>
-  <g transform="translate(592 248)"><rect class="panel" width="320" height="132" rx="12"/><text class="label" x="20" y="34">Wilcoxon signed-rank</text><text class="note" x="20" y="65">ranks |gap|, then restores sign</text><text class="small" x="20" y="96">largest |gap| gets largest rank</text><text class="small" x="20" y="118">ties / zeros need conventions</text></g>
-  <text class="note" x="48" y="418">Neither test supplies an effect size or population generalization by itself.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="390" viewBox="0 0 760 390" role="img" aria-labelledby="titlePaired descPaired">
+  <title id="titlePaired">The sign test and Wilcoxon use the same paired gaps differently</title>
+  <desc id="descPaired">Six paired rank gaps are positive 46, positive 11, negative 8, positive 3, positive 29, and positive 18. The sign test counts five positive directions and one negative direction. Wilcoxon orders the six absolute gaps before restoring their signs.</desc>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:15px;font-weight:700}
+    .h{font-size:13px;font-weight:700}
+    .s{font-size:12px}
+    .m{font-size:11px;fill:#5A544C}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;fill:#2C2924}
+    .card{fill:#FBF9F6;stroke:#D9D0C4;stroke-width:1.2}
+    .pos{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.2}
+    .neg{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.2}
+    .axis{stroke:#A89B8C;stroke-width:1.2}
+    .zero{stroke:#7F786D;stroke-width:1.4;stroke-dasharray:4 3}
+    .foot{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.4}
+  </style>
+
+  <text x="24" y="28" class="t title">The same paired gaps feed two different tests</text>
+  <text x="24" y="48" class="t m">Positive means the treatment achieved the better, lower vocabulary rank.</text>
+
+  <rect class="card" x="24" y="64" width="428" height="270" rx="12"/>
+  <text x="40" y="88" class="t h">Six paired rank gaps</text>
+  <text x="40" y="106" class="t m">Shared raw-gap axis: control rank minus treatment rank</text>
+
+  <line class="zero" x1="203" y1="116" x2="203" y2="286"/>
+  <text x="40" y="137" class="t m">pair 1</text>
+  <rect class="pos" x="203" y="124" width="199" height="16" rx="3"/>
+  <text x="408" y="136" class="mono">+46</text>
+
+  <text x="40" y="164" class="t m">pair 2</text>
+  <rect class="pos" x="203" y="151" width="48" height="16" rx="3"/>
+  <text x="257" y="163" class="mono">+11</text>
+
+  <text x="40" y="191" class="t m">pair 3</text>
+  <rect class="neg" x="168" y="178" width="35" height="16" rx="3"/>
+  <text x="142" y="190" class="mono">-8</text>
+
+  <text x="40" y="218" class="t m">pair 4</text>
+  <rect class="pos" x="203" y="205" width="13" height="16" rx="3"/>
+  <text x="222" y="217" class="mono">+3</text>
+
+  <text x="40" y="245" class="t m">pair 5</text>
+  <rect class="pos" x="203" y="232" width="126" height="16" rx="3"/>
+  <text x="335" y="244" class="mono">+29</text>
+
+  <text x="40" y="272" class="t m">pair 6</text>
+  <rect class="pos" x="203" y="259" width="78" height="16" rx="3"/>
+  <text x="287" y="271" class="mono">+18</text>
+
+  <line class="axis" x1="160" y1="292" x2="420" y2="292"/>
+  <line class="axis" x1="160" y1="288" x2="160" y2="296"/>
+  <line class="axis" x1="203" y1="288" x2="203" y2="296"/>
+  <line class="axis" x1="247" y1="288" x2="247" y2="296"/>
+  <line class="axis" x1="290" y1="288" x2="290" y2="296"/>
+  <line class="axis" x1="333" y1="288" x2="333" y2="296"/>
+  <line class="axis" x1="377" y1="288" x2="377" y2="296"/>
+  <line class="axis" x1="420" y1="288" x2="420" y2="296"/>
+  <text x="160" y="312" text-anchor="middle" class="t m">-10</text>
+  <text x="203" y="312" text-anchor="middle" class="t m">0</text>
+  <text x="247" y="312" text-anchor="middle" class="t m">10</text>
+  <text x="290" y="312" text-anchor="middle" class="t m">20</text>
+  <text x="333" y="312" text-anchor="middle" class="t m">30</text>
+  <text x="377" y="312" text-anchor="middle" class="t m">40</text>
+  <text x="420" y="312" text-anchor="middle" class="t m">50</text>
+
+  <rect class="card" x="468" y="64" width="268" height="112" rx="12"/>
+  <text x="484" y="88" class="t h">Sign test: keep direction</text>
+  <rect class="pos" x="484" y="101" width="24" height="24" rx="5"/>
+  <rect class="pos" x="514" y="101" width="24" height="24" rx="5"/>
+  <rect class="neg" x="544" y="101" width="24" height="24" rx="5"/>
+  <rect class="pos" x="574" y="101" width="24" height="24" rx="5"/>
+  <rect class="pos" x="604" y="101" width="24" height="24" rx="5"/>
+  <rect class="pos" x="634" y="101" width="24" height="24" rx="5"/>
+  <text x="496" y="118" text-anchor="middle" class="t s">+</text>
+  <text x="526" y="118" text-anchor="middle" class="t s">+</text>
+  <text x="556" y="118" text-anchor="middle" class="t s">-</text>
+  <text x="586" y="118" text-anchor="middle" class="t s">+</text>
+  <text x="616" y="118" text-anchor="middle" class="t s">+</text>
+  <text x="646" y="118" text-anchor="middle" class="t s">+</text>
+  <text x="484" y="148" class="t s">5 positive, 1 negative</text>
+  <text x="484" y="165" class="t m">The six gap sizes are discarded.</text>
+
+  <rect class="card" x="468" y="192" width="268" height="142" rx="12"/>
+  <text x="484" y="216" class="t h">Wilcoxon: order absolute gaps</text>
+  <text x="484" y="241" class="mono">3  &lt;  8  &lt;  11  &lt;  18  &lt;  29  &lt;  46</text>
+  <text x="484" y="265" class="t s">Assign ranks 1 through 6,</text>
+  <text x="484" y="283" class="t s">then restore each original sign.</text>
+  <text x="484" y="310" class="t m">Ties and zeros need a stated rule.</text>
+
+  <rect class="foot" x="24" y="346" width="712" height="32" rx="9"/>
+  <text x="40" y="367" class="t s">Both tests need valid paired units. Neither is an effect size or a population claim.</text>
 </svg>

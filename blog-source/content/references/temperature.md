@@ -36,7 +36,7 @@ def softmax_with_temperature(logits: list[float], temperature: float):
     return [weight / total for weight in weights]
 ```
 
-For every positive \(T\), division by \(T\) preserves logit order. A [greedy continuation]({{< relref "greedy-continuation.md" >}}) therefore chooses the same argmax even though the inspectable probability distribution changes. API settings called `temperature: 0` are normally a special convention for greedy or near-greedy decoding—not the formula above evaluated at zero.
+For every positive \(T\), division by \(T\) preserves logit order. A [greedy continuation]({{< relref "greedy-continuation.md" >}}) therefore chooses the same argmax even though the inspectable probability distribution changes. API settings called `temperature: 0` are normally a special convention for greedy or near-greedy decoding, not the formula above evaluated at zero.
 
 Temperature and [top-p]({{< relref "top-p.md" >}}) interact: temperature changes which tokens accumulate the nucleus mass, so record both settings and the order in which an inference library applies them.
 

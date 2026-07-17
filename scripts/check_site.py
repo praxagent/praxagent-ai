@@ -205,6 +205,52 @@ def check_svg(errors: list[str]) -> None:
             errors.append(f"{path.relative_to(ROOT)}: invalid SVG/XML: {exc}")
 
 
+def check_glossary_svg_accessibility(errors: list[str]) -> None:
+    glossary_dir = ROOT / "blog-source/static/references/glossary"
+    for path in sorted(glossary_dir.glob("*.svg")):
+        try:
+            root = ElementTree.parse(path).getroot()
+        except (ElementTree.ParseError, OSError):
+            continue  # check_svg reports the detailed parse error.
+
+        relative = path.relative_to(ROOT)
+        for attribute in ("width", "height", "viewBox"):
+            if not root.get(attribute):
+                errors.append(f"{relative}: accessible SVG requires {attribute}")
+
+        if root.get("role") != "img":
+            errors.append(f"{relative}: accessible SVG requires role='img'")
+
+        children = {
+            child.tag.rsplit("}", 1)[-1]: child
+            for child in root
+            if child.tag.rsplit("}", 1)[-1] in {"title", "desc"}
+        }
+        labelled_by = set(root.get("aria-labelledby", "").split())
+        for element_name in ("title", "desc"):
+            element = children.get(element_name)
+            if element is None:
+                errors.append(
+                    f"{relative}: accessible SVG requires a direct <{element_name}>"
+                )
+                continue
+
+            element_id = element.get("id")
+            element_text = "".join(element.itertext()).strip()
+            if not element_id:
+                errors.append(f"{relative}: <{element_name}> requires an id")
+            elif element_id not in labelled_by:
+                errors.append(
+                    f"{relative}: aria-labelledby must include {element_name} id "
+                    f"{element_id!r}"
+                )
+            if not element_text:
+                errors.append(f"{relative}: <{element_name}> must not be empty")
+
+        if "—" in path.read_text(encoding="utf-8"):
+            errors.append(f"{relative}: SVG text must not contain an em dash")
+
+
 def main() -> int:
     errors: list[str] = []
     check_brand(errors)
@@ -212,6 +258,7 @@ def main() -> int:
     check_json(errors)
     check_prax_docs(errors)
     check_svg(errors)
+    check_glossary_svg_accessibility(errors)
 
     if errors:
         print("Site validation failed:", file=sys.stderr)
@@ -220,8 +267,8 @@ def main() -> int:
         return 1
 
     print(
-        "Site validation passed: lowercase brand, local links, anchors, JSON, SVG, "
-        "and Prax docs."
+        "Site validation passed: lowercase brand, local links, anchors, JSON, SVG "
+        "accessibility, and Prax docs."
     )
     return 0
 

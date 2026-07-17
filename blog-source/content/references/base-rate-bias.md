@@ -8,7 +8,7 @@ aliases:
   - /references/base-rate-biased/
 ---
 
-**Base-rate bias** is our operational name for a probe token looking strong in a readout even when the experimental condition did little or nothing distinctive. The strength may come from the model's ordinary next-token preferences, the output vocabulary geometry, or the search statistic—not from the construct being tested.
+**Base-rate bias** is our operational name for a probe token looking strong in a readout even when the experimental condition did little or nothing distinctive. The strength may come from the model's ordinary next-token preferences, the output vocabulary geometry, or the search statistic, not from the construct being tested.
 
 It is a diagnosis from **controls**, not a permanent property of a word. A token can be high-prior in one prompt position and informative in another.
 

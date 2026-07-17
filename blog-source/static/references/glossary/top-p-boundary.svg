@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="440" viewBox="0 0 760 440" role="img" aria-labelledby="topPTitle topPDesc">
+  <title id="topPTitle">Top-p keeps the boundary-crossing token</title>
+  <desc id="topPDesc">Four token cards are sorted from most to least likely. A cumulative-mass track shows A and B below the threshold, C crossing the threshold and staying, and the patterned tail D being removed.</desc>
+  <defs>
+    <pattern id="topPTailPattern" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="8" height="8" fill="#EDE8E1"/>
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#7F786D" stroke-width="2"/>
+    </pattern>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:15px;font-weight:700}
+      .h{font-size:13px;font-weight:700}
+      .s{font-size:12px}
+      .m{font-size:11px;fill:#5A544C}
+      .panel{fill:#FBF9F6;stroke:#D9D0C4;stroke-width:1.2}
+      .kept{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+      .boundary{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.6}
+      .tail{fill:url(#topPTailPattern);stroke:#7F786D;stroke-width:1.5}
+      .dash{stroke:#A89B8C;stroke-width:1.5;stroke-dasharray:5 4}
+    </style>
+  </defs>
+
+  <rect width="760" height="440" fill="#F7F4F0"/>
+  <text x="24" y="28" class="t title">Top-p keeps the boundary-crossing token</text>
+  <text x="24" y="48" class="t m">Conceptual sequence; widths do not encode probabilities.</text>
+
+  <rect x="24" y="66" width="712" height="96" rx="10" class="panel"/>
+  <text x="40" y="88" class="t h">1. Sort tokens from most to least likely</text>
+  <text x="496" y="88" class="t m">probability decreases from A to D</text>
+
+  <rect x="40" y="104" width="154" height="42" rx="8" class="kept"/>
+  <text x="52" y="122" class="t h">A</text>
+  <text x="76" y="122" class="t s">highest-ranked</text>
+  <text x="52" y="139" class="t m">kept prefix</text>
+
+  <rect x="208" y="104" width="154" height="42" rx="8" class="kept"/>
+  <text x="220" y="122" class="t h">B</text>
+  <text x="244" y="122" class="t s">next-ranked</text>
+  <text x="220" y="139" class="t m">kept prefix</text>
+
+  <rect x="376" y="104" width="154" height="42" rx="8" class="boundary"/>
+  <text x="388" y="122" class="t h">C</text>
+  <text x="412" y="122" class="t s">boundary token</text>
+  <text x="388" y="139" class="t m">included</text>
+
+  <rect x="544" y="104" width="154" height="42" rx="8" class="tail"/>
+  <text x="556" y="122" class="t h">D</text>
+  <text x="580" y="122" class="t s">tail token</text>
+  <text x="556" y="139" class="t m">removed</text>
+
+  <rect x="24" y="176" width="712" height="108" rx="10" class="panel"/>
+  <text x="40" y="199" class="t h">2. Accumulate mass until the threshold is reached</text>
+  <text x="40" y="216" class="t m">Conceptual cumulative-mass track, not to scale</text>
+
+  <rect x="40" y="228" width="280" height="36" rx="7" class="kept"/>
+  <text x="180" y="251" text-anchor="middle" class="t s">A + B: below threshold</text>
+
+  <rect x="320" y="228" width="230" height="36" class="boundary"/>
+  <text x="435" y="244" text-anchor="middle" class="t s">C crosses threshold</text>
+  <text x="435" y="258" text-anchor="middle" class="t m">and stays</text>
+  <line x1="508" y1="220" x2="508" y2="270" class="dash"/>
+  <text x="508" y="279" text-anchor="middle" class="t m">threshold reached while adding C</text>
+
+  <rect x="550" y="228" width="168" height="36" rx="7" class="tail"/>
+  <text x="634" y="244" text-anchor="middle" class="t s">D: removed tail</text>
+  <text x="634" y="258" text-anchor="middle" class="t m">not needed to reach threshold</text>
+
+  <rect x="24" y="298" width="712" height="70" rx="10" class="panel"/>
+  <text x="40" y="320" class="t h">3. Keep the smallest prefix, then renormalize it</text>
+  <rect x="40" y="332" width="500" height="24" rx="7" class="kept"/>
+  <text x="290" y="349" text-anchor="middle" class="t s">kept nucleus: A, B, C</text>
+  <rect x="556" y="332" width="162" height="24" rx="7" class="tail"/>
+  <text x="637" y="349" text-anchor="middle" class="t s">D: zeroed</text>
+
+  <rect x="24" y="384" width="712" height="40" rx="10" class="kept"/>
+  <text x="380" y="409" text-anchor="middle" class="t s">The token that first takes cumulative mass to the threshold or beyond remains in the nucleus.</text>
+</svg>

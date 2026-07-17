@@ -135,6 +135,14 @@ U_\ell = H_\ell + \operatorname{Attention}_\ell(N(H_\ell)),
 \qquad
 H_{\ell+1} = U_\ell + \operatorname{MLP}_\ell(N(U_\ell)).
 \]<p>Attention means the update at one position can depend on other permitted positions in the sequence. The residual stream is therefore better pictured as a sequence of evolving row vectors than as a single global scratchpad.</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram" tabindex="0">
+        <img src="/blog/references/glossary/residual-stream.svg" alt="Four token positions each retain their own residual vector across a transformer block; attention can mix permitted positions, the MLP updates each position, and a readout selects one layer-position vector." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>Figure structure: the toy tokens <code>The</code>, <code>capital</code>, <code>is</code>, and <code>Paris</code> each have a separate vector before the block. Attention can use permitted earlier or current positions to update a token, and the MLP then updates each position. Four separate vectors continue after the block; the highlighted last-position vector is one selected state, not a summary of the full prompt. This is a schematic common pre-normalization block, not a universal architecture or tokenizer specification.</figcaption>
+</figure>
+
 <h2 id="worked-example">Worked example</h2>
 <p>Suppose a tokenizer turns “The capital is Paris” into four tokens. A saved activation tensor might have shape <code>(layers, 4, d_model)</code>. Reading the state after layer 20 at the last token means selecting one vector:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">layer</span> <span class="o">=</span> <span class="mi">20</span>

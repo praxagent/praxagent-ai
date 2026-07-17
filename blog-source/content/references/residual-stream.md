@@ -27,6 +27,8 @@ H_{\ell+1} = U_\ell + \operatorname{MLP}_\ell(N(U_\ell)).
 
 Attention means the update at one position can depend on other permitted positions in the sequence. The residual stream is therefore better pictured as a sequence of evolving row vectors than as a single global scratchpad.
 
+{{< reference-figure src="references/glossary/residual-stream.svg" alt="Four token positions each retain their own residual vector across a transformer block; attention can mix permitted positions, the MLP updates each position, and a readout selects one layer-position vector." caption="Figure structure: the toy tokens `The`, `capital`, `is`, and `Paris` each have a separate vector before the block. Attention can use permitted earlier or current positions to update a token, and the MLP then updates each position. Four separate vectors continue after the block; the highlighted last-position vector is one selected state, not a summary of the full prompt. This is a schematic common pre-normalization block, not a universal architecture or tokenizer specification." >}}
+
 ## Worked example
 
 Suppose a tokenizer turns “The capital is Paris” into four tokens. A saved activation tensor might have shape `(layers, 4, d_model)`. Reading the state after layer 20 at the last token means selecting one vector:

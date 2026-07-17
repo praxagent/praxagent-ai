@@ -23,8 +23,6 @@ flowchart LR
 
 This is a common conceptual order; inference libraries may expose additional penalties and filters, so a reproducible protocol should record their order and values.
 
-{{< reference-figure src="references/glossary/decoding-controls.svg" alt="A next-token distribution shown before and after temperature scaling and top-p truncation, contrasted with greedy argmax selection" caption="Greedy decoding follows the highest logit. Sampling reshapes and optionally truncates the distribution before drawing a token." >}}
-
 ## Worked example
 
 Suppose the next-token distribution is:

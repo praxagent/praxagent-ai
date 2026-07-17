@@ -129,6 +129,14 @@ z_{\ell,t} = W_U\,N_f(h_{\ell,t}) + b_U,
 </span></span><span class="line"><span class="cl"><span class="n">scores</span> <span class="o">=</span> <span class="n">output_head</span><span class="p">(</span><span class="n">final_norm</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="n">ranking</span> <span class="o">=</span> <span class="n">scores</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span></span></code></pre></div><p>The softmax of <code>scores</code> is a convenient display distribution, but at an intermediate layer it is not necessarily calibrated as that layer&rsquo;s true next-token probability distribution. The rest of the network has not run yet.</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram" tabindex="0">
+        <img src="/blog/references/glossary/lens-transports.svg" alt="The logit lens sends the same selected middle-layer state directly through the final normalization and output head, while Jacobian and Random-J lanes change only the transport for a matched comparison." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>Figure structure: one selected residual state branches into three transports. The logit lens uses identity, the Jacobian lens uses a corpus-derived map, and Random-J uses a named randomized map with stated preserved properties. Each lane then uses the same final normalization, output head, probe tokens, search rule, and summary statistic. This makes the logit lens the no-fitted-transport baseline; a difference between lanes is not by itself a causal result.</figcaption>
+</figure>
+
 <h2 id="how-to-read-the-result">How to read the result</h2>
 <p>If <em>Paris</em> ranks first at a middle layer, the careful claim is: “under the model&rsquo;s final vocabulary readout, this selected normalized state gives <em>Paris</em> a very high score.” It is not yet a claim that the model will emit <em>Paris</em>, that a dedicated “Paris feature” exists, or that this score causally drives the answer. Later blocks can strengthen, erase, or redirect it.</p>
 <p>It is the mandatory control. If the logit lens already surfaces your probe words, the fitted Jacobian file was not doing the distinctive work on that task.</p>

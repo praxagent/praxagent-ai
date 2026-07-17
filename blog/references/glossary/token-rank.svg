@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="410"
+     viewBox="0 0 760 410" role="img"
+     aria-labelledby="tokenRankTitle tokenRankDesc">
+  <title id="tokenRankTitle">Token scores become vocabulary ranks</title>
+  <desc id="tokenRankDesc">Illustrative token IDs with qualitative scores are sorted from highest to lowest. The target Paris token becomes rank 3, while a leading-space Paris variant is a separate token ID at rank 2.</desc>
+  <defs>
+    <marker id="tokenRankArrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10Z" fill="#A67C52"/>
+    </marker>
+  </defs>
+  <rect width="760" height="410" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:15px;font-weight:700}
+    .h{font-size:13px;font-weight:700}
+    .s{font-size:12px}
+    .m{font-size:11px;fill:#5A544C}
+    .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+    .row{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.2}
+    .target{fill:#F3E8E0;stroke:#A67C52;stroke-width:2.4}
+    .bar{fill:#4B6787}
+    .barTarget{fill:#A67C52}
+    .arrow{fill:none;stroke:#A67C52;stroke-width:2.2;marker-end:url(#tokenRankArrow)}
+  </style>
+
+  <text x="24" y="28" class="t title">Rank is the position after sorting token scores</text>
+  <text x="24" y="48" class="t m">Illustrative qualitative scores only. Longer bars mean higher scores; no measured values are implied.</text>
+
+  <rect x="24" y="72" width="268" height="256" rx="12" class="card"/>
+  <text x="42" y="98" class="t h">Scored token IDs</text>
+  <text x="42" y="117" class="t m">Input order does not determine rank</text>
+
+  <rect x="42" y="132" width="232" height="38" rx="8" class="row"/>
+  <text x="54" y="148" class="t s">ID gamma: Paris</text>
+  <rect x="54" y="154" width="74" height="8" rx="4" class="barTarget"/>
+
+  <rect x="42" y="178" width="232" height="38" rx="8" class="row"/>
+  <text x="54" y="194" class="t s">ID alpha: river</text>
+  <rect x="54" y="200" width="126" height="8" rx="4" class="bar"/>
+
+  <rect x="42" y="224" width="232" height="38" rx="8" class="row"/>
+  <text x="54" y="240" class="t s">ID delta: city</text>
+  <rect x="54" y="246" width="46" height="8" rx="4" class="bar"/>
+
+  <rect x="42" y="270" width="232" height="38" rx="8" class="row"/>
+  <text x="54" y="286" class="t s">ID beta: [space]Paris</text>
+  <rect x="54" y="292" width="99" height="8" rx="4" class="bar"/>
+
+  <path d="M310 195H354" class="arrow"/>
+  <text x="332" y="181" text-anchor="middle" class="t m">sort high</text>
+  <text x="332" y="216" text-anchor="middle" class="t m">to low</text>
+
+  <rect x="372" y="72" width="364" height="256" rx="12" class="card"/>
+  <text x="390" y="98" class="t h">Descending score order</text>
+  <text x="390" y="117" class="t m">Rank 1 is strongest</text>
+
+  <rect x="390" y="132" width="328" height="38" rx="8" class="row"/>
+  <text x="402" y="155" class="t h">1</text>
+  <text x="430" y="155" class="t s">ID alpha: river</text>
+  <rect x="572" y="146" width="126" height="8" rx="4" class="bar"/>
+
+  <rect x="390" y="178" width="328" height="38" rx="8" class="row"/>
+  <text x="402" y="201" class="t h">2</text>
+  <text x="430" y="201" class="t s">ID beta: [space]Paris</text>
+  <rect x="572" y="192" width="99" height="8" rx="4" class="bar"/>
+
+  <rect x="390" y="224" width="328" height="38" rx="8" class="target"/>
+  <text x="402" y="247" class="t h">3</text>
+  <text x="430" y="247" class="t s">ID gamma: Paris</text>
+  <rect x="572" y="238" width="74" height="8" rx="4" class="barTarget"/>
+  <text x="698" y="247" text-anchor="end" class="t h">TARGET</text>
+
+  <rect x="390" y="270" width="328" height="38" rx="8" class="row"/>
+  <text x="402" y="293" class="t h">4</text>
+  <text x="430" y="293" class="t s">ID delta: city</text>
+  <rect x="572" y="284" width="46" height="8" rx="4" class="bar"/>
+
+  <rect x="24" y="350" width="712" height="42" rx="10" fill="#EAF1E5" stroke="#6F8D5E" stroke-width="1.4"/>
+  <text x="380" y="375" text-anchor="middle" class="t s">Paris and [space]Paris can be separate token IDs, so fix allowed variants in every arm.</text>
+</svg>

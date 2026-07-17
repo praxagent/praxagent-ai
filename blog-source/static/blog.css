@@ -1269,9 +1269,32 @@ main,
     margin: 2rem auto 2.25rem;
 }
 
-.reference-figure img {
+.reference-figure__viewport {
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    contain: inline-size;
+    touch-action: pan-x pan-y pinch-zoom;
+    overscroll-behavior-inline: contain;
+    scrollbar-gutter: stable;
+    -webkit-overflow-scrolling: touch;
+}
+
+.reference-figure__viewport:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 0.25rem;
+}
+
+.reference-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
     margin: 0;
+}
+
+.reference-figure__scroll-hint {
+    display: none;
 }
 
 .reference-figure figcaption {
@@ -1281,6 +1304,22 @@ main,
     font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
     font-size: 0.82rem;
     line-height: 1.55;
+}
+
+@media (max-width: 52rem) {
+    .reference-figure img {
+        width: 52rem;
+        max-width: none;
+    }
+
+    .reference-figure__scroll-hint {
+        display: block;
+        margin: 0.55rem 0 0;
+        color: var(--text-tertiary);
+        font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
+        font-size: 0.76rem;
+        line-height: 1.45;
+    }
 }
 
 .figure-note {

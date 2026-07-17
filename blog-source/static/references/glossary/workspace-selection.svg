@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="450" viewBox="0 0 760 450" role="img" aria-labelledby="workspaceSelectionTitle workspaceSelectionDesc">
+  <title id="workspaceSelectionTitle">Workspace measurements select a sparse subset of a middle-layer band</title>
+  <desc id="workspaceSelectionDesc">A coarse early-middle-late layer framing expands the middle band into many candidate states. Only hatched cells selected by frozen positions and probes pass through a Jacobian readout to vocabulary scores and ranks.</desc>
+  <defs>
+    <marker id="workspaceSelectionArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#A67C52"/>
+    </marker>
+    <pattern id="workspaceSelectionHatch" width="7" height="7" patternUnits="userSpaceOnUse">
+      <rect width="7" height="7" fill="#EAF1E5"/>
+      <path d="M-2 2 L2 -2 M0 7 L7 0 M5 9 L9 5" stroke="#6F8D5E" stroke-width="1"/>
+    </pattern>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:15px;font-weight:700}
+      .h{font-size:13px;font-weight:700}
+      .s{font-size:12px}
+      .m{font-size:11px;fill:#5A544C}
+      .neutral{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.5}
+      .middle{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.7}
+      .candidate{fill:#EDE8E1;stroke:#7F786D;stroke-width:1.1}
+      .selected{fill:url(#workspaceSelectionHatch);stroke:#4B6787;stroke-width:2}
+      .selection{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.6}
+      .readout{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.6}
+      .flow{fill:none;stroke:#A67C52;stroke-width:1.8;marker-end:url(#workspaceSelectionArrow)}
+      .expand{fill:none;stroke:#A89B8C;stroke-width:1.5;stroke-dasharray:5 4}
+      .footer{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+    </style>
+  </defs>
+
+  <rect width="760" height="450" fill="#F7F4F0"/>
+  <text x="24" y="28" class="t title">A workspace measurement samples selected states, not the whole middle</text>
+  <text x="24" y="48" class="t m">Coarse framing for the systems studied, not universal layer boundaries.</text>
+
+  <rect x="24" y="76" width="170" height="72" rx="10" class="neutral"/>
+  <text x="109" y="105" text-anchor="middle" class="t h">EARLY REGION</text>
+  <text x="109" y="127" text-anchor="middle" class="t m">candidate processing</text>
+  <rect x="206" y="76" width="340" height="72" rx="10" class="middle"/>
+  <text x="376" y="105" text-anchor="middle" class="t h">PRESPECIFIED MIDDLE BAND</text>
+  <text x="376" y="127" text-anchor="middle" class="t m">many layers, positions, and directions</text>
+  <rect x="558" y="76" width="178" height="72" rx="10" class="neutral"/>
+  <text x="647" y="105" text-anchor="middle" class="t h">LATE REGION</text>
+  <text x="647" y="127" text-anchor="middle" class="t m">nearer model output</text>
+
+  <path class="expand" d="M230 148 L24 180"/>
+  <path class="expand" d="M522 148 L364 180"/>
+  <rect x="24" y="180" width="340" height="166" rx="12" class="middle"/>
+  <text x="44" y="204" class="t h">MIDDLE BAND, EXPANDED</text>
+  <text x="44" y="220" class="t m">Illustrative candidate states, not to scale</text>
+
+  <rect x="44" y="233" width="42" height="22" rx="5" class="candidate"/>
+  <rect x="100" y="233" width="42" height="22" rx="5" class="candidate"/>
+  <rect x="156" y="233" width="42" height="22" rx="5" class="selected"/>
+  <text x="177" y="249" text-anchor="middle" class="t m">S</text>
+  <rect x="212" y="233" width="42" height="22" rx="5" class="candidate"/>
+  <rect x="268" y="233" width="42" height="22" rx="5" class="candidate"/>
+
+  <rect x="44" y="265" width="42" height="22" rx="5" class="candidate"/>
+  <rect x="100" y="265" width="42" height="22" rx="5" class="selected"/>
+  <text x="121" y="281" text-anchor="middle" class="t m">S</text>
+  <rect x="156" y="265" width="42" height="22" rx="5" class="candidate"/>
+  <rect x="212" y="265" width="42" height="22" rx="5" class="candidate"/>
+  <rect x="268" y="265" width="42" height="22" rx="5" class="selected"/>
+  <text x="289" y="281" text-anchor="middle" class="t m">S</text>
+
+  <rect x="44" y="297" width="42" height="22" rx="5" class="candidate"/>
+  <rect x="100" y="297" width="42" height="22" rx="5" class="candidate"/>
+  <rect x="156" y="297" width="42" height="22" rx="5" class="candidate"/>
+  <rect x="212" y="297" width="42" height="22" rx="5" class="selected"/>
+  <text x="233" y="313" text-anchor="middle" class="t m">S</text>
+  <rect x="268" y="297" width="42" height="22" rx="5" class="candidate"/>
+  <text x="44" y="337" class="t m">S plus hatching marks a selected state</text>
+
+  <path class="flow" d="M364 263 H390"/>
+  <rect x="390" y="195" width="150" height="136" rx="12" class="selection"/>
+  <text x="465" y="220" text-anchor="middle" class="t h">FROZEN SELECTION</text>
+  <text x="465" y="247" text-anchor="middle" class="t s">layer range</text>
+  <text x="465" y="271" text-anchor="middle" class="t s">token position</text>
+  <text x="465" y="295" text-anchor="middle" class="t s">probe direction</text>
+  <text x="465" y="317" text-anchor="middle" class="t m">chosen before comparison</text>
+
+  <path class="flow" d="M540 263 H570"/>
+  <rect x="570" y="195" width="166" height="136" rx="12" class="readout"/>
+  <text x="653" y="220" text-anchor="middle" class="t h">JACOBIAN READOUT</text>
+  <text x="653" y="250" text-anchor="middle" class="t s">selected state</text>
+  <text x="653" y="274" text-anchor="middle" class="t s">vocabulary scores</text>
+  <text x="653" y="298" text-anchor="middle" class="t s">probe rank</text>
+  <text x="653" y="317" text-anchor="middle" class="t m">an analyst's measurement</text>
+
+  <rect x="24" y="374" width="712" height="52" rx="10" class="footer"/>
+  <text x="380" y="405" text-anchor="middle" class="t s">Only selected states are measured; the whole middle band is not thereby a workspace.</text>
+</svg>

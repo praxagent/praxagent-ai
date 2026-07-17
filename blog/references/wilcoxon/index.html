@@ -126,7 +126,10 @@
 D_i = \text{control rank}_i - \text{treatment rank}_i,
 \]<p>so a positive value means the treatment achieved the better, lower vocabulary rank. Remove or otherwise handle zeros, rank the values \(\lvert D_i\rvert\) from smallest to largest, then restore each sign and add the positive and negative ranks.</p>
 <figure class="reference-figure">
-    <img src="/blog/references/glossary/paired-tests.svg" alt="Six paired rank gaps, five positive and one negative, feeding a sign test that counts directions and a Wilcoxon test that ranks absolute gaps" loading="lazy" decoding="async">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram" tabindex="0">
+        <img src="/blog/references/glossary/paired-tests.svg" alt="Six paired rank gaps, five positive and one negative, feeding a sign test that counts directions and a Wilcoxon test that ranks absolute gaps" loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
     <figcaption>The sign test keeps only direction. Wilcoxon first ranks the absolute gaps, then restores their signs; neither test supplies an effect size or population claim by itself.</figcaption>
 </figure>
 

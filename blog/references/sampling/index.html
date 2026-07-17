@@ -131,11 +131,6 @@
     G --> H[Optional top-p truncation]
     H --> I[Categorical draw]</pre>
 <p>This is a common conceptual order; inference libraries may expose additional penalties and filters, so a reproducible protocol should record their order and values.</p>
-<figure class="reference-figure">
-    <img src="/blog/references/glossary/decoding-controls.svg" alt="A next-token distribution shown before and after temperature scaling and top-p truncation, contrasted with greedy argmax selection" loading="lazy" decoding="async">
-    <figcaption>Greedy decoding follows the highest logit. Sampling reshapes and optionally truncates the distribution before drawing a token.</figcaption>
-</figure>
-
 <h2 id="worked-example">Worked example</h2>
 <p>Suppose the next-token distribution is:</p>
 <table>

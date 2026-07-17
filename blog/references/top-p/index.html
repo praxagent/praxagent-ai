@@ -122,6 +122,14 @@
             <div class="post-body">
                 <p><strong>Top-p</strong> (also <em>nucleus sampling</em>) truncates the next-token distribution before <a href="/blog/references/sampling/">sampling</a>. Tokens are ordered by probability; you keep the smallest prefix whose cumulative mass is at least \(p\) (for example 0.9), zero out the rest, renormalize, and sample from what remains.</p>
 <p>The token that <strong>crosses the boundary is included</strong>. For probabilities \([0.55, 0.25, 0.12, 0.08]\) and \(p=0.90\), the first two tokens total only 0.80, so the third is also retained: the nucleus has mass 0.92. After renormalization its probabilities are approximately \([0.598, 0.272, 0.130]\). Top-p does not mean “keep every token whose individual probability is at least \(p\),” and it does not discard the token that takes the cumulative sum past \(p\).</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram" tabindex="0">
+        <img src="/blog/references/glossary/top-p-boundary.svg" alt="Four tokens sorted by probability: A and B remain below the cumulative threshold, C crosses the threshold and stays, and the lower-probability tail D is removed." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>In the worked example, A, B, C, and D have probabilities 0.55, 0.25, 0.12, and 0.08. Their cumulative masses are 0.55, 0.80, 0.92, and 1.00. At \(p=0.90\), A through C are the smallest prefix that reaches the threshold, so boundary token C stays and D is removed. Renormalizing the retained mass gives approximately 0.598, 0.272, and 0.130. This illustrates the boundary rule, not a recommended setting; exact ties, floating-point rounding, and minimum-token options can affect an implementation&rsquo;s boundary.</figcaption>
+</figure>
+
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">nucleus</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;top-p must be in (0, 1]&#34;</span><span class="p">)</span>

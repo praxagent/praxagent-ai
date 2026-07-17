@@ -5,6 +5,9 @@
 {{- if not $alt }}{{ errorf "reference-figure shortcode requires alt: %s" .Position }}{{ end -}}
 {{- if not $caption }}{{ errorf "reference-figure shortcode requires caption: %s" .Position }}{{ end -}}
 <figure class="reference-figure">
-    <img src="{{ $src | relURL }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram" tabindex="0">
+        <img src="{{ $src | relURL }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
     <figcaption>{{ $caption | markdownify }}</figcaption>
 </figure>

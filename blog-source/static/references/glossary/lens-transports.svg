@@ -1,23 +1,73 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 410" role="img" aria-labelledby="title desc">
-  <title id="title">Comparison of logit lens, Jacobian lens, and random-J</title>
-  <desc id="desc">A mid-layer residual vector branches through identity, corpus-derived Jacobian, or random matched-scale transports before shared final normalization and unembedding produce vocabulary scores.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="440" viewBox="0 0 760 440" role="img" aria-labelledby="lensTransportsTitle lensTransportsDesc">
+  <title id="lensTransportsTitle">Three transports with one shared vocabulary readout</title>
+  <desc id="lensTransportsDesc">The same selected middle-layer state branches through identity, a corpus-derived Jacobian, or a named Random-J. All lanes then share final normalization, the output head, the probe, the search rule, and the rank statistic.</desc>
   <defs>
+    <marker id="lensTransportsArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#A67C52"/>
+    </marker>
     <style>
-      .bg{fill:#f8fafc}.box{fill:#fff;stroke:#94a3b8;stroke-width:1.5}.fit{fill:#d6e8f5;stroke:#4b6787;stroke-width:2}.null{fill:#fff7ed;stroke:#d97706;stroke-width:2}.title{font:600 25px 'IBM Plex Sans',system-ui,sans-serif;fill:#17283a}.label{font:600 16px 'IBM Plex Sans',system-ui,sans-serif;fill:#24384d}.small{font:13px 'IBM Plex Sans',system-ui,sans-serif;fill:#526273}.math{font:600 18px 'JetBrains Mono',ui-monospace,monospace;fill:#24384d}.line{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#head)}
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:15px;font-weight:700}
+      .h{font-size:13px;font-weight:700}
+      .s{font-size:12px}
+      .m{font-size:11px;fill:#5A544C}
+      .source{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.7}
+      .identity{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.5}
+      .fitted{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.7}
+      .random{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.7;stroke-dasharray:5 4}
+      .shared{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.6}
+      .test{fill:#EDE8E1;stroke:#7F786D;stroke-width:1.6}
+      .flow{fill:none;stroke:#A67C52;stroke-width:1.8;marker-end:url(#lensTransportsArrow)}
+      .footer{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
     </style>
-    <marker id="head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
   </defs>
-  <rect class="bg" width="980" height="410" rx="18"/>
-  <text class="title" x="48" y="48">Three transports, one shared vocabulary readout</text>
-  <g transform="translate(42 162)"><rect class="box" width="170" height="82" rx="12"/><text class="label" x="85" y="31" text-anchor="middle">mid-layer residual</text><text class="math" x="85" y="59" text-anchor="middle">xℓ</text></g>
-  <path class="line" d="M212 203 C270 203 270 102 326 102"/><path class="line" d="M212 203 L326 203"/><path class="line" d="M212 203 C270 203 270 304 326 304"/>
-  <g transform="translate(326 64)"><rect class="box" width="220" height="76" rx="12"/><text class="label" x="110" y="29" text-anchor="middle">Logit lens</text><text class="small" x="110" y="53" text-anchor="middle">identity: I · xℓ</text></g>
-  <g transform="translate(326 165)"><rect class="fit" width="220" height="76" rx="12"/><text class="label" x="110" y="29" text-anchor="middle">Jacobian lens</text><text class="small" x="110" y="53" text-anchor="middle">corpus-derived: Jℓ · xℓ</text></g>
-  <g transform="translate(326 266)"><rect class="null" width="220" height="76" rx="12"/><text class="label" x="110" y="29" text-anchor="middle">Random-J control</text><text class="small" x="110" y="53" text-anchor="middle">scrambled, scale-matched J̃ℓ · xℓ</text></g>
-  <path class="line" d="M546 102 C610 102 610 203 656 203"/><path class="line" d="M546 203 L656 203"/><path class="line" d="M546 304 C610 304 610 203 656 203"/>
-  <g transform="translate(656 162)"><rect class="box" width="130" height="82" rx="12"/><text class="small" x="65" y="22" text-anchor="middle">final norm +</text><text class="label" x="65" y="44" text-anchor="middle">unembedding</text><text class="math" x="65" y="69" text-anchor="middle">Wᵁ</text></g>
-  <path class="line" d="M786 203 L840 203"/>
-  <g transform="translate(840 162)"><rect class="box" width="105" height="82" rx="12"/><text class="label" x="52" y="31" text-anchor="middle">scores</text><text class="small" x="52" y="56" text-anchor="middle">one / token</text></g>
-  <text class="small" x="48" y="374">Beating identity and a matched-scale random-J supports a corpus-derived transport advantage.</text>
-  <text class="small" x="48" y="394">Stronger attribution requires controls that preserve the relevant geometry.</text>
+
+  <rect width="760" height="440" fill="#F7F4F0"/>
+  <text x="24" y="28" class="t title">Three transports, one shared vocabulary readout</text>
+  <text x="24" y="48" class="t m">Hold the state and evaluation fixed so the comparison changes only the transport.</text>
+
+  <rect x="24" y="152" width="132" height="104" rx="12" class="source"/>
+  <text x="90" y="181" text-anchor="middle" class="t h">SELECTED STATE</text>
+  <text x="90" y="207" text-anchor="middle" class="t s">same layer</text>
+  <text x="90" y="228" text-anchor="middle" class="t s">same position</text>
+  <text x="90" y="246" text-anchor="middle" class="t m">same input to each lane</text>
+
+  <path class="flow" d="M156 204 C176 204 174 111 196 111"/>
+  <path class="flow" d="M156 204 H196"/>
+  <path class="flow" d="M156 204 C176 204 174 297 196 297"/>
+
+  <rect x="196" y="76" width="218" height="70" rx="11" class="identity"/>
+  <text x="305" y="102" text-anchor="middle" class="t h">LOGIT LENS</text>
+  <text x="305" y="124" text-anchor="middle" class="t s">identity transport</text>
+  <text x="305" y="140" text-anchor="middle" class="t m">no fitted map</text>
+
+  <rect x="196" y="169" width="218" height="70" rx="11" class="fitted"/>
+  <text x="305" y="195" text-anchor="middle" class="t h">JACOBIAN LENS</text>
+  <text x="305" y="217" text-anchor="middle" class="t s">corpus-derived transport</text>
+  <text x="305" y="233" text-anchor="middle" class="t m">averaged downstream derivatives</text>
+
+  <rect x="196" y="262" width="218" height="70" rx="11" class="random"/>
+  <text x="305" y="288" text-anchor="middle" class="t h">RANDOM-J CONTROL</text>
+  <text x="305" y="310" text-anchor="middle" class="t s">named random transport</text>
+  <text x="305" y="326" text-anchor="middle" class="t m">preserved properties stated</text>
+
+  <path class="flow" d="M414 111 C437 111 435 204 458 204"/>
+  <path class="flow" d="M414 204 H458"/>
+  <path class="flow" d="M414 297 C437 297 435 204 458 204"/>
+
+  <rect x="458" y="145" width="132" height="118" rx="12" class="shared"/>
+  <text x="524" y="172" text-anchor="middle" class="t h">HELD FIXED</text>
+  <text x="524" y="199" text-anchor="middle" class="t s">final normalization</text>
+  <text x="524" y="222" text-anchor="middle" class="t s">output head</text>
+  <text x="524" y="246" text-anchor="middle" class="t m">vocabulary scores</text>
+
+  <path class="flow" d="M590 204 H616"/>
+  <rect x="616" y="145" width="120" height="118" rx="12" class="test"/>
+  <text x="676" y="172" text-anchor="middle" class="t h">SAME TEST</text>
+  <text x="676" y="198" text-anchor="middle" class="t s">probe tokens</text>
+  <text x="676" y="220" text-anchor="middle" class="t s">search rule</text>
+  <text x="676" y="242" text-anchor="middle" class="t s">rank statistic</text>
+
+  <rect x="24" y="365" width="712" height="50" rx="10" class="footer"/>
+  <text x="380" y="395" text-anchor="middle" class="t s">Only the transport changes; any advantage is relative to the named identity and Random-J controls.</text>
 </svg>

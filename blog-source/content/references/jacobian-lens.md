@@ -44,7 +44,7 @@ probe_rank = rank_of(scores, probe_token_id)
 
 This is best read as a **verbalizability or vocabulary-alignment readout** under the corpus-derived transport. It is not simply “what the model is about to say.” A highly ranked token can be absent from the eventual continuation, and an important internal computation need not align cleanly with any single token.
 
-{{< reference-figure src="references/glossary/lens-transports.svg" alt="Comparison of identity, Jacobian, and randomized transports from a middle-layer residual vector to vocabulary scores." caption="The output head is held fixed while the transport changes. Comparing identity, corpus-derived Jacobian, and randomized transports tests whether the derived transport contributes beyond the stated baselines; what the comparison isolates depends on which scale or geometry the random-J construction preserves." >}}
+{{< reference-figure src="references/glossary/lens-transports.svg" alt="The same selected middle-layer state passes through identity, a corpus-derived Jacobian, or a specified Random-J before a shared output head and matched ranking test; only the transport differs." caption="Figure structure: one selected residual state branches into three transports. The logit lens uses identity, the Jacobian lens uses an averaged downstream-derivative map, and Random-J uses a named randomized map with stated preserved properties. Every lane then uses the same final normalization, output head, probe tokens, search rule, and summary statistic. A Jacobian-lens advantage is transport-specific only relative to those matched baselines; it is not by itself a causal claim." >}}
 
 ## Not the tuned lens
 

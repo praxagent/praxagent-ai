@@ -120,14 +120,17 @@
             </header>
 
             <div class="post-body">
-                <p><strong>Best-rank</strong> is the smallest numerical vocabulary <a href="/blog/references/rank/">rank</a> reached by a pre-specified probe across a search grid—typically layers × prompt positions × allowed token variants. Lower is stronger.</p>
+                <p><strong>Best-rank</strong> is the smallest numerical vocabulary <a href="/blog/references/rank/">rank</a> reached by a pre-specified probe across a search grid, typically layers × prompt positions × allowed token variants. Lower is stronger.</p>
 <p>If \(r_{\ell,p,t}\) is the rank at layer \(\ell\), position \(p\), and token variant \(t\), then</p>
 \[
 r_{\text{best}} = \min_{\ell,p,t} r_{\ell,p,t}.
 \]<p>Although the operation is a minimum, it selects the <strong>maximum-looking evidence</strong>. That is why we call it a max-statistic in prose.</p>
 <figure class="reference-figure">
-    <img src="/blog/references/glossary/rank-best-rank.svg" alt="A grid of token ranks across three layers and positions, with rank 12 highlighted as the minimum" loading="lazy" decoding="async">
-    <figcaption>Best-rank keeps one extreme cell and discards where the probe was weak. Controls must use the same pre-specified layers, positions, variants, and search rule.</figcaption>
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram" tabindex="0">
+        <img src="/blog/references/glossary/rank-best-rank.svg" alt="Qualitative three-by-three search grid across early, middle, and late layers and positions A, B, and C. The middle-layer, position-B cell is labeled the smallest rank and selected as best-rank; all other cells leave the summary." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>Best-rank examines the full pre-specified grid. In this qualitative illustration, the early-layer cells are weaker, intermediate, and weaker; the middle-layer cells are intermediate, the smallest rank, and weaker; the late-layer cells are weaker, intermediate, and intermediate. The middle-layer, position-B cell becomes the summary. Controls must use the same layers, positions, variants, and minimum-selection rule. These labels imply no measured values.</figcaption>
 </figure>
 
 <h2 id="tiny-implementation">Tiny implementation</h2>

@@ -23,6 +23,8 @@ def token_rank(scores, token_id):
 
 This definition gives tied tokens the same rank. Implementations should state their tie convention, although exact floating-point ties are uncommon.
 
+{{< reference-figure src="references/glossary/token-rank.svg" alt="Illustrative token ranking: token IDs are sorted from highest to lowest qualitative readout score, giving the highlighted target token rank 3. Paris and its leading-space variant are separate token IDs and occupy different positions." caption="Token rank is a target ID's position after sorting scores from highest to lowest. In this illustrative order, ID alpha (`river`) is rank 1, ID beta (leading-space ` Paris`) is rank 2, target ID gamma (`Paris`) is rank 3, and ID delta (`city`) is rank 4. Bar lengths are qualitative and imply no measured values. This page uses competition rank for ties; allowed token variants must be fixed before comparing arms." >}}
+
 ## Words are not always tokens
 
 A displayed word may correspond to several possible token IDs:

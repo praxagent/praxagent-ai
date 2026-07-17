@@ -5,7 +5,7 @@ summary: "The minimum vocabulary rank a pre-specified probe token hits across la
 pro_reviewed: true
 ---
 
-**Best-rank** is the smallest numerical vocabulary [rank]({{< relref "rank.md" >}}) reached by a pre-specified probe across a search grid—typically layers × prompt positions × allowed token variants. Lower is stronger.
+**Best-rank** is the smallest numerical vocabulary [rank]({{< relref "rank.md" >}}) reached by a pre-specified probe across a search grid, typically layers × prompt positions × allowed token variants. Lower is stronger.
 
 If \(r_{\ell,p,t}\) is the rank at layer \(\ell\), position \(p\), and token variant \(t\), then
 
@@ -15,7 +15,7 @@ r_{\text{best}} = \min_{\ell,p,t} r_{\ell,p,t}.
 
 Although the operation is a minimum, it selects the **maximum-looking evidence**. That is why we call it a max-statistic in prose.
 
-{{< reference-figure src="references/glossary/rank-best-rank.svg" alt="A grid of token ranks across three layers and positions, with rank 12 highlighted as the minimum" caption="Best-rank keeps one extreme cell and discards where the probe was weak. Controls must use the same pre-specified layers, positions, variants, and search rule." >}}
+{{< reference-figure src="references/glossary/rank-best-rank.svg" alt="Qualitative three-by-three search grid across early, middle, and late layers and positions A, B, and C. The middle-layer, position-B cell is labeled the smallest rank and selected as best-rank; all other cells leave the summary." caption="Best-rank examines the full pre-specified grid. In this qualitative illustration, the early-layer cells are weaker, intermediate, and weaker; the middle-layer cells are intermediate, the smallest rank, and weaker; the late-layer cells are weaker, intermediate, and intermediate. The middle-layer, position-B cell becomes the summary. Controls must use the same layers, positions, variants, and minimum-selection rule. These labels imply no measured values." >}}
 
 ## Tiny implementation
 

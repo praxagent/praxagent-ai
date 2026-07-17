@@ -1,21 +1,13 @@
 ---
 title: "Workspace"
 slug: "workspace"
-summary: "A workspace-like mid-network regime studied through selected residual directions and positions—not the whole middle of a model."
+summary: "A workspace-like mid-network regime studied through selected residual directions and positions, not the whole middle of a model."
 pro_reviewed: true
 ---
 
-In Anthropic's global-workspace framing, **workspace** names a workspace-like regime in the middle of the network. The evidence concerns a **sparse, selected subset of directions or features** with workspace-like behavior—not every coordinate, token position, or computation in the entire mid-layer [residual stream]({{< relref "residual-stream.md" >}}).
+In Anthropic's global-workspace framing, **workspace** names a workspace-like regime in the middle of the network. The evidence concerns a **sparse, selected subset of directions or features** with workspace-like behavior, not every coordinate, token position, or computation in the entire mid-layer [residual stream]({{< relref "residual-stream.md" >}}).
 
-```mermaid
-flowchart LR
-    E["Early layers<br/>sensory-like processing"] --> B["Prespecified<br/>mid-layer band"]
-    B --> L["Late layers<br/>motor-like processing"]
-    B -.->|selected positions and probes| J["J-space readout"]
-    J --> R["Vocabulary scores<br/>and ranks"]
-```
-
-<p class="figure-note">The broad layer band supplies candidate states; the measurement reads selected positions and directions. Calling the whole band “the workspace” is convenient shorthand, not evidence that every state in it has workspace-like properties.</p>
+{{< reference-figure src="references/glossary/workspace-selection.svg" alt="Only a few selected directions and token positions inside a prespecified middle-layer band feed the Jacobian readout; the rest of the band is not measured as workspace." caption="Figure structure: early, middle, and late regions provide a coarse framing. The middle region is expanded into many candidate states; only a labeled, hatched subset is selected by frozen layer, position, and probe rules. Those selected states, not the entire middle band, are mapped through the Jacobian readout to vocabulary scores and ranks. The diagram is illustrative and does not specify universal layer boundaries, feature density, or consciousness." >}}
 
 In our notes, **workspace rank** is an operational abbreviation: apply a [Jacobian lens]({{< relref "jacobian-lens.md" >}}) to a chosen residual position across a prespecified middle-layer band, then record a probe token's vocabulary [rank]({{< relref "rank.md" >}}). Lower rank means the probe is nearer the top **under that readout**. It is not a direct neural activation measurement.
 

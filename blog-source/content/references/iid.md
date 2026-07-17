@@ -21,6 +21,8 @@ Suppose an eight-item battery is made by taking two base templates and writing f
 
 The observed count is 7/8, but the eight results may share only two major sources of wording variation. If one template happens to favor the pressure arm, all four descendants can move together. Freezing the battery before the run prevents outcome-driven rewriting; it does not turn related variants into eight independent draws from “all threats in the wild.”
 
+{{< reference-figure src="references/glossary/paraphrase-family-dependence.svg" alt="Two base templates each branch into four related paraphrases, with family outlines and connector lines showing that rows within a family share wording ancestry." caption="The example contains two base templates, each with four small variants. Every variant is an observation, but variants in the same outlined family share a source of wording variation and may move together. The diagram does not claim an effective sample size, prove a particular correlation, or establish that the two families are independent. Freezing the battery prevents outcome-driven rewriting; it does not turn related paraphrases into independent population draws." >}}
+
 ## What “exact” means here
 
 An exact calculation still has assumptions:

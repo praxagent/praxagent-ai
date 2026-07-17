@@ -12,6 +12,8 @@ aliases:
 
 The token that **crosses the boundary is included**. For probabilities \([0.55, 0.25, 0.12, 0.08]\) and \(p=0.90\), the first two tokens total only 0.80, so the third is also retained: the nucleus has mass 0.92. After renormalization its probabilities are approximately \([0.598, 0.272, 0.130]\). Top-p does not mean “keep every token whose individual probability is at least \(p\),” and it does not discard the token that takes the cumulative sum past \(p\).
 
+{{< reference-figure src="references/glossary/top-p-boundary.svg" alt="Four tokens sorted by probability: A and B remain below the cumulative threshold, C crosses the threshold and stays, and the lower-probability tail D is removed." caption="In the worked example, A, B, C, and D have probabilities 0.55, 0.25, 0.12, and 0.08. Their cumulative masses are 0.55, 0.80, 0.92, and 1.00. At \(p=0.90\), A through C are the smallest prefix that reaches the threshold, so boundary token C stays and D is removed. Renormalizing the retained mass gives approximately 0.598, 0.272, and 0.130. This illustrates the boundary rule, not a recommended setting; exact ties, floating-point rounding, and minimum-token options can affect an implementation's boundary." >}}
+
 ```python
 def nucleus(tokens, probabilities, p):
     if not 0 < p <= 1:
