@@ -1,0 +1,31 @@
+{{ define "main" }}
+{{ $terms := .Parent.RegularPages.ByTitle }}
+<header class="blog-header">
+    <div class="blog-header-content">
+        <p class="blog-kicker">Knowledge Base / Concepts</p>
+        <div class="blog-header-grid">
+            <h1 class="blog-title">
+                {{ .Params.title_lead }} <span class="accent">{{ .Params.title_accent }}</span>
+            </h1>
+            <p class="blog-subtitle">{{ .Params.summary }}</p>
+        </div>
+    </div>
+</header>
+
+<div class="blog-main">
+    <div class="knowledge-glossary">
+        <div class="knowledge-section-toolbar">
+            <a class="knowledge-back" href="{{ "references/" | relURL }}">← Knowledge Base</a>
+            <span class="knowledge-section-count">{{ len $terms }} concepts</span>
+        </div>
+        <div class="blog-index-list taxonomy-directory">
+{{ range $terms }}
+            <a class="blog-index-row" href="{{ .RelPermalink }}">
+                <h3>{{ .Title }}</h3>
+                <span class="blog-index-meta">{{ with .Params.summary }}{{ . | truncate 90 }}{{ else }}Concept guide{{ end }}</span>
+            </a>
+{{ end }}
+        </div>
+    </div>
+</div>
+{{ end }}

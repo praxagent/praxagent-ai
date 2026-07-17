@@ -40,7 +40,7 @@
     <link rel="stylesheet" href="{{ "blog.css" | relURL }}">
     <link rel="stylesheet" href="{{ "katex.min.css" | relURL }}">
     <script src="https://unpkg.com/feather-icons"></script>
-    {{ if .IsPage }}
+{{ if or .IsPage (eq .Section "references") }}
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script type="module">
@@ -53,7 +53,7 @@
         flowchart: { htmlLabels: true, curve: 'basis' }
       });
     </script>
-    {{ end }}
+{{ end }}
 </head>
 <body>
     <nav class="navbar navbar-scrolls industrial-navbar">
@@ -63,11 +63,11 @@
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
-            {{ $onRefs := eq .Section "references" }}
+{{ $onKnowledgeBase := eq .Section "references" }}
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
-                <a href="/blog/index.html" class="nav-link{{ if not $onRefs }} active{{ end }}">Research Notes</a>
-                <a href="{{ "references/" | relURL }}" class="nav-link{{ if $onRefs }} active{{ end }}">References</a>
+                <a href="/blog/index.html" class="nav-link{{ if not $onKnowledgeBase }} active{{ end }}">Research Notes</a>
+                <a href="{{ "references/" | relURL }}" class="nav-link{{ if $onKnowledgeBase }} active{{ end }}">Knowledge Base</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -78,22 +78,22 @@
                     </span>
                 </div>
             </div>
-            
+
             <!-- Mobile menu button -->
             <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            
+
         </div>
     </nav>
 
     <div class="mobile-menu-overlay" id="mobile-menu-overlay">
         <div class="mobile-menu-content">
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
-            <a href="/blog/index.html" class="mobile-nav-link{{ if not $onRefs }} active{{ end }}">Research Notes</a>
-            <a href="{{ "references/" | relURL }}" class="mobile-nav-link{{ if $onRefs }} active{{ end }}">References</a>
+            <a href="/blog/index.html" class="mobile-nav-link{{ if not $onKnowledgeBase }} active{{ end }}">Research Notes</a>
+            <a href="{{ "references/" | relURL }}" class="mobile-nav-link{{ if $onKnowledgeBase }} active{{ end }}">Knowledge Base</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -123,7 +123,7 @@
                 <nav aria-label="Footer navigation">
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
-                    <a href="{{ "references/" | relURL }}">References</a>
+                    <a href="{{ "references/" | relURL }}">Knowledge Base</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
@@ -138,11 +138,9 @@
     <script>
       feather.replace()
     </script>
-    {{ if .IsPage }}
+{{ if or .IsPage (eq .Section "references") }}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Keep wide tables readable: preserve useful column widths and let
-            // the table itself scroll without widening the whole page.
             const tables = document.querySelectorAll('.post-body table');
             tables.forEach((table, index) => {
                 if (table.parentElement?.classList.contains('table-scroll')) return;
@@ -175,41 +173,36 @@
 
             renderMathInElement(document.body, {
                 delimiters: [
-                    // No bare "$…$" — it eats currency ($14, $143) and breaks prose.
-                    // Inline/display math in posts uses \(…\) and \[…\] (and $$).
                     {left: "$$", right: "$$", display: true},
                     {left: "\\[", right: "\\]", display: true},
                     {left: "\\(", right: "\\)", display: false}
                 ],
                 throwOnError: false,
-                // Prefer HTML output; MathML is for a11y and must stay visually hidden.
                 output: "htmlAndMathml"
             });
 
-            // Add copy buttons to code blocks
-            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre');
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
             codeBlocks.forEach(pre => {
                 const button = document.createElement('button');
                 button.className = 'copy-code-button';
                 button.innerHTML = '📋 Copy';
                 button.setAttribute('aria-label', 'Copy code to clipboard');
-                
+
                 button.addEventListener('click', () => {
                     const code = pre.querySelector('code');
                     const text = code ? code.textContent : pre.textContent;
-                    
+
                     navigator.clipboard.writeText(text).then(() => {
                         const originalText = button.innerHTML;
                         button.innerHTML = '✅ Copied!';
                         button.classList.add('copied');
-                        
+
                         setTimeout(() => {
                             button.innerHTML = originalText;
                             button.classList.remove('copied');
                         }, 2000);
                     }).catch(err => {
                         console.error('Failed to copy: ', err);
-                        // Fallback for older browsers
                         const textArea = document.createElement('textarea');
                         textArea.value = text;
                         document.body.appendChild(textArea);
@@ -220,7 +213,7 @@
                             const originalText = button.innerHTML;
                             button.innerHTML = '✅ Copied!';
                             button.classList.add('copied');
-                            
+
                             setTimeout(() => {
                                 button.innerHTML = originalText;
                                 button.classList.remove('copied');
@@ -231,11 +224,11 @@
                         document.body.removeChild(textArea);
                     });
                 });
-                
+
                 pre.appendChild(button);
             });
         });
     </script>
-    {{ end }}
+{{ end }}
 </body>
 </html>

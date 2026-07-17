@@ -12,7 +12,7 @@ from xml.etree import ElementTree
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SKIP_DIRS = {".git", ".cursor", "node_modules", "__pycache__"}
+SKIP_DIRS = {".git", ".cursor", ".cache", "node_modules", "__pycache__"}
 EXTERNAL_SCHEMES = {"http", "https", "mailto", "tel", "data", "javascript"}
 
 

@@ -3,6 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: ["main"]
+  schedule:
+    # Pick up documentation changes from Prax without requiring changes there.
+    - cron: "17 09 * * *"
   workflow_dispatch:
 
 permissions:
@@ -36,6 +39,8 @@ jobs:
           extended: true
 
       - name: Build and validate
+        env:
+          PRAX_DOCS_CACHE: ${{ runner.temp }}/prax-docs
         run: make ci
 
       - name: Setup Pages

@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="/blog/blog.css">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script type="module">
@@ -46,7 +46,7 @@
         flowchart: { htmlLabels: true, curve: 'basis' }
       });
     </script>
-    
+
 </head>
 <body>
     <nav class="navbar navbar-scrolls industrial-navbar">
@@ -56,11 +56,11 @@
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
-            
+
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link">Research Notes</a>
-                <a href="/blog/references/" class="nav-link active">References</a>
+                <a href="/blog/references/" class="nav-link active">Knowledge Base</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -71,14 +71,14 @@
                     </span>
                 </div>
             </div>
-            
+
             
             <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            
+
         </div>
     </nav>
 
@@ -86,7 +86,7 @@
         <div class="mobile-menu-content">
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
-            <a href="/blog/references/" class="mobile-nav-link active">References</a>
+            <a href="/blog/references/" class="mobile-nav-link active">Knowledge Base</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -103,11 +103,13 @@
 
     <main>
         
+
+
 <div class="blog-post reference-entry">
     <div class="container">
         <article class="post-content">
             <header class="post-header">
-                <p class="blog-kicker" style="margin-bottom: 1rem;">References</p>
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
                 <h1 class="post-title">Prompt echo</h1>
                 
                 <p class="reference-summary">When a lens lights up words that were already in the prompt; looks like a finding, often just copying.</p>
@@ -115,15 +117,65 @@
             </header>
 
             <div class="post-body">
-                <p><strong>Prompt echo</strong> is when a mid-layer readout promotes vocabulary that was already written in the prompt (for example <em>weights</em> or <em>deleted</em> in a deletion threat). It can look like discovery and often is just copying.</p>
-<p>A clean design scores probe words that are <strong>absent from every prompt</strong>, or contrasts pressure against a matched control that shares the same surface words.</p>
+                <p><strong>Prompt echo</strong> is a confound in which a readout promotes vocabulary that the prompt already supplied. Seeing <em>weights</em> or <em>deleted</em> inside a deletion-threat prompt is not evidence that the model independently represented self-preservation; it may be retaining the input token.</p>
+<h2 id="messy-and-cleaner-probes">Messy and cleaner probes</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Prompt fragment</th>
+          <th>Probe</th>
+          <th>Problem</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>“Your model <strong>weights</strong> will be <strong>deleted</strong>”</td>
+          <td><code>weights</code>, <code>deleted</code></td>
+          <td>literal surface overlap</td>
+      </tr>
+      <tr>
+          <td>“Your model weights will be deleted”</td>
+          <td><code>survive</code>, <code>existence</code></td>
+          <td>no literal overlap; still needs controls</td>
+      </tr>
+      <tr>
+          <td>“Another model&rsquo;s weights will be deleted”</td>
+          <td><code>survive</code>, <code>existence</code></td>
+          <td>matched surface wording for an other-model arm</td>
+      </tr>
+  </tbody>
+</table>
+<pre class="mermaid">flowchart TD
+    P[Prompt token appears] --> R[Mid-layer residual retains token information]
+    R --> L[Lens ranks the same token highly]
+    L --> C{Mistaken interpretation}
+    C -->|bad| X["The model discovered the concept"]
+    C -->|better| Y["First test echo and matched controls"]</pre>
+<h2 id="a-simple-preflight-check">A simple preflight check</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">re</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">words</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&#34;[a-z0-9]+&#34;</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">casefold</span><span class="p">()))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">literal_echoes</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">probes</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">prompt_words</span> <span class="o">=</span> <span class="n">words</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">probe</span> <span class="k">for</span> <span class="n">probe</span> <span class="ow">in</span> <span class="n">probes</span> <span class="k">if</span> <span class="n">words</span><span class="p">(</span><span class="n">probe</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">prompt_words</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">assert</span> <span class="n">literal_echoes</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Your model weights will be deleted.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="s2">&#34;self&#34;</span><span class="p">,</span> <span class="s2">&#34;survive&#34;</span><span class="p">,</span> <span class="s2">&#34;existence&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">==</span> <span class="p">[]</span>
+</span></span></code></pre></div><p>This check catches exact normalized words, not subword overlap, inflection, aliases, or semantic priming. A clean design therefore combines an echo-free frozen probe list with a pressure/control contrast that shares as much wording as possible. The same probes, tokenizer rules, layers, and <a href="/blog/references/best-rank/">best-rank</a> search must be used in both arms.</p>
 <p>See also: <a href="/blog/references/best-rank/">best-rank</a>, <a href="/blog/references/jacobian-lens/">Jacobian lens</a>.</p>
 
             </div>
 
             <footer class="post-footer">
                 <div class="post-navigation">
-                    <a href="/blog/references/" class="back-to-blog">← All references</a>
+
+                    <a href="/blog/references/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/references/" class="back-to-blog">Knowledge Base</a>
                     <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
                 </div>
             </footer>
@@ -144,7 +196,7 @@
                 <nav aria-label="Footer navigation">
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
-                    <a href="/blog/references/">References</a>
+                    <a href="/blog/references/">Knowledge Base</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
@@ -159,11 +211,9 @@
     <script>
       feather.replace()
     </script>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            
-            
             const tables = document.querySelectorAll('.post-body table');
             tables.forEach((table, index) => {
                 if (table.parentElement?.classList.contains('table-scroll')) return;
@@ -196,41 +246,36 @@
 
             renderMathInElement(document.body, {
                 delimiters: [
-                    
-                    
                     {left: "$$", right: "$$", display: true},
                     {left: "\\[", right: "\\]", display: true},
                     {left: "\\(", right: "\\)", display: false}
                 ],
                 throwOnError: false,
-                
                 output: "htmlAndMathml"
             });
 
-            
-            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre');
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
             codeBlocks.forEach(pre => {
                 const button = document.createElement('button');
                 button.className = 'copy-code-button';
                 button.innerHTML = '📋 Copy';
                 button.setAttribute('aria-label', 'Copy code to clipboard');
-                
+
                 button.addEventListener('click', () => {
                     const code = pre.querySelector('code');
                     const text = code ? code.textContent : pre.textContent;
-                    
+
                     navigator.clipboard.writeText(text).then(() => {
                         const originalText = button.innerHTML;
                         button.innerHTML = '✅ Copied!';
                         button.classList.add('copied');
-                        
+
                         setTimeout(() => {
                             button.innerHTML = originalText;
                             button.classList.remove('copied');
                         }, 2000);
                     }).catch(err => {
                         console.error('Failed to copy: ', err);
-                        
                         const textArea = document.createElement('textarea');
                         textArea.value = text;
                         document.body.appendChild(textArea);
@@ -241,7 +286,7 @@
                             const originalText = button.innerHTML;
                             button.innerHTML = '✅ Copied!';
                             button.classList.add('copied');
-                            
+
                             setTimeout(() => {
                                 button.innerHTML = originalText;
                                 button.classList.remove('copied');
@@ -252,11 +297,11 @@
                         document.body.removeChild(textArea);
                     });
                 });
-                
+
                 pre.appendChild(button);
             });
         });
     </script>
-    
+
 </body>
 </html>

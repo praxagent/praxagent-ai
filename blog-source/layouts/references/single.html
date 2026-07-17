@@ -1,9 +1,11 @@
 {{ define "main" }}
+{{ $knowledgeBaseURL := "references/" | relURL }}
+{{ $isGlossaryEntry := eq .Parent.RelPermalink $knowledgeBaseURL }}
 <div class="blog-post reference-entry">
     <div class="container">
         <article class="post-content">
             <header class="post-header">
-                <p class="blog-kicker" style="margin-bottom: 1rem;">References</p>
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / {{ if $isGlossaryEntry }}Glossary{{ else }}{{ .Parent.Title }}{{ end }}</p>
                 <h1 class="post-title">{{ .Title }}</h1>
                 {{ with .Params.summary }}
                 <p class="reference-summary">{{ . }}</p>
@@ -16,7 +18,12 @@
 
             <footer class="post-footer">
                 <div class="post-navigation">
-                    <a href="{{ "references/" | relURL }}" class="back-to-blog">← All references</a>
+{{ if $isGlossaryEntry }}
+                    <a href="{{ "references/glossary/" | relURL }}" class="back-to-blog">← Glossary</a>
+{{ else }}
+                    <a href="{{ .Parent.RelPermalink }}" class="back-to-blog">← {{ .Parent.Title }}</a>
+{{ end }}
+                    <a href="{{ $knowledgeBaseURL }}" class="back-to-blog">Knowledge Base</a>
                     <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
                 </div>
             </footer>

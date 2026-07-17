@@ -213,6 +213,492 @@ main,
     color: var(--sky, #4B6787);
 }
 
+/* Knowledge Base section directory */
+.knowledge-directory {
+    display: grid;
+    width: 100%;
+    max-width: 70rem;
+    margin: 0 auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid var(--border-primary);
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.knowledge-card {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: 21rem;
+    flex-direction: column;
+    padding: 2rem;
+    color: inherit;
+    background: transparent;
+    border-left: 1px solid var(--border-primary);
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.knowledge-card:first-child {
+    border-left: 0;
+}
+
+.knowledge-card:hover {
+    background: var(--bg-secondary);
+    border-color: var(--border-secondary);
+}
+
+.knowledge-card:focus-visible {
+    z-index: 1;
+    outline: 3px solid var(--sky, #4B6787);
+    outline-offset: -3px;
+}
+
+.knowledge-card-index,
+.knowledge-section-count,
+.knowledge-collection-status-label {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.68rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sky, #4B6787);
+}
+
+.knowledge-card-index {
+    margin-bottom: 3rem;
+}
+
+.knowledge-card h2 {
+    margin: 0 0 1rem;
+    font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
+    font-size: clamp(1.45rem, 2.4vw, 1.9rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: var(--text-dark);
+    transition: color 0.2s ease;
+}
+
+.knowledge-card:hover h2 {
+    color: var(--sky, #4B6787);
+}
+
+.knowledge-card p {
+    max-width: 28rem;
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+.knowledge-card-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: auto;
+    padding-top: 3rem;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--text-tertiary);
+    transition: color 0.2s ease;
+}
+
+.knowledge-card:hover .knowledge-card-action {
+    color: var(--sky, #4B6787);
+}
+
+.knowledge-glossary,
+.knowledge-collection {
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+.knowledge-section-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.knowledge-glossary .blog-index-meta {
+    max-width: 38rem;
+    line-height: 1.45;
+    text-align: right;
+    white-space: normal;
+}
+
+.knowledge-back {
+    display: inline-flex;
+    color: var(--sky, #4B6787);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.knowledge-back:hover {
+    color: var(--sky-deep, #3A5573);
+    transform: translateX(-3px);
+}
+
+.knowledge-back:focus-visible {
+    outline: 2px solid var(--sky, #4B6787);
+    outline-offset: 4px;
+}
+
+.knowledge-collection > .knowledge-back {
+    margin-bottom: 2.5rem;
+}
+
+.knowledge-collection-copy {
+    max-width: 44rem;
+    color: var(--text-primary);
+    font-family: var(--font-serif, 'Source Serif 4', Georgia, serif);
+    font-size: 1.125rem;
+    line-height: 1.75;
+}
+
+.knowledge-collection-copy p {
+    margin: 0 0 1.25rem;
+}
+
+.knowledge-collection-copy a {
+    color: var(--sky, #4B6787);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+}
+
+.knowledge-collection-status {
+    margin-top: 3rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border-primary);
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.knowledge-collection-status-label {
+    margin: 0 0 1rem;
+}
+
+.knowledge-collection-status h2 {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text-dark);
+}
+
+.knowledge-collection-status > p:last-child {
+    max-width: 44rem;
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+.knowledge-collection-list {
+    margin-top: 3rem;
+    border-top: 1px solid var(--border-primary);
+}
+
+@media (max-width: 900px) {
+    .knowledge-directory {
+        grid-template-columns: 1fr;
+    }
+
+    .knowledge-card,
+    .knowledge-card:first-child {
+        min-height: 0;
+        padding: 1.75rem;
+        border-left: 0;
+    }
+
+    .knowledge-card + .knowledge-card {
+        border-top: 1px solid var(--border-primary);
+    }
+
+    .knowledge-card-index {
+        margin-bottom: 1.75rem;
+    }
+
+    .knowledge-card-action {
+        padding-top: 2rem;
+    }
+
+    .knowledge-glossary .blog-index-meta {
+        max-width: none;
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .knowledge-card,
+    .knowledge-card:first-child {
+        padding: 1.5rem 0;
+    }
+
+    .knowledge-section-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}
+
+/* Imported Prax documentation */
+.prax-doc {
+    padding-top: 6.75rem;
+}
+
+.prax-doc-container {
+    max-width: 78rem;
+}
+
+.prax-doc-shell {
+    display: grid;
+    grid-template-columns: minmax(12rem, 15rem) minmax(0, 1fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: start;
+}
+
+.prax-doc-sidebar {
+    position: sticky;
+    top: 6.5rem;
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+}
+
+.prax-doc-nav-label,
+.prax-doc-children-label {
+    margin: 0 0 0.85rem;
+    color: var(--text-tertiary);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.prax-doc-nav a {
+    display: block;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+}
+
+.prax-doc-nav-root,
+.prax-doc-nav-section-link {
+    padding: 0.7rem 0.75rem;
+    border-left: 2px solid transparent;
+    font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.prax-doc-nav-sections {
+    margin-top: 0.45rem;
+    padding-top: 0.45rem;
+    border-top: 1px solid var(--border-primary);
+}
+
+.prax-doc-nav-section + .prax-doc-nav-section {
+    border-top: 1px solid var(--border-primary);
+}
+
+.prax-doc-nav-pages {
+    padding: 0.15rem 0 0.65rem;
+}
+
+.prax-doc-nav-page {
+    padding: 0.38rem 0.75rem 0.38rem 1.1rem;
+    border-left: 2px solid transparent;
+    font-size: 0.78rem;
+    line-height: 1.4;
+}
+
+.prax-doc-nav-standalone {
+    margin-top: 0.45rem;
+    padding-top: 0.45rem;
+    border-top: 1px solid var(--border-primary);
+}
+
+.prax-doc-nav a:hover,
+.prax-doc-nav a.is-active {
+    color: var(--sky, #4B6787);
+}
+
+.prax-doc-nav a.is-active {
+    border-left-color: var(--sky, #4B6787);
+    background: var(--bg-secondary);
+}
+
+.prax-doc-main {
+    max-width: 54rem;
+    margin: 0;
+}
+
+.prax-doc-main .prax-doc-header,
+.prax-doc-main .prax-doc-body > *,
+.prax-doc-main .prax-doc-footer {
+    max-width: 48rem;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+.prax-doc-main .prax-doc-body > .table-scroll,
+.prax-doc-main .prax-doc-body > .highlight,
+.prax-doc-main .prax-doc-body > pre,
+.prax-doc-main .prax-doc-body > .mermaid,
+.prax-doc-main .prax-doc-body > figure {
+    max-width: 54rem;
+}
+
+.prax-doc-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+    color: var(--text-tertiary);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+}
+
+.prax-doc-breadcrumb a {
+    color: var(--sky, #4B6787);
+    text-decoration: none;
+}
+
+.prax-doc-summary {
+    max-width: 42rem;
+    margin: 1rem 0 0;
+    color: var(--text-secondary);
+    font-family: var(--font-serif, 'Source Serif 4', Georgia, serif);
+    font-size: 1.1rem;
+    line-height: 1.65;
+}
+
+.prax-doc-source {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    margin-top: 1.75rem;
+    padding: 0.8rem 0;
+    border-top: 1px solid var(--border-primary);
+    border-bottom: 1px solid var(--border-primary);
+    color: var(--text-tertiary);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.68rem;
+}
+
+.prax-doc-source code {
+    color: var(--text-secondary);
+}
+
+.prax-doc-source a {
+    color: var(--sky, #4B6787);
+    text-decoration: none;
+}
+
+.prax-doc-body {
+    margin-top: 2.5rem;
+}
+
+.prax-doc-body > div[align="center"] {
+    text-align: left;
+}
+
+.prax-doc-body > div[align="center"] img {
+    display: block;
+    max-width: 100%;
+    margin: 1.5rem auto;
+}
+
+.prax-doc-children {
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-primary);
+}
+
+.prax-doc-children a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--border-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.prax-doc-children a:hover {
+    color: var(--sky, #4B6787);
+}
+
+.prax-doc-footer {
+    margin-top: 3.5rem !important;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-primary);
+    color: var(--text-tertiary);
+    font-size: 0.78rem;
+    line-height: 1.6;
+}
+
+.prax-doc-footer a {
+    color: var(--sky, #4B6787);
+}
+
+@media (max-width: 900px) {
+    .prax-doc {
+        padding-top: 6rem;
+    }
+
+    .prax-doc-shell {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .prax-doc-sidebar {
+        position: static;
+        max-height: none;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border-primary);
+        overflow: visible;
+    }
+
+    .prax-doc-nav-pages {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 1rem;
+    }
+
+    .prax-doc-main {
+        max-width: none;
+    }
+}
+
+@media (max-width: 560px) {
+    .prax-doc-nav-pages {
+        grid-template-columns: 1fr;
+    }
+
+    .prax-doc-source {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
 /* Meta line on single posts */
 .post-header .post-meta {
     display: flex;
@@ -523,6 +1009,18 @@ main,
     color: white;
 }
 
+.copy-code-button:focus-visible {
+    opacity: 1;
+    outline: 2px solid var(--sky, #4B6787);
+    outline-offset: 2px;
+}
+
+@media (hover: none) {
+    .copy-code-button {
+        opacity: 1;
+    }
+}
+
 .post-body pre code {
     background: none;
     padding: 0;
@@ -729,6 +1227,30 @@ main,
     background: var(--bg-card);
     overflow-x: auto;
     text-align: center;
+}
+
+.post-body .mermaid svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.reference-figure {
+    width: 100%;
+    margin: 2rem auto 2.25rem;
+}
+
+.reference-figure img {
+    width: 100%;
+    margin: 0;
+}
+
+.reference-figure figcaption {
+    max-width: 44rem;
+    margin: 0.7rem auto 0;
+    color: var(--text-tertiary);
+    font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
+    font-size: 0.82rem;
+    line-height: 1.55;
 }
 
 .figure-note {
@@ -1196,7 +1718,7 @@ main,
     .post-title {
         font-size: 2rem;
     }
-    
+
     .post-body {
         font-size: 1rem;
     }
@@ -1221,15 +1743,15 @@ main,
     .blog-main {
         padding: 2rem 1rem;
     }
-    
+
     .blog-post {
         padding: 5.5rem 0 2rem;
     }
-    
+
     .blog-title {
         font-size: 2.75rem;
     }
-    
+
     .post-title {
         font-size: 1.75rem;
     }

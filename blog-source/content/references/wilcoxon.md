@@ -1,16 +1,71 @@
 ---
 title: "Wilcoxon signed-rank test"
 slug: "wilcoxon"
-summary: "A paired test that uses both the direction and the size of pressure-vs-control rank gaps, not just win counts."
+summary: "A paired test that uses each gap's direction and its absolute-size rank, not just win counts."
 aliases:
   - /references/wilcoxon-signed-rank/
   - /references/wilcoxon-test/
 ---
 
-The **Wilcoxon signed-rank test** (in these notes, almost always the *paired* signed-rank version) asks whether the pressure arm tends to beat its matched control across paraphrase pairs, using both the **sign** and the **magnitude** of each paired difference.
+The **Wilcoxon signed-rank test** (in these notes, the paired version) combines two pieces of each paired difference: its direction and the **rank ordering of its absolute size**. It does not use the raw magnitudes directly.
 
-**How it differs from the [sign test]({{< relref "p-value.md" >}}).** The sign test only counts wins (e.g. 9/10). Wilcoxon ranks the absolute gaps and then signs those ranks, so a pair that moves a lot counts more than a tiny nudge. We often report both: sign *p* for the fair-coin win count, Wilcoxon *p* for the sized gaps.
+For a rank comparison, define
 
-**Example.** On ten eval-vs-casual pairs, **9/10** wins gives a sign *p* around 0.02; if the winning gaps are also large, the Wilcoxon *p* can be smaller (e.g. 0.004). Both are still within-battery consistency checks, not population estimates ([p-value]({{< relref "p-value.md" >}})).
+\[
+D_i = \text{control rank}_i - \text{treatment rank}_i,
+\]
 
-See also: [rank]({{< relref "rank.md" >}}), [best-rank]({{< relref "best-rank.md" >}}).
+so a positive value means the treatment achieved the better, lower vocabulary rank. Remove or otherwise handle zeros, rank the values \(\lvert D_i\rvert\) from smallest to largest, then restore each sign and add the positive and negative ranks.
+
+{{< reference-figure src="references/glossary/paired-tests.svg" alt="Six paired rank gaps, five positive and one negative, feeding a sign test that counts directions and a Wilcoxon test that ranks absolute gaps" caption="The sign test keeps only direction. Wilcoxon first ranks the absolute gaps, then restores their signs; neither test supplies an effect size or population claim by itself." >}}
+
+## Worked example
+
+Use the six differences shown above:
+
+| pair | \(D_i\) | \(\lvert D_i\rvert\) rank | signed rank |
+|---:|---:|---:|---:|
+| 1 | +46 | 6 | +6 |
+| 2 | +11 | 3 | +3 |
+| 3 | −8 | 2 | −2 |
+| 4 | +3 | 1 | +1 |
+| 5 | +29 | 5 | +5 |
+| 6 | +18 | 4 | +4 |
+
+The positive-rank sum is \(W^+=19\), the negative-rank sum is \(W^-=2\), and the usual two-sided statistic is the smaller value, \(W=2\). With six distinct nonzero absolute gaps, all \(2^6\) sign assignments can be enumerated exactly. Six are at least this extreme, so \(p=6/64=0.09375\).
+
+Here is that final enumeration in standard-library Python:
+
+```python
+from itertools import product
+
+ranks = (6, 3, 2, 1, 5, 4)
+observed = min(19, 2)
+rank_total = sum(ranks)
+
+null_statistics = []
+for signs in product((False, True), repeat=len(ranks)):
+    w_plus = sum(r for r, positive in zip(ranks, signs) if positive)
+    null_statistics.append(min(w_plus, rank_total - w_plus))
+
+p = sum(w <= observed for w in null_statistics) / len(null_statistics)
+print(p)  # 0.09375
+```
+
+The example deliberately has no zeros or tied absolute gaps. Production analysis should use a tested statistics library and record its conventions.
+
+## Null and assumptions
+
+- **Null:** the paired-difference distribution is symmetric around zero. Conditional on the absolute gaps, their positive and negative signs are exchangeable under that null.
+- **Across-pair dependence:** the paired differences must provide independent or otherwise valid exchangeable units. Several paraphrases descended from one template may not; see [i.i.d.]({{< relref "iid.md" >}}).
+- **Ties and zeros:** equal absolute gaps receive average ranks. A zero difference may be dropped, included only in ranking, or split according to the chosen procedure. Those choices change the null distribution and must be stated; many software packages cannot use their simplest “exact” calculation when zeros or ties occur.
+- **Sidedness:** a two-sided test asks about either direction. A one-sided test is appropriate only for a direction fixed before seeing outcomes.
+- **Difference scale:** vocabulary [rank]({{< relref "rank.md" >}}) is ordinal and strongly skewed. Decide in advance whether \(D_i\) is a raw-rank gap, log-rank gap, or another score; a nonlinear transformation can change the ordering of absolute gaps.
+
+## How it differs from the sign test
+
+The [sign test]({{< relref "p-value.md" >}}) asks only how many pairs win. Wilcoxon gives more weight to observations with larger **absolute-gap ranks**, which can improve sensitivity when its symmetry and scale assumptions are credible. That extra sensitivity is not free: the sign test is the simpler robustness check when only direction is trustworthy.
+
+We often report both as within-battery consistency summaries. Neither is an effect size, a correction for trying many analyses, or evidence that the convenience battery represents a population. Report the direction count and actual rank gaps alongside either \(p\)-value.
+
+See also: [p-value]({{< relref "p-value.md" >}}), [i.i.d.]({{< relref "iid.md" >}}), [rank]({{< relref "rank.md" >}}), [best-rank]({{< relref "best-rank.md" >}}).

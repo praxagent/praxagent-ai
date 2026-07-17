@@ -6,6 +6,15 @@ BLOG_SOURCE := blog-source
 BLOG_OUTPUT := blog
 HUGO_CONFIG := $(BLOG_SOURCE)/hugo.yaml
 
+# Prax docs are imported at build time; set PRAX_DOCS_SOURCE to use an
+# existing checkout instead of updating the shallow cache.
+PRAX_DOCS_REPO ?= https://github.com/praxagent/prax.git
+PRAX_DOCS_REF ?= main
+PRAX_DOCS_CACHE ?= .cache/prax-docs/repo
+PRAX_DOCS_SOURCE ?=
+PRAX_DOCS_CONTENT_OUTPUT := $(BLOG_SOURCE)/content/references/prax
+PRAX_DOCS_STATIC_OUTPUT := $(BLOG_SOURCE)/static/prax-docs
+
 # Port used to serve the full static site locally.
 SITE_PORT ?= 8000
 # Port used by the blog-only Hugo live-reload server.
@@ -33,7 +42,7 @@ DETACH := $(abspath scripts/detach_serve.sh)
 
 .DEFAULT_GOAL := help
 
-.PHONY: help blog blog-drafts blog-serve blog-serve-tailscale run-site-local run-site-tailscale check ci up down
+.PHONY: help sync-prax-docs blog blog-drafts blog-serve blog-serve-tailscale run-site-local run-site-tailscale check ci up down
 
 help: ## Show available commands
 	@awk 'BEGIN {FS = ":.*## "; printf "Usage: make <target>\n\nTargets:\n"} /^[a-zA-Z0-9_-]+:.*## / {printf "  %-22s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -54,7 +63,13 @@ up down:
 		exit 1; \
 	fi
 
-blog: ## Compile blog-source/content/posts into blog/
+sync-prax-docs: ## Fetch Prax and generate Hugo-ready documentation
+	$(PYTHON) scripts/import_prax_docs.py \
+		$(if $(PRAX_DOCS_SOURCE),--source "$(PRAX_DOCS_SOURCE)",--repo "$(PRAX_DOCS_REPO)" --ref "$(PRAX_DOCS_REF)" --cache-dir "$(PRAX_DOCS_CACHE)") \
+		--content-output "$(PRAX_DOCS_CONTENT_OUTPUT)" \
+		--static-output "$(PRAX_DOCS_STATIC_OUTPUT)"
+
+blog: sync-prax-docs ## Compile blog-source/content/posts into blog/
 	$(HUGO) \
 		--source "$(BLOG_SOURCE)" \
 		--config "$(abspath $(HUGO_CONFIG))" \
@@ -76,6 +91,10 @@ blog: ## Compile blog-source/content/posts into blog/
 
 blog-drafts: ## Compile blog output including draft Research Notes
 	$(MAKE) blog BLOG_BUILD_FLAGS=--buildDrafts
+
+ifneq ($(SERVE_ACTION),down)
+blog-serve blog-serve-tailscale: sync-prax-docs
+endif
 
 blog-serve: ## Blog live reload at http://127.0.0.1:1313/blog/ (up|down supported)
 ifeq ($(SERVE_ACTION),down)
@@ -151,7 +170,7 @@ else
 	$(PYTHON) -m http.server $(SITE_PORT) --bind 0.0.0.0
 endif
 
-check: ## Validate Hugo, local links, anchors, JSON, SVG, Python, branding, and data provenance
+check: sync-prax-docs ## Validate Hugo, local links, anchors, JSON, SVG, Python, branding, and data provenance
 	$(HUGO) \
 		--source "$(BLOG_SOURCE)" \
 		--config "$(abspath $(HUGO_CONFIG))" \

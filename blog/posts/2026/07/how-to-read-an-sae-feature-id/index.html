@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="/blog/blog.css">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script type="module">
@@ -51,7 +51,7 @@
         flowchart: { htmlLabels: true, curve: 'basis' }
       });
     </script>
-    
+
 </head>
 <body>
     <nav class="navbar navbar-scrolls industrial-navbar">
@@ -61,11 +61,11 @@
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
-            
+
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link active">Research Notes</a>
-                <a href="/blog/references/" class="nav-link">References</a>
+                <a href="/blog/references/" class="nav-link">Knowledge Base</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -76,14 +76,14 @@
                     </span>
                 </div>
             </div>
-            
+
             
             <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            
+
         </div>
     </nav>
 
@@ -91,7 +91,7 @@
         <div class="mobile-menu-content">
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link active">Research Notes</a>
-            <a href="/blog/references/" class="mobile-nav-link">References</a>
+            <a href="/blog/references/" class="mobile-nav-link">Knowledge Base</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -1496,7 +1496,7 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
                 <nav aria-label="Footer navigation">
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
-                    <a href="/blog/references/">References</a>
+                    <a href="/blog/references/">Knowledge Base</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
@@ -1511,11 +1511,9 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
     <script>
       feather.replace()
     </script>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            
-            
             const tables = document.querySelectorAll('.post-body table');
             tables.forEach((table, index) => {
                 if (table.parentElement?.classList.contains('table-scroll')) return;
@@ -1548,41 +1546,36 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 
             renderMathInElement(document.body, {
                 delimiters: [
-                    
-                    
                     {left: "$$", right: "$$", display: true},
                     {left: "\\[", right: "\\]", display: true},
                     {left: "\\(", right: "\\)", display: false}
                 ],
                 throwOnError: false,
-                
                 output: "htmlAndMathml"
             });
 
-            
-            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre');
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
             codeBlocks.forEach(pre => {
                 const button = document.createElement('button');
                 button.className = 'copy-code-button';
                 button.innerHTML = '📋 Copy';
                 button.setAttribute('aria-label', 'Copy code to clipboard');
-                
+
                 button.addEventListener('click', () => {
                     const code = pre.querySelector('code');
                     const text = code ? code.textContent : pre.textContent;
-                    
+
                     navigator.clipboard.writeText(text).then(() => {
                         const originalText = button.innerHTML;
                         button.innerHTML = '✅ Copied!';
                         button.classList.add('copied');
-                        
+
                         setTimeout(() => {
                             button.innerHTML = originalText;
                             button.classList.remove('copied');
                         }, 2000);
                     }).catch(err => {
                         console.error('Failed to copy: ', err);
-                        
                         const textArea = document.createElement('textarea');
                         textArea.value = text;
                         document.body.appendChild(textArea);
@@ -1593,7 +1586,7 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
                             const originalText = button.innerHTML;
                             button.innerHTML = '✅ Copied!';
                             button.classList.add('copied');
-                            
+
                             setTimeout(() => {
                                 button.innerHTML = originalText;
                                 button.classList.remove('copied');
@@ -1604,11 +1597,11 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
                         document.body.removeChild(textArea);
                     });
                 });
-                
+
                 pre.appendChild(button);
             });
         });
     </script>
-    
+
 </body>
 </html>

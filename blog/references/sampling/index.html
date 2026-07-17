@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="/blog/blog.css">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script type="module">
@@ -46,7 +46,7 @@
         flowchart: { htmlLabels: true, curve: 'basis' }
       });
     </script>
-    
+
 </head>
 <body>
     <nav class="navbar navbar-scrolls industrial-navbar">
@@ -56,11 +56,11 @@
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
-            
+
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link">Research Notes</a>
-                <a href="/blog/references/" class="nav-link active">References</a>
+                <a href="/blog/references/" class="nav-link active">Knowledge Base</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -71,14 +71,14 @@
                     </span>
                 </div>
             </div>
-            
+
             
             <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            
+
         </div>
     </nav>
 
@@ -86,7 +86,7 @@
         <div class="mobile-menu-content">
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
-            <a href="/blog/references/" class="mobile-nav-link active">References</a>
+            <a href="/blog/references/" class="mobile-nav-link active">Knowledge Base</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -103,11 +103,13 @@
 
     <main>
         
+
+
 <div class="blog-post reference-entry">
     <div class="container">
         <article class="post-content">
             <header class="post-header">
-                <p class="blog-kicker" style="margin-bottom: 1rem;">References</p>
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
                 <h1 class="post-title">Sampling</h1>
                 
                 <p class="reference-summary">Choosing the next token from a distribution over the vocabulary, rather than always taking the single highest-scoring token.</p>
@@ -115,15 +117,81 @@
             </header>
 
             <div class="post-body">
-                <p><strong>Sampling</strong> means drawing the next token from a probability distribution over the vocabulary, instead of always emitting the argmax. The raw next-token scores from the <a href="/blog/references/unembedding/">unembedding</a> are turned into probabilities (usually via softmax), then a token is chosen according to a rule such as multinomial draw, often after reshaping the distribution with <a href="/blog/references/temperature/">temperature</a> or truncating it with <a href="/blog/references/top-p/">top-p</a>.</p>
-<p>A <a href="/blog/references/greedy-continuation/">greedy continuation</a> is the opposite: no sampling, just the highest-scoring token at every step. That path is deterministic given the prompt and model; sampled paths are not.</p>
+                <p><strong>Sampling</strong> means drawing the next token from a probability distribution over the vocabulary, instead of always emitting the argmax. The next-token logits from the <a href="/blog/references/unembedding/">unembedding</a> are usually transformed by <a href="/blog/references/temperature/">temperature</a>, softmax, and optional filters such as <a href="/blog/references/top-p/">top-p</a>. A categorical draw then chooses one token with the resulting probabilities.</p>
+<pre class="mermaid">flowchart LR
+    A[Final residual state] --> B[Final norm and unembedding]
+    B --> C[Logits]
+    C --> D{Decoder}
+    D -->|Greedy| E[Argmax token]
+    D -->|Sampling| F[Temperature scaling]
+    F --> G[Softmax probabilities]
+    G --> H[Optional top-p truncation]
+    H --> I[Categorical draw]</pre>
+<p>This is a common conceptual order; inference libraries may expose additional penalties and filters, so a reproducible protocol should record their order and values.</p>
+<figure class="reference-figure">
+    <img src="/blog/references/glossary/decoding-controls.svg" alt="A next-token distribution shown before and after temperature scaling and top-p truncation, contrasted with greedy argmax selection" loading="lazy" decoding="async">
+    <figcaption>Greedy decoding follows the highest logit. Sampling reshapes and optionally truncates the distribution before drawing a token.</figcaption>
+</figure>
+
+<h2 id="worked-example">Worked example</h2>
+<p>Suppose the next-token distribution is:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Token</th>
+          <th style="text-align: right">Probability</th>
+          <th>Draw interval</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>sunny</code></td>
+          <td style="text-align: right">0.55</td>
+          <td>\([0.00, 0.55)\)</td>
+      </tr>
+      <tr>
+          <td><code>rainy</code></td>
+          <td style="text-align: right">0.30</td>
+          <td>\([0.55, 0.85)\)</td>
+      </tr>
+      <tr>
+          <td><code>cloudy</code></td>
+          <td style="text-align: right">0.15</td>
+          <td>\([0.85, 1.00)\)</td>
+      </tr>
+  </tbody>
+</table>
+<p>A uniform random draw of 0.73 selects <code>rainy</code>. <code>sunny</code> is most likely, but it is not guaranteed. Across many identical trials, the frequencies should approach 55%, 30%, and 15%.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">random</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">isclose</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">categorical_sample</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="n">random</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">probabilities</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;tokens and probabilities must have equal, nonzero length&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">probability</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">probability</span> <span class="ow">in</span> <span class="n">probabilities</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;probabilities must be non-negative&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">isclose</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">probabilities</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">rel_tol</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">abs_tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;probabilities must sum to one&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">draw</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cumulative</span> <span class="o">=</span> <span class="mf">0.0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">token</span><span class="p">,</span> <span class="n">probability</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cumulative</span> <span class="o">+=</span> <span class="n">probability</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">draw</span> <span class="o">&lt;</span> <span class="n">cumulative</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">token</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">tokens</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Protect against floating-point roundoff.</span>
+</span></span></code></pre></div><p>A <a href="/blog/references/greedy-continuation/">greedy continuation</a> is the opposite: no sampling, just the highest-scoring token at every step. That path is deterministic under fixed prompt serialization, decoding protocol, numerical runtime, and model; sampled paths are not.</p>
+<p>A random seed makes a particular software run easier to reproduce; it does not make sampling equivalent to greedy decoding, and exact replay can still depend on library version, hardware, batching, and numerical kernels. For experiments, report the decoder settings, seed policy, number of draws, and whether statistics treat several samples from one prompt as independent.</p>
 <p>See also: <a href="/blog/references/temperature/">temperature</a>, <a href="/blog/references/top-p/">top-p</a>, <a href="/blog/references/greedy-continuation/">greedy continuation</a>.</p>
 
             </div>
 
             <footer class="post-footer">
                 <div class="post-navigation">
-                    <a href="/blog/references/" class="back-to-blog">← All references</a>
+
+                    <a href="/blog/references/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/references/" class="back-to-blog">Knowledge Base</a>
                     <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
                 </div>
             </footer>
@@ -144,7 +212,7 @@
                 <nav aria-label="Footer navigation">
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
-                    <a href="/blog/references/">References</a>
+                    <a href="/blog/references/">Knowledge Base</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
@@ -159,11 +227,9 @@
     <script>
       feather.replace()
     </script>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            
-            
             const tables = document.querySelectorAll('.post-body table');
             tables.forEach((table, index) => {
                 if (table.parentElement?.classList.contains('table-scroll')) return;
@@ -196,41 +262,36 @@
 
             renderMathInElement(document.body, {
                 delimiters: [
-                    
-                    
                     {left: "$$", right: "$$", display: true},
                     {left: "\\[", right: "\\]", display: true},
                     {left: "\\(", right: "\\)", display: false}
                 ],
                 throwOnError: false,
-                
                 output: "htmlAndMathml"
             });
 
-            
-            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre');
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
             codeBlocks.forEach(pre => {
                 const button = document.createElement('button');
                 button.className = 'copy-code-button';
                 button.innerHTML = '📋 Copy';
                 button.setAttribute('aria-label', 'Copy code to clipboard');
-                
+
                 button.addEventListener('click', () => {
                     const code = pre.querySelector('code');
                     const text = code ? code.textContent : pre.textContent;
-                    
+
                     navigator.clipboard.writeText(text).then(() => {
                         const originalText = button.innerHTML;
                         button.innerHTML = '✅ Copied!';
                         button.classList.add('copied');
-                        
+
                         setTimeout(() => {
                             button.innerHTML = originalText;
                             button.classList.remove('copied');
                         }, 2000);
                     }).catch(err => {
                         console.error('Failed to copy: ', err);
-                        
                         const textArea = document.createElement('textarea');
                         textArea.value = text;
                         document.body.appendChild(textArea);
@@ -241,7 +302,7 @@
                             const originalText = button.innerHTML;
                             button.innerHTML = '✅ Copied!';
                             button.classList.add('copied');
-                            
+
                             setTimeout(() => {
                                 button.innerHTML = originalText;
                                 button.classList.remove('copied');
@@ -252,11 +313,11 @@
                         document.body.removeChild(textArea);
                     });
                 });
-                
+
                 pre.appendChild(button);
             });
         });
     </script>
-    
+
 </body>
 </html>

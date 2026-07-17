@@ -10,13 +10,13 @@
     
     
     
-    <meta name="description" content="In these notes, p is usually a sign-test or Wilcoxon p-value across paraphrase pairs: how often the predicted direction would appear by chance if there were no effect.">
+    <meta name="description" content="A tail probability under a stated null model; in these notes it usually comes from a paired sign or Wilcoxon test.">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/references/p-value/">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="praxagent Research Notes">
     <meta property="og:title" content="p-value">
-    <meta property="og:description" content="In these notes, p is usually a sign-test or Wilcoxon p-value across paraphrase pairs: how often the predicted direction would appear by chance if there were no effect.">
+    <meta property="og:description" content="A tail probability under a stated null model; in these notes it usually comes from a paired sign or Wilcoxon test.">
     <meta property="og:url" content="https://praxagent.ai/blog/references/p-value/">
     <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
     <meta property="og:image:width" content="1200">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@praxagent">
     <meta name="twitter:title" content="p-value">
-    <meta name="twitter:description" content="In these notes, p is usually a sign-test or Wilcoxon p-value across paraphrase pairs: how often the predicted direction would appear by chance if there were no effect.">
+    <meta name="twitter:description" content="A tail probability under a stated null model; in these notes it usually comes from a paired sign or Wilcoxon test.">
     <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="/blog/blog.css">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script type="module">
@@ -46,7 +46,7 @@
         flowchart: { htmlLabels: true, curve: 'basis' }
       });
     </script>
-    
+
 </head>
 <body>
     <nav class="navbar navbar-scrolls industrial-navbar">
@@ -56,11 +56,11 @@
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
-            
+
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link">Research Notes</a>
-                <a href="/blog/references/" class="nav-link active">References</a>
+                <a href="/blog/references/" class="nav-link active">Knowledge Base</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -71,14 +71,14 @@
                     </span>
                 </div>
             </div>
-            
+
             
             <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            
+
         </div>
     </nav>
 
@@ -86,7 +86,7 @@
         <div class="mobile-menu-content">
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
-            <a href="/blog/references/" class="mobile-nav-link active">References</a>
+            <a href="/blog/references/" class="mobile-nav-link active">Knowledge Base</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -103,30 +103,70 @@
 
     <main>
         
+
+
 <div class="blog-post reference-entry">
     <div class="container">
         <article class="post-content">
             <header class="post-header">
-                <p class="blog-kicker" style="margin-bottom: 1rem;">References</p>
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
                 <h1 class="post-title">p-value</h1>
                 
-                <p class="reference-summary">In these notes, p is usually a sign-test or Wilcoxon p-value across paraphrase pairs: how often the predicted direction would appear by chance if there were no effect.</p>
+                <p class="reference-summary">A tail probability under a stated null model; in these notes it usually comes from a paired sign or Wilcoxon test.</p>
                 
             </header>
 
             <div class="post-body">
-                <p>When a Research Note writes <strong>p=0.004</strong>, it is answering: <em>if there were no real effect, how often would a result this extreme (or more) show up by chance?</em></p>
-<p><strong>How we usually compute it here.</strong> Constructs are scored as <strong>paired paraphrase tests</strong>: each of <em>n</em> wordings gives a pressure/control (or self/other) pair. We count how many pairs move the predicted way, then report a <strong>sign test</strong> p-value (and often a <a href="/blog/references/wilcoxon/">Wilcoxon</a> signed-rank p-value on the paired differences). Example: <strong>14/16</strong> pairs in the predicted direction with <strong>p=0.004</strong> means that under a fair coin (no effect), seeing at least 14 wins in 16 trials is unlikely.</p>
-<p><strong>With n=10 the test is conservative.</strong> Only extreme direction counts clear usual thresholds (about <strong>10/10 → p≈0.002</strong>, <strong>9/10 → p≈0.02</strong>; <strong>8/10</strong> is already not significant). A soft majority (6–4, 7–3) correctly fails. That matches the job of the paraphrase battery: show the effect is not one lucky sentence.</p>
-<p><strong>What it is not.</strong> It is not the probability that the hypothesis is true, not a measure of effect size (that lives in the rank gap), and not a population estimate. The paraphrases are a frozen convenience set on <em>this</em> battery, not <a href="/blog/references/iid/">i.i.d.</a> draws from “all threats in the wild.” It is also not a license to ignore design flaws: a tiny <em>p</em> with a confounded arm is still a confounded arm; that is why the pressure note retracts mismatched human/log comparisons even when ranks look striking.</p>
-<p><strong>Rule of thumb for reading these notes.</strong> Prefer the triple: <em>direction count</em> (e.g. 14/16), <em>p</em>, and the <strong>controls</strong> (<a href="/blog/references/logit-lens/">logit lens</a>, <a href="/blog/references/random-j/">random-J</a>). A low <em>p</em> that also appears under the logit lens is usually not a <a href="/blog/references/jacobian-lens/">Jacobian-lens</a>-specific claim. Generalization beyond the battery needs more models and more independently authored templates.</p>
+                <p>When a Research Note writes <strong>\(p=0.004\)</strong>, the precise question is:</p>
+<blockquote>
+<p>Under the stated null model, and with the analysis rule fixed, what is the probability of a test statistic at least as incompatible with that null as the one observed?</p>
+</blockquote>
+<p>That conditional probability is not simply “the chance this happened by accident.” Its meaning depends on the null, the statistic, the assumptions, and whether the test is one- or two-sided.</p>
+<h2 id="the-sign-test-used-in-these-notes">The sign test used in these notes</h2>
+<p>Constructs are usually scored as <strong>paired paraphrase tests</strong>. For each wording, define a difference such as</p>
+\[
+D_i = \text{control rank}_i - \text{pressure rank}_i,
+\]<p>so \(D_i>0\) means the pressure arm achieved the better (lower) vocabulary rank. The sign test discards the size of each nonzero difference and counts only positive and negative signs.</p>
+<p>Its fair-sign null is \(P(D_i>0)=P(D_i<0)=\tfrac12\) for each non-tied pair. The default in these notes is a <strong>two-sided</strong> test: a result this lopsided in either direction counts as extreme.</p>
+<h2 id="worked-example-14-wins-in-16-pairs">Worked example: 14 wins in 16 pairs</h2>
+<p>With 14 positive and 2 negative differences, the exact two-sided binomial tail is</p>
+\[
+p = 2\sum_{k=0}^{2}{16 \choose k}2^{-16}
+  = 0.0041809\ldots
+\]<p>The site rounds that to <strong>\(p=0.004\)</strong>. This dependency-free Python reproduces the calculation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">comb</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sign_test_two_sided</span><span class="p">(</span><span class="n">wins</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">losses</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">n</span> <span class="o">=</span> <span class="n">wins</span> <span class="o">+</span> <span class="n">losses</span>
+</span></span><span class="line"><span class="cl">    <span class="n">smaller_tail</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">wins</span><span class="p">,</span> <span class="n">losses</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="o">**</span><span class="n">n</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">smaller_tail</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">sign_test_two_sided</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># 0.004180908203125</span>
+</span></span></code></pre></div><p>With \(n=10\), the same rule gives <strong>10/10 → 0.00195</strong>, <strong>9/10 → 0.0215</strong>, and <strong>8/10 → 0.109</strong>. The discreteness is why a small battery needs an extreme direction count to cross a conventional threshold.</p>
+<h2 id="assumptions-and-choices">Assumptions and choices</h2>
+<ul>
+<li><strong>Pairing:</strong> each pressure result must be compared with its genuinely matched control; unmatched arms do not become valid because their \(p\)-value is small.</li>
+<li><strong>Independence or exchangeability:</strong> the usual binomial tail treats the nonzero signs as independent fair signs under the null. Closely related paraphrases can violate that model; see <a href="/blog/references/iid/">i.i.d.</a>.</li>
+<li><strong>Ties:</strong> \(D_i=0\) has no sign. Omit ties and report the reduced effective \(n\), rather than silently counting them as wins or losses.</li>
+<li><strong>Sidedness:</strong> choose a one-sided alternative only when its direction was fixed in advance. Otherwise report the two-sided result used above.</li>
+<li><strong>Selection:</strong> the test does not correct for trying many lexicons, constructs, subsets, or analysis rules and reporting the most favorable one.</li>
+</ul>
+<p>“Exact” means no large-sample approximation was used to compute the binomial tail. It does not remove these design assumptions.</p>
+<h2 id="what-a-p-value-does-not-tell-you">What a p-value does not tell you</h2>
+<p>A \(p\)-value is not the probability that the hypothesis is true, not an effect size, and not a population estimate. The direction count says how consistently the frozen pairs moved; the reported rank gaps show their separation on the chosen scale; the <a href="/blog/references/wilcoxon/">Wilcoxon test</a> uses the ordering of those absolute gaps. None turns a convenience paraphrase battery into <a href="/blog/references/iid/">i.i.d.</a> draws from a wider construct.</p>
+<p>Prefer the full evidence bundle: <strong>direction count, exact \(p\), a pre-specified magnitude summary, and matched controls</strong> (<a href="/blog/references/logit-lens/">logit lens</a>, <a href="/blog/references/random-j/">random-J</a>). A low \(p\) that also appears under the logit lens is not, by itself, a <a href="/blog/references/jacobian-lens/">Jacobian-lens</a>-specific result. A tiny \(p\) from a confounded comparison remains a confounded result.</p>
 <p>See also: <a href="/blog/references/wilcoxon/">Wilcoxon</a>, <a href="/blog/references/best-rank/">best-rank</a>, <a href="/blog/references/prompt-echo/">prompt echo</a>.</p>
 
             </div>
 
             <footer class="post-footer">
                 <div class="post-navigation">
-                    <a href="/blog/references/" class="back-to-blog">← All references</a>
+
+                    <a href="/blog/references/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/references/" class="back-to-blog">Knowledge Base</a>
                     <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
                 </div>
             </footer>
@@ -147,7 +187,7 @@
                 <nav aria-label="Footer navigation">
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
-                    <a href="/blog/references/">References</a>
+                    <a href="/blog/references/">Knowledge Base</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
@@ -162,11 +202,9 @@
     <script>
       feather.replace()
     </script>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            
-            
             const tables = document.querySelectorAll('.post-body table');
             tables.forEach((table, index) => {
                 if (table.parentElement?.classList.contains('table-scroll')) return;
@@ -199,41 +237,36 @@
 
             renderMathInElement(document.body, {
                 delimiters: [
-                    
-                    
                     {left: "$$", right: "$$", display: true},
                     {left: "\\[", right: "\\]", display: true},
                     {left: "\\(", right: "\\)", display: false}
                 ],
                 throwOnError: false,
-                
                 output: "htmlAndMathml"
             });
 
-            
-            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre');
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
             codeBlocks.forEach(pre => {
                 const button = document.createElement('button');
                 button.className = 'copy-code-button';
                 button.innerHTML = '📋 Copy';
                 button.setAttribute('aria-label', 'Copy code to clipboard');
-                
+
                 button.addEventListener('click', () => {
                     const code = pre.querySelector('code');
                     const text = code ? code.textContent : pre.textContent;
-                    
+
                     navigator.clipboard.writeText(text).then(() => {
                         const originalText = button.innerHTML;
                         button.innerHTML = '✅ Copied!';
                         button.classList.add('copied');
-                        
+
                         setTimeout(() => {
                             button.innerHTML = originalText;
                             button.classList.remove('copied');
                         }, 2000);
                     }).catch(err => {
                         console.error('Failed to copy: ', err);
-                        
                         const textArea = document.createElement('textarea');
                         textArea.value = text;
                         document.body.appendChild(textArea);
@@ -244,7 +277,7 @@
                             const originalText = button.innerHTML;
                             button.innerHTML = '✅ Copied!';
                             button.classList.add('copied');
-                            
+
                             setTimeout(() => {
                                 button.innerHTML = originalText;
                                 button.classList.remove('copied');
@@ -255,11 +288,11 @@
                         document.body.removeChild(textArea);
                     });
                 });
-                
+
                 pre.appendChild(button);
             });
         });
     </script>
-    
+
 </body>
 </html>

@@ -10,13 +10,13 @@
     
     
     
-    <meta name="description" content="An intermediate entity a model must use to answer a two-hop question, but that never appears in the prompt or the generated answer.">
+    <meta name="description" content="An intermediate entity that logically links a two-hop question to its answer while remaining absent from both visible texts.">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/references/hidden-bridge/">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="praxagent Research Notes">
     <meta property="og:title" content="Hidden bridge">
-    <meta property="og:description" content="An intermediate entity a model must use to answer a two-hop question, but that never appears in the prompt or the generated answer.">
+    <meta property="og:description" content="An intermediate entity that logically links a two-hop question to its answer while remaining absent from both visible texts.">
     <meta property="og:url" content="https://praxagent.ai/blog/references/hidden-bridge/">
     <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
     <meta property="og:image:width" content="1200">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@praxagent">
     <meta name="twitter:title" content="Hidden bridge">
-    <meta name="twitter:description" content="An intermediate entity a model must use to answer a two-hop question, but that never appears in the prompt or the generated answer.">
+    <meta name="twitter:description" content="An intermediate entity that logically links a two-hop question to its answer while remaining absent from both visible texts.">
     <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="/blog/blog.css">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script type="module">
@@ -46,7 +46,7 @@
         flowchart: { htmlLabels: true, curve: 'basis' }
       });
     </script>
-    
+
 </head>
 <body>
     <nav class="navbar navbar-scrolls industrial-navbar">
@@ -56,11 +56,11 @@
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
-            
+
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link">Research Notes</a>
-                <a href="/blog/references/" class="nav-link active">References</a>
+                <a href="/blog/references/" class="nav-link active">Knowledge Base</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -71,14 +71,14 @@
                     </span>
                 </div>
             </div>
-            
+
             
             <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            
+
         </div>
     </nav>
 
@@ -86,7 +86,7 @@
         <div class="mobile-menu-content">
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
-            <a href="/blog/references/" class="mobile-nav-link active">References</a>
+            <a href="/blog/references/" class="mobile-nav-link active">Knowledge Base</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -103,27 +103,88 @@
 
     <main>
         
+
+
 <div class="blog-post reference-entry">
     <div class="container">
         <article class="post-content">
             <header class="post-header">
-                <p class="blog-kicker" style="margin-bottom: 1rem;">References</p>
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
                 <h1 class="post-title">Hidden bridge</h1>
                 
-                <p class="reference-summary">An intermediate entity a model must use to answer a two-hop question, but that never appears in the prompt or the generated answer.</p>
+                <p class="reference-summary">An intermediate entity that logically links a two-hop question to its answer while remaining absent from both visible texts.</p>
                 
             </header>
 
             <div class="post-body">
-                <p>A <strong>hidden bridge</strong> (also <em>bridge entity</em>, <em>country-bridge</em> in our release note) is the unspoken intermediate in a two-hop question.</p>
-<p>Example: “What is the capital of the country where the Statue of Liberty stands?” The bridge is <strong>United States</strong> / <strong>America</strong>. The asked answer is a capital city. A strict audit requires the bridge string to be absent from the prompt <strong>and</strong> from the model&rsquo;s <a href="/blog/references/greedy-continuation/">greedy continuation</a>.</p>
+                <p>A <strong>hidden bridge</strong> (also <em>bridge entity</em>, or <em>country-bridge</em> in our release note) is an intermediate fact that logically connects a question to its answer, while the bridge&rsquo;s name is absent from both the question and the model&rsquo;s visible answer.</p>
+<h2 id="worked-example">Worked example</h2>
+<blockquote>
+<p>What is the capital of the country where the Statue of Liberty stands?</p>
+</blockquote>
+<table>
+  <thead>
+      <tr>
+          <th>Role</th>
+          <th>Entity</th>
+          <th style="text-align: right">Visible in prompt?</th>
+          <th style="text-align: right">Expected in answer?</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Starting clue</td>
+          <td>Statue of Liberty</td>
+          <td style="text-align: right">yes</td>
+          <td style="text-align: right">no</td>
+      </tr>
+      <tr>
+          <td>Hidden bridge</td>
+          <td>United States / America / U.S.</td>
+          <td style="text-align: right">no</td>
+          <td style="text-align: right">no</td>
+      </tr>
+      <tr>
+          <td>Requested answer</td>
+          <td>Washington, D.C.</td>
+          <td style="text-align: right">no</td>
+          <td style="text-align: right">yes</td>
+      </tr>
+  </tbody>
+</table>
+<pre class="mermaid">flowchart LR
+    Q["Statue of Liberty"] -->|located in| B["United States"]
+    B -->|capital is| A["Washington, D.C."]
+    classDef hidden fill:#fff7ed,stroke:#d97706,stroke-width:2px;
+    class B hidden;</pre>
+<p>The bridge is logically useful even though the final answer need not spell it out. This makes it a cleaner mid-layer probe than a word copied directly from the prompt.</p>
+<h2 id="leakage-audit">Leakage audit</h2>
+<p>A string audit should normalize case and punctuation and check an explicit alias list:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">re</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">words</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&#34;[a-z0-9]+&#34;</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">casefold</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s2">&#34; &#34;</span> <span class="o">+</span> <span class="s2">&#34; &#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34; &#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">leaks_bridge</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">continuation</span><span class="p">,</span> <span class="n">aliases</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">visible</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">prompt</span> <span class="o">+</span> <span class="s2">&#34; &#34;</span> <span class="o">+</span> <span class="n">continuation</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">normalize</span><span class="p">(</span><span class="n">alias</span><span class="p">)</span> <span class="ow">in</span> <span class="n">visible</span> <span class="k">for</span> <span class="n">alias</span> <span class="ow">in</span> <span class="n">aliases</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">aliases</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;United States&#34;</span><span class="p">,</span> <span class="s2">&#34;America&#34;</span><span class="p">,</span> <span class="s2">&#34;U.S.&#34;</span><span class="p">,</span> <span class="s2">&#34;USA&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="s2">&#34;What is the capital of the country where the Statue of Liberty stands?&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">continuation</span> <span class="o">=</span> <span class="s2">&#34;Washington, D.C.&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">assert</span> <span class="ow">not</span> <span class="n">leaks_bridge</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">continuation</span><span class="p">,</span> <span class="n">aliases</span><span class="p">)</span>
+</span></span></code></pre></div><p>For production audits, use the model&rsquo;s tokenizer too: one concept may have case, leading-space, abbreviation, and multi-token variants. String absence rules out literal leakage; it does <strong>not</strong> prove that a lens readout was causally used to produce the answer. That stronger claim needs an intervention or another causal test.</p>
 <p>See also: <a href="/blog/references/jacobian-lens/">Jacobian lens</a>, <a href="/blog/references/logit-lens/">logit lens</a>, <a href="/blog/references/greedy-continuation/">greedy continuation</a>, <a href="/blog/references/workspace/">workspace</a>.</p>
 
             </div>
 
             <footer class="post-footer">
                 <div class="post-navigation">
-                    <a href="/blog/references/" class="back-to-blog">← All references</a>
+
+                    <a href="/blog/references/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/references/" class="back-to-blog">Knowledge Base</a>
                     <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
                 </div>
             </footer>
@@ -144,7 +205,7 @@
                 <nav aria-label="Footer navigation">
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
-                    <a href="/blog/references/">References</a>
+                    <a href="/blog/references/">Knowledge Base</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
@@ -159,11 +220,9 @@
     <script>
       feather.replace()
     </script>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            
-            
             const tables = document.querySelectorAll('.post-body table');
             tables.forEach((table, index) => {
                 if (table.parentElement?.classList.contains('table-scroll')) return;
@@ -196,41 +255,36 @@
 
             renderMathInElement(document.body, {
                 delimiters: [
-                    
-                    
                     {left: "$$", right: "$$", display: true},
                     {left: "\\[", right: "\\]", display: true},
                     {left: "\\(", right: "\\)", display: false}
                 ],
                 throwOnError: false,
-                
                 output: "htmlAndMathml"
             });
 
-            
-            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre');
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
             codeBlocks.forEach(pre => {
                 const button = document.createElement('button');
                 button.className = 'copy-code-button';
                 button.innerHTML = '📋 Copy';
                 button.setAttribute('aria-label', 'Copy code to clipboard');
-                
+
                 button.addEventListener('click', () => {
                     const code = pre.querySelector('code');
                     const text = code ? code.textContent : pre.textContent;
-                    
+
                     navigator.clipboard.writeText(text).then(() => {
                         const originalText = button.innerHTML;
                         button.innerHTML = '✅ Copied!';
                         button.classList.add('copied');
-                        
+
                         setTimeout(() => {
                             button.innerHTML = originalText;
                             button.classList.remove('copied');
                         }, 2000);
                     }).catch(err => {
                         console.error('Failed to copy: ', err);
-                        
                         const textArea = document.createElement('textarea');
                         textArea.value = text;
                         document.body.appendChild(textArea);
@@ -241,7 +295,7 @@
                             const originalText = button.innerHTML;
                             button.innerHTML = '✅ Copied!';
                             button.classList.add('copied');
-                            
+
                             setTimeout(() => {
                                 button.innerHTML = originalText;
                                 button.classList.remove('copied');
@@ -252,11 +306,11 @@
                         document.body.removeChild(textArea);
                     });
                 });
-                
+
                 pre.appendChild(button);
             });
         });
     </script>
-    
+
 </body>
 </html>

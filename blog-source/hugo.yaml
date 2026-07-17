@@ -15,7 +15,6 @@ params:
 
 permalinks:
   posts: '/posts/:year/:month/:slug/'
-  references: '/references/:slug/'
 
 markup:
   goldmark:

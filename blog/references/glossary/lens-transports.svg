@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 410" role="img" aria-labelledby="title desc">
+  <title id="title">Comparison of logit lens, Jacobian lens, and random-J</title>
+  <desc id="desc">A mid-layer residual vector branches through identity, corpus-derived Jacobian, or random matched-scale transports before shared final normalization and unembedding produce vocabulary scores.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}.box{fill:#fff;stroke:#94a3b8;stroke-width:1.5}.fit{fill:#d6e8f5;stroke:#4b6787;stroke-width:2}.null{fill:#fff7ed;stroke:#d97706;stroke-width:2}.title{font:600 25px 'IBM Plex Sans',system-ui,sans-serif;fill:#17283a}.label{font:600 16px 'IBM Plex Sans',system-ui,sans-serif;fill:#24384d}.small{font:13px 'IBM Plex Sans',system-ui,sans-serif;fill:#526273}.math{font:600 18px 'JetBrains Mono',ui-monospace,monospace;fill:#24384d}.line{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#head)}
+    </style>
+    <marker id="head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+  </defs>
+  <rect class="bg" width="980" height="410" rx="18"/>
+  <text class="title" x="48" y="48">Three transports, one shared vocabulary readout</text>
+  <g transform="translate(42 162)"><rect class="box" width="170" height="82" rx="12"/><text class="label" x="85" y="31" text-anchor="middle">mid-layer residual</text><text class="math" x="85" y="59" text-anchor="middle">xℓ</text></g>
+  <path class="line" d="M212 203 C270 203 270 102 326 102"/><path class="line" d="M212 203 L326 203"/><path class="line" d="M212 203 C270 203 270 304 326 304"/>
+  <g transform="translate(326 64)"><rect class="box" width="220" height="76" rx="12"/><text class="label" x="110" y="29" text-anchor="middle">Logit lens</text><text class="small" x="110" y="53" text-anchor="middle">identity: I · xℓ</text></g>
+  <g transform="translate(326 165)"><rect class="fit" width="220" height="76" rx="12"/><text class="label" x="110" y="29" text-anchor="middle">Jacobian lens</text><text class="small" x="110" y="53" text-anchor="middle">corpus-derived: Jℓ · xℓ</text></g>
+  <g transform="translate(326 266)"><rect class="null" width="220" height="76" rx="12"/><text class="label" x="110" y="29" text-anchor="middle">Random-J control</text><text class="small" x="110" y="53" text-anchor="middle">scrambled, scale-matched J̃ℓ · xℓ</text></g>
+  <path class="line" d="M546 102 C610 102 610 203 656 203"/><path class="line" d="M546 203 L656 203"/><path class="line" d="M546 304 C610 304 610 203 656 203"/>
+  <g transform="translate(656 162)"><rect class="box" width="130" height="82" rx="12"/><text class="small" x="65" y="22" text-anchor="middle">final norm +</text><text class="label" x="65" y="44" text-anchor="middle">unembedding</text><text class="math" x="65" y="69" text-anchor="middle">Wᵁ</text></g>
+  <path class="line" d="M786 203 L840 203"/>
+  <g transform="translate(840 162)"><rect class="box" width="105" height="82" rx="12"/><text class="label" x="52" y="31" text-anchor="middle">scores</text><text class="small" x="52" y="56" text-anchor="middle">one / token</text></g>
+  <text class="small" x="48" y="374">Beating identity and a matched-scale random-J supports a corpus-derived transport advantage.</text>
+  <text class="small" x="48" y="394">Stronger attribution requires controls that preserve the relevant geometry.</text>
+</svg>

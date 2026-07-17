@@ -1,29 +1,31 @@
 {{ define "main" }}
 <header class="blog-header">
     <div class="blog-header-content">
-        <p class="blog-kicker">praxagent / Technical record</p>
+        <p class="blog-kicker">praxagent / Learning library</p>
         <div class="blog-header-grid">
             <h1 class="blog-title">
-                Technical <span class="accent">References</span>
+                Knowledge <span class="accent">Base</span>
             </h1>
             <p class="blog-subtitle">
-                Short, stable definitions for terms used across the Research Notes.
-                Notes stay on experiments; explanations live here.
+                Choose a path: learn a subject in depth, look up a term, or build
+                with Prax. Each collection grows with the work.
             </p>
         </div>
     </div>
 </header>
 
 <div class="blog-main">
-    <div class="blog-index">
-        <div class="blog-index-list taxonomy-directory">
-            {{ range (where .Pages "Kind" "page").ByTitle }}
-            <a class="blog-index-row" href="{{ .RelPermalink }}">
-                <h3>{{ .Title }}</h3>
-                <span class="blog-index-meta">{{ with .Params.summary }}{{ . | truncate 90 }}{{ else }}Reference{{ end }}</span>
+    <nav class="knowledge-directory" aria-label="Knowledge Base sections">
+{{ range .Sections.ByWeight }}
+            <a class="knowledge-card" href="{{ .RelPermalink }}">
+                <span class="knowledge-card-index" aria-hidden="true">{{ .Params.card_index }} / {{ .Params.card_label }}</span>
+                <h2>{{ .Params.card_title | default .Title }}</h2>
+                <p>{{ .Params.card_summary | default .Params.summary }}</p>
+                <span class="knowledge-card-action">
+                    {{ .Params.card_action }} <span aria-hidden="true">→</span>
+                </span>
             </a>
-            {{ end }}
-        </div>
-    </div>
+{{ end }}
+    </nav>
 </div>
 {{ end }}

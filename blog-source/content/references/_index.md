@@ -1,8 +1,8 @@
 ---
-title: "References"
-summary: "Short, stable definitions for technical terms used across praxagent Research Notes."
+title: "Knowledge Base"
+summary: "Deep dives, practical documentation, and connected explanations for learning and building with praxagent."
 ---
 
-Stable definitions for terms that recur in the notes. Research Notes stay focused on
-experiments and results; when a term needs explaining, link here instead of re-deriving
-it inline.
+Choose the kind of knowledge you need: learn a subject in depth, look up a term, or
+build with Prax. Each collection can grow independently while staying connected to
+the Research Notes.

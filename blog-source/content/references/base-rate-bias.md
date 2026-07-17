@@ -7,13 +7,36 @@ aliases:
   - /references/base-rate-biased/
 ---
 
-**Base-rate bias** (in these notes) means a probe word looks active in a lens readout mainly because it is a *common, high-prior* token, not because the prompt condition did distinctive work.
+**Base-rate bias** is our operational name for a probe token looking strong in a readout even when the experimental condition did little or nothing distinctive. The strength may come from the model's ordinary next-token preferences, the output vocabulary geometry, or the search statistic—not from the construct being tested.
 
-Two places it shows up:
+It is a diagnosis from **controls**, not a permanent property of a word. A token can be high-prior in one prompt position and informative in another.
 
-1. **[Logit lens]({{< relref "logit-lens.md" >}}) / unembedding.** Mid-layer readouts reuse the model's output map. Frequent words and near-certain completions (famous capitals, function words, survival verbs like *self* / *shut*) sit near the top of that map by default. The Tuned Lens literature documents that the plain logit lens is especially prone to this kind of output-adjacent, base-rate-heavy readout ([Belrose et al. 2023](https://arxiv.org/abs/2303.08112)).
-2. **[Best-rank]({{< relref "best-rank.md" >}}).** Taking the *minimum* rank over many layers and positions pulls any high-prior word downward further. A random transport can look “good” on the same statistic.
+## A toy example
 
-**How we treat it.** Prefer pressure-vs-control contrasts, run [random-J]({{< relref "random-j.md" >}}) and logit-lens controls on the same probe, and do not read a low absolute rank on a famous capital or common survival word as proof of resistance or self-preservation.
+Suppose lower [rank]({{< relref "rank.md" >}}) is stronger and every arm uses the same layer-by-position search:
+
+| Probe | Pressure | Matched control | Random-J | Reading |
+|---|---:|---:|---:|---|
+| `the` | 4 | 5 | 6 | Strong everywhere; no condition-specific evidence |
+| `survive` | 180 | 3,900 | 21,000 | Large matched contrast worth investigating |
+| `Paris` | 22 | 25 | 31 | Likely an easy/high-prior completion in this context |
+
+The absolute rank of `the` is spectacular, but its **contrast** is negligible. `survive` has a weaker absolute rank and much stronger experimental evidence.
+
+## Where the bias enters
+
+1. **Output-adjacent readout.** A [logit lens]({{< relref "logit-lens.md" >}}) reuses the model's output head at a point where its coordinates may not yet match the final layer. The Tuned Lens work shows that plain logit-lens distributions can be brittle and systematically miscalibrated across depth; it does not, by itself, establish a universal frequency mechanism for each token ([Belrose et al. 2023](https://arxiv.org/abs/2303.08112)).
+2. **Selection over many cells.** [Best-rank]({{< relref "best-rank.md" >}}) keeps the minimum over layers, positions, and sometimes token variants. More searched cells create more opportunities for an accidental extreme.
+3. **Prompt and task priors.** Famous facts, syntactic continuations, and words already suggested by the prompt can rank well without carrying the intended latent concept.
+
+## How we guard against it
+
+- Pre-specify probe tokens and tokenization variants.
+- Compare paired pressure/control prompts that share surface form wherever possible.
+- Score [logit lens]({{< relref "logit-lens.md" >}}), fitted lens, and [random-J]({{< relref "random-j.md" >}}) with the **identical** search rule.
+- Check for literal [prompt echo]({{< relref "prompt-echo.md" >}}).
+- Report the paired gap and direction count alongside the absolute best rank.
+
+A low absolute rank is a lead. A replicated, control-relative gap is evidence.
 
 See also: [rank]({{< relref "rank.md" >}}), [prompt echo]({{< relref "prompt-echo.md" >}}), [unembedding]({{< relref "unembedding.md" >}}).

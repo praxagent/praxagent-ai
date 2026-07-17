@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="/blog/blog.css">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script type="module">
@@ -46,7 +46,7 @@
         flowchart: { htmlLabels: true, curve: 'basis' }
       });
     </script>
-    
+
 </head>
 <body>
     <nav class="navbar navbar-scrolls industrial-navbar">
@@ -56,11 +56,11 @@
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
-            
+
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link">Research Notes</a>
-                <a href="/blog/references/" class="nav-link active">References</a>
+                <a href="/blog/references/" class="nav-link active">Knowledge Base</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -71,14 +71,14 @@
                     </span>
                 </div>
             </div>
-            
+
             
             <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            
+
         </div>
     </nav>
 
@@ -86,7 +86,7 @@
         <div class="mobile-menu-content">
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
-            <a href="/blog/references/" class="mobile-nav-link active">References</a>
+            <a href="/blog/references/" class="mobile-nav-link active">Knowledge Base</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -103,11 +103,13 @@
 
     <main>
         
+
+
 <div class="blog-post reference-entry">
     <div class="container">
         <article class="post-content">
             <header class="post-header">
-                <p class="blog-kicker" style="margin-bottom: 1rem;">References</p>
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
                 <h1 class="post-title">Logit lens</h1>
                 
                 <p class="reference-summary">The free mid-layer readout that skips any fitted transport: unembed the residual as if it were already final-layer coordinates.</p>
@@ -115,15 +117,29 @@
             </header>
 
             <div class="post-body">
-                <p>The <strong>logit lens</strong> (also called the <em>identity</em> transport in our notes) takes a mid-layer residual-stream vector and unembeds it <em>as if</em> it were already in final-layer coordinates. Same ranking code as a <a href="/blog/references/jacobian-lens/">Jacobian lens</a>, no published matrix required.</p>
+                <p>The <strong>logit lens</strong> (also called the <em>identity</em> transport in our notes) takes one mid-layer <a href="/blog/references/residual-stream/">residual-stream</a> vector and applies the model&rsquo;s final readout <em>as if that vector were already in final-layer coordinates</em>. A typical implementation is</p>
+\[
+z_{\ell,t} = W_U\,N_f(h_{\ell,t}) + b_U,
+\]<p>where \(N_f\) is the model&rsquo;s final normalization and \(W_U\) and \(b_U\) are its <a href="/blog/references/unembedding/">unembedding</a> parameters. Architectural details differ: the correct normalization, bias, and tied-weight convention must match the model being inspected. Skipping the final normalization can materially change the ranking.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Schematic only: use the target model&#39;s actual final norm and output head.</span>
+</span></span><span class="line"><span class="cl"><span class="n">h</span> <span class="o">=</span> <span class="n">residual</span><span class="p">[</span><span class="n">layer</span><span class="p">,</span> <span class="n">position</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">scores</span> <span class="o">=</span> <span class="n">output_head</span><span class="p">(</span><span class="n">final_norm</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">ranking</span> <span class="o">=</span> <span class="n">scores</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span></code></pre></div><p>The softmax of <code>scores</code> is a convenient display distribution, but at an intermediate layer it is not necessarily calibrated as that layer&rsquo;s true next-token probability distribution. The rest of the network has not run yet.</p>
+<h2 id="how-to-read-the-result">How to read the result</h2>
+<p>If <em>Paris</em> ranks first at a middle layer, the careful claim is: “under the model&rsquo;s final vocabulary readout, this selected normalized state gives <em>Paris</em> a very high score.” It is not yet a claim that the model will emit <em>Paris</em>, that a dedicated “Paris feature” exists, or that this score causally drives the answer. Later blocks can strengthen, erase, or redirect it.</p>
 <p>It is the mandatory control. If the logit lens already surfaces your probe words, the fitted Jacobian file was not doing the distinctive work on that task.</p>
+<p>Conversely, a difference between the identity readout and a <a href="/blog/references/jacobian-lens/">Jacobian lens</a> shows sensitivity to the transport. It does not, without matched prompts and interventions, establish that either lens has recovered the model&rsquo;s mechanism.</p>
 <p>See also: <a href="/blog/references/base-rate-bias/">base-rate bias</a>, <a href="/blog/references/jacobian-lens/">Jacobian lens</a>, <a href="/blog/references/random-j/">random-J</a>, <a href="/blog/references/best-rank/">best-rank</a>.</p>
 
             </div>
 
             <footer class="post-footer">
                 <div class="post-navigation">
-                    <a href="/blog/references/" class="back-to-blog">← All references</a>
+
+                    <a href="/blog/references/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/references/" class="back-to-blog">Knowledge Base</a>
                     <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
                 </div>
             </footer>
@@ -144,7 +160,7 @@
                 <nav aria-label="Footer navigation">
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
-                    <a href="/blog/references/">References</a>
+                    <a href="/blog/references/">Knowledge Base</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
@@ -159,11 +175,9 @@
     <script>
       feather.replace()
     </script>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            
-            
             const tables = document.querySelectorAll('.post-body table');
             tables.forEach((table, index) => {
                 if (table.parentElement?.classList.contains('table-scroll')) return;
@@ -196,41 +210,36 @@
 
             renderMathInElement(document.body, {
                 delimiters: [
-                    
-                    
                     {left: "$$", right: "$$", display: true},
                     {left: "\\[", right: "\\]", display: true},
                     {left: "\\(", right: "\\)", display: false}
                 ],
                 throwOnError: false,
-                
                 output: "htmlAndMathml"
             });
 
-            
-            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre');
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
             codeBlocks.forEach(pre => {
                 const button = document.createElement('button');
                 button.className = 'copy-code-button';
                 button.innerHTML = '📋 Copy';
                 button.setAttribute('aria-label', 'Copy code to clipboard');
-                
+
                 button.addEventListener('click', () => {
                     const code = pre.querySelector('code');
                     const text = code ? code.textContent : pre.textContent;
-                    
+
                     navigator.clipboard.writeText(text).then(() => {
                         const originalText = button.innerHTML;
                         button.innerHTML = '✅ Copied!';
                         button.classList.add('copied');
-                        
+
                         setTimeout(() => {
                             button.innerHTML = originalText;
                             button.classList.remove('copied');
                         }, 2000);
                     }).catch(err => {
                         console.error('Failed to copy: ', err);
-                        
                         const textArea = document.createElement('textarea');
                         textArea.value = text;
                         document.body.appendChild(textArea);
@@ -241,7 +250,7 @@
                             const originalText = button.innerHTML;
                             button.innerHTML = '✅ Copied!';
                             button.classList.add('copied');
-                            
+
                             setTimeout(() => {
                                 button.innerHTML = originalText;
                                 button.classList.remove('copied');
@@ -252,11 +261,11 @@
                         document.body.removeChild(textArea);
                     });
                 });
-                
+
                 pre.appendChild(button);
             });
         });
     </script>
-    
+
 </body>
 </html>

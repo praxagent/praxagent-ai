@@ -10,13 +10,13 @@
     
     
     
-    <meta name="description" content="The model&#39;s running hidden-state scratchpad: each layer reads it, adds an update, and passes it on.">
+    <meta name="description" content="The model&#39;s running hidden-state channel: each layer reads it, adds an update, and passes it on.">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/references/residual-stream/">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="praxagent Research Notes">
     <meta property="og:title" content="Residual stream">
-    <meta property="og:description" content="The model&#39;s running hidden-state scratchpad: each layer reads it, adds an update, and passes it on.">
+    <meta property="og:description" content="The model&#39;s running hidden-state channel: each layer reads it, adds an update, and passes it on.">
     <meta property="og:url" content="https://praxagent.ai/blog/references/residual-stream/">
     <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
     <meta property="og:image:width" content="1200">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@praxagent">
     <meta name="twitter:title" content="Residual stream">
-    <meta name="twitter:description" content="The model&#39;s running hidden-state scratchpad: each layer reads it, adds an update, and passes it on.">
+    <meta name="twitter:description" content="The model&#39;s running hidden-state channel: each layer reads it, adds an update, and passes it on.">
     <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="/blog/blog.css">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script type="module">
@@ -46,7 +46,7 @@
         flowchart: { htmlLabels: true, curve: 'basis' }
       });
     </script>
-    
+
 </head>
 <body>
     <nav class="navbar navbar-scrolls industrial-navbar">
@@ -56,11 +56,11 @@
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
-            
+
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link">Research Notes</a>
-                <a href="/blog/references/" class="nav-link active">References</a>
+                <a href="/blog/references/" class="nav-link active">Knowledge Base</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -71,14 +71,14 @@
                     </span>
                 </div>
             </div>
-            
+
             
             <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            
+
         </div>
     </nav>
 
@@ -86,7 +86,7 @@
         <div class="mobile-menu-content">
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
-            <a href="/blog/references/" class="mobile-nav-link active">References</a>
+            <a href="/blog/references/" class="mobile-nav-link active">Knowledge Base</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -103,26 +103,53 @@
 
     <main>
         
+
+
 <div class="blog-post reference-entry">
     <div class="container">
         <article class="post-content">
             <header class="post-header">
-                <p class="blog-kicker" style="margin-bottom: 1rem;">References</p>
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
                 <h1 class="post-title">Residual stream</h1>
                 
-                <p class="reference-summary">The model&#39;s running hidden-state scratchpad: each layer reads it, adds an update, and passes it on.</p>
+                <p class="reference-summary">The model&#39;s running hidden-state channel: each layer reads it, adds an update, and passes it on.</p>
                 
             </header>
 
             <div class="post-body">
-                <p>The <strong>residual stream</strong> is the transformer&rsquo;s shared hidden-state vector that every layer reads and writes. Mid-network it is a high-dimensional vector, not English. Readouts such as the <a href="/blog/references/logit-lens/">logit lens</a> and <a href="/blog/references/jacobian-lens/">Jacobian lens</a> score that vector against vocabulary directions.</p>
+                <p>The <strong>residual stream</strong> is the transformer&rsquo;s running hidden state. More precisely, there is <strong>one residual vector per token position</strong>, not one vector for the whole prompt. At layer \(\ell\), a sequence of \(n\) tokens has a residual-state matrix</p>
+\[
+H_\ell =
+\begin{bmatrix}
+h_{\ell,1}^{\top} \\
+\vdots \\
+h_{\ell,n}^{\top}
+\end{bmatrix}
+\in \mathbb{R}^{n\times d_{\text{model}}}.
+\]<p>Each transformer block reads those vectors and adds updates back into them. In a common pre-normalization block, the schematic update is</p>
+\[
+U_\ell = H_\ell + \operatorname{Attention}_\ell(N(H_\ell)),
+\qquad
+H_{\ell+1} = U_\ell + \operatorname{MLP}_\ell(N(U_\ell)).
+\]<p>Attention means the update at one position can depend on other permitted positions in the sequence. The residual stream is therefore better pictured as a sequence of evolving row vectors than as a single global scratchpad.</p>
+<h2 id="worked-example">Worked example</h2>
+<p>Suppose a tokenizer turns “The capital is Paris” into four tokens. A saved activation tensor might have shape <code>(layers, 4, d_model)</code>. Reading the state after layer 20 at the last token means selecting one vector:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">layer</span> <span class="o">=</span> <span class="mi">20</span>
+</span></span><span class="line"><span class="cl"><span class="n">position</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">h</span> <span class="o">=</span> <span class="n">residual</span><span class="p">[</span><span class="n">layer</span><span class="p">,</span> <span class="n">position</span><span class="p">]</span>  <span class="c1"># shape: (d_model,)</span>
+</span></span></code></pre></div><p>Changing <code>position</code> changes the state being inspected. A result at the final prompt position does not automatically describe every earlier token position.</p>
+<h2 id="what-a-readout-adds">What a readout adds</h2>
+<p>Mid-network \(h_{\ell,t}\) is a high-dimensional vector, not a sentence in English. Readouts such as the <a href="/blog/references/logit-lens/">logit lens</a> and <a href="/blog/references/jacobian-lens/">Jacobian lens</a> normalize and map a selected vector into vocabulary scores. Those scores are a measurement imposed by the analyst. Seeing a word score highly does not by itself show that the model represents a clean, discrete English concept there or that the scored direction causally controls behavior. Causal claims require an intervention and an observed downstream effect.</p>
 <p>See also: <a href="/blog/references/workspace/">workspace</a>, <a href="/blog/references/unembedding/">unembedding</a>.</p>
 
             </div>
 
             <footer class="post-footer">
                 <div class="post-navigation">
-                    <a href="/blog/references/" class="back-to-blog">← All references</a>
+
+                    <a href="/blog/references/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/references/" class="back-to-blog">Knowledge Base</a>
                     <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
                 </div>
             </footer>
@@ -143,7 +170,7 @@
                 <nav aria-label="Footer navigation">
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
-                    <a href="/blog/references/">References</a>
+                    <a href="/blog/references/">Knowledge Base</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
@@ -158,11 +185,9 @@
     <script>
       feather.replace()
     </script>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            
-            
             const tables = document.querySelectorAll('.post-body table');
             tables.forEach((table, index) => {
                 if (table.parentElement?.classList.contains('table-scroll')) return;
@@ -195,41 +220,36 @@
 
             renderMathInElement(document.body, {
                 delimiters: [
-                    
-                    
                     {left: "$$", right: "$$", display: true},
                     {left: "\\[", right: "\\]", display: true},
                     {left: "\\(", right: "\\)", display: false}
                 ],
                 throwOnError: false,
-                
                 output: "htmlAndMathml"
             });
 
-            
-            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre');
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
             codeBlocks.forEach(pre => {
                 const button = document.createElement('button');
                 button.className = 'copy-code-button';
                 button.innerHTML = '📋 Copy';
                 button.setAttribute('aria-label', 'Copy code to clipboard');
-                
+
                 button.addEventListener('click', () => {
                     const code = pre.querySelector('code');
                     const text = code ? code.textContent : pre.textContent;
-                    
+
                     navigator.clipboard.writeText(text).then(() => {
                         const originalText = button.innerHTML;
                         button.innerHTML = '✅ Copied!';
                         button.classList.add('copied');
-                        
+
                         setTimeout(() => {
                             button.innerHTML = originalText;
                             button.classList.remove('copied');
                         }, 2000);
                     }).catch(err => {
                         console.error('Failed to copy: ', err);
-                        
                         const textArea = document.createElement('textarea');
                         textArea.value = text;
                         document.body.appendChild(textArea);
@@ -240,7 +260,7 @@
                             const originalText = button.innerHTML;
                             button.innerHTML = '✅ Copied!';
                             button.classList.add('copied');
-                            
+
                             setTimeout(() => {
                                 button.innerHTML = originalText;
                                 button.classList.remove('copied');
@@ -251,11 +271,11 @@
                         document.body.removeChild(textArea);
                     });
                 });
-                
+
                 pre.appendChild(button);
             });
         });
     </script>
-    
+
 </body>
 </html>

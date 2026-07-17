@@ -2,6 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://praxagent.ai/blog/references/deep-dives/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/glossary/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/</loc>
+  </url><url>
     <loc>https://praxagent.ai/blog/tags/ai/</loc>
     <lastmod>2026-07-15T00:00:00+00:00</lastmod>
   </url><url>
@@ -77,49 +83,137 @@
     <loc>https://praxagent.ai/blog/tags/vector-search/</loc>
     <lastmod>2025-08-02T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/agents/checkpointing/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/agents/delegation/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/guides/feedback-loop/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/agents/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/architecture/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/guides/authentication/</loc>
+  </url><url>
     <loc>https://praxagent.ai/blog/references/base-rate-bias/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/references/best-rank/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/categories/</loc>
   </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/security/configuration/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/infrastructure/content-publishing/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/infrastructure/context-management/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/infrastructure/docker/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/guides/extending/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/guides/social-posts-fetch/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/guides/git-hygiene/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/guides/cloud-gpu/</loc>
+  </url><url>
     <loc>https://praxagent.ai/blog/references/greedy-continuation/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/guides/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/infrastructure/health-monitoring/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/references/hidden-bridge/</loc>
   </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/architecture/hub-and-spoke/</loc>
+  </url><url>
     <loc>https://praxagent.ai/blog/references/iid/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/infrastructure/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/references/jacobian-lens/</loc>
   </url><url>
+    <loc>https://praxagent.ai/blog/references/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/library/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/guides/local-vision/</loc>
+  </url><url>
     <loc>https://praxagent.ai/blog/references/logit-lens/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/infrastructure/mcp-server/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/infrastructure/memory/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/references/motor-layer/</loc>
   </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/security/network-exposure/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/infrastructure/observability/</loc>
+  </url><url>
     <loc>https://praxagent.ai/blog/references/p-value/</loc>
   </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/security/plugin-trust/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/architecture/interoperability/</loc>
+  </url><url>
     <loc>https://praxagent.ai/blog/references/prompt-echo/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/infrastructure/sandbox/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/references/random-j/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/references/rank/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/references/</loc>
+    <loc>https://praxagent.ai/blog/references/prax/architecture/request-flows/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/references/residual-stream/</loc>
   </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/guides/local-cpu-inference/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/guides/cheap-evals/</loc>
+  </url><url>
     <loc>https://praxagent.ai/blog/references/sampling/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/guides/scheduler/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/security/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/agents/self-improvement/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/agents/self-modification/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/agents/self-regeneration/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/guides/setup/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/references/survival-identity/</loc>
   </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/guides/embeddings-migration/</loc>
+  </url><url>
     <loc>https://praxagent.ai/blog/references/temperature/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/guides/testing/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/guides/eval-matrix/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/architecture/lang-stack/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/references/thinking-mode/</loc>
   </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/security/tool-risk/</loc>
+  </url><url>
     <loc>https://praxagent.ai/blog/references/top-p/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/guides/trajectory-export/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/guides/troubleshooting/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/references/unembedding/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/references/wilcoxon/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/references/prax/architecture/workspace/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/references/workspace/</loc>
   </url>

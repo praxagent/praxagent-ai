@@ -1776,12 +1776,26 @@ body {
 }
 
 .industrial-navbar .nav-link {
+    position: relative;
     font-family: var(--font-mono);
     font-size: 0.68rem;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    white-space: nowrap;
     color: var(--text-tertiary);
+}
+
+.industrial-navbar .nav-link + .nav-link::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -0.75rem;
+    width: 1px;
+    height: 0.8rem;
+    background: var(--border-primary);
+    transform: translateY(-50%);
+    pointer-events: none;
 }
 
 .industrial-navbar .nav-link:hover,

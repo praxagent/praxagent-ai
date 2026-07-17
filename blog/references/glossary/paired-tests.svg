@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" role="img" aria-labelledby="title desc">
+  <title id="title">Sign test compared with Wilcoxon signed-rank</title>
+  <desc id="desc">Six paired differences have five positive signs and one negative sign. The sign test counts directions, while Wilcoxon ranks absolute gap sizes before attaching their signs.</desc>
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}.panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.pos{fill:#4b6787}.neg{fill:#d97706}.axis{stroke:#94a3b8;stroke-width:1.5}.title{font:600 25px 'IBM Plex Sans',system-ui,sans-serif;fill:#17283a}.label{font:600 16px 'IBM Plex Sans',system-ui,sans-serif;fill:#24384d}.small{font:13px 'JetBrains Mono',ui-monospace,monospace;fill:#526273}.note{font:14px 'IBM Plex Sans',system-ui,sans-serif;fill:#526273}
+    </style>
+  </defs>
+  <rect class="bg" width="960" height="440" rx="18"/>
+  <text class="title" x="48" y="48">The same paired gaps feed two different tests</text>
+  <g transform="translate(48 90)"><rect class="panel" width="520" height="290" rx="12"/><text class="label" x="22" y="34">paired difference: control rank − treatment rank</text><line class="axis" x1="260" y1="58" x2="260" y2="248"/>
+    <text class="small" x="22" y="84">pair 1</text><rect class="pos" x="260" y="67" width="184" height="20" rx="3"/><text class="small" x="452" y="83">+46</text>
+    <text class="small" x="22" y="118">pair 2</text><rect class="pos" x="260" y="101" width="44" height="20" rx="3"/><text class="small" x="312" y="117">+11</text>
+    <text class="small" x="22" y="152">pair 3</text><rect class="neg" x="228" y="135" width="32" height="20" rx="3"/><text class="small" x="190" y="151">−8</text>
+    <text class="small" x="22" y="186">pair 4</text><rect class="pos" x="260" y="169" width="12" height="20" rx="3"/><text class="small" x="280" y="185">+3</text>
+    <text class="small" x="22" y="220">pair 5</text><rect class="pos" x="260" y="203" width="116" height="20" rx="3"/><text class="small" x="384" y="219">+29</text>
+    <text class="small" x="22" y="254">pair 6</text><rect class="pos" x="260" y="237" width="72" height="20" rx="3"/><text class="small" x="340" y="253">+18</text>
+  </g>
+  <g transform="translate(592 90)"><rect class="panel" width="320" height="132" rx="12"/><text class="label" x="20" y="34">Sign test</text><text class="note" x="20" y="65">uses only direction</text><text class="small" x="20" y="96">5 positive, 1 negative</text><text class="small" x="20" y="118">magnitudes discarded</text></g>
+  <g transform="translate(592 248)"><rect class="panel" width="320" height="132" rx="12"/><text class="label" x="20" y="34">Wilcoxon signed-rank</text><text class="note" x="20" y="65">ranks |gap|, then restores sign</text><text class="small" x="20" y="96">largest |gap| gets largest rank</text><text class="small" x="20" y="118">ties / zeros need conventions</text></g>
+  <text class="note" x="48" y="418">Neither test supplies an effect size or population generalization by itself.</text>
+</svg>

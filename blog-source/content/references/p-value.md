@@ -1,21 +1,71 @@
 ---
 title: "p-value"
 slug: "p-value"
-summary: "In these notes, p is usually a sign-test or Wilcoxon p-value across paraphrase pairs: how often the predicted direction would appear by chance if there were no effect."
+summary: "A tail probability under a stated null model; in these notes it usually comes from a paired sign or Wilcoxon test."
 aliases:
   - /references/p/
   - /references/pvalue/
   - /references/sign-test/
 ---
 
-When a Research Note writes **p=0.004**, it is answering: *if there were no real effect, how often would a result this extreme (or more) show up by chance?*
+When a Research Note writes **\(p=0.004\)**, the precise question is:
 
-**How we usually compute it here.** Constructs are scored as **paired paraphrase tests**: each of *n* wordings gives a pressure/control (or self/other) pair. We count how many pairs move the predicted way, then report a **sign test** p-value (and often a [Wilcoxon]({{< relref "wilcoxon.md" >}}) signed-rank p-value on the paired differences). Example: **14/16** pairs in the predicted direction with **p=0.004** means that under a fair coin (no effect), seeing at least 14 wins in 16 trials is unlikely.
+> Under the stated null model, and with the analysis rule fixed, what is the probability of a test statistic at least as incompatible with that null as the one observed?
 
-**With n=10 the test is conservative.** Only extreme direction counts clear usual thresholds (about **10/10 → p≈0.002**, **9/10 → p≈0.02**; **8/10** is already not significant). A soft majority (6–4, 7–3) correctly fails. That matches the job of the paraphrase battery: show the effect is not one lucky sentence.
+That conditional probability is not simply “the chance this happened by accident.” Its meaning depends on the null, the statistic, the assumptions, and whether the test is one- or two-sided.
 
-**What it is not.** It is not the probability that the hypothesis is true, not a measure of effect size (that lives in the rank gap), and not a population estimate. The paraphrases are a frozen convenience set on *this* battery, not [i.i.d.]({{< relref "iid.md" >}}) draws from “all threats in the wild.” It is also not a license to ignore design flaws: a tiny *p* with a confounded arm is still a confounded arm; that is why the pressure note retracts mismatched human/log comparisons even when ranks look striking.
+## The sign test used in these notes
 
-**Rule of thumb for reading these notes.** Prefer the triple: *direction count* (e.g. 14/16), *p*, and the **controls** ([logit lens]({{< relref "logit-lens.md" >}}), [random-J]({{< relref "random-j.md" >}})). A low *p* that also appears under the logit lens is usually not a [Jacobian-lens]({{< relref "jacobian-lens.md" >}})-specific claim. Generalization beyond the battery needs more models and more independently authored templates.
+Constructs are usually scored as **paired paraphrase tests**. For each wording, define a difference such as
+
+\[
+D_i = \text{control rank}_i - \text{pressure rank}_i,
+\]
+
+so \(D_i>0\) means the pressure arm achieved the better (lower) vocabulary rank. The sign test discards the size of each nonzero difference and counts only positive and negative signs.
+
+Its fair-sign null is \(P(D_i>0)=P(D_i<0)=\tfrac12\) for each non-tied pair. The default in these notes is a **two-sided** test: a result this lopsided in either direction counts as extreme.
+
+## Worked example: 14 wins in 16 pairs
+
+With 14 positive and 2 negative differences, the exact two-sided binomial tail is
+
+\[
+p = 2\sum_{k=0}^{2}{16 \choose k}2^{-16}
+  = 0.0041809\ldots
+\]
+
+The site rounds that to **\(p=0.004\)**. This dependency-free Python reproduces the calculation:
+
+```python
+from math import comb
+
+def sign_test_two_sided(wins: int, losses: int) -> float:
+    n = wins + losses
+    smaller_tail = sum(
+        comb(n, k) for k in range(min(wins, losses) + 1)
+    ) / 2**n
+    return min(1.0, 2 * smaller_tail)
+
+print(sign_test_two_sided(14, 2))  # 0.004180908203125
+```
+
+With \(n=10\), the same rule gives **10/10 → 0.00195**, **9/10 → 0.0215**, and **8/10 → 0.109**. The discreteness is why a small battery needs an extreme direction count to cross a conventional threshold.
+
+## Assumptions and choices
+
+- **Pairing:** each pressure result must be compared with its genuinely matched control; unmatched arms do not become valid because their \(p\)-value is small.
+- **Independence or exchangeability:** the usual binomial tail treats the nonzero signs as independent fair signs under the null. Closely related paraphrases can violate that model; see [i.i.d.]({{< relref "iid.md" >}}).
+- **Ties:** \(D_i=0\) has no sign. Omit ties and report the reduced effective \(n\), rather than silently counting them as wins or losses.
+- **Sidedness:** choose a one-sided alternative only when its direction was fixed in advance. Otherwise report the two-sided result used above.
+- **Selection:** the test does not correct for trying many lexicons, constructs, subsets, or analysis rules and reporting the most favorable one.
+
+“Exact” means no large-sample approximation was used to compute the binomial tail. It does not remove these design assumptions.
+
+## What a p-value does not tell you
+
+A \(p\)-value is not the probability that the hypothesis is true, not an effect size, and not a population estimate. The direction count says how consistently the frozen pairs moved; the reported rank gaps show their separation on the chosen scale; the [Wilcoxon test]({{< relref "wilcoxon.md" >}}) uses the ordering of those absolute gaps. None turns a convenience paraphrase battery into [i.i.d.]({{< relref "iid.md" >}}) draws from a wider construct.
+
+Prefer the full evidence bundle: **direction count, exact \(p\), a pre-specified magnitude summary, and matched controls** ([logit lens]({{< relref "logit-lens.md" >}}), [random-J]({{< relref "random-j.md" >}})). A low \(p\) that also appears under the logit lens is not, by itself, a [Jacobian-lens]({{< relref "jacobian-lens.md" >}})-specific result. A tiny \(p\) from a confounded comparison remains a confounded result.
 
 See also: [Wilcoxon]({{< relref "wilcoxon.md" >}}), [best-rank]({{< relref "best-rank.md" >}}), [prompt echo]({{< relref "prompt-echo.md" >}}).

@@ -1,0 +1,55 @@
+{{- $prax := .Site.GetPage "/references/prax" -}}
+<div class="blog-post prax-doc">
+    <div class="container prax-doc-container">
+        <div class="prax-doc-shell">
+            <aside class="prax-doc-sidebar">
+                {{ partial "prax-doc-nav.html" . }}
+            </aside>
+
+            <article class="post-content prax-doc-main">
+                <header class="post-header prax-doc-header">
+                    <nav class="prax-doc-breadcrumb" aria-label="Breadcrumb">
+                        <a href="{{ "references/" | relURL }}">Knowledge Base</a>
+                        <span aria-hidden="true">/</span>
+                        {{- if and $prax (ne .RelPermalink $prax.RelPermalink) }}
+                        <a href="{{ $prax.RelPermalink }}">Prax</a>
+                        <span aria-hidden="true">/</span>
+                        {{- end }}
+                        <span>{{ .Title }}</span>
+                    </nav>
+                    <h1 class="post-title">{{ .Title }}</h1>
+                    {{ with .Params.summary }}<p class="prax-doc-summary">{{ . }}</p>{{ end }}
+                    {{ if and .Params.source_repo .Params.source_commit .Params.source_path }}
+                    <div class="prax-doc-source">
+                        <span>Synced from Prax at <code>{{ printf "%.8s" .Params.source_commit }}</code></span>
+                        <a href="{{ printf "%s/blob/%s/%s" .Params.source_repo .Params.source_commit .Params.source_path }}" target="_blank" rel="noopener">View source ↗</a>
+                    </div>
+                    {{ end }}
+                </header>
+
+                <div class="post-body prax-doc-body">
+                    {{ .Content }}
+                </div>
+
+                {{ if .IsSection }}
+                    {{ $children := .Pages.ByWeight }}
+                    {{ if $children }}
+                    <nav class="prax-doc-children" aria-label="Pages in {{ .Title }}">
+                        <p class="prax-doc-children-label">Continue reading</p>
+                        {{ range $children }}
+                        <a href="{{ .RelPermalink }}">
+                            <span>{{ .Title }}</span>
+                            <span aria-hidden="true">→</span>
+                        </a>
+                        {{ end }}
+                    </nav>
+                    {{ end }}
+                {{ end }}
+
+                <footer class="prax-doc-footer">
+                    <p>Documentation adapted from the Apache-2.0-licensed <a href="https://github.com/praxagent/prax" target="_blank" rel="noopener">Prax project</a>.</p>
+                </footer>
+            </article>
+        </div>
+    </div>
+</div>

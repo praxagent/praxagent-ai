@@ -10,13 +10,13 @@
     
     
     
-    <meta name="description" content="The minimum vocabulary rank a probe word hits across layers and positions; a max-statistic that needs matched controls.">
+    <meta name="description" content="The minimum vocabulary rank a pre-specified probe token hits across layers, positions, and allowed variants.">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/references/best-rank/">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="praxagent Research Notes">
     <meta property="og:title" content="Best-rank">
-    <meta property="og:description" content="The minimum vocabulary rank a probe word hits across layers and positions; a max-statistic that needs matched controls.">
+    <meta property="og:description" content="The minimum vocabulary rank a pre-specified probe token hits across layers, positions, and allowed variants.">
     <meta property="og:url" content="https://praxagent.ai/blog/references/best-rank/">
     <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
     <meta property="og:image:width" content="1200">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@praxagent">
     <meta name="twitter:title" content="Best-rank">
-    <meta name="twitter:description" content="The minimum vocabulary rank a probe word hits across layers and positions; a max-statistic that needs matched controls.">
+    <meta name="twitter:description" content="The minimum vocabulary rank a pre-specified probe token hits across layers, positions, and allowed variants.">
     <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="/blog/blog.css">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script type="module">
@@ -46,7 +46,7 @@
         flowchart: { htmlLabels: true, curve: 'basis' }
       });
     </script>
-    
+
 </head>
 <body>
     <nav class="navbar navbar-scrolls industrial-navbar">
@@ -56,11 +56,11 @@
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
-            
+
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link">Research Notes</a>
-                <a href="/blog/references/" class="nav-link active">References</a>
+                <a href="/blog/references/" class="nav-link active">Knowledge Base</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -71,14 +71,14 @@
                     </span>
                 </div>
             </div>
-            
+
             
             <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            
+
         </div>
     </nav>
 
@@ -86,7 +86,7 @@
         <div class="mobile-menu-content">
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
-            <a href="/blog/references/" class="mobile-nav-link active">References</a>
+            <a href="/blog/references/" class="mobile-nav-link active">Knowledge Base</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -103,26 +103,58 @@
 
     <main>
         
+
+
 <div class="blog-post reference-entry">
     <div class="container">
         <article class="post-content">
             <header class="post-header">
-                <p class="blog-kicker" style="margin-bottom: 1rem;">References</p>
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
                 <h1 class="post-title">Best-rank</h1>
                 
-                <p class="reference-summary">The minimum vocabulary rank a probe word hits across layers and positions; a max-statistic that needs matched controls.</p>
+                <p class="reference-summary">The minimum vocabulary rank a pre-specified probe token hits across layers, positions, and allowed variants.</p>
                 
             </header>
 
             <div class="post-body">
-                <p><strong>Best-rank</strong> is the <em>minimum</em> (best) vocabulary rank a target word or small lexicon achieves across many layers and prompt positions. Lower is stronger. Because it is a max-statistic, it is easy to over-read unless every control transport is scored the same way.</p>
+                <p><strong>Best-rank</strong> is the smallest numerical vocabulary <a href="/blog/references/rank/">rank</a> reached by a pre-specified probe across a search grid—typically layers × prompt positions × allowed token variants. Lower is stronger.</p>
+<p>If \(r_{\ell,p,t}\) is the rank at layer \(\ell\), position \(p\), and token variant \(t\), then</p>
+\[
+r_{\text{best}} = \min_{\ell,p,t} r_{\ell,p,t}.
+\]<p>Although the operation is a minimum, it selects the <strong>maximum-looking evidence</strong>. That is why we call it a max-statistic in prose.</p>
+<figure class="reference-figure">
+    <img src="/blog/references/glossary/rank-best-rank.svg" alt="A grid of token ranks across three layers and positions, with rank 12 highlighted as the minimum" loading="lazy" decoding="async">
+    <figcaption>Best-rank keeps one extreme cell and discards where the probe was weak. Controls must use the same pre-specified layers, positions, variants, and search rule.</figcaption>
+</figure>
+
+<h2 id="tiny-implementation">Tiny implementation</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">best_rank</span><span class="p">(</span><span class="n">ranks_by_layer_position</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Each cell contains ranks for the allowed token variants.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rank</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">ranks_by_layer_position</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="n">layer</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">position</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></div><p>The set of layers, positions, probes, and token variants must be fixed before comparing arms. Searching extra variants only for the favored condition makes the statistic incomparable.</p>
+<h2 id="why-matched-controls-matter">Why matched controls matter</h2>
+<p>In an intentionally unrealistic null where \(N\) searched ranks are independent draws from the discrete uniform distribution on \(\{1,\ldots,V\}\), the exact expectation is</p>
+\[
+\mathbb{E}[r_{\min}]
+= \sum_{j=1}^{V}\left(\frac{j}{V}\right)^N
+\approx \frac{V}{N+1}+\frac{1}{2}.
+\]<p>With \(V=248{,}320\) and \(N=16{,}000\), the exact expectation is about 16.02; the approximation including the discrete continuity correction is also about 16.02. The cruder continuous approximation \(V/(N+1)\) is 15.52. Any of these is an impressive-looking rank generated by search alone. Real layer/position ranks are strongly dependent, so this is an intuition pump, <strong>not</strong> a null model for the experiment.</p>
+<p>Apply the identical minimum to pressure, matched control, <a href="/blog/references/logit-lens/">logit lens</a>, and <a href="/blog/references/random-j/">random-J</a>. Then report paired gaps or direction counts rather than treating the winning cell as an independent observation.</p>
 <p>See also: <a href="/blog/references/rank/">rank</a>, <a href="/blog/references/logit-lens/">logit lens</a>, <a href="/blog/references/prompt-echo/">prompt echo</a>.</p>
 
             </div>
 
             <footer class="post-footer">
                 <div class="post-navigation">
-                    <a href="/blog/references/" class="back-to-blog">← All references</a>
+
+                    <a href="/blog/references/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/references/" class="back-to-blog">Knowledge Base</a>
                     <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
                 </div>
             </footer>
@@ -143,7 +175,7 @@
                 <nav aria-label="Footer navigation">
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
-                    <a href="/blog/references/">References</a>
+                    <a href="/blog/references/">Knowledge Base</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
@@ -158,11 +190,9 @@
     <script>
       feather.replace()
     </script>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            
-            
             const tables = document.querySelectorAll('.post-body table');
             tables.forEach((table, index) => {
                 if (table.parentElement?.classList.contains('table-scroll')) return;
@@ -195,41 +225,36 @@
 
             renderMathInElement(document.body, {
                 delimiters: [
-                    
-                    
                     {left: "$$", right: "$$", display: true},
                     {left: "\\[", right: "\\]", display: true},
                     {left: "\\(", right: "\\)", display: false}
                 ],
                 throwOnError: false,
-                
                 output: "htmlAndMathml"
             });
 
-            
-            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre');
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
             codeBlocks.forEach(pre => {
                 const button = document.createElement('button');
                 button.className = 'copy-code-button';
                 button.innerHTML = '📋 Copy';
                 button.setAttribute('aria-label', 'Copy code to clipboard');
-                
+
                 button.addEventListener('click', () => {
                     const code = pre.querySelector('code');
                     const text = code ? code.textContent : pre.textContent;
-                    
+
                     navigator.clipboard.writeText(text).then(() => {
                         const originalText = button.innerHTML;
                         button.innerHTML = '✅ Copied!';
                         button.classList.add('copied');
-                        
+
                         setTimeout(() => {
                             button.innerHTML = originalText;
                             button.classList.remove('copied');
                         }, 2000);
                     }).catch(err => {
                         console.error('Failed to copy: ', err);
-                        
                         const textArea = document.createElement('textarea');
                         textArea.value = text;
                         document.body.appendChild(textArea);
@@ -240,7 +265,7 @@
                             const originalText = button.innerHTML;
                             button.innerHTML = '✅ Copied!';
                             button.classList.add('copied');
-                            
+
                             setTimeout(() => {
                                 button.innerHTML = originalText;
                                 button.classList.remove('copied');
@@ -251,11 +276,11 @@
                         document.body.removeChild(textArea);
                     });
                 });
-                
+
                 pre.appendChild(button);
             });
         });
     </script>
-    
+
 </body>
 </html>

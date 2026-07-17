@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="/blog/blog.css">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script type="module">
@@ -51,7 +51,7 @@
         flowchart: { htmlLabels: true, curve: 'basis' }
       });
     </script>
-    
+
 </head>
 <body>
     <nav class="navbar navbar-scrolls industrial-navbar">
@@ -61,11 +61,11 @@
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
-            
+
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link active">Research Notes</a>
-                <a href="/blog/references/" class="nav-link">References</a>
+                <a href="/blog/references/" class="nav-link">Knowledge Base</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -76,14 +76,14 @@
                     </span>
                 </div>
             </div>
-            
+
             
             <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            
+
         </div>
     </nav>
 
@@ -91,7 +91,7 @@
         <div class="mobile-menu-content">
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link active">Research Notes</a>
-            <a href="/blog/references/" class="mobile-nav-link">References</a>
+            <a href="/blog/references/" class="mobile-nav-link">Knowledge Base</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -243,7 +243,7 @@
 <li><strong>Matched contrasts, not impressive absolute ranks.</strong> A lens can echo its prompt, and a minimum over many words, positions, and layers can make even random-J look good. The corrected claims compare paired arms within the same transport, with the same stakes and language except for the variable being tested. The identity/<a href="/blog/references/logit-lens/" class="ref-term">logit lens</a> and <a href="/blog/references/random-j/" class="ref-term">random-J</a> controls run through the same search.</li>
 <li><strong>Frozen paraphrase tests.</strong> Each construct uses matched wording pairs frozen before outcomes. We report the median <a href="/blog/references/rank/" class="ref-term">rank</a> in each arm, the number of pairs moving in the predicted direction, and a <a href="/blog/references/p-value/">sign test</a> plus <a href="/blog/references/wilcoxon/" class="ref-term">Wilcoxon</a> across them. Freezing prevents outcome-driven rewriting, but it does not make a bad comparison valid. That is the central lesson of Round two.</li>
 </ul>
-<p>Technical terms link to <a href="/blog/references/">References</a> on first use (and whenever a definition helps). Teaching detail for the instrument lives in the <a href="../praxagent-jacobian-lens-qwen3-5-397b-a17b/">Jacobian-lens release</a>. For when a <a href="/blog/references/jacobian-lens/" class="ref-term">Jacobian lens</a> earns its keep versus a <a href="/blog/references/logit-lens/" class="ref-term">logit lens</a>, see the <a href="#appendix-jacobian-vs-logit">appendix</a>.</p>
+<p>Technical terms link to the <a href="/blog/references/">Knowledge Base</a> on first use (and whenever a definition helps). Teaching detail for the instrument lives in the <a href="../praxagent-jacobian-lens-qwen3-5-397b-a17b/">Jacobian-lens release</a>. For when a <a href="/blog/references/jacobian-lens/" class="ref-term">Jacobian lens</a> earns its keep versus a <a href="/blog/references/logit-lens/" class="ref-term">logit lens</a>, see the <a href="#appendix-jacobian-vs-logit">appendix</a>.</p>
 <h3 id="how-this-sits-in-the-literature-and-what-is-actually-new">How this sits in the literature (and what is actually new)</h3>
 <p>Almost none of the <em>phenomena</em> here are ours to claim, and being clear about that is part of the point. <strong>That a model&rsquo;s internal state can encode the truth while its output says otherwise</strong> is well established: by Azaria &amp; Mitchell (<a href="#ref-azaria">2023</a>), Inference-Time Intervention (<a href="#ref-iti">Li et al. 2023</a>), the Geometry of Truth (<a href="#ref-marks">Marks &amp; Tegmark 2023</a>), CCS (<a href="#ref-burns">Burns et al. 2022</a>), and, at the preference level, Alignment Faking (<a href="#ref-alignmentfaking">Greenblatt et al. 2024</a>). <strong>Detecting deception from activations</strong> is likewise prior art: Representation Engineering (<a href="#ref-repe">Zou et al. 2023</a>), &ldquo;Simple probes can catch sleeper agents&rdquo; (<a href="#ref-sleeper">MacDiarmid et al. 2024</a>), and Apollo&rsquo;s linear deception probes (<a href="#ref-apollo">Goldowsky-Dill et al. 2025</a>), with the skeptical counterweight of &ldquo;Still No Lie Detector for Language Models&rdquo; (<a href="#ref-levinstein">Levinstein &amp; Herrmann 2023</a>). The <strong>self-preservation</strong> and <strong>evaluation-awareness</strong> setups come from the agentic-misalignment / scheming line (<a href="#ref-meinke">Meinke et al. 2024</a>; <a href="#ref-agentic">Anthropic 2025</a>; <a href="#ref-palisade">Palisade 2025</a>; <a href="#ref-needham">Needham et al. 2025</a>). And our two &ldquo;impostor lenses&rdquo; are textbook probing controls in the sense of Hewitt &amp; Liang&rsquo;s <a href="#ref-hewitt">control tasks</a> (<a href="#ref-hewitt">2019</a>); that the logit lens in particular is <a href="/blog/references/base-rate-bias/" class="ref-term">base-rate-biased</a> and reads output-adjacent content is documented by the <a href="#ref-tunedlens">Tuned Lens</a> (<a href="#ref-tunedlens">Belrose et al. 2023</a>).</p>
 <p>Read against that backdrop, our null is <em>expected</em>, not a failure: if a simple linear probe already catches deception (<a href="#ref-sleeper">MacDiarmid</a>) and the truth direction is linear and near-output (<a href="#ref-marks">Marks &amp; Tegmark</a>), then a Jacobian lens should <em>not</em> out-read a logit lens on output-adjacent signals, and it doesn&rsquo;t. Concurrent work reaches the same negative conclusion from the monitoring side: internal-state probes &ldquo;read the situation, not the action,&rdquo; undercut by specificity and generalization checks as pre-action misalignment monitors (<a href="#ref-fomin">Fomin et al. 2026</a>). Anthropic&rsquo;s own companion commentary already contains an <strong>independent open-weight replication of the workspace findings by Neel Nanda</strong> (<a href="#ref-workspace-commentary">2026</a>), so we do not claim to be first on that axis. What this note adds is narrower: (1) a reproduction on <em>another</em> near-frontier-scale open-weights model (Qwen3.5-397B-A17B) across the blackmail / eval-awareness / self-monitoring paradigms (<a href="#ref-anthropic-2026">Gurnee, Lindsey et al. 2026</a>), with an explicit prompt-echo confound-breaker (matched threat language, vary only the referent, score words absent from every prompt) that that paper&rsquo;s blackmail case study does not report; and (2) a <strong>transport-control deflation</strong>: the specific, citable result that on these tasks the identity transport (= logit lens) reads the &ldquo;held truth&rdquo; as well as or better than the fitted Jacobian lens, with random-J as the null, a boundary condition on the workspace paper&rsquo;s own logit-vs-Jacobian distinction.</p>
@@ -1148,7 +1148,7 @@
                 <nav aria-label="Footer navigation">
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
-                    <a href="/blog/references/">References</a>
+                    <a href="/blog/references/">Knowledge Base</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
@@ -1163,11 +1163,9 @@
     <script>
       feather.replace()
     </script>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            
-            
             const tables = document.querySelectorAll('.post-body table');
             tables.forEach((table, index) => {
                 if (table.parentElement?.classList.contains('table-scroll')) return;
@@ -1200,41 +1198,36 @@
 
             renderMathInElement(document.body, {
                 delimiters: [
-                    
-                    
                     {left: "$$", right: "$$", display: true},
                     {left: "\\[", right: "\\]", display: true},
                     {left: "\\(", right: "\\)", display: false}
                 ],
                 throwOnError: false,
-                
                 output: "htmlAndMathml"
             });
 
-            
-            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre');
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
             codeBlocks.forEach(pre => {
                 const button = document.createElement('button');
                 button.className = 'copy-code-button';
                 button.innerHTML = '📋 Copy';
                 button.setAttribute('aria-label', 'Copy code to clipboard');
-                
+
                 button.addEventListener('click', () => {
                     const code = pre.querySelector('code');
                     const text = code ? code.textContent : pre.textContent;
-                    
+
                     navigator.clipboard.writeText(text).then(() => {
                         const originalText = button.innerHTML;
                         button.innerHTML = '✅ Copied!';
                         button.classList.add('copied');
-                        
+
                         setTimeout(() => {
                             button.innerHTML = originalText;
                             button.classList.remove('copied');
                         }, 2000);
                     }).catch(err => {
                         console.error('Failed to copy: ', err);
-                        
                         const textArea = document.createElement('textarea');
                         textArea.value = text;
                         document.body.appendChild(textArea);
@@ -1245,7 +1238,7 @@
                             const originalText = button.innerHTML;
                             button.innerHTML = '✅ Copied!';
                             button.classList.add('copied');
-                            
+
                             setTimeout(() => {
                                 button.innerHTML = originalText;
                                 button.classList.remove('copied');
@@ -1256,11 +1249,11 @@
                         document.body.removeChild(textArea);
                     });
                 });
-                
+
                 pre.appendChild(button);
             });
         });
     </script>
-    
+
 </body>
 </html>

@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="/blog/blog.css">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script type="module">
@@ -46,7 +46,7 @@
         flowchart: { htmlLabels: true, curve: 'basis' }
       });
     </script>
-    
+
 </head>
 <body>
     <nav class="navbar navbar-scrolls industrial-navbar">
@@ -56,11 +56,11 @@
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
-            
+
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link">Research Notes</a>
-                <a href="/blog/references/" class="nav-link active">References</a>
+                <a href="/blog/references/" class="nav-link active">Knowledge Base</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -71,14 +71,14 @@
                     </span>
                 </div>
             </div>
-            
+
             
             <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            
+
         </div>
     </nav>
 
@@ -86,7 +86,7 @@
         <div class="mobile-menu-content">
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
-            <a href="/blog/references/" class="mobile-nav-link active">References</a>
+            <a href="/blog/references/" class="mobile-nav-link active">Knowledge Base</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -103,11 +103,13 @@
 
     <main>
         
+
+
 <div class="blog-post reference-entry">
     <div class="container">
         <article class="post-content">
             <header class="post-header">
-                <p class="blog-kicker" style="margin-bottom: 1rem;">References</p>
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
                 <h1 class="post-title">Top-p</h1>
                 
                 <p class="reference-summary">Nucleus sampling: keep only the smallest set of tokens whose cumulative probability reaches p, then sample within that set.</p>
@@ -116,15 +118,33 @@
 
             <div class="post-body">
                 <p><strong>Top-p</strong> (also <em>nucleus sampling</em>) truncates the next-token distribution before <a href="/blog/references/sampling/">sampling</a>. Tokens are ordered by probability; you keep the smallest prefix whose cumulative mass is at least \(p\) (for example 0.9), zero out the rest, renormalize, and sample from what remains.</p>
+<p>The token that <strong>crosses the boundary is included</strong>. For probabilities \([0.55, 0.25, 0.12, 0.08]\) and \(p=0.90\), the first two tokens total only 0.80, so the third is also retained: the nucleus has mass 0.92. After renormalization its probabilities are approximately \([0.598, 0.272, 0.130]\). Top-p does not mean “keep every token whose individual probability is at least \(p\),” and it does not discard the token that takes the cumulative sum past \(p\).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">nucleus</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;top-p must be in (0, 1]&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">ranked</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">probabilities</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">pair</span><span class="p">:</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">kept</span><span class="p">,</span> <span class="n">mass</span> <span class="o">=</span> <span class="p">[],</span> <span class="mf">0.0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">token</span><span class="p">,</span> <span class="n">probability</span> <span class="ow">in</span> <span class="n">ranked</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">kept</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">token</span><span class="p">,</span> <span class="n">probability</span><span class="p">))</span>  <span class="c1"># Include the boundary token.</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mass</span> <span class="o">+=</span> <span class="n">probability</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">mass</span> <span class="o">&gt;=</span> <span class="n">p</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[(</span><span class="n">token</span><span class="p">,</span> <span class="n">probability</span> <span class="o">/</span> <span class="n">mass</span><span class="p">)</span> <span class="k">for</span> <span class="n">token</span><span class="p">,</span> <span class="n">probability</span> <span class="ow">in</span> <span class="n">kept</span><span class="p">]</span>
+</span></span></code></pre></div><p>At very small positive \(p\), the nucleus contains at least the highest-probability token; at \(p=1\), it normally contains the full nonzero distribution. Exact ties, floating-point rounding, and library options such as a minimum number of retained tokens can affect the boundary, so record the implementation when it matters.</p>
 <p>It is a different knob from <a href="/blog/references/temperature/">temperature</a>: temperature reshapes the whole distribution; top-p hard-cuts the long tail. They are often used together.</p>
-<p>Like temperature, top-p is irrelevant to a <a href="/blog/references/greedy-continuation/">greedy continuation</a>, which never samples.</p>
+<p>Like temperature, top-p does not change an ordinary <a href="/blog/references/greedy-continuation/">greedy continuation</a>: the retained prefix contains the top-ranked token, and greedy decoding does not draw from the renormalized nucleus.</p>
 <p>See also: <a href="/blog/references/temperature/">temperature</a>, <a href="/blog/references/sampling/">sampling</a>, <a href="/blog/references/greedy-continuation/">greedy continuation</a>.</p>
 
             </div>
 
             <footer class="post-footer">
                 <div class="post-navigation">
-                    <a href="/blog/references/" class="back-to-blog">← All references</a>
+
+                    <a href="/blog/references/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/references/" class="back-to-blog">Knowledge Base</a>
                     <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
                 </div>
             </footer>
@@ -145,7 +165,7 @@
                 <nav aria-label="Footer navigation">
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
-                    <a href="/blog/references/">References</a>
+                    <a href="/blog/references/">Knowledge Base</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
@@ -160,11 +180,9 @@
     <script>
       feather.replace()
     </script>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            
-            
             const tables = document.querySelectorAll('.post-body table');
             tables.forEach((table, index) => {
                 if (table.parentElement?.classList.contains('table-scroll')) return;
@@ -197,41 +215,36 @@
 
             renderMathInElement(document.body, {
                 delimiters: [
-                    
-                    
                     {left: "$$", right: "$$", display: true},
                     {left: "\\[", right: "\\]", display: true},
                     {left: "\\(", right: "\\)", display: false}
                 ],
                 throwOnError: false,
-                
                 output: "htmlAndMathml"
             });
 
-            
-            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre');
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
             codeBlocks.forEach(pre => {
                 const button = document.createElement('button');
                 button.className = 'copy-code-button';
                 button.innerHTML = '📋 Copy';
                 button.setAttribute('aria-label', 'Copy code to clipboard');
-                
+
                 button.addEventListener('click', () => {
                     const code = pre.querySelector('code');
                     const text = code ? code.textContent : pre.textContent;
-                    
+
                     navigator.clipboard.writeText(text).then(() => {
                         const originalText = button.innerHTML;
                         button.innerHTML = '✅ Copied!';
                         button.classList.add('copied');
-                        
+
                         setTimeout(() => {
                             button.innerHTML = originalText;
                             button.classList.remove('copied');
                         }, 2000);
                     }).catch(err => {
                         console.error('Failed to copy: ', err);
-                        
                         const textArea = document.createElement('textarea');
                         textArea.value = text;
                         document.body.appendChild(textArea);
@@ -242,7 +255,7 @@
                             const originalText = button.innerHTML;
                             button.innerHTML = '✅ Copied!';
                             button.classList.add('copied');
-                            
+
                             setTimeout(() => {
                                 button.innerHTML = originalText;
                                 button.classList.remove('copied');
@@ -253,11 +266,11 @@
                         document.body.removeChild(textArea);
                     });
                 });
-                
+
                 pre.appendChild(button);
             });
         });
     </script>
-    
+
 </body>
 </html>

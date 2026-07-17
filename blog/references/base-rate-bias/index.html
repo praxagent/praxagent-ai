@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="/blog/blog.css">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script type="module">
@@ -46,7 +46,7 @@
         flowchart: { htmlLabels: true, curve: 'basis' }
       });
     </script>
-    
+
 </head>
 <body>
     <nav class="navbar navbar-scrolls industrial-navbar">
@@ -56,11 +56,11 @@
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
-            
+
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link">Research Notes</a>
-                <a href="/blog/references/" class="nav-link active">References</a>
+                <a href="/blog/references/" class="nav-link active">Knowledge Base</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -71,14 +71,14 @@
                     </span>
                 </div>
             </div>
-            
+
             
             <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
             </button>
-            
+
         </div>
     </nav>
 
@@ -86,7 +86,7 @@
         <div class="mobile-menu-content">
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
-            <a href="/blog/references/" class="mobile-nav-link active">References</a>
+            <a href="/blog/references/" class="mobile-nav-link active">Knowledge Base</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -103,11 +103,13 @@
 
     <main>
         
+
+
 <div class="blog-post reference-entry">
     <div class="container">
         <article class="post-content">
             <header class="post-header">
-                <p class="blog-kicker" style="margin-bottom: 1rem;">References</p>
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
                 <h1 class="post-title">Base-rate bias</h1>
                 
                 <p class="reference-summary">Common, high-prior tokens look artificially strong under mid-layer unembedding and best-rank statistics; a low rank can be the prior, not the experiment.</p>
@@ -115,20 +117,70 @@
             </header>
 
             <div class="post-body">
-                <p><strong>Base-rate bias</strong> (in these notes) means a probe word looks active in a lens readout mainly because it is a <em>common, high-prior</em> token, not because the prompt condition did distinctive work.</p>
-<p>Two places it shows up:</p>
+                <p><strong>Base-rate bias</strong> is our operational name for a probe token looking strong in a readout even when the experimental condition did little or nothing distinctive. The strength may come from the model&rsquo;s ordinary next-token preferences, the output vocabulary geometry, or the search statistic—not from the construct being tested.</p>
+<p>It is a diagnosis from <strong>controls</strong>, not a permanent property of a word. A token can be high-prior in one prompt position and informative in another.</p>
+<h2 id="a-toy-example">A toy example</h2>
+<p>Suppose lower <a href="/blog/references/rank/">rank</a> is stronger and every arm uses the same layer-by-position search:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Probe</th>
+          <th style="text-align: right">Pressure</th>
+          <th style="text-align: right">Matched control</th>
+          <th style="text-align: right">Random-J</th>
+          <th>Reading</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>the</code></td>
+          <td style="text-align: right">4</td>
+          <td style="text-align: right">5</td>
+          <td style="text-align: right">6</td>
+          <td>Strong everywhere; no condition-specific evidence</td>
+      </tr>
+      <tr>
+          <td><code>survive</code></td>
+          <td style="text-align: right">180</td>
+          <td style="text-align: right">3,900</td>
+          <td style="text-align: right">21,000</td>
+          <td>Large matched contrast worth investigating</td>
+      </tr>
+      <tr>
+          <td><code>Paris</code></td>
+          <td style="text-align: right">22</td>
+          <td style="text-align: right">25</td>
+          <td style="text-align: right">31</td>
+          <td>Likely an easy/high-prior completion in this context</td>
+      </tr>
+  </tbody>
+</table>
+<p>The absolute rank of <code>the</code> is spectacular, but its <strong>contrast</strong> is negligible. <code>survive</code> has a weaker absolute rank and much stronger experimental evidence.</p>
+<h2 id="where-the-bias-enters">Where the bias enters</h2>
 <ol>
-<li><strong><a href="/blog/references/logit-lens/">Logit lens</a> / unembedding.</strong> Mid-layer readouts reuse the model&rsquo;s output map. Frequent words and near-certain completions (famous capitals, function words, survival verbs like <em>self</em> / <em>shut</em>) sit near the top of that map by default. The Tuned Lens literature documents that the plain logit lens is especially prone to this kind of output-adjacent, base-rate-heavy readout (<a href="https://arxiv.org/abs/2303.08112">Belrose et al. 2023</a>).</li>
-<li><strong><a href="/blog/references/best-rank/">Best-rank</a>.</strong> Taking the <em>minimum</em> rank over many layers and positions pulls any high-prior word downward further. A random transport can look “good” on the same statistic.</li>
+<li><strong>Output-adjacent readout.</strong> A <a href="/blog/references/logit-lens/">logit lens</a> reuses the model&rsquo;s output head at a point where its coordinates may not yet match the final layer. The Tuned Lens work shows that plain logit-lens distributions can be brittle and systematically miscalibrated across depth; it does not, by itself, establish a universal frequency mechanism for each token (<a href="https://arxiv.org/abs/2303.08112">Belrose et al. 2023</a>).</li>
+<li><strong>Selection over many cells.</strong> <a href="/blog/references/best-rank/">Best-rank</a> keeps the minimum over layers, positions, and sometimes token variants. More searched cells create more opportunities for an accidental extreme.</li>
+<li><strong>Prompt and task priors.</strong> Famous facts, syntactic continuations, and words already suggested by the prompt can rank well without carrying the intended latent concept.</li>
 </ol>
-<p><strong>How we treat it.</strong> Prefer pressure-vs-control contrasts, run <a href="/blog/references/random-j/">random-J</a> and logit-lens controls on the same probe, and do not read a low absolute rank on a famous capital or common survival word as proof of resistance or self-preservation.</p>
+<h2 id="how-we-guard-against-it">How we guard against it</h2>
+<ul>
+<li>Pre-specify probe tokens and tokenization variants.</li>
+<li>Compare paired pressure/control prompts that share surface form wherever possible.</li>
+<li>Score <a href="/blog/references/logit-lens/">logit lens</a>, fitted lens, and <a href="/blog/references/random-j/">random-J</a> with the <strong>identical</strong> search rule.</li>
+<li>Check for literal <a href="/blog/references/prompt-echo/">prompt echo</a>.</li>
+<li>Report the paired gap and direction count alongside the absolute best rank.</li>
+</ul>
+<p>A low absolute rank is a lead. A replicated, control-relative gap is evidence.</p>
 <p>See also: <a href="/blog/references/rank/">rank</a>, <a href="/blog/references/prompt-echo/">prompt echo</a>, <a href="/blog/references/unembedding/">unembedding</a>.</p>
 
             </div>
 
             <footer class="post-footer">
                 <div class="post-navigation">
-                    <a href="/blog/references/" class="back-to-blog">← All references</a>
+
+                    <a href="/blog/references/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/references/" class="back-to-blog">Knowledge Base</a>
                     <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
                 </div>
             </footer>
@@ -149,7 +201,7 @@
                 <nav aria-label="Footer navigation">
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
-                    <a href="/blog/references/">References</a>
+                    <a href="/blog/references/">Knowledge Base</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
@@ -164,11 +216,9 @@
     <script>
       feather.replace()
     </script>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            
-            
             const tables = document.querySelectorAll('.post-body table');
             tables.forEach((table, index) => {
                 if (table.parentElement?.classList.contains('table-scroll')) return;
@@ -201,41 +251,36 @@
 
             renderMathInElement(document.body, {
                 delimiters: [
-                    
-                    
                     {left: "$$", right: "$$", display: true},
                     {left: "\\[", right: "\\]", display: true},
                     {left: "\\(", right: "\\)", display: false}
                 ],
                 throwOnError: false,
-                
                 output: "htmlAndMathml"
             });
 
-            
-            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre');
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
             codeBlocks.forEach(pre => {
                 const button = document.createElement('button');
                 button.className = 'copy-code-button';
                 button.innerHTML = '📋 Copy';
                 button.setAttribute('aria-label', 'Copy code to clipboard');
-                
+
                 button.addEventListener('click', () => {
                     const code = pre.querySelector('code');
                     const text = code ? code.textContent : pre.textContent;
-                    
+
                     navigator.clipboard.writeText(text).then(() => {
                         const originalText = button.innerHTML;
                         button.innerHTML = '✅ Copied!';
                         button.classList.add('copied');
-                        
+
                         setTimeout(() => {
                             button.innerHTML = originalText;
                             button.classList.remove('copied');
                         }, 2000);
                     }).catch(err => {
                         console.error('Failed to copy: ', err);
-                        
                         const textArea = document.createElement('textarea');
                         textArea.value = text;
                         document.body.appendChild(textArea);
@@ -246,7 +291,7 @@
                             const originalText = button.innerHTML;
                             button.innerHTML = '✅ Copied!';
                             button.classList.add('copied');
-                            
+
                             setTimeout(() => {
                                 button.innerHTML = originalText;
                                 button.classList.remove('copied');
@@ -257,11 +302,11 @@
                         document.body.removeChild(textArea);
                     });
                 });
-                
+
                 pre.appendChild(button);
             });
         });
     </script>
-    
+
 </body>
 </html>

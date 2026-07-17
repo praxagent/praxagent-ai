@@ -1,0 +1,48 @@
+{{- $current := . -}}
+{{- $prax := .Site.GetPage "/references/prax" -}}
+{{- with $prax }}
+<nav class="prax-doc-nav" aria-label="Prax documentation">
+    <p class="prax-doc-nav-label">Prax documentation</p>
+    <a class="prax-doc-nav-root{{ if eq $current.RelPermalink .RelPermalink }} is-active{{ end }}"
+       href="{{ .RelPermalink }}"{{ if eq $current.RelPermalink .RelPermalink }} aria-current="page"{{ end }}>
+        Overview
+    </a>
+
+    <div class="prax-doc-nav-sections">
+    {{- range .Sections.ByWeight }}
+        {{- $section := . -}}
+        {{- $isOpen := hasPrefix $current.RelPermalink .RelPermalink -}}
+        {{- $isCurrent := eq $current.RelPermalink .RelPermalink -}}
+        <div class="prax-doc-nav-section{{ if $isOpen }} is-open{{ end }}">
+            <a class="prax-doc-nav-section-link{{ if $isCurrent }} is-active{{ end }}"
+               href="{{ .RelPermalink }}"{{ if $isCurrent }} aria-current="page"{{ end }}>
+                {{ .Title }}
+            </a>
+            {{- if $isOpen }}
+            <div class="prax-doc-nav-pages">
+                {{- range .RegularPagesRecursive.ByTitle }}
+                    {{- $isPageCurrent := eq $current.RelPermalink .RelPermalink -}}
+                    <a class="prax-doc-nav-page{{ if $isPageCurrent }} is-active{{ end }}"
+                       href="{{ .RelPermalink }}"{{ if $isPageCurrent }} aria-current="page"{{ end }}>
+                        {{ .Title }}
+                    </a>
+                {{- end }}
+            </div>
+            {{- end }}
+        </div>
+    {{- end }}
+    </div>
+
+    {{- with .RegularPages }}
+    <div class="prax-doc-nav-standalone">
+        {{- range .ByTitle }}
+            {{- $isPageCurrent := eq $current.RelPermalink .RelPermalink -}}
+            <a class="prax-doc-nav-page{{ if $isPageCurrent }} is-active{{ end }}"
+               href="{{ .RelPermalink }}"{{ if $isPageCurrent }} aria-current="page"{{ end }}>
+                {{ .Title }}
+            </a>
+        {{- end }}
+    </div>
+    {{- end }}
+</nav>
+{{- end }}
