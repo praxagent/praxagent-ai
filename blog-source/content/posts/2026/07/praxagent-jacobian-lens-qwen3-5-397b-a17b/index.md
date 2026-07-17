@@ -39,14 +39,14 @@ have to read it in only one order:
 - **Release/evidence path:** [Release at a glance](#release-at-a-glance) →
   [appendix inventory](#appendix-release-inventory) →
   [audit design](#the-audit-what-identity-and-random-transports-can-rule-out) →
-  [main result](#reading-the-hidden-step-act-2--lens-n24).
+  [main result](#reading-the-hidden-step-act-2-lens-n24).
 - **Mathematical path:** [glossary](#a-quick-glossary-read-this-first) →
   [construction](#what-the-jacobian-lens-actually-is) →
   [Monte Carlo fitting](#monte-carlo-here-means-sample-averaging).
 - **Systems/reproduction path:** [full-matrix computation](#how-the-full-matrix-is-computed) →
-  [reproduce it](#reproduce-it) → [warm-start extension](#extending-our-lens-warm-start--why-n24-is-still-a-contribution).
+  [reproduce it](#reproduce-it) → [warm-start extension](#extending-our-lens-warm-start-why-n24-is-still-a-contribution).
 - **Exploratory path:** [exploratory readouts](#exploratory-readouts-not-part-of-the-pre-registered-act-2-audit) →
-  [interactive layer explorer](#interactive-explorer--scrub-the-band-yourself).
+  [interactive layer explorer](#interactive-explorer-scrub-the-band-yourself).
 
 ---
 

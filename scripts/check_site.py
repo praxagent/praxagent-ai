@@ -135,6 +135,68 @@ def check_json(errors: list[str]) -> None:
             errors.append(f"{path.relative_to(ROOT)}: invalid JSON: {exc}")
 
 
+def check_prax_docs(errors: list[str]) -> None:
+    entry = ROOT / "blog/references/prax/index.html"
+    manifest_path = ROOT / "blog/prax-docs/prax-docs-manifest.json"
+
+    for path in (entry, manifest_path):
+        if not path.is_file():
+            errors.append(
+                f"{path.relative_to(ROOT)}: missing generated Prax documentation"
+            )
+
+    if not manifest_path.is_file():
+        return
+
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        return  # check_json reports the detailed parse error.
+
+    if not isinstance(manifest, dict):
+        errors.append(
+            "blog/prax-docs/prax-docs-manifest.json: root must be an object"
+        )
+        return
+
+    content_files = manifest.get("content_files")
+    if not isinstance(content_files, list):
+        errors.append(
+            "blog/prax-docs/prax-docs-manifest.json: content_files must be a list"
+        )
+        return
+
+    imported = {
+        item.get("source_path"): item.get("content_path")
+        for item in content_files
+        if isinstance(item, dict)
+    }
+    if imported.get("README.md") != "_index.md":
+        errors.append(
+            "blog/prax-docs/prax-docs-manifest.json: Prax README must be the "
+            "documentation entry page"
+        )
+
+    research_sources = sorted(
+        source
+        for source in imported
+        if isinstance(source, str)
+        and (source == "docs/research" or source.startswith("docs/research/"))
+    )
+    if research_sources:
+        errors.append(
+            "blog/prax-docs/prax-docs-manifest.json: excluded Prax research "
+            f"documentation was imported: {', '.join(research_sources)}"
+        )
+
+    research_output = ROOT / "blog/references/prax/research"
+    if research_output.exists():
+        errors.append(
+            f"{research_output.relative_to(ROOT)}: excluded Prax research "
+            "documentation was generated"
+        )
+
+
 def check_svg(errors: list[str]) -> None:
     for path in walk("*.svg"):
         try:
@@ -148,6 +210,7 @@ def main() -> int:
     check_brand(errors)
     check_html(errors)
     check_json(errors)
+    check_prax_docs(errors)
     check_svg(errors)
 
     if errors:
@@ -157,7 +220,8 @@ def main() -> int:
         return 1
 
     print(
-        "Site validation passed: lowercase brand, local links, anchors, JSON, and SVG."
+        "Site validation passed: lowercase brand, local links, anchors, JSON, SVG, "
+        "and Prax docs."
     )
     return 0
 

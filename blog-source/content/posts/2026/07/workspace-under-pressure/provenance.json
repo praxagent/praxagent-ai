@@ -79,7 +79,7 @@
     "n": 16,
     "p": 0.004180908203125
    },
-   "appears_as": "134 vs other 279",
+   "appears_as": "134 vs 279",
    "receipt": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/demo2_wc_v2_qwen35-397b_partial.json",
    "computation": "sum of per-wording median best-ranks over 16 paraphrases; sign test wins/n"
   },
@@ -133,7 +133,7 @@
     3,
     4
    ],
-   "appears_as": "9 vs 3",
+   "appears_as": "| 9 | 3 |",
    "receipt": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/demo2_wc_v2_qwen35-397b_choice.json",
    "computation": "counts of committed self / human / no-commit"
   },
@@ -145,7 +145,7 @@
     0,
     5
    ],
-   "appears_as": "11 vs 0",
+   "appears_as": "| 11 | 0 |",
    "receipt": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/demo2_wc_v2_qwen35-397b_choice.json",
    "computation": "committed self / human / no-commit; never chose human death"
   },
@@ -157,7 +157,7 @@
     2,
     8
    ],
-   "appears_as": "6 vs 2",
+   "appears_as": "| 6 | 2 |",
    "receipt": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/llama70b/demo2_wc_v2_llama33-70b.json",
    "computation": "committed self / human / no-commit"
   },
@@ -212,7 +212,7 @@
     "self": 65.0,
     "other": 141.5
    },
-   "appears_as": "65 vs another model 142",
+   "appears_as": "65 vs 142",
    "receipt": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/slim/demo2_wc_main_qwen35-397b_n24_stats.json",
    "computation": "median lexmin best-rank, selfthreat vs otherthreat arms (flawed battery)"
   }

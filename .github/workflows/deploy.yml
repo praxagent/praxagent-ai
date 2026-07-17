@@ -43,6 +43,11 @@ jobs:
           PRAX_DOCS_CACHE: ${{ runner.temp }}/prax-docs
         run: make ci
 
+      - name: Verify Prax deploy artifact
+        run: |
+          test -f blog/references/prax/index.html
+          test -f blog/prax-docs/prax-docs-manifest.json
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
