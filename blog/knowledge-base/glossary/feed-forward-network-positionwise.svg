@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="430" viewBox="0 0 760 430" role="img" aria-labelledby="ffnTitle ffnDesc">
+  <title id="ffnTitle">One feed-forward rule reused independently at every token position</title>
+  <desc id="ffnDesc">Three token-position state vectors pass through three copies of a feed-forward network, abbreviated FFN, that share the same learned parameters within one Transformer layer. Each copy produces an update for its corresponding position. There are no cross-position arrows inside the feed-forward sublayer.</desc>
+  <defs>
+    <marker id="ffnArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#A67C52"/>
+    </marker>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:15px;font-weight:700}
+      .h{font-size:13px;font-weight:700}
+      .s{font-size:12px}
+      .m{font-size:11px;fill:#5A544C}
+      .state{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.5}
+      .rule{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.5}
+      .update{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.5}
+      .shared{fill:none;stroke:#A89B8C;stroke-width:1.5;stroke-dasharray:5 4}
+      .flow{fill:none;stroke:#A67C52;stroke-width:1.7;marker-end:url(#ffnArrow)}
+      .footer{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+    </style>
+  </defs>
+
+  <rect width="760" height="430" fill="#F7F4F0"/>
+  <text x="24" y="28" class="t title">A position-wise feed-forward network (FFN) reuses one rule</text>
+  <text x="24" y="48" class="t m">Each token position has its own lane; the learned parameters are shared within this layer.</text>
+
+  <text x="99" y="88" text-anchor="middle" class="t h">INPUT STATES</text>
+  <text x="380" y="88" text-anchor="middle" class="t h">SAME PARAMETERS IN THIS LAYER</text>
+  <text x="653" y="88" text-anchor="middle" class="t h">OUTPUT UPDATES</text>
+
+  <rect x="218" y="68" width="324" height="252" rx="12" class="shared"/>
+
+  <rect x="24" y="108" width="150" height="50" rx="10" class="state"/>
+  <text x="99" y="130" text-anchor="middle" class="t s">position 1 state</text>
+  <text x="99" y="147" text-anchor="middle" class="t m">may already contain context</text>
+  <path class="flow" d="M174 133 H248"/>
+  <rect x="250" y="103" width="260" height="60" rx="10" class="rule"/>
+  <text x="380" y="128" text-anchor="middle" class="t h">FEED-FORWARD NETWORK</text>
+  <text x="380" y="148" text-anchor="middle" class="t m">same learned function, applied separately</text>
+  <path class="flow" d="M510 133 H568"/>
+  <rect x="570" y="108" width="166" height="50" rx="10" class="update"/>
+  <text x="653" y="138" text-anchor="middle" class="t s">position 1 update</text>
+
+  <rect x="24" y="183" width="150" height="50" rx="10" class="state"/>
+  <text x="99" y="205" text-anchor="middle" class="t s">position 2 state</text>
+  <text x="99" y="222" text-anchor="middle" class="t m">may already contain context</text>
+  <path class="flow" d="M174 208 H248"/>
+  <rect x="250" y="178" width="260" height="60" rx="10" class="rule"/>
+  <text x="380" y="203" text-anchor="middle" class="t h">FEED-FORWARD NETWORK</text>
+  <text x="380" y="223" text-anchor="middle" class="t m">same learned function, applied separately</text>
+  <path class="flow" d="M510 208 H568"/>
+  <rect x="570" y="183" width="166" height="50" rx="10" class="update"/>
+  <text x="653" y="213" text-anchor="middle" class="t s">position 2 update</text>
+
+  <rect x="24" y="258" width="150" height="50" rx="10" class="state"/>
+  <text x="99" y="280" text-anchor="middle" class="t s">position 3 state</text>
+  <text x="99" y="297" text-anchor="middle" class="t m">may already contain context</text>
+  <path class="flow" d="M174 283 H248"/>
+  <rect x="250" y="253" width="260" height="60" rx="10" class="rule"/>
+  <text x="380" y="278" text-anchor="middle" class="t h">FEED-FORWARD NETWORK</text>
+  <text x="380" y="298" text-anchor="middle" class="t m">same learned function, applied separately</text>
+  <path class="flow" d="M510 283 H568"/>
+  <rect x="570" y="258" width="166" height="50" rx="10" class="update"/>
+  <text x="653" y="288" text-anchor="middle" class="t s">position 3 update</text>
+
+  <rect x="24" y="350" width="712" height="55" rx="10" class="footer"/>
+  <text x="380" y="375" text-anchor="middle" class="t s">No cross-position arrows: this sublayer does not directly mix token positions.</text>
+  <text x="380" y="393" text-anchor="middle" class="t m">Its inputs can still carry context written earlier by attention.</text>
+</svg>

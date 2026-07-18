@@ -28,7 +28,8 @@ from urllib.parse import quote, unquote, urlsplit, urlunsplit
 DEFAULT_REPOSITORY = "https://github.com/praxagent/prax.git"
 DEFAULT_REF = "main"
 DEFAULT_CACHE = Path(".cache/prax-docs/repo")
-PUBLIC_ROOT = "/blog/references/prax/"
+PUBLIC_ROOT = "/blog/knowledge-base/prax/"
+LEGACY_ALIAS_ROOT = "/references/prax/"
 STATIC_PUBLIC_ROOT = "/blog/prax-docs/"
 MANIFEST_NAME = "prax-docs-manifest.json"
 
@@ -485,6 +486,20 @@ def _toml_string(value: str) -> str:
     return json.dumps(value, ensure_ascii=False)
 
 
+def _route_suffix_for_output(output: PurePosixPath) -> str:
+    if output == PurePosixPath("_index.md"):
+        return ""
+    if output.name == "_index.md":
+        relative = output.parent.as_posix().strip("/")
+    else:
+        relative = output.with_suffix("").as_posix().strip("/")
+    return quote(relative, safe="/-._~") + "/"
+
+
+def _legacy_alias_for_output(output: PurePosixPath) -> str:
+    return LEGACY_ALIAS_ROOT + _route_suffix_for_output(output)
+
+
 def render_front_matter(
     title: str,
     summary: str,
@@ -495,6 +510,7 @@ def render_front_matter(
         ("title", title),
         ("summary", summary),
         ("layout", "prax-docs-section" if document.is_section else "prax-doc"),
+        ("aliases", [_legacy_alias_for_output(document.output_path)]),
     ]
     if document.source_path == PurePosixPath("README.md"):
         fields.extend(ROOT_CARD_METADATA)
@@ -513,6 +529,9 @@ def render_front_matter(
     for key, value in fields:
         if isinstance(value, int):
             rendered.append(f"{key} = {value}")
+        elif isinstance(value, (list, tuple)):
+            items = ", ".join(_toml_string(str(item)) for item in value)
+            rendered.append(f"{key} = [{items}]")
         else:
             rendered.append(f"{key} = {_toml_string(str(value))}")
     rendered.extend(("+++", ""))
@@ -520,13 +539,7 @@ def render_front_matter(
 
 
 def _route_for_output(output: PurePosixPath) -> str:
-    if output == PurePosixPath("_index.md"):
-        return PUBLIC_ROOT
-    if output.name == "_index.md":
-        relative = output.parent.as_posix().strip("/")
-    else:
-        relative = output.with_suffix("").as_posix().strip("/")
-    return PUBLIC_ROOT + quote(relative, safe="/-._~") + "/"
+    return PUBLIC_ROOT + _route_suffix_for_output(output)
 
 
 def _split_destination(destination: str) -> tuple[str, bool]:

@@ -1,4 +1,4 @@
-{{- $prax := .Site.GetPage "/references/prax" -}}
+{{- $prax := .Site.GetPage "/knowledge-base/prax" -}}
 <div class="blog-post prax-doc">
     <div class="container prax-doc-container">
         <div class="prax-doc-shell">
@@ -9,7 +9,7 @@
             <article class="post-content prax-doc-main">
                 <header class="post-header prax-doc-header">
                     <nav class="prax-doc-breadcrumb" aria-label="Breadcrumb">
-                        <a href="{{ "references/" | relURL }}">Knowledge Base</a>
+                        <a href="{{ "knowledge-base/" | relURL }}">Knowledge Base</a>
                         <span aria-hidden="true">/</span>
                         {{- if and $prax (ne .RelPermalink $prax.RelPermalink) }}
                         <a href="{{ $prax.RelPermalink }}">Prax</a>

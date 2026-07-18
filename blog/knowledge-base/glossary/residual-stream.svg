@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="440" viewBox="0 0 760 440" role="img" aria-labelledby="residualStreamTitle residualStreamDesc">
+  <title id="residualStreamTitle">One evolving residual state per token position</title>
+  <desc id="residualStreamDesc">A toy four-token sequence has four separate state vectors before and after a transformer block. Attention may combine permitted positions. The position-wise multilayer perceptron, abbreviated MLP, applies the same learned function at each position. An analyst selects one layer-position vector and passes it to a readout, which maps it to derived scores.</desc>
+  <defs>
+    <marker id="residualStreamArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#A67C52"/>
+    </marker>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:15px;font-weight:700}
+      .h{font-size:13px;font-weight:700}
+      .s{font-size:12px}
+      .m{font-size:11px;fill:#5A544C}
+      .token{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+      .state{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.5}
+      .block{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.6}
+      .attention{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.4}
+      .mlp{fill:#EDE8E1;stroke:#7F786D;stroke-width:1.4}
+      .selected{fill:#F3E8E0;stroke:#A67C52;stroke-width:2.2}
+      .flow{fill:none;stroke:#A67C52;stroke-width:1.7;marker-end:url(#residualStreamArrow)}
+      .footer{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+    </style>
+  </defs>
+
+  <rect width="760" height="440" fill="#F7F4F0"/>
+  <text x="24" y="28" class="t title">The residual stream is a row of states, not one global scratchpad</text>
+  <text x="24" y="48" class="t m">Toy four-token sequence. Each token position keeps a separate evolving vector.</text>
+
+  <text x="64" y="100" text-anchor="middle" class="t h">Toy tokens</text>
+  <text x="185" y="100" text-anchor="middle" class="t h">Before the block</text>
+  <text x="375" y="100" text-anchor="middle" class="t h">Block updates</text>
+  <text x="565" y="100" text-anchor="middle" class="t h">After the block</text>
+
+  <path class="flow" d="M250 142 H285"/>
+  <path class="flow" d="M250 190 H285"/>
+  <path class="flow" d="M250 238 H285"/>
+  <path class="flow" d="M250 286 H285"/>
+  <path class="flow" d="M465 142 H500"/>
+  <path class="flow" d="M465 190 H500"/>
+  <path class="flow" d="M465 238 H500"/>
+  <path class="flow" d="M465 286 H500"/>
+
+  <rect x="24" y="125" width="80" height="34" rx="9" class="token"/>
+  <text x="64" y="146" text-anchor="middle" class="t s">The</text>
+  <rect x="24" y="173" width="80" height="34" rx="9" class="token"/>
+  <text x="64" y="194" text-anchor="middle" class="t s">capital</text>
+  <rect x="24" y="221" width="80" height="34" rx="9" class="token"/>
+  <text x="64" y="242" text-anchor="middle" class="t s">is</text>
+  <rect x="24" y="269" width="80" height="34" rx="9" class="token"/>
+  <text x="64" y="290" text-anchor="middle" class="t s">Paris</text>
+
+  <rect x="120" y="125" width="130" height="34" rx="9" class="state"/>
+  <text x="185" y="146" text-anchor="middle" class="t s">state vector</text>
+  <rect x="120" y="173" width="130" height="34" rx="9" class="state"/>
+  <text x="185" y="194" text-anchor="middle" class="t s">state vector</text>
+  <rect x="120" y="221" width="130" height="34" rx="9" class="state"/>
+  <text x="185" y="242" text-anchor="middle" class="t s">state vector</text>
+  <rect x="120" y="269" width="130" height="34" rx="9" class="state"/>
+  <text x="185" y="290" text-anchor="middle" class="t s">state vector</text>
+
+  <rect x="285" y="115" width="180" height="200" rx="12" class="block"/>
+  <rect x="303" y="137" width="144" height="68" rx="10" class="attention"/>
+  <text x="375" y="162" text-anchor="middle" class="t h">ATTENTION UPDATE</text>
+  <text x="375" y="182" text-anchor="middle" class="t m">may combine permitted</text>
+  <text x="375" y="197" text-anchor="middle" class="t m">token positions</text>
+  <path class="flow" d="M375 209 V225"/>
+  <rect x="303" y="229" width="144" height="68" rx="10" class="mlp"/>
+  <text x="375" y="254" text-anchor="middle" class="t h">MLP UPDATE</text>
+  <text x="375" y="274" text-anchor="middle" class="t m">multilayer perceptron</text>
+  <text x="375" y="289" text-anchor="middle" class="t m">applied per position</text>
+
+  <rect x="500" y="125" width="130" height="34" rx="9" class="state"/>
+  <text x="565" y="146" text-anchor="middle" class="t s">state vector</text>
+  <rect x="500" y="173" width="130" height="34" rx="9" class="state"/>
+  <text x="565" y="194" text-anchor="middle" class="t s">state vector</text>
+  <rect x="500" y="221" width="130" height="34" rx="9" class="state"/>
+  <text x="565" y="242" text-anchor="middle" class="t s">state vector</text>
+  <rect x="500" y="269" width="130" height="34" rx="9" class="selected"/>
+  <text x="565" y="290" text-anchor="middle" class="t s">selected vector</text>
+
+  <path class="flow" d="M630 286 H650"/>
+  <rect x="650" y="253" width="86" height="66" rx="10" class="attention"/>
+  <text x="693" y="274" text-anchor="middle" class="t h">READOUT</text>
+  <text x="693" y="294" text-anchor="middle" class="t m">maps selected</text>
+  <text x="693" y="309" text-anchor="middle" class="t m">vector to scores</text>
+
+  <rect x="24" y="365" width="712" height="50" rx="10" class="footer"/>
+  <text x="380" y="395" text-anchor="middle" class="t s">One layer-position vector may contain context, but it is not the prompt's full set of states.</text>
+</svg>

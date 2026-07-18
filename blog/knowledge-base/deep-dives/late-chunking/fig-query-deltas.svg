@@ -1,0 +1,337 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="480" viewBox="0 0 760 480" role="img" aria-labelledby="queryDeltaTitle queryDeltaDesc">
+  <title id="queryDeltaTitle">Late chunking helps some SciFact queries and hurts others</title>
+  <desc id="queryDeltaDesc">Sorted query-level SciFact nDCG at 10 differences for late minus naive chunking: 49 queries improved, 229 tied, and 22 worsened. The mean difference is +0.0196, with a paired query-bootstrap interval from +0.0033 to +0.0358. Points above zero favor late chunking; points below zero favor naive chunking.</desc>
+  <defs>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:15px;font-weight:700}
+      .h{font-size:13px;font-weight:700}
+      .s{font-size:12px}
+      .m{font-size:11px;fill:#5A544C}
+      .grid{stroke:#D9D0C4;stroke-width:1}
+      .zero{stroke:#2C2924;stroke-width:1.8}
+      .positive{fill:#E8F0F7;stroke:#4B6787;stroke-width:0.8}
+      .negative{fill:#F3E8E0;stroke:#A67C52;stroke-width:0.8}
+      .tie{fill:#EDE8E1;stroke:#7F786D;stroke-width:0.8}
+    </style>
+  </defs>
+  <rect width="760" height="480" fill="#F7F4F0"/>
+  <text x="24" y="29" class="t title">Late chunking helps some SciFact queries and hurts others</text>
+  <text x="24" y="50" class="t m">Each marker is one test query, sorted by late-minus-naive nDCG@10.</text>
+  <line x1="82.0" y1="386.0" x2="716.0" y2="386.0" class="grid"/>
+  <text x="70" y="390.0" text-anchor="end" class="t m">-1.0</text>
+  <line x1="82.0" y1="314.5" x2="716.0" y2="314.5" class="grid"/>
+  <text x="70" y="318.5" text-anchor="end" class="t m">-0.5</text>
+  <line x1="82.0" y1="243.0" x2="716.0" y2="243.0" class="zero"/>
+  <text x="70" y="247.0" text-anchor="end" class="t m">+0.0</text>
+  <line x1="82.0" y1="171.5" x2="716.0" y2="171.5" class="grid"/>
+  <text x="70" y="175.5" text-anchor="end" class="t m">+0.5</text>
+  <line x1="82.0" y1="100.0" x2="716.0" y2="100.0" class="grid"/>
+  <text x="70" y="104.0" text-anchor="end" class="t m">+1.0</text>
+  <text x="18" y="243" transform="rotate(-90 18 243)" text-anchor="middle" class="t s">Late minus naive nDCG@10</text>
+  <text x="82.0" y="407" text-anchor="middle" class="t m">1</text>
+  <text x="716.0" y="407" text-anchor="middle" class="t m">300</text>
+  <text x="399" y="426" text-anchor="middle" class="t s">Queries sorted from most negative to most positive difference</text>
+  <rect x="79.80" y="340.75" width="4.4" height="4.4" class="negative"/>
+  <rect x="81.92" y="336.13" width="4.4" height="4.4" class="negative"/>
+  <rect x="84.04" y="332.86" width="4.4" height="4.4" class="negative"/>
+  <rect x="86.16" y="322.21" width="4.4" height="4.4" class="negative"/>
+  <rect x="88.28" y="293.58" width="4.4" height="4.4" class="negative"/>
+  <rect x="90.40" y="293.58" width="4.4" height="4.4" class="negative"/>
+  <rect x="92.52" y="293.58" width="4.4" height="4.4" class="negative"/>
+  <rect x="94.64" y="293.58" width="4.4" height="4.4" class="negative"/>
+  <rect x="96.76" y="282.14" width="4.4" height="4.4" class="negative"/>
+  <rect x="98.88" y="270.96" width="4.4" height="4.4" class="negative"/>
+  <rect x="101.00" y="261.36" width="4.4" height="4.4" class="negative"/>
+  <rect x="103.12" y="259.52" width="4.4" height="4.4" class="negative"/>
+  <rect x="105.24" y="259.52" width="4.4" height="4.4" class="negative"/>
+  <rect x="107.37" y="256.98" width="4.4" height="4.4" class="negative"/>
+  <rect x="109.49" y="252.28" width="4.4" height="4.4" class="negative"/>
+  <rect x="111.61" y="248.69" width="4.4" height="4.4" class="negative"/>
+  <rect x="113.73" y="247.13" width="4.4" height="4.4" class="negative"/>
+  <rect x="115.85" y="245.18" width="4.4" height="4.4" class="negative"/>
+  <rect x="117.97" y="244.07" width="4.4" height="4.4" class="negative"/>
+  <rect x="120.09" y="242.86" width="4.4" height="4.4" class="negative"/>
+  <rect x="122.21" y="242.86" width="4.4" height="4.4" class="negative"/>
+  <rect x="124.33" y="242.86" width="4.4" height="4.4" class="negative"/>
+  <path d="M128.65 240.00 L131.65 243.00 L128.65 246.00 L125.65 243.00 Z" class="tie"/>
+  <path d="M130.77 240.00 L133.77 243.00 L130.77 246.00 L127.77 243.00 Z" class="tie"/>
+  <path d="M132.89 240.00 L135.89 243.00 L132.89 246.00 L129.89 243.00 Z" class="tie"/>
+  <path d="M135.01 240.00 L138.01 243.00 L135.01 246.00 L132.01 243.00 Z" class="tie"/>
+  <path d="M137.13 240.00 L140.13 243.00 L137.13 246.00 L134.13 243.00 Z" class="tie"/>
+  <path d="M139.25 240.00 L142.25 243.00 L139.25 246.00 L136.25 243.00 Z" class="tie"/>
+  <path d="M141.37 240.00 L144.37 243.00 L141.37 246.00 L138.37 243.00 Z" class="tie"/>
+  <path d="M143.49 240.00 L146.49 243.00 L143.49 246.00 L140.49 243.00 Z" class="tie"/>
+  <path d="M145.61 240.00 L148.61 243.00 L145.61 246.00 L142.61 243.00 Z" class="tie"/>
+  <path d="M147.73 240.00 L150.73 243.00 L147.73 246.00 L144.73 243.00 Z" class="tie"/>
+  <path d="M149.85 240.00 L152.85 243.00 L149.85 246.00 L146.85 243.00 Z" class="tie"/>
+  <path d="M151.97 240.00 L154.97 243.00 L151.97 246.00 L148.97 243.00 Z" class="tie"/>
+  <path d="M154.09 240.00 L157.09 243.00 L154.09 246.00 L151.09 243.00 Z" class="tie"/>
+  <path d="M156.21 240.00 L159.21 243.00 L156.21 246.00 L153.21 243.00 Z" class="tie"/>
+  <path d="M158.33 240.00 L161.33 243.00 L158.33 246.00 L155.33 243.00 Z" class="tie"/>
+  <path d="M160.45 240.00 L163.45 243.00 L160.45 246.00 L157.45 243.00 Z" class="tie"/>
+  <path d="M162.58 240.00 L165.58 243.00 L162.58 246.00 L159.58 243.00 Z" class="tie"/>
+  <path d="M164.70 240.00 L167.70 243.00 L164.70 246.00 L161.70 243.00 Z" class="tie"/>
+  <path d="M166.82 240.00 L169.82 243.00 L166.82 246.00 L163.82 243.00 Z" class="tie"/>
+  <path d="M168.94 240.00 L171.94 243.00 L168.94 246.00 L165.94 243.00 Z" class="tie"/>
+  <path d="M171.06 240.00 L174.06 243.00 L171.06 246.00 L168.06 243.00 Z" class="tie"/>
+  <path d="M173.18 240.00 L176.18 243.00 L173.18 246.00 L170.18 243.00 Z" class="tie"/>
+  <path d="M175.30 240.00 L178.30 243.00 L175.30 246.00 L172.30 243.00 Z" class="tie"/>
+  <path d="M177.42 240.00 L180.42 243.00 L177.42 246.00 L174.42 243.00 Z" class="tie"/>
+  <path d="M179.54 240.00 L182.54 243.00 L179.54 246.00 L176.54 243.00 Z" class="tie"/>
+  <path d="M181.66 240.00 L184.66 243.00 L181.66 246.00 L178.66 243.00 Z" class="tie"/>
+  <path d="M183.78 240.00 L186.78 243.00 L183.78 246.00 L180.78 243.00 Z" class="tie"/>
+  <path d="M185.90 240.00 L188.90 243.00 L185.90 246.00 L182.90 243.00 Z" class="tie"/>
+  <path d="M188.02 240.00 L191.02 243.00 L188.02 246.00 L185.02 243.00 Z" class="tie"/>
+  <path d="M190.14 240.00 L193.14 243.00 L190.14 246.00 L187.14 243.00 Z" class="tie"/>
+  <path d="M192.26 240.00 L195.26 243.00 L192.26 246.00 L189.26 243.00 Z" class="tie"/>
+  <path d="M194.38 240.00 L197.38 243.00 L194.38 246.00 L191.38 243.00 Z" class="tie"/>
+  <path d="M196.50 240.00 L199.50 243.00 L196.50 246.00 L193.50 243.00 Z" class="tie"/>
+  <path d="M198.62 240.00 L201.62 243.00 L198.62 246.00 L195.62 243.00 Z" class="tie"/>
+  <path d="M200.74 240.00 L203.74 243.00 L200.74 246.00 L197.74 243.00 Z" class="tie"/>
+  <path d="M202.86 240.00 L205.86 243.00 L202.86 246.00 L199.86 243.00 Z" class="tie"/>
+  <path d="M204.98 240.00 L207.98 243.00 L204.98 246.00 L201.98 243.00 Z" class="tie"/>
+  <path d="M207.10 240.00 L210.10 243.00 L207.10 246.00 L204.10 243.00 Z" class="tie"/>
+  <path d="M209.22 240.00 L212.22 243.00 L209.22 246.00 L206.22 243.00 Z" class="tie"/>
+  <path d="M211.34 240.00 L214.34 243.00 L211.34 246.00 L208.34 243.00 Z" class="tie"/>
+  <path d="M213.46 240.00 L216.46 243.00 L213.46 246.00 L210.46 243.00 Z" class="tie"/>
+  <path d="M215.59 240.00 L218.59 243.00 L215.59 246.00 L212.59 243.00 Z" class="tie"/>
+  <path d="M217.71 240.00 L220.71 243.00 L217.71 246.00 L214.71 243.00 Z" class="tie"/>
+  <path d="M219.83 240.00 L222.83 243.00 L219.83 246.00 L216.83 243.00 Z" class="tie"/>
+  <path d="M221.95 240.00 L224.95 243.00 L221.95 246.00 L218.95 243.00 Z" class="tie"/>
+  <path d="M224.07 240.00 L227.07 243.00 L224.07 246.00 L221.07 243.00 Z" class="tie"/>
+  <path d="M226.19 240.00 L229.19 243.00 L226.19 246.00 L223.19 243.00 Z" class="tie"/>
+  <path d="M228.31 240.00 L231.31 243.00 L228.31 246.00 L225.31 243.00 Z" class="tie"/>
+  <path d="M230.43 240.00 L233.43 243.00 L230.43 246.00 L227.43 243.00 Z" class="tie"/>
+  <path d="M232.55 240.00 L235.55 243.00 L232.55 246.00 L229.55 243.00 Z" class="tie"/>
+  <path d="M234.67 240.00 L237.67 243.00 L234.67 246.00 L231.67 243.00 Z" class="tie"/>
+  <path d="M236.79 240.00 L239.79 243.00 L236.79 246.00 L233.79 243.00 Z" class="tie"/>
+  <path d="M238.91 240.00 L241.91 243.00 L238.91 246.00 L235.91 243.00 Z" class="tie"/>
+  <path d="M241.03 240.00 L244.03 243.00 L241.03 246.00 L238.03 243.00 Z" class="tie"/>
+  <path d="M243.15 240.00 L246.15 243.00 L243.15 246.00 L240.15 243.00 Z" class="tie"/>
+  <path d="M245.27 240.00 L248.27 243.00 L245.27 246.00 L242.27 243.00 Z" class="tie"/>
+  <path d="M247.39 240.00 L250.39 243.00 L247.39 246.00 L244.39 243.00 Z" class="tie"/>
+  <path d="M249.51 240.00 L252.51 243.00 L249.51 246.00 L246.51 243.00 Z" class="tie"/>
+  <path d="M251.63 240.00 L254.63 243.00 L251.63 246.00 L248.63 243.00 Z" class="tie"/>
+  <path d="M253.75 240.00 L256.75 243.00 L253.75 246.00 L250.75 243.00 Z" class="tie"/>
+  <path d="M255.87 240.00 L258.87 243.00 L255.87 246.00 L252.87 243.00 Z" class="tie"/>
+  <path d="M257.99 240.00 L260.99 243.00 L257.99 246.00 L254.99 243.00 Z" class="tie"/>
+  <path d="M260.11 240.00 L263.11 243.00 L260.11 246.00 L257.11 243.00 Z" class="tie"/>
+  <path d="M262.23 240.00 L265.23 243.00 L262.23 246.00 L259.23 243.00 Z" class="tie"/>
+  <path d="M264.35 240.00 L267.35 243.00 L264.35 246.00 L261.35 243.00 Z" class="tie"/>
+  <path d="M266.47 240.00 L269.47 243.00 L266.47 246.00 L263.47 243.00 Z" class="tie"/>
+  <path d="M268.60 240.00 L271.60 243.00 L268.60 246.00 L265.60 243.00 Z" class="tie"/>
+  <path d="M270.72 240.00 L273.72 243.00 L270.72 246.00 L267.72 243.00 Z" class="tie"/>
+  <path d="M272.84 240.00 L275.84 243.00 L272.84 246.00 L269.84 243.00 Z" class="tie"/>
+  <path d="M274.96 240.00 L277.96 243.00 L274.96 246.00 L271.96 243.00 Z" class="tie"/>
+  <path d="M277.08 240.00 L280.08 243.00 L277.08 246.00 L274.08 243.00 Z" class="tie"/>
+  <path d="M279.20 240.00 L282.20 243.00 L279.20 246.00 L276.20 243.00 Z" class="tie"/>
+  <path d="M281.32 240.00 L284.32 243.00 L281.32 246.00 L278.32 243.00 Z" class="tie"/>
+  <path d="M283.44 240.00 L286.44 243.00 L283.44 246.00 L280.44 243.00 Z" class="tie"/>
+  <path d="M285.56 240.00 L288.56 243.00 L285.56 246.00 L282.56 243.00 Z" class="tie"/>
+  <path d="M287.68 240.00 L290.68 243.00 L287.68 246.00 L284.68 243.00 Z" class="tie"/>
+  <path d="M289.80 240.00 L292.80 243.00 L289.80 246.00 L286.80 243.00 Z" class="tie"/>
+  <path d="M291.92 240.00 L294.92 243.00 L291.92 246.00 L288.92 243.00 Z" class="tie"/>
+  <path d="M294.04 240.00 L297.04 243.00 L294.04 246.00 L291.04 243.00 Z" class="tie"/>
+  <path d="M296.16 240.00 L299.16 243.00 L296.16 246.00 L293.16 243.00 Z" class="tie"/>
+  <path d="M298.28 240.00 L301.28 243.00 L298.28 246.00 L295.28 243.00 Z" class="tie"/>
+  <path d="M300.40 240.00 L303.40 243.00 L300.40 246.00 L297.40 243.00 Z" class="tie"/>
+  <path d="M302.52 240.00 L305.52 243.00 L302.52 246.00 L299.52 243.00 Z" class="tie"/>
+  <path d="M304.64 240.00 L307.64 243.00 L304.64 246.00 L301.64 243.00 Z" class="tie"/>
+  <path d="M306.76 240.00 L309.76 243.00 L306.76 246.00 L303.76 243.00 Z" class="tie"/>
+  <path d="M308.88 240.00 L311.88 243.00 L308.88 246.00 L305.88 243.00 Z" class="tie"/>
+  <path d="M311.00 240.00 L314.00 243.00 L311.00 246.00 L308.00 243.00 Z" class="tie"/>
+  <path d="M313.12 240.00 L316.12 243.00 L313.12 246.00 L310.12 243.00 Z" class="tie"/>
+  <path d="M315.24 240.00 L318.24 243.00 L315.24 246.00 L312.24 243.00 Z" class="tie"/>
+  <path d="M317.36 240.00 L320.36 243.00 L317.36 246.00 L314.36 243.00 Z" class="tie"/>
+  <path d="M319.48 240.00 L322.48 243.00 L319.48 246.00 L316.48 243.00 Z" class="tie"/>
+  <path d="M321.61 240.00 L324.61 243.00 L321.61 246.00 L318.61 243.00 Z" class="tie"/>
+  <path d="M323.73 240.00 L326.73 243.00 L323.73 246.00 L320.73 243.00 Z" class="tie"/>
+  <path d="M325.85 240.00 L328.85 243.00 L325.85 246.00 L322.85 243.00 Z" class="tie"/>
+  <path d="M327.97 240.00 L330.97 243.00 L327.97 246.00 L324.97 243.00 Z" class="tie"/>
+  <path d="M330.09 240.00 L333.09 243.00 L330.09 246.00 L327.09 243.00 Z" class="tie"/>
+  <path d="M332.21 240.00 L335.21 243.00 L332.21 246.00 L329.21 243.00 Z" class="tie"/>
+  <path d="M334.33 240.00 L337.33 243.00 L334.33 246.00 L331.33 243.00 Z" class="tie"/>
+  <path d="M336.45 240.00 L339.45 243.00 L336.45 246.00 L333.45 243.00 Z" class="tie"/>
+  <path d="M338.57 240.00 L341.57 243.00 L338.57 246.00 L335.57 243.00 Z" class="tie"/>
+  <path d="M340.69 240.00 L343.69 243.00 L340.69 246.00 L337.69 243.00 Z" class="tie"/>
+  <path d="M342.81 240.00 L345.81 243.00 L342.81 246.00 L339.81 243.00 Z" class="tie"/>
+  <path d="M344.93 240.00 L347.93 243.00 L344.93 246.00 L341.93 243.00 Z" class="tie"/>
+  <path d="M347.05 240.00 L350.05 243.00 L347.05 246.00 L344.05 243.00 Z" class="tie"/>
+  <path d="M349.17 240.00 L352.17 243.00 L349.17 246.00 L346.17 243.00 Z" class="tie"/>
+  <path d="M351.29 240.00 L354.29 243.00 L351.29 246.00 L348.29 243.00 Z" class="tie"/>
+  <path d="M353.41 240.00 L356.41 243.00 L353.41 246.00 L350.41 243.00 Z" class="tie"/>
+  <path d="M355.53 240.00 L358.53 243.00 L355.53 246.00 L352.53 243.00 Z" class="tie"/>
+  <path d="M357.65 240.00 L360.65 243.00 L357.65 246.00 L354.65 243.00 Z" class="tie"/>
+  <path d="M359.77 240.00 L362.77 243.00 L359.77 246.00 L356.77 243.00 Z" class="tie"/>
+  <path d="M361.89 240.00 L364.89 243.00 L361.89 246.00 L358.89 243.00 Z" class="tie"/>
+  <path d="M364.01 240.00 L367.01 243.00 L364.01 246.00 L361.01 243.00 Z" class="tie"/>
+  <path d="M366.13 240.00 L369.13 243.00 L366.13 246.00 L363.13 243.00 Z" class="tie"/>
+  <path d="M368.25 240.00 L371.25 243.00 L368.25 246.00 L365.25 243.00 Z" class="tie"/>
+  <path d="M370.37 240.00 L373.37 243.00 L370.37 246.00 L367.37 243.00 Z" class="tie"/>
+  <path d="M372.49 240.00 L375.49 243.00 L372.49 246.00 L369.49 243.00 Z" class="tie"/>
+  <path d="M374.62 240.00 L377.62 243.00 L374.62 246.00 L371.62 243.00 Z" class="tie"/>
+  <path d="M376.74 240.00 L379.74 243.00 L376.74 246.00 L373.74 243.00 Z" class="tie"/>
+  <path d="M378.86 240.00 L381.86 243.00 L378.86 246.00 L375.86 243.00 Z" class="tie"/>
+  <path d="M380.98 240.00 L383.98 243.00 L380.98 246.00 L377.98 243.00 Z" class="tie"/>
+  <path d="M383.10 240.00 L386.10 243.00 L383.10 246.00 L380.10 243.00 Z" class="tie"/>
+  <path d="M385.22 240.00 L388.22 243.00 L385.22 246.00 L382.22 243.00 Z" class="tie"/>
+  <path d="M387.34 240.00 L390.34 243.00 L387.34 246.00 L384.34 243.00 Z" class="tie"/>
+  <path d="M389.46 240.00 L392.46 243.00 L389.46 246.00 L386.46 243.00 Z" class="tie"/>
+  <path d="M391.58 240.00 L394.58 243.00 L391.58 246.00 L388.58 243.00 Z" class="tie"/>
+  <path d="M393.70 240.00 L396.70 243.00 L393.70 246.00 L390.70 243.00 Z" class="tie"/>
+  <path d="M395.82 240.00 L398.82 243.00 L395.82 246.00 L392.82 243.00 Z" class="tie"/>
+  <path d="M397.94 240.00 L400.94 243.00 L397.94 246.00 L394.94 243.00 Z" class="tie"/>
+  <path d="M400.06 240.00 L403.06 243.00 L400.06 246.00 L397.06 243.00 Z" class="tie"/>
+  <path d="M402.18 240.00 L405.18 243.00 L402.18 246.00 L399.18 243.00 Z" class="tie"/>
+  <path d="M404.30 240.00 L407.30 243.00 L404.30 246.00 L401.30 243.00 Z" class="tie"/>
+  <path d="M406.42 240.00 L409.42 243.00 L406.42 246.00 L403.42 243.00 Z" class="tie"/>
+  <path d="M408.54 240.00 L411.54 243.00 L408.54 246.00 L405.54 243.00 Z" class="tie"/>
+  <path d="M410.66 240.00 L413.66 243.00 L410.66 246.00 L407.66 243.00 Z" class="tie"/>
+  <path d="M412.78 240.00 L415.78 243.00 L412.78 246.00 L409.78 243.00 Z" class="tie"/>
+  <path d="M414.90 240.00 L417.90 243.00 L414.90 246.00 L411.90 243.00 Z" class="tie"/>
+  <path d="M417.02 240.00 L420.02 243.00 L417.02 246.00 L414.02 243.00 Z" class="tie"/>
+  <path d="M419.14 240.00 L422.14 243.00 L419.14 246.00 L416.14 243.00 Z" class="tie"/>
+  <path d="M421.26 240.00 L424.26 243.00 L421.26 246.00 L418.26 243.00 Z" class="tie"/>
+  <path d="M423.38 240.00 L426.38 243.00 L423.38 246.00 L420.38 243.00 Z" class="tie"/>
+  <path d="M425.51 240.00 L428.51 243.00 L425.51 246.00 L422.51 243.00 Z" class="tie"/>
+  <path d="M427.63 240.00 L430.63 243.00 L427.63 246.00 L424.63 243.00 Z" class="tie"/>
+  <path d="M429.75 240.00 L432.75 243.00 L429.75 246.00 L426.75 243.00 Z" class="tie"/>
+  <path d="M431.87 240.00 L434.87 243.00 L431.87 246.00 L428.87 243.00 Z" class="tie"/>
+  <path d="M433.99 240.00 L436.99 243.00 L433.99 246.00 L430.99 243.00 Z" class="tie"/>
+  <path d="M436.11 240.00 L439.11 243.00 L436.11 246.00 L433.11 243.00 Z" class="tie"/>
+  <path d="M438.23 240.00 L441.23 243.00 L438.23 246.00 L435.23 243.00 Z" class="tie"/>
+  <path d="M440.35 240.00 L443.35 243.00 L440.35 246.00 L437.35 243.00 Z" class="tie"/>
+  <path d="M442.47 240.00 L445.47 243.00 L442.47 246.00 L439.47 243.00 Z" class="tie"/>
+  <path d="M444.59 240.00 L447.59 243.00 L444.59 246.00 L441.59 243.00 Z" class="tie"/>
+  <path d="M446.71 240.00 L449.71 243.00 L446.71 246.00 L443.71 243.00 Z" class="tie"/>
+  <path d="M448.83 240.00 L451.83 243.00 L448.83 246.00 L445.83 243.00 Z" class="tie"/>
+  <path d="M450.95 240.00 L453.95 243.00 L450.95 246.00 L447.95 243.00 Z" class="tie"/>
+  <path d="M453.07 240.00 L456.07 243.00 L453.07 246.00 L450.07 243.00 Z" class="tie"/>
+  <path d="M455.19 240.00 L458.19 243.00 L455.19 246.00 L452.19 243.00 Z" class="tie"/>
+  <path d="M457.31 240.00 L460.31 243.00 L457.31 246.00 L454.31 243.00 Z" class="tie"/>
+  <path d="M459.43 240.00 L462.43 243.00 L459.43 246.00 L456.43 243.00 Z" class="tie"/>
+  <path d="M461.55 240.00 L464.55 243.00 L461.55 246.00 L458.55 243.00 Z" class="tie"/>
+  <path d="M463.67 240.00 L466.67 243.00 L463.67 246.00 L460.67 243.00 Z" class="tie"/>
+  <path d="M465.79 240.00 L468.79 243.00 L465.79 246.00 L462.79 243.00 Z" class="tie"/>
+  <path d="M467.91 240.00 L470.91 243.00 L467.91 246.00 L464.91 243.00 Z" class="tie"/>
+  <path d="M470.03 240.00 L473.03 243.00 L470.03 246.00 L467.03 243.00 Z" class="tie"/>
+  <path d="M472.15 240.00 L475.15 243.00 L472.15 246.00 L469.15 243.00 Z" class="tie"/>
+  <path d="M474.27 240.00 L477.27 243.00 L474.27 246.00 L471.27 243.00 Z" class="tie"/>
+  <path d="M476.39 240.00 L479.39 243.00 L476.39 246.00 L473.39 243.00 Z" class="tie"/>
+  <path d="M478.52 240.00 L481.52 243.00 L478.52 246.00 L475.52 243.00 Z" class="tie"/>
+  <path d="M480.64 240.00 L483.64 243.00 L480.64 246.00 L477.64 243.00 Z" class="tie"/>
+  <path d="M482.76 240.00 L485.76 243.00 L482.76 246.00 L479.76 243.00 Z" class="tie"/>
+  <path d="M484.88 240.00 L487.88 243.00 L484.88 246.00 L481.88 243.00 Z" class="tie"/>
+  <path d="M487.00 240.00 L490.00 243.00 L487.00 246.00 L484.00 243.00 Z" class="tie"/>
+  <path d="M489.12 240.00 L492.12 243.00 L489.12 246.00 L486.12 243.00 Z" class="tie"/>
+  <path d="M491.24 240.00 L494.24 243.00 L491.24 246.00 L488.24 243.00 Z" class="tie"/>
+  <path d="M493.36 240.00 L496.36 243.00 L493.36 246.00 L490.36 243.00 Z" class="tie"/>
+  <path d="M495.48 240.00 L498.48 243.00 L495.48 246.00 L492.48 243.00 Z" class="tie"/>
+  <path d="M497.60 240.00 L500.60 243.00 L497.60 246.00 L494.60 243.00 Z" class="tie"/>
+  <path d="M499.72 240.00 L502.72 243.00 L499.72 246.00 L496.72 243.00 Z" class="tie"/>
+  <path d="M501.84 240.00 L504.84 243.00 L501.84 246.00 L498.84 243.00 Z" class="tie"/>
+  <path d="M503.96 240.00 L506.96 243.00 L503.96 246.00 L500.96 243.00 Z" class="tie"/>
+  <path d="M506.08 240.00 L509.08 243.00 L506.08 246.00 L503.08 243.00 Z" class="tie"/>
+  <path d="M508.20 240.00 L511.20 243.00 L508.20 246.00 L505.20 243.00 Z" class="tie"/>
+  <path d="M510.32 240.00 L513.32 243.00 L510.32 246.00 L507.32 243.00 Z" class="tie"/>
+  <path d="M512.44 240.00 L515.44 243.00 L512.44 246.00 L509.44 243.00 Z" class="tie"/>
+  <path d="M514.56 240.00 L517.56 243.00 L514.56 246.00 L511.56 243.00 Z" class="tie"/>
+  <path d="M516.68 240.00 L519.68 243.00 L516.68 246.00 L513.68 243.00 Z" class="tie"/>
+  <path d="M518.80 240.00 L521.80 243.00 L518.80 246.00 L515.80 243.00 Z" class="tie"/>
+  <path d="M520.92 240.00 L523.92 243.00 L520.92 246.00 L517.92 243.00 Z" class="tie"/>
+  <path d="M523.04 240.00 L526.04 243.00 L523.04 246.00 L520.04 243.00 Z" class="tie"/>
+  <path d="M525.16 240.00 L528.16 243.00 L525.16 246.00 L522.16 243.00 Z" class="tie"/>
+  <path d="M527.28 240.00 L530.28 243.00 L527.28 246.00 L524.28 243.00 Z" class="tie"/>
+  <path d="M529.40 240.00 L532.40 243.00 L529.40 246.00 L526.40 243.00 Z" class="tie"/>
+  <path d="M531.53 240.00 L534.53 243.00 L531.53 246.00 L528.53 243.00 Z" class="tie"/>
+  <path d="M533.65 240.00 L536.65 243.00 L533.65 246.00 L530.65 243.00 Z" class="tie"/>
+  <path d="M535.77 240.00 L538.77 243.00 L535.77 246.00 L532.77 243.00 Z" class="tie"/>
+  <path d="M537.89 240.00 L540.89 243.00 L537.89 246.00 L534.89 243.00 Z" class="tie"/>
+  <path d="M540.01 240.00 L543.01 243.00 L540.01 246.00 L537.01 243.00 Z" class="tie"/>
+  <path d="M542.13 240.00 L545.13 243.00 L542.13 246.00 L539.13 243.00 Z" class="tie"/>
+  <path d="M544.25 240.00 L547.25 243.00 L544.25 246.00 L541.25 243.00 Z" class="tie"/>
+  <path d="M546.37 240.00 L549.37 243.00 L546.37 246.00 L543.37 243.00 Z" class="tie"/>
+  <path d="M548.49 240.00 L551.49 243.00 L548.49 246.00 L545.49 243.00 Z" class="tie"/>
+  <path d="M550.61 240.00 L553.61 243.00 L550.61 246.00 L547.61 243.00 Z" class="tie"/>
+  <path d="M552.73 240.00 L555.73 243.00 L552.73 246.00 L549.73 243.00 Z" class="tie"/>
+  <path d="M554.85 240.00 L557.85 243.00 L554.85 246.00 L551.85 243.00 Z" class="tie"/>
+  <path d="M556.97 240.00 L559.97 243.00 L556.97 246.00 L553.97 243.00 Z" class="tie"/>
+  <path d="M559.09 240.00 L562.09 243.00 L559.09 246.00 L556.09 243.00 Z" class="tie"/>
+  <path d="M561.21 240.00 L564.21 243.00 L561.21 246.00 L558.21 243.00 Z" class="tie"/>
+  <path d="M563.33 240.00 L566.33 243.00 L563.33 246.00 L560.33 243.00 Z" class="tie"/>
+  <path d="M565.45 240.00 L568.45 243.00 L565.45 246.00 L562.45 243.00 Z" class="tie"/>
+  <path d="M567.57 240.00 L570.57 243.00 L567.57 246.00 L564.57 243.00 Z" class="tie"/>
+  <path d="M569.69 240.00 L572.69 243.00 L569.69 246.00 L566.69 243.00 Z" class="tie"/>
+  <path d="M571.81 240.00 L574.81 243.00 L571.81 246.00 L568.81 243.00 Z" class="tie"/>
+  <path d="M573.93 240.00 L576.93 243.00 L573.93 246.00 L570.93 243.00 Z" class="tie"/>
+  <path d="M576.05 240.00 L579.05 243.00 L576.05 246.00 L573.05 243.00 Z" class="tie"/>
+  <path d="M578.17 240.00 L581.17 243.00 L578.17 246.00 L575.17 243.00 Z" class="tie"/>
+  <path d="M580.29 240.00 L583.29 243.00 L580.29 246.00 L577.29 243.00 Z" class="tie"/>
+  <path d="M582.41 240.00 L585.41 243.00 L582.41 246.00 L579.41 243.00 Z" class="tie"/>
+  <path d="M584.54 240.00 L587.54 243.00 L584.54 246.00 L581.54 243.00 Z" class="tie"/>
+  <path d="M586.66 240.00 L589.66 243.00 L586.66 246.00 L583.66 243.00 Z" class="tie"/>
+  <path d="M588.78 240.00 L591.78 243.00 L588.78 246.00 L585.78 243.00 Z" class="tie"/>
+  <path d="M590.90 240.00 L593.90 243.00 L590.90 246.00 L587.90 243.00 Z" class="tie"/>
+  <path d="M593.02 240.00 L596.02 243.00 L593.02 246.00 L590.02 243.00 Z" class="tie"/>
+  <path d="M595.14 240.00 L598.14 243.00 L595.14 246.00 L592.14 243.00 Z" class="tie"/>
+  <path d="M597.26 240.00 L600.26 243.00 L597.26 246.00 L594.26 243.00 Z" class="tie"/>
+  <path d="M599.38 240.00 L602.38 243.00 L599.38 246.00 L596.38 243.00 Z" class="tie"/>
+  <path d="M601.50 240.00 L604.50 243.00 L601.50 246.00 L598.50 243.00 Z" class="tie"/>
+  <path d="M603.62 240.00 L606.62 243.00 L603.62 246.00 L600.62 243.00 Z" class="tie"/>
+  <path d="M605.74 240.00 L608.74 243.00 L605.74 246.00 L602.74 243.00 Z" class="tie"/>
+  <path d="M607.86 240.00 L610.86 243.00 L607.86 246.00 L604.86 243.00 Z" class="tie"/>
+  <path d="M609.98 240.00 L612.98 243.00 L609.98 246.00 L606.98 243.00 Z" class="tie"/>
+  <path d="M612.10 240.00 L615.10 243.00 L612.10 246.00 L609.10 243.00 Z" class="tie"/>
+  <circle cx="614.22" cy="242.42" r="2.4" class="positive"/>
+  <circle cx="616.34" cy="239.73" r="2.4" class="positive"/>
+  <circle cx="618.46" cy="239.39" r="2.4" class="positive"/>
+  <circle cx="620.58" cy="238.75" r="2.4" class="positive"/>
+  <circle cx="622.70" cy="238.62" r="2.4" class="positive"/>
+  <circle cx="624.82" cy="238.00" r="2.4" class="positive"/>
+  <circle cx="626.94" cy="236.73" r="2.4" class="positive"/>
+  <circle cx="629.06" cy="236.47" r="2.4" class="positive"/>
+  <circle cx="631.18" cy="235.11" r="2.4" class="positive"/>
+  <circle cx="633.30" cy="234.97" r="2.4" class="positive"/>
+  <circle cx="635.42" cy="233.40" r="2.4" class="positive"/>
+  <circle cx="637.55" cy="233.09" r="2.4" class="positive"/>
+  <circle cx="639.67" cy="233.09" r="2.4" class="positive"/>
+  <circle cx="641.79" cy="233.08" r="2.4" class="positive"/>
+  <circle cx="643.91" cy="232.35" r="2.4" class="positive"/>
+  <circle cx="646.03" cy="230.73" r="2.4" class="positive"/>
+  <circle cx="648.15" cy="229.08" r="2.4" class="positive"/>
+  <circle cx="650.27" cy="226.82" r="2.4" class="positive"/>
+  <circle cx="652.39" cy="224.46" r="2.4" class="positive"/>
+  <circle cx="654.51" cy="224.28" r="2.4" class="positive"/>
+  <circle cx="656.63" cy="224.28" r="2.4" class="positive"/>
+  <circle cx="658.75" cy="217.65" r="2.4" class="positive"/>
+  <circle cx="660.87" cy="216.96" r="2.4" class="positive"/>
+  <circle cx="662.99" cy="214.36" r="2.4" class="positive"/>
+  <circle cx="665.11" cy="213.77" r="2.4" class="positive"/>
+  <circle cx="667.23" cy="212.84" r="2.4" class="positive"/>
+  <circle cx="669.35" cy="211.77" r="2.4" class="positive"/>
+  <circle cx="671.47" cy="210.64" r="2.4" class="positive"/>
+  <circle cx="673.59" cy="208.10" r="2.4" class="positive"/>
+  <circle cx="675.71" cy="208.10" r="2.4" class="positive"/>
+  <circle cx="677.83" cy="199.95" r="2.4" class="positive"/>
+  <circle cx="679.95" cy="195.33" r="2.4" class="positive"/>
+  <circle cx="682.07" cy="192.06" r="2.4" class="positive"/>
+  <circle cx="684.19" cy="190.22" r="2.4" class="positive"/>
+  <circle cx="686.31" cy="190.22" r="2.4" class="positive"/>
+  <circle cx="688.43" cy="190.22" r="2.4" class="positive"/>
+  <circle cx="690.56" cy="190.22" r="2.4" class="positive"/>
+  <circle cx="692.68" cy="190.22" r="2.4" class="positive"/>
+  <circle cx="694.80" cy="190.22" r="2.4" class="positive"/>
+  <circle cx="696.92" cy="190.22" r="2.4" class="positive"/>
+  <circle cx="699.04" cy="190.22" r="2.4" class="positive"/>
+  <circle cx="701.16" cy="190.22" r="2.4" class="positive"/>
+  <circle cx="703.28" cy="189.48" r="2.4" class="positive"/>
+  <circle cx="705.40" cy="181.41" r="2.4" class="positive"/>
+  <circle cx="707.52" cy="171.50" r="2.4" class="positive"/>
+  <circle cx="709.64" cy="171.50" r="2.4" class="positive"/>
+  <circle cx="711.76" cy="161.59" r="2.4" class="positive"/>
+  <circle cx="713.88" cy="161.59" r="2.4" class="positive"/>
+  <circle cx="716.00" cy="147.67" r="2.4" class="positive"/>
+  <rect x="24" y="448" width="712" height="26" rx="8" fill="#EAF1E5" stroke="#6F8D5E" stroke-width="1.3"/>
+  <text x="380" y="466" text-anchor="middle" class="t s">Improved 49 | tied 229 | worsened 22 | mean +0.0196 [+0.0033, +0.0358]</text>
+</svg>

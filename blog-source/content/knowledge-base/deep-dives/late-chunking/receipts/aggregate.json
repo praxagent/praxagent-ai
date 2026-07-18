@@ -1,0 +1,77 @@
+{
+  "benchmark": "SciFact test retrieval",
+  "bootstrap": {
+    "method_interval_seeds": {
+      "late": 20260718,
+      "naive": 20260717,
+      "whole_document": 20260719
+    },
+    "paired_difference_seed": 20260717,
+    "percentile_interpolation": "linear interpolation at zero-based position (B - 1) * p",
+    "prng": "SplitMix64 with rejection-sampled bounded integers",
+    "replicates": 20000,
+    "seed": 20260717,
+    "unit": "query"
+  },
+  "methods": {
+    "late": {
+      "mrr_at_10": {
+        "mean": 0.6337248677248677
+      },
+      "ndcg_at_10": {
+        "mean": 0.6609776646723947,
+        "query_bootstrap_95_percent_interval": [
+          0.6145399649247424,
+          0.7070844743964247
+        ]
+      },
+      "recall_at_10": {
+        "mean": 0.7775555555555556
+      }
+    },
+    "naive": {
+      "mrr_at_10": {
+        "mean": 0.6123492063492062
+      },
+      "ndcg_at_10": {
+        "mean": 0.6414254895397593,
+        "query_bootstrap_95_percent_interval": [
+          0.5941801288149041,
+          0.6875954822650707
+        ]
+      },
+      "recall_at_10": {
+        "mean": 0.7625555555555555
+      }
+    },
+    "whole_document": {
+      "mrr_at_10": {
+        "mean": 0.6104973544973544
+      },
+      "ndcg_at_10": {
+        "mean": 0.6388903593656915,
+        "query_bootstrap_95_percent_interval": [
+          0.5917522695931684,
+          0.6852170695308275
+        ]
+      },
+      "recall_at_10": {
+        "mean": 0.7592222222222221
+      }
+    }
+  },
+  "metric_unit": "nDCG, Recall, and reciprocal rank on a 0-1 scale",
+  "paired_late_minus_naive_ndcg_at_10": {
+    "improved_queries": 49,
+    "mean_difference": 0.019552175132635588,
+    "query_bootstrap_95_percent_interval": [
+      0.0032721920785872076,
+      0.03584544477819499
+    ],
+    "tied_queries": 229,
+    "uncertainty_semantics": "Percentile interval from 20,000 paired resamples of the 300 fixed SciFact test queries. It describes query-level stability for this benchmark and is not a population confidence interval.",
+    "worse_queries": 22
+  },
+  "query_count": 300,
+  "schema_version": 1
+}

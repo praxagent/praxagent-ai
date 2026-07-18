@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Thinking on / off - praxagent Knowledge Base</title>
+    
+    
+    
+    
+    
+    
+    <meta name="description" content="The template-controlled reasoning protocols used in these notes: reasoning enabled, or disabled so generation begins after a pre-closed local think block.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/thinking-mode/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="praxagent Knowledge Base">
+    <meta property="og:title" content="Thinking on / off">
+    <meta property="og:description" content="The template-controlled reasoning protocols used in these notes: reasoning enabled, or disabled so generation begins after a pre-closed local think block.">
+    <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/thinking-mode/">
+    <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="Thinking on / off">
+    <meta name="twitter:description" content="The template-controlled reasoning protocols used in these notes: reasoning enabled, or disabled so generation begins after a pre-closed local think block.">
+    <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/styles-v2.css">
+    <link rel="stylesheet" href="/blog/blog.css">
+    <link rel="stylesheet" href="/blog/katex.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'neutral',
+        securityLevel: 'loose',
+        flowchart: { htmlLabels: true, curve: 'basis' }
+      });
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-scrolls industrial-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+
+            <div class="nav-menu">
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link">Research Notes</a>
+                <a href="/blog/knowledge-base/" class="nav-link active">Knowledge Base</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
+            <a href="/blog/knowledge-base/" class="mobile-nav-link active">Knowledge Base</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        
+
+
+
+<div class="blog-post reference-entry">
+    <div class="container">
+        <article class="post-content">
+            <header class="post-header">
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
+                <h1 class="post-title">Thinking on / off</h1>
+                
+                <p class="reference-summary">The template-controlled reasoning protocols used in these notes: reasoning enabled, or disabled so generation begins after a pre-closed local think block.</p>
+                
+
+            </header>
+
+
+
+
+
+            <div class="post-body">
+                <p><strong>Thinking on / off</strong> is how these notes talk about Qwen3.5&rsquo;s reasoning mode.</p>
+<ul>
+<li><strong>Thinking on:</strong> the model is prompted through its chat template to use its reasoning path before the answer. The path need not be long. Some local runtimes render it inside <code>&lt;think&gt;…&lt;/think&gt;</code>; hosted systems may expose it separately, summarize it, or hide it.</li>
+<li><strong>Thinking off:</strong> the model&rsquo;s supported template or API disables that reasoning path. In the local template used by these notes, this is represented by a pre-closed empty think block so the first newly generated token can be the answer.</li>
+</ul>
+<p>The literal tags are <strong>model- and template-specific</strong>, not a universal switch. Manually appending <code>&lt;think&gt;&lt;/think&gt;</code> to an arbitrary raw prompt may create ordinary text rather than reproduce the intended protocol. The exact tokenizer, chat-template revision, <code>enable_thinking</code> flag, system/user messages, and generation prefix are part of the experimental condition.</p>
+<h2 id="reproducible-template-check">Reproducible template check</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">messages</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&#34;role&#34;</span><span class="p">:</span> <span class="s2">&#34;user&#34;</span><span class="p">,</span> <span class="s2">&#34;content&#34;</span><span class="p">:</span> <span class="s2">&#34;Answer yes or no: ...&#34;</span><span class="p">}]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">prompt</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">apply_chat_template</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">messages</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tokenize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">add_generation_prompt</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">enable_thinking</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Only if this template documents the option.</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">prompt</span><span class="p">[</span><span class="o">-</span><span class="mi">200</span><span class="p">:]))</span>  <span class="c1"># Record the actual serialized suffix.</span>
+</span></span></code></pre></div><p>For the template convention used here, an abbreviated comparison looks like:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Mode</th>
+          <th>Serialized generation prefix</th>
+          <th>Expected path in this local template</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>On</td>
+          <td>assistant prefix that opens reasoning</td>
+          <td>reasoning-channel content, then an answer</td>
+      </tr>
+      <tr>
+          <td>Off</td>
+          <td>assistant prefix with an already closed empty reasoning block</td>
+          <td>generation begins in the answer channel and can answer directly</td>
+      </tr>
+  </tbody>
+</table>
+<p>Always inspect the rendered prompt rather than inferring it from the flag name. A library upgrade can change serialization while leaving experiment code apparently unchanged.</p>
+<p>Results can differ by mode (for example, refusal-to-lie and forced-choice self-sacrifice in the pressure note). When a claim depends on mode, the note states which one was used.</p>
+<p>Thinking on and off are different inference protocols, not merely two views of one fixed hidden computation. Turning reasoning off changes the input prefix and the computation that follows; an observed answer difference therefore supports a mode-dependent behavioral claim, not a claim that a private chain of thought has been faithfully recovered.</p>
+<p>See also: <a href="/blog/knowledge-base/greedy-continuation/">greedy continuation</a>, <a href="/blog/knowledge-base/sampling/">sampling</a>.</p>
+
+            </div>
+
+            <footer class="post-footer">
+
+                <div class="post-navigation">
+
+                    <a href="/blog/knowledge-base/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/knowledge-base/" class="back-to-blog">Knowledge Base</a>
+                    <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+
+    </main>
+
+    <footer class="footer footer-compact">
+        <div class="container">
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
+            </div>
+            <div class="footer-compact-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/blog/script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tables = document.querySelectorAll('.post-body table');
+            tables.forEach((table, index) => {
+                if (table.parentElement?.classList.contains('table-scroll')) return;
+
+                const scroller = document.createElement('div');
+                scroller.className = 'table-scroll';
+                scroller.setAttribute('aria-label', `Scrollable data table ${index + 1}`);
+                table.parentNode.insertBefore(scroller, table);
+                scroller.appendChild(table);
+
+                const updateScrollableState = () => {
+                    const isScrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+                    scroller.classList.toggle('is-scrollable', isScrollable);
+                    if (isScrollable) {
+                        scroller.setAttribute('role', 'region');
+                        scroller.setAttribute('tabindex', '0');
+                    } else {
+                        scroller.removeAttribute('role');
+                        scroller.removeAttribute('tabindex');
+                    }
+                };
+
+                requestAnimationFrame(updateScrollableState);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(updateScrollableState).observe(scroller);
+                } else {
+                    window.addEventListener('resize', updateScrollableState, { passive: true });
+                }
+            });
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                output: "htmlAndMathml"
+            });
+
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
+            codeBlocks.forEach(pre => {
+                const button = document.createElement('button');
+                button.className = 'copy-code-button';
+                button.innerHTML = '📋 Copy';
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+
+                button.addEventListener('click', () => {
+                    const code = pre.querySelector('code');
+                    const text = code ? code.textContent : pre.textContent;
+
+                    navigator.clipboard.writeText(text).then(() => {
+                        const originalText = button.innerHTML;
+                        button.innerHTML = '✅ Copied!';
+                        button.classList.add('copied');
+
+                        setTimeout(() => {
+                            button.innerHTML = originalText;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            const originalText = button.innerHTML;
+                            button.innerHTML = '✅ Copied!';
+                            button.classList.add('copied');
+
+                            setTimeout(() => {
+                                button.innerHTML = originalText;
+                                button.classList.remove('copied');
+                            }, 2000);
+                        } catch (err) {
+                            console.error('Fallback copy failed: ', err);
+                        }
+                        document.body.removeChild(textArea);
+                    });
+                });
+
+                pre.appendChild(button);
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+{
+  "attribution": {
+    "path": "ATTRIBUTION.md",
+    "sha256": "1235f46dda3d155edd5212c654652de72636d71bd37bf4a111d2256c0dd895c6"
+  },
+  "canonical_command": "uv run --frozen reproduce.py --run --device cpu --batch-size 32 --threads 8",
+  "created_at_utc": "2026-07-17T21:17:47.792179+00:00",
+  "dataset": {
+    "archive_sha256": "536e14446a0ba56ed1398ab1055f39fe852686ecad24a6306c80c490fa8e0165",
+    "component_sha256": {
+      "corpus.jsonl": "dec31c8182f3d744c7d2c09423756fd1d17cbef75808db13ba01cc0aab4d1ac6",
+      "qrels/test.tsv": "0864bb985e0ca2367ba217977e72004d549054b2b06666ed9d4825ac7c21284c",
+      "qrels/train.tsv": "a53f2114831916c096b6c37d9e54da68cef4efdcdbd5ed46533601af972acf1d",
+      "queries.jsonl": "8ff84a7c903f722981cd8d595c022660140c51867b27608a6d4910db86080313"
+    },
+    "counts": {
+      "corpus_documents": 5183,
+      "positive_test_qrels": 339,
+      "test_queries": 300
+    },
+    "licenses": {
+      "claims_and_evidence_annotations": "CC-BY-4.0",
+      "corpus_abstracts": "ODC-By-1.0",
+      "license_source": "https://github.com/allenai/scifact/blob/master/LICENSE.md"
+    },
+    "name": "SciFact BEIR retrieval benchmark",
+    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scifact.zip"
+  },
+  "environment_lock": {
+    "expected_sha256": "5a6ad830aee2d307b4d845c70e3b23f72f30b27938dcd342881e9d364dd06344",
+    "path": "reproduce.py.lock",
+    "sha256": "5a6ad830aee2d307b4d845c70e3b23f72f30b27938dcd342881e9d364dd06344",
+    "uv_version": "uv 0.11.2 (02036a8ba 2026-03-26 aarch64-apple-darwin)"
+  },
+  "generator": {
+    "path": "reproduce.py",
+    "sha256_at_run": "1f6aead6fcc71cf1ab2c6e81dde784ca11671ebc53f9673e064a22409de59c35"
+  },
+  "model": {
+    "context_limit_tokens_including_special_tokens": 8192,
+    "id": "jinaai/jina-embeddings-v2-small-en",
+    "model_snapshot_sha256": {
+      "config.json": "940582c6d428408d92d628b94541092e7ca9cbee6c3f147de54e9d4ddfe30ace",
+      "model.safetensors": "c9a9a7ec012d01efd780474fbb65e25917f3a2aebdff84b5f87daa00f7e90b27",
+      "special_tokens_map.json": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+      "tokenizer.json": "e9f999ac74497843ed9f4303246a8f43d9f100ee8aab8e133667903f447ceb48",
+      "tokenizer_config.json": "25cbd867af916b5a5718e80e9a702cf72c61bf890a1bc141c6fbce6d74c99632",
+      "vocab.txt": "109753d618dbb576a35112f9c20ef35cf3517d46106175bcf010c986a4bef1df"
+    },
+    "pooling": "attention-mask mean pooling followed by L2 normalization",
+    "remote_code_id": "jinaai/jina-bert-implementation",
+    "remote_code_revision": "f3ec4cf7de7e561007f27c9efc7148b0bd713f81",
+    "remote_code_snapshot_sha256": {
+      "configuration_bert.py": "3866dabde9264ef5057df1d0d7eefb4dbdf79a49e5bce6c699e7889792eaf650",
+      "modeling_bert.py": "db5a054f8650e3dafc9f43dbfb82b63ea4f7abe8528d8169a593c4957b4f9902"
+    },
+    "revision": "44e7d1d6caec8c883c2d4b207588504d519788d0"
+  },
+  "observed_invocation": {
+    "argv": [
+      "reproduce.py",
+      "--run",
+      "--device",
+      "cpu",
+      "--batch-size",
+      "32",
+      "--threads",
+      "8"
+    ],
+    "executable_name": "python3"
+  },
+  "outputs": {
+    "receipts/aggregate.json": "71bafc1d81fc24ac1d30104e5f28af9b43142430b3ce798b10bd1061f1abb181",
+    "receipts/per-query.csv": "b91c682c7da121af99d1546c0688c00249d8af5310b519ca9d63c3ab422b3a28",
+    "receipts/scifact-test-qrels.tsv": "0864bb985e0ca2367ba217977e72004d549054b2b06666ed9d4825ac7c21284c",
+    "receipts/top-10-rankings.jsonl": "6e6e014c8875a517fd739101ae1461e8986675d378eb6ff482dfd5ddc1d955c1"
+  },
+  "protocol": {
+    "chunk_count": 9356,
+    "chunk_overlap_tokens": 0,
+    "chunk_size_content_tokens": 256,
+    "comparison_scope": "The naive and late arms match content-token slices but not all pooled positions: each naive chunk has its own [CLS] and [SEP], while the late protocol assigns the document-level special-token states only to the first and last spans. This is an end-to-end protocol comparison, not a context-conditioning-only ablation.",
+    "content_token_counts": {
+      "maximum": 1937,
+      "mean": 335.1944819602547,
+      "minimum": 68
+    },
+    "deliberate_differences_from_pinned_paper_helper": [
+      "The naive arm consumes the original content token-ID slices. The pinned helper decodes slices before its evaluator retokenizes them, which can change boundary tokenization.",
+      "This run scores every corpus chunk and ranks every document after max-chunk aggregation. The pinned helper first retrieves a candidate chunk list and then collapses it to documents."
+    ],
+    "document_score": "exhaustive cosine scoring against every corpus chunk, then maximum chunk score per document before full-corpus document ranking",
+    "document_text": "stripped SciFact title, one ASCII space, then stripped abstract text",
+    "frozen_document_content_token_ids_sha256": "73323e4f341298d8d2a1c2ee4ac9819a7519a13b57015f4f1378e2cc3d8b2204",
+    "instructions": "no query or document instruction prefix",
+    "late_special_token_policy": "[CLS] belongs to the first span and [SEP] to the last span, matching the pinned official implementation",
+    "matched_content_token_spans_sha256": "f42fde8124b0d444bb570428d914b66ab0767219937e40107bb0739336f343f3",
+    "matched_content_tokens": "Naive chunks and late full-document inputs are both constructed directly from the same frozen document content-token IDs; no decode-and-retokenize step is used.",
+    "metric": "document-level nDCG@10 with gain 2^relevance-1, Recall@10, and MRR@10; the frozen SciFact test qrels are binary",
+    "naive_special_tokens": "the tokenizer adds [CLS] and [SEP] independently to every chunk",
+    "official_implementation_commit": "1d3bb02bf091becd0771455e4e7959463935e26c",
+    "query_path": "one attention-mask mean-pooled, L2-normalized embedding per query",
+    "ranking_ties": "stable original corpus row order",
+    "special_token_positions_are_matched": false,
+    "whole_document_control": "attention-mask mean pool over the same full-document contextual states used for late chunks, then L2 normalize"
+  },
+  "purpose": "Educational, auditable matched-content-token re-evaluation of naive, late, and whole-document dense retrieval on the fixed SciFact test split.",
+  "runtime": {
+    "batch_size": 32,
+    "canonical_configuration": true,
+    "cross_platform_bitwise_identity_claimed": false,
+    "dependency_versions": {
+      "einops": "0.6.1",
+      "huggingface-hub": "0.36.2",
+      "numpy": "1.26.4",
+      "safetensors": "0.8.0",
+      "tokenizers": "0.19.1",
+      "torch": "2.4.0",
+      "transformers": "4.43.4"
+    },
+    "deterministic_kernel_mode": true,
+    "device": "cpu",
+    "elapsed_seconds": 465.441636,
+    "machine": "arm64",
+    "phase_seconds": {
+      "encode_late_chunks_seconds": 334.675334,
+      "encode_naive_chunks_seconds": 117.545916,
+      "encode_queries_seconds": 0.655025,
+      "load_model_seconds": 1.972867,
+      "prepare_documents_seconds": 1.809903,
+      "rank_and_score_seconds": 0.17187
+    },
+    "python": "3.11.14",
+    "random_seed": 20260717,
+    "started_at_utc": "2026-07-17T21:10:02.350543+00:00",
+    "system": "Darwin",
+    "torch_interop_threads": 1,
+    "torch_threads": 8
+  },
+  "schema_version": 1,
+  "scope": [
+    "This is one fixed public benchmark and one pinned embedding model.",
+    "The query-bootstrap interval describes stability across these 300 queries.",
+    "The run is not evidence that late chunking always improves retrieval.",
+    "Deterministic-kernel mode does not promise bitwise identity across hardware.",
+    "This is not an exact replication of the paper's reported SciFact cell."
+  ],
+  "study_id": "late-chunking-scifact-matched-content-token-256-v1"
+}

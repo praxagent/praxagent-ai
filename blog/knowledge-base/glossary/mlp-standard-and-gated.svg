@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="510" viewBox="0 0 760 510" role="img" aria-labelledby="mlpTitle mlpDesc">
+  <title id="mlpTitle">Standard and gated multilayer perceptron paths</title>
+  <desc id="mlpDesc">A standard multilayer perceptron, abbreviated MLP, sends one token-position state through an input projection, a nonlinear activation, and an output projection. A gated MLP instead splits the state into gate and value projections, multiplies the two branches coordinate by coordinate, and applies a down projection. Both paths return a model-width update.</desc>
+  <defs>
+    <marker id="mlpArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#A67C52"/>
+    </marker>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:15px;font-weight:700}
+      .h{font-size:13px;font-weight:700}
+      .s{font-size:12px}
+      .m{font-size:11px;fill:#5A544C}
+      .input{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.5}
+      .stage{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.5}
+      .nonlinear{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.5}
+      .gate{fill:#EDE8E1;stroke:#7F786D;stroke-width:1.5}
+      .output{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+      .flow{fill:none;stroke:#A67C52;stroke-width:1.7;marker-end:url(#mlpArrow)}
+      .split{fill:none;stroke:#A67C52;stroke-width:1.7}
+      .footer{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+    </style>
+  </defs>
+
+  <rect width="760" height="510" fill="#F7F4F0"/>
+  <text x="24" y="28" class="t title">A multilayer perceptron (MLP) can use one path or a gated pair</text>
+  <text x="24" y="48" class="t m">Both common forms return a model-width update for one token position.</text>
+
+  <text x="24" y="84" class="t h">STANDARD MLP</text>
+  <rect x="24" y="102" width="105" height="84" rx="10" class="input"/>
+  <text x="76.5" y="128" text-anchor="middle" class="t h">TOKEN STATE</text>
+  <text x="76.5" y="149" text-anchor="middle" class="t s">one position</text>
+  <text x="76.5" y="167" text-anchor="middle" class="t m">model width</text>
+
+  <path class="flow" d="M129 144 H158"/>
+  <rect x="160" y="102" width="120" height="84" rx="10" class="stage"/>
+  <text x="220" y="128" text-anchor="middle" class="t h">UP PROJECTION</text>
+  <text x="220" y="149" text-anchor="middle" class="t s">learned map</text>
+  <text x="220" y="167" text-anchor="middle" class="t m">intermediate width</text>
+
+  <path class="flow" d="M280 144 H313"/>
+  <rect x="315" y="102" width="120" height="84" rx="10" class="nonlinear"/>
+  <text x="375" y="128" text-anchor="middle" class="t h">ACTIVATION</text>
+  <text x="375" y="149" text-anchor="middle" class="t s">nonlinear change</text>
+  <text x="375" y="167" text-anchor="middle" class="t m">coordinate by coordinate</text>
+
+  <path class="flow" d="M435 144 H468"/>
+  <rect x="470" y="102" width="120" height="84" rx="10" class="stage"/>
+  <text x="530" y="128" text-anchor="middle" class="t h">DOWN PROJECTION</text>
+  <text x="530" y="149" text-anchor="middle" class="t s">learned map</text>
+  <text x="530" y="167" text-anchor="middle" class="t m">back to model width</text>
+
+  <path class="flow" d="M590 144 H623"/>
+  <rect x="625" y="102" width="111" height="84" rx="10" class="output"/>
+  <text x="680.5" y="128" text-anchor="middle" class="t h">UPDATE</text>
+  <text x="680.5" y="149" text-anchor="middle" class="t s">added later to</text>
+  <text x="680.5" y="167" text-anchor="middle" class="t m">the residual stream</text>
+
+  <text x="24" y="228" class="t h">GATED MLP</text>
+  <rect x="24" y="270" width="105" height="84" rx="10" class="input"/>
+  <text x="76.5" y="296" text-anchor="middle" class="t h">TOKEN STATE</text>
+  <text x="76.5" y="317" text-anchor="middle" class="t s">one position</text>
+  <text x="76.5" y="335" text-anchor="middle" class="t m">shared input</text>
+
+  <path class="split" d="M129 312 H145"/>
+  <path class="flow" d="M145 312 V270 H168"/>
+  <path class="flow" d="M145 312 V350 H168"/>
+
+  <rect x="170" y="240" width="130" height="60" rx="10" class="nonlinear"/>
+  <text x="235" y="265" text-anchor="middle" class="t h">GATE BRANCH</text>
+  <text x="235" y="285" text-anchor="middle" class="t m">projection + activation</text>
+
+  <rect x="170" y="320" width="130" height="60" rx="10" class="gate"/>
+  <text x="235" y="345" text-anchor="middle" class="t h">VALUE BRANCH</text>
+  <text x="235" y="365" text-anchor="middle" class="t m">separate projection</text>
+
+  <path class="flow" d="M300 270 H320 V303 H338"/>
+  <path class="flow" d="M300 350 H320 V327 H338"/>
+  <rect x="340" y="285" width="100" height="60" rx="10" class="nonlinear"/>
+  <text x="390" y="310" text-anchor="middle" class="t h">MULTIPLY</text>
+  <text x="390" y="330" text-anchor="middle" class="t m">coordinate by coordinate</text>
+
+  <path class="flow" d="M440 315 H478"/>
+  <rect x="480" y="285" width="110" height="60" rx="10" class="stage"/>
+  <text x="535" y="310" text-anchor="middle" class="t h">DOWN MAP</text>
+  <text x="535" y="330" text-anchor="middle" class="t m">to model width</text>
+
+  <path class="flow" d="M590 315 H623"/>
+  <rect x="625" y="285" width="111" height="60" rx="10" class="output"/>
+  <text x="680.5" y="310" text-anchor="middle" class="t h">UPDATE</text>
+  <text x="680.5" y="330" text-anchor="middle" class="t m">model width</text>
+
+  <rect x="24" y="430" width="712" height="55" rx="10" class="footer"/>
+  <text x="380" y="455" text-anchor="middle" class="t s">Intermediate width, activation, gating, and biases are model choices.</text>
+  <text x="380" y="473" text-anchor="middle" class="t m">Neither path directly mixes different token positions.</text>
+</svg>

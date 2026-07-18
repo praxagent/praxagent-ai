@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Submit the Hugo glossary to GPT-5.6 Sol Pro for a technical review.
+"""Submit Knowledge Base content to GPT-5.6 Sol Pro for technical review.
 
 The script uses only the Python standard library. It reads OPENAI_API_KEY (or
 the project's OPENAI_KEY alias) from the process environment first, then from
@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 from pathlib import Path
 from urllib.error import HTTPError, URLError
@@ -19,13 +20,15 @@ from urllib.request import Request, urlopen
 
 
 ROOT = Path(__file__).resolve().parents[1]
-GLOSSARY_DIR = ROOT / "blog-source" / "content" / "references"
-DIAGRAM_DIR = ROOT / "blog-source" / "static" / "references" / "glossary"
+GLOSSARY_DIR = ROOT / "blog-source" / "content" / "knowledge-base"
+DIAGRAM_DIR = ROOT / "blog-source" / "static" / "knowledge-base" / "glossary"
 DOTENV_PATH = ROOT / ".env"
 PRIVATE_OUTPUT_DIR = ROOT / ".cache" / "glossary-review"
 DEFAULT_OUTPUT = PRIVATE_OUTPUT_DIR / "gpt-5.6-sol-pro.json"
 DEFAULT_CONTINUATION_OUTPUT = PRIVATE_OUTPUT_DIR / "gpt-5.6-sol-pro-continued.json"
 API_KEY_NAMES = ("OPENAI_API_KEY", "OPENAI_KEY")
+NON_ENTRY_MARKDOWN = frozenset({"_index.md", "AGENTS.md", "SKILL.md"})
+SVG_SRC_RE = re.compile(r'''\bsrc\s*=\s*["']([^"']+[.]svg)(?:[?#][^"']*)?["']''')
 
 REVIEW_INSTRUCTIONS = """\
 You are the final scientific and technical reviewer for an educational glossary
@@ -36,15 +39,84 @@ Check, with exceptional care:
 1. factual and mathematical accuracy, including equations and numeric examples;
 2. whether Python snippets implement the prose and handle the stated boundary;
 3. consistency between entries, Mermaid diagrams, SVG labels, captions, and links;
-4. distinctions among description, readout, prediction, causation, and mechanism;
-5. statistical assumptions: pairing, sidedness, ties, dependence, exchangeability,
+4. every supplied SVG's visible labels, arrows, grouping, encoded relationships,
+   title, description, alt text, and caption as substantive technical claims;
+5. distinctions among description, readout, prediction, causation, and mechanism;
+6. statistical assumptions: pairing, sidedness, ties, dependence, exchangeability,
    selection, effect size, and population generalization;
-6. model- or experiment-specific claims that are phrased too generally;
-7. terminology that would teach a careful newcomer the wrong mental model.
+7. model- or experiment-specific claims that are phrased too generally;
+8. terminology that would teach a careful newcomer the wrong mental model;
+9. unexplained acronyms, symbols, or specialized terms in prose, equations,
+   code, tables, captions, alt text, and SVG source; require first-use expansion
+   and a just-in-time definition even when a glossary link is present.
 
 Do not reward length and do not rewrite passages that are already correct. Treat
 site-specific empirical claims as claims that need appropriately narrow wording;
 do not invent evidence or citations. Return valid JSON only, with this shape:
+{
+  "verdict": "pass" | "revise",
+  "summary": "short overall assessment",
+  "findings": [
+    {
+      "severity": "error" | "important" | "minor",
+      "file": "repository-relative path",
+      "section": "heading or SVG element",
+      "claim": "short exact excerpt or identifier",
+      "issue": "specific explanation",
+      "recommended_replacement": "ready-to-apply wording or code",
+      "confidence": "high" | "medium" | "low"
+    }
+  ],
+  "cross_entry_conflicts": ["specific conflict, if any"],
+  "checks_that_passed": ["important point explicitly verified"]
+}
+Sort findings by severity, then file. If there are no actionable findings, use
+an empty findings array and verdict "pass".
+"""
+
+DEEP_DIVE_REVIEW_INSTRUCTIONS = """\
+You are the final scientific, technical, and educational reviewer for a Knowledge
+Base Deep Dive about late chunking for retrieval embeddings. Review the supplied
+Markdown and SVG source as one connected article.
+
+Check, with exceptional care:
+1. fidelity to the cited primary Late Chunking paper, especially the order of
+   token contextualization and span pooling, and the long-document extension;
+2. mathematical accuracy, including pooling notation, normalization, token spans,
+   attention masks, special tokens, truncation, and overlapping macro-windows;
+3. whether code and pseudocode implement the prose without relying on an API that
+   exposes only already-pooled embeddings;
+4. distinctions among contextual influence, reference resolution, cosine
+   similarity, retrieval quality, and universal performance claims;
+5. whether empirical claims identify the evaluated benchmark, metric, comparison,
+   and boundary, without turning a paper result into a product guarantee;
+6. consistency among prose, SVG labels, alt text, captions, and links;
+7. every supplied SVG's visible labels, arrows, grouping, encoded relationships,
+   title, description, alt text, and caption as substantive technical claims;
+8. accessibility: each figure needs one finding, useful direct labels, a concise
+   alt text, and a caption that is a complete nonvisual explanation;
+9. teaching quality for a technically curious newcomer, including a plain-language
+   definition, explicit non-goals, implementation pitfalls, and evaluation advice;
+10. primary-source citations and scoped wording for model-specific facts;
+11. whether the runnable reproduction freezes a real corpus, queries, qrels,
+    model, tokenizer, chunker, and query path, while changing only the stated
+    document-context treatment across matched arms;
+12. whether document ranking, query-level nDCG@10, the whole-document control,
+    paired uncertainty, and scope limits are computed and described correctly;
+13. whether every empirical figure is generated from compact committed results,
+    has a machine-verifiable receipt, agrees with its accessible text equivalent,
+    and avoids unsupported statistical or cross-corpus inference.
+14. unexplained acronyms, symbols, or specialized terms in prose, equations,
+    code, tables, captions, alt text, and SVG source; require first-use expansion
+    and a just-in-time definition even when a glossary link is present.
+
+Editorial constraint: the author requires the page to retain its original
+publication date, 2025-08-02, with no public `lastmod` or correction notice.
+The separately timestamped experiment receipt supplies provenance for the later
+run and is not a reason to request an updated page date.
+
+Do not reward length and do not invent evidence, benchmark values, citations, or
+implementation guarantees. Return valid JSON only, with this shape:
 {
   "verdict": "pass" | "revise",
   "summary": "short overall assessment",
@@ -75,14 +147,70 @@ and omit internal deliberation.
 """
 
 
-def source_paths() -> list[Path]:
+def glossary_source_paths() -> list[Path]:
     entries = sorted(
         path
         for path in GLOSSARY_DIR.glob("*.md")
-        if path.name != "_index.md"
+        if path.name not in NON_ENTRY_MARKDOWN
     )
     diagrams = sorted(DIAGRAM_DIR.glob("*.svg"))
     return entries + diagrams
+
+
+def selected_source_paths(candidates: list[Path]) -> list[Path]:
+    """Resolve explicit review inputs while keeping them inside this repository."""
+    selected: list[Path] = []
+    for candidate in candidates:
+        resolved = candidate.expanduser()
+        if not resolved.is_absolute():
+            resolved = ROOT / resolved
+        resolved = resolved.resolve()
+        try:
+            resolved.relative_to(ROOT)
+        except ValueError as exc:
+            raise ValueError(f"review input must stay inside {ROOT}: {candidate}") from exc
+        if not resolved.is_file():
+            raise ValueError(f"review input is not a file: {candidate}")
+        if resolved.suffix.lower() not in {
+            ".csv",
+            ".json",
+            ".jsonl",
+            ".lock",
+            ".md",
+            ".py",
+            ".svg",
+            ".tsv",
+        }:
+            raise ValueError(f"unsupported review input type: {candidate}")
+        if resolved not in selected:
+            selected.append(resolved)
+    return selected
+
+
+def referenced_svg_paths(markdown_paths: list[Path]) -> list[Path]:
+    """Resolve local SVGs referenced by selected Markdown artifacts."""
+    referenced: list[Path] = []
+    static_root = ROOT / "blog-source" / "static"
+    for markdown_path in markdown_paths:
+        if markdown_path.suffix.lower() != ".md":
+            continue
+        source = markdown_path.read_text(encoding="utf-8")
+        for match in SVG_SRC_RE.finditer(source):
+            raw_reference = match.group(1)
+            if "://" in raw_reference:
+                continue
+            normalized = raw_reference.removeprefix("/blog/").lstrip("/")
+            candidates = (
+                markdown_path.parent / normalized,
+                static_root / normalized,
+            )
+            resolved = next(
+                (candidate.resolve() for candidate in candidates if candidate.is_file()),
+                None,
+            )
+            if resolved is not None and resolved not in referenced:
+                referenced.append(resolved)
+    return referenced
 
 
 def build_bundle(paths: list[Path]) -> str:
@@ -206,6 +334,19 @@ def build_request_input(
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
+        "--review-profile",
+        choices=("glossary", "deep-dive"),
+        default="glossary",
+        help="Review rubric to apply (default: %(default)s)",
+    )
+    parser.add_argument(
+        "--path",
+        type=Path,
+        action="append",
+        default=[],
+        help="Repository-local artifact to review; repeat for a connected bundle",
+    )
+    parser.add_argument(
         "--output",
         type=Path,
         default=DEFAULT_OUTPUT,
@@ -255,19 +396,60 @@ def main() -> int:
         print(f"Invalid private review artifact: {exc}", file=sys.stderr)
         return 1
 
-    paths = source_paths()
-    if not paths:
-        print("No glossary artifacts found.", file=sys.stderr)
+    try:
+        paths = (
+            selected_source_paths(args.path)
+            if args.path
+            else glossary_source_paths()
+        )
+    except (OSError, ValueError) as exc:
+        print(f"Invalid review input: {exc}", file=sys.stderr)
         return 1
+    if args.review_profile == "deep-dive" and not args.path:
+        print("--review-profile deep-dive requires at least one --path.", file=sys.stderr)
+        return 1
+    if not paths:
+        print("No review artifacts found.", file=sys.stderr)
+        return 1
+    if args.path:
+        referenced_svgs = referenced_svg_paths(paths)
+        missing_svgs = [path for path in referenced_svgs if path not in paths]
+        if missing_svgs:
+            print(
+                "Explicit review bundle omitted referenced SVG source(s):",
+                file=sys.stderr,
+            )
+            for path in missing_svgs:
+                print(f"  {path.relative_to(ROOT).as_posix()}", file=sys.stderr)
+            print("Add each file with another --path argument.", file=sys.stderr)
+            return 1
 
     bundle = build_bundle(paths)
     if args.dry_run:
-        markdown_count = sum(path.suffix == ".md" for path in paths)
-        svg_count = sum(path.suffix == ".svg" for path in paths)
+        counts = {
+            suffix: sum(path.suffix == suffix for path in paths)
+            for suffix in (
+                ".md",
+                ".svg",
+                ".py",
+                ".json",
+                ".lock",
+                ".csv",
+                ".jsonl",
+                ".tsv",
+            )
+        }
         print(
-            f"Review bundle ready: {markdown_count} Markdown entries, "
-            f"{svg_count} SVG diagrams, {len(bundle.encode('utf-8')):,} bytes."
+            "Review bundle ready: "
+            f"{counts['.md']} Markdown, {counts['.svg']} SVG, "
+            f"{counts['.py']} Python, {counts['.json']} JSON, "
+            f"{counts['.lock']} lock, {counts['.csv']} CSV, "
+            f"{counts['.jsonl']} JSONL, {counts['.tsv']} TSV, "
+            f"{len(bundle.encode('utf-8')):,} bytes."
         )
+        print("Artifacts:")
+        for path in paths:
+            print(f"  {path.relative_to(ROOT).as_posix()}")
         continuation = " with encrypted-reasoning continuation" if prior else ""
         print(
             "Target: gpt-5.6-sol, reasoning mode pro, "
@@ -301,7 +483,11 @@ def main() -> int:
             "effort": args.reasoning_effort,
             "context": "all_turns" if prior is not None else "current_turn",
         },
-        "instructions": REVIEW_INSTRUCTIONS,
+        "instructions": (
+            DEEP_DIVE_REVIEW_INSTRUCTIONS
+            if args.review_profile == "deep-dive"
+            else REVIEW_INSTRUCTIONS
+        ),
         "input": build_request_input(bundle, prior),
         "max_output_tokens": args.max_output_tokens,
         "store": False,

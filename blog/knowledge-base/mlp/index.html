@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Multilayer perceptron (MLP) - praxagent Knowledge Base</title>
+    
+    
+    
+    
+    
+    
+    <meta name="description" content="The position-wise nonlinear feed-forward sublayer that transforms each token state and writes an update to the residual stream.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/mlp/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="praxagent Knowledge Base">
+    <meta property="og:title" content="Multilayer perceptron (MLP)">
+    <meta property="og:description" content="The position-wise nonlinear feed-forward sublayer that transforms each token state and writes an update to the residual stream.">
+    <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/mlp/">
+    <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="Multilayer perceptron (MLP)">
+    <meta name="twitter:description" content="The position-wise nonlinear feed-forward sublayer that transforms each token state and writes an update to the residual stream.">
+    <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/styles-v2.css">
+    <link rel="stylesheet" href="/blog/blog.css">
+    <link rel="stylesheet" href="/blog/katex.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'neutral',
+        securityLevel: 'loose',
+        flowchart: { htmlLabels: true, curve: 'basis' }
+      });
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-scrolls industrial-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+
+            <div class="nav-menu">
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link">Research Notes</a>
+                <a href="/blog/knowledge-base/" class="nav-link active">Knowledge Base</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
+            <a href="/blog/knowledge-base/" class="mobile-nav-link active">Knowledge Base</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        
+
+
+
+<div class="blog-post reference-entry">
+    <div class="container">
+        <article class="post-content">
+            <header class="post-header">
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
+                <h1 class="post-title">Multilayer perceptron (MLP)</h1>
+                
+                <p class="reference-summary">The position-wise nonlinear feed-forward sublayer that transforms each token state and writes an update to the residual stream.</p>
+                
+
+            </header>
+
+
+
+
+
+            <div class="post-body">
+                <p>A <strong>multilayer perceptron (MLP)</strong> is a learned function composed of affine maps, matrix multiplications followed by optional additions of bias vectors, and typically nonlinear activation functions applied to intermediate coordinates. Neural-network software often calls the affine maps <em>linear layers</em>; an affine map with zero bias is mathematically linear. In <a href="/blog/knowledge-base/transformer/">Transformer</a> discussions, <strong>MLP</strong> usually names the block&rsquo;s position-wise <a href="/blog/knowledge-base/feed-forward-network/">feed-forward network (FFN)</a>: the same learned function transforms every token position and returns an update with the model&rsquo;s hidden width.</p>
+<p>Unlike attention, a standard Transformer MLP does not directly mix token positions. It acts on one position at a time. Its input can still contain information about other tokens because attention or another sequence-mixing operation may already have written that context into the token&rsquo;s <a href="/blog/knowledge-base/residual-stream/">residual-stream</a> vector, the running hidden-state vector carried at that position.</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: A standard multilayer perceptron sends one token vector through an input projection, a nonlinear activation, and an output projection; a gated variant uses gate and value branches that are multiplied before the output projection." tabindex="0">
+        <img src="/blog/knowledge-base/glossary/mlp-standard-and-gated.svg" alt="A standard multilayer perceptron sends one token vector through an input projection, a nonlinear activation, and an output projection; a gated variant uses gate and value branches that are multiplied before the output projection." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>Two common Transformer MLP structures. In the standard path, one token-position state is projected to a model-specific intermediate width, transformed by an elementwise nonlinear activation, and projected back to a model-width update. In the gated path, separate gate and value projections are combined by elementwise multiplication before the down projection. Both paths return an update with the residual stream&rsquo;s model width. Biases are omitted, and the illustration does not imply a universal intermediate width, activation, gating rule, or parameter name.</figcaption>
+</figure>
+
+<h2 id="a-common-form">A common form</h2>
+<p>Let \(\mathbb{R}\) denote the set of real numbers. For a column vector \(h_t\in\mathbb{R}^{d_{\text{model}}}\) at token position \(t\), a common MLP form is</p>
+\[
+\operatorname{MLP}(h_t)
+= W_{\text{out}}\,\phi(W_{\text{in}}h_t+b_{\text{in}})+b_{\text{out}}.
+\]<p>Here \(d_{\text{model}}\) is the model&rsquo;s hidden width and \(d_{\text{mlp}}\) is the MLP&rsquo;s intermediate width. The matrix \(W_{\text{in}}\in\mathbb{R}^{d_{\text{mlp}}\times d_{\text{model}}}\) maps the token vector into that intermediate space, \(\phi\) is an elementwise activation function, and \(W_{\text{out}}\in\mathbb{R}^{d_{\text{model}}\times d_{\text{mlp}}}\) maps the result back to the residual width. The vectors \(b_{\text{in}}\) and \(b_{\text{out}}\) are optional biases.</p>
+<p>Within one layer, the same \(W_{\text{in}}\), \(W_{\text{out}}\), and biases are used at every token position. Different layers normally have different parameters. The original Transformer described this component as a position-wise feed-forward network with two learned affine transformations, called linear transformations in the paper, and a rectified linear unit (ReLU), the elementwise function \(x\mapsto\max(0,x)\) (<a href="https://arxiv.org/abs/1706.03762v7">Vaswani et al., 2017, Section 3.3</a>).</p>
+<h2 id="shape-check">Shape check</h2>
+<p>This example uses PyTorch, a Python library for tensors (multidimensional arrays of values) and neural networks. The imported name <code>nn</code> refers to PyTorch&rsquo;s neural-network module. <code>nn.Sequential</code> runs the listed modules in order. The Gaussian error linear unit (GELU), \(x\mapsto x\Phi(x)\), supplies the activation; \(\Phi(x)\) is the probability that a standard-normal random variable with mean zero and variance one is at most \(x\). The function <code>torch.randn</code> creates a random tensor with the requested shape. In the code, <code>residual</code> has shape <code>(2, 4, 768)</code>: a batch of two input examples, with four token positions and 768 coordinates per position. By default, <code>nn.Linear</code> applies an affine map, a matrix multiplication plus a learned bias, to the final tensor dimension, so the token-position dimension remains four throughout:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">torch</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">mlp</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">768</span><span class="p">,</span> <span class="mi">3072</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">nn</span><span class="o">.</span><span class="n">GELU</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">3072</span><span class="p">,</span> <span class="mi">768</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">residual</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">768</span><span class="p">)</span>  <span class="c1"># batch, token positions, model width</span>
+</span></span><span class="line"><span class="cl"><span class="n">delta</span> <span class="o">=</span> <span class="n">mlp</span><span class="p">(</span><span class="n">residual</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">assert</span> <span class="n">delta</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">768</span><span class="p">)</span>
+</span></span></code></pre></div><p>For each example in the batch, the output vector at token position \(t\) depends only on the input vector at that same position. The same learned function is applied separately at every token position and to every batch example. The resulting <code>delta</code> is normally added back to the residual stream; it is not yet a vector of vocabulary logits, the unnormalized next-token scores.</p>
+<h2 id="gated-variants">Gated variants</h2>
+<p>A Transformer block can instead use a gated MLP. One bias-free schematic form is</p>
+\[
+\operatorname{GatedMLP}(h_t)
+= W_{\text{down}}
+\left[
+\phi(W_{\text{gate}}h_t)
+\odot
+(W_{\text{up}}h_t)
+\right],
+\]<p>where \(\odot\) is elementwise multiplication. The matrices \(W_{\text{gate}}\) and \(W_{\text{up}}\) project into a shared intermediate width, and \(W_{\text{down}}\) maps the gated product back to the residual width. These are gated linear unit (GLU) variants. A Swish-based gated linear unit (SwiGLU) uses a Swish-family activation on the gate branch. That family is \(x\mapsto x/(1+\exp(-\beta x))\), where \(\exp\) is the exponential function and \(\beta\) controls the slope; many implementations use the sigmoid linear unit (SiLU), the \(\beta=1\) form. A GELU-based gated linear unit (GEGLU) uses the Gaussian error linear unit (GELU) on that branch. These variants have two input projections and one output projection, not merely a different activation (<a href="https://arxiv.org/abs/2002.05202v1">Shazeer, 2020</a>).</p>
+<p>Activation, gating, intermediate width, bias use, and parameter names such as <code>up_proj</code>, <code>gate_proj</code>, and <code>down_proj</code> are model choices. Do not assume every Transformer MLP uses ReLU, expands to exactly four times the model width, or has biases.</p>
+<h2 id="what-the-term-does-not-imply">What the term does not imply</h2>
+<ul>
+<li><strong>Position-wise</strong> does not mean <strong>context-free</strong>. The input vector may already contain context gathered by attention.</li>
+<li>An MLP hidden unit is not automatically a clean, human-interpretable feature.</li>
+<li>“MLP activation” is underspecified in an interpretability analysis. State whether it means the input projection, the value before or after the activation, a gated product, or the output update.</li>
+<li>The MLP output is an internal residual-stream update. It has not yet been mapped by the final <a href="/blog/knowledge-base/unembedding/">unembedding</a>, the learned output projection from model-width states to vocabulary logits, or converted into next-token probabilities.</li>
+</ul>
+<p>See also: <a href="/blog/knowledge-base/feed-forward-network/">feed-forward network (FFN)</a>, <a href="/blog/knowledge-base/transformer/">Transformer</a>, <a href="/blog/knowledge-base/residual-stream/">residual stream</a>, <a href="/blog/knowledge-base/unembedding/">unembedding</a>.</p>
+
+            </div>
+
+            <footer class="post-footer">
+
+                <div class="post-navigation">
+
+                    <a href="/blog/knowledge-base/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/knowledge-base/" class="back-to-blog">Knowledge Base</a>
+                    <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+
+    </main>
+
+    <footer class="footer footer-compact">
+        <div class="container">
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
+            </div>
+            <div class="footer-compact-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/blog/script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tables = document.querySelectorAll('.post-body table');
+            tables.forEach((table, index) => {
+                if (table.parentElement?.classList.contains('table-scroll')) return;
+
+                const scroller = document.createElement('div');
+                scroller.className = 'table-scroll';
+                scroller.setAttribute('aria-label', `Scrollable data table ${index + 1}`);
+                table.parentNode.insertBefore(scroller, table);
+                scroller.appendChild(table);
+
+                const updateScrollableState = () => {
+                    const isScrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+                    scroller.classList.toggle('is-scrollable', isScrollable);
+                    if (isScrollable) {
+                        scroller.setAttribute('role', 'region');
+                        scroller.setAttribute('tabindex', '0');
+                    } else {
+                        scroller.removeAttribute('role');
+                        scroller.removeAttribute('tabindex');
+                    }
+                };
+
+                requestAnimationFrame(updateScrollableState);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(updateScrollableState).observe(scroller);
+                } else {
+                    window.addEventListener('resize', updateScrollableState, { passive: true });
+                }
+            });
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                output: "htmlAndMathml"
+            });
+
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
+            codeBlocks.forEach(pre => {
+                const button = document.createElement('button');
+                button.className = 'copy-code-button';
+                button.innerHTML = '📋 Copy';
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+
+                button.addEventListener('click', () => {
+                    const code = pre.querySelector('code');
+                    const text = code ? code.textContent : pre.textContent;
+
+                    navigator.clipboard.writeText(text).then(() => {
+                        const originalText = button.innerHTML;
+                        button.innerHTML = '✅ Copied!';
+                        button.classList.add('copied');
+
+                        setTimeout(() => {
+                            button.innerHTML = originalText;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            const originalText = button.innerHTML;
+                            button.innerHTML = '✅ Copied!';
+                            button.classList.add('copied');
+
+                            setTimeout(() => {
+                                button.innerHTML = originalText;
+                                button.classList.remove('copied');
+                            }, 2000);
+                        } catch (err) {
+                            console.error('Fallback copy failed: ', err);
+                        }
+                        document.body.removeChild(textArea);
+                    });
+                });
+
+                pre.appendChild(button);
+            });
+        });
+    </script>
+
+</body>
+</html>

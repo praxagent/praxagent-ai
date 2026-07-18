@@ -49,10 +49,12 @@ key_result: |
 ---
 
 {{< panel "info" >}}
-**AI-use disclosure.** Generative-AI tools were used to help implement the
-experiment and draft this article. The author selected the research question,
-approved the frozen design, has inspected the artifacts, and takes
-responsibility for the final text and claims.
+**AI-use disclosure.** Generative-AI tools helped implement, audit, execute,
+interpret, visualize, review, and draft this study. The author selected the
+research question, authorized the compute, has inspected the artifacts, and is
+responsible for the final text and claims. This is an independent,
+non-peer-reviewed Research Note. Verify numbers against the released receipts
+before relying on them.
 {{< /panel >}}
 
 {{< panel "info" >}}

@@ -214,7 +214,8 @@ __marimo__/
 
 # Prax documentation import (recreated by `make sync-prax-docs`)
 /.cache/prax-docs/
-/blog-source/content/references/prax/
+/blog-source/content/knowledge-base/prax/
 /blog-source/static/prax-docs/
 /blog/prax-docs/
+/blog/knowledge-base/prax/
 /blog/references/prax/

@@ -1,0 +1,70 @@
+{
+  "accessibility": {
+    "article_alt_text_check": "scripts/check_site.py compares the article shortcode alt text with this receipt",
+    "color_is_not_the_only_channel": true,
+    "direct_title_and_description": true,
+    "full_text_equivalent": "receipts/per-query.csv",
+    "svg_role_img": true
+  },
+  "alt_text": "SciFact test document nDCG at 10 on a zero-to-one axis, with query-bootstrap intervals: naive 256-token chunks 0.6414 [0.5942, 0.6876]; late 256-token chunks 0.6610 [0.6145, 0.7071]; whole-document encoding 0.6389 [0.5918, 0.6852]. Higher is better.",
+  "claim_scope_exclusions": [
+    "No claim of superiority on another dataset or model.",
+    "No claim that the query-bootstrap interval samples a population."
+  ],
+  "data_source": {
+    "aggregation": "query-level metrics aggregated by arithmetic mean",
+    "artifacts": [
+      {
+        "path": "receipts/aggregate.json",
+        "sha256": "71bafc1d81fc24ac1d30104e5f28af9b43142430b3ce798b10bd1061f1abb181"
+      },
+      {
+        "path": "receipts/per-query.csv",
+        "sha256": "b91c682c7da121af99d1546c0688c00249d8af5310b519ca9d63c3ab422b3a28"
+      }
+    ],
+    "selection": "all 300 queries in the fixed SciFact test qrels",
+    "transformation": "Arithmetic mean of each arm's 300 query-level nDCG@10 values; intervals are percentile query bootstraps as specified below."
+  },
+  "description": "Mean document-level nDCG@10 and query-bootstrap intervals for naive chunks, late chunks, and whole-document encoding.",
+  "figure_id": "late-chunking-scifact-retrieval",
+  "plotted_data": {
+    "late": {
+      "marker": "circle",
+      "mean_ndcg_at_10": 0.6609776646723947,
+      "query_bootstrap_95_percent_interval": [
+        0.6145399649247424,
+        0.7070844743964247
+      ]
+    },
+    "naive": {
+      "marker": "square",
+      "mean_ndcg_at_10": 0.6414254895397593,
+      "query_bootstrap_95_percent_interval": [
+        0.5941801288149041,
+        0.6875954822650707
+      ]
+    },
+    "whole_document": {
+      "marker": "diamond",
+      "mean_ndcg_at_10": 0.6388903593656915,
+      "query_bootstrap_95_percent_interval": [
+        0.5917522695931684,
+        0.6852170695308275
+      ]
+    }
+  },
+  "provenance": {
+    "generator_path": "reproduce.py",
+    "generator_sha256": "1f6aead6fcc71cf1ab2c6e81dde784ca11671ebc53f9673e064a22409de59c35",
+    "outputs": {
+      "fig-scifact-retrieval.svg": "66bb22c36301d8e0d49df95cbfbfd91984b260b303c494eadc8ff024f2b7d0ca"
+    },
+    "plotting_library": "dependency-free Python SVG generator",
+    "study_id": "late-chunking-scifact-matched-content-token-256-v1",
+    "verification_command": "python3 reproduce.py --verify"
+  },
+  "schema_version": 1,
+  "title": "SciFact retrieval quality across three document protocols",
+  "uncertainty": "Each method interval uses 20,000 query resamples of the 300 fixed test queries. Endpoints are the 2.5th and 97.5th percentiles with linear interpolation at (B - 1) * p. The three method intervals use the seeds recorded in aggregate.json; they are not called paired intervals."
+}

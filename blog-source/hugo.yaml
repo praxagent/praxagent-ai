@@ -9,6 +9,7 @@ ignoreFiles:
   - '\\.git/'
   - 'node_modules/'
   - '__pycache__/'
+  - '(^|/)AGENTS[.]md$'
 
 params:
   description: 'Experiments, methods, controls, and engineering notes from praxagent'
@@ -29,7 +30,6 @@ markup:
             - ['$$', '$$']
           inline:
             - ['\(', '\)']
-            - ['$', '$']
   highlight:
     noClasses: false
     lineNos: false

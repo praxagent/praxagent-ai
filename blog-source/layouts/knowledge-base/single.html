@@ -1,0 +1,73 @@
+{{ define "main" }}
+{{ $knowledgeBaseURL := "knowledge-base/" | relURL }}
+{{ $isGlossaryEntry := eq .Parent.RelPermalink $knowledgeBaseURL }}
+{{ $isDeepDive := eq .Parent.RelPermalink ("knowledge-base/deep-dives/" | relURL) }}
+<div class="blog-post reference-entry">
+    <div class="container">
+        <article class="post-content">
+            <header class="post-header">
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / {{ if $isGlossaryEntry }}Glossary{{ else }}{{ .Parent.Title }}{{ end }}</p>
+                <h1 class="post-title">{{ .Title }}</h1>
+                {{ with .Params.summary }}
+                <p class="reference-summary">{{ . }}</p>
+                {{ end }}
+{{ if $isDeepDive }}
+                <div class="post-meta">
+                    <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
+                    <span class="post-author">by {{ .Params.author | default "praxagent Team" }}</span>
+                </div>
+{{ end }}
+            </header>
+
+{{ if or .Params.correction .Params.ai_disclosure }}
+            <div class="post-body post-preface">
+{{ with .Params.correction }}
+                <div class="panel warning">
+                    <div class="panel-icon" aria-hidden="true"><i data-feather="alert-circle"></i></div>
+                    <div class="panel-content">{{ . | markdownify }}</div>
+                </div>
+{{ end }}
+{{ with .Params.ai_disclosure }}
+                <div class="panel info">
+                    <div class="panel-icon" aria-hidden="true"><i data-feather="info"></i></div>
+                    <div class="panel-content">{{ . | markdownify }}</div>
+                </div>
+{{ end }}
+            </div>
+{{ end }}
+
+{{ if and (not $isGlossaryEntry) (gt (len .TableOfContents) 50) }}
+            <div class="table-of-contents">
+                <h3>Table of Contents</h3>
+                {{ .TableOfContents }}
+            </div>
+{{ end }}
+
+            <div class="post-body">
+                {{ .Content }}
+            </div>
+
+            <footer class="post-footer">
+{{ if $isDeepDive }}
+                <div class="post-transparency">
+                    <div class="post-transparency-label">Public source &amp; edit history</div>
+                    <p>This Deep Dive is rendered from plain-text source in
+                    <a href="https://github.com/praxagent/praxagent-ai" rel="noopener">praxagent/praxagent-ai</a>.
+                    Every revision is preserved in the public commit log{{ with .File }}:
+                    <a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/{{ .Path }}" rel="noopener">view this page's edit history</a>{{ end }}.</p>
+                </div>
+{{ end }}
+                <div class="post-navigation">
+{{ if $isGlossaryEntry }}
+                    <a href="{{ "knowledge-base/glossary/" | relURL }}" class="back-to-blog">← Glossary</a>
+{{ else }}
+                    <a href="{{ .Parent.RelPermalink }}" class="back-to-blog">← {{ .Parent.Title }}</a>
+{{ end }}
+                    <a href="{{ $knowledgeBaseURL }}" class="back-to-blog">Knowledge Base</a>
+                    <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+{{ end }}

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420"
+     viewBox="0 0 760 420" role="img"
+     aria-labelledby="fpDivTitle fpDivDesc">
+  <title id="fpDivTitle">32-bit floating point (FP32), bfloat16 (BF16), and binary16 (FP16) can disagree</title>
+  <desc id="fpDivDesc">Left: three 32-bit floating-point (FP32) values near 1.0. Bfloat16 (BF16) rounds all three to 1.0. Binary16 (FP16) keeps C (approximately 1.0009766) but rounds B (approximately 1.0002441) to 1.0. Right: rounding 0.0001 and the new partial sum after each of ten thousand additions yields about 1.00005 in FP32, 0.25 in FP16, and 0.03125 in BF16. The FP32 overshoot is accumulated rounding error; the FP16 and BF16 sums stop changing at 0.25 and 0.03125 because the rounded increment is then too small to alter the rounded partial sum.</desc>
+  <rect width="760" height="420" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .t.bf16Text{fill:#A67C52}
+    .t.fp16Text{fill:#6F8D5E}
+    .title{font-size:15px;font-weight:700}
+    .h{font-size:13px;font-weight:700}
+    .s{font-size:12px}
+    .m{font-size:11px;fill:#5A544C}
+    .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+    .fp32{fill:#4B6787}
+    .bf16{fill:#A67C52}
+    .fp16{fill:#6F8D5E}
+    .line{stroke:#C4B8A8;stroke-width:2}
+    .tick{stroke:#7F786D;stroke-width:1.5}
+    .footer{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+    .bar32{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.4}
+    .bar16{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.4}
+    .barbf{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.4}
+  </style>
+
+  <text x="24" y="28" class="t title">Same inputs, three floating-point stories</text>
+  <text x="24" y="44" class="t m">
+    <tspan x="24">FP32 = 32-bit float; BF16 = bfloat16; FP16 = binary16.</tspan>
+    <tspan x="24" dy="14">Values are rounded, then converted back to Python numbers for display.</tspan>
+  </text>
+
+  <!-- Left card: number line -->
+  <rect x="24" y="72" width="360" height="276" rx="12" class="card"/>
+  <text x="40" y="96" class="t h">Near 1.0: who can still tell them apart?</text>
+  <text x="40" y="116" class="t m">Three FP32 values on a zoomed number line</text>
+
+  <!-- axis -->
+  <line x1="56" y1="200" x2="352" y2="200" class="line"/>
+  <line x1="56" y1="192" x2="56" y2="208" class="tick"/>
+  <line x1="352" y1="192" x2="352" y2="208" class="tick"/>
+  <text x="56" y="228" class="t m">1.0</text>
+  <text x="300" y="228" class="t m">1.001</text>
+
+  <!-- FP32 points: 1.0 at x=56, 1.000244 at ~56+72, 1.000977 at ~56+288 -->
+  <circle cx="56" cy="200" r="6" class="fp32"/>
+  <circle cx="128" cy="200" r="6" class="fp32"/>
+  <circle cx="345" cy="200" r="6" class="fp32"/>
+  <text x="56" y="175" text-anchor="middle" class="t m">A</text>
+  <text x="128" y="175" text-anchor="middle" class="t m">B</text>
+  <text x="345" y="175" text-anchor="middle" class="t m">C</text>
+
+  <text x="40" y="258" class="t s">A = 1.0</text>
+  <text x="40" y="276" class="t s">B = 1.0 + 2⁻¹² ≈ 1.0002441</text>
+  <text x="40" y="294" class="t s">C = 1.0 + 2⁻¹⁰ ≈ 1.0009766</text>
+  <text x="40" y="320" class="t s bf16Text" font-weight="700">BF16: A = B = C -&gt; 1.0</text>
+  <text x="40" y="338" class="t s fp16Text" font-weight="700">FP16: A = B -&gt; 1.0; C kept (displayed as 1.0009766)</text>
+
+  <!-- Right card: accumulation -->
+  <rect x="400" y="72" width="336" height="276" rx="12" class="card"/>
+  <text x="416" y="96" class="t h">Add 0.0001, ten thousand times</text>
+  <text x="416" y="114" class="t m">
+    <tspan x="416">Each step rounds 0.0001, then rounds</tspan>
+    <tspan x="416" dy="14">the new running sum.</tspan>
+  </text>
+
+  <!-- bars: max height 140 for value 1.0; y baseline 300 -->
+  <rect x="440" y="160" width="56" height="140" rx="6" class="bar32"/>
+  <text x="468" y="152" text-anchor="middle" class="t s">~1.00005</text>
+  <text x="468" y="318" text-anchor="middle" class="t m">FP32</text>
+
+  <rect x="540" y="265" width="56" height="35" rx="6" class="bar16"/>
+  <text x="568" y="257" text-anchor="middle" class="t s">0.25</text>
+  <text x="568" y="318" text-anchor="middle" class="t m">FP16</text>
+
+  <rect x="640" y="295.625" width="56" height="4.375" rx="2" class="barbf"/>
+  <text x="668" y="284" text-anchor="middle" class="t s">0.03125</text>
+  <text x="668" y="318" text-anchor="middle" class="t m">BF16</text>
+
+  <text x="416" y="334" class="t m">
+    <tspan x="416">Ideal unrounded total: 1.0. Eventually each increment is</tspan>
+    <tspan x="416" dy="13">too small to change either 16-bit partial sum.</tspan>
+  </text>
+
+  <rect x="24" y="364" width="712" height="40" rx="10" class="footer"/>
+  <text x="40" y="389" class="t s">Takeaway: BF16 is not "FP16 with a different name." Range, precision, and accumulation errors diverge.</text>
+</svg>

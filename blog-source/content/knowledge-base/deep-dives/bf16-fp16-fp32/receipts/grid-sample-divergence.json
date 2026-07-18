@@ -1,0 +1,114 @@
+{
+  "protocol": {
+    "operation": "torch.nn.functional.grid_sample 2D bilinear backward (input gradient)",
+    "input_shape": [1, 3, 32, 32],
+    "output_resolutions": [16, 32, 64, 128, 256, 512],
+    "trials_per_resolution": 30,
+    "pairs_per_resolution": 435,
+    "total_coordinates": 3072,
+    "comparison": "all-pairs bitwise equality on FP32 gradients viewed as int32, plus max elementwise absolute difference",
+    "inputs": "generated once on CPU with torch.Generator(seed=42) and transferred, identical bytes across devices and arms",
+    "warmup": "one full forward+backward per output geometry before trials",
+    "synchronization": "torch.cuda.current_stream().synchronize() in the test thread; background arm uses 4 CUDA streams of 4096x4096 FP32 matmuls with stream-local synchronize",
+    "arms": ["idle", "background-matmul"],
+    "date": "2026-07-18",
+    "runtime": "Google Colab",
+    "source": "Summary statistics transcribed from the printed console output of divergence_protocol.py runs; the full per-pair experiment_results.json files from each Colab session are the raw source."
+  },
+  "deterministic_mode_probe": {
+    "setting": "torch.use_deterministic_algorithms(True)",
+    "cuda_result": "RuntimeError: grid_sampler_2d_backward_cuda does not have a deterministic implementation",
+    "cpu_result": "backward completed"
+  },
+  "devices": {
+    "cpu": {
+      "device_name": "CPU",
+      "pytorch_version": "2.11.0+cpu",
+      "cuda_version": null,
+      "cudnn_version": null,
+      "compute_capability": null,
+      "idle": {
+        "max_drift_coords": [0, 0, 0, 0, 0, 0],
+        "max_div": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        "pairwise_match_rate": [100.0, 100.0, 100.0, 100.0, 100.0, 100.0]
+      },
+      "background_matmul": {
+        "max_drift_coords": [0, 0, 0, 0, 0, 0],
+        "max_div": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+        "pairwise_match_rate": [100.0, 100.0, 100.0, 100.0, 100.0, 100.0]
+      }
+    },
+    "t4": {
+      "device_name": "Tesla T4",
+      "architecture": "Turing",
+      "pytorch_version": "2.11.0+cu128",
+      "cuda_version": "12.8",
+      "cudnn_version": 91900,
+      "compute_capability": "7.5",
+      "idle": {
+        "max_drift_coords": [23, 516, 1776, 2492, 2783, 2888],
+        "max_div": [1.1921e-07, 4.7684e-07, 1.4305e-06, 4.7684e-06, 1.6212e-05, 4.1962e-05],
+        "pairwise_match_rate": [0.2, 0.0, 0.0, 0.0, 0.0, 0.0]
+      },
+      "background_matmul": {
+        "max_drift_coords": [74, 981, 2169, 2650, 2821, 2905],
+        "max_div": [1.1921e-07, 4.7684e-07, 1.9073e-06, 6.6757e-06, 1.5259e-05, 4.3869e-05],
+        "pairwise_match_rate": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      }
+    },
+    "a100": {
+      "device_name": "NVIDIA A100-SXM4-40GB",
+      "architecture": "Ampere",
+      "pytorch_version": "2.11.0+cu128",
+      "cuda_version": "12.8",
+      "cudnn_version": 91900,
+      "compute_capability": "8.0",
+      "idle": {
+        "max_drift_coords": [17, 288, 1491, 2617, 2791, 2945],
+        "max_div": [1.1921e-07, 4.7684e-07, 1.6689e-06, 4.2915e-06, 2.5749e-05, 6.1035e-05],
+        "pairwise_match_rate": [0.7, 0.0, 0.0, 0.0, 0.0, 0.0]
+      },
+      "background_matmul": {
+        "max_drift_coords": [18, 279, 1769, 2675, 2869, 2970],
+        "max_div": [1.1921e-07, 4.7684e-07, 1.4305e-06, 5.7220e-06, 2.0981e-05, 5.7220e-05],
+        "pairwise_match_rate": [0.9, 0.0, 0.0, 0.0, 0.0, 0.0]
+      }
+    },
+    "l4": {
+      "device_name": "NVIDIA L4",
+      "architecture": "Ada",
+      "pytorch_version": "2.11.0+cu128",
+      "cuda_version": "12.8",
+      "cudnn_version": 91900,
+      "compute_capability": "8.9",
+      "idle": {
+        "max_drift_coords": [24, 418, 1652, 2524, 2806, 2917],
+        "max_div": [1.1921e-07, 4.7684e-07, 1.4305e-06, 6.6757e-06, 2.0981e-05, 4.3869e-05],
+        "pairwise_match_rate": [0.2, 0.0, 0.0, 0.0, 0.0, 0.0]
+      },
+      "background_matmul": {
+        "max_drift_coords": [21, 394, 1707, 2648, 2840, 2928],
+        "max_div": [1.1921e-07, 4.7684e-07, 1.4305e-06, 6.6757e-06, 1.7166e-05, 5.7220e-05],
+        "pairwise_match_rate": [0.2, 0.0, 0.0, 0.0, 0.0, 0.0]
+      }
+    },
+    "rtx_pro_6000_blackwell": {
+      "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "architecture": "Blackwell",
+      "pytorch_version": "2.11.0+cu128",
+      "cuda_version": "12.8",
+      "cudnn_version": 91900,
+      "compute_capability": "12.0",
+      "idle": {
+        "max_drift_coords": [44, 608, 1902, 2556, 2828, 2933],
+        "max_div": [1.1921e-07, 4.7684e-07, 1.9073e-06, 4.7684e-06, 1.5259e-05, 4.9591e-05],
+        "pairwise_match_rate": [0.2, 0.0, 0.0, 0.0, 0.0, 0.0]
+      },
+      "background_matmul": {
+        "max_drift_coords": [60, 935, 2202, 2672, 2841, 2929],
+        "max_div": [1.1921e-07, 4.7684e-07, 1.9073e-06, 5.7220e-06, 1.7166e-05, 4.5776e-05],
+        "pairwise_match_rate": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      }
+    }
+  }
+}

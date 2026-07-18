@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="580" viewBox="0 0 760 580" role="img" aria-labelledby="lateChunkingWindowTitle lateChunkingWindowDesc">
+  <title id="lateChunkingWindowTitle">Long late chunking stitches one state per document position</title>
+  <desc id="lateChunkingWindowDesc">A document that fits one window is contextualized in one pass. For a longer document, macro-window A covers positions 1 through 5 and macro-window B covers positions 4 through 8. The pinned implementation keeps A's states for positions 1 through 5, discards B's repeated states for positions 4 and 5, and appends B's states for positions 6 through 8.</desc>
+  <defs>
+    <pattern id="lateChunkingWindowOverlap" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="8" height="8" fill="#F3E8E0"/>
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#A67C52" stroke-width="2"/>
+    </pattern>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:15px;font-weight:700}
+      .h{font-size:13px;font-weight:700}
+      .s{font-size:12px}
+      .m{font-size:11px;fill:#5A544C}
+      .panel{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.5}
+      .windowA{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.7}
+      .windowB{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.7}
+      .chunk{fill:#F7F4F0;stroke:#7F786D;stroke-width:1.2}
+      .divider{stroke:#7F786D;stroke-width:1.2;stroke-dasharray:4 4}
+      .vector{fill:#2C2924}
+    </style>
+  </defs>
+
+  <rect width="760" height="580" fill="#F7F4F0"/>
+  <text x="24" y="29" class="t title">Context reach stops at the encoder window</text>
+  <text x="24" y="49" class="t m">Retrieval spans may be small even when the transformer input is much larger.</text>
+
+  <rect x="24" y="74" width="712" height="148" rx="14" class="panel"/>
+  <text x="42" y="101" class="t h">A. DOCUMENT FITS ONE WINDOW</text>
+  <text x="42" y="120" class="t m">Every span is contextualized in the same encoder pass.</text>
+  <rect x="42" y="139" width="618" height="48" rx="10" class="windowA"/>
+  <text x="351" y="157" text-anchor="middle" class="t s">ONE ENCODER WINDOW</text>
+  <line x1="165.6" y1="163" x2="165.6" y2="187" class="divider"/>
+  <line x1="289.2" y1="163" x2="289.2" y2="187" class="divider"/>
+  <line x1="412.8" y1="163" x2="412.8" y2="187" class="divider"/>
+  <line x1="536.4" y1="163" x2="536.4" y2="187" class="divider"/>
+  <text x="103.8" y="180" text-anchor="middle" class="t m">span 1</text>
+  <text x="227.4" y="180" text-anchor="middle" class="t m">span 2</text>
+  <text x="351" y="180" text-anchor="middle" class="t m">span 3</text>
+  <text x="474.6" y="180" text-anchor="middle" class="t m">span 4</text>
+  <text x="598.2" y="180" text-anchor="middle" class="t m">span 5</text>
+  <circle cx="688" cy="151" r="4.5" class="vector"/>
+  <circle cx="704" cy="151" r="4.5" class="vector"/>
+  <circle cx="720" cy="151" r="4.5" class="vector"/>
+  <circle cx="696" cy="175" r="4.5" class="vector"/>
+  <circle cx="712" cy="175" r="4.5" class="vector"/>
+  <text x="704" y="205" text-anchor="middle" class="t m">5 vectors</text>
+
+  <rect x="24" y="238" width="712" height="290" rx="14" class="panel"/>
+  <text x="42" y="265" class="t h">B. DOCUMENT EXCEEDS ONE WINDOW</text>
+  <text x="42" y="284" class="t m">Overlapping macro-windows provide local context around their shared boundary.</text>
+
+  <rect x="42" y="305" width="676" height="38" rx="8" class="chunk"/>
+  <line x1="126.5" y1="305" x2="126.5" y2="343" class="divider"/>
+  <line x1="211" y1="305" x2="211" y2="343" class="divider"/>
+  <line x1="295.5" y1="305" x2="295.5" y2="343" class="divider"/>
+  <line x1="380" y1="305" x2="380" y2="343" class="divider"/>
+  <line x1="464.5" y1="305" x2="464.5" y2="343" class="divider"/>
+  <line x1="549" y1="305" x2="549" y2="343" class="divider"/>
+  <line x1="633.5" y1="305" x2="633.5" y2="343" class="divider"/>
+  <text x="84.25" y="329" text-anchor="middle" class="t m">1</text>
+  <text x="168.75" y="329" text-anchor="middle" class="t m">2</text>
+  <text x="253.25" y="329" text-anchor="middle" class="t m">3</text>
+  <text x="337.75" y="329" text-anchor="middle" class="t m">4</text>
+  <text x="422.25" y="329" text-anchor="middle" class="t m">5</text>
+  <text x="506.75" y="329" text-anchor="middle" class="t m">6</text>
+  <text x="591.25" y="329" text-anchor="middle" class="t m">7</text>
+  <text x="675.75" y="329" text-anchor="middle" class="t m">8</text>
+
+  <rect x="42" y="354" width="422.5" height="34" rx="8" class="windowA"/>
+  <text x="168.75" y="376" text-anchor="middle" class="t s">KEEP A: positions 1-3</text>
+  <rect x="295.5" y="354" width="169" height="34" fill="url(#lateChunkingWindowOverlap)" stroke="#A67C52" stroke-width="1.2"/>
+  <text x="380" y="376" text-anchor="middle" class="t h">KEEP A: 4-5</text>
+
+  <rect x="295.5" y="398" width="422.5" height="34" rx="8" class="windowB"/>
+  <rect x="295.5" y="398" width="169" height="34" fill="url(#lateChunkingWindowOverlap)" stroke="#A67C52" stroke-width="1.2"/>
+  <line x1="308" y1="404" x2="452" y2="426" stroke="#7F786D" stroke-width="1.4"/>
+  <line x1="452" y1="404" x2="308" y2="426" stroke="#7F786D" stroke-width="1.4"/>
+  <text x="380" y="420" text-anchor="middle" class="t h">DISCARD B: 4-5</text>
+  <text x="591.25" y="420" text-anchor="middle" class="t s">KEEP B: positions 6-8</text>
+
+  <text x="42" y="458" class="t h">STITCHED TOKEN STATES: ONE STATE PER DOCUMENT POSITION</text>
+  <rect x="42" y="470" width="422.5" height="34" rx="8" class="windowA"/>
+  <rect x="464.5" y="470" width="253.5" height="34" rx="8" class="windowB"/>
+  <text x="253.25" y="492" text-anchor="middle" class="t s">positions 1-5 kept from A</text>
+  <text x="591.25" y="492" text-anchor="middle" class="t s">positions 6-8 kept from B</text>
+
+  <rect x="24" y="544" width="712" height="26" rx="8" fill="#F3E8E0" stroke="#A67C52" stroke-width="1.4"/>
+  <text x="380" y="562" text-anchor="middle" class="t s">The repeated B input positions provide context; their duplicate output states are discarded rather than stitched.</text>
+</svg>

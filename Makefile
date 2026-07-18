@@ -12,8 +12,10 @@ PRAX_DOCS_REPO ?= https://github.com/praxagent/prax.git
 PRAX_DOCS_REF ?= main
 PRAX_DOCS_CACHE ?= .cache/prax-docs/repo
 PRAX_DOCS_SOURCE ?=
-PRAX_DOCS_CONTENT_OUTPUT := $(BLOG_SOURCE)/content/references/prax
+PRAX_DOCS_CONTENT_OUTPUT := $(BLOG_SOURCE)/content/knowledge-base/prax
 PRAX_DOCS_STATIC_OUTPUT := $(BLOG_SOURCE)/static/prax-docs
+LATE_CHUNKING_BUNDLE := $(BLOG_SOURCE)/content/knowledge-base/deep-dives/late-chunking
+LATE_CHUNKING_PUBLIC := $(BLOG_OUTPUT)/knowledge-base/deep-dives/late-chunking
 
 # Port used to serve the full static site locally.
 SITE_PORT ?= 8000
@@ -42,7 +44,7 @@ DETACH := $(abspath scripts/detach_serve.sh)
 
 .DEFAULT_GOAL := help
 
-.PHONY: help sync-prax-docs blog blog-drafts blog-serve blog-serve-tailscale run-site-local run-site-tailscale check ci up down
+.PHONY: help sync-prax-docs verify-late-chunking blog blog-drafts blog-serve blog-serve-tailscale run-site-local run-site-tailscale check ci up down
 
 help: ## Show available commands
 	@awk 'BEGIN {FS = ":.*## "; printf "Usage: make <target>\n\nTargets:\n"} /^[a-zA-Z0-9_-]+:.*## / {printf "  %-22s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -69,7 +71,10 @@ sync-prax-docs: ## Fetch Prax and generate Hugo-ready documentation
 		--content-output "$(PRAX_DOCS_CONTENT_OUTPUT)" \
 		--static-output "$(PRAX_DOCS_STATIC_OUTPUT)"
 
-blog: sync-prax-docs ## Compile blog-source/content/posts into blog/
+verify-late-chunking: ## Verify the committed Late Chunking benchmark artifacts offline
+	$(PYTHON) "$(LATE_CHUNKING_BUNDLE)/reproduce.py" --verify
+
+blog: sync-prax-docs verify-late-chunking ## Compile blog-source/content/posts into blog/
 	$(HUGO) \
 		--source "$(BLOG_SOURCE)" \
 		--config "$(abspath $(HUGO_CONFIG))" \
@@ -78,6 +83,24 @@ blog: sync-prax-docs ## Compile blog-source/content/posts into blog/
 		$(BLOG_BUILD_FLAGS) \
 		--noBuildLock \
 		--cleanDestinationDir
+	$(RSYNC) -a \
+		--include='/reproduce.py' \
+		--include='/reproduce.py.lock' \
+		--include='/ATTRIBUTION.md' \
+		--include='/provenance.json' \
+		--include='/fig-scifact-retrieval.svg' \
+		--include='/fig-query-deltas.svg' \
+		--include='/fig-scifact-retrieval.receipt.json' \
+		--include='/fig-query-deltas.receipt.json' \
+		--include='/receipts/' \
+		--include='/receipts/aggregate.json' \
+		--include='/receipts/per-query.csv' \
+		--include='/receipts/scifact-test-qrels.tsv' \
+		--include='/receipts/top-10-rankings.jsonl' \
+		--include='/receipts/run.receipt.json' \
+		--exclude='*' \
+		"$(LATE_CHUNKING_BUNDLE)/" \
+		"$(LATE_CHUNKING_PUBLIC)/"
 	$(RSYNC) -a \
 		--include='*/' \
 		--include='README.md' \
@@ -170,7 +193,7 @@ else
 	$(PYTHON) -m http.server $(SITE_PORT) --bind 0.0.0.0
 endif
 
-check: sync-prax-docs ## Validate Hugo, local links, anchors, JSON, SVG, Python, branding, and data provenance
+check: sync-prax-docs verify-late-chunking ## Validate Hugo, local links, anchors, JSON, SVG, Python, branding, and data provenance
 	$(HUGO) \
 		--source "$(BLOG_SOURCE)" \
 		--config "$(abspath $(HUGO_CONFIG))" \

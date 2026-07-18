@@ -12,7 +12,12 @@ lead: |
 ---
 
 {{< panel "info" >}}
-**AI-use disclosure & disclaimer.** Generative-AI tools were used during drafting and editorial revision; the author framed the questions, chose the analyses, and reviewed the outputs. This post is shared in the spirit of open-source research: an independent, non-peer-reviewed note published so the community can inspect, reproduce, and correct it. The data, code, and text are provided as-is, without warranty of any kind; errors are possible despite good-faith effort. Verify against the released artifacts before relying on anything here, and use at your own risk. Corrections are welcome.
+**AI-use disclosure.** Generative-AI tools helped implement, audit, execute,
+interpret, visualize, review, and draft this study. The author selected the
+research question, authorized the compute, has inspected the artifacts, and is
+responsible for the final text and claims. This is an independent,
+non-peer-reviewed Research Note. Verify numbers against the released receipts
+before relying on them.
 {{< /panel >}}
 
 {{< panel "info" >}}

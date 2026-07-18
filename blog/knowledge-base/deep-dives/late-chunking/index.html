@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Late Chunking: Context Before Pooling - praxagent Knowledge Base</title>
+    
+    
+    
+    
+    
+    
+    <meta name="description" content="Late chunking lets an embedding model contextualize a longer input before pooling smaller retrieval chunks, preserving one vector per chunk without promising that more context always helps.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/deep-dives/late-chunking/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="praxagent Knowledge Base">
+    <meta property="og:title" content="Late Chunking: Context Before Pooling">
+    <meta property="og:description" content="Late chunking lets an embedding model contextualize a longer input before pooling smaller retrieval chunks, preserving one vector per chunk without promising that more context always helps.">
+    <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/deep-dives/late-chunking/">
+    <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="Late Chunking: Context Before Pooling">
+    <meta name="twitter:description" content="Late chunking lets an embedding model contextualize a longer input before pooling smaller retrieval chunks, preserving one vector per chunk without promising that more context always helps.">
+    <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/styles-v2.css">
+    <link rel="stylesheet" href="/blog/blog.css">
+    <link rel="stylesheet" href="/blog/katex.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'neutral',
+        securityLevel: 'loose',
+        flowchart: { htmlLabels: true, curve: 'basis' }
+      });
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-scrolls industrial-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+
+            <div class="nav-menu">
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link">Research Notes</a>
+                <a href="/blog/knowledge-base/" class="nav-link active">Knowledge Base</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
+            <a href="/blog/knowledge-base/" class="mobile-nav-link active">Knowledge Base</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        
+
+
+
+<div class="blog-post reference-entry">
+    <div class="container">
+        <article class="post-content">
+            <header class="post-header">
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Deep Dives</p>
+                <h1 class="post-title">Late Chunking: Context Before Pooling</h1>
+                
+                <p class="reference-summary">Late chunking lets an embedding model contextualize a longer input before pooling smaller retrieval chunks, preserving one vector per chunk without promising that more context always helps.</p>
+                
+
+                <div class="post-meta">
+                    <span class="post-date">August 2, 2025</span>
+                    <span class="post-author">by Timothy Jones</span>
+                </div>
+
+            </header>
+
+
+            <div class="post-body post-preface">
+
+
+                <div class="panel info">
+                    <div class="panel-icon" aria-hidden="true"><i data-feather="info"></i></div>
+                    <div class="panel-content"><strong>AI-use disclosure.</strong> Generative-AI tools helped implement, audit, execute,
+interpret, visualize, review, and draft this study. The author selected the
+research question, authorized the compute, has inspected the artifacts, and is
+responsible for the final text and claims. This is an independent,
+non-peer-reviewed Deep Dive. Verify numbers against the released receipts
+before relying on them.</div>
+                </div>
+
+            </div>
+
+
+
+            <div class="table-of-contents">
+                <h3>Table of Contents</h3>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-short-version">The short version</a></li>
+    <li><a href="#the-operation-precisely">The operation, precisely</a>
+      <ul>
+        <li><a href="#what-changes-and-what-stays-fixed">What changes and what stays fixed</a></li>
+      </ul>
+    </li>
+    <li><a href="#a-worked-example-and-its-limit">A worked example, and its limit</a></li>
+    <li><a href="#what-the-published-retrieval-evaluation-found">What the published retrieval evaluation found</a></li>
+    <li><a href="#an-auditable-scifact-matched-content-token-re-evaluation">An auditable SciFact matched-content-token re-evaluation</a>
+      <ul>
+        <li><a href="#reproduce-and-audit-the-result">Reproduce and audit the result</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-implementation-boundary">The implementation boundary</a>
+      <ul>
+        <li><a href="#boundary-alignment-is-not-optional">Boundary alignment is not optional</a></li>
+      </ul>
+    </li>
+    <li><a href="#documents-longer-than-the-encoder-window">Documents longer than the encoder window</a></li>
+    <li><a href="#related-techniques-are-not-synonyms">Related techniques are not synonyms</a></li>
+    <li><a href="#how-to-evaluate-it-on-your-corpus">How to evaluate it on your corpus</a></li>
+    <li><a href="#decision-checklist">Decision checklist</a></li>
+    <li><a href="#primary-references">Primary references</a></li>
+  </ul>
+</nav>
+            </div>
+
+
+            <div class="post-body">
+                <p><strong>Late chunking</strong> creates an embedding for each small retrieval chunk <em>after</em> a transformer has contextualized a longer input containing that chunk. The chunk boundaries can stay exactly where they were. What moves later is their use in pooling.</p>
+<p>That distinction matters:</p>
+<ul>
+<li>Late chunking does <strong>not</strong> ask a model to choose the chunk boundaries.</li>
+<li>It does <strong>not</strong> store one vector for every token.</li>
+<li>It does <strong>not</strong> guarantee better retrieval whenever more context is available.</li>
+<li>It does require access to token-level states from a compatible embedding model.</li>
+</ul>
+<p>The method was introduced by Günther et al. in <a href="https://arxiv.org/abs/2409.04701v3"><em>Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models</em></a>. This Deep Dive explains the operation, the published evidence, the implementation boundaries, and the cases where the standard approach can still win.</p>
+<h2 id="the-short-version">The short version</h2>
+<p>Suppose a document contains three chunks:</p>
+<ol>
+<li>“Berlin is the capital and largest city of Germany.”</li>
+<li>“Its population exceeds 3.85 million.”</li>
+<li>“The city is also one of Germany&rsquo;s states.”</li>
+</ol>
+<p>With <strong>naive chunking</strong>, the embedding model encodes each numbered span independently. Tokens such as <em>Its</em> and <em>The city</em> cannot attend to the earlier mention of <em>Berlin</em> during that encoding pass.</p>
+<p>With <strong>late chunking</strong>, the model encodes all three spans in one in-window input. It then mean-pools the token states inside each of the same three spans. Earlier context can influence the vectors for spans 2 and 3, but only tokens assigned to each span are pooled into that span&rsquo;s final vector.</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Naive and late chunking pipelines" tabindex="0">
+        <img src="/blog/knowledge-base/deep-dives/late-chunking-order.svg" alt="Two pipelines use the same document and chunk boundaries. Naive chunking splits before encoding, so the phrase &#39;the city&#39; cannot attend to the earlier mention of &#39;Berlin&#39;. Late chunking encodes the in-window document first and then pools the same spans, so that earlier context can influence the chunk vector." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>Late chunking changes when chunk boundaries isolate context, not necessarily where the boundaries are drawn. Naive chunking encodes each span independently. Late chunking first contextualizes all tokens in one encoder input, then pools token states inside the same spans. Context is available, but the figure does not claim that every reference is resolved or that retrieval must improve.</figcaption>
+</figure>
+
+<h2 id="the-operation-precisely">The operation, precisely</h2>
+<p>Let \(x\) be the actual in-window encoder sequence, including any chosen instruction and special tokens, and let \(a_i\) be its attention mask. Here \(x\) also stands for the other fixed encoder inputs, such as position or token-type IDs where the model uses them. The transformer produces a contextual state for each encoded position:</p>
+\[
+H = E(x,a) = \left[h_1(x,a), h_2(x,a), \ldots, h_m(x,a)\right].
+\]<p>Let \(S_j\) be the encoded positions assigned to retrieval chunk \(j\), with \(\sum_{i \in S_j} a_i > 0\). For attention-mask mean pooling followed by L2 normalization, and assuming the pooled vector has nonzero finite norm:</p>
+\[
+\begin{aligned}
+\mu_j^{\mathrm{late}}
+&= \frac{\sum_{i \in S_j} a_i h_i(x,a)}{\sum_{i \in S_j} a_i}, \\
+z_j^{\mathrm{late}}
+&= \frac{\mu_j^{\mathrm{late}}}{\lVert\mu_j^{\mathrm{late}}\rVert_2}.
+\end{aligned}
+\]<p>For naive chunking, let \(x^{(j)}\), \(a^{(j)}\), and \(S_j^{(j)}\) denote chunk \(j\)&rsquo;s separately encoded input, attention mask, and local pooled positions:</p>
+\[
+\begin{aligned}
+\mu_j^{\mathrm{naive}}
+&= \frac{\sum_{r \in S_j^{(j)}} a_r^{(j)} h_r(x^{(j)},a^{(j)})}{\sum_{r \in S_j^{(j)}} a_r^{(j)}}, \\
+z_j^{\mathrm{naive}}
+&= \frac{\mu_j^{\mathrm{naive}}}{\lVert\mu_j^{\mathrm{naive}}\rVert_2}.
+\end{aligned}
+\]<p>The different indices matter. A late position \(i\) is contextualized inside the longer input \(x\); a naive position \(r\) is local to the separately encoded chunk input \(x^{(j)}\). These equations describe the reproduction&rsquo;s pooling recipe. Another embedding model may specify different pooling or normalization.</p>
+<h3 id="what-changes-and-what-stays-fixed">What changes and what stays fixed</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Naive chunking</th>
+          <th>Late chunking</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Chunk text and boundaries</td>
+          <td>Chosen before encoding</td>
+          <td>Chosen before encoding</td>
+      </tr>
+      <tr>
+          <td>Transformer input</td>
+          <td>One chunk at a time</td>
+          <td>A longer input containing several chunks</td>
+      </tr>
+      <tr>
+          <td>Pooling</td>
+          <td>Over states conditioned on that chunk</td>
+          <td>Over the same span&rsquo;s states, conditioned on the longer input</td>
+      </tr>
+      <tr>
+          <td>Stored representation</td>
+          <td>One vector per chunk</td>
+          <td>One vector per chunk</td>
+      </tr>
+      <tr>
+          <td>Query encoding</td>
+          <td>Model&rsquo;s documented query path</td>
+          <td>The same documented query path</td>
+      </tr>
+      <tr>
+          <td>Context reach</td>
+          <td>The isolated chunk</td>
+          <td>The encoder&rsquo;s usable input window</td>
+      </tr>
+  </tbody>
+</table>
+<p>Late chunking changes the <strong>input-conditioned representation</strong>, not the model&rsquo;s learned vector space. There is no per-document retraining.</p>
+<h2 id="a-worked-example-and-its-limit">A worked example, and its limit</h2>
+<p>The paper&rsquo;s introductory Berlin example compares the query <em>Berlin</em> with three sentence embeddings produced by <code>jina-embeddings-v2-small-en</code>. Its reported cosine similarities are:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Sentence</th>
+          <th style="text-align: right">Naive</th>
+          <th style="text-align: right">Late</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Contains “Berlin” directly</td>
+          <td style="text-align: right">0.8486</td>
+          <td style="text-align: right">0.8495</td>
+      </tr>
+      <tr>
+          <td>Begins “Its more than 3.85 million inhabitants&hellip;”</td>
+          <td style="text-align: right">0.7084</td>
+          <td style="text-align: right">0.8249</td>
+      </tr>
+      <tr>
+          <td>Begins “The city is also one of the states&hellip;”</td>
+          <td style="text-align: right">0.7535</td>
+          <td style="text-align: right">0.8498</td>
+      </tr>
+  </tbody>
+</table>
+<p>This is a useful mechanism-level illustration: the two later sentence vectors change when their token states are conditioned on the preceding sentence. It is <strong>not</strong> a retrieval benchmark. A cosine increase for one query does not establish a better ranking, fewer false matches, or resolution of every anaphor. Those claims require a corpus, queries, relevance judgments, and a retrieval metric.</p>
+<p>Source: <a href="https://arxiv.org/html/2409.04701v3#S1.T1">Günther et al., Table 1</a>.</p>
+<h2 id="what-the-published-retrieval-evaluation-found">What the published retrieval evaluation found</h2>
+<p>The paper compares naive and late chunking on four selected BEIR datasets, NFCorpus, SciFact, FiQA, and TREC-COVID, using three embedding models. Each dataset supplies queries, a document corpus, and qrels that identify relevant documents. Chunk rankings are converted to document rankings under the paper&rsquo;s protocol and scored with nDCG@10.</p>
+<p>The paper reports nDCG@10 on a 0-100 scale. The changes below are absolute points on that reporting scale:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Boundary method</th>
+          <th style="text-align: right">Naive nDCG@10 (×100)</th>
+          <th style="text-align: right">Late nDCG@10 (×100)</th>
+          <th style="text-align: right">Paper-reported change (points)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Five sentences per chunk</td>
+          <td style="text-align: right">52.4</td>
+          <td style="text-align: right">54.3</td>
+          <td style="text-align: right">+1.9</td>
+      </tr>
+      <tr>
+          <td>256 tokens per chunk</td>
+          <td style="text-align: right">52.2</td>
+          <td style="text-align: right">54.0</td>
+          <td style="text-align: right">+1.8</td>
+      </tr>
+      <tr>
+          <td>Semantic sentence boundaries</td>
+          <td style="text-align: right">52.4</td>
+          <td style="text-align: right">53.8</td>
+          <td style="text-align: right">+1.5 from unrounded scores</td>
+      </tr>
+  </tbody>
+</table>
+<p>These are averages across the paper&rsquo;s three models and four selected BEIR tasks, not expected gains for a new corpus. The evaluation used non-overlapping retrieval chunks and a specific protocol for assigning instruction and special-token states to the first or last chunk. See <a href="https://arxiv.org/html/2409.04701v3#S4.SS1">Section 4.1</a> for the table and <a href="https://arxiv.org/html/2409.04701v3#S4.SS2">Section 4.2</a> for the chunk-size ablation.</p>
+<p>The aggregate hides heterogeneous results. In Section 4.2&rsquo;s nDCG retrieval ablation, the authors use <code>jina-embeddings-v2-small-en</code>, fixed-size chunks at several tested sizes, NFCorpus and LongEmbed tasks, and truncate inputs at 8,192 tokens. They report stronger late-chunking results particularly at smaller chunk sizes, while some reading-comprehension configurations with larger chunks favor naive chunking. They also report no late-chunking benefit on the tested Needle-8192 and Passkey-8192 configurations, where short relevant text is placed inside unrelated context. Those are results and interpretations for that experiment, not a rule that a task family universally favors either method.</p>
+<p>The defensible conclusion is that late chunking can improve retrieval when surrounding text helps represent the target span. “More context is always better” is not supported.</p>
+<h2 id="an-auditable-scifact-matched-content-token-re-evaluation">An auditable SciFact matched-content-token re-evaluation</h2>
+<p>This page also ships a runnable re-evaluation on the complete SciFact test retrieval benchmark: 5,183 candidate documents, 300 test queries, and 339 positive query-document judgments. It uses <a href="https://huggingface.co/jinaai/jina-embeddings-v2-small-en/tree/44e7d1d6caec8c883c2d4b207588504d519788d0"><code>jina-embeddings-v2-small-en</code> at commit <code>44e7d1d</code></a>, its remote implementation at commit <code>f3ec4cf</code>, and 256-content-token spans without overlap. The frozen corpus produced 9,356 chunks. Its longest document had 1,937 content tokens, so no document was truncated against the model&rsquo;s 8,192-token limit.</p>
+<p>The naive and late arms match the corpus, query path, tokenizer and model revisions, content-token boundaries, mean-pooling operation, normalization, and cosine scoring. They match frozen content-token IDs and slices, but this is not a context-only causal ablation. Each naive chunk is encoded with its own <code>[CLS]</code> and <code>[SEP]</code>, whereas the late arm uses one document-level pair assigned to the first and last spans. Those special tokens can affect content-token hidden states even when the special-token states themselves are excluded from pooling. More generally, independently encoded chunks may differ in position IDs or other position-dependent model inputs. A context-only ablation must hold fixed every non-contextual encoder input and every pooled position, then vary only cross-span context or attention. Where a compatible model supports it, one possible design is to encode the same full token sequence with carefully matched full-attention and block-diagonal-attention masks.</p>
+<p>The three evaluated document representations are:</p>
+<ol>
+<li><strong>Naive chunks:</strong> each frozen content-token slice receives its own special tokens and is encoded independently.</li>
+<li><strong>Late chunks:</strong> the complete document is encoded once, then the same content-token spans are pooled. <code>[CLS]</code> belongs to the first span and <code>[SEP]</code> to the last.</li>
+<li><strong>Whole document:</strong> the same full-document states used by the late arm are pooled into one vector. This is a control for “use all context” without retaining one retrieval vector per chunk.</li>
+</ol>
+<p>Queries receive no instruction prefix and use the same attention-mask mean pooling and L2 normalization in every arm. The script scores every corpus chunk, takes each document&rsquo;s maximum chunk score for the two chunked arms, ranks the complete document corpus, and calculates document-level nDCG@10, Recall@10, and MRR@10 from the frozen binary qrels. Stable corpus order breaks exact score ties.</p>
+<p>This is an <strong>auditable matched-content-token re-evaluation</strong>, not an exact replication of one paper-table cell or a context-only causal ablation. The pinned paper helper decodes token slices before its evaluator retokenizes them; that can alter boundary tokenization. This version passes the original token IDs directly so the naive and late arms share exact content spans. It also scores the full corpus before max-chunk document aggregation instead of collapsing a previously retrieved candidate-chunk list. Those choices make the content-token comparison cleaner for this tutorial, but its values should not be substituted for the paper&rsquo;s protocol.</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: SciFact retrieval quality for three document protocols" tabindex="0">
+        <img src="/blog/knowledge-base/deep-dives/late-chunking/fig-scifact-retrieval.svg" alt="SciFact test document nDCG at 10 on a zero-to-one axis, with query-bootstrap intervals: naive 256-token chunks 0.6414 [0.5942, 0.6876]; late 256-token chunks 0.6610 [0.6145, 0.7071]; whole-document encoding 0.6389 [0.5918, 0.6852]. Higher is better." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption><strong>Finding:</strong> on this frozen SciFact test benchmark, the late-chunk protocol reached 0.6610 document nDCG@10, compared with 0.6414 for the naive-chunk protocol and 0.6389 for one whole-document vector. The naive and late arms match content-token slices but follow different stated special-token pooling policies, so this is an end-to-end protocol comparison. Horizontal lines show descriptive query-bootstrap intervals from 20,000 resamples of the 300 fixed queries. They describe benchmark stability, not performance on another corpus or a population confidence interval. The table below is the full visible text equivalent. <a href="fig-scifact-retrieval.receipt.json">Figure receipt</a>.</figcaption>
+</figure>
+
+<table>
+  <thead>
+      <tr>
+          <th>Document representation</th>
+          <th style="text-align: right">nDCG@10</th>
+          <th style="text-align: right">95% query-bootstrap interval</th>
+          <th style="text-align: right">Recall@10</th>
+          <th style="text-align: right">MRR@10</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Naive 256-token chunks</td>
+          <td style="text-align: right">0.6414</td>
+          <td style="text-align: right">[0.5942, 0.6876]</td>
+          <td style="text-align: right">0.7626</td>
+          <td style="text-align: right">0.6123</td>
+      </tr>
+      <tr>
+          <td>Late 256-token chunks</td>
+          <td style="text-align: right">0.6610</td>
+          <td style="text-align: right">[0.6145, 0.7071]</td>
+          <td style="text-align: right">0.7776</td>
+          <td style="text-align: right">0.6337</td>
+      </tr>
+      <tr>
+          <td>Whole document</td>
+          <td style="text-align: right">0.6389</td>
+          <td style="text-align: right">[0.5918, 0.6852]</td>
+          <td style="text-align: right">0.7592</td>
+          <td style="text-align: right">0.6105</td>
+      </tr>
+  </tbody>
+</table>
+<p>Late chunking had the highest aggregate score of these three arms, but the aggregate hides how sparse the changes were.</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Sorted query-level late-minus-naive changes" tabindex="0">
+        <img src="/blog/knowledge-base/deep-dives/late-chunking/fig-query-deltas.svg" alt="Sorted query-level SciFact nDCG at 10 differences for late minus naive chunking: 49 queries improved, 229 tied, and 22 worsened. The mean difference is &#43;0.0196, with a paired query-bootstrap interval from &#43;0.0033 to &#43;0.0358. Points above zero favor late chunking; points below zero favor naive chunking." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption><strong>Finding:</strong> the mean late-minus-naive nDCG@10 difference was +0.0196, with a descriptive paired query-bootstrap interval of [+0.0033, +0.0358]. At query level, 49 improved, 229 tied, and 22 worsened on nDCG@10. Circles above zero favor late chunks, squares below zero favor naive chunks, and diamonds on zero are ties, so color is not required to interpret the plot. The interval resamples the fixed query-level paired differences; it is not a p-value or a universal retrieval claim. <a href="fig-query-deltas.receipt.json">Figure receipt</a>.</figcaption>
+</figure>
+
+<table>
+  <thead>
+      <tr>
+          <th>Paired comparison</th>
+          <th style="text-align: right">Mean nDCG@10 difference</th>
+          <th style="text-align: right">95% paired query-bootstrap interval</th>
+          <th style="text-align: right">Improved</th>
+          <th style="text-align: right">Tied</th>
+          <th style="text-align: right">Worsened</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Late minus naive</td>
+          <td style="text-align: right">+0.0196</td>
+          <td style="text-align: right">[+0.0033, +0.0358]</td>
+          <td style="text-align: right">49</td>
+          <td style="text-align: right">229</td>
+          <td style="text-align: right">22</td>
+      </tr>
+  </tbody>
+</table>
+<p>The correct reading is narrow: late chunking improved the mean ranking metric for this pinned model and benchmark, while some queries regressed and most had the same nDCG@10. The whole-document control also did not match the late-chunk score, so contextualizing a document and compressing it into one vector is not equivalent to retaining context-conditioned retrieval chunks. This comparison does not identify why an individual query changed, benchmark indexing throughput, or establish an expected gain on another corpus.</p>
+<h3 id="reproduce-and-audit-the-result">Reproduce and audit the result</h3>
+<p>The page bundle contains the <a href="reproduce.py">reproduction script</a>, <a href="reproduce.py.lock">locked dependency graph</a>, <a href="receipts/scifact-test-qrels.tsv">byte-identical test qrels</a>, <a href="receipts/aggregate.json">aggregate metrics</a>, <a href="receipts/per-query.csv">per-query metrics</a>, <a href="receipts/top-10-rankings.jsonl">top-ten rankings</a>, <a href="receipts/run.receipt.json">run receipt</a>, <a href="provenance.json">provenance manifest</a>, and <a href="ATTRIBUTION.md">SciFact attribution</a>. Model weights, corpus text, and caches remain uncommitted.</p>
+<p>Run the canonical model evaluation with:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">uv run --frozen reproduce.py --run --device cpu --batch-size <span class="m">32</span> --threads <span class="m">8</span>
+</span></span></code></pre></div><p>Before inference, the script validates the SciFact archive; model, tokenizer, and remote Python snapshots; the expected lockfile hash; and the material installed package versions. The documented <code>uv run --frozen</code> command enforces the complete locked dependency graph. The receipt distinguishes that canonical command from the observed Python argument vector and records platform and package versions, CPU settings, input hashes, protocol choices, phase timings, and output hashes. Deterministic-kernel mode is enabled, but the receipt does not promise bitwise identity across different hardware or math libraries.</p>
+<p>CI uses the standard-library-only offline check:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python3 reproduce.py --verify
+</span></span></code></pre></div><p>That check binds the run to the script and lockfile, validates the frozen qrels hash, requires one complete ten-document ranking with unique document IDs for every query-arm pair, re-derives relevance labels and query metrics, re-runs the query bootstraps, and regenerates both SVGs and their receipts byte for byte.</p>
+<h2 id="the-implementation-boundary">The implementation boundary</h2>
+<p>Late chunking needs more than an API that returns one already-pooled vector for an input. You need:</p>
+<ol>
+<li>token-level hidden states from the embedding model;</li>
+<li>one frozen tokenization of the longer input;</li>
+<li>one half-open token span for each retrieval chunk; if boundaries originate in character or sentence space, request offset mappings and align those boundaries to the frozen tokenization;</li>
+<li>the model&rsquo;s compatible pooling, instruction, and normalization rules; and</li>
+<li>an explicit policy for special tokens, padding, truncation, and over-length inputs.</li>
+</ol>
+<p>The pooling core can be small. The hard part is producing correct spans and model inputs:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Sequence</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">torch</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">Tensor</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@torch.inference_mode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">mean_pool_spans</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">token_states</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span>          <span class="c1"># [tokens, hidden]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">attention_mask</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span>        <span class="c1"># [tokens], 1 for usable positions</span>
+</span></span><span class="line"><span class="cl">    <span class="n">spans</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span>  <span class="c1"># half-open [start, stop)</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Pool already-contextualized token states into normalized chunk vectors.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">token_states</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;token_states must have shape [tokens, hidden]&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">attention_mask</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">token_states</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">1</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;attention_mask must have one value per token&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">usable</span> <span class="o">=</span> <span class="n">attention_mask</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vectors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span> <span class="ow">in</span> <span class="n">spans</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="n">stop</span> <span class="o">&lt;=</span> <span class="n">token_states</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;invalid token span: </span><span class="si">{</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">keep</span> <span class="o">=</span> <span class="n">usable</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">torch</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">keep</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;token span contains no usable states: </span><span class="si">{</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">pooled</span> <span class="o">=</span> <span class="n">token_states</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">][</span><span class="n">keep</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">norm</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">vector_norm</span><span class="p">(</span><span class="n">pooled</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">torch</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">pooled</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">torch</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">norm</span><span class="p">)</span> <span class="ow">or</span> <span class="n">norm</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="sa">f</span><span class="s2">&#34;token span produced a non-finite or zero-norm vector: </span><span class="si">{</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pooled</span> <span class="o">/</span> <span class="n">norm</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">vectors</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;at least one token span is required&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">vectors</span><span class="p">)</span>
+</span></span></code></pre></div><p>This function assumes the transformer has already processed the complete in-window input. It intentionally does not pretend that sentence splitting, offset alignment, model loading, or instruction handling are universal.</p>
+<h3 id="boundary-alignment-is-not-optional">Boundary alignment is not optional</h3>
+<p>A reliable pipeline should tokenize the document once and derive every chunk span against that frozen token sequence. If the chunker emits character or sentence boundaries, request offset mappings and map those boundaries to token positions. If the chunker operates directly on token counts, define half-open spans over the frozen content-token IDs, as the reproduction does. In either case, do not decode slices and re-tokenize them to recover boundaries.</p>
+<p>Decide and test all of the following:</p>
+<ul>
+<li>whether chunk spans overlap;</li>
+<li>where prepended instructions, <code>[CLS]</code>, and appended separator states are pooled;</li>
+<li>whether padding is excluded by the attention mask, how instruction and special tokens consume the input budget, and how silent truncation is prevented; if document content exceeds the remaining budget, reject it or route it through the documented macro-window path rather than pooling an incomplete chunk;</li>
+<li>whether normalization occurs before or after pooling;</li>
+<li>whether query and document instructions differ;</li>
+<li>which model, tokenizer, and remote-code revisions are pinned; and</li>
+<li>what happens when a chunk maps to no usable tokens.</li>
+</ul>
+<p>The paper&rsquo;s evaluation assigns prepended special and instruction-token states to the first chunk and appended states to the last. Other model families may require a different documented policy.</p>
+<p>For a full reference implementation, inspect the authors&rsquo; <a href="https://github.com/jina-ai/late-chunking/tree/1d3bb02bf091becd0771455e4e7959463935e26c">official repository at commit <code>1d3bb02</code></a>. Treat that implementation and the chosen model revision as versioned dependencies.</p>
+<h2 id="documents-longer-than-the-encoder-window">Documents longer than the encoder window</h2>
+<p>Full-document contextualization is possible only when the document fits within the embedding model&rsquo;s usable input. If it does not, the paper&rsquo;s <strong>long late chunking</strong> method divides the token sequence into overlapping macro-windows and then stitches one contextual state back onto each document token position before span pooling.</p>
+<p>The authors&rsquo; <a href="https://github.com/jina-ai/late-chunking/blob/1d3bb02bf091becd0771455e4e7959463935e26c/chunked_pooling/mteb_chunked_eval.py#L128-L159">pinned implementation</a> uses a concrete ownership rule. It keeps every state from the first macro-window. For each later window, it discards the states for that window&rsquo;s repeated leading overlap and appends only the states for new document positions. The overlap therefore supplies preceding context to the new positions, while the stitched sequence still has exactly one state per document token. Chunk boundaries are then applied to that stitched sequence, producing one vector and one ID per retrieval chunk.</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Long-document overlap stitching" tabindex="0">
+        <img src="/blog/knowledge-base/deep-dives/late-chunking-context-window.svg" alt="A document that fits one encoder window is contextualized in one pass. For an over-length document, the pinned long-late-chunking implementation keeps all states from the first macro-window, discards the repeated leading-overlap states from the next window, and appends only its new positions, yielding one stitched state per document token." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>The scope of late chunking is the embedding model&rsquo;s usable input window. If the document fits, all retrieval spans can be contextualized in one encoder pass. In the pinned long-document implementation shown here, macro-window B repeats positions 4 and 5 as context, but those repeated B states are discarded; the retained B states begin at position 6. Concatenating the kept A and B states restores positions 1 through 8 exactly once before retrieval-span pooling. This one-sided ownership rule is implementation-specific, and overlap does not recreate one full-document encoder pass.</figcaption>
+</figure>
+
+<p>This is not permission to improvise a duplicate rule. A different implementation that averages overlap states, chooses centered states, or emits window-local chunk vectors is a different algorithm and should be documented and evaluated as such. Reserve capacity for instruction and special tokens, prevent tokenizer truncation, and ensure every pooled span is fully covered. Overlap reduces one boundary problem; it does not create global context. Long inputs also cost more to encode because transformer attention and intermediate activations grow with sequence length. Measure indexing throughput and peak memory with the actual model and window size.</p>
+<h2 id="related-techniques-are-not-synonyms">Related techniques are not synonyms</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Technique</th>
+          <th>Context mechanism</th>
+          <th>Stored representation</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Naive overlapping chunks</td>
+          <td>Repeats neighboring text in independently encoded chunks</td>
+          <td>One vector per overlapping chunk</td>
+      </tr>
+      <tr>
+          <td>Late chunking</td>
+          <td>Contextualizes a longer encoder input, then pools smaller spans</td>
+          <td>One vector per pooled span</td>
+      </tr>
+      <tr>
+          <td>Contextual text augmentation</td>
+          <td>Adds generated or extracted context to chunk text before embedding</td>
+          <td>Usually one vector per augmented chunk</td>
+      </tr>
+      <tr>
+          <td>ColBERT-style late interaction</td>
+          <td>Keeps multiple token vectors and scores them with query-time MaxSim</td>
+          <td>Multiple vectors per passage</td>
+      </tr>
+  </tbody>
+</table>
+<p>Late chunking and ColBERT&rsquo;s “late interaction” share a word, not an operation. ColBERT retains token-level vectors for query-time comparison; late chunking pools contextual token states into a single vector per retrieval chunk. See the <a href="https://arxiv.org/abs/2004.12832">ColBERT paper</a> for that separate design.</p>
+<h2 id="how-to-evaluate-it-on-your-corpus">How to evaluate it on your corpus</h2>
+<p>Do not evaluate late chunking by hand-picking positive and negative words and asking whether absolute cosine scores moved in a preferred direction. Evaluate the retrieval system you intend to deploy.</p>
+<ol>
+<li>Freeze a document corpus, queries, and relevance judgments.</li>
+<li>Freeze the embedding model and tokenizer revisions, instructions, chunker, boundaries, and query encoding.</li>
+<li>Decide whether the target is a context-only ablation or an end-to-end protocol comparison. For a context-only ablation, hold fixed input IDs, including instructions and special tokens, position and token-type inputs, pooled positions, pooling, and normalization, and vary only cross-span context or attention. Merely excluding special-token states from the mean is insufficient because those tokens can still influence content-token states. Otherwise, disclose every additional protocol difference.</li>
+<li>Compare ranking metrics such as nDCG@10, Recall@k, and MRR at the query level.</li>
+<li>Report uncertainty over defensible units such as queries or datasets, preserving known grouping and dependence.</li>
+<li>Report indexing time, peak memory, index size, and query latency.</li>
+<li>Stratify by document length, chunk size, cross-chunk dependency, and irrelevant surrounding context.</li>
+<li>Inspect failures. A mean gain can hide queries that regress badly.</li>
+</ol>
+<p>For a production decision, the relevant quantity is the control-relative retrieval change on representative data, not whether one illustrative cosine similarity increased.</p>
+<h2 id="decision-checklist">Decision checklist</h2>
+<p>Late chunking is a plausible candidate when:</p>
+<ul>
+<li>useful context often lives outside the target retrieval chunk;</li>
+<li>the embedding model exposes token states and a compatible pooling recipe;</li>
+<li>several retrieval chunks fit inside one practical encoder window; and</li>
+<li>additional indexing cost is acceptable while query-time vector search stays unchanged.</li>
+</ul>
+<p>Prefer a simpler baseline, or at least expect a smaller gain, when:</p>
+<ul>
+<li>chunks are already self-contained;</li>
+<li>surrounding text is mostly irrelevant;</li>
+<li>documents routinely exceed the usable window and local macro-context is insufficient;</li>
+<li>the provider exposes only a pooled embedding endpoint; or</li>
+<li>the evaluation shows no robust ranking benefit for the added indexing cost.</li>
+</ul>
+<h2 id="primary-references">Primary references</h2>
+<ul>
+<li>Michael Günther et al., <a href="https://arxiv.org/abs/2409.04701v3"><em>Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models</em>, v3</a>, 2024.</li>
+<li>Jina AI, <a href="https://github.com/jina-ai/late-chunking/tree/1d3bb02bf091becd0771455e4e7959463935e26c">official Late Chunking implementation, pinned commit</a>.</li>
+<li>Michael Günther et al., <a href="https://arxiv.org/abs/2310.19923"><em>Jina Embeddings 2: 8192-Token General-Purpose Text Embeddings for Long Documents</em></a>, 2023.</li>
+<li>Jina AI, <a href="https://huggingface.co/jinaai/jina-embeddings-v2-small-en/blob/44e7d1d6caec8c883c2d4b207588504d519788d0/README.md"><code>jina-embeddings-v2-small-en</code> model card, pinned revision</a>.</li>
+<li>Nandan Thakur et al., <a href="https://arxiv.org/abs/2104.08663"><em>BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models</em></a>, 2021.</li>
+<li>David Wadden et al., <a href="https://arxiv.org/abs/2004.14974"><em>Fact or Fiction: Verifying Scientific Claims</em></a>, 2020; see also the <a href="https://github.com/allenai/scifact/blob/master/LICENSE.md">SciFact data license notice</a>.</li>
+<li>Omar Khattab and Matei Zaharia, <a href="https://arxiv.org/abs/2004.12832"><em>ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT</em></a>, 2020.</li>
+</ul>
+
+            </div>
+
+            <footer class="post-footer">
+
+                <div class="post-transparency">
+                    <div class="post-transparency-label">Public source &amp; edit history</div>
+                    <p>This Deep Dive is rendered from plain-text source in
+                    <a href="https://github.com/praxagent/praxagent-ai" rel="noopener">praxagent/praxagent-ai</a>.
+                    Every revision is preserved in the public commit log:
+                    <a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/knowledge-base/deep-dives/late-chunking/index.md" rel="noopener">view this page's edit history</a>.</p>
+                </div>
+
+                <div class="post-navigation">
+
+                    <a href="/blog/knowledge-base/deep-dives/" class="back-to-blog">← Deep Dives</a>
+
+                    <a href="/blog/knowledge-base/" class="back-to-blog">Knowledge Base</a>
+                    <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+
+    </main>
+
+    <footer class="footer footer-compact">
+        <div class="container">
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
+            </div>
+            <div class="footer-compact-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/blog/script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tables = document.querySelectorAll('.post-body table');
+            tables.forEach((table, index) => {
+                if (table.parentElement?.classList.contains('table-scroll')) return;
+
+                const scroller = document.createElement('div');
+                scroller.className = 'table-scroll';
+                scroller.setAttribute('aria-label', `Scrollable data table ${index + 1}`);
+                table.parentNode.insertBefore(scroller, table);
+                scroller.appendChild(table);
+
+                const updateScrollableState = () => {
+                    const isScrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+                    scroller.classList.toggle('is-scrollable', isScrollable);
+                    if (isScrollable) {
+                        scroller.setAttribute('role', 'region');
+                        scroller.setAttribute('tabindex', '0');
+                    } else {
+                        scroller.removeAttribute('role');
+                        scroller.removeAttribute('tabindex');
+                    }
+                };
+
+                requestAnimationFrame(updateScrollableState);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(updateScrollableState).observe(scroller);
+                } else {
+                    window.addEventListener('resize', updateScrollableState, { passive: true });
+                }
+            });
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                output: "htmlAndMathml"
+            });
+
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
+            codeBlocks.forEach(pre => {
+                const button = document.createElement('button');
+                button.className = 'copy-code-button';
+                button.innerHTML = '📋 Copy';
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+
+                button.addEventListener('click', () => {
+                    const code = pre.querySelector('code');
+                    const text = code ? code.textContent : pre.textContent;
+
+                    navigator.clipboard.writeText(text).then(() => {
+                        const originalText = button.innerHTML;
+                        button.innerHTML = '✅ Copied!';
+                        button.classList.add('copied');
+
+                        setTimeout(() => {
+                            button.innerHTML = originalText;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            const originalText = button.innerHTML;
+                            button.innerHTML = '✅ Copied!';
+                            button.classList.add('copied');
+
+                            setTimeout(() => {
+                                button.innerHTML = originalText;
+                                button.classList.remove('copied');
+                            }, 2000);
+                        } catch (err) {
+                            console.error('Fallback copy failed: ', err);
+                        }
+                        document.body.removeChild(textArea);
+                    });
+                });
+
+                pre.appendChild(button);
+            });
+        });
+    </script>
+
+</body>
+</html>

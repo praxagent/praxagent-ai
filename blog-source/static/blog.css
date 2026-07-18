@@ -332,36 +332,6 @@ main,
     white-space: normal;
 }
 
-.knowledge-glossary-name {
-    display: inline-flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.65rem;
-}
-
-.pro-reviewed-badge {
-    display: inline-flex;
-    align-items: center;
-    min-height: 1.4rem;
-    padding: 0.18rem 0.45rem;
-    border: 1px solid var(--border-secondary);
-    border-color: color-mix(in srgb, var(--sky, #4B6787) 55%, transparent);
-    color: var(--sky, #4B6787);
-    background: var(--bg-secondary);
-    background: color-mix(in srgb, var(--sky, #4B6787) 7%, transparent);
-    font-family: var(--font-mono, 'JetBrains Mono', monospace);
-    font-size: 0.58rem;
-    font-weight: 600;
-    line-height: 1;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    white-space: nowrap;
-}
-
-.reference-review-status {
-    margin-top: 0.85rem;
-}
-
 .knowledge-back {
     display: inline-flex;
     color: var(--sky, #4B6787);
@@ -986,6 +956,15 @@ main,
     overscroll-behavior-x: contain;
 }
 
+.post-body pre.compact-code {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    contain: none;
+    padding: 0.9rem 1.1rem;
+    margin: 0.75rem auto 1.5rem;
+}
+
 .post-body .katex-display {
     overflow-x: auto;
     overflow-y: hidden;
@@ -1510,6 +1489,15 @@ main,
 
 .katex {
     font-size: 1.1em;
+}
+
+/* Keep closing punctuation attached to the inline expression it follows. */
+.post-body .katex::after {
+    content: "\2060";
+}
+
+.post-body .katex-display .katex::after {
+    content: none;
 }
 
 /* Post lead (hook paragraph above the TOC) */

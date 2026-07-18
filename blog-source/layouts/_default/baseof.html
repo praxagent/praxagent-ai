@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ if .IsHome }}praxagent Research Notes{{ else if .Title }}{{ .Title }} - praxagent Research Notes{{ else }}praxagent Research Notes{{ end }}</title>
+{{ $siteLabel := "praxagent Research Notes" }}
+{{ if eq .Section "knowledge-base" }}{{ $siteLabel = "praxagent Knowledge Base" }}{{ end }}
+    <title>{{ if .IsHome }}{{ $siteLabel }}{{ else if .Title }}{{ .Title }} - {{ $siteLabel }}{{ else }}{{ $siteLabel }}{{ end }}</title>
     {{ $desc := .Site.Params.description }}
     {{ if .Params.summary }}{{ $desc = .Params.summary }}{{ else if .Description }}{{ $desc = .Description }}{{ end }}
     {{ $ogImage := "https://praxagent.ai/assets/praxagent_stochastic_mountain.png" }}
@@ -21,7 +23,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="{{ $canonical }}">
     <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
-    <meta property="og:site_name" content="praxagent Research Notes">
+    <meta property="og:site_name" content="{{ $siteLabel }}">
     <meta property="og:title" content="{{ if .Title }}{{ .Title }}{{ else }}praxagent Research Notes{{ end }}">
     <meta property="og:description" content="{{ $desc }}">
     <meta property="og:url" content="{{ $canonical }}">
@@ -40,7 +42,7 @@
     <link rel="stylesheet" href="{{ "blog.css" | relURL }}">
     <link rel="stylesheet" href="{{ "katex.min.css" | relURL }}">
     <script src="https://unpkg.com/feather-icons"></script>
-{{ if or .IsPage (eq .Section "references") }}
+{{ if or .IsPage (eq .Section "knowledge-base") }}
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <script type="module">
@@ -63,11 +65,11 @@
                     <span class="logo-text">praxagent</span>
                 </a>
             </div>
-{{ $onKnowledgeBase := eq .Section "references" }}
+{{ $onKnowledgeBase := eq .Section "knowledge-base" }}
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link{{ if not $onKnowledgeBase }} active{{ end }}">Research Notes</a>
-                <a href="{{ "references/" | relURL }}" class="nav-link{{ if $onKnowledgeBase }} active{{ end }}">Knowledge Base</a>
+                <a href="{{ "knowledge-base/" | relURL }}" class="nav-link{{ if $onKnowledgeBase }} active{{ end }}">Knowledge Base</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -93,7 +95,7 @@
         <div class="mobile-menu-content">
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link{{ if not $onKnowledgeBase }} active{{ end }}">Research Notes</a>
-            <a href="{{ "references/" | relURL }}" class="mobile-nav-link{{ if $onKnowledgeBase }} active{{ end }}">Knowledge Base</a>
+            <a href="{{ "knowledge-base/" | relURL }}" class="mobile-nav-link{{ if $onKnowledgeBase }} active{{ end }}">Knowledge Base</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -123,7 +125,7 @@
                 <nav aria-label="Footer navigation">
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
-                    <a href="{{ "references/" | relURL }}">Knowledge Base</a>
+                    <a href="{{ "knowledge-base/" | relURL }}">Knowledge Base</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
@@ -138,7 +140,7 @@
     <script>
       feather.replace()
     </script>
-{{ if or .IsPage (eq .Section "references") }}
+{{ if or .IsPage (eq .Section "knowledge-base") }}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const tables = document.querySelectorAll('.post-body table');

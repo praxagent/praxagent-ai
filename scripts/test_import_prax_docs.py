@@ -188,6 +188,7 @@ class ImportPraxDocsTests(unittest.TestCase):
         self.assertTrue(root.startswith("+++\ntitle = \"Prax\"\n"))
         self.assertIn('summary = "A teaching harness for dependable agents."', root)
         self.assertIn('layout = "prax-docs-section"', root)
+        self.assertIn('aliases = ["/references/prax/"]', root)
         self.assertIn("weight = 30", root)
         self.assertIn('card_label = "Documentation"', root)
         self.assertIn('card_title = "Prax Harness"', root)
@@ -200,11 +201,11 @@ class ImportPraxDocsTests(unittest.TestCase):
         self.assertNotIn("# Prax", root)
         self.assertNotIn("<div", root)
         self.assertNotIn("<img", root)
-        self.assertIn("[Agents](/blog/references/prax/agents/)", root)
+        self.assertIn("[Agents](/blog/knowledge-base/prax/agents/)", root)
         self.assertIn(
-            "[Checkpointing](/blog/references/prax/agents/checkpointing/#save-now)", root
+            "[Checkpointing](/blog/knowledge-base/prax/agents/checkpointing/#save-now)", root
         )
-        self.assertIn("[Local section](/blog/references/prax/#quick-start)", root)
+        self.assertIn("[Local section](/blog/knowledge-base/prax/#quick-start)", root)
         self.assertNotIn("Academic foundations for agentic workflow design", root)
         self.assertNotIn("[Research]", root)
         self.assertIn("## Memory System", root)
@@ -236,11 +237,14 @@ class ImportPraxDocsTests(unittest.TestCase):
 
         leaf = (self.content / "agents/checkpointing.md").read_text(encoding="utf-8")
         self.assertIn('layout = "prax-doc"', leaf)
-        self.assertNotIn("# Checkpointing", leaf)
-        self.assertIn("[← Agents](/blog/references/prax/agents/)", leaf)
-        self.assertIn("[Security](/blog/references/prax/security/#defaults)", leaf)
         self.assertIn(
-            "[**security\nguide**](/blog/references/prax/security/#defaults)", leaf
+            'aliases = ["/references/prax/agents/checkpointing/"]', leaf
+        )
+        self.assertNotIn("# Checkpointing", leaf)
+        self.assertIn("[← Agents](/blog/knowledge-base/prax/agents/)", leaf)
+        self.assertIn("[Security](/blog/knowledge-base/prax/security/#defaults)", leaf)
+        self.assertIn(
+            "[**security\nguide**](/blog/knowledge-base/prax/security/#defaults)", leaf
         )
         self.assertIn(
             f"[`configuration`](https://github.com/praxagent/prax/blob/{self.fixture.commit}/config.py)",
@@ -267,19 +271,19 @@ class ImportPraxDocsTests(unittest.TestCase):
         setup = (self.content / "guides/setup.md").read_text(encoding="utf-8")
         memory = (self.content / "infrastructure/memory.md").read_text(encoding="utf-8")
         self.assertIn(
-            "[Channels](/blog/references/prax/security/configuration/#channel-setup)", guides
+            "[Channels](/blog/knowledge-base/prax/security/configuration/#channel-setup)", guides
         )
         self.assertIn(
             f"[the self-modification plan](https://github.com/praxagent/prax/blob/{self.fixture.commit}/docs/SELF_MODIFY_PLAN.md)",
             extending,
         )
-        self.assertIn("[Quick Start](/blog/references/prax/#quick-start)", setup)
+        self.assertIn("[Quick Start](/blog/knowledge-base/prax/#quick-start)", setup)
         self.assertIn(
-            "[`PluginCapabilities`](/blog/references/prax/security/plugin-trust/#plugin-security)",
+            "[`PluginCapabilities`](/blog/knowledge-base/prax/security/plugin-trust/#plugin-security)",
             extending,
         )
         self.assertIn(
-            "[Decay](/blog/references/prax/infrastructure/memory/#memory-decay-dual-time--interaction)",
+            "[Decay](/blog/knowledge-base/prax/infrastructure/memory/#memory-decay-dual-time--interaction)",
             memory,
         )
 

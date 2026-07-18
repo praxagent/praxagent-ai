@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="500" viewBox="0 0 760 500" role="img" aria-labelledby="lateChunkingOrderTitle lateChunkingOrderDesc">
+  <title id="lateChunkingOrderTitle">Late chunking changes the order of encoding and span pooling</title>
+  <desc id="lateChunkingOrderDesc">Two pipelines use the same three Berlin sentence spans. The naive pipeline splits first and encodes each span alone. The late pipeline encodes the full in-window document first and then pools token states within the same three spans. Both store one vector per span.</desc>
+  <defs>
+    <marker id="lateChunkingOrderArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#A67C52"/>
+    </marker>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:15px;font-weight:700}
+      .h{font-size:13px;font-weight:700}
+      .s{font-size:12px}
+      .m{font-size:11px;fill:#5A544C}
+      .lane{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.5}
+      .a{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.5}
+      .b{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.5}
+      .c{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+      .processor{fill:#EDE8E1;stroke:#7F786D;stroke-width:1.6}
+      .flow{fill:none;stroke:#A67C52;stroke-width:1.8;marker-end:url(#lateChunkingOrderArrow)}
+      .boundary{stroke:#7F786D;stroke-width:1.4;stroke-dasharray:4 4}
+      .vector{fill:#2C2924}
+    </style>
+  </defs>
+
+  <rect width="760" height="500" fill="#F7F4F0"/>
+  <text x="24" y="29" class="t title">Same chunk boundaries, different context at encoding time</text>
+  <text x="24" y="49" class="t m">Both pipelines finish with one stored vector for each of the same three spans.</text>
+
+  <rect x="24" y="74" width="712" height="168" rx="14" class="lane"/>
+  <text x="42" y="101" class="t h">NAIVE: SPLIT BEFORE ENCODING</text>
+  <text x="42" y="120" class="t m">Each encoder input is isolated from the other spans.</text>
+
+  <rect x="42" y="143" width="152" height="62" rx="9" class="a"/>
+  <text x="118" y="167" text-anchor="middle" class="t h">SPAN A</text>
+  <text x="118" y="188" text-anchor="middle" class="t s">“Berlin...”</text>
+  <rect x="205" y="143" width="152" height="62" rx="9" class="b"/>
+  <text x="281" y="167" text-anchor="middle" class="t h">SPAN B</text>
+  <text x="281" y="188" text-anchor="middle" class="t s">“Its population...”</text>
+  <rect x="368" y="143" width="152" height="62" rx="9" class="c"/>
+  <text x="444" y="167" text-anchor="middle" class="t h">SPAN C</text>
+  <text x="444" y="188" text-anchor="middle" class="t s">“The city...”</text>
+
+  <path class="flow" d="M531 174 H568"/>
+  <rect x="576" y="133" width="93" height="82" rx="10" class="processor"/>
+  <text x="622.5" y="158" text-anchor="middle" class="t h">3 INPUTS</text>
+  <text x="622.5" y="180" text-anchor="middle" class="t s">encode each</text>
+  <text x="622.5" y="198" text-anchor="middle" class="t s">pool alone</text>
+  <path class="flow" d="M669 174 H698"/>
+  <circle cx="710" cy="151" r="5" class="vector"/>
+  <circle cx="710" cy="174" r="5" class="vector"/>
+  <circle cx="710" cy="197" r="5" class="vector"/>
+
+  <rect x="24" y="258" width="712" height="184" rx="14" class="lane"/>
+  <text x="42" y="285" class="t h">LATE: ENCODE BEFORE SPAN POOLING</text>
+  <text x="42" y="304" class="t m">One in-window input contextualizes tokens across the dashed boundaries.</text>
+
+  <rect x="42" y="327" width="478" height="70" rx="9" class="a"/>
+  <rect x="201" y="327" width="159" height="70" fill="#F3E8E0"/>
+  <rect x="360" y="327" width="160" height="70" fill="#EAF1E5"/>
+  <line x1="201" y1="327" x2="201" y2="397" class="boundary"/>
+  <line x1="360" y1="327" x2="360" y2="397" class="boundary"/>
+  <text x="121.5" y="353" text-anchor="middle" class="t h">SPAN A</text>
+  <text x="121.5" y="376" text-anchor="middle" class="t s">“Berlin...”</text>
+  <text x="280.5" y="353" text-anchor="middle" class="t h">SPAN B</text>
+  <text x="280.5" y="376" text-anchor="middle" class="t s">“Its population...”</text>
+  <text x="440" y="353" text-anchor="middle" class="t h">SPAN C</text>
+  <text x="440" y="376" text-anchor="middle" class="t s">“The city...”</text>
+
+  <path class="flow" d="M531 362 H568"/>
+  <rect x="576" y="321" width="93" height="82" rx="10" class="processor"/>
+  <text x="622.5" y="346" text-anchor="middle" class="t h">1 INPUT</text>
+  <text x="622.5" y="368" text-anchor="middle" class="t s">encode jointly,</text>
+  <text x="622.5" y="386" text-anchor="middle" class="t s">pool by span</text>
+  <path class="flow" d="M669 362 H698"/>
+  <circle cx="710" cy="339" r="5" class="vector"/>
+  <circle cx="710" cy="362" r="5" class="vector"/>
+  <circle cx="710" cy="385" r="5" class="vector"/>
+
+  <rect x="24" y="458" width="712" height="26" rx="8" fill="#EAF1E5" stroke="#6F8D5E" stroke-width="1.4"/>
+  <text x="380" y="476" text-anchor="middle" class="t s">Earlier “Berlin” can influence later token states; that availability is not proof of reference resolution.</text>
+</svg>

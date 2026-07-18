@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
     <title>Open-sourcing (and Auditing) a Jacobian Lens for Qwen3.5-397B - praxagent Research Notes</title>
     
     
@@ -65,7 +67,7 @@
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link active">Research Notes</a>
-                <a href="/blog/references/" class="nav-link">Knowledge Base</a>
+                <a href="/blog/knowledge-base/" class="nav-link">Knowledge Base</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -91,7 +93,7 @@
         <div class="mobile-menu-content">
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link active">Research Notes</a>
-            <a href="/blog/references/" class="mobile-nav-link">Knowledge Base</a>
+            <a href="/blog/knowledge-base/" class="mobile-nav-link">Knowledge Base</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -253,7 +255,12 @@
         
     </div>
     <div class="panel-content">
-        <strong>AI-use disclosure &amp; disclaimer.</strong> Generative-AI tools were used during drafting and editorial revision; the author framed the questions, chose the analyses, and reviewed the outputs. This post is shared in the spirit of open-source research: an independent, non-peer-reviewed note published so the community can inspect, reproduce, and correct it. The data, code, and text are provided as-is, without warranty of any kind; errors are possible despite good-faith effort. Verify against the released artifacts before relying on anything here, and use at your own risk. Corrections are welcome.
+        <strong>AI-use disclosure.</strong> Generative-AI tools helped implement, audit, execute,
+interpret, visualize, review, and draft this study. The author selected the
+research question, authorized the compute, has inspected the artifacts, and is
+responsible for the final text and claims. This is an independent,
+non-peer-reviewed Research Note. Verify numbers against the released receipts
+before relying on them.
     </div>
 </div>
 
@@ -1900,7 +1907,7 @@ workspace holds deception/manipulation concepts while reading a lexically-neutra
 question about detecting them. The earlier ~4,000 rank was punctuation position, not
 a null.</li>
 <li><strong>Digit meta-prompt</strong>, <code>Digits</code>/<code>DIG</code> dominate late-band; <code>digit</code> rank <strong>18</strong>.
-Complements the free-geometry finding that digit features are deep/<a href="/blog/references/motor-layer/" class="ref-term">motor-local</a> (<a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/d7ef84518135ee4c2d350a4b434a760e043114e9/projects/jacobian-lens-and-identifiability/experiments/lens_demo/digit_geometry_397b.json">digit geometry receipt</a>).</li>
+Complements the free-geometry finding that digit features are deep/<a href="/blog/knowledge-base/motor-layer/" class="ref-term">motor-local</a> (<a href="https://github.com/praxagent/jacobian-lens-research-202607a/blob/d7ef84518135ee4c2d350a4b434a760e043114e9/projects/jacobian-lens-and-identifiability/experiments/lens_demo/digit_geometry_397b.json">digit geometry receipt</a>).</li>
 <li><strong>Meristems in dicots</strong>, <code>tissue</code> <strong>#15</strong>, <code>growth</code> #70, <code>vascular</code> #152, <code>root</code> #266:
 the right botanical neighborhood (apical/lateral meristems in tips + vascular cambium),
 not a textbook dump of the answer string.</li>
@@ -1971,7 +1978,7 @@ that follow-up. Audit the raw JSON in the
 <ul>
 <li><strong>Act 1 failed its gate and was dropped, per pre-registration, before the 397B ran.</strong> Direct riddles (&ldquo;the striped African horse is the…&rdquo;) scored 0.31 on the gate model, <em>exactly tied with the logit-lens</em>. When the concept is the model&rsquo;s next token, you don&rsquo;t need a Jacobian lens to see it. The lens&rsquo;s distinctive power is <strong>intermediate</strong> content, which is precisely Anthropic&rsquo;s own characterization. We report the drop because an audit that hides its dead ends is not an audit.</li>
 <li><strong>Rates are lower at 397B than at 27B</strong> (bridge hit 0.30 vs 0.85 with a Neuronpedia-fit lens there, same 248k vocabulary, so that&rsquo;s not it). A common guess is &ldquo;they fit on more prompts,&rdquo; and here the numbers deserve care. Neuronpedia&rsquo;s pipeline <em>requests</em> 1000 prompts but <strong>early-stops on a matrix-stability criterion</strong>, with per-lens thresholds: the <strong>qwen3.5-27b lens used in this comparison fitted 672 prompts</strong> at <code>stop_at_delta: 0.002</code> (<a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/qwen3.5-27b/jlens/Salesforce-wikitext/config.yaml">pinned config</a>), while their Llama-3.3-70B lens stopped at 125 under a looser 0.012 (<a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext/config.yaml">pinned config</a>). So the honest contrast is <strong>24 vs 672, a 28× fit-size gap</strong>, which keeps fit-size a <em>strong</em> candidate for the readout-rate difference.</li>
-<li><strong>Two different things get called &ldquo;convergence,&rdquo; and they should not be conflated.</strong> <em>Matrix convergence</em> is Neuronpedia&rsquo;s criterion: the running-mean Jacobians stop changing. Their 70B curve follows mean-relative-change ≈ 1.2/n, at n=24 it reads <strong>0.048</strong>, 4× above even their looser threshold (sibling <a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext/Llama-3.3-70B-Instruct_convergence.csv"><code>*_convergence.csv</code></a> has the curve). <em>Statistic convergence</em> is what our n-scaling showed: the <strong>band statistic</strong> plateaus by n≈16, long before the matrix settles. Our n=24 lens is converged in the second sense only; its own mean-relative-change at n=24 was not logged (≈0.05 by 1/n extrapolation (an estimate, not a measurement). That is exactly why this release leans on <em>functional</em> evidence) the <a href="/blog/references/motor-layer/" class="ref-term">motor-convergence</a> gate (where our n=24 lens beats the architecture-matched Neuronpedia lens), ignition, and this trial&rsquo;s controls, rather than matrix-delta convergence. Other candidates we cannot yet separate: the 397B&rsquo;s sparse 512-expert routing, and template/scale effects. The clean test is still to <strong>extend this same lens</strong> (exact warm-start, see Reproduce) toward its own matrix convergence and re-run act 2. What&rsquo;s not in doubt: the readout effect is large against both controls at n=24.</li>
+<li><strong>Two different things get called &ldquo;convergence,&rdquo; and they should not be conflated.</strong> <em>Matrix convergence</em> is Neuronpedia&rsquo;s criterion: the running-mean Jacobians stop changing. Their 70B curve follows mean-relative-change ≈ 1.2/n, at n=24 it reads <strong>0.048</strong>, 4× above even their looser threshold (sibling <a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext/Llama-3.3-70B-Instruct_convergence.csv"><code>*_convergence.csv</code></a> has the curve). <em>Statistic convergence</em> is what our n-scaling showed: the <strong>band statistic</strong> plateaus by n≈16, long before the matrix settles. Our n=24 lens is converged in the second sense only; its own mean-relative-change at n=24 was not logged (≈0.05 by 1/n extrapolation (an estimate, not a measurement). That is exactly why this release leans on <em>functional</em> evidence) the <a href="/blog/knowledge-base/motor-layer/" class="ref-term">motor-convergence</a> gate (where our n=24 lens beats the architecture-matched Neuronpedia lens), ignition, and this trial&rsquo;s controls, rather than matrix-delta convergence. Other candidates we cannot yet separate: the 397B&rsquo;s sparse 512-expert routing, and template/scale effects. The clean test is still to <strong>extend this same lens</strong> (exact warm-start, see Reproduce) toward its own matrix convergence and re-run act 2. What&rsquo;s not in doubt: the readout effect is large against both controls at n=24.</li>
 <li><strong>Showcase selection matters, and so does the full matrix.</strong> China (#5 vs logit #8,153) and Japan (#3 vs #43) are clean discriminating wins. Kenya (#11) is a real bridge readout that still fails as a lens showcase because identity ranks it #1. France (#262) and Spain (#301) are weak despite being large, familiar countries. A “more dominant country → better readout” story does <strong>not</strong> fit this set (GDP/population correlations ≈ 0).</li>
 <li><strong>This is one model, one lineage, one trivia-bridge template, twenty items, text-only.</strong> It&rsquo;s a narrow audit, not a survey, the <a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit">pinned 35-model survey is here</a>. Qwen3.5-397B-A17B is multimodal; we did not audit the vision encoder.</li>
 </ul>
@@ -1999,7 +2006,7 @@ future packaging.</li>
 <hr>
 <h2 id="what-stronger-evidence-would-look-like">What Stronger Evidence Would Look Like</h2>
 <ol>
-<li><strong>Extend the 397B lens</strong> toward matrix convergence, first measured deltas by n≈30–50 (~$70–190; <strong>warm-start underway</strong>), Anthropic&rsquo;s ~100-prompt &ldquo;usable&rdquo; regime / 70B-threshold parity near n≈100, and the discriminating <strong>n≈672</strong> target for the 27B rate-gap test if budget allows (exact warm-start; see cost table in Reproduce). Report convergence diagnostics at each milestone. Where the evidence stands: for the 27B comparison, fit-size is a <strong>strong</strong> candidate (24 vs 672 is a 28× gap); the counterweights are (a) our n-scaling curve (the band statistic plateaus by n≈16), and (b) <a href="/blog/references/motor-layer/" class="ref-term">motor-convergence</a>, where the n=24 lens already matches or beats the architecture-matched Neuronpedia lens. Neither counterweight measures readout-rate directly, so the hypothesis stays live until the extension runs.</li>
+<li><strong>Extend the 397B lens</strong> toward matrix convergence, first measured deltas by n≈30–50 (~$70–190; <strong>warm-start underway</strong>), Anthropic&rsquo;s ~100-prompt &ldquo;usable&rdquo; regime / 70B-threshold parity near n≈100, and the discriminating <strong>n≈672</strong> target for the 27B rate-gap test if budget allows (exact warm-start; see cost table in Reproduce). Report convergence diagnostics at each milestone. Where the evidence stands: for the 27B comparison, fit-size is a <strong>strong</strong> candidate (24 vs 672 is a 28× gap); the counterweights are (a) our n-scaling curve (the band statistic plateaus by n≈16), and (b) <a href="/blog/knowledge-base/motor-layer/" class="ref-term">motor-convergence</a>, where the n=24 lens already matches or beats the architecture-matched Neuronpedia lens. Neither counterweight measures readout-rate directly, so the hypothesis stays live until the extension runs.</li>
 <li><strong>Pre-register an act-2 v2 benchmark <em>before</em> any extension milestone reports</strong>, then run it at <strong>n=24 first</strong> as the baseline, and again at each fit-size milestone on the <em>same</em> instrument. Commitments: <strong>≥200 items</strong> across <strong>≥4 template families</strong> (not only capital-of-country); alias/canonicalization lists for leakage (Nippon / Holland-class); a <strong>fixed-layer primary endpoint</strong> chosen from the 27B gate data and frozen before the 397B eval, with best-of-band demoted to sensitivity analysis; <strong>paired sign / Wilcoxon</strong> as the primary statistics (hit-rate secondary).</li>
 <li><strong>Save full top-k J-lens token lists</strong> (not just ranks) for showcase items, word-cloud / vocabulary fingerprints.</li>
 <li><strong>External replication invitation</strong>, freeze a citeable bundle (prompts, scoring, hash, receipts); DOI / Zenodo snapshot when packaging. Author-run isolation is already disclosed; an outside lab is a community ask, not something we can run on ourselves.
@@ -2106,7 +2113,7 @@ Neuronpedia&rsquo;s ~0.056 reference from n=16 on. This is a convergence curve o
 observed plateau. For the emergence/band measurements in our
 <a href="https://github.com/praxagent/jacobian-lens-research-202607a/tree/fa66e53a1eacb99b2d4a92c966c5cb4dd992bd65/blog/jspace-audit">pinned 35-model audit</a>,
 fit-size is therefore not the observed bottleneck for this statistic.</li>
-<li><strong>On functional fidelity, our n=24 lens is already in-family with the high-n lenses.</strong> On the <a href="/blog/references/motor-layer/" class="ref-term">motor-layer</a> convergence eval it scores <strong>0.5625</strong>, inside the range set by Neuronpedia&rsquo;s own lenses (qwen3-4b <strong>0.722</strong>, architecture-matched qwen3.5-0.8b <strong>0.549</strong>), and it <em>beats</em> the architecture-matched one. A drastically under-fit lens would fail that eval; ours passes it.</li>
+<li><strong>On functional fidelity, our n=24 lens is already in-family with the high-n lenses.</strong> On the <a href="/blog/knowledge-base/motor-layer/" class="ref-term">motor-layer</a> convergence eval it scores <strong>0.5625</strong>, inside the range set by Neuronpedia&rsquo;s own lenses (qwen3-4b <strong>0.722</strong>, architecture-matched qwen3.5-0.8b <strong>0.549</strong>), and it <em>beats</em> the architecture-matched one. A drastically under-fit lens would fail that eval; ours passes it.</li>
 <li><strong>The paired design controls item difficulty, not fit-size noise.</strong> Japan is compared
 with Japan under every transport, and every method gets the same layer search and
 scoring code. That removes a large source of between-item variation. But identity does
@@ -2554,7 +2561,7 @@ beats identity on 18 of 20 ranks.</li>
                 <nav aria-label="Footer navigation">
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
-                    <a href="/blog/references/">Knowledge Base</a>
+                    <a href="/blog/knowledge-base/">Knowledge Base</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>

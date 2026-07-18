@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="400"
+     viewBox="0 0 760 400" role="img"
+     aria-labelledby="accOrderTitle accOrderDesc">
+  <title id="accOrderTitle">Why the same operation is bit-stable on CPU but drifts on GPU</title>
+  <desc id="accOrderDesc">Left: a CPU reduction adds the same contributions in a fixed order every run, so repeated runs produce identical bits. Right: a GPU kernel using atomic additions lets many threads update the same coordinate in an order that can change between runs. Because floating-point addition is not associative, a different order can produce a slightly different rounded sum, typically at the scale of the last representable bit.</desc>
+  <rect width="760" height="400" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:15px;font-weight:700}
+    .h{font-size:13px;font-weight:700}
+    .s{font-size:12px}
+    .m{font-size:11px;fill:#5A544C}
+    .mono{font-family:'JetBrains Mono',monospace;font-size:11px}
+    .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+    .cpuBox{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.4}
+    .gpuBox{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.4}
+    .cpuText{fill:#4B6787}
+    .gpuText{fill:#A67C52}
+    .arrow{stroke:#7F786D;stroke-width:1.5;fill:none}
+    .footer{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+  </style>
+
+  <text x="24" y="28" class="t title">Same inputs, same operation: why one path is bit-stable and one drifts</text>
+  <text x="24" y="46" class="t m">Floating-point addition is not associative: (a + b) + c can round differently from a + (b + c).</text>
+
+  <!-- Left card: CPU -->
+  <rect x="24" y="60" width="348" height="270" rx="12" class="card"/>
+  <text x="40" y="86" class="t h cpuText">CPU reduction: fixed order</text>
+  <text x="40" y="104" class="t m">The same contributions are added in the same</text>
+  <text x="40" y="118" class="t m">sequence on every run.</text>
+
+  <rect x="40" y="132" width="80" height="26" rx="4" class="cpuBox"/>
+  <text x="80" y="149" text-anchor="middle" class="t mono cpuText">a</text>
+  <rect x="130" y="132" width="80" height="26" rx="4" class="cpuBox"/>
+  <text x="170" y="149" text-anchor="middle" class="t mono cpuText">b</text>
+  <rect x="220" y="132" width="80" height="26" rx="4" class="cpuBox"/>
+  <text x="260" y="149" text-anchor="middle" class="t mono cpuText">c</text>
+
+  <path class="arrow" d="M 80 158 L 80 186"/>
+  <path class="arrow" d="M 170 158 L 170 186 L 96 186" />
+  <rect x="40" y="186" width="120" height="26" rx="4" class="cpuBox"/>
+  <text x="100" y="203" text-anchor="middle" class="t mono cpuText">(a + b)</text>
+  <path class="arrow" d="M 260 158 L 260 240 L 186 240"/>
+  <path class="arrow" d="M 100 212 L 100 240"/>
+  <rect x="40" y="240" width="145" height="26" rx="4" class="cpuBox"/>
+  <text x="112" y="257" text-anchor="middle" class="t mono cpuText">(a + b) + c</text>
+
+  <text x="40" y="296" class="t s cpuText" font-weight="700">Run 1 = Run 2 = Run 3: identical bits</text>
+  <text x="40" y="314" class="t m">Observed in the CPU control: 435/435 exact pairs.</text>
+
+  <!-- Right card: GPU -->
+  <rect x="388" y="60" width="348" height="270" rx="12" class="card"/>
+  <text x="404" y="86" class="t h gpuText">GPU atomic accumulation: order varies</text>
+  <text x="404" y="104" class="t m">Many threads add into the same coordinate; the</text>
+  <text x="404" y="118" class="t m">scheduler decides who lands first, run by run.</text>
+
+  <rect x="404" y="132" width="80" height="26" rx="4" class="gpuBox"/>
+  <text x="444" y="149" text-anchor="middle" class="t mono gpuText">a</text>
+  <rect x="494" y="132" width="80" height="26" rx="4" class="gpuBox"/>
+  <text x="534" y="149" text-anchor="middle" class="t mono gpuText">b</text>
+  <rect x="584" y="132" width="80" height="26" rx="4" class="gpuBox"/>
+  <text x="624" y="149" text-anchor="middle" class="t mono gpuText">c</text>
+
+  <text x="404" y="196" class="t mono gpuText">Run 1: (a + b) + c</text>
+  <text x="404" y="218" class="t mono gpuText">Run 2: (c + a) + b</text>
+  <text x="404" y="240" class="t mono gpuText">Run 3: (b + c) + a</text>
+
+  <text x="404" y="278" class="t s gpuText" font-weight="700">Same inputs, different rounded sums</text>
+  <text x="404" y="296" class="t m">Differences are typically one unit in the last place:</text>
+  <text x="404" y="312" class="t m">observed maxima were exact powers of two.</text>
+
+  <rect x="24" y="346" width="712" height="36" rx="10" class="footer"/>
+  <text x="40" y="369" class="t s">Takeaway: bit-stability tracks the reduction order of the kernel, not the hardware generation or the numeric format.</text>
+</svg>

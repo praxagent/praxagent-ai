@@ -1,0 +1,74 @@
+{
+  "figures": [
+    "fig-scifact-retrieval.svg",
+    "fig-query-deltas.svg"
+  ],
+  "generator": {
+    "path": "reproduce.py",
+    "sha256": "1f6aead6fcc71cf1ab2c6e81dde784ca11671ebc53f9673e064a22409de59c35",
+    "verify": "python3 reproduce.py --verify"
+  },
+  "local_bundle": true,
+  "numbers": [
+    {
+      "appears_as": "300 test queries",
+      "id": "scifact-query-count",
+      "source": "receipts/aggregate.json",
+      "value": 300
+    },
+    {
+      "appears_as": "0.6414",
+      "id": "scifact-naive-ndcg10",
+      "source": "receipts/aggregate.json",
+      "value": 0.6414254895397593
+    },
+    {
+      "appears_as": "0.6610",
+      "id": "scifact-late-ndcg10",
+      "source": "receipts/aggregate.json",
+      "value": 0.6609776646723947
+    },
+    {
+      "appears_as": "0.6389",
+      "id": "scifact-whole-document-ndcg10",
+      "source": "receipts/aggregate.json",
+      "value": 0.6388903593656915
+    },
+    {
+      "appears_as": "+0.0196",
+      "id": "scifact-late-minus-naive",
+      "source": "receipts/aggregate.json",
+      "value": 0.019552175132635588
+    },
+    {
+      "appears_as": "49 improved",
+      "id": "scifact-improved-queries",
+      "source": "receipts/aggregate.json",
+      "value": 49
+    },
+    {
+      "appears_as": "229 tied",
+      "id": "scifact-tied-queries",
+      "source": "receipts/aggregate.json",
+      "value": 229
+    },
+    {
+      "appears_as": "22 worsened",
+      "id": "scifact-worse-queries",
+      "source": "receipts/aggregate.json",
+      "value": 22
+    }
+  ],
+  "receipts": {
+    "ATTRIBUTION.md": "1235f46dda3d155edd5212c654652de72636d71bd37bf4a111d2256c0dd895c6",
+    "fig-query-deltas.receipt.json": "ca1e444b91794b23d94a5ecac1017cc0a58568c8f8f37fa5703008c7c8b60b45",
+    "fig-scifact-retrieval.receipt.json": "8e8f473095b069f614c345b185a13d468edf835479770a6f14d9426ed311e90c",
+    "receipts/aggregate.json": "71bafc1d81fc24ac1d30104e5f28af9b43142430b3ce798b10bd1061f1abb181",
+    "receipts/per-query.csv": "b91c682c7da121af99d1546c0688c00249d8af5310b519ca9d63c3ab422b3a28",
+    "receipts/run.receipt.json": "0c6169622148d3e96eac71aeee1236a1426345cabc21ad58d2bba46e7f9ce561",
+    "receipts/scifact-test-qrels.tsv": "0864bb985e0ca2367ba217977e72004d549054b2b06666ed9d4825ac7c21284c",
+    "receipts/top-10-rankings.jsonl": "6e6e014c8875a517fd739101ae1461e8986675d378eb6ff482dfd5ddc1d955c1",
+    "reproduce.py.lock": "5a6ad830aee2d307b4d845c70e3b23f72f30b27938dcd342881e9d364dd06344"
+  },
+  "schema_version": 1
+}
