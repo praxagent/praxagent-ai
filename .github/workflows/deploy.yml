@@ -48,6 +48,24 @@ jobs:
           test -f blog/knowledge-base/prax/index.html
           test -f blog/references/prax/index.html
           test -f blog/prax-docs/prax-docs-manifest.json
+          # GitHub Pages returns 404 for directories that are not world-traversable.
+          python3 - <<'PY'
+          import stat
+          from pathlib import Path
+
+          for relative in (
+              "blog/knowledge-base/prax",
+              "blog/references/prax",
+              "blog/prax-docs",
+          ):
+              path = Path(relative)
+              mode = path.stat().st_mode
+              print(f"{relative} mode={oct(mode & 0o777)}")
+              if not ((mode & stat.S_IXOTH) and (mode & stat.S_IROTH)):
+                  raise SystemExit(
+                      f"error: {relative} mode {oct(mode & 0o777)} is not world-traversable"
+                  )
+          PY
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

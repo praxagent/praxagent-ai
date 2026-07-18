@@ -14,7 +14,10 @@ Run from this Deep Dive's content directory:
 Reads receipts/grid-sample-divergence.json and writes:
 
 * fig-grid-sample-divergence.png (page bundle)
-* ../../../../static/knowledge-base/deep-dives/bf16-grid-sample-divergence.png
+* ../../../../static/knowledge-base/deep-dives/fp32-grid-sample-divergence.png
+
+The FP32 prefix on the static copy names the measured dtype; the experiment
+does not involve BF16.
 
 Idle-arm values are plotted as solid lines; the background-matmul arm is
 plotted as thin dashed lines in the same color to show the overlap without
@@ -141,7 +144,7 @@ def main() -> None:
     fig.savefig(bundle_png, dpi=PNG_DPI, bbox_inches="tight")
     STATIC.mkdir(parents=True, exist_ok=True)
     fig.savefig(
-        STATIC / "bf16-grid-sample-divergence.png",
+        STATIC / "fp32-grid-sample-divergence.png",
         dpi=PNG_DPI,
         bbox_inches="tight",
     )

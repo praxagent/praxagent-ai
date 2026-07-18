@@ -108,6 +108,12 @@ blog: sync-prax-docs verify-late-chunking ## Compile blog-source/content/posts i
 		--exclude='*' \
 		"$(BLOG_SOURCE)/content/" \
 		"$(BLOG_OUTPUT)/"
+	# rsync -a preserves directory modes. Keep published Prax trees world-
+	# traversable so GitHub Pages can serve them (mode 0700 → 404).
+	chmod -R a+rX \
+		"$(BLOG_OUTPUT)/knowledge-base/prax" \
+		"$(BLOG_OUTPUT)/references/prax" \
+		"$(BLOG_OUTPUT)/prax-docs"
 	$(PYTHON) scripts/copy_blog_docs.py \
 		"$(BLOG_SOURCE)/content/posts" \
 		"$(BLOG_OUTPUT)/posts"

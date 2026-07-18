@@ -768,7 +768,12 @@ class LinkRewriter:
 
 def _make_staging_directory(target: Path) -> Path:
     target.parent.mkdir(parents=True, exist_ok=True)
-    return Path(tempfile.mkdtemp(prefix=f".{target.name}.tmp-", dir=target.parent))
+    # tempfile.mkdtemp defaults to 0o700. GitHub Pages (and the post-Hugo
+    # rsync that mirrors content directories into blog/) cannot publish a
+    # non-world-executable tree, so open the staging root immediately.
+    staging = Path(tempfile.mkdtemp(prefix=f".{target.name}.tmp-", dir=target.parent))
+    staging.chmod(0o755)
+    return staging
 
 
 def _remove_path(path: Path) -> None:
@@ -776,6 +781,15 @@ def _remove_path(path: Path) -> None:
         shutil.rmtree(path)
     elif path.exists() or path.is_symlink():
         path.unlink()
+
+
+def _ensure_world_traversable(path: Path) -> None:
+    """Ensure directories are world-executable/readable for static hosting."""
+
+    if not path.is_dir() or path.is_symlink():
+        return
+    mode = path.stat().st_mode
+    path.chmod(mode | 0o755)
 
 
 def _atomic_replace_directories(replacements: list[tuple[Path, Path]]) -> None:
@@ -791,6 +805,7 @@ def _atomic_replace_directories(replacements: list[tuple[Path, Path]]) -> None:
                 backups.append((backup, target))
         for staging, target in replacements:
             os.replace(staging, target)
+            _ensure_world_traversable(target)
             installed.append((target, staging))
     except BaseException:
         for target, _staging in reversed(installed):

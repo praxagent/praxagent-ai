@@ -159,14 +159,38 @@ def check_json(errors: list[str]) -> None:
             errors.append(f"{path.relative_to(ROOT)}: invalid JSON: {exc}")
 
 
+def _is_world_traversable_dir(path: Path) -> bool:
+    if not path.is_dir():
+        return False
+    mode = path.stat().st_mode
+    return bool(mode & 0o005) and bool(mode & 0o004)
+
+
 def check_prax_docs(errors: list[str]) -> None:
     entry = ROOT / "blog/knowledge-base/prax/index.html"
     manifest_path = ROOT / "blog/prax-docs/prax-docs-manifest.json"
+    publish_dirs = (
+        ROOT / "blog/knowledge-base/prax",
+        ROOT / "blog/references/prax",
+        ROOT / "blog/prax-docs",
+    )
 
     for path in (entry, manifest_path):
         if not path.is_file():
             errors.append(
                 f"{path.relative_to(ROOT)}: missing generated Prax documentation"
+            )
+
+    for directory in publish_dirs:
+        if not directory.is_dir():
+            errors.append(
+                f"{directory.relative_to(ROOT)}: missing generated Prax directory"
+            )
+        elif not _is_world_traversable_dir(directory):
+            errors.append(
+                f"{directory.relative_to(ROOT)}: directory mode "
+                f"{oct(directory.stat().st_mode & 0o777)} is not world-traversable; "
+                "GitHub Pages will 404"
             )
 
     if not manifest_path.is_file():

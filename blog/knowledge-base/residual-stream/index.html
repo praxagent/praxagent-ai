@@ -248,27 +248,41 @@ H_{\ell+1} = U_\ell + \operatorname{MLP}_\ell(N^{\mathrm{mlp}}_\ell(U_\ell)).
                 output: "htmlAndMathml"
             });
 
+            const copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+            const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
             const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
             codeBlocks.forEach(pre => {
+                if (pre.closest('.code-block-frame')) {
+                    return;
+                }
+
+                const frame = document.createElement('div');
+                frame.className = 'code-block-frame';
+                const toolbar = document.createElement('div');
+                toolbar.className = 'code-block-toolbar';
                 const button = document.createElement('button');
+                button.type = 'button';
                 button.className = 'copy-code-button';
-                button.innerHTML = '📋 Copy';
+                button.innerHTML = copyIcon;
                 button.setAttribute('aria-label', 'Copy code to clipboard');
+                button.setAttribute('title', 'Copy');
+
+                const markCopied = () => {
+                    button.innerHTML = checkIcon;
+                    button.classList.add('copied');
+                    button.setAttribute('aria-label', 'Copied');
+                    setTimeout(() => {
+                        button.innerHTML = copyIcon;
+                        button.classList.remove('copied');
+                        button.setAttribute('aria-label', 'Copy code to clipboard');
+                    }, 2000);
+                };
 
                 button.addEventListener('click', () => {
                     const code = pre.querySelector('code');
                     const text = code ? code.textContent : pre.textContent;
 
-                    navigator.clipboard.writeText(text).then(() => {
-                        const originalText = button.innerHTML;
-                        button.innerHTML = '✅ Copied!';
-                        button.classList.add('copied');
-
-                        setTimeout(() => {
-                            button.innerHTML = originalText;
-                            button.classList.remove('copied');
-                        }, 2000);
-                    }).catch(err => {
+                    navigator.clipboard.writeText(text).then(markCopied).catch(err => {
                         console.error('Failed to copy: ', err);
                         const textArea = document.createElement('textarea');
                         textArea.value = text;
@@ -277,22 +291,18 @@ H_{\ell+1} = U_\ell + \operatorname{MLP}_\ell(N^{\mathrm{mlp}}_\ell(U_\ell)).
                         textArea.select();
                         try {
                             document.execCommand('copy');
-                            const originalText = button.innerHTML;
-                            button.innerHTML = '✅ Copied!';
-                            button.classList.add('copied');
-
-                            setTimeout(() => {
-                                button.innerHTML = originalText;
-                                button.classList.remove('copied');
-                            }, 2000);
-                        } catch (err) {
-                            console.error('Fallback copy failed: ', err);
+                            markCopied();
+                        } catch (fallbackErr) {
+                            console.error('Fallback copy failed: ', fallbackErr);
                         }
                         document.body.removeChild(textArea);
                     });
                 });
 
-                pre.appendChild(button);
+                toolbar.appendChild(button);
+                frame.appendChild(toolbar);
+                pre.parentNode.insertBefore(frame, pre);
+                frame.appendChild(pre);
             });
         });
     </script>

@@ -2,7 +2,6 @@
 title: "Feed-forward network (FFN)"
 slug: "feed-forward-network"
 summary: "A computation with no feedback cycle; in a Transformer, usually the shared position-wise sublayer that transforms each token state separately."
-draft: true
 pro_reviewed: false
 ---
 

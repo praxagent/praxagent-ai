@@ -7,6 +7,7 @@ summary: "A worked Deep Dive on floating-point formats for model arithmetic: bit
 weight: 20
 draft: true
 pro_reviewed: false
+og_image: "https://praxagent.ai/blog/knowledge-base/deep-dives/bf16-accumulation-swamping.png"
 ai_disclosure: |
   **AI-use disclosure.** Generative-AI tools helped draft, edit, and review this
   Deep Dive. The author selected the teaching goals, checked the numeric demos
@@ -22,7 +23,8 @@ reduce memory traffic. They can also run faster when the hardware and software
 provide an accelerated path, but emulated or conversion-heavy paths may be
 slower.
 
-This Deep Dive compares three common data types (**dtypes**):
+This Deep Dive compares three common
+[data types (**dtypes**)]({{< relref "dtype.md" >}}):
 
 - **FP32**: 32-bit floating point (also called float32 or F32)
 - **FP16**: 16-bit floating point (also called float16 or F16; IEEE 754 binary16)
@@ -63,6 +65,11 @@ Rough intuition:
 - **TF32** is an NVIDIA Tensor Core compute mode rather than a storage dtype:
   FP32 operands are rounded to 10 trailing fraction bits for multiplication
   while retaining FP32-like range.
+
+One standards note: FP32 and FP16 are IEEE 754 interchange formats (binary32
+and binary16). **BF16 and TF32 are not**; they are industry/vendor formats
+that borrow IEEE-style encoding conventions. Defer to each vendor's
+documentation for their exact edge-case behavior.
 
 ## Numerical range and spacing
 
@@ -225,19 +232,21 @@ uv run reproduce.py
 
 ### 1. Hardware check
 
-Ask the runtime which GPU is present and whether PyTorch reports native BF16
-Tensor Core support. The banner below is from one Colab A100 run. The later
-dtype demos do **not** require that GPU; they are cast arithmetic.
+Ask the runtime which GPU is present and what PyTorch reports about it. Be
+precise about what the probe proves: `torch.cuda.is_bf16_supported()` reports
+**BF16 dtype support** (it even accepts an `including_emulation` argument),
+not proof that BF16 work will dispatch to native Tensor Cores. Whether a
+given kernel actually uses the matrix units depends on the architecture, the
+library, and the dispatch path, so print the device identity separately and
+check it against the vendor's architecture tables:
 
 ```python
 import torch
 
 if torch.cuda.is_available():
     print(f"GPU: {torch.cuda.get_device_name(0)}")
-    print(
-        "Native BF16 Tensor Cores Supported: "
-        f"{torch.cuda.is_bf16_supported()}"
-    )
+    print(f"Compute capability: {torch.cuda.get_device_capability(0)}")
+    print(f"BF16 dtype support reported: {torch.cuda.is_bf16_supported()}")
 else:
     print("Running on CPU.")
 ```
@@ -246,8 +255,14 @@ Example output (A100 Colab):
 
 ```text
 GPU: NVIDIA A100-SXM4-40GB
-Native BF16 Tensor Cores Supported: True
+Compute capability: (8, 0)
+BF16 dtype support reported: True
 ```
+
+The A100's compute capability 8.0 (Ampere) is what places it in the native
+BF16 Tensor Core generation; the dtype probe alone would also return `True`
+on devices that support BF16 through emulation. The later dtype demos do
+**not** require any GPU; they are cast arithmetic.
 
 ### 2. Precision near 1.0
 
@@ -274,7 +289,29 @@ Input: 1.000244140625  | FP32: 1.000244140625  | FP16: 1.0             | BF16: 1
 Input: 1.0009765625    | FP32: 1.0009765625    | FP16: 1.0009765625    | BF16: 1.0
 ```
 
-### 3. Accumulation swamping
+None of those inputs is an exact tie, so they exercise only the "nearest"
+half of round-to-nearest, ties-to-even. To see the tie rule itself, feed each
+format a value exactly halfway between 1.0 and its next representable
+neighbor: \(1 + 2^{-11}\) for FP16 (halfway to \(1 + 2^{-10}\)) and
+\(1 + 2^{-8}\) for BF16 (halfway to \(1 + 2^{-7}\)). Both round **down** to
+1.0 because, of the two equally distant candidates, 1.0 is the one whose last
+retained significand bit is 0 (even):
+
+```python
+print("--- Ties-to-even Check ---")
+fp16_tie = torch.tensor([1.0 + 2**-11], dtype=torch.float32)
+bf16_tie = torch.tensor([1.0 + 2**-8], dtype=torch.float32)
+print(f"FP16 tie 1 + 2^-11: {fp16_tie.to(torch.float16).item()}")
+print(f"BF16 tie 1 + 2^-8:  {bf16_tie.to(torch.bfloat16).item()}")
+```
+
+```text
+--- Ties-to-even Check ---
+FP16 tie 1 + 2^-11: 1.0
+BF16 tie 1 + 2^-8:  1.0
+```
+
+### 3. Swamping under cast-at-each-step accumulation
 
 Now add \(10^{-4}\) ten thousand times, casting the increment and the running
 sum after every step:
@@ -291,6 +328,11 @@ literature; Wang et al. (2018) use it for exactly this full-absorption failure
 in low-precision training accumulations, and Osorio et al. (2022) measure how
 often it occurs in BF16 fused multiply-add units (see
 [References](#references)).
+
+To be precise about what is being demonstrated: this is **low-precision
+storage with cast-at-each-step accumulation**, not "BF16 accumulation" in
+general. Vendor-accelerated GEMM paths typically take BF16 or FP16 inputs and
+accumulate in FP32, which avoids exactly this failure.
 
 ```python
 print("--- Accumulation Swamping Demo ---")
@@ -379,6 +421,12 @@ FP16 converting 100,000: inf
 BF16 converting 100,000: 99840.0
 ```
 
+The 99840 is worth deriving once by hand. Near \(10^5\) the exponent is
+\(e = 16\) (since \(2^{16} = 65536 \le 10^5 < 2^{17}\)), so adjacent BF16
+values are spaced \(2^{16-7} = 512\) apart. The representable neighbors of
+100000 are \(195 \times 512 = 99840\) and \(196 \times 512 = 100352\), at
+distances 160 and 352. Nearest wins: 99840.
+
 ## Why this matters for interventions
 
 Casting an edit coordinate to BF16 rounds it to a nearby representable value.
@@ -394,6 +442,17 @@ identify the multiplication, reduction, or accumulation precision used to
 produce those tensors.
 
 ## cuBLAS and bit-wise determinism
+
+**Scope note:** everything in this section, and the measurements on this
+page, concern the NVIDIA/PyTorch stack our Research Notes run on. These are
+library-scoped and condition-scoped statements, not universal GPU laws.
+Other vendors publish analogous but *different* reproducibility conditions:
+AMD's rocBLAS ties bitwise reproducibility to an identical GFX target
+instruction set, a single HIP stream per handle, an identical ROCm version,
+and disallowed atomics, while Intel's oneMKL offers conditional numerical
+reproducibility for selected BLAS level-3 routines on GPUs with the same
+product name (see [References](#references)). We have not tested those
+stacks; check the vendor tables before transferring any claim here.
 
 **cuBLAS** is NVIDIA's Compute Unified Device Architecture (**CUDA**)-platform
 implementation of Basic Linear Algebra Subprograms (**BLAS**) and sits behind
@@ -426,11 +485,21 @@ import torch
 torch.use_deterministic_algorithms(True)
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
-torch.backends.cuda.matmul.allow_tf32 = False
+torch.backends.cuda.matmul.allow_tf32 = False   # legacy TF32 control
 ```
 
 Even in "FP32" matmuls, Ampere+ GPUs may use TF32 Tensor Cores unless
-disabled; that is the `allow_tf32` line above.
+disabled. On current PyTorch, prefer the newer precision controls over the
+legacy `allow_tf32` flag, and do not mix the two families:
+
+```python
+# Current API: request true IEEE FP32 matmuls (disables TF32 downgrades).
+torch.set_float32_matmul_precision("highest")
+```
+
+Disabling TF32 is a *precision* choice with a real throughput cost on
+Ampere-class matrix units; record which setting produced any number you
+publish.
 
 ### Verifying cuBLAS determinism on your stack
 
@@ -629,7 +698,7 @@ Results on PyTorch 2.11.0 / CUDA 12.8 (Google Colab, FP32,
 | RTX PRO 6000 (Blackwell) | 12.0 | 2933 | \(4.96\times10^{-5}\) | raises `RuntimeError` |
 
 {{< reference-figure
-  src="knowledge-base/deep-dives/bf16-grid-sample-divergence.png"
+  src="knowledge-base/deep-dives/fp32-grid-sample-divergence.png"
   alt="Two-panel chart. Left: maximum pairwise drifting coordinates out of 3072 versus output grid resolution for four GPUs, all rising from tens of coordinates at 16x16 output to roughly 2900 at 512x512, while the CPU control stays at exactly zero. Right: maximum pairwise FP32 divergence on a log scale, rising from about 1.2e-7 to about 5e-5 across the same range, with all four GPU curves nearly overlapping; dashed lines for the background-matmul arm overlap the idle arm."
   caption="**Finding:** four GPU generations (Turing, Ampere, Ada, Blackwell) produce nearly interchangeable divergence curves for the same operation and input bytes, while the CPU control is bit-identical on all 435 pairs at every size (zero divergence, omitted from the log-scale right panel). The exact-match rate collapses to about 0% by 32x32 output even though the divergence magnitudes stay at the scale of the last representable bit: observed maxima are exact powers of two (for example \(2^{-23}\approx1.19\times10^{-7}\)), the signature of reordered FP32 additions. The background-matmul arm (dashed) overlaps idle, so divergence persists under load but load was not shown to increase it. Values are stack-scoped observations, not universal constants. Generated by [plot_grid_sample_divergence.py](plot_grid_sample_divergence.py) from the [receipt](receipts/grid-sample-divergence.json)."
 >}}
@@ -670,10 +739,64 @@ See also: [BF16 glossary entry]({{< relref "bf16.md" >}}),
 
 ## References
 
+### Standards and formats
+
+- IEEE (2019).
+  [IEEE 754-2019: IEEE Standard for Floating-Point Arithmetic](https://ieeexplore.ieee.org/document/8766229).
+  The normative source for binary32 / binary16 encodings, subnormals,
+  rounding modes, and ties-to-even. BF16 and TF32 are *not* IEEE 754
+  interchange formats.
+- Open Compute Project (2023).
+  [OCP Microscaling (MX) Formats Specification](https://www.opencompute.org/documents/ocp-microscaling-formats-mx-v1-0-spec-final-pdf).
+  Block-scaled low-bit formats (including FP4/E2M1 variants) referenced in
+  the FP8/FP4 discussion.
+
+### Vendor documentation
+
+- NVIDIA.
+  [Floating Point and IEEE 754 Compliance for NVIDIA GPUs](https://docs.nvidia.com/cuda/floating-point/index.html).
+  CUDA rounding behavior, FMA, flush-to-zero controls, and IEEE-compliance
+  scope.
+- NVIDIA.
+  [cuBLAS documentation: results reproducibility](https://docs.nvidia.com/cuda/cublas/index.html#results-reproducibility).
+  The operation-level reproducibility guarantee and its conditions.
+- AMD.
+  [rocBLAS design notes: bitwise reproducibility](https://rocm.docs.amd.com/projects/rocBLAS/en/latest/conceptual/rocblas-design-notes.html).
+  AMD's conditions: identical GFX target ISA, single HIP stream per handle,
+  identical ROCm version, atomics disallowed. Cited for scope contrast; not
+  tested on this page.
+- Intel.
+  [oneMKL: obtaining numerically reproducible results](https://www.intel.com/content/www/us/en/docs/onemkl/developer-guide-linux/2025-2/obtaining-numerically-reproducible-results.html).
+  Conditional numerical reproducibility, including GPU support for selected
+  BLAS level-3 routines on same-product-name devices. Cited for scope
+  contrast; not tested on this page.
+
+### Framework documentation
+
+- PyTorch.
+  [Reproducibility notes](https://docs.pytorch.org/docs/stable/notes/randomness.html)
+  and
+  [`torch.use_deterministic_algorithms`](https://docs.pytorch.org/docs/stable/generated/torch.use_deterministic_algorithms.html).
+  Version-specific determinism controls and the operation registry.
+- PyTorch.
+  [`torch.cuda.is_bf16_supported`](https://docs.pytorch.org/docs/stable/generated/torch.cuda.is_bf16_supported.html)
+  (a dtype-support probe, with an `including_emulation` parameter) and
+  [`torch.set_float32_matmul_precision`](https://docs.pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html)
+  (the current TF32/FP32 matmul precision control).
+- PyTorch pull requests
+  [#85447](https://github.com/pytorch/pytorch/pull/85447) (explicit cuBLAS
+  workspaces per handle/stream) and
+  [#161749](https://github.com/pytorch/pytorch/pull/161749) (removal of the
+  `CUBLAS_WORKSPACE_CONFIG` requirement checks).
+
+### Research papers
+
 - David Goldberg (1991).
-  [What Every Computer Scientist Should Know About Floating-Point Arithmetic](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html).
-  *ACM Computing Surveys* 23(1). The classic treatment of rounding,
-  non-associativity, and error analysis behind every demo on this page.
+  [What Every Computer Scientist Should Know About Floating-Point Arithmetic](https://doi.org/10.1145/103162.103163).
+  *ACM Computing Surveys* 23(1)
+  ([Oracle reprint](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html)).
+  The classic treatment of rounding, non-associativity, and error analysis
+  behind every demo on this page.
 - Naigang Wang, Jungwook Choi, Daniel Brand, Chia-Yu Chen, and Kailash
   Gopalakrishnan (2018).
   [Training Deep Neural Networks with 8-bit Floating Point Numbers](https://arxiv.org/abs/1812.08011).
@@ -687,23 +810,16 @@ See also: [BF16 glossary entry]({{< relref "bf16.md" >}}),
 - Paulius Micikevicius et al. (2018).
   [Mixed Precision Training](https://arxiv.org/abs/1710.03740). *ICLR 2018*.
   Master weights, loss scaling, and FP32 accumulation in FP16 training.
+- Paulius Micikevicius et al. (2022).
+  [FP8 Formats for Deep Learning](https://arxiv.org/abs/2209.05433).
+  The E4M3/E5M2 FP8 variants discussed in the lower-bit formats section.
 - Dhiraj Kalamkar et al. (2019).
   [A Study of BFLOAT16 for Deep Learning Training](https://arxiv.org/abs/1905.12322).
   The BF16 training recipe and its numerical rationale.
-- NVIDIA.
-  [cuBLAS documentation: results reproducibility](https://docs.nvidia.com/cuda/cublas/index.html#results-reproducibility).
-  The operation-level reproducibility guarantee and its conditions.
-- PyTorch.
-  [Reproducibility notes](https://docs.pytorch.org/docs/stable/notes/randomness.html)
-  and
-  [`torch.use_deterministic_algorithms`](https://docs.pytorch.org/docs/stable/generated/torch.use_deterministic_algorithms.html).
-  Version-specific determinism controls and the operation registry.
-- PyTorch pull requests
-  [#85447](https://github.com/pytorch/pytorch/pull/85447) (explicit cuBLAS
-  workspaces per handle/stream) and
-  [#161749](https://github.com/pytorch/pytorch/pull/161749) (removal of the
-  `CUBLAS_WORKSPACE_CONFIG` requirement checks).
-- Receipts and scripts for every measured number on this page:
+
+### Receipts and scripts
+
+- Every measured number on this page re-derives from committed artifacts:
   [demo receipt](demo.receipt.json) / [reproduce.py](reproduce.py),
   [grid_sample receipt](receipts/grid-sample-divergence.json) /
   [divergence_protocol.py](divergence_protocol.py) /

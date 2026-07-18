@@ -2,7 +2,6 @@
 title: "Transformer"
 slug: "transformer"
 summary: "A family of sequence-processing neural networks that combine attention, position-wise transformations, residual connections, normalization, and position information."
-draft: true
 pro_reviewed: false
 ---
 

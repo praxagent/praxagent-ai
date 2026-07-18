@@ -122,7 +122,7 @@
     <div class="knowledge-glossary">
         <div class="knowledge-section-toolbar">
             <a class="knowledge-back" href="/blog/knowledge-base/">← Knowledge Base</a>
-            <span class="knowledge-section-count">27 concepts</span>
+            <span class="knowledge-section-count">24 concepts</span>
         </div>
         <div class="blog-index-list taxonomy-directory">
 
@@ -134,11 +134,6 @@
             <a class="blog-index-row" href="/blog/knowledge-base/best-rank/">
                 <h3>Best-rank</h3>
                 <span class="blog-index-meta">The minimum vocabulary rank a pre-specified probe token hits across layers, positions, and …</span>
-            </a>
-
-            <a class="blog-index-row" href="/blog/knowledge-base/bf16/">
-                <h3>BF16, FP16, and FP32</h3>
-                <span class="blog-index-meta">Floating-point formats for model arithmetic: 32-bit floating point (FP32), standard 16-bit …</span>
             </a>
 
             <a class="blog-index-row" href="/blog/knowledge-base/feed-forward-network/">
@@ -169,11 +164,6 @@
             <a class="blog-index-row" href="/blog/knowledge-base/logit-lens/">
                 <h3>Logit lens</h3>
                 <span class="blog-index-meta">The free mid-layer readout that skips any fitted transport: unembed the residual as if it …</span>
-            </a>
-
-            <a class="blog-index-row" href="/blog/knowledge-base/matmul/">
-                <h3>Matmul</h3>
-                <span class="blog-index-meta">Matrix multiplication: the core linear-algebra operation behind attention, multilayer …</span>
             </a>
 
             <a class="blog-index-row" href="/blog/knowledge-base/motor-layer/">
@@ -209,11 +199,6 @@
             <a class="blog-index-row" href="/blog/knowledge-base/residual-stream/">
                 <h3>Residual stream</h3>
                 <span class="blog-index-meta">The model&#39;s running hidden-state channel: each layer reads it, adds an update, and passes …</span>
-            </a>
-
-            <a class="blog-index-row" href="/blog/knowledge-base/rms/">
-                <h3>Root mean square (RMS)</h3>
-                <span class="blog-index-meta">The square root of the mean squared coordinates of a vector, used here as a measure of …</span>
             </a>
 
             <a class="blog-index-row" href="/blog/knowledge-base/sampling/">
@@ -336,27 +321,41 @@
                 output: "htmlAndMathml"
             });
 
+            const copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+            const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
             const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
             codeBlocks.forEach(pre => {
+                if (pre.closest('.code-block-frame')) {
+                    return;
+                }
+
+                const frame = document.createElement('div');
+                frame.className = 'code-block-frame';
+                const toolbar = document.createElement('div');
+                toolbar.className = 'code-block-toolbar';
                 const button = document.createElement('button');
+                button.type = 'button';
                 button.className = 'copy-code-button';
-                button.innerHTML = '📋 Copy';
+                button.innerHTML = copyIcon;
                 button.setAttribute('aria-label', 'Copy code to clipboard');
+                button.setAttribute('title', 'Copy');
+
+                const markCopied = () => {
+                    button.innerHTML = checkIcon;
+                    button.classList.add('copied');
+                    button.setAttribute('aria-label', 'Copied');
+                    setTimeout(() => {
+                        button.innerHTML = copyIcon;
+                        button.classList.remove('copied');
+                        button.setAttribute('aria-label', 'Copy code to clipboard');
+                    }, 2000);
+                };
 
                 button.addEventListener('click', () => {
                     const code = pre.querySelector('code');
                     const text = code ? code.textContent : pre.textContent;
 
-                    navigator.clipboard.writeText(text).then(() => {
-                        const originalText = button.innerHTML;
-                        button.innerHTML = '✅ Copied!';
-                        button.classList.add('copied');
-
-                        setTimeout(() => {
-                            button.innerHTML = originalText;
-                            button.classList.remove('copied');
-                        }, 2000);
-                    }).catch(err => {
+                    navigator.clipboard.writeText(text).then(markCopied).catch(err => {
                         console.error('Failed to copy: ', err);
                         const textArea = document.createElement('textarea');
                         textArea.value = text;
@@ -365,22 +364,18 @@
                         textArea.select();
                         try {
                             document.execCommand('copy');
-                            const originalText = button.innerHTML;
-                            button.innerHTML = '✅ Copied!';
-                            button.classList.add('copied');
-
-                            setTimeout(() => {
-                                button.innerHTML = originalText;
-                                button.classList.remove('copied');
-                            }, 2000);
-                        } catch (err) {
-                            console.error('Fallback copy failed: ', err);
+                            markCopied();
+                        } catch (fallbackErr) {
+                            console.error('Fallback copy failed: ', fallbackErr);
                         }
                         document.body.removeChild(textArea);
                     });
                 });
 
-                pre.appendChild(button);
+                toolbar.appendChild(button);
+                frame.appendChild(toolbar);
+                pre.parentNode.insertBefore(frame, pre);
+                frame.appendChild(pre);
             });
         });
     </script>

@@ -6,7 +6,7 @@
     <description>Recent content in Machine-Learning on praxagent Research Notes</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 18 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 15 Jul 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://praxagent.ai/blog/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Why Experimental Details Matter: Recovering from a Flawed Interpretability Study</title>
@@ -14,13 +14,6 @@
       <pubDate>Wed, 15 Jul 2026 00:00:00 +0000</pubDate>
       <guid>https://praxagent.ai/blog/posts/2026/07/workspace-under-pressure/</guid>
       <description>A striking interpretability result survived preregistration and still came from a flawed comparison. We trace how prompt echo, a domain-mismatched lexicon, and unequal stakes produced an overconfident story; retract the invalid chart; and show how a corrected, frozen re-run changed what the experiment could honestly support.</description>
-    </item>
-    <item>
-      <title>A Linear Nudge, a Nonlinear Wake</title>
-      <link>https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/</link>
-      <pubDate>Tue, 14 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/</guid>
-      <description>We followed controlled hidden-state edits through the final 29 blocks of Llama 3.3 70B. The delivered edits were dose-linear and a fixed corpus-average Jacobian preserved that scaling, while the model&amp;rsquo;s actual downstream response did not.</description>
     </item>
     <item>
       <title>Can a Jacobian Lens Detect SAE Steering?</title>

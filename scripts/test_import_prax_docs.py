@@ -185,6 +185,11 @@ class ImportPraxDocsTests(unittest.TestCase):
         manifest = self.import_docs()
         root = (self.content / "_index.md").read_text(encoding="utf-8")
 
+        # tempfile.mkdtemp is 0o700 by default; published trees must stay
+        # world-traversable or GitHub Pages 404s the whole collection.
+        self.assertTrue(self.content.stat().st_mode & 0o005)
+        self.assertTrue(self.static.stat().st_mode & 0o005)
+
         self.assertTrue(root.startswith("+++\ntitle = \"Prax\"\n"))
         self.assertIn('summary = "A teaching harness for dependable agents."', root)
         self.assertIn('layout = "prax-docs-section"', root)

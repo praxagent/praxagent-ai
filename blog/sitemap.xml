@@ -3,26 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://praxagent.ai/blog/knowledge-base/deep-dives/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2025-08-02T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/deep-dives/late-chunking/</loc>
     <lastmod>2025-08-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/deep-dives/bf16-fp16-fp32/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/glossary/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://praxagent.ai/blog/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://praxagent.ai/blog/tags/ai/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/ai-safety/</loc>
     <lastmod>2026-07-15T00:00:00+00:00</lastmod>
@@ -31,40 +22,34 @@
     <lastmod>2026-07-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/interpretability/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/j-space/</loc>
     <lastmod>2026-07-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/jacobian-lens/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/llm/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/machine-learning/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/open-science/</loc>
     <lastmod>2026-07-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/posts/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://praxagent.ai/blog/</loc>
+    <lastmod>2026-07-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/posts/2026/07/workspace-under-pressure/</loc>
     <lastmod>2026-07-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://praxagent.ai/blog/tags/reproducibility/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://praxagent.ai/blog/tags/sparse-autoencoders/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/</loc>
     <lastmod>2026-07-12T00:00:00+00:00</lastmod>
@@ -75,6 +60,12 @@
     <loc>https://praxagent.ai/blog/tags/preregistration/</loc>
     <lastmod>2026-07-12T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://praxagent.ai/blog/tags/reproducibility/</loc>
+    <lastmod>2026-07-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://praxagent.ai/blog/tags/sparse-autoencoders/</loc>
+    <lastmod>2026-07-12T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/</loc>
     <lastmod>2026-07-10T00:00:00+00:00</lastmod>
   </url><url>
@@ -83,6 +74,9 @@
   </url><url>
     <loc>https://praxagent.ai/blog/tags/tutorials/</loc>
     <lastmod>2026-07-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/</loc>
+    <lastmod>2025-08-02T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/agents/checkpointing/</loc>
   </url><url>
@@ -99,8 +93,6 @@
     <loc>https://praxagent.ai/blog/knowledge-base/base-rate-bias/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/best-rank/</loc>
-  </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/bf16/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/categories/</loc>
   </url><url>
@@ -144,8 +136,6 @@
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/logit-lens/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/matmul/</loc>
-  </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/infrastructure/mcp-server/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/infrastructure/memory/</loc>
@@ -175,8 +165,6 @@
     <loc>https://praxagent.ai/blog/knowledge-base/prax/architecture/request-flows/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/residual-stream/</loc>
-  </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/rms/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/local-cpu-inference/</loc>
   </url><url>
