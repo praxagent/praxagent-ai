@@ -35,6 +35,8 @@ FORBIDDEN_BASENAMES = {
     ".hugo_build.lock",
     ".npmrc",
     ".pypirc",
+    "AGENTS.md",
+    "SKILL.md",
     "id_dsa",
     "id_ecdsa",
     "id_ed25519",

@@ -213,6 +213,10 @@ cython_debug/
 /.codex/
 /.cursor/
 
+# Authoring instructions belong in the private development repository.
+AGENTS.md
+SKILL.md
+
 # Private keys, local credentials, and editor backups
 *.key
 *.pem

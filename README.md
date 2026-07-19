@@ -64,6 +64,10 @@ Both are ignored. `scripts/check_public_repo.py` adds a conservative CI backstop
 for high-confidence credential formats and local-only filenames, but it cannot
 retract material after a push.
 
+Repository-specific authoring instructions (`AGENTS.md` and `SKILL.md`) live in
+the private development repository. They are ignored and rejected from this
+public final-products repository.
+
 GitHub Pages never receives the repository working tree. `scripts/stage_pages.py`
 copies an explicit allowlist into `pages-artifact/`, and
 `scripts/check_pages_artifact.py` verifies its contents, permissions, and local
