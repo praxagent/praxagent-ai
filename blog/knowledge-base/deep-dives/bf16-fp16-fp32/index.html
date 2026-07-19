@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>BF16, FP16, and FP32: Precision, Range, Swamping, and Determinism - praxagent Knowledge Base</title>
+    
+    
+    
+    
+    
+    
+    <meta name="description" content="A worked Deep Dive on floating-point formats for model arithmetic: bit layouts, GPU Tensor Core support, round-to-nearest demos in PyTorch, accumulation swamping when small adds meet short mantissas, and run-to-run determinism measured across five execution stacks.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/deep-dives/bf16-fp16-fp32/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="praxagent Knowledge Base">
+    <meta property="og:title" content="BF16, FP16, and FP32: Precision, Range, Swamping, and Determinism">
+    <meta property="og:description" content="A worked Deep Dive on floating-point formats for model arithmetic: bit layouts, GPU Tensor Core support, round-to-nearest demos in PyTorch, accumulation swamping when small adds meet short mantissas, and run-to-run determinism measured across five execution stacks.">
+    <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/deep-dives/bf16-fp16-fp32/">
+    <meta property="og:image" content="https://praxagent.ai/blog/knowledge-base/deep-dives/bf16-accumulation-swamping.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="BF16, FP16, and FP32: Precision, Range, Swamping, and Determinism">
+    <meta name="twitter:description" content="A worked Deep Dive on floating-point formats for model arithmetic: bit layouts, GPU Tensor Core support, round-to-nearest demos in PyTorch, accumulation swamping when small adds meet short mantissas, and run-to-run determinism measured across five execution stacks.">
+    <meta name="twitter:image" content="https://praxagent.ai/blog/knowledge-base/deep-dives/bf16-accumulation-swamping.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/styles-v2.css">
+    <link rel="stylesheet" href="/blog/blog.css">
+    <link rel="stylesheet" href="/blog/katex.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'neutral',
+        securityLevel: 'loose',
+        flowchart: { htmlLabels: true, curve: 'basis' }
+      });
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-scrolls industrial-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+
+            <div class="nav-menu">
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link">Research Notes</a>
+                <a href="/blog/knowledge-base/" class="nav-link active">Knowledge Base</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
+            <a href="/blog/knowledge-base/" class="mobile-nav-link active">Knowledge Base</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        
+
+
+
+<div class="blog-post reference-entry">
+    <div class="container">
+        <article class="post-content">
+            <header class="post-header">
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Deep Dives</p>
+                <h1 class="post-title">BF16, FP16, and FP32: Precision, Range, Swamping, and Determinism</h1>
+                
+                <p class="reference-summary">A worked Deep Dive on floating-point formats for model arithmetic: bit layouts, GPU Tensor Core support, round-to-nearest demos in PyTorch, accumulation swamping when small adds meet short mantissas, and run-to-run determinism measured across five execution stacks.</p>
+                
+
+                <div class="post-meta">
+                    <span class="post-date">July 18, 2026</span>
+                    <span class="post-author">by Timothy Jones</span>
+                </div>
+
+            </header>
+
+
+            <div class="post-body post-preface">
+
+
+                <div class="panel info">
+                    <div class="panel-icon" aria-hidden="true"><i data-feather="info"></i></div>
+                    <div class="panel-content"><strong>AI-use disclosure.</strong> Generative-AI tools helped draft, edit, and review this
+Deep Dive. The author selected the teaching goals, checked the numeric demos
+against the committed receipt, and is responsible for the final text and
+claims. This is an independent teaching note, not a peer-reviewed paper.</div>
+                </div>
+
+            </div>
+
+
+
+            <div class="table-of-contents">
+                <h3>Table of Contents</h3>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#how-the-bits-are-spent">How the bits are spent</a></li>
+    <li><a href="#numerical-range-and-spacing">Numerical range and spacing</a>
+      <ul>
+        <li><a href="#normal-versus-subnormal">Normal versus subnormal</a></li>
+        <li><a href="#are-fp8-and-fp4-real">Are FP8 and FP4 real?</a></li>
+      </ul>
+    </li>
+    <li><a href="#when-to-use-each-format">When to use each format</a></li>
+    <li><a href="#gpu-tensor-cores">GPU Tensor Cores</a></li>
+    <li><a href="#worked-demo-in-pytorch">Worked demo in PyTorch</a>
+      <ul>
+        <li><a href="#1-hardware-check">1. Hardware check</a></li>
+        <li><a href="#2-precision-near-10">2. Precision near 1.0</a></li>
+        <li><a href="#3-swamping-under-cast-at-each-step-accumulation">3. Swamping under cast-at-each-step accumulation</a></li>
+        <li><a href="#4-overflow--range">4. Overflow / range</a></li>
+      </ul>
+    </li>
+    <li><a href="#why-this-matters-for-interventions">Why this matters for interventions</a></li>
+    <li><a href="#cublas-and-bit-wise-determinism">cuBLAS and bit-wise determinism</a>
+      <ul>
+        <li><a href="#verifying-cublas-determinism-on-your-stack">Verifying cuBLAS determinism on your stack</a></li>
+        <li><a href="#three-general-determinism-lessons">Three general determinism lessons</a></li>
+        <li><a href="#case-study-one-kernel-five-stacks">Case study: one kernel, five stacks</a></li>
+      </ul>
+    </li>
+    <li><a href="#what-a-format-label-does-not-establish">What a format label does not establish</a></li>
+    <li><a href="#references">References</a>
+      <ul>
+        <li><a href="#standards-and-formats">Standards and formats</a></li>
+        <li><a href="#vendor-documentation">Vendor documentation</a></li>
+        <li><a href="#framework-documentation">Framework documentation</a></li>
+        <li><a href="#research-papers">Research papers</a></li>
+        <li><a href="#receipts-and-scripts">Receipts and scripts</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+
+
+            <div class="post-body">
+                <p>Neural-network code stores numbers in <strong>floating-point formats</strong>: a sign bit,
+an exponent that largely controls range, and a significand that controls
+precision. The stored low-order portion is the fraction field, informally also
+called the mantissa. Shorter formats use less storage per element and can
+reduce memory traffic. They can also run faster when the hardware and software
+provide an accelerated path, but emulated or conversion-heavy paths may be
+slower.</p>
+<p>This Deep Dive compares three common
+<a href="/blog/knowledge-base/dtype/">data types (<strong>dtypes</strong>)</a>:</p>
+<ul>
+<li><strong>FP32</strong>: 32-bit floating point (also called float32 or F32)</li>
+<li><strong>FP16</strong>: 16-bit floating point (also called float16 or F16; IEEE 754 binary16)</li>
+<li><strong>BF16</strong>: bfloat16 (brain floating point)</li>
+</ul>
+<p>A short glossary stub lives at <a href="/blog/knowledge-base/bf16/">BF16, FP16, and FP32</a>.
+This page carries the worked demos, the swamping chart, and the hardware /
+determinism detail.</p>
+<h2 id="how-the-bits-are-spent">How the bits are spent</h2>
+<p><strong>Mixed precision</strong> means using more than one numeric format in a computation,
+such as FP16 operands with FP32 accumulation. A <strong>master weight</strong> is a
+higher-precision copy of a trainable parameter retained for optimizer updates.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Name</th>
+          <th>Also called</th>
+          <th style="text-align: right">Bits</th>
+          <th style="text-align: right">Exponent bits</th>
+          <th style="text-align: right">Trailing significand bits</th>
+          <th>Typical role</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>FP32</strong></td>
+          <td>float32, F32, single</td>
+          <td style="text-align: right">32</td>
+          <td style="text-align: right">8</td>
+          <td style="text-align: right">23</td>
+          <td>Reference / CUDA-core math, loss, some master weights</td>
+      </tr>
+      <tr>
+          <td><strong>FP16</strong></td>
+          <td>float16, F16, half</td>
+          <td style="text-align: right">16</td>
+          <td style="text-align: right">5</td>
+          <td style="text-align: right">10</td>
+          <td>Mixed precision; narrower range than FP32</td>
+      </tr>
+      <tr>
+          <td><strong>BF16</strong></td>
+          <td>bfloat16, brain float</td>
+          <td style="text-align: right">16</td>
+          <td style="text-align: right">8</td>
+          <td style="text-align: right">7</td>
+          <td>Activations / <a href="/blog/knowledge-base/matmul/">matrix multiplications (matmuls)</a>; FP32-like range, less precision</td>
+      </tr>
+      <tr>
+          <td><strong>TF32</strong></td>
+          <td>TensorFloat-32</td>
+          <td style="text-align: right">FP32 storage; 19 effective input bits for multiplication (1 sign, 8 exponent, 10 trailing fraction)</td>
+          <td style="text-align: right">8</td>
+          <td style="text-align: right">10</td>
+          <td>NVIDIA Tensor Core compute mode; FP32 inputs are rounded for multiplication, commonly with FP32 accumulation</td>
+      </tr>
+  </tbody>
+</table>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Bit layouts left-aligned from the sign bit. FP16 uses 1 sign, 5 exponent, and 10 mantissa bits. BF16 uses 1 sign, 8 exponent, and 7 mantissa bits. FP32 uses 1 sign, 8 exponent, and 23 mantissa bits. A dashed guide marks where the 16-bit BF16 word ends inside the longer FP32 layout." tabindex="0">
+        <img src="/blog/knowledge-base/glossary/fp-bit-layouts.svg" alt="Bit layouts left-aligned from the sign bit. FP16 uses 1 sign, 5 exponent, and 10 mantissa bits. BF16 uses 1 sign, 8 exponent, and 7 mantissa bits. FP32 uses 1 sign, 8 exponent, and 23 mantissa bits. A dashed guide marks where the 16-bit BF16 word ends inside the longer FP32 layout." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>How the bits are spent. All three formats are drawn left-aligned from the sign bit. BF16 matches FP32&rsquo;s 8-bit exponent (similar dynamic range) and truncates the mantissa to 7 trailing bits (coarser precision). FP16 uses the same 16-bit total width as BF16 but spends 5 bits on the exponent and 10 on the mantissa, so range and precision trade off differently.</figcaption>
+</figure>
+
+<p>Rough intuition:</p>
+<ul>
+<li><strong>FP32</strong> is the familiar high-precision baseline. For a normal finite binary
+value, the encoding supplies an implicit leading 1, so FP32 has 24 bits of
+precision.</li>
+<li><strong>FP16</strong> spends more of its 16 bits on precision and fewer on range (max
+finite FP16 is 65504). Normal FP16 values have 11 bits of precision.</li>
+<li><strong>BF16</strong> keeps FP32&rsquo;s 8-bit exponent and only 7 trailing fraction bits, so
+normal BF16 values have 8 bits of precision.</li>
+<li><strong>TF32</strong> is an NVIDIA Tensor Core compute mode rather than a storage dtype:
+FP32 operands are rounded to 10 trailing fraction bits for multiplication
+while retaining FP32-like range.</li>
+</ul>
+<p>One standards note: FP32 and FP16 are IEEE 754 interchange formats (binary32
+and binary16). <strong>BF16 and TF32 are not</strong>; they are industry/vendor formats
+that borrow IEEE-style encoding conventions. Defer to each vendor&rsquo;s
+documentation for their exact edge-case behavior.</p>
+<h2 id="numerical-range-and-spacing">Numerical range and spacing</h2>
+<p>The range is symmetric for negative finite values. “Smallest positive normal”
+is where normal encoding begins; subnormal values extend closer to zero with
+reduced effective precision. “Spacing above 1” is the gap from 1 to the next
+larger representable value.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Storage format</th>
+          <th style="text-align: right">Largest finite value</th>
+          <th style="text-align: right">Smallest positive normal</th>
+          <th style="text-align: right">Smallest positive subnormal</th>
+          <th style="text-align: right">Spacing above 1</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>FP32</strong></td>
+          <td style="text-align: right">\(3.4028235\times10^{38}\)</td>
+          <td style="text-align: right">\(1.1754944\times10^{-38}\)</td>
+          <td style="text-align: right">\(1.4012985\times10^{-45}\)</td>
+          <td style="text-align: right">\(1.1920929\times10^{-7}\)</td>
+      </tr>
+      <tr>
+          <td><strong>FP16</strong></td>
+          <td style="text-align: right">\(65504\)</td>
+          <td style="text-align: right">\(6.1035156\times10^{-5}\)</td>
+          <td style="text-align: right">\(5.9604645\times10^{-8}\)</td>
+          <td style="text-align: right">\(9.765625\times10^{-4}\)</td>
+      </tr>
+      <tr>
+          <td><strong>BF16</strong></td>
+          <td style="text-align: right">\(3.3895314\times10^{38}\)</td>
+          <td style="text-align: right">\(1.1754944\times10^{-38}\)</td>
+          <td style="text-align: right">\(9.1835496\times10^{-41}\)</td>
+          <td style="text-align: right">\(7.8125\times10^{-3}\)</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="normal-versus-subnormal">Normal versus subnormal</h3>
+<p>A <strong>normal</strong> floating-point number uses a nonzero exponent field. For a finite
+binary normal, the leading significand bit is understood to be 1 even though
+that bit is not stored:</p>
+\[
+\text{normal significand}=1.\text{fraction bits}.
+\]<p>That implicit leading 1 gives one extra bit of precision without consuming a
+stored bit. BF16 stores only the 7 bits after the binary point. For a normal
+value, the decoder supplies the leading <code>1</code> automatically:</p>
+<pre class="compact-code"><code>stored fraction bits:       abcdefg
+decoded significand:      1.abcdefg</code></pre>
+<p>The decoded significand therefore contains 8 meaningful binary digits: 1
+known leading bit plus 7 stored fraction bits. This is why BF16 has <strong>8 bits of
+significand precision</strong>, even though its bit layout contains only <strong>7 fraction
+bits</strong>. It does not secretly store an eighth fraction bit.</p>
+<p>A <strong>subnormal</strong> number is a nonzero value with an all-zero exponent field. It
+does not receive the implicit leading 1:</p>
+\[
+\text{subnormal significand}=0.\text{fraction bits}.
+\]<p>The same 7 BF16 fraction bits are stored, but the decoder supplies a leading
+<code>0</code> instead of a leading <code>1</code>:</p>
+<pre class="compact-code"><code>stored fraction bits:       abcdefg
+decoded significand:      0.abcdefg</code></pre>
+<p>That leading <code>0</code> is not a meaningful precision bit. The first <code>1</code> must come
+from somewhere inside the stored fraction. As a subnormal gets smaller, that
+first <code>1</code> moves farther right:</p>
+<pre class="compact-code"><code>larger subnormal:          0.1010000
+smaller subnormal:         0.0000001</code></pre>
+<p>The larger example has several meaningful binary digits after its first <code>1</code>.
+The smallest positive BF16 subnormal has only the final stored <code>1</code>, so it has
+just one meaningful significand bit. In other words, subnormals retain the
+format&rsquo;s fixed spacing near zero, but their <strong>relative precision decreases</strong>
+as they approach zero.</p>
+<p>Subnormals fill the gap between the smallest positive normal value and zero.
+Instead of jumping directly from the smallest normal number to zero, the
+format represents progressively smaller values with progressively fewer
+meaningful precision bits. This behavior is called <strong>gradual underflow</strong>.</p>
+<p>For a concrete FP16 example:</p>
+<ul>
+<li>smallest positive normal: \(2^{-14}\approx 6.10\times10^{-5}\);</li>
+<li>smallest positive subnormal: \(2^{-24}\approx 5.96\times10^{-8}\);</li>
+<li>anything smaller than the rounding boundary near that minimum becomes zero.</li>
+</ul>
+<p>The table describes what each format can represent. A particular accelerator
+or kernel may use <strong>flush to zero</strong>, treating subnormal inputs or results as
+zero for performance. Therefore, format-level subnormal support does not by
+itself prove that every hardware path preserves those values.</p>
+<p>This table exposes the main tradeoff: BF16 reaches almost as far as FP32, but
+its spacing near 1 is 8192 times coarser. FP16 has finer spacing than BF16 near
+1, but its largest finite value is only 65504.</p>
+<h3 id="are-fp8-and-fp4-real">Are FP8 and FP4 real?</h3>
+<p>Yes, but neither name identifies one universal format:</p>
+<ul>
+<li><strong>FP8</strong> commonly means an E4M3 variant (more precision, less range) or an
+E5M2 variant (less precision, more range). Exact treatment of infinities,
+not-a-number values, and unsigned-zero variants depends on the named format.</li>
+<li><strong>FP4</strong> commonly uses a very small encoding such as E2M1. In practical model
+kernels it is often paired with per-block scale factors, so the encoding&rsquo;s
+raw four-bit range is not the tensor&rsquo;s effective numerical range.</li>
+</ul>
+<p>They matter for specialized training and inference on recent accelerators, but
+including them in the main three-format table would imply false
+interchangeability. A reproducible protocol should name the exact variant,
+scaling granularity, scale dtype, accumulation dtype, hardware path, and
+framework implementation. This Deep Dive keeps FP8/FP4 as context and focuses
+its worked examples on FP32, FP16, and BF16.</p>
+<h2 id="when-to-use-each-format">When to use each format</h2>
+<p>This is a starting guide, not a substitute for checking the exact model,
+operation, hardware, and framework path. In mixed-precision systems, storage,
+multiplication, and accumulation may use different formats.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Format</th>
+          <th>Good fit when</th>
+          <th>Avoid or reconsider when</th>
+          <th>Main tradeoff</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>FP32</strong></td>
+          <td>Establishing a reference result; debugging numerical behavior; computing precision-sensitive reductions, metrics, losses, or optimizer state; the workload is small enough that memory and throughput are secondary</td>
+          <td>A validated lower-precision path gives acceptable results and the workload is limited by accelerator throughput or memory capacity</td>
+          <td>Highest precision of these three, but twice the storage and memory traffic of FP16/BF16 and often lower Tensor Core throughput</td>
+      </tr>
+      <tr>
+          <td><strong>FP16</strong></td>
+          <td>The accelerator has a strong native FP16 path (including older Turing hardware such as T4); values stay within FP16&rsquo;s narrower range; its extra significand precision over BF16 matters; training uses an appropriate mixed-precision and loss-scaling recipe</td>
+          <td>Values may exceed 65504 or become extremely small; overflow/underflow is already visible; the workload naturally prefers BF16; assuming loss scaling fixes every numerical issue</td>
+          <td>More precision near a fixed magnitude than BF16, but much less exponent range than BF16/FP32</td>
+      </tr>
+      <tr>
+          <td><strong>BF16</strong></td>
+          <td>Training or inference on Ampere-or-newer hardware with native BF16 support; FP32-like dynamic range is valuable; model activations or weights tolerate coarser spacing; avoiding FP16 overflow is more important than preserving FP16&rsquo;s extra fraction bits</td>
+          <td>Small updates or differences must survive beside larger values; precision-sensitive accumulation is stored in BF16; the device lacks a native BF16 fast path (for example T4); a measured quality or fidelity check fails</td>
+          <td>FP32-like range in 16 bits, but only 7 stored fraction bits, so rounding and swamping happen sooner</td>
+      </tr>
+  </tbody>
+</table>
+<p>A practical default on modern training accelerators is often <strong>BF16 operands or
+activations with FP32 accumulation</strong>, not “everything in BF16.” On T4, FP16 is
+usually the native 16-bit Tensor Core choice. Keep an FP32 reference path and
+validate the actual task metric before treating either 16-bit format as safe.</p>
+<h2 id="gpu-tensor-cores">GPU Tensor Cores</h2>
+<p>A card can usually <em>store</em> or <em>emulate</em> many dtypes. What changes in practice is
+whether <strong>Tensor Cores</strong> (specialized matrix units) natively accelerate that
+format, or whether execution uses general-purpose GPU arithmetic lanes
+(<strong>CUDA cores</strong>) or casting / software emulation.</p>
+<table>
+  <thead>
+      <tr>
+          <th>GPU generation (examples)</th>
+          <th>Fast Tensor Core highlights</th>
+          <th>Practical note</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Turing</strong> (Tesla <strong>T4</strong>, RTX 20-series)</td>
+          <td>FP16, INT8, INT4; FP32 on CUDA cores</td>
+          <td><strong>No native BF16 Tensor Cores.</strong></td>
+      </tr>
+      <tr>
+          <td><strong>Ampere</strong> (A100, RTX 30-series)</td>
+          <td>Adds <strong>BF16</strong> (and TF32)</td>
+          <td>Common sweet spot for BF16 large-model runs.</td>
+      </tr>
+      <tr>
+          <td><strong>Ada</strong> (L40, RTX 40-series)</td>
+          <td>FP8, FP16, BF16, TF32</td>
+          <td>Check the exact stock-keeping unit (<strong>SKU</strong>).</td>
+      </tr>
+      <tr>
+          <td><strong>Hopper</strong> (H100, …)</td>
+          <td>FP8, FP16, BF16, TF32</td>
+          <td>Throughput and software paths differ from Ada.</td>
+      </tr>
+  </tbody>
+</table>
+<p>T4 is <em>not</em> &ldquo;unable to do full precision.&rdquo; It has FP32 CUDA-core throughput; it
+lacks <strong>native BF16 Tensor Core</strong> acceleration.</p>
+<h2 id="worked-demo-in-pytorch">Worked demo in PyTorch</h2>
+<p>The demos below use <a href="https://pytorch.org/">PyTorch</a>, a tensor and neural-network
+framework. A <strong>tensor</strong> is a multidimensional array of numbers (here often a
+length-1 vector). <code>torch.tensor([v], dtype=...)</code> builds such an array from
+Python values and stores it in the named floating-point format; <code>.item()</code> reads
+the single scalar back out as an ordinary Python number for printing. Calling
+<code>.to(torch.float16)</code> or <code>.to(torch.bfloat16)</code> <strong>casts</strong> (converts) the tensor
+into that format, with the target format&rsquo;s rounding rules.</p>
+<p>The demos intentionally store every partial sum in the selected format. That is
+<strong>not</strong> a model of every matrix-multiplication kernel: FP16 and BF16 Tensor Core
+general matrix multiplication (<strong>GEMM</strong>) operations commonly multiply
+low-precision operands while accumulating products in FP32.</p>
+<p>These conversions use <strong>round to nearest, ties to even</strong>: choose the nearest
+representable value, and when the input is exactly halfway between two values,
+choose the one whose least-significant retained significand bit is 0.</p>
+<p>Reproduce the numeric receipt and refresh the chart by downloading
+<a href="reproduce.py"><code>reproduce.py</code></a> (published beside this page) and running:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">uv run reproduce.py
+</span></span></code></pre></div><h3 id="1-hardware-check">1. Hardware check</h3>
+<p>Ask the runtime which GPU is present and what PyTorch reports about it. Be
+precise about what the probe proves: <code>torch.cuda.is_bf16_supported()</code> reports
+<strong>BF16 dtype support</strong> (it even accepts an <code>including_emulation</code> argument),
+not proof that BF16 work will dispatch to native Tensor Cores. Whether a
+given kernel actually uses the matrix units depends on the architecture, the
+library, and the dispatch path, so print the device identity separately and
+check it against the vendor&rsquo;s architecture tables:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">torch</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;GPU: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_name</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Compute capability: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_capability</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;BF16 dtype support reported: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_bf16_supported</span><span class="p">()</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Running on CPU.&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>Example output (A100 Colab):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">GPU: NVIDIA A100-SXM4-40GB
+</span></span><span class="line"><span class="cl">Compute capability: (8, 0)
+</span></span><span class="line"><span class="cl">BF16 dtype support reported: True
+</span></span></code></pre></div><p>The A100&rsquo;s compute capability 8.0 (Ampere) is what places it in the native
+BF16 Tensor Core generation; the dtype probe alone would also return <code>True</code>
+on devices that support BF16 through emulation. The later dtype demos do
+<strong>not</strong> require any GPU; they are cast arithmetic.</p>
+<h3 id="2-precision-near-10">2. Precision near 1.0</h3>
+<p>Cast three nearby values through FP32, FP16, and BF16. BF16 collapses all three
+to 1.0. FP16 keeps \(1 + 2^{-10}\) but rounds \(1 + 2^{-12}\) to 1.0.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;--- Precision Check: Adding small values to 1.0 ---&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">vals</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="mi">2</span><span class="o">**-</span><span class="mi">12</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="mi">2</span><span class="o">**-</span><span class="mi">10</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vals</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t_fp32</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">v</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t_fp16</span> <span class="o">=</span> <span class="n">t_fp32</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float16</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t_bf16</span> <span class="o">=</span> <span class="n">t_fp32</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">bfloat16</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="sa">f</span><span class="s2">&#34;Input: </span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> | FP32: </span><span class="si">{</span><span class="n">t_fp32</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> | &#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="sa">f</span><span class="s2">&#34;FP16: </span><span class="si">{</span><span class="n">t_fp16</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> | BF16: </span><span class="si">{</span><span class="n">t_bf16</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">--- Precision Check: Adding small values to 1.0 ---
+</span></span><span class="line"><span class="cl">Input: 1.0             | FP32: 1.0             | FP16: 1.0             | BF16: 1.0
+</span></span><span class="line"><span class="cl">Input: 1.000244140625  | FP32: 1.000244140625  | FP16: 1.0             | BF16: 1.0
+</span></span><span class="line"><span class="cl">Input: 1.0009765625    | FP32: 1.0009765625    | FP16: 1.0009765625    | BF16: 1.0
+</span></span></code></pre></div><p>None of those inputs is an exact tie, so they exercise only the &ldquo;nearest&rdquo;
+half of round-to-nearest, ties-to-even. To see the tie rule itself, feed each
+format a value exactly halfway between 1.0 and its next representable
+neighbor: \(1 + 2^{-11}\) for FP16 (halfway to \(1 + 2^{-10}\)) and
+\(1 + 2^{-8}\) for BF16 (halfway to \(1 + 2^{-7}\)). Both round <strong>down</strong> to
+1.0 because, of the two equally distant candidates, 1.0 is the one whose last
+retained significand bit is 0 (even):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;--- Ties-to-even Check ---&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fp16_tie</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.0</span> <span class="o">+</span> <span class="mi">2</span><span class="o">**-</span><span class="mi">11</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">bf16_tie</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.0</span> <span class="o">+</span> <span class="mi">2</span><span class="o">**-</span><span class="mi">8</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;FP16 tie 1 + 2^-11: </span><span class="si">{</span><span class="n">fp16_tie</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float16</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;BF16 tie 1 + 2^-8:  </span><span class="si">{</span><span class="n">bf16_tie</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">bfloat16</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">--- Ties-to-even Check ---
+</span></span><span class="line"><span class="cl">FP16 tie 1 + 2^-11: 1.0
+</span></span><span class="line"><span class="cl">BF16 tie 1 + 2^-8:  1.0
+</span></span></code></pre></div><h3 id="3-swamping-under-cast-at-each-step-accumulation">3. Swamping under cast-at-each-step accumulation</h3>
+<p>Now add \(10^{-4}\) ten thousand times, casting the increment and the running
+sum after every step:</p>
+\[
+s \leftarrow \mathrm{cast}\bigl(s + \mathrm{cast}(10^{-4})\bigr).
+\]<p>When a small addend cannot change a larger rounded sum, that loss is called
+<strong>swamping</strong> (also <strong>absorption</strong>): the short mantissa cannot resolve the
+increment once the sum&rsquo;s unit in the last place sits above the edit. The term
+is standard in numerical computing and in the reduced-precision deep-learning
+literature; Wang et al. (2018) use it for exactly this full-absorption failure
+in low-precision training accumulations, and Osorio et al. (2022) measure how
+often it occurs in BF16 fused multiply-add units (see
+<a href="#references">References</a>).</p>
+<p>To be precise about what is being demonstrated: this is <strong>low-precision
+storage with cast-at-each-step accumulation</strong>, not &ldquo;BF16 accumulation&rdquo; in
+general. Vendor-accelerated GEMM paths typically take BF16 or FP16 inputs and
+accumulate in FP32, which avoids exactly this failure.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;--- Accumulation Swamping Demo ---&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">n_steps</span> <span class="o">=</span> <span class="mi">10000</span>
+</span></span><span class="line"><span class="cl"><span class="n">step_val</span> <span class="o">=</span> <span class="mf">1e-4</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">fp32_sum</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fp16_sum</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float16</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">bf16_sum</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bfloat16</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">fp32_history</span><span class="p">,</span> <span class="n">fp16_history</span><span class="p">,</span> <span class="n">bf16_history</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fp32_sum</span> <span class="o">=</span> <span class="p">(</span><span class="n">fp32_sum</span> <span class="o">+</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">step_val</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">torch</span><span class="o">.</span><span class="n">float32</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fp16_sum</span> <span class="o">=</span> <span class="p">(</span><span class="n">fp16_sum</span> <span class="o">+</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">step_val</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float16</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">torch</span><span class="o">.</span><span class="n">float16</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bf16_sum</span> <span class="o">=</span> <span class="p">(</span><span class="n">bf16_sum</span> <span class="o">+</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">step_val</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bfloat16</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">torch</span><span class="o">.</span><span class="n">bfloat16</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fp32_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fp32_sum</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fp16_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fp16_sum</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bf16_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bf16_sum</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Final Sums (Target 1.0): &#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="sa">f</span><span class="s2">&#34;FP32=</span><span class="si">{</span><span class="n">fp32_sum</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, &#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="sa">f</span><span class="s2">&#34;FP16=</span><span class="si">{</span><span class="n">fp16_sum</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, &#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="sa">f</span><span class="s2">&#34;BF16=</span><span class="si">{</span><span class="n">bf16_sum</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">--- Accumulation Swamping Demo ---
+</span></span><span class="line"><span class="cl">Final Sums (Target 1.0): FP32=1.00005, FP16=0.25000, BF16=0.03125
+</span></span></code></pre></div><figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Line chart of running sum versus step while adding 0.0001 ten thousand times with per-step casting. FP32 climbs to about 1.00005. FP16 stalls at 0.25. BF16 stalls at 0.03125. A horizontal line marks the ideal unrounded total of 1.0." tabindex="0">
+        <img src="/blog/knowledge-base/deep-dives/bf16-accumulation-swamping.png" alt="Line chart of running sum versus step while adding 0.0001 ten thousand times with per-step casting. FP32 climbs to about 1.00005. FP16 stalls at 0.25. BF16 stalls at 0.03125. A horizontal line marks the ideal unrounded total of 1.0." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption><strong>Finding:</strong> under the intentional cast-every-step protocol, FP32 ends near 1.00005 (accumulated rounding error), while FP16 stalls at 0.25 and BF16 at 0.03125 once each increment is too small to change the rounded 16-bit partial sum. The gray line is the ideal unrounded total 1.0, not a claim that every GPU kernel accumulates this way. High-resolution PNG rendered by Matplotlib from the demo histories in <a href="reproduce.py">reproduce.py</a>. <a href="demo.receipt.json">Demo receipt</a>.</figcaption>
+</figure>
+
+<p>The figure above is produced by the same plotting code (saved instead of
+<code>plt.show()</code>):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fp32_history</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&#34;FP32 (Float32)&#34;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fp16_history</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&#34;FP16 (Half)&#34;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&#34;--&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bf16_history</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&#34;BF16 (Bfloat16)&#34;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&#34;:&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&#34;gray&#34;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&#34;-&#34;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&#34;Target (1.0)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;Accumulation Swamping: Adding 0.0001 ten thousand times&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&#34;Steps&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&#34;Running Sum&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&#34;fig-accumulation-swamping.png&#34;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&#34;tight&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="4-overflow--range">4. Overflow / range</h3>
+<p>FP16&rsquo;s narrower exponent overflows at \(10^5\). BF16 stays finite (here
+99840.0 after rounding).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;--- Overflow Limit Check ---&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">large_val</span> <span class="o">=</span> <span class="mf">1e5</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;FP16 converting 100,000: &#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">large_val</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float16</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;BF16 converting 100,000: &#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">large_val</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bfloat16</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">--- Overflow Limit Check ---
+</span></span><span class="line"><span class="cl">FP16 converting 100,000: inf
+</span></span><span class="line"><span class="cl">BF16 converting 100,000: 99840.0
+</span></span></code></pre></div><p>The 99840 is worth deriving once by hand. Near \(10^5\) the exponent is
+\(e = 16\) (since \(2^{16} = 65536 \le 10^5 < 2^{17}\)), so adjacent BF16
+values are spaced \(2^{16-7} = 512\) apart. The representable neighbors of
+100000 are \(195 \times 512 = 99840\) and \(196 \times 512 = 100352\), at
+distances 160 and 352. Nearest wins: 99840.</p>
+<h2 id="why-this-matters-for-interventions">Why this matters for interventions</h2>
+<p>Casting an edit coordinate to BF16 rounds it to a nearby representable value.
+Separately, when a small edit is <strong>added</strong> to a larger BF16 activation,
+swamping can produce <strong>zero realized change</strong> even though the cast edit was
+nonzero. Protocols that compare a <em>requested</em> FP32 edit with a <em>realized</em>
+post-write difference are checking that full write path.</p>
+<p>When these notes say <strong>BF16 activations</strong>, they mean intermediate tensors
+(multidimensional arrays) intercepted by an instrumentation hook had BF16
+storage dtype at the observation or write point. The label does not by itself
+identify the multiplication, reduction, or accumulation precision used to
+produce those tensors.</p>
+<h2 id="cublas-and-bit-wise-determinism">cuBLAS and bit-wise determinism</h2>
+<p><strong>Scope note:</strong> everything in this section, and the measurements on this
+page, concern the NVIDIA/PyTorch stack our Research Notes run on. These are
+library-scoped and condition-scoped statements, not universal GPU laws.
+Other vendors publish analogous but <em>different</em> reproducibility conditions:
+AMD&rsquo;s rocBLAS ties bitwise reproducibility to an identical GFX target
+instruction set, a single HIP stream per handle, an identical ROCm version,
+and disallowed atomics, while Intel&rsquo;s oneMKL offers conditional numerical
+reproducibility for selected BLAS level-3 routines on GPUs with the same
+product name (see <a href="#references">References</a>). We have not tested those
+stacks; check the vendor tables before transferring any claim here.</p>
+<p><strong>cuBLAS</strong> is NVIDIA&rsquo;s Compute Unified Device Architecture (<strong>CUDA</strong>)-platform
+implementation of Basic Linear Algebra Subprograms (<strong>BLAS</strong>) and sits behind
+many <a href="/blog/knowledge-base/matmul/">matmul</a> / GEMM calls in PyTorch. For a fixed
+CUDA toolkit version, cuBLAS documents bitwise reproducibility for supported
+routines on GPUs with the same architecture and the same number of streaming
+multiprocessors (<strong>SMs</strong>), with documented exceptions (concurrent streams,
+atomics). That is an operation-level guarantee, not whole-experiment
+reproducibility.</p>
+<p><strong>The workspace variable is only needed on older stacks.</strong> For years,
+deterministic mode raised a <code>RuntimeError</code> from <code>torch.mm</code>, <code>torch.mv</code>, and
+<code>torch.bmm</code> on CUDA 10.2+ unless <code>CUBLAS_WORKSPACE_CONFIG=:4096:8</code> (or
+<code>:16:8</code>) was set before CUDA initialized. Modern PyTorch allocates cuBLAS
+workspaces explicitly, one per handle/stream combination
+(<a href="https://github.com/pytorch/pytorch/pull/85447">pytorch/pytorch #85447</a>),
+which satisfies cuBLAS&rsquo;s documented reproducibility conditions by itself, so
+the requirement check was removed
+(<a href="https://github.com/pytorch/pytorch/pull/161749">pytorch/pytorch #161749</a>).
+On a current stack, cuBLAS GEMMs through PyTorch are deterministic without
+the variable.</p>
+<p><strong>If you run an older PyTorch, still set the variable</strong> before CUDA
+initializes:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&#34;CUBLAS_WORKSPACE_CONFIG&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;:4096:8&#34;</span>  <span class="c1"># before CUDA init</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">torch</span>
+</span></span><span class="line"><span class="cl"><span class="n">torch</span><span class="o">.</span><span class="n">use_deterministic_algorithms</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">deterministic</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl"><span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">benchmark</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl"><span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">matmul</span><span class="o">.</span><span class="n">allow_tf32</span> <span class="o">=</span> <span class="kc">False</span>   <span class="c1"># legacy TF32 control</span>
+</span></span></code></pre></div><p>Even in &ldquo;FP32&rdquo; matmuls, Ampere+ GPUs may use TF32 Tensor Cores unless
+disabled. On current PyTorch, prefer the newer precision controls over the
+legacy <code>allow_tf32</code> flag, and do not mix the two families:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Current API: request true IEEE FP32 matmuls (disables TF32 downgrades).</span>
+</span></span><span class="line"><span class="cl"><span class="n">torch</span><span class="o">.</span><span class="n">set_float32_matmul_precision</span><span class="p">(</span><span class="s2">&#34;highest&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>Disabling TF32 is a <em>precision</em> choice with a real throughput cost on
+Ampere-class matrix units; record which setting produced any number you
+publish.</p>
+<h3 id="verifying-cublas-determinism-on-your-stack">Verifying cuBLAS determinism on your stack</h3>
+<p>Because these requirements move between versions, the reliable move is to
+probe the stack you actually run on. We verified the statements above on
+PyTorch 2.11.0+cu128 with one A100. Full script:
+<a href="cublas_determinism_protocol.py"><code>cublas_determinism_protocol.py</code></a>;
+<a href="receipts/cublas-determinism.json">receipt</a>.</p>
+<p><strong>Why the test needs subprocesses.</strong> cuBLAS reads <code>CUBLAS_WORKSPACE_CONFIG</code>
+when CUDA initializes, which in a notebook happens the first time any tensor
+touches the GPU. After that, changing the variable does nothing. So a single
+process cannot honestly compare &ldquo;variable set&rdquo; against &ldquo;variable absent.&rdquo;
+The script launches one fresh copy of itself per condition, each with a
+controlled environment, and every worker records the variable it actually
+saw, so the receipt proves which condition ran:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">launch</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="n">workspace</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">env</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">env</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&#34;CUBLAS_WORKSPACE_CONFIG&#34;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>   <span class="c1"># start clean</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">workspace</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">env</span><span class="p">[</span><span class="s2">&#34;CUBLAS_WORKSPACE_CONFIG&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">workspace</span>
+</span></span><span class="line"><span class="cl">    <span class="n">env</span><span class="p">[</span><span class="s2">&#34;COND&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">condition</span>
+</span></span><span class="line"><span class="cl">    <span class="n">proc</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">proc</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</span></span></code></pre></div><p><strong>The inputs and the comparison.</strong> As in the <code>grid_sample</code> case study below,
+the two 2048x2048 FP32 matrices are generated once on the CPU from a fixed
+seed, so every condition multiplies identical bytes. Each measuring
+condition runs 20 trials and compares <strong>all 190 trial pairs bit-for-bit</strong>
+(outputs viewed as int32), never a scalar summary:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">all_pairs_stats</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">max_div</span><span class="p">,</span> <span class="n">exact</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">r1</span><span class="p">,</span> <span class="n">r2</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span> <span class="n">r2</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">int32</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">exact</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="n">max_div</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_div</span><span class="p">,</span> <span class="p">(</span><span class="n">r1</span> <span class="o">-</span> <span class="n">r2</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span><span class="s2">&#34;pairs&#34;</span><span class="p">:</span> <span class="n">total</span><span class="p">,</span> <span class="s2">&#34;exact_pairs&#34;</span><span class="p">:</span> <span class="n">exact</span><span class="p">,</span> <span class="s2">&#34;max_div&#34;</span><span class="p">:</span> <span class="n">max_div</span><span class="p">}</span>
+</span></span></code></pre></div><p><strong>Condition 1: the probe.</strong> Turn on deterministic mode, run one <code>torch.mm</code>,
+and record whether PyTorch raises. On an old stack this raises with a
+message naming <code>CUBLAS_WORKSPACE_CONFIG</code>; on a current stack it completes:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">torch</span><span class="o">.</span><span class="n">use_deterministic_algorithms</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_</span> <span class="o">=</span> <span class="n">a</span> <span class="o">@</span> <span class="n">b</span>            <span class="c1"># torch.mm through cuBLAS</span>
+</span></span><span class="line"><span class="cl">    <span class="n">out</span><span class="p">[</span><span class="s2">&#34;probe&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;completed&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">out</span><span class="p">[</span><span class="s2">&#34;probe&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;raised&#34;</span>
+</span></span></code></pre></div><p><strong>Condition 2: deterministic-mode repeatability.</strong> With the variable set and
+deterministic mode on, run 20 multiplies and check that every pair is
+bit-identical. This is the positive control.</p>
+<p><strong>Condition 3: the stress arm.</strong> Allow nondeterministic algorithms, leave
+the variable unset, and issue GEMMs concurrently from four CUDA streams,
+because NVIDIA&rsquo;s reproducibility note scopes cuBLAS&rsquo;s guarantee to
+same-stream use. If shared-workspace effects were going to appear anywhere,
+it would be here:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">torch</span><span class="o">.</span><span class="n">use_deterministic_algorithms</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">streams</span> <span class="o">=</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">outputs</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">stream</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">streams</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="n">stream</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span> <span class="o">@</span> <span class="n">b</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">stream</span> <span class="ow">in</span> <span class="n">streams</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stream</span><span class="o">.</span><span class="n">synchronize</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">clone</span><span class="p">())</span>
+</span></span></code></pre></div><p><strong>The results</strong> (PyTorch 2.11.0+cu128, one A100-SXM4-80GB, FP32):</p>
+<table>
+  <thead>
+      <tr>
+          <th>Condition</th>
+          <th>Deterministic mode</th>
+          <th><code>CUBLAS_WORKSPACE_CONFIG</code></th>
+          <th>Outcome</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Probe</td>
+          <td>on</td>
+          <td>absent</td>
+          <td>completed, no <code>RuntimeError</code></td>
+      </tr>
+      <tr>
+          <td>Probe</td>
+          <td>on</td>
+          <td><code>:4096:8</code></td>
+          <td>completed</td>
+      </tr>
+      <tr>
+          <td>Repeatability</td>
+          <td>on</td>
+          <td><code>:4096:8</code></td>
+          <td>190/190 pairs bit-identical, max divergence 0</td>
+      </tr>
+      <tr>
+          <td>Stress (4 streams)</td>
+          <td>off</td>
+          <td>absent</td>
+          <td>190/190 pairs bit-identical, max divergence 0</td>
+      </tr>
+      <tr>
+          <td>Stress (4 streams)</td>
+          <td>off</td>
+          <td><code>:4096:8</code></td>
+          <td>190/190 pairs bit-identical, max divergence 0</td>
+      </tr>
+  </tbody>
+</table>
+<p>Exactly as the PyTorch pull requests document: the probe completes without
+the variable, and every measured condition is bit-identical, including the
+concurrent four-stream arm with the variable unset.</p>
+<p>Note the contrast with the <code>grid_sample</code> case study below, which uses the
+<em>same</em> stack and the same flags. <strong>Turning deterministic mode off means &ldquo;no
+guarantee,&rdquo; not &ldquo;guaranteed drift.&rdquo;</strong> The flag only controls which
+implementations PyTorch may select; what decides the outcome is how the
+selected kernel accumulates. A cuBLAS GEMM reduces each output tile in a
+fixed order baked into the kernel, so repeated runs retrace the same
+additions and produce the same bits even when nondeterministic algorithms
+are permitted. The <code>grid_sample</code> backward kernel scatters contributions into
+shared coordinates with atomic additions, so its addition order varies run
+to run and its rounded sums differ. The determinism registry is
+per-operation, and its requirements move between versions, so probe the
+stack you actually run on and record the PyTorch, CUDA, and cuBLAS versions
+in the receipt. The stress arm&rsquo;s stability is an observation under this
+load pattern, not a proof that shared-workspace nondeterminism is
+impossible.</p>
+<h3 id="three-general-determinism-lessons">Three general determinism lessons</h3>
+<p>cuBLAS covers BLAS operations such as matrix multiplication; <code>libcublas</code> is
+the shared-library binary that provides that implementation. Many other CUDA
+tensor operations use framework or library-specific kernels instead. A cuBLAS
+reproducibility setting therefore does not govern every operation in a model.</p>
+<p>Across GPU libraries and frameworks, three broader lessons apply:</p>
+<ol>
+<li><strong>Two identical outputs do not prove determinism.</strong> A CUDA reduction may use
+atomic additions, where many threads update shared destinations and the
+effective addition order is not guaranteed. Two lightly loaded runs can
+happen to use the same order and produce the same bits. That observed
+agreement is evidence about those two runs, not a reproducibility
+guarantee under another load, launch configuration, software version, or
+device. Also compare the <strong>full output or gradient tensor</strong>, not only a
+scalar summary such as <code>gradient.sum().item()</code>. Positive and negative
+coordinate-level differences can cancel in a sum, making two unstable
+tensors appear identical. A stronger check compares the underlying tensor
+bits and reports the maximum elementwise difference and number of changed
+coordinates.</li>
+<li><strong>Deterministic mode can change the algorithm and the answer.</strong>
+<code>torch.use_deterministic_algorithms(True)</code> asks PyTorch to use a documented
+deterministic implementation when one is available. That implementation
+may perform reductions or other operations in a different order. Because
+floating-point addition is not associative, a deterministic result can
+differ slightly while still processing the same inputs. Do not claim a
+specific replacement algorithm unless pinned source code or a profiler
+trace establishes that implementation detail.</li>
+<li><strong>Unsupported operations fail closed by default.</strong> If PyTorch knows that an
+operation has no deterministic implementation for the active device and
+mode, deterministic mode raises <code>RuntimeError</code> rather than silently running
+the known nondeterministic path. Passing <code>warn_only=True</code> requests warnings
+instead. This check is valuable, but it is not a proof that an entire
+program is reproducible.</li>
+</ol>
+<p>See PyTorch&rsquo;s version-specific
+<a href="https://docs.pytorch.org/docs/stable/generated/torch.use_deterministic_algorithms.html"><code>torch.use_deterministic_algorithms</code></a>
+documentation for the current operation list. Always record the PyTorch,
+CUDA, cuDNN, and cuBLAS versions because implementation choices and supported
+deterministic paths can change.</p>
+<h3 id="case-study-one-kernel-five-stacks">Case study: one kernel, five stacks</h3>
+<p>To make the lessons concrete, we measured run-to-run divergence of one
+operation that PyTorch itself classifies as nondeterministic on CUDA:
+the backward pass of <code>torch.nn.functional.grid_sample</code> (2D bilinear), whose
+input-gradient kernel accumulates many contributions into the same input
+coordinates with atomic additions.</p>
+<p>The protocol (full script:
+<a href="divergence_protocol.py"><code>divergence_protocol.py</code></a>):</p>
+<ul>
+<li>All input tensors were generated once on CPU from a fixed seed and
+transferred, so every device and arm consumed <strong>identical bytes</strong>.</li>
+<li>The input stayed fixed at 32x32 while the output grid grew from 16x16 to
+512x512, increasing how many output samples land on each input coordinate.</li>
+<li>Each geometry was warmed up once, then run 30 times; all 435 trial pairs
+were compared <strong>bit-for-bit</strong> (gradients viewed as int32), recording the
+exact-match rate, the maximum number of drifting coordinates, and the
+maximum elementwise difference. No scalar summaries.</li>
+<li>Two arms: idle, and a background-matmul condition (four CUDA streams of
+4096x4096 FP32 matmuls with stream-local synchronization).</li>
+<li>A final probe enables deterministic mode and records how PyTorch
+classifies the operation on that stack.</li>
+</ul>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Left: a CPU reduction adds contributions a, b, c in a fixed order every run, producing identical bits; the CPU control matched on all 435 pairs. Right: a GPU kernel using atomic additions lets threads land in a different order each run, such as (a &#43; b) &#43; c versus (c &#43; a) &#43; b, producing slightly different rounded sums, typically one unit in the last place." tabindex="0">
+        <img src="/blog/knowledge-base/deep-dives/fp-accumulation-order.svg" alt="Left: a CPU reduction adds contributions a, b, c in a fixed order every run, producing identical bits; the CPU control matched on all 435 pairs. Right: a GPU kernel using atomic additions lets threads land in a different order each run, such as (a &#43; b) &#43; c versus (c &#43; a) &#43; b, producing slightly different rounded sums, typically one unit in the last place." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>The mechanism. Floating-point addition is not associative, so the result depends on the order of additions. A CPU reduction fixes that order, so repeated runs are bit-identical. A GPU kernel that accumulates with atomic additions lets the scheduler decide the order, so repeated runs can differ by roughly one unit in the last place per affected coordinate. Bit-stability tracks the reduction order of the kernel, not the hardware generation.</figcaption>
+</figure>
+
+<p>Results on PyTorch 2.11.0 / CUDA 12.8 (Google Colab, FP32,
+<a href="receipts/grid-sample-divergence.json">receipt</a>):</p>
+<table>
+  <thead>
+      <tr>
+          <th>Device</th>
+          <th style="text-align: right">Compute capability</th>
+          <th style="text-align: right">512x512 output: drifting coordinates (of 3072)</th>
+          <th style="text-align: right">Max pairwise divergence</th>
+          <th>Deterministic-mode probe</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>CPU control</td>
+          <td style="text-align: right">n/a</td>
+          <td style="text-align: right">0 (100% exact pairs at every size)</td>
+          <td style="text-align: right">0</td>
+          <td>completes</td>
+      </tr>
+      <tr>
+          <td>Tesla T4 (Turing)</td>
+          <td style="text-align: right">7.5</td>
+          <td style="text-align: right">2888</td>
+          <td style="text-align: right">\(4.20\times10^{-5}\)</td>
+          <td>raises <code>RuntimeError</code></td>
+      </tr>
+      <tr>
+          <td>A100 (Ampere)</td>
+          <td style="text-align: right">8.0</td>
+          <td style="text-align: right">2945</td>
+          <td style="text-align: right">\(6.10\times10^{-5}\)</td>
+          <td>raises <code>RuntimeError</code></td>
+      </tr>
+      <tr>
+          <td>L4 (Ada)</td>
+          <td style="text-align: right">8.9</td>
+          <td style="text-align: right">2917</td>
+          <td style="text-align: right">\(4.39\times10^{-5}\)</td>
+          <td>raises <code>RuntimeError</code></td>
+      </tr>
+      <tr>
+          <td>RTX PRO 6000 (Blackwell)</td>
+          <td style="text-align: right">12.0</td>
+          <td style="text-align: right">2933</td>
+          <td style="text-align: right">\(4.96\times10^{-5}\)</td>
+          <td>raises <code>RuntimeError</code></td>
+      </tr>
+  </tbody>
+</table>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Two-panel chart. Left: maximum pairwise drifting coordinates out of 3072 versus output grid resolution for four GPUs, all rising from tens of coordinates at 16x16 output to roughly 2900 at 512x512, while the CPU control stays at exactly zero. Right: maximum pairwise FP32 divergence on a log scale, rising from about 1.2e-7 to about 5e-5 across the same range, with all four GPU curves nearly overlapping; dashed lines for the background-matmul arm overlap the idle arm." tabindex="0">
+        <img src="/blog/knowledge-base/deep-dives/fp32-grid-sample-divergence.png" alt="Two-panel chart. Left: maximum pairwise drifting coordinates out of 3072 versus output grid resolution for four GPUs, all rising from tens of coordinates at 16x16 output to roughly 2900 at 512x512, while the CPU control stays at exactly zero. Right: maximum pairwise FP32 divergence on a log scale, rising from about 1.2e-7 to about 5e-5 across the same range, with all four GPU curves nearly overlapping; dashed lines for the background-matmul arm overlap the idle arm." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption><strong>Finding:</strong> four GPU generations (Turing, Ampere, Ada, Blackwell) produce nearly interchangeable divergence curves for the same operation and input bytes, while the CPU control is bit-identical on all 435 pairs at every size (zero divergence, omitted from the log-scale right panel). The exact-match rate collapses to about 0% by 32x32 output even though the divergence magnitudes stay at the scale of the last representable bit: observed maxima are exact powers of two (for example \(2^{-23}\approx1.19\times10^{-7}\)), the signature of reordered FP32 additions. The background-matmul arm (dashed) overlaps idle, so divergence persists under load but load was not shown to increase it. Values are stack-scoped observations, not universal constants. Generated by <a href="plot_grid_sample_divergence.py">plot_grid_sample_divergence.py</a> from the <a href="receipts/grid-sample-divergence.json">receipt</a>.</figcaption>
+</figure>
+
+<p>What this case study establishes, and what it does not:</p>
+<ul>
+<li><strong>The nondeterminism belongs to the kernel, not the hardware.</strong> Four GPU
+generations drift almost identically; the CPU implementation of the same
+operation on the same bytes is exactly stable. The variable is the
+execution model (atomic accumulation versus a fixed reduction order).</li>
+<li><strong>The empirical arms and the framework&rsquo;s registry agree.</strong> Every CUDA
+device rejected the backward pass under deterministic mode with
+<code>grid_sampler_2d_backward_cuda does not have a deterministic implementation</code>; the CPU path completed.</li>
+<li><strong>Divergences are ULP-scale.</strong> Reordered additions change results by about
+one unit in the last place per coordinate, which is also why a scalar
+summary such as <code>grad.sum()</code> can hide thousands of drifting coordinates
+through cancellation (lesson 1 above).</li>
+<li>It does <strong>not</strong> establish that background load increases drift, that other
+operations behave the same way, or that these curves hold on other
+PyTorch/CUDA versions. It also does not identify the kernel&rsquo;s exact
+scheduling behavior; that would require pinned source or a profiler trace.</li>
+</ul>
+<h2 id="what-a-format-label-does-not-establish">What a format label does not establish</h2>
+<ul>
+<li>It does not name the full mixed-precision recipe.</li>
+<li>It does not imply FP16 and BF16 are interchangeable, or that T4 &ldquo;cannot do
+FP32.&rdquo;</li>
+<li>The cast-every-step swamping loop is not a universal law of BF16 kernels.</li>
+<li>Bit layouts follow usual Institute of Electrical and Electronics Engineers
+(<strong>IEEE</strong>)-style / industry conventions; defer to framework dtype docs for
+subnormals, not-a-number (<strong>NaN</strong>), and rounding mode.</li>
+</ul>
+<p>See also: <a href="/blog/knowledge-base/bf16/">BF16 glossary entry</a>,
+<a href="/blog/knowledge-base/matmul/">matmul</a>,
+<a href="/blog/knowledge-base/rms/">root mean square (RMS)</a>,
+<a href="/blog/knowledge-base/residual-stream/">residual stream</a>.</p>
+<h2 id="references">References</h2>
+<h3 id="standards-and-formats">Standards and formats</h3>
+<ul>
+<li>IEEE (2019).
+<a href="https://ieeexplore.ieee.org/document/8766229">IEEE 754-2019: IEEE Standard for Floating-Point Arithmetic</a>.
+The normative source for binary32 / binary16 encodings, subnormals,
+rounding modes, and ties-to-even. BF16 and TF32 are <em>not</em> IEEE 754
+interchange formats.</li>
+<li>Open Compute Project (2023).
+<a href="https://www.opencompute.org/documents/ocp-microscaling-formats-mx-v1-0-spec-final-pdf">OCP Microscaling (MX) Formats Specification</a>.
+Block-scaled low-bit formats (including FP4/E2M1 variants) referenced in
+the FP8/FP4 discussion.</li>
+</ul>
+<h3 id="vendor-documentation">Vendor documentation</h3>
+<ul>
+<li>NVIDIA.
+<a href="https://docs.nvidia.com/cuda/floating-point/index.html">Floating Point and IEEE 754 Compliance for NVIDIA GPUs</a>.
+CUDA rounding behavior, FMA, flush-to-zero controls, and IEEE-compliance
+scope.</li>
+<li>NVIDIA.
+<a href="https://docs.nvidia.com/cuda/cublas/index.html#results-reproducibility">cuBLAS documentation: results reproducibility</a>.
+The operation-level reproducibility guarantee and its conditions.</li>
+<li>AMD.
+<a href="https://rocm.docs.amd.com/projects/rocBLAS/en/latest/conceptual/rocblas-design-notes.html">rocBLAS design notes: bitwise reproducibility</a>.
+AMD&rsquo;s conditions: identical GFX target ISA, single HIP stream per handle,
+identical ROCm version, atomics disallowed. Cited for scope contrast; not
+tested on this page.</li>
+<li>Intel.
+<a href="https://www.intel.com/content/www/us/en/docs/onemkl/developer-guide-linux/2025-2/obtaining-numerically-reproducible-results.html">oneMKL: obtaining numerically reproducible results</a>.
+Conditional numerical reproducibility, including GPU support for selected
+BLAS level-3 routines on same-product-name devices. Cited for scope
+contrast; not tested on this page.</li>
+</ul>
+<h3 id="framework-documentation">Framework documentation</h3>
+<ul>
+<li>PyTorch.
+<a href="https://docs.pytorch.org/docs/stable/notes/randomness.html">Reproducibility notes</a>
+and
+<a href="https://docs.pytorch.org/docs/stable/generated/torch.use_deterministic_algorithms.html"><code>torch.use_deterministic_algorithms</code></a>.
+Version-specific determinism controls and the operation registry.</li>
+<li>PyTorch.
+<a href="https://docs.pytorch.org/docs/stable/generated/torch.cuda.is_bf16_supported.html"><code>torch.cuda.is_bf16_supported</code></a>
+(a dtype-support probe, with an <code>including_emulation</code> parameter) and
+<a href="https://docs.pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html"><code>torch.set_float32_matmul_precision</code></a>
+(the current TF32/FP32 matmul precision control).</li>
+<li>PyTorch pull requests
+<a href="https://github.com/pytorch/pytorch/pull/85447">#85447</a> (explicit cuBLAS
+workspaces per handle/stream) and
+<a href="https://github.com/pytorch/pytorch/pull/161749">#161749</a> (removal of the
+<code>CUBLAS_WORKSPACE_CONFIG</code> requirement checks).</li>
+</ul>
+<h3 id="research-papers">Research papers</h3>
+<ul>
+<li>David Goldberg (1991).
+<a href="https://doi.org/10.1145/103162.103163">What Every Computer Scientist Should Know About Floating-Point Arithmetic</a>.
+<em>ACM Computing Surveys</em> 23(1)
+(<a href="https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">Oracle reprint</a>).
+The classic treatment of rounding, non-associativity, and error analysis
+behind every demo on this page.</li>
+<li>Naigang Wang, Jungwook Choi, Daniel Brand, Chia-Yu Chen, and Kailash
+Gopalakrishnan (2018).
+<a href="https://arxiv.org/abs/1812.08011">Training Deep Neural Networks with 8-bit Floating Point Numbers</a>.
+<em>NeurIPS 2018</em>. Uses <strong>swamping</strong> for the full-absorption failure of small
+addends in low-precision training accumulations.</li>
+<li>John Osorio, Adria Armejach, Eric Petit, Greg Henry, and Marc Casas (2022).
+<a href="https://doi.org/10.1109/TETC.2022.3187770">A BF16 FMA is All You Need for DNN Training</a>.
+<em>IEEE Transactions on Emerging Topics in Computing</em> 10(3), 1302-1314.
+Measures how often swamping occurs in BF16 fused multiply-add
+accumulations.</li>
+<li>Paulius Micikevicius et al. (2018).
+<a href="https://arxiv.org/abs/1710.03740">Mixed Precision Training</a>. <em>ICLR 2018</em>.
+Master weights, loss scaling, and FP32 accumulation in FP16 training.</li>
+<li>Paulius Micikevicius et al. (2022).
+<a href="https://arxiv.org/abs/2209.05433">FP8 Formats for Deep Learning</a>.
+The E4M3/E5M2 FP8 variants discussed in the lower-bit formats section.</li>
+<li>Dhiraj Kalamkar et al. (2019).
+<a href="https://arxiv.org/abs/1905.12322">A Study of BFLOAT16 for Deep Learning Training</a>.
+The BF16 training recipe and its numerical rationale.</li>
+</ul>
+<h3 id="receipts-and-scripts">Receipts and scripts</h3>
+<ul>
+<li>Every measured number on this page re-derives from committed artifacts:
+<a href="demo.receipt.json">demo receipt</a> / <a href="reproduce.py">reproduce.py</a>,
+<a href="receipts/grid-sample-divergence.json">grid_sample receipt</a> /
+<a href="divergence_protocol.py">divergence_protocol.py</a> /
+<a href="plot_grid_sample_divergence.py">plot_grid_sample_divergence.py</a>, and
+<a href="receipts/cublas-determinism.json">cuBLAS receipt</a> /
+<a href="cublas_determinism_protocol.py">cublas_determinism_protocol.py</a>.</li>
+</ul>
+
+            </div>
+
+            <footer class="post-footer">
+
+                <div class="post-transparency">
+                    <div class="post-transparency-label">Public source &amp; edit history</div>
+                    <p>This Deep Dive is rendered from plain-text source in
+                    <a href="https://github.com/praxagent/praxagent-ai" rel="noopener">praxagent/praxagent-ai</a>.
+                    Every revision is preserved in the public commit log:
+                    <a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/knowledge-base/deep-dives/bf16-fp16-fp32/index.md" rel="noopener">view this page's edit history</a>.</p>
+                </div>
+
+                <div class="post-navigation">
+
+                    <a href="/blog/knowledge-base/deep-dives/" class="back-to-blog">← Deep Dives</a>
+
+                    <a href="/blog/knowledge-base/" class="back-to-blog">Knowledge Base</a>
+                    <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+
+    </main>
+
+    <footer class="footer footer-compact">
+        <div class="container">
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
+            </div>
+            <div class="footer-compact-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/blog/script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tables = document.querySelectorAll('.post-body table');
+            tables.forEach((table, index) => {
+                if (table.parentElement?.classList.contains('table-scroll')) return;
+
+                const scroller = document.createElement('div');
+                scroller.className = 'table-scroll';
+                scroller.setAttribute('aria-label', `Scrollable data table ${index + 1}`);
+                table.parentNode.insertBefore(scroller, table);
+                scroller.appendChild(table);
+
+                const updateScrollableState = () => {
+                    const isScrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+                    scroller.classList.toggle('is-scrollable', isScrollable);
+                    if (isScrollable) {
+                        scroller.setAttribute('role', 'region');
+                        scroller.setAttribute('tabindex', '0');
+                    } else {
+                        scroller.removeAttribute('role');
+                        scroller.removeAttribute('tabindex');
+                    }
+                };
+
+                requestAnimationFrame(updateScrollableState);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(updateScrollableState).observe(scroller);
+                } else {
+                    window.addEventListener('resize', updateScrollableState, { passive: true });
+                }
+            });
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                output: "htmlAndMathml"
+            });
+
+            const copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+            const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
+            codeBlocks.forEach(pre => {
+                if (pre.closest('.code-block-frame')) {
+                    return;
+                }
+
+                const frame = document.createElement('div');
+                frame.className = 'code-block-frame';
+                const toolbar = document.createElement('div');
+                toolbar.className = 'code-block-toolbar';
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'copy-code-button';
+                button.innerHTML = copyIcon;
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+                button.setAttribute('title', 'Copy');
+
+                const markCopied = () => {
+                    button.innerHTML = checkIcon;
+                    button.classList.add('copied');
+                    button.setAttribute('aria-label', 'Copied');
+                    setTimeout(() => {
+                        button.innerHTML = copyIcon;
+                        button.classList.remove('copied');
+                        button.setAttribute('aria-label', 'Copy code to clipboard');
+                    }, 2000);
+                };
+
+                button.addEventListener('click', () => {
+                    const code = pre.querySelector('code');
+                    const text = code ? code.textContent : pre.textContent;
+
+                    navigator.clipboard.writeText(text).then(markCopied).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            markCopied();
+                        } catch (fallbackErr) {
+                            console.error('Fallback copy failed: ', fallbackErr);
+                        }
+                        document.body.removeChild(textArea);
+                    });
+                });
+
+                toolbar.appendChild(button);
+                frame.appendChild(toolbar);
+                pre.parentNode.insertBefore(frame, pre);
+                frame.appendChild(pre);
+            });
+        });
+    </script>
+
+</body>
+</html>

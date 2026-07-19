@@ -2,7 +2,7 @@
 title: "Root mean square (RMS)"
 slug: "rms"
 summary: "The square root of the mean squared coordinates of a vector, used here as a measure of residual-state scale."
-draft: true
+draft: false
 pro_reviewed: false
 aliases:
   - /references/rms/

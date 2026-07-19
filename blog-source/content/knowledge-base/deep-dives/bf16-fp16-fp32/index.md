@@ -5,7 +5,7 @@ date: 2026-07-18
 author: Timothy Jones
 summary: "A worked Deep Dive on floating-point formats for model arithmetic: bit layouts, GPU Tensor Core support, round-to-nearest demos in PyTorch, accumulation swamping when small adds meet short mantissas, and run-to-run determinism measured across five execution stacks."
 weight: 20
-draft: true
+draft: false
 pro_reviewed: false
 og_image: "https://praxagent.ai/blog/knowledge-base/deep-dives/bf16-accumulation-swamping.png"
 ai_disclosure: |

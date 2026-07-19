@@ -6,7 +6,7 @@
     <description>Recent content in Tags on praxagent Research Notes</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 18 Jul 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://praxagent.ai/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AI</title>
@@ -72,6 +72,20 @@
       <description></description>
     </item>
     <item>
+      <title>Reproducibility</title>
+      <link>https://praxagent.ai/blog/tags/reproducibility/</link>
+      <pubDate>Tue, 14 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://praxagent.ai/blog/tags/reproducibility/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sparse-Autoencoders</title>
+      <link>https://praxagent.ai/blog/tags/sparse-autoencoders/</link>
+      <pubDate>Tue, 14 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://praxagent.ai/blog/tags/sparse-autoencoders/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Model-Auditing</title>
       <link>https://praxagent.ai/blog/tags/model-auditing/</link>
       <pubDate>Sun, 12 Jul 2026 00:00:00 +0000</pubDate>
@@ -83,20 +97,6 @@
       <link>https://praxagent.ai/blog/tags/preregistration/</link>
       <pubDate>Sun, 12 Jul 2026 00:00:00 +0000</pubDate>
       <guid>https://praxagent.ai/blog/tags/preregistration/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Reproducibility</title>
-      <link>https://praxagent.ai/blog/tags/reproducibility/</link>
-      <pubDate>Sun, 12 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>https://praxagent.ai/blog/tags/reproducibility/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Sparse-Autoencoders</title>
-      <link>https://praxagent.ai/blog/tags/sparse-autoencoders/</link>
-      <pubDate>Sun, 12 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>https://praxagent.ai/blog/tags/sparse-autoencoders/</guid>
       <description></description>
     </item>
     <item>

@@ -37,15 +37,17 @@ before relying on them.
 {{< /panel >}}
 
 {{< panel "info" >}}
-**Abstract.** Activation steering adds a controlled vector to a model's
-{{< refterm "residual-stream" "residual stream" >}}. A
+**Abstract.** In this note, activation steering means additive
+residual-stream intervention: a controlled vector added to a model's
+{{< refterm "residual-stream" "residual stream" >}}. That is one common
+steering primitive, not a definition of the whole field. A
 {{< refterm "jacobian-lens" "Jacobian lens" >}} is a corpus-average first-order
 map from that mid-network state toward later residuals and vocabulary
 dispositions. Before attributing a downstream effect to the meaning of a
 steering direction, requested-versus-realized fidelity under low precision,
 linear transport, and nonlinear model dynamics need to be separated.
 
-**(1)** In Llama 3.3 70B Instruct, we applied three neutral Gaussian directions
+**(1)** In Llama 3.3 70B Instruct, we applied three unselected Gaussian directions
 after block 50 across eight prompts, varied dose from `0.5%` to `30%` of
 {{< refterm "rms" "residual RMS" >}}, and followed the signed central response
 through the remaining 29 blocks. Protocol, plan, and decision rules were frozen
@@ -87,11 +89,15 @@ Shipping table, sample records, and hashes are in the
 
 ## The Question
 
-Activation steering changes a model from the inside. Instead of changing the
-prompt, the researcher adds a controlled vector to the hidden state carried
-between transformer blocks. That vector can encode a proposed semantic
-direction, such as a sparse-autoencoder feature, or it can be deliberately
-generic, as in the experiment reported here.
+Activation steering changes a model from the inside. In the additive form
+studied here, the researcher adds a controlled vector to the hidden state
+carried between transformer blocks instead of changing the prompt; contrastive
+activation addition is the canonical modern example
+([Rimsky et al., 2024](#ref-rimsky-2024)). The field also includes adaptive,
+feature-targeted, and geometry-preserving variants, which this note does not
+test. The added vector can encode a proposed semantic direction, such as a
+sparse-autoencoder feature, or it can be deliberately generic, as in the
+experiment reported here.
 
 A Jacobian is a local derivative: the high-dimensional analogue of a tangent
 line. A {{< refterm "jacobian-lens" "Jacobian lens" >}}
@@ -99,7 +105,13 @@ line. A {{< refterm "jacobian-lens" "Jacobian lens" >}}
 reference by averaging input-output Jacobians over many prompts and token
 positions. The result is one fixed linear map for each source layer: a
 corpus-average first-order approximation, not the exact Jacobian of the prompt
-under study.
+under study. Gurnee et al. built the lens to surface verbalizable,
+vocabulary-oriented content; this note repurposes it as a transport benchmark
+for arbitrary residual perturbations, a different job from the one it was fit
+for. Whether averaged first-order maps carry useful structure is itself
+setting-dependent: relation-decoding work finds that mean Jacobian-based affine
+maps decode some relations well and others poorly
+([Hernandez et al., 2024](#ref-hernandez-2024)).
 
 This distinction matters because a downstream change can have several causes.
 The requested intervention may not land accurately in low-precision arithmetic.
@@ -146,7 +158,7 @@ invent the lens or the general fact that neural networks are nonlinear.
 ## Design in Brief
 
 We tested this in Llama 3.3 70B Instruct. Immediately after transformer block
-50, we applied three neutral stress-test directions to eight prompts, varied
+50, we applied three unselected stress-test directions to eight prompts, varied
 their magnitude from `0.5%` to `30%` of {{< refterm "rms" "residual RMS" >}},
 and followed the response through the remaining 29 blocks. The directions were
 independent Gaussian vectors normalized to unit {{< refterm "rms" "RMS" >}},
@@ -399,9 +411,12 @@ At `2%`, requested-versus-realized cosine had a median of `0.997`, while median
 relative RMSE was `0.076`. Passing does not mean requested and realized edits
 were bit-identical. It does show that the final-state nonlinearity on the
 `2%`/`3%`/`4%` panel cannot be blamed on the low-dose fidelity failure seen
-below `2%`. The boundary is consistent with BF16 rounding, but it is an
-empirical property of this implementation and panel, not a universal BF16
-limit.
+below `2%`. The boundary is consistent with BF16 rounding, but the experiment does not
+isolate rounding from other implementation details such as the casting path,
+kernel ordering, or fused operations. It is an empirical property of this
+implementation and panel, not a universal BF16 limit; a datatype and hook-path
+ablation (FP32, FP16, alternative hook implementations) would be the direct
+mechanism test.
 
 ![Three aligned plots show the low-dose requested-versus-realized fidelity transition under BF16 execution in this model and intervention setup, across requested doses from 0.5% to 30%. Directional cosine rises sharply from a median 0.961 at 0.5% toward 1.0 and clears its 0.995 threshold by the eligible panel. Relative RMSE falls from a median 0.287 at 0.5% through its 0.10 ceiling near 1.5–2% and continues toward zero. Pale bands show the minimum-to-maximum range across the fixed 24-cell census, not uncertainty. The bottom strip reports the full paired-branch fidelity rule: 24 failed cells at 0.5%, 24 at 1%, 18 at 1.5%, and zero from 2% through 30%.](fig-3-bf16-delivery-floor.svg)
 
@@ -439,8 +454,9 @@ captures useful structure at a fixed dose. Figure 1 used J only as a linear
 algebra reference. Predictive accuracy requires a different test: compare J's
 prediction with the final response and ask whether it beats cheap alternatives.
 We used two: identity, which carries the observed source-state change forward
-unchanged (the residual-space twin of a plain
-{{< refterm "logit-lens" "logit lens" >}} transport), and five prespecified
+unchanged (a geometry-free transport baseline, not a vocabulary readout such
+as a {{< refterm "logit-lens" "logit lens" >}} or tuned lens
+([Belrose et al., 2023](#ref-belrose-2023))), and five prespecified
 {{< refterm "random-j" "random-J" >}} controls, which apply seeded sign and
 coordinate permutations to the released map.
 
@@ -460,6 +476,12 @@ source-state layer cleared the added-value-over-identity margin in both spaces.
 The bounded conclusion is therefore precise: the released map contains
 structure beyond these five randomizations, but it did not show added value
 over simply carrying the residual change forward unchanged.
+
+This comparison cannot separate two explanations for that null: that
+first-order transport itself adds little for these directions, or that corpus
+averaging washes out prompt-local structure that a per-prompt Jacobian would
+capture. A prompt-specific Jacobian baseline, run on the same cells, is the
+natural next control and was not part of this study.
 
 For Figure 4, each horizontal position has a different source-state layer but
 the same target. At source layer \(\ell\), both \(J_\ell\) and identity receive
@@ -484,6 +506,13 @@ The generic-direction anomaly motivates that experiment; it does not confirm
 an SAE mechanism. The target features, prompts, dose panel, semantic endpoints,
 and analysis rules would need to be specified before their outcomes are
 inspected.
+
+Two cheaper follow-ups would sharpen the present result before any semantic
+extension: the datatype and hook-path ablation named above, which would turn
+"consistent with BF16" into a mechanism test, and a small public notebook that
+exports the requested edit, realized edit, fixed-J projection, and actual
+final residual for one prompt, one direction, and one layer at each dose, so
+the study's central decomposition can be audited in minutes rather than hours.
 
 ## Interpretation
 
@@ -530,7 +559,7 @@ teaching inventory are in the [appendix](#appendix-release-inventory).
 | Compact replication record | [`…/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9`](https://github.com/tdj28/llm_selfref_pre/tree/fde24e93770859bf0ec848b91eb0564d550a641d/docs/consciousness_sae_signed_dose_scan/results/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9) |
 | Protocol | [`docs/…/PROTOCOL.md`](https://github.com/tdj28/llm_selfref_pre/blob/fde24e93770859bf0ec848b91eb0564d550a641d/docs/consciousness_sae_signed_dose_scan/PROTOCOL.md) |
 | Result summary | [`RESULT_SUMMARY.md`](https://github.com/tdj28/llm_selfref_pre/blob/fde24e93770859bf0ec848b91eb0564d550a641d/docs/consciousness_sae_signed_dose_scan/results/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9/RESULT_SUMMARY.md) |
-| Figure generator (this post bundle) | [`plot_signed_dose_scan_results.py`](plot_signed_dose_scan_results.py) (SHA-256 `480c4b9e…`; not yet committed to the experiment repo at `fde24e9`) |
+| Figure generator (this post bundle) | [`plot_signed_dose_scan_results.py`](plot_signed_dose_scan_results.py) (SHA-256 `480c4b9e…`; committed upstream with the figure package at [`f5e906e`](https://github.com/tdj28/llm_selfref_pre/tree/f5e906e1737bc71bf20b642af1d698018eec82fe/docs/consciousness_sae_signed_dose_scan/results/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9/figures)) |
 | Post-wide number manifest | [`provenance.json`](provenance.json) |
 | Llama 3.3 70B Instruct | revision [`6f6073b…`](https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct/blob/6f6073b423013f6a7d4d9f39144961bfbfbc386b/README.md) (gated) |
 | Neuronpedia J-lens config | revision [`a4114d7…`](https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext/config.yaml) |
@@ -731,22 +760,27 @@ and the audited-summary SHA-256 is
 `b490b101c112f774ae7bffc9c54294a70b91c874c4cee78eddaa7890446c08f6`.
 The [compact replication
 record](https://github.com/tdj28/llm_selfref_pre/tree/fde24e93770859bf0ec848b91eb0564d550a641d/docs/consciousness_sae_signed_dose_scan/results/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9)
-contains the protocol pointers, result summary, audit receipts, and figure
-provenance once the figure package is committed upstream.
+contains the protocol pointers, result summary, audit receipts, and, as of
+commit
+[`f5e906e`](https://github.com/tdj28/llm_selfref_pre/commit/f5e906e1737bc71bf20b642af1d698018eec82fe),
+the committed figure package.
 
 All four empirical figures were generated programmatically from that audited
 summary with Matplotlib. The generator validates source identity, row counts,
 and zero-target guards; emits SVG, PDF, and 300-DPI PNG; and writes a separate
 JSON receipt containing data selection, transformations, derived values, alt
 text, and output hashes. Verification regenerated all 12 images byte-for-byte
-and matched the article's alt text to the receipts. The generator currently
-ships in this post bundle as
+and matched the article's alt text to the receipts. The generator ships
+in this post bundle as
 [`plot_signed_dose_scan_results.py`](plot_signed_dose_scan_results.py)
-(SHA-256 `480c4b9ec2d9ea464119a9336053f5bb18838049274d7c623687f282047c25aa`);
-it was not yet present at result commit `fde24e9` in the experiment repo. That
-is a named gap: close it by committing the script and `figures/` package
-upstream before treating the experiment repo alone as the complete figure
-provenance root.
+(SHA-256 `480c4b9ec2d9ea464119a9336053f5bb18838049274d7c623687f282047c25aa`).
+It was not yet present at result commit `fde24e9`; that named gap was closed
+by committing the script, the four figure sets (SVG/PDF/PNG), the per-figure
+receipts, and the receipts index into the compact replication record at
+[`f5e906e`](https://github.com/tdj28/llm_selfref_pre/tree/f5e906e1737bc71bf20b642af1d698018eec82fe/docs/consciousness_sae_signed_dose_scan/results/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9/figures),
+after re-verifying every file hash against the receipt provenance blocks and
+`figure-receipts-index.json`. The experiment repo at `f5e906e` or later can
+therefore be treated as a complete figure provenance root.
 
 AI-assisted editorial review improved exposition but was not treated as
 scientific verification. Two bounded `gpt-5.6-sol` Pro passes were kept
@@ -782,6 +816,15 @@ cost `$0.6345`). Neither received raw tensors or row-level data.
 - <a id="ref-meta-llama-70b"></a>Meta, [Llama 3.3 70B Instruct model
   card](https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct/blob/6f6073b423013f6a7d4d9f39144961bfbfbc386b/README.md),
   pinned revision `6f6073b423013f6a7d4d9f39144961bfbfbc386b` (Llama Community License; gated weights).
+- <a id="ref-belrose-2023"></a>Belrose et al. (2023), [*Eliciting Latent Predictions from Transformers
+  with the Tuned Lens*](https://arxiv.org/abs/2303.08112), arXiv:2303.08112;
+  accessed 18 July 2026.
+- <a id="ref-hernandez-2024"></a>Hernandez et al. (2024), [*Linearity of Relation Decoding in Transformer
+  Language Models*](https://arxiv.org/abs/2308.09124), ICLR 2024;
+  arXiv:2308.09124; accessed 18 July 2026.
+- <a id="ref-rimsky-2024"></a>Rimsky et al. (2024), [*Steering Llama 2 via Contrastive Activation
+  Addition*](https://aclanthology.org/2024.acl-long.828/), ACL 2024,
+  doi:10.18653/v1/2024.acl-long.828; accessed 18 July 2026.
 - <a id="ref-taimeskhanov-2026"></a>Taimeskhanov, Vaiter, and Garreau (2026), [*Towards Understanding Steering
   Strength*](https://arxiv.org/abs/2602.02712), arXiv:2602.02712v2, 8 July
   2026; accepted at ICML 2026; accessed 17 July 2026.

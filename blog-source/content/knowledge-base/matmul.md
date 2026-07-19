@@ -2,7 +2,7 @@
 title: "Matmul"
 slug: "matmul"
 summary: "Matrix multiplication: the core linear-algebra operation behind attention, multilayer perceptron layers, final hidden-state-to-vocabulary projections often called unembeddings, and local linear maps represented by Jacobian matrices. Basic Linear Algebra Subprograms (BLAS) libraries commonly implement matrix-matrix cases with general matrix multiplication (GEMM) routines."
-draft: true
+draft: false
 pro_reviewed: false
 aliases:
   - /references/matmul/

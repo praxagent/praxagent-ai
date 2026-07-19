@@ -2,7 +2,7 @@
 title: "Dtype"
 slug: "dtype"
 summary: "The data type (dtype) of a tensor or array: the storage format shared by every element, such as float32, bfloat16, or int8. A dtype label names storage, not the whole arithmetic path."
-draft: true
+draft: false
 pro_reviewed: false
 aliases:
   - /references/dtype/
