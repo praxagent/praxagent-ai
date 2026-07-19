@@ -1,0 +1,79 @@
+{
+  "accessibility": {
+    "alt_text_embedded_in_svg_and_png_metadata": true,
+    "color_is_not_the_only_channel": true,
+    "text_alternative_required_at_embed": true
+  },
+  "alt_text": "Two paired dot plots show all 24 frozen prompt-by-direction cells over the 2%, 3%, and 4% dose panel, using 3% as the anchor. In the left plot, minimum cosine to the 3% anchor clusters between 0.993 and 0.996 for the realized source edit and J of the realized edit, above the 0.95 threshold, then drops to 0.778\u20130.848 for the actual final state, below threshold in all 24 cells. In the right plot, maximum dose-normalized RMS discrepancy from the 3% anchor is 0.089\u20130.117 for the first two quantities, below the 0.15 ceiling, but 0.572\u20130.703 for the actual final state, above threshold in every cell. Faint gray lines connect the same cell across the three quantities. Exact proportionality is preserved by a fixed linear map; here the approximately proportional delivered edits also remain within both numerical bounds after projection, while the downstream model response does not.",
+  "claim_scope": [
+    "Target-blind generic-direction mechanics validation only.",
+    "No SAE direction, paper prompt, semantic endpoint, behavior, or consciousness claim.",
+    "Fixed-census ranges are descriptive; readout bands are stability intervals, not population confidence intervals."
+  ],
+  "data_source": {
+    "artifact": "CALIBRATION_SUMMARY.json",
+    "path_at_generation": "CALIBRATION_SUMMARY.json",
+    "sections": [
+      "linearity_rows"
+    ],
+    "selection_and_aggregation": "Plot every frozen row without inferential aggregation; pair identical prompt and direction cells across the three prespecified quantities.",
+    "sha256": "b490b101c112f774ae7bffc9c54294a70b91c874c4cee78eddaa7890446c08f6"
+  },
+  "derived_values": {
+    "actual_final_cosine_range": [
+      0.778046727180481,
+      0.8478642106056213
+    ],
+    "actual_final_failure_count": 24,
+    "actual_final_slope_discrepancy_range": [
+      0.5717267394065857,
+      0.7033523321151733
+    ],
+    "j_of_realized_cosine_range": [
+      0.9931380748748779,
+      0.9959162473678589
+    ],
+    "j_of_realized_failure_count": 0,
+    "j_of_realized_slope_discrepancy_range": [
+      0.09031520783901215,
+      0.11694958060979843
+    ],
+    "linearity_gate_doses_percent": [
+      2,
+      3,
+      4
+    ],
+    "prompt_direction_cells": 24,
+    "realized_source_cosine_range": [
+      0.9948713183403015,
+      0.9961008429527283
+    ],
+    "realized_source_failure_count": 0,
+    "realized_source_slope_discrepancy_range": [
+      0.08856915682554245,
+      0.10139615833759308
+    ]
+  },
+  "description": "A paired census of the frozen 24 prompt-by-direction cells compares cross-dose linearity for the realized source edit, a fixed corpus-average Jacobian applied to that edit, and the model's actual final state.",
+  "figure_id": "fig-1-linearity-census",
+  "provenance": {
+    "audit_receipt_sha256": "176e2f7ea16349272f7db2b85eb4f9d7b5a7f9fcf2b6dbb74c7d88f02ca31ee1",
+    "generator": {
+      "manual_data_geometry": false,
+      "matplotlib_version": "3.10.8",
+      "path": "plot_signed_dose_scan_results.py",
+      "sha256": "0e9db35a7f1200d450b179ab38ecd9ce512bb95107cf613909ee2b71cc3ed39f"
+    },
+    "outputs": {
+      "fig-1-linearity-census.pdf": "b33e2189c97967df4af6fcfa09b3c10e1b4f5eaaaf75f3864bc553591a678806",
+      "fig-1-linearity-census.png": "cc3f4a3009391cfd66045b9df60801c5a53d043950dcb4876a767645dc2a58c1",
+      "fig-1-linearity-census.svg": "c2428755ee99c9bf9fb5219de400cb9dbf4b3f47bd40de1f2b98dbbccb5dfc46"
+    },
+    "protocol_version": "consciousness_sae_signed_dose_scan_v1.0.0",
+    "run": "signed-dose-a084caa-wl8obvtuq0ax8t-v2 / C9 audit recovery",
+    "study_id": "consciousness_sae_signed_dose_scan_v1",
+    "summary_receipt_sha256": "a65944745699e49809613b5cf436f2f76173e6c2b902746b47b9006125b2acaa"
+  },
+  "schema_version": 1,
+  "title": "The source edit stayed linear; the model response did not"
+}

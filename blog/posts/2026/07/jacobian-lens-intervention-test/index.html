@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>A Linear Nudge, a Nonlinear Wake - praxagent Research Notes</title>
+    
+    
+
+
+
+
+
+
+
+
+
+    
+    
+      
+      
+        
+      
+    
+    <meta name="description" content="We followed controlled hidden-state edits through the final 29 blocks of Llama 3.3 70B. The delivered edits were dose-linear and a fixed corpus-average Jacobian preserved that scaling, while the model&#39;s actual downstream response did not.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="praxagent Research Notes">
+    <meta property="og:title" content="A Linear Nudge, a Nonlinear Wake">
+    <meta property="og:description" content="We followed controlled hidden-state edits through the final 29 blocks of Llama 3.3 70B. The delivered edits were dose-linear and a fixed corpus-average Jacobian preserved that scaling, while the model&#39;s actual downstream response did not.">
+    <meta property="og:url" content="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/">
+    <meta property="og:image" content="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/og-card.png">
+    <meta property="og:image:alt" content="Dose-linearity gates at 2, 3, and 4 percent: all 24 source edits remain aligned, while none of the 24 actual final-state responses do.">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="A Linear Nudge, a Nonlinear Wake">
+    <meta name="twitter:description" content="We followed controlled hidden-state edits through the final 29 blocks of Llama 3.3 70B. The delivered edits were dose-linear and a fixed corpus-average Jacobian preserved that scaling, while the model&#39;s actual downstream response did not.">
+    <meta name="twitter:image" content="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/og-card.png">
+    <meta name="twitter:image:alt" content="Dose-linearity gates at 2, 3, and 4 percent: all 24 source edits remain aligned, while none of the 24 actual final-state responses do.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/styles-v2.css">
+    <link rel="stylesheet" href="/blog/blog.css">
+    <link rel="stylesheet" href="/blog/katex.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'neutral',
+        securityLevel: 'loose',
+        flowchart: { htmlLabels: true, curve: 'basis' }
+      });
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-scrolls industrial-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+
+            <div class="nav-menu">
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link active">Research Notes</a>
+                <a href="/blog/knowledge-base/" class="nav-link">Knowledge Base</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link active">Research Notes</a>
+            <a href="/blog/knowledge-base/" class="mobile-nav-link">Knowledge Base</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        
+
+
+<div class="blog-post">
+    <div class="container">
+        <article class="post-content">
+            <header class="post-header">
+                <h1 class="post-title">A Linear Nudge, a Nonlinear Wake</h1>
+                <div class="post-meta">
+                    <span class="post-date">July 18, 2026</span>
+                    <span class="post-author">by Timothy Jones</span>
+                </div>
+            </header>
+
+            
+            
+
+            
+            
+
+            
+            <div class="post-lead">
+                A transformer repeatedly transforms a high-dimensional hidden state as
+information moves through its layers. If that state is deliberately changed
+halfway through the network, do the remaining layers carry the change forward
+as a local linear model predicts, or bend it into a different trajectory? The
+answer matters for interpreting what activation steering does inside a
+language model.
+            </div>
+            
+
+            
+            <div class="key-result">
+                <div class="key-result-label">Key result</div>
+                Against a frozen first-order benchmark on Llama 3.3 70B, the split was
+complete: 24 of 24 delivered edits stayed dose-linear over the prespecified
+2%/3%/4% panel, their fixed corpus-average Jacobian references stayed inside
+the same bounds, and 0 of 24 actual final-state responses did. The released
+Jacobian beat five random-map controls but did not clear the stronger
+added-value-over-identity margin at the primary layer-50 comparison (logit
+advantage 0.011, below the frozen 0.02 threshold). Linear edit in, nonlinear
+hidden-state wake out, for these generic directions only.
+            </div>
+            
+
+            
+            <div class="table-of-contents">
+                <h3>Table of Contents</h3>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-question">The Question</a>
+      <ul>
+        <li><a href="#prior-work-contribution-and-non-claims">Prior work, contribution, and non-claims</a></li>
+      </ul>
+    </li>
+    <li><a href="#design-in-brief">Design in Brief</a>
+      <ul>
+        <li><a href="#what-one-measurement-is">What one measurement is</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-linear-edit-and-the-nonlinear-wake">The Linear Edit and the Nonlinear Wake</a>
+      <ul>
+        <li><a href="#what-linear-means-in-this-note">What “linear” means in this note</a></li>
+        <li><a href="#how-we-scored-pass-versus-fail">How we scored pass versus fail</a></li>
+        <li><a href="#what-the-census-found">What the census found</a></li>
+      </ul>
+    </li>
+    <li><a href="#requested-versus-realized-edit-fidelity-under-bf16">Requested-versus-realized edit fidelity under BF16</a>
+      <ul>
+        <li><a href="#what-we-observed">What we observed</a></li>
+      </ul>
+    </li>
+    <li><a href="#watch-the-wake-develop-across-depth">Watch the Wake Develop Across Depth</a></li>
+    <li><a href="#did-the-jacobian-lens-predict-the-wake">Did the Jacobian Lens Predict the Wake?</a></li>
+    <li><a href="#implications-for-sae-intervention-studies">Implications for SAE Intervention Studies</a></li>
+    <li><a href="#interpretation">Interpretation</a></li>
+    <li><a href="#discussion-a-taylor-series-view-of-the-result">Discussion: A Taylor-Series View of the Result</a></li>
+    <li><a href="#reproducibility-and-artifact-ledger">Reproducibility And Artifact Ledger</a></li>
+    <li><a href="#technical-appendices">Technical Appendices</a>
+      <ul>
+        <li><a href="#open-a-record-compact-publication-marker">Open a record: compact publication marker</a></li>
+        <li><a href="#open-a-record-linearity-census-receipt">Open a record: linearity census receipt</a></li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+            </div>
+            
+
+            <div class="post-body">
+                <div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+        
+    </div>
+    <div class="panel-content">
+        <strong>AI-use disclosure.</strong> Generative-AI tools helped implement, audit, execute,
+interpret, visualize, review, and draft this study. The author selected the
+research question, authorized the compute, has inspected the artifacts, and is
+responsible for the final text and claims. This is an independent,
+non-peer-reviewed Research Note. Verify numbers against the released receipts
+before relying on them.
+    </div>
+</div>
+
+<div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+        
+    </div>
+    <div class="panel-content">
+        <p><strong>Abstract.</strong> In this note, activation steering means additive
+residual-stream intervention: a controlled vector added to a model&rsquo;s
+<a href="/blog/knowledge-base/residual-stream/" class="ref-term">residual stream</a>. That is one common
+steering primitive, not a definition of the whole field. A
+<a href="/blog/knowledge-base/jacobian-lens/" class="ref-term">Jacobian lens</a> is a corpus-average first-order
+map from that mid-network state toward later residuals and vocabulary
+dispositions. Before attributing a downstream effect to the meaning of a
+steering direction, requested-versus-realized fidelity under low precision,
+linear transport, and nonlinear model dynamics need to be separated.</p>
+<p><strong>(1)</strong> In Llama 3.3 70B Instruct, we applied three unselected Gaussian directions
+after block 50 across eight prompts, varied dose from <code>0.5%</code> to <code>30%</code> of
+<a href="/blog/knowledge-base/rms/" class="ref-term">residual RMS</a>, and followed the signed response (the
+half-difference of paired \(\pm\)dose runs) through the remaining 29 blocks. Protocol, plan, and decision rules were frozen
+before outcomes
+(<a href="https://github.com/tdj28/llm_selfref_pre/commit/a084caafc2ec27860044d80d3b33912f656fd08a"><code>a084caa</code></a>).</p>
+<p><strong>(2)</strong> On the frozen <code>2%</code>/<code>3%</code>/<code>4%</code> panel, every one of the 24 prompt ×
+direction cases kept a dose-linear <em>source</em> edit, while every <em>final</em>
+hidden-state response failed <strong>both</strong> gates: direction drifted
+(\(c_{\min}\) fell to <code>0.778</code>–<code>0.848</code>, below <code>0.95</code>) and dose-normalized size
+mismatched (\(d_{\max}\) rose to <code>0.572</code>–<code>0.703</code>, above <code>0.15</code>). The fixed-J
+projection of the realized edits stayed inside the same bounds as an algebraic
+consistency reference, not as a claim that J predicted the model.</p>
+<p><strong>(3)</strong> Requested-versus-realized edit fidelity under
+<a href="/blog/knowledge-base/bf16/" class="ref-term">BF16</a> casting failed the frozen rule below <code>2%</code> and
+passed from <code>2%</code> through <code>30%</code> (the protocol&rsquo;s short name for this check is
+&ldquo;delivery&rdquo;). Median final-state <a href="/blog/knowledge-base/rms/" class="ref-term">RMS</a> gain was <code>1.82x</code>
+at <code>2%</code> and tapered to <code>1.48x</code> at <code>30%</code> over this fixed census.</p>
+<p><strong>(4)</strong> At the primary layer-50 comparison, released J beat five
+<a href="/blog/knowledge-base/random-j/" class="ref-term">random-J</a> maps but did not clear
+added-value-over-identity (logit advantage <code>0.011</code>, residual advantage slightly
+negative).</p>
+<p><strong>Takeaway.</strong> Linear edit in, nonlinear hidden-state wake out, for these
+generic directions on this model. The result motivates an SAE-specific dose
+scan; it does not establish an SAE, behavioral, or consciousness claim.</p>
+
+    </div>
+</div>
+
+<p>Study status: <strong>complete</strong> (pre-outcome freeze
+<a href="https://github.com/tdj28/llm_selfref_pre/commit/a084caafc2ec27860044d80d3b33912f656fd08a"><code>a084caa</code></a>;
+audited result release
+<a href="https://github.com/tdj28/llm_selfref_pre/commit/fde24e93770859bf0ec848b91eb0564d550a641d"><code>fde24e9</code></a>).
+Experiment package:
+<a href="https://github.com/tdj28/llm_selfref_pre/tree/main/experiments/consciousness_sae_signed_dose_scan"><code>experiments/consciousness_sae_signed_dose_scan</code></a>.
+Shipping table, sample records, and hashes are in the
+<a href="#appendix-release-inventory">appendix</a>.</p>
+<h2 id="the-question">The Question</h2>
+<p>Activation steering changes a model from the inside. In the additive form
+studied here, the researcher adds a controlled vector to the hidden state
+carried between <a href="/blog/knowledge-base/transformer/" class="ref-term">Transformer</a> blocks instead of changing the prompt; contrastive
+activation addition is the canonical modern example
+(<a href="#ref-rimsky-2024">Rimsky et al., 2024</a>). The field also includes adaptive,
+feature-targeted, and geometry-preserving variants, which this note does not
+test. The added vector can encode a proposed semantic direction, such as a
+sparse-autoencoder feature, or it can be deliberately generic, as in the
+experiment reported here.</p>
+<p>A Jacobian is a local derivative: the high-dimensional analogue of a tangent
+line. A <a href="/blog/knowledge-base/jacobian-lens/" class="ref-term">Jacobian lens</a>
+(<a href="#ref-gurnee-2026">Gurnee et al., 2026</a>) turns that idea into a reusable
+reference by averaging input-output Jacobians over many prompts and token
+positions. The result is one fixed linear map for each source layer: a
+corpus-average first-order approximation, not the exact Jacobian of the prompt
+under study. Gurnee et al. built the lens to surface verbalizable,
+vocabulary-oriented content; this note repurposes it as a transport benchmark
+for arbitrary residual perturbations, a different job from the one it was fit
+for. Whether averaged first-order maps carry useful structure is itself
+setting-dependent: relation-decoding work finds that mean Jacobian-based
+<a href="/blog/knowledge-base/affine-map/" class="ref-term">affine maps</a>
+decode some relations well and others poorly
+(<a href="#ref-hernandez-2024">Hernandez et al., 2024</a>).</p>
+<p>This distinction matters because a downstream change can have several causes.
+The requested intervention may not land accurately in low-precision arithmetic.
+A well-delivered edit may propagate as the linear map predicts. Or the model&rsquo;s
+remaining nonlinear blocks may reshape it. Before attributing a downstream
+effect to the meaning of a steering direction, these possibilities need to be
+separated.</p>
+<h3 id="prior-work-contribution-and-non-claims">Prior work, contribution, and non-claims</h3>
+<p><strong>Prior work.</strong> Gurnee et al. introduce the Jacobian lens and connect mid-layer
+directions to later residual and vocabulary geometry
+(<a href="#ref-gurnee-2026">2026</a>). Public fitting tooling and Llama maps come from
+Anthropic&rsquo;s reference implementation (<a href="#ref-anthropic-jlens">2026</a>) and
+Neuronpedia&rsquo;s Llama release (<a href="#ref-neuronpedia-jlens">2026</a>). Recent dose and
+steering work reports that intervention strength need not grow effects
+monotonically (<a href="#ref-taimeskhanov-2026">Taimeskhanov, Vaiter, and Garreau, 2026</a>)
+and that stronger SAE refusal steering can coincide with collateral
+over-refusal (<a href="#ref-obrien-2025">O&rsquo;Brien et al., 2025</a>). An earlier Praxagent
+note asks whether SAE steering leaves a detectable J-space fingerprint under
+matched access models (<a href="#ref-sae-steering">Jones, 2026</a>). This note does not
+invent the lens or the general fact that neural networks are nonlinear.</p>
+<p><strong>This note&rsquo;s contribution.</strong></p>
+<ul>
+<li>a prospectively frozen, target-masked signed dose scan on Llama 3.3 70B that
+retains requested edit, BF16-realized edit, fixed-J reference, and actual
+state separately at every dose and depth;</li>
+<li>a complete 24-cell census on the frozen <code>2%</code>/<code>3%</code>/<code>4%</code> linearity panel, with
+identity and five random-J controls on the primary predictive comparison;</li>
+<li>a public ledger in
+<a href="https://github.com/tdj28/llm_selfref_pre/tree/main/experiments/consciousness_sae_signed_dose_scan"><code>tdj28/llm_selfref_pre</code></a>
+with freeze and audited-release commits separated.</li>
+</ul>
+<p><strong>Not claimed.</strong></p>
+<ul>
+<li>that SAE decoder directions, as a class, are nonlinear downstream;</li>
+<li>that any specific SAE feature has its published semantic interpretation;</li>
+<li>that generated behavior, deception, or consciousness-related vocabulary
+changed;</li>
+<li>that the corpus-average J outperforms simply carrying the residual change
+forward (it did not clear that frozen margin here).</li>
+</ul>
+<h2 id="design-in-brief">Design in Brief</h2>
+<p>We tested this in
+<a href="https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct">Llama 3.3 70B Instruct</a>.
+Immediately after transformer block 50, we applied three stress-test directions
+to eight prompts, varied their magnitude from <code>0.5%</code> to <code>30%</code> of
+<a href="/blog/knowledge-base/rms/" class="ref-term">residual RMS</a>, and followed the response through the
+remaining 29 blocks. The directions were <em>unselected</em>: independent Gaussian
+vectors normalized to unit <a href="/blog/knowledge-base/rms/" class="ref-term">RMS</a>, generated from
+predeclared seeds and frozen before the experiment, with no step that picked
+them for meaning, expected effect, or resemblance to any SAE feature. They test
+the mechanics of perturbation transport rather than any concept.</p>
+<h3 id="what-one-measurement-is">What one measurement is</h3>
+<p>A &ldquo;run&rdquo; in this study is <strong>one deterministic forward pass, not a generation</strong>.
+The same network with the same weights reads the same fixed prompt; no tokens
+are sampled, so no temperature is involved anywhere. We record the hidden
+state the model computes at one fixed position (the continuation token, the
+final rendered prompt token) after each block.</p>
+<p>For each prompt there is one <em>clean</em> run with no intervention. For each
+direction and dose there are two <em>edited</em> runs, identical to the clean run in
+every respect except one: immediately after block 50, the direction vector,
+scaled to the requested dose, is added to (\(+b\) run) or subtracted from
+(\(-b\) run) the residual state at that position before block 51 continues.
+The model is therefore its own control. Any difference between runs at any
+later block can only have come from that one injected vector, because nothing
+else differs: weights, prompt, position, and arithmetic path are identical. The clean run
+also sets the dose scale: a dose of <code>2%</code> means the injected vector&rsquo;s
+<a href="/blog/knowledge-base/rms/" class="ref-term">RMS</a> is 2% of the clean run&rsquo;s layer-50 residual RMS
+for that prompt. The frozen grid comes to 2,896 forward passes in total.</p>
+<p>The paired edited runs act like pushing and then pulling the same knob. Any
+downstream change genuinely driven by the edit should flip sign between the
+two runs; anything that shows up either way (noise, or the model reacting to
+being disturbed at all) should not. Half the difference between the two runs
+keeps the flipping part and cancels the rest; we call that the <strong>signed
+response</strong> (the implementation&rsquo;s name for it is the central contrast). The
+non-flipping part, measured as the midpoint of the two runs relative to an
+unedited run, is kept as a separate common-mode diagnostic. Because each
+\(+\)/\(-\) pair collapses into one curve, the census has 24 prompt ×
+direction curves rather than 48 independent observations. Exact construction,
+provenance, dose grid, and pairing equations are in
+<a href="#appendix-a-exact-test">Appendix A</a>.</p>
+<p><img src="diagram-2-signed-runs.svg" alt="Schematic of one measurement. Three horizontal timelines show three deterministic forward passes of the same network on the same prompt, with vertical ticks marking blocks 0, 50, and 79. The clean run has no edit and ends at hidden state h clean. The plus-b run has a circled plus at block 50 labeled b times v added to the residual here, and ends at h plus. The minus-b run has a circled minus at block 50 labeled b times v subtracted from the residual here, and ends at h minus. Below the timelines, two equations: signed response equals h plus minus h minus, over two, which keeps only what flips when the edit&rsquo;s sign flips; and common mode equals the average of h plus and h minus, minus h clean, which keeps what appears either way and is retained as a disturbance diagnostic."></p>
+<p class="figure-note">Diagram: how one measurement is built from three forward passes. This is a hand-drawn conceptual schematic, not a receipt-backed data figure; the exact pairing equations are in <a href="#appendix-a-exact-test">Appendix A</a>.</p>
+<p>At every dose, the analysis retained four quantities: the edit <em>requested</em> in
+high precision; the edit <em>realized</em> after casting into
+<a href="/blog/knowledge-base/bf16/" class="ref-term">BF16</a> activations (see
+<a href="#requested-versus-realized-edit-fidelity-under-bf16">requested-versus-realized fidelity</a>);
+the downstream change from the fixed Jacobian map; and the downstream change
+the model actually produced. Separating requested from realized keeps
+low-precision rounding from being mistaken for nonlinear model dynamics.</p>
+<p><img src="diagram-1-pipeline.svg" alt="Schematic pipeline of the experiment. A requested edit built in float32 is cast to BF16 to become the realized edit that actually lands after block 50; a dashed fidelity gate between them notes that requested-versus-realized checks fail below 2 percent dose and pass from 2 through 30 percent. From the realized edit two branches diverge: the fixed corpus-average Jacobian produces the predicted wake with one matrix multiply, while the model&rsquo;s remaining blocks 51 through 79 produce the actual wake. Two question boxes at the bottom summarize the analyses: dose-linearity gates on the 2, 3, and 4 percent panel where the realized edit and fixed-J pass 24 of 24 and the actual final passes 0 of 24, and the predictive comparison where J beats five random maps but not identity at layer 50."></p>
+<p class="figure-note">Diagram: the study decomposition (requested edit, realized edit, predicted wake, actual wake) and the two frozen questions asked of them. Conceptual schematic; the quoted pass counts are from the audited census reported in Figures 1–4.</p>
+<p>Every decision rule (which doses count, which quantities are compared, and
+the numeric thresholds for passing) was written down and committed to git
+before any results were computed. The ordering matters: thresholds chosen
+after seeing the data can make a &ldquo;pass&rdquo; or &ldquo;fail&rdquo; an artifact of where the
+goalposts were placed, whereas rules frozen first let the experiment genuinely
+come out either way. Concretely, the frozen rule says: once a small edit
+demonstrably landed intact, the model&rsquo;s final response counts as linear only
+if scaling the dose across <code>2%</code>/<code>3%</code>/<code>4%</code> scales the response by the same
+factor while keeping nearly the same direction, within the two numeric bounds
+defined below. Failing that rule means the local-linear description broke by a
+prespecified margin on this panel. It does not mean &ldquo;networks are nonlinear&rdquo;
+in general, and it is not an estimate of how often this happens across other
+models or directions.</p>
+<h2 id="the-linear-edit-and-the-nonlinear-wake">The Linear Edit and the Nonlinear Wake</h2>
+<h3 id="what-linear-means-in-this-note">What “linear” means in this note</h3>
+<p>Imagine a dimmer switch. If the response is <strong>dose-linear</strong>, turning the dose
+from <code>2%</code> to <code>4%</code> should roughly double the size of the change while leaving
+its direction alone. In vector language: the hidden-state response at dose
+\(b\) should look like \(b\cdot v\) for one fixed direction \(v\).</p>
+<p><strong>Nonlinear</strong>, here, means that rule fails in a measured way: as dose changes,
+the response rotates (direction drifts) or its size stops tracking the dose
+(amplification or compression). We are not using “nonlinear” as a vibe word for
+“the network has nonlinear layers.” Transformers are nonlinear by construction.
+The question is whether <em>this</em> dose–response curve stayed close enough to a
+straight line through the origin on a small, prechosen panel.</p>
+<p>A <strong>cell</strong> is one prompt paired with one generic direction: 8 prompts × 3
+directions = 24 cells. For each cell we track the signed response across dose
+(the \(+\)dose run minus the \(-\)dose run, halved, as defined in the design
+section), so the 24 cells are 24 curves, not 48 independent signed runs.</p>
+<p>We apply the same linearity test to three quantities in each cell:</p>
+<ol>
+<li><strong>Source:</strong> the edit that actually landed after block 50.</li>
+<li><strong>Fixed J:</strong> that same realized edit pushed through the corpus-average
+Jacobian map (an algebraic straight-line reference).</li>
+<li><strong>Actual final:</strong> the model’s real residual change after block 79.</li>
+</ol>
+<h3 id="how-we-scored-pass-versus-fail">How we scored pass versus fail</h3>
+<p>The frozen panel is \(B=\{0.02,0.03,0.04\}\) (<code>2%</code>, <code>3%</code>, <code>4%</code>), with <code>3%</code> as
+the anchor. That panel is the first three-dose window where every source edit
+already cleared the requested-versus-realized fidelity checks; Figure 2 shows
+that boundary.</p>
+<p>Every response vector \(x_b\) below is built from the paired runs described in
+the design section: for the <em>source</em>, it is the signed response measured right
+after block 50 (the half-difference of the \(+b\) and \(-b\) runs at the
+continuation position); for the <em>actual final</em>, the same half-difference
+measured after block 79; for <em>fixed J</em>, the source vector pushed through the
+released linear map. No new runs, prompts, or sampling are involved; the
+three quantities are three readouts of the same 2,896 deterministic forward
+passes.</p>
+<p>For a response vector \(x_b\) at dose \(b\), form the dose-normalized vector</p>
+\[
+q_b = \frac{x_b}{s_b}.
+\]<p>The divisor \(s_b\) is the size of the input being scaled. For the source
+edit, \(s_b\) is the requested dose fraction (<code>0.02</code>, <code>0.03</code>, <code>0.04</code>). For J
+and the actual final state, \(s_b\) is instead the measured
+<a href="/blog/knowledge-base/rms/" class="ref-term">RMS</a> size of the edit that <em>actually landed</em> at block
+50, expressed as the same kind of fraction. The reason for the switch: those
+two quantities are downstream of the realized edit, so the fair question is
+&ldquo;per unit of edit that landed, what came out?&rdquo;, not &ldquo;per unit of edit we
+asked for.&rdquo; Dividing by \(s_b\) puts every dose on that per-unit scale. If
+doubling the landed edit exactly doubled the downstream response without
+turning it, the normalized vectors \(q_b\) at <code>2%</code>, <code>3%</code>, and <code>4%</code> would all
+be the same vector; how far they spread apart is what the two statistics below
+measure.</p>
+<p>Two statistics then ask whether the \(q_b\) stay near the <code>3%</code> anchor
+\(q_{0.03}\):</p>
+\[
+c_{\min} = \min_{b\in B}\cos(q_b,q_{0.03}),
+\qquad
+d_{\max} = \max_{b\in B}
+\frac{\operatorname{RMS}(q_b-q_{0.03})}{\operatorname{RMS}(q_{0.03})}.
+\]<ul>
+<li>\(c_{\min}\) is directional agreement (1 means identical direction).</li>
+<li>\(d_{\max}\) is relative size mismatch after dose normalization (0 means
+identical scale and shape). The implementation calls \(d_{\max}\) “slope
+discrepancy.”</li>
+</ul>
+<p>A cell <strong>passes</strong> for a quantity when both frozen gates hold:</p>
+\[
+c_{\min}\ge 0.95
+\quad\text{and}\quad
+d_{\max}\le 0.15.
+\]<p>Fail either gate and that quantity is scored <strong>nonlinear</strong> on this panel.
+Exact construction of \(x_b\) (signed branches, common-mode diagnostic) is in
+<a href="#appendix-a-exact-test">Appendix A</a>.</p>
+<div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+        
+    </div>
+    <div class="panel-content">
+        <strong>Why these two gates, and why these numbers?</strong> Two gates because
+proportionality can fail in exactly two ways: the response can <em>rotate</em>
+(caught by \(c_{\min}\)) or its per-unit-dose <em>size and shape</em> can drift
+(caught by \(d_{\max}\)); one statistic per failure mode. The specific values
+are frozen judgment calls, not derived constants. A cosine floor of <code>0.95</code>
+tolerates directional wobble inside roughly an 18° cone, and a discrepancy
+ceiling of <code>0.15</code> sits comfortably above the roughly <code>0.10</code> relative deviation
+that BF16 delivery alone induces in the source edits, so a faithfully landed
+edit cannot fail the panel merely because of rounding noise. What protects the
+conclusion is not the exact numbers but two facts: the thresholds were
+committed before any outcome was seen, and the results landed nowhere near
+them. Sources and fixed-J scored \(c_{\min}\ge 0.993\) and
+\(d_{\max}\le 0.117\); actual finals scored \(c_{\min}\le 0.848\) and
+\(d_{\max}\ge 0.572\). Any cosine floor between <code>0.85</code> and <code>0.99</code>, and any
+discrepancy ceiling between <code>0.12</code> and <code>0.57</code>, produces the identical
+24/24-versus-0/24 split.
+    </div>
+</div>
+
+<p><img src="diagram-3-dose-gates.svg" alt="Schematic of what the two gates measure. Left panel, labeled source edit, dose-linear, 24 of 24 pass: three per-unit-dose vectors for the 2, 3, and 4 percent doses drawn from a common origin lie exactly on top of one another, illustrating same direction and same size. Right panel, labeled actual final state, bent, 0 of 24 pass: the three per-unit-dose vectors fan apart at visibly different angles and lengths, with the observed ranges quoted: minimum cosine fell to 0.778 to 0.848 and the size discrepancy rose to 0.572 to 0.703. A caption line states that cosine catches rotation and the dose-normalized RMS discrepancy catches size and shape drift, one gate per failure mode."></p>
+<p class="figure-note">Diagram: the two failure modes the frozen gates test, drawn as dose-normalized vectors \(q_b\). Conceptual schematic: arrow geometry is illustrative; the quoted numeric ranges are the audited census values also shown in Figure 1.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">B</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ANCHOR</span> <span class="o">=</span> <span class="mf">0.03</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">rms</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">x</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">cosine</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">dose_linearity_gates</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x_by_dose</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="n">s_by_dose</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="o">*</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cosine_min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.95</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">slope_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.15</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Return (c_min, d_max, &#39;pass&#39;|&#39;fail&#39;) for one cell and one quantity.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">q</span> <span class="o">=</span> <span class="p">{</span><span class="n">b</span><span class="p">:</span> <span class="n">x_by_dose</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="o">/</span> <span class="n">s_by_dose</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">B</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">q_anchor</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="n">ANCHOR</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c_min</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">cosine</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">b</span><span class="p">],</span> <span class="n">q_anchor</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">B</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">d_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">rms</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="o">-</span> <span class="n">q_anchor</span><span class="p">)</span> <span class="o">/</span> <span class="n">rms</span><span class="p">(</span><span class="n">q_anchor</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">B</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">status</span> <span class="o">=</span> <span class="s2">&#34;pass&#34;</span> <span class="k">if</span> <span class="n">c_min</span> <span class="o">&gt;=</span> <span class="n">cosine_min</span> <span class="ow">and</span> <span class="n">d_max</span> <span class="o">&lt;=</span> <span class="n">slope_max</span> <span class="k">else</span> <span class="s2">&#34;fail&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">c_min</span><span class="p">,</span> <span class="n">d_max</span><span class="p">,</span> <span class="n">status</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Example call for one prompt × direction cell:</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># c_min, d_max, status = dose_linearity_gates(source_x, source_s)</span>
+</span></span></code></pre></div><div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+        
+    </div>
+    <div class="panel-content">
+        <strong>Why normalize by dose first?</strong> Without dividing by \(s_b\), a perfectly
+linear response \(x_b=b\,v\) would still change length across the panel, and a
+naive cosine between raw \(x_{0.02}\) and \(x_{0.04}\) would not isolate the
+failure mode we care about. Dose normalization asks whether the <em>per-unit-dose</em>
+vector stayed put.
+    </div>
+</div>
+
+<h3 id="what-the-census-found">What the census found</h3>
+<p><strong>Against that frozen first-order benchmark, the split was complete: 24 of 24
+source edits passed both gates, 24 of 24 fixed-J references also passed, and
+0 of 24 actual final-state responses did.</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Quantity</th>
+          <th style="text-align: right">\(c_{\min}\) (need \(\ge 0.95\))</th>
+          <th style="text-align: right">\(d_{\max}\) (need \(\le 0.15\))</th>
+          <th style="text-align: right">Cells passing</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Realized source edit</td>
+          <td style="text-align: right"><code>0.995</code>–<code>0.996</code></td>
+          <td style="text-align: right"><code>0.089</code>–<code>0.101</code></td>
+          <td style="text-align: right">24 / 24</td>
+      </tr>
+      <tr>
+          <td>Fixed J of that edit</td>
+          <td style="text-align: right"><code>0.993</code>–<code>0.996</code></td>
+          <td style="text-align: right"><code>0.090</code>–<code>0.117</code></td>
+          <td style="text-align: right">24 / 24</td>
+      </tr>
+      <tr>
+          <td>Actual final state</td>
+          <td style="text-align: right"><code>0.778</code>–<code>0.848</code></td>
+          <td style="text-align: right"><code>0.572</code>–<code>0.703</code></td>
+          <td style="text-align: right">0 / 24</td>
+      </tr>
+  </tbody>
+</table>
+<p>So the finals did not fail by a hair on one metric. In every cell they failed
+<strong>both</strong> rules: the dose-normalized response rotated away from the <code>3%</code> anchor
+(cosine well below <code>0.95</code>) <em>and</em> its per-unit-dose size/shape drifted far past
+the <code>0.15</code> ceiling. Source and fixed-J curves, by contrast, sat near cosine
+<code>1</code> with only about <code>0.1</code> relative discrepancy.</p>
+<p>In plain English: at the intervention site the delivered edit behaved like a
+dimmer. After 29 more blocks, turning the dose from <code>2%</code> to <code>4%</code> no longer
+gave “same arrow, twice as long.” The arrow bent, and the length stopped
+tracking dose. The fixed Jacobian cannot invent that failure by itself: a
+fixed linear map would preserve exact proportionality, and here the
+approximately proportional source curves also stayed inside both numerical
+bounds after projection. The curvature therefore sits in the model’s mapping
+from the realized post-block-50 edit to the post-block-79 residual, not in
+dose-dependent mangling of the source edit. Fixed J is an algebraic and
+implementation control here; it is not evidence that J predicted the model
+accurately. Predictive accuracy is tested separately in Figure 4.</p>
+<p class="figure-note">Table: frozen-panel linearity census ranges across the 24 cells. Provenance: <a href="fig-1-linearity-census.receipt.json">fig-1-linearity-census.receipt.json</a> · <a href="provenance.json"><code>provenance.json</code></a>.</p>
+<p>Figure 1 shows the complete census rather than an average. Its three horizontal
+categories are the realized source edit, J applied to that realized edit, and
+the actual final state. The left panel plots \(c_{\min}\) against the <code>0.95</code>
+floor; the right plots \(d_{\max}\) against the <code>0.15</code> ceiling. Each connecting
+line is one prespecified prompt × direction cell.</p>
+<p><img src="fig-1-linearity-census.svg" alt="Two paired dot plots show all 24 frozen prompt-by-direction cells over the 2%, 3%, and 4% dose panel, using 3% as the anchor. In the left plot, minimum cosine to the 3% anchor clusters between 0.993 and 0.996 for the realized source edit and J of the realized edit, above the 0.95 threshold, then drops to 0.778–0.848 for the actual final state, below threshold in all 24 cells. In the right plot, maximum dose-normalized RMS discrepancy from the 3% anchor is 0.089–0.117 for the first two quantities, below the 0.15 ceiling, but 0.572–0.703 for the actual final state, above threshold in every cell. Faint gray lines connect the same cell across the three quantities. Exact proportionality is preserved by a fixed linear map; here the approximately proportional delivered edits also remain within both numerical bounds after projection, while the downstream model response does not."></p>
+<p class="figure-note">Figure 1: source linearity versus actual downstream curvature. Each line is one of 24 prompt × direction central-contrast curves over the prespecified <code>2%</code>/<code>3%</code>/<code>4%</code> panel. In these data, the fixed linear operator left the near-proportional delivered curves within both numerical bounds; that panel is a consistency reference, not a test of predictive accuracy. The model's actual final hidden states satisfy neither criterion in any cell. Dashed lines mark thresholds fixed before outcomes. Provenance: <a href="fig-1-linearity-census.receipt.json">receipt</a> · <a href="plot_signed_dose_scan_results.py"><code>plot_signed_dose_scan_results.py</code></a> · <a href="provenance.json"><code>provenance.json</code></a>. Verify (needs the on-request audited summary): <code>python3 plot_signed_dose_scan_results.py --summary CALIBRATION_SUMMARY.json --output-dir . --verify --post index.md</code>.</p>
+<h2 id="requested-versus-realized-edit-fidelity-under-bf16">Requested-versus-realized edit fidelity under BF16</h2>
+<p>“Delivery” is <strong>not</strong> a standard ML term. It is this study’s short name for a
+simple fidelity check: does the intervention vector we <em>requested</em> match the
+vector that was <em>realized</em> in the residual after casting into the model’s
+number format?</p>
+<p>That format here is <a href="/blog/knowledge-base/bf16/" class="ref-term">BF16</a> (bfloat16): a 16-bit
+floating-point type with FP32-like range but much coarser precision, so many
+float32 values round to the same BF16 number. For bit layouts, casting demos,
+and accumulation swamping, see the Deep Dive
+<a href="/blog/knowledge-base/deep-dives/bf16-fp16-fp32/">BF16, FP16, and FP32: Precision, Range, Swamping, and Determinism</a>.
+The protocol builds the requested edit in float32 along a
+unit-<a href="/blog/knowledge-base/rms/" class="ref-term">RMS</a> direction, then casts it into the BF16
+residual hook. Write \(e^{\mathrm{req}}\) for the intended vector and
+\(e^{\mathrm{real}}\) for the change actually present after the hook. If
+rounding were negligible, those two would nearly match.</p>
+<p>We score that match with the same two geometric ideas as linearity, now
+comparing request to realization at a single dose:</p>
+\[
+\cos\!\big(e^{\mathrm{req}},e^{\mathrm{real}}\big)
+\ge 0.995,
+\qquad
+\frac{\operatorname{RMS}\big(e^{\mathrm{real}}-e^{\mathrm{req}}\big)}
+{\operatorname{RMS}\big(e^{\mathrm{req}}\big)}
+\le 0.10.
+\]<p>The full gate also checks both signed branches, their signed response (the
+half-difference defined in the design section), and the common-mode response.
+Fail any piece and that cell fails the fidelity check at that dose.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Uses the same rms() / cosine helpers as the linearity sketch above.</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">requested_realized_ok</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">e_req</span><span class="p">,</span> <span class="n">e_real</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">cos_min</span><span class="o">=</span><span class="mf">0.995</span><span class="p">,</span> <span class="n">rel_rmse_max</span><span class="o">=</span><span class="mf">0.10</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cosine</span><span class="p">(</span><span class="n">e_req</span><span class="p">,</span> <span class="n">e_real</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">cos_min</span>
+</span></span><span class="line"><span class="cl">        <span class="ow">and</span> <span class="n">rms</span><span class="p">(</span><span class="n">e_real</span> <span class="o">-</span> <span class="n">e_req</span><span class="p">)</span> <span class="o">/</span> <span class="n">rms</span><span class="p">(</span><span class="n">e_req</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">rel_rmse_max</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></div><p>Why this matters: if a tiny requested dose mostly rounds away, a “nonlinear”
+downstream curve could just be noise from a mangled source edit. The fidelity
+check asks whether the source edit is faithful enough to blame the model for
+what happens next.</p>
+<h3 id="what-we-observed">What we observed</h3>
+<p>At very small magnitudes, that rounding is not negligible. In this exact model,
+hook, prompt panel, and set of generic directions, the three smallest dose
+levels did not meet the predefined fidelity bounds. All 24 cells failed the
+full paired-branch rule at <code>0.5%</code> and <code>1%</code>, and 18 of 24 did so at <code>1.5%</code>.
+Every cell passed from <code>2%</code> through <code>30%</code>.</p>
+<p>At <code>2%</code>, requested-versus-realized cosine had a median of <code>0.997</code>, while median
+relative RMSE was <code>0.076</code>. Passing does not mean requested and realized edits
+were bit-identical. It does show that the final-state nonlinearity on the
+<code>2%</code>/<code>3%</code>/<code>4%</code> panel cannot be blamed on the low-dose fidelity failure seen
+below <code>2%</code>. The boundary is consistent with BF16 rounding, but the experiment does not
+isolate rounding from other implementation details such as the casting path,
+kernel ordering, or fused operations. It is an empirical property of this
+implementation and panel, not a universal BF16 limit; a datatype and hook-path
+ablation (FP32, FP16, alternative hook implementations) would be the direct
+mechanism test.</p>
+<p><img src="fig-3-bf16-delivery-floor.svg" alt="Three aligned plots show the low-dose requested-versus-realized fidelity transition under BF16 execution in this model and intervention setup, across requested doses from 0.5% to 30%. Directional cosine rises sharply from a median 0.961 at 0.5% toward 1.0 and clears its 0.995 threshold by the eligible panel. Relative RMSE falls from a median 0.287 at 0.5% through its 0.10 ceiling near 1.5–2% and continues toward zero. Pale bands show the minimum-to-maximum range across the fixed 24-cell census, not uncertainty. The bottom strip reports the full paired-branch fidelity rule: 24 failed cells at 0.5%, 24 at 1%, 18 at 1.5%, and zero from 2% through 30%."></p>
+<p class="figure-note">Figure 2: low-dose requested-versus-realized fidelity under this BF16 setup (file stem <code>fig-3-bf16-delivery-floor</code>; “delivery” is the protocol nickname). The upper curves show the central signed estimate; the bottom strip applies the complete rule to both signed branches, their central contrast, and their common-mode response. Pale envelopes are the observed minimum and maximum across the fixed census (all 24 prespecified prompt × direction cells), not confidence intervals. Provenance: <a href="fig-3-bf16-delivery-floor.receipt.json">receipt</a> · <a href="plot_signed_dose_scan_results.py"><code>plot_signed_dose_scan_results.py</code></a> · <a href="provenance.json"><code>provenance.json</code></a>.</p>
+<h2 id="watch-the-wake-develop-across-depth">Watch the Wake Develop Across Depth</h2>
+<p>At each state, gain is the root-mean-square magnitude of the signed
+response, \((h_{+}-h_{-})/2\), divided by the RMS magnitude of the realized
+signed source edit. It is <code>1x</code> at state 50 by construction. A gain of <code>1.8x</code>,
+for example, means the downstream signed response is 80% larger in RMS than
+the edit that landed. Median gain generally accumulated through later blocks,
+although individual trajectories were not uniformly monotone. Every tested
+trajectory ended above <code>1x</code>.</p>
+<p>The median final-state gain was <code>1.82x</code> at <code>2%</code>, <code>1.66x</code> at <code>3%</code>, <code>1.60x</code> at
+<code>4%</code>, <code>1.55x</code> at <code>8%</code>, and <code>1.48x</code> at <code>30%</code>. Relative amplification was
+generally larger at lower eligible doses (doses where every cell passed the
+requested-versus-realized checks), though the complete half-point dose series
+was not perfectly monotone.</p>
+<p>Figure 3 makes the depth and dose axes explicit. The upper heatmap runs dose
+horizontally and post-block state vertically; the lower panel shows final-state
+gain across dose for every one of the 24 cells, with their median emphasized.</p>
+<p><img src="fig-2-dose-depth-arc.svg" alt="A two-panel dose-by-depth view of the complete downstream response. The upper heatmap places requested dose from 0.5% to 30% on the horizontal axis and states 50 through 79 on the vertical axis. Every state-50 cell begins at gain 1 because gain is normalized to the realized edit. Median gain generally accumulates in later blocks, reaching its largest values at the smallest doses and generally tapering as dose rises. A dashed vertical line marks 2%, the first dose where every cell met the frozen delivery criteria. The lower panel shows all 24 final-state trajectories as pale lines and their median as a dark line. The median is 1.82 times at 2%, 1.66 at 3%, 1.60 at 4%, 1.55 at 8%, and 1.48 at 30%. The 0.5–1.5% region is shaded because its delivery gate failed."></p>
+<p class="figure-note">Figure 3: the measured hidden-state response from the intervention point to the final block (file stem <code>fig-2-dose-depth-arc</code>). The heatmap uses fixed-panel medians (the median across the same prespecified 24 cells at each dose and layer); the lower panel retains every trajectory. These are descriptive census summaries of exactly these 24 cells, not population estimates. Provenance: <a href="fig-2-dose-depth-arc.receipt.json">receipt</a> · <a href="plot_signed_dose_scan_results.py"><code>plot_signed_dose_scan_results.py</code></a> · <a href="provenance.json"><code>provenance.json</code></a>.</p>
+<h2 id="did-the-jacobian-lens-predict-the-wake">Did the Jacobian Lens Predict the Wake?</h2>
+<p>Cross-dose curvature and predictive usefulness at one dose are logically
+independent: a response can bend as dose changes while a first-order map still
+captures useful structure at a fixed dose. Figure 1 used J only as a linear
+algebra reference. Predictive accuracy requires a different test: compare J&rsquo;s
+prediction with the final response and ask whether it beats cheap alternatives.
+We used two: identity, which carries the observed source-state change forward
+unchanged (a geometry-free transport baseline, not a vocabulary readout such
+as a <a href="/blog/knowledge-base/logit-lens/" class="ref-term">logit lens</a> or tuned lens
+(<a href="#ref-belrose-2023">Belrose et al., 2023</a>)), and five prespecified
+<a href="/blog/knowledge-base/random-j/" class="ref-term">random-J</a> controls, which apply seeded sign and
+coordinate permutations to the released map.</p>
+<p>The layer-50 source state was selected in advance for the primary comparison.
+On this fixed <code>3%</code> panel, the released J cleared the absolute thresholds and
+decisively beat the strongest of five random maps in both metrics. For
+fixed-token logit correlation (agreement between predicted and observed score
+changes for 2,048 prespecified vocabulary tokens), real J scored <code>0.344</code>; its
+advantage over the strongest random map was <code>0.286</code>, with a 95% fixed-panel
+stability lower bound of <code>0.271</code>. In residual space, the corresponding advantage
+was <code>0.337</code>, with a lower bound of <code>0.321</code>.</p>
+<p>Identity was the harder baseline. J&rsquo;s logit advantage over identity was only
+<code>0.011</code>, with a lower bound of <code>-0.0015</code>, below the predefined <code>0.02</code> margin.
+Its residual-space advantage was slightly negative (<code>-0.0015</code>). No tested
+source-state layer cleared the added-value-over-identity margin in both spaces.
+The bounded conclusion is therefore precise: the released map contains
+structure beyond these five randomizations, but it did not show added value
+over simply carrying the residual change forward unchanged.</p>
+<p>This comparison cannot separate two explanations for that null: that
+first-order transport itself adds little for these directions, or that corpus
+averaging washes out prompt-local structure that a per-prompt Jacobian would
+capture. A prompt-specific Jacobian baseline, run on the same cells, is the
+natural next control and was not part of this study.</p>
+<p>For Figure 4, each horizontal position has a different source-state layer but
+the same target. At source layer \(\ell\), both \(J_\ell\) and identity receive
+the observed signed residual change after block \(\ell\) and predict the
+post-block-79 change. Only layer 50 is the intervention site. Layers 51–78 are
+shorter-horizon diagnostics after the model has already transformed the edit.</p>
+<p><img src="fig-4-j-versus-identity.svg" alt="Four profiles compare predictions from source-state layers 50 through 78 to the same post-block-79 target. The left column shows that absolute released-J fixed-token logit correlation and residual cosine both exceed their frozen thresholds at every source layer and rise as the source approaches the target. The right column shows released J minus identity. Logit advantage generally rises above 0.02 after early layers, but residual advantage remains below the 0.02 margin at 28 of 29 source layers. Its sole residual pass at layer 78 does not coincide with a logit pass. At source layer 50, selected in advance for the primary comparison, logit correlation is 0.344 but J minus identity is only 0.011 with a lower bound below zero; residual J minus identity is slightly negative. No source layer satisfies the identity condition for both metrics. Shaded bands are 20,000-replicate prompt-resampling stability intervals over eight fixed prompts, not population confidence intervals."></p>
+<p class="figure-note">Figure 4: prediction from successive source states to one fixed target. For each source layer \(\ell=50,\ldots,78\), \(J_\ell\) and identity receive the observed central residual change after block \(\ell\) and are compared with the same post-block-79 target. Layer 50 was selected in advance for the primary comparison; layers 51–78 are descriptive shorter-horizon diagnostics, not additional intervention sites. Bands are fixed-panel stability intervals obtained by resampling the eight prompts and do not support population-level inference. Provenance: <a href="fig-4-j-versus-identity.receipt.json">receipt</a> · <a href="plot_signed_dose_scan_results.py"><code>plot_signed_dose_scan_results.py</code></a> · <a href="provenance.json"><code>provenance.json</code></a>.</p>
+<h2 id="implications-for-sae-intervention-studies">Implications for SAE Intervention Studies</h2>
+<p>The measurement design transfers to an SAE-specific study; the dose boundary
+does not. A direct extension would replace the generic vectors with target SAE,
+matched-SAE, and norm-matched generic directions, then rerun the
+requested-versus-realized fidelity and common-mode checks for every vector.
+The <code>2%</code>/<code>3%</code>/<code>4%</code> panel is only a
+candidate calibration starting point. Any semantic or behavioral extension
+would also need its own controls and never-intervened counterfactual branch.
+The generic-direction anomaly motivates that experiment; it does not confirm
+an SAE mechanism. The target features, prompts, dose panel, semantic endpoints,
+and analysis rules would need to be specified before their outcomes are
+inspected.</p>
+<p>Two cheaper follow-ups would sharpen the present result before any semantic
+extension: the datatype and hook-path ablation named above, which would turn
+&ldquo;consistent with BF16&rdquo; into a mechanism test, and a small public notebook that
+exports the requested edit, realized edit, fixed-J projection, and actual
+final residual for one prompt, one direction, and one layer at each dose, so
+the study&rsquo;s central decomposition can be audited in minutes rather than hours.</p>
+<h2 id="interpretation">Interpretation</h2>
+<p>Five conclusions follow from the experiment:</p>
+<ul>
+<li>this setup has an observed low-dose requested-versus-realized fidelity
+boundary under BF16 casting, with universal passage beginning at <code>2%</code> for
+the tested generic directions;</li>
+<li>above that boundary, the realized edit remains dose-linear over the primary
+<code>2%</code>/<code>3%</code>/<code>4%</code> panel, and the approximately proportional curves empirically
+remain within both bounds after fixed-J projection;</li>
+<li>the actual final residual state changes direction and scale enough to fall
+outside both predefined linearity bounds in every cell;</li>
+<li>the full arc shows a dose-dependent transformation generally accumulating
+through the remaining blocks; and</li>
+<li>the released J beats five randomized maps but does not clear the stronger
+added-value-over-identity rule at any tested source-state layer.</li>
+</ul>
+<p>These conclusions apply to the 24 tested prompt × direction combinations and to
+hidden-state dynamics. The experiment did not test generated behavior, SAE
+features, deception, or consciousness-related vocabulary.</p>
+<p>The depth arc localizes where the first-order description stops being adequate;
+it does not identify the mechanism that bends the trajectory. Mechanistic
+explanations suggested by this pattern are hypotheses for a new study whose
+mechanism test is specified before data inspection.</p>
+<p>Taken together, the result is both sharp and bounded: <strong>linear edit in,
+nonlinear hidden-state wake out.</strong> The corpus-average Jacobian sees nonrandom
+structure in that wake, but it does not outperform the simplest strong
+baseline: carrying the residual change forward unchanged.</p>
+<h2 id="discussion-a-taylor-series-view-of-the-result">Discussion: A Taylor-Series View of the Result</h2>
+<p>This section steps back from the audited numbers and asks what kind of object
+a Jacobian lens is, and why the observed split (every source edit linear,
+every fixed-J projection linear, every actual final state bent) is exactly
+the pattern a linearization story predicts. Everything here is
+interpretation; the census results above stand on their own, and the
+hypotheses below would need their own prespecified tests.</p>
+<p><strong>The fixed-J &ldquo;pass&rdquo; was never evidence about the network.</strong> A fixed linear
+map preserves proportionality automatically: if the input curve is
+\(x_b \approx b\,v\), then \(Jx_b \approx b\,(Jv)\) for <em>any</em> matrix \(J\);
+a random one would have passed the same gates. That is why Figure 1 treats
+the fixed-J column as an algebraic consistency reference. The informative
+cells are the other two: the delivered edits stayed proportional, so the
+input to blocks 51–79 was clean, and the actual finals bent anyway. The
+curvature therefore belongs to the network&rsquo;s own mapping, and a linear object
+is structurally incapable of reproducing it.</p>
+<p><strong>The lens is the first term of a Taylor series.</strong> Write \(F\) for the
+function taking the post-block-50 residual to the post-block-79 residual.
+For an edit \(e\) around the clean state \(h\),</p>
+\[
+F(h+e) = F(h) + J(h)\,e + \tfrac{1}{2}\,e^{\top}H(h)\,e + \cdots,
+\]<p>where \(J(h)\) is the local Jacobian and \(H(h)\) the second-derivative term.
+The experiment measures \(F(h+e)-F(h)\) directly; a Jacobian lens supplies
+only the first-order term. The dose scan is then literally a probe of the
+remainder: if the first-order term dominated, the response would scale like
+the dose and pass the gates. It did not, even at <code>2%</code>–<code>4%</code> RMS, so for these
+directions, the higher-order terms are already non-negligible at doses that
+small.</p>
+<p><strong>The released lens is wrong in two independent ways, and this study cannot
+tell them apart.</strong> First, truncation: it omits every term past the first.
+Second, expansion point: it is not even \(J(h)\) for the prompt under study
+but a Jacobian averaged over other prompts and positions. The Figure 4 null
+(J failing to beat identity) could come from either. The prompt-specific
+Jacobian baseline named above is the control that separates them, and there
+is a reasonable chance that fixing the expansion point buys more than adding
+a derivative order.</p>
+<p><strong>Identity is not a dumb baseline; it is the free part of the first-order
+term.</strong> Because of the residual stream, the true Jacobian has the form
+\(I + \text{(block contributions)}\): skip connections carry the edit forward
+unchanged at no cost. Identity is that free part alone. The finding that the
+corpus-average J could not beat it says the learned, averaged remainder of
+the first-order term added nothing detectable for these generic directions.</p>
+<p><strong>Would a second-order lens be superior?</strong> In principle yes; as a shipped
+artifact, no. The first-order lens is an <code>8192 × 8192</code> matrix: about 67
+million numbers. The second-order term is an <code>8192 × 8192 × 8192</code> tensor:
+roughly \(5.5\times 10^{11}\) numbers, on the order of a terabyte per source
+layer in BF16. What <em>is</em> feasible: Hessian-vector products computed on
+demand by double backpropagation, which give \(e^{\top}H\,e\) for a specific
+edit without materializing \(H\), and low-order polynomial fits along a fixed
+direction, since the whole dose curve is then a function of one scalar.</p>
+<div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+        
+    </div>
+    <div class="panel-content">
+        <strong>The ± design already separates odd from even orders.</strong> In the Taylor
+expansion, the signed response \((F(h+e)-F(h-e))/2\) cancels every
+even-order term, leaving \(J(h)\,e\) plus cubic and higher odd terms; the
+common-mode diagnostic \((F(h+e)+F(h-e))/2 - F(h)\) isolates the quadratic
+term (to leading order). The observed bending of the <em>signed</em> response
+therefore cannot be blamed on the quadratic term alone; odd terms at cubic
+order or above, or non-polynomial behavior, must contribute.
+    </div>
+</div>
+
+<p><strong>One empirical hint argues against a low-order polynomial fix.</strong> If a
+quadratic or cubic term dominated the wake, the per-unit-dose response should
+<em>grow</em> with dose. It shrank: median final-state gain fell from <code>1.82x</code> at
+<code>2%</code> to <code>1.48x</code> at <code>30%</code>. Shrinking per-unit response looks more like
+saturation (attention softmax and normalization layers flattening out), and
+saturating functions are exactly the ones a truncated Taylor series
+approximates poorly outside a small radius. The realistic ladder of &ldquo;better
+lenses&rdquo; is therefore probably: prompt-local first order, then first order
+plus a directional low-order correction, then abandoning polynomials for a
+small learned nonlinear predictor.</p>
+<p><strong>Why would smaller doses be amplified <em>more</em>?</strong> At first glance the gain
+ordering looks backwards. It is not: the <em>absolute</em> wake still grows with
+dose (a <code>30%</code> edit moves the final state far more than a <code>2%</code> edit); what
+falls is the amplification <em>per unit of delivered edit</em>. The small-dose gain
+is the more fundamental number: as dose shrinks, gain approaches the
+magnification of the model&rsquo;s true local Jacobian along these directions,
+roughly <code>1.8x</code> here. The question is then why larger doses are compressed
+relative to that linear-regime baseline, and at least three mechanisms would
+each produce exactly this signature. First, <strong>normalization compression</strong>:
+Llama applies RMSNorm on the way into every block, dividing the residual by
+its own overall scale. A tiny edit leaves that scale essentially untouched
+and rides through; a <code>30%</code> edit measurably inflates the very norm it is
+divided by, so the network re-scales it downward everywhere downstream.
+Second, <strong>attention saturation</strong>: small perturbations move pre-softmax scores
+within their locally linear range, while large ones push attention patterns
+toward saturated, nearly winner-take-all configurations whose marginal
+sensitivity is lower. Third, <strong>trained robustness</strong>: a model trained on
+enormous data has seen its own representational noise and may have learned
+broadly contractive dynamics around its typical activations, so the farther
+an edit pushes the state off that manifold, the harder the remaining blocks
+pull back per unit of push. All three are hypotheses, not measurements. The
+first is also the most testable: recompute gain after accounting for the
+measured layer-wise norm inflation, or deliver the edit as a norm-preserving
+rotation instead of an addition and check whether the dose profile of gain
+flattens. A fourth, duller possibility, that the falling curve is an artifact
+of normalizing by the realized rather than requested edit, is already
+excluded by the fidelity gate: from <code>2%</code> through <code>30%</code>, realized and
+requested edits matched within the frozen bounds.</p>
+<p>These framings are hypotheses. The census established <em>where</em> the first-order
+description stops being adequate for these directions on this model; the
+mechanism that bends the trajectory, and whether any of the candidate
+&ldquo;superior lenses&rdquo; would capture it, is a question for a study whose test is
+frozen before its outcomes are inspected.</p>
+<h2 id="reproducibility-and-artifact-ledger">Reproducibility And Artifact Ledger</h2>
+<p>Compact map for readers who already know what they want. Sample records and the
+teaching inventory are in the <a href="#appendix-release-inventory">appendix</a>.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Artifact</th>
+          <th>Link</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Experiment package</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/tree/main/experiments/consciousness_sae_signed_dose_scan"><code>experiments/consciousness_sae_signed_dose_scan</code></a></td>
+      </tr>
+      <tr>
+          <td>Pre-outcome freeze</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/commit/a084caafc2ec27860044d80d3b33912f656fd08a"><code>a084caa</code></a></td>
+      </tr>
+      <tr>
+          <td>Audited result release</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/commit/fde24e93770859bf0ec848b91eb0564d550a641d"><code>fde24e9</code></a></td>
+      </tr>
+      <tr>
+          <td>Frozen plan directory</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/tree/a084caafc2ec27860044d80d3b33912f656fd08a/data/consciousness_sae_signed_dose_scan/dose_scan_v1_plan_20260716"><code>dose_scan_v1_plan_20260716</code></a></td>
+      </tr>
+      <tr>
+          <td>Compact replication record</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/tree/fde24e93770859bf0ec848b91eb0564d550a641d/docs/consciousness_sae_signed_dose_scan/results/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9"><code>…/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9</code></a></td>
+      </tr>
+      <tr>
+          <td>Protocol</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/blob/fde24e93770859bf0ec848b91eb0564d550a641d/docs/consciousness_sae_signed_dose_scan/PROTOCOL.md"><code>docs/…/PROTOCOL.md</code></a></td>
+      </tr>
+      <tr>
+          <td>Result summary</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/blob/fde24e93770859bf0ec848b91eb0564d550a641d/docs/consciousness_sae_signed_dose_scan/results/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9/RESULT_SUMMARY.md"><code>RESULT_SUMMARY.md</code></a></td>
+      </tr>
+      <tr>
+          <td>Figure generator (sanitized post bundle)</td>
+          <td><a href="plot_signed_dose_scan_results.py"><code>plot_signed_dose_scan_results.py</code></a> (SHA-256 <code>0e9db35a…</code>; publication copy of the generator committed upstream with the figure package at <a href="https://github.com/tdj28/llm_selfref_pre/tree/f5e906e1737bc71bf20b642af1d698018eec82fe/docs/consciousness_sae_signed_dose_scan/results/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9/figures"><code>f5e906e</code></a>, with machine-local receipt paths replaced by basenames)</td>
+      </tr>
+      <tr>
+          <td>Post-wide number manifest</td>
+          <td><a href="provenance.json"><code>provenance.json</code></a></td>
+      </tr>
+      <tr>
+          <td>Llama 3.3 70B Instruct</td>
+          <td>revision <a href="https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct/blob/6f6073b423013f6a7d4d9f39144961bfbfbc386b/README.md"><code>6f6073b…</code></a> (gated)</td>
+      </tr>
+      <tr>
+          <td>Neuronpedia J-lens config</td>
+          <td>revision <a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext/config.yaml"><code>a4114d7…</code></a></td>
+      </tr>
+  </tbody>
+</table>
+<p class="figure-note">Table: compact ledger. Freeze and release commits are separated on purpose. The 2.23&nbsp;GB raw residual tree stays off-repository; its inventory SHA-256 is in the appendix.</p>
+<hr>
+<h2 id="technical-appendices">Technical Appendices</h2>
+<h3 id="appendix-release-inventory">Appendix: release inventory</h3>
+<div class="panel warning">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="alert-circle"></i>
+        
+    </div>
+    <div class="panel-content">
+        <strong>Study status: complete.</strong> The design was frozen in git
+(<a href="https://github.com/tdj28/llm_selfref_pre/commit/a084caafc2ec27860044d80d3b33912f656fd08a"><code>a084caa</code></a>)
+<em>before</em> outcomes. The audited public package is
+<a href="https://github.com/tdj28/llm_selfref_pre/commit/fde24e93770859bf0ec848b91eb0564d550a641d"><code>fde24e9</code></a>
+in <a href="https://github.com/tdj28/llm_selfref_pre"><code>tdj28/llm_selfref_pre</code></a>. C9
+recomputed the audit from the unchanged raw tree with zero fresh model
+forwards.
+    </div>
+</div>
+
+<table>
+  <thead>
+      <tr>
+          <th>What we shipped</th>
+          <th>In plain English</th>
+          <th>For specialists</th>
+          <th>License / access</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Experiment code and gates</td>
+          <td>Scripts that build, validate, run, and audit the scan</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/tree/main/experiments/consciousness_sae_signed_dose_scan"><code>experiments/consciousness_sae_signed_dose_scan</code></a></td>
+          <td>open (repo license)</td>
+      </tr>
+      <tr>
+          <td>Frozen plan</td>
+          <td>The pre-outcome protocol bytes</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/tree/a084caafc2ec27860044d80d3b33912f656fd08a/data/consciousness_sae_signed_dose_scan/dose_scan_v1_plan_20260716"><code>dose_scan_v1_plan_20260716</code></a>; plan manifest field <code>plan_manifest_sha256</code> <code>79810742…63c51d</code></td>
+          <td>open</td>
+      </tr>
+      <tr>
+          <td>Compact audit package</td>
+          <td>What a reader needs without the raw tensors</td>
+          <td><a href="https://github.com/tdj28/llm_selfref_pre/tree/fde24e93770859bf0ec848b91eb0564d550a641d/docs/consciousness_sae_signed_dose_scan/results/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9"><code>…/audit-recovery-c9</code></a>; audit status <code>pass</code></td>
+          <td>open</td>
+      </tr>
+      <tr>
+          <td>Audited summary (26.8 MB)</td>
+          <td>Machine-readable census behind the figures</td>
+          <td>SHA-256 <code>b490b101c112f774ae7bffc9c54294a70b91c874c4cee78eddaa7890446c08f6</code></td>
+          <td>on-request (too large for git; bound by <code>PUBLICATION_COMPLETE.json</code>)</td>
+      </tr>
+      <tr>
+          <td>Raw residual tree (2.23 GB)</td>
+          <td>Full archived arcs for independent replay</td>
+          <td>inventory SHA-256 <code>9fc8c8ffe5f8d34f8ddba863c11fff7370ef3644c1fad0139f96e39a4c8fbfc0</code></td>
+          <td>withheld / on-request (volume retention; not in git)</td>
+      </tr>
+      <tr>
+          <td>Empirical figures</td>
+          <td>The four plots in this note</td>
+          <td>per-figure <code>.receipt.json</code> in this post bundle; index <a href="figure-receipts-index.json"><code>figure-receipts-index.json</code></a></td>
+          <td>open (bundled here)</td>
+      </tr>
+      <tr>
+          <td>Llama 3.3 70B Instruct</td>
+          <td>Base weights for the run</td>
+          <td>revision <code>6f6073b423013f6a7d4d9f39144961bfbfbc386b</code></td>
+          <td>gated (Llama Community License)</td>
+      </tr>
+      <tr>
+          <td>Neuronpedia J-lens maps</td>
+          <td>Corpus-average \(J_\ell\) used as reference</td>
+          <td>revision <code>a4114d7752d11eb546e6cf372213d7e75526d3a1</code></td>
+          <td>publicly released (see HF card)</td>
+      </tr>
+  </tbody>
+</table>
+<p class="figure-note">Table: what "complete" means for this release. Middle column is plain language; right columns carry specialist pins and access conditions.</p>
+<h3 id="open-a-record-compact-publication-marker">Open a record: compact publication marker</h3>
+<p><strong>Plain English.</strong> The public package seals that the audit finished from the
+unchanged raw tree and records the hashes a skeptic should match.</p>
+<p><strong>Technical.</strong> <code>PUBLICATION_COMPLETE.json</code> in the compact replication record:
+<code>status</code> = <code>complete_atomic_audit_only_recovery</code>;
+<code>summary_file_sha256</code> = <code>b490b101…08f6</code>;
+<code>audit_receipt_sha256</code> = <code>176e2f7e…ee1</code>;
+run id <code>signed-dose-a084caa-wl8obvtuq0ax8t-v2</code>.</p>
+<h3 id="open-a-record-linearity-census-receipt">Open a record: linearity census receipt</h3>
+<p><strong>Plain English.</strong> Figure 1&rsquo;s numbers are not typed by hand. A receipt lists
+every plotted range and failure count.</p>
+<p><strong>Technical.</strong> <a href="fig-1-linearity-census.receipt.json"><code>fig-1-linearity-census.receipt.json</code></a>:
+<code>actual_final_failure_count</code> = 24;
+<code>realized_source_failure_count</code> = 0;
+<code>j_of_realized_failure_count</code> = 0;
+source summary SHA-256 <code>b490b101…08f6</code>.</p>
+<h3 id="appendix-a-exact-test">Appendix A: Exact Test</h3>
+<p>The experiment used <a href="https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct/blob/6f6073b423013f6a7d4d9f39144961bfbfbc386b/README.md">Meta&rsquo;s Llama 3.3 70B Instruct
+checkpoint</a>
+at revision <code>6f6073b…</code> and <a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext/config.yaml">Neuronpedia&rsquo;s Llama-specific Jacobian-lens
+release</a>
+at revision <code>a4114d7…</code>. Neuronpedia generated the maps with <a href="https://github.com/anthropics/jacobian-lens/tree/581d398613e5602a5af361e1c34d3a92ea82ba8e">Anthropic&rsquo;s
+reference method</a>,
+averaging derivatives over 125 completed WikiText prompts of at most 128
+tokens. They were not estimated from this study&rsquo;s prompts or outcomes.</p>
+<p>The three stress-test directions were independent standard-normal vectors in
+the 8,192-dimensional residual space, normalized to unit
+<a href="/blog/knowledge-base/rms/" class="ref-term">RMS</a> and fixed by predeclared seeds. There was no
+semantic or SAE-based selection, rejection for outcome behavior, or post-hoc
+sign flip. Dose ran from <code>0.5%</code> to <code>30%</code> of <a href="/blog/knowledge-base/rms/" class="ref-term">residual RMS</a>
+in <code>0.5</code>-percentage-point increments. The prompts, directions,
+primary dose panel, and decision rules were fixed before outcomes were opened.</p>
+<p>For prompt \(p\), direction \(v\), and magnitude \(b\), the two signed branches
+produce the realized signed source edit (the quantity the implementation calls
+the central contrast)</p>
+\[
+e_b = \frac{h^{\mathrm{post50}}_{+b}-h^{\mathrm{post50}}_{-b}}{2}.
+\]<p>The midpoint relative to the clean branch was retained as a separate
+common-mode diagnostic. The two signed branches therefore form one paired
+measurement. A linearity cell is one prompt × direction curve across dose,
+giving 24 cells rather than 48.</p>
+<p>For a realized layer-50 edit \(e_b\), the fixed lens supplies</p>
+\[
+\Delta h_{79}^{J} = J_{50}\,e_b.
+\]<p>The released \(J_\ell\) is an <code>8192 × 8192</code> corpus- and position-averaged
+input-output Jacobian from the post-block-\(\ell\) residual to the post-block-79
+residual. It has no prompt-specific conditioning, intercept, or centering term.
+The row-vector implementation is \(e_bJ_{50}^{\mathsf T}\). Because the same
+linear operator is used at every dose, exact source proportionality would be
+preserved automatically. The realized curves were only approximately
+proportional, so remaining within the numerical bounds after J projection is an
+empirical consistency check. Figure 4 separately evaluates prediction against
+the observed target state and against identity and random-map controls.</p>
+<div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+        
+    </div>
+    <div class="panel-content">
+        <strong>Notation.</strong> \(J_{50}\) is a matrix multiply, not a nonlinear function of the
+prompt. Exact proportionality of source edits would be preserved by any fixed
+linear map; the interesting failure is the model&rsquo;s actual final state.
+    </div>
+</div>
+
+<p>The prespecified primary panel (the doses and decision rules committed before the
+results were examined) compared the dose set
+\(B=\{0.02,0.03,0.04\}\), with <code>3%</code> as the anchor. For a response vector
+\(x_b\), define the dose-normalized vector \(q_b=x_b/s_b\). For the realized
+source, \(s_b\) is the requested BF16 edit&rsquo;s residual-RMS fraction; for J and
+the actual final response, \(s_b\) is the realized source edit&rsquo;s residual-RMS
+fraction. The two implemented statistics were</p>
+\[
+c_{\min}=\min_{b\in B}\cos(q_b,q_{0.03}),
+\qquad
+d_{\max}=\max_{b\in B}
+\frac{\operatorname{RMS}(q_b-q_{0.03})}
+{\operatorname{RMS}(q_{0.03})}.
+\]<p>Each prompt-direction cell required \(c_{\min}\ge 0.95\) (the dose-normalized
+vector kept nearly the same direction as the <code>3%</code> anchor) and
+\(d_{\max}\le 0.15\) (its component-wise RMS deviation from the anchor stayed
+small). These are vector-valued dose-response checks; &ldquo;slope discrepancy&rdquo; is
+the implementation&rsquo;s name for \(d_{\max}\).</p>
+<p>Realized-source and J-projected curves had minimum cosine between <code>0.993</code> and
+<code>0.996</code> and maximum slope discrepancy between <code>0.089</code> and <code>0.117</code>. Actual-final
+curves had minimum cosine between <code>0.778</code> and <code>0.848</code> and maximum slope
+discrepancy between <code>0.572</code> and <code>0.703</code>.</p>
+<p>Delivery used stricter source-fidelity criteria (checks on whether the edit
+that landed matched the edit requested): requested-versus-realized cosine at
+least <code>0.995</code> and relative RMSE at most <code>0.10</code>. The primary panel was
+prospectively defined (written into the plan before outcomes were opened) and
+begins at the first dose where all 24 cells met both requested-versus-realized
+criteria.</p>
+<p>Figure 4&rsquo;s bands are 20,000-replicate prompt-resampling stability intervals
+(repeated reweightings of the same eight prompts to show sensitivity within
+this panel). They are not confidence intervals for a broader prompt population.
+Each Figure 4 map takes a different post-block source state \(\ell=50,\ldots,78\)
+to the same post-block-79 target. Only block 50 is the intervention site.
+Figure 2&rsquo;s and Figure 3&rsquo;s ranges are descriptive minima, maxima, or medians over
+the complete fixed census and contain no inferential uncertainty (they report
+the tested cases rather than estimate unseen ones).</p>
+<h3 id="appendix-b-pilot-study">Appendix B: Pilot Study and Motivation for the Signed-Dose Scan</h3>
+<p>An earlier target-masked pilot established that the released maps were loaded
+and oriented correctly and that the clean readout could distinguish its
+prespecified semantic and Yes/No controls. It did not meet the prespecified
+generic-intervention criterion, so it did not support a claim that J
+outperformed identity. More importantly for the present design, that pilot did
+not preserve the edit that BF16 arithmetic actually realized.
+Requested-versus-realized error and downstream curvature therefore remained
+confounded.</p>
+<p>The signed-dose scan was built to resolve that one ambiguity by retaining the
+requested edit, realized edit, J reference, and actual state separately at every
+dose. It does not retroactively change the pilot&rsquo;s threshold result. The full
+gate table, statistics, hashes, and execution history remain in the <a href="https://github.com/tdj28/llm_selfref_pre/tree/main/data/consciousness_readout_validation/pilot_v1_result_20260714_r15">pilot
+replication record</a>.</p>
+<h3 id="appendix-c-scope-and-prior-work">Appendix C: Scope Detail</h3>
+<p>Neither completed study measured downstream dose response for an SAE decoder
+direction (the vector associated with one learned sparse-autoencoder feature).
+The signed-dose result is evidence of nonlinear downstream model
+response to these generic residual directions. It is not evidence that SAE
+interventions as a class are nonlinear, that a specific SAE feature has its
+published interpretation, or that consciousness-related vocabulary changed.</p>
+<p>The contribution of this experiment is not the general observation that neural
+networks are nonlinear. It is the point-by-point separation of requested edit,
+realized edit, a fixed corpus-average J reference, and actual state across a
+dose-by-depth scan whose primary panel and decision rules were set before the
+outcomes were examined. Literature that motivates a dose scan or collateral-effect
+measurement is cited in the early prior-work block and listed below; those
+papers are study-specific reports, not evidence for the result here.</p>
+<h3 id="appendix-d-audit-and-provenance">Appendix D: Audit and Provenance</h3>
+<p>The replication record identifies the study as
+<code>consciousness_sae_signed_dose_scan_v1</code> and the model run as
+<code>signed-dose-a084caa-wl8obvtuq0ax8t-v2</code>. Its independent audit status is
+<code>pass</code>; the audit was recomputed from the unchanged raw-data tree without new
+model inference. The 2.23 GB raw dataset remains off-repository. Its complete
+file-inventory SHA-256 is
+<code>9fc8c8ffe5f8d34f8ddba863c11fff7370ef3644c1fad0139f96e39a4c8fbfc0</code>,
+and the audited-summary SHA-256 is
+<code>b490b101c112f774ae7bffc9c54294a70b91c874c4cee78eddaa7890446c08f6</code>.
+The <a href="https://github.com/tdj28/llm_selfref_pre/tree/fde24e93770859bf0ec848b91eb0564d550a641d/docs/consciousness_sae_signed_dose_scan/results/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9">compact replication
+record</a>
+contains the protocol pointers, result summary, audit receipts, and, as of
+commit
+<a href="https://github.com/tdj28/llm_selfref_pre/commit/f5e906e1737bc71bf20b642af1d698018eec82fe"><code>f5e906e</code></a>,
+the committed figure package.</p>
+<p>All four empirical figures were generated programmatically from that audited
+summary with Matplotlib. The generator validates source identity, row counts,
+and zero-target guards; emits SVG, PDF, and 300-DPI PNG; and writes a separate
+JSON receipt containing data selection, transformations, derived values, alt
+text, and output hashes. Verification regenerated all 12 images byte-for-byte
+and matched the article&rsquo;s alt text to the receipts. This post bundle carries a
+publication-sanitized copy of the upstream generator, with machine-local receipt
+paths replaced by stable basenames:
+<a href="plot_signed_dose_scan_results.py"><code>plot_signed_dose_scan_results.py</code></a>
+(bundled SHA-256 <code>0e9db35a7f1200d450b179ab38ecd9ce512bb95107cf613909ee2b71cc3ed39f</code>;
+upstream pre-sanitization SHA-256
+<code>480c4b9ec2d9ea464119a9336053f5bb18838049274d7c623687f282047c25aa</code>).
+It was not yet present at result commit <code>fde24e9</code>; that named gap was closed
+by committing the script, the four figure sets (SVG/PDF/PNG), the per-figure
+receipts, and the receipts index into the compact replication record at
+<a href="https://github.com/tdj28/llm_selfref_pre/tree/f5e906e1737bc71bf20b642af1d698018eec82fe/docs/consciousness_sae_signed_dose_scan/results/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9/figures"><code>f5e906e</code></a>,
+after re-verifying every file hash against the receipt provenance blocks and
+<code>figure-receipts-index.json</code>. The experiment repo at <code>f5e906e</code> or later can
+therefore be treated as a complete figure provenance root.</p>
+<p>AI-assisted editorial review improved exposition but was not treated as
+scientific verification. Two bounded <code>gpt-5.6-sol</code> Pro passes were kept
+separate: the scientific-integrity review received the draft plus a compact
+evidence card (review SHA-256
+<code>2f25a07bfde8e7df7bbb59c3bbc0e13908052d6df6a3ed1c4709fdec38e89645</code>;
+cost <code>$0.7671</code>), while the zero-context reader review received only the
+scientifically corrected draft (review SHA-256
+<code>48fd3d83a2e02495d4ec15ac5fb1f7838dab9bb675a2e59b464bfa42206e84ee</code>;
+cost <code>$0.6345</code>). Neither received raw tensors or row-level data.</p>
+<p><strong>Figure resources.</strong> <a href="fig-1-linearity-census.receipt.json">Figure 1 receipt</a> ·
+<a href="fig-1-linearity-census.pdf">PDF</a> · <a href="fig-1-linearity-census.png">PNG</a><br>
+<a href="fig-3-bf16-delivery-floor.receipt.json">Figure 2 receipt</a> ·
+<a href="fig-3-bf16-delivery-floor.pdf">PDF</a> · <a href="fig-3-bf16-delivery-floor.png">PNG</a><br>
+<a href="fig-2-dose-depth-arc.receipt.json">Figure 3 receipt</a> ·
+<a href="fig-2-dose-depth-arc.pdf">PDF</a> · <a href="fig-2-dose-depth-arc.png">PNG</a><br>
+<a href="fig-4-j-versus-identity.receipt.json">Figure 4 receipt</a> ·
+<a href="fig-4-j-versus-identity.pdf">PDF</a> · <a href="fig-4-j-versus-identity.png">PNG</a></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a id="ref-gurnee-2026"></a>Gurnee et al. (2026), <a href="https://transformer-circuits.pub/2026/workspace/index.html"><em>Verbalizable Representations Form a Global Workspace
+in Language Models</em></a>,
+<em>Transformer Circuits Thread</em>, published 6 July 2026; the Jacobian-lens
+construction is in <a href="https://transformer-circuits.pub/2026/workspace/index.html#methods-jlens">Methods</a>.</li>
+<li><a id="ref-anthropic-jlens"></a>Anthropic, <a href="https://github.com/anthropics/jacobian-lens/tree/581d398613e5602a5af361e1c34d3a92ea82ba8e">Jacobian-lens reference
+implementation</a>,
+pinned commit <code>581d398613e5602a5af361e1c34d3a92ea82ba8e</code> (Apache License 2.0).</li>
+<li><a id="ref-neuronpedia-jlens"></a>Neuronpedia, <a href="https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext/config.yaml">Llama 3.3 70B Jacobian-lens
+configuration</a>,
+pinned revision <code>a4114d7752d11eb546e6cf372213d7e75526d3a1</code>.</li>
+<li><a id="ref-meta-llama-70b"></a>Meta, <a href="https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct/blob/6f6073b423013f6a7d4d9f39144961bfbfbc386b/README.md">Llama 3.3 70B Instruct model
+card</a>,
+pinned revision <code>6f6073b423013f6a7d4d9f39144961bfbfbc386b</code> (Llama Community License; gated weights).</li>
+<li><a id="ref-belrose-2023"></a>Belrose et al. (2023), <a href="https://arxiv.org/abs/2303.08112"><em>Eliciting Latent Predictions from Transformers
+with the Tuned Lens</em></a>, arXiv:2303.08112;
+accessed 18 July 2026.</li>
+<li><a id="ref-hernandez-2024"></a>Hernandez et al. (2024), <a href="https://arxiv.org/abs/2308.09124"><em>Linearity of Relation Decoding in Transformer
+Language Models</em></a>, ICLR 2024;
+arXiv:2308.09124; accessed 18 July 2026.</li>
+<li><a id="ref-rimsky-2024"></a>Rimsky et al. (2024), <a href="https://aclanthology.org/2024.acl-long.828/"><em>Steering Llama 2 via Contrastive Activation
+Addition</em></a>, ACL 2024,
+doi:10.18653/v1/2024.acl-long.828; accessed 18 July 2026.</li>
+<li><a id="ref-taimeskhanov-2026"></a>Taimeskhanov, Vaiter, and Garreau (2026), <a href="https://arxiv.org/abs/2602.02712"><em>Towards Understanding Steering
+Strength</em></a>, arXiv:2602.02712v2, 8 July
+2026; accepted at ICML 2026; accessed 17 July 2026.</li>
+<li><a id="ref-obrien-2025"></a>O&rsquo;Brien et al. (2025), <a href="https://icml.cc/virtual/2025/49605"><em>Steering Language Model Refusal with Sparse
+Autoencoders</em></a>, ICML 2025 Actionable
+Interpretability Workshop; <a href="https://arxiv.org/abs/2411.11296">arXiv:2411.11296v2</a>,
+22 May 2025; accessed 17 July 2026.</li>
+<li><a id="ref-sae-steering"></a>Jones, T. (2026), <a href="https://praxagent.ai/blog/posts/jacobian-lens-sae-steering/"><em>Can a Jacobian Lens Detect SAE
+Steering?</em></a>,
+Praxagent Research Note.</li>
+</ul>
+
+            </div>
+
+            <footer class="post-footer">
+                <div class="post-transparency">
+                    <div class="post-transparency-label">Public source &amp; edit history</div>
+                    <p>Each research note is available two ways: as the rendered page you are
+                    reading, and as plain-text source in a public git repository,
+                    <a href="https://github.com/praxagent/praxagent-ai" rel="noopener">praxagent/praxagent-ai</a>.
+                    Every revision to every post is preserved in the commit log, so
+                    you can see exactly what changed and when:
+                    <a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/posts/2026/07/jacobian-lens-intervention-test/index.md" rel="noopener">view this article's edit history</a>.</p>
+                </div>
+                <div class="post-navigation">
+                    <a href="/blog/index.html" class="back-to-blog">← Back to Research Notes</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+
+        
+        
+
+    </main>
+
+    <footer class="footer footer-compact">
+        <div class="container">
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
+            </div>
+            <div class="footer-compact-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/blog/script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tables = document.querySelectorAll('.post-body table');
+            tables.forEach((table, index) => {
+                if (table.parentElement?.classList.contains('table-scroll')) return;
+
+                const scroller = document.createElement('div');
+                scroller.className = 'table-scroll';
+                scroller.setAttribute('aria-label', `Scrollable data table ${index + 1}`);
+                table.parentNode.insertBefore(scroller, table);
+                scroller.appendChild(table);
+
+                const updateScrollableState = () => {
+                    const isScrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+                    scroller.classList.toggle('is-scrollable', isScrollable);
+                    if (isScrollable) {
+                        scroller.setAttribute('role', 'region');
+                        scroller.setAttribute('tabindex', '0');
+                    } else {
+                        scroller.removeAttribute('role');
+                        scroller.removeAttribute('tabindex');
+                    }
+                };
+
+                requestAnimationFrame(updateScrollableState);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(updateScrollableState).observe(scroller);
+                } else {
+                    window.addEventListener('resize', updateScrollableState, { passive: true });
+                }
+            });
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                output: "htmlAndMathml"
+            });
+
+            const copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+            const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
+            codeBlocks.forEach(pre => {
+                if (pre.closest('.code-block-frame')) {
+                    return;
+                }
+
+                const frame = document.createElement('div');
+                frame.className = 'code-block-frame';
+                const toolbar = document.createElement('div');
+                toolbar.className = 'code-block-toolbar';
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'copy-code-button';
+                button.innerHTML = copyIcon;
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+                button.setAttribute('title', 'Copy');
+
+                const markCopied = () => {
+                    button.innerHTML = checkIcon;
+                    button.classList.add('copied');
+                    button.setAttribute('aria-label', 'Copied');
+                    setTimeout(() => {
+                        button.innerHTML = copyIcon;
+                        button.classList.remove('copied');
+                        button.setAttribute('aria-label', 'Copy code to clipboard');
+                    }, 2000);
+                };
+
+                button.addEventListener('click', () => {
+                    const code = pre.querySelector('code');
+                    const text = code ? code.textContent : pre.textContent;
+
+                    navigator.clipboard.writeText(text).then(markCopied).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            markCopied();
+                        } catch (fallbackErr) {
+                            console.error('Fallback copy failed: ', fallbackErr);
+                        }
+                        document.body.removeChild(textArea);
+                    });
+                });
+
+                toolbar.appendChild(button);
+                frame.appendChild(toolbar);
+                pre.parentNode.insertBefore(frame, pre);
+                frame.appendChild(pre);
+            });
+        });
+    </script>
+
+</body>
+</html>

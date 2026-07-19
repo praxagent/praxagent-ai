@@ -1,0 +1,11 @@
+{
+  "generator_sha256": "0e9db35a7f1200d450b179ab38ecd9ce512bb95107cf613909ee2b71cc3ed39f",
+  "receipts": {
+    "fig-1-linearity-census.receipt.json": "f0487ced4db957cffd8fa2c811ef5a1f0e611973ecc87e645db15589f000809d",
+    "fig-2-dose-depth-arc.receipt.json": "bc45264fd05c76d160085cea0158e143491546a3bb614cd5fbcc9237c2e3772d",
+    "fig-3-bf16-delivery-floor.receipt.json": "5805eff1d82764ec619a845a79d2f43ba7f2b0c022d858b2ee2ba6b438115516",
+    "fig-4-j-versus-identity.receipt.json": "b3e8a1f75fac039c712c8091c5193aa0fa7506a58a9f2b54cbe06cf459d5824f"
+  },
+  "schema_version": 1,
+  "source_sha256": "b490b101c112f774ae7bffc9c54294a70b91c874c4cee78eddaa7890446c08f6"
+}

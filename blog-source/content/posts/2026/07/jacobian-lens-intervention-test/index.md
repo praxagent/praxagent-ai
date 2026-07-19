@@ -1,7 +1,7 @@
 ---
 title: "A Linear Nudge, a Nonlinear Wake"
 slug: "jacobian-lens-intervention-test"
-date: 2026-07-14
+date: 2026-07-18
 lastmod: 2026-07-18
 aliases: ["/posts/jacobian-lens-intervention-test/"]
 tags: ["AI", "LLM", "machine-learning", "interpretability", "sparse-autoencoders", "jacobian-lens", "reproducibility"]
@@ -25,8 +25,8 @@ key_result: |
   added-value-over-identity margin at the primary layer-50 comparison (logit
   advantage 0.011, below the frozen 0.02 threshold). Linear edit in, nonlinear
   hidden-state wake out, for these generic directions only.
-toc: false
-draft: true
+toc: true
+draft: false
 ---
 
 {{< panel "info" >}}

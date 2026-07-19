@@ -1,0 +1,194 @@
+{
+  "accessibility": {
+    "alt_text_embedded_in_svg_and_png_metadata": true,
+    "color_is_not_the_only_channel": true,
+    "text_alternative_required_at_embed": true
+  },
+  "alt_text": "Three aligned plots show the low-dose delivery transition under BF16 execution in this model and intervention setup, across requested doses from 0.5% to 30%. Directional cosine rises sharply from a median 0.961 at 0.5% toward 1.0 and clears its 0.995 threshold by the eligible panel. Relative RMSE falls from a median 0.287 at 0.5% through its 0.10 ceiling near 1.5\u20132% and continues toward zero. Pale bands show the minimum-to-maximum range across the fixed 24-cell census, not uncertainty. The bottom strip reports the full paired-branch delivery rule: 24 failed cells at 0.5%, 24 at 1%, 18 at 1.5%, and zero from 2% through 30%.",
+  "claim_scope": [
+    "Target-blind generic-direction mechanics validation only.",
+    "No SAE direction, paper prompt, semantic endpoint, behavior, or consciousness claim.",
+    "Fixed-census ranges are descriptive; readout bands are stability intervals, not population confidence intervals."
+  ],
+  "data_source": {
+    "artifact": "CALIBRATION_SUMMARY.json",
+    "path_at_generation": "CALIBRATION_SUMMARY.json",
+    "sections": [
+      "by_dose"
+    ],
+    "selection_and_aggregation": "Plot the stored minimum, median, and maximum requested-realized metrics at every nonzero dose and the exact requested_delivery_failure_count.",
+    "sha256": "b490b101c112f774ae7bffc9c54294a70b91c874c4cee78eddaa7890446c08f6"
+  },
+  "derived_values": {
+    "first_universal_delivery_pass_dose": 0.02,
+    "requested_nonzero_dose_count": 60,
+    "selected_doses": {
+      "0.005": {
+        "final_downstream_gain_over_realized_source": {
+          "max": 4.2714486891974754,
+          "median": 3.8484052704738727,
+          "min": 3.6142990251329885
+        },
+        "requested_delivery_failure_count": 24,
+        "requested_realized_cosine": {
+          "max": 0.9628778696060181,
+          "median": 0.9607773423194885,
+          "min": 0.9543812870979309
+        },
+        "requested_realized_relative_rmse": {
+          "max": 0.3115290403366089,
+          "median": 0.2865796387195587,
+          "min": 0.27778711915016174
+        }
+      },
+      "0.01": {
+        "final_downstream_gain_over_realized_source": {
+          "max": 2.890376944483905,
+          "median": 2.3899587293569233,
+          "min": 2.268236987800563
+        },
+        "requested_delivery_failure_count": 24,
+        "requested_realized_cosine": {
+          "max": 0.9899809956550598,
+          "median": 0.989271730184555,
+          "min": 0.987403392791748
+        },
+        "requested_realized_relative_rmse": {
+          "max": 0.16061416268348694,
+          "median": 0.14762820303440094,
+          "min": 0.14233727753162384
+        }
+      },
+      "0.015": {
+        "final_downstream_gain_over_realized_source": {
+          "max": 2.4087793044455923,
+          "median": 1.9891596654184922,
+          "min": 1.8863582654414797
+        },
+        "requested_delivery_failure_count": 18,
+        "requested_realized_cosine": {
+          "max": 0.9954715967178345,
+          "median": 0.9950686991214752,
+          "min": 0.9941730499267578
+        },
+        "requested_realized_relative_rmse": {
+          "max": 0.10826397687196732,
+          "median": 0.09966504201292992,
+          "min": 0.09556261450052261
+        }
+      },
+      "0.02": {
+        "final_downstream_gain_over_realized_source": {
+          "max": 2.3248086267860466,
+          "median": 1.8193391741925096,
+          "min": 1.7108632427946275
+        },
+        "requested_delivery_failure_count": 0,
+        "requested_realized_cosine": {
+          "max": 0.9973555207252502,
+          "median": 0.9971391558647156,
+          "min": 0.9966927766799927
+        },
+        "requested_realized_relative_rmse": {
+          "max": 0.08157511055469513,
+          "median": 0.07581618055701256,
+          "min": 0.07290307432413101
+        }
+      },
+      "0.03": {
+        "final_downstream_gain_over_realized_source": {
+          "max": 2.1312569163892747,
+          "median": 1.6559003525470457,
+          "min": 1.5605816011715041
+        },
+        "requested_delivery_failure_count": 0,
+        "requested_realized_cosine": {
+          "max": 0.9988037943840027,
+          "median": 0.9986675083637238,
+          "min": 0.9984403848648071
+        },
+        "requested_realized_relative_rmse": {
+          "max": 0.05589541792869568,
+          "median": 0.05169581063091755,
+          "min": 0.048953793942928314
+        }
+      },
+      "0.04": {
+        "final_downstream_gain_over_realized_source": {
+          "max": 2.065869396393136,
+          "median": 1.6022558945542418,
+          "min": 1.487091221865874
+        },
+        "requested_delivery_failure_count": 0,
+        "requested_realized_cosine": {
+          "max": 0.9993487000465393,
+          "median": 0.9992580711841583,
+          "min": 0.9990606904029846
+        },
+        "requested_realized_relative_rmse": {
+          "max": 0.04336639866232872,
+          "median": 0.03857619687914848,
+          "min": 0.0361219085752964
+        }
+      },
+      "0.08": {
+        "final_downstream_gain_over_realized_source": {
+          "max": 2.0531005251048238,
+          "median": 1.5479621199150384,
+          "min": 1.4274491112586194
+        },
+        "requested_delivery_failure_count": 0,
+        "requested_realized_cosine": {
+          "max": 0.9998361468315125,
+          "median": 0.9998051226139069,
+          "min": 0.9997448921203613
+        },
+        "requested_realized_relative_rmse": {
+          "max": 0.02266482263803482,
+          "median": 0.01981995813548565,
+          "min": 0.018182922154664993
+        }
+      },
+      "0.3": {
+        "final_downstream_gain_over_realized_source": {
+          "max": 1.8447346292067202,
+          "median": 1.4758179455605553,
+          "min": 1.3690210802403502
+        },
+        "requested_delivery_failure_count": 0,
+        "requested_realized_cosine": {
+          "max": 0.9999896883964539,
+          "median": 0.999982476234436,
+          "min": 0.9999784827232361
+        },
+        "requested_realized_relative_rmse": {
+          "max": 0.006880374159663916,
+          "median": 0.006214583059772849,
+          "min": 0.004923367407172918
+        }
+      }
+    }
+  },
+  "description": "Requested-versus-realized direction and magnitude fidelity under this BF16 execution setup are plotted across the full 0.5%\u201330% scan, together with the exact number of failed delivery cells.",
+  "figure_id": "fig-3-bf16-delivery-floor",
+  "provenance": {
+    "audit_receipt_sha256": "176e2f7ea16349272f7db2b85eb4f9d7b5a7f9fcf2b6dbb74c7d88f02ca31ee1",
+    "generator": {
+      "manual_data_geometry": false,
+      "matplotlib_version": "3.10.8",
+      "path": "plot_signed_dose_scan_results.py",
+      "sha256": "0e9db35a7f1200d450b179ab38ecd9ce512bb95107cf613909ee2b71cc3ed39f"
+    },
+    "outputs": {
+      "fig-3-bf16-delivery-floor.pdf": "879c8f60971aa101ca0270ef2d507925e3ed3465e6ed6aef04f3c9ecf516fcf1",
+      "fig-3-bf16-delivery-floor.png": "cbddaf3b908390da530cc6d86fa9bad3b64f218886a145b1d08f03a67470a31b",
+      "fig-3-bf16-delivery-floor.svg": "a2753df3d917808e90c1f83e00e8267c791b265ee5b3a2314b53a8032d3e942d"
+    },
+    "protocol_version": "consciousness_sae_signed_dose_scan_v1.0.0",
+    "run": "signed-dose-a084caa-wl8obvtuq0ax8t-v2 / C9 audit recovery",
+    "study_id": "consciousness_sae_signed_dose_scan_v1",
+    "summary_receipt_sha256": "a65944745699e49809613b5cf436f2f76173e6c2b902746b47b9006125b2acaa"
+  },
+  "schema_version": 1,
+  "title": "Observed low-dose delivery boundary under BF16 execution"
+}
