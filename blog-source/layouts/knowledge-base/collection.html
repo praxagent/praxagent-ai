@@ -21,7 +21,7 @@
 
 {{ if .Pages }}
         <nav class="blog-index-list knowledge-collection-list" aria-label="{{ .Title }} pages">
-{{ range .Pages.ByWeight }}
+{{ range .Pages.ByDate.Reverse }}
             {{- $image := partial "featured-image.html" . }}
             <a class="blog-index-row{{ with $image.display }} has-featured-image{{ end }}" href="{{ .RelPermalink }}">
                 {{- with $image.display }}
