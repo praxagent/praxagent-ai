@@ -12,7 +12,7 @@
   ],
   "data_source": {
     "artifact": "CALIBRATION_SUMMARY.json",
-    "path_at_generation": "/private/tmp/signed-dose-c9-override-retry-v5-20260717T172926Z-UK4Lsy/compact/CALIBRATION_SUMMARY.json",
+    "path_at_generation": "CALIBRATION_SUMMARY.json",
     "sections": [
       "linearity_rows"
     ],
@@ -61,8 +61,8 @@
     "generator": {
       "manual_data_geometry": false,
       "matplotlib_version": "3.10.8",
-      "path": "/Users/d7082791602/Desktop/website/llm_selfref_pre/scripts/plot_signed_dose_scan_results.py",
-      "sha256": "480c4b9ec2d9ea464119a9336053f5bb18838049274d7c623687f282047c25aa"
+      "path": "plot_signed_dose_scan_results.py",
+      "sha256": "0e9db35a7f1200d450b179ab38ecd9ce512bb95107cf613909ee2b71cc3ed39f"
     },
     "outputs": {
       "fig-1-linearity-census.pdf": "b33e2189c97967df4af6fcfa09b3c10e1b4f5eaaaf75f3864bc553591a678806",

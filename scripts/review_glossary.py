@@ -74,6 +74,20 @@ Sort findings by severity, then file. If there are no actionable findings, use
 an empty findings array and verdict "pass".
 """
 
+FOLLOWUP_REVIEW_INSTRUCTIONS = """\
+This is review round {round_number}, not an initial review. Concentrate on
+whether the current bundle has any remaining factual, mathematical,
+implementation, accessibility, or materially misleading teaching defects.
+Do not introduce new stylistic preferences, optional elaborations, or
+terminology polish merely because further refinement is possible. Do not
+rephrase correct text. A specialized term warrants a finding only when leaving
+it as written would likely give the intended careful newcomer a materially
+wrong mental model or prevent them from understanding a central claim.
+
+Use verdict "pass" when no error or important finding remains. Minor,
+non-blocking polish does not prevent a pass and should normally be omitted.
+"""
+
 DEEP_DIVE_REVIEW_INSTRUCTIONS = """\
 You are the final scientific, technical, and educational reviewer for a Knowledge
 Base Deep Dive about late chunking for retrieval embeddings. Review the supplied
@@ -364,6 +378,12 @@ def parse_args() -> argparse.Namespace:
         help="Reasoning effort inside Pro mode (default: %(default)s)",
     )
     parser.add_argument(
+        "--review-round",
+        type=int,
+        default=1,
+        help="Review round number; rounds after 1 use a regression-focused rubric",
+    )
+    parser.add_argument(
         "--max-output-tokens",
         type=int,
         default=48_000,
@@ -379,6 +399,9 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
+    if args.review_round < 1:
+        print("--review-round must be at least 1.", file=sys.stderr)
+        return 1
     if args.max_output_tokens < 25_000:
         print(
             "--max-output-tokens must be at least 25000 for a reasoning review.",
@@ -454,7 +477,7 @@ def main() -> int:
         print(
             "Target: gpt-5.6-sol, reasoning mode pro, "
             f"effort {args.reasoning_effort}, max output {args.max_output_tokens}, "
-            f"store false{continuation}."
+            f"store false, review round {args.review_round}{continuation}."
         )
         print(f"Private output: {output_path}")
         return 0
@@ -476,6 +499,16 @@ def main() -> int:
         return 2
 
     base_url = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
+    review_instructions = (
+        DEEP_DIVE_REVIEW_INSTRUCTIONS
+        if args.review_profile == "deep-dive"
+        else REVIEW_INSTRUCTIONS
+    )
+    if args.review_round > 1:
+        review_instructions += "\n\n" + FOLLOWUP_REVIEW_INSTRUCTIONS.format(
+            round_number=args.review_round
+        )
+
     request_body = {
         "model": "gpt-5.6-sol",
         "reasoning": {
@@ -483,11 +516,7 @@ def main() -> int:
             "effort": args.reasoning_effort,
             "context": "all_turns" if prior is not None else "current_turn",
         },
-        "instructions": (
-            DEEP_DIVE_REVIEW_INSTRUCTIONS
-            if args.review_profile == "deep-dive"
-            else REVIEW_INSTRUCTIONS
-        ),
+        "instructions": review_instructions,
         "input": build_request_input(bundle, prior),
         "max_output_tokens": args.max_output_tokens,
         "store": False,

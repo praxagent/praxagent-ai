@@ -8,8 +8,15 @@
     <title>Transformer - praxagent Knowledge Base</title>
     
     
-    
-    
+
+
+
+
+
+
+
+
+
     
     
     <meta name="description" content="A family of sequence-processing neural networks that combine attention, position-wise transformations, residual connections, normalization, and position information.">
@@ -20,14 +27,16 @@
     <meta property="og:title" content="Transformer">
     <meta property="og:description" content="A family of sequence-processing neural networks that combine attention, position-wise transformations, residual connections, normalization, and position information.">
     <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/transformer/">
-    <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <meta property="og:image" content="https://praxagent.ai/blog/knowledge-base/glossary/transformer-overview.png">
+    <meta property="og:image:alt" content="Praxagent&#39;s stochastic mountain landscape.">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@praxagent">
     <meta name="twitter:title" content="Transformer">
     <meta name="twitter:description" content="A family of sequence-processing neural networks that combine attention, position-wise transformations, residual connections, normalization, and position information.">
-    <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <meta name="twitter:image" content="https://praxagent.ai/blog/knowledge-base/glossary/transformer-overview.png">
+    <meta name="twitter:image:alt" content="Praxagent&#39;s stochastic mountain landscape.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -125,21 +134,22 @@
 
 
             <div class="post-body">
-                <p>A <strong>Transformer</strong> is a family of neural-network architectures, arrangements of learned computations, for processing sequences. In the canonical design, repeated blocks alternate an <strong>attention</strong> sublayer, which lets each position gather information from positions permitted by an attention rule, with a position-wise <a href="/blog/knowledge-base/feed-forward-network/">feed-forward network (FFN)</a>, which transforms each position separately. Residual connections carry a running state through the stack, normalization rescales that state according to a specified rule, and positional information lets the model represent sequence order.</p>
-<p>The original Transformer was an encoder-decoder model for translation. The name now covers a family rather than one fixed diagram: encoder-only, decoder-only, encoder-decoder, and other variants can change the attention rule, block order, normalization placement, positional mechanism, and feed-forward implementation (<a href="https://arxiv.org/abs/1706.03762v7">Vaswani et al., 2017</a>).</p>
+                <p>A <strong>Transformer</strong> is a family of neural-network architectures, arrangements of learned computations, for processing sequences. In common designs, repeated blocks contain one or more <strong>attention</strong> sublayers, which let each position gather information from positions permitted by an attention rule, and a position-wise <a href="/blog/knowledge-base/feed-forward-network/">feed-forward network (FFN)</a>, which transforms each position separately. Residual connections carry a running state through the stack, normalization rescales that state according to a specified rule, and positional information lets the model represent sequence order.</p>
+<p>The original Transformer used an <strong>encoder</strong>, a stack that represented a source (input) sequence, and a <strong>decoder</strong>, a stack that generated a target (output) sequence using earlier target positions and encoder states. The name now covers a family rather than one fixed diagram: encoder-only models typically let positions gather context from both earlier and later positions; decoder-only models typically block attention to later positions; and encoder-decoder models use both connected stacks. Other variants can change the attention rule, block order, normalization placement, positional mechanism, and feed-forward implementation (<a href="https://arxiv.org/abs/1706.03762v7">Vaswani et al., 2017</a>).</p>
 <figure class="reference-figure">
-    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Token vectors with position information travel along a residual path through repeated blocks; attention mixes permitted positions, a feed-forward network transforms each position separately, and a task-specific head reads the final states." tabindex="0">
-        <img src="/blog/knowledge-base/glossary/transformer-overview.svg" alt="Token vectors with position information travel along a residual path through repeated blocks; attention mixes permitted positions, a feed-forward network transforms each position separately, and a task-specific head reads the final states." loading="lazy" decoding="async">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: A residual path receives an attention update followed by a position-wise feed-forward update before a task-specific head reads the final states." tabindex="0">
+        <img src="/blog/knowledge-base/glossary/transformer-overview.svg" alt="A residual path receives an attention update followed by a position-wise feed-forward update before a task-specific head reads the final states." loading="lazy" decoding="async">
     </div>
     <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
-    <figcaption>A canonical Transformer path. Tokens are mapped to vectors with position information before entering repeated blocks. Within a block, attention can combine information from positions allowed by the model&rsquo;s attention rule, while the feed-forward network applies the same learned transformation separately at each position. Both contribute updates to the residual stream. The final head depends on the task. Encoder and decoder arrangements, attention masks, normalization placement, and exact sublayer order vary, so this is a family-level teaching diagram rather than a specification for every Transformer.</figcaption>
+    <figcaption>A common Transformer block pattern: attention combines information from allowed positions, then a position-wise feed-forward network transforms each state; both add updates to the residual stream. Position handling, normalization, masks, sublayer order, and encoder-decoder structure vary between architectures.</figcaption>
 </figure>
 
 <h2 id="from-tokens-to-states">From tokens to states</h2>
-<p>A <strong>tokenizer</strong> maps an input such as text into discrete token identifiers. An <strong>embedding</strong> maps each identifier to a vector of learned numbers. A positional mechanism supplies information about order or relative position; it may add position vectors, modify attention calculations, or use another model-specific method.</p>
+<p>For a typical text Transformer, a <strong>tokenizer</strong> maps text to a sequence of discrete units called <strong>tokens</strong> and represents each token with an identifier from a <strong>token vocabulary</strong>, the set of token types available to the model. An <strong>embedding</strong> maps each identifier to a learned vector. Transformers for other input types may instead map their input elements directly to vectors. A positional mechanism supplies information about order or relative position; it may add position vectors, modify attention calculations, or use another model-specific method.</p>
 <p>Those position-aware vectors enter a stack of Transformer blocks. Within a block:</p>
 <ol>
-<li><strong>Self-attention</strong>, attention among states in the same sequence, computes input-dependent mixtures of positions allowed by the attention rule.</li>
+<li><strong>Self-attention</strong>, attention among states in the same sequence, combines information from positions allowed by the attention rule in an input-dependent way.</li>
+<li>Decoder blocks in encoder-decoder models commonly also use <strong>cross-attention</strong>, in which decoder positions gather information from encoder states.</li>
 <li>A position-wise FFN, often implemented as a <a href="/blog/knowledge-base/mlp/">multilayer perceptron (MLP)</a>, transforms each position separately.</li>
 <li>Residual connections add the sublayers&rsquo; updates to the running <a href="/blog/knowledge-base/residual-stream/">residual stream</a>.</li>
 <li>Normalization modules rescale, and in some variants recenter, states around those updates. Their placement and exact formula are architecture choices.</li>
@@ -168,15 +178,15 @@
       <tr>
           <td>Encoder-decoder</td>
           <td>An encoder represents a source sequence; a decoder reads earlier target positions and attends to encoder states</td>
-          <td>Sequence-to-sequence tasks such as translation</td>
+          <td>Tasks that map an input sequence to an output sequence, such as translation</td>
       </tr>
   </tbody>
 </table>
-<p>These are common patterns, not exclusive definitions. A model may use different masks, sparse or local attention, multiple data types, or task-specific block components.</p>
+<p>These are common patterns, not exclusive definitions. A model may use attention masks that permit or block specified pairs of positions, including sparse patterns that permit only selected pairs or local patterns centered on nearby positions. It may also combine multiple data types or use task-specific block components.</p>
 <h2 id="what-transformer-does-not-specify">What Transformer does not specify</h2>
 <ul>
 <li>It does not by itself mean a language model, a chatbot, or a model of any particular size.</li>
-<li>It does not determine the tokenizer, context length, parameter count, positional mechanism, normalization placement, FFN variant, attention pattern, or training objective.</li>
+<li>It does not determine the tokenizer; context length, meaning the number of sequence positions the model is configured to process together; parameter count, meaning the number of learned scalar parameters; positional mechanism; normalization placement; FFN variant; attention pattern; or training objective, meaning the criterion optimized during training.</li>
 <li>An attention weight is an internal mixing coefficient. It is not automatically a probability that a statement is true or a causal explanation of a model output.</li>
 <li>Parallel processing of known sequence positions during training does not make one-token-at-a-time autoregressive generation fully parallel.</li>
 </ul>

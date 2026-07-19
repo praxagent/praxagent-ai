@@ -5,6 +5,7 @@ RSYNC ?= rsync
 BLOG_SOURCE := blog-source
 BLOG_OUTPUT := blog
 HUGO_CONFIG := $(BLOG_SOURCE)/hugo.yaml
+PAGES_OUTPUT := pages-artifact
 
 # Prax docs are imported at build time; set PRAX_DOCS_SOURCE to use an
 # existing checkout instead of updating the shallow cache.
@@ -44,7 +45,7 @@ DETACH := $(abspath scripts/detach_serve.sh)
 
 .DEFAULT_GOAL := help
 
-.PHONY: help sync-prax-docs verify-late-chunking blog blog-drafts blog-serve blog-serve-tailscale run-site-local run-site-tailscale check ci up down
+.PHONY: help sync-prax-docs verify-late-chunking blog blog-drafts blog-serve blog-serve-tailscale run-site-local run-site-tailscale check stage-pages pages ci up down
 
 help: ## Show available commands
 	@awk 'BEGIN {FS = ":.*## "; printf "Usage: make <target>\n\nTargets:\n"} /^[a-zA-Z0-9_-]+:.*## / {printf "  %-22s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -199,18 +200,28 @@ else
 	$(PYTHON) -m http.server $(SITE_PORT) --bind 0.0.0.0
 endif
 
-check: sync-prax-docs verify-late-chunking ## Validate Hugo, local links, anchors, JSON, SVG, Python, branding, and data provenance
+check: sync-prax-docs verify-late-chunking ## Validate Hugo, links, assets, provenance, and public-repository safety
 	$(HUGO) \
 		--source "$(BLOG_SOURCE)" \
 		--config "$(abspath $(HUGO_CONFIG))" \
 		--renderToMemory \
 		--noBuildLock \
 		--panicOnWarning
-	$(PYTHON) -m compileall -q "$(BLOG_SOURCE)"
+	$(PYTHON) scripts/check_python_syntax.py
+	$(PYTHON) scripts/check_public_repo.py
 	$(PYTHON) scripts/check_site.py
 	$(PYTHON) scripts/check_provenance.py
 
-ci: blog check ## Run the same build and validation used by GitHub Actions
+stage-pages: ## Assemble and validate the allowlisted Pages artifact
+	$(PYTHON) scripts/stage_pages.py --output "$(PAGES_OUTPUT)"
+	$(PYTHON) scripts/check_pages_artifact.py "$(PAGES_OUTPUT)"
+
+ci: ## Build, validate, and stage exactly what GitHub Pages publishes
+	$(PYTHON) scripts/check_release_inputs.py
+	$(MAKE) blog check
+	$(MAKE) stage-pages
+
+pages: ci ## Build the complete, deployment-ready Pages artifact
 
 # $(1)=name $(2)=port $(3)=pidfile $(4)=logfile $(5)=modefile $(6)=mode $(7)=url $(8...)=command
 define ensure-serve-up

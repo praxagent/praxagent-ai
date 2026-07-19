@@ -6,7 +6,8 @@ aliases: ["/posts/praxagent-jacobian-lens-qwen3-5-397b-a17b/"]
 tags: ["AI", "LLM", "machine-learning", "interpretability", "jacobian-lens", "j-space", "reproducibility", "open-science"]
 author: Timothy Jones
 summary: "As of July 10, 2026, Praxagent is open-sourcing the public Jacobian lens fitted for the largest base model so far: Qwen3.5-397B-A17B, with a pre-registered readout audit against identity and random-J controls. Weights, hash, code, and receipts included."
-og_image: "https://praxagent.ai/assets/og-jacobian-lens-397b-release-v2.jpg"
+og_image: "og-card.png"
+og_image_alt: "Praxagent announces an open Jacobian lens for Qwen3.5-397B with a mid-layer readout diagram and links to weights, code, hash, and receipts."
 lead: |
   **As of July 10, 2026**, Praxagent is open-sourcing a Jacobian lens for **Qwen3.5-397B-A17B** ([`praxagent-org/jacobian-lens-qwen3.5-397b-a17b`](https://huggingface.co/praxagent-org/jacobian-lens-qwen3.5-397b-a17b)): to our knowledge, **the public Jacobian lens fitted for the largest base model so far**. The largest prior public collection we found tops out at a 70B base model; this release targets a 397B-total, 17B-active multimodal MoE (**A17B** = ~17B parameters active per token; [explainer](#what-a17b-means); this note is **text-only**). This note is the release: what a Jacobian lens is, how we fit it (**n=24**; warm-start toward **n≈50** underway), and a pre-registered readout audit so the file is not over-read as a mind-reader.
 ---

@@ -8,8 +8,12 @@
     <title>Deep Dives - praxagent Knowledge Base</title>
     
     
-    
-    
+
+
+
+
+
+
     
     
     <meta name="description" content="Extended, educational guides that build important ideas from first principles and connect them to the research.">
@@ -21,13 +25,15 @@
     <meta property="og:description" content="Extended, educational guides that build important ideas from first principles and connect them to the research.">
     <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/deep-dives/">
     <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Praxagent&#39;s stochastic mountain landscape.">
+    <meta property="og:image:width" content="1499">
+    <meta property="og:image:height" content="780">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@praxagent">
     <meta name="twitter:title" content="Deep Dives">
     <meta name="twitter:description" content="Extended, educational guides that build important ideas from first principles and connect them to the research.">
     <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <meta name="twitter:image:alt" content="Praxagent&#39;s stochastic mountain landscape.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -133,14 +139,24 @@ assuming that readers already speak the field&rsquo;s shorthand.</p>
 
         <nav class="blog-index-list knowledge-collection-list" aria-label="Deep Dives pages">
 
-            <a class="blog-index-row" href="/blog/knowledge-base/deep-dives/late-chunking/">
-                <h3>Late Chunking: Context Before Pooling</h3>
-                <span class="blog-index-meta">Late chunking lets an embedding model contextualize a longer input before pooling smaller …</span>
+            <a class="blog-index-row has-featured-image" href="/blog/knowledge-base/deep-dives/late-chunking/">
+                <div class="blog-index-media">
+                    <img src="/blog/knowledge-base/deep-dives/late-chunking/og-card.png" alt="" width="1200" height="630" loading="lazy" decoding="async">
+                </div>
+                <div class="blog-index-copy">
+                    <h3>Late Chunking: Context Before Pooling</h3>
+                    <p class="blog-index-summary">Late chunking lets an embedding model contextualize a longer input before pooling smaller retrieval chunks, preserving one vector per chunk without promising that more context always helps.</p>
+                </div>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/deep-dives/bf16-fp16-fp32/">
-                <h3>BF16, FP16, and FP32: Precision, Range, Swamping, and Determinism</h3>
-                <span class="blog-index-meta">A worked Deep Dive on floating-point formats for model arithmetic: bit layouts, GPU Tensor …</span>
+            <a class="blog-index-row has-featured-image" href="/blog/knowledge-base/deep-dives/bf16-fp16-fp32/">
+                <div class="blog-index-media">
+                    <img src="/blog/knowledge-base/deep-dives/bf16-fp16-fp32/og-card.png" alt="" width="1200" height="630" loading="lazy" decoding="async">
+                </div>
+                <div class="blog-index-copy">
+                    <h3>BF16, FP16, and FP32: Precision, Range, Swamping, and Determinism</h3>
+                    <p class="blog-index-summary">A worked Deep Dive on floating-point formats for model arithmetic: bit layouts, GPU Tensor Core support, round-to-nearest demos in PyTorch, accumulation swamping when small adds meet short mantissas, and run-to-run …</p>
+                </div>
             </a>
 
         </nav>

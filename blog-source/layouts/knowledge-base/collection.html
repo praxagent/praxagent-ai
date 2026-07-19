@@ -22,9 +22,17 @@
 {{ if .Pages }}
         <nav class="blog-index-list knowledge-collection-list" aria-label="{{ .Title }} pages">
 {{ range .Pages.ByWeight }}
-            <a class="blog-index-row" href="{{ .RelPermalink }}">
-                <h3>{{ .Title }}</h3>
-                <span class="blog-index-meta">{{ .Params.summary | default "Guide" | truncate 90 }}</span>
+            {{- $image := partial "featured-image.html" . }}
+            <a class="blog-index-row{{ with $image.display }} has-featured-image{{ end }}" href="{{ .RelPermalink }}">
+                {{- with $image.display }}
+                <div class="blog-index-media">
+                    <img src="{{ . }}" alt="" width="{{ $image.width }}" height="{{ $image.height }}" loading="lazy" decoding="async">
+                </div>
+                {{- end }}
+                <div class="blog-index-copy">
+                    <h3>{{ .Title }}</h3>
+                    <p class="blog-index-summary">{{ .Params.summary | default "Guide" | plainify | truncate 220 }}</p>
+                </div>
             </a>
 {{ end }}
         </nav>

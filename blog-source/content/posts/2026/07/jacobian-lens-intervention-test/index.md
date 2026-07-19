@@ -14,6 +14,8 @@ lead: |
   answer matters for interpreting what activation steering does inside a
   language model.
 summary: "We followed controlled hidden-state edits through the final 29 blocks of Llama 3.3 70B. The delivered edits were dose-linear and a fixed corpus-average Jacobian preserved that scaling, while the model's actual downstream response did not."
+og_image: "og-card.png"
+og_image_alt: "Dose-linearity gates at 2, 3, and 4 percent: all 24 source edits remain aligned, while none of the 24 actual final-state responses do."
 key_result: |
   Against a frozen first-order benchmark on Llama 3.3 70B, the split was
   complete: 24 of 24 delivered edits stayed dose-linear over the prespecified
@@ -49,8 +51,8 @@ linear transport, and nonlinear model dynamics need to be separated.
 
 **(1)** In Llama 3.3 70B Instruct, we applied three unselected Gaussian directions
 after block 50 across eight prompts, varied dose from `0.5%` to `30%` of
-{{< refterm "rms" "residual RMS" >}}, and followed the signed central response
-through the remaining 29 blocks. Protocol, plan, and decision rules were frozen
+{{< refterm "rms" "residual RMS" >}}, and followed the signed response (the
+half-difference of paired \(\pm\)dose runs) through the remaining 29 blocks. Protocol, plan, and decision rules were frozen
 before outcomes
 ([`a084caa`](https://github.com/tdj28/llm_selfref_pre/commit/a084caafc2ec27860044d80d3b33912f656fd08a)).
 
@@ -91,7 +93,7 @@ Shipping table, sample records, and hashes are in the
 
 Activation steering changes a model from the inside. In the additive form
 studied here, the researcher adds a controlled vector to the hidden state
-carried between transformer blocks instead of changing the prompt; contrastive
+carried between {{< refterm "transformer" "Transformer" >}} blocks instead of changing the prompt; contrastive
 activation addition is the canonical modern example
 ([Rimsky et al., 2024](#ref-rimsky-2024)). The field also includes adaptive,
 feature-targeted, and geometry-preserving variants, which this note does not
@@ -109,8 +111,9 @@ under study. Gurnee et al. built the lens to surface verbalizable,
 vocabulary-oriented content; this note repurposes it as a transport benchmark
 for arbitrary residual perturbations, a different job from the one it was fit
 for. Whether averaged first-order maps carry useful structure is itself
-setting-dependent: relation-decoding work finds that mean Jacobian-based affine
-maps decode some relations well and others poorly
+setting-dependent: relation-decoding work finds that mean Jacobian-based
+{{< refterm "affine-map" "affine maps" >}}
+decode some relations well and others poorly
 ([Hernandez et al., 2024](#ref-hernandez-2024)).
 
 This distinction matters because a downstream change can have several causes.
@@ -137,7 +140,7 @@ invent the lens or the general fact that neural networks are nonlinear.
 
 **This note's contribution.**
 
-- a prospectively frozen, target-blind signed dose scan on Llama 3.3 70B that
+- a prospectively frozen, target-masked signed dose scan on Llama 3.3 70B that
   retains requested edit, BF16-realized edit, fixed-J reference, and actual
   state separately at every dose and depth;
 - a complete 24-cell census on the frozen `2%`/`3%`/`4%` linearity panel, with
@@ -157,21 +160,53 @@ invent the lens or the general fact that neural networks are nonlinear.
 
 ## Design in Brief
 
-We tested this in Llama 3.3 70B Instruct. Immediately after transformer block
-50, we applied three unselected stress-test directions to eight prompts, varied
-their magnitude from `0.5%` to `30%` of {{< refterm "rms" "residual RMS" >}},
-and followed the response through the remaining 29 blocks. The directions were
-independent Gaussian vectors normalized to unit {{< refterm "rms" "RMS" >}},
-fixed without semantic or SAE-based selection. They test the mechanics of
-perturbation transport rather than any concept.
+We tested this in
+[Llama 3.3 70B Instruct](https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct).
+Immediately after transformer block 50, we applied three stress-test directions
+to eight prompts, varied their magnitude from `0.5%` to `30%` of
+{{< refterm "rms" "residual RMS" >}}, and followed the response through the
+remaining 29 blocks. The directions were *unselected*: independent Gaussian
+vectors normalized to unit {{< refterm "rms" "RMS" >}}, generated from
+predeclared seeds and frozen before the experiment, with no step that picked
+them for meaning, expected effect, or resemblance to any SAE feature. They test
+the mechanics of perturbation transport rather than any concept.
 
-Each direction was applied at positive and negative dose. Taking half their
-difference isolates the intervention-aligned response (the part that reverses
-with sign), while the midpoint relative to clean is retained as a common-mode
-diagnostic. The paired signs form one curve, giving 24 prompt × direction
-curves rather than 48 independent observations. Exact construction,
+### What one measurement is
+
+A "run" in this study is **one deterministic forward pass, not a generation**.
+The same network with the same weights reads the same fixed prompt; no tokens
+are sampled, so no temperature is involved anywhere. We record the hidden
+state the model computes at one fixed position (the continuation token, the
+final rendered prompt token) after each block.
+
+For each prompt there is one *clean* run with no intervention. For each
+direction and dose there are two *edited* runs, identical to the clean run in
+every respect except one: immediately after block 50, the direction vector,
+scaled to the requested dose, is added to (\(+b\) run) or subtracted from
+(\(-b\) run) the residual state at that position before block 51 continues.
+The model is therefore its own control. Any difference between runs at any
+later block can only have come from that one injected vector, because nothing
+else differs: weights, prompt, position, and arithmetic path are identical. The clean run
+also sets the dose scale: a dose of `2%` means the injected vector's
+{{< refterm "rms" "RMS" >}} is 2% of the clean run's layer-50 residual RMS
+for that prompt. The frozen grid comes to 2,896 forward passes in total.
+
+The paired edited runs act like pushing and then pulling the same knob. Any
+downstream change genuinely driven by the edit should flip sign between the
+two runs; anything that shows up either way (noise, or the model reacting to
+being disturbed at all) should not. Half the difference between the two runs
+keeps the flipping part and cancels the rest; we call that the **signed
+response** (the implementation's name for it is the central contrast). The
+non-flipping part, measured as the midpoint of the two runs relative to an
+unedited run, is kept as a separate common-mode diagnostic. Because each
+\(+\)/\(-\) pair collapses into one curve, the census has 24 prompt ×
+direction curves rather than 48 independent observations. Exact construction,
 provenance, dose grid, and pairing equations are in
 [Appendix A](#appendix-a-exact-test).
+
+![Schematic of one measurement. Three horizontal timelines show three deterministic forward passes of the same network on the same prompt, with vertical ticks marking blocks 0, 50, and 79. The clean run has no edit and ends at hidden state h clean. The plus-b run has a circled plus at block 50 labeled b times v added to the residual here, and ends at h plus. The minus-b run has a circled minus at block 50 labeled b times v subtracted from the residual here, and ends at h minus. Below the timelines, two equations: signed response equals h plus minus h minus, over two, which keeps only what flips when the edit's sign flips; and common mode equals the average of h plus and h minus, minus h clean, which keeps what appears either way and is retained as a disturbance diagnostic.](diagram-2-signed-runs.svg)
+
+<p class="figure-note">Diagram: how one measurement is built from three forward passes. This is a hand-drawn conceptual schematic, not a receipt-backed data figure; the exact pairing equations are in <a href="#appendix-a-exact-test">Appendix A</a>.</p>
 
 At every dose, the analysis retained four quantities: the edit *requested* in
 high precision; the edit *realized* after casting into
@@ -181,13 +216,23 @@ the downstream change from the fixed Jacobian map; and the downstream change
 the model actually produced. Separating requested from realized keeps
 low-precision rounding from being mistaken for nonlinear model dynamics.
 
-The test fixed this comparison and its pass/fail criteria before any outcomes
-were examined, making the result falsifiable without pretending to measure a
-field-wide prior. Once a small edit landed faithfully, a local-linear account
-would survive the `2%`/`3%`/`4%` diagnostic only if the dose-normalized final
-response retained nearly the same direction and scale. The design did not
-assume either outcome; it decided in advance what passing and failing would
-mean.
+![Schematic pipeline of the experiment. A requested edit built in float32 is cast to BF16 to become the realized edit that actually lands after block 50; a dashed fidelity gate between them notes that requested-versus-realized checks fail below 2 percent dose and pass from 2 through 30 percent. From the realized edit two branches diverge: the fixed corpus-average Jacobian produces the predicted wake with one matrix multiply, while the model's remaining blocks 51 through 79 produce the actual wake. Two question boxes at the bottom summarize the analyses: dose-linearity gates on the 2, 3, and 4 percent panel where the realized edit and fixed-J pass 24 of 24 and the actual final passes 0 of 24, and the predictive comparison where J beats five random maps but not identity at layer 50.](diagram-1-pipeline.svg)
+
+<p class="figure-note">Diagram: the study decomposition (requested edit, realized edit, predicted wake, actual wake) and the two frozen questions asked of them. Conceptual schematic; the quoted pass counts are from the audited census reported in Figures 1–4.</p>
+
+Every decision rule (which doses count, which quantities are compared, and
+the numeric thresholds for passing) was written down and committed to git
+before any results were computed. The ordering matters: thresholds chosen
+after seeing the data can make a "pass" or "fail" an artifact of where the
+goalposts were placed, whereas rules frozen first let the experiment genuinely
+come out either way. Concretely, the frozen rule says: once a small edit
+demonstrably landed intact, the model's final response counts as linear only
+if scaling the dose across `2%`/`3%`/`4%` scales the response by the same
+factor while keeping nearly the same direction, within the two numeric bounds
+defined below. Failing that rule means the local-linear description broke by a
+prespecified margin on this panel. It does not mean "networks are nonlinear"
+in general, and it is not an estimate of how often this happens across other
+models or directions.
 
 ## The Linear Edit and the Nonlinear Wake
 
@@ -206,9 +251,9 @@ The question is whether *this* dose–response curve stayed close enough to a
 straight line through the origin on a small, prechosen panel.
 
 A **cell** is one prompt paired with one generic direction: 8 prompts × 3
-directions = 24 cells. For each cell we look at the central signed contrast
-across dose (plus minus minus, halved), so the 24 cells are 24 curves, not 48
-independent signed runs.
+directions = 24 cells. For each cell we track the signed response across dose
+(the \(+\)dose run minus the \(-\)dose run, halved, as defined in the design
+section), so the 24 cells are 24 curves, not 48 independent signed runs.
 
 We apply the same linearity test to three quantities in each cell:
 
@@ -224,31 +269,42 @@ the anchor. That panel is the first three-dose window where every source edit
 already cleared the requested-versus-realized fidelity checks; Figure 2 shows
 that boundary.
 
+Every response vector \(x_b\) below is built from the paired runs described in
+the design section: for the *source*, it is the signed response measured right
+after block 50 (the half-difference of the \(+b\) and \(-b\) runs at the
+continuation position); for the *actual final*, the same half-difference
+measured after block 79; for *fixed J*, the source vector pushed through the
+released linear map. No new runs, prompts, or sampling are involved; the
+three quantities are three readouts of the same 2,896 deterministic forward
+passes.
+
 For a response vector \(x_b\) at dose \(b\), form the dose-normalized vector
 
 \[
 q_b = \frac{x_b}{s_b}.
 \]
 
-For the source edit, \(s_b\) is the requested dose fraction. For J and the
-actual final state, \(s_b\) is the {{< refterm "rms" "RMS" >}} fraction of the
-realized source edit (so we ask whether the downstream map preserves the
-dose-normalized shape of what landed). If the response were exactly proportional
-to dose, every \(q_b\) would be the same vector.
+The divisor \(s_b\) is the size of the input being scaled. For the source
+edit, \(s_b\) is the requested dose fraction (`0.02`, `0.03`, `0.04`). For J
+and the actual final state, \(s_b\) is instead the measured
+{{< refterm "rms" "RMS" >}} size of the edit that *actually landed* at block
+50, expressed as the same kind of fraction. The reason for the switch: those
+two quantities are downstream of the realized edit, so the fair question is
+"per unit of edit that landed, what came out?", not "per unit of edit we
+asked for." Dividing by \(s_b\) puts every dose on that per-unit scale. If
+doubling the landed edit exactly doubled the downstream response without
+turning it, the normalized vectors \(q_b\) at `2%`, `3%`, and `4%` would all
+be the same vector; how far they spread apart is what the two statistics below
+measure.
 
 Two statistics then ask whether the \(q_b\) stay near the `3%` anchor
 \(q_{0.03}\):
 
 \[
-c_{\min}
-=
-\min_{b\in B}\cos(q_b,q_{0.03}),
+c_{\min} = \min_{b\in B}\cos(q_b,q_{0.03}),
 \qquad
-d_{\max}
-=
-\max_{b\in B}
-\frac{\operatorname{RMS}(q_b-q_{0.03})}
-{\operatorname{RMS}(q_{0.03})}.
+d_{\max} = \max_{b\in B}
+\frac{\operatorname{RMS}(q_b-q_{0.03})}{\operatorname{RMS}(q_{0.03})}.
 \]
 
 - \(c_{\min}\) is directional agreement (1 means identical direction).
@@ -267,6 +323,29 @@ d_{\max}\le 0.15.
 Fail either gate and that quantity is scored **nonlinear** on this panel.
 Exact construction of \(x_b\) (signed branches, common-mode diagnostic) is in
 [Appendix A](#appendix-a-exact-test).
+
+{{< panel "info" >}}
+**Why these two gates, and why these numbers?** Two gates because
+proportionality can fail in exactly two ways: the response can *rotate*
+(caught by \(c_{\min}\)) or its per-unit-dose *size and shape* can drift
+(caught by \(d_{\max}\)); one statistic per failure mode. The specific values
+are frozen judgment calls, not derived constants. A cosine floor of `0.95`
+tolerates directional wobble inside roughly an 18° cone, and a discrepancy
+ceiling of `0.15` sits comfortably above the roughly `0.10` relative deviation
+that BF16 delivery alone induces in the source edits, so a faithfully landed
+edit cannot fail the panel merely because of rounding noise. What protects the
+conclusion is not the exact numbers but two facts: the thresholds were
+committed before any outcome was seen, and the results landed nowhere near
+them. Sources and fixed-J scored \(c_{\min}\ge 0.993\) and
+\(d_{\max}\le 0.117\); actual finals scored \(c_{\min}\le 0.848\) and
+\(d_{\max}\ge 0.572\). Any cosine floor between `0.85` and `0.99`, and any
+discrepancy ceiling between `0.12` and `0.57`, produces the identical
+24/24-versus-0/24 split.
+{{< /panel >}}
+
+![Schematic of what the two gates measure. Left panel, labeled source edit, dose-linear, 24 of 24 pass: three per-unit-dose vectors for the 2, 3, and 4 percent doses drawn from a common origin lie exactly on top of one another, illustrating same direction and same size. Right panel, labeled actual final state, bent, 0 of 24 pass: the three per-unit-dose vectors fan apart at visibly different angles and lengths, with the observed ranges quoted: minimum cosine fell to 0.778 to 0.848 and the size discrepancy rose to 0.572 to 0.703. A caption line states that cosine catches rotation and the dose-normalized RMS discrepancy catches size and shape drift, one gate per failure mode.](diagram-3-dose-gates.svg)
+
+<p class="figure-note">Diagram: the two failure modes the frozen gates test, drawn as dose-normalized vectors \(q_b\). Conceptual schematic: arrow geometry is illustrative; the quoted numeric ranges are the audited census values also shown in Figure 1.</p>
 
 ```python
 import numpy as np
@@ -379,9 +458,9 @@ comparing request to realization at a single dose:
 \le 0.10.
 \]
 
-The full gate also checks both signed branches, their central contrast, and the
-common-mode response. Fail any piece and that cell fails the fidelity check at
-that dose.
+The full gate also checks both signed branches, their signed response (the
+half-difference defined in the design section), and the common-mode response.
+Fail any piece and that cell fails the fidelity check at that dose.
 
 ```python
 # Uses the same rms() / cosine helpers as the linearity sketch above.
@@ -424,10 +503,10 @@ mechanism test.
 
 ## Watch the Wake Develop Across Depth
 
-At each state, gain is the root-mean-square magnitude of the central signed
+At each state, gain is the root-mean-square magnitude of the signed
 response, \((h_{+}-h_{-})/2\), divided by the RMS magnitude of the realized
-central source edit. It is `1x` at state 50 by construction. A gain of `1.8x`,
-for example, means the downstream central response is 80% larger in RMS than
+signed source edit. It is `1x` at state 50 by construction. A gain of `1.8x`,
+for example, means the downstream signed response is 80% larger in RMS than
 the edit that landed. Median gain generally accumulated through later blocks,
 although individual trajectories were not uniformly monotone. Every tested
 trajectory ended above `1x`.
@@ -545,6 +624,122 @@ nonlinear hidden-state wake out.** The corpus-average Jacobian sees nonrandom
 structure in that wake, but it does not outperform the simplest strong
 baseline: carrying the residual change forward unchanged.
 
+## Discussion: A Taylor-Series View of the Result
+
+This section steps back from the audited numbers and asks what kind of object
+a Jacobian lens is, and why the observed split (every source edit linear,
+every fixed-J projection linear, every actual final state bent) is exactly
+the pattern a linearization story predicts. Everything here is
+interpretation; the census results above stand on their own, and the
+hypotheses below would need their own prespecified tests.
+
+**The fixed-J "pass" was never evidence about the network.** A fixed linear
+map preserves proportionality automatically: if the input curve is
+\(x_b \approx b\,v\), then \(Jx_b \approx b\,(Jv)\) for *any* matrix \(J\);
+a random one would have passed the same gates. That is why Figure 1 treats
+the fixed-J column as an algebraic consistency reference. The informative
+cells are the other two: the delivered edits stayed proportional, so the
+input to blocks 51–79 was clean, and the actual finals bent anyway. The
+curvature therefore belongs to the network's own mapping, and a linear object
+is structurally incapable of reproducing it.
+
+**The lens is the first term of a Taylor series.** Write \(F\) for the
+function taking the post-block-50 residual to the post-block-79 residual.
+For an edit \(e\) around the clean state \(h\),
+
+\[
+F(h+e) = F(h) + J(h)\,e + \tfrac{1}{2}\,e^{\top}H(h)\,e + \cdots,
+\]
+
+where \(J(h)\) is the local Jacobian and \(H(h)\) the second-derivative term.
+The experiment measures \(F(h+e)-F(h)\) directly; a Jacobian lens supplies
+only the first-order term. The dose scan is then literally a probe of the
+remainder: if the first-order term dominated, the response would scale like
+the dose and pass the gates. It did not, even at `2%`–`4%` RMS, so for these
+directions, the higher-order terms are already non-negligible at doses that
+small.
+
+**The released lens is wrong in two independent ways, and this study cannot
+tell them apart.** First, truncation: it omits every term past the first.
+Second, expansion point: it is not even \(J(h)\) for the prompt under study
+but a Jacobian averaged over other prompts and positions. The Figure 4 null
+(J failing to beat identity) could come from either. The prompt-specific
+Jacobian baseline named above is the control that separates them, and there
+is a reasonable chance that fixing the expansion point buys more than adding
+a derivative order.
+
+**Identity is not a dumb baseline; it is the free part of the first-order
+term.** Because of the residual stream, the true Jacobian has the form
+\(I + \text{(block contributions)}\): skip connections carry the edit forward
+unchanged at no cost. Identity is that free part alone. The finding that the
+corpus-average J could not beat it says the learned, averaged remainder of
+the first-order term added nothing detectable for these generic directions.
+
+**Would a second-order lens be superior?** In principle yes; as a shipped
+artifact, no. The first-order lens is an `8192 × 8192` matrix: about 67
+million numbers. The second-order term is an `8192 × 8192 × 8192` tensor:
+roughly \(5.5\times 10^{11}\) numbers, on the order of a terabyte per source
+layer in BF16. What *is* feasible: Hessian-vector products computed on
+demand by double backpropagation, which give \(e^{\top}H\,e\) for a specific
+edit without materializing \(H\), and low-order polynomial fits along a fixed
+direction, since the whole dose curve is then a function of one scalar.
+
+{{< panel "info" >}}
+**The ± design already separates odd from even orders.** In the Taylor
+expansion, the signed response \((F(h+e)-F(h-e))/2\) cancels every
+even-order term, leaving \(J(h)\,e\) plus cubic and higher odd terms; the
+common-mode diagnostic \((F(h+e)+F(h-e))/2 - F(h)\) isolates the quadratic
+term (to leading order). The observed bending of the *signed* response
+therefore cannot be blamed on the quadratic term alone; odd terms at cubic
+order or above, or non-polynomial behavior, must contribute.
+{{< /panel >}}
+
+**One empirical hint argues against a low-order polynomial fix.** If a
+quadratic or cubic term dominated the wake, the per-unit-dose response should
+*grow* with dose. It shrank: median final-state gain fell from `1.82x` at
+`2%` to `1.48x` at `30%`. Shrinking per-unit response looks more like
+saturation (attention softmax and normalization layers flattening out), and
+saturating functions are exactly the ones a truncated Taylor series
+approximates poorly outside a small radius. The realistic ladder of "better
+lenses" is therefore probably: prompt-local first order, then first order
+plus a directional low-order correction, then abandoning polynomials for a
+small learned nonlinear predictor.
+
+**Why would smaller doses be amplified *more*?** At first glance the gain
+ordering looks backwards. It is not: the *absolute* wake still grows with
+dose (a `30%` edit moves the final state far more than a `2%` edit); what
+falls is the amplification *per unit of delivered edit*. The small-dose gain
+is the more fundamental number: as dose shrinks, gain approaches the
+magnification of the model's true local Jacobian along these directions,
+roughly `1.8x` here. The question is then why larger doses are compressed
+relative to that linear-regime baseline, and at least three mechanisms would
+each produce exactly this signature. First, **normalization compression**:
+Llama applies RMSNorm on the way into every block, dividing the residual by
+its own overall scale. A tiny edit leaves that scale essentially untouched
+and rides through; a `30%` edit measurably inflates the very norm it is
+divided by, so the network re-scales it downward everywhere downstream.
+Second, **attention saturation**: small perturbations move pre-softmax scores
+within their locally linear range, while large ones push attention patterns
+toward saturated, nearly winner-take-all configurations whose marginal
+sensitivity is lower. Third, **trained robustness**: a model trained on
+enormous data has seen its own representational noise and may have learned
+broadly contractive dynamics around its typical activations, so the farther
+an edit pushes the state off that manifold, the harder the remaining blocks
+pull back per unit of push. All three are hypotheses, not measurements. The
+first is also the most testable: recompute gain after accounting for the
+measured layer-wise norm inflation, or deliver the edit as a norm-preserving
+rotation instead of an addition and check whether the dose profile of gain
+flattens. A fourth, duller possibility, that the falling curve is an artifact
+of normalizing by the realized rather than requested edit, is already
+excluded by the fidelity gate: from `2%` through `30%`, realized and
+requested edits matched within the frozen bounds.
+
+These framings are hypotheses. The census established *where* the first-order
+description stops being adequate for these directions on this model; the
+mechanism that bends the trajectory, and whether any of the candidate
+"superior lenses" would capture it, is a question for a study whose test is
+frozen before its outcomes are inspected.
+
 ## Reproducibility And Artifact Ledger
 
 Compact map for readers who already know what they want. Sample records and the
@@ -559,7 +754,7 @@ teaching inventory are in the [appendix](#appendix-release-inventory).
 | Compact replication record | [`…/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9`](https://github.com/tdj28/llm_selfref_pre/tree/fde24e93770859bf0ec848b91eb0564d550a641d/docs/consciousness_sae_signed_dose_scan/results/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9) |
 | Protocol | [`docs/…/PROTOCOL.md`](https://github.com/tdj28/llm_selfref_pre/blob/fde24e93770859bf0ec848b91eb0564d550a641d/docs/consciousness_sae_signed_dose_scan/PROTOCOL.md) |
 | Result summary | [`RESULT_SUMMARY.md`](https://github.com/tdj28/llm_selfref_pre/blob/fde24e93770859bf0ec848b91eb0564d550a641d/docs/consciousness_sae_signed_dose_scan/results/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9/RESULT_SUMMARY.md) |
-| Figure generator (this post bundle) | [`plot_signed_dose_scan_results.py`](plot_signed_dose_scan_results.py) (SHA-256 `480c4b9e…`; committed upstream with the figure package at [`f5e906e`](https://github.com/tdj28/llm_selfref_pre/tree/f5e906e1737bc71bf20b642af1d698018eec82fe/docs/consciousness_sae_signed_dose_scan/results/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9/figures)) |
+| Figure generator (sanitized post bundle) | [`plot_signed_dose_scan_results.py`](plot_signed_dose_scan_results.py) (SHA-256 `0e9db35a…`; publication copy of the generator committed upstream with the figure package at [`f5e906e`](https://github.com/tdj28/llm_selfref_pre/tree/f5e906e1737bc71bf20b642af1d698018eec82fe/docs/consciousness_sae_signed_dose_scan/results/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9/figures), with machine-local receipt paths replaced by basenames) |
 | Post-wide number manifest | [`provenance.json`](provenance.json) |
 | Llama 3.3 70B Instruct | revision [`6f6073b…`](https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct/blob/6f6073b423013f6a7d4d9f39144961bfbfbc386b/README.md) (gated) |
 | Neuronpedia J-lens config | revision [`a4114d7…`](https://huggingface.co/neuronpedia/jacobian-lens/blob/a4114d7752d11eb546e6cf372213d7e75526d3a1/llama3.3-70b-it/jlens/Salesforce-wikitext/config.yaml) |
@@ -637,7 +832,8 @@ in `0.5`-percentage-point increments. The prompts, directions,
 primary dose panel, and decision rules were fixed before outcomes were opened.
 
 For prompt \(p\), direction \(v\), and magnitude \(b\), the two signed branches
-produce the realized central source edit
+produce the realized signed source edit (the quantity the implementation calls
+the central contrast)
 
 \[
 e_b = \frac{h^{\mathrm{post50}}_{+b}-h^{\mathrm{post50}}_{-b}}{2}.
@@ -715,7 +911,7 @@ the tested cases rather than estimate unseen ones).
 
 <h3 id="appendix-b-pilot-study">Appendix B: Pilot Study and Motivation for the Signed-Dose Scan</h3>
 
-An earlier target-blind pilot established that the released maps were loaded
+An earlier target-masked pilot established that the released maps were loaded
 and oriented correctly and that the clean readout could distinguish its
 prespecified semantic and Yes/No controls. It did not meet the prespecified
 generic-intervention criterion, so it did not support a claim that J
@@ -770,10 +966,13 @@ summary with Matplotlib. The generator validates source identity, row counts,
 and zero-target guards; emits SVG, PDF, and 300-DPI PNG; and writes a separate
 JSON receipt containing data selection, transformations, derived values, alt
 text, and output hashes. Verification regenerated all 12 images byte-for-byte
-and matched the article's alt text to the receipts. The generator ships
-in this post bundle as
+and matched the article's alt text to the receipts. This post bundle carries a
+publication-sanitized copy of the upstream generator, with machine-local receipt
+paths replaced by stable basenames:
 [`plot_signed_dose_scan_results.py`](plot_signed_dose_scan_results.py)
-(SHA-256 `480c4b9ec2d9ea464119a9336053f5bb18838049274d7c623687f282047c25aa`).
+(bundled SHA-256 `0e9db35a7f1200d450b179ab38ecd9ce512bb95107cf613909ee2b71cc3ed39f`;
+upstream pre-sanitization SHA-256
+`480c4b9ec2d9ea464119a9336053f5bb18838049274d7c623687f282047c25aa`).
 It was not yet present at result commit `fde24e9`; that named gap was closed
 by committing the script, the four figure sets (SVG/PDF/PNG), the per-figure
 receipts, and the receipts index into the compact replication record at

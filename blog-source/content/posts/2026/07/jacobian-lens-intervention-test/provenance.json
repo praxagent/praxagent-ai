@@ -11,16 +11,16 @@
   },
   "generator": {
     "path": "plot_signed_dose_scan_results.py",
-    "sha256": "480c4b9ec2d9ea464119a9336053f5bb18838049274d7c623687f282047c25aa",
+    "sha256": "0e9db35a7f1200d450b179ab38ecd9ce512bb95107cf613909ee2b71cc3ed39f",
     "verify": "python3 plot_signed_dose_scan_results.py --summary CALIBRATION_SUMMARY.json --output-dir . --verify --post index.md",
     "note": "Bundled in this post; not present at experiment-repo commit fde24e9 (named gap). CALIBRATION_SUMMARY.json is on-request (SHA-256 b490b101…08f6)."
   },
   "receipts": {
-    "fig-1-linearity-census.receipt.json": "212f924b2a2f943f8d584b8e26d1d6a91302c54fd122ce668805ab901efbb622",
-    "fig-2-dose-depth-arc.receipt.json": "e52aff9d984c26f4c7eed3ec94306c48d93615d56f2ec73485e01cb92b216087",
-    "fig-3-bf16-delivery-floor.receipt.json": "4368bfb841e2f7db1a5c7b0a948c16af411d7e373e1c703fabb644560e7e3c41",
-    "fig-4-j-versus-identity.receipt.json": "14d96e35253b7d84902fdd916f8c1ef3acbd00aa3ec054f19d6f994bb579d869",
-    "figure-receipts-index.json": "5e4f3fd2cb1ee26fa455c97a97f7cecf5a7eeab4bf3721eb50b613df113ab3cb"
+    "fig-1-linearity-census.receipt.json": "f0487ced4db957cffd8fa2c811ef5a1f0e611973ecc87e645db15589f000809d",
+    "fig-2-dose-depth-arc.receipt.json": "bc45264fd05c76d160085cea0158e143491546a3bb614cd5fbcc9237c2e3772d",
+    "fig-3-bf16-delivery-floor.receipt.json": "5805eff1d82764ec619a845a79d2f43ba7f2b0c022d858b2ee2ba6b438115516",
+    "fig-4-j-versus-identity.receipt.json": "b3e8a1f75fac039c712c8091c5193aa0fa7506a58a9f2b54cbe06cf459d5824f",
+    "figure-receipts-index.json": "397e6cd9ac8f93f8661e64e55051ae78b5bda0a9a0d9cbc5ff2d3a54ef41891d"
   },
   "receipts_not_in_git": {
     "CALIBRATION_SUMMARY.json": {
@@ -53,7 +53,7 @@
       "id": "realized-source-failures",
       "claim": "realized-source linearity failures on 2/3/4% panel",
       "value": 0,
-      "appears_as": "0 of 24 / all 24 passed (source)",
+      "appears_as": "`realized_source_failure_count` = 0",
       "receipt": "fig-1-linearity-census.receipt.json",
       "computation": "derived_values.realized_source_failure_count"
     },
@@ -61,7 +61,7 @@
       "id": "j-of-realized-failures",
       "claim": "J(realized) linearity failures on 2/3/4% panel",
       "value": 0,
-      "appears_as": "0 / fixed-J references remained inside bounds",
+      "appears_as": "`j_of_realized_failure_count` = 0",
       "receipt": "fig-1-linearity-census.receipt.json",
       "computation": "derived_values.j_of_realized_failure_count"
     },
@@ -69,7 +69,7 @@
       "id": "actual-final-failures",
       "claim": "actual-final linearity failures on 2/3/4% panel",
       "value": 24,
-      "appears_as": "0 of 24 actual final-state responses / all 24 failed",
+      "appears_as": "`actual_final_failure_count` = 24",
       "receipt": "fig-1-linearity-census.receipt.json",
       "computation": "derived_values.actual_final_failure_count"
     },
@@ -109,7 +109,7 @@
       "id": "delivery-fail-0.5",
       "claim": "delivery failures at 0.5%",
       "value": 24,
-      "appears_as": "24 cells at 0.5%",
+      "appears_as": "24 failed cells at 0.5%",
       "receipt": "fig-3-bf16-delivery-floor.receipt.json",
       "computation": "derived_values.selected_doses['0.005'].requested_delivery_failure_count"
     },
@@ -125,7 +125,7 @@
       "id": "delivery-fail-1.5",
       "claim": "delivery failures at 1.5%",
       "value": 18,
-      "appears_as": "18 of 24 at 1.5%",
+      "appears_as": "18 at 1.5%",
       "receipt": "fig-3-bf16-delivery-floor.receipt.json",
       "computation": "derived_values.selected_doses['0.015'].requested_delivery_failure_count"
     },
@@ -285,7 +285,7 @@
       "id": "raw-inventory-sha256",
       "claim": "raw tree file-inventory SHA-256",
       "value": "9fc8c8ffe5f8d34f8ddba863c11fff7370ef3644c1fad0139f96e39a4c8fbfc0",
-      "appears_as": "9fc8c8ff…bfc0",
+      "appears_as": "9fc8c8ffe5f8d34f8ddba863c11fff7370ef3644c1fad0139f96e39a4c8fbfc0",
       "receipt": "RESULT_SUMMARY.md (compact record)",
       "computation": "documented in RESULT_SUMMARY.md External raw and compact artifacts"
     }

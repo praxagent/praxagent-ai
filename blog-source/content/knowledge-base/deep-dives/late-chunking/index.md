@@ -4,6 +4,8 @@ slug: "late-chunking"
 date: 2025-08-02
 author: Timothy Jones
 summary: "Late chunking lets an embedding model contextualize a longer input before pooling smaller retrieval chunks, preserving one vector per chunk without promising that more context always helps."
+og_image: "og-card.png"
+og_image_alt: "Naive chunking splits before encoding, while late chunking contextualizes the in-window document first and then pools the same spans into one vector per chunk."
 weight: 10
 pro_reviewed: true
 aliases:

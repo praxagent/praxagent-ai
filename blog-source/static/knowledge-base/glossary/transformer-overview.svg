@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="transformerTitle transformerDesc">
+  <title id="transformerTitle">Attention and a feed-forward network update a Transformer's residual stream</title>
+  <desc id="transformerDesc">Vectors for tokens, discrete input units produced by a tokenizer, enter a repeated Transformer block. An architecture-specific positional mechanism supplies order information, for example by modifying input states or attention calculations. At each position, attention combines information from positions permitted by its rule, then a position-wise feed-forward network transforms each position separately. Each sublayer adds an update back to the residual stream. A task-specific head reads the final states.</desc>
+  <defs>
+    <marker id="transformerArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#A67C52"/>
+    </marker>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:27px;font-weight:700}
+      .h{font-size:20px;font-weight:700}
+      .s{font-size:17px}
+      .m{font-size:15px;fill:#5A544C}
+      .state{fill:#E8F0F7;stroke:#4B6787;stroke-width:2}
+      .attention{fill:#F3E8E0;stroke:#A67C52;stroke-width:2}
+      .ffn{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:2}
+      .head{fill:#FBF9F6;stroke:#766A5D;stroke-width:2}
+      .block{fill:none;stroke:#A89B8C;stroke-width:2;stroke-dasharray:8 6}
+      .flow{fill:none;stroke:#A67C52;stroke-width:3;marker-end:url(#transformerArrow)}
+      .residual{fill:none;stroke:#4B6787;stroke-width:4;marker-end:url(#transformerArrow)}
+      .update{fill:none;stroke:#6F8D5E;stroke-width:2.5;marker-end:url(#transformerArrow)}
+    </style>
+  </defs>
+
+  <rect width="1200" height="630" fill="#F7F4F0"/>
+  <text x="52" y="55" class="t title">A Transformer repeatedly updates a shared residual path</text>
+  <text x="52" y="84" class="t m">Attention combines information from permitted positions; the feed-forward network transforms positions separately.</text>
+
+  <rect x="52" y="245" width="190" height="94" rx="14" class="state"/>
+  <text x="147" y="278" text-anchor="middle" class="t h">TOKEN VECTORS</text>
+  <text x="147" y="305" text-anchor="middle" class="t s">one per input unit</text>
+  <text x="147" y="327" text-anchor="middle" class="t m">order handling varies</text>
+
+  <path class="residual" d="M242 292 H1032"/>
+  <text x="500" y="326" text-anchor="middle" class="t s">residual stream carries the running states</text>
+
+  <rect x="310" y="128" width="610" height="390" rx="20" class="block"/>
+  <text x="615" y="158" text-anchor="middle" class="t h">REPEATED TRANSFORMER BLOCK</text>
+
+  <path class="flow" d="M382 292 V218 H398"/>
+  <rect x="400" y="184" width="250" height="74" rx="13" class="attention"/>
+  <text x="525" y="216" text-anchor="middle" class="t h">ATTENTION</text>
+  <text x="525" y="241" text-anchor="middle" class="t s">combines permitted states</text>
+  <path class="update" d="M650 221 H680 V292"/>
+  <circle cx="680" cy="292" r="15" fill="#F7F4F0" stroke="#6F8D5E" stroke-width="2"/>
+  <text x="680" y="299" text-anchor="middle" class="t h">+</text>
+
+  <path class="flow" d="M710 292 V345 H628 V404 H648"/>
+  <rect x="650" y="367" width="200" height="86" rx="13" class="ffn"/>
+  <text x="750" y="398" text-anchor="middle" class="t h">FEED-FORWARD</text>
+  <text x="750" y="421" text-anchor="middle" class="t h">NETWORK</text>
+  <text x="750" y="443" text-anchor="middle" class="t m">each position separately</text>
+  <path class="update" d="M850 410 H875 V292"/>
+  <circle cx="875" cy="292" r="15" fill="#F7F4F0" stroke="#6F8D5E" stroke-width="2"/>
+  <text x="875" y="299" text-anchor="middle" class="t h">+</text>
+
+  <text x="615" y="485" text-anchor="middle" class="t m">Normalization and exact sublayer order vary by architecture.</text>
+
+  <rect x="1035" y="245" width="122" height="94" rx="14" class="head"/>
+  <text x="1096" y="278" text-anchor="middle" class="t h">HEAD</text>
+  <text x="1096" y="305" text-anchor="middle" class="t s">reads final</text>
+  <text x="1096" y="327" text-anchor="middle" class="t s">states</text>
+
+  <rect x="52" y="550" width="1105" height="48" rx="12" class="head"/>
+  <text x="604" y="580" text-anchor="middle" class="t s">The family includes encoder-only, decoder-only, and encoder-decoder arrangements; this diagram shows their shared teaching pattern.</text>
+</svg>

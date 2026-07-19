@@ -1,0 +1,40 @@
+{{- $page := . -}}
+{{- $configured := .Params.og_image | default "" -}}
+{{- $alt := .Params.og_image_alt | default "" -}}
+{{- $displayURL := "" -}}
+{{- $socialURL := "" -}}
+{{- $width := 1200 -}}
+{{- $height := 630 -}}
+
+{{- with $configured -}}
+  {{- if or (hasPrefix . "https://") (hasPrefix . "http://") -}}
+    {{- $displayURL = . -}}
+    {{- $socialURL = . -}}
+  {{- else if hasPrefix . "/" -}}
+    {{- $displayURL = . -}}
+    {{- $socialURL = printf "https://praxagent.ai%s" . -}}
+  {{- else if $page.IsPage -}}
+    {{- with $page.Resources.GetMatch . -}}
+      {{- $displayURL = .RelPermalink -}}
+      {{- $socialURL = .Permalink -}}
+      {{- if eq .MediaType.MainType "image" -}}
+        {{- $width = .Width -}}
+        {{- $height = .Height -}}
+      {{- end -}}
+    {{- else -}}
+      {{- $displayURL = printf "%s%s" $page.RelPermalink $configured -}}
+      {{- $socialURL = printf "https://praxagent.ai%s%s" $page.RelPermalink $configured -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $displayURL = $configured | relURL -}}
+    {{- $socialURL = $configured | absURL -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return (dict
+  "display" $displayURL
+  "social" $socialURL
+  "alt" $alt
+  "width" $width
+  "height" $height
+) -}}

@@ -690,7 +690,7 @@ def write_figure_receipts(summary: dict, source: Path, output_dir: Path, files: 
             "alt_text": spec["alt_text"],
             "data_source": {
                 "artifact": "CALIBRATION_SUMMARY.json",
-                "path_at_generation": str(source),
+                "path_at_generation": source.name,
                 "sha256": source_sha,
                 "sections": spec["data_sections"],
                 "selection_and_aggregation": spec["transformation"],
@@ -702,7 +702,7 @@ def write_figure_receipts(summary: dict, source: Path, output_dir: Path, files: 
                 "audit_receipt_sha256": summary["audit_receipt_sha256"],
                 "summary_receipt_sha256": summary["receipt_sha256"],
                 "generator": {
-                    "path": str(generator_path),
+                    "path": generator_path.name,
                     "sha256": sha256(generator_path),
                     "matplotlib_version": mpl.__version__,
                     "manual_data_geometry": False,

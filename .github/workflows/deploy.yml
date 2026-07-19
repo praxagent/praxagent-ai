@@ -25,10 +25,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -45,18 +45,22 @@ jobs:
 
       - name: Verify Prax deploy artifact
         run: |
-          test -f blog/knowledge-base/prax/index.html
-          test -f blog/references/prax/index.html
-          test -f blog/prax-docs/prax-docs-manifest.json
+          test -f pages-artifact/index.html
+          test -f pages-artifact/blog/knowledge-base/prax/index.html
+          test -f pages-artifact/blog/references/prax/index.html
+          test -f pages-artifact/blog/prax-docs/prax-docs-manifest.json
+          test ! -e pages-artifact/Makefile
+          test ! -e pages-artifact/blog-source
+          test ! -e pages-artifact/scripts
           # GitHub Pages returns 404 for directories that are not world-traversable.
           python3 - <<'PY'
           import stat
           from pathlib import Path
 
           for relative in (
-              "blog/knowledge-base/prax",
-              "blog/references/prax",
-              "blog/prax-docs",
+              "pages-artifact/blog/knowledge-base/prax",
+              "pages-artifact/blog/references/prax",
+              "pages-artifact/blog/prax-docs",
           ):
               path = Path(relative)
               mode = path.stat().st_mode
@@ -68,13 +72,15 @@ jobs:
           PY
 
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
-          path: '.'
+          path: 'pages-artifact'
+          # v5 excludes dotfiles by default; Pages needs .nojekyll.
+          include-hidden-files: true
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

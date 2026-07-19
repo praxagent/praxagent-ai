@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Affine map - praxagent Knowledge Base</title>
+    
+    
+
+
+
+
+
+
+    
+    
+    <meta name="description" content="A transformation that applies a linear map and then adds a fixed offset; it preserves affine combinations, whose coefficients sum to 1, but need not preserve the origin, or zero vector.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/affine-map/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="praxagent Knowledge Base">
+    <meta property="og:title" content="Affine map">
+    <meta property="og:description" content="A transformation that applies a linear map and then adds a fixed offset; it preserves affine combinations, whose coefficients sum to 1, but need not preserve the origin, or zero vector.">
+    <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/affine-map/">
+    <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <meta property="og:image:alt" content="Praxagent&#39;s stochastic mountain landscape.">
+    <meta property="og:image:width" content="1499">
+    <meta property="og:image:height" content="780">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="Affine map">
+    <meta name="twitter:description" content="A transformation that applies a linear map and then adds a fixed offset; it preserves affine combinations, whose coefficients sum to 1, but need not preserve the origin, or zero vector.">
+    <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <meta name="twitter:image:alt" content="Praxagent&#39;s stochastic mountain landscape.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/styles-v2.css">
+    <link rel="stylesheet" href="/blog/blog.css">
+    <link rel="stylesheet" href="/blog/katex.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'neutral',
+        securityLevel: 'loose',
+        flowchart: { htmlLabels: true, curve: 'basis' }
+      });
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-scrolls industrial-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+
+            <div class="nav-menu">
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link">Research Notes</a>
+                <a href="/blog/knowledge-base/" class="nav-link active">Knowledge Base</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
+            <a href="/blog/knowledge-base/" class="mobile-nav-link active">Knowledge Base</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        
+
+
+
+<div class="blog-post reference-entry">
+    <div class="container">
+        <article class="post-content">
+            <header class="post-header">
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
+                <h1 class="post-title">Affine map</h1>
+                
+                <p class="reference-summary">A transformation that applies a linear map and then adds a fixed offset; it preserves affine combinations, whose coefficients sum to 1, but need not preserve the origin, or zero vector.</p>
+                
+
+            </header>
+
+
+
+
+
+            <div class="post-body">
+                <p>An <strong>affine map</strong> applies a linear transformation and then adds a fixed offset. For a real-valued input vector with \(n\) coordinates and an output vector with \(m\) coordinates, an affine map has the form</p>
+\[
+f(x)=Ax+b,
+\]<p>where \(\mathbb{R}\) denotes the real numbers, \(A\in\mathbb{R}^{m\times n}\) is a matrix that linearly combines the input coordinates, for example to rotate, rescale, reduce the number of coordinates, or shear by slanting one coordinate in proportion to another, and \(b\in\mathbb{R}^{m}\) is a fixed <strong>bias</strong> or offset. The <a href="/blog/knowledge-base/matmul/">matrix multiplication</a> \(Ax\) determines how differences between inputs change; adding \(b\) determines where the transformed points sit relative to the origin, meaning the zero vector.</p>
+<h2 id="a-checkable-example">A checkable example</h2>
+<p>Let</p>
+\[
+x=
+\begin{bmatrix}
+2 \\
+3
+\end{bmatrix},
+\qquad
+A=
+\begin{bmatrix}
+2 & 0 \\
+0 & -1
+\end{bmatrix},
+\qquad
+b=
+\begin{bmatrix}
+1 \\
+4
+\end{bmatrix}.
+\]<p>Then</p>
+\[
+f(x)=Ax+b=
+\begin{bmatrix}
+2 & 0 \\
+0 & -1
+\end{bmatrix}\;\times\;
+\begin{bmatrix}
+2 \\
+3
+\end{bmatrix}\;+\;
+\begin{bmatrix}
+1 \\
+4
+\end{bmatrix}\;=\;
+\begin{bmatrix}
+5 \\
+1
+\end{bmatrix}.
+\]<p>The matrix doubles the first coordinate and reverses the sign of the second; the bias then adds 1 and 4. In particular, \(f(0)=b\). This map is linear only when \(b=0\), because a linear map must send the zero vector to the zero vector.</p>
+<h2 id="what-affine-maps-preserve">What affine maps preserve</h2>
+<p>For any two inputs \(x_1,x_2\) and any real number \(t\),</p>
+\[
+f\bigl((1-t)x_1+t x_2\bigr)
+=(1-t)f(x_1)+t f(x_2).
+\]<p>Thus an affine map sends an entire straight line either to an entire straight line or to a single point; it sends a line segment either to a line segment or to a point. When the direction is not collapsed, meaning \(A(x_2-x_1)\ne0\), the same parameter \(t\) identifies corresponding points along the input and output lines. If the direction is collapsed, distinct points on the input line map to the same point. An affine map does not necessarily preserve lengths, angles, areas, or the origin. The equation allows values of \(t\) outside the interval from 0 to 1; restricting \(t\) to that interval describes points on the line segment between \(x_1\) and \(x_2\).</p>
+<p>Differences cancel the bias:</p>
+\[
+f(x_1)-f(x_2)=A(x_1-x_2).
+\]<p>This is why \(A\) controls how small changes, or <strong>perturbations</strong>, and directions are transported even when the full map includes an offset.</p>
+<h2 id="affine-maps-in-neural-network-analysis">Affine maps in neural-network analysis</h2>
+<p>Neural-network libraries often call \(x\mapsto Ax+b\) a <strong>linear layer</strong>, although the operation is mathematically affine when \(b\ne0\). Such layers are building blocks of a <a href="/blog/knowledge-base/mlp/">multilayer perceptron (MLP)</a>. An <strong>activation function</strong> is a function applied to a layer&rsquo;s intermediate values; inserting a nonlinear activation function between affine maps generally makes the resulting MLP nonlinear.</p>
+<p>For a function \(h:\mathbb{R}^{n}\to\mathbb{R}^{m}\) that is differentiable at a chosen base input \(x_0\), there is a linear map for which the approximation error divided by the distance between \(x\) and \(x_0\) tends to zero as \(x\) approaches \(x_0\). Its first-order approximation is affine:</p>
+\[
+g(x)=h(x_0)+J_h(x_0)(x-x_0)
+=J_h(x_0)x+\bigl(h(x_0)-J_h(x_0)x_0\bigr),
+\]<p>where \(J_h(x_0)\) is the Jacobian matrix, the matrix of first derivatives of \(h\) evaluated at \(x_0\). The approximation describes local behavior near \(x_0\); it does not make \(h\) globally affine.</p>
+<p>In the construction called a <a href="/blog/knowledge-base/jacobian-lens/">Jacobian lens</a> in this glossary, Jacobian matrices of a specified later-computed, or <strong>downstream</strong>, quantity with respect to a specified internal state are averaged over a specified <strong>corpus</strong>, meaning a collection of examples. Each Jacobian is a local sensitivity: it maps a small change in the internal state to a first-order change in the downstream quantity. Reusing the average as a fixed <strong>readout</strong>, an analyst-applied map used to estimate a chosen target from internal activations, is an additional approximation; it does not show that the model uses that map in its own computation. Adding or fitting an offset makes the readout affine. Its predictive accuracy must be evaluated for the states and change sizes where it will be used.</p>
+<h2 id="what-an-affine-map-does-not-establish">What an affine map does not establish</h2>
+<ul>
+<li>Fitting an affine relation to observations does not show that the system is globally affine, nor does it establish a causal relation: by itself, the fit does not show that intervening to change the input would produce the mapped change in the output.</li>
+<li>An affine map need not be <strong>invertible</strong>: there may be no inverse map that recovers \(x\) from \(f(x)\). For \(f:\mathbb{R}^{n}\to\mathbb{R}^{n}\), the map is invertible if and only if \(Av=0\) has no solution other than the zero vector \(v=0\). Equivalently, every vector \(y\in\mathbb{R}^{n}\) can be written as \(y=Av\) for some \(v\in\mathbb{R}^{n}\). This condition is called <strong>full rank</strong>.</li>
+<li>The bias \(b\) is a geometric offset. It is unrelated to statistical or social bias unless a particular application gives it that meaning.</li>
+<li>A score produced by an affine map is not automatically a probability. For a finite set of mutually exclusive, exhaustive outcomes, a probability vector must have nonnegative entries that sum to 1. A transformation such as <strong>softmax</strong>, exponentiating every score and dividing each exponential by the sum of all the exponentials, enforces these algebraic constraints. It does not by itself guarantee <strong>calibration</strong>, a distribution-dependent empirical property under which, among cases assigned a given predicted probability or a narrow range around it, the relevant event occurs at approximately that frequency.</li>
+</ul>
+<p>See also: <a href="/blog/knowledge-base/matmul/">matmul</a>, <a href="/blog/knowledge-base/mlp/">multilayer perceptron (MLP)</a>, <a href="/blog/knowledge-base/jacobian-lens/">Jacobian lens</a>.</p>
+
+            </div>
+
+            <footer class="post-footer">
+
+                <div class="post-navigation">
+
+                    <a href="/blog/knowledge-base/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/knowledge-base/" class="back-to-blog">Knowledge Base</a>
+                    <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+
+    </main>
+
+    <footer class="footer footer-compact">
+        <div class="container">
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
+            </div>
+            <div class="footer-compact-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/blog/script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tables = document.querySelectorAll('.post-body table');
+            tables.forEach((table, index) => {
+                if (table.parentElement?.classList.contains('table-scroll')) return;
+
+                const scroller = document.createElement('div');
+                scroller.className = 'table-scroll';
+                scroller.setAttribute('aria-label', `Scrollable data table ${index + 1}`);
+                table.parentNode.insertBefore(scroller, table);
+                scroller.appendChild(table);
+
+                const updateScrollableState = () => {
+                    const isScrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+                    scroller.classList.toggle('is-scrollable', isScrollable);
+                    if (isScrollable) {
+                        scroller.setAttribute('role', 'region');
+                        scroller.setAttribute('tabindex', '0');
+                    } else {
+                        scroller.removeAttribute('role');
+                        scroller.removeAttribute('tabindex');
+                    }
+                };
+
+                requestAnimationFrame(updateScrollableState);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(updateScrollableState).observe(scroller);
+                } else {
+                    window.addEventListener('resize', updateScrollableState, { passive: true });
+                }
+            });
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                output: "htmlAndMathml"
+            });
+
+            const copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+            const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
+            codeBlocks.forEach(pre => {
+                if (pre.closest('.code-block-frame')) {
+                    return;
+                }
+
+                const frame = document.createElement('div');
+                frame.className = 'code-block-frame';
+                const toolbar = document.createElement('div');
+                toolbar.className = 'code-block-toolbar';
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'copy-code-button';
+                button.innerHTML = copyIcon;
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+                button.setAttribute('title', 'Copy');
+
+                const markCopied = () => {
+                    button.innerHTML = checkIcon;
+                    button.classList.add('copied');
+                    button.setAttribute('aria-label', 'Copied');
+                    setTimeout(() => {
+                        button.innerHTML = copyIcon;
+                        button.classList.remove('copied');
+                        button.setAttribute('aria-label', 'Copy code to clipboard');
+                    }, 2000);
+                };
+
+                button.addEventListener('click', () => {
+                    const code = pre.querySelector('code');
+                    const text = code ? code.textContent : pre.textContent;
+
+                    navigator.clipboard.writeText(text).then(markCopied).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            markCopied();
+                        } catch (fallbackErr) {
+                            console.error('Fallback copy failed: ', fallbackErr);
+                        }
+                        document.body.removeChild(textArea);
+                    });
+                });
+
+                toolbar.appendChild(button);
+                frame.appendChild(toolbar);
+                pre.parentNode.insertBefore(frame, pre);
+                frame.appendChild(pre);
+            });
+        });
+    </script>
+
+</body>
+</html>

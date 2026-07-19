@@ -47,18 +47,38 @@
         {{ if and .IsHome (gt (len $sorted) 0) }}
             {{ $featured := index $sorted 0 }}
             {{ $rest = after 1 $sorted }}
-            <a class="blog-featured" href="{{ $featured.RelPermalink }}">
-                <span class="blog-featured-label">Latest</span>
-                <h2>{{ $featured.Title }}</h2>
-                <p class="blog-featured-summary">{{ $featured.Summary | plainify | truncate 300 }}</p>
-                <span class="blog-index-meta">{{ $featured.Params.author | default "praxagent" }} · {{ $featured.Date.Format "January 2, 2006" }}</span>
+{{ $featuredImage := partial "featured-image.html" $featured }}
+            <a class="blog-featured{{ with $featuredImage.display }} has-featured-image{{ end }}" href="{{ $featured.RelPermalink }}">
+{{ with $featuredImage.display }}
+                <div class="blog-featured-media">
+                    <img src="{{ . }}" alt="" width="{{ $featuredImage.width }}" height="{{ $featuredImage.height }}" decoding="async" fetchpriority="high">
+                </div>
+{{ end }}
+                <div class="blog-featured-copy">
+                    <span class="blog-featured-label">Latest</span>
+                    <h2>{{ $featured.Title }}</h2>
+                    <p class="blog-featured-summary">{{ $featured.Summary | plainify | truncate 300 }}</p>
+                    <span class="blog-index-meta">{{ $featured.Params.author | default "praxagent" }} · {{ $featured.Date.Format "January 2, 2006" }}</span>
+                </div>
             </a>
         {{ end }}
 
         <div class="blog-index-list">
             {{ range $rest }}
-            <a class="blog-index-row" href="{{ .RelPermalink }}">
-                <h3>{{ .Title }}</h3>
+            {{- $image := partial "featured-image.html" . }}
+            <a class="blog-index-row{{ with $image.display }} has-featured-image{{ end }}" href="{{ .RelPermalink }}">
+                {{- with $image.display }}
+                <div class="blog-index-media">
+                    <img src="{{ . }}" alt="" width="{{ $image.width }}" height="{{ $image.height }}" loading="lazy" decoding="async">
+                </div>
+                {{- end }}
+                {{- $summary := .Params.summary | default .Description | default .Summary }}
+                <div class="blog-index-copy">
+                    <h3>{{ .Title }}</h3>
+                    {{- with $summary }}
+                    <p class="blog-index-summary">{{ . | plainify | truncate 220 }}</p>
+                    {{- end }}
+                </div>
                 <span class="blog-index-meta">{{ .Params.author | default "praxagent" }} · {{ .Date.Format "January 2, 2006" }}</span>
             </a>
             {{ end }}

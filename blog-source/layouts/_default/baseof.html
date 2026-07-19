@@ -8,8 +8,15 @@
     <title>{{ if .IsHome }}{{ $siteLabel }}{{ else if .Title }}{{ .Title }} - {{ $siteLabel }}{{ else }}{{ $siteLabel }}{{ end }}</title>
     {{ $desc := .Site.Params.description }}
     {{ if .Params.summary }}{{ $desc = .Params.summary }}{{ else if .Description }}{{ $desc = .Description }}{{ end }}
-    {{ $ogImage := "https://praxagent.ai/assets/praxagent_stochastic_mountain.png" }}
-    {{ with .Params.og_image }}{{ $ogImage = . }}{{ end }}
+{{ $featuredImage := partial "featured-image.html" . }}
+{{ $ogImage := $featuredImage.social | default "https://praxagent.ai/assets/praxagent_stochastic_mountain.png" }}
+{{ $ogImageAlt := $featuredImage.alt | default "Praxagent's stochastic mountain landscape." }}
+{{ $ogImageWidth := 1499 }}
+{{ $ogImageHeight := 780 }}
+{{ if $featuredImage.social }}
+{{ $ogImageWidth = $featuredImage.width }}
+{{ $ogImageHeight = $featuredImage.height }}
+{{ end }}
     {{ $canonical := printf "https://praxagent.ai%s" .RelPermalink }}
     {{ if .Params.canonical }}
       {{ $canonical = .Params.canonical }}
@@ -28,13 +35,15 @@
     <meta property="og:description" content="{{ $desc }}">
     <meta property="og:url" content="{{ $canonical }}">
     <meta property="og:image" content="{{ $ogImage }}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="{{ $ogImageAlt }}">
+    <meta property="og:image:width" content="{{ $ogImageWidth }}">
+    <meta property="og:image:height" content="{{ $ogImageHeight }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@praxagent">
     <meta name="twitter:title" content="{{ if .Title }}{{ .Title }}{{ else }}praxagent Research Notes{{ end }}">
     <meta name="twitter:description" content="{{ $desc }}">
     <meta name="twitter:image" content="{{ $ogImage }}">
+    <meta name="twitter:image:alt" content="{{ $ogImageAlt }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">

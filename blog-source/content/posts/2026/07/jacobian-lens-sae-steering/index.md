@@ -6,6 +6,8 @@ aliases: ["/posts/jacobian-lens-sae-steering/"]
 tags: ["AI", "LLM", "machine-learning", "interpretability", "sparse-autoencoders", "jacobian-lens", "model-auditing", "reproducibility", "preregistration", "open-science"]
 author: Timothy Jones
 summary: "A prospectively frozen Llama 3.3 70B experiment asks whether SAE steering leaves a detectable downstream fingerprint in Jacobian-lens space. A preregistered follow-up adds semantic hard negatives, same-subfamily comparators, a 14-reader capacity ladder, and a worked example of a replay gate failing honestly."
+og_image: "og-card.png"
+og_image_alt: "Two access models produce different results: isolated post-steering attribution is at chance, while a matched clean reference supports differential monitoring."
 draft: false
 lead: |
   Imagine you push a language model sideways by adding a small internal

@@ -7,7 +7,8 @@ summary: "A worked Deep Dive on floating-point formats for model arithmetic: bit
 weight: 20
 draft: false
 pro_reviewed: false
-og_image: "https://praxagent.ai/blog/knowledge-base/deep-dives/bf16-accumulation-swamping.png"
+og_image: "og-card.png"
+og_image_alt: "Adding 0.0001 ten thousand times reaches 1.0 in FP32, but stalls near 0.25 in FP16 and near 0.03 in BF16 when increments become too small to change the accumulator."
 ai_disclosure: |
   **AI-use disclosure.** Generative-AI tools helped draft, edit, and review this
   Deep Dive. The author selected the teaching goals, checked the numeric demos

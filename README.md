@@ -19,6 +19,7 @@ praxagent/
 │   ├── static/                # Blog CSS, JS assets
 │   └── hugo.yaml              # Hugo configuration
 ├── blog/                      # Generated blog output (do not edit directly)
+├── pages-artifact/            # Ignored, allowlisted deployment staging directory
 └── assets/                    # Static images, logos
 ```
 
@@ -37,11 +38,38 @@ make blog       # compile blog-source/content/posts into blog/
 make blog-drafts # compile blog/ including draft Research Notes
 make blog-serve # Hugo live reload at http://127.0.0.1:1313/blog/
 make ci         # exact build + validation contract used by GitHub Actions
+make pages      # build and validate the exact artifact uploaded to Pages
 ```
 
 `make ci` compiles the production blog, runs Hugo again with warnings treated as
-failures, compiles checked-in Python, and validates lowercase branding, local links,
-HTML anchors, JSON, and SVG/XML assets.
+failures, compiles checked-in Python, validates lowercase branding, local links,
+HTML anchors, JSON, SVG/XML assets, provenance, and publication-safety rules, then
+stages the allowlisted public website in `pages-artifact/`.
+
+Stage intended site-source and deployment changes before running `make ci`. The
+release-input check deliberately rejects untracked files and unstaged edits that
+affect the published site: those files exist in a local build but disappear from
+GitHub Actions' clean checkout.
+
+## Public Repository Boundary
+
+This repository is intentionally public. Treat every committed file and every
+commit message as immediately public, even when Hugo front matter says
+`draft: true`. Confidential drafts, client material, credentials, raw model-review
+responses, and unpublished proprietary research belong in a private working
+repository or an ignored local cache—not here.
+
+Local credentials live in `.env`; raw Pro-review responses live under `.cache/`.
+Both are ignored. `scripts/check_public_repo.py` adds a conservative CI backstop
+for high-confidence credential formats and local-only filenames, but it cannot
+retract material after a push.
+
+GitHub Pages never receives the repository working tree. `scripts/stage_pages.py`
+copies an explicit allowlist into `pages-artifact/`, and
+`scripts/check_pages_artifact.py` verifies its contents, permissions, and local
+links before deployment. Source, workflows, Makefiles, local caches, and review
+tooling remain visible on GitHub because this repository is public, but they are
+not duplicated at `praxagent.ai`.
 
 ### Development
 
@@ -192,12 +220,17 @@ var anchors = [
 ## Deployment
 
 ```bash
-cd blog-source
-hugo --destination ../blog
+make pages
 ```
 
-Upload the entire repo to GitHub Pages (or any static host). The `CNAME` file points to `praxagent.ai`.
+GitHub Actions uploads only `pages-artifact/`. Never configure Pages to publish
+the repository root. In repository **Settings → Pages → Build and deployment**,
+set **Source** to **GitHub Actions**; **Deploy from a branch** bypasses the
+allowlisted artifact. The staged `CNAME` file points to `praxagent.ai`.
 
 ## License
 
-See LICENSE file for details.
+Repository software and tooling are available under the
+[Apache License 2.0](LICENSE). Blog prose, original figures, and brand assets are
+covered separately by [CONTENT-LICENSE.md](CONTENT-LICENSE.md). Third-party
+materials retain their own licenses and attribution requirements.

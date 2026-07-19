@@ -141,6 +141,8 @@ celerybeat.pid
 
 # Local secrets and environments (never commit)
 .env
+.env.*
+!.env.example
 .envrc
 .venv
 env/
@@ -206,6 +208,22 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
+# Local agent/editor state (repository policy must not depend on global ignores)
+/.claude/
+/.codex/
+/.cursor/
+
+# Private keys, local credentials, and editor backups
+*.key
+*.pem
+*.p12
+*.pfx
+*.kdbx
+*.swp
+*.swo
+*.bak
+*~
+
 # Marimo
 marimo/_static/
 marimo/_lsp/
@@ -219,3 +237,8 @@ __marimo__/
 /blog/prax-docs/
 /blog/knowledge-base/prax/
 /blog/references/prax/
+
+# Disposable build products. Only pages-artifact/ is uploaded by Pages CI.
+/pages-artifact/
+/blog-source/public/
+/blog-source/.hugo_build.lock

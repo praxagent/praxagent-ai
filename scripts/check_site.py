@@ -5,10 +5,11 @@ from __future__ import annotations
 
 import json
 import re
+import struct
 import sys
 from html.parser import HTMLParser
 from pathlib import Path, PurePosixPath
-from urllib.parse import quote, unquote, urlsplit
+from urllib.parse import quote, unquote, urljoin, urlsplit
 from xml.etree import ElementTree
 
 
@@ -38,6 +39,29 @@ REFERENCE_FIGURE_RE = re.compile(
     r"{{<\s*reference-figure\s+(.*?)\s*>}}", re.DOTALL
 )
 SHORTCODE_ATTRIBUTE_RE = re.compile(r'([A-Za-z][\w-]*)="([^"]*)"')
+SOCIAL_IMAGE_FIELDS = (
+    "og:image",
+    "twitter:image",
+)
+SOCIAL_IMAGE_ALT_FIELDS = (
+    "og:image:alt",
+    "twitter:image:alt",
+)
+SOCIAL_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png"}
+SOCIAL_IMAGE_WIDTH = 1200
+SOCIAL_IMAGE_HEIGHT = 630
+SOCIAL_IMAGE_BUNDLE_ROOTS = (
+    (
+        Path("blog-source/content/posts"),
+        Path("blog/posts"),
+        "Research Note",
+    ),
+    (
+        Path("blog-source/content/knowledge-base/deep-dives"),
+        Path("blog/knowledge-base/deep-dives"),
+        "Deep Dive",
+    ),
+)
 
 
 class DocumentParser(HTMLParser):
@@ -45,16 +69,25 @@ class DocumentParser(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.ids: set[str] = set()
         self.links: list[tuple[str, str]] = []
+        self.meta: dict[str, list[str]] = {}
+        self.is_redirect = False
 
     def handle_starttag(
         self, tag: str, attrs: list[tuple[str, str | None]]
     ) -> None:
-        values = dict(attrs)
+        values = {key.casefold(): value for key, value in attrs}
         if element_id := values.get("id"):
             self.ids.add(element_id)
         for attr in ("href", "src"):
             if value := values.get(attr):
                 self.links.append((attr, value))
+        if tag.casefold() == "meta":
+            if (values.get("http-equiv") or "").casefold() == "refresh":
+                self.is_redirect = True
+            meta_name = values.get("property") or values.get("name")
+            content = values.get("content")
+            if meta_name and content is not None:
+                self.meta.setdefault(meta_name.casefold(), []).append(content)
 
 
 def walk(pattern: str) -> list[Path]:
@@ -69,6 +102,300 @@ def parse_html(path: Path) -> DocumentParser:
     parser = DocumentParser()
     parser.feed(path.read_text(encoding="utf-8"))
     return parser
+
+
+def _frontmatter_scalars(path: Path) -> dict[str, str]:
+    """Return simple, top-level scalar values from YAML front matter.
+
+    The social-card convention deliberately uses one-line scalar fields, so a
+    full YAML dependency would add complexity without improving this check.
+    """
+
+    lines = path.read_text(encoding="utf-8").splitlines()
+    if not lines or lines[0].strip() != "---":
+        return {}
+
+    fields: dict[str, str] = {}
+    for line in lines[1:]:
+        if line.strip() == "---":
+            break
+        match = re.match(r"^([A-Za-z_][\w-]*):\s*(.*?)\s*$", line)
+        if match is None:
+            continue
+        key, raw_value = match.groups()
+        value = raw_value.strip()
+        if len(value) >= 2 and value[0] == value[-1] == '"':
+            try:
+                decoded = json.loads(value)
+            except json.JSONDecodeError:
+                decoded = value[1:-1]
+            if isinstance(decoded, str):
+                value = decoded
+        elif len(value) >= 2 and value[0] == value[-1] == "'":
+            value = value[1:-1].replace("''", "'")
+        else:
+            value = re.split(r"\s+#", value, maxsplit=1)[0].rstrip()
+        fields[key] = value
+    return fields
+
+
+def _png_dimensions(data: bytes) -> tuple[int, int]:
+    if len(data) < 24 or data[:8] != b"\x89PNG\r\n\x1a\n":
+        raise ValueError("invalid PNG signature")
+    if data[12:16] != b"IHDR" or struct.unpack(">I", data[8:12])[0] != 13:
+        raise ValueError("PNG does not begin with a valid IHDR chunk")
+    width, height = struct.unpack(">II", data[16:24])
+    if width < 1 or height < 1:
+        raise ValueError("PNG has invalid zero dimensions")
+    return width, height
+
+
+def _jpeg_dimensions(data: bytes) -> tuple[int, int]:
+    if len(data) < 4 or data[:2] != b"\xff\xd8":
+        raise ValueError("invalid JPEG signature")
+
+    # Start-of-frame markers that carry sample precision, height, and width.
+    sof_markers = {
+        0xC0,
+        0xC1,
+        0xC2,
+        0xC3,
+        0xC5,
+        0xC6,
+        0xC7,
+        0xC9,
+        0xCA,
+        0xCB,
+        0xCD,
+        0xCE,
+        0xCF,
+    }
+    standalone_markers = {0x01, *range(0xD0, 0xDA)}
+    offset = 2
+    while offset < len(data):
+        while offset < len(data) and data[offset] != 0xFF:
+            offset += 1
+        while offset < len(data) and data[offset] == 0xFF:
+            offset += 1
+        if offset >= len(data):
+            break
+
+        marker = data[offset]
+        offset += 1
+        if marker == 0x00:
+            continue
+        if marker in standalone_markers:
+            continue
+        if marker in {0xD8, 0xD9}:
+            if marker == 0xD9:
+                break
+            continue
+        if offset + 2 > len(data):
+            raise ValueError("truncated JPEG segment length")
+
+        segment_length = struct.unpack(">H", data[offset : offset + 2])[0]
+        if segment_length < 2 or offset + segment_length > len(data):
+            raise ValueError("invalid or truncated JPEG segment")
+        if marker in sof_markers:
+            if segment_length < 7:
+                raise ValueError("truncated JPEG start-of-frame segment")
+            height, width = struct.unpack(">HH", data[offset + 3 : offset + 7])
+            if width < 1 or height < 1:
+                raise ValueError("JPEG has invalid zero dimensions")
+            return width, height
+        if marker == 0xDA:
+            break
+        offset += segment_length
+
+    raise ValueError("JPEG has no supported start-of-frame marker")
+
+
+def _raster_dimensions(path: Path) -> tuple[int, int]:
+    data = path.read_bytes()
+    if path.suffix.casefold() == ".png":
+        return _png_dimensions(data)
+    return _jpeg_dimensions(data)
+
+
+def _resolved_public_path(page: Path, raw_url: str) -> str:
+    page_directory = "/" + page.parent.relative_to(ROOT).as_posix().strip("/") + "/"
+    base = f"https://local.invalid{page_directory}"
+    return unquote(urlsplit(urljoin(base, raw_url)).path)
+
+
+def _generated_social_bundle(
+    *,
+    source_root: Path,
+    output_root: Path,
+    bundle: Path,
+    fields: dict[str, str],
+    content_label: str,
+) -> Path:
+    explicit_url = fields.get("url", "").strip()
+    if explicit_url:
+        public_path = unquote(urlsplit(explicit_url).path).strip("/")
+        return ROOT / public_path
+
+    bundle_relative = bundle.relative_to(source_root)
+    slug = fields.get("slug", "").strip() or bundle_relative.name
+    if content_label == "Research Note":
+        date_match = re.match(r"^(\d{4})-(\d{2})", fields.get("date", ""))
+        if date_match is not None:
+            year, month = date_match.groups()
+            return output_root / year / month / slug
+    return output_root / bundle_relative.parent / slug
+
+
+def _check_social_meta_value(
+    errors: list[str],
+    *,
+    source: Path,
+    document: DocumentParser,
+    field: str,
+    expected: str,
+    image_field: bool = False,
+    generated_page: Path,
+) -> None:
+    values = document.meta.get(field, [])
+    if len(values) != 1:
+        errors.append(
+            f"{generated_page.relative_to(ROOT)}: expected exactly one {field} "
+            f"meta tag for {source.relative_to(ROOT)}, found {len(values)}"
+        )
+        return
+
+    actual = values[0]
+    if image_field:
+        actual = _resolved_public_path(generated_page, actual)
+    if actual != expected:
+        errors.append(
+            f"{generated_page.relative_to(ROOT)}: {field} must be {expected!r} "
+            f"for {source.relative_to(ROOT)}, found {actual!r}"
+        )
+
+
+def check_social_images(errors: list[str]) -> None:
+    """Validate source cards and their generated Open Graph/Twitter metadata."""
+
+    for source_root_relative, output_root_relative, content_label in (
+        SOCIAL_IMAGE_BUNDLE_ROOTS
+    ):
+        source_root = ROOT / source_root_relative
+        output_root = ROOT / output_root_relative
+        for source in sorted(source_root.rglob("index.md")):
+            bundle = source.parent
+            fields = _frontmatter_scalars(source)
+            image_name = fields.get("og_image", "").strip()
+            image_alt = fields.get("og_image_alt", "").strip()
+
+            if not image_name:
+                errors.append(
+                    f"{source.relative_to(ROOT)}: {content_label} requires "
+                    "og_image"
+                )
+            if not image_alt:
+                errors.append(
+                    f"{source.relative_to(ROOT)}: {content_label} requires "
+                    "og_image_alt"
+                )
+
+            valid_image_name = bool(image_name)
+            parsed_image = urlsplit(image_name)
+            if image_name and (
+                parsed_image.scheme
+                or parsed_image.netloc
+                or image_name.startswith("/")
+                or parsed_image.query
+                or parsed_image.fragment
+                or "/" in image_name
+                or "\\" in image_name
+                or PurePosixPath(image_name).name != image_name
+            ):
+                valid_image_name = False
+                errors.append(
+                    f"{source.relative_to(ROOT)}: og_image must be a local "
+                    f"page-bundle filename, found {image_name!r}"
+                )
+
+            extension = Path(image_name).suffix.casefold() if image_name else ""
+            if image_name and extension not in SOCIAL_IMAGE_EXTENSIONS:
+                valid_image_name = False
+                errors.append(
+                    f"{source.relative_to(ROOT)}: og_image must use PNG or JPEG, "
+                    f"found {extension or 'no extension'}"
+                )
+
+            source_image = bundle / image_name if valid_image_name else None
+            if source_image is not None and not source_image.is_file():
+                errors.append(
+                    f"{source_image.relative_to(ROOT)}: og_image page-bundle "
+                    "file is missing"
+                )
+            elif source_image is not None:
+                try:
+                    width, height = _raster_dimensions(source_image)
+                except (OSError, ValueError) as exc:
+                    errors.append(
+                        f"{source_image.relative_to(ROOT)}: invalid social image: {exc}"
+                    )
+                else:
+                    if (width, height) != (
+                        SOCIAL_IMAGE_WIDTH,
+                        SOCIAL_IMAGE_HEIGHT,
+                    ):
+                        errors.append(
+                            f"{source_image.relative_to(ROOT)}: social image must be "
+                            f"{SOCIAL_IMAGE_WIDTH}x{SOCIAL_IMAGE_HEIGHT}, found "
+                            f"{width}x{height}"
+                        )
+
+            generated_bundle = _generated_social_bundle(
+                source_root=source_root,
+                output_root=output_root,
+                bundle=bundle,
+                fields=fields,
+                content_label=content_label,
+            )
+            generated_page = generated_bundle / "index.html"
+            if not generated_page.is_file() or not valid_image_name:
+                continue
+
+            try:
+                document = parse_html(generated_page)
+            except UnicodeDecodeError:
+                errors.append(
+                    f"{generated_page.relative_to(ROOT)}: generated page must be UTF-8"
+                )
+                continue
+            if document.is_redirect:
+                continue
+
+            generated_image = generated_bundle / image_name
+            if not generated_image.is_file():
+                errors.append(
+                    f"{generated_image.relative_to(ROOT)}: generated social image "
+                    "page resource is missing"
+                )
+            expected_public_path = "/" + generated_image.relative_to(ROOT).as_posix()
+            for field in SOCIAL_IMAGE_FIELDS:
+                _check_social_meta_value(
+                    errors,
+                    source=source,
+                    document=document,
+                    field=field,
+                    expected=expected_public_path,
+                    image_field=True,
+                    generated_page=generated_page,
+                )
+            for field in SOCIAL_IMAGE_ALT_FIELDS:
+                _check_social_meta_value(
+                    errors,
+                    source=source,
+                    document=document,
+                    field=field,
+                    expected=image_alt,
+                    generated_page=generated_page,
+                )
 
 
 def resolve_local(source: Path, raw_url: str) -> tuple[Path, str] | None:
@@ -658,6 +985,7 @@ def main() -> int:
     check_brand(errors)
     check_html(errors)
     check_json(errors)
+    check_social_images(errors)
     check_prax_docs(errors)
     check_knowledge_base_routes(errors)
     check_late_chunking_deep_dive(errors)
@@ -672,7 +1000,7 @@ def main() -> int:
 
     print(
         "Site validation passed: lowercase brand, local links, anchors, JSON, SVG "
-        "accessibility, and Prax docs."
+        "accessibility, social images, and Prax docs."
     )
     return 0
 
