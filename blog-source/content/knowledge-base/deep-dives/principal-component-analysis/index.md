@@ -4,8 +4,8 @@ slug: "principal-component-analysis"
 date: 2026-07-19
 author: Timothy Jones
 summary: "Principal component analysis turns many measurements into a simpler map. This guide explains how rows, scaling, metadata, and evaluation choices shape what that map can mean."
-draft: true
-pro_reviewed: false
+draft: false
+pro_reviewed: true
 og_image: "og-card.png"
 og_image_alt: "A principal component analysis plot of 210 measured wheat kernels sits beside the statement that PCA is a map of variation, not a verdict."
 weight: 20
