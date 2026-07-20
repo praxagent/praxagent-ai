@@ -1,6 +1,7 @@
 {{ define "main" }}
 {{ $knowledgeBaseURL := "knowledge-base/" | relURL }}
-{{ $isGlossaryEntry := eq .Parent.RelPermalink $knowledgeBaseURL }}
+{{ $glossaryURL := "knowledge-base/glossary/" | relURL }}
+{{ $isGlossaryEntry := eq .Parent.RelPermalink $glossaryURL }}
 {{ $isDeepDive := eq .Parent.RelPermalink ("knowledge-base/deep-dives/" | relURL) }}
 <div class="blog-post reference-entry">
     <div class="container">

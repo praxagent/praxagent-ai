@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-labelledby="tokenization-title tokenization-desc">
+  <title id="tokenization-title">A tokenizer maps text to token pieces and identifiers</title>
+  <desc id="tokenization-desc">The text Root-like growth is split into four illustrative token pieces: Root, hyphen, like, and a piece containing a leading space plus growth. Each piece maps to an arbitrary integer identifier.</desc>
+  <defs>
+    <marker id="tokenization-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4B6787"/>
+    </marker>
+  </defs>
+  <rect width="900" height="360" fill="#F7F4F0"/>
+  <text x="450" y="42" text-anchor="middle" fill="#2C2924" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">One visible phrase can become several model tokens</text>
+
+  <rect x="50" y="80" width="250" height="72" rx="14" fill="#FFFDFC" stroke="#2C2924" stroke-width="2"/>
+  <text x="175" y="110" text-anchor="middle" fill="#5A544C" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700">INPUT TEXT</text>
+  <text x="175" y="139" text-anchor="middle" fill="#2C2924" font-family="Inter, Arial, sans-serif" font-size="21">Root-like growth</text>
+  <line x1="320" y1="116" x2="385" y2="116" stroke="#4B6787" stroke-width="4" marker-end="url(#tokenization-arrow)"/>
+  <text x="352" y="96" text-anchor="middle" fill="#4B6787" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700">split</text>
+
+  <g font-family="Inter, Arial, sans-serif" text-anchor="middle">
+    <rect x="405" y="82" width="96" height="68" rx="12" fill="#E8EEF4" stroke="#4B6787" stroke-width="2"/>
+    <text x="453" y="111" fill="#2C2924" font-size="18" font-weight="700">Root</text>
+    <text x="453" y="136" fill="#5A544C" font-size="14">token 1</text>
+    <rect x="513" y="82" width="76" height="68" rx="12" fill="#F2E7DC" stroke="#A67C52" stroke-width="2"/>
+    <text x="551" y="111" fill="#2C2924" font-size="20" font-weight="700">-</text>
+    <text x="551" y="136" fill="#5A544C" font-size="14">token 2</text>
+    <rect x="601" y="82" width="96" height="68" rx="12" fill="#E8F0E5" stroke="#6F8D5E" stroke-width="2"/>
+    <text x="649" y="111" fill="#2C2924" font-size="18" font-weight="700">like</text>
+    <text x="649" y="136" fill="#5A544C" font-size="14">token 3</text>
+    <rect x="709" y="82" width="142" height="68" rx="12" fill="#EEE9F3" stroke="#765B83" stroke-width="2"/>
+    <text x="780" y="108" fill="#2C2924" font-size="16" font-weight="700">[space]growth</text>
+    <text x="780" y="136" fill="#5A544C" font-size="14">token 4</text>
+  </g>
+
+  <line x1="628" y1="168" x2="628" y2="215" stroke="#4B6787" stroke-width="4" marker-end="url(#tokenization-arrow)"/>
+  <text x="648" y="197" fill="#4B6787" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700">look up identifiers</text>
+
+  <rect x="330" y="232" width="540" height="64" rx="14" fill="#FFFDFC" stroke="#2C2924" stroke-width="2"/>
+  <text x="354" y="258" fill="#5A544C" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700">ILLUSTRATIVE TOKEN IDENTIFIERS</text>
+  <text x="600" y="282" text-anchor="middle" fill="#2C2924" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="21">[7312, 14, 982, 4401]</text>
+
+  <text x="450" y="333" text-anchor="middle" fill="#5A544C" font-family="Inter, Arial, sans-serif" font-size="15">A different tokenizer may choose different pieces and different identifiers for the same characters.</text>
+</svg>

@@ -20,7 +20,7 @@
       },
       {
         "path": "receipts/per-query.csv",
-        "sha256": "b91c682c7da121af99d1546c0688c00249d8af5310b519ca9d63c3ab422b3a28"
+        "sha256": "377e6d4feb59687d5f3e0557dea05f4cae6de4dc08619d6069cab9ef782c487d"
       }
     ],
     "selection": "all 300 queries in the fixed SciFact test qrels",
@@ -56,7 +56,7 @@
   },
   "provenance": {
     "generator_path": "reproduce.py",
-    "generator_sha256": "1f6aead6fcc71cf1ab2c6e81dde784ca11671ebc53f9673e064a22409de59c35",
+    "generator_sha256": "d0a83bffa0c487abafc3f54f1d04c496f16284dc9c566fd917f536b43119a039",
     "outputs": {
       "fig-scifact-retrieval.svg": "66bb22c36301d8e0d49df95cbfbfd91984b260b303c494eadc8ff024f2b7d0ca"
     },

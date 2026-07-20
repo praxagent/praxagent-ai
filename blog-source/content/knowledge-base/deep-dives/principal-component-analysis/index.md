@@ -105,7 +105,7 @@ By the end of this guide, you should be able to answer five practical questions 
 2. What does one row represent, and should any rows be combined?
 3. When would a median be justified for repeated or missing measurements?
 4. What patterns are actually visible in the PCA map?
-5. You scaled (put features on a comparable numerical scale) and imputed (filled in missing values) the entire dataset before saving it. How could that cause data leakage when building a model, and how would you prevent it?
+5. You {{< refterm "standard-scaling" "scaled" >}} (put features on a comparable numerical scale) and {{< refterm "imputation" "imputed" >}} (filled in missing values) the entire dataset before saving it. How could that cause {{< refterm "data-leakage" "data leakage" >}} (test-set information accidentally influencing training) when building a model, and how would you prevent it?
 
 No programming experience is assumed. Read the page in order the first time. Each picture introduces one decision, and each equation appears only after the corresponding idea has been explained visually.
 
@@ -397,7 +397,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-The **Pearson correlation** is a standardized description of a linear relationship. A value near +1 means two measurements rise together in an almost straight-line pattern. A value near -1 means one tends to fall as the other rises. A value near 0 means there is little straight-line relationship; it does not rule out a curved relationship.
+The {{< refterm "pearson-correlation" "Pearson correlation" >}} is a standardized description of a linear relationship. A value near +1 means two measurements rise together in an almost straight-line pattern. A value near -1 means one tends to fall as the other rises. A value near 0 means there is little straight-line relationship; it does not rule out a curved relationship.
 
 {{< panel "info" >}}
 **How Pearson correlation is calculated**
@@ -522,7 +522,7 @@ Before imputing, ask which measurements are missing, why they are missing, wheth
 
 ## Before scaling: what standard deviation means
 
-The **mean** and **standard deviation** answer different questions about one feature column:
+The **mean** and {{< refterm "standard-deviation" "standard deviation" >}} answer different questions about one feature column:
 
 - The mean tells us where the center is.
 - The standard deviation tells us how widely the values spread around that center.

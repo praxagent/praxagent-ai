@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="500" viewBox="0 0 880 500" role="img" aria-labelledby="pca-title pca-desc">
+  <title id="pca-title">Principal component analysis keeps observations fixed while changing the coordinate axes</title>
+  <desc id="pca-desc">Two panels show the same five-point diagonal cloud. The left panel uses horizontal feature 1 and vertical feature 2 axes. The right panel uses a principal component 1 axis along the cloud's longest spread and a perpendicular principal component 2 axis.</desc>
+  <defs>
+    <marker id="pca-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#2C2924"/>
+    </marker>
+    <pattern id="pca-dot-pattern" width="6" height="6" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1" fill="#2C2924" opacity="0.22"/>
+    </pattern>
+  </defs>
+  <rect width="880" height="500" rx="24" fill="#F7F4F0"/>
+  <text x="440" y="38" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#2C2924">The observations stay; the coordinate directions change</text>
+
+  <rect x="34" y="66" width="382" height="382" rx="18" fill="#FFFDF9" stroke="#B9AA98" stroke-width="2"/>
+  <text x="225" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#2C2924">Original feature axes</text>
+  <line x1="102" y1="395" x2="376" y2="395" stroke="#2C2924" stroke-width="3" marker-end="url(#pca-arrow)"/>
+  <line x1="102" y1="395" x2="102" y2="130" stroke="#2C2924" stroke-width="3" marker-end="url(#pca-arrow)"/>
+  <text x="373" y="425" text-anchor="end" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#2C2924">feature 1</text>
+  <text x="79" y="143" text-anchor="end" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#2C2924">feature 2</text>
+
+  <g stroke="#2C2924" stroke-width="2">
+    <circle cx="150" cy="365" r="10" fill="#BFD0DF"/>
+    <rect x="185" y="325" width="20" height="20" rx="3" fill="#D8B898"/>
+    <circle cx="240" cy="300" r="10" fill="#BFD0DF"/>
+    <rect x="280" y="255" width="20" height="20" rx="3" fill="#D8B898"/>
+    <circle cx="340" cy="230" r="10" fill="url(#pca-dot-pattern)"/>
+  </g>
+  <path d="M142 379 C205 341 278 286 351 217" fill="none" stroke="#6F8D5E" stroke-width="4" stroke-dasharray="8 7"/>
+  <text x="235" y="184" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#5A544C">greatest spread is diagonal</text>
+
+  <rect x="464" y="66" width="382" height="382" rx="18" fill="#FFFDF9" stroke="#B9AA98" stroke-width="2"/>
+  <text x="655" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#2C2924">Principal-component axes</text>
+  <line x1="529" y1="401" x2="812" y2="198" stroke="#2C2924" stroke-width="3" marker-end="url(#pca-arrow)"/>
+  <line x1="774" y1="443" x2="568" y2="156" stroke="#4B6787" stroke-width="3" marker-end="url(#pca-arrow)"/>
+  <text x="756" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#2C2924">principal component 1</text>
+  <text x="555" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#4B6787">principal component 2</text>
+
+  <g stroke="#2C2924" stroke-width="2">
+    <circle cx="580" cy="365" r="10" fill="#BFD0DF"/>
+    <rect x="615" y="325" width="20" height="20" rx="3" fill="#D8B898"/>
+    <circle cx="670" cy="300" r="10" fill="#BFD0DF"/>
+    <rect x="710" y="255" width="20" height="20" rx="3" fill="#D8B898"/>
+    <circle cx="770" cy="230" r="10" fill="url(#pca-dot-pattern)"/>
+  </g>
+  <path d="M572 379 C635 341 708 286 781 217" fill="none" stroke="#6F8D5E" stroke-width="4" stroke-dasharray="8 7"/>
+  <text x="655" y="475" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#5A544C">Same points in both panels; only the axes change.</text>
+</svg>

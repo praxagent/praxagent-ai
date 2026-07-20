@@ -86,9 +86,13 @@ blog: sync-prax-docs verify-late-chunking ## Compile blog-source/content/posts i
 		--cleanDestinationDir
 	$(RSYNC) -a \
 		--include='/reproduce.py' \
+		--include='/reproduce-at-run.py' \
 		--include='/reproduce.py.lock' \
 		--include='/ATTRIBUTION.md' \
 		--include='/provenance.json' \
+		--include='/late-chunking-order.svg' \
+		--include='/late-chunking-context-window.svg' \
+		--include='/late-chunking-ranking-metrics.svg' \
 		--include='/fig-scifact-retrieval.svg' \
 		--include='/fig-query-deltas.svg' \
 		--include='/fig-scifact-retrieval.receipt.json' \

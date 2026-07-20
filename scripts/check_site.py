@@ -23,12 +23,16 @@ LATE_CHUNKING_BUNDLE = Path(
 LATE_CHUNKING_ARTIFACTS = (
     "ATTRIBUTION.md",
     "reproduce.py",
+    "reproduce-at-run.py",
     "reproduce.py.lock",
     "receipts/aggregate.json",
     "receipts/per-query.csv",
     "receipts/scifact-test-qrels.tsv",
     "receipts/top-10-rankings.jsonl",
     "receipts/run.receipt.json",
+    "late-chunking-order.svg",
+    "late-chunking-context-window.svg",
+    "late-chunking-ranking-metrics.svg",
     "fig-scifact-retrieval.svg",
     "fig-query-deltas.svg",
     "fig-scifact-retrieval.receipt.json",
@@ -60,6 +64,11 @@ SOCIAL_IMAGE_BUNDLE_ROOTS = (
         Path("blog-source/content/knowledge-base/deep-dives"),
         Path("blog/knowledge-base/deep-dives"),
         "Deep Dive",
+    ),
+    (
+        Path("blog-source/content/knowledge-base/glossary"),
+        Path("blog/knowledge-base/glossary"),
+        "Glossary entry",
     ),
 )
 
@@ -234,7 +243,9 @@ def _generated_social_bundle(
     explicit_url = fields.get("url", "").strip()
     if explicit_url:
         public_path = unquote(urlsplit(explicit_url).path).strip("/")
-        return ROOT / public_path
+        if public_path == "blog" or public_path.startswith("blog/"):
+            return ROOT / public_path
+        return ROOT / "blog" / public_path
 
     bundle_relative = bundle.relative_to(source_root)
     slug = fields.get("slug", "").strip() or bundle_relative.name
@@ -287,6 +298,9 @@ def check_social_images(errors: list[str]) -> None:
             fields = _frontmatter_scalars(source)
             image_name = fields.get("og_image", "").strip()
             image_alt = fields.get("og_image_alt", "").strip()
+
+            if content_label == "Glossary entry" and not image_name and not image_alt:
+                continue
 
             if not image_name:
                 errors.append(
@@ -456,6 +470,11 @@ def check_html(errors: list[str]) -> None:
 
     for source in html_files:
         document = parsed[source.resolve()]
+        source_text = source.read_text(encoding="utf-8")
+        if 'class="ref-term ref-term-missing"' in source_text:
+            errors.append(
+                f"{source.relative_to(ROOT)}: unresolved refterm shortcode"
+            )
         for attr, raw_url in document.links:
             resolved = resolve_local(source.resolve(), raw_url)
             if resolved is None:
@@ -687,28 +706,91 @@ def check_knowledge_base_routes(errors: list[str]) -> None:
     route_parts: dict[tuple[str, ...], bool] = {
         (): True,
         ("deep-dives",): True,
-        ("glossary",): True,
+        ("glossary",): False,
     }
 
     content_dir = ROOT / "blog-source/content/knowledge-base"
-    for path in sorted(content_dir.glob("*.md")):
+    glossary_dir = content_dir / "glossary"
+    loose_entries = [
+        path
+        for path in sorted(content_dir.glob("*.md"))
+        if path.name not in {"_index.md", "AGENTS.md", "SKILL.md"}
+    ]
+    for path in loose_entries:
+        errors.append(
+            f"{path.relative_to(ROOT)}: glossary entry must be a leaf bundle "
+            "under knowledge-base/glossary/<slug>/index.md"
+        )
+
+    for bundle in sorted(path for path in glossary_dir.iterdir() if path.is_dir()):
+        if not (bundle / "index.md").is_file():
+            errors.append(
+                f"{bundle.relative_to(ROOT)}: glossary bundle requires index.md"
+            )
+
+    entry_paths = [
+        (path, ("glossary",))
+        for path in sorted(glossary_dir.glob("*/index.md"))
+    ]
+    for path, route_prefix in entry_paths:
         if path.name in {"_index.md", "AGENTS.md", "SKILL.md"}:
             continue
         text = path.read_text(encoding="utf-8")
         frontmatter_parts = text.split("---", 2)
         frontmatter = frontmatter_parts[1] if len(frontmatter_parts) == 3 else ""
-        if re.search(r"(?mi)^draft:\s*true\s*$", frontmatter):
-            continue
+        is_draft = re.search(r"(?mi)^draft:\s*true\s*$", frontmatter) is not None
         slug = re.search(
             r'(?m)^slug:\s*["\']?([^"\'\s]+)["\']?\s*$', frontmatter
         )
         if slug is None:
             errors.append(f"{path.relative_to(ROOT)}: glossary entry requires a slug")
             continue
-        has_legacy_alias = re.search(
-            r"(?m)^\s*-\s*/references/", frontmatter
-        ) is not None
-        route_parts[(slug.group(1),)] = has_legacy_alias
+        if route_prefix and path.parent.name != slug.group(1):
+            errors.append(
+                f"{path.relative_to(ROOT)}: bundle directory must match slug "
+                f"{slug.group(1)!r}"
+            )
+        if slug.group(1) in {"deep-dives", "glossary", "prax"}:
+            errors.append(
+                f"{path.relative_to(ROOT)}: glossary slug {slug.group(1)!r} "
+                "is reserved by the Knowledge Base"
+            )
+        route = route_prefix + (slug.group(1),)
+        explicit_url = re.search(
+            r'(?m)^url:\s*["\']?([^"\'\s]+)["\']?\s*$', frontmatter
+        )
+        if explicit_url is not None:
+            errors.append(
+                f"{path.relative_to(ROOT)}: glossary entries must not override "
+                "url; the bundle path defines the canonical nested route"
+            )
+        if re.search(r"(?m)^aliases:\s*$", frontmatter) is not None:
+            errors.append(
+                f"{path.relative_to(ROOT)}: glossary entries must not declare "
+                "redirect aliases; update links to the canonical glossary URL"
+            )
+        if is_draft:
+            continue
+        if route in route_parts:
+            errors.append(
+                f"{path.relative_to(ROOT)}: duplicate canonical Knowledge Base "
+                f"route /knowledge-base/{'/'.join(route)}/"
+            )
+            continue
+        route_parts[route] = False
+
+        flat_page = (
+            ROOT
+            / "blog"
+            / "knowledge-base"
+            / slug.group(1)
+            / "index.html"
+        )
+        if flat_page.is_file():
+            errors.append(
+                f"{flat_page.relative_to(ROOT)}: obsolete flat glossary route "
+                "must not be generated"
+            )
 
     manifest_path = ROOT / "blog/prax-docs/prax-docs-manifest.json"
     if manifest_path.is_file():
@@ -740,10 +822,17 @@ def check_knowledge_base_routes(errors: list[str]) -> None:
             errors.append(
                 "blog/sitemap.xml: legacy References redirects must not be indexed"
             )
-        if "/blog/knowledge-base/" not in sitemap_text:
+        if "/blog/knowledge-base/glossary/" not in sitemap_text:
             errors.append(
-                "blog/sitemap.xml: canonical Knowledge Base routes are missing"
+                "blog/sitemap.xml: canonical nested glossary routes are missing"
             )
+
+    legacy_glossary = ROOT / "blog/references/glossary"
+    if legacy_glossary.exists():
+        errors.append(
+            f"{legacy_glossary.relative_to(ROOT)}: glossary redirects must not "
+            "be generated; link to /blog/knowledge-base/glossary/ directly"
+        )
 
 
 def check_late_chunking_deep_dive(errors: list[str]) -> None:
@@ -931,6 +1020,7 @@ def check_svg(errors: list[str]) -> None:
 def check_knowledge_base_svg_accessibility(errors: list[str]) -> None:
     roots = (
         ROOT / "blog-source/static/knowledge-base",
+        ROOT / "blog-source/content/knowledge-base/glossary",
         ROOT / "blog-source/content/knowledge-base/deep-dives",
     )
     svg_paths = sorted(

@@ -20,14 +20,13 @@ from urllib.request import Request, urlopen
 
 
 ROOT = Path(__file__).resolve().parents[1]
-GLOSSARY_DIR = ROOT / "blog-source" / "content" / "knowledge-base"
+GLOSSARY_DIR = ROOT / "blog-source" / "content" / "knowledge-base" / "glossary"
 DIAGRAM_DIR = ROOT / "blog-source" / "static" / "knowledge-base" / "glossary"
 DOTENV_PATH = ROOT / ".env"
 PRIVATE_OUTPUT_DIR = ROOT / ".cache" / "glossary-review"
 DEFAULT_OUTPUT = PRIVATE_OUTPUT_DIR / "gpt-5.6-sol-pro.json"
 DEFAULT_CONTINUATION_OUTPUT = PRIVATE_OUTPUT_DIR / "gpt-5.6-sol-pro-continued.json"
 API_KEY_NAMES = ("OPENAI_API_KEY", "OPENAI_KEY")
-NON_ENTRY_MARKDOWN = frozenset({"_index.md", "AGENTS.md", "SKILL.md"})
 SVG_SRC_RE = re.compile(r'''\bsrc\s*=\s*["']([^"']+[.]svg)(?:[?#][^"']*)?["']''')
 
 REVIEW_INSTRUCTIONS = """\
@@ -162,13 +161,10 @@ and omit internal deliberation.
 
 
 def glossary_source_paths() -> list[Path]:
-    entries = sorted(
-        path
-        for path in GLOSSARY_DIR.glob("*.md")
-        if path.name not in NON_ENTRY_MARKDOWN
-    )
-    diagrams = sorted(DIAGRAM_DIR.glob("*.svg"))
-    return entries + diagrams
+    bundled_entries = sorted(GLOSSARY_DIR.glob("*/index.md"))
+    bundled_diagrams = sorted(GLOSSARY_DIR.glob("*/*.svg"))
+    shared_diagrams = sorted(DIAGRAM_DIR.glob("*.svg"))
+    return bundled_entries + bundled_diagrams + shared_diagrams
 
 
 def selected_source_paths(candidates: list[Path]) -> list[Path]:

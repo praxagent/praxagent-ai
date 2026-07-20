@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-labelledby="rankingMetricsTitle rankingMetricsDesc">
+  <title id="rankingMetricsTitle">Three retrieval metrics read one ranked list in different ways</title>
+  <desc id="rankingMetricsDesc">A toy top-ten ranking contains relevant documents at ranks 2, 4, and 7. One additional known relevant document is missing. Recall at 10 is three quarters. Reciprocal rank at 10 is one half because rank 2 is the first relevant result. Normalized discounted cumulative gain at 10 is about 0.545 because relevant documents farther down receive less credit.</desc>
+  <defs>
+    <style>
+      .ink{fill:#2C2924;font-family:Inter,Arial,Helvetica,sans-serif}
+      .title{font-size:18px;font-weight:700}
+      .head{font-size:14px;font-weight:700}
+      .body{font-size:13px}
+      .small{font-size:12px;fill:#5A544C}
+      .panel{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.5}
+      .relevant{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+      .other{fill:#F7F4F0;stroke:#9B9388;stroke-width:1.2}
+      .metric{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.5}
+      .missing{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.5;stroke-dasharray:5 4}
+      .guide{stroke:#A67C52;stroke-width:1.5;stroke-dasharray:4 4}
+      .check{fill:none;stroke:#355C3A;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+    </style>
+  </defs>
+
+  <rect width="900" height="560" fill="#F7F4F0"/>
+  <text x="28" y="34" class="ink title">One top-ten ranking, three different questions</text>
+  <text x="28" y="56" class="ink small">Known relevant documents: A, C, D, and E. The system retrieves A, C, and D in its first ten results.</text>
+
+  <rect x="28" y="82" width="440" height="436" rx="14" class="panel"/>
+  <text x="48" y="111" class="ink head">RANKED RESULTS FOR ONE QUERY</text>
+  <text x="48" y="132" class="ink small">Earlier ranks are more prominent in the search results.</text>
+
+  <g class="ink body">
+    <text x="52" y="169">1</text><rect x="78" y="148" width="348" height="29" rx="6" class="other"/><text x="94" y="168">Document X</text><text x="399" y="168" text-anchor="end" class="small">not relevant</text>
+    <text x="52" y="207">2</text><rect x="78" y="186" width="348" height="29" rx="6" class="relevant"/><text x="94" y="206">Document A</text><path d="M385 200 l6 6 11 -13" class="check"/><text x="375" y="206" text-anchor="end" class="small">relevant</text>
+    <text x="52" y="245">3</text><rect x="78" y="224" width="348" height="29" rx="6" class="other"/><text x="94" y="244">Document Y</text><text x="399" y="244" text-anchor="end" class="small">not relevant</text>
+    <text x="52" y="283">4</text><rect x="78" y="262" width="348" height="29" rx="6" class="relevant"/><text x="94" y="282">Document C</text><path d="M385 276 l6 6 11 -13" class="check"/><text x="375" y="282" text-anchor="end" class="small">relevant</text>
+    <text x="52" y="321">5</text><rect x="78" y="300" width="348" height="29" rx="6" class="other"/><text x="94" y="320">Document Z</text><text x="399" y="320" text-anchor="end" class="small">not relevant</text>
+    <text x="52" y="359">6</text><rect x="78" y="338" width="348" height="29" rx="6" class="other"/><text x="94" y="358">Document W</text><text x="399" y="358" text-anchor="end" class="small">not relevant</text>
+    <text x="52" y="397">7</text><rect x="78" y="376" width="348" height="29" rx="6" class="relevant"/><text x="94" y="396">Document D</text><path d="M385 390 l6 6 11 -13" class="check"/><text x="375" y="396" text-anchor="end" class="small">relevant</text>
+    <text x="52" y="435">8</text><rect x="78" y="414" width="105" height="29" rx="6" class="other"/><text x="94" y="434">Q</text>
+    <text x="203" y="435">9</text><rect x="229" y="414" width="83" height="29" rx="6" class="other"/><text x="245" y="434">R</text>
+    <text x="329" y="435">10</text><rect x="360" y="414" width="66" height="29" rx="6" class="other"/><text x="376" y="434">S</text>
+  </g>
+
+  <line x1="48" y1="464" x2="448" y2="464" class="guide"/>
+  <rect x="78" y="480" width="348" height="25" rx="6" class="missing"/>
+  <text x="94" y="498" class="ink body">Document E is relevant but absent from the top 10</text>
+
+  <rect x="494" y="82" width="378" height="126" rx="14" class="metric"/>
+  <text x="516" y="111" class="ink head">RECALL@10 = 3 / 4 = 0.75</text>
+  <text x="516" y="139" class="ink body">Question: how many known relevant documents</text>
+  <text x="516" y="159" class="ink body">did the first ten results recover?</text>
+  <text x="516" y="187" class="ink small">A, C, and D are found. E is missing.</text>
+
+  <rect x="494" y="225" width="378" height="126" rx="14" class="metric"/>
+  <text x="516" y="254" class="ink head">RR@10 = 1 / 2 = 0.50</text>
+  <text x="516" y="282" class="ink body">Question: how early is the first relevant result?</text>
+  <text x="516" y="310" class="ink body">The first relevant document is at rank 2.</text>
+  <text x="516" y="333" class="ink small">Later relevant results do not change RR.</text>
+
+  <rect x="494" y="368" width="378" height="150" rx="14" class="metric"/>
+  <text x="516" y="397" class="ink head">nDCG@10 = 0.545</text>
+  <text x="516" y="425" class="ink body">Question: are all relevant results near the top?</text>
+  <text x="516" y="453" class="ink body">Ranks 2, 4, and 7 all earn credit, but later</text>
+  <text x="516" y="473" class="ink body">ranks are discounted. The score is normalized</text>
+  <text x="516" y="493" class="ink body">against an ideal ranking for the same qrels.</text>
+</svg>

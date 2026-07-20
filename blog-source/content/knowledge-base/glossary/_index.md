@@ -8,6 +8,4 @@ card_label: "Concepts"
 card_action: "Browse the glossary"
 title_lead: "Technical"
 title_accent: "Glossary"
-aliases:
-  - /references/glossary/
 ---

@@ -25,13 +25,13 @@ provide an accelerated path, but emulated or conversion-heavy paths may be
 slower.
 
 This Deep Dive compares three common
-[data types (**dtypes**)]({{< relref "dtype.md" >}}):
+[data types (**dtypes**)]({{< relref "knowledge-base/glossary/dtype/index.md" >}}):
 
 - **FP32**: 32-bit floating point (also called float32 or F32)
 - **FP16**: 16-bit floating point (also called float16 or F16; IEEE 754 binary16)
 - **BF16**: bfloat16 (brain floating point)
 
-A short glossary stub lives at [BF16, FP16, and FP32]({{< relref "bf16.md" >}}).
+A short glossary stub lives at [BF16, FP16, and FP32]({{< relref "knowledge-base/glossary/bf16/index.md" >}}).
 This page carries the worked demos, the swamping chart, and the hardware /
 determinism detail.
 
@@ -45,7 +45,7 @@ higher-precision copy of a trainable parameter retained for optimizer updates.
 |---|---|---:|---:|---:|---|
 | **FP32** | float32, F32, single | 32 | 8 | 23 | Reference / CUDA-core math, loss, some master weights |
 | **FP16** | float16, F16, half | 16 | 5 | 10 | Mixed precision; narrower range than FP32 |
-| **BF16** | bfloat16, brain float | 16 | 8 | 7 | Activations / [matrix multiplications (matmuls)]({{< relref "matmul.md" >}}); FP32-like range, less precision |
+| **BF16** | bfloat16, brain float | 16 | 8 | 7 | Activations / [matrix multiplications (matmuls)]({{< relref "knowledge-base/glossary/matmul/index.md" >}}); FP32-like range, less precision |
 | **TF32** | TensorFloat-32 | FP32 storage; 19 effective input bits for multiplication (1 sign, 8 exponent, 10 trailing fraction) | 8 | 10 | NVIDIA Tensor Core compute mode; FP32 inputs are rounded for multiplication, commonly with FP32 accumulation |
 
 {{< reference-figure
@@ -457,7 +457,7 @@ stacks; check the vendor tables before transferring any claim here.
 
 **cuBLAS** is NVIDIA's Compute Unified Device Architecture (**CUDA**)-platform
 implementation of Basic Linear Algebra Subprograms (**BLAS**) and sits behind
-many [matmul]({{< relref "matmul.md" >}}) / GEMM calls in PyTorch. For a fixed
+many [matmul]({{< relref "knowledge-base/glossary/matmul/index.md" >}}) / GEMM calls in PyTorch. For a fixed
 CUDA toolkit version, cuBLAS documents bitwise reproducibility for supported
 routines on GPUs with the same architecture and the same number of streaming
 multiprocessors (**SMs**), with documented exceptions (concurrent streams,
@@ -733,10 +733,10 @@ What this case study establishes, and what it does not:
   (**IEEE**)-style / industry conventions; defer to framework dtype docs for
   subnormals, not-a-number (**NaN**), and rounding mode.
 
-See also: [BF16 glossary entry]({{< relref "bf16.md" >}}),
-[matmul]({{< relref "matmul.md" >}}),
-[root mean square (RMS)]({{< relref "rms.md" >}}),
-[residual stream]({{< relref "residual-stream.md" >}}).
+See also: [BF16 glossary entry]({{< relref "knowledge-base/glossary/bf16/index.md" >}}),
+[matmul]({{< relref "knowledge-base/glossary/matmul/index.md" >}}),
+[root mean square (RMS)]({{< relref "knowledge-base/glossary/rms/index.md" >}}),
+[residual stream]({{< relref "knowledge-base/glossary/residual-stream/index.md" >}}).
 
 ## References
 

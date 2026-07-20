@@ -71,9 +71,19 @@
   },
   "outputs": {
     "receipts/aggregate.json": "71bafc1d81fc24ac1d30104e5f28af9b43142430b3ce798b10bd1061f1abb181",
-    "receipts/per-query.csv": "b91c682c7da121af99d1546c0688c00249d8af5310b519ca9d63c3ab422b3a28",
+    "receipts/per-query.csv": "377e6d4feb59687d5f3e0557dea05f4cae6de4dc08619d6069cab9ef782c487d",
     "receipts/scifact-test-qrels.tsv": "0864bb985e0ca2367ba217977e72004d549054b2b06666ed9d4825ac7c21284c",
-    "receipts/top-10-rankings.jsonl": "6e6e014c8875a517fd739101ae1461e8986675d378eb6ff482dfd5ddc1d955c1"
+    "receipts/top-10-rankings.jsonl": "546dabbaaab10ed0a1919701308d0c109ba06483dbadb222bbb8d505e72d5493"
+  },
+  "post_run_schema_revision": {
+    "applied_at_utc": "2026-07-20T07:50:53Z",
+    "field_change": "Per-query and ranking fields named mrr_at_10 were renamed rr_at_10 because each row contains one query's reciprocal rank. Aggregate mrr_at_10 remains the mean across queries.",
+    "numeric_values_changed": false,
+    "original_output_sha256": {
+      "receipts/per-query.csv": "b91c682c7da121af99d1546c0688c00249d8af5310b519ca9d63c3ab422b3a28",
+      "receipts/top-10-rankings.jsonl": "6e6e014c8875a517fd739101ae1461e8986675d378eb6ff482dfd5ddc1d955c1"
+    },
+    "review_reason": "Reserve MRR for the mean of per-query reciprocal ranks and make the receipt schema match the article's terminology."
   },
   "protocol": {
     "chunk_count": 9356,
@@ -137,7 +147,7 @@
     "torch_interop_threads": 1,
     "torch_threads": 8
   },
-  "schema_version": 1,
+  "schema_version": 2,
   "scope": [
     "This is one fixed public benchmark and one pinned embedding model.",
     "The query-bootstrap interval describes stability across these 300 queries.",

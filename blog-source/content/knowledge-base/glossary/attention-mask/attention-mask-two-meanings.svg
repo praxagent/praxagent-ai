@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="450" viewBox="0 0 900 450" role="img" aria-labelledby="attention-mask-title attention-mask-desc">
+  <title id="attention-mask-title">Attention mask can refer to a valid-token mask or a pairwise attention rule</title>
+  <desc id="attention-mask-desc">The left panel marks three content tokens as included and one padding token as excluded. The right panel is a four by four causal permission grid where each position may use itself and earlier positions.</desc>
+  <rect width="900" height="450" fill="#F7F4F0"/>
+  <text x="450" y="42" text-anchor="middle" fill="#2C2924" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">“Attention mask” has more than one common meaning</text>
+
+  <rect x="36" y="72" width="380" height="310" rx="16" fill="#FFFDFC" stroke="#4B6787" stroke-width="2"/>
+  <text x="226" y="106" text-anchor="middle" fill="#2C2924" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">One-dimensional valid-token mask</text>
+  <text x="226" y="132" text-anchor="middle" fill="#5A544C" font-family="Inter, Arial, sans-serif" font-size="15">Which positions contain usable input?</text>
+  <g font-family="Inter, Arial, sans-serif" text-anchor="middle">
+    <rect x="58" y="168" width="76" height="70" rx="10" fill="#E8F0E5" stroke="#4E7146" stroke-width="2"/>
+    <text x="96" y="197" fill="#2C2924" font-size="15">roots</text><text x="96" y="222" fill="#315A2E" font-size="16" font-weight="700">USE: 1</text>
+    <rect x="144" y="168" width="76" height="70" rx="10" fill="#E8F0E5" stroke="#4E7146" stroke-width="2"/>
+    <text x="182" y="197" fill="#2C2924" font-size="15">need</text><text x="182" y="222" fill="#315A2E" font-size="16" font-weight="700">USE: 1</text>
+    <rect x="230" y="168" width="76" height="70" rx="10" fill="#E8F0E5" stroke="#4E7146" stroke-width="2"/>
+    <text x="268" y="197" fill="#2C2924" font-size="15">water</text><text x="268" y="222" fill="#315A2E" font-size="16" font-weight="700">USE: 1</text>
+    <rect x="316" y="168" width="76" height="70" rx="10" fill="#EAE4DC" stroke="#6B6259" stroke-width="2" stroke-dasharray="7 5"/>
+    <text x="354" y="197" fill="#2C2924" font-size="13">padding</text><text x="354" y="222" fill="#5A4436" font-size="16" font-weight="700">SKIP: 0</text>
+  </g>
+  <text x="226" y="276" text-anchor="middle" fill="#4B6787" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Shape: one value per position</text>
+  <text x="226" y="309" text-anchor="middle" fill="#5A544C" font-family="Inter, Arial, sans-serif" font-size="15">Often used for padding and pooling.</text>
+  <text x="226" y="334" text-anchor="middle" fill="#5A544C" font-family="Inter, Arial, sans-serif" font-size="15">Numeric conventions vary by library.</text>
+
+  <rect x="440" y="72" width="424" height="310" rx="16" fill="#FFFDFC" stroke="#A67C52" stroke-width="2"/>
+  <text x="652" y="106" text-anchor="middle" fill="#2C2924" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Two-dimensional pairwise attention rule</text>
+  <text x="652" y="132" text-anchor="middle" fill="#5A544C" font-family="Inter, Arial, sans-serif" font-size="15">Which source positions may each row use?</text>
+  <g font-family="Inter, Arial, sans-serif" font-size="13" text-anchor="middle">
+    <text x="610" y="160" fill="#5A544C">1</text><text x="654" y="160" fill="#5A544C">2</text><text x="698" y="160" fill="#5A544C">3</text><text x="742" y="160" fill="#5A544C">4</text>
+    <text x="568" y="191" fill="#5A544C">row 1</text><text x="568" y="235" fill="#5A544C">row 2</text><text x="568" y="279" fill="#5A544C">row 3</text><text x="568" y="323" fill="#5A544C">row 4</text>
+    <g fill="#E8F0E5" stroke="#4E7146" stroke-width="1.5">
+      <rect x="589" y="168" width="40" height="36"/><rect x="589" y="212" width="40" height="36"/><rect x="633" y="212" width="40" height="36"/>
+      <rect x="589" y="256" width="40" height="36"/><rect x="633" y="256" width="40" height="36"/><rect x="677" y="256" width="40" height="36"/>
+      <rect x="589" y="300" width="40" height="36"/><rect x="633" y="300" width="40" height="36"/><rect x="677" y="300" width="40" height="36"/><rect x="721" y="300" width="40" height="36"/>
+    </g>
+    <g fill="#F0ECE7" stroke="#80776D" stroke-width="1.5" stroke-dasharray="4 3">
+      <rect x="633" y="168" width="40" height="36"/><rect x="677" y="168" width="40" height="36"/><rect x="721" y="168" width="40" height="36"/>
+      <rect x="677" y="212" width="40" height="36"/><rect x="721" y="212" width="40" height="36"/><rect x="721" y="256" width="40" height="36"/>
+    </g>
+    <g fill="#315A2E" font-weight="700"><text x="609" y="191">YES</text><text x="609" y="235">YES</text><text x="653" y="235">YES</text><text x="609" y="279">YES</text><text x="653" y="279">YES</text><text x="697" y="279">YES</text><text x="609" y="323">YES</text><text x="653" y="323">YES</text><text x="697" y="323">YES</text><text x="741" y="323">YES</text></g>
+    <g fill="#5A544C"><text x="653" y="191">NO</text><text x="697" y="191">NO</text><text x="741" y="191">NO</text><text x="697" y="235">NO</text><text x="741" y="235">NO</text><text x="741" y="279">NO</text></g>
+  </g>
+  <text x="652" y="361" text-anchor="middle" fill="#A05F2C" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">Causal pattern shown, not a block-diagonal rule</text>
+
+  <rect x="110" y="401" width="680" height="32" rx="9" fill="#EAE4DC"/>
+  <text x="450" y="423" text-anchor="middle" fill="#4A443D" font-family="Inter, Arial, sans-serif" font-size="15">Check shape, numeric convention, and purpose in the exact model interface.</text>
+</svg>

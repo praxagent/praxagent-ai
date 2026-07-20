@@ -5,9 +5,13 @@
 {{- if not $src }}{{ errorf "reference-figure shortcode requires src: %s" .Position }}{{ end -}}
 {{- if not $alt }}{{ errorf "reference-figure shortcode requires alt: %s" .Position }}{{ end -}}
 {{- if not $caption }}{{ errorf "reference-figure shortcode requires caption: %s" .Position }}{{ end -}}
+{{- $resolvedSrc := $src | relURL -}}
+{{- with .Page.Resources.GetMatch $src -}}
+  {{- $resolvedSrc = .RelPermalink -}}
+{{- end -}}
 <figure class="reference-figure">
     <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: {{ $label }}" tabindex="0">
-        <img src="{{ $src | relURL }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+        <img src="{{ $resolvedSrc }}" alt="{{ $alt }}" loading="lazy" decoding="async">
     </div>
     <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
     <figcaption>{{ $caption | markdownify }}</figcaption>

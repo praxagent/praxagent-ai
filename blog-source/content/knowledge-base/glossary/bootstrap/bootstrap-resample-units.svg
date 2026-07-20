@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="400" viewBox="0 0 900 400" role="img" aria-labelledby="bootstrap-title bootstrap-desc">
+  <title id="bootstrap-title">A bootstrap resample selects observed units with replacement</title>
+  <desc id="bootstrap-desc">Four observed plants P1 through P4 form a source set. One resample contains P3, P1, P3, and P4, so P3 repeats and P2 is absent.</desc>
+  <defs>
+    <marker id="boot-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4B6787"/></marker>
+  </defs>
+  <rect width="900" height="400" fill="#F7F4F0"/>
+  <text x="450" y="42" text-anchor="middle" fill="#2C2924" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Sample the observed units with replacement</text>
+
+  <text x="185" y="87" text-anchor="middle" fill="#2C2924" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">Observed plants</text>
+  <g font-family="Inter, Arial, sans-serif" text-anchor="middle" font-size="18" font-weight="700">
+    <rect x="52" y="110" width="72" height="60" rx="12" fill="#E8EEF4" stroke="#4B6787" stroke-width="2"/><text x="88" y="147" fill="#2C2924">P1</text>
+    <rect x="140" y="110" width="72" height="60" rx="12" fill="#F2E7DC" stroke="#A67C52" stroke-width="2"/><text x="176" y="147" fill="#2C2924">P2</text>
+    <rect x="228" y="110" width="72" height="60" rx="12" fill="#E8F0E5" stroke="#6F8D5E" stroke-width="2"/><text x="264" y="147" fill="#2C2924">P3</text>
+    <rect x="316" y="110" width="72" height="60" rx="12" fill="#EEE9F3" stroke="#765B83" stroke-width="2"/><text x="352" y="147" fill="#2C2924">P4</text>
+  </g>
+  <text x="220" y="205" text-anchor="middle" fill="#5A544C" font-family="Inter, Arial, sans-serif" font-size="15">Each draw returns the plant before the next draw.</text>
+
+  <path d="M 415 150 C 470 150, 470 150, 525 150" fill="none" stroke="#4B6787" stroke-width="4" marker-end="url(#boot-arrow)"/>
+  <text x="470" y="130" text-anchor="middle" fill="#4B6787" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">draw 4 times</text>
+
+  <text x="710" y="87" text-anchor="middle" fill="#2C2924" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">One bootstrap resample</text>
+  <g font-family="Inter, Arial, sans-serif" text-anchor="middle" font-size="18" font-weight="700">
+    <rect x="535" y="110" width="72" height="60" rx="12" fill="#E8F0E5" stroke="#6F8D5E" stroke-width="2"/><text x="571" y="147" fill="#2C2924">P3</text>
+    <rect x="623" y="110" width="72" height="60" rx="12" fill="#E8EEF4" stroke="#4B6787" stroke-width="2"/><text x="659" y="147" fill="#2C2924">P1</text>
+    <rect x="711" y="110" width="72" height="60" rx="12" fill="#E8F0E5" stroke="#6F8D5E" stroke-width="4"/><text x="747" y="147" fill="#2C2924">P3</text>
+    <rect x="799" y="110" width="72" height="60" rx="12" fill="#EEE9F3" stroke="#765B83" stroke-width="2"/><text x="835" y="147" fill="#2C2924">P4</text>
+  </g>
+  <text x="710" y="205" text-anchor="middle" fill="#315A2E" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">P3 repeats; P2 is absent</text>
+
+  <rect x="72" y="246" width="756" height="108" rx="16" fill="#FFFDFC" stroke="#2C2924" stroke-width="2"/>
+  <text x="450" y="278" text-anchor="middle" fill="#2C2924" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Repeat the process and recalculate the statistic each time</text>
+  <text x="450" y="307" text-anchor="middle" fill="#5A544C" font-family="Inter, Arial, sans-serif" font-size="16">mean from resample 1, resample 2, resample 3, and many more</text>
+  <text x="450" y="336" text-anchor="middle" fill="#7A3E2F" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">Choose the resampling unit to match the study design.</text>
+  <text x="450" y="385" text-anchor="middle" fill="#5A544C" font-family="Inter, Arial, sans-serif" font-size="14">Toy plant identifiers show the sampling rule, not an empirical dataset.</text>
+</svg>
