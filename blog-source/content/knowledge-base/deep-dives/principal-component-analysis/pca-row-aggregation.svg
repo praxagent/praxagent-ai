@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="380" viewBox="0 0 760 380" role="img" aria-labelledby="pcaRowsTitle pcaRowsDesc">
+  <title id="pcaRowsTitle">Three technical image rows become one row for plant P01 on day 5</title>
+  <desc id="pcaRowsDesc">Three image profiles come from the same identified plant P01 on day 5. Genotype G01 and the well-watered treatment remain metadata. The toy root-length values are 21, 22, and 80 millimeters. Grouping repeated images by plant and day produces one profile row for plant P01 on day 5 with median root length 22 millimeters, while the raw extreme value remains available for investigation.</desc>
+  <defs>
+    <marker id="pcaRowsArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#A67C52"/>
+    </marker>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:16px;font-weight:700}
+      .h{font-size:13px;font-weight:700}
+      .s{font-size:12px}
+      .m{font-size:11px;fill:#5A544C}
+      .row{fill:#FBF9F6;stroke:#4B6787;stroke-width:1.4}
+      .outlier{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.8}
+      .result{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.8}
+      .flow{fill:none;stroke:#A67C52;stroke-width:1.9;marker-end:url(#pcaRowsArrow)}
+      .group{fill:none;stroke:#7F786D;stroke-width:1.4;stroke-dasharray:5 4}
+    </style>
+  </defs>
+  <rect width="760" height="380" fill="#F7F4F0"/>
+  <text x="24" y="31" class="t title">One point means whatever one row means</text>
+  <text x="24" y="51" class="t m">Toy values show the grouping arithmetic; they are not plant measurements.</text>
+
+  <text x="42" y="82" class="t h">BEFORE: 3 IMAGE ROWS</text>
+  <rect x="34" y="94" width="368" height="224" rx="13" class="group"/>
+  <text x="52" y="117" class="t m">Same repeat key: plant P01 + day 5</text>
+
+  <rect x="52" y="132" width="330" height="48" rx="8" class="row"/>
+  <text x="68" y="153" class="t h">IMAGE R1</text><text x="68" y="170" class="t m">one technical profile</text>
+  <text x="360" y="161" text-anchor="end" class="t h">21 millimeters</text>
+
+  <rect x="52" y="190" width="330" height="48" rx="8" class="row"/>
+  <text x="68" y="211" class="t h">IMAGE R2</text><text x="68" y="228" class="t m">one technical profile</text>
+  <text x="360" y="219" text-anchor="end" class="t h">22 millimeters</text>
+
+  <rect x="52" y="248" width="330" height="48" rx="8" class="outlier"/>
+  <text x="68" y="269" class="t h">IMAGE R3</text><text x="68" y="286" class="t m">inspect this extreme value</text>
+  <text x="360" y="277" text-anchor="end" class="t h">80 millimeters</text>
+
+  <path class="flow" d="M417 205 H489"/>
+  <text x="453" y="187" text-anchor="middle" class="t m">group, then</text>
+  <text x="453" y="222" text-anchor="middle" class="t m">take median</text>
+
+  <text x="621" y="82" text-anchor="middle" class="t h" style="font-size:12px">AFTER: 1 ROW FOR P01 ON DAY 5</text>
+  <rect x="506" y="118" width="230" height="146" rx="13" class="result"/>
+  <text x="526" y="145" class="t h">PLANT P01 + DAY 5</text>
+  <text x="526" y="168" class="t m">Metadata: G01 + well-watered</text>
+  <text x="526" y="193" class="t s">Images summarized: 3</text>
+  <text x="526" y="218" class="t s">Median root length:</text>
+  <text x="526" y="247" class="t title">22 millimeters</text>
+
+  <rect x="24" y="338" width="712" height="24" rx="7" fill="#EDE8E1"/>
+  <text x="380" y="355" text-anchor="middle" class="t m">Keep the raw rows. The median changes the summary, not the history of how it was produced.</text>
+</svg>

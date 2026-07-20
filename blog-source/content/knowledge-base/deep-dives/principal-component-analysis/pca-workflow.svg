@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" role="img" aria-labelledby="pcaWorkflowTitle pcaWorkflowDesc">
+  <title id="pcaWorkflowTitle">Principal component analysis workflow from question to interpretation</title>
+  <desc id="pcaWorkflowDesc">Five numbered stages connect a biological question, a row definition, a prepared numerical feature matrix that is scaled when scientifically justified, principal component analysis axes fitted without group labels in this example, and interpretation with metadata and principal-axis coefficients. Arrows show that every later stage depends on earlier choices.</desc>
+  <defs>
+    <marker id="pcaWorkflowArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#A67C52"/>
+    </marker>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:16px;font-weight:700}
+      .h{font-size:13px;font-weight:700}
+      .s{font-size:11px}
+      .m{font-size:11px;fill:#5A544C}
+      .box{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.5}
+      .biology{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+      .matrix{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.5}
+      .pca{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.8}
+      .flow{fill:none;stroke:#A67C52;stroke-width:1.8;marker-end:url(#pcaWorkflowArrow)}
+      .number{fill:#2C2924}
+      .numberText{font-size:11px;font-weight:700;fill:#F7F4F0}
+    </style>
+  </defs>
+  <rect width="760" height="300" fill="#F7F4F0"/>
+  <text x="24" y="31" class="t title">Principal component analysis (PCA) sits inside five decisions</text>
+  <text x="24" y="51" class="t m">Read left to right. A weak decision early in the chain changes the map at the end.</text>
+
+  <rect x="24" y="83" width="126" height="128" rx="12" class="biology"/>
+  <circle cx="42" cy="101" r="11" class="number"/><text x="42" y="105" text-anchor="middle" class="t numberText">1</text>
+  <text x="87" y="127" text-anchor="middle" class="t h">ASK</text>
+  <text x="87" y="150" text-anchor="middle" class="t s">What biological</text>
+  <text x="87" y="167" text-anchor="middle" class="t s">comparison matters?</text>
+
+  <path class="flow" d="M151 147 H170"/>
+  <rect x="178" y="83" width="126" height="128" rx="12" class="biology"/>
+  <circle cx="196" cy="101" r="11" class="number"/><text x="196" y="105" text-anchor="middle" class="t numberText">2</text>
+  <text x="241" y="127" text-anchor="middle" class="t h">DEFINE ROWS</text>
+  <text x="241" y="150" text-anchor="middle" class="t s">What does one point</text>
+  <text x="241" y="167" text-anchor="middle" class="t s">represent?</text>
+  <text x="241" y="190" text-anchor="middle" class="t m">Keep metadata nearby</text>
+
+  <path class="flow" d="M305 147 H324"/>
+  <rect x="332" y="83" width="126" height="128" rx="12" class="matrix"/>
+  <circle cx="350" cy="101" r="11" class="number"/><text x="350" y="105" text-anchor="middle" class="t numberText">3</text>
+  <text x="395" y="127" text-anchor="middle" class="t h">PREPARE</text>
+  <text x="395" y="146" text-anchor="middle" class="t s">Aggregate if justified;</text>
+  <text x="395" y="164" text-anchor="middle" class="t s">check missingness</text>
+  <text x="395" y="190" text-anchor="middle" class="t m">Scale as justified</text>
+
+  <path class="flow" d="M459 147 H478"/>
+  <rect x="486" y="83" width="104" height="128" rx="12" class="pca"/>
+  <circle cx="504" cy="101" r="11" class="number"/><text x="504" y="105" text-anchor="middle" class="t numberText">4</text>
+  <text x="538" y="127" text-anchor="middle" class="t h">FIT PCA</text>
+  <text x="538" y="150" text-anchor="middle" class="t s">Learn axes of</text>
+  <text x="538" y="167" text-anchor="middle" class="t s">maximum variance</text>
+  <text x="538" y="186" text-anchor="middle" class="t m">No group labels</text>
+  <text x="538" y="200" text-anchor="middle" class="t m">used here</text>
+
+  <path class="flow" d="M591 147 H610"/>
+  <rect x="618" y="83" width="118" height="128" rx="12" class="box"/>
+  <circle cx="636" cy="101" r="11" class="number"/><text x="636" y="105" text-anchor="middle" class="t numberText">5</text>
+  <text x="677" y="127" text-anchor="middle" class="t h">INTERPRET</text>
+  <text x="677" y="150" text-anchor="middle" class="t s">Overlay metadata</text>
+  <text x="677" y="167" text-anchor="middle" class="t s">and read coefficients</text>
+  <text x="677" y="190" text-anchor="middle" class="t m">State the limits</text>
+
+  <rect x="24" y="235" width="712" height="40" rx="9" fill="#EDE8E1" stroke="#7F786D" stroke-width="1.2"/>
+  <text x="380" y="260" text-anchor="middle" class="t s">PCA answers “where is the variance?” Biology and evaluation decide what that pattern can mean.</text>
+</svg>

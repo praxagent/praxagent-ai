@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="650" viewBox="0 0 1000 650" role="img" aria-labelledby="toyPcaTitle toyPcaDesc">
+  <title id="toyPcaTitle">Toy kernels at high and low PC1 and PC2 scores</title>
+  <desc id="toyPcaDesc">A two-by-two conceptual guide shows four toy wheat kernels. The left column has low PC1 scores and smaller overall kernels; the right column has high PC1 scores and larger overall kernels. The top row has high PC2 scores and rounder, more symmetric kernels with shorter centered grooves. The bottom row has low PC2 scores and more elongated, asymmetric kernels with longer off-center grooves. The drawings are teaching cartoons, not reconstructed observations.</desc>
+  <defs>
+    <marker id="toyArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#8A7355"/>
+    </marker>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:20px;font-weight:700}
+      .heading{font-size:15px;font-weight:700}
+      .label{font-size:13px;font-weight:700}
+      .body{font-size:12px;fill:#4F4942}
+      .muted{font-size:12px;fill:#5A544C}
+      .grid{stroke:#C4B8A8;stroke-width:1.4}
+      .axis{stroke:#8A7355;stroke-width:2;marker-start:url(#toyArrow);marker-end:url(#toyArrow)}
+      .kernel{fill:#E8D6A9;stroke:#6F573D;stroke-width:2.2}
+      .groove{fill:none;stroke:#4B6787;stroke-width:3;stroke-linecap:round}
+      .center-mark{fill:#4B6787}
+      .tag{fill:#F7F3EC;stroke:#B9A88F;stroke-width:1}
+    </style>
+  </defs>
+  <rect width="1000" height="650" fill="#F7F4F0"/>
+  <text x="30" y="36" class="t title">PC1 and PC2 create four score combinations</text>
+  <text x="30" y="59" class="t muted">Conceptual extremes for reading the map, not four observed or reconstructed kernels</text>
+
+  <text x="300" y="96" text-anchor="middle" class="t heading">LOW PC1</text>
+  <text x="300" y="116" text-anchor="middle" class="t body">smaller across the shared size measurements</text>
+  <text x="730" y="96" text-anchor="middle" class="t heading">HIGH PC1</text>
+  <text x="730" y="116" text-anchor="middle" class="t body">larger across the shared size measurements</text>
+
+  <text x="22" y="178" class="t heading">HIGH PC2</text>
+  <text x="22" y="199" class="t body">more compact</text>
+  <text x="22" y="217" class="t body">less asymmetric</text>
+  <text x="22" y="235" class="t body">shorter groove</text>
+  <text x="22" y="410" class="t heading">LOW PC2</text>
+  <text x="22" y="431" class="t body">less compact</text>
+  <text x="22" y="449" class="t body">more asymmetric</text>
+  <text x="22" y="467" class="t body">longer groove</text>
+
+  <line x1="515" y1="132" x2="515" y2="520" class="grid"/>
+  <line x1="145" y1="324" x2="930" y2="324" class="grid"/>
+  <g data-pc1="low" data-pc2="high" aria-label="low PC1, high PC2">
+    <path class="kernel" d="M 237 205 C 254.64 163.64, 322.05 164.16, 363 204.76 C 334.65 246.44, 277.95 245.9, 237 205 Z"/>
+    <path class="groove" d="M 269.76 205.36 Q 300 204.75, 330.24 204.64"/>
+    <circle class="center-mark" cx="300" cy="205" r="3"/>
+  </g>
+  <g data-pc1="high" data-pc2="high" aria-label="high PC1, high PC2">
+    <path class="kernel" d="M 638 205 C 663.76 144.46, 762.2 145.24, 822 204.64 C 780.6 265.66, 697.8 264.85, 638 205 Z"/>
+    <path class="groove" d="M 685.84 205.54 Q 730 204.62, 774.16 204.46"/>
+    <circle class="center-mark" cx="730" cy="205" r="3"/>
+  </g>
+  <g data-pc1="low" data-pc2="low" aria-label="low PC1, low PC2">
+    <path class="kernel" d="M 229 438 C 248.88 405.12, 324.85 409.28, 371 436.08 C 339.05 471.52, 275.15 467.2, 229 438 Z"/>
+    <path class="groove" d="M 248.88 440.88 Q 300 435.98, 351.12 435.12"/>
+    <circle class="center-mark" cx="300" cy="438" r="3"/>
+  </g>
+  <g data-pc1="high" data-pc2="low" aria-label="high PC1, low PC2">
+    <path class="kernel" d="M 627.5 438 C 656.2 391.04, 765.88 396.76, 832.5 435.36 C 786.38 485.84, 694.12 479.9, 627.5 438 Z"/>
+    <path class="groove" d="M 656.2 441.96 Q 730 435.23, 803.8 434.04"/>
+    <circle class="center-mark" cx="730" cy="438" r="3"/>
+  </g>
+
+  <rect x="221" y="270" width="158" height="30" rx="15" class="tag"/>
+  <text x="300" y="290" text-anchor="middle" class="t label">low PC1, high PC2</text>
+  <rect x="651" y="270" width="158" height="30" rx="15" class="tag"/>
+  <text x="730" y="290" text-anchor="middle" class="t label">high PC1, high PC2</text>
+  <rect x="221" y="503" width="158" height="30" rx="15" class="tag"/>
+  <text x="300" y="523" text-anchor="middle" class="t label">low PC1, low PC2</text>
+  <rect x="651" y="503" width="158" height="30" rx="15" class="tag"/>
+  <text x="730" y="523" text-anchor="middle" class="t label">high PC1, low PC2</text>
+
+  <line x1="210" y1="570" x2="820" y2="570" class="axis"/>
+  <text x="515" y="560" text-anchor="middle" class="t label">PC1: broad size-related direction</text>
+  <text x="515" y="599" text-anchor="middle" class="t body">Move horizontally to compare PC1 while holding the illustrated PC2 shape type fixed.</text>
+  <text x="515" y="621" text-anchor="middle" class="t body">Move vertically to compare PC2 while holding the illustrated PC1 size level fixed.</text>
+</svg>

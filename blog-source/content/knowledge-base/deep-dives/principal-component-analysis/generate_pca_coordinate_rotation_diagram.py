@@ -29,10 +29,7 @@ RAW_POINTS = (
 SCALE_PX = 54.0
 LEFT_ORIGIN = (224.0, 238.0)
 RIGHT_ORIGIN = (716.0, 238.0)
-OUTPUT_DEFAULT = (
-    Path(__file__).resolve().parents[4]
-    / "static/knowledge-base/deep-dives/pca-center-scale-rotate.svg"
-)
+OUTPUT_DEFAULT = Path(__file__).with_name("pca-center-scale-rotate.svg")
 
 
 def standardize(points: tuple[tuple[float, float], ...]) -> tuple[tuple[float, float], ...]:

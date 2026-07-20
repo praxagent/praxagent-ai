@@ -11,10 +11,7 @@ from pathlib import Path
 NARROW_VALUES = (-0.90, -0.60, -0.35, -0.10, 0.10, 0.35, 0.60, 0.90)
 WIDE_VALUES = tuple(2.0 * value for value in NARROW_VALUES)
 SCALE_PX = 75.0
-OUTPUT_DEFAULT = (
-    Path(__file__).resolve().parents[4]
-    / "static/knowledge-base/deep-dives/pca-standard-deviation.svg"
-)
+OUTPUT_DEFAULT = Path(__file__).with_name("pca-standard-deviation.svg")
 
 
 def mean(values: tuple[float, ...]) -> float:

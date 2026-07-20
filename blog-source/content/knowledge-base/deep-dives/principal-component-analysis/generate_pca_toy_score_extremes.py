@@ -9,10 +9,7 @@ from pathlib import Path
 from xml.etree import ElementTree
 
 
-OUTPUT_DEFAULT = (
-    Path(__file__).resolve().parents[4]
-    / "static/knowledge-base/deep-dives/pca-toy-score-extremes.svg"
-)
+OUTPUT_DEFAULT = Path(__file__).with_name("pca-toy-score-extremes.svg")
 
 
 @dataclass(frozen=True)
