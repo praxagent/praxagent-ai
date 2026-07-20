@@ -1,0 +1,11 @@
+{
+  "name": "praxagent-site-tests",
+  "private": true,
+  "scripts": {
+    "test:browser": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "katex": "0.16.47"
+  }
+}

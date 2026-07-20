@@ -1,5 +1,6 @@
 HUGO ?= hugo
 PYTHON ?= python3
+NPM ?= npm
 RSYNC ?= rsync
 
 BLOG_SOURCE := blog-source
@@ -45,7 +46,7 @@ DETACH := $(abspath scripts/detach_serve.sh)
 
 .DEFAULT_GOAL := help
 
-.PHONY: help sync-prax-docs verify-late-chunking blog blog-drafts blog-serve blog-serve-tailscale run-site-local run-site-tailscale check stage-pages pages ci up down
+.PHONY: help sync-prax-docs verify-late-chunking blog blog-drafts blog-serve blog-serve-tailscale run-site-local run-site-tailscale check check-browser stage-pages pages ci up down
 
 help: ## Show available commands
 	@awk 'BEGIN {FS = ":.*## "; printf "Usage: make <target>\n\nTargets:\n"} /^[a-zA-Z0-9_-]+:.*## / {printf "  %-22s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -215,6 +216,10 @@ check: sync-prax-docs verify-late-chunking ## Validate Hugo, links, assets, prov
 	$(PYTHON) scripts/check_public_repo.py
 	$(PYTHON) scripts/check_site.py
 	$(PYTHON) scripts/check_provenance.py
+	$(MAKE) check-browser
+
+check-browser: ## Render every knowledge-base display equation in Chromium
+	$(NPM) run test:browser
 
 stage-pages: ## Assemble and validate the allowlisted Pages artifact
 	$(PYTHON) scripts/stage_pages.py --output "$(PAGES_OUTPUT)"

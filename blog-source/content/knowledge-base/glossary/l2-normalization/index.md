@@ -14,8 +14,7 @@ For a vector \(x=(x_1,\ldots,x_d)\) with \(d\) coordinates, its L2 norm is
 
 \[
 \lVert x\rVert_2
-=
-\sqrt{\sum_{j=1}^{d}x_j^2}.
+= \sqrt{\sum_{j=1}^{d}x_j^2}.
 \]
 
 Here \(j\) identifies a coordinate and \(x_j\) is its value. If \(x\ne 0\), its L2-normalized vector is

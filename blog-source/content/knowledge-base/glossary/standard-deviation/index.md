@@ -30,8 +30,7 @@ standard deviation. Then
 
 \[
 \sigma
-=
-\sqrt{\frac{1}{n}\sum_{i=1}^{n}(x_i-\mu)^2}.
+= \sqrt{\frac{1}{n}\sum_{i=1}^{n}(x_i-\mu)^2}.
 \]
 
 Read the formula as a recipe:

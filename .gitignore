@@ -40,6 +40,9 @@ pip-delete-this-directory.txt
 htmlcov/
 .tox/
 .nox/
+node_modules/
+playwright-report/
+test-results/
 .coverage
 .coverage.*
 .cache

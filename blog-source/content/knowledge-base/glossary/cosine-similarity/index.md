@@ -14,10 +14,8 @@ For nonzero vectors \(a,b\in\mathbb{R}^{d}\),
 
 \[
 \operatorname{cosine}(a,b)
-=
-\frac{a\cdot b}{\lVert a\rVert_2\lVert b\rVert_2}
-=
-\frac{\sum_{j=1}^{d}a_jb_j}
+= \frac{a\cdot b}{\lVert a\rVert_2\lVert b\rVert_2}
+= \frac{\sum_{j=1}^{d}a_jb_j}
 {\sqrt{\sum_{j=1}^{d}a_j^2}\sqrt{\sum_{j=1}^{d}b_j^2}}.
 \]
 
@@ -35,8 +33,7 @@ Let \(a=(1,0)\) and \(b=(1,1)\). Their dot product is 1, their lengths are 1 and
 
 \[
 \operatorname{cosine}(a,b)
-=
-\frac{1}{\sqrt{2}}
+= \frac{1}{\sqrt{2}}
 \approx 0.707.
 \]
 

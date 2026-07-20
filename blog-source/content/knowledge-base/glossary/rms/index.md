@@ -10,10 +10,8 @@ The **root mean square (RMS)** is a nonnegative scalar that summarizes a real-va
 
 \[
 \operatorname{RMS}(h)
-=
-\sqrt{\frac{1}{d}\sum_{i=1}^{d}h_i^2}
-=
-\frac{\lVert h\rVert_2}{\sqrt{d}},
+= \sqrt{\frac{1}{d}\sum_{i=1}^{d}h_i^2}
+= \frac{\lVert h\rVert_2}{\sqrt{d}},
 \qquad d\ge 1.
 \]
 
@@ -33,10 +31,8 @@ For \(h=(3,4,0,0)\), the dimension is \(d=4\), so
 
 \[
 \operatorname{RMS}(h)
-=
-\sqrt{\frac{3^2+4^2+0^2+0^2}{4}}
-=
-\sqrt{\frac{25}{4}}
+= \sqrt{\frac{3^2+4^2+0^2+0^2}{4}}
+= \sqrt{\frac{25}{4}}
 =2.5.
 \]
 
@@ -76,12 +72,10 @@ In these notes, **residual RMS** means \(\operatorname{RMS}(h)\) for one chosen 
 
 \[
 e_{\text{requested}}
-=
-\alpha\,\operatorname{RMS}(h)\,u,
+= \alpha\,\operatorname{RMS}(h)\,u,
 \qquad
 \operatorname{RMS}(e_{\text{requested}})
-=
-|\alpha|\,\operatorname{RMS}(h).
+= |\alpha|\,\operatorname{RMS}(h).
 \]
 
 If \(\operatorname{RMS}(h)=2\) and the nonnegative dose fraction is \(\alpha=0.03\), the requested edit has RMS \(0.03\times2=0.06\). RMS discards sign, so a signed negative amplitude has the same RMS as its positive counterpart.
@@ -94,18 +88,15 @@ Numerical precision can separate a request from what the model receives. A proto
 
 \[
 \operatorname{RMSE}(x,\hat{x})
-=
-\operatorname{RMS}(x-\hat{x})
-=
-\sqrt{\frac{1}{d}\sum_{i=1}^{d}(x_i-\hat{x}_i)^2}.
+= \operatorname{RMS}(x-\hat{x})
+= \sqrt{\frac{1}{d}\sum_{i=1}^{d}(x_i-\hat{x}_i)^2}.
 \]
 
 Relative RMSE divides that error by a named, nonzero reference size. One convention is
 
 \[
 \operatorname{relative\ RMSE}(x,\hat{x})
-=
-\frac{\operatorname{RMSE}(x,\hat{x})}{\operatorname{RMS}(x)},
+= \frac{\operatorname{RMSE}(x,\hat{x})}{\operatorname{RMS}(x)},
 \qquad \operatorname{RMS}(x)>0.
 \]
 
@@ -117,8 +108,7 @@ Other denominators are possible, including \(\operatorname{RMS}(\hat{x})\). A pr
 
 \[
 y_i
-=
-g_i
+= g_i
 \frac{x_i}{\sqrt{\frac{1}{d}\sum_{j=1}^{d}x_j^2+\varepsilon}},
 \]
 
