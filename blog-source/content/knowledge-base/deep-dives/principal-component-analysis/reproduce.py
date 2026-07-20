@@ -50,6 +50,7 @@ PCA_FIGURE = "fig-wheat-kernel-pca.png"
 LOADINGS_FIGURE = "fig-wheat-kernel-loadings.png"
 OG_CARD = "og-card.png"
 RECEIPT = "wheat-kernel-pca.receipt.json"
+FIGURE_RECEIPT = "fig-wheat-kernel-pca.receipt.json"
 PROVENANCE = "provenance.json"
 LOCK_FILE = "reproduce.py.lock"
 
@@ -716,6 +717,14 @@ def build_outputs(output_dir: Path, generator_sha256: str) -> None:
         LOADINGS_FIGURE,
         OG_CARD,
     )
+    figure_files = (
+        FEATURE_FIGURE,
+        ALL_FEATURES_FIGURE,
+        CORRELATION_FIGURE,
+        PCA_FIGURE,
+        LOADINGS_FIGURE,
+        OG_CARD,
+    )
     receipt = {
         "analysis_id": "uci-seeds-scaled-pca",
         "analysis_scope": (
@@ -831,8 +840,34 @@ def build_outputs(output_dir: Path, generator_sha256: str) -> None:
     }
     write_json(output_dir / RECEIPT, receipt)
 
+    figure_receipt = {
+        "schema_version": 1,
+        "description": (
+            "Hash binding for every empirical figure and the featured card "
+            "generated from the UCI Seeds PCA analysis"
+        ),
+        "analysis_receipt": {
+            "path": RECEIPT,
+            "sha256": sha256_file(output_dir / RECEIPT),
+        },
+        "source": {
+            "path": SOURCE_TXT,
+            "sha256": sha256_file(HERE / SOURCE_TXT),
+            "doi": SOURCE_DOI,
+        },
+        "provenance": {
+            "generator": "reproduce.py",
+            "generator_sha256": generator_sha256,
+            "outputs": {
+                name: sha256_file(output_dir / name) for name in figure_files
+            },
+        },
+    }
+    write_json(output_dir / FIGURE_RECEIPT, figure_receipt)
+
     manifest = {
-        "page": "principal-component-analysis",
+        "schema_version": 1,
+        "local_bundle": True,
         "source": {
             "path": SOURCE_TXT,
             "sha256": sha256_file(HERE / SOURCE_TXT),
@@ -842,49 +877,51 @@ def build_outputs(output_dir: Path, generator_sha256: str) -> None:
         "generator": {
             "path": "reproduce.py",
             "sha256": generator_sha256,
-            "lockfile": LOCK_FILE,
-            "lockfile_sha256": sha256_file(HERE / LOCK_FILE),
+            "verify": "uv run --frozen reproduce.py --verify",
         },
-        "artifacts": {
-            name: sha256_file(output_dir / name)
-            for name in (*generated_files, RECEIPT)
+        "receipts": {
+            FIGURE_RECEIPT: sha256_file(output_dir / FIGURE_RECEIPT),
+            RECEIPT: sha256_file(output_dir / RECEIPT),
+            LOCK_FILE: sha256_file(HERE / LOCK_FILE),
+            SOURCE_TXT: sha256_file(HERE / SOURCE_TXT),
         },
-        "published_claims": [
+        "figures": list(figure_files),
+        "numbers": [
             {
-                "label": "kernel count",
+                "id": "kernel-count",
                 "value": 210,
-                "receipt": RECEIPT,
-                "field": "counts.kernels",
+                "appears_as": "210 kernels",
+                "source": f"{RECEIPT}#counts.kernels",
             },
             {
-                "label": "feature count",
+                "id": "feature-count",
                 "value": 7,
-                "receipt": RECEIPT,
-                "field": "counts.features",
+                "appears_as": "seven measurement features",
+                "source": f"{RECEIPT}#counts.features",
             },
             {
-                "label": "missing measurement count",
+                "id": "missing-measurement-count",
                 "value": 0,
-                "receipt": RECEIPT,
-                "field": "counts.missing_measurement_cells",
+                "appears_as": "0 missing measurement cells",
+                "source": f"{RECEIPT}#counts.missing_measurement_cells",
             },
             {
-                "label": "PC1 explained variance ratio",
+                "id": "pc1-explained-variance",
                 "value": rounded(ratios[0]),
-                "receipt": RECEIPT,
-                "field": "pca.explained_variance_ratio.PC1",
+                "appears_as": "71.9%",
+                "source": f"{RECEIPT}#pca.explained_variance_ratio.PC1",
             },
             {
-                "label": "PC2 explained variance ratio",
+                "id": "pc2-explained-variance",
                 "value": rounded(ratios[1]),
-                "receipt": RECEIPT,
-                "field": "pca.explained_variance_ratio.PC2",
+                "appears_as": "17.1%",
+                "source": f"{RECEIPT}#pca.explained_variance_ratio.PC2",
             },
             {
-                "label": "PC1 and PC2 combined explained variance ratio",
+                "id": "pc1-pc2-combined-explained-variance",
                 "value": rounded(ratios[:2].sum()),
-                "receipt": RECEIPT,
-                "field": "pca.first_two_components_combined",
+                "appears_as": "89.0%",
+                "source": f"{RECEIPT}#pca.first_two_components_combined",
             },
         ],
     }
@@ -903,6 +940,7 @@ def generated_names() -> tuple[str, ...]:
         LOADINGS_FIGURE,
         OG_CARD,
         RECEIPT,
+        FIGURE_RECEIPT,
         PROVENANCE,
     )
 

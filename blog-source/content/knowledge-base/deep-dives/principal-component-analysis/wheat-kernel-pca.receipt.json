@@ -276,7 +276,7 @@
       "wheat_kernel_measurements.csv": "c7912a8217991ced457663cffccfe154e2a9e60a07ac0ab7b0fd436dda9126d6"
     },
     "generator": "reproduce.py",
-    "generator_sha256": "c8b81186dec962341503aefc46c6e79b84c87b4b29e4dc6baec433b62002fe04",
+    "generator_sha256": "f0df0b7ccbd8782c4ace93135d001bede81c74d1fdc05c1818bc0138317df780",
     "lockfile": "reproduce.py.lock",
     "lockfile_sha256": "783473858fe78fe0eb7a203a646bcb3cd4fac96a357304910ccafd06379fdde0",
     "matplotlib_version": "3.10.3",
