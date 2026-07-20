@@ -1,0 +1,301 @@
+{
+  "analysis_id": "uci-seeds-scaled-pca",
+  "analysis_scope": "Descriptive PCA of the complete UCI Seeds dataset. No population inference, classifier evaluation, or causal claim is made.",
+  "counts": {
+    "features": 7,
+    "kernels": 210,
+    "kernels_by_variety": {
+      "Canadian": 70,
+      "Kama": 70,
+      "Rosa": 70
+    },
+    "missing_measurement_cells": 0
+  },
+  "figures": {
+    "fig-wheat-kernel-all-features.png": {
+      "dimensions": [
+        2400,
+        2400
+      ],
+      "plotting_note": "Boxplots plus all observations with deterministic jitter from NumPy seed 236",
+      "question": "How are all seven original measurements distributed within each recorded variety?",
+      "sha256": "66f65468cf83297c681a660533a0ead591225fa5cc60ae055e77ab99db20d3c4"
+    },
+    "fig-wheat-kernel-correlations.png": {
+      "dimensions": [
+        1800,
+        1600
+      ],
+      "question": "Which pairs of original measurements have strong linear correlations?",
+      "sha256": "ba62a90e5ecfcfee6bcc0373274168abb8b90e1c6fbf6234186f5a3a5197be89"
+    },
+    "fig-wheat-kernel-feature-space.png": {
+      "dimensions": [
+        2000,
+        1000
+      ],
+      "question": "What is visible in two of the seven original measurements?",
+      "sha256": "71cb776e5e575200795f9ee203dc371247c5032dfb91fe8b2d5827bde90e379b"
+    },
+    "fig-wheat-kernel-loadings.png": {
+      "dimensions": [
+        2200,
+        1140
+      ],
+      "question": "Which principal-axis coefficients define PC1 and PC2?",
+      "sha256": "0986e90f9a7007f83a9b516174bacf0d1639b94fbe86116d83e63ba885d14418"
+    },
+    "fig-wheat-kernel-pca.png": {
+      "dimensions": [
+        2400,
+        1100
+      ],
+      "question": "Where do kernels land on PC1 and PC2, and how much variance do all components represent?",
+      "sha256": "a3f5524d597bef125c2874f1c2664c8bdbc3c260e97a952518a11487f81d712e"
+    },
+    "og-card.png": {
+      "dimensions": [
+        1200,
+        630
+      ],
+      "question": "What is the page's central real-data example?",
+      "sha256": "44d7824e2defad906ee620401f5d173cbb13c258fc80b6d01e906f0dae830e8a"
+    }
+  },
+  "original_feature_correlations": {
+    "area": {
+      "area": 1.0,
+      "asymmetry_coefficient": -0.229572,
+      "compactness": 0.608288,
+      "kernel_groove_length": 0.863693,
+      "kernel_length": 0.949985,
+      "kernel_width": 0.970771,
+      "perimeter": 0.994341
+    },
+    "asymmetry_coefficient": {
+      "area": -0.229572,
+      "asymmetry_coefficient": 1.0,
+      "compactness": -0.331471,
+      "kernel_groove_length": -0.011079,
+      "kernel_length": -0.171562,
+      "kernel_width": -0.258037,
+      "perimeter": -0.21734
+    },
+    "compactness": {
+      "area": 0.608288,
+      "asymmetry_coefficient": -0.331471,
+      "compactness": 1.0,
+      "kernel_groove_length": 0.226825,
+      "kernel_length": 0.367915,
+      "kernel_width": 0.761635,
+      "perimeter": 0.529244
+    },
+    "kernel_groove_length": {
+      "area": 0.863693,
+      "asymmetry_coefficient": -0.011079,
+      "compactness": 0.226825,
+      "kernel_groove_length": 1.0,
+      "kernel_length": 0.932806,
+      "kernel_width": 0.749131,
+      "perimeter": 0.890784
+    },
+    "kernel_length": {
+      "area": 0.949985,
+      "asymmetry_coefficient": -0.171562,
+      "compactness": 0.367915,
+      "kernel_groove_length": 0.932806,
+      "kernel_length": 1.0,
+      "kernel_width": 0.860415,
+      "perimeter": 0.972422
+    },
+    "kernel_width": {
+      "area": 0.970771,
+      "asymmetry_coefficient": -0.258037,
+      "compactness": 0.761635,
+      "kernel_groove_length": 0.749131,
+      "kernel_length": 0.860415,
+      "kernel_width": 1.0,
+      "perimeter": 0.944829
+    },
+    "perimeter": {
+      "area": 0.994341,
+      "asymmetry_coefficient": -0.21734,
+      "compactness": 0.529244,
+      "kernel_groove_length": 0.890784,
+      "kernel_length": 0.972422,
+      "kernel_width": 0.944829,
+      "perimeter": 1.0
+    }
+  },
+  "pca": {
+    "coefficient_terminology": "Values called loadings in legacy artifact names are principal-axis coefficients, equivalently entries of the right singular vectors; they are not feature-component correlation loadings",
+    "explained_variance_ratio": {
+      "PC1": 0.718743,
+      "PC2": 0.171082,
+      "PC3": 0.096858,
+      "PC4": 0.009766,
+      "PC5": 0.002673,
+      "PC6": 0.000762,
+      "PC7": 0.000116
+    },
+    "first_two_components_combined": 0.889825,
+    "loadings_ordered_by_absolute_value": {
+      "PC1": [
+        {
+          "feature": "area",
+          "label": "Area",
+          "loading": 0.444474
+        },
+        {
+          "feature": "perimeter",
+          "label": "Perimeter",
+          "loading": 0.441571
+        },
+        {
+          "feature": "kernel_width",
+          "label": "Kernel width",
+          "loading": 0.432819
+        },
+        {
+          "feature": "kernel_length",
+          "label": "Kernel length",
+          "loading": 0.423563
+        },
+        {
+          "feature": "kernel_groove_length",
+          "label": "Kernel-groove length",
+          "loading": 0.387161
+        },
+        {
+          "feature": "compactness",
+          "label": "Compactness",
+          "loading": 0.277017
+        },
+        {
+          "feature": "asymmetry_coefficient",
+          "label": "Asymmetry coefficient",
+          "loading": -0.118692
+        }
+      ],
+      "PC2": [
+        {
+          "feature": "asymmetry_coefficient",
+          "label": "Asymmetry coefficient",
+          "loading": -0.716882
+        },
+        {
+          "feature": "compactness",
+          "label": "Compactness",
+          "loading": 0.529151
+        },
+        {
+          "feature": "kernel_groove_length",
+          "label": "Kernel-groove length",
+          "loading": -0.377193
+        },
+        {
+          "feature": "kernel_length",
+          "label": "Kernel length",
+          "loading": -0.205975
+        },
+        {
+          "feature": "kernel_width",
+          "label": "Kernel width",
+          "loading": 0.11669
+        },
+        {
+          "feature": "perimeter",
+          "label": "Perimeter",
+          "loading": -0.084003
+        },
+        {
+          "feature": "area",
+          "label": "Area",
+          "loading": -0.026564
+        }
+      ]
+    },
+    "method": "singular value decomposition of the centered, scaled matrix",
+    "sign_orientation": [
+      "PC1 is oriented so area has a positive principal-axis coefficient",
+      "PC2 is oriented so compactness has a positive principal-axis coefficient",
+      "PC3 is oriented so asymmetry coefficient has a positive principal-axis coefficient",
+      "PC4 is oriented so kernel-groove length has a positive principal-axis coefficient",
+      "PC5 is oriented so kernel length has a positive principal-axis coefficient",
+      "PC6 is oriented so kernel width has a positive principal-axis coefficient",
+      "PC7 is oriented so area has a positive principal-axis coefficient"
+    ],
+    "variety_score_centroids": {
+      "Canadian": {
+        "PC1": -2.317316,
+        "PC2": -0.607992
+      },
+      "Kama": {
+        "PC1": -0.364914,
+        "PC2": 1.017664
+      },
+      "Rosa": {
+        "PC1": 2.68223,
+        "PC2": -0.409671
+      }
+    }
+  },
+  "preprocessing": {
+    "aggregation": "none",
+    "feature_means": {
+      "area": 14.847524,
+      "asymmetry_coefficient": 3.700201,
+      "compactness": 0.870999,
+      "kernel_groove_length": 5.408071,
+      "kernel_length": 5.628533,
+      "kernel_width": 3.258605,
+      "perimeter": 14.559286
+    },
+    "feature_standard_deviations": {
+      "area": 2.902763,
+      "asymmetry_coefficient": 1.499973,
+      "compactness": 0.023573,
+      "kernel_groove_length": 0.490309,
+      "kernel_length": 0.442007,
+      "kernel_width": 0.376814,
+      "perimeter": 1.302846
+    },
+    "imputation": "none; the source table contains no missing values",
+    "scaling": "for each feature, subtract the full-dataset mean and divide by the full-dataset population standard deviation (ddof=0)"
+  },
+  "provenance": {
+    "generated_outputs": {
+      "fig-wheat-kernel-all-features.png": "66f65468cf83297c681a660533a0ead591225fa5cc60ae055e77ab99db20d3c4",
+      "fig-wheat-kernel-correlations.png": "ba62a90e5ecfcfee6bcc0373274168abb8b90e1c6fbf6234186f5a3a5197be89",
+      "fig-wheat-kernel-feature-space.png": "71cb776e5e575200795f9ee203dc371247c5032dfb91fe8b2d5827bde90e379b",
+      "fig-wheat-kernel-loadings.png": "0986e90f9a7007f83a9b516174bacf0d1639b94fbe86116d83e63ba885d14418",
+      "fig-wheat-kernel-pca.png": "a3f5524d597bef125c2874f1c2664c8bdbc3c260e97a952518a11487f81d712e",
+      "og-card.png": "44d7824e2defad906ee620401f5d173cbb13c258fc80b6d01e906f0dae830e8a",
+      "pca_loadings.csv": "945c1467006918360db155eebc418458aca8ff2a98551ab04af1dd2562d17fd9",
+      "pca_scores.csv": "ec2f94c4852ef1f51afb2521f98a7812bd4d761ecbc932ecd5303fbfe007ca32",
+      "wheat_kernel_measurements.csv": "c7912a8217991ced457663cffccfe154e2a9e60a07ac0ab7b0fd436dda9126d6"
+    },
+    "generator": "reproduce.py",
+    "generator_sha256": "c8b81186dec962341503aefc46c6e79b84c87b4b29e4dc6baec433b62002fe04",
+    "lockfile": "reproduce.py.lock",
+    "lockfile_sha256": "783473858fe78fe0eb7a203a646bcb3cd4fac96a357304910ccafd06379fdde0",
+    "matplotlib_version": "3.10.3",
+    "numpy_version": "2.3.2"
+  },
+  "source": {
+    "committed_source": "seeds_dataset.txt",
+    "dataset": "Seeds",
+    "dataset_page": "https://archive.ics.uci.edu/dataset/236/seeds",
+    "doi": "10.24432/C5H30K",
+    "download_url": "https://archive.ics.uci.edu/ml/machine-learning-databases/00236/seeds_dataset.txt",
+    "license": "CC BY 4.0",
+    "repository": "UCI Machine Learning Repository",
+    "row_definition": "one measured wheat kernel",
+    "source_sha256": "1f3f83c0d8485ae9148061389d19628607e3f5660e3d6f40ec9102fb398bb12f",
+    "variety_code_mapping": {
+      "1": "Kama",
+      "2": "Rosa",
+      "3": "Canadian"
+    }
+  }
+}

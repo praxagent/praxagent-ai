@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="470" viewBox="0 0 900 470" role="img" aria-labelledby="scalingTitle scalingDesc">
+  <title id="scalingTitle">One spreadsheet cell standardized step by step</title>
+  <desc id="scalingDesc">A three-step diagram begins with observed value x i j, subtracts the mean of feature column j, and divides by the standard deviation of feature column j to obtain standardized value z i j. A sign guide explains that negative values are below the feature mean, zero is at the feature mean, and positive values are above the feature mean.</desc>
+  <defs>
+    <marker id="scalingArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#A67C52"/>
+    </marker>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:22px;font-weight:700}
+      .subtitle{font-size:13px;fill:#5A544C}
+      .step{font-size:12px;font-weight:700;letter-spacing:.6px;fill:#4B6787}
+      .value{font-size:24px;font-weight:700}
+      .equation{font-size:18px;font-weight:700}
+      .body{font-size:13px}
+      .small{font-size:11px;fill:#5A544C}
+      .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+      .arrow{fill:none;stroke:#A67C52;stroke-width:2;marker-end:url(#scalingArrow)}
+      .axis{stroke:#7F786D;stroke-width:2}
+      .tick{stroke:#7F786D;stroke-width:1.4}
+      .marker{fill:#A67C52;stroke:#F7F4F0;stroke-width:2}
+      .guide{stroke:#A67C52;stroke-width:1.5;stroke-dasharray:4 3}
+    </style>
+  </defs>
+
+  <rect width="900" height="470" fill="#F7F4F0"/>
+  <text x="24" y="36" class="t title">One spreadsheet cell, scaled step by step</text>
+  <text x="24" y="59" class="t subtitle">The feature subscript j matters: each feature column supplies its own mean and standard deviation.</text>
+
+  <rect x="24" y="92" width="224" height="184" rx="12" class="card"/>
+  <text x="44" y="119" class="t step">1. START WITH ONE CELL</text>
+  <text x="44" y="157" class="t value">xᵢⱼ</text>
+  <text x="44" y="181" class="t body">the observed value</text>
+  <text x="44" y="215" class="t small">i identifies one observation row.</text>
+  <text x="44" y="236" class="t small">j identifies one feature column.</text>
+  <text x="44" y="257" class="t small">Together, i and j locate one cell.</text>
+
+  <path d="M256 184 H325" class="arrow"/>
+  <text x="291" y="145" text-anchor="middle" class="t body">subtract</text>
+  <text x="291" y="163" text-anchor="middle" class="t small">feature mean μⱼ</text>
+
+  <rect x="334" y="92" width="224" height="184" rx="12" class="card"/>
+  <text x="354" y="119" class="t step">2. CENTER THE VALUE</text>
+  <text x="354" y="155" class="t equation">xᵢⱼ − μⱼ</text>
+  <text x="354" y="187" class="t body">distance from the feature mean</text>
+  <text x="354" y="224" class="t small">The sign says whether the value is</text>
+  <text x="354" y="245" class="t small">above or below the feature mean.</text>
+  <text x="354" y="263" class="t small">The original feature unit remains.</text>
+
+  <path d="M566 184 H635" class="arrow"/>
+  <text x="601" y="145" text-anchor="middle" class="t body">divide by</text>
+  <text x="601" y="163" text-anchor="middle" class="t small">feature standard deviation σⱼ</text>
+
+  <rect x="644" y="92" width="232" height="184" rx="12" class="card"/>
+  <text x="664" y="119" class="t step">3. SCALE THE DIFFERENCE</text>
+  <text x="664" y="155" class="t equation">(xᵢⱼ − μⱼ) ÷ σⱼ</text>
+  <text x="664" y="187" class="t value">= zᵢⱼ</text>
+  <text x="664" y="215" class="t body">standard-deviation units</text>
+  <text x="664" y="246" class="t small">The original feature unit is gone.</text>
+  <text x="664" y="263" class="t small">Now features share a common scale.</text>
+
+  <text x="24" y="319" class="t step">READ THE SIGN OF THE STANDARDIZED VALUE</text>
+  <line x1="120" y1="383" x2="780" y2="383" class="axis"/>
+  <path d="M122 383 L134 377 L134 389 Z" fill="#7F786D"/>
+  <path d="M778 383 L766 377 L766 389 Z" fill="#7F786D"/>
+  <line x1="450" y1="366" x2="450" y2="400" class="tick"/>
+  <circle cx="450" cy="383" r="8" class="marker"/>
+  <g class="t body" text-anchor="middle">
+    <text x="245" y="359" font-weight="700">negative zᵢⱼ</text>
+    <text x="450" y="359" font-weight="700">zᵢⱼ = 0</text>
+    <text x="655" y="359" font-weight="700">positive zᵢⱼ</text>
+    <text x="245" y="414">below the feature mean</text>
+    <text x="450" y="414">at the feature mean</text>
+    <text x="655" y="414">above the feature mean</text>
+  </g>
+  <text x="450" y="445" text-anchor="middle" class="t small">Distance from zero is measured in that feature's standard deviations.</text>
+</svg>

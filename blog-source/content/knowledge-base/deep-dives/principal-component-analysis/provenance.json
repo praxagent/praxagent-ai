@@ -1,0 +1,65 @@
+{
+  "artifacts": {
+    "fig-wheat-kernel-all-features.png": "66f65468cf83297c681a660533a0ead591225fa5cc60ae055e77ab99db20d3c4",
+    "fig-wheat-kernel-correlations.png": "ba62a90e5ecfcfee6bcc0373274168abb8b90e1c6fbf6234186f5a3a5197be89",
+    "fig-wheat-kernel-feature-space.png": "71cb776e5e575200795f9ee203dc371247c5032dfb91fe8b2d5827bde90e379b",
+    "fig-wheat-kernel-loadings.png": "0986e90f9a7007f83a9b516174bacf0d1639b94fbe86116d83e63ba885d14418",
+    "fig-wheat-kernel-pca.png": "a3f5524d597bef125c2874f1c2664c8bdbc3c260e97a952518a11487f81d712e",
+    "og-card.png": "44d7824e2defad906ee620401f5d173cbb13c258fc80b6d01e906f0dae830e8a",
+    "pca_loadings.csv": "945c1467006918360db155eebc418458aca8ff2a98551ab04af1dd2562d17fd9",
+    "pca_scores.csv": "ec2f94c4852ef1f51afb2521f98a7812bd4d761ecbc932ecd5303fbfe007ca32",
+    "wheat-kernel-pca.receipt.json": "7b83783da2e815cc4b9b66d7370212e4dbd675263e2cc40ff34ed609580f761e",
+    "wheat_kernel_measurements.csv": "c7912a8217991ced457663cffccfe154e2a9e60a07ac0ab7b0fd436dda9126d6"
+  },
+  "generator": {
+    "lockfile": "reproduce.py.lock",
+    "lockfile_sha256": "783473858fe78fe0eb7a203a646bcb3cd4fac96a357304910ccafd06379fdde0",
+    "path": "reproduce.py",
+    "sha256": "c8b81186dec962341503aefc46c6e79b84c87b4b29e4dc6baec433b62002fe04"
+  },
+  "page": "principal-component-analysis",
+  "published_claims": [
+    {
+      "field": "counts.kernels",
+      "label": "kernel count",
+      "receipt": "wheat-kernel-pca.receipt.json",
+      "value": 210
+    },
+    {
+      "field": "counts.features",
+      "label": "feature count",
+      "receipt": "wheat-kernel-pca.receipt.json",
+      "value": 7
+    },
+    {
+      "field": "counts.missing_measurement_cells",
+      "label": "missing measurement count",
+      "receipt": "wheat-kernel-pca.receipt.json",
+      "value": 0
+    },
+    {
+      "field": "pca.explained_variance_ratio.PC1",
+      "label": "PC1 explained variance ratio",
+      "receipt": "wheat-kernel-pca.receipt.json",
+      "value": 0.718743
+    },
+    {
+      "field": "pca.explained_variance_ratio.PC2",
+      "label": "PC2 explained variance ratio",
+      "receipt": "wheat-kernel-pca.receipt.json",
+      "value": 0.171082
+    },
+    {
+      "field": "pca.first_two_components_combined",
+      "label": "PC1 and PC2 combined explained variance ratio",
+      "receipt": "wheat-kernel-pca.receipt.json",
+      "value": 0.889825
+    }
+  ],
+  "source": {
+    "doi": "10.24432/C5H30K",
+    "license": "CC BY 4.0",
+    "path": "seeds_dataset.txt",
+    "sha256": "1f3f83c0d8485ae9148061389d19628607e3f5660e3d6f40ec9102fb398bb12f"
+  }
+}
