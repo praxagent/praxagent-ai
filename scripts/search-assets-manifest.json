@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "packages": {
+    "pagefind": "1.5.2",
+    "transformers_js": "3.8.1"
+  },
+  "model": {
+    "dimension": 384,
+    "dtype": "q8",
+    "id": "Xenova/all-MiniLM-L6-v2",
+    "license": "Apache-2.0",
+    "pooling": "mean",
+    "normalize": true,
+    "revision": "751bff37182d3f1213fa05d7196b954e230abad9",
+    "files": [
+      {
+        "path": "config.json",
+        "sha256": "7135149f7cffa1a573466c6e4d8423ed73b62fd2332c575bf738a0d033f70df7",
+        "size": 650
+      },
+      {
+        "path": "special_tokens_map.json",
+        "sha256": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+        "size": 125
+      },
+      {
+        "path": "tokenizer.json",
+        "sha256": "da0e79933b9ed51798a3ae27893d3c5fa4a201126cef75586296df9b4d2c62a0",
+        "size": 711661
+      },
+      {
+        "path": "tokenizer_config.json",
+        "sha256": "9261e7d79b44c8195c1cada2b453e55b00aeb81e907a6664974b4d7776172ab3",
+        "size": 366
+      },
+      {
+        "path": "vocab.txt",
+        "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+        "size": 231508
+      },
+      {
+        "path": "onnx/model_quantized.onnx",
+        "sha256": "afdb6f1a0e45b715d0bb9b11772f032c399babd23bfc31fed1c170afc848bdb1",
+        "size": 22972370
+      }
+    ]
+  },
+  "runtime": {
+    "files": [
+      {
+        "output": "transformers.min.js",
+        "package_path": "node_modules/@huggingface/transformers/dist/transformers.min.js",
+        "sha256": "aa5002b70e789798da263f5f99c62bd3e8fcd0c119258a493c40c180648365fa",
+        "size": 888173
+      },
+      {
+        "output": "ort-wasm-simd-threaded.jsep.mjs",
+        "package_path": "node_modules/@huggingface/transformers/dist/ort-wasm-simd-threaded.jsep.mjs",
+        "sha256": "08fb86ec433c78bfb032c5d84a68b8e8e5a8d81268fa39e24314179a5767a5b9",
+        "size": 44484
+      },
+      {
+        "output": "ort-wasm-simd-threaded.jsep.wasm",
+        "package_path": "node_modules/@huggingface/transformers/dist/ort-wasm-simd-threaded.jsep.wasm",
+        "sha256": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39",
+        "size": 21596019
+      }
+    ]
+  }
+}

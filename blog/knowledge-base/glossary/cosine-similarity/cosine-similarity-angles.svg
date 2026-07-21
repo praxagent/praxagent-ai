@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-labelledby="cosine-title cosine-desc">
+  <title id="cosine-title">Cosine similarity compares vector angles</title>
+  <desc id="cosine-desc">Three panels show vector pairs with zero, ninety, and one hundred eighty degree angles, corresponding to cosine similarities one, zero, and negative one.</desc>
+  <defs>
+    <marker id="cos-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4B6787"/></marker>
+    <marker id="cos-clay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#A67C52"/></marker>
+  </defs>
+  <rect width="900" height="420" fill="#F7F4F0"/>
+  <text x="450" y="42" text-anchor="middle" fill="#2C2924" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Same length is optional; direction controls cosine similarity</text>
+
+  <g font-family="Inter, Arial, sans-serif">
+    <rect x="32" y="72" width="260" height="300" rx="16" fill="#FFFDFC" stroke="#6F8D5E" stroke-width="2"/>
+    <text x="162" y="106" text-anchor="middle" fill="#2C2924" font-size="20" font-weight="700">Same direction</text>
+    <line x1="92" y1="245" x2="235" y2="155" stroke="#4B6787" stroke-width="6" marker-end="url(#cos-blue)"/>
+    <line x1="92" y1="245" x2="196" y2="180" stroke="#A67C52" stroke-width="3" marker-end="url(#cos-clay)"/>
+    <text x="162" y="285" text-anchor="middle" fill="#5A544C" font-size="17">angle = 0 degrees</text>
+    <text x="162" y="327" text-anchor="middle" fill="#315A2E" font-size="25" font-weight="700">cosine = 1</text>
+
+    <rect x="320" y="72" width="260" height="300" rx="16" fill="#FFFDFC" stroke="#4B6787" stroke-width="2"/>
+    <text x="450" y="106" text-anchor="middle" fill="#2C2924" font-size="20" font-weight="700">Perpendicular</text>
+    <line x1="398" y1="245" x2="520" y2="245" stroke="#4B6787" stroke-width="5" marker-end="url(#cos-blue)"/>
+    <line x1="398" y1="245" x2="398" y2="133" stroke="#A67C52" stroke-width="5" marker-end="url(#cos-clay)"/>
+    <path d="M 398 220 L 423 220 L 423 245" fill="none" stroke="#2C2924" stroke-width="2"/>
+    <text x="450" y="285" text-anchor="middle" fill="#5A544C" font-size="17">angle = 90 degrees</text>
+    <text x="450" y="327" text-anchor="middle" fill="#31516F" font-size="25" font-weight="700">cosine = 0</text>
+
+    <rect x="608" y="72" width="260" height="300" rx="16" fill="#FFFDFC" stroke="#A67C52" stroke-width="2"/>
+    <text x="738" y="106" text-anchor="middle" fill="#2C2924" font-size="20" font-weight="700">Opposite directions</text>
+    <line x1="738" y1="225" x2="832" y2="225" stroke="#4B6787" stroke-width="5" marker-end="url(#cos-blue)"/>
+    <line x1="738" y1="225" x2="644" y2="225" stroke="#A67C52" stroke-width="5" marker-end="url(#cos-clay)"/>
+    <circle cx="738" cy="225" r="5" fill="#2C2924"/>
+    <text x="738" y="285" text-anchor="middle" fill="#5A544C" font-size="17">angle = 180 degrees</text>
+    <text x="738" y="327" text-anchor="middle" fill="#7A3E2F" font-size="25" font-weight="700">cosine = -1</text>
+  </g>
+  <text x="450" y="401" text-anchor="middle" fill="#5A544C" font-family="Inter, Arial, sans-serif" font-size="15">Cosine similarity is an angle-based score, not a probability that two items mean the same thing.</text>
+</svg>

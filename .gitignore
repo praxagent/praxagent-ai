@@ -245,6 +245,20 @@ __marimo__/
 /blog/knowledge-base/prax/
 /blog/references/prax/
 
+# Search indexes and browser-model assets are rebuilt from the rendered site.
+# Keep the large pinned model and generated Pagefind files out of Git; Pages CI
+# publishes them from the generated blog/ tree.
+/blog/pagefind/
+/blog/search-assets/
+
+# Local Hugo-server preview copies of the generated search bundle. Keep
+# committed source files and third-party notices at search-assets/ root.
+/blog-source/static/pagefind/
+/blog-source/static/search-assets/assets-manifest.json
+/blog-source/static/search-assets/index/
+/blog-source/static/search-assets/models/
+/blog-source/static/search-assets/runtime/
+
 # Disposable build products. Only pages-artifact/ is uploaded by Pages CI.
 /pages-artifact/
 /blog-source/public/

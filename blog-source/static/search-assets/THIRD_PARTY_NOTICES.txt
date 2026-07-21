@@ -1,0 +1,31 @@
+Semantic search third-party notices
+===================================
+
+The browser-based search bundle includes the following third-party works.
+
+Xenova/all-MiniLM-L6-v2
+  Source: https://huggingface.co/Xenova/all-MiniLM-L6-v2/tree/751bff37182d3f1213fa05d7196b954e230abad9
+  Base model: sentence-transformers/all-MiniLM-L6-v2
+  License: Apache License 2.0
+  The deployed model is the q8 ONNX file from the pinned revision above.
+
+Transformers.js 3.8.1
+  Source: https://github.com/huggingface/transformers.js
+  License: Apache License 2.0
+  The deployed runtime is copied from the exact npm package version recorded
+  in package-lock.json and checked against scripts/search-assets-manifest.json.
+
+ONNX Runtime Web
+  Source: https://github.com/microsoft/onnxruntime
+  License: MIT License
+  Transformers.js distributes the ONNX Runtime Web JSEP loader and WebAssembly
+  binary used by this search feature.
+
+Pagefind 1.5.2
+  Source: https://github.com/CloudCannon/pagefind
+  License: MIT License
+  Pagefind builds the lexical half of the hybrid search index.
+
+The complete Apache License 2.0 and MIT License texts are available from the
+linked upstream projects. No search query is sent to any of these projects;
+the deployed model and runtime execute locally in the visitor's browser.

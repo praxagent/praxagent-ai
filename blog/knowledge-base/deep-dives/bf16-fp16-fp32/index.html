@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
+
     <title>BF16, FP16, and FP32: Precision, Range, Swamping, and Determinism - praxagent Knowledge Base</title>
     
     
@@ -45,8 +46,8 @@
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js"></script>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -68,10 +69,13 @@
                 </a>
             </div>
 
+
+
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link">Research Notes</a>
                 <a href="/blog/knowledge-base/" class="nav-link active">Knowledge Base</a>
+                <a href="/blog/search/" class="nav-link">Search</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -98,6 +102,7 @@
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
             <a href="/blog/knowledge-base/" class="mobile-nav-link active">Knowledge Base</a>
+            <a href="/blog/search/" class="mobile-nav-link">Search</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -114,6 +119,7 @@
 
     <main>
         
+
 
 
 
@@ -150,9 +156,15 @@ claims. This is an independent teaching note, not a peer-reviewed paper.</div>
 
 
 
-            <div class="table-of-contents">
-                <h3>Table of Contents</h3>
-                <nav id="TableOfContents">
+            <details class="table-of-contents">
+    <summary class="table-of-contents-summary">
+        <span class="table-of-contents-label">On this page</span>
+        <span class="table-of-contents-count">
+            23 sections
+        </span>
+    </summary>
+    <div class="table-of-contents-body">
+        <nav id="TableOfContents" aria-label="On this page">
   <ul>
     <li><a href="#how-the-bits-are-spent">How the bits are spent</a></li>
     <li><a href="#numerical-range-and-spacing">Numerical range and spacing</a>
@@ -191,7 +203,9 @@ claims. This is an independent teaching note, not a peer-reviewed paper.</div>
     </li>
   </ul>
 </nav>
-            </div>
+    </div>
+</details>
+
 
 
             <div class="post-body">
@@ -203,13 +217,13 @@ reduce memory traffic. They can also run faster when the hardware and software
 provide an accelerated path, but emulated or conversion-heavy paths may be
 slower.</p>
 <p>This Deep Dive compares three common
-<a href="/blog/knowledge-base/dtype/">data types (<strong>dtypes</strong>)</a>:</p>
+<a href="/blog/knowledge-base/glossary/dtype/">data types (<strong>dtypes</strong>)</a>:</p>
 <ul>
 <li><strong>FP32</strong>: 32-bit floating point (also called float32 or F32)</li>
 <li><strong>FP16</strong>: 16-bit floating point (also called float16 or F16; IEEE 754 binary16)</li>
 <li><strong>BF16</strong>: bfloat16 (brain floating point)</li>
 </ul>
-<p>A short glossary stub lives at <a href="/blog/knowledge-base/bf16/">BF16, FP16, and FP32</a>.
+<p>A short glossary stub lives at <a href="/blog/knowledge-base/glossary/bf16/">BF16, FP16, and FP32</a>.
 This page carries the worked demos, the swamping chart, and the hardware /
 determinism detail.</p>
 <h2 id="how-the-bits-are-spent">How the bits are spent</h2>
@@ -250,7 +264,7 @@ higher-precision copy of a trainable parameter retained for optimizer updates.</
           <td style="text-align: right">16</td>
           <td style="text-align: right">8</td>
           <td style="text-align: right">7</td>
-          <td>Activations / <a href="/blog/knowledge-base/matmul/">matrix multiplications (matmuls)</a>; FP32-like range, less precision</td>
+          <td>Activations / <a href="/blog/knowledge-base/glossary/matmul/">matrix multiplications (matmuls)</a>; FP32-like range, less precision</td>
       </tr>
       <tr>
           <td><strong>TF32</strong></td>
@@ -659,7 +673,7 @@ product name (see <a href="#references">References</a>). We have not tested thos
 stacks; check the vendor tables before transferring any claim here.</p>
 <p><strong>cuBLAS</strong> is NVIDIA&rsquo;s Compute Unified Device Architecture (<strong>CUDA</strong>)-platform
 implementation of Basic Linear Algebra Subprograms (<strong>BLAS</strong>) and sits behind
-many <a href="/blog/knowledge-base/matmul/">matmul</a> / GEMM calls in PyTorch. For a fixed
+many <a href="/blog/knowledge-base/glossary/matmul/">matmul</a> / GEMM calls in PyTorch. For a fixed
 CUDA toolkit version, cuBLAS documents bitwise reproducibility for supported
 routines on GPUs with the same architecture and the same number of streaming
 multiprocessors (<strong>SMs</strong>), with documented exceptions (concurrent streams,
@@ -973,10 +987,10 @@ FP32.&rdquo;</li>
 (<strong>IEEE</strong>)-style / industry conventions; defer to framework dtype docs for
 subnormals, not-a-number (<strong>NaN</strong>), and rounding mode.</li>
 </ul>
-<p>See also: <a href="/blog/knowledge-base/bf16/">BF16 glossary entry</a>,
-<a href="/blog/knowledge-base/matmul/">matmul</a>,
-<a href="/blog/knowledge-base/rms/">root mean square (RMS)</a>,
-<a href="/blog/knowledge-base/residual-stream/">residual stream</a>.</p>
+<p>See also: <a href="/blog/knowledge-base/glossary/bf16/">BF16 glossary entry</a>,
+<a href="/blog/knowledge-base/glossary/matmul/">matmul</a>,
+<a href="/blog/knowledge-base/glossary/rms/">root mean square (RMS)</a>,
+<a href="/blog/knowledge-base/glossary/residual-stream/">residual stream</a>.</p>
 <h2 id="references">References</h2>
 <h3 id="standards-and-formats">Standards and formats</h3>
 <ul>
@@ -1105,6 +1119,7 @@ The BF16 training recipe and its numerical rationale.</li>
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
                     <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="/blog/search/">Search</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>

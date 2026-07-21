@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="520" viewBox="0 0 880 520" role="img" aria-labelledby="corr-title corr-desc">
+  <title id="corr-title">Pearson correlation adds signed products of deviations from two feature means</title>
+  <desc id="corr-desc">A coordinate plane is divided by the mean of x and mean of y. Two observations lie where both deviations have the same sign and make large positive contributions. Two lie in opposite-sign quadrants and make smaller negative contributions, producing a toy Pearson correlation near positive 0.83.</desc>
+  <defs>
+    <pattern id="corr-positive" width="8" height="8" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.3" fill="#6F8D5E" opacity="0.34"/>
+    </pattern>
+    <pattern id="corr-negative" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#A67C52" stroke-width="2" opacity="0.28"/>
+    </pattern>
+    <marker id="corr-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#2C2924"/>
+    </marker>
+  </defs>
+  <rect width="880" height="520" rx="24" fill="#F7F4F0"/>
+  <text x="440" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#2C2924">Correlation asks whether paired deviations share a sign</text>
+
+  <rect x="84" y="72" width="712" height="388" rx="18" fill="#FFFDF9" stroke="#B9AA98" stroke-width="2"/>
+  <rect x="410" y="92" width="348" height="168" fill="url(#corr-positive)"/>
+  <rect x="104" y="260" width="306" height="180" fill="url(#corr-positive)"/>
+  <rect x="104" y="92" width="306" height="168" fill="url(#corr-negative)"/>
+  <rect x="410" y="260" width="348" height="180" fill="url(#corr-negative)"/>
+
+  <line x1="104" y1="260" x2="762" y2="260" stroke="#2C2924" stroke-width="3" marker-end="url(#corr-arrow)"/>
+  <line x1="410" y1="440" x2="410" y2="88" stroke="#2C2924" stroke-width="3" marker-end="url(#corr-arrow)"/>
+  <text x="758" y="289" text-anchor="end" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#2C2924">feature x</text>
+  <text x="425" y="108" text-anchor="start" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#2C2924">feature y</text>
+  <text x="410" y="476" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#5A544C">mean of x = 2.5</text>
+  <text x="90" y="254" font-family="Arial, sans-serif" font-size="16" fill="#5A544C">mean of y = 2.75</text>
+
+  <g font-family="Arial, sans-serif" font-size="17" font-weight="700" text-anchor="middle">
+    <text x="595" y="143" fill="#506A43">both above means: positive product</text>
+    <text x="255" y="418" fill="#506A43">both below means: positive product</text>
+    <text x="250" y="143" fill="#7A5939">opposite signs: negative product</text>
+    <text x="590" y="418" fill="#7A5939">opposite signs: negative product</text>
+  </g>
+
+  <path d="M178 376 L643 145" fill="none" stroke="#4B6787" stroke-width="3" stroke-dasharray="8 7" opacity="0.8"/>
+  <g stroke="#2C2924" stroke-width="2">
+    <circle cx="178" cy="383" r="11" fill="#D8B898"/>
+    <rect x="322" y="232" width="22" height="22" rx="3" fill="#BFD0DF"/>
+    <circle cx="488" cy="313" r="11" fill="#BFD0DF"/>
+    <rect x="632" y="92" width="22" height="22" rx="3" fill="#D8B898"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#2C2924">
+    <text x="193" y="375">(1, 1)</text><text x="348" y="232">(2, 3)</text><text x="503" y="339">(3, 2)</text><text x="658" y="93">(4, 5)</text>
+  </g>
+  <rect x="625" y="204" width="120" height="55" rx="12" fill="#FFFDF9" stroke="#4B6787" stroke-width="2"/>
+  <text x="685" y="239" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#4B6787">r = 0.83</text>
+  <text x="440" y="500" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#5A544C">Toy paired values. Positive products dominate, but the points do not form a perfect line.</text>
+</svg>

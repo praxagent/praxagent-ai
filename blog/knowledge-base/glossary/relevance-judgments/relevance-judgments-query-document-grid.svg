@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="440" viewBox="0 0 900 440" role="img" aria-labelledby="qrels-title qrels-desc">
+  <title id="qrels-title">Relevance judgments label query and document pairs</title>
+  <desc id="qrels-desc">A grid for queries Q1 and Q2 and documents D1 through D4 contains cells explicitly marked relevant, not relevant, or unjudged. Document D2 has different labels for the two queries.</desc>
+  <rect width="900" height="440" fill="#F7F4F0"/>
+  <text x="450" y="42" text-anchor="middle" fill="#2C2924" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Relevance belongs to a query-document pair</text>
+
+  <text x="315" y="86" text-anchor="middle" fill="#5A544C" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">DOCUMENT</text>
+  <g font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" text-anchor="middle" fill="#2C2924">
+    <text x="210" y="120">D1</text><text x="310" y="120">D2</text><text x="410" y="120">D3</text><text x="510" y="120">D4</text>
+  </g>
+  <text x="92" y="235" transform="rotate(-90 92 235)" text-anchor="middle" fill="#5A544C" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">QUERY</text>
+  <g font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#2C2924">
+    <text x="145" y="183">Q1</text><text x="145" y="283">Q2</text>
+  </g>
+
+  <g stroke="#2C2924" stroke-width="2" font-family="Inter, Arial, sans-serif" text-anchor="middle">
+    <rect x="170" y="140" width="80" height="80" fill="#EAE4DC" stroke-dasharray="7 5"/><text x="210" y="175" fill="#5A544C" font-size="13">U</text><text x="210" y="198" fill="#5A544C" font-size="14">unjudged</text>
+    <rect x="270" y="140" width="80" height="80" fill="#E8F0E5"/><text x="310" y="175" fill="#315A2E" font-size="15" font-weight="700">R</text><text x="310" y="198" fill="#315A2E" font-size="14">relevant</text>
+    <rect x="370" y="140" width="80" height="80" fill="#F2E7DC"/><text x="410" y="175" fill="#7A3E2F" font-size="15" font-weight="700">N</text><text x="410" y="198" fill="#7A3E2F" font-size="13">not relevant</text>
+    <rect x="470" y="140" width="80" height="80" fill="#EAE4DC" stroke-dasharray="7 5"/><text x="510" y="175" fill="#5A544C" font-size="13">U</text><text x="510" y="198" fill="#5A544C" font-size="14">unjudged</text>
+
+    <rect x="170" y="240" width="80" height="80" fill="#E8F0E5"/><text x="210" y="275" fill="#315A2E" font-size="15" font-weight="700">R</text><text x="210" y="298" fill="#315A2E" font-size="14">relevant</text>
+    <rect x="270" y="240" width="80" height="80" fill="#F2E7DC" stroke-width="4"/><text x="310" y="275" fill="#7A3E2F" font-size="15" font-weight="700">N</text><text x="310" y="298" fill="#7A3E2F" font-size="13">not relevant</text>
+    <rect x="370" y="240" width="80" height="80" fill="#EAE4DC" stroke-dasharray="7 5"/><text x="410" y="275" fill="#5A544C" font-size="13">U</text><text x="410" y="298" fill="#5A544C" font-size="14">unjudged</text>
+    <rect x="470" y="240" width="80" height="80" fill="#E8F0E5"/><text x="510" y="275" fill="#315A2E" font-size="15" font-weight="700">R</text><text x="510" y="298" fill="#315A2E" font-size="14">relevant</text>
+  </g>
+
+  <rect x="600" y="106" width="255" height="222" rx="16" fill="#FFFDFC" stroke="#4B6787" stroke-width="2"/>
+  <text x="728" y="140" text-anchor="middle" fill="#2C2924" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700">Read one cell at a time</text>
+  <text x="624" y="177" fill="#2C2924" font-family="Inter, Arial, sans-serif" font-size="16">D2 is relevant to Q1.</text>
+  <text x="624" y="209" fill="#2C2924" font-family="Inter, Arial, sans-serif" font-size="16">D2 is not relevant to Q2.</text>
+  <line x1="622" y1="232" x2="834" y2="232" stroke="#D4CCC3" stroke-width="2"/>
+  <text x="624" y="264" fill="#5A544C" font-family="Inter, Arial, sans-serif" font-size="15">An unjudged pair has no label.</text>
+  <text x="624" y="291" fill="#5A544C" font-family="Inter, Arial, sans-serif" font-size="15">It is not an explicit negative.</text>
+
+  <rect x="124" y="358" width="652" height="48" rx="11" fill="#EAE4DC"/>
+  <text x="450" y="388" text-anchor="middle" fill="#4A443D" font-family="Inter, Arial, sans-serif" font-size="15">Qrels record the evaluation task and assessor decisions; they can be incomplete or disputed.</text>
+</svg>

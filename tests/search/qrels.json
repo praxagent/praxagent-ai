@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "description": "Small, hand-judged regression set for the praxagent site search. Relevance 2 is a direct answer and relevance 1 is a useful supporting page.",
+  "evaluation": {
+    "top_k": 10,
+    "minimum_any_relevant_hit_rate": 0.85,
+    "minimum_direct_answer_hit_rate": 0.85,
+    "required_query_ids": [
+      "leakage-before-split",
+      "context-before-pooling",
+      "reduce-correlated-measurements"
+    ]
+  },
+  "queries": [
+    {
+      "id": "leakage-before-split",
+      "query": "Why must I split off test data before learning means and medians?",
+      "kind": "paraphrase",
+      "judgments": [
+        {
+          "url": "/blog/knowledge-base/deep-dives/principal-component-analysis/#question-5-why-can-preprocessing-the-entire-dataset-cause-leakage",
+          "relevance": 2
+        },
+        {
+          "url": "/blog/knowledge-base/glossary/data-leakage/",
+          "relevance": 2
+        }
+      ]
+    },
+    {
+      "id": "biological-row",
+      "query": "What does one row represent in a biological measurement table?",
+      "kind": "natural-language",
+      "judgments": [
+        {
+          "url": "/blog/knowledge-base/deep-dives/principal-component-analysis/#question-2-what-does-one-row-represent",
+          "relevance": 2
+        }
+      ]
+    },
+    {
+      "id": "vector-length-one",
+      "query": "Make every vector length one before comparing directions",
+      "kind": "paraphrase",
+      "judgments": [
+        {
+          "url": "/blog/knowledge-base/glossary/l2-normalization/",
+          "relevance": 2
+        },
+        {
+          "url": "/blog/knowledge-base/glossary/cosine-similarity/",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "first-relevant-rank",
+      "query": "Metric based on how soon the first relevant result appears",
+      "lexical_query": "reciprocal rank",
+      "kind": "definition",
+      "judgments": [
+        {
+          "url": "/blog/knowledge-base/glossary/retrieval-ranking-metrics/",
+          "relevance": 2
+        }
+      ]
+    },
+    {
+      "id": "query-answer-labels",
+      "query": "Human labels saying which documents answer each search query",
+      "kind": "paraphrase",
+      "judgments": [
+        {
+          "url": "/blog/knowledge-base/glossary/relevance-judgments/",
+          "relevance": 2
+        }
+      ]
+    },
+    {
+      "id": "pool-token-vectors",
+      "query": "Combine many token vectors into one vector by averaging",
+      "kind": "paraphrase",
+      "judgments": [
+        {
+          "url": "/blog/knowledge-base/glossary/mean-pooling/",
+          "relevance": 2
+        },
+        {
+          "url": "/blog/knowledge-base/glossary/embedding/",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "context-before-pooling",
+      "query": "Let document chunks see surrounding context before pooling embeddings",
+      "kind": "paraphrase",
+      "judgments": [
+        {
+          "url": "/blog/knowledge-base/deep-dives/late-chunking/",
+          "relevance": 2
+        }
+      ]
+    },
+    {
+      "id": "vector-angle",
+      "query": "Compare vectors by the angle between their directions",
+      "kind": "paraphrase",
+      "judgments": [
+        {
+          "url": "/blog/knowledge-base/glossary/cosine-similarity/",
+          "relevance": 2
+        }
+      ]
+    },
+    {
+      "id": "fill-missing-median",
+      "query": "Fill missing feature values with the median",
+      "kind": "definition",
+      "judgments": [
+        {
+          "url": "/blog/knowledge-base/glossary/imputation/",
+          "relevance": 2
+        }
+      ]
+    },
+    {
+      "id": "spread-around-average",
+      "query": "Typical spread of values around their average",
+      "lexical_query": "standard deviation",
+      "kind": "paraphrase",
+      "judgments": [
+        {
+          "url": "/blog/knowledge-base/glossary/standard-deviation/",
+          "relevance": 2
+        }
+      ]
+    },
+    {
+      "id": "comparable-feature-scales",
+      "query": "Put measurements with different units on comparable scales",
+      "kind": "paraphrase",
+      "judgments": [
+        {
+          "url": "/blog/knowledge-base/glossary/standard-scaling/",
+          "relevance": 2
+        },
+        {
+          "url": "/blog/knowledge-base/deep-dives/principal-component-analysis/#why-scaling-changes-pca",
+          "relevance": 1
+        }
+      ]
+    },
+    {
+      "id": "reduce-correlated-measurements",
+      "query": "Replace correlated biological measurements with a few axes",
+      "kind": "paraphrase",
+      "judgments": [
+        {
+          "url": "/blog/knowledge-base/deep-dives/principal-component-analysis/",
+          "relevance": 2
+        },
+        {
+          "url": "/blog/knowledge-base/glossary/principal-component-analysis/",
+          "relevance": 2
+        }
+      ]
+    },
+    {
+      "id": "split-text-subwords",
+      "query": "Turn text into model input pieces and integer identifiers",
+      "kind": "paraphrase",
+      "judgments": [
+        {
+          "url": "/blog/knowledge-base/glossary/tokenization/",
+          "relevance": 2
+        }
+      ]
+    }
+  ]
+}

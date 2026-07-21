@@ -5,16 +5,178 @@
   ],
   "generator": {
     "path": "reproduce.py",
-    "sha256": "1f6aead6fcc71cf1ab2c6e81dde784ca11671ebc53f9673e064a22409de59c35",
+    "sha256": "d0a83bffa0c487abafc3f54f1d04c496f16284dc9c566fd917f536b43119a039",
     "verify": "python3 reproduce.py --verify"
   },
   "local_bundle": true,
   "numbers": [
     {
+      "appears_as": "0.8486",
+      "id": "paper-berlin-direct-naive-similarity",
+      "source": "https://arxiv.org/html/2409.04701v3#S1.T1",
+      "value": 0.8486
+    },
+    {
+      "appears_as": "0.8495",
+      "id": "paper-berlin-direct-late-similarity",
+      "source": "https://arxiv.org/html/2409.04701v3#S1.T1",
+      "value": 0.8495
+    },
+    {
+      "appears_as": "0.7084",
+      "id": "paper-berlin-pronoun-naive-similarity",
+      "source": "https://arxiv.org/html/2409.04701v3#S1.T1",
+      "value": 0.7084
+    },
+    {
+      "appears_as": "0.8249",
+      "id": "paper-berlin-pronoun-late-similarity",
+      "source": "https://arxiv.org/html/2409.04701v3#S1.T1",
+      "value": 0.8249
+    },
+    {
+      "appears_as": "0.7535",
+      "id": "paper-berlin-city-naive-similarity",
+      "source": "https://arxiv.org/html/2409.04701v3#S1.T1",
+      "value": 0.7535
+    },
+    {
+      "appears_as": "0.8498",
+      "id": "paper-berlin-city-late-similarity",
+      "source": "https://arxiv.org/html/2409.04701v3#S1.T1",
+      "value": 0.8498
+    },
+    {
+      "appears_as": "three embedding models",
+      "id": "paper-evaluation-model-count",
+      "source": "https://arxiv.org/html/2409.04701v3#S4.SS1",
+      "value": 3
+    },
+    {
+      "appears_as": "four selected datasets",
+      "id": "paper-evaluation-dataset-count",
+      "source": "https://arxiv.org/html/2409.04701v3#S4.SS1",
+      "value": 4
+    },
+    {
+      "appears_as": "0-100 scale",
+      "id": "paper-ndcg-reporting-scale",
+      "source": "https://arxiv.org/html/2409.04701v3#S4.SS1",
+      "value": 100
+    },
+    {
+      "appears_as": "52.4",
+      "id": "paper-five-sentence-naive-ndcg10",
+      "source": "https://arxiv.org/html/2409.04701v3#S4.SS1",
+      "value": 52.4
+    },
+    {
+      "appears_as": "54.3",
+      "id": "paper-five-sentence-late-ndcg10",
+      "source": "https://arxiv.org/html/2409.04701v3#S4.SS1",
+      "value": 54.3
+    },
+    {
+      "appears_as": "+1.9",
+      "id": "paper-five-sentence-change",
+      "source": "https://arxiv.org/html/2409.04701v3#S4.SS1",
+      "value": 1.9
+    },
+    {
+      "appears_as": "52.2",
+      "id": "paper-256-token-naive-ndcg10",
+      "source": "https://arxiv.org/html/2409.04701v3#S4.SS1",
+      "value": 52.2
+    },
+    {
+      "appears_as": "54.0",
+      "id": "paper-256-token-late-ndcg10",
+      "source": "https://arxiv.org/html/2409.04701v3#S4.SS1",
+      "value": 54.0
+    },
+    {
+      "appears_as": "+1.8",
+      "id": "paper-256-token-change",
+      "source": "https://arxiv.org/html/2409.04701v3#S4.SS1",
+      "value": 1.8
+    },
+    {
+      "appears_as": "52.4",
+      "id": "paper-semantic-naive-ndcg10",
+      "source": "https://arxiv.org/html/2409.04701v3#S4.SS1",
+      "value": 52.4
+    },
+    {
+      "appears_as": "53.8",
+      "id": "paper-semantic-late-ndcg10",
+      "source": "https://arxiv.org/html/2409.04701v3#S4.SS1",
+      "value": 53.8
+    },
+    {
+      "appears_as": "+1.5 from unrounded scores",
+      "id": "paper-semantic-change-unrounded",
+      "source": "https://arxiv.org/html/2409.04701v3#S4.SS1",
+      "value": 1.5
+    },
+    {
+      "appears_as": "8,192 tokens",
+      "id": "paper-ablation-truncation-limit",
+      "source": "https://arxiv.org/html/2409.04701v3#S4.SS2",
+      "value": 8192
+    },
+    {
+      "appears_as": "5,183 documents",
+      "id": "scifact-document-count",
+      "source": "receipts/run.receipt.json",
+      "value": 5183
+    },
+    {
       "appears_as": "300 test queries",
       "id": "scifact-query-count",
       "source": "receipts/aggregate.json",
       "value": 300
+    },
+    {
+      "appears_as": "339 positive query-document judgments",
+      "id": "scifact-positive-qrel-count",
+      "source": "receipts/run.receipt.json",
+      "value": 339
+    },
+    {
+      "appears_as": "256-content-token spans",
+      "id": "scifact-content-token-chunk-size",
+      "source": "receipts/run.receipt.json",
+      "value": 256
+    },
+    {
+      "appears_as": "9,356 chunks",
+      "id": "scifact-chunk-count",
+      "source": "receipts/run.receipt.json",
+      "value": 9356
+    },
+    {
+      "appears_as": "1,937 content tokens",
+      "id": "scifact-maximum-document-content-tokens",
+      "source": "receipts/run.receipt.json",
+      "value": 1937
+    },
+    {
+      "appears_as": "8,192-token limit",
+      "id": "model-context-limit",
+      "source": "receipts/run.receipt.json",
+      "value": 8192
+    },
+    {
+      "appears_as": "20,000 resamples",
+      "id": "bootstrap-replicates",
+      "source": "receipts/aggregate.json",
+      "value": 20000
+    },
+    {
+      "appears_as": "about eight minutes",
+      "id": "recorded-runtime-seconds",
+      "source": "receipts/run.receipt.json",
+      "value": 465.441636
     },
     {
       "appears_as": "0.6414",
@@ -23,22 +185,106 @@
       "value": 0.6414254895397593
     },
     {
+      "appears_as": "0.5942",
+      "id": "scifact-naive-ndcg10-interval-lower",
+      "source": "receipts/aggregate.json",
+      "value": 0.5941801288149041
+    },
+    {
+      "appears_as": "0.6876",
+      "id": "scifact-naive-ndcg10-interval-upper",
+      "source": "receipts/aggregate.json",
+      "value": 0.6875954822650707
+    },
+    {
+      "appears_as": "0.7626",
+      "id": "scifact-naive-recall10",
+      "source": "receipts/aggregate.json",
+      "value": 0.7625555555555555
+    },
+    {
+      "appears_as": "0.6123",
+      "id": "scifact-naive-mrr10",
+      "source": "receipts/aggregate.json",
+      "value": 0.6123492063492062
+    },
+    {
       "appears_as": "0.6610",
       "id": "scifact-late-ndcg10",
       "source": "receipts/aggregate.json",
       "value": 0.6609776646723947
     },
     {
+      "appears_as": "0.6145",
+      "id": "scifact-late-ndcg10-interval-lower",
+      "source": "receipts/aggregate.json",
+      "value": 0.6145399649247424
+    },
+    {
+      "appears_as": "0.7071",
+      "id": "scifact-late-ndcg10-interval-upper",
+      "source": "receipts/aggregate.json",
+      "value": 0.7070844743964247
+    },
+    {
+      "appears_as": "0.7776",
+      "id": "scifact-late-recall10",
+      "source": "receipts/aggregate.json",
+      "value": 0.7775555555555556
+    },
+    {
+      "appears_as": "0.6337",
+      "id": "scifact-late-mrr10",
+      "source": "receipts/aggregate.json",
+      "value": 0.6337248677248677
+    },
+    {
       "appears_as": "0.6389",
-      "id": "scifact-whole-document-ndcg10",
+      "id": "scifact-whole_document-ndcg10",
       "source": "receipts/aggregate.json",
       "value": 0.6388903593656915
+    },
+    {
+      "appears_as": "0.5918",
+      "id": "scifact-whole_document-ndcg10-interval-lower",
+      "source": "receipts/aggregate.json",
+      "value": 0.5917522695931684
+    },
+    {
+      "appears_as": "0.6852",
+      "id": "scifact-whole_document-ndcg10-interval-upper",
+      "source": "receipts/aggregate.json",
+      "value": 0.6852170695308275
+    },
+    {
+      "appears_as": "0.7592",
+      "id": "scifact-whole_document-recall10",
+      "source": "receipts/aggregate.json",
+      "value": 0.7592222222222221
+    },
+    {
+      "appears_as": "0.6105",
+      "id": "scifact-whole_document-mrr10",
+      "source": "receipts/aggregate.json",
+      "value": 0.6104973544973544
     },
     {
       "appears_as": "+0.0196",
       "id": "scifact-late-minus-naive",
       "source": "receipts/aggregate.json",
       "value": 0.019552175132635588
+    },
+    {
+      "appears_as": "+0.0033",
+      "id": "scifact-late-minus-naive-interval-lower",
+      "source": "receipts/aggregate.json",
+      "value": 0.0032721920785872076
+    },
+    {
+      "appears_as": "+0.0358",
+      "id": "scifact-late-minus-naive-interval-upper",
+      "source": "receipts/aggregate.json",
+      "value": 0.03584544477819499
     },
     {
       "appears_as": "49 improved",
@@ -61,13 +307,14 @@
   ],
   "receipts": {
     "ATTRIBUTION.md": "1235f46dda3d155edd5212c654652de72636d71bd37bf4a111d2256c0dd895c6",
-    "fig-query-deltas.receipt.json": "ca1e444b91794b23d94a5ecac1017cc0a58568c8f8f37fa5703008c7c8b60b45",
-    "fig-scifact-retrieval.receipt.json": "8e8f473095b069f614c345b185a13d468edf835479770a6f14d9426ed311e90c",
+    "fig-query-deltas.receipt.json": "ae802f9417aef78cc7773190366f984e14506d84022ee4e0269740a875034f18",
+    "fig-scifact-retrieval.receipt.json": "03ed6d6945c7eff8a17e2ac9c3450b39ac6e69c590a6c162e060dafb260af259",
     "receipts/aggregate.json": "71bafc1d81fc24ac1d30104e5f28af9b43142430b3ce798b10bd1061f1abb181",
-    "receipts/per-query.csv": "b91c682c7da121af99d1546c0688c00249d8af5310b519ca9d63c3ab422b3a28",
-    "receipts/run.receipt.json": "0c6169622148d3e96eac71aeee1236a1426345cabc21ad58d2bba46e7f9ce561",
+    "receipts/per-query.csv": "377e6d4feb59687d5f3e0557dea05f4cae6de4dc08619d6069cab9ef782c487d",
+    "receipts/run.receipt.json": "108bc5695e63a8a9aab910daa7021be03a1214b2e6f975e865dc104b9ff96391",
     "receipts/scifact-test-qrels.tsv": "0864bb985e0ca2367ba217977e72004d549054b2b06666ed9d4825ac7c21284c",
-    "receipts/top-10-rankings.jsonl": "6e6e014c8875a517fd739101ae1461e8986675d378eb6ff482dfd5ddc1d955c1",
+    "receipts/top-10-rankings.jsonl": "546dabbaaab10ed0a1919701308d0c109ba06483dbadb222bbb8d505e72d5493",
+    "reproduce-at-run.py": "1f6aead6fcc71cf1ab2c6e81dde784ca11671ebc53f9673e064a22409de59c35",
     "reproduce.py.lock": "5a6ad830aee2d307b4d845c70e3b23f72f30b27938dcd342881e9d364dd06344"
   },
   "schema_version": 1

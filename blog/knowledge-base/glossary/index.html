@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
+
     <title>Glossary - praxagent Knowledge Base</title>
     
     
@@ -42,8 +43,8 @@
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js"></script>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -65,10 +66,13 @@
                 </a>
             </div>
 
+
+
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link">Research Notes</a>
                 <a href="/blog/knowledge-base/" class="nav-link active">Knowledge Base</a>
+                <a href="/blog/search/" class="nav-link">Search</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -95,6 +99,7 @@
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
             <a href="/blog/knowledge-base/" class="mobile-nav-link active">Knowledge Base</a>
+            <a href="/blog/search/" class="mobile-nav-link">Search</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -128,151 +133,226 @@
     <div class="knowledge-glossary">
         <div class="knowledge-section-toolbar">
             <a class="knowledge-back" href="/blog/knowledge-base/">← Knowledge Base</a>
-            <span class="knowledge-section-count">29 concepts</span>
+            <span class="knowledge-section-count">44 concepts</span>
         </div>
         <div class="blog-index-list taxonomy-directory">
 
-            <a class="blog-index-row" href="/blog/knowledge-base/affine-map/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/affine-map/">
                 <h3>Affine map</h3>
                 <span class="blog-index-meta">A transformation that applies a linear map and then adds a fixed offset; it preserves …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/base-rate-bias/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/attention-mask/">
+                <h3>Attention mask</h3>
+                <span class="blog-index-meta">A model or library rule that marks usable positions or specifies which sequence positions …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/base-rate-bias/">
                 <h3>Base-rate bias</h3>
                 <span class="blog-index-meta">A low absolute probe-token rank can reflect its prompt-conditioned baseline or a …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/best-rank/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/best-rank/">
                 <h3>Best-rank</h3>
                 <span class="blog-index-meta">The minimum vocabulary rank a pre-specified probe token hits across layers, positions, and …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/bf16/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/bf16/">
                 <h3>BF16, FP16, and FP32</h3>
                 <span class="blog-index-meta">Floating-point formats for model arithmetic: 32-bit floating point (FP32), standard 16-bit …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/dtype/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/bootstrap/">
+                <h3>Bootstrap</h3>
+                <span class="blog-index-meta">A resampling method that repeatedly draws observed units with replacement to study how a …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/cosine-similarity/">
+                <h3>Cosine similarity</h3>
+                <span class="blog-index-meta">A comparison of two nonzero vectors based on the angle between them rather than their …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/data-leakage/">
+                <h3>Data leakage</h3>
+                <span class="blog-index-meta">An accidental flow of information across an evaluation boundary that makes held-out …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/dtype/">
                 <h3>Dtype</h3>
                 <span class="blog-index-meta">The data type (dtype) of a tensor or array: the storage format shared by every element, …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/feed-forward-network/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/embedding/">
+                <h3>Embedding</h3>
+                <span class="blog-index-meta">A vector of numbers used to represent an item so a model or retrieval system can compare …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/feed-forward-network/">
                 <h3>Feed-forward network (FFN)</h3>
                 <span class="blog-index-meta">A computation with no feedback cycle; in a Transformer, usually the shared position-wise …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/greedy-continuation/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/greedy-continuation/">
                 <h3>Greedy continuation</h3>
                 <span class="blog-index-meta">The model&#39;s generated text when each next token is chosen as the single …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/hidden-bridge/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/hidden-bridge/">
                 <h3>Hidden bridge</h3>
                 <span class="blog-index-meta">An intermediate entity that logically links a two-hop question to its answer while …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/iid/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/iid/">
                 <h3>i.i.d.</h3>
                 <span class="blog-index-meta">Independent and identically distributed: each draw is independent of the others and from …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/jacobian-lens/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/imputation/">
+                <h3>Imputation</h3>
+                <span class="blog-index-meta">A documented rule for filling missing values so an analysis can use a complete table …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/jacobian-lens/">
                 <h3>Jacobian lens</h3>
                 <span class="blog-index-meta">A corpus-averaged linear map that turns a mid-layer residual-stream state into …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/logit-lens/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/l2-normalization/">
+                <h3>L2 normalization</h3>
+                <span class="blog-index-meta">Rescaling a nonzero vector to Euclidean length one while preserving its direction.</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/logit-lens/">
                 <h3>Logit lens</h3>
                 <span class="blog-index-meta">The free mid-layer readout that skips any fitted transport: unembed the residual as if it …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/matmul/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/matmul/">
                 <h3>Matmul</h3>
                 <span class="blog-index-meta">Matrix multiplication: the core linear-algebra operation behind attention, multilayer …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/motor-layer/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/mean-pooling/">
+                <h3>Mean pooling</h3>
+                <span class="blog-index-meta">A rule that averages selected vectors to produce one summary vector.</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/motor-layer/">
                 <h3>Motor layer / motor-late</h3>
                 <span class="blog-index-meta">A late, near-output regime; in one scoped 397B analysis, digit-direction vocabulary-score …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/mlp/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/mlp/">
                 <h3>Multilayer perceptron (MLP)</h3>
                 <span class="blog-index-meta">The position-wise nonlinear feed-forward sublayer that transforms each token state and …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/p-value/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/p-value/">
                 <h3>p-value</h3>
                 <span class="blog-index-meta">A tail probability under a stated null model; in these notes it usually comes from a …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/prompt-echo/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/pearson-correlation/">
+                <h3>Pearson correlation</h3>
+                <span class="blog-index-meta">A number from negative one to positive one that summarizes the direction and strength of a …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/principal-component-analysis/">
+                <h3>Principal component analysis (PCA)</h3>
+                <span class="blog-index-meta">A linear dimensionality-reduction method that replaces numerical feature columns with new …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/prompt-echo/">
                 <h3>Prompt echo</h3>
                 <span class="blog-index-meta">When a lens lights up words that were already in the prompt; looks like a finding, often …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/random-j/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/random-j/">
                 <h3>Random-J</h3>
                 <span class="blog-index-meta">A family of randomized Jacobian-lens controls; each construction states which scale or …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/rank/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/rank/">
                 <h3>Rank</h3>
                 <span class="blog-index-meta">Position of a target token ID in a scored vocabulary list (1 = highest-scoring). Lower is …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/residual-stream/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/relevance-judgments/">
+                <h3>Relevance judgments</h3>
+                <span class="blog-index-meta">Reference labels that say which documents are considered relevant to each evaluation …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/residual-stream/">
                 <h3>Residual stream</h3>
                 <span class="blog-index-meta">The model&#39;s running hidden-state channel: each layer reads it, adds an update, and passes …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/rms/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/retrieval-ranking-metrics/">
+                <h3>Retrieval ranking metrics</h3>
+                <span class="blog-index-meta">Measures that compare a ranked retrieval list with relevance judgments, including …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/rms/">
                 <h3>Root mean square (RMS)</h3>
                 <span class="blog-index-meta">The square root of the mean squared coordinates of a vector, used here as a measure of …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/sampling/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/sampling/">
                 <h3>Sampling</h3>
                 <span class="blog-index-meta">Choosing the next token from a distribution over the vocabulary, rather than always taking …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/survival-identity/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/standard-deviation/">
+                <h3>Standard deviation</h3>
+                <span class="blog-index-meta">A measure of how far values in one numerical feature typically spread around their mean.</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/standard-scaling/">
+                <h3>Standard scaling</h3>
+                <span class="blog-index-meta">A feature-wise transformation that subtracts each column&#39;s mean and divides by that …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/survival-identity/">
                 <h3>Survival-identity vocabulary</h3>
                 <span class="blog-index-meta">The frozen probe list for the primary self-vs-other-model battery; its exact normalized …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/temperature/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/temperature/">
                 <h3>Temperature</h3>
                 <span class="blog-index-meta">A scalar that sharpens or flattens the next-token distribution before sampling.</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/thinking-mode/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/thinking-mode/">
                 <h3>Thinking on / off</h3>
                 <span class="blog-index-meta">The template-controlled reasoning protocols used in these notes: reasoning enabled, or …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/top-p/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/tokenization/">
+                <h3>Tokenization</h3>
+                <span class="blog-index-meta">The model-specific process that divides an input into tokens and maps those tokens to …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/top-p/">
                 <h3>Top-p</h3>
                 <span class="blog-index-meta">Nucleus sampling: keep only the smallest set of tokens whose cumulative probability …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/transformer/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/transformer/">
                 <h3>Transformer</h3>
                 <span class="blog-index-meta">A family of sequence-processing neural networks that combine attention, position-wise …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/unembedding/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/unembedding/">
                 <h3>Unembedding</h3>
                 <span class="blog-index-meta">The final linear map from residual-stream coordinates to a score for every vocabulary …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/wilcoxon/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/wilcoxon/">
                 <h3>Wilcoxon signed-rank test</h3>
                 <span class="blog-index-meta">A paired test that uses each gap&#39;s direction and its absolute-size rank, not just win …</span>
             </a>
 
-            <a class="blog-index-row" href="/blog/knowledge-base/workspace/">
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/workspace/">
                 <h3>Workspace</h3>
                 <span class="blog-index-meta">A workspace-like mid-network regime studied through selected residual directions and …</span>
             </a>
@@ -295,6 +375,7 @@
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
                     <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="/blog/search/">Search</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>

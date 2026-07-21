@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
+import json
 import stat
 from html.parser import HTMLParser
 from pathlib import Path
@@ -21,12 +23,20 @@ REQUIRED_PATHS = (
     "work/index.html",
     "research/index.html",
     "blog/index.html",
+    "blog/search/index.html",
+    "blog/pagefind/pagefind.js",
+    "blog/js/semantic-search.js",
+    "blog/js/semantic-search-worker.js",
+    "blog/search-assets/THIRD_PARTY_NOTICES.txt",
+    "blog/search-assets/index/semantic-index.json",
+    "blog/search-assets/index/embeddings.f32",
     "blog/knowledge-base/index.html",
     "blog/knowledge-base/prax/index.html",
     "blog/prax-docs/prax-docs-manifest.json",
 )
 FORBIDDEN_NAMES = {
     ".DS_Store",
+    ".cache",
     ".env",
     ".git",
     ".github",
@@ -37,6 +47,26 @@ FORBIDDEN_NAMES = {
     "pages-artifact",
     "scripts",
 }
+
+SEARCH_RUNTIME_FILES = (
+    "transformers.min.js",
+    "ort-wasm-simd-threaded.jsep.mjs",
+    "ort-wasm-simd-threaded.jsep.wasm",
+)
+MODEL_WEIGHT_NAMES = ("model_int8.onnx", "model_quantized.onnx")
+MODEL_WEIGHT_SIZE = 22_972_370
+MODEL_WEIGHT_SHA256 = (
+    "afdb6f1a0e45b715d0bb9b11772f032c399babd23bfc31fed1c170afc848bdb1"
+)
+MODEL_SUPPORT_FILES = (
+    "config.json",
+    "special_tokens_map.json",
+    "tokenizer.json",
+    "tokenizer_config.json",
+    "vocab.txt",
+)
+EMBEDDING_DIMENSION = 384
+FLOAT32_BYTES = 4
 
 
 class DocumentParser(HTMLParser):
@@ -93,6 +123,97 @@ def _resolve_local(artifact: Path, source: Path, raw_url: str) -> tuple[Path, st
     return target, unquote(resolved.fragment)
 
 
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _check_search_assets(artifact: Path) -> list[str]:
+    """Check assets loaded dynamically by the search worker.
+
+    These files are not discoverable from ordinary HTML ``src`` attributes,
+    so the general link checker below cannot prove that they reached the Pages
+    artifact. Keep this validation independent of the generated directory
+    layout while requiring the exact pinned model bytes.
+    """
+
+    errors: list[str] = []
+    search_assets = artifact / "blog/search-assets"
+    if not search_assets.is_dir():
+        return ["artifact is missing search asset directory: blog/search-assets"]
+
+    for filename in SEARCH_RUNTIME_FILES:
+        matches = sorted(search_assets.rglob(filename))
+        if len(matches) != 1:
+            errors.append(
+                f"search assets require exactly one {filename!r}; found {len(matches)}"
+            )
+        elif matches[0].stat().st_size == 0:
+            errors.append(f"search runtime is empty: {matches[0].relative_to(artifact)}")
+
+    weight_matches = sorted(
+        path
+        for filename in MODEL_WEIGHT_NAMES
+        for path in search_assets.rglob(filename)
+    )
+    if len(weight_matches) != 1:
+        errors.append(
+            "search assets require exactly one pinned int8 MiniLM weight; "
+            f"found {len(weight_matches)}"
+        )
+    else:
+        weight = weight_matches[0]
+        if weight.stat().st_size != MODEL_WEIGHT_SIZE:
+            errors.append(
+                f"{weight.relative_to(artifact)}: expected {MODEL_WEIGHT_SIZE:,} "
+                f"bytes, found {weight.stat().st_size:,}"
+            )
+        if _sha256(weight) != MODEL_WEIGHT_SHA256:
+            errors.append(
+                f"{weight.relative_to(artifact)}: SHA-256 does not match the "
+                "pinned MiniLM model"
+            )
+
+        model_root = weight.parent.parent
+        for filename in MODEL_SUPPORT_FILES:
+            support_file = model_root / filename
+            if not support_file.is_file() or support_file.stat().st_size == 0:
+                errors.append(
+                    f"search model is missing support file: "
+                    f"{support_file.relative_to(artifact)}"
+                )
+
+    semantic_index = search_assets / "index/semantic-index.json"
+    if semantic_index.is_file():
+        try:
+            payload = json.loads(semantic_index.read_text(encoding="utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            errors.append(
+                f"{semantic_index.relative_to(artifact)} is not valid UTF-8 JSON: {exc}"
+            )
+        else:
+            if not isinstance(payload, (dict, list)) or not payload:
+                errors.append(
+                    f"{semantic_index.relative_to(artifact)} must contain search records"
+                )
+
+    embeddings = search_assets / "index/embeddings.f32"
+    if embeddings.is_file():
+        vector_bytes = EMBEDDING_DIMENSION * FLOAT32_BYTES
+        size = embeddings.stat().st_size
+        if size == 0 or size % vector_bytes:
+            errors.append(
+                f"{embeddings.relative_to(artifact)}: expected raw "
+                f"{EMBEDDING_DIMENSION}-dimensional float32 vectors, found "
+                f"{size:,} bytes"
+            )
+
+    return errors
+
+
 def check_artifact(artifact: Path) -> list[str]:
     errors: list[str] = []
     if not artifact.is_dir():
@@ -111,6 +232,8 @@ def check_artifact(artifact: Path) -> list[str]:
     for relative in REQUIRED_PATHS:
         if not (artifact / relative).is_file():
             errors.append(f"artifact is missing required file: {relative}")
+
+    errors.extend(_check_search_assets(artifact))
 
     cname = artifact / "CNAME"
     if cname.is_file() and cname.read_text(encoding="utf-8").strip() != "praxagent.ai":

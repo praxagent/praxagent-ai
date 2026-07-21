@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
+
     <title>Late Chunking: Context Before Pooling - praxagent Knowledge Base</title>
     
     
@@ -45,8 +46,8 @@
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js"></script>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -68,10 +69,13 @@
                 </a>
             </div>
 
+
+
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link">Research Notes</a>
                 <a href="/blog/knowledge-base/" class="nav-link active">Knowledge Base</a>
+                <a href="/blog/search/" class="nav-link">Search</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -98,6 +102,7 @@
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
             <a href="/blog/knowledge-base/" class="mobile-nav-link active">Knowledge Base</a>
+            <a href="/blog/search/" class="mobile-nav-link">Search</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -114,6 +119,7 @@
 
     <main>
         
+
 
 
 
@@ -152,23 +158,29 @@ before relying on them.</div>
 
 
 
-            <div class="table-of-contents">
-                <h3>Table of Contents</h3>
-                <nav id="TableOfContents">
+            <details class="table-of-contents">
+    <summary class="table-of-contents-summary">
+        <span class="table-of-contents-label">On this page</span>
+        <span class="table-of-contents-count">
+            19 sections
+        </span>
+    </summary>
+    <div class="table-of-contents-body">
+        <nav id="TableOfContents" aria-label="On this page">
   <ul>
+    <li><a href="#before-late-chunking-a-tiny-vocabulary-kit">Before late chunking: a tiny vocabulary kit</a></li>
     <li><a href="#the-short-version">The short version</a></li>
-    <li><a href="#the-operation-precisely">The operation, precisely</a>
+    <li><a href="#the-operation-one-step-at-a-time">The operation, one step at a time</a>
       <ul>
+        <li><a href="#a-tiny-runnable-pooling-example">A tiny runnable pooling example</a></li>
         <li><a href="#what-changes-and-what-stays-fixed">What changes and what stays fixed</a></li>
       </ul>
     </li>
     <li><a href="#a-worked-example-and-its-limit">A worked example, and its limit</a></li>
+    <li><a href="#how-retrieval-is-scored">How retrieval is scored</a></li>
     <li><a href="#what-the-published-retrieval-evaluation-found">What the published retrieval evaluation found</a></li>
-    <li><a href="#an-auditable-scifact-matched-content-token-re-evaluation">An auditable SciFact matched-content-token re-evaluation</a>
-      <ul>
-        <li><a href="#reproduce-and-audit-the-result">Reproduce and audit the result</a></li>
-      </ul>
-    </li>
+    <li><a href="#an-auditable-scifact-matched-content-token-re-evaluation">An auditable SciFact matched-content-token re-evaluation</a></li>
+    <li><a href="#what-did-this-re-evaluation-teach-us">What did this re-evaluation teach us?</a></li>
     <li><a href="#the-implementation-boundary">The implementation boundary</a>
       <ul>
         <li><a href="#boundary-alignment-is-not-optional">Boundary alignment is not optional</a></li>
@@ -178,14 +190,18 @@ before relying on them.</div>
     <li><a href="#related-techniques-are-not-synonyms">Related techniques are not synonyms</a></li>
     <li><a href="#how-to-evaluate-it-on-your-corpus">How to evaluate it on your corpus</a></li>
     <li><a href="#decision-checklist">Decision checklist</a></li>
+    <li><a href="#appendix-a-reproduce-and-audit-the-result">Appendix A: reproduce and audit the result</a></li>
+    <li><a href="#appendix-b-the-formal-definition">Appendix B: the formal definition</a></li>
     <li><a href="#primary-references">Primary references</a></li>
   </ul>
 </nav>
-            </div>
+    </div>
+</details>
+
 
 
             <div class="post-body">
-                <p><strong>Late chunking</strong> creates an embedding for each small retrieval chunk <em>after</em> a transformer has contextualized a longer input containing that chunk. The chunk boundaries can stay exactly where they were. What moves later is their use in pooling.</p>
+                <p><strong>Late chunking</strong> creates an <a href="/blog/knowledge-base/glossary/embedding/" class="ref-term">embedding</a> for each small retrieval chunk <em>after</em> a <a href="/blog/knowledge-base/glossary/transformer/" class="ref-term">transformer</a> has read a longer input containing that chunk. The chunk boundaries can stay exactly where they were. What moves later is the moment when those boundaries are used for <a href="/blog/knowledge-base/glossary/mean-pooling/" class="ref-term">pooling</a>.</p>
 <p>That distinction matters:</p>
 <ul>
 <li>Late chunking does <strong>not</strong> ask a model to choose the chunk boundaries.</li>
@@ -194,6 +210,29 @@ before relying on them.</div>
 <li>It does require access to token-level states from a compatible embedding model.</li>
 </ul>
 <p>The method was introduced by Günther et al. in <a href="https://arxiv.org/abs/2409.04701v3"><em>Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models</em></a>. This Deep Dive explains the operation, the published evidence, the implementation boundaries, and the cases where the standard approach can still win.</p>
+<h2 id="before-late-chunking-a-tiny-vocabulary-kit">Before late chunking: a tiny vocabulary kit</h2>
+<div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+        
+    </div>
+    <div class="panel-content">
+        <strong>You do not need to know transformer internals first.</strong> Keep one picture in
+mind: the model reads text and produces a list of numbers for every token. Late
+chunking changes how much surrounding text the model can read before those
+lists are combined.
+    </div>
+</div>
+
+<ul>
+<li>A <strong>token</strong> is one piece of text produced by <a href="/blog/knowledge-base/glossary/tokenization/" class="ref-term">tokenization</a>. A token might be a word, part of a word, or punctuation.</li>
+<li>A <strong>contextual token state</strong> is the model&rsquo;s list of numbers for one token <em>after</em> it has read the surrounding tokens allowed by its <a href="/blog/knowledge-base/glossary/attention-mask/" class="ref-term">attention mask</a>. The same word can therefore receive different numbers in different sentences.</li>
+<li>A <strong>vector</strong> is an ordered list of numbers. An <a href="/blog/knowledge-base/glossary/embedding/" class="ref-term">embedding</a> is a vector used to represent an item so that a retrieval system can compare it with other items.</li>
+<li>A <strong>retrieval chunk</strong> is one stored piece of a document that search may return.</li>
+<li><strong><a href="/blog/knowledge-base/glossary/mean-pooling/" class="ref-term">Mean pooling</a></strong> averages several token-state vectors coordinate by coordinate to make one chunk vector.</li>
+<li><strong><a href="/blog/knowledge-base/glossary/l2-normalization/" class="ref-term">L2 normalization</a></strong> rescales a nonzero vector to length 1. It does not choose chunk boundaries or add context.</li>
+</ul>
+<p>These definitions are deliberately local and practical. The linked glossary entries give formulas, edge cases, and small diagrams when you want them.</p>
 <h2 id="the-short-version">The short version</h2>
 <p>Suppose a document contains three chunks:</p>
 <ol>
@@ -205,33 +244,66 @@ before relying on them.</div>
 <p>With <strong>late chunking</strong>, the model encodes all three spans in one in-window input. It then mean-pools the token states inside each of the same three spans. Earlier context can influence the vectors for spans 2 and 3, but only tokens assigned to each span are pooled into that span&rsquo;s final vector.</p>
 <figure class="reference-figure">
     <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Naive and late chunking pipelines" tabindex="0">
-        <img src="/blog/knowledge-base/deep-dives/late-chunking-order.svg" alt="Two pipelines use the same document and chunk boundaries. Naive chunking splits before encoding, so the phrase &#39;the city&#39; cannot attend to the earlier mention of &#39;Berlin&#39;. Late chunking encodes the in-window document first and then pools the same spans, so that earlier context can influence the chunk vector." loading="lazy" decoding="async">
+        <img src="/blog/knowledge-base/deep-dives/late-chunking/late-chunking-order.svg" alt="Two pipelines use the same document and chunk boundaries. Naive chunking splits before encoding, so the phrase &#39;the city&#39; cannot attend to the earlier mention of &#39;Berlin&#39;. Late chunking encodes the in-window document first and then pools the same spans, so that earlier context can influence the chunk vector." loading="lazy" decoding="async">
     </div>
     <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
     <figcaption>Late chunking changes when chunk boundaries isolate context, not necessarily where the boundaries are drawn. Naive chunking encodes each span independently. Late chunking first contextualizes all tokens in one encoder input, then pools token states inside the same spans. Context is available, but the figure does not claim that every reference is resolved or that retrieval must improve.</figcaption>
 </figure>
 
-<h2 id="the-operation-precisely">The operation, precisely</h2>
-<p>Let \(x\) be the actual in-window encoder sequence, including any chosen instruction and special tokens, and let \(a_i\) be its attention mask. Here \(x\) also stands for the other fixed encoder inputs, such as position or token-type IDs where the model uses them. The transformer produces a contextual state for each encoded position:</p>
-\[
-H = E(x,a) = \left[h_1(x,a), h_2(x,a), \ldots, h_m(x,a)\right].
-\]<p>Let \(S_j\) be the encoded positions assigned to retrieval chunk \(j\), with \(\sum_{i \in S_j} a_i > 0\). For attention-mask mean pooling followed by L2 normalization, and assuming the pooled vector has nonzero finite norm:</p>
-\[
-\begin{aligned}
-\mu_j^{\mathrm{late}}
-&= \frac{\sum_{i \in S_j} a_i h_i(x,a)}{\sum_{i \in S_j} a_i}, \\
-z_j^{\mathrm{late}}
-&= \frac{\mu_j^{\mathrm{late}}}{\lVert\mu_j^{\mathrm{late}}\rVert_2}.
-\end{aligned}
-\]<p>For naive chunking, let \(x^{(j)}\), \(a^{(j)}\), and \(S_j^{(j)}\) denote chunk \(j\)&rsquo;s separately encoded input, attention mask, and local pooled positions:</p>
-\[
-\begin{aligned}
-\mu_j^{\mathrm{naive}}
-&= \frac{\sum_{r \in S_j^{(j)}} a_r^{(j)} h_r(x^{(j)},a^{(j)})}{\sum_{r \in S_j^{(j)}} a_r^{(j)}}, \\
-z_j^{\mathrm{naive}}
-&= \frac{\mu_j^{\mathrm{naive}}}{\lVert\mu_j^{\mathrm{naive}}\rVert_2}.
-\end{aligned}
-\]<p>The different indices matter. A late position \(i\) is contextualized inside the longer input \(x\); a naive position \(r\) is local to the separately encoded chunk input \(x^{(j)}\). These equations describe the reproduction&rsquo;s pooling recipe. Another embedding model may specify different pooling or normalization.</p>
+<h2 id="the-operation-one-step-at-a-time">The operation, one step at a time</h2>
+<p>For one document that fits the encoder&rsquo;s usable window:</p>
+<ol>
+<li><strong>Choose the retrieval chunks.</strong> Record exactly which text belongs to each chunk.</li>
+<li><strong>Tokenize the longer input once.</strong> Keep the mapping from the original chunk boundaries to token positions.</li>
+<li><strong>Run the transformer once.</strong> Retain one contextual state vector for every usable token position.</li>
+<li><strong>Average within each chunk.</strong> For each recorded span, mean-pool only the token states assigned to that span.</li>
+<li><strong>Normalize each chunk vector.</strong> Divide each nonzero mean vector by its L2 length if that is the embedding model&rsquo;s documented recipe.</li>
+</ol>
+<p>The result is still one vector per retrieval chunk. The difference is that each token state could use context from outside its final chunk before the averaging step.</p>
+<div class="panel definition">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="book-open"></i>
+        
+    </div>
+    <div class="panel-content">
+        <strong>What does L2 normalization do?</strong> For a vector such as \([3,4]\), its L2
+length is \(\sqrt{3^2+4^2}=5\). Dividing every coordinate by 5 produces
+\([0.6,0.8]\), whose length is 1. The direction stays the same while the
+magnitude is removed. A zero vector cannot be normalized because division by
+zero is undefined. When two vectors have both been L2-normalized, their dot
+product equals their <a href="/blog/knowledge-base/glossary/cosine-similarity/" class="ref-term">cosine similarity</a>.
+    </div>
+</div>
+
+<h3 id="a-tiny-runnable-pooling-example">A tiny runnable pooling example</h3>
+<p>The next cell starts <em>after</em> a transformer has produced four toy token states. It shows only averaging, masking, and L2 normalization. Paste it into a Colab or local Python cell with NumPy installed.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Four already-contextualized token states, each with two coordinates.</span>
+</span></span><span class="line"><span class="cl"><span class="n">token_states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="mf">99.0</span><span class="p">,</span> <span class="mf">99.0</span><span class="p">],</span>  <span class="c1"># padding: the mask below excludes this row</span>
+</span></span><span class="line"><span class="cl"><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">attention_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">spans</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span>  <span class="c1"># half-open: start included, stop excluded</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">chunk_vectors</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span> <span class="ow">in</span> <span class="n">spans</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">usable_states</span> <span class="o">=</span> <span class="n">token_states</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">][</span><span class="n">attention_mask</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mean_vector</span> <span class="o">=</span> <span class="n">usable_states</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unit_vector</span> <span class="o">=</span> <span class="n">mean_vector</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">mean_vector</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">chunk_vectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unit_vector</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">chunk_vectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">chunk_vectors</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">chunk_vectors</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">chunk_vectors</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="mi">4</span><span class="p">))</span>
+</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">[[0.7071 0.7071]
+</span></span><span class="line"><span class="cl"> [1.     0.    ]]
+</span></span><span class="line"><span class="cl">[1. 1.]
+</span></span></code></pre></div><p>The first chunk averages \([1,0]\) and \([1,2]\) to get \([1,1]\), then rescales it to about \([0.7071,0.7071]\). The second span contains one usable state because the padding row is masked out. This small example teaches the mechanics, not how a real model creates the contextual states.</p>
 <h3 id="what-changes-and-what-stays-fixed">What changes and what stays fixed</h3>
 <table>
   <thead>
@@ -274,7 +346,7 @@ z_j^{\mathrm{naive}}
       </tr>
   </tbody>
 </table>
-<p>Late chunking changes the <strong>input-conditioned representation</strong>, not the model&rsquo;s learned vector space. There is no per-document retraining.</p>
+<p>Late chunking changes the chunk vectors by changing the text available while the model creates token states. It does not change the model parameters or output dimensionality, and there is no per-document retraining.</p>
 <h2 id="a-worked-example-and-its-limit">A worked example, and its limit</h2>
 <p>The paper&rsquo;s introductory Berlin example compares the query <em>Berlin</em> with three sentence embeddings produced by <code>jina-embeddings-v2-small-en</code>. Its reported cosine similarities are:</p>
 <table>
@@ -303,10 +375,42 @@ z_j^{\mathrm{naive}}
       </tr>
   </tbody>
 </table>
-<p>This is a useful mechanism-level illustration: the two later sentence vectors change when their token states are conditioned on the preceding sentence. It is <strong>not</strong> a retrieval benchmark. A cosine increase for one query does not establish a better ranking, fewer false matches, or resolution of every anaphor. Those claims require a corpus, queries, relevance judgments, and a retrieval metric.</p>
+<p>This is a useful mechanism-level illustration: the two later sentence vectors change when their token states are conditioned on the preceding sentence. It is <strong>not</strong> a retrieval benchmark. A cosine increase for one query does not establish a better ranking, fewer false matches, or correct interpretation of every phrase that refers back to an earlier phrase. Those claims require a corpus, queries, <a href="/blog/knowledge-base/glossary/relevance-judgments/" class="ref-term">relevance judgments</a>, and retrieval metrics.</p>
 <p>Source: <a href="https://arxiv.org/html/2409.04701v3#S1.T1">Günther et al., Table 1</a>.</p>
+<h2 id="how-retrieval-is-scored">How retrieval is scored</h2>
+<p>A retrieval benchmark supplies three connected ingredients:</p>
+<ul>
+<li>a <strong>query</strong>, such as a scientific claim that needs supporting evidence;</li>
+<li>a <strong>corpus</strong>, meaning the collection of documents that can be returned; and</li>
+<li><strong>relevance judgments</strong>, often stored in a file called <strong>qrels</strong>, that record which query-document pairs count as relevant under the benchmark.</li>
+</ul>
+<p>The search system ranks the corpus for each query. The notation <strong>@10</strong> means that the metric inspects only the first ten returned documents.</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Three retrieval metrics read the same ranked list differently" tabindex="0">
+        <img src="/blog/knowledge-base/deep-dives/late-chunking/late-chunking-ranking-metrics.svg" alt="A toy top-ten ranking has relevant documents at ranks 2, 4, and 7, while a fourth known relevant document is absent. Recall at 10 is three quarters, reciprocal rank at 10 is one half because the first relevant document is rank 2, and normalized discounted cumulative gain at 10 gives more credit to relevant documents near the top." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>The same toy ranking answers three different questions. Recall@10 finds 3 of 4 known relevant documents. RR@10 looks only at the first relevant result, at rank 2. Averaging those per-query reciprocal ranks across all evaluation queries gives MRR@10. nDCG@10 rewards all three retrieved relevant documents but discounts those found farther down the list. The values are computed from the marked ranking and are not SciFact results.</figcaption>
+</figure>
+
+<div class="panel definition">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="book-open"></i>
+        
+    </div>
+    <div class="panel-content">
+        <strong>Three metrics, three questions.</strong> <a href="/blog/knowledge-base/glossary/retrieval-ranking-metrics/" class="ref-term">nDCG@10</a>
+asks whether relevant documents appear near the top, with more credit for earlier
+ranks. <strong>Recall@10</strong> asks what fraction of all known relevant documents appears
+in the first ten. <strong>RR@10</strong> uses only the rank of the first relevant document for
+one query, or zero if none appears in the first ten. <strong>MRR@10</strong> is the mean of
+those per-query reciprocal ranks across the evaluation queries. No one metric
+is a complete picture. All three depend on the available relevance judgments.
+    </div>
+</div>
+
 <h2 id="what-the-published-retrieval-evaluation-found">What the published retrieval evaluation found</h2>
-<p>The paper compares naive and late chunking on four selected BEIR datasets, NFCorpus, SciFact, FiQA, and TREC-COVID, using three embedding models. Each dataset supplies queries, a document corpus, and qrels that identify relevant documents. Chunk rankings are converted to document rankings under the paper&rsquo;s protocol and scored with nDCG@10.</p>
+<p>The paper compares naive and late chunking on four selected datasets from the Benchmarking Information Retrieval (BEIR) collection, NFCorpus, SciFact, FiQA, and TREC-COVID, using three embedding models. Each dataset supplies queries, a document corpus, and qrels that identify relevant documents. Chunk rankings are converted to document rankings under the paper&rsquo;s protocol and scored with nDCG@10.</p>
 <p>The paper reports nDCG@10 on a 0-100 scale. The changes below are absolute points on that reporting scale:</p>
 <table>
   <thead>
@@ -338,12 +442,40 @@ z_j^{\mathrm{naive}}
       </tr>
   </tbody>
 </table>
-<p>These are averages across the paper&rsquo;s three models and four selected BEIR tasks, not expected gains for a new corpus. The evaluation used non-overlapping retrieval chunks and a specific protocol for assigning instruction and special-token states to the first or last chunk. See <a href="https://arxiv.org/html/2409.04701v3#S4.SS1">Section 4.1</a> for the table and <a href="https://arxiv.org/html/2409.04701v3#S4.SS2">Section 4.2</a> for the chunk-size ablation.</p>
+<p>The displayed 52.4 and 53.8 values are rounded to one decimal place, while the reported +1.5 change was calculated from the unrounded values. That is why subtracting the displayed endpoints appears to give 1.4.</p>
+<p>These are averages across the paper&rsquo;s three models and four selected BEIR tasks, not expected gains for a new corpus. The evaluation used non-overlapping retrieval chunks and a specific protocol for assigning instruction and special-token states to the first or last chunk. See <a href="https://arxiv.org/html/2409.04701v3#S4.SS1">Section 4.1</a> for the table and <a href="https://arxiv.org/html/2409.04701v3#S4.SS2">Section 4.2</a> for the chunk-size ablation, meaning a comparison that deliberately changes chunk size while keeping the rest of the intended protocol fixed.</p>
 <p>The aggregate hides heterogeneous results. In Section 4.2&rsquo;s nDCG retrieval ablation, the authors use <code>jina-embeddings-v2-small-en</code>, fixed-size chunks at several tested sizes, NFCorpus and LongEmbed tasks, and truncate inputs at 8,192 tokens. They report stronger late-chunking results particularly at smaller chunk sizes, while some reading-comprehension configurations with larger chunks favor naive chunking. They also report no late-chunking benefit on the tested Needle-8192 and Passkey-8192 configurations, where short relevant text is placed inside unrelated context. Those are results and interpretations for that experiment, not a rule that a task family universally favors either method.</p>
 <p>The defensible conclusion is that late chunking can improve retrieval when surrounding text helps represent the target span. “More context is always better” is not supported.</p>
 <h2 id="an-auditable-scifact-matched-content-token-re-evaluation">An auditable SciFact matched-content-token re-evaluation</h2>
-<p>This page also ships a runnable re-evaluation on the complete SciFact test retrieval benchmark: 5,183 candidate documents, 300 test queries, and 339 positive query-document judgments. It uses <a href="https://huggingface.co/jinaai/jina-embeddings-v2-small-en/tree/44e7d1d6caec8c883c2d4b207588504d519788d0"><code>jina-embeddings-v2-small-en</code> at commit <code>44e7d1d</code></a>, its remote implementation at commit <code>f3ec4cf</code>, and 256-content-token spans without overlap. The frozen corpus produced 9,356 chunks. Its longest document had 1,937 content tokens, so no document was truncated against the model&rsquo;s 8,192-token limit.</p>
-<p>The naive and late arms match the corpus, query path, tokenizer and model revisions, content-token boundaries, mean-pooling operation, normalization, and cosine scoring. They match frozen content-token IDs and slices, but this is not a context-only causal ablation. Each naive chunk is encoded with its own <code>[CLS]</code> and <code>[SEP]</code>, whereas the late arm uses one document-level pair assigned to the first and last spans. Those special tokens can affect content-token hidden states even when the special-token states themselves are excluded from pooling. More generally, independently encoded chunks may differ in position IDs or other position-dependent model inputs. A context-only ablation must hold fixed every non-contextual encoder input and every pooled position, then vary only cross-span context or attention. Where a compatible model supports it, one possible design is to encode the same full token sequence with carefully matched full-attention and block-diagonal-attention masks.</p>
+<p>This page also ships a runnable re-evaluation on the complete SciFact test candidate corpus: 5,183 documents, 300 test queries, and 339 positive query-document judgments. Under this benchmark protocol, query-document pairs absent from the qrels are treated as nonrelevant. The run uses <a href="https://huggingface.co/jinaai/jina-embeddings-v2-small-en/tree/44e7d1d6caec8c883c2d4b207588504d519788d0"><code>jina-embeddings-v2-small-en</code> at commit <code>44e7d1d</code></a>, its remote implementation at commit <code>f3ec4cf</code>, and 256-content-token spans without overlap. The frozen corpus produced 9,356 chunks. Its longest document had 1,937 content tokens, so no document was truncated against the model&rsquo;s 8,192-token limit.</p>
+<p>The naive and late arms match many important choices, but not every model input. This is an end-to-end protocol comparison rather than a context-only causal test.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Comparison question</th>
+          <th>Frozen answer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Held fixed</strong></td>
+          <td>Corpus, queries, tokenizer and model revisions, content-token IDs and spans, query path, mean pooling, L2 normalization, and cosine scoring</td>
+      </tr>
+      <tr>
+          <td><strong>Different by design</strong></td>
+          <td>Every naive chunk gets its own <code>[CLS]</code> start token and <code>[SEP]</code> end token. The late arm uses one document-level pair, assigned to the first and last spans. Independently encoded chunks can also use different position-dependent inputs.</td>
+      </tr>
+      <tr>
+          <td><strong>Measured</strong></td>
+          <td>Full-corpus document nDCG@10, Recall@10, MRR@10, query-level changes, and descriptive query-bootstrap intervals</td>
+      </tr>
+      <tr>
+          <td><strong>Not isolated</strong></td>
+          <td>The effect of cross-span context by itself. Special tokens and position-dependent inputs can influence content-token states even when their own states are not included in the final mean.</td>
+      </tr>
+  </tbody>
+</table>
+<p>A stricter context-only ablation, meaning a test that changes one intended factor, would hold every non-contextual encoder input and every pooled position fixed, then vary only cross-span context or attention. Where a compatible model supports it, one possible design is to encode the same token sequence with carefully matched full-attention and block-diagonal attention masks. An ordinary padding attention mask merely marks usable positions; it does not automatically prevent one chunk from attending to another.</p>
 <p>The three evaluated document representations are:</p>
 <ol>
 <li><strong>Naive chunks:</strong> each frozen content-token slice receives its own special tokens and is encoded independently.</li>
@@ -352,6 +484,7 @@ z_j^{\mathrm{naive}}
 </ol>
 <p>Queries receive no instruction prefix and use the same attention-mask mean pooling and L2 normalization in every arm. The script scores every corpus chunk, takes each document&rsquo;s maximum chunk score for the two chunked arms, ranks the complete document corpus, and calculates document-level nDCG@10, Recall@10, and MRR@10 from the frozen binary qrels. Stable corpus order breaks exact score ties.</p>
 <p>This is an <strong>auditable matched-content-token re-evaluation</strong>, not an exact replication of one paper-table cell or a context-only causal ablation. The pinned paper helper decodes token slices before its evaluator retokenizes them; that can alter boundary tokenization. This version passes the original token IDs directly so the naive and late arms share exact content spans. It also scores the full corpus before max-chunk document aggregation instead of collapsing a previously retrieved candidate-chunk list. Those choices make the content-token comparison cleaner for this tutorial, but its values should not be substituted for the paper&rsquo;s protocol.</p>
+<p>The intervals below use a <a href="/blog/knowledge-base/glossary/bootstrap/" class="ref-term">query bootstrap</a>: repeatedly resample the 300 query rows with replacement, recompute the summary, and inspect how much it moves. These are descriptive stability intervals for the fixed benchmark, not population confidence intervals.</p>
 <figure class="reference-figure">
     <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: SciFact retrieval quality for three document protocols" tabindex="0">
         <img src="/blog/knowledge-base/deep-dives/late-chunking/fig-scifact-retrieval.svg" alt="SciFact test document nDCG at 10 on a zero-to-one axis, with query-bootstrap intervals: naive 256-token chunks 0.6414 [0.5942, 0.6876]; late 256-token chunks 0.6610 [0.6145, 0.7071]; whole-document encoding 0.6389 [0.5918, 0.6852]. Higher is better." loading="lazy" decoding="async">
@@ -425,21 +558,36 @@ z_j^{\mathrm{naive}}
       </tr>
   </tbody>
 </table>
-<p>The correct reading is narrow: late chunking improved the mean ranking metric for this pinned model and benchmark, while some queries regressed and most had the same nDCG@10. The whole-document control also did not match the late-chunk score, so contextualizing a document and compressing it into one vector is not equivalent to retaining context-conditioned retrieval chunks. This comparison does not identify why an individual query changed, benchmark indexing throughput, or establish an expected gain on another corpus.</p>
-<h3 id="reproduce-and-audit-the-result">Reproduce and audit the result</h3>
-<p>The page bundle contains the <a href="reproduce.py">reproduction script</a>, <a href="reproduce.py.lock">locked dependency graph</a>, <a href="receipts/scifact-test-qrels.tsv">byte-identical test qrels</a>, <a href="receipts/aggregate.json">aggregate metrics</a>, <a href="receipts/per-query.csv">per-query metrics</a>, <a href="receipts/top-10-rankings.jsonl">top-ten rankings</a>, <a href="receipts/run.receipt.json">run receipt</a>, <a href="provenance.json">provenance manifest</a>, and <a href="ATTRIBUTION.md">SciFact attribution</a>. Model weights, corpus text, and caches remain uncommitted.</p>
-<p>Run the canonical model evaluation with:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">uv run --frozen reproduce.py --run --device cpu --batch-size <span class="m">32</span> --threads <span class="m">8</span>
-</span></span></code></pre></div><p>Before inference, the script validates the SciFact archive; model, tokenizer, and remote Python snapshots; the expected lockfile hash; and the material installed package versions. The documented <code>uv run --frozen</code> command enforces the complete locked dependency graph. The receipt distinguishes that canonical command from the observed Python argument vector and records platform and package versions, CPU settings, input hashes, protocol choices, phase timings, and output hashes. Deterministic-kernel mode is enabled, but the receipt does not promise bitwise identity across different hardware or math libraries.</p>
-<p>CI uses the standard-library-only offline check:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python3 reproduce.py --verify
-</span></span></code></pre></div><p>That check binds the run to the script and lockfile, validates the frozen qrels hash, requires one complete ten-document ranking with unique document IDs for every query-arm pair, re-derives relevance labels and query metrics, re-runs the query bootstraps, and regenerates both SVGs and their receipts byte for byte.</p>
+<h2 id="what-did-this-re-evaluation-teach-us">What did this re-evaluation teach us?</h2>
+<p>After seeing the scores, a reader should reasonably ask, “what did the analysis actually teach us?” This re-evaluation produced five useful conclusions:</p>
+<ol>
+<li><strong>Late chunking had the highest mean ranking score in this comparison.</strong> Its nDCG@10 was 0.6610, compared with 0.6414 for naive chunks and 0.6389 for one whole-document vector.</li>
+<li><strong>The gain was not shared evenly.</strong> Late chunking improved 49 queries, tied on 229, and worsened 22. The positive average did not mean every query benefited.</li>
+<li><strong>The one-vector whole-document baseline scored lower, but it does not isolate why.</strong> Full-document context followed by one pooled vector scored below the late-chunk arm. The chunked arm stores several candidate vectors and uses maximum-score aggregation, so the difference can reflect representation granularity and aggregation as well as contextualization. This is a practical baseline, not a capacity-matched causal control.</li>
+<li><strong>The comparison does not isolate context alone.</strong> The naive and late arms differ in their special-token and position-dependent inputs as well as in cross-chunk context.</li>
+<li><strong>The practical answer is to test, not assume.</strong> A representative corpus can reveal whether the ranking improvement is large enough to justify the added indexing cost and memory.</li>
+</ol>
+<div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+        
+    </div>
+    <div class="panel-content">
+        <strong>The useful conclusion.</strong> Late chunking was better on average in this frozen
+SciFact comparison, and the query-level analysis showed exactly where that
+summary needs restraint. The result supports trying the method on a comparable
+retrieval problem. It does not prove that extra context always helps, explain
+why each query changed, or predict the gain on another corpus or model.
+    </div>
+</div>
+
+<p>The full audit trail and commands are in <a href="#appendix-a-reproduce-and-audit-the-result">Appendix A</a>.</p>
 <h2 id="the-implementation-boundary">The implementation boundary</h2>
-<p>Late chunking needs more than an API that returns one already-pooled vector for an input. You need:</p>
+<p>Late chunking needs more than an application programming interface (API) that returns one already-pooled vector for an input. You need:</p>
 <ol>
 <li>token-level hidden states from the embedding model;</li>
 <li>one frozen tokenization of the longer input;</li>
-<li>one half-open token span for each retrieval chunk; if boundaries originate in character or sentence space, request offset mappings and align those boundaries to the frozen tokenization;</li>
+<li>one half-open token span for each retrieval chunk, where the start is included and the stop is excluded;</li>
 <li>the model&rsquo;s compatible pooling, instruction, and normalization rules; and</li>
 <li>an explicit policy for special tokens, padding, truncation, and over-length inputs.</li>
 </ol>
@@ -484,12 +632,15 @@ z_j^{\mathrm{naive}}
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">vectors</span><span class="p">)</span>
 </span></span></code></pre></div><p>This function assumes the transformer has already processed the complete in-window input. It intentionally does not pretend that sentence splitting, offset alignment, model loading, or instruction handling are universal.</p>
 <h3 id="boundary-alignment-is-not-optional">Boundary alignment is not optional</h3>
-<p>A reliable pipeline should tokenize the document once and derive every chunk span against that frozen token sequence. If the chunker emits character or sentence boundaries, request offset mappings and map those boundaries to token positions. If the chunker operates directly on token counts, define half-open spans over the frozen content-token IDs, as the reproduction does. In either case, do not decode slices and re-tokenize them to recover boundaries.</p>
+<p>A reliable pipeline should tokenize the document once and derive every chunk span against that frozen token sequence.</p>
+<p>If the chunker emits character or sentence boundaries, request <strong>offset mappings</strong>, the start and stop character positions associated with each token. Use those mappings to align the original boundaries to token positions. If the chunker operates directly on token counts, define half-open spans over the frozen content-token IDs, as the reproduction does. In either case, do not decode slices and re-tokenize them to recover boundaries.</p>
 <p>Decide and test all of the following:</p>
 <ul>
 <li>whether chunk spans overlap;</li>
 <li>where prepended instructions, <code>[CLS]</code>, and appended separator states are pooled;</li>
-<li>whether padding is excluded by the attention mask, how instruction and special tokens consume the input budget, and how silent truncation is prevented; if document content exceeds the remaining budget, reject it or route it through the documented macro-window path rather than pooling an incomplete chunk;</li>
+<li>whether padding is excluded by the attention mask;</li>
+<li>how instruction and special tokens consume the input budget;</li>
+<li>how silent truncation is prevented, including whether an over-budget document is rejected or routed through the documented macro-window path;</li>
 <li>whether normalization occurs before or after pooling;</li>
 <li>whether query and document instructions differ;</li>
 <li>which model, tokenizer, and remote-code revisions are pinned; and</li>
@@ -499,16 +650,19 @@ z_j^{\mathrm{naive}}
 <p>For a full reference implementation, inspect the authors&rsquo; <a href="https://github.com/jina-ai/late-chunking/tree/1d3bb02bf091becd0771455e4e7959463935e26c">official repository at commit <code>1d3bb02</code></a>. Treat that implementation and the chosen model revision as versioned dependencies.</p>
 <h2 id="documents-longer-than-the-encoder-window">Documents longer than the encoder window</h2>
 <p>Full-document contextualization is possible only when the document fits within the embedding model&rsquo;s usable input. If it does not, the paper&rsquo;s <strong>long late chunking</strong> method divides the token sequence into overlapping macro-windows and then stitches one contextual state back onto each document token position before span pooling.</p>
-<p>The authors&rsquo; <a href="https://github.com/jina-ai/late-chunking/blob/1d3bb02bf091becd0771455e4e7959463935e26c/chunked_pooling/mteb_chunked_eval.py#L128-L159">pinned implementation</a> uses a concrete ownership rule. It keeps every state from the first macro-window. For each later window, it discards the states for that window&rsquo;s repeated leading overlap and appends only the states for new document positions. The overlap therefore supplies preceding context to the new positions, while the stitched sequence still has exactly one state per document token. Chunk boundaries are then applied to that stitched sequence, producing one vector and one ID per retrieval chunk.</p>
+<p>The authors&rsquo; <a href="https://github.com/jina-ai/late-chunking/blob/1d3bb02bf091becd0771455e4e7959463935e26c/chunked_pooling/mteb_chunked_eval.py#L128-L159">pinned implementation</a> uses a concrete ownership rule. It keeps every state from the first macro-window. For each later window, it discards the states for that window&rsquo;s repeated leading overlap and appends only the states for new document positions.</p>
+<p>The overlap supplies preceding context to the new positions, while the stitched sequence still has exactly one state per document token. Chunk boundaries are then applied to that stitched sequence, producing one vector and one ID per retrieval chunk.</p>
 <figure class="reference-figure">
     <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Long-document overlap stitching" tabindex="0">
-        <img src="/blog/knowledge-base/deep-dives/late-chunking-context-window.svg" alt="A document that fits one encoder window is contextualized in one pass. For an over-length document, the pinned long-late-chunking implementation keeps all states from the first macro-window, discards the repeated leading-overlap states from the next window, and appends only its new positions, yielding one stitched state per document token." loading="lazy" decoding="async">
+        <img src="/blog/knowledge-base/deep-dives/late-chunking/late-chunking-context-window.svg" alt="A document that fits one encoder window is contextualized in one pass. For an over-length document, the pinned long-late-chunking implementation keeps all states from the first macro-window, discards the repeated leading-overlap states from the next window, and appends only its new positions, yielding one stitched state per document token." loading="lazy" decoding="async">
     </div>
     <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
     <figcaption>The scope of late chunking is the embedding model&rsquo;s usable input window. If the document fits, all retrieval spans can be contextualized in one encoder pass. In the pinned long-document implementation shown here, macro-window B repeats positions 4 and 5 as context, but those repeated B states are discarded; the retained B states begin at position 6. Concatenating the kept A and B states restores positions 1 through 8 exactly once before retrieval-span pooling. This one-sided ownership rule is implementation-specific, and overlap does not recreate one full-document encoder pass.</figcaption>
 </figure>
 
-<p>This is not permission to improvise a duplicate rule. A different implementation that averages overlap states, chooses centered states, or emits window-local chunk vectors is a different algorithm and should be documented and evaluated as such. Reserve capacity for instruction and special tokens, prevent tokenizer truncation, and ensure every pooled span is fully covered. Overlap reduces one boundary problem; it does not create global context. Long inputs also cost more to encode because transformer attention and intermediate activations grow with sequence length. Measure indexing throughput and peak memory with the actual model and window size.</p>
+<p>This is not permission to improvise a duplicate rule. A version that averages overlap states, chooses centered states, or emits window-local chunk vectors is a different algorithm and should be documented and evaluated as such.</p>
+<p>Reserve capacity for instruction and special tokens, prevent tokenizer truncation, and ensure every pooled span is fully covered. Overlap reduces one boundary problem; it does not create global context.</p>
+<p>Long inputs also cost more to encode because transformer attention and intermediate activations grow with sequence length. Measure indexing throughput and peak memory with the actual model and window size.</p>
 <h2 id="related-techniques-are-not-synonyms">Related techniques are not synonyms</h2>
 <table>
   <thead>
@@ -541,44 +695,184 @@ z_j^{\mathrm{naive}}
       </tr>
   </tbody>
 </table>
-<p>Late chunking and ColBERT&rsquo;s “late interaction” share a word, not an operation. ColBERT retains token-level vectors for query-time comparison; late chunking pools contextual token states into a single vector per retrieval chunk. See the <a href="https://arxiv.org/abs/2004.12832">ColBERT paper</a> for that separate design.</p>
+<p>Late chunking and ColBERT&rsquo;s “late interaction” share a word, not an operation. ColBERT retains token-level vectors and uses <strong>MaxSim</strong>, which finds each query token&rsquo;s strongest similarity to a passage token before combining those matches. Late chunking instead pools contextual token states into a single vector per retrieval chunk. See the <a href="https://arxiv.org/abs/2004.12832">ColBERT paper</a> for that separate design.</p>
 <h2 id="how-to-evaluate-it-on-your-corpus">How to evaluate it on your corpus</h2>
 <p>Do not evaluate late chunking by hand-picking positive and negative words and asking whether absolute cosine scores moved in a preferred direction. Evaluate the retrieval system you intend to deploy.</p>
-<ol>
-<li>Freeze a document corpus, queries, and relevance judgments.</li>
-<li>Freeze the embedding model and tokenizer revisions, instructions, chunker, boundaries, and query encoding.</li>
-<li>Decide whether the target is a context-only ablation or an end-to-end protocol comparison. For a context-only ablation, hold fixed input IDs, including instructions and special tokens, position and token-type inputs, pooled positions, pooling, and normalization, and vary only cross-span context or attention. Merely excluding special-token states from the mean is insufficient because those tokens can still influence content-token states. Otherwise, disclose every additional protocol difference.</li>
-<li>Compare ranking metrics such as nDCG@10, Recall@k, and MRR at the query level.</li>
-<li>Report uncertainty over defensible units such as queries or datasets, preserving known grouping and dependence.</li>
-<li>Report indexing time, peak memory, index size, and query latency.</li>
-<li>Stratify by document length, chunk size, cross-chunk dependency, and irrelevant surrounding context.</li>
-<li>Inspect failures. A mean gain can hide queries that regress badly.</li>
-</ol>
+<p>Work through these four passes.</p>
+<div class="panel warning">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="alert-circle"></i>
+        
+    </div>
+    <div class="panel-content">
+        <p><strong>Pass 1: freeze the comparison</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Evaluation set:</strong> Freeze a document corpus, queries, and relevance judgments.</li>
+<li><input disabled="" type="checkbox"> <strong>Model path:</strong> Freeze model and tokenizer revisions, instructions, the chunker, boundaries, and query encoding.</li>
+</ul>
+    </div>
+</div>
+
+<div class="panel warning">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="alert-circle"></i>
+        
+    </div>
+    <div class="panel-content">
+        <p><strong>Pass 2: state what the comparison isolates</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Target:</strong> Decide whether this is a context-only ablation or an end-to-end protocol comparison.</li>
+<li><input disabled="" type="checkbox"> <strong>Matched inputs:</strong> For a context-only test, hold fixed input IDs, special tokens, position inputs, pooled positions, pooling, and normalization. Vary only cross-span context or attention.</li>
+<li><input disabled="" type="checkbox"> <strong>Disclosure:</strong> If more than context changes, list every additional protocol difference.</li>
+</ul>
+    </div>
+</div>
+
+<div class="panel warning">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="alert-circle"></i>
+        
+    </div>
+    <div class="panel-content">
+        <p><strong>Pass 3: measure rankings and costs</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Ranking quality:</strong> Compare nDCG@10, Recall@k, and MRR at the query level. Here, \(k\) means the chosen number of top results to inspect.</li>
+<li><input disabled="" type="checkbox"> <strong>Uncertainty:</strong> Resample defensible units such as queries or datasets while preserving known grouping and dependence.</li>
+<li><input disabled="" type="checkbox"> <strong>System cost:</strong> Report indexing time, peak memory, index size, and query latency.</li>
+</ul>
+    </div>
+</div>
+
+<div class="panel warning">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="alert-circle"></i>
+        
+    </div>
+    <div class="panel-content">
+        <p><strong>Pass 4: inspect heterogeneity and generalization</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Subgroups:</strong> Stratify by document length, chunk size, cross-chunk dependency, and irrelevant surrounding context.</li>
+<li><input disabled="" type="checkbox"> <strong>Failures:</strong> Inspect queries that regress badly instead of relying only on the mean.</li>
+<li><input disabled="" type="checkbox"> <strong>Scope:</strong> State which corpora, models, and protocol choices the conclusion actually covers.</li>
+</ul>
+    </div>
+</div>
+
 <p>For a production decision, the relevant quantity is the control-relative retrieval change on representative data, not whether one illustrative cosine similarity increased.</p>
 <h2 id="decision-checklist">Decision checklist</h2>
-<p>Late chunking is a plausible candidate when:</p>
+<div class="panel warning">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="alert-circle"></i>
+        
+    </div>
+    <div class="panel-content">
+        <p><strong>Late chunking may be worth testing</strong></p>
 <ul>
-<li>useful context often lives outside the target retrieval chunk;</li>
-<li>the embedding model exposes token states and a compatible pooling recipe;</li>
-<li>several retrieval chunks fit inside one practical encoder window; and</li>
-<li>additional indexing cost is acceptable while query-time vector search stays unchanged.</li>
+<li><input disabled="" type="checkbox"> Useful context often lives outside the target retrieval chunk.</li>
+<li><input disabled="" type="checkbox"> The embedding model exposes token states and a compatible pooling recipe.</li>
+<li><input disabled="" type="checkbox"> Several retrieval chunks fit inside one practical encoder window.</li>
+<li><input disabled="" type="checkbox"> Additional indexing cost is acceptable while query-time vector search stays unchanged.</li>
 </ul>
-<p>Prefer a simpler baseline, or at least expect a smaller gain, when:</p>
+    </div>
+</div>
+
+<div class="panel warning">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="alert-circle"></i>
+        
+    </div>
+    <div class="panel-content">
+        <p><strong>Prefer the simpler baseline, or expect a smaller gain</strong></p>
 <ul>
-<li>chunks are already self-contained;</li>
-<li>surrounding text is mostly irrelevant;</li>
-<li>documents routinely exceed the usable window and local macro-context is insufficient;</li>
-<li>the provider exposes only a pooled embedding endpoint; or</li>
-<li>the evaluation shows no robust ranking benefit for the added indexing cost.</li>
+<li><input disabled="" type="checkbox"> Chunks are already self-contained.</li>
+<li><input disabled="" type="checkbox"> Surrounding text is mostly irrelevant.</li>
+<li><input disabled="" type="checkbox"> Documents routinely exceed the usable window and local macro-context is insufficient.</li>
+<li><input disabled="" type="checkbox"> The provider exposes only an already-pooled embedding endpoint.</li>
+<li><input disabled="" type="checkbox"> Representative evaluation shows no robust ranking benefit for the added indexing cost.</li>
 </ul>
+    </div>
+</div>
+
+<h2 id="appendix-a-reproduce-and-audit-the-result">Appendix A: reproduce and audit the result</h2>
+<p>The page bundle contains the current <a href="reproduce.py">reproduction and verification script</a>, the exact <a href="reproduce-at-run.py">generator archived from the recorded model run</a>, <a href="reproduce.py.lock">locked dependency graph</a>, <a href="receipts/scifact-test-qrels.tsv">byte-identical test qrels</a>, <a href="receipts/aggregate.json">aggregate metrics</a>, <a href="receipts/per-query.csv">per-query metrics</a>, <a href="receipts/top-10-rankings.jsonl">top-ten rankings</a>, <a href="receipts/run.receipt.json">run receipt</a>, <a href="provenance.json">provenance manifest</a>, and <a href="ATTRIBUTION.md">SciFact attribution</a>. The archive lets the verifier confirm the generator hash recorded before this article-only revision. Model weights, corpus text, and caches remain uncommitted.</p>
+<div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+        
+    </div>
+    <div class="panel-content">
+        <strong>Receipt naming note.</strong> The recorded run generator used <code>mrr_at_10</code> as the
+field name for each individual query&rsquo;s reciprocal rank. During review, those
+per-query fields were renamed <code>rr_at_10</code>; no ranks, relevance labels, scores,
+or metric values changed. The aggregate field remains <code>mrr_at_10</code> because it is
+the mean of the 300 per-query reciprocal ranks. The archived generator and the
+run receipt preserve this history explicitly.
+    </div>
+</div>
+
+<p>The committed receipts are much cheaper to inspect than re-running the model. From this bundle, the following standard-library-only cell prints the three aggregate rows and the late-minus-naive query counts:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">results</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&#34;receipts/aggregate.json&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&#34;naive&#34;</span><span class="p">,</span> <span class="s2">&#34;late&#34;</span><span class="p">,</span> <span class="s2">&#34;whole_document&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">row</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&#34;methods&#34;</span><span class="p">][</span><span class="n">name</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="sa">f</span><span class="s2">&#34;nDCG@10=</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;ndcg_at_10&#39;</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="sa">f</span><span class="s2">&#34;Recall@10=</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;recall_at_10&#39;</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="sa">f</span><span class="s2">&#34;MRR@10=</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;mrr_at_10&#39;</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">paired</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&#34;paired_late_minus_naive_ndcg_at_10&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;late minus naive:&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">paired</span><span class="p">[</span><span class="s2">&#34;improved_queries&#34;</span><span class="p">],</span> <span class="s2">&#34;improved,&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">paired</span><span class="p">[</span><span class="s2">&#34;tied_queries&#34;</span><span class="p">],</span> <span class="s2">&#34;tied,&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">paired</span><span class="p">[</span><span class="s2">&#34;worse_queries&#34;</span><span class="p">],</span> <span class="s2">&#34;worsened&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">naive nDCG@10=0.6414 Recall@10=0.7626 MRR@10=0.6123
+</span></span><span class="line"><span class="cl">late nDCG@10=0.6610 Recall@10=0.7776 MRR@10=0.6337
+</span></span><span class="line"><span class="cl">whole_document nDCG@10=0.6389 Recall@10=0.7592 MRR@10=0.6105
+</span></span><span class="line"><span class="cl">late minus naive: 49 improved, 229 tied, 22 worsened
+</span></span></code></pre></div><p>Run the full model evaluation only when you need to recreate the embeddings and rankings. It downloads the checksum-pinned SciFact data and model files and took about eight minutes on the recorded Apple-silicon CPU run:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">uv run --frozen reproduce.py --run --device cpu --batch-size <span class="m">32</span> --threads <span class="m">8</span>
+</span></span></code></pre></div><p>Before inference, the script validates the SciFact archive; model, tokenizer, and remote Python snapshots; the expected lockfile hash; and material installed package versions. The documented <code>uv run --frozen</code> command enforces the complete locked dependency graph. The receipt records the observed command, platform, versions, CPU settings, input hashes, protocol choices, phase timings, and output hashes. Deterministic-kernel mode is enabled, but the receipt does not promise bitwise identity across different hardware or math libraries.</p>
+<p>Continuous integration (CI), meaning the automated checks run before publication, uses this offline command:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">python3 reproduce.py --verify
+</span></span></code></pre></div><p>That check binds the run to the script and lockfile, validates the frozen qrels hash, requires one complete ten-document ranking with unique document IDs for every query-arm pair, re-derives relevance labels and query metrics, re-runs the query bootstraps, and regenerates both empirical SVGs and their receipts byte for byte.</p>
+<h2 id="appendix-b-the-formal-definition">Appendix B: the formal definition</h2>
+<p>The five-step recipe in the main text is enough to implement the method. This appendix writes the same recipe compactly.</p>
+<p>Let \(x\) be the actual in-window encoder sequence, including any chosen instruction and special tokens, and let \(a_i\) be its attention mask. Here \(x\) also stands for other fixed encoder inputs, such as position or token-type IDs where the model uses them. The transformer produces one contextual state for each encoded position:</p>
+\[
+H = E(x,a) = \left[h_1(x,a), h_2(x,a), \ldots, h_m(x,a)\right].
+\]<p>Let \(S_j\) be the encoded positions assigned to retrieval chunk \(j\), with at least one position marked usable by the attention mask. For attention-mask mean pooling followed by L2 normalization, and assuming the pooled vector has nonzero finite length:</p>
+\[
+\begin{aligned}
+\mu_j^{\mathrm{late}}
+&= \frac{\sum_{i \in S_j} a_i h_i(x,a)}{\sum_{i \in S_j} a_i}, \\
+z_j^{\mathrm{late}}
+&= \frac{\mu_j^{\mathrm{late}}}{\lVert\mu_j^{\mathrm{late}}\rVert_2}.
+\end{aligned}
+\]<p>The first line averages the usable contextual states in chunk \(j\). The second divides that average by its L2 length, producing the stored unit vector \(z_j^{\mathrm{late}}\).</p>
+<p>For naive chunking, let \(x^{(j)}\), \(a^{(j)}\), and \(S_j^{(j)}\) describe chunk \(j\)&rsquo;s separately encoded input, attention mask, and local pooled positions:</p>
+\[
+\begin{aligned}
+\mu_j^{\mathrm{naive}}
+&= \frac{\sum_{r \in S_j^{(j)}} a_r^{(j)} h_r(x^{(j)},a^{(j)})}{\sum_{r \in S_j^{(j)}} a_r^{(j)}}, \\
+z_j^{\mathrm{naive}}
+&= \frac{\mu_j^{\mathrm{naive}}}{\lVert\mu_j^{\mathrm{naive}}\rVert_2}.
+\end{aligned}
+\]<p>The indices are different on purpose. A late position \(i\) is contextualized inside the longer input \(x\). A naive position \(r\) belongs to the separately encoded chunk input \(x^{(j)}\). These equations describe this reproduction&rsquo;s pooling recipe. Another embedding model may specify different pooling or normalization.</p>
 <h2 id="primary-references">Primary references</h2>
 <ul>
-<li>Michael Günther et al., <a href="https://arxiv.org/abs/2409.04701v3"><em>Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models</em>, v3</a>, 2024.</li>
-<li>Jina AI, <a href="https://github.com/jina-ai/late-chunking/tree/1d3bb02bf091becd0771455e4e7959463935e26c">official Late Chunking implementation, pinned commit</a>.</li>
+<li>Michael Günther et al., <a href="https://arxiv.org/abs/2409.04701v3"><em>Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models</em>, v3</a>, 2024. Version 3 dated July 2025; accessed July 20, 2026.</li>
+<li>Jina AI, <a href="https://github.com/jina-ai/late-chunking/tree/1d3bb02bf091becd0771455e4e7959463935e26c">official Late Chunking implementation, pinned commit <code>1d3bb02</code></a>. Commit-pinned source accessed July 20, 2026.</li>
 <li>Michael Günther et al., <a href="https://arxiv.org/abs/2310.19923"><em>Jina Embeddings 2: 8192-Token General-Purpose Text Embeddings for Long Documents</em></a>, 2023.</li>
-<li>Jina AI, <a href="https://huggingface.co/jinaai/jina-embeddings-v2-small-en/blob/44e7d1d6caec8c883c2d4b207588504d519788d0/README.md"><code>jina-embeddings-v2-small-en</code> model card, pinned revision</a>.</li>
+<li>Jina AI, <a href="https://huggingface.co/jinaai/jina-embeddings-v2-small-en/blob/44e7d1d6caec8c883c2d4b207588504d519788d0/README.md"><code>jina-embeddings-v2-small-en</code> model card, pinned revision <code>44e7d1d</code></a>. Revision-pinned source accessed July 20, 2026.</li>
 <li>Nandan Thakur et al., <a href="https://arxiv.org/abs/2104.08663"><em>BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models</em></a>, 2021.</li>
-<li>David Wadden et al., <a href="https://arxiv.org/abs/2004.14974"><em>Fact or Fiction: Verifying Scientific Claims</em></a>, 2020; see also the <a href="https://github.com/allenai/scifact/blob/master/LICENSE.md">SciFact data license notice</a>.</li>
+<li>David Wadden et al., <a href="https://arxiv.org/abs/2004.14974"><em>Fact or Fiction: Verifying Scientific Claims</em></a>, 2020; see also the <a href="https://github.com/allenai/scifact/blob/master/LICENSE.md">SciFact data license notice</a>, accessed July 20, 2026.</li>
 <li>Omar Khattab and Matei Zaharia, <a href="https://arxiv.org/abs/2004.12832"><em>ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT</em></a>, 2020.</li>
 </ul>
 
@@ -620,6 +914,7 @@ z_j^{\mathrm{naive}}
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
                     <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="/blog/search/">Search</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>

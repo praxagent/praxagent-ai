@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
+
     <title>Knowledge Base - praxagent Knowledge Base</title>
     
     
@@ -42,8 +43,8 @@
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js"></script>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -65,10 +66,13 @@
                 </a>
             </div>
 
+
+
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link">Research Notes</a>
                 <a href="/blog/knowledge-base/" class="nav-link active">Knowledge Base</a>
+                <a href="/blog/search/" class="nav-link">Search</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -95,6 +99,7 @@
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
             <a href="/blog/knowledge-base/" class="mobile-nav-link active">Knowledge Base</a>
+            <a href="/blog/search/" class="mobile-nav-link">Search</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -127,6 +132,28 @@
 </header>
 
 <div class="blog-main">
+    <section class="knowledge-search" aria-labelledby="knowledge-search-title">
+        <div class="knowledge-search-copy">
+            <p class="knowledge-card-index" aria-hidden="true">Search / Entire library</p>
+            <h2 id="knowledge-search-title">Find an explanation</h2>
+            <p>Search Deep Dives, glossary entries, Research Notes, and Prax documentation by exact wording or by meaning.</p>
+        </div>
+        <form class="knowledge-search-form" role="search" action="/blog/search/" method="get">
+            <label for="knowledge-search-query">Search the library</label>
+            <div class="knowledge-search-field">
+                <input
+                    id="knowledge-search-query"
+                    name="q"
+                    type="search"
+                    autocomplete="off"
+                    enterkeyhint="search"
+                    placeholder="Try: data leakage before PCA"
+                >
+                <button type="submit">Search</button>
+            </div>
+        </form>
+    </section>
+
     <nav class="knowledge-directory" aria-label="Knowledge Base sections">
 
             <a class="knowledge-card" href="/blog/knowledge-base/deep-dives/">
@@ -173,6 +200,7 @@
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
                     <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="/blog/search/">Search</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>

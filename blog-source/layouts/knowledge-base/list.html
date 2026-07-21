@@ -15,6 +15,28 @@
 </header>
 
 <div class="blog-main">
+    <section class="knowledge-search" aria-labelledby="knowledge-search-title">
+        <div class="knowledge-search-copy">
+            <p class="knowledge-card-index" aria-hidden="true">Search / Entire library</p>
+            <h2 id="knowledge-search-title">Find an explanation</h2>
+            <p>Search Deep Dives, glossary entries, Research Notes, and Prax documentation by exact wording or by meaning.</p>
+        </div>
+        <form class="knowledge-search-form" role="search" action="{{ "search/" | relURL }}" method="get">
+            <label for="knowledge-search-query">Search the library</label>
+            <div class="knowledge-search-field">
+                <input
+                    id="knowledge-search-query"
+                    name="q"
+                    type="search"
+                    autocomplete="off"
+                    enterkeyhint="search"
+                    placeholder="Try: data leakage before PCA"
+                >
+                <button type="submit">Search</button>
+            </div>
+        </form>
+    </section>
+
     <nav class="knowledge-directory" aria-label="Knowledge Base sections">
 {{ range .Sections.ByWeight }}
             <a class="knowledge-card" href="{{ .RelPermalink }}">

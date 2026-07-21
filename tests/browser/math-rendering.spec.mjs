@@ -165,3 +165,67 @@ test("retrieval-metrics figure stays contained at desktop and mobile widths", as
     }
   }
 });
+
+test("long article contents stay compact and keyboard accessible", async ({ page }) => {
+  await useLocalMathScripts(page);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("knowledge-base/deep-dives/principal-component-analysis/", {
+    waitUntil: "domcontentloaded",
+  });
+
+  const contents = page.locator("details.table-of-contents");
+  const summary = contents.locator("summary");
+  const navigation = contents.locator("#TableOfContents");
+
+  await expect(contents).toBeVisible();
+  await expect(contents).not.toHaveAttribute("open", "");
+  await expect(summary).toContainText("On this page");
+  await expect(summary).toContainText(/\d+ sections?/);
+  await expect(navigation).toHaveAttribute("aria-label", "On this page");
+  await expect(navigation).toBeHidden();
+
+  await summary.focus();
+  await page.keyboard.press("Enter");
+  await expect(contents).toHaveAttribute("open", "");
+  await expect(navigation).toBeVisible();
+  const sectionCount = await navigation.locator("a[href^='#']").count();
+  expect(sectionCount).toBeGreaterThan(20);
+  await expect(contents.locator(".table-of-contents-count")).toHaveText(
+    `${sectionCount} sections`,
+  );
+
+  const openLayout = await contents.evaluate((element) => {
+    const bounds = element.getBoundingClientRect();
+    return {
+      left: bounds.left,
+      right: bounds.right,
+      viewportWidth: window.innerWidth,
+      pageOverflow: document.documentElement.scrollWidth - window.innerWidth,
+    };
+  });
+  expect(openLayout.left).toBeGreaterThanOrEqual(0);
+  expect(openLayout.right).toBeLessThanOrEqual(openLayout.viewportWidth + 1);
+  expect(openLayout.pageOverflow).toBeLessThanOrEqual(1);
+
+  await page.keyboard.press("Space");
+  await expect(contents).not.toHaveAttribute("open", "");
+  await expect(navigation).toBeHidden();
+
+  const overflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - window.innerWidth,
+  );
+  expect(overflow).toBeLessThanOrEqual(1);
+
+  await page.goto("posts/2026/07/how-to-read-an-sae-feature-id/", {
+    waitUntil: "domcontentloaded",
+  });
+  const noteContents = page.locator("details.table-of-contents");
+  await expect(noteContents).toBeVisible();
+  await expect(noteContents).not.toHaveAttribute("open", "");
+  await expect(noteContents.locator("summary")).toContainText("On this page");
+
+  await page.goto("knowledge-base/glossary/rms/", {
+    waitUntil: "domcontentloaded",
+  });
+  await expect(page.locator("details.table-of-contents")).toHaveCount(0);
+});

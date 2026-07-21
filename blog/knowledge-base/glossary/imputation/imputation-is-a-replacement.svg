@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="510" viewBox="0 0 920 510" role="img" aria-labelledby="imp-title imp-desc">
+  <title id="imp-title">Median imputation inserts a replacement without recovering the missing measurement</title>
+  <desc id="imp-desc">A toy training column contains 9, 10, missing, 12, and 14. The observed values give a median of 11. The completed column contains 11 in the missing cell and retains a separate true missingness flag.</desc>
+  <defs>
+    <marker id="imp-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#2C2924"/>
+    </marker>
+    <pattern id="imp-missing" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#A67C52" stroke-width="2" opacity="0.35"/>
+    </pattern>
+  </defs>
+  <rect width="920" height="510" rx="24" fill="#F7F4F0"/>
+  <text x="460" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#2C2924">Imputation fills a cell; it does not recover a measurement</text>
+
+  <rect x="38" y="75" width="226" height="374" rx="18" fill="#FFFDF9" stroke="#B9AA98" stroke-width="2"/>
+  <text x="151" y="109" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#2C2924">1. Inspect</text>
+  <text x="151" y="134" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#5A544C">toy training feature</text>
+  <rect x="92" y="157" width="118" height="230" rx="8" fill="#F7F4F0" stroke="#887B6B" stroke-width="2"/>
+  <g stroke="#887B6B" stroke-width="1.5">
+    <line x1="92" y1="203" x2="210" y2="203"/><line x1="92" y1="249" x2="210" y2="249"/><line x1="92" y1="295" x2="210" y2="295"/><line x1="92" y1="341" x2="210" y2="341"/>
+  </g>
+  <rect x="93" y="250" width="116" height="44" fill="url(#imp-missing)"/>
+  <g font-family="Arial, sans-serif" font-size="19" fill="#2C2924" text-anchor="middle">
+    <text x="151" y="187">9</text><text x="151" y="233">10</text><text x="151" y="279" font-weight="700" fill="#7A5939">missing</text><text x="151" y="325">12</text><text x="151" y="371">14</text>
+  </g>
+  <text x="151" y="417" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#5A544C">Missing is not zero.</text>
+
+  <line x1="276" y1="260" x2="325" y2="260" stroke="#2C2924" stroke-width="3" marker-end="url(#imp-arrow)"/>
+  <rect x="338" y="116" width="244" height="287" rx="18" fill="#FFFDF9" stroke="#B9AA98" stroke-width="2"/>
+  <text x="460" y="151" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#2C2924">2. Fit a stated rule</text>
+  <text x="460" y="184" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#5A544C">sort observed values</text>
+  <rect x="370" y="205" width="180" height="52" rx="10" fill="#DCE6EE" stroke="#4B6787" stroke-width="2"/>
+  <text x="460" y="238" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#2C2924">9, 10, 12, 14</text>
+  <text x="460" y="291" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#2C2924">middle pair: 10 and 12</text>
+  <text x="460" y="329" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#4B6787">median = 11</text>
+  <text x="460" y="371" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#5A544C">This rule uses observed values.</text>
+
+  <line x1="595" y1="260" x2="642" y2="260" stroke="#2C2924" stroke-width="3" marker-end="url(#imp-arrow)"/>
+  <rect x="655" y="75" width="227" height="374" rx="18" fill="#FFFDF9" stroke="#B9AA98" stroke-width="2"/>
+  <text x="768" y="109" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#2C2924">3. Fill and record</text>
+  <text x="768" y="134" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#5A544C">completed feature</text>
+  <rect x="710" y="157" width="116" height="230" rx="8" fill="#F7F4F0" stroke="#887B6B" stroke-width="2"/>
+  <g stroke="#887B6B" stroke-width="1.5">
+    <line x1="710" y1="203" x2="826" y2="203"/><line x1="710" y1="249" x2="826" y2="249"/><line x1="710" y1="295" x2="826" y2="295"/><line x1="710" y1="341" x2="826" y2="341"/>
+  </g>
+  <rect x="711" y="250" width="114" height="44" fill="url(#imp-missing)"/>
+  <g font-family="Arial, sans-serif" font-size="19" fill="#2C2924" text-anchor="middle">
+    <text x="768" y="187">9</text><text x="768" y="233">10</text><text x="768" y="279" font-weight="700" fill="#7A5939">11*</text><text x="768" y="325">12</text><text x="768" y="371">14</text>
+  </g>
+  <text x="768" y="411" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#7A5939">* replacement</text>
+  <text x="768" y="433" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#5A544C">was_missing = true</text>
+  <text x="460" y="482" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#5A544C">The result is complete for computation, but uncertainty about the missing measurement remains.</text>
+</svg>

@@ -2,10 +2,14 @@
   "name": "praxagent-site-tests",
   "private": true,
   "scripts": {
-    "test:browser": "playwright test"
+    "build:search": "node scripts/build_search_index.mjs",
+    "test:browser": "playwright test",
+    "test:search-browser": "playwright test --config playwright.search.config.mjs"
   },
   "devDependencies": {
+    "@huggingface/transformers": "3.8.1",
     "@playwright/test": "1.61.1",
-    "katex": "0.16.47"
+    "katex": "0.16.47",
+    "pagefind": "1.5.2"
   }
 }

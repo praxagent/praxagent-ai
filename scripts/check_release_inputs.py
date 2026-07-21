@@ -27,7 +27,12 @@ RELEASE_INPUTS = (
     ".gitignore",
     "Makefile",
     "blog-source",
+    "package-lock.json",
+    "package.json",
+    "playwright.config.mjs",
+    "playwright.search.config.mjs",
     "scripts",
+    "tests",
     *DIRECT_PUBLIC_INPUTS,
 )
 

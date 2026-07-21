@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="500" viewBox="0 0 760 500" role="img" aria-labelledby="pcaLeakTitle pcaLeakDesc">
+  <title id="pcaLeakTitle">Split before learned preprocessing to prevent principal component analysis leakage</title>
+  <desc id="pcaLeakDesc">The incorrect upper lane lets training and held-out groups jointly fit imputation, scaling, and principal component analysis before evaluation. The correct lower lane splits groups first, fits preprocessing and the model on training groups only, and then sends held-out groups through that already fitted pipeline for scoring.</desc>
+  <defs>
+    <marker id="pcaLeakArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#A67C52"/>
+    </marker>
+    <marker id="pcaLeakBadArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#9A4F4F"/>
+    </marker>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:16px;font-weight:700}
+      .h{font-size:13px;font-weight:700}
+      .s{font-size:11px}
+      .m{font-size:11px;fill:#5A544C}
+      .lane{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+      .data{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.4}
+      .held{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.4}
+      .fit{fill:#EDE8E1;stroke:#7F786D;stroke-width:1.4}
+      .good{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+      .flow{fill:none;stroke:#A67C52;stroke-width:1.7;marker-end:url(#pcaLeakArrow)}
+      .badFlow{fill:none;stroke:#9A4F4F;stroke-width:1.8;stroke-dasharray:5 4;marker-end:url(#pcaLeakBadArrow)}
+      .bad{fill:#9A4F4F}.goodMark{fill:#55784B}
+    </style>
+  </defs>
+  <rect width="760" height="500" fill="#F7F4F0"/>
+  <text x="24" y="31" class="t title">The evaluation boundary must come before anything that learns</text>
+  <text x="24" y="51" class="t m">Imputation, scaling, principal component analysis (PCA), and a classifier all fit parameters from data.</text>
+
+  <rect x="24" y="76" width="712" height="172" rx="14" class="lane"/>
+  <circle cx="47" cy="101" r="12" class="bad"/><text x="47" y="106" text-anchor="middle" font-family="Arial" font-size="17" font-weight="700" fill="#F7F4F0">X</text>
+  <text x="68" y="105" class="t h">INCORRECT: PREPROCESS EVERY GROUP, THEN SPLIT</text>
+
+  <rect x="44" y="132" width="124" height="74" rx="9" class="data"/>
+  <text x="106" y="157" text-anchor="middle" class="t h">ALL GROUPS</text>
+  <text x="106" y="177" text-anchor="middle" class="t s">train + held-out</text>
+  <text x="106" y="195" text-anchor="middle" class="t m">mixed together</text>
+  <path class="flow" d="M169 169 H203"/>
+  <rect x="211" y="122" width="260" height="94" rx="9" class="fit"/>
+  <text x="341" y="149" text-anchor="middle" class="t h">FIT IMPUTER + SCALER + PCA</text>
+  <text x="341" y="174" text-anchor="middle" class="t s">held-out medians, means, spreads,</text>
+  <text x="341" y="193" text-anchor="middle" class="t s">and covariance influence training</text>
+  <path class="flow" d="M472 169 H506"/>
+  <rect x="514" y="132" width="198" height="74" rx="9" class="held"/>
+  <text x="613" y="158" text-anchor="middle" class="t h">SPLIT + EVALUATE</text>
+  <text x="613" y="181" text-anchor="middle" class="t s">test information already leaked</text>
+
+  <rect x="24" y="266" width="712" height="202" rx="14" class="lane"/>
+  <circle cx="47" cy="291" r="12" class="goodMark"/><path d="M40 291 L45 296 L55 285" fill="none" stroke="#F7F4F0" stroke-width="2.4"/>
+  <text x="68" y="295" class="t h">CORRECT: SPLIT GROUPS FIRST</text>
+
+  <rect x="44" y="322" width="124" height="58" rx="9" class="data"/>
+  <text x="106" y="347" text-anchor="middle" class="t h">TRAIN GROUPS</text>
+  <text x="106" y="367" text-anchor="middle" class="t s">available to fit</text>
+  <path class="flow" d="M169 351 H203"/>
+  <rect x="211" y="310" width="300" height="82" rx="9" class="good"/>
+  <text x="361" y="337" text-anchor="middle" class="t h">FIT TRAINING PIPELINE</text>
+  <text x="361" y="361" text-anchor="middle" class="t s">imputer + scaler + PCA + model</text>
+  <text x="361" y="379" text-anchor="middle" class="t s">learned from training groups only</text>
+
+  <rect x="44" y="402" width="124" height="45" rx="9" class="held"/>
+  <text x="106" y="421" text-anchor="middle" class="t h">HELD-OUT</text>
+  <text x="106" y="438" text-anchor="middle" class="t s">unseen groups</text>
+  <path class="flow" d="M169 425 H505"/>
+  <path class="flow" d="M461 393 V407 H505"/>
+  <rect x="514" y="402" width="198" height="45" rx="9" class="held"/>
+  <text x="613" y="421" text-anchor="middle" class="t h">APPLY FITTED PIPELINE</text>
+  <text x="613" y="438" text-anchor="middle" class="t s">then score held-out rows</text>
+
+  <text x="380" y="489" text-anchor="middle" class="t s">Group by the unit named in the claim: donor, organism, genotype, plate, or another justified unit.</text>
+</svg>

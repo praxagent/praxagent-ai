@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="340" viewBox="0 0 760 340" role="img" aria-labelledby="pcaScoresTitle pcaScoresDesc">
+  <title id="pcaScoresTitle">Principal component analysis gives scores to profiles and principal-axis coefficients to features</title>
+  <desc id="pcaScoresDesc">A prepared numerical feature matrix, scaled for this example, has profile rows and measurement columns and enters principal component analysis. The left output is a profile map labeled scores, where each row becomes a point. The right output is an axis recipe labeled principal-axis coefficients. Three generic feature bars illustrate example coefficients and are not empirical wheat-kernel labels.</desc>
+  <defs>
+    <marker id="pcaScoresArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#A67C52"/>
+    </marker>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:16px;font-weight:700}
+      .h{font-size:13px;font-weight:700}
+      .s{font-size:12px}
+      .m{font-size:11px;fill:#5A544C}
+      .matrix{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.6}
+      .pca{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.8}
+      .scores{fill:#FBF9F6;stroke:#6F8D5E;stroke-width:1.6}
+      .loads{fill:#FBF9F6;stroke:#8E5A8A;stroke-width:1.6}
+      .flow{fill:none;stroke:#A67C52;stroke-width:1.8;marker-end:url(#pcaScoresArrow)}
+      .axis{stroke:#7F786D;stroke-width:1.1}
+      .point{fill:#4B6787}
+      .barA{fill:#8E5A8A}.barB{fill:#BDA9BA}
+    </style>
+  </defs>
+  <rect width="760" height="340" fill="#F7F4F0"/>
+  <text x="24" y="31" class="t title">One calculation, two different kinds of output</text>
+  <text x="24" y="51" class="t m">Ask whether a value belongs to a profile row or an original feature column.</text>
+
+  <rect x="24" y="92" width="180" height="154" rx="12" class="matrix"/>
+  <text x="114" y="120" text-anchor="middle" class="t h">FEATURE MATRIX</text>
+  <text x="114" y="145" text-anchor="middle" class="t s">rows = profiles</text>
+  <text x="114" y="166" text-anchor="middle" class="t s">columns = measurements</text>
+  <line x1="50" y1="187" x2="178" y2="187" class="axis"/>
+  <text x="114" y="212" text-anchor="middle" class="t m">prepared numeric matrix</text>
+  <text x="114" y="228" text-anchor="middle" class="t m">scaled in this example</text>
+  <text x="114" y="244" text-anchor="middle" class="t m">labels excluded</text>
+
+  <path class="flow" d="M205 169 H250"/>
+  <rect x="258" y="116" width="106" height="106" rx="53" class="pca"/>
+  <text x="311" y="159" text-anchor="middle" class="t h">PRINCIPAL</text>
+  <text x="311" y="177" text-anchor="middle" class="t h">COMPONENT</text>
+  <text x="311" y="195" text-anchor="middle" class="t h">ANALYSIS</text>
+
+  <path class="flow" d="M365 151 C399 151 401 113 430 113"/>
+  <path class="flow" d="M365 187 C399 187 401 236 430 236"/>
+
+  <rect x="438" y="74" width="298" height="108" rx="12" class="scores"/>
+  <text x="456" y="99" class="t h">SCORES BELONG TO PROFILE ROWS</text>
+  <line x1="464" y1="159" x2="550" y2="159" class="axis"/><line x1="507" y1="170" x2="507" y2="116" class="axis"/>
+  <circle cx="482" cy="151" r="4" class="point"/><circle cx="496" cy="142" r="4" class="point"/><circle cx="522" cy="130" r="4" class="point"/><circle cx="537" cy="121" r="4" class="point"/>
+  <text x="574" y="130" class="t s">Where does one profile</text>
+  <text x="574" y="148" class="t s">row sit on component 1</text>
+  <text x="574" y="166" class="t s">and component 2?</text>
+
+  <rect x="438" y="196" width="298" height="108" rx="12" class="loads"/>
+  <text x="456" y="217" class="t h">PRINCIPAL-AXIS COEFFICIENTS</text>
+  <text x="456" y="233" class="t m">example weights; one per feature</text>
+  <text x="456" y="252" class="t m">feature A</text><rect x="535" y="241" width="65" height="12" class="barA"/>
+  <text x="456" y="270" class="t m">feature B</text><rect x="535" y="259" width="42" height="12" class="barB"/>
+  <text x="456" y="288" class="t m">feature C</text><rect x="535" y="277" width="52" height="12" class="barA"/>
+  <text x="620" y="258" class="t s">Which measurements</text>
+  <text x="620" y="276" class="t s">define this axis?</text>
+
+  <text x="380" y="326" text-anchor="middle" class="t s">A score locates one profile. A principal-axis coefficient weights one feature in the definition of an axis.</text>
+</svg>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <title>Feed-forward network (FFN) - praxagent Knowledge Base</title>
+    
+    
+
+
+
+
+
+
+    
+    
+    <meta name="description" content="A computation with no feedback cycle; in a Transformer, usually the shared position-wise sublayer that transforms each token state separately.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/glossary/feed-forward-network/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="praxagent Knowledge Base">
+    <meta property="og:title" content="Feed-forward network (FFN)">
+    <meta property="og:description" content="A computation with no feedback cycle; in a Transformer, usually the shared position-wise sublayer that transforms each token state separately.">
+    <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/glossary/feed-forward-network/">
+    <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <meta property="og:image:alt" content="Praxagent&#39;s stochastic mountain landscape.">
+    <meta property="og:image:width" content="1499">
+    <meta property="og:image:height" content="780">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="Feed-forward network (FFN)">
+    <meta name="twitter:description" content="A computation with no feedback cycle; in a Transformer, usually the shared position-wise sublayer that transforms each token state separately.">
+    <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <meta name="twitter:image:alt" content="Praxagent&#39;s stochastic mountain landscape.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/styles-v2.css">
+    <link rel="stylesheet" href="/blog/blog.css">
+    <link rel="stylesheet" href="/blog/katex.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'neutral',
+        securityLevel: 'loose',
+        flowchart: { htmlLabels: true, curve: 'basis' }
+      });
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-scrolls industrial-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+
+
+
+            <div class="nav-menu">
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link">Research Notes</a>
+                <a href="/blog/knowledge-base/" class="nav-link active">Knowledge Base</a>
+                <a href="/blog/search/" class="nav-link">Search</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
+            <a href="/blog/knowledge-base/" class="mobile-nav-link active">Knowledge Base</a>
+            <a href="/blog/search/" class="mobile-nav-link">Search</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        
+
+
+
+
+<div class="blog-post reference-entry">
+    <div class="container">
+        <article class="post-content">
+            <header class="post-header">
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
+                <h1 class="post-title">Feed-forward network (FFN)</h1>
+                
+                <p class="reference-summary">A computation with no feedback cycle; in a Transformer, usually the shared position-wise sublayer that transforms each token state separately.</p>
+                
+
+            </header>
+
+
+
+
+
+            <div class="post-body">
+                <p>A <strong>feed-forward network (FFN)</strong> is a neural-network computation in which values move from inputs through a finite sequence, or another arrangement with no feedback cycle, to outputs. During one forward computation, a later value is not fed back into an earlier operation. A residual or skip connection can still be feed-forward when it only carries an earlier value to a later operation.</p>
+<p>In <a href="/blog/knowledge-base/glossary/transformer/">Transformer</a> writing, <strong>FFN</strong> usually means something narrower: the <strong>position-wise feed-forward sublayer</strong> inside each block. The same learned function transforms every token-position state separately. A <a href="/blog/knowledge-base/glossary/mlp/">multilayer perceptron (MLP)</a> is a common implementation of that function.</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Three token-state vectors pass independently through feed-forward network copies with the same parameters, producing three corresponding updates without direct cross-position connections." tabindex="0">
+        <img src="/blog/knowledge-base/glossary/feed-forward-network/feed-forward-network-positionwise.svg" alt="Three token-state vectors pass independently through feed-forward network copies with the same parameters, producing three corresponding updates without direct cross-position connections." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>Within one Transformer layer, the same feed-forward network parameters map each token-position state to an update at that position. No position directly reads another position inside this sublayer, although each input state may already contain context written by attention. The illustration omits normalization and residual addition and does not imply that parameters are shared between different layers.</figcaption>
+</figure>
+
+<h2 id="position-wise-means-one-row-at-a-time">Position-wise means one row at a time</h2>
+<p>Let \(\mathbb{R}\) denote the real numbers. Suppose \(H\in\mathbb{R}^{n\times d_{\text{model}}}\) contains one row for each of \(n\) token positions, with \(d_{\text{model}}\) coordinates per row. A position-wise FFN computes</p>
+\[
+Y_{t,:}=f_\theta(H_{t,:}),
+\qquad t\in\{1,\ldots,n\}.
+\]<p>Here \(t\) selects a token position, the colon means all coordinates in that row, \(f_\theta\) is the learned feed-forward function, and \(\theta\) denotes its learned numeric parameters. The same \(\theta\) is reused for every position within this layer. Different layers normally have different parameters.</p>
+<p>The output row \(Y_{t,:}\) does not directly read a different input row \(H_{s,:}\) when \(s\ne t\). That does <strong>not</strong> make it context-free: \(H_{t,:}\) may already contain information gathered from other positions by attention. The original Transformer described this sublayer as two learned affine transformations with a rectified linear unit between them, applied to each position separately and identically (<a href="https://arxiv.org/abs/1706.03762v7">Vaswani et al., 2017, Section 3.3</a>). Modern blocks may use gated variants instead (<a href="https://arxiv.org/abs/2002.05202v1">Shazeer, 2020</a>).</p>
+<h2 id="ffn-position-wise-ffn-and-mlp">FFN, position-wise FFN, and MLP</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Term</th>
+          <th>What it identifies</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Feed-forward network</td>
+          <td>A forward computation with no feedback cycle</td>
+      </tr>
+      <tr>
+          <td>Position-wise FFN</td>
+          <td>The Transformer sublayer&rsquo;s role: apply one learned function separately at each token position</td>
+      </tr>
+      <tr>
+          <td>Multilayer perceptron</td>
+          <td>A common layered implementation using learned affine maps and nonlinear activation or gating</td>
+      </tr>
+  </tbody>
+</table>
+<p>These labels often refer to the same module in Transformer code, but they emphasize different facts. <strong>Feed-forward</strong> describes connectivity, <strong>position-wise</strong> describes how token positions are handled, and <strong>MLP</strong> describes a common internal construction.</p>
+<h2 id="what-feed-forward-does-not-mean">What feed-forward does not mean</h2>
+<ul>
+<li>It does not mean that training only moves forward. Training can still work backward through the operations to determine how learned parameters should change.</li>
+<li><strong>Fully connected</strong> means a learned map can combine coordinates within one token vector. It does not mean the FFN directly mixes token positions.</li>
+<li>Shared parameters across positions do not imply shared parameters across layers.</li>
+<li>The FFN&rsquo;s output is an internal update to the <a href="/blog/knowledge-base/glossary/residual-stream/">residual stream</a>, not a final token probability.</li>
+</ul>
+<p>See also: <a href="/blog/knowledge-base/glossary/mlp/">multilayer perceptron (MLP)</a>, <a href="/blog/knowledge-base/glossary/transformer/">Transformer</a>, <a href="/blog/knowledge-base/glossary/residual-stream/">residual stream</a>.</p>
+
+            </div>
+
+            <footer class="post-footer">
+
+                <div class="post-navigation">
+
+                    <a href="/blog/knowledge-base/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/knowledge-base/" class="back-to-blog">Knowledge Base</a>
+                    <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+
+    </main>
+
+    <footer class="footer footer-compact">
+        <div class="container">
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
+            </div>
+            <div class="footer-compact-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="/blog/search/">Search</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/blog/script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tables = document.querySelectorAll('.post-body table');
+            tables.forEach((table, index) => {
+                if (table.parentElement?.classList.contains('table-scroll')) return;
+
+                const scroller = document.createElement('div');
+                scroller.className = 'table-scroll';
+                scroller.setAttribute('aria-label', `Scrollable data table ${index + 1}`);
+                table.parentNode.insertBefore(scroller, table);
+                scroller.appendChild(table);
+
+                const updateScrollableState = () => {
+                    const isScrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+                    scroller.classList.toggle('is-scrollable', isScrollable);
+                    if (isScrollable) {
+                        scroller.setAttribute('role', 'region');
+                        scroller.setAttribute('tabindex', '0');
+                    } else {
+                        scroller.removeAttribute('role');
+                        scroller.removeAttribute('tabindex');
+                    }
+                };
+
+                requestAnimationFrame(updateScrollableState);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(updateScrollableState).observe(scroller);
+                } else {
+                    window.addEventListener('resize', updateScrollableState, { passive: true });
+                }
+            });
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                output: "htmlAndMathml"
+            });
+
+            const copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+            const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
+            codeBlocks.forEach(pre => {
+                if (pre.closest('.code-block-frame')) {
+                    return;
+                }
+
+                const frame = document.createElement('div');
+                frame.className = 'code-block-frame';
+                const toolbar = document.createElement('div');
+                toolbar.className = 'code-block-toolbar';
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'copy-code-button';
+                button.innerHTML = copyIcon;
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+                button.setAttribute('title', 'Copy');
+
+                const markCopied = () => {
+                    button.innerHTML = checkIcon;
+                    button.classList.add('copied');
+                    button.setAttribute('aria-label', 'Copied');
+                    setTimeout(() => {
+                        button.innerHTML = copyIcon;
+                        button.classList.remove('copied');
+                        button.setAttribute('aria-label', 'Copy code to clipboard');
+                    }, 2000);
+                };
+
+                button.addEventListener('click', () => {
+                    const code = pre.querySelector('code');
+                    const text = code ? code.textContent : pre.textContent;
+
+                    navigator.clipboard.writeText(text).then(markCopied).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            markCopied();
+                        } catch (fallbackErr) {
+                            console.error('Fallback copy failed: ', fallbackErr);
+                        }
+                        document.body.removeChild(textArea);
+                    });
+                });
+
+                toolbar.appendChild(button);
+                frame.appendChild(toolbar);
+                pre.parentNode.insertBefore(frame, pre);
+                frame.appendChild(pre);
+            });
+        });
+    </script>
+
+</body>
+</html>

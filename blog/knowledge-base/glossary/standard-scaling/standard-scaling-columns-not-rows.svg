@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="530" viewBox="0 0 920 530" role="img" aria-labelledby="scale-title scale-desc">
+  <title id="scale-title">Standard scaling works down feature columns, while L2 normalization works across one vector</title>
+  <desc id="scale-desc">The left panel shows separate means and standard deviations learned down the area, width, and groove feature columns across observations. The right panel divides one row vector, 2, 1, 2, by its Euclidean length 3 to produce the exact unit-length vector two-thirds, one-third, two-thirds.</desc>
+  <defs>
+    <marker id="scale-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#2C2924"/>
+    </marker>
+    <pattern id="scale-row-pattern" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#A67C52" stroke-width="2" opacity="0.28"/>
+    </pattern>
+  </defs>
+  <rect width="920" height="530" rx="24" fill="#F7F4F0"/>
+  <text x="460" y="39" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#2C2924">Two normalizations, two directions of calculation</text>
+
+  <rect x="30" y="68" width="500" height="420" rx="18" fill="#FFFDF9" stroke="#B9AA98" stroke-width="2"/>
+  <text x="280" y="103" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#2C2924">Standard scaling: down each feature column</text>
+  <text x="280" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#5A544C">Learn a different mean and standard deviation for every column</text>
+
+  <rect x="72" y="158" width="402" height="198" rx="10" fill="#F7F4F0" stroke="#887B6B" stroke-width="2"/>
+  <rect x="156" y="158" width="106" height="198" fill="#DCE6EE" opacity="0.9"/>
+  <rect x="262" y="158" width="106" height="198" fill="#E7D5C2" opacity="0.85"/>
+  <rect x="368" y="158" width="106" height="198" fill="#DDE8D6" opacity="0.9"/>
+  <g stroke="#887B6B" stroke-width="1.5">
+    <line x1="72" y1="204" x2="474" y2="204"/><line x1="72" y1="254" x2="474" y2="254"/><line x1="72" y1="304" x2="474" y2="304"/>
+    <line x1="156" y1="158" x2="156" y2="356"/><line x1="262" y1="158" x2="262" y2="356"/><line x1="368" y1="158" x2="368" y2="356"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="17" fill="#2C2924" text-anchor="middle">
+    <text x="114" y="188" font-weight="700">row</text><text x="209" y="188" font-weight="700">area</text><text x="315" y="188" font-weight="700">width</text><text x="421" y="188" font-weight="700">groove</text>
+    <text x="114" y="236">1</text><text x="209" y="236">12.1</text><text x="315" y="236">3.0</text><text x="421" y="236">5.2</text>
+    <text x="114" y="286">2</text><text x="209" y="286">15.4</text><text x="315" y="286">3.6</text><text x="421" y="286">5.9</text>
+    <text x="114" y="336">3</text><text x="209" y="336">13.8</text><text x="315" y="336">3.2</text><text x="421" y="336">5.5</text>
+  </g>
+  <g stroke="#2C2924" stroke-width="2.5" marker-end="url(#scale-arrow)">
+    <line x1="245" y1="218" x2="245" y2="340"/><line x1="351" y1="218" x2="351" y2="340"/><line x1="457" y1="218" x2="457" y2="340"/>
+  </g>
+  <text x="280" y="392" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#4B6787">one mean and one spread per column</text>
+  <text x="280" y="422" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#5A544C">training columns become centered with variance 1</text>
+  <text x="280" y="452" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#5A544C">Table values are a structural toy example.</text>
+
+  <rect x="554" y="68" width="336" height="420" rx="18" fill="#FFFDF9" stroke="#B9AA98" stroke-width="2"/>
+  <text x="722" y="103" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#2C2924">Euclidean (L2): across one row</text>
+  <text x="722" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#5A544C">Rescale the vector to Euclidean length 1</text>
+  <rect x="598" y="166" width="248" height="64" rx="12" fill="url(#scale-row-pattern)" stroke="#A67C52" stroke-width="2"/>
+  <text x="722" y="207" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="700" fill="#2C2924">[ 2, 1, 2 ]</text>
+  <line x1="722" y1="243" x2="722" y2="292" stroke="#2C2924" stroke-width="3" marker-end="url(#scale-arrow)"/>
+  <text x="738" y="270" font-family="Arial, sans-serif" font-size="17" fill="#5A544C">divide by length 3</text>
+  <rect x="585" y="307" width="274" height="66" rx="12" fill="#DCE6EE" stroke="#4B6787" stroke-width="2"/>
+  <text x="722" y="349" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#2C2924">[ 2/3, 1/3, 2/3 ]</text>
+  <text x="722" y="406" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#4B6787">vector length = 1</text>
+  <text x="722" y="436" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#5A544C">No feature mean is subtracted.</text>
+</svg>

@@ -1,6 +1,7 @@
 HUGO ?= hugo
 PYTHON ?= python3
 NPM ?= npm
+NODE ?= node
 RSYNC ?= rsync
 
 BLOG_SOURCE := blog-source
@@ -18,6 +19,10 @@ PRAX_DOCS_CONTENT_OUTPUT := $(BLOG_SOURCE)/content/knowledge-base/prax
 PRAX_DOCS_STATIC_OUTPUT := $(BLOG_SOURCE)/static/prax-docs
 LATE_CHUNKING_BUNDLE := $(BLOG_SOURCE)/content/knowledge-base/deep-dives/late-chunking
 LATE_CHUNKING_PUBLIC := $(BLOG_OUTPUT)/knowledge-base/deep-dives/late-chunking
+SEARCH_PAGE := $(BLOG_OUTPUT)/search/index.html
+PAGEFIND_RUNTIME := $(BLOG_OUTPUT)/pagefind/pagefind.js
+SEMANTIC_INDEX := $(BLOG_OUTPUT)/search-assets/index/semantic-index.json
+SEMANTIC_EMBEDDINGS := $(BLOG_OUTPUT)/search-assets/index/embeddings.f32
 
 # Port used to serve the full static site locally.
 SITE_PORT ?= 8000
@@ -46,7 +51,7 @@ DETACH := $(abspath scripts/detach_serve.sh)
 
 .DEFAULT_GOAL := help
 
-.PHONY: help sync-prax-docs verify-late-chunking blog blog-drafts blog-serve blog-serve-tailscale run-site-local run-site-tailscale check check-browser stage-pages pages ci up down
+.PHONY: help sync-prax-docs verify-late-chunking blog blog-drafts blog-serve blog-serve-tailscale run-site-local run-site-tailscale check check-browser check-search-assets check-search-browser stage-pages pages ci up down
 
 help: ## Show available commands
 	@awk 'BEGIN {FS = ":.*## "; printf "Usage: make <target>\n\nTargets:\n"} /^[a-zA-Z0-9_-]+:.*## / {printf "  %-22s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -123,12 +128,13 @@ blog: sync-prax-docs verify-late-chunking ## Compile blog-source/content/posts i
 	$(PYTHON) scripts/copy_blog_docs.py \
 		"$(BLOG_SOURCE)/content/posts" \
 		"$(BLOG_OUTPUT)/posts"
+	$(NPM) run build:search
 
 blog-drafts: ## Compile blog output including draft Research Notes
 	$(MAKE) blog BLOG_BUILD_FLAGS=--buildDrafts
 
 ifneq ($(SERVE_ACTION),down)
-blog-serve blog-serve-tailscale: sync-prax-docs
+blog-serve blog-serve-tailscale: blog-drafts
 endif
 
 blog-serve: ## Blog live reload at http://127.0.0.1:1313/blog/ (up|down supported)
@@ -216,10 +222,22 @@ check: sync-prax-docs verify-late-chunking ## Validate Hugo, links, assets, prov
 	$(PYTHON) scripts/check_public_repo.py
 	$(PYTHON) scripts/check_site.py
 	$(PYTHON) scripts/check_provenance.py
+	$(MAKE) check-search-assets
 	$(MAKE) check-browser
+	$(MAKE) check-search-browser
 
 check-browser: ## Render every knowledge-base display equation in Chromium
 	$(NPM) run test:browser
+
+check-search-assets: ## Require the generated lexical and semantic search bundle
+	test -s "$(SEARCH_PAGE)"
+	test -s "$(PAGEFIND_RUNTIME)"
+	test -s "$(SEMANTIC_INDEX)"
+	test -s "$(SEMANTIC_EMBEDDINGS)"
+	$(NODE) scripts/check_search_index.mjs
+
+check-search-browser: check-search-assets ## Exercise the production search bundle in Chromium
+	$(NPM) run test:search-browser
 
 stage-pages: ## Assemble and validate the allowlisted Pages artifact
 	$(PYTHON) scripts/stage_pages.py --output "$(PAGES_OUTPUT)"

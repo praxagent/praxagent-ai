@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="480" viewBox="0 0 880 480" role="img" aria-labelledby="sd-title sd-desc">
+  <title id="sd-title">Standard deviation distinguishes narrow and wide spread around the same mean</title>
+  <desc id="sd-desc">Two horizontal number lines share a mean of 10. Values 9, 9, 10, and 12 cluster near the mean and have population standard deviation 1.22. Values 6, 9, 11, and 14 sit farther from the mean and have population standard deviation 2.92.</desc>
+  <defs>
+    <pattern id="sd-wide-pattern" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#6F8D5E" stroke-width="2" opacity="0.35"/>
+    </pattern>
+  </defs>
+  <rect width="880" height="480" rx="24" fill="#F7F4F0"/>
+  <text x="440" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#2C2924">Same mean, different spread</text>
+  <text x="440" y="67" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#5A544C">Toy values on one shared scale</text>
+
+  <rect x="48" y="91" width="784" height="151" rx="17" fill="#FFFDF9" stroke="#B9AA98" stroke-width="2"/>
+  <text x="74" y="123" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#2C2924">Values close to 10</text>
+  <text x="806" y="123" text-anchor="end" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#4B6787">standard deviation = 1.22</text>
+  <rect x="373" y="143" width="134" height="48" rx="8" fill="#DCE6EE" stroke="#4B6787" stroke-width="2"/>
+  <text x="460" y="139" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#4B6787">about one standard deviation each side</text>
+  <line x1="110" y1="192" x2="770" y2="192" stroke="#2C2924" stroke-width="3"/>
+  <line x1="440" y1="133" x2="440" y2="218" stroke="#A67C52" stroke-width="3" stroke-dasharray="6 5"/>
+  <text x="440" y="232" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#7A5939">mean = 10</text>
+  <g fill="#4B6787" stroke="#2C2924" stroke-width="2">
+    <circle cx="385" cy="178" r="10"/>
+    <circle cx="385" cy="207" r="10"/>
+    <circle cx="440" cy="178" r="10"/>
+    <circle cx="550" cy="178" r="10"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="14" fill="#5A544C" text-anchor="middle">
+    <text x="385" y="165">9, 9</text><text x="440" y="165">10</text><text x="550" y="165">12</text>
+  </g>
+
+  <rect x="48" y="264" width="784" height="151" rx="17" fill="#FFFDF9" stroke="#B9AA98" stroke-width="2"/>
+  <text x="74" y="296" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#2C2924">Values farther from 10</text>
+  <text x="806" y="296" text-anchor="end" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#6F8D5E">standard deviation = 2.92</text>
+  <rect x="279" y="316" width="322" height="48" rx="8" fill="url(#sd-wide-pattern)" stroke="#6F8D5E" stroke-width="2"/>
+  <text x="440" y="312" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#506A43">about one standard deviation each side</text>
+  <line x1="110" y1="365" x2="770" y2="365" stroke="#2C2924" stroke-width="3"/>
+  <line x1="440" y1="306" x2="440" y2="391" stroke="#A67C52" stroke-width="3" stroke-dasharray="6 5"/>
+  <text x="440" y="405" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#7A5939">mean = 10</text>
+  <g fill="#D7C3A9" stroke="#2C2924" stroke-width="2">
+    <rect x="210" y="341" width="20" height="20" rx="3"/>
+    <rect x="375" y="341" width="20" height="20" rx="3"/>
+    <rect x="485" y="341" width="20" height="20" rx="3"/>
+    <rect x="650" y="341" width="20" height="20" rx="3"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="14" fill="#5A544C" text-anchor="middle">
+    <text x="220" y="332">6</text><text x="385" y="332">9</text><text x="495" y="332">11</text><text x="660" y="332">14</text>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="14" fill="#5A544C" text-anchor="middle">
+    <text x="110" y="442">4</text><text x="275" y="442">7</text><text x="440" y="442">10</text><text x="605" y="442">13</text><text x="770" y="442">16</text>
+  </g>
+</svg>

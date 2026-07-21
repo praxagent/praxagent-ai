@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="retrieval-metrics-title retrieval-metrics-desc">
+  <title id="retrieval-metrics-title">One top-ten list, three different retrieval scoring rules</title>
+  <desc id="retrieval-metrics-desc">Every candidate document has a binary label of relevant or nonrelevant, and at 10 means that ranks 1 through 10 are evaluated. Four documents are known relevant. Three appear in the top ten at ranks 2, 5, and 9, while one known-relevant document is not within the top ten. Recall at 10, written Recall@10, counts all three found documents and is 0.75. Reciprocal rank at 10, written RR@10, uses only the first relevant result at rank 2 and is 0.50. Discounted cumulative gain at 10, written DCG@10, is 1.319; ideal discounted cumulative gain at 10, written IDCG@10, is 2.562; normalized discounted cumulative gain at 10, written nDCG@10, is 0.515.</desc>
+
+  <rect width="1200" height="630" fill="#F7F4F0"/>
+
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="600" y="38" text-anchor="middle" fill="#2C2924" font-size="27" font-weight="700">One top-ten list, three different scoring rules</text>
+    <text x="600" y="65" text-anchor="middle" fill="#5A544C" font-size="15">Every candidate is labeled relevant or nonrelevant; @10 evaluates ranks 1-10</text>
+
+    <text x="36" y="101" fill="#5A544C" font-size="12" font-weight="700" letter-spacing="1.1">THE SAME TOP-TEN LIST</text>
+    <text x="36" y="128" fill="#2C2924" font-size="14" font-weight="700">R = relevant; N = nonrelevant</text>
+    <text x="36" y="149" fill="#5A544C" font-size="13">in the reference labels</text>
+
+    <g text-anchor="middle">
+      <g fill="#FFFDFC" stroke="#8C8379" stroke-width="1.4">
+        <rect x="263" y="105" width="46" height="54" rx="7"/>
+        <rect x="323" y="105" width="46" height="54" rx="7"/>
+        <rect x="383" y="105" width="46" height="54" rx="7"/>
+        <rect x="443" y="105" width="46" height="54" rx="7"/>
+        <rect x="503" y="105" width="46" height="54" rx="7"/>
+        <rect x="563" y="105" width="46" height="54" rx="7"/>
+        <rect x="623" y="105" width="46" height="54" rx="7"/>
+        <rect x="683" y="105" width="46" height="54" rx="7"/>
+        <rect x="743" y="105" width="46" height="54" rx="7"/>
+        <rect x="803" y="105" width="46" height="54" rx="7"/>
+      </g>
+      <g fill="#E3ECDD" stroke="#3F6640" stroke-width="2.4">
+        <rect x="323" y="105" width="46" height="54" rx="7"/>
+        <rect x="503" y="105" width="46" height="54" rx="7"/>
+        <rect x="743" y="105" width="46" height="54" rx="7"/>
+      </g>
+      <g fill="#5A544C" font-size="11" font-weight="700">
+        <text x="286" y="122">RANK</text><text x="286" y="139">1</text>
+        <text x="346" y="122">RANK</text><text x="346" y="139">2</text>
+        <text x="406" y="122">RANK</text><text x="406" y="139">3</text>
+        <text x="466" y="122">RANK</text><text x="466" y="139">4</text>
+        <text x="526" y="122">RANK</text><text x="526" y="139">5</text>
+        <text x="586" y="122">RANK</text><text x="586" y="139">6</text>
+        <text x="646" y="122">RANK</text><text x="646" y="139">7</text>
+        <text x="706" y="122">RANK</text><text x="706" y="139">8</text>
+        <text x="766" y="122">RANK</text><text x="766" y="139">9</text>
+        <text x="826" y="122">RANK</text><text x="826" y="139">10</text>
+      </g>
+      <g font-size="15" font-weight="700">
+        <text x="346" y="154" fill="#315A35">R</text>
+        <text x="526" y="154" fill="#315A35">R</text>
+        <text x="766" y="154" fill="#315A35">R</text>
+      </g>
+      <g fill="#6F675F" font-size="13" font-weight="700">
+        <text x="286" y="154">N</text><text x="406" y="154">N</text><text x="466" y="154">N</text>
+        <text x="586" y="154">N</text><text x="646" y="154">N</text><text x="706" y="154">N</text><text x="826" y="154">N</text>
+      </g>
+    </g>
+
+    <rect x="902" y="104" width="260" height="57" rx="8" fill="#FFFDFC" stroke="#3F6640" stroke-width="1.7" stroke-dasharray="5 4"/>
+    <text x="1032" y="124" text-anchor="middle" fill="#315A35" font-size="13" font-weight="700">1 KNOWN-RELEVANT DOCUMENT</text>
+    <text x="1032" y="146" text-anchor="middle" fill="#5A544C" font-size="14">is not within the top ten</text>
+
+    <g stroke="#DED7CF" stroke-width="1" stroke-dasharray="3 5">
+      <path d="M286 166V574"/><path d="M346 166V574"/><path d="M406 166V574"/><path d="M466 166V574"/><path d="M526 166V574"/>
+      <path d="M586 166V574"/><path d="M646 166V574"/><path d="M706 166V574"/><path d="M766 166V574"/><path d="M826 166V574"/>
+    </g>
+    <g stroke="#CFC7BD" stroke-width="1.3">
+      <path d="M36 177H1164"/><path d="M36 282H1164"/><path d="M36 389H1164"/>
+    </g>
+
+    <text x="36" y="207" fill="#31516F" font-size="18" font-weight="700">Recall at 10 (Recall@10)</text>
+    <text x="36" y="232" fill="#2C2924" font-size="14">How many of the 4</text>
+    <text x="36" y="251" fill="#2C2924" font-size="14">known-relevant documents</text>
+    <text x="36" y="270" fill="#2C2924" font-size="14">are in the top ten?</text>
+    <text x="556" y="201" text-anchor="middle" fill="#5A544C" font-size="13">All three found documents count equally</text>
+    <g text-anchor="middle" font-size="13" font-weight="700">
+      <circle cx="346" cy="230" r="18" fill="#DCE8F3" stroke="#31516F" stroke-width="2"/><text x="346" y="235" fill="#27445D">+1</text>
+      <circle cx="526" cy="230" r="18" fill="#DCE8F3" stroke="#31516F" stroke-width="2"/><text x="526" y="235" fill="#27445D">+1</text>
+      <circle cx="766" cy="230" r="18" fill="#DCE8F3" stroke="#31516F" stroke-width="2"/><text x="766" y="235" fill="#27445D">+1</text>
+      <text x="346" y="263" fill="#31516F" font-size="11">FOUND</text>
+      <text x="526" y="263" fill="#31516F" font-size="11">FOUND</text>
+      <text x="766" y="263" fill="#31516F" font-size="11">FOUND</text>
+    </g>
+    <text x="1032" y="218" text-anchor="middle" fill="#5A544C" font-size="14">3 found / 4 known</text>
+    <text x="1032" y="250" text-anchor="middle" fill="#31516F" font-size="22" font-weight="700">Recall@10 = 0.75</text>
+
+    <text x="36" y="309" fill="#7A542E" font-size="17" font-weight="700">Reciprocal rank at 10</text>
+    <text x="36" y="330" fill="#7A542E" font-size="15" font-weight="700">(RR@10)</text>
+    <text x="36" y="352" fill="#2C2924" font-size="14">How early is the first</text>
+    <text x="36" y="371" fill="#2C2924" font-size="14">relevant result?</text>
+    <text x="556" y="308" text-anchor="middle" fill="#5A544C" font-size="13">Only the first relevant result is used</text>
+    <circle cx="346" cy="337" r="21" fill="#F4E4D2" stroke="#7A542E" stroke-width="2.4"/>
+    <text x="346" y="342" text-anchor="middle" fill="#6B4828" font-size="12" font-weight="700">FIRST</text>
+    <g text-anchor="middle">
+      <circle cx="526" cy="337" r="16" fill="#FFFDFC" stroke="#A99B8B" stroke-width="1.5"/>
+      <circle cx="766" cy="337" r="16" fill="#FFFDFC" stroke="#A99B8B" stroke-width="1.5"/>
+      <text x="526" y="342" fill="#7A7168" font-size="12">later</text>
+      <text x="766" y="342" fill="#7A7168" font-size="12">later</text>
+      <text x="646" y="370" fill="#5A544C" font-size="12">Ranks 5 and 9 do not change reciprocal rank</text>
+    </g>
+    <text x="1032" y="325" text-anchor="middle" fill="#5A544C" font-size="14">first relevant result: rank 2</text>
+    <text x="1032" y="357" text-anchor="middle" fill="#7A542E" font-size="22" font-weight="700">RR@10 = 1 / 2 = 0.50</text>
+
+    <text x="36" y="417" fill="#3F6640" font-size="16" font-weight="700">Normalized discounted</text>
+    <text x="36" y="437" fill="#3F6640" font-size="16" font-weight="700">cumulative gain at 10</text>
+    <text x="36" y="457" fill="#3F6640" font-size="15" font-weight="700">(nDCG@10)</text>
+    <text x="36" y="484" fill="#2C2924" font-size="14">How much credit remains</text>
+    <text x="36" y="503" fill="#2C2924" font-size="14">after later ranks receive</text>
+    <text x="36" y="522" fill="#2C2924" font-size="14">smaller weights?</text>
+    <text x="556" y="417" text-anchor="middle" fill="#5A544C" font-size="13">Bar height is proportional to each binary-gain contribution</text>
+    <path d="M270 553H850" stroke="#8C8379" stroke-width="1.5"/>
+    <text x="270" y="448" fill="#5A544C" font-size="11">CREDIT</text>
+    <g text-anchor="middle">
+      <rect x="323" y="463" width="46" height="90" rx="5" fill="#D9E7D7" stroke="#3F6640" stroke-width="2"/>
+      <rect x="503" y="498" width="46" height="55" rx="5" fill="#D9E7D7" stroke="#3F6640" stroke-width="2"/>
+      <rect x="743" y="510" width="46" height="43" rx="5" fill="#D9E7D7" stroke="#3F6640" stroke-width="2"/>
+      <text x="346" y="454" fill="#315A35" font-size="14" font-weight="700">0.631</text>
+      <text x="526" y="489" fill="#315A35" font-size="14" font-weight="700">0.387</text>
+      <text x="766" y="501" fill="#315A35" font-size="14" font-weight="700">0.301</text>
+      <text x="346" y="573" fill="#5A544C" font-size="11">RANK 2</text>
+      <text x="526" y="573" fill="#5A544C" font-size="11">RANK 5</text>
+      <text x="766" y="573" fill="#5A544C" font-size="11">RANK 9</text>
+    </g>
+
+    <text x="906" y="412" fill="#5A544C" font-size="10" font-weight="700" letter-spacing="0.5">DISCOUNTED CUMULATIVE GAIN (DCG)</text>
+    <text x="906" y="429" fill="#5A544C" font-size="10" font-weight="700" letter-spacing="0.8">ACTUAL ORDER</text>
+    <text x="906" y="449" fill="#2C2924" font-size="13">0.631 + 0.387 + 0.301</text>
+    <text x="1158" y="449" text-anchor="end" fill="#315A35" font-size="16" font-weight="700">DCG = 1.319</text>
+
+    <text x="906" y="474" fill="#5A544C" font-size="9.5" font-weight="700" letter-spacing="0.25">IDEAL DISCOUNTED CUMULATIVE GAIN (IDCG)</text>
+    <text x="906" y="490" fill="#5A544C" font-size="10" font-weight="700" letter-spacing="0.5">RELEVANT AT RANKS 1-4</text>
+    <g text-anchor="middle" font-size="11" font-weight="700">
+      <rect x="906" y="498" width="36" height="25" rx="5" fill="#E3ECDD" stroke="#3F6640"/><text x="924" y="515" fill="#315A35">R</text>
+      <rect x="949" y="498" width="36" height="25" rx="5" fill="#E3ECDD" stroke="#3F6640"/><text x="967" y="515" fill="#315A35">R</text>
+      <rect x="992" y="498" width="36" height="25" rx="5" fill="#E3ECDD" stroke="#3F6640"/><text x="1010" y="515" fill="#315A35">R</text>
+      <rect x="1035" y="498" width="36" height="25" rx="5" fill="#E3ECDD" stroke="#3F6640"/><text x="1053" y="515" fill="#315A35">R</text>
+    </g>
+    <text x="1158" y="542" text-anchor="end" fill="#315A35" font-size="16" font-weight="700">IDCG = 2.562</text>
+    <path d="M906 550H1162" stroke="#CFC7BD" stroke-width="1.2"/>
+    <text x="906" y="571" fill="#5A544C" font-size="13">1.319 / 2.562</text>
+    <text x="1158" y="571" text-anchor="end" fill="#315A35" font-size="20" font-weight="700">nDCG = 0.515</text>
+    <text x="1158" y="590" text-anchor="end" fill="#5A544C" font-size="11">rounded to three decimals</text>
+
+    <text x="600" y="612" text-anchor="middle" fill="#5A544C" font-size="12.5">Recall measures judged-relevant coverage. Reciprocal rank uses the first judged-relevant result. nDCG rewards earlier higher-gain results.</text>
+  </g>
+</svg>

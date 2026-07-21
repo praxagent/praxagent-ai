@@ -1,0 +1,67 @@
+{
+  "figures": [
+    "fig-wheat-kernel-feature-space.png",
+    "fig-wheat-kernel-all-features.png",
+    "fig-wheat-kernel-correlations.png",
+    "fig-wheat-kernel-pca.png",
+    "fig-wheat-kernel-loadings.png",
+    "og-card.png"
+  ],
+  "generator": {
+    "path": "reproduce.py",
+    "sha256": "f0df0b7ccbd8782c4ace93135d001bede81c74d1fdc05c1818bc0138317df780",
+    "verify": "uv run --frozen reproduce.py --verify"
+  },
+  "local_bundle": true,
+  "numbers": [
+    {
+      "appears_as": "210 kernels",
+      "id": "kernel-count",
+      "source": "wheat-kernel-pca.receipt.json#counts.kernels",
+      "value": 210
+    },
+    {
+      "appears_as": "seven measurement features",
+      "id": "feature-count",
+      "source": "wheat-kernel-pca.receipt.json#counts.features",
+      "value": 7
+    },
+    {
+      "appears_as": "0 missing measurement cells",
+      "id": "missing-measurement-count",
+      "source": "wheat-kernel-pca.receipt.json#counts.missing_measurement_cells",
+      "value": 0
+    },
+    {
+      "appears_as": "71.9%",
+      "id": "pc1-explained-variance",
+      "source": "wheat-kernel-pca.receipt.json#pca.explained_variance_ratio.PC1",
+      "value": 0.718743
+    },
+    {
+      "appears_as": "17.1%",
+      "id": "pc2-explained-variance",
+      "source": "wheat-kernel-pca.receipt.json#pca.explained_variance_ratio.PC2",
+      "value": 0.171082
+    },
+    {
+      "appears_as": "89.0%",
+      "id": "pc1-pc2-combined-explained-variance",
+      "source": "wheat-kernel-pca.receipt.json#pca.first_two_components_combined",
+      "value": 0.889825
+    }
+  ],
+  "receipts": {
+    "fig-wheat-kernel-pca.receipt.json": "8e25e81accf3a6a3e616b75f9417e9604c22d043284086b231148d1287ede1e5",
+    "reproduce.py.lock": "783473858fe78fe0eb7a203a646bcb3cd4fac96a357304910ccafd06379fdde0",
+    "seeds_dataset.txt": "1f3f83c0d8485ae9148061389d19628607e3f5660e3d6f40ec9102fb398bb12f",
+    "wheat-kernel-pca.receipt.json": "22fe447d75a8c07ab14b58123bb94bbfe04011b5a8ff2e81c90540d987ad3b28"
+  },
+  "schema_version": 1,
+  "source": {
+    "doi": "10.24432/C5H30K",
+    "license": "CC BY 4.0",
+    "path": "seeds_dataset.txt",
+    "sha256": "1f3f83c0d8485ae9148061389d19628607e3f5660e3d6f40ec9102fb398bb12f"
+  }
+}

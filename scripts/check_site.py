@@ -906,19 +906,34 @@ def check_late_chunking_deep_dive(errors: list[str]) -> None:
                 f"{canonical.relative_to(ROOT)}: updated date must not be displayed"
             )
         disclosure_position = folded.find("ai-use disclosure")
-        contents_position = folded.find('class="table-of-contents"')
+        contents_position = folded.find('<details class="table-of-contents"')
         if disclosure_position < 0:
             errors.append(
                 f"{canonical.relative_to(ROOT)}: missing AI-use disclosure"
             )
         if contents_position < 0:
             errors.append(
-                f"{canonical.relative_to(ROOT)}: missing Deep Dive table of contents"
+                f"{canonical.relative_to(ROOT)}: missing collapsible Deep Dive "
+                "table of contents"
             )
         elif disclosure_position < 0 or disclosure_position > contents_position:
             errors.append(
                 f"{canonical.relative_to(ROOT)}: AI-use disclosure must precede "
                 "the table of contents"
+            )
+        elif re.search(
+            r'<details\b[^>]*class="[^"]*\btable-of-contents\b[^"]*"[^>]*\bopen\b',
+            page,
+            re.IGNORECASE,
+        ):
+            errors.append(
+                f"{canonical.relative_to(ROOT)}: table of contents must be "
+                "collapsed by default"
+            )
+        if 'aria-label="on this page"' not in folded:
+            errors.append(
+                f"{canonical.relative_to(ROOT)}: table-of-contents navigation "
+                "needs an accessible label"
             )
         if "pro-reviewed" in folded or "pro_reviewed" in folded:
             errors.append(

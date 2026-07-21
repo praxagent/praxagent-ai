@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="390" viewBox="0 0 900 390" role="img" aria-labelledby="sdTitle sdDesc">
+  <title id="sdTitle">Standard deviation compares how tightly values gather around their mean</title>
+  <desc id="sdDesc">Two panels use the same horizontal scale and the same mean. In the left panel, eight values cluster near the mean and the shaded one-standard-deviation band is narrow. In the right panel, eight values spread farther from the mean and the shaded band is twice as wide. The comparison shows that standard deviation summarizes spread around a mean.</desc>
+  <defs>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:18px;font-weight:700}
+      .h{font-size:13px;font-weight:700;letter-spacing:.25px}
+      .s{font-size:11px}
+      .m{font-size:10px;fill:#5A544C}
+      .panel{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.3}
+      .sd-band{fill:#EAF1E5;stroke:#8BA07A;stroke-width:1}
+      .axis{stroke:#7F786D;stroke-width:1.5}
+      .mean-line{stroke:#2C2924;stroke-width:1.8}
+      .sd-bracket{stroke:#A67C52;stroke-width:2}
+      .point{fill:#4B6787;stroke:#F7F4F0;stroke-width:1.2}
+    </style>
+  </defs>
+  <rect width="900" height="390" fill="#F7F4F0"/>
+  <text x="24" y="31" class="t title">Standard deviation describes spread around the mean</text>
+  <text x="24" y="52" class="t m">Both panels use the same horizontal scale and have the same mean.</text>
+  <rect x="24" y="78" width="414" height="250" rx="12" class="panel"/>
+  <text x="44" y="104" class="t h">SMALLER STANDARD DEVIATION</text>
+  <text x="44" y="124" class="t m">Values lie relatively close to the mean</text>
+  <rect data-panel="smaller" data-role="one-sd-band" x="188.202" y="153" width="85.595" height="98" rx="8" class="sd-band"/>
+  <line x1="66" y1="214" x2="396" y2="214" class="axis"/>
+  <line x1="231" y1="145" x2="231" y2="252" class="mean-line"/>
+  <text x="231" y="143" text-anchor="middle" class="t s">mean</text>
+  <circle class="point" data-panel="smaller" data-observation="1" cx="163.5" cy="214" r="6"/>
+  <circle class="point" data-panel="smaller" data-observation="2" cx="186" cy="214" r="6"/>
+  <circle class="point" data-panel="smaller" data-observation="3" cx="204.75" cy="214" r="6"/>
+  <circle class="point" data-panel="smaller" data-observation="4" cx="223.5" cy="214" r="6"/>
+  <circle class="point" data-panel="smaller" data-observation="5" cx="238.5" cy="214" r="6"/>
+  <circle class="point" data-panel="smaller" data-observation="6" cx="257.25" cy="214" r="6"/>
+  <circle class="point" data-panel="smaller" data-observation="7" cx="276" cy="214" r="6"/>
+  <circle class="point" data-panel="smaller" data-observation="8" cx="298.5" cy="214" r="6"/>
+  <line x1="231" y1="266" x2="273.798" y2="266" class="sd-bracket"/>
+  <line x1="231" y1="259" x2="231" y2="273" class="sd-bracket"/>
+  <line x1="273.798" y1="259" x2="273.798" y2="273" class="sd-bracket"/>
+  <text x="252.399" y="289" text-anchor="middle" class="t s">one standard-deviation unit</text>
+  <text x="231" y="314" text-anchor="middle" class="t m">The shaded width spans one standard deviation on each side of the mean.</text>
+  <rect x="462" y="78" width="414" height="250" rx="12" class="panel"/>
+  <text x="482" y="104" class="t h">LARGER STANDARD DEVIATION</text>
+  <text x="482" y="124" class="t m">Values lie farther from the same mean</text>
+  <rect data-panel="larger" data-role="one-sd-band" x="583.405" y="153" width="171.191" height="98" rx="8" class="sd-band"/>
+  <line x1="504" y1="214" x2="834" y2="214" class="axis"/>
+  <line x1="669" y1="145" x2="669" y2="252" class="mean-line"/>
+  <text x="669" y="143" text-anchor="middle" class="t s">mean</text>
+  <circle class="point" data-panel="larger" data-observation="1" cx="534" cy="214" r="6"/>
+  <circle class="point" data-panel="larger" data-observation="2" cx="579" cy="214" r="6"/>
+  <circle class="point" data-panel="larger" data-observation="3" cx="616.5" cy="214" r="6"/>
+  <circle class="point" data-panel="larger" data-observation="4" cx="654" cy="214" r="6"/>
+  <circle class="point" data-panel="larger" data-observation="5" cx="684" cy="214" r="6"/>
+  <circle class="point" data-panel="larger" data-observation="6" cx="721.5" cy="214" r="6"/>
+  <circle class="point" data-panel="larger" data-observation="7" cx="759" cy="214" r="6"/>
+  <circle class="point" data-panel="larger" data-observation="8" cx="804" cy="214" r="6"/>
+  <line x1="669" y1="266" x2="754.595" y2="266" class="sd-bracket"/>
+  <line x1="669" y1="259" x2="669" y2="273" class="sd-bracket"/>
+  <line x1="754.595" y1="259" x2="754.595" y2="273" class="sd-bracket"/>
+  <text x="711.798" y="289" text-anchor="middle" class="t s">one standard-deviation unit</text>
+  <text x="669" y="314" text-anchor="middle" class="t m">The shaded width spans one standard deviation on each side of the mean.</text>
+  <text x="450" y="354" text-anchor="middle" class="t s">Same mean, different spread: values farther from the mean produce a larger standard deviation.</text>
+  <text x="450" y="374" text-anchor="middle" class="t m">Standard deviation describes the values. It does not explain why they differ or whether they are correct.</text>
+</svg>

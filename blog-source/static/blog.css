@@ -524,6 +524,369 @@ main,
     }
 }
 
+/* Site search */
+.knowledge-search {
+    display: grid;
+    width: 100%;
+    max-width: 70rem;
+    margin: 0 auto 3rem;
+    padding: 2rem 0;
+    grid-template-columns: minmax(0, 0.85fr) minmax(20rem, 1.15fr);
+    align-items: end;
+    gap: clamp(2rem, 7vw, 6rem);
+    border-top: 1px solid var(--border-primary);
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.knowledge-search .knowledge-card-index {
+    display: block;
+    margin: 0 0 1rem;
+}
+
+.knowledge-search h2,
+.semantic-search-note h2 {
+    margin: 0 0 0.7rem;
+    color: var(--text-dark);
+    font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
+    font-size: clamp(1.35rem, 2.5vw, 1.8rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+}
+
+.knowledge-search-copy > p:last-child {
+    max-width: 34rem;
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+.knowledge-search-form label,
+.site-search-form label {
+    display: block;
+    margin: 0 0 0.65rem;
+    color: var(--text-dark);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.knowledge-search-field,
+.site-search-field {
+    display: flex;
+    min-width: 0;
+}
+
+.knowledge-search-field input,
+.site-search-field input {
+    width: 100%;
+    min-width: 0;
+    padding: 0.9rem 1rem;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    border: 1px solid var(--border-secondary);
+    border-right: 0;
+    border-radius: 0;
+    font: inherit;
+    line-height: 1.4;
+}
+
+.knowledge-search-field input::placeholder,
+.site-search-field input::placeholder {
+    color: var(--text-quaternary);
+}
+
+.knowledge-search-field button,
+.site-search-field button,
+.semantic-search-enable {
+    flex: 0 0 auto;
+    padding: 0.9rem 1.25rem;
+    color: #F4F0E9;
+    background: #172A3D;
+    border: 1px solid #172A3D;
+    border-radius: 0;
+    cursor: pointer;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.knowledge-search-field button:hover,
+.site-search-field button:hover,
+.semantic-search-enable:hover {
+    background: var(--sky-deep, #3A5573);
+    border-color: var(--sky-deep, #3A5573);
+}
+
+.knowledge-search-field input:focus-visible,
+.site-search-field input:focus-visible,
+.knowledge-search-field button:focus-visible,
+.site-search-field button:focus-visible,
+.semantic-search-enable:focus-visible {
+    position: relative;
+    z-index: 1;
+    outline: 3px solid var(--sky, #4B6787);
+    outline-offset: 3px;
+}
+
+.site-search-field button:disabled {
+    cursor: wait;
+    opacity: 0.66;
+}
+
+.search-main {
+    min-height: 40rem;
+}
+
+.site-search {
+    width: 100%;
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+.site-search-form {
+    max-width: 52rem;
+}
+
+.site-search-field input {
+    min-height: 3.6rem;
+    font-size: 1.05rem;
+}
+
+.site-search-field button {
+    min-width: 7.5rem;
+}
+
+.semantic-search-note {
+    display: grid;
+    margin: 2rem 0 0;
+    padding: 1.5rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem 2rem;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--sky, #4B6787);
+}
+
+.search-noscript {
+    max-width: 52rem;
+    margin-top: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--sky, #4B6787);
+}
+
+.search-noscript h2 {
+    margin: 0 0 0.55rem;
+    color: var(--text-dark);
+    font-family: var(--font-sans, 'IBM Plex Sans', sans-serif);
+    font-size: 1rem;
+}
+
+.search-noscript p,
+.search-noscript ul {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.search-noscript ul {
+    margin-top: 0.55rem;
+    padding-left: 1.25rem;
+}
+
+.search-noscript a {
+    color: var(--sky, #4B6787);
+}
+
+.semantic-search-note h2 {
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+}
+
+.semantic-search-note p {
+    max-width: 48rem;
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.semantic-search-enable {
+    max-width: 16rem;
+    padding: 0.8rem 1rem;
+    line-height: 1.4;
+}
+
+.semantic-save-data-explanation {
+    grid-column: 1 / -1;
+    color: var(--text-primary) !important;
+}
+
+.search-status {
+    min-height: 1.5rem;
+    margin: 2.5rem 0 0;
+    padding-bottom: 0.9rem;
+    color: var(--text-tertiary);
+    border-bottom: 1px solid var(--border-primary);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+}
+
+.search-results {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.search-result,
+.search-results-empty {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.search-result article {
+    max-width: 52rem;
+}
+
+.search-result-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin-bottom: 0.65rem;
+    color: var(--sky, #4B6787);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.search-result-meta span + span {
+    color: var(--text-tertiary);
+}
+
+.search-result h2 {
+    margin: 0;
+    font-family: var(--font-serif, 'Source Serif 4', Georgia, serif);
+    font-size: clamp(1.25rem, 2.5vw, 1.55rem);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.search-result h2 a {
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: color 0.18s ease;
+}
+
+.search-result h2 a:hover {
+    color: var(--sky, #4B6787);
+}
+
+.search-result h2 a:focus-visible {
+    border-radius: 0.1rem;
+    outline: 2px solid var(--sky, #4B6787);
+    outline-offset: 4px;
+}
+
+.search-result-section {
+    margin: 0.55rem 0 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+
+.search-result-section a,
+.search-result-more a {
+    color: var(--sky-deep, #3A5573);
+    font-weight: 600;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.15em;
+}
+
+.search-result-section a:hover,
+.search-result-more a:hover {
+    color: var(--text-dark);
+}
+
+.search-result-section a:focus-visible,
+.search-result-more a:focus-visible {
+    border-radius: 0.1rem;
+    outline: 2px solid var(--sky, #4B6787);
+    outline-offset: 3px;
+}
+
+.search-result-excerpt,
+.search-results-empty {
+    max-width: 48rem;
+    margin: 0.65rem 0 0;
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+.search-result-more {
+    display: grid;
+    max-width: 48rem;
+    margin: 0.8rem 0 0;
+    padding: 0.75rem 0 0;
+    gap: 0.35rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid var(--border-primary);
+    font-size: 0.82rem;
+    line-height: 1.45;
+    list-style: none;
+}
+
+.search-results-empty {
+    margin-top: 0;
+}
+
+@media (max-width: 760px) {
+    .knowledge-search {
+        grid-template-columns: 1fr;
+        align-items: start;
+        gap: 1.5rem;
+    }
+
+    .semantic-search-note {
+        grid-template-columns: 1fr;
+    }
+
+    .semantic-search-enable {
+        max-width: none;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .knowledge-search-field,
+    .site-search-field {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .knowledge-search-field input,
+    .site-search-field input {
+        border-right: 1px solid var(--border-secondary);
+    }
+
+    .knowledge-search-field button,
+    .site-search-field button {
+        width: 100%;
+    }
+
+    .semantic-search-note {
+        padding: 1.2rem;
+    }
+}
+
 /* Imported Prax documentation */
 .prax-doc {
     padding-top: 6.75rem;
@@ -1681,18 +2044,71 @@ main,
     background: var(--bg-card);
     border: 1px solid var(--border-primary);
     border-radius: 0.4rem;
-    padding: 1.5rem;
+    padding: 0;
     margin: 2rem 0;
-    box-shadow: 0 2px 8px var(--shadow-primary);
+    box-shadow: 0 1px 4px var(--shadow-primary);
+    overflow: hidden;
 }
 
-.table-of-contents h3 {
+.table-of-contents-summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.2rem;
+    cursor: pointer;
+    list-style: none;
+    transition: background-color 0.18s ease;
+}
+
+.table-of-contents-summary::-webkit-details-marker {
+    display: none;
+}
+
+.table-of-contents-summary::after {
+    width: 0.48rem;
+    height: 0.48rem;
+    content: '';
+    border-right: 2px solid var(--sky, #4B6787);
+    border-bottom: 2px solid var(--sky, #4B6787);
+    transform: rotate(45deg) translate(-0.1rem, 0.1rem);
+    transform-origin: center;
+    transition: transform 0.18s ease;
+}
+
+.table-of-contents[open] .table-of-contents-summary::after {
+    transform: rotate(225deg) translate(-0.1rem, 0.1rem);
+}
+
+.table-of-contents-summary:hover {
+    background: var(--bg-secondary);
+}
+
+.table-of-contents-summary:focus-visible {
+    position: relative;
+    z-index: 1;
+    outline: 3px solid var(--sky, #4B6787);
+    outline-offset: -3px;
+}
+
+.table-of-contents-label {
     color: var(--text-primary);
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border-primary);
+    line-height: 1.3;
+}
+
+.table-of-contents-count {
+    color: var(--text-tertiary);
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.7rem;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+}
+
+.table-of-contents-body {
+    padding: 0.85rem 1.2rem 1.15rem;
+    border-top: 1px solid var(--border-primary);
 }
 
 .table-of-contents nav ul {
@@ -1940,8 +2356,13 @@ main,
 
     .post-body blockquote,
     .panel,
-    .key-result,
-    .table-of-contents {
+    .key-result {
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+
+    .table-of-contents-summary,
+    .table-of-contents-body {
         padding-right: 1rem;
         padding-left: 1rem;
     }

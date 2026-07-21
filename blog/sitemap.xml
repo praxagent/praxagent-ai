@@ -3,10 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://praxagent.ai/blog/knowledge-base/deep-dives/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/deep-dives/late-chunking/</loc>
     <lastmod>2025-08-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/deep-dives/principal-component-analysis/</loc>
+    <lastmod>2026-07-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/deep-dives/bf16-fp16-fp32/</loc>
     <lastmod>2026-07-18T00:00:00+00:00</lastmod>
@@ -14,6 +17,12 @@
     <loc>https://praxagent.ai/blog/knowledge-base/glossary/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/</loc>
+    <lastmod>2026-07-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://praxagent.ai/blog/</loc>
+    <lastmod>2026-07-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/</loc>
     <lastmod>2026-07-18T00:00:00+00:00</lastmod>
@@ -27,9 +36,6 @@
     <loc>https://praxagent.ai/blog/tags/jacobian-lens/</loc>
     <lastmod>2026-07-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://praxagent.ai/blog/tags/llm/</loc>
     <lastmod>2026-07-18T00:00:00+00:00</lastmod>
   </url><url>
@@ -37,9 +43,6 @@
     <lastmod>2026-07-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/posts/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://praxagent.ai/blog/</loc>
     <lastmod>2026-07-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/reproducibility/</loc>
@@ -84,7 +87,7 @@
     <loc>https://praxagent.ai/blog/tags/tutorials/</loc>
     <lastmod>2026-07-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/affine-map/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/affine-map/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/agents/checkpointing/</loc>
   </url><url>
@@ -96,13 +99,17 @@
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/architecture/</loc>
   </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/attention-mask/</loc>
+  </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/authentication/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/base-rate-bias/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/base-rate-bias/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/best-rank/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/best-rank/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/bf16/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/bf16/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/bootstrap/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/categories/</loc>
   </url><url>
@@ -112,13 +119,19 @@
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/infrastructure/context-management/</loc>
   </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/cosine-similarity/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/data-leakage/</loc>
+  </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/infrastructure/docker/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/dtype/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/dtype/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/embedding/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/extending/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/feed-forward-network/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/feed-forward-network/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/social-posts-fetch/</loc>
   </url><url>
@@ -126,69 +139,89 @@
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/cloud-gpu/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/greedy-continuation/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/trace-grading/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/greedy-continuation/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/infrastructure/health-monitoring/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/hidden-bridge/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/hidden-bridge/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/architecture/hub-and-spoke/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/iid/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/iid/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/imputation/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/infrastructure/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/jacobian-lens/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/jacobian-lens/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/l2-normalization/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/library/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/local-vision/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/logit-lens/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/logit-lens/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/matmul/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/matmul/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/infrastructure/mcp-server/</loc>
   </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/mean-pooling/</loc>
+  </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/infrastructure/memory/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/motor-layer/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/motor-layer/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/mlp/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/mlp/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/security/network-exposure/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/infrastructure/observability/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/p-value/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/p-value/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/pearson-correlation/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/security/plugin-trust/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/architecture/interoperability/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/prompt-echo/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/principal-component-analysis/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/prompt-echo/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/infrastructure/sandbox/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/random-j/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/random-j/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/rank/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/rank/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/relevance-judgments/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/architecture/request-flows/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/residual-stream/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/residual-stream/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/rms/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/retrieval-ranking-metrics/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/rms/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/local-cpu-inference/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/cheap-evals/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/sampling/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/programmatic-usage/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/sampling/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/scheduler/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/search/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/security/</loc>
   </url><url>
@@ -200,11 +233,15 @@
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/setup/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/survival-identity/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/standard-deviation/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/standard-scaling/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/survival-identity/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/embeddings-migration/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/temperature/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/temperature/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/testing/</loc>
   </url><url>
@@ -212,24 +249,28 @@
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/architecture/lang-stack/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/thinking-mode/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/prax/security/sandbox-execution-boundary/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/thinking-mode/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/tokenization/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/security/tool-risk/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/top-p/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/top-p/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/trajectory-export/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/transformer/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/transformer/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/troubleshooting/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/unembedding/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/unembedding/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/wilcoxon/</loc>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/wilcoxon/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/glossary/workspace/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/architecture/workspace/</loc>
-  </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/workspace/</loc>
   </url>
 </urlset>

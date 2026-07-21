@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {{ $siteLabel := "praxagent Research Notes" }}
 {{ if eq .Section "knowledge-base" }}{{ $siteLabel = "praxagent Knowledge Base" }}{{ end }}
+{{ if or (eq .Section "search") (eq .Type "search") }}{{ $siteLabel = "praxagent Search" }}{{ end }}
     <title>{{ if .IsHome }}{{ $siteLabel }}{{ else if .Title }}{{ .Title }} - {{ $siteLabel }}{{ else }}{{ $siteLabel }}{{ end }}</title>
     {{ $desc := .Site.Params.description }}
     {{ if .Params.summary }}{{ $desc = .Params.summary }}{{ else if .Description }}{{ $desc = .Description }}{{ end }}
@@ -75,10 +76,13 @@
                 </a>
             </div>
 {{ $onKnowledgeBase := eq .Section "knowledge-base" }}
+{{ $onSearch := or (eq .Section "search") (eq .Type "search") }}
+{{ $onResearchNotes := and (not $onKnowledgeBase) (not $onSearch) }}
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
-                <a href="/blog/index.html" class="nav-link{{ if not $onKnowledgeBase }} active{{ end }}">Research Notes</a>
+                <a href="/blog/index.html" class="nav-link{{ if $onResearchNotes }} active{{ end }}">Research Notes</a>
                 <a href="{{ "knowledge-base/" | relURL }}" class="nav-link{{ if $onKnowledgeBase }} active{{ end }}">Knowledge Base</a>
+                <a href="{{ "search/" | relURL }}" class="nav-link{{ if $onSearch }} active{{ end }}"{{ if $onSearch }} aria-current="page"{{ end }}>Search</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -103,8 +107,9 @@
     <div class="mobile-menu-overlay" id="mobile-menu-overlay">
         <div class="mobile-menu-content">
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
-            <a href="/blog/index.html" class="mobile-nav-link{{ if not $onKnowledgeBase }} active{{ end }}">Research Notes</a>
+            <a href="/blog/index.html" class="mobile-nav-link{{ if $onResearchNotes }} active{{ end }}">Research Notes</a>
             <a href="{{ "knowledge-base/" | relURL }}" class="mobile-nav-link{{ if $onKnowledgeBase }} active{{ end }}">Knowledge Base</a>
+            <a href="{{ "search/" | relURL }}" class="mobile-nav-link{{ if $onSearch }} active{{ end }}"{{ if $onSearch }} aria-current="page"{{ end }}>Search</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -135,6 +140,7 @@
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
                     <a href="{{ "knowledge-base/" | relURL }}">Knowledge Base</a>
+                    <a href="{{ "search/" | relURL }}">Search</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>

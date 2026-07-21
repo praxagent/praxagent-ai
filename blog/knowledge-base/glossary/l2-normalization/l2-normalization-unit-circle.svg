@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-labelledby="l2-title l2-desc">
+  <title id="l2-title">L2 normalization maps same-direction vectors to one point on the unit circle</title>
+  <desc id="l2-desc">Vectors three four and six eight lie on the same ray with lengths five and ten. Dividing each by its length maps both to zero point six, zero point eight on the unit circle.</desc>
+  <defs>
+    <marker id="l2-arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#4B6787"/></marker>
+    <marker id="l2-arrow-clay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#A67C52"/></marker>
+  </defs>
+  <rect width="900" height="420" fill="#F7F4F0"/>
+  <text x="450" y="42" text-anchor="middle" fill="#2C2924" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">L2 normalization keeps direction and removes length</text>
+
+  <line x1="90" y1="335" x2="420" y2="335" stroke="#2C2924" stroke-width="2" marker-end="url(#l2-arrow-blue)"/>
+  <line x1="170" y1="375" x2="170" y2="72" stroke="#2C2924" stroke-width="2" marker-end="url(#l2-arrow-blue)"/>
+  <line x1="170" y1="335" x2="338" y2="111" stroke="#D4CCC3" stroke-width="3" stroke-dasharray="7 6"/>
+  <line x1="170" y1="335" x2="242" y2="239" stroke="#4B6787" stroke-width="5" marker-end="url(#l2-arrow-blue)"/>
+  <line x1="170" y1="335" x2="314" y2="143" stroke="#A67C52" stroke-width="5" marker-end="url(#l2-arrow-clay)"/>
+  <text x="227" y="270" fill="#31516F" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">(3, 4), length 5</text>
+  <text x="280" y="118" fill="#795530" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">(6, 8), length 10</text>
+
+  <line x1="450" y1="210" x2="548" y2="210" stroke="#4B6787" stroke-width="4" marker-end="url(#l2-arrow-blue)"/>
+  <text x="499" y="189" text-anchor="middle" fill="#4B6787" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">divide by length</text>
+
+  <circle cx="700" cy="235" r="125" fill="#FFFDFC" stroke="#6F8D5E" stroke-width="3"/>
+  <line x1="550" y1="235" x2="855" y2="235" stroke="#80776D" stroke-width="1.5"/>
+  <line x1="700" y1="382" x2="700" y2="82" stroke="#80776D" stroke-width="1.5"/>
+  <line x1="700" y1="235" x2="775" y2="135" stroke="#4B6787" stroke-width="6" marker-end="url(#l2-arrow-blue)"/>
+  <circle cx="775" cy="135" r="9" fill="#FFFDFC" stroke="#2C2924" stroke-width="3"/>
+  <text x="785" y="114" fill="#2C2924" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">(0.6, 0.8)</text>
+  <text x="700" y="405" text-anchor="middle" fill="#5A544C" font-family="Inter, Arial, sans-serif" font-size="15">Unit circle: every point is length 1</text>
+  <rect x="555" y="48" width="290" height="38" rx="9" fill="#E8F0E5"/>
+  <text x="700" y="73" text-anchor="middle" fill="#315A2E" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">Both original vectors land here</text>
+</svg>

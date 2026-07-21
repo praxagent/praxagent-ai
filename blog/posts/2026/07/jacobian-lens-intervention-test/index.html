@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
+
     <title>A Linear Nudge, a Nonlinear Wake - praxagent Research Notes</title>
     
     
@@ -50,8 +51,8 @@
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js"></script>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -73,10 +74,13 @@
                 </a>
             </div>
 
+
+
             <div class="nav-menu">
                 <a href="/work/index.html" class="nav-link">Work</a>
                 <a href="/blog/index.html" class="nav-link active">Research Notes</a>
                 <a href="/blog/knowledge-base/" class="nav-link">Knowledge Base</a>
+                <a href="/blog/search/" class="nav-link">Search</a>
                 <a href="/index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -103,6 +107,7 @@
             <a href="/work/index.html" class="mobile-nav-link">Work</a>
             <a href="/blog/index.html" class="mobile-nav-link active">Research Notes</a>
             <a href="/blog/knowledge-base/" class="mobile-nav-link">Knowledge Base</a>
+            <a href="/blog/search/" class="mobile-nav-link">Search</a>
             <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -164,9 +169,15 @@ hidden-state wake out, for these generic directions only.
             
 
             
-            <div class="table-of-contents">
-                <h3>Table of Contents</h3>
-                <nav id="TableOfContents">
+            <details class="table-of-contents">
+    <summary class="table-of-contents-summary">
+        <span class="table-of-contents-label">On this page</span>
+        <span class="table-of-contents-count">
+            20 sections
+        </span>
+    </summary>
+    <div class="table-of-contents-body">
+        <nav id="TableOfContents" aria-label="On this page">
   <ul>
     <li><a href="#the-question">The Question</a>
       <ul>
@@ -205,7 +216,9 @@ hidden-state wake out, for these generic directions only.
     <li><a href="#references">References</a></li>
   </ul>
 </nav>
-            </div>
+    </div>
+</details>
+
             
 
             <div class="post-body">
@@ -232,16 +245,16 @@ before relying on them.
     <div class="panel-content">
         <p><strong>Abstract.</strong> In this note, activation steering means additive
 residual-stream intervention: a controlled vector added to a model&rsquo;s
-<a href="/blog/knowledge-base/residual-stream/" class="ref-term">residual stream</a>. That is one common
+<a href="/blog/knowledge-base/glossary/residual-stream/" class="ref-term">residual stream</a>. That is one common
 steering primitive, not a definition of the whole field. A
-<a href="/blog/knowledge-base/jacobian-lens/" class="ref-term">Jacobian lens</a> is a corpus-average first-order
+<a href="/blog/knowledge-base/glossary/jacobian-lens/" class="ref-term">Jacobian lens</a> is a corpus-average first-order
 map from that mid-network state toward later residuals and vocabulary
 dispositions. Before attributing a downstream effect to the meaning of a
 steering direction, requested-versus-realized fidelity under low precision,
 linear transport, and nonlinear model dynamics need to be separated.</p>
 <p><strong>(1)</strong> In Llama 3.3 70B Instruct, we applied three unselected Gaussian directions
 after block 50 across eight prompts, varied dose from <code>0.5%</code> to <code>30%</code> of
-<a href="/blog/knowledge-base/rms/" class="ref-term">residual RMS</a>, and followed the signed response (the
+<a href="/blog/knowledge-base/glossary/rms/" class="ref-term">residual RMS</a>, and followed the signed response (the
 half-difference of paired \(\pm\)dose runs) through the remaining 29 blocks. Protocol, plan, and decision rules were frozen
 before outcomes
 (<a href="https://github.com/tdj28/llm_selfref_pre/commit/a084caafc2ec27860044d80d3b33912f656fd08a"><code>a084caa</code></a>).</p>
@@ -253,12 +266,12 @@ mismatched (\(d_{\max}\) rose to <code>0.572</code>–<code>0.703</code>, above 
 projection of the realized edits stayed inside the same bounds as an algebraic
 consistency reference, not as a claim that J predicted the model.</p>
 <p><strong>(3)</strong> Requested-versus-realized edit fidelity under
-<a href="/blog/knowledge-base/bf16/" class="ref-term">BF16</a> casting failed the frozen rule below <code>2%</code> and
+<a href="/blog/knowledge-base/glossary/bf16/" class="ref-term">BF16</a> casting failed the frozen rule below <code>2%</code> and
 passed from <code>2%</code> through <code>30%</code> (the protocol&rsquo;s short name for this check is
-&ldquo;delivery&rdquo;). Median final-state <a href="/blog/knowledge-base/rms/" class="ref-term">RMS</a> gain was <code>1.82x</code>
+&ldquo;delivery&rdquo;). Median final-state <a href="/blog/knowledge-base/glossary/rms/" class="ref-term">RMS</a> gain was <code>1.82x</code>
 at <code>2%</code> and tapered to <code>1.48x</code> at <code>30%</code> over this fixed census.</p>
 <p><strong>(4)</strong> At the primary layer-50 comparison, released J beat five
-<a href="/blog/knowledge-base/random-j/" class="ref-term">random-J</a> maps but did not clear
+<a href="/blog/knowledge-base/glossary/random-j/" class="ref-term">random-J</a> maps but did not clear
 added-value-over-identity (logit advantage <code>0.011</code>, residual advantage slightly
 negative).</p>
 <p><strong>Takeaway.</strong> Linear edit in, nonlinear hidden-state wake out, for these
@@ -279,7 +292,7 @@ Shipping table, sample records, and hashes are in the
 <h2 id="the-question">The Question</h2>
 <p>Activation steering changes a model from the inside. In the additive form
 studied here, the researcher adds a controlled vector to the hidden state
-carried between <a href="/blog/knowledge-base/transformer/" class="ref-term">Transformer</a> blocks instead of changing the prompt; contrastive
+carried between <a href="/blog/knowledge-base/glossary/transformer/" class="ref-term">Transformer</a> blocks instead of changing the prompt; contrastive
 activation addition is the canonical modern example
 (<a href="#ref-rimsky-2024">Rimsky et al., 2024</a>). The field also includes adaptive,
 feature-targeted, and geometry-preserving variants, which this note does not
@@ -287,7 +300,7 @@ test. The added vector can encode a proposed semantic direction, such as a
 sparse-autoencoder feature, or it can be deliberately generic, as in the
 experiment reported here.</p>
 <p>A Jacobian is a local derivative: the high-dimensional analogue of a tangent
-line. A <a href="/blog/knowledge-base/jacobian-lens/" class="ref-term">Jacobian lens</a>
+line. A <a href="/blog/knowledge-base/glossary/jacobian-lens/" class="ref-term">Jacobian lens</a>
 (<a href="#ref-gurnee-2026">Gurnee et al., 2026</a>) turns that idea into a reusable
 reference by averaging input-output Jacobians over many prompts and token
 positions. The result is one fixed linear map for each source layer: a
@@ -297,7 +310,7 @@ vocabulary-oriented content; this note repurposes it as a transport benchmark
 for arbitrary residual perturbations, a different job from the one it was fit
 for. Whether averaged first-order maps carry useful structure is itself
 setting-dependent: relation-decoding work finds that mean Jacobian-based
-<a href="/blog/knowledge-base/affine-map/" class="ref-term">affine maps</a>
+<a href="/blog/knowledge-base/glossary/affine-map/" class="ref-term">affine maps</a>
 decode some relations well and others poorly
 (<a href="#ref-hernandez-2024">Hernandez et al., 2024</a>).</p>
 <p>This distinction matters because a downstream change can have several causes.
@@ -344,9 +357,9 @@ forward (it did not clear that frozen margin here).</li>
 <a href="https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct">Llama 3.3 70B Instruct</a>.
 Immediately after transformer block 50, we applied three stress-test directions
 to eight prompts, varied their magnitude from <code>0.5%</code> to <code>30%</code> of
-<a href="/blog/knowledge-base/rms/" class="ref-term">residual RMS</a>, and followed the response through the
+<a href="/blog/knowledge-base/glossary/rms/" class="ref-term">residual RMS</a>, and followed the response through the
 remaining 29 blocks. The directions were <em>unselected</em>: independent Gaussian
-vectors normalized to unit <a href="/blog/knowledge-base/rms/" class="ref-term">RMS</a>, generated from
+vectors normalized to unit <a href="/blog/knowledge-base/glossary/rms/" class="ref-term">RMS</a>, generated from
 predeclared seeds and frozen before the experiment, with no step that picked
 them for meaning, expected effect, or resemblance to any SAE feature. They test
 the mechanics of perturbation transport rather than any concept.</p>
@@ -365,7 +378,7 @@ The model is therefore its own control. Any difference between runs at any
 later block can only have come from that one injected vector, because nothing
 else differs: weights, prompt, position, and arithmetic path are identical. The clean run
 also sets the dose scale: a dose of <code>2%</code> means the injected vector&rsquo;s
-<a href="/blog/knowledge-base/rms/" class="ref-term">RMS</a> is 2% of the clean run&rsquo;s layer-50 residual RMS
+<a href="/blog/knowledge-base/glossary/rms/" class="ref-term">RMS</a> is 2% of the clean run&rsquo;s layer-50 residual RMS
 for that prompt. The frozen grid comes to 2,896 forward passes in total.</p>
 <p>The paired edited runs act like pushing and then pulling the same knob. Any
 downstream change genuinely driven by the edit should flip sign between the
@@ -383,7 +396,7 @@ provenance, dose grid, and pairing equations are in
 <p class="figure-note">Diagram: how one measurement is built from three forward passes. This is a hand-drawn conceptual schematic, not a receipt-backed data figure; the exact pairing equations are in <a href="#appendix-a-exact-test">Appendix A</a>.</p>
 <p>At every dose, the analysis retained four quantities: the edit <em>requested</em> in
 high precision; the edit <em>realized</em> after casting into
-<a href="/blog/knowledge-base/bf16/" class="ref-term">BF16</a> activations (see
+<a href="/blog/knowledge-base/glossary/bf16/" class="ref-term">BF16</a> activations (see
 <a href="#requested-versus-realized-edit-fidelity-under-bf16">requested-versus-realized fidelity</a>);
 the downstream change from the fixed Jacobian map; and the downstream change
 the model actually produced. Separating requested from realized keeps
@@ -445,7 +458,7 @@ q_b = \frac{x_b}{s_b}.
 \]<p>The divisor \(s_b\) is the size of the input being scaled. For the source
 edit, \(s_b\) is the requested dose fraction (<code>0.02</code>, <code>0.03</code>, <code>0.04</code>). For J
 and the actual final state, \(s_b\) is instead the measured
-<a href="/blog/knowledge-base/rms/" class="ref-term">RMS</a> size of the edit that <em>actually landed</em> at block
+<a href="/blog/knowledge-base/glossary/rms/" class="ref-term">RMS</a> size of the edit that <em>actually landed</em> at block
 50, expressed as the same kind of fraction. The reason for the switch: those
 two quantities are downstream of the realized edit, so the fair question is
 &ldquo;per unit of edit that landed, what came out?&rdquo;, not &ldquo;per unit of edit we
@@ -607,13 +620,13 @@ line is one prespecified prompt × direction cell.</p>
 simple fidelity check: does the intervention vector we <em>requested</em> match the
 vector that was <em>realized</em> in the residual after casting into the model’s
 number format?</p>
-<p>That format here is <a href="/blog/knowledge-base/bf16/" class="ref-term">BF16</a> (bfloat16): a 16-bit
+<p>That format here is <a href="/blog/knowledge-base/glossary/bf16/" class="ref-term">BF16</a> (bfloat16): a 16-bit
 floating-point type with FP32-like range but much coarser precision, so many
 float32 values round to the same BF16 number. For bit layouts, casting demos,
 and accumulation swamping, see the Deep Dive
 <a href="/blog/knowledge-base/deep-dives/bf16-fp16-fp32/">BF16, FP16, and FP32: Precision, Range, Swamping, and Determinism</a>.
 The protocol builds the requested edit in float32 along a
-unit-<a href="/blog/knowledge-base/rms/" class="ref-term">RMS</a> direction, then casts it into the BF16
+unit-<a href="/blog/knowledge-base/glossary/rms/" class="ref-term">RMS</a> direction, then casts it into the BF16
 residual hook. Write \(e^{\mathrm{req}}\) for the intended vector and
 \(e^{\mathrm{real}}\) for the change actually present after the hook. If
 rounding were negligible, those two would nearly match.</p>
@@ -685,9 +698,9 @@ algebra reference. Predictive accuracy requires a different test: compare J&rsqu
 prediction with the final response and ask whether it beats cheap alternatives.
 We used two: identity, which carries the observed source-state change forward
 unchanged (a geometry-free transport baseline, not a vocabulary readout such
-as a <a href="/blog/knowledge-base/logit-lens/" class="ref-term">logit lens</a> or tuned lens
+as a <a href="/blog/knowledge-base/glossary/logit-lens/" class="ref-term">logit lens</a> or tuned lens
 (<a href="#ref-belrose-2023">Belrose et al., 2023</a>)), and five prespecified
-<a href="/blog/knowledge-base/random-j/" class="ref-term">random-J</a> controls, which apply seeded sign and
+<a href="/blog/knowledge-base/glossary/random-j/" class="ref-term">random-J</a> controls, which apply seeded sign and
 coordinate permutations to the released map.</p>
 <p>The layer-50 source state was selected in advance for the primary comparison.
 On this fixed <code>3%</code> panel, the released J cleared the absolute thresholds and
@@ -1035,9 +1048,9 @@ averaging derivatives over 125 completed WikiText prompts of at most 128
 tokens. They were not estimated from this study&rsquo;s prompts or outcomes.</p>
 <p>The three stress-test directions were independent standard-normal vectors in
 the 8,192-dimensional residual space, normalized to unit
-<a href="/blog/knowledge-base/rms/" class="ref-term">RMS</a> and fixed by predeclared seeds. There was no
+<a href="/blog/knowledge-base/glossary/rms/" class="ref-term">RMS</a> and fixed by predeclared seeds. There was no
 semantic or SAE-based selection, rejection for outcome behavior, or post-hoc
-sign flip. Dose ran from <code>0.5%</code> to <code>30%</code> of <a href="/blog/knowledge-base/rms/" class="ref-term">residual RMS</a>
+sign flip. Dose ran from <code>0.5%</code> to <code>30%</code> of <a href="/blog/knowledge-base/glossary/rms/" class="ref-term">residual RMS</a>
 in <code>0.5</code>-percentage-point increments. The prompts, directions,
 primary dose panel, and decision rules were fixed before outcomes were opened.</p>
 <p>For prompt \(p\), direction \(v\), and magnitude \(b\), the two signed branches
@@ -1262,6 +1275,7 @@ Praxagent Research Note.</li>
                     <a href="/work/index.html">Work</a>
                     <a href="/blog/index.html">Research Notes</a>
                     <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="/blog/search/">Search</a>
                     <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
                     <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
                     <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>

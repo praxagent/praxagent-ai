@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="430" viewBox="0 0 940 430" role="img" aria-labelledby="pcaTransformTitle pcaTransformDesc">
+  <title id="pcaTransformTitle">The same profiles shown with feature axes and principal-component axes</title>
+  <desc id="pcaTransformDesc">Two equal panels contain the same twelve profile points at identical local coordinates. The left panel uses horizontal and vertical standardized-feature axes. The right panel keeps every point fixed and replaces those axes with a solid principal component 1 axis and a dashed perpendicular principal component 2 axis. Profiles A and B are highlighted in both panels. In the right panel, blue segments show their principal component 2 distances from the principal component 1 axis.</desc>
+  <defs>
+    <marker id="pcaTransformArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#A67C52"/>
+    </marker>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:18px;font-weight:700}
+      .h{font-size:13px;font-weight:700;letter-spacing:.3px}
+      .s{font-size:11px}
+      .m{font-size:10px;fill:#5A544C}
+      .panel{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.3}
+      .axis{stroke:#7F786D;stroke-width:1.4}
+      .pc1{stroke:#A67C52;stroke-width:2.8}
+      .pc2{stroke:#4B6787;stroke-width:2.4;stroke-dasharray:7 4}
+      .projection{stroke:#4B6787;stroke-width:2}
+      .point{fill:#4B6787;stroke:#F7F4F0;stroke-width:1}
+      .focus{fill:#EAF1E5;stroke:#5A7346;stroke-width:2.3}
+      .profile-label{font-size:11px;font-weight:700}
+      .origin{fill:#2C2924}
+      .flow{fill:none;stroke:#A67C52;stroke-width:1.8;marker-end:url(#pcaTransformArrow)}
+    </style>
+  </defs>
+  <rect width="940" height="430" fill="#F7F4F0"/>
+  <text x="24" y="31" class="t title">The profiles stay; the coordinate system changes</text>
+  <text x="24" y="52" class="t m">Both panels are drawn from one shared coordinate table. PCA computes the new axes from those same coordinates.</text>
+
+  <rect x="24" y="78" width="400" height="288" rx="12" class="panel"/>
+  <text x="44" y="103" class="t h">STANDARDIZED FEATURE AXES</text>
+  <text x="44" y="121" class="t m">Each profile has a coordinate on feature 1 and feature 2</text>
+  <g transform="translate(224 238)">
+    <line x1="-146" y1="0" x2="146" y2="0" class="axis"/>
+    <line x1="0" y1="-104" x2="0" y2="104" class="axis"/>
+    <circle cx="0" cy="0" r="3" class="origin"/>
+    <circle class="point" data-panel="feature" data-profile="01" data-local-x="-86.688" data-local-y="84.693" cx="-86.688" cy="84.693" r="5"/>
+    <circle class="point" data-panel="feature" data-profile="02" data-local-x="-71.069" data-local-y="70.059" cx="-71.069" cy="70.059" r="5"/>
+    <circle class="point" data-panel="feature" data-profile="03" data-local-x="-55.449" data-local-y="75.181" cx="-55.449" cy="75.181" r="5"/>
+    <circle class="point" data-panel="feature" data-profile="04" data-local-x="-39.83" data-local-y="26.158" cx="-39.83" cy="26.158" r="5"/>
+    <circle class="point" data-panel="feature" data-profile="05" data-local-x="-24.21" data-local-y="-47.011" cx="-24.21" cy="-47.011" r="5"/>
+    <circle class="point" data-panel="feature" data-profile="06" data-local-x="-5.987" data-local-y="-12.622" cx="-5.987" cy="-12.622" r="5"/>
+    <circle class="point" data-panel="feature" data-profile="07" data-local-x="10.673" data-local-y="18.841" cx="10.673" cy="18.841" r="5"/>
+    <circle class="point" data-panel="feature" data-profile="08" data-local-x="25.252" data-local-y="-47.011" cx="25.252" cy="-47.011" r="5"/>
+    <circle class="point" data-panel="feature" data-profile="09" data-local-x="39.83" data-local-y="-21.402" cx="39.83" cy="-21.402" r="5"/>
+    <circle class="point" data-panel="feature" data-profile="10" data-local-x="53.887" data-local-y="-5.305" cx="53.887" cy="-5.305" r="5"/>
+    <circle class="point" data-panel="feature" data-profile="11" data-local-x="69.507" data-local-y="-47.011" cx="69.507" cy="-47.011" r="5"/>
+    <circle class="point" data-panel="feature" data-profile="12" data-local-x="84.085" data-local-y="-94.571" cx="84.085" cy="-94.571" r="5"/>
+    <circle class="focus" data-panel="feature" data-profile="10" cx="53.887" cy="-5.305" r="7"/>
+    <circle class="focus" data-panel="feature" data-profile="05" cx="-24.21" cy="-47.011" r="7"/>
+    <text class="t profile-label" x="42.887" y="-14.305" text-anchor="end">A</text>
+    <text class="t profile-label" x="-13.21" y="-56.011" text-anchor="start">B</text>
+    <text x="132" y="20" text-anchor="end" class="t s">feature 1</text>
+    <text x="-14" y="-90" text-anchor="end" class="t s">feature 2</text>
+  </g>
+  <text x="224" y="348" text-anchor="middle" class="t m">Profiles A and B are ringed so you can track them.</text>
+
+  <path class="flow" d="M439 218 H493"/>
+  <text x="466" y="192" text-anchor="middle" class="t s">same x,y</text>
+  <text x="466" y="207" text-anchor="middle" class="t s">positions</text>
+
+  <rect x="516" y="78" width="400" height="288" rx="12" class="panel"/>
+  <text x="536" y="103" class="t h">PRINCIPAL-COMPONENT AXES</text>
+  <text x="536" y="121" class="t m">Every profile stays fixed while the perpendicular axes change</text>
+  <g transform="translate(716 238)">
+    <line class="pc1" x1="-100.409" y1="100.409" x2="100.409" y2="-100.409"/>
+    <line class="pc2" x1="100.409" y1="100.409" x2="-100.409" y2="-100.409"/>
+    <circle cx="0" cy="0" r="3" class="origin"/>
+    <circle class="point" data-panel="pca" data-profile="01" data-local-x="-86.688" data-local-y="84.693" cx="-86.688" cy="84.693" r="5"/>
+    <circle class="point" data-panel="pca" data-profile="02" data-local-x="-71.069" data-local-y="70.059" cx="-71.069" cy="70.059" r="5"/>
+    <circle class="point" data-panel="pca" data-profile="03" data-local-x="-55.449" data-local-y="75.181" cx="-55.449" cy="75.181" r="5"/>
+    <circle class="point" data-panel="pca" data-profile="04" data-local-x="-39.83" data-local-y="26.158" cx="-39.83" cy="26.158" r="5"/>
+    <circle class="point" data-panel="pca" data-profile="05" data-local-x="-24.21" data-local-y="-47.011" cx="-24.21" cy="-47.011" r="5"/>
+    <circle class="point" data-panel="pca" data-profile="06" data-local-x="-5.987" data-local-y="-12.622" cx="-5.987" cy="-12.622" r="5"/>
+    <circle class="point" data-panel="pca" data-profile="07" data-local-x="10.673" data-local-y="18.841" cx="10.673" cy="18.841" r="5"/>
+    <circle class="point" data-panel="pca" data-profile="08" data-local-x="25.252" data-local-y="-47.011" cx="25.252" cy="-47.011" r="5"/>
+    <circle class="point" data-panel="pca" data-profile="09" data-local-x="39.83" data-local-y="-21.402" cx="39.83" cy="-21.402" r="5"/>
+    <circle class="point" data-panel="pca" data-profile="10" data-local-x="53.887" data-local-y="-5.305" cx="53.887" cy="-5.305" r="5"/>
+    <circle class="point" data-panel="pca" data-profile="11" data-local-x="69.507" data-local-y="-47.011" cx="69.507" cy="-47.011" r="5"/>
+    <circle class="point" data-panel="pca" data-profile="12" data-local-x="84.085" data-local-y="-94.571" cx="84.085" cy="-94.571" r="5"/>
+    <line class="projection" x1="29.596" y1="-29.596" x2="53.887" y2="-5.305"/>
+    <line class="projection" x1="11.4" y1="-11.4" x2="-24.21" y2="-47.011"/>
+    <circle class="focus" data-panel="pca" data-profile="10" cx="53.887" cy="-5.305" r="7"/>
+    <circle class="focus" data-panel="pca" data-profile="05" cx="-24.21" cy="-47.011" r="7"/>
+    <text class="t profile-label" x="42.887" y="-14.305" text-anchor="end">A</text>
+    <text class="t profile-label" x="-13.21" y="-56.011" text-anchor="start">B</text>
+    <text x="112" y="-87" class="t h">PC1 (solid)</text>
+    <text x="-112" y="-87" text-anchor="end" class="t h">PC2 (dashed)</text>
+  </g>
+  <text x="716" y="348" text-anchor="middle" class="t m">Blue segments are the profiles' PC2 coordinates.</text>
+
+  <text x="470" y="397" text-anchor="middle" class="t s">Coordinate check: every profile has the same local x and y in both panels.</text>
+  <text x="470" y="416" text-anchor="middle" class="t m">PCA changes the directions used to describe the profiles. It does not rearrange the profiles.</text>
+</svg>

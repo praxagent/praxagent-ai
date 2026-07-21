@@ -47,6 +47,12 @@ jobs:
       - name: Install browser-test dependencies
         run: npm ci
 
+      - name: Cache pinned semantic-search model
+        uses: actions/cache@v4
+        with:
+          path: .cache/semantic-search
+          key: semantic-search-minilm-751bff37182d3f1213fa05d7196b954e230abad9
+
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
 

@@ -107,6 +107,12 @@ STUDY_ID = "late-chunking-scifact-matched-content-token-256-v1"
 EXPECTED_LOCK_SHA256 = (
     "5a6ad830aee2d307b4d845c70e3b23f72f30b27938dcd342881e9d364dd06344"
 )
+ORIGINAL_PER_QUERY_SHA256 = (
+    "b91c682c7da121af99d1546c0688c00249d8af5310b519ca9d63c3ab422b3a28"
+)
+ORIGINAL_RANKINGS_SHA256 = (
+    "6e6e014c8875a517fd739101ae1461e8986675d378eb6ff482dfd5ddc1d955c1"
+)
 CANONICAL_COMMAND = (
     "uv run --frozen reproduce.py --run --device cpu --batch-size 32 --threads 8"
 )
@@ -126,7 +132,7 @@ CONDITION_LABELS = {
     "late": "Late 256-token chunks",
     "whole_document": "Whole document",
 }
-METRIC_KEYS = ("ndcg_at_10", "recall_at_10", "mrr_at_10")
+PER_QUERY_METRIC_KEYS = ("ndcg_at_10", "recall_at_10", "rr_at_10")
 
 AGGREGATE_PATH = RECEIPTS_DIR / "aggregate.json"
 PER_QUERY_PATH = RECEIPTS_DIR / "per-query.csv"
@@ -140,6 +146,7 @@ DELTA_FIGURE_PATH = HERE / "fig-query-deltas.svg"
 QUALITY_RECEIPT_PATH = HERE / "fig-scifact-retrieval.receipt.json"
 DELTA_RECEIPT_PATH = HERE / "fig-query-deltas.receipt.json"
 PROVENANCE_PATH = HERE / "provenance.json"
+RUN_GENERATOR_ARCHIVE_PATH = HERE / "reproduce-at-run.py"
 
 
 class ReproductionError(RuntimeError):
@@ -596,7 +603,7 @@ def metrics_for_ranking(
     return {
         "ndcg_at_10": ndcg,
         "recall_at_10": recall,
-        "mrr_at_10": reciprocal_rank,
+        "rr_at_10": reciprocal_rank,
     }
 
 
@@ -725,14 +732,15 @@ def aggregate_rows(
     methods: dict[str, Any] = {}
     for condition in CONDITIONS:
         method_metrics = {}
-        for metric in METRIC_KEYS:
+        for metric in PER_QUERY_METRIC_KEYS:
             values = [float(by_query[condition][query_id][metric]) for query_id in query_ids]
-            method_metrics[metric] = {"mean": sum(values) / len(values)}
+            aggregate_metric = "mrr_at_10" if metric == "rr_at_10" else metric
+            method_metrics[aggregate_metric] = {"mean": sum(values) / len(values)}
             if metric == "ndcg_at_10":
                 lower, upper = paired_bootstrap_interval(
                     values, seed=BOOTSTRAP_SEED + CONDITIONS.index(condition)
                 )
-                method_metrics[metric][
+                method_metrics[aggregate_metric][
                     "query_bootstrap_95_percent_interval"
                 ] = [lower, upper]
         methods[condition] = method_metrics
@@ -797,7 +805,7 @@ def combine_per_query_rows(
             "relevant_count": base["relevant_count"],
         }
         for condition in CONDITIONS:
-            for metric in METRIC_KEYS:
+            for metric in PER_QUERY_METRIC_KEYS:
                 row[f"{condition}_{metric}"] = indexed[condition][query_id][metric]
         row["late_minus_naive_ndcg_at_10"] = (
             row["late_ndcg_at_10"] - row["naive_ndcg_at_10"]
@@ -1075,7 +1083,7 @@ def run_experiment(args: argparse.Namespace) -> None:
     }
     finished = datetime.now(timezone.utc)
     run_receipt = {
-        "schema_version": 1,
+        "schema_version": 2,
         "study_id": STUDY_ID,
         "created_at_utc": finished.isoformat(),
         "purpose": (
@@ -1540,6 +1548,7 @@ def figure_receipt(
 
 def build_publication_artifacts() -> dict[Path, bytes]:
     aggregate = load_json(AGGREGATE_PATH)
+    run_receipt = load_json(RUN_RECEIPT_PATH)
     per_query = load_per_query_csv(PER_QUERY_PATH)
     quality_svg, quality_alt, quality_data = svg_quality(aggregate)
     delta_svg, delta_alt, delta_data = svg_deltas(aggregate, per_query)
@@ -1610,10 +1619,6 @@ def build_publication_artifacts() -> dict[Path, bytes]:
     expected[DELTA_RECEIPT_PATH] = canonical_json_bytes(delta_receipt)
 
     paired = aggregate["paired_late_minus_naive_ndcg_at_10"]
-    method_values = {
-        condition: aggregate["methods"][condition]["ndcg_at_10"]["mean"]
-        for condition in CONDITIONS
-    }
     receipt_hashes = {
         relative_bundle_path(path): sha256_bytes(expected[path])
         for path in (QUALITY_RECEIPT_PATH, DELTA_RECEIPT_PATH)
@@ -1629,51 +1634,254 @@ def build_publication_artifacts() -> dict[Path, bytes]:
                 QRELS_PATH,
                 LOCK_PATH,
                 ATTRIBUTION_PATH,
+                RUN_GENERATOR_ARCHIVE_PATH,
             )
         }
     )
-    provenance = {
-        "schema_version": 1,
-        "local_bundle": True,
-        "generator": {
-            "path": "reproduce.py",
-            "sha256": sha256_file(Path(__file__).resolve()),
-            "verify": "python3 reproduce.py --verify",
+    protocol = run_receipt["protocol"]
+    dataset_counts = run_receipt["dataset"]["counts"]
+    model_context_limit = run_receipt["model"][
+        "context_limit_tokens_including_special_tokens"
+    ]
+    bootstrap = aggregate["bootstrap"]
+    paper_table_1 = "https://arxiv.org/html/2409.04701v3#S1.T1"
+    paper_section_4_1 = "https://arxiv.org/html/2409.04701v3#S4.SS1"
+    paper_section_4_2 = "https://arxiv.org/html/2409.04701v3#S4.SS2"
+    provenance_numbers = [
+        {
+            "id": "paper-berlin-direct-naive-similarity",
+            "value": 0.8486,
+            "appears_as": "0.8486",
+            "source": paper_table_1,
         },
-        "receipts": receipt_hashes,
-        "figures": [
-            relative_bundle_path(QUALITY_FIGURE_PATH),
-            relative_bundle_path(DELTA_FIGURE_PATH),
-        ],
-        "numbers": [
-            {
-                "id": "scifact-query-count",
-                "value": aggregate["query_count"],
-                "appears_as": "300 test queries",
-                "source": "receipts/aggregate.json",
-            },
-            {
-                "id": "scifact-naive-ndcg10",
-                "value": method_values["naive"],
-                "appears_as": f"{method_values['naive']:.4f}",
-                "source": "receipts/aggregate.json",
-            },
-            {
-                "id": "scifact-late-ndcg10",
-                "value": method_values["late"],
-                "appears_as": f"{method_values['late']:.4f}",
-                "source": "receipts/aggregate.json",
-            },
-            {
-                "id": "scifact-whole-document-ndcg10",
-                "value": method_values["whole_document"],
-                "appears_as": f"{method_values['whole_document']:.4f}",
-                "source": "receipts/aggregate.json",
-            },
+        {
+            "id": "paper-berlin-direct-late-similarity",
+            "value": 0.8495,
+            "appears_as": "0.8495",
+            "source": paper_table_1,
+        },
+        {
+            "id": "paper-berlin-pronoun-naive-similarity",
+            "value": 0.7084,
+            "appears_as": "0.7084",
+            "source": paper_table_1,
+        },
+        {
+            "id": "paper-berlin-pronoun-late-similarity",
+            "value": 0.8249,
+            "appears_as": "0.8249",
+            "source": paper_table_1,
+        },
+        {
+            "id": "paper-berlin-city-naive-similarity",
+            "value": 0.7535,
+            "appears_as": "0.7535",
+            "source": paper_table_1,
+        },
+        {
+            "id": "paper-berlin-city-late-similarity",
+            "value": 0.8498,
+            "appears_as": "0.8498",
+            "source": paper_table_1,
+        },
+        {
+            "id": "paper-evaluation-model-count",
+            "value": 3,
+            "appears_as": "three embedding models",
+            "source": paper_section_4_1,
+        },
+        {
+            "id": "paper-evaluation-dataset-count",
+            "value": 4,
+            "appears_as": "four selected datasets",
+            "source": paper_section_4_1,
+        },
+        {
+            "id": "paper-ndcg-reporting-scale",
+            "value": 100,
+            "appears_as": "0-100 scale",
+            "source": paper_section_4_1,
+        },
+        {
+            "id": "paper-five-sentence-naive-ndcg10",
+            "value": 52.4,
+            "appears_as": "52.4",
+            "source": paper_section_4_1,
+        },
+        {
+            "id": "paper-five-sentence-late-ndcg10",
+            "value": 54.3,
+            "appears_as": "54.3",
+            "source": paper_section_4_1,
+        },
+        {
+            "id": "paper-five-sentence-change",
+            "value": 1.9,
+            "appears_as": "+1.9",
+            "source": paper_section_4_1,
+        },
+        {
+            "id": "paper-256-token-naive-ndcg10",
+            "value": 52.2,
+            "appears_as": "52.2",
+            "source": paper_section_4_1,
+        },
+        {
+            "id": "paper-256-token-late-ndcg10",
+            "value": 54.0,
+            "appears_as": "54.0",
+            "source": paper_section_4_1,
+        },
+        {
+            "id": "paper-256-token-change",
+            "value": 1.8,
+            "appears_as": "+1.8",
+            "source": paper_section_4_1,
+        },
+        {
+            "id": "paper-semantic-naive-ndcg10",
+            "value": 52.4,
+            "appears_as": "52.4",
+            "source": paper_section_4_1,
+        },
+        {
+            "id": "paper-semantic-late-ndcg10",
+            "value": 53.8,
+            "appears_as": "53.8",
+            "source": paper_section_4_1,
+        },
+        {
+            "id": "paper-semantic-change-unrounded",
+            "value": 1.5,
+            "appears_as": "+1.5 from unrounded scores",
+            "source": paper_section_4_1,
+        },
+        {
+            "id": "paper-ablation-truncation-limit",
+            "value": 8192,
+            "appears_as": "8,192 tokens",
+            "source": paper_section_4_2,
+        },
+        {
+            "id": "scifact-document-count",
+            "value": dataset_counts["corpus_documents"],
+            "appears_as": f"{dataset_counts['corpus_documents']:,} documents",
+            "source": "receipts/run.receipt.json",
+        },
+        {
+            "id": "scifact-query-count",
+            "value": aggregate["query_count"],
+            "appears_as": f"{aggregate['query_count']} test queries",
+            "source": "receipts/aggregate.json",
+        },
+        {
+            "id": "scifact-positive-qrel-count",
+            "value": dataset_counts["positive_test_qrels"],
+            "appears_as": (
+                f"{dataset_counts['positive_test_qrels']} positive "
+                "query-document judgments"
+            ),
+            "source": "receipts/run.receipt.json",
+        },
+        {
+            "id": "scifact-content-token-chunk-size",
+            "value": protocol["chunk_size_content_tokens"],
+            "appears_as": (
+                f"{protocol['chunk_size_content_tokens']}-content-token spans"
+            ),
+            "source": "receipts/run.receipt.json",
+        },
+        {
+            "id": "scifact-chunk-count",
+            "value": protocol["chunk_count"],
+            "appears_as": f"{protocol['chunk_count']:,} chunks",
+            "source": "receipts/run.receipt.json",
+        },
+        {
+            "id": "scifact-maximum-document-content-tokens",
+            "value": protocol["content_token_counts"]["maximum"],
+            "appears_as": (
+                f"{protocol['content_token_counts']['maximum']:,} content tokens"
+            ),
+            "source": "receipts/run.receipt.json",
+        },
+        {
+            "id": "model-context-limit",
+            "value": model_context_limit,
+            "appears_as": f"{model_context_limit:,}-token limit",
+            "source": "receipts/run.receipt.json",
+        },
+        {
+            "id": "bootstrap-replicates",
+            "value": bootstrap["replicates"],
+            "appears_as": f"{bootstrap['replicates']:,} resamples",
+            "source": "receipts/aggregate.json",
+        },
+        {
+            "id": "recorded-runtime-seconds",
+            "value": run_receipt["runtime"]["elapsed_seconds"],
+            "appears_as": "about eight minutes",
+            "source": "receipts/run.receipt.json",
+        },
+    ]
+    for condition in CONDITIONS:
+        metrics = aggregate["methods"][condition]
+        interval = metrics["ndcg_at_10"][
+            "query_bootstrap_95_percent_interval"
+        ]
+        provenance_numbers.extend(
+            [
+                {
+                    "id": f"scifact-{condition}-ndcg10",
+                    "value": metrics["ndcg_at_10"]["mean"],
+                    "appears_as": f"{metrics['ndcg_at_10']['mean']:.4f}",
+                    "source": "receipts/aggregate.json",
+                },
+                {
+                    "id": f"scifact-{condition}-ndcg10-interval-lower",
+                    "value": interval[0],
+                    "appears_as": f"{interval[0]:.4f}",
+                    "source": "receipts/aggregate.json",
+                },
+                {
+                    "id": f"scifact-{condition}-ndcg10-interval-upper",
+                    "value": interval[1],
+                    "appears_as": f"{interval[1]:.4f}",
+                    "source": "receipts/aggregate.json",
+                },
+                {
+                    "id": f"scifact-{condition}-recall10",
+                    "value": metrics["recall_at_10"]["mean"],
+                    "appears_as": f"{metrics['recall_at_10']['mean']:.4f}",
+                    "source": "receipts/aggregate.json",
+                },
+                {
+                    "id": f"scifact-{condition}-mrr10",
+                    "value": metrics["mrr_at_10"]["mean"],
+                    "appears_as": f"{metrics['mrr_at_10']['mean']:.4f}",
+                    "source": "receipts/aggregate.json",
+                },
+            ]
+        )
+    paired_interval = paired["query_bootstrap_95_percent_interval"]
+    provenance_numbers.extend(
+        [
             {
                 "id": "scifact-late-minus-naive",
                 "value": paired["mean_difference"],
                 "appears_as": f"{paired['mean_difference']:+.4f}",
+                "source": "receipts/aggregate.json",
+            },
+            {
+                "id": "scifact-late-minus-naive-interval-lower",
+                "value": paired_interval[0],
+                "appears_as": f"{paired_interval[0]:+.4f}",
+                "source": "receipts/aggregate.json",
+            },
+            {
+                "id": "scifact-late-minus-naive-interval-upper",
+                "value": paired_interval[1],
+                "appears_as": f"{paired_interval[1]:+.4f}",
                 "source": "receipts/aggregate.json",
             },
             {
@@ -1694,7 +1902,22 @@ def build_publication_artifacts() -> dict[Path, bytes]:
                 "appears_as": f"{paired['worse_queries']} worsened",
                 "source": "receipts/aggregate.json",
             },
+        ]
+    )
+    provenance = {
+        "schema_version": 1,
+        "local_bundle": True,
+        "generator": {
+            "path": "reproduce.py",
+            "sha256": sha256_file(Path(__file__).resolve()),
+            "verify": "python3 reproduce.py --verify",
+        },
+        "receipts": receipt_hashes,
+        "figures": [
+            relative_bundle_path(QUALITY_FIGURE_PATH),
+            relative_bundle_path(DELTA_FIGURE_PATH),
         ],
+        "numbers": provenance_numbers,
     }
     expected[PROVENANCE_PATH] = canonical_json_bytes(provenance)
     return expected
@@ -1845,7 +2068,7 @@ def verify_rankings_and_metrics() -> None:
                 **recomputed,
             }
             rows_by_condition[condition].append(metric_row)
-            for metric in METRIC_KEYS:
+            for metric in PER_QUERY_METRIC_KEYS:
                 assert_close(
                     recomputed[metric],
                     float(ranking[metric]),
@@ -1891,17 +2114,40 @@ def verify_rankings_and_metrics() -> None:
 
 
 def verify_run_receipt(run_receipt: dict[str, Any]) -> None:
-    """Bind the frozen inputs and recorded outputs to this exact generator."""
+    """Bind frozen inputs and outputs to the exact generator used at run time."""
+    if run_receipt.get("schema_version") != 2:
+        raise ReproductionError("run receipt has the wrong schema version")
     if run_receipt.get("study_id") != STUDY_ID:
         raise ReproductionError("run receipt has the wrong study ID")
-    expected_generator_hash = sha256_file(Path(__file__).resolve())
+    if not RUN_GENERATOR_ARCHIVE_PATH.is_file():
+        raise ReproductionError("the archived run generator is missing")
+    expected_generator_hashes = {
+        sha256_file(RUN_GENERATOR_ARCHIVE_PATH),
+        sha256_file(Path(__file__).resolve()),
+    }
     generator = run_receipt.get("generator", {})
-    if generator.get("path") != "reproduce.py" or generator.get(
-        "sha256_at_run"
-    ) != expected_generator_hash:
+    generator_hash = generator.get("sha256_at_run")
+    if (
+        generator.get("path") != "reproduce.py"
+        or generator_hash not in expected_generator_hashes
+    ):
         raise ReproductionError(
-            "run receipt was not produced by the committed reproduce.py"
+            "run receipt does not match the archived or current generator"
         )
+    if generator_hash == sha256_file(RUN_GENERATOR_ARCHIVE_PATH):
+        schema_revision = run_receipt.get("post_run_schema_revision", {})
+        original_hashes = schema_revision.get("original_output_sha256", {})
+        expected_original_hashes = {
+            "receipts/per-query.csv": ORIGINAL_PER_QUERY_SHA256,
+            "receipts/top-10-rankings.jsonl": ORIGINAL_RANKINGS_SHA256,
+        }
+        if (
+            schema_revision.get("numeric_values_changed") is not False
+            or original_hashes != expected_original_hashes
+        ):
+            raise ReproductionError(
+                "run receipt does not document the post-run RR field rename"
+            )
     environment_lock = run_receipt.get("environment_lock", {})
     if environment_lock.get("path") != relative_bundle_path(
         LOCK_PATH
@@ -2032,6 +2278,7 @@ def verify_artifacts() -> None:
         RUN_RECEIPT_PATH,
         LOCK_PATH,
         ATTRIBUTION_PATH,
+        RUN_GENERATOR_ARCHIVE_PATH,
         QUALITY_FIGURE_PATH,
         DELTA_FIGURE_PATH,
         QUALITY_RECEIPT_PATH,

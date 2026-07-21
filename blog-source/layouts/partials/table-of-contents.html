@@ -1,0 +1,13 @@
+{{- $toc := replace .TableOfContents `<nav id="TableOfContents">` `<nav id="TableOfContents" aria-label="On this page">` | safeHTML -}}
+{{- $sectionCount := len (findRE "<a href=" $toc) -}}
+<details class="table-of-contents">
+    <summary class="table-of-contents-summary">
+        <span class="table-of-contents-label">On this page</span>
+        <span class="table-of-contents-count">
+            {{ $sectionCount }} {{ if eq $sectionCount 1 }}section{{ else }}sections{{ end }}
+        </span>
+    </summary>
+    <div class="table-of-contents-body">
+        {{ $toc }}
+    </div>
+</details>
