@@ -26,6 +26,7 @@ import argparse
 import csv
 import hashlib
 import json
+import platform
 import struct
 import tempfile
 from pathlib import Path
@@ -36,6 +37,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib import ft2font
 
 
 HERE = Path(__file__).resolve().parent
@@ -53,6 +55,7 @@ RECEIPT = "wheat-kernel-pca.receipt.json"
 FIGURE_RECEIPT = "fig-wheat-kernel-pca.receipt.json"
 PROVENANCE = "provenance.json"
 LOCK_FILE = "reproduce.py.lock"
+NOTEBOOK = "wheat-kernel-pca-colab.ipynb"
 
 SOURCE_URL = (
     "https://archive.ics.uci.edu/ml/machine-learning-databases/00236/"
@@ -123,6 +126,21 @@ def png_dimensions(path: Path) -> tuple[int, int]:
     if header[:8] != b"\x89PNG\r\n\x1a\n":
         raise RuntimeError(f"{path.name} is not a PNG")
     return struct.unpack(">II", header[16:24])
+
+
+def current_reference_environment() -> dict[str, str]:
+    """Return stable diagnostics for the environment that rendered artifacts."""
+    return {
+        "python_implementation": platform.python_implementation(),
+        "python_version": platform.python_version(),
+        "operating_system": platform.system(),
+        "os_release": platform.release(),
+        "architecture": platform.machine(),
+        "numpy_version": np.__version__,
+        "matplotlib_version": matplotlib.__version__,
+        "freetype_version": ft2font.__freetype_version__,
+        "matplotlib_backend": str(matplotlib.get_backend()),
+    }
 
 
 def load_source() -> tuple[np.ndarray, np.ndarray]:
@@ -678,7 +696,11 @@ def loading_records(loadings: np.ndarray, component: int) -> list[dict[str, Any]
     ]
 
 
-def build_outputs(output_dir: Path, generator_sha256: str) -> None:
+def build_outputs(
+    output_dir: Path,
+    generator_sha256: str,
+    reference_environment: dict[str, str],
+) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     matrix, variety_codes = load_source()
     pca = compute_pca(matrix)
@@ -831,8 +853,11 @@ def build_outputs(output_dir: Path, generator_sha256: str) -> None:
             "generator_sha256": generator_sha256,
             "lockfile": LOCK_FILE,
             "lockfile_sha256": sha256_file(HERE / LOCK_FILE),
-            "numpy_version": np.__version__,
-            "matplotlib_version": matplotlib.__version__,
+            "notebook": NOTEBOOK,
+            "notebook_sha256": sha256_file(HERE / NOTEBOOK),
+            "numpy_version": reference_environment["numpy_version"],
+            "matplotlib_version": reference_environment["matplotlib_version"],
+            "reference_environment": reference_environment,
             "generated_outputs": {
                 name: sha256_file(output_dir / name) for name in generated_files
             },
@@ -868,6 +893,7 @@ def build_outputs(output_dir: Path, generator_sha256: str) -> None:
     manifest = {
         "schema_version": 1,
         "local_bundle": True,
+        "reference_environment": reference_environment,
         "source": {
             "path": SOURCE_TXT,
             "sha256": sha256_file(HERE / SOURCE_TXT),
@@ -878,6 +904,10 @@ def build_outputs(output_dir: Path, generator_sha256: str) -> None:
             "path": "reproduce.py",
             "sha256": generator_sha256,
             "verify": "uv run --frozen reproduce.py --verify",
+        },
+        "notebook": {
+            "path": NOTEBOOK,
+            "sha256": sha256_file(HERE / NOTEBOOK),
         },
         "receipts": {
             FIGURE_RECEIPT: sha256_file(output_dir / FIGURE_RECEIPT),
@@ -946,15 +976,34 @@ def generated_names() -> tuple[str, ...]:
 
 
 def generate() -> None:
-    build_outputs(HERE, sha256_file(HERE / "reproduce.py"))
+    build_outputs(
+        HERE,
+        sha256_file(HERE / "reproduce.py"),
+        current_reference_environment(),
+    )
     print("generated UCI Seeds PCA artifacts")
 
 
 def verify() -> None:
     generator_hash = sha256_file(HERE / "reproduce.py")
+    committed_receipt = json.loads((HERE / RECEIPT).read_text(encoding="utf-8"))
+    receipt_provenance = committed_receipt.get("provenance")
+    reference_environment = (
+        receipt_provenance.get("reference_environment")
+        if isinstance(receipt_provenance, dict)
+        else None
+    )
+    if not isinstance(reference_environment, dict) or not all(
+        isinstance(key, str) and isinstance(value, str)
+        for key, value in reference_environment.items()
+    ):
+        raise RuntimeError(
+            f"{RECEIPT} must record provenance.reference_environment"
+        )
+    current_environment = current_reference_environment()
     with tempfile.TemporaryDirectory(prefix="verify-uci-seeds-pca-") as temp:
         candidate = Path(temp)
-        build_outputs(candidate, generator_hash)
+        build_outputs(candidate, generator_hash, reference_environment)
         differences: list[str] = []
         for name in generated_names():
             committed = HERE / name
@@ -964,7 +1013,17 @@ def verify() -> None:
             elif committed.read_bytes() != rebuilt.read_bytes():
                 differences.append(f"byte mismatch: {name}")
         if differences:
-            raise RuntimeError("verification failed:\n" + "\n".join(differences))
+            environment_note = (
+                "\nrecorded reference environment:\n"
+                + json.dumps(reference_environment, indent=2, sort_keys=True)
+                + "\ncurrent verification environment:\n"
+                + json.dumps(current_environment, indent=2, sort_keys=True)
+            )
+            raise RuntimeError(
+                "verification failed:\n"
+                + "\n".join(differences)
+                + environment_note
+            )
     print("verified all UCI Seeds PCA artifacts byte for byte")
 
 

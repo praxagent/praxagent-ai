@@ -1,12 +1,12 @@
 {
   "analysis_receipt": {
     "path": "wheat-kernel-pca.receipt.json",
-    "sha256": "22fe447d75a8c07ab14b58123bb94bbfe04011b5a8ff2e81c90540d987ad3b28"
+    "sha256": "e18284c1e712471710e0e9d43055ca12f9ea19f4895104e3f54502b16c2cd5bf"
   },
   "description": "Hash binding for every empirical figure and the featured card generated from the UCI Seeds PCA analysis",
   "provenance": {
     "generator": "reproduce.py",
-    "generator_sha256": "f0df0b7ccbd8782c4ace93135d001bede81c74d1fdc05c1818bc0138317df780",
+    "generator_sha256": "138edbcfe082341441e0374ad002e44be431056cadcf5e00d571a5482334b817",
     "outputs": {
       "fig-wheat-kernel-all-features.png": "66f65468cf83297c681a660533a0ead591225fa5cc60ae055e77ab99db20d3c4",
       "fig-wheat-kernel-correlations.png": "ba62a90e5ecfcfee6bcc0373274168abb8b90e1c6fbf6234186f5a3a5197be89",

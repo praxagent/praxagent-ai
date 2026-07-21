@@ -17,9 +17,9 @@ instead of reaching a reader:
    repo with each number RE-DERIVED from a committed receipt, so this binds the
    receipt-derived numbers to what the prose actually says -- edit a number in
    one place but not the other and this fails. Local bundles also validate
-   generator, receipt, and figure hashes. Set `local_bundle` to true or false
-   explicitly to control that strict check; without the flag, a manifest whose
-   receipt paths all exist beside it is treated as local.
+   generator, notebook, receipt, and figure hashes. Set `local_bundle` to true
+   or false explicitly to control that strict check; without the flag, a
+   manifest whose receipt paths all exist beside it is treated as local.
 
 Run from repo root: `python3 scripts/check_provenance.py`.
 """
@@ -142,6 +142,20 @@ def check_local_hashes(manifest_path: Path, manifest: dict[object, object]) -> i
             generator.get("sha256"),
             "generator",
         )
+
+    notebook = manifest.get("notebook")
+    if notebook is not None:
+        if not isinstance(notebook, dict):
+            print(f"FAIL {relative_manifest}: local notebook must be an object")
+            fails += 1
+        else:
+            fails += check_sha256(
+                manifest_path,
+                bundle,
+                notebook.get("path"),
+                notebook.get("sha256"),
+                "notebook",
+            )
 
     receipts = manifest.get("receipts")
     if not isinstance(receipts, dict):

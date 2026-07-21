@@ -292,10 +292,14 @@ stops feeling concrete, return to the examples in these boxes.
         
     </div>
     <div class="panel-content">
-        <strong>Observation and row.</strong> An <strong>observation</strong> is one thing being described. In
+        <p><strong>Observation and row.</strong> An <strong>observation</strong> is one thing being described. In
 the real dataset used here, it is one measured wheat kernel. It occupies one
 spreadsheet <strong>row</strong> and later becomes one point on the PCA map. A <strong>feature</strong> is
-one measurement column, such as kernel length or compactness.
+one measurement column, such as kernel length or compactness.</p>
+<p>The same biological unit can generate several rows, such as repeated images,
+technical repeats, or measurements at several time points. A row in a prepared
+table is therefore not automatically an independent biological observation.</p>
+
     </div>
 </div>
 
@@ -313,11 +317,20 @@ far values sit from their average, squares those distances so negative and
 positive differences do not cancel, and averages the squared distances. Larger
 variance means the values are more spread out. You do not need to calculate it
 by hand to follow the pictures.</p>
-<p><strong>Correlation.</strong> Two features are correlated when they tend to change together.
-If plants with longer primary roots also tend to have more lateral roots, those
-features have a positive correlation. “Tend to” matters: the relationship does
-not have to be perfect, and correlation alone does not show that one feature
-causes the other.</p>
+<p>Variance depends on the numerical scale set by a feature&rsquo;s units, so raw
+variances from unlike measurement columns may not be directly comparable.</p>
+<p><strong>Covariance.</strong> Covariance describes whether paired feature values tend to
+deviate from their respective averages in the same direction. It is positive
+when the two features tend to be above or below their averages together,
+negative when one tends to be above as the other is below, and near zero when
+those paired linear deviations mostly cancel. Its magnitude depends on the
+features&rsquo; units and scales.</p>
+<p><strong>Correlation.</strong> Correlation standardizes that covariance by the two features'
+standard deviations, producing a unit-free value from -1 to +1. If plants with
+longer primary roots also tend to have more lateral roots, those features have
+a positive correlation. “Tend to” matters: the relationship does not have to
+be perfect, and correlation alone does not show that one feature causes the
+other.</p>
 
     </div>
 </div>
@@ -345,6 +358,10 @@ single graph.</p>
 the original features. PCA chooses the first new axis to follow the direction
 with the most variance. It chooses the next perpendicular axis to capture as
 much of the remaining variance as possible.</p>
+<p>The most variable direction is not necessarily the one most relevant to the
+biological question. It can reflect organism size, developmental stage, which
+organism supplied a sample, a batch, measurement conditions, or a mixture of
+sources.</p>
 
     </div>
 </div>
@@ -416,6 +433,9 @@ batch effect, or let held-out data influence preprocessing.</p>
 <p>How do seven measured geometric features vary across this collection of wheat kernels, and where do the three recorded wheat varieties land on the resulting PCA map?</p>
 </blockquote>
 <p>The <a href="https://archive.ics.uci.edu/dataset/236/seeds">University of California, Irvine (UCI) Seeds dataset</a> contains real measurements of 210 wheat kernels: 70 Kama, 70 Rosa, and 70 Canadian. Researchers used soft X-ray images and the GRAINS image-analysis software to measure area, perimeter, compactness, kernel length, kernel width, asymmetry coefficient, and kernel-groove length. The dataset is licensed under Creative Commons Attribution 4.0 and has no missing values (<a href="#ref-uci-seeds">Charytanowicz and colleagues, 2010</a>).</p>
+<p>These seven columns are image-derived summaries of morphology. PCA can
+summarize how the recorded shapes vary, but it cannot by itself identify the
+developmental, genetic, or environmental causes of those shapes.</p>
 <p>The researchers who introduced the data also used PCA to reduce the seven measurements to two dimensions for visual inspection (<a href="#ref-seeds-paper">Charytanowicz and colleagues, 2010</a>). We calculate our own PCA directly from the open numerical table. Every empirical Portable Network Graphics (PNG) image below is produced by the included Python code from that exact file. None is traced, redrawn, or copied from the paper.</p>
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
@@ -503,6 +523,11 @@ batch effect, or let held-out data influence preprocessing.</p>
   </tbody>
 </table>
 <p>The order matters: define what one row represents, repair or flag data problems, examine missingness and suspicious values, and only then create the numerical feature matrix for scaling and PCA.</p>
+<p>One vocabulary distinction matters here. Repeated images of the same kernel
+are technical repeats. Kernels sampled from independently grown plants or
+plots may provide biological replication, but only when the study design
+supports treating those plants or plots as independent experimental units
+(<a href="#ref-blainey-replication-2014">Blainey and colleagues, 2014</a>).</p>
 <h2 id="follow-along-in-google-colab">Follow along in Google Colab</h2>
 <p>This is also a coding tutorial. The <a href="wheat-kernel-pca-colab.ipynb" download="wheat-kernel-pca-colab.ipynb">wheat-kernel PCA notebook</a> downloads the UCI data, verifies its checksum, and produces the same counts, variance percentages, PCA map, and loading values shown below.</p>
 <p>To run it:</p>
@@ -704,9 +729,12 @@ batch effect, or let held-out data influence preprocessing.</p>
         <img src="/blog/knowledge-base/deep-dives/principal-component-analysis/fig-wheat-kernel-feature-space.png" alt="Kernel length versus kernel width for 210 measured wheat kernels. Rosa kernels generally occupy larger values, Canadian kernels smaller values, and Kama kernels overlap both groups." loading="lazy" decoding="async">
     </div>
     <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
-    <figcaption><strong>Finding:</strong> length and width already show structure among the 210 kernels, but this plot displays only two of the seven measured features. Rosa kernels tend toward larger length and width, Canadian kernels toward smaller values, and Kama overlaps both in this view. Shape and color both identify the recorded variety. This is a descriptive view of the complete UCI table, not a population estimate or classifier result. Generated directly by <a href="reproduce.py">reproduce.py</a> from the <a href="seeds_dataset.txt">UCI source file</a>; exact values, hashes, and plotting rules are in the <a href="wheat-kernel-pca.receipt.json">receipt</a>.</figcaption>
+    <figcaption><strong>Finding:</strong> length and width already show structure among the 210 kernels, but this plot displays only two of the seven measured features. Rosa kernels tend toward larger length and width, Canadian kernels toward smaller values, and Kama overlaps both in this view. Shape and color both identify the recorded variety. This is a descriptive view of the complete UCI table, not a population estimate or classifier result. Source values are in <a href="seeds_dataset.txt">seeds_dataset.txt</a> and <a href="wheat_kernel_measurements.csv">wheat_kernel_measurements.csv</a>, plotting code is in <a href="reproduce.py">reproduce.py</a>, and artifact hashes and analysis summaries are in the <a href="wheat-kernel-pca.receipt.json">receipt</a>.</figcaption>
 </figure>
 
+<p>The partial visual separation does not establish that length and width are the
+best features for distinguishing varieties. They are simply the two
+measurements chosen for this preliminary view.</p>
 <h3 id="step-6-look-at-all-seven-measurements">Step 6: look at all seven measurements</h3>
 <p>The length-versus-width chart hides five columns. Small multiples solve that problem by giving each measurement its own horizontal scale. The dots show all 210 values in every panel. The boxes mark the middle half of each variety&rsquo;s values, and the line inside each box is the median.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">236</span><span class="p">)</span>  <span class="c1"># A random-number generator makes display-only jitter repeatable.</span>
@@ -736,7 +764,7 @@ batch effect, or let held-out data influence preprocessing.</p>
         <img src="/blog/knowledge-base/deep-dives/principal-component-analysis/fig-wheat-kernel-all-features.png" alt="Seven small-multiple plots show every area, perimeter, compactness, kernel length, kernel width, asymmetry coefficient, and kernel-groove length value for Kama, Rosa, and Canadian wheat kernels, with a box marking the middle half of each distribution." loading="lazy" decoding="async">
     </div>
     <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
-    <figcaption><strong>Finding:</strong> Rosa kernels generally have larger area, perimeter, length, width, and groove length in this table, while Canadian kernels generally have smaller values on those measurements. Compactness overlaps substantially, and asymmetry varies widely within every variety. Each panel keeps the feature&rsquo;s original scale. Every symbol is a measured kernel, and each box marks the middle 50% of that variety&rsquo;s values. These are descriptive distributions, not estimates for all wheat. Generated directly by <a href="reproduce.py">reproduce.py</a>; the source values and deterministic plotting rules are recorded in the <a href="wheat-kernel-pca.receipt.json">receipt</a>.</figcaption>
+    <figcaption><strong>Finding:</strong> Rosa kernels generally have larger area, perimeter, length, width, and groove length in this table, while Canadian kernels generally have smaller values on those measurements. Compactness overlaps substantially, and asymmetry varies widely within every variety. Each panel keeps the feature&rsquo;s original scale. Every symbol is a measured kernel, and each box marks the middle 50% of that variety&rsquo;s values. These are descriptive distributions, not estimates for all wheat. Source values are in <a href="seeds_dataset.txt">seeds_dataset.txt</a> and <a href="wheat_kernel_measurements.csv">wheat_kernel_measurements.csv</a>, plotting code is in <a href="reproduce.py">reproduce.py</a>, and artifact hashes and analysis summaries are in the <a href="wheat-kernel-pca.receipt.json">receipt</a>.</figcaption>
 </figure>
 
 <h3 id="step-7-find-measurements-that-move-together">Step 7: find measurements that move together</h3>
@@ -789,6 +817,9 @@ r_{xy}=
 <blockquote>
 <p><strong>You should see:</strong> area and perimeter have a correlation of 0.99, so they carry very similar size information. Asymmetry and groove length have a correlation of -0.01, which is almost no linear relationship in this table. Correlation does not say that one measurement causes the other.</p>
 </blockquote>
+<p>Near-redundancy does not make either area or perimeter biologically
+meaningless. It means that, within this collection, they encode much of the
+same between-kernel variation.</p>
 <figure class="reference-figure">
     <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Correlations among all seven original wheat-kernel measurements" tabindex="0">
         <img src="/blog/knowledge-base/deep-dives/principal-component-analysis/fig-wheat-kernel-correlations.png" alt="A seven by seven correlation matrix shows strong positive relationships among area, perimeter, length, width, and groove length, while asymmetry has weak negative or near-zero linear correlations with the other measurements." loading="lazy" decoding="async">
@@ -901,6 +932,8 @@ r_{xy}=
 <h3 id="median-imputation-in-a-dataset-with-missing-cells">Median imputation in a dataset with missing cells</h3>
 <p><strong>Imputation</strong> means filling a missing cell with a calculated replacement. Median imputation would insert the median of the observed values from that feature. It can produce the complete numerical matrix PCA requires, but it cannot recover the unobserved measurement.</p>
 <p>Median imputation is a pragmatic replacement rule, not recovery of the missing measurements. Replacing several cells with one feature median usually reduces that feature&rsquo;s variance, changes its covariances and correlations with other features, and treats the replacements as if they were known values. Because PCA summarizes this variance-and-covariance structure, compare results under defensible missing-data treatments and report whether the interpretation changes. For inferential work, consider a method that represents missing-data uncertainty when appropriate.</p>
+<p>These distortions can be substantial when many values are missing or
+missingness is concentrated in a biological or technical group.</p>
 <p>Before imputing, ask which measurements are missing, why they are missing, whether missingness is concentrated in one biological or technical group, and whether the assumption behind a typical replacement is defensible. For this UCI table, the answer is recorded as “none”: no values are imputed.</p>
 <h2 id="before-scaling-what-standard-deviation-means">Before scaling: what standard deviation means</h2>
 <p>The <strong>mean</strong> and <a href="/blog/knowledge-base/glossary/standard-deviation/" class="ref-term">standard deviation</a> answer different questions about one feature column:</p>
@@ -925,7 +958,8 @@ r_{xy}=
 <li>Square every deviation so values below and above the mean cannot cancel each other.</li>
 <li>Average the squared deviations, then take the square root to return to the feature&rsquo;s original units.</li>
 </ol>
-<p>The population standard deviation used by <code>StandardScaler</code> is</p>
+<p><code>StandardScaler</code> uses the population-standard-deviation convention shown below
+(<a href="#ref-sklearn-scaling">scikit-learn StandardScaler documentation</a>):</p>
 $$\sigma_j=\sqrt{\frac{1}{n}\sum_{i=1}^{n}(x_{ij}-\mu_j)^2}.$$<p>Read the formula from the inside outward. The parentheses measure one observation&rsquo;s difference from the mean. Squaring makes that difference nonnegative. The sum combines all observations, division by \(n\) forms their average squared deviation, and the square root converts the result back from squared units.</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
@@ -1044,7 +1078,7 @@ z=\frac{0.1345}{0.4420}\approx+0.30.
       </tr>
   </tbody>
 </table>
-<p>The same interpretation applies to every real measurement in every feature column. After scaling, all seven columns use the same unit: standard deviations from that feature&rsquo;s mean. PCA can now compare how unusual the measurements are without treating their original numerical units as directly comparable.</p>
+<p>The same interpretation applies to every real measurement in every feature column. After scaling, all seven columns share a common numerical form: the number of feature-specific standard deviations above or below that feature&rsquo;s mean. PCA can now compare how unusual the measurements are without treating their original numerical units as directly comparable.</p>
 <h3 id="what-mean-zero-and-variance-one-means">What “mean zero and variance one” means</h3>
 <p>After every value in one feature column is standardized:</p>
 <ul>
@@ -1060,7 +1094,17 @@ z=\frac{0.1345}{0.4420}\approx+0.30.
     </div>
     <div class="panel-content">
         <p><strong>Scaling is a scientific judgment, not a ritual</strong></p>
-<p>Scaling encodes the judgment that a one-standard-deviation change should be comparable across features. That may be sensible for mixed morphology measurements. It may be undesirable when absolute variance is scientifically meaningful, measurement noise differs sharply across features, or the inputs were already normalized in a meaningful way.</p>
+<p>Scaling encodes the judgment that a one-standard-deviation change should be
+comparable across features. It puts each feature in feature-specific
+standard-deviation units; it does not make features equally biologically
+important or equally reliable, and it does not separate biological variation
+from measurement noise. Scaling also does not remove redundancy: a large
+correlated feature family, such as several size measurements, may collectively
+shape the PCA more than a smaller family. The same dataset can therefore
+justify different scaling choices for different scientific questions. Scaling
+may be undesirable when absolute variance is scientifically meaningful,
+measurement noise differs sharply across features, or the inputs were already
+normalized in a meaningful way.</p>
 
     </div>
 </div>
@@ -1165,6 +1209,11 @@ z=\frac{0.1345}{0.4420}\approx+0.30.
 </ul>
 <p>PCA keeps all 210 kernels. It does not merge kernels, remove kernels, or predict their varieties. It changes how we describe the position of each kernel.</p>
 <p>Before PCA, one kernel needs seven coordinates because it has seven standardized measurements. After PCA, that same kernel can be described by seven new coordinates called PC1 score, PC2 score, and so on through PC7 score. The first few new coordinates are designed to retain as much of the table&rsquo;s variation as possible.</p>
+<p>These axes identify where variation lies, not what produced it. A component
+can combine biological differences, technical effects, or both. Interpreting
+its likely source requires returning to the original measurements and relevant
+metadata such as variety, treatment, batch, date, instrument, or imaging
+conditions.</p>
 <h3 id="follow-one-kernel-onto-pc1">Follow one kernel onto PC1</h3>
 <p>Think of PC1 as a recipe containing seven coefficients, one for each original measurement. PCA finds the recipe that spreads the 210 kernels out as much as possible along one line.</p>
 <p>To give one kernel its PC1 score, the software:</p>
@@ -1328,7 +1377,7 @@ z=\frac{0.1345}{0.4420}\approx+0.30.
         <img src="/blog/knowledge-base/deep-dives/principal-component-analysis/fig-wheat-kernel-pca.png" alt="Scaled principal component analysis of 210 wheat kernels. PC1 contains 71.9 percent of the variance and largely separates Rosa kernels at positive scores from Canadian kernels at negative scores, while Kama kernels occupy an intermediate region. PC2 contains 17.1 percent and shows additional overlap and separation." loading="lazy" decoding="async">
     </div>
     <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
-    <figcaption><strong>Finding:</strong> PC1 represents 71.9% and PC2 represents 17.1% of variation across the seven scaled measurements. Together they represent 89.0%. Rosa kernels generally occupy positive PC1 scores, Canadian kernels negative scores, and Kama kernels an intermediate region, with overlap among recorded varieties. Shapes and colors both identify variety. These are descriptive coordinates for the complete UCI table. They do not estimate population separation, classification accuracy, or causality. Generated directly by <a href="reproduce.py">reproduce.py</a> from the <a href="seeds_dataset.txt">UCI source file</a>; exact scores, variance ratios, hashes, and plotting rules are in the <a href="wheat-kernel-pca.receipt.json">receipt</a>.</figcaption>
+    <figcaption><strong>Finding:</strong> PC1 represents 71.9% and PC2 represents 17.1% of variation across the seven scaled measurements. Together they represent 89.0%. Rosa kernels generally occupy positive PC1 scores, Canadian kernels negative scores, and Kama kernels an intermediate region, with overlap among recorded varieties. Shapes and colors both identify variety. These are descriptive coordinates for the complete UCI table. They do not estimate population separation, classification accuracy, or causality. Generated from the <a href="seeds_dataset.txt">UCI source file</a> by <a href="reproduce.py">reproduce.py</a>. Exact coordinates are in <a href="pca_scores.csv">pca_scores.csv</a>, and variance ratios and artifact hashes are in the <a href="wheat-kernel-pca.receipt.json">receipt</a>.</figcaption>
 </figure>
 
 <p>Begin with the score-and-variance figure in two passes.</p>
@@ -1361,7 +1410,7 @@ z=\frac{0.1345}{0.4420}\approx+0.30.
         <img src="/blog/knowledge-base/deep-dives/principal-component-analysis/fig-wheat-kernel-loadings.png" alt="Principal-axis coefficient bars show that PC1 rises with area, perimeter, kernel width, kernel length, groove length, and compactness, while PC2 is defined most strongly by negative asymmetry and positive compactness." loading="lazy" decoding="async">
     </div>
     <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
-    <figcaption><strong>Finding:</strong> in the displayed orientation, PC1 combines area (+0.444), perimeter (+0.442), width (+0.433), length (+0.424), groove length (+0.387), and compactness (+0.277), with a smaller negative asymmetry coefficient (-0.119). PC2 contrasts asymmetry (-0.717) and groove length (-0.377) with compactness (+0.529). These values are the principal-axis coefficients from <code>components_.T</code>, often informally called loadings. They are not feature-component correlations. Bar position and printed signs carry the meaning without relying on color. Component signs are arbitrary and may be mirrored together with all scores. Generated directly by <a href="reproduce.py">reproduce.py</a>; the complete coefficient table is <a href="pca_loadings.csv">pca_loadings.csv</a>, and exact hashes and rules are in the <a href="wheat-kernel-pca.receipt.json">receipt</a>.</figcaption>
+    <figcaption><strong>Finding:</strong> in the displayed orientation, PC1 combines area (+0.444), perimeter (+0.442), width (+0.433), length (+0.424), groove length (+0.387), and compactness (+0.277), with a smaller negative asymmetry coefficient (-0.119). PC2 contrasts asymmetry (-0.717) and groove length (-0.377) with compactness (+0.529). These values are the principal-axis coefficients from <code>components_.T</code>, often informally called loadings. They are not feature-component correlations. Bar position and printed signs carry the meaning without relying on color. Component signs are arbitrary and may be mirrored together with all scores. The complete coefficient table is <a href="pca_loadings.csv">pca_loadings.csv</a>, plotting code is in <a href="reproduce.py">reproduce.py</a>, and artifact hashes are in the <a href="wheat-kernel-pca.receipt.json">receipt</a>.</figcaption>
 </figure>
 
 <h3 id="find-the-strongest-coefficients-instead-of-guessing-from-the-bars">Find the strongest coefficients instead of guessing from the bars</h3>
@@ -1483,6 +1532,8 @@ z=\frac{0.1345}{0.4420}\approx+0.30.
 </table>
 <p>In the displayed orientation, Rosa has the highest average position on the size-related PC1 axis, Canadian has the lowest, and Kama lies nearer the middle. Kama has the highest average PC2 score, placing its center farther toward the compactness-positive side of the PC2 contrast.</p>
 <p>These averages summarize real structure in this collection. They are especially interesting because PCA was not given the variety labels when it constructed the axes. However, a centroid describes the center of a variety, not every kernel in it. The point clouds overlap, so these results do not provide a perfect rule for identifying individual kernels.</p>
+<p>Overlap is compatible with genuine group-level differences because individuals
+vary; complete separation in morphology space is not required.</p>
 <p><strong>4. Two dimensions provide a strong overview, but not the whole dataset.</strong></p>
 <p>PC1 and PC2 together retain 89.0% of the variation in the standardized measurements. That makes the two-axis map a useful summary of this dataset. The remaining 11.0% is not imaginary or unimportant: PC3 alone contains another 9.7%, and an individual difference may be visible there even when it is hidden in the PC1-versus-PC2 map.</p>
 <div class="panel info">
@@ -1524,6 +1575,10 @@ z=\frac{0.1345}{0.4420}\approx+0.30.
     </div>
 </div>
 
+<p>This principle is not unique to population genetics. Adding specimens,
+batches, laboratories, treatments, or time points creates a new matrix, so a
+changed PCA may correctly describe changed sampling rather than a software
+failure.</p>
 <p>The relevant lesson is not that PCA produces random answers. For a fixed numerical matrix, implementation, and solver, PCA returns the same fitted component subspaces up to numerical precision. Individual component signs remain arbitrary. If two components have exactly equal explained variance, any perpendicular rotation within their shared subspace is equally valid. Near-equal values can also make the individual axes numerically unstable even when the combined subspace is stable.</p>
 <p>The larger interpretive problem is that each revised set of observations creates a different matrix, so PCA answers a different question. A two-dimensional map can also distort distances that exist across all the original dimensions. Treating the spacing between points or apparent groups as direct evidence of ancestry, migration, gene flow between populations, or biological distance therefore reaches beyond what the plot establishes.</p>
 <p>Elhaik argues that a large body of population-genetics research should be reevaluated. That is a broad, domain-specific conclusion from one critical study, not proof that PCA is useless in every biological setting. Other population-genetics researchers describe concrete ways to use PCA more carefully, including checking for unequal population sizes, linkage disequilibrium, outliers, unstable projections, and components driven by a small genomic region (<a href="#ref-prive-pca-2020">Privé and colleagues, 2020</a>). <strong>Linkage disequilibrium</strong> means that nearby genetic variants are inherited together more often than would be expected if they were independent.</p>
@@ -1620,8 +1675,12 @@ z=\frac{0.1345}{0.4420}\approx+0.30.
 </span></span><span class="line"><span class="cl">    <span class="n">seeds</span><span class="p">[</span><span class="s2">&#34;variety_code&#34;</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">    <span class="n">cv</span><span class="o">=</span><span class="n">folds</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span></code></pre></div><p>On each cross-validation split, the pipeline fits imputation, scaling, PCA, and the classifier using the training kernels only. The held-out kernels are transformed using medians, scales, and component axes learned from the training kernels. The imputer is a no-op for the current complete table, but it demonstrates where missing-value handling belongs if future input contains empty cells.</p>
-<p>The grouping rule must match the scientific claim. This file has no field, harvest, plate, plant, or repeat identifiers. Stratified kernel-level folds can test held-out kernels from this collection, but they cannot establish generalization to new fields, harvests, plates, or populations. A stronger biological evaluation would need those identifiers and would keep the corresponding groups together during splitting.</p>
+</span></span></code></pre></div><p>On each cross-validation split, the pipeline fits imputation, scaling, PCA, and the classifier using the training kernels only. The held-out kernels are transformed using medians, scales, and component axes learned from the training kernels. The imputer does not change the current complete table. With missing input, <code>SimpleImputer(strategy=&quot;median&quot;)</code> replaces each empty cell using that feature&rsquo;s median learned from the training fold (<a href="#ref-sklearn-imputer">scikit-learn SimpleImputer documentation</a>).</p>
+<p>The grouping rule must match the scientific claim. This file has no field, harvest, plate, plant, or repeat identifiers. Stratified kernel-level folds produce scores for rows withheld from this table, and the pipeline prevents those rows from fitting imputation, scaling, PCA, or the classifier. However, unrecorded relationships or shared batches could cross folds, so the table cannot verify that this split respects independence. These row-level scores do not establish performance for new plants, fields, harvests, plates, or populations. A stronger biological evaluation would require the relevant identifiers and would keep each corresponding group within a single fold.</p>
+<p>In other biological systems, related rows may share a donor, tissue, animal,
+culture, litter, family, or patient. Those relationships are part of the study
+design, not statistical conveniences, and should determine which rows stay
+together during splitting.</p>
 <h3 id="exploratory-pca-is-a-different-use-case">Exploratory PCA is a different use case</h3>
 <p>Fitting PCA to the complete dataset is appropriate when the stated goal is simply to describe that dataset. There is no held-out performance claim in a purely exploratory map.</p>
 <p>The mistake is to reuse globally imputed, globally scaled, or globally fitted PCA features for supposedly held-out model evaluation. Keep exploratory outputs separate from the modeling pipeline, and name them accordingly.</p>
@@ -1635,6 +1694,14 @@ z=\frac{0.1345}{0.4420}\approx+0.30.
 <li><strong>Leakage:</strong> Full-data scaling is acceptable for describing this complete table. If we later claim held-out prediction performance, we must split first and fit imputation, scaling, PCA, and the model inside each training fold.</li>
 </ol>
 <p>That answer demonstrates understanding of the biology, the table, the preprocessing, the plot, and the evaluation boundary without requiring a derivation from memory.</p>
+<p>In biological research, PCA is often the beginning of a conversation rather
+than the end of an analysis. Components do not arrive with biological meanings;
+those meanings emerge by combining the mathematical results with experimental
+knowledge and metadata. The patterns can motivate follow-up experiments,
+statistical analyses, or properly held-out predictive models. The same
+principles apply whether rows describe wheat kernels, image-derived morphology,
+gene-expression profiles, ecological surveys, or other high-dimensional
+biological tables.</p>
 <h2 id="a-practical-interpretation-checklist">A practical interpretation checklist</h2>
 <p>Do not try to judge a PCA figure from the point cloud alone. Work through these four passes before accepting the interpretation.</p>
 <div class="panel warning">
@@ -1699,12 +1766,12 @@ z=\frac{0.1345}{0.4420}\approx+0.30.
 
 <h2 id="appendix-a-reproduce-the-teaching-example">Appendix A: reproduce the teaching example</h2>
 <p>For a guided run, start with the <a href="wheat-kernel-pca-colab.ipynb" download="wheat-kernel-pca-colab.ipynb">wheat-kernel PCA Colab notebook</a>. It downloads and checksum-verifies the same UCI file, explains each stage, displays an expected result after each important cell, and saves new score and loading tables at the end.</p>
-<p>For an exact artifact audit from a local command line, the page bundle includes the <a href="reproduce.py">reproducible generator</a>, <a href="reproduce.py.lock">locked dependency graph</a>, <a href="seeds_dataset.txt">unmodified UCI source file</a>, <a href="wheat_kernel_measurements.csv">readable measurement table</a>, <a href="pca_scores.csv">PCA coordinates</a>, <a href="pca_loadings.csv">complete principal-axis coefficients</a>, <a href="wheat-kernel-pca.receipt.json">analysis and figure receipt</a>, and <a href="provenance.json">provenance manifest</a>. The coefficient file retains its established <code>pca_loadings.csv</code> name for link compatibility.</p>
+<p>For an exact artifact audit from a local command line, the page bundle includes the <a href="reproduce.py">reproducible generator</a>, <a href="reproduce.py.lock">locked dependency graph</a>, <a href="seeds_dataset.txt">unmodified UCI source file</a>, <a href="wheat_kernel_measurements.csv">readable measurement table</a>, <a href="pca_scores.csv">PCA coordinates</a>, <a href="pca_loadings.csv">complete principal-axis coefficients</a>, <a href="wheat-kernel-pca.receipt.json">analysis and figure receipt</a>, and <a href="provenance.json">provenance manifest</a>. The manifest also binds the downloadable notebook to its committed SHA-256 hash. The coefficient file retains its established <code>pca_loadings.csv</code> name for link compatibility.</p>
 <p>Generate every derived table, empirical figure, and featured card with:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">uv run --frozen reproduce.py --generate
 </span></span></code></pre></div><p>Within the locked, supported software environment, regenerate every artifact in a temporary directory and require byte-for-byte agreement with the committed bundle using:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">uv run --frozen reproduce.py --verify
-</span></span></code></pre></div><p>The generator verifies the original UCI file against its SHA-256 checksum, uses pinned NumPy and Matplotlib versions, declares a sign convention for all seven components, and checks every regenerated artifact byte for byte. The numerical PCA subspace is reproducible beyond that exact environment, but last-bit floating-point values and rendered PNG bytes can vary with the operating system or numerical libraries. The PNG figures are code outputs from the numerical data. The conceptual SVGs elsewhere on this page teach general relationships and do not contain empirical results.</p>
+</span></span></code></pre></div><p>The generator verifies the original UCI file against its SHA-256 checksum, uses pinned NumPy and Matplotlib versions, declares a sign convention for all seven components, and checks every regenerated artifact byte for byte. The receipt and manifest record the reference Python, operating system, architecture, NumPy, Matplotlib, FreeType, and rendering-backend versions so a mismatch can be diagnosed without recording a hostname, username, or working path. The numerical PCA subspace is reproducible beyond that exact environment, but last-bit floating-point values and rendered PNG bytes can vary with the operating system or numerical libraries. The PNG figures are code outputs from the numerical data. The conceptual SVGs elsewhere on this page teach general relationships and do not contain empirical results.</p>
 <h2 id="appendix-b-the-mathematical-definition-of-pca">Appendix B: the mathematical definition of PCA</h2>
 <p>This appendix expresses the same steps from the main tutorial in compact mathematical notation. You do not need this derivation to run or interpret the Python example.</p>
 <h3 id="write-the-wheat-table-as-a-matrix">Write the wheat table as a matrix</h3>
@@ -1787,7 +1854,15 @@ X=U\Sigma V^{\mathsf T}.
 </ul>
 <p>PCA can also be derived from the eigenvectors of a covariance or correlation matrix. Jolliffe and Cadima provide that derivation and discuss covariance-based and correlation-based PCA (<a href="#ref-jolliffe-cadima-2016">Jolliffe and Cadima, 2016</a>).</p>
 <h3 id="define-the-explained-variance-ratio">Define the explained-variance ratio</h3>
-<p>Let \(\lambda_k\) be the variance of the scores along component \(k\). The explained-variance ratio for that component is</p>
+<p>Because \(X\) is centered, each component&rsquo;s score vector \(t_k\) is centered.
+Scikit-learn and <code>reproduce.py</code> use the sample-variance convention</p>
+\[
+\lambda_k=\frac{\lVert t_k\rVert_2^2}{n-1}=\frac{d_k^2}{n-1},
+\]<p>where \(d_k\) is the corresponding singular value. Dividing every component
+variance by \(n\) instead would rescale all \(\lambda_k\) values by the same
+factor, so it would not change the component directions or explained-variance
+ratios (<a href="#ref-sklearn-pca">scikit-learn PCA documentation</a>). The
+explained-variance ratio for component \(k\) is</p>
 \[
 r_k=\frac{\lambda_k}{\sum_{j=1}^{p}\lambda_j}.
 \]<p>The numerator, \(\lambda_k\), is the variance along the component being examined. The denominator adds the variance from all \(p=7\) components. Their ratio, \(r_k\), is the fraction of the fitted table&rsquo;s total variance that lies along component \(k\).</p>
@@ -1796,9 +1871,10 @@ r_k=\frac{\lambda_k}{\sum_{j=1}^{p}\lambda_j}.
 <p><a id="ref-jolliffe-cadima-2016"></a>Jolliffe, I. T., and Cadima, J. (2016). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4792409/">Principal component analysis: a review and recent developments</a>. <em>Philosophical Transactions of the Royal Society A</em>, 374(2065), 20150202. Digital object identifier (DOI): 10.1098/rsta.2015.0202.</p>
 <p><a id="ref-uci-seeds"></a>Charytanowicz, M., Niewczas, J., Kulczycki, P., Kowalski, P. A., and Lukasik, S. (2010). <a href="https://archive.ics.uci.edu/dataset/236/seeds">Seeds dataset</a>. UCI Machine Learning Repository. DOI: 10.24432/C5H30K. The repository records 210 kernels, seven continuous geometric measurements, three varieties with 70 kernels each, no missing values, and a Creative Commons Attribution 4.0 license.</p>
 <p><a id="ref-seeds-paper"></a>Charytanowicz, M., Niewczas, J., Kulczycki, P., Kowalski, P. A., Lukasik, S., and Zak, S. (2010). <a href="https://doi.org/10.1007/978-3-642-13105-9_2">Complete Gradient Clustering Algorithm for Features Analysis of X-Ray Images</a>. In <em>Information Technologies in Biomedicine</em>, volume 69, pages 15-24. The paper describes the X-ray-derived kernel measurements and reports reducing the seven-dimensional data with PCA for two-dimensional visual inspection.</p>
+<p><a id="ref-blainey-replication-2014"></a>Blainey, P., Krzywinski, M., and Altman, N. (2014). <a href="https://www.nature.com/articles/nmeth.3091">Replication</a>. <em>Nature Methods</em>, 11, 879-880. DOI: 10.1038/nmeth.3091. The article distinguishes sources of technical and biological variation and explains why replicate layers do not contribute equally or independently.</p>
 <p><a id="ref-elhaik-pca-2022"></a>Elhaik, E. (2022). <a href="https://www.nature.com/articles/s41598-022-14395-4">Principal Component Analyses (PCA)-based findings in population genetic studies are highly biased and must be reevaluated</a>. <em>Scientific Reports</em>, 12, 14683. DOI: 10.1038/s41598-022-14395-4. The study varies which observations are included, sample sizes, genetic markers, and displayed components to test the stability of population-genetics interpretations.</p>
 <p><a id="ref-prive-pca-2020"></a>Privé, F., Luu, K., Blum, M. G. B., McGrath, J. J., and Vilhjálmsson, B. J. (2020). <a href="https://academic.oup.com/bioinformatics/article/36/16/4449/5838185">Efficient toolkit implementing best practices for principal component analysis of population genetic data</a>. <em>Bioinformatics</em>, 36(16), 4449-4457. DOI: 10.1093/bioinformatics/btaa520. The paper discusses linkage disequilibrium, projected-component shrinkage, sample outliers, and uneven population sizes.</p>
-<p><a id="ref-sklearn-pca"></a>scikit-learn developers. <a href="https://scikit-learn.org/stable/modules/decomposition.html#pca">Principal component analysis</a>. The guide states that PCA centers but does not scale input features and describes components as successive orthogonal directions that maximize variance. Accessed July 19, 2026.</p>
+<p><a id="ref-sklearn-pca"></a>scikit-learn developers. <a href="https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html">Principal component analysis</a>. The application programming interface reference states that PCA centers but does not scale input features, defines components as orthogonal directions of maximum variance, and documents the \(n-1\) degrees-of-freedom convention for estimated component variances. Accessed July 19, 2026.</p>
 <p><a id="ref-sklearn-scaling"></a>scikit-learn developers. <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html">StandardScaler</a>. The application programming interface (API) reference defines feature-wise centering and scaling and stores training means and standard deviations for later transformation. Accessed July 19, 2026.</p>
 <p><a id="ref-sklearn-imputer"></a>scikit-learn developers. <a href="https://scikit-learn.org/stable/modules/generated/sklearn.impute.SimpleImputer.html">SimpleImputer</a>. The API reference documents column-wise mean, median, most-frequent, and constant replacement strategies. Accessed July 19, 2026.</p>
 <p><a id="ref-sklearn-leakage"></a>scikit-learn developers. <a href="https://scikit-learn.org/stable/common_pitfalls.html#data-leakage">Common pitfalls and recommended practices</a>. The guide recommends splitting before learned preprocessing and fitting transformations only on training data, preferably through a pipeline. Accessed July 19, 2026.</p>

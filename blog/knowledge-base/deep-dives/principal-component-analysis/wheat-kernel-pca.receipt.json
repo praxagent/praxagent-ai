@@ -276,11 +276,24 @@
       "wheat_kernel_measurements.csv": "c7912a8217991ced457663cffccfe154e2a9e60a07ac0ab7b0fd436dda9126d6"
     },
     "generator": "reproduce.py",
-    "generator_sha256": "f0df0b7ccbd8782c4ace93135d001bede81c74d1fdc05c1818bc0138317df780",
+    "generator_sha256": "138edbcfe082341441e0374ad002e44be431056cadcf5e00d571a5482334b817",
     "lockfile": "reproduce.py.lock",
     "lockfile_sha256": "783473858fe78fe0eb7a203a646bcb3cd4fac96a357304910ccafd06379fdde0",
     "matplotlib_version": "3.10.3",
-    "numpy_version": "2.3.2"
+    "notebook": "wheat-kernel-pca-colab.ipynb",
+    "notebook_sha256": "d921219a59891e286790040df2576b3df260e30fa31d190831735889cebfeea2",
+    "numpy_version": "2.3.2",
+    "reference_environment": {
+      "architecture": "arm64",
+      "freetype_version": "2.6.1",
+      "matplotlib_backend": "Agg",
+      "matplotlib_version": "3.10.3",
+      "numpy_version": "2.3.2",
+      "operating_system": "Darwin",
+      "os_release": "25.5.0",
+      "python_implementation": "CPython",
+      "python_version": "3.13.11"
+    }
   },
   "source": {
     "committed_source": "seeds_dataset.txt",

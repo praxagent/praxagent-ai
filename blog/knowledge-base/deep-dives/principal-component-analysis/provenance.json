@@ -9,10 +9,14 @@
   ],
   "generator": {
     "path": "reproduce.py",
-    "sha256": "f0df0b7ccbd8782c4ace93135d001bede81c74d1fdc05c1818bc0138317df780",
+    "sha256": "138edbcfe082341441e0374ad002e44be431056cadcf5e00d571a5482334b817",
     "verify": "uv run --frozen reproduce.py --verify"
   },
   "local_bundle": true,
+  "notebook": {
+    "path": "wheat-kernel-pca-colab.ipynb",
+    "sha256": "d921219a59891e286790040df2576b3df260e30fa31d190831735889cebfeea2"
+  },
   "numbers": [
     {
       "appears_as": "210 kernels",
@@ -52,10 +56,21 @@
     }
   ],
   "receipts": {
-    "fig-wheat-kernel-pca.receipt.json": "8e25e81accf3a6a3e616b75f9417e9604c22d043284086b231148d1287ede1e5",
+    "fig-wheat-kernel-pca.receipt.json": "0d962bd382d1c29dc4289bf8e85a6e0c047faa6c1fba87ea9f2cec0879bbe9dc",
     "reproduce.py.lock": "783473858fe78fe0eb7a203a646bcb3cd4fac96a357304910ccafd06379fdde0",
     "seeds_dataset.txt": "1f3f83c0d8485ae9148061389d19628607e3f5660e3d6f40ec9102fb398bb12f",
-    "wheat-kernel-pca.receipt.json": "22fe447d75a8c07ab14b58123bb94bbfe04011b5a8ff2e81c90540d987ad3b28"
+    "wheat-kernel-pca.receipt.json": "e18284c1e712471710e0e9d43055ca12f9ea19f4895104e3f54502b16c2cd5bf"
+  },
+  "reference_environment": {
+    "architecture": "arm64",
+    "freetype_version": "2.6.1",
+    "matplotlib_backend": "Agg",
+    "matplotlib_version": "3.10.3",
+    "numpy_version": "2.3.2",
+    "operating_system": "Darwin",
+    "os_release": "25.5.0",
+    "python_implementation": "CPython",
+    "python_version": "3.13.11"
   },
   "schema_version": 1,
   "source": {
