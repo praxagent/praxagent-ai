@@ -2151,6 +2151,13 @@ body {
     gap: 1.5rem;
 }
 
+.hero-cta-links {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 1.5rem;
+}
+
 .hero-text-link,
 .hero-contact-link {
     font-size: 0.9rem;
@@ -2825,6 +2832,10 @@ body {
         gap: 1.25rem;
     }
 
+    .hero-cta-links {
+        gap: 1.25rem;
+    }
+
     .hero-media {
         min-height: 22rem;
         order: 2;
@@ -2956,6 +2967,10 @@ body {
         align-items: flex-start;
         flex-direction: column;
         gap: 0.65rem;
+    }
+
+    .hero-cta-links {
+        gap: 1.25rem;
     }
 
     .footer-compact-top {

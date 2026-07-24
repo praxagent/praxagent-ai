@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles-v2.css?v=20260724">
+    <link rel="stylesheet" href="../styles-v2.css?v=20260724b">
 </head>
 <body class="work-page">
     <nav class="navbar industrial-navbar">
@@ -30,6 +30,7 @@
                 <a href="index.html" class="nav-link active">Work</a>
                 <a href="../blog/index.html" class="nav-link">Research Notes</a>
                 <a href="../blog/knowledge-base/" class="nav-link">Knowledge Base</a>
+                <a href="../blog/search/" class="nav-link">Search</a>
                 <a href="../index.html#contact" class="nav-link">Contact</a>
                 <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
                     <span class="theme-toggle-icon sun" aria-hidden="true">
@@ -53,6 +54,7 @@
             <a href="index.html" class="mobile-nav-link active">Work</a>
             <a href="../blog/index.html" class="mobile-nav-link">Research Notes</a>
             <a href="../blog/knowledge-base/" class="mobile-nav-link">Knowledge Base</a>
+            <a href="../blog/search/" class="mobile-nav-link">Search</a>
             <a href="../index.html#contact" class="mobile-nav-link">Contact</a>
             <div class="mobile-theme-toggle">
                 <div class="theme-toggle" aria-label="Toggle dark mode">
@@ -83,6 +85,52 @@
                 <div class="section-index">
                     <p class="section-index-label">01 / Research programs</p>
                     <h2 id="research-programs-title">Model internals and evaluation</h2>
+                </div>
+                <div class="research-figures" aria-label="Figures from recent research notes">
+                    <a href="../blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">
+                        <img
+                            src="../assets/research/cka_397b.webp"
+                            alt="CKA similarity matrix across layers for a Jacobian lens on Qwen3.5-397B"
+                            width="1600"
+                            height="1384"
+                            loading="lazy"
+                            decoding="async"
+                        >
+                        <span>CKA layer similarity</span>
+                    </a>
+                    <a href="../blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">
+                        <img
+                            src="../assets/research/emergence-curve.webp"
+                            alt="Mid-band separation versus parameter count across model families"
+                            width="1200"
+                            height="709"
+                            loading="lazy"
+                            decoding="async"
+                        >
+                        <span>Workspace band vs. scale</span>
+                    </a>
+                    <a href="../blog/posts/2026/07/jacobian-lens-intervention-test/">
+                        <img
+                            src="../assets/research/dose-depth-arc.webp"
+                            alt="Downstream gain heatmap and final-state trajectories after a layer-50 edit"
+                            width="1200"
+                            height="1025"
+                            loading="lazy"
+                            decoding="async"
+                        >
+                        <span>Dose–depth response</span>
+                    </a>
+                    <a href="../blog/posts/2026/07/jacobian-lens-sae-steering/">
+                        <img
+                            src="../assets/research/semantic-matrix.webp"
+                            alt="Jacobian readout family matrix across intervention families"
+                            width="1200"
+                            height="966"
+                            loading="lazy"
+                            decoding="async"
+                        >
+                        <span>Readout family matrix</span>
+                    </a>
                 </div>
                 <div class="work-ledger">
                     <a class="work-row" href="../blog/tags/jacobian-lens/">
