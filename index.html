@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>praxagent - Independent AI Research & Applied Systems</title>
-    <meta name="description" content="Independent AI research in mechanistic interpretability, model evaluation, reproducibility, and applied systems. Public artifacts, code, controls, and receipts.">
+    <meta name="description" content="Independent AI research in mechanistic interpretability, model evaluation, and reproducibility — plus Prax, a self-hostable agent harness suite. Public artifacts, code, controls, and receipts.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:title" content="praxagent - Independent AI Research & Applied Systems">
@@ -86,6 +86,7 @@
                     </p>
                     <div class="hero-cta">
                         <a href="work/index.html" class="hero-text-link">Work index <span aria-hidden="true">↗</span></a>
+                        <a href="#prax-suite" class="hero-text-link">Prax suite <span aria-hidden="true">↓</span></a>
                         <a href="mailto:hello@praxagent.ai" class="hero-contact-link">hello@praxagent.ai</a>
                     </div>
                 </div>
@@ -105,11 +106,62 @@
 
     <section class="recent-research" aria-labelledby="recent-research-title">
         <div class="container">
-            <div class="section-index">
-                <p class="section-index-label">01 / Recent research</p>
-                <h2 id="recent-research-title">Research notes</h2>
-                <a href="blog/index.html">View all notes <span aria-hidden="true">→</span></a>
+            <div class="research-header">
+                <p class="section-index-label">01 / Research</p>
+                <div class="research-header-copy">
+                    <h2 id="recent-research-title">Research</h2>
+                    <p>
+                        Controlled experiments and investigations in LLM interpretability, alignment, agentic behavior, and more.
+                    </p>
+                </div>
             </div>
+            <div class="research-figures" aria-label="Figures from recent research notes">
+                <a href="blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">
+                    <img
+                        src="assets/research/cka_397b.webp"
+                        alt="CKA similarity matrix across layers for a Jacobian lens on Qwen3.5-397B"
+                        width="1600"
+                        height="1384"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                    <span>CKA layer similarity</span>
+                </a>
+                <a href="blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">
+                    <img
+                        src="assets/research/emergence-curve.webp"
+                        alt="Mid-band separation versus parameter count across model families"
+                        width="1200"
+                        height="709"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                    <span>Workspace band vs. scale</span>
+                </a>
+                <a href="blog/posts/2026/07/jacobian-lens-intervention-test/">
+                    <img
+                        src="assets/research/dose-depth-arc.webp"
+                        alt="Downstream gain heatmap and final-state trajectories after a layer-50 edit"
+                        width="1200"
+                        height="1025"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                    <span>Dose–depth response</span>
+                </a>
+                <a href="blog/posts/2026/07/jacobian-lens-sae-steering/">
+                    <img
+                        src="assets/research/semantic-matrix.webp"
+                        alt="Jacobian readout family matrix across intervention families"
+                        width="1200"
+                        height="966"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                    <span>Readout family matrix</span>
+                </a>
+            </div>
+            <p class="research-examples-label">Recent examples</p>
             <div class="research-ledger">
                 <a href="blog/posts/2026/07/jacobian-lens-sae-steering/" class="research-ledger-row">
                     <span class="research-ledger-type">Interpretability</span>
@@ -122,14 +174,78 @@
                     <time datetime="2026-07-10">10 Jul 2026</time>
                 </a>
             </div>
+            <div class="research-footer">
+                <a href="blog/index.html">View all notes <span aria-hidden="true">→</span></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="prax-suite" class="prax-suite" aria-labelledby="prax-suite-title">
+        <div class="container">
+            <div class="section-index">
+                <p class="section-index-label">02 / Open harness</p>
+                <h2 id="prax-suite-title">Prax suite</h2>
+                <a href="blog/knowledge-base/prax/">Docs <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="prax-suite-intro">
+                <p>
+                    A security-first self-hosted agentic harness, with an integrated orchestrator, collaboration shell, sandbox, plugins, and keyless egress.
+                </p>
+                <a href="https://github.com/praxagent/prax" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+            <figure class="home-shot">
+                <img
+                    src="assets/prax-suite/prax-header.webp"
+                    alt="TeamWork chat with Prax beside a live browser screencast of a NASA article the agent opened"
+                    width="1600"
+                    height="898"
+                    loading="lazy"
+                    decoding="async"
+                >
+            </figure>
+            <div class="work-ledger">
+                <a class="work-row" href="https://github.com/praxagent/prax" target="_blank" rel="noopener">
+                    <span class="work-row-index">P01</span>
+                    <div>
+                        <h3>Prax</h3>
+                        <p>Safety-first multi-agent harness with dozens of tools, sophisticated memory management, and more.</p>
+                    </div>
+                    <span class="work-row-link">GitHub ↗</span>
+                </a>
+                <a class="work-row" href="https://github.com/praxagent/teamwork" target="_blank" rel="noopener">
+                    <span class="work-row-index">P02</span>
+                    <div>
+                        <h3>TeamWork</h3>
+                        <p>Agent-agnostic shell: chat, kanban, terminal, and live browser takeover.</p>
+                    </div>
+                    <span class="work-row-link">GitHub ↗</span>
+                </a>
+                <a class="work-row" href="https://github.com/praxagent/prax-sandbox" target="_blank" rel="noopener">
+                    <span class="work-row-index">P03</span>
+                    <div>
+                        <h3>Sandbox</h3>
+                        <p>Dockerized coding agents, Chromium/CDP, desktop, and a full toolchain.</p>
+                    </div>
+                    <span class="work-row-link">GitHub ↗</span>
+                </a>
+                <a class="work-row" href="https://github.com/praxagent/prax-secrets-proxy" target="_blank" rel="noopener">
+                    <span class="work-row-index">P04</span>
+                    <div>
+                        <h3>Secrets proxy</h3>
+                        <p>Credential-injecting egress so the agent process holds no real keys.</p>
+                    </div>
+                    <span class="work-row-link">GitHub ↗</span>
+                </a>
+            </div>
         </div>
     </section>
 
     <section id="services" class="services">
         <div class="container">
             <div class="section-index">
-                <p class="section-index-label">02 / Research domains</p>
+                <p class="section-index-label">03 / Research domains</p>
                 <h2 class="section-title">Where we work</h2>
+                <a href="work/index.html">Work index <span aria-hidden="true">→</span></a>
             </div>
             <div class="services-grid">
                 <div class="service-card">
@@ -154,8 +270,9 @@
     <section id="about" class="about">
         <div class="container">
             <div class="section-index">
-                <p class="section-index-label">03 / Operating principles</p>
+                <p class="section-index-label">04 / Operating principles</p>
                 <h2>How we work</h2>
+                <a href="methods/experiment-integrity/">Experiment integrity <span aria-hidden="true">→</span></a>
             </div>
             <div class="about-content">
                 <div class="about-points">

@@ -40,7 +40,7 @@ DEFAULT_OUTPUT = PRIVATE_OUTPUT_DIR / "gpt-5.6-sol-pro.json"
 DEFAULT_CONTINUATION_OUTPUT = PRIVATE_OUTPUT_DIR / "gpt-5.6-sol-pro-continued.json"
 API_KEY_NAMES = ("OPENAI_API_KEY", "OPENAI_KEY")
 REVIEW_METADATA_KEY = "_prax_review"
-DATA_TEXT_SUFFIXES = frozenset({".csv", ".jsonl", ".tsv", ".txt"})
+DATA_TEXT_SUFFIXES = frozenset({".arff", ".csv", ".jsonl", ".tsv", ".txt"})
 CORE_TEXT_SUFFIXES = frozenset(
     {
         ".adoc",

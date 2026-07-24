@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment Integrity - praxagent</title>
+    <meta name="description" content="How praxagent runs confirmatory research: freeze the design before outcomes, keep controls honest, retain failures, and ship the evidence with the claim.">
+    <link rel="canonical" href="https://praxagent.ai/methods/experiment-integrity/">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Experiment Integrity - praxagent">
+    <meta property="og:description" content="A high-level look at how we keep confirmatory experiments inspectable: design before outcomes, honest controls, retained failures, and public receipts.">
+    <meta property="og:url" content="https://praxagent.ai/methods/experiment-integrity/">
+    <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles-v2.css">
+</head>
+<body class="methods-page">
+    <nav class="navbar industrial-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../../index.html">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="../../work/index.html" class="nav-link">Work</a>
+                <a href="../../blog/index.html" class="nav-link">Research Notes</a>
+                <a href="../../blog/knowledge-base/" class="nav-link">Knowledge Base</a>
+                <a href="../../index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="../../work/index.html" class="mobile-nav-link">Work</a>
+            <a href="../../blog/index.html" class="mobile-nav-link">Research Notes</a>
+            <a href="../../blog/knowledge-base/" class="mobile-nav-link">Knowledge Base</a>
+            <a href="../../index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <header class="work-header">
+            <div class="container">
+                <p class="work-kicker">praxagent / Methods</p>
+                <div class="work-header-grid">
+                    <h1>Experiment integrity</h1>
+                    <p>Freeze the design before outcomes. Run what you froze. Keep the failures. Ship the receipts with the claim.</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="work-section" aria-labelledby="why-title">
+            <div class="container">
+                <div class="section-index">
+                    <p class="section-index-label">01 / Why</p>
+                    <h2 id="why-title">Credibility is chronological</h2>
+                </div>
+                <div class="methods-prose">
+                    <p>
+                        Confirmatory research goes wrong when the rules change after the data arrive:
+                        optional stopping, selective reporting, or hypothesizing after results are known.
+                        We cannot erase judgment. We can make the consequential choices visible and
+                        time-ordered.
+                    </p>
+                    <p>
+                        The point is not ceremony. It is a public trail that the design preceded the
+                        outcome, the run followed the design, all outcomes were retained, and later
+                        analyses are labeled by when they entered the story.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="work-section work-section-alt" aria-labelledby="sequence-title">
+            <div class="container">
+                <div class="section-index">
+                    <p class="section-index-label">02 / Sequence</p>
+                    <h2 id="sequence-title">Freeze, run, audit, release</h2>
+                </div>
+                <div class="work-ledger">
+                    <div class="work-row methods-row">
+                        <span class="work-row-index">01 / Freeze</span>
+                        <div>
+                            <h3>Lock the design before outcomes exist</h3>
+                            <p>The question, claim boundary, sample, controls, endpoints, and analysis are committed before any target outcome is generated or inspected.</p>
+                        </div>
+                    </div>
+                    <div class="work-row methods-row">
+                        <span class="work-row-index">02 / Run</span>
+                        <div>
+                            <h3>Execute the plan as frozen</h3>
+                            <p>No editing rules mid-flight because an effect looks weak, strong, or inconvenient. Defects become dated amendments, not quiet fixes.</p>
+                        </div>
+                    </div>
+                    <div class="work-row methods-row">
+                        <span class="work-row-index">03 / Audit</span>
+                        <div>
+                            <h3>Bind the artifacts to the design</h3>
+                            <p>Runtime records are checked against the frozen plan, and every condition and failure path stays in the record.</p>
+                        </div>
+                    </div>
+                    <div class="work-row methods-row">
+                        <span class="work-row-index">04 / Release</span>
+                        <div>
+                            <h3>Ship the receipts with the claim</h3>
+                            <p>Code, prompts, hashes, artifacts, and result receipts are published so a reader can inspect what the claim rests on.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="work-section" aria-labelledby="labels-title">
+            <div class="container">
+                <div class="section-index">
+                    <p class="section-index-label">03 / Labels</p>
+                    <h2 id="labels-title">Say what the result is</h2>
+                </div>
+                <div class="methods-prose">
+                    <p>
+                        Not every run is confirmatory. We keep status language boring and consistent:
+                    </p>
+                </div>
+                <div class="work-ledger">
+                    <div class="work-row methods-row">
+                        <span class="work-row-index">Exploratory</span>
+                        <div>
+                            <h3>Outcomes may still shape design</h3>
+                            <p>Useful for discovery and feasibility, and labeled as such — never sold as a confirmatory error rate.</p>
+                        </div>
+                    </div>
+                    <div class="work-row methods-row">
+                        <span class="work-row-index">Frozen</span>
+                        <div>
+                            <h3>The design predates the outcomes</h3>
+                            <p>The complete plan was committed before target outcomes existed. Later changes are dated amendments, not quiet edits.</p>
+                        </div>
+                    </div>
+                    <div class="work-row methods-row">
+                        <span class="work-row-index">Confirmatory</span>
+                        <div>
+                            <h3>Everything reported was in the freeze</h3>
+                            <p>Endpoint, sample, controls, exclusions, and analysis all trace back to the frozen design.</p>
+                        </div>
+                    </div>
+                    <div class="work-row methods-row">
+                        <span class="work-row-index">Post-run</span>
+                        <div>
+                            <h3>Added after the results were seen</h3>
+                            <p>Sensitivity analyses can be informative, but they are labeled by timing and never promoted to confirmatory status.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="work-section work-section-alt" aria-labelledby="public-title">
+            <div class="container">
+                <div class="section-index">
+                    <p class="section-index-label">04 / In public</p>
+                    <h2 id="public-title">What you should see</h2>
+                </div>
+                <div class="about-points">
+                    <div class="point">
+                        <span>01</span>
+                        <h3>Release the evidence.</h3>
+                        <p>Code, prompts, data, hashes, artifacts, and result receipts ship with the claim.</p>
+                    </div>
+                    <div class="point">
+                        <span>02</span>
+                        <h3>Run the control.</h3>
+                        <p>Matched baselines and null tests determine what survives into the conclusion.</p>
+                    </div>
+                    <div class="point">
+                        <span>03</span>
+                        <h3>Report the failure.</h3>
+                        <p>Negative results and broken hypotheses remain part of the public record.</p>
+                    </div>
+                </div>
+                <div class="methods-prose methods-prose-foot">
+                    <p>
+                        This page is the public posture, not the internal checklist. Research notes
+                        carry the concrete receipts for each claim.
+                    </p>
+                    <p>
+                        <a href="../../blog/index.html">Research notes <span aria-hidden="true">→</span></a>
+                        <a href="../../index.html#about">Back to How we work <span aria-hidden="true">→</span></a>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer footer-compact">
+        <div class="container">
+            <div class="footer-compact-top">
+                <a href="../../index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
+            </div>
+            <div class="footer-compact-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="../../work/index.html">Work</a>
+                    <a href="../../blog/index.html">Research Notes</a>
+                    <a href="../../blog/knowledge-base/">Knowledge Base</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../script.js"></script>
+</body>
+</html>

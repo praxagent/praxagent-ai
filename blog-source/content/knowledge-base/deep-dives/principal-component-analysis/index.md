@@ -9,6 +9,11 @@ pro_reviewed: true
 og_image: "og-card.png"
 og_image_alt: "A principal component analysis plot of 210 measured wheat kernels sits beside the statement that PCA is a map of variation, not a verdict."
 weight: 20
+acknowledgment: |
+  **Acknowledgment.** We thank Jennifer Hoffman, who holds a Master of Science in
+  Biology from Syracuse University, for thoughtful feedback that inspired and
+  informed the revisions to this guide. Any mistakes remaining are those of the
+  author alone.
 ai_disclosure: |
   **Artificial intelligence (AI)-use disclosure.** Generative-AI tools helped
   draft, revise, illustrate, and review this Deep Dive. The author selected the

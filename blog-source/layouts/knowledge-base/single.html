@@ -20,8 +20,14 @@
 {{ end }}
             </header>
 
-{{ if or .Params.correction .Params.ai_disclosure }}
+{{ if or .Params.acknowledgment .Params.correction .Params.ai_disclosure }}
             <div class="post-body post-preface">
+{{- with .Params.acknowledgment }}
+                <div class="panel acknowledgment">
+                    <div class="panel-icon" aria-hidden="true"><i data-feather="users"></i></div>
+                    <div class="panel-content">{{ . | markdownify }}</div>
+                </div>
+{{ end }}
 {{ with .Params.correction }}
                 <div class="panel warning">
                     <div class="panel-icon" aria-hidden="true"><i data-feather="alert-circle"></i></div>

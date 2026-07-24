@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Work - praxagent</title>
-    <meta name="description" content="Research programs and applied systems from praxagent: model internals, controlled evaluation, agent infrastructure, and focused software.">
+    <meta name="description" content="Research programs and the Prax agent harness suite from praxagent: model internals, controlled evaluation, self-hostable agent infrastructure, and focused software.">
     <link rel="canonical" href="https://praxagent.ai/work/">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <meta property="og:type" content="website">
@@ -113,39 +113,83 @@
             </div>
         </section>
 
-        <section class="work-section work-section-alt" aria-labelledby="applied-systems-title">
+        <section id="prax-suite" class="work-section work-section-alt" aria-labelledby="prax-suite-title">
             <div class="container">
                 <div class="section-index">
-                    <p class="section-index-label">02 / Applied systems</p>
-                    <h2 id="applied-systems-title">Infrastructure and focused software</h2>
+                    <p class="section-index-label">02 / Open harness</p>
+                    <h2 id="prax-suite-title">Prax suite</h2>
+                    <a href="../blog/knowledge-base/prax/">Docs <span aria-hidden="true">→</span></a>
                 </div>
+                <div class="prax-suite-intro">
+                    <p>
+                        A security-first self-hosted agentic harness, with an integrated orchestrator, collaboration shell, sandbox, plugins, and keyless egress.
+                    </p>
+                    <a href="https://github.com/praxagent/prax" target="_blank" rel="noopener">GitHub ↗</a>
+                </div>
+                <figure class="home-shot">
+                    <img
+                        src="../assets/prax-suite/prax-header.webp"
+                        alt="TeamWork chat with Prax beside a live browser screencast of a NASA article the agent opened"
+                        width="1600"
+                        height="898"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                </figure>
                 <div class="work-ledger">
                     <a class="work-row" href="https://github.com/praxagent/prax" target="_blank" rel="noopener">
-                        <span class="work-row-index">S01</span>
+                        <span class="work-row-index">P01</span>
                         <div>
                             <h3>Prax</h3>
-                            <p>A self-hostable agent orchestrator with governed tools, durable memory, plugins, failure replay, and multi-channel operation.</p>
-                        </div>
-                        <span class="work-row-link">GitHub ↗</span>
-                    </a>
-                    <a class="work-row" href="https://github.com/praxagent/prax-sandbox" target="_blank" rel="noopener">
-                        <span class="work-row-index">S02</span>
-                        <div>
-                            <h3>Prax Sandbox</h3>
-                            <p>A Dockerized browser, desktop, terminal, and coding-agent environment with a framework-independent Python client.</p>
+                            <p>Safety-first multi-agent harness with dozens of tools, sophisticated memory management, and more.</p>
                         </div>
                         <span class="work-row-link">GitHub ↗</span>
                     </a>
                     <a class="work-row" href="https://github.com/praxagent/teamwork" target="_blank" rel="noopener">
-                        <span class="work-row-index">S03</span>
+                        <span class="work-row-index">P02</span>
                         <div>
                             <h3>TeamWork</h3>
-                            <p>An agent-agnostic collaboration shell with real-time chat, task boards, files, terminal access, and browser screencasts.</p>
+                            <p>Agent-agnostic shell with chat, kanban, files, terminal, and browser screencasts.</p>
                         </div>
                         <span class="work-row-link">GitHub ↗</span>
                     </a>
+                    <a class="work-row" href="https://github.com/praxagent/prax-sandbox" target="_blank" rel="noopener">
+                        <span class="work-row-index">P03</span>
+                        <div>
+                            <h3>Prax Sandbox</h3>
+                            <p>Dockerized coding agents, Chromium/CDP, desktop, and a framework-independent Python client.</p>
+                        </div>
+                        <span class="work-row-link">GitHub ↗</span>
+                    </a>
+                    <a class="work-row" href="https://github.com/praxagent/prax-plugins" target="_blank" rel="noopener">
+                        <span class="work-row-index">P04</span>
+                        <div>
+                            <h3>Prax Plugins</h3>
+                            <p>Self-contained plugin pack for presentations, music, radio, and other runtime extensions.</p>
+                        </div>
+                        <span class="work-row-link">GitHub ↗</span>
+                    </a>
+                    <a class="work-row" href="https://github.com/praxagent/prax-secrets-proxy" target="_blank" rel="noopener">
+                        <span class="work-row-index">P05</span>
+                        <div>
+                            <h3>Secrets proxy</h3>
+                            <p>Isolated credential-injecting egress so a compromised agent has no real keys to steal.</p>
+                        </div>
+                        <span class="work-row-link">GitHub ↗</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="work-section" aria-labelledby="focused-software-title">
+            <div class="container">
+                <div class="section-index">
+                    <p class="section-index-label">03 / Focused software</p>
+                    <h2 id="focused-software-title">Other projects</h2>
+                </div>
+                <div class="work-ledger">
                     <a class="work-row" href="https://tippytip.ai" target="_blank" rel="noopener">
-                        <span class="work-row-index">S04</span>
+                        <span class="work-row-index">S01</span>
                         <div>
                             <h3>TippyTip</h3>
                             <p>An iOS reading system for saved web content, summaries, audio, podcasts, knowledge graphs, and private API-key use.</p>
@@ -153,7 +197,7 @@
                         <span class="work-row-link">Website ↗</span>
                     </a>
                     <a class="work-row" href="https://apps.apple.com/us/app/chaos-lab/id398270047" target="_blank" rel="noopener">
-                        <span class="work-row-index">S05</span>
+                        <span class="work-row-index">S02</span>
                         <div>
                             <h3>Chaos Lab</h3>
                             <p>Interactive strange attractors, fractal morphing, gravitational simulations, and chemical reactions for iOS.</p>

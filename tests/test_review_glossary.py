@@ -212,6 +212,11 @@ class GenericKnowledgeBaseReviewTests(unittest.TestCase):
         for filename in ("analysis.R", "figure.mmd", "run.sh", "config.yaml"):
             self.assertTrue(review_glossary.is_reviewable_text_path(Path(filename)))
 
+    def test_arff_dataset_is_reviewable_but_not_a_core_text_artifact(self) -> None:
+        path = Path("Rice_Cammeo_Osmancik.arff")
+        self.assertTrue(review_glossary.is_reviewable_text_path(path))
+        self.assertFalse(review_glossary.is_core_text_path(path))
+
     def test_inline_raster_data_is_rejected(self) -> None:
         source = "data:image/" + "png;base64,iVBORw0KGgo="
         self.assertTrue(review_glossary.contains_inline_raster(source))

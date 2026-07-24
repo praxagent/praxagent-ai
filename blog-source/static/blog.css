@@ -2466,6 +2466,18 @@ main,
     color: #7F786D;
 }
 
+/* Acknowledgment: neutral editorial credit */
+.panel.acknowledgment {
+    background: #F5F2ED;
+    border-color: rgba(127, 120, 109, 0.28);
+    border-left-color: #7F786D;
+    color: #3F3A34;
+}
+
+.panel.acknowledgment .panel-icon {
+    color: #7F786D;
+}
+
 /* Output — muted sage */
 .panel.output {
     background: #F2F5F2;
@@ -2556,6 +2568,17 @@ main,
 
 [data-theme="dark"] .panel.quote .panel-icon {
     color: #A89B8C;
+}
+
+[data-theme="dark"] .panel.acknowledgment {
+    background: rgba(127, 120, 109, 0.14);
+    border-color: rgba(168, 155, 140, 0.3);
+    border-left-color: #B8AEA1;
+    color: #E8DFD4;
+}
+
+[data-theme="dark"] .panel.acknowledgment .panel-icon {
+    color: #B8AEA1;
 }
 
 [data-theme="dark"] .panel.output {
