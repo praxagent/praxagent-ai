@@ -15,4 +15,7 @@
     </div>
     <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
     <figcaption>{{ $caption | markdownify }}</figcaption>
+    {{- if and (eq .Page.Type "posts") (eq .Page.Params.citation_enabled true) }}
+    {{ partial "figure-attribution.html" (dict "page" .Page "resource_path" ((urls.Parse $src).Path)) }}
+    {{- end }}
 </figure>

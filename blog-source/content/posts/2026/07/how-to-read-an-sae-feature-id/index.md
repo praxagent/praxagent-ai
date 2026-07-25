@@ -2,9 +2,13 @@
 title: "How to Read an SAE Feature ID"
 slug: "how-to-read-an-sae-feature-id"
 date: 2026-07-09
+lastmod: 2026-07-18
+citation_enabled: true
+citation_version: "2026.07.18"
 aliases: ["/posts/how-to-read-an-sae-feature-id/"]
 tags: ["AI", "LLM", "machine-learning", "interpretability", "sparse-autoencoders", "reproducibility", "tutorials"]
 author: Timothy Jones
+author_id: "timothy-jones"
 summary: "A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights."
 og_image: "og-card.png"
 og_image_alt: "A feature ID is separated into three claims: a measurable dictionary coordinate, a human-applied label, and a causal story that requires its own experiment."

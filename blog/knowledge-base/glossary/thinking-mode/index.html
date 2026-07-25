@@ -16,10 +16,10 @@
 
 
     
-    
     <meta name="description" content="The template-controlled reasoning protocols used in these notes: reasoning enabled, or disabled so generation begins after a pre-closed local think block.">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/glossary/thinking-mode/">
+
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="praxagent Knowledge Base">
     <meta property="og:title" content="Thinking on / off">
@@ -267,6 +267,49 @@
                 ],
                 throwOnError: false,
                 output: "htmlAndMathml"
+            });
+
+            const copyText = async (text) => {
+                if (navigator.clipboard?.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    return;
+                }
+
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.setAttribute('readonly', '');
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                const copied = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                if (!copied) {
+                    throw new Error('Copy command was not accepted');
+                }
+            };
+
+            document.querySelectorAll('[data-copy-target]').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const target = document.querySelector(button.dataset.copyTarget);
+                    if (!target) {
+                        console.error(`Copy target not found: ${button.dataset.copyTarget}`);
+                        return;
+                    }
+
+                    const originalLabel = button.textContent;
+                    try {
+                        await copyText(target.textContent.trim());
+                        button.textContent = 'Copied';
+                        button.classList.add('copied');
+                        setTimeout(() => {
+                            button.textContent = originalLabel;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    } catch (error) {
+                        console.error('Failed to copy citation: ', error);
+                    }
+                });
             });
 
             const copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';

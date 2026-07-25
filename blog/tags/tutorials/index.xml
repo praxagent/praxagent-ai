@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tutorials on praxagent Research Notes</title>
-    <link>https://praxagent.ai/blog/tags/tutorials/</link>
+    <link>http://macbook-air.tail9eb7b0.ts.net:8000/blog/tags/tutorials/</link>
     <description>Recent content in Tutorials on praxagent Research Notes</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Jul 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://praxagent.ai/blog/tags/tutorials/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 18 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://macbook-air.tail9eb7b0.ts.net:8000/blog/tags/tutorials/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to Read an SAE Feature ID</title>
-      <link>https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/</link>
+      <link>http://macbook-air.tail9eb7b0.ts.net:8000/blog/posts/2026/07/how-to-read-an-sae-feature-id/</link>
       <pubDate>Thu, 09 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/</guid>
+      <guid>http://macbook-air.tail9eb7b0.ts.net:8000/blog/posts/2026/07/how-to-read-an-sae-feature-id/</guid>
       <description>A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights.</description>
     </item>
   </channel>

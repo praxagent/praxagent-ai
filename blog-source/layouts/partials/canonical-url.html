@@ -1,0 +1,10 @@
+{{- $canonical := printf "https://praxagent.ai%s" .RelPermalink -}}
+{{- if .Params.canonical -}}
+  {{- $canonical = .Params.canonical -}}
+{{- else if and (eq .Type "posts") .File -}}
+  {{- $slug := path.Base (strings.TrimSuffix "/" .File.Dir) -}}
+  {{- if and (ne $slug ".") (ne $slug "") (ne $slug "posts") -}}
+    {{- $canonical = printf "https://praxagent.ai/blog/posts/%s/%s/%s/" (.Date.Format "2006") (.Date.Format "01") $slug -}}
+  {{- end -}}
+{{- end -}}
+{{- return $canonical -}}

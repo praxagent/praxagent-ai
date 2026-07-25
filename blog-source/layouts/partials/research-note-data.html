@@ -1,0 +1,54 @@
+{{- $page := . -}}
+{{- $scholarly := $page.Site.Params.scholarly -}}
+{{- $authorID := $page.Params.author_id | default $scholarly.default_author -}}
+{{- $author := index hugo.Data.authors $authorID -}}
+{{- if not $author -}}
+  {{- errorf "Research Note %q references unknown author_id %q" $page.RelPermalink $authorID -}}
+{{- end -}}
+
+{{- $canonical := partial "canonical-url.html" $page -}}
+{{- $version := $page.Params.citation_version | default ($page.Lastmod.Format "2006.01.02") -}}
+{{- $doi := strings.TrimSpace ($page.Params.doi | default "") -}}
+{{- $doi = strings.TrimPrefix "https://doi.org/" $doi -}}
+{{- $doi = strings.TrimPrefix "http://doi.org/" $doi -}}
+{{- $doiURL := "" -}}
+{{- if $doi -}}
+  {{- $doiURL = printf "https://doi.org/%s" $doi -}}
+{{- end -}}
+{{- $citationURL := $canonical -}}
+{{- if $doiURL -}}
+  {{- $citationURL = $doiURL -}}
+{{- end -}}
+
+{{- $year := $page.Date.Format "2006" -}}
+{{- $citationText := printf "%s. (%s). %s (Version %s) [Research note]. %s. %s" $author.citation_name $year $page.Title $version $scholarly.publisher_name $citationURL -}}
+{{- $bibtexKey := printf "%s%s:%s" ($author.family_names | urlize) $year ($page.Params.slug | default $page.Slug) -}}
+{{- $doiLine := "" -}}
+{{- if $doi -}}
+  {{- $doiLine = printf "\n  doi       = {%s}," $doi -}}
+{{- end -}}
+{{- $bibtex := printf "@misc{%s,\n  author    = {%s},\n  title     = {%s},\n  year      = {%s},\n  version   = {%s},\n  publisher = {%s},\n  url       = {%s},%s\n  note      = {Research note}\n}" $bibtexKey $author.citation_name $page.Title $year $version $scholarly.publisher_name $canonical $doiLine -}}
+
+{{- return (dict
+  "author" $author
+  "author_id" $authorID
+  "bibtex" $bibtex
+  "canonical" $canonical
+  "citation_text" $citationText
+  "container_title" $scholarly.container_title
+  "doi" $doi
+  "doi_url" $doiURL
+  "modified_display" ($page.Lastmod.Format "January 2, 2006")
+  "modified_iso" ($page.Lastmod.Format "2006-01-02")
+  "published_display" ($page.Date.Format "January 2, 2006")
+  "published_iso" ($page.Date.Format "2006-01-02")
+  "publisher_name" $scholarly.publisher_name
+  "publisher_url" $scholarly.publisher_url
+  "repository_url" $scholarly.repository_url
+  "rights_holder" $scholarly.rights_holder
+  "rights_label" $scholarly.rights_label
+  "rights_notice" (printf "Copyright © %s %s. %s" $year $scholarly.rights_holder $scholarly.rights_label)
+  "rights_url" $scholarly.rights_url
+  "version" $version
+  "year" $year
+) -}}

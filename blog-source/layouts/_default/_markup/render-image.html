@@ -1,0 +1,9 @@
+{{- $resourcePath := (urls.Parse .Destination).Path -}}
+{{- if and (eq .Page.Type "posts") (eq .Page.Params.citation_enabled true) -}}
+<span class="research-figure">
+    <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy" decoding="async">
+    {{- partial "figure-attribution.html" (dict "page" .Page "resource_path" $resourcePath) -}}
+</span>
+{{- else -}}
+<img src="{{ .Destination | safeURL }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy" decoding="async">
+{{- end -}}

@@ -18,18 +18,13 @@
 {{ $ogImageWidth = $featuredImage.width }}
 {{ $ogImageHeight = $featuredImage.height }}
 {{ end }}
-    {{ $canonical := printf "https://praxagent.ai%s" .RelPermalink }}
-    {{ if .Params.canonical }}
-      {{ $canonical = .Params.canonical }}
-    {{ else if and (eq .Type "posts") .File }}
-      {{ $slug := path.Base (strings.TrimSuffix "/" .File.Dir) }}
-      {{ if and (ne $slug ".") (ne $slug "") (ne $slug "posts") }}
-        {{ $canonical = printf "https://praxagent.ai/blog/posts/%s/%s/%s/" (.Date.Format "2006") (.Date.Format "01") $slug }}
-      {{ end }}
-    {{ end }}
+    {{ $canonical := partial "canonical-url.html" . }}
     <meta name="description" content="{{ $desc }}">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="{{ $canonical }}">
+{{ if and (eq .Type "posts") (eq .Params.citation_enabled true) }}
+{{ partial "research-note-head.html" (dict "page" . "description" $desc "image" $ogImage) }}
+{{ end }}
     <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
     <meta property="og:site_name" content="{{ $siteLabel }}">
     <meta property="og:title" content="{{ if .Title }}{{ .Title }}{{ else }}praxagent Research Notes{{ end }}">
@@ -49,7 +44,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ "styles-v2.css" | relURL }}?v=20260724">
-    <link rel="stylesheet" href="{{ "blog.css" | relURL }}?v=20260724">
+    <link rel="stylesheet" href="{{ "blog.css" | relURL }}?v=20260725-2">
     <link rel="stylesheet" href="{{ "katex.min.css" | relURL }}">
     <script src="https://unpkg.com/feather-icons"></script>
 {{ if or .IsPage (eq .Section "knowledge-base") }}
@@ -196,6 +191,49 @@
                 ],
                 throwOnError: false,
                 output: "htmlAndMathml"
+            });
+
+            const copyText = async (text) => {
+                if (navigator.clipboard?.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    return;
+                }
+
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.setAttribute('readonly', '');
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                const copied = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                if (!copied) {
+                    throw new Error('Copy command was not accepted');
+                }
+            };
+
+            document.querySelectorAll('[data-copy-target]').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const target = document.querySelector(button.dataset.copyTarget);
+                    if (!target) {
+                        console.error(`Copy target not found: ${button.dataset.copyTarget}`);
+                        return;
+                    }
+
+                    const originalLabel = button.textContent;
+                    try {
+                        await copyText(target.textContent.trim());
+                        button.textContent = 'Copied';
+                        button.classList.add('copied');
+                        setTimeout(() => {
+                            button.textContent = originalLabel;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    } catch (error) {
+                        console.error('Failed to copy citation: ', error);
+                    }
+                });
             });
 
             const copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';

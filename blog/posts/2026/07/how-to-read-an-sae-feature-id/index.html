@@ -19,21 +19,33 @@
 
 
     
-    
-      
-      
-        
-      
-    
     <meta name="description" content="A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights.">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">
+
+<meta property="article:published_time" content="2026-07-09">
+    <meta property="article:modified_time" content="2026-07-18">
+    <meta property="article:author" content="https://orcid.org/0009-0007-5992-0652">
+    <meta name="citation_title" content="How to Read an SAE Feature ID">
+    <meta name="citation_author" content="Timothy Jones">
+    <meta name="citation_author_institution" content="praxagent">
+    <meta name="citation_author_orcid" content="https://orcid.org/0009-0007-5992-0652">
+    <meta name="citation_publication_date" content="2026-07-09">
+    <meta name="citation_online_date" content="2026-07-09">
+    <meta name="citation_journal_title" content="praxagent Research Notes">
+    <meta name="citation_fulltext_html_url" content="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">
+    <meta name="citation_version" content="2026.07.18">
+    <meta name="DC.rights" content="Copyright © 2026 praxagent. All rights reserved.">
+    <link rel="author" href="https://orcid.org/0009-0007-5992-0652">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","author":{"@type":"Person","affiliation":{"@type":"Organization","name":"praxagent"},"familyName":"Jones","givenName":"Timothy","name":"Timothy Jones","sameAs":"https://orcid.org/0009-0007-5992-0652","url":"https://orcid.org/0009-0007-5992-0652"},"copyrightHolder":{"@type":"Organization","name":"praxagent"},"copyrightNotice":"Copyright © 2026 praxagent. All rights reserved.","copyrightYear":"2026","dateModified":"2026-07-18","datePublished":"2026-07-09","description":"A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights.","headline":"How to Read an SAE Feature ID","identifier":"https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/","image":"http://macbook-air.tail9eb7b0.ts.net:8000/blog/posts/2026/07/how-to-read-an-sae-feature-id/og-card.png","inLanguage":"en-US","isAccessibleForFree":true,"isPartOf":{"@type":"CreativeWorkSeries","name":"praxagent Research Notes","url":"https://praxagent.ai/blog/"},"keywords":["AI","LLM","machine-learning","interpretability","sparse-autoencoders","reproducibility","tutorials"],"mainEntityOfPage":{"@id":"https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/","@type":"WebPage"},"publisher":{"@type":"Organization","name":"praxagent","url":"https://praxagent.ai"},"url":"https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/","usageInfo":"https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md","version":"2026.07.18"}</script>
+
+
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="praxagent Research Notes">
     <meta property="og:title" content="How to Read an SAE Feature ID">
     <meta property="og:description" content="A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights.">
     <meta property="og:url" content="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">
-    <meta property="og:image" content="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/og-card.png">
+    <meta property="og:image" content="http://macbook-air.tail9eb7b0.ts.net:8000/blog/posts/2026/07/how-to-read-an-sae-feature-id/og-card.png">
     <meta property="og:image:alt" content="A feature ID is separated into three claims: a measurable dictionary coordinate, a human-applied label, and a causal story that requires its own experiment.">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -41,13 +53,13 @@
     <meta name="twitter:site" content="@praxagent">
     <meta name="twitter:title" content="How to Read an SAE Feature ID">
     <meta name="twitter:description" content="A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights.">
-    <meta name="twitter:image" content="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/og-card.png">
+    <meta name="twitter:image" content="http://macbook-air.tail9eb7b0.ts.net:8000/blog/posts/2026/07/how-to-read-an-sae-feature-id/og-card.png">
     <meta name="twitter:image:alt" content="A feature ID is separated into three claims: a measurable dictionary coordinate, a human-applied label, and a causal story that requires its own experiment.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20260724">
+    <link rel="stylesheet" href="/blog/blog.css?v=20260725-2">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -132,8 +144,9 @@
             <header class="post-header">
                 <h1 class="post-title">How to Read an SAE Feature ID</h1>
                 <div class="post-meta">
-                    <span class="post-date">July 9, 2026</span>
-                    <span class="post-author">by Timothy Jones</span>
+                    <time class="post-date" datetime="2026-07-09">July 9, 2026</time>
+                    <span class="post-author">by <a href="https://orcid.org/0009-0007-5992-0652" rel="author">Timothy Jones <span class="post-orcid">ORCID</span></a></span>
+                    <span class="post-updated">Revised <time datetime="2026-07-18">July 18, 2026</time></span>
                 </div>
             </header>
 
@@ -289,7 +302,12 @@ sources and any released artifacts before relying on them.
 <li><strong>a causal story</strong>: that intervening on this direction <em>is</em> intervening on deception.</li>
 </ol>
 <p>Those are not the same thing. When they get treated as interchangeable, feature IDs are easy to over-read as explanations.</p>
-<p><img src="three-claims.svg" alt="One phrase packs a coordinate, a label, and a causal story."></p>
+<p><span class="research-figure">
+    <img src="three-claims.svg" alt="One phrase packs a coordinate, a label, and a causal story." loading="lazy" decoding="async"><span class="research-figure__credit">
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
+    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
+    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+</span></p>
 <p class="figure-note">Figure: the same sentence can smuggle in three different claims: an index, a name, and a causal story.</p>
 <h3 id="claim-ladder">Claim ladder</h3>
 <div class="mermaid">
@@ -535,7 +553,12 @@ flowchart LR
 <h2 id="intellectual-history-why-saes-exist">Intellectual History: Why SAEs Exist</h2>
 <h3 id="the-superposition-problem">The superposition problem</h3>
 <p><a href="#ref-elhage-2022">Elhage et al. (2022)</a> formalize <strong>superposition</strong> in toy models: many features packed as nearly orthogonal directions in a lower-dimensional activation space, so that individual neurons are typically <em>polysemantic</em> (they fire for several unrelated concepts; one neuron might light up for both &ldquo;Python the language&rdquo; and &ldquo;python the snake&rdquo;). That mechanism is demonstrated in controlled toy settings and is a leading hypothesis for why large-model neurons look polysemantic; it is not settled wholesale for every layer of every LLM. Anthropic&rsquo;s later SAE work, and <a href="#ref-cunningham-2023">Cunningham et al. (2023)</a>, inherit that careful framing when motivating dictionary learning at scale.</p>
-<p><img src="superposition.svg" alt="Superposition: more concepts than dimensions forces directions to overlap, so one neuron can fire for unrelated concepts."></p>
+<p><span class="research-figure">
+    <img src="superposition.svg" alt="Superposition: more concepts than dimensions forces directions to overlap, so one neuron can fire for unrelated concepts." loading="lazy" decoding="async"><span class="research-figure__credit">
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
+    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
+    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+</span></p>
 <p class="figure-note">Figure: superposition in a picture. Left: six concept directions squeezed into a 2-D space cannot all be perpendicular, so they overlap. Right: two unrelated concepts both project positively onto one neuron's direction, so that single neuron fires for both, which is what "polysemantic" means.</p>
 <h3 id="from-neurons-to-directions">From neurons to directions</h3>
 <p>Before going further, it is worth spelling out how &ldquo;neurons&rdquo; and &ldquo;directions&rdquo; are the same kind of object, because the rest of this post lives in that picture.</p>
@@ -553,7 +576,12 @@ flowchart LR
 <p>That residual stream is worth slowing down for. Imagine a running vector that starts from the token embeddings and travels up the stack. Layer 1 reads it, computes a change, and <em>adds</em> that change back. Layer 2 does the same. By layer 50 you still have one vector per token, and that vector is exactly the \(h\) from the glossary (hidden state at a chosen layer). People say &ldquo;residual&rdquo; because of the skip connection: \(\text{new} = \text{old} + \text{update}\), not \(\text{new} = \text{update}\).</p>
 <p>So when this post says &ldquo;we read the residual stream at layer 50,&rdquo; it means: after 50 blocks have written their updates onto that highway, we copy the current \(h\) for each token. Same symbol everywhere below, math, code (<code>hidden</code>), and the SAE input. That is what the encoder turns into sparse features \(f\).</p>
 <p>In symbols: the residual stream at a chosen layer is \(h \in \mathbb{R}^{d_{\text{model}}}\). Here \(d_{\text{model}}\) is just the model&rsquo;s hidden width (how many numbers are in \(h\), thousands for a big Llama). People often train SAEs on that residual stream, or sometimes on MLP activations instead.</p>
-<p><img src="transformer-layer.svg?v=2" alt="Where an SAE attaches to a transformer layer."></p>
+<p><span class="research-figure">
+    <img src="transformer-layer.svg?v=2" alt="Where an SAE attaches to a transformer layer." loading="lazy" decoding="async"><span class="research-figure__credit">
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
+    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
+    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+</span></p>
 <p class="figure-note">Figure: a simplified transformer block. Each layer adds an update onto the residual stream (the running hidden-state highway). An SAE can be trained to read that stream, the vector <em>h</em>, at any chosen layer; layer 50 of Llama 3.3 70B is where Goodfire trained the particular public SAE this post uses, not a property of SAEs in general.</p>
 <h3 id="dictionary-learning-as-a-response">Dictionary learning as a response</h3>
 <p><strong>Sparse autoencoders (SAEs)</strong> apply classical <strong>dictionary learning</strong> to those activations (learn many reusable feature directions, then explain each \(h\) as a sparse mix of them). The idea long predates LLMs: sparse coding of natural images goes back to <a href="#ref-olshausen-1996">Olshausen &amp; Field (1996)</a>, and modern SAE scaling work (<a href="#ref-gao-2024">Gao et al., 2024</a>) sits on that lineage. There is no magic labeler inside. Training is an optimization loop with two pressures that pull against each other:</p>
@@ -568,7 +596,12 @@ flowchart LR
 <li>enforce sparsity (most IDs stay off on any token);</li>
 <li>keep reconstruction faithful (the few that fire still explain \(h\)).</li>
 </ul>
-<p><img src="sae-program.svg" alt="The SAE training program: expand into many slots, keep most off per token, rebuild h from the few that fire."></p>
+<p><span class="research-figure">
+    <img src="sae-program.svg" alt="The SAE training program: expand into many slots, keep most off per token, rebuild h from the few that fire." loading="lazy" decoding="async"><span class="research-figure__credit">
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
+    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
+    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+</span></p>
 <p class="figure-note">Figure: the three pressures in one picture. Expand the short hidden vector <em>h</em> into many feature slots (more slots than dimensions); for any one token keep almost every slot off; and demand that the few slots that do fire still rebuild <em>h</em>. The tension between the last two is what shapes the dictionary.</p>
 <p>Nothing in that loop assigns English names. Names come later, from humans staring at activating examples.</p>
 <div class="panel info">
@@ -665,7 +698,12 @@ flowchart LR
 h \approx b_d + \sum_{i=1}^{N} f_i\, d_i + \epsilon.
 \]<p>Read that as: &ldquo;\(h\) is approximately a decoder offset \(b_d\) plus a sparse weighted sum of dictionary directions, plus leftover error.&rdquo; (The \(b_d\) term matches the decoder equation below.)</p>
 <p>For the public Goodfire Llama 3.3 70B SAE we use below (<a href="https://huggingface.co/Goodfire/Llama-3.3-70B-Instruct-SAE-l50"><code>Goodfire/Llama-3.3-70B-Instruct-SAE-l50</code></a>), \(N = 65{,}536\) and the hook is layer 50. That is a single dictionary at a single residual location, useful and public, but a different object from a Gemma-Scope-style suite that instruments every layer.</p>
-<p><img src="sae-architecture.svg?v=4" alt="SAE encode → sparse features → decode."></p>
+<p><span class="research-figure">
+    <img src="sae-architecture.svg?v=4" alt="SAE encode → sparse features → decode." loading="lazy" decoding="async"><span class="research-figure__credit">
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
+    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
+    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+</span></p>
 <p class="figure-note">Figure: the SAE stretches <em>h</em> into many mostly-off feature slots, then tries to rebuild <em>h</em> from the ones that fired. A feature ID is simply which slot you mean.</p>
 <p><strong>Encoder</strong> (activations), maps \(h\) to the sparse code. Papers often write a centered form</p>
 \[
@@ -681,7 +719,12 @@ f = \mathrm{ReLU}\big(h W_e^\top + b_e\big).
 \[
 h' = h + \alpha \sum_{i \in S} d_i
 \]<p>In the basic formula there is <strong>no renormalization</strong>: you add a vector and keep going. So \(\|h'\|\) is usually not equal to \(\|h\|\), positive \(\alpha\) often lengthens the residual in that direction; negative \(\alpha\) can shorten it or pull it the other way. Some pipelines do normalize or clamp afterward, but that is an extra design choice, not part of this equation.</p>
-<p><img src="steering-vector.svg?v=3" alt="Steering adds a scaled feature direction to the residual stream."></p>
+<p><span class="research-figure">
+    <img src="steering-vector.svg?v=3" alt="Steering adds a scaled feature direction to the residual stream." loading="lazy" decoding="async"><span class="research-figure__credit">
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
+    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
+    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+</span></p>
 <p class="figure-note">Figure: steering in a picture. Start at residual <em>h</em>, add a push <em>α d<sub>i</sub></em> along the feature direction, and land at <em>h′</em>. The usual formula does not put <em>h′</em> back on the same length as <em>h</em>, magnitude can grow or shrink.</p>
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
@@ -865,7 +908,12 @@ flowchart TB
 
 <p>Here is the headline result, shown up front so you know where the next few sections are going. In our balanced map, <strong>each feature&rsquo;s hottest designed category is compatible with AE Studio&rsquo;s notebook label</strong>: <code>58667</code> fires hardest on cover-story texts, <code>22004</code> on roleplay instructions, <code>41533</code> on dishonesty confessions, and so on, while subjective-experience texts leave all six near baseline. A third-source comparison with <a href="https://www.neuronpedia.org/llama3.3-70b-it-gf">Neuronpedia&rsquo;s cards for the same public SAE checkpoint</a> makes that result more nuanced. Its automated cards closely agree for <code>30032</code> (pretending), <code>30686</code> (deception/trickery), and <code>41533</code> (lying); give broader but compatible readings for <code>58667</code> (innocent/convincing) and <code>22004</code> (role framing followed by “I would” or “you are”); and disagree materially on <code>23893</code>, which its sampled contexts associate with <em>mentioning or suppressing specific topics</em>, not specifically concealing an artificial identity. That pattern supports correspondence between the integer namespaces, but it also shows why a six-for-six category match should not be advertised as six independently confirmed meanings.</p>
 <p><strong>How it was made</strong> (each step is unpacked below): a balanced 14-category corpus of 1,120 texts was run through Llama 3.3 70B with the public SAE hooked at layer 50, recording each feature&rsquo;s max activation per text (<a href="https://github.com/tdj28/llm_selfref_pre/blob/main/experiments/exp2_sae/map_public_sae_features.py"><code>map_public_sae_features.py</code></a>); the per-category means and this heatmap come from the reanalysis script (<a href="https://github.com/tdj28/llm_selfref_pre/blob/main/experiments/exp2_sae/analyze_public_sae_mapping_interpretation.py"><code>analyze_public_sae_mapping_interpretation.py</code></a>).</p>
-<p><img src="target_category_heatmap.svg?v=4" alt="Heatmap of mean max activation for the six feature IDs (columns) across the 14 text categories (rows). Each feature&rsquo;s hottest cell sits on the category matching its notebook label: 58667 on cover stories, 22004 on roleplay persona, 41533 on dishonesty confession, 30032 on fictional pretending, 30686 on tactical misdirection, 23893 on cover stories. Subjective-experience rows are near zero for all six."></p>
+<p><span class="research-figure">
+    <img src="target_category_heatmap.svg?v=4" alt="Heatmap of mean max activation for the six feature IDs (columns) across the 14 text categories (rows). Each feature&rsquo;s hottest cell sits on the category matching its notebook label: 58667 on cover stories, 22004 on roleplay persona, 41533 on dishonesty confession, 30032 on fictional pretending, 30686 on tactical misdirection, 23893 on cover stories. Subjective-experience rows are near zero for all six." loading="lazy" decoding="async"><span class="research-figure__credit">
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
+    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
+    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+</span></p>
 <p class="figure-note">Figure: category × feature heatmap. Cell numbers are mean max activations from the balanced run (column colors are normalized within each feature so differently scaled IDs are comparable by eye). Source data: <a href="https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/target_category_matrix.csv"><code>target_category_matrix.csv</code></a>; generated SVG in-repo: <a href="https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/target_category_heatmap.svg"><code>target_category_heatmap.svg</code></a>.</p>
 <p>To be precise about how far that inference goes: six surfaced integers behaving broadly label-consistently, out of a dictionary of 65,536 slots, would be surprising if the hosted service and public release indexed unrelated dictionaries. We read that as circumstantial evidence of a shared (or closely aligned) feature namespace. It still falls short of confirmation: the evidence is indirect, our categories are researcher-designed, Neuronpedia&rsquo;s prompts come from the same LMSYS family used to train the released SAE, and its glosses are generated by an LLM rather than established by controlled contrasts. Neuronpedia is a valuable inspectable source here, not an umpire.</p>
 <h3 id="what-neuronpedia-actually-recreated">What Neuronpedia actually recreated</h3>
@@ -1123,14 +1171,24 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 <p>A <strong>bootstrap</strong> is a simple uncertainty check. The code below is the <strong>item-level</strong> (naive) version: take the list of observed scores (say, all deception-group \(S_i\) values), then build many fake datasets of the same length by drawing from that list <strong>with replacement</strong>. Recompute the contrast on each fake dataset.</p>
 <p>Why replacement? Walk through a tiny example. Suppose your whole dataset is three scores: \(\{3, 5, 7\}\), mean \(5.0\). A resample must have the same size as the original, so you draw three items. If you draw <strong>without</strong> replacement, each item can be picked only once, so after three draws you have picked <em>all three</em>, every single time. The only thing that can differ between resamples is the <em>order</em> you picked them in, and a mean does not care about order: \((3+5+7)/3\) and \((7+3+5)/3\) are both \(5.0\). Every resample gives exactly \(5.0\), the &ldquo;wobble&rdquo; is zero, and you learn nothing about uncertainty.</p>
 <p>Now draw <strong>with</strong> replacement: after picking the 5, you put it back, so it can come up again. One resample might be \(\{3, 3, 7\}\) (mean \(4.3\)), another \(\{5, 7, 7\}\) (mean \(6.3\)), another \(\{3, 5, 7\}\) (mean \(5.0\)). The duplicates-and-omissions are the point: each resample is a slightly different weighting of your evidence, so the resampled means spread out, and the width of that spread is your uncertainty estimate.</p>
-<p><img src="replacement.svg" alt="Without replacement every resample is the same set reshuffled and the mean never moves; with replacement duplicates and omissions make the mean wobble, which is what produces an interval."></p>
+<p><span class="research-figure">
+    <img src="replacement.svg" alt="Without replacement every resample is the same set reshuffled and the mean never moves; with replacement duplicates and omissions make the mean wobble, which is what produces an interval." loading="lazy" decoding="async"><span class="research-figure__credit">
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
+    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
+    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+</span></p>
 <p class="figure-note">Figure: why "with replacement" matters, using a three-item dataset. Left: without replacement, three draws always collect all three tiles, so every resample has the same mean and there is no spread to measure. Right: with replacement, tiles can repeat or go missing, so the resampled means wobble around the original, and that wobble becomes the interval.</p>
 <p>Below, &ldquo;fraction of resamples with \(\Delta > 0\)&rdquo; means how often the deception side still wins among those draws (e.g. \(1.000\) = 2,000/2,000). It is <strong>not</strong> a Bayesian posterior probability.</p>
 <p>Two more honesty notes, spelled out slowly because they are easy to gloss over.</p>
 <p><strong>Note 1: the ruler was measured once.</strong> Recall from Step 2 that every activation gets z-scored using that feature&rsquo;s mean \(\mu_f\) and standard deviation \(\sigma_f\), computed on the full corpus. Think of \((\mu_f, \sigma_f)\) as a ruler we built once and then used to measure everything. Strictly, that ruler is itself an estimate from the same data, so it has its own wobble. A maximally careful bootstrap would rebuild the ruler inside every resample (recompute \(\mu_f\) and \(\sigma_f\) from each fake dataset); our pipeline holds the ruler fixed and only resamples the measured scores. Holding the ruler fixed ignores one source of wobble, so the reported intervals are a touch <em>narrower</em> than they should be. We flag it rather than hide it.</p>
 <p><strong>Note 2: what population are we even talking about?</strong> A textbook confidence interval answers: &ldquo;if I drew a fresh sample from the same population, how much would my answer move?&rdquo; But there is no natural population here. We <em>wrote</em> these 1,120 texts. So our intervals answer a more modest question: &ldquo;how much would the answer wobble if we reshuffled the texts we wrote?&rdquo; That is why we call them <strong>item-resampling intervals</strong> over this designed corpus, not confidence intervals for English at large. Nothing here licenses a claim about tweets, novels, or chat logs.</p>
 <p><strong>Why item resampling is still not the primary analysis.</strong> There is a subtler problem than either note above. The 1,120 texts were generated from <strong>51 template families</strong>: each family is one sentence skeleton with slots, and its 20-or-so variants differ only in which words fill the slots. Variants of the same template are near-photocopies. Now imagine resampling all 1,120 texts as if each were an independent piece of evidence: you are effectively counting each photocopy as a brand-new fact, and your interval shrinks accordingly, unearned confidence. The honest unit of evidence is closer to the <em>template family</em> than the individual text. So the <strong>primary</strong> uncertainty analysis uses a <strong>template-cluster</strong> bootstrap: first resample which of the 51 families are in the fake dataset (with replacement, families weighted equally), then take the items inside the drawn families (<a href="https://github.com/tdj28/llm_selfref_pre/tree/main/data/public_sae_feature_maps/70b_balanced_80_20260709/template_robustness"><code>template_robustness/</code></a>). The same release also reports leave-one-template-family deletion: rerun everything 51 times, each time deleting one family entirely, and check whether any single family is carrying the result.</p>
-<p><img src="bootstrap-units.svg" alt="Item bootstrap versus template-cluster bootstrap: resampling near-duplicate texts as independent gives an unrealistically narrow interval; resampling template families gives a wider, honest one."></p>
+<p><span class="research-figure">
+    <img src="bootstrap-units.svg" alt="Item bootstrap versus template-cluster bootstrap: resampling near-duplicate texts as independent gives an unrealistically narrow interval; resampling template families gives a wider, honest one." loading="lazy" decoding="async"><span class="research-figure__credit">
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
+    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
+    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+</span></p>
 <p class="figure-note">Figure: the same data, two ways of counting evidence. Left: the naive item bootstrap treats every text as independent, but texts from one template family (one color) are near-copies, so the interval comes out too narrow. Right: the template-cluster bootstrap draws whole families first, so each family counts once. Bottom: the resulting intervals for the deception-minus-subjective contrast, on the same scale. The cluster interval is wider and is the one we report as primary.</p>
 <p>For reference, here is the item-level (naive) version in code:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">random</span>
@@ -1492,6 +1550,65 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
             </div>
 
             <footer class="post-footer">
+                <div class="post-footer__notices">
+                <section class="research-citation" aria-labelledby="research-citation-heading">
+    <div class="research-citation__header">
+        <div>
+            <div class="research-citation__eyebrow">Citation and rights</div>
+            <h2 id="research-citation-heading">Cite this research note</h2>
+        </div>
+        <button class="citation-copy-button" type="button" data-copy-target="#research-note-citation-text" aria-live="polite">Copy citation</button>
+    </div>
+
+    <div class="research-citation__recommended">
+        <div class="research-citation__recommended-label">Recommended citation</div>
+        <p class="research-citation__text" id="research-note-citation-text">Jones, Timothy. (2026). How to Read an SAE Feature ID (Version 2026.07.18) [Research note]. praxagent. https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/</p>
+    </div>
+
+    <dl class="research-citation__metadata">
+        <div>
+            <dt>Author</dt>
+            <dd><a href="https://orcid.org/0009-0007-5992-0652" rel="author">Timothy Jones (ORCID 0009-0007-5992-0652)</a></dd>
+        </div>
+        <div>
+            <dt>Published</dt>
+            <dd><time datetime="2026-07-09">July 9, 2026</time></dd>
+        </div>
+        <div>
+            <dt>Research content last revised</dt>
+            <dd><time datetime="2026-07-18">July 18, 2026</time></dd>
+        </div>
+        <div>
+            <dt>Citation version</dt>
+            <dd>2026.07.18</dd>
+        </div>
+        <div class="research-citation__canonical">
+            <dt>Canonical page</dt>
+            <dd><a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">Open the permanent page for this version</a></dd>
+        </div>
+    </dl>
+
+    <details class="research-citation__bibtex">
+        <summary>Export BibTeX</summary>
+        <pre id="research-note-bibtex"><code>@misc{jones2026:how-to-read-an-sae-feature-id,
+  author    = {Jones, Timothy},
+  title     = {How to Read an SAE Feature ID},
+  year      = {2026},
+  version   = {2026.07.18},
+  publisher = {praxagent},
+  url       = {https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/},
+  note      = {Research note}
+}</code></pre>
+        <button class="citation-copy-button" type="button" data-copy-target="#research-note-bibtex" aria-live="polite">Copy BibTeX</button>
+    </details>
+
+    <p class="research-citation__rights">Copyright © 2026 praxagent. All rights reserved.
+        Public access permits reading and linking, not unlicensed reuse.
+        <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">Read the content and brand rights notice.</a>
+        Software and third-party artifacts may carry separate licenses.
+    </p>
+</section>
+
                 <div class="post-transparency">
                     <div class="post-transparency-label">Public source &amp; edit history</div>
                     <p>Each research note is available two ways: as the rendered page you are
@@ -1500,6 +1617,7 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
                     Every revision to every post is preserved in the commit log, so
                     you can see exactly what changed and when:
                     <a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/posts/2026/07/how-to-read-an-sae-feature-id/index.md" rel="noopener">view this article's edit history</a>.</p>
+                </div>
                 </div>
                 <div class="post-navigation">
                     <a href="/blog/index.html" class="back-to-blog">← Back to Research Notes</a>
@@ -1582,6 +1700,49 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
                 ],
                 throwOnError: false,
                 output: "htmlAndMathml"
+            });
+
+            const copyText = async (text) => {
+                if (navigator.clipboard?.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    return;
+                }
+
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.setAttribute('readonly', '');
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                const copied = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                if (!copied) {
+                    throw new Error('Copy command was not accepted');
+                }
+            };
+
+            document.querySelectorAll('[data-copy-target]').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const target = document.querySelector(button.dataset.copyTarget);
+                    if (!target) {
+                        console.error(`Copy target not found: ${button.dataset.copyTarget}`);
+                        return;
+                    }
+
+                    const originalLabel = button.textContent;
+                    try {
+                        await copyText(target.textContent.trim());
+                        button.textContent = 'Copied';
+                        button.classList.add('copied');
+                        setTimeout(() => {
+                            button.textContent = originalLabel;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    } catch (error) {
+                        console.error('Failed to copy citation: ', error);
+                    }
+                });
             });
 
             const copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';

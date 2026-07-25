@@ -220,6 +220,7 @@ check: sync-prax-docs verify-late-chunking ## Validate Hugo, links, assets, prov
 		--panicOnWarning
 	$(PYTHON) scripts/check_python_syntax.py
 	$(PYTHON) -m unittest tests/test_review_glossary.py
+	$(PYTHON) -m unittest tests/test_research_citations.py
 	$(PYTHON) scripts/check_public_repo.py
 	$(PYTHON) scripts/check_site.py
 	$(PYTHON) scripts/check_provenance.py

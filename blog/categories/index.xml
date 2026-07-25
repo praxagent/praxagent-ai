@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on praxagent Research Notes</title>
-    <link>https://praxagent.ai/blog/categories/</link>
+    <link>http://macbook-air.tail9eb7b0.ts.net:8000/blog/categories/</link>
     <description>Recent content in Categories on praxagent Research Notes</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="https://praxagent.ai/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://macbook-air.tail9eb7b0.ts.net:8000/blog/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

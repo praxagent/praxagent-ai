@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="titleSetup descSetup">
+  <title id="titleSetup">One test sentence is scored under a control prompt and a treatment prompt</title>
+  <desc id="descSetup">A language model receives the same fixed test sentence twice: once after a control prompt and once after a treatment prompt. Each run yields a vocabulary-rank score for the same probe token, forming one matched pair.</desc>
+  <defs>
+    <marker id="arrowSetup" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#A67C52"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:26px;font-weight:700}
+    .h{font-size:20px;font-weight:700}
+    .s{font-size:17px}
+    .m{font-size:15px;fill:#5A544C}
+    .card{fill:#FBF9F6;stroke:#D9D0C4;stroke-width:2}
+    .model{fill:#E8F0F7;stroke:#4B6787;stroke-width:2}
+    .ctrl{fill:#EDE8E1;stroke:#7F786D;stroke-width:2}
+    .treat{fill:#F3E8E0;stroke:#A67C52;stroke-width:2}
+    .kept{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:2}
+    .arrow{stroke:#A67C52;stroke-width:3;fill:none;marker-end:url(#arrowSetup)}
+    .dash{stroke:#A89B8C;stroke-width:2;stroke-dasharray:7 6;fill:none}
+  </style>
+
+  <text x="40" y="48" class="t title">One language-model experiment, one matched pair</text>
+  <text x="40" y="80" class="t m">Same model, same test sentence, same probe token. Only the surrounding prompt changes.</text>
+
+  <rect class="model" x="40" y="112" width="1120" height="64" rx="12"/>
+  <text x="600" y="152" text-anchor="middle" class="t s">Frozen language model: next-token scores after the full prompt-plus-sentence prefix</text>
+
+  <rect class="card" x="40" y="204" width="340" height="230" rx="16"/>
+  <text x="64" y="242" class="t h">Fixed materials</text>
+  <text x="64" y="278" class="t s">Test sentence S</text>
+  <text x="64" y="304" class="t m">e.g. a short threat paraphrase</text>
+  <text x="64" y="340" class="t s">Probe token W</text>
+  <text x="64" y="366" class="t m">one exact vocabulary entry to score</text>
+  <text x="64" y="402" class="t m">Chosen before looking at outcomes.</text>
+
+  <path class="arrow" d="M400 320 H450"/>
+
+  <rect class="ctrl" x="470" y="204" width="300" height="100" rx="14"/>
+  <text x="620" y="244" text-anchor="middle" class="t h">Control arm</text>
+  <text x="620" y="274" text-anchor="middle" class="t s">control prompt + sentence S</text>
+  <text x="620" y="296" text-anchor="middle" class="t m">baseline / no intervention</text>
+
+  <rect class="treat" x="470" y="334" width="300" height="100" rx="14"/>
+  <text x="620" y="374" text-anchor="middle" class="t h">Treatment arm</text>
+  <text x="620" y="404" text-anchor="middle" class="t s">treatment prompt + sentence S</text>
+  <text x="620" y="426" text-anchor="middle" class="t m">adds the intervention under test</text>
+
+  <path class="arrow" d="M790 254 H840"/>
+  <path class="arrow" d="M790 384 H840"/>
+
+  <rect class="kept" x="860" y="204" width="300" height="100" rx="14"/>
+  <text x="1010" y="244" text-anchor="middle" class="t h">Control rank</text>
+  <text x="1010" y="274" text-anchor="middle" class="t s">position of probe W</text>
+  <text x="1010" y="296" text-anchor="middle" class="t m">lower rank = more favored</text>
+
+  <rect class="kept" x="860" y="334" width="300" height="100" rx="14"/>
+  <text x="1010" y="374" text-anchor="middle" class="t h">Treatment rank</text>
+  <text x="1010" y="404" text-anchor="middle" class="t s">position of probe W</text>
+  <text x="1010" y="426" text-anchor="middle" class="t m">same scoring rule as control</text>
+
+  <line class="dash" x1="860" y1="454" x2="1160" y2="454"/>
+
+  <rect class="card" x="40" y="468" width="1120" height="64" rx="12"/>
+  <text x="600" y="508" text-anchor="middle" class="t s">One pair = (control rank, treatment rank) for the same sentence S. Repeat across many sentences to build a battery.</text>
+</svg>

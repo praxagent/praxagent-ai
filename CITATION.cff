@@ -1,0 +1,23 @@
+cff-version: "1.2.0"
+message: >-
+  Please cite the specific research note or software release you use. If no
+  artifact-specific citation is available, cite this repository using the
+  metadata below.
+title: "praxagent: Independent AI Research and Applied Systems"
+type: software
+authors:
+  - given-names: "Timothy"
+    family-names: "Jones"
+    orcid: "https://orcid.org/0009-0007-5992-0652"
+abstract: >-
+  Public website and research publication repository for praxagent, covering
+  model internals, evaluation and safety, and applied AI systems with
+  inspectable evidence and reproducible artifacts.
+repository-code: "https://github.com/praxagent/praxagent-ai"
+url: "https://praxagent.ai"
+keywords:
+  - "artificial intelligence"
+  - "mechanistic interpretability"
+  - "AI evaluation"
+  - "AI safety"
+  - "agentic systems"

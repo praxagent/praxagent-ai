@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <title>Fisher&#39;s exact test - praxagent Knowledge Base</title>
+    
+    
+
+
+
+
+
+
+    
+    <meta name="description" content="An exact conditional test for association in a count table, commonly used for a 2 by 2 comparison of two groups and two outcomes.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/glossary/fisher-exact-test/">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="praxagent Knowledge Base">
+    <meta property="og:title" content="Fisher&#39;s exact test">
+    <meta property="og:description" content="An exact conditional test for association in a count table, commonly used for a 2 by 2 comparison of two groups and two outcomes.">
+    <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/glossary/fisher-exact-test/">
+    <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <meta property="og:image:alt" content="Praxagent&#39;s stochastic mountain landscape.">
+    <meta property="og:image:width" content="1499">
+    <meta property="og:image:height" content="780">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="Fisher&#39;s exact test">
+    <meta name="twitter:description" content="An exact conditional test for association in a count table, commonly used for a 2 by 2 comparison of two groups and two outcomes.">
+    <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
+    <meta name="twitter:image:alt" content="Praxagent&#39;s stochastic mountain landscape.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
+    <link rel="stylesheet" href="/blog/blog.css?v=20260724">
+    <link rel="stylesheet" href="/blog/katex.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'neutral',
+        securityLevel: 'loose',
+        flowchart: { htmlLabels: true, curve: 'basis' }
+      });
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-scrolls industrial-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+
+
+
+            <div class="nav-menu">
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link">Research Notes</a>
+                <a href="/blog/knowledge-base/" class="nav-link active">Knowledge Base</a>
+                <a href="/blog/search/" class="nav-link">Search</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
+            <a href="/blog/knowledge-base/" class="mobile-nav-link active">Knowledge Base</a>
+            <a href="/blog/search/" class="mobile-nav-link">Search</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        
+
+
+
+
+<div class="blog-post reference-entry">
+    <div class="container">
+        <article class="post-content">
+            <header class="post-header">
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
+                <h1 class="post-title">Fisher&#39;s exact test</h1>
+                
+                <p class="reference-summary">An exact conditional test for association in a count table, commonly used for a 2 by 2 comparison of two groups and two outcomes.</p>
+                
+
+            </header>
+
+
+
+
+
+            <div class="post-body">
+                <p><strong>Fisher&rsquo;s exact test</strong> calculates a
+<a href="/blog/knowledge-base/glossary/p-value/">p-value</a> for
+association in a table of counts. In the common \(2\times2\) case, the rows are
+two groups and the columns are two outcomes. The calculation conditions on the
+observed row and column totals, enumerates tables compatible with those totals,
+and sums a stated null tail.</p>
+<p>Informal phrases such as <strong>Fisher \(p\)</strong> mean the \(p\)-value from Fisher&rsquo;s
+exact test. They do not mean <strong>Fisher&rsquo;s method</strong>, which combines several
+\(p\)-values into one test statistic.</p>
+<h2 id="the-conditional-null-distribution">The conditional null distribution</h2>
+<p>Write the observed table as:</p>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th style="text-align: right">outcome 1</th>
+          <th style="text-align: right">outcome 2</th>
+          <th style="text-align: right">row total</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>group 1</td>
+          <td style="text-align: right">\(a\)</td>
+          <td style="text-align: right">\(b\)</td>
+          <td style="text-align: right">\(r_1=a+b\)</td>
+      </tr>
+      <tr>
+          <td>group 2</td>
+          <td style="text-align: right">\(c\)</td>
+          <td style="text-align: right">\(d\)</td>
+          <td style="text-align: right">\(r_2=c+d\)</td>
+      </tr>
+      <tr>
+          <td>column total</td>
+          <td style="text-align: right">\(c_1=a+c\)</td>
+          <td style="text-align: right">\(c_2=b+d\)</td>
+          <td style="text-align: right">\(N=a+b+c+d\)</td>
+      </tr>
+  </tbody>
+</table>
+<p>Here \(a,b,c,d\) are nonnegative integer counts. The <strong>margins</strong> are the
+outside totals written beside and below the table: the row totals \(r_1\) and
+\(r_2\) (how many units sit in each group), the column totals \(c_1\) and
+\(c_2\) (how many units have each outcome), and the grand total \(N\). They
+are called margins because they sit on the margin of the table, outside the
+four interior cells.</p>
+<p><strong>Held fixed</strong> means: in the probability calculation, those outside totals are
+treated as known constants equal to the values you observed. Only the interior
+can move. So every table the null compares must still have the same group sizes
+and the same overall outcome counts; what varies is how the outcomes are split
+between the two groups. That restriction is called <strong>conditioning on the
+margins</strong>.</p>
+<p>The observed count in the <strong>group 1, outcome 1</strong> cell is \(a\). Under the null
+model below, that same cell is treated as a random variable \(A\): how many
+outcome-1 units fall in group 1 when those margins stay at their observed
+values. The data are one realized value \(A=a\).</p>
+<p>If \(p_1\) and \(p_2\) are the probabilities of outcome 1 in groups 1 and 2,
+respectively, the <strong>population odds ratio</strong> is</p>
+\[
+\theta = \frac{p_1/(1-p_1)}{p_2/(1-p_2)}.
+\]<p>Nondegenerate means \(0\lt p_1\lt 1\) and \(0\lt p_2\lt 1\), so both odds are
+defined. The odds for a group are \(p/(1-p)\): how many times more likely
+outcome 1 is than outcome 2 in that group. The ratio \(\theta\) compares those
+two odds.</p>
+<p>Why the null sets \(\theta=1\): that is the “no association” claim. If
+\(\theta=1\), then \(p_1=p_2\): knowing which group a unit belongs to does not
+change its chance of outcome 1. The groups have the same hit rate in the
+population. Values \(\theta\gt 1\) or \(\theta\lt 1\) would mean one group is
+more (or less) prone to outcome 1 than the other. Fisher’s test asks whether
+the observed table is extreme under that no-difference null; it does not claim
+the sample odds ratio must equal 1.</p>
+<p>Under the conditional null \(\theta=1\), \(A\) given the fixed margins follows
+a central hypergeometric distribution (defined next).</p>
+<div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+        
+    </div>
+    <div class="panel-content">
+        <p><strong>Why the null is hypergeometric.</strong> Conditioning on the observed margins freezes
+the outside totals \(N\), \(r_1\), \(r_2\), \(c_1\), and \(c_2\) at the values
+in your table. Under the null that group membership does not change the chance
+of outcome 1, those \(c_1\) outcome-1 labels are exchangeable across the \(N\)
+units. Fixing group 1&rsquo;s size at \(r_1\) is then exactly like dealing \(r_1\)
+seats out of \(N\) without putting anyone back: a finite population, drawn
+<strong>without replacement</strong>.</p>
+<p>That is the definition of a hypergeometric count, not a binomial one. A
+binomial model would need independent trials with a fixed success probability
+and would not automatically keep the column total \(c_1\) exact. Here the
+column total is locked because we conditioned on it, so each draw changes what
+remains in the pool.</p>
+<p><strong>Urn picture.</strong> An urn holds \(N\) balls, \(c_1\) marked “outcome 1” and
+\(c_2=N-c_1\) marked “outcome 2.” Draw \(r_1\) balls without replacement for
+group 1; the rest are group 2. Let \(A\) be how many of those \(r_1\) balls are
+marked outcome 1. Then</p>
+\[
+P(A=x) = \frac{\binom{c_1}{x}\binom{c_2}{r_1-x}}{\binom{N}{r_1}}.
+\]<p>The symbols \(\binom{\cdot}{\cdot}\) here are <strong>binomial coefficients</strong> (counts
+of combinations), not binomial probabilities. Read \(\binom{n}{k}\) as “number
+of ways to choose \(k\) items from \(n\).” Under the null every way to choose
+group 1&rsquo;s \(r_1\) seats from the \(N\) units is equally likely, so the
+probability is a ratio of counts:</p>
+<ul>
+<li><strong>Denominator</strong> \(\binom{N}{r_1}\): ways to choose which \(r_1\) of the \(N\)
+units go to group 1 (the rest go to group 2).</li>
+<li><strong>Numerator first factor</strong> \(\binom{c_1}{x}\): ways to fill \(x\) of those
+group-1 seats from the \(c_1\) outcome-1 units.</li>
+<li><strong>Numerator second factor</strong> \(\binom{c_2}{r_1-x}\): ways to fill the remaining
+\(r_1-x\) group-1 seats from the \(c_2\) outcome-2 units.</li>
+</ul>
+<p>Multiply the two numerator factors because you choose the outcome-1 members and
+the outcome-2 members of group 1 separately, then divide by the total number of
+group-1 assignments. The result is already a probability; there is no extra
+\(p^{x}(1-p)^{r_1-x}\) factor.</p>
+<p><strong>Contrast with a binomial probability.</strong> If each of \(r_1\) independent trials
+had the same success chance \(p\), you would write</p>
+\[
+P(A=x) = \binom{r_1}{x}\,p^{x}(1-p)^{r_1-x}.
+\]<p>That binomial coefficient only chooses which of the \(r_1\) trials succeed; the
+powers of \(p\) and \(1-p\) supply the probability weight, and the total number
+of successes is not forced to equal a fixed \(c_1\). Fisher&rsquo;s hypergeometric
+formula instead uses three counting coefficients and a locked column total, with
+equal weight on every seat assignment that respects the margins.</p>
+<p>The formula applies for every integer \(x\) with
+\(\max(0,r_1-c_2)\le x\le \min(r_1,c_1)\). Each such \(x\) fills the whole
+\(2\times2\) table once the margins are fixed. Fisher&rsquo;s calculation uses this
+urn story with the observed \(N,r_1,c_1,c_2\).</p>
+
+    </div>
+</div>
+
+<p>So the conditional null probability for a candidate count \(x\) is</p>
+\[
+\begin{aligned}
+P(A=x\mid r_1,r_2,c_1,c_2)
+&= \frac{\binom{c_1}{x}\binom{c_2}{r_1-x}}{\binom{N}{r_1}}.
+\end{aligned}
+\]<h2 id="worked-toy-example">Worked toy example</h2>
+<p>Suppose the observed table is:</p>
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th style="text-align: right">hit (outcome 1)</th>
+          <th style="text-align: right">miss (outcome 2)</th>
+          <th style="text-align: right">row total</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>method A (group 1)</td>
+          <td style="text-align: right">\(a=6\)</td>
+          <td style="text-align: right">\(b=2\)</td>
+          <td style="text-align: right">\(r_1=8\)</td>
+      </tr>
+      <tr>
+          <td>method B (group 2)</td>
+          <td style="text-align: right">\(c=1\)</td>
+          <td style="text-align: right">\(d=4\)</td>
+          <td style="text-align: right">\(r_2=5\)</td>
+      </tr>
+      <tr>
+          <td>column total</td>
+          <td style="text-align: right">\(c_1=7\)</td>
+          <td style="text-align: right">\(c_2=6\)</td>
+          <td style="text-align: right">\(N=13\)</td>
+      </tr>
+  </tbody>
+</table>
+<p>The margins are written on the edge of that table: \(r_1=8\), \(r_2=5\),
+\(c_1=7\), \(c_2=6\), and \(N=13\). Not every integer is a legal value of
+\(A\). You cannot put more hits in method A than exist overall, and you cannot
+put more hits there than method A has seats:</p>
+\[
+0 \le x \le \min(r_1,c_1) = \min(8,7) = 7.
+\]<p>You also cannot leave method A so short of hits that the six misses cannot fill
+its remaining seats. Method A needs \(r_1=8\) seats; if it takes only \(x\)
+hits, it needs \(8-x\) misses, and there are only \(c_2=6\) misses available, so
+\(8-x\le 6\), which is \(x\ge 2\). Combining both sides:</p>
+\[
+\max(0,r_1-c_2) \le x \le \min(r_1,c_1),
+\]<p>which here is \(2\le x\le 7\). So the possible values are
+\(x=2,3,4,5,6,7\). Each one corresponds to one full table with these same
+margins. Two examples (rows still method A / method B; columns still hit /
+miss):</p>
+\[
+x=6:\quad
+\begin{bmatrix}
+6 & 2 \\
+1 & 4
+\end{bmatrix}
+\qquad
+x=7:\quad
+\begin{bmatrix}
+7 & 1 \\
+0 & 5
+\end{bmatrix}.
+\]<p>Both keep \(r_1=8\), \(r_2=5\), \(c_1=7\), \(c_2=6\), and \(N=13\). The
+\(x=6\) matrix is the observed table; \(x=7\) moves one more hit into method
+A and therefore one more miss into method B.</p>
+<p>Now choose the scientific question <strong>before</strong> looking at the table: is method
+A better at producing hits than method B? That is a <strong>one-sided</strong> alternative
+in the “A has more hits” direction. Under the null the groups are equally
+prone to hits, so large values of \(A\) (many hits piled into method A) are the
+surprising ones for that claim.</p>
+<p>A <strong>tail</strong> is the set of outcomes counted as “at least this extreme” for the
+chosen direction. A <strong>one-sided tail</strong> looks only in that one direction. We
+observed \(a=6\), so the one-sided upper tail is every legal table with at
+least as many method-A hits as we saw: \(x=6\) and \(x=7\). The
+<a href="/blog/knowledge-base/glossary/p-value/">p-value</a> is the
+probability of landing in that tail <strong>if the null is true</strong> (here: if the two
+methods are equally prone to hits). It is not the probability that the null is
+true, and not the probability that the methods are equal. Tables with
+\(x\le 5\) go the other way and are left out of this one-sided sum (a
+two-sided test would also count an equally extreme lower direction).</p>
+\[
+\begin{aligned}
+p_{\mathrm{greater}}
+&= P(A\ge6) \\
+&= \frac{\binom{7}{6}\binom{6}{2}+\binom{7}{7}\binom{6}{1}}{\binom{13}{8}} \\
+&= \frac{111}{1287}
+\approx 0.08625.
+\end{aligned}
+\]<p>A <strong>two-sided</strong> test also counts tables that are extreme in the other
+direction (method A unusually <em>short</em> of hits). SciPy and R use a common rule
+for what “extreme” means here: compare tables by how <strong>rare</strong> they are under
+the null, not only by how large \(A\) is.</p>
+<p>Under the null, every way to choose which \(r_1\) of the \(N\) units sit in
+group 1 is equally likely. There are \(\binom{N}{r_1}\) such assignments in
+total (here \(\binom{13}{8}=1287\)). For a particular value \(x\), the number
+of those assignments that produce \(A=x\) is</p>
+\[
+w(x) = \binom{c_1}{x}\binom{c_2}{r_1-x}:
+\]<p>choose which \(x\) of the \(c_1\) hits go to group 1, and which \(r_1-x\) of the
+\(c_2\) misses fill the rest of group 1. Call that count the table’s
+<strong>weight</strong>. The null probability is the weight divided by the total number of
+assignments,</p>
+\[
+P(A=x) = \frac{w(x)}{\binom{N}{r_1}} = \frac{\binom{c_1}{x}\binom{c_2}{r_1-x}}{\binom{N}{r_1}}.
+\]<p>A smaller weight means a rarer table under the null, so comparing null
+probabilities is the same as comparing weights. The two-sided rule keeps every
+table whose weight is <strong>less than or equal to</strong> the observed table’s weight,
+then sums those probabilities.</p>
+<p>For this toy table the counts and null probabilities are:</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: right">\(x\)</th>
+          <th style="text-align: right">weight \(\binom{7}{x}\binom{6}{8-x}\)</th>
+          <th style="text-align: right">null \(P(A=x)\)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: right">2</td>
+          <td style="text-align: right">21</td>
+          <td style="text-align: right">\(21/1287\approx0.0163\)</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">3</td>
+          <td style="text-align: right">210</td>
+          <td style="text-align: right">\(210/1287\approx0.1632\)</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">4</td>
+          <td style="text-align: right">525</td>
+          <td style="text-align: right">\(525/1287\approx0.4079\)</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">5</td>
+          <td style="text-align: right">420</td>
+          <td style="text-align: right">\(420/1287\approx0.3263\)</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">6 (observed)</td>
+          <td style="text-align: right">105</td>
+          <td style="text-align: right">\(105/1287\approx0.0816\)</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">7</td>
+          <td style="text-align: right">6</td>
+          <td style="text-align: right">\(6/1287\approx0.0047\)</td>
+      </tr>
+  </tbody>
+</table>
+<p>The observed table has weight 105. Tables with weight \(\le 105\) are
+\(x=2\) (weight 21), \(x=6\) (105), and \(x=7\) (6). The middle values
+\(x=3,4,5\) are <em>more</em> common under the null than what we saw, so they are not
+treated as extreme under this convention. Adding the three kept probabilities
+gives</p>
+\[
+p = \frac{21+105+6}{1287} = \frac{132}{1287} \approx 0.10256.
+\]<p>Notice \(x=2\) enters even though it is on the low side of \(A\): it is rarer
+under the null than the observed table. Other two-sided definitions exist, so
+a report should name the software and convention rather than write only
+“two-sided Fisher \(p\).”</p>
+<p>This standard-library Python reproduces both values without an asymptotic
+approximation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">comb</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">table</span> <span class="o">=</span> <span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">row_1</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">column_1</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">table</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">sum</span><span class="p">,</span> <span class="n">table</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">column_2</span> <span class="o">=</span> <span class="n">total</span> <span class="o">-</span> <span class="n">column_1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">support</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">row_1</span> <span class="o">-</span> <span class="n">column_2</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">min</span><span class="p">(</span><span class="n">row_1</span><span class="p">,</span> <span class="n">column_1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">denominator</span> <span class="o">=</span> <span class="n">comb</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="n">row_1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">weights</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span><span class="p">:</span> <span class="n">comb</span><span class="p">(</span><span class="n">column_1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">comb</span><span class="p">(</span><span class="n">column_2</span><span class="p">,</span> <span class="n">row_1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">support</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">observed</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">observed_weight</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="n">observed</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">p_greater</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">weight</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">weights</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="n">observed</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">/</span> <span class="n">denominator</span>
+</span></span><span class="line"><span class="cl"><span class="n">p_two_sided</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">weight</span> <span class="k">for</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">weights</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">weight</span> <span class="o">&lt;=</span> <span class="n">observed_weight</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">/</span> <span class="n">denominator</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">p_greater</span><span class="p">)</span>    <span class="c1"># 0.08624708624708624</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">p_two_sided</span><span class="p">)</span>  <span class="c1"># 0.10256410256410256</span>
+</span></span></code></pre></div><h2 id="what-the-design-must-justify">What the design must justify</h2>
+<ul>
+<li><strong>Counts and units:</strong> cells contain counts of observational or randomized
+units, not percentages, fitted scores, or repeated rows treated as new
+independent units.</li>
+<li><strong>Conditional reference set:</strong> the calculation conditions on the observed
+margins. A design with fixed group sizes can still justify the conditional
+null by conditioning on the total number of outcomes. Because the attainable
+conditional \(p\)-values are discrete, the rejection probability at a nominal
+level \(\alpha\) can be strictly below \(\alpha\) for particular fixed
+margins. In that sense the test can be conservative. When only the group
+sizes are fixed by design, unconditional exact procedures such as Barnard&rsquo;s
+or Boschloo&rsquo;s test may be more powerful, although they use a different
+reference construction. State the sampling or randomization design that makes
+the chosen reference set relevant.</li>
+<li><strong>Dependence and reference distribution:</strong> the sampling or randomization
+design must justify the hypergeometric conditional distribution used by the
+test. In the usual independent-groups sampling model, observational units
+must be independent; clustered, longitudinal, repeated, or otherwise
+dependent observations require a method that represents that dependence. A
+fixed-allocation randomized design may justify Fisher&rsquo;s test through its
+assignment mechanism rather than through independent Bernoulli sampling.</li>
+<li><strong>Pairing:</strong> if both methods are evaluated on the same items, the observations
+are paired. A method-by-outcome Fisher table discards that matching. For
+paired binary outcomes, an exact McNemar test instead uses the two discordant
+pair counts. For paired continuous or ranked differences, use a paired method
+such as the
+<a href="/blog/knowledge-base/glossary/wilcoxon/">Wilcoxon signed-rank test</a>.</li>
+<li><strong>Sidedness:</strong> choose a one-sided direction before seeing the table. A
+two-sided test needs an explicit extremeness convention.</li>
+<li><strong>Selection:</strong> the test does not correct for trying many outcomes, thresholds,
+subsets, or analysis rules and reporting the smallest \(p\)-value.</li>
+</ul>
+<p>The word <strong>exact</strong> means the conditional null probabilities are calculated
+without a large-sample approximation. It does not mean the study design,
+dependence assumptions, or scientific interpretation are automatically
+correct.</p>
+<h2 id="what-to-report-with-the-p-value">What to report with the p-value</h2>
+<p>Report the full count table, the alternative and sidedness, the two-sided
+convention when applicable, the software and version, and an effect estimate
+with an interval. State the odds-ratio estimator and interval construction:
+for example, the sample cross-product odds ratio \(\widehat{\theta}=ad/bc\),
+or the conditional maximum-likelihood estimate from the noncentral
+hypergeometric model. These are not always numerically identical; SciPy&rsquo;s
+<code>fisher_exact</code> reports the sample estimate, while R&rsquo;s <code>fisher.test</code> reports
+the conditional MLE. A Fisher \(p\)-value is not the probability that the null
+hypothesis is true, not an effect size, and not a causal conclusion. Zero cells
+can make the simple sample odds ratio zero or infinite even though the exact
+\(p\)-value remains finite, another reason to show the counts.</p>
+<p>When both methods are evaluated on the same items, their separate total hit and
+miss counts may be shown descriptively, but an ordinary Fisher \(p\)-value does
+not account for within-item pairing. Use a paired analysis, such as an exact
+McNemar test, for inference about the matched comparison.</p>
+<p>See also: <a href="/blog/knowledge-base/glossary/p-value/">p-value</a>
+and
+<a href="/blog/knowledge-base/glossary/wilcoxon/">Wilcoxon signed-rank test</a>.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><a href="https://docs.scipy.org/doc/scipy-1.17.0/reference/generated/scipy.stats.fisher_exact.html">SciPy 1.17: <code>scipy.stats.fisher_exact</code></a></li>
+<li><a href="https://docs.scipy.org/doc/scipy/tutorial/stats/hypothesis_fisher_exact.html">SciPy tutorial: Fisher&rsquo;s exact test</a></li>
+<li><a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/fisher.test.html">R <code>stats::fisher.test</code> documentation</a></li>
+</ul>
+
+            </div>
+
+            <footer class="post-footer">
+
+                <div class="post-navigation">
+
+                    <a href="/blog/knowledge-base/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/knowledge-base/" class="back-to-blog">Knowledge Base</a>
+                    <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+
+    </main>
+
+    <footer class="footer footer-compact">
+        <div class="container">
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
+            </div>
+            <div class="footer-compact-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="/blog/search/">Search</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/blog/script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tables = document.querySelectorAll('.post-body table');
+            tables.forEach((table, index) => {
+                if (table.parentElement?.classList.contains('table-scroll')) return;
+
+                const scroller = document.createElement('div');
+                scroller.className = 'table-scroll';
+                scroller.setAttribute('aria-label', `Scrollable data table ${index + 1}`);
+                table.parentNode.insertBefore(scroller, table);
+                scroller.appendChild(table);
+
+                const updateScrollableState = () => {
+                    const isScrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+                    scroller.classList.toggle('is-scrollable', isScrollable);
+                    if (isScrollable) {
+                        scroller.setAttribute('role', 'region');
+                        scroller.setAttribute('tabindex', '0');
+                    } else {
+                        scroller.removeAttribute('role');
+                        scroller.removeAttribute('tabindex');
+                    }
+                };
+
+                requestAnimationFrame(updateScrollableState);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(updateScrollableState).observe(scroller);
+                } else {
+                    window.addEventListener('resize', updateScrollableState, { passive: true });
+                }
+            });
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                output: "htmlAndMathml"
+            });
+
+            const copyText = async (text) => {
+                if (navigator.clipboard?.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    return;
+                }
+
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.setAttribute('readonly', '');
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                const copied = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                if (!copied) {
+                    throw new Error('Copy command was not accepted');
+                }
+            };
+
+            document.querySelectorAll('[data-copy-target]').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const target = document.querySelector(button.dataset.copyTarget);
+                    if (!target) {
+                        console.error(`Copy target not found: ${button.dataset.copyTarget}`);
+                        return;
+                    }
+
+                    const originalLabel = button.textContent;
+                    try {
+                        await copyText(target.textContent.trim());
+                        button.textContent = 'Copied';
+                        button.classList.add('copied');
+                        setTimeout(() => {
+                            button.textContent = originalLabel;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    } catch (error) {
+                        console.error('Failed to copy citation: ', error);
+                    }
+                });
+            });
+
+            const copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+            const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
+            codeBlocks.forEach(pre => {
+                if (pre.closest('.code-block-frame')) {
+                    return;
+                }
+
+                const frame = document.createElement('div');
+                frame.className = 'code-block-frame';
+                const toolbar = document.createElement('div');
+                toolbar.className = 'code-block-toolbar';
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'copy-code-button';
+                button.innerHTML = copyIcon;
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+                button.setAttribute('title', 'Copy');
+
+                const markCopied = () => {
+                    button.innerHTML = checkIcon;
+                    button.classList.add('copied');
+                    button.setAttribute('aria-label', 'Copied');
+                    setTimeout(() => {
+                        button.innerHTML = copyIcon;
+                        button.classList.remove('copied');
+                        button.setAttribute('aria-label', 'Copy code to clipboard');
+                    }, 2000);
+                };
+
+                button.addEventListener('click', () => {
+                    const code = pre.querySelector('code');
+                    const text = code ? code.textContent : pre.textContent;
+
+                    navigator.clipboard.writeText(text).then(markCopied).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            markCopied();
+                        } catch (fallbackErr) {
+                            console.error('Fallback copy failed: ', fallbackErr);
+                        }
+                        document.body.removeChild(textArea);
+                    });
+                });
+
+                toolbar.appendChild(button);
+                frame.appendChild(toolbar);
+                pre.parentNode.insertBefore(frame, pre);
+                frame.appendChild(pre);
+            });
+        });
+    </script>
+
+</body>
+</html>

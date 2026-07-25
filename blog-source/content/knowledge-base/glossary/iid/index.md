@@ -35,4 +35,4 @@ An exact calculation still has assumptions:
 
 In these notes, the [p-value]({{< relref "knowledge-base/glossary/p-value/index.md" >}}) is best read as a **within-battery consistency summary under an explicit sign-flip model**. It does not make the convenience battery a population sample. Generalization needs additional models, genuinely independent template families, independently authored prompts, or an analysis that treats template family as the unit of replication.
 
-See also: [p-value]({{< relref "knowledge-base/glossary/p-value/index.md" >}}), [Wilcoxon]({{< relref "knowledge-base/glossary/wilcoxon/index.md" >}}).
+See also: [p-value]({{< relref "knowledge-base/glossary/p-value/index.md" >}}), [Wilcoxon]({{< relref "knowledge-base/glossary/wilcoxon/index.md" >}}), [Fisher's exact test]({{< relref "knowledge-base/glossary/fisher-exact-test/index.md" >}}).

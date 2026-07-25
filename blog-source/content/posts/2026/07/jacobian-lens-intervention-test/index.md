@@ -3,9 +3,12 @@ title: "A Linear Nudge, a Nonlinear Wake"
 slug: "jacobian-lens-intervention-test"
 date: 2026-07-18
 lastmod: 2026-07-18
+citation_enabled: true
+citation_version: "2026.07.18"
 aliases: ["/posts/jacobian-lens-intervention-test/"]
 tags: ["AI", "LLM", "machine-learning", "interpretability", "sparse-autoencoders", "jacobian-lens", "reproducibility"]
 author: Timothy Jones
+author_id: "timothy-jones"
 lead: |
   A transformer repeatedly transforms a high-dimensional hidden state as
   information moves through its layers. If that state is deliberately changed

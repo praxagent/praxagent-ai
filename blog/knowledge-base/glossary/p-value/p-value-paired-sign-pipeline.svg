@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="titlePipe descPipe">
+  <title id="titlePipe">Paired ranks become signed differences, then only the signs are kept</title>
+  <desc id="descPipe">Four sentence pairs each have a control vocabulary rank and a treatment vocabulary rank. Their differences are positive 28, positive 7, negative 7, and positive 41. The sign test keeps only the directions: three positive and one negative.</desc>
+  <defs>
+    <marker id="arrowPipe" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#A67C52"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:26px;font-weight:700}
+    .h{font-size:20px;font-weight:700}
+    .s{font-size:17px}
+    .m{font-size:15px;fill:#5A544C}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:16px;fill:#2C2924}
+    .card{fill:#FBF9F6;stroke:#D9D0C4;stroke-width:2}
+    .ctrl{fill:#EDE8E1;stroke:#7F786D;stroke-width:2}
+    .treat{fill:#E8F0F7;stroke:#4B6787;stroke-width:2}
+    .pos{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:2}
+    .neg{fill:#F3E8E0;stroke:#A67C52;stroke-width:2}
+    .arrow{stroke:#A67C52;stroke-width:3;fill:none;marker-end:url(#arrowPipe)}
+    .foot{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:2}
+  </style>
+
+  <text x="40" y="48" class="t title">From matched pairs to a sign count</text>
+  <text x="40" y="80" class="t m">Toy ranks only. Rank 1 is highest-scoring; lower numerical rank is stronger.</text>
+
+  <rect class="card" x="40" y="108" width="520" height="350" rx="16"/>
+  <text x="64" y="146" class="t h">1. Score each matched pair</text>
+  <text x="64" y="174" class="t m">Same sentence; score one probe token in each arm</text>
+
+  <text x="120" y="214" text-anchor="middle" class="t m">control</text>
+  <text x="250" y="214" text-anchor="middle" class="t m">treatment</text>
+  <text x="380" y="214" text-anchor="middle" class="t m">gap D</text>
+  <text x="480" y="214" text-anchor="middle" class="t m">sign</text>
+
+  <text x="64" y="258" class="t s">pair 1</text>
+  <rect class="ctrl" x="96" y="236" width="48" height="32" rx="8"/>
+  <text x="120" y="258" text-anchor="middle" class="mono">40</text>
+  <rect class="treat" x="226" y="236" width="48" height="32" rx="8"/>
+  <text x="250" y="258" text-anchor="middle" class="mono">12</text>
+  <text x="380" y="258" text-anchor="middle" class="mono">+28</text>
+  <rect class="pos" x="456" y="236" width="48" height="32" rx="8"/>
+  <text x="480" y="258" text-anchor="middle" class="t s">+</text>
+
+  <text x="64" y="310" class="t s">pair 2</text>
+  <rect class="ctrl" x="96" y="288" width="48" height="32" rx="8"/>
+  <text x="120" y="310" text-anchor="middle" class="mono">25</text>
+  <rect class="treat" x="226" y="288" width="48" height="32" rx="8"/>
+  <text x="250" y="310" text-anchor="middle" class="mono">18</text>
+  <text x="380" y="310" text-anchor="middle" class="mono">+7</text>
+  <rect class="pos" x="456" y="288" width="48" height="32" rx="8"/>
+  <text x="480" y="310" text-anchor="middle" class="t s">+</text>
+
+  <text x="64" y="362" class="t s">pair 3</text>
+  <rect class="ctrl" x="96" y="340" width="48" height="32" rx="8"/>
+  <text x="120" y="362" text-anchor="middle" class="mono">15</text>
+  <rect class="treat" x="226" y="340" width="48" height="32" rx="8"/>
+  <text x="250" y="362" text-anchor="middle" class="mono">22</text>
+  <text x="380" y="362" text-anchor="middle" class="mono">-7</text>
+  <rect class="neg" x="456" y="340" width="48" height="32" rx="8"/>
+  <text x="480" y="362" text-anchor="middle" class="t s">-</text>
+
+  <text x="64" y="414" class="t s">pair 4</text>
+  <rect class="ctrl" x="96" y="392" width="48" height="32" rx="8"/>
+  <text x="120" y="414" text-anchor="middle" class="mono">50</text>
+  <rect class="treat" x="226" y="392" width="48" height="32" rx="8"/>
+  <text x="250" y="414" text-anchor="middle" class="mono">9</text>
+  <text x="380" y="414" text-anchor="middle" class="mono">+41</text>
+  <rect class="pos" x="456" y="392" width="48" height="32" rx="8"/>
+  <text x="480" y="414" text-anchor="middle" class="t s">+</text>
+
+  <path class="arrow" d="M590 280 H640"/>
+
+  <rect class="card" x="660" y="108" width="500" height="350" rx="16"/>
+  <text x="684" y="146" class="t h">2. Keep only direction</text>
+  <text x="684" y="174" class="t m">The sign test discards the gap sizes</text>
+
+  <rect class="pos" x="700" y="220" width="72" height="72" rx="12"/>
+  <text x="736" y="264" text-anchor="middle" class="t h">+</text>
+  <rect class="pos" x="792" y="220" width="72" height="72" rx="12"/>
+  <text x="828" y="264" text-anchor="middle" class="t h">+</text>
+  <rect class="neg" x="884" y="220" width="72" height="72" rx="12"/>
+  <text x="920" y="264" text-anchor="middle" class="t h">-</text>
+  <rect class="pos" x="976" y="220" width="72" height="72" rx="12"/>
+  <text x="1012" y="264" text-anchor="middle" class="t h">+</text>
+
+  <text x="910" y="340" text-anchor="middle" class="t s">3 positive, 1 negative</text>
+  <text x="910" y="372" text-anchor="middle" class="t m">D = control rank - treatment rank</text>
+  <text x="910" y="400" text-anchor="middle" class="t m">Positive means treatment ranked better.</text>
+
+  <rect class="foot" x="40" y="484" width="1120" height="48" rx="12"/>
+  <text x="600" y="514" text-anchor="middle" class="t s">A later panel turns a win/loss count into a p-value under a fair-sign null. Gap sizes are unused here.</text>
+</svg>

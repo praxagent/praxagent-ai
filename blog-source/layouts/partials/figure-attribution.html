@@ -1,0 +1,25 @@
+{{- $page := .page -}}
+{{- $meta := partial "research-note-data.html" $page -}}
+{{- $resource := $page.Resources.GetMatch .resource_path -}}
+{{- $creator := printf "%s / praxagent" $meta.author.display_name -}}
+{{- $creatorURL := $meta.author.orcid -}}
+{{- $sourceLabel := "this research note" -}}
+{{- $sourceURL := $meta.canonical -}}
+{{- $rightsLabel := $meta.rights_label -}}
+{{- $rightsURL := $meta.rights_url -}}
+{{- $modifications := "" -}}
+{{- with $resource -}}
+  {{- with .Params.creator }}{{ $creator = . }}{{ end -}}
+  {{- with .Params.creator_url }}{{ $creatorURL = . }}{{ end -}}
+  {{- with .Params.source_label }}{{ $sourceLabel = . }}{{ end -}}
+  {{- with .Params.source_url }}{{ $sourceURL = . }}{{ end -}}
+  {{- with .Params.rights }}{{ $rightsLabel = . }}{{ end -}}
+  {{- with .Params.rights_url }}{{ $rightsURL = . }}{{ end -}}
+  {{- with .Params.modifications }}{{ $modifications = . }}{{ end -}}
+{{- end -}}
+<span class="research-figure__credit">
+    Source: <a href="{{ $sourceURL }}">{{ $sourceLabel }}</a>.
+    Credit: {{ if $creatorURL }}<a href="{{ $creatorURL }}">{{ $creator }}</a>{{ else }}{{ $creator }}{{ end }}.
+    {{ if $rightsURL }}<a href="{{ $rightsURL }}">{{ $rightsLabel }}</a>{{ else }}{{ $rightsLabel }}{{ end }}
+    {{- with $modifications }} Modified: {{ . }}{{ end -}}
+</span>

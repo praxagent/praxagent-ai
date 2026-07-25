@@ -1,0 +1,56 @@
+{{- $meta := partial "research-note-data.html" . -}}
+<section class="research-citation" aria-labelledby="research-citation-heading">
+    <div class="research-citation__header">
+        <div>
+            <div class="research-citation__eyebrow">Citation and rights</div>
+            <h2 id="research-citation-heading">Cite this research note</h2>
+        </div>
+        <button class="citation-copy-button" type="button" data-copy-target="#research-note-citation-text" aria-live="polite">Copy citation</button>
+    </div>
+
+    <div class="research-citation__recommended">
+        <div class="research-citation__recommended-label">Recommended citation</div>
+        <p class="research-citation__text" id="research-note-citation-text">{{ $meta.citation_text }}</p>
+    </div>
+
+    <dl class="research-citation__metadata">
+        <div>
+            <dt>Author</dt>
+            <dd><a href="{{ $meta.author.orcid }}" rel="author">{{ $meta.author.display_name }} (ORCID {{ strings.TrimPrefix "https://orcid.org/" $meta.author.orcid }})</a></dd>
+        </div>
+        <div>
+            <dt>Published</dt>
+            <dd><time datetime="{{ $meta.published_iso }}">{{ $meta.published_display }}</time></dd>
+        </div>
+        <div>
+            <dt>Research content last revised</dt>
+            <dd><time datetime="{{ $meta.modified_iso }}">{{ $meta.modified_display }}</time></dd>
+        </div>
+        <div>
+            <dt>Citation version</dt>
+            <dd>{{ $meta.version }}</dd>
+        </div>
+        <div class="research-citation__canonical">
+            <dt>Canonical page</dt>
+            <dd><a href="{{ $meta.canonical }}">Open the permanent page for this version</a></dd>
+        </div>
+        {{- with $meta.doi }}
+        <div>
+            <dt>DOI</dt>
+            <dd><a href="{{ $meta.doi_url }}">{{ . }}</a></dd>
+        </div>
+        {{- end }}
+    </dl>
+
+    <details class="research-citation__bibtex">
+        <summary>Export BibTeX</summary>
+        <pre id="research-note-bibtex"><code>{{ $meta.bibtex }}</code></pre>
+        <button class="citation-copy-button" type="button" data-copy-target="#research-note-bibtex" aria-live="polite">Copy BibTeX</button>
+    </details>
+
+    <p class="research-citation__rights">{{ $meta.rights_notice }}
+        Public access permits reading and linking, not unlicensed reuse.
+        <a href="{{ $meta.rights_url }}">Read the content and brand rights notice.</a>
+        Software and third-party artifacts may carry separate licenses.
+    </p>
+</section>

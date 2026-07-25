@@ -6,10 +6,21 @@
         <article class="post-content">
             <header class="post-header">
                 <h1 class="post-title">{{ .Title }}</h1>
+                {{- if and (eq .Type "posts") (eq .Params.citation_enabled true) }}
+                {{- $meta := partial "research-note-data.html" . }}
                 <div class="post-meta">
-                    <span class="post-date">{{ .Date.Format "January 2, 2006" }}</span>
+                    <time class="post-date" datetime="{{ $meta.published_iso }}">{{ $meta.published_display }}</time>
+                    <span class="post-author">by <a href="{{ $meta.author.orcid }}" rel="author">{{ $meta.author.display_name }} <span class="post-orcid">ORCID</span></a></span>
+                    {{- if ne $meta.modified_iso $meta.published_iso }}
+                    <span class="post-updated">Revised <time datetime="{{ $meta.modified_iso }}">{{ $meta.modified_display }}</time></span>
+                    {{- end }}
+                </div>
+                {{- else }}
+                <div class="post-meta">
+                    <time class="post-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
                     <span class="post-author">by {{ .Params.author | default "praxagent Team" }}</span>
                 </div>
+                {{- end }}
             </header>
 
             <!-- Knowledge Graph Data (Hidden for now) -->
@@ -44,6 +55,10 @@
             </div>
 
             <footer class="post-footer">
+                <div class="post-footer__notices">
+                {{- if and (eq .Type "posts") (eq .Params.citation_enabled true) }}
+                {{ partial "research-note-citation.html" . }}
+                {{- end }}
                 <div class="post-transparency">
                     <div class="post-transparency-label">Public source &amp; edit history</div>
                     <p>Each research note is available two ways: as the rendered page you are
@@ -52,6 +67,7 @@
                     Every revision to every post is preserved in the commit log, so
                     you can see exactly what changed and when{{ with .File }}:
                     <a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/{{ .Path }}" rel="noopener">view this article's edit history</a>{{ end }}.</p>
+                </div>
                 </div>
                 <div class="post-navigation">
                     <a href="/blog/index.html" class="back-to-blog">← Back to Research Notes</a>

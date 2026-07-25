@@ -2,9 +2,13 @@
 title: "Why Experimental Details Matter: Recovering from a Flawed Interpretability Study"
 slug: "workspace-under-pressure"
 date: 2026-07-15
+lastmod: 2026-07-20
+citation_enabled: true
+citation_version: "2026.07.20"
 aliases: ["/posts/workspace-under-pressure/"]
 tags: ["AI", "LLM", "machine-learning", "interpretability", "jacobian-lens", "j-space", "ai-safety", "evaluation-awareness", "open-science"]
 author: Timothy Jones
+author_id: "timothy-jones"
 summary: "A striking interpretability result survived preregistration and still came from a flawed comparison. We trace how prompt echo, a domain-mismatched lexicon, and unequal stakes produced an overconfident story; retract the invalid chart; and show how a corrected, frozen re-run changed what the experiment could honestly support."
 og_image: "og-card.png"
 og_image_alt: "Corrected matched-threat comparison: only the Jacobian lens shows a significant self-versus-other-model contrast; identity and random-map controls do not."

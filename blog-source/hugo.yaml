@@ -13,6 +13,15 @@ ignoreFiles:
 
 params:
   description: 'Experiments, methods, controls, and engineering notes from praxagent'
+  scholarly:
+    default_author: 'timothy-jones'
+    publisher_name: 'praxagent'
+    publisher_url: 'https://praxagent.ai'
+    container_title: 'praxagent Research Notes'
+    repository_url: 'https://github.com/praxagent/praxagent-ai'
+    rights_holder: 'praxagent'
+    rights_label: 'All rights reserved.'
+    rights_url: 'https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md'
 
 permalinks:
   posts: '/posts/:year/:month/:slug/'

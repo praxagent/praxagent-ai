@@ -15,26 +15,29 @@
 
 
 
+
+
+
     
-    
-    <meta name="description" content="A tail probability under a stated null model; in these notes it usually comes from a paired sign or Wilcoxon test.">
+    <meta name="description" content="A tail probability under a stated null model: how often that null produces a result at least as extreme as the one observed.">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/glossary/p-value/">
+
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="praxagent Knowledge Base">
     <meta property="og:title" content="p-value">
-    <meta property="og:description" content="A tail probability under a stated null model; in these notes it usually comes from a paired sign or Wilcoxon test.">
+    <meta property="og:description" content="A tail probability under a stated null model: how often that null produces a result at least as extreme as the one observed.">
     <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/glossary/p-value/">
-    <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
-    <meta property="og:image:alt" content="Praxagent&#39;s stochastic mountain landscape.">
-    <meta property="og:image:width" content="1499">
-    <meta property="og:image:height" content="780">
+    <meta property="og:image" content="http://macbook-air.tail9eb7b0.ts.net:8000/blog/knowledge-base/glossary/p-value/p-value-sign-test-tail.png">
+    <meta property="og:image:alt" content="A two-sided sign-test p-value sums fair-sign outcomes at least as extreme as 14 wins in 16 pairs.">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@praxagent">
     <meta name="twitter:title" content="p-value">
-    <meta name="twitter:description" content="A tail probability under a stated null model; in these notes it usually comes from a paired sign or Wilcoxon test.">
-    <meta name="twitter:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
-    <meta name="twitter:image:alt" content="Praxagent&#39;s stochastic mountain landscape.">
+    <meta name="twitter:description" content="A tail probability under a stated null model: how often that null produces a result at least as extreme as the one observed.">
+    <meta name="twitter:image" content="http://macbook-air.tail9eb7b0.ts.net:8000/blog/knowledge-base/glossary/p-value/p-value-sign-test-tail.png">
+    <meta name="twitter:image:alt" content="A two-sided sign-test p-value sums fair-sign outcomes at least as extreme as 14 wins in 16 pairs.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -127,7 +130,7 @@
                 <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
                 <h1 class="post-title">p-value</h1>
                 
-                <p class="reference-summary">A tail probability under a stated null model; in these notes it usually comes from a paired sign or Wilcoxon test.</p>
+                <p class="reference-summary">A tail probability under a stated null model: how often that null produces a result at least as extreme as the one observed.</p>
                 
 
             </header>
@@ -137,26 +140,207 @@
 
 
             <div class="post-body">
-                <p>When a Research Note writes <strong>\(p=0.004\)</strong>, the precise question is:</p>
+                <p>A <strong>p-value</strong> answers one precise question:</p>
 <blockquote>
-<p>Under the stated null model, and with the analysis rule fixed, what is the probability of a test statistic at least as incompatible with that null as the one observed?</p>
+<p>Under a stated null model, and with the analysis rule fixed in advance, what
+is the probability of a test statistic at least as incompatible with that
+null as the one observed?</p>
 </blockquote>
-<p>That conditional probability is not simply “the chance this happened by accident.” Its meaning depends on the null, the statistic, the assumptions, and whether the test is one- or two-sided.</p>
-<h2 id="the-sign-test-used-in-these-notes">The sign test used in these notes</h2>
-<p>Constructs are usually scored as <strong>paired paraphrase tests</strong>. For each wording, define a difference such as</p>
+<p>That conditional probability is not simply “the chance this happened by
+accident.” Its meaning depends on the null, the statistic, the assumptions, and
+whether the test is one- or two-sided. In particular, a \(p\)-value measures
+incompatibility with a specified statistical model; it is not the probability
+that the null hypothesis is true.</p>
+<p>The worked example below is a small <strong>language-model (LLM) experiment</strong>: you
+change the prompt text sent to a model and ask whether a chosen vocabulary
+entry becomes more favored. The same sign-test logic applies to many other
+paired comparisons; the LLM setting is only the concrete setup used to teach
+the idea.</p>
+<h2 id="set-up-the-experiment">Set up the experiment</h2>
+<p>A <strong>large language model</strong> is a neural network that, given some input text,
+assigns a score to every entry in a fixed <strong>vocabulary</strong> (the model&rsquo;s list of
+token strings, which are often subword pieces rather than whole words). Higher
+score means the model treats that entry as a better <strong>next-token</strong> candidate
+at a particular position.</p>
+<p>Freeze one model. Then choose:</p>
+<ol>
+<li>A <strong>probe token</strong> \(W\): one exact vocabulary entry, including its
+whitespace and capitalization convention. A displayed English word may map
+to several tokens, or to different tokens depending on leading space and
+case, so do not treat “the word” as automatically identical to one
+vocabulary row. If you truly need several allowed variants, pre-register
+the exact set and a single scoring rule applied identically in both arms
+(for example, a fixed canonical token, or the maximum score among that
+fixed set). Choosing the best-looking variant after seeing the outcomes is
+selection, not a pre-registered probe. If the target is several tokens long,
+use a sequence score (worked example just below) rather than ranking only
+the first piece.</li>
+<li>Two prompt templates that differ in one intended way:
+<ul>
+<li>a <strong>control prompt</strong>: the baseline text, with no intervention;</li>
+<li>a <strong>treatment prompt</strong>: the same kind of setup, plus the intervention you
+want to test (for example, added pressure or threat wording).</li>
+</ul>
+</li>
+<li>A battery of fixed <strong>test sentences</strong> \(S_1,\ldots,S_{16}\). Write them
+before seeing outcomes and do not edit them afterward.</li>
+</ol>
+<p><strong>Multi-token probes in practice.</strong> Suppose the surface string is <code>New York</code>
+and the model&rsquo;s tokenizer splits it into two vocabulary entries \(w_1\) =
+<code>New</code> and \(w_2\) = a leading-space <code> York</code> (exact spelling is
+tokenizer-specific; freeze it). Let \(x\) be the full prompt-plus-sentence
+prefix where you score. Then:</p>
+<ol>
+<li>Read the next-token distribution at \(x\) and take
+\(\log P(w_1\mid x)\), the log-probability of <code>New</code>.</li>
+<li>Append <code>New</code> to the context, so the prefix is now \(x\) followed by \(w_1\).</li>
+<li>Read the next-token distribution there and take
+\(\log P(w_2\mid x,w_1)\), the log-probability of leading-space <code> York</code>.</li>
+<li>Add those two numbers:
+\(\log P(w_1\mid x)+\log P(w_2\mid x,w_1)\).</li>
+</ol>
+<p>That sum is one scalar per arm. Compare control and treatment with that
+scalar (or its sign). Ranking <code>New</code> alone would ignore whether <code> York</code> is
+actually a good continuation after it.</p>
+<p>For each test sentence \(S_i\), run the model <strong>twice</strong>:</p>
+<ul>
+<li><strong>Control arm:</strong> control prompt followed by \(S_i\).</li>
+<li><strong>Treatment arm:</strong> treatment prompt followed by the <strong>same</strong> \(S_i\).</li>
+</ul>
+<p>For each arm, compute the next-token score distribution <strong>immediately after
+the complete prompt-plus-sentence prefix</strong> \(S_i\). Fix in advance the final
+character, whitespace convention, tokenizer, and that scoring position. That
+is where you look up the probe token \(W\) chosen above. Other choices are
+different experiments: scoring \(W\) right after the intervention text, at a
+blank inside the sentence, as a free continuation after extra generated text,
+or at a position where \(W\) is already written into the input (so the model
+is not being asked to prefer \(W\) as the next unseen token).</p>
+<p>Only the surrounding prompt changes. The sentence, probe token, model, and
+scoring rule stay fixed. Those two runs form one <strong>matched pair</strong>: two
+measurements on the identical sentence, so later comparisons do not mix
+different sentences together. Sixteen sentences give sixteen pairs, not
+thirty-two unrelated runs.</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: A frozen language model scores the same test sentence under a control prompt and a treatment prompt, producing a control rank and a treatment rank for one probe token." tabindex="0">
+        <img src="/blog/knowledge-base/glossary/p-value/p-value-llm-pair-setup.svg" alt="A frozen language model scores the same test sentence under a control prompt and a treatment prompt, producing a control rank and a treatment rank for one probe token." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>Experiment anatomy for one pair: freeze a language model, fix a test sentence S and probe token W, then score W as the next-token candidate immediately after the full prompt-plus-sentence prefix, once under a control prompt and once under a treatment prompt. The only intended difference between arms is the prompt intervention. Repeat across many pre-written sentences to build a battery. The diagram is a teaching cartoon, not a claim about any particular model release.</figcaption>
+</figure>
+
+<h2 id="turn-each-pair-into-a-sign">Turn each pair into a sign</h2>
+<p>After each run, read the model&rsquo;s next-token scores over the vocabulary. The
+probe&rsquo;s <a href="/blog/knowledge-base/glossary/rank/">rank</a> is its
+position in that scored list: rank 1 is the highest-scoring entry, so a lower
+numerical rank means the probe is more favored under that prompt. Rank is a
+valid directional summary, but a weak scientific one: a jump from rank 10000
+to 100 and a jump from rank 2 to 1 both count as one win, and a tiny
+log-probability change can move rank a lot when many tokens are tightly packed.</p>
+<p>For pair \(i\), this tutorial&rsquo;s primary signed quantity is the rank gap</p>
 \[
-D_i = \text{control rank}_i - \text{pressure rank}_i,
-\]<p>so \(D_i>0\) means the pressure arm achieved the better (lower) vocabulary rank. The sign test discards the size of each nonzero difference and counts only positive and negative signs.</p>
-<p>Its fair-sign null is conditional on a difference being nonzero:</p>
+D_i = \text{control rank}_i - \text{treatment rank}_i.
+\]<p>Then \(D_i>0\) means the treatment prompt placed the probe at a better (lower)
+rank than the control prompt did on that same sentence. The <strong>sign test</strong>
+discards the size of each nonzero difference and keeps only whether the
+treatment won or lost that pair. In a real study, prefer also reporting the
+paired log-probability gap
+\(\log P_{\mathrm{treatment}}(W\mid S_i)-\log P_{\mathrm{control}}(W\mid S_i)\),
+choosing one pre-specified primary quantity for the test, and summarizing
+magnitude with something such as a median difference and interval. Rank can
+remain a secondary visualization.</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Four matched pairs convert control and treatment vocabulary ranks into signed gaps, then keep only three positive signs and one negative sign." tabindex="0">
+        <img src="/blog/knowledge-base/glossary/p-value/p-value-paired-sign-pipeline.svg" alt="Four matched pairs convert control and treatment vocabulary ranks into signed gaps, then keep only three positive signs and one negative sign." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>Each row is one sentence scored under a control prompt and a treatment prompt. Their rank difference D is positive when treatment ranks the probe better on that same sentence. The sign test throws away the gap sizes and keeps only the directions. The four toy ranks are teaching values, not measurements from a model run.</figcaption>
+</figure>
+
+<h2 id="where-the-randomness-comes-from">Where the randomness comes from</h2>
+<p>If the model is frozen and the sixteen sentences are fixed, each arm&rsquo;s scores
+are essentially deterministic computations. The fourteen positive signs are
+<strong>not</strong> automatically fourteen independent coin-flip observations created by
+running the model twice.</p>
+<p>The calculation below treats the test sentences as independent units from a
+specified population of sentences. Under that superpopulation model, and under
+the null, the nonzero treatment-versus-control differences have independent
+equiprobable signs. The model outputs themselves are not the source of
+randomness; the inferential model concerns how the sentence-level signs would
+vary across that population. If the sixteen sentences are merely a fixed
+hand-selected battery, the 14/16 count remains a valid descriptive result for
+that battery, but a binomial \(p\)-value that generalizes beyond it requires
+additional assumptions (or a design whose randomization supplies the reference
+distribution). An arbitrarily chosen prompt battery does not earn
+\(p=0.004\) as a population claim merely by being tallied.</p>
+<h2 id="from-a-win-count-to-a-p-value">From a win count to a p-value</h2>
+<p>After dropping ties, suppose the sixteen pairs give <strong>14 positive</strong> and
+<strong>2 negative</strong> signs. The null used here is <strong>no systematic directional
+tendency</strong> across the target population of sentence-level comparisons:
+conditional on a difference being nonzero,</p>
 \[
-P(D_i>0\mid D_i\ne0)=P(D_i<0\mid D_i\ne0)=\tfrac12.
-\]<p>The usual exact binomial calculation additionally requires the retained signs to have the joint independent-fair-sign distribution, or another explicitly justified randomization distribution with the same tail probabilities. The default in these notes is a <strong>two-sided</strong> test: a result this lopsided in either direction counts as extreme.</p>
-<h2 id="worked-example-14-wins-in-16-pairs">Worked example: 14 wins in 16 pairs</h2>
-<p>With 14 positive and 2 negative differences, the exact two-sided binomial tail is</p>
+P(D_i>0\mid D_i\ne0)=P(D_i<0\mid D_i\ne0)=\tfrac12,
+\]<p>and the retained signs are jointly distributed as independent fair signs.
+Equivalently, every one of the \(2^{16}=65536\) sign patterns is equally likely.
+That null is not automatically the same as “the prompts are semantically
+identical,” “the treatment has no effect on every sentence,” “the average rank
+difference is zero,” or “the model has no preference for the concept
+associated with \(W\).”</p>
+<p>The conventional two-sided exact sign test used here counts a result this
+lopsided in either direction as extreme: as few as 0–2 wins, or as many as
+14–16 wins.</p>
+<div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+        
+    </div>
+    <div class="panel-content">
+        <p><strong>Binomial coefficient and binomial distribution.</strong> The binomial coefficient
+\(\binom{n}{k}\) (read “\(n\) choose \(k\)”) counts how many ways to pick \(k\)
+wins out of \(n\) pairs:</p>
 \[
-p = 2\sum_{k=0}^{2}{16 \choose k}2^{-16}
-  = 0.0041809\ldots
-\]<p>The site rounds that to <strong>\(p=0.004\)</strong>. This dependency-free Python reproduces the calculation:</p>
+\binom{n}{k} = \frac{n!}{k!\,(n-k)!}.
+\]<p>If each of \(n\) independent trials is a win with the same probability \(p\),
+the number of wins \(K\) has a <strong>binomial distribution</strong>. The probability of
+exactly \(k\) wins is</p>
+\[
+P(K=k) = \binom{n}{k}\,p^{k}(1-p)^{n-k}.
+\]<p>Under the fair-sign null, \(p=1/2\) and \(n=16\), so every one of the
+\(2^{16}=65536\) sign patterns is equally likely and</p>
+\[
+P(K=k) = \binom{16}{k}\,2^{-16} = \frac{\binom{16}{k}}{65536}.
+\]
+    </div>
+</div>
+
+<p>Expanding the low-win tail:</p>
+\[
+\begin{aligned}
+P(K\le 2)
+&= \frac{\binom{16}{0}+\binom{16}{1}+\binom{16}{2}}{65536} \\
+&= \frac{1+16+120}{65536} \\
+&= \frac{137}{65536}.
+\end{aligned}
+\]<p>By symmetry, the high-win tail has the same mass:
+\(P(K\ge 14)=P(K\le 2)\). Doubling one tail (the two-sided step for this
+symmetric \(p_0=1/2\) binomial) gives</p>
+\[
+\begin{aligned}
+p
+&= 2\cdot\frac{137}{65536}
+= \frac{274}{65536}
+= 0.0041809\ldots
+\end{aligned}
+\]<p>A rounded report of that value is <strong>\(p=0.004\)</strong>. Other discrete two-sided
+conventions exist; name the one you use.</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Fourteen wins and two losses become a two-sided p-value of about 0.004 under a fair-sign null over 65536 equally likely sign patterns." tabindex="0">
+        <img src="/blog/knowledge-base/glossary/p-value/p-value-sign-test-tail.svg" alt="Fourteen wins and two losses become a two-sided p-value of about 0.004 under a fair-sign null over 65536 equally likely sign patterns." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>The observed direction count is 14 wins in 16 pairs. Under the fair-sign null every one of the 65536 sign patterns is equally likely. The conventional two-sided p-value used here sums the patterns with at most two wins or at most two losses, giving about 0.00418. The figure teaches that tail construction; it does not prove the pairs are independent or that the null is scientifically correct for a hand-picked battery.</figcaption>
+</figure>
+
+<p>This dependency-free Python reproduces the calculation:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">comb</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sign_test_two_sided</span><span class="p">(</span><span class="n">wins</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">losses</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
@@ -167,20 +351,63 @@ p = 2\sum_{k=0}^{2}{16 \choose k}2^{-16}
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">smaller_tail</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">sign_test_two_sided</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># 0.004180908203125</span>
-</span></span></code></pre></div><p>With \(n=10\), the same rule gives <strong>10/10 → 0.00195</strong>, <strong>9/10 → 0.0215</strong>, and <strong>8/10 → 0.109</strong>. The discreteness is why a small battery needs an extreme direction count to cross a conventional threshold.</p>
+</span></span></code></pre></div><p>With \(n=10\), the same rule gives <strong>10/10 → 0.00195</strong>, <strong>9/10 → 0.0215</strong>, and
+<strong>8/10 → 0.109</strong>. The discreteness is why a small battery needs an extreme
+direction count to cross a conventional threshold.</p>
 <h2 id="assumptions-and-choices">Assumptions and choices</h2>
 <ul>
-<li><strong>Pairing:</strong> each pressure result must be compared with its genuinely matched control; unmatched arms do not become valid because their \(p\)-value is small.</li>
-<li><strong>Joint sign distribution:</strong> the usual binomial tail requires the retained signs to be jointly distributed as independent fair signs, equivalently uniform over all \(2^n\) sign patterns. Ordinary permutation exchangeability by itself is not sufficient. Closely related paraphrases can violate this model; see <a href="/blog/knowledge-base/glossary/iid/">i.i.d.</a>.</li>
-<li><strong>Ties:</strong> \(D_i=0\) has no sign. Omit ties and report the reduced effective \(n\), rather than silently counting them as wins or losses.</li>
-<li><strong>Sidedness:</strong> choose a one-sided alternative only when its direction was fixed in advance. Otherwise report the two-sided result used above.</li>
-<li><strong>Selection:</strong> the test does not correct for trying many lexicons, constructs, subsets, or analysis rules and reporting the most favorable one.</li>
+<li><strong>Pairing:</strong> each treatment result must be compared with its genuinely matched
+control on the same sentence. Unmatched arms do not become valid because their
+\(p\)-value is small.</li>
+<li><strong>Null distribution:</strong> conditional on the number \(n\) of non-ties, the
+binomial calculation is justified when the retained signs are independent
+Bernoulli(\(1/2\)), or when the experimental design otherwise induces that
+same null distribution. Independent fair signs are a standard sufficient
+condition. Exchangeability of the sentence units alone does not imply
+independent fair signs. Closely related paraphrases or other dependent units
+can violate this model; see
+<a href="/blog/knowledge-base/glossary/iid/">i.i.d.</a>.</li>
+<li><strong>Ties:</strong> \(D_i=0\) has no sign. Omit ties and report the reduced effective
+\(n\), rather than silently counting them as wins or losses.</li>
+<li><strong>Sidedness:</strong> choose a one-sided alternative only when its direction was
+fixed in advance. Otherwise report the conventional two-sided exact result
+used above.</li>
+<li><strong>Selection:</strong> the test does not correct for trying many probes, thresholds,
+subsets, or analysis rules and reporting the most favorable one.</li>
 </ul>
-<p>“Exact” means no large-sample approximation was used to compute the binomial tail. It does not remove these design assumptions.</p>
+<p>“Exact” means no large-sample approximation was used to compute the binomial
+tail. It does not remove these design assumptions. A different exact
+conditional construction appears in
+<a href="/blog/knowledge-base/glossary/fisher-exact-test/">Fisher&rsquo;s exact test</a>
+for association in a count table. When the differences have a meaningful
+ordered magnitude and their distribution can reasonably be treated as
+symmetric, the
+<a href="/blog/knowledge-base/glossary/wilcoxon/">Wilcoxon signed-rank test</a>
+uses the ranks of their absolute magnitudes as well as their signs.</p>
 <h2 id="what-a-p-value-does-not-tell-you">What a p-value does not tell you</h2>
-<p>A \(p\)-value is not the probability that the hypothesis is true, not an effect size, and not a population estimate. The direction count says how consistently the frozen pairs moved; the reported rank gaps show their separation on the chosen scale; the <a href="/blog/knowledge-base/glossary/wilcoxon/">Wilcoxon test</a> uses the ordering of those absolute gaps. None turns a convenience paraphrase battery into <a href="/blog/knowledge-base/glossary/iid/">i.i.d.</a> draws from a wider construct.</p>
-<p>Prefer the full evidence bundle: <strong>direction count, exact \(p\), a pre-specified magnitude summary, matched pressure/control prompts, and matched readout baselines</strong> (<a href="/blog/knowledge-base/glossary/logit-lens/">logit lens</a>, <a href="/blog/knowledge-base/glossary/random-j/">random-J</a>). A low \(p\) that also appears under the logit lens is not, by itself, a <a href="/blog/knowledge-base/glossary/jacobian-lens/">Jacobian-lens</a>-specific result. A tiny \(p\) from a confounded comparison remains a confounded result.</p>
-<p>See also: <a href="/blog/knowledge-base/glossary/wilcoxon/">Wilcoxon</a>, <a href="/blog/knowledge-base/glossary/best-rank/">best-rank</a>, <a href="/blog/knowledge-base/glossary/prompt-echo/">prompt echo</a>.</p>
+<p>A \(p\)-value is not the probability that the hypothesis is true, not an effect
+size, and not a population estimate. The direction count says how consistently
+the matched pairs moved. Rank gaps describe movement in vocabulary ordering,
+but should not be interpreted as interval-scale effect sizes. Neither turns a
+convenience sample into
+<a href="/blog/knowledge-base/glossary/iid/">i.i.d.</a> draws from a
+wider population.</p>
+<p>Prefer the full evidence bundle: the direction count, the exact \(p\), a
+pre-specified magnitude summary (preferably on a log-probability or other
+interval-friendly scale), matched treatment/control conditions, and any matched
+readout baselines used in the study. A tiny \(p\) from a confounded comparison
+remains a confounded result.</p>
+<p>See also: <a href="/blog/knowledge-base/glossary/rank/">rank</a>,
+<a href="/blog/knowledge-base/glossary/wilcoxon/">Wilcoxon</a>,
+<a href="/blog/knowledge-base/glossary/fisher-exact-test/">Fisher&rsquo;s exact test</a>,
+<a href="/blog/knowledge-base/glossary/best-rank/">best-rank</a>,
+<a href="/blog/knowledge-base/glossary/iid/">i.i.d.</a>,
+<a href="/blog/knowledge-base/glossary/prompt-echo/">prompt echo</a>.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><a href="https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf">ASA Statement on Statistical Significance and P-Values</a></li>
+<li><a href="https://www.itl.nist.gov/div898/software/dataplot/refman1/auxillar/signrank.htm">NIST: Wilcoxon Signed Rank Test</a></li>
+</ul>
 
             </div>
 
@@ -268,6 +495,49 @@ p = 2\sum_{k=0}^{2}{16 \choose k}2^{-16}
                 ],
                 throwOnError: false,
                 output: "htmlAndMathml"
+            });
+
+            const copyText = async (text) => {
+                if (navigator.clipboard?.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    return;
+                }
+
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.setAttribute('readonly', '');
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                const copied = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                if (!copied) {
+                    throw new Error('Copy command was not accepted');
+                }
+            };
+
+            document.querySelectorAll('[data-copy-target]').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const target = document.querySelector(button.dataset.copyTarget);
+                    if (!target) {
+                        console.error(`Copy target not found: ${button.dataset.copyTarget}`);
+                        return;
+                    }
+
+                    const originalLabel = button.textContent;
+                    try {
+                        await copyText(target.textContent.trim());
+                        button.textContent = 'Copied';
+                        button.classList.add('copied');
+                        setTimeout(() => {
+                            button.textContent = originalLabel;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    } catch (error) {
+                        console.error('Failed to copy citation: ', error);
+                    }
+                });
             });
 
             const copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
