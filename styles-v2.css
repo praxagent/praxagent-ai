@@ -2123,15 +2123,30 @@ body {
 }
 
 .hero-title {
-    max-width: 10ch;
+    max-width: none;
     margin: 0 0 1.5rem;
     font-family: var(--font-sans);
-    font-size: clamp(2.8rem, 5vw, 4.65rem);
+    font-size: clamp(2.8rem, 4.5vw, 4rem);
     font-weight: 600;
     line-height: 0.98;
     letter-spacing: -0.05em;
     color: #F4F0E9;
     text-shadow: none;
+}
+
+.hero-title > span {
+    display: block;
+}
+
+.hero-title-probability {
+    margin-top: 0.32em;
+    color: #9FC2D8;
+    font-family: var(--font-mono);
+    font-size: 0.62em;
+    font-weight: 500;
+    letter-spacing: -0.055em;
+    line-height: 1.08;
+    white-space: nowrap;
 }
 
 .hero-subtitle {
