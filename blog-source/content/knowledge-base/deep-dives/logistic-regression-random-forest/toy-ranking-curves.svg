@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620" role="img" aria-labelledby="toy-ranking-curves-title toy-ranking-curves-desc">
+  <title id="toy-ranking-curves-title">Precision-recall and receiver operating characteristic curves for one toy ranked queue of five candidates</title>
+  <desc id="toy-ranking-curves-desc">A toy queue of five candidates is sorted by predicted score. Their true labels in rank order are positive, negative, positive, negative, negative. The left panel plots precision against recall for each cutoff: stopping after rank one gives recall 0.50 and precision 1.00; after rank two, recall 0.50 and precision 0.50; after rank three, recall 1.00 and precision 0.67; after rank four, recall 1.00 and precision 0.50; after rank five, recall 1.00 and precision 0.40, which equals the positive rate of two in five. Average precision sums precision at the two cutoffs where recall rises, giving 0.83. The right panel plots true-positive rate against false-positive rate for the same cutoffs: the curve steps from the origin up to true-positive rate 0.50, right to false-positive rate 0.33, up to true-positive rate 1.00, then right to false-positive rate 1.00. The shaded region under that step path is the area under the curve, 0.83. A diagonal chance line is shown for reference. Both summaries equal five sixths in this tiny example, which is a coincidence of these five rows rather than a general rule.</desc>
+  <defs>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:24px;font-weight:700}
+      .h{font-size:18px;font-weight:700}
+      .s{font-size:15px}
+      .m{font-size:13px;fill:#5A544C}
+      .xs{font-size:12px;fill:#5A544C}
+      .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.5}
+      .axis{stroke:#5A544C;stroke-width:1.6}
+      .grid{stroke:#DCD3C6;stroke-width:1}
+      .curve{fill:none;stroke:#4B6787;stroke-width:3}
+      .chance{fill:none;stroke:#8B6542;stroke-width:2;stroke-dasharray:7 5}
+      .floor{fill:none;stroke:#6F8D5E;stroke-width:2;stroke-dasharray:7 5}
+    </style>
+  </defs>
+
+  <rect width="1000" height="620" fill="#F7F4F0"/>
+  <text class="t title" x="24" y="34">Two views of the same toy ranking</text>
+  <text class="t m" x="24" y="58">Five candidates, two of them positive. Each plotted point is one stopping place in the review queue.</text>
+
+  <rect class="card" x="24" y="78" width="952" height="78" rx="12"/>
+  <text class="t s" x="48" y="102" font-weight="700">Toy ranked queue</text>
+  <text class="t m" x="188" y="102">rank 1 is the candidate the model rated most likely to be positive</text>
+
+  <rect x="48" y="112" width="86" height="30" rx="6" fill="#F3E8E0" stroke="#A67C52" stroke-width="1.8"/>
+  <text class="t s" x="91" y="132" text-anchor="middle">1 positive</text>
+  <rect x="146" y="112" width="86" height="30" rx="6" fill="#E8F0F7" stroke="#4B6787" stroke-width="1.8" stroke-dasharray="5 3"/>
+  <text class="t s" x="189" y="132" text-anchor="middle">2 negative</text>
+  <rect x="244" y="112" width="86" height="30" rx="6" fill="#F3E8E0" stroke="#A67C52" stroke-width="1.8"/>
+  <text class="t s" x="287" y="132" text-anchor="middle">3 positive</text>
+  <rect x="342" y="112" width="86" height="30" rx="6" fill="#E8F0F7" stroke="#4B6787" stroke-width="1.8" stroke-dasharray="5 3"/>
+  <text class="t s" x="385" y="132" text-anchor="middle">4 negative</text>
+  <rect x="440" y="112" width="86" height="30" rx="6" fill="#E8F0F7" stroke="#4B6787" stroke-width="1.8" stroke-dasharray="5 3"/>
+  <text class="t s" x="483" y="132" text-anchor="middle">5 negative</text>
+
+  <circle cx="562" cy="118" r="6" fill="#2C2924"/>
+  <text class="t xs" x="576" y="122">filled dot: this cutoff recovered a new positive</text>
+  <rect x="556" y="134" width="12" height="12" rx="2" fill="#FBF9F6" stroke="#2C2924" stroke-width="2"/>
+  <text class="t xs" x="576" y="145">open square: this cutoff only added a negative</text>
+
+  <!-- Left panel: precision-recall -->
+  <rect class="card" x="24" y="170" width="452" height="380" rx="12"/>
+  <text class="t h" x="48" y="200">Precision-recall view</text>
+  <text class="t m" x="48" y="220">Average precision (AP) = 0.83</text>
+
+  <line class="grid" x1="96" y1="240" x2="436" y2="240"/>
+  <line class="grid" x1="96" y1="360" x2="436" y2="360"/>
+  <line class="grid" x1="266" y1="240" x2="266" y2="480"/>
+  <line class="axis" x1="96" y1="480" x2="436" y2="480"/>
+  <line class="axis" x1="96" y1="240" x2="96" y2="480"/>
+
+  <text class="t xs" x="88" y="484" text-anchor="end">0</text>
+  <text class="t xs" x="88" y="364" text-anchor="end">0.5</text>
+  <text class="t xs" x="88" y="244" text-anchor="end">1.0</text>
+  <text class="t xs" x="96" y="498" text-anchor="middle">0</text>
+  <text class="t xs" x="266" y="498" text-anchor="middle">0.5</text>
+  <text class="t xs" x="436" y="498" text-anchor="middle">1.0</text>
+  <text class="t m" x="266" y="518" text-anchor="middle">Recall (share of the 2 positives recovered)</text>
+  <text class="t m" x="62" y="360" text-anchor="middle" transform="rotate(-90 62 360)">Precision</text>
+
+  <line class="floor" x1="96" y1="384" x2="436" y2="384"/>
+
+  <path class="curve" d="M266,240 L266,360 L436,320 L436,360 L436,384"/>
+
+  <circle cx="266" cy="240" r="7" fill="#2C2924"/>
+  <text class="t xs" x="256" y="238" text-anchor="end">rank 1</text>
+  <text class="t xs" x="256" y="254" text-anchor="end">P 1.00, R 0.50</text>
+
+  <rect x="259" y="353" width="14" height="14" rx="2" fill="#FBF9F6" stroke="#2C2924" stroke-width="2"/>
+  <text class="t xs" x="250" y="352" text-anchor="end">rank 2</text>
+  <text class="t xs" x="250" y="368" text-anchor="end">P 0.50, R 0.50</text>
+
+  <circle cx="436" cy="320" r="7" fill="#2C2924"/>
+  <text class="t xs" x="424" y="300" text-anchor="end">rank 3</text>
+  <text class="t xs" x="424" y="316" text-anchor="end">P 0.67, R 1.00</text>
+
+  <rect x="429" y="353" width="14" height="14" rx="2" fill="#FBF9F6" stroke="#2C2924" stroke-width="2"/>
+  <rect x="429" y="377" width="14" height="14" rx="2" fill="#FBF9F6" stroke="#2C2924" stroke-width="2"/>
+  <text class="t xs" x="424" y="410" text-anchor="end" fill="#4F6B41">floor 0.40 = positive rate</text>
+  <text class="t xs" x="424" y="426" text-anchor="end">ranks 4 and 5 add negatives</text>
+
+  <text class="t xs" x="266" y="538" text-anchor="middle">AP adds precision only at the two filled dots.</text>
+
+  <!-- Right panel: ROC -->
+  <rect class="card" x="524" y="170" width="452" height="380" rx="12"/>
+  <text class="t h" x="548" y="200">Receiver operating characteristic (ROC) view</text>
+  <text class="t m" x="548" y="220">Area under the curve (ROC AUC) = 0.83</text>
+
+  <path d="M596,480 L596,360 L709.3,360 L709.3,240 L936,240 L936,480 Z" fill="#E8F0F7" stroke="none"/>
+
+  <line class="grid" x1="596" y1="240" x2="936" y2="240"/>
+  <line class="grid" x1="596" y1="360" x2="936" y2="360"/>
+  <line class="grid" x1="766" y1="240" x2="766" y2="480"/>
+  <line class="axis" x1="596" y1="480" x2="936" y2="480"/>
+  <line class="axis" x1="596" y1="240" x2="596" y2="480"/>
+
+  <text class="t xs" x="588" y="484" text-anchor="end">0</text>
+  <text class="t xs" x="588" y="364" text-anchor="end">0.5</text>
+  <text class="t xs" x="588" y="244" text-anchor="end">1.0</text>
+  <text class="t xs" x="596" y="498" text-anchor="middle">0</text>
+  <text class="t xs" x="766" y="498" text-anchor="middle">0.5</text>
+  <text class="t xs" x="936" y="498" text-anchor="middle">1.0</text>
+  <text class="t m" x="766" y="518" text-anchor="middle">False-positive rate (share of the 3 negatives reviewed)</text>
+  <text class="t m" x="562" y="360" text-anchor="middle" transform="rotate(-90 562 360)">True-positive rate</text>
+
+  <line class="chance" x1="596" y1="480" x2="936" y2="240"/>
+
+  <path class="curve" d="M596,480 L596,360 L709.3,360 L709.3,240 L936,240"/>
+
+  <circle cx="596" cy="360" r="7" fill="#2C2924"/>
+  <rect x="702.3" y="353" width="14" height="14" rx="2" fill="#FBF9F6" stroke="#2C2924" stroke-width="2"/>
+  <circle cx="709.3" cy="240" r="7" fill="#2C2924"/>
+  <rect x="815.7" y="233" width="14" height="14" rx="2" fill="#FBF9F6" stroke="#2C2924" stroke-width="2"/>
+  <rect x="929" y="233" width="14" height="14" rx="2" fill="#FBF9F6" stroke="#2C2924" stroke-width="2"/>
+
+  <text class="t xs" x="930" y="402" text-anchor="end">up = a positive was recovered</text>
+  <text class="t xs" x="930" y="420" text-anchor="end">right = a negative was added</text>
+  <text class="t xs" x="930" y="438" text-anchor="end">order: up, right, up, right, right</text>
+  <text class="t xs" x="930" y="462" text-anchor="end" fill="#7A5A3A">dashed diagonal: chance line</text>
+
+  <text class="t xs" x="766" y="538" text-anchor="middle">Shaded region is the area under the step path.</text>
+
+  <rect x="24" y="566" width="952" height="34" rx="10" fill="#EAF1E5" stroke="#6F8D5E" stroke-width="1.5"/>
+  <text class="t s" x="500" y="589" text-anchor="middle" font-weight="700">Both summaries equal five sixths here. That match is a coincidence of these five rows, not a general rule.</text>
+</svg>

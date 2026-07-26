@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="570" viewBox="0 0 1000 570" role="img" aria-labelledby="tree-to-probability-title tree-to-probability-desc">
+  <title id="tree-to-probability-title">How one decision tree turns a candidate into a probability</title>
+  <desc id="tree-to-probability-desc">A toy decision tree with three yes-or-no questions and four leaves. The root asks whether the kurtosis of the integrated profile is above 1.5. Answering no leads to a question about signal-to-noise spread above 8, whose leaves hold 812 training rows with 4 positive, a probability of 0.005, and 196 rows with 21 positive, a probability of 0.107. Answering yes leads to a question about skewness above 6, whose leaves hold 128 rows with 39 positive, a probability of 0.305, and 40 rows with 34 positive, a probability of 0.850. One candidate with kurtosis 2.4, skewness 9.1, and signal-to-noise spread 3.0 answers yes then yes, follows the highlighted path to the fourth leaf, and receives the probability 0.850 from this tree. Every candidate reaching that leaf receives the same number, so a single tree can only ever state as many distinct probabilities as it has leaves. The tree, its cutoffs, and its counts are illustrative rather than fitted values.</desc>
+  <defs>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:24px;font-weight:700}
+      .h{font-size:18px;font-weight:700}
+      .m{font-size:13px;fill:#5A544C}
+      .s{font-size:15px}
+      .xs{font-size:12px;fill:#5A544C}
+      .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.5}
+      .node{fill:#F2EEE8;stroke:#8B8377;stroke-width:2}
+      .leaf{fill:#FBF9F6;stroke:#8B8377;stroke-width:2}
+      .leafhot{fill:#E8F0F7;stroke:#4B6787;stroke-width:3}
+      .edge{stroke:#8B8377;stroke-width:2;fill:none}
+      .edgehot{stroke:#4B6787;stroke-width:4;fill:none}
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4B6787"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="570" fill="#F7F4F0"/>
+  <text class="t title" x="24" y="34">How one tree turns a candidate into a probability</text>
+  <text class="t m" x="24" y="58">Each node asks one yes-or-no question about one feature. A leaf reports the share of its training rows that were positive.</text>
+
+  <!-- Tree card -->
+  <rect class="card" x="24" y="88" width="616" height="412" rx="12"/>
+
+  <!-- edges -->
+  <path class="edge" d="M 332 170 L 178 222"/>
+  <path class="edgehot" d="M 332 170 L 486 222"/>
+  <path class="edge" d="M 178 274 L 101 326"/>
+  <path class="edge" d="M 178 274 L 255 326"/>
+  <path class="edge" d="M 486 274 L 409 326"/>
+  <path class="edgehot" d="M 486 274 L 563 326"/>
+
+  <text class="t xs" x="244" y="188">no</text>
+  <text class="t xs" x="408" y="188" fill="#3C5570" font-weight="700">yes</text>
+  <text class="t xs" x="112" y="300" text-anchor="end">no</text>
+  <text class="t xs" x="244" y="300">yes</text>
+  <text class="t xs" x="420" y="300" text-anchor="end">no</text>
+  <text class="t xs" x="552" y="300" fill="#3C5570" font-weight="700">yes</text>
+
+  <!-- root -->
+  <rect class="node" x="217" y="118" width="230" height="52" rx="8"/>
+  <text class="t s" x="332" y="142" text-anchor="middle" font-weight="700">kurtosis of profile</text>
+  <text class="t s" x="332" y="160" text-anchor="middle">greater than 1.5?</text>
+
+  <!-- level one -->
+  <rect class="node" x="83" y="222" width="190" height="52" rx="8"/>
+  <text class="t s" x="178" y="246" text-anchor="middle" font-weight="700">SNR spread</text>
+  <text class="t s" x="178" y="264" text-anchor="middle">greater than 8?</text>
+
+  <rect class="node" x="391" y="222" width="190" height="52" rx="8"/>
+  <text class="t s" x="486" y="246" text-anchor="middle" font-weight="700">skewness of profile</text>
+  <text class="t s" x="486" y="264" text-anchor="middle">greater than 6?</text>
+
+  <!-- leaves -->
+  <rect class="leaf" x="36" y="326" width="130" height="88" rx="8"/>
+  <text class="t xs" x="101" y="348" text-anchor="middle" font-weight="700">Leaf A</text>
+  <text class="t xs" x="101" y="368" text-anchor="middle">812 rows</text>
+  <text class="t xs" x="101" y="384" text-anchor="middle">4 positive</text>
+  <text class="t s" x="101" y="406" text-anchor="middle" font-weight="700">p = 0.005</text>
+
+  <rect class="leaf" x="190" y="326" width="130" height="88" rx="8"/>
+  <text class="t xs" x="255" y="348" text-anchor="middle" font-weight="700">Leaf B</text>
+  <text class="t xs" x="255" y="368" text-anchor="middle">196 rows</text>
+  <text class="t xs" x="255" y="384" text-anchor="middle">21 positive</text>
+  <text class="t s" x="255" y="406" text-anchor="middle" font-weight="700">p = 0.107</text>
+
+  <rect class="leaf" x="344" y="326" width="130" height="88" rx="8"/>
+  <text class="t xs" x="409" y="348" text-anchor="middle" font-weight="700">Leaf C</text>
+  <text class="t xs" x="409" y="368" text-anchor="middle">128 rows</text>
+  <text class="t xs" x="409" y="384" text-anchor="middle">39 positive</text>
+  <text class="t s" x="409" y="406" text-anchor="middle" font-weight="700">p = 0.305</text>
+
+  <rect class="leafhot" x="498" y="326" width="130" height="88" rx="8"/>
+  <text class="t xs" x="563" y="348" text-anchor="middle" font-weight="700" fill="#3C5570">Leaf D</text>
+  <text class="t xs" x="563" y="368" text-anchor="middle">40 rows</text>
+  <text class="t xs" x="563" y="384" text-anchor="middle">34 positive</text>
+  <text class="t s" x="563" y="406" text-anchor="middle" font-weight="700" fill="#3C5570">p = 0.850</text>
+
+  <text class="t xs" x="48" y="446">Leaf probability = positive rows in the leaf / all rows in the leaf. Here 34 / 40 = 0.850.</text>
+  <text class="t xs" x="48" y="466">Feature names are shortened, cutoffs and counts are illustrative, and a fitted tree is deeper than this one.</text>
+  <text class="t xs" x="48" y="486">Highlighted path: the candidate in the panel on the right.</text>
+
+  <!-- Candidate card -->
+  <rect class="card" x="660" y="88" width="316" height="412" rx="12"/>
+  <text class="t h" x="684" y="118">One candidate</text>
+
+  <rect x="684" y="134" width="268" height="88" rx="8" fill="#F2EEE8" stroke="#C4B8A8" stroke-width="1.5"/>
+  <text class="t s" x="700" y="158">kurtosis of profile = 2.4</text>
+  <text class="t s" x="700" y="182">skewness of profile = 9.1</text>
+  <text class="t s" x="700" y="206">SNR spread = 3.0</text>
+
+  <line x1="818" y1="230" x2="818" y2="252" stroke="#4B6787" stroke-width="3" marker-end="url(#arrow)"/>
+  <text class="t s" x="684" y="278">2.4 is above 1.5, so answer yes.</text>
+  <line x1="818" y1="290" x2="818" y2="312" stroke="#4B6787" stroke-width="3" marker-end="url(#arrow)"/>
+  <text class="t s" x="684" y="338">9.1 is above 6, so answer yes again.</text>
+  <line x1="818" y1="350" x2="818" y2="372" stroke="#4B6787" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="684" y="382" width="268" height="60" rx="8" fill="#E8F0F7" stroke="#4B6787" stroke-width="2.5"/>
+  <text class="t s" x="818" y="406" text-anchor="middle">the candidate lands in Leaf D</text>
+  <text class="t h" x="818" y="430" text-anchor="middle" fill="#3C5570">this tree says 0.850</text>
+
+  <text class="t xs" x="684" y="460">Every candidate that reaches Leaf D gets</text>
+  <text class="t xs" x="684" y="476">0.850 from this tree, so one tree can state</text>
+  <text class="t xs" x="684" y="492">only as many values as it has leaves.</text>
+
+  <rect x="24" y="516" width="952" height="34" rx="10" fill="#EAF1E5" stroke="#6F8D5E" stroke-width="1.5"/>
+  <text class="t s" x="500" y="538" text-anchor="middle" font-weight="700">A tree makes no global rule: it asks local questions, and each answer changes which question comes next.</text>
+</svg>

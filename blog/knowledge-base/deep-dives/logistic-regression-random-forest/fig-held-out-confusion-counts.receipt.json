@@ -1,0 +1,89 @@
+{
+  "accessibility": {
+    "alt_text": "At threshold 0.5 on HTRU2, the dummy prior has 3,252 true negatives, 0 false positives, 328 false negatives, and 0 true positives; logistic regression has 3,233, 19, 61, and 267; random forest has 3,225, 27, 51, and 277. On Rice, the dummy prior has 436 true negatives, 0 false positives, 326 false negatives, and 0 true positives; logistic regression has 408, 28, 39, and 287; random forest has 409, 27, 41, and 285.",
+    "color_is_not_the_only_channel": true,
+    "full_text_equivalent": "plotted_data and caption_suggestion in this receipt",
+    "redundant_channels": [
+      "direct labels",
+      "cell position",
+      "exact values in receipt"
+    ]
+  },
+  "alt_text": "At threshold 0.5 on HTRU2, the dummy prior has 3,252 true negatives, 0 false positives, 328 false negatives, and 0 true positives; logistic regression has 3,233, 19, 61, and 267; random forest has 3,225, 27, 51, and 277. On Rice, the dummy prior has 436 true negatives, 0 false positives, 326 false negatives, and 0 true positives; logistic regression has 408, 28, 39, and 287; random forest has 409, 27, 41, and 285.",
+  "caption_suggestion": "Finding: the 0.5 threshold exposes which errors each model makes, rather than hiding them inside one score. Counts describe only the fixed test rows. The dummy baseline is shown under the same threshold; class imbalance makes its HTRU2 accuracy potentially look acceptable while its positive recall is zero.",
+  "claim_scope_exclusions": [
+    "no population-wide performance claim",
+    "no causal claim",
+    "no independence claim beyond the released row tables",
+    "no claim that either selected model is universally superior"
+  ],
+  "data_source": {
+    "artifact": "receipts/analysis.receipt.json",
+    "artifact_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+    "row_selection": "the fixed held-out rows declared in the analysis receipt",
+    "source_fields": [
+      "test_metrics.*.confusion"
+    ],
+    "transformation": "computed by reproduce.py without manual figure values"
+  },
+  "description": "True-negative, false-positive, false-negative, and true-positive counts at the fixed 0.5 threshold.",
+  "figure_id": "held-out-confusion-counts",
+  "plotted_data": {
+    "htru2": {
+      "dummy_prior": {
+        "fn": 328,
+        "fp": 0,
+        "tn": 3252,
+        "tp": 0
+      },
+      "logistic_regression": {
+        "fn": 61,
+        "fp": 19,
+        "tn": 3233,
+        "tp": 267
+      },
+      "random_forest": {
+        "fn": 51,
+        "fp": 27,
+        "tn": 3225,
+        "tp": 277
+      }
+    },
+    "rice": {
+      "dummy_prior": {
+        "fn": 326,
+        "fp": 0,
+        "tn": 436,
+        "tp": 0
+      },
+      "logistic_regression": {
+        "fn": 39,
+        "fp": 28,
+        "tn": 408,
+        "tp": 287
+      },
+      "random_forest": {
+        "fn": 41,
+        "fp": 27,
+        "tn": 409,
+        "tp": 285
+      }
+    }
+  },
+  "provenance": {
+    "generator": "reproduce.py",
+    "generator_sha256": "a2ad91d1e3f7cf2a15da4fc10246de57b7adda70c1ab2f229f2e51553a75e510",
+    "outputs": {
+      "fig-held-out-confusion-counts.png": "fcc8c2fba4f1a495d5de0c4d91dd7f058fd98eecb78ae4fddb48d1fde15a5229"
+    },
+    "plotting_library": "matplotlib 3.10.3",
+    "study_id": "uci-htru2-rice-logistic-random-forest-v1",
+    "verification_command": "uv run --frozen reproduce.py --verify"
+  },
+  "schema_version": 1,
+  "title": "Held-out confusion counts",
+  "uncertainty": {
+    "kind": "none plotted",
+    "threshold": 0.5
+  }
+}

@@ -1,0 +1,809 @@
+{
+  "accessibility": {
+    "alt_text": "On HTRU2, Brier score and log loss are 0.0832 and 0.3063 for the dummy prior, 0.0184 and 0.0784 for logistic regression, and 0.0175 and 0.0725 for random forest. In the 0.0 to 0.1 reliability bin, logistic regression has 3,204 rows with mean prediction 0.0123 and observed fraction 0.0097; random forest has 3,189 rows at 0.0090 and 0.0094. In the 0.9 to 1.0 bin, the corresponding counts and values are 221 at 0.9901 and 0.9774, and 228 at 0.9793 and 0.9825. HTRU2 middle bins contain only 9 to 51 logistic or forest rows. On Rice, Brier score and log loss are 0.2448 and 0.6827 for the dummy prior, 0.0655 and 0.2264 for logistic regression, and 0.0684 and 0.2420 for random forest. The Rice low and high bins contain 370 and 233 logistic rows and 347 and 232 forest rows; all middle bins contain 10 to 49 rows. Sparse bins make local departures from the diagonal noisy.",
+    "color_is_not_the_only_channel": true,
+    "full_text_equivalent": "plotted_data and caption_suggestion in this receipt",
+    "redundant_channels": [
+      "direct labels",
+      "marker shapes",
+      "line styles",
+      "position",
+      "exact values in receipt"
+    ]
+  },
+  "alt_text": "On HTRU2, Brier score and log loss are 0.0832 and 0.3063 for the dummy prior, 0.0184 and 0.0784 for logistic regression, and 0.0175 and 0.0725 for random forest. In the 0.0 to 0.1 reliability bin, logistic regression has 3,204 rows with mean prediction 0.0123 and observed fraction 0.0097; random forest has 3,189 rows at 0.0090 and 0.0094. In the 0.9 to 1.0 bin, the corresponding counts and values are 221 at 0.9901 and 0.9774, and 228 at 0.9793 and 0.9825. HTRU2 middle bins contain only 9 to 51 logistic or forest rows. On Rice, Brier score and log loss are 0.2448 and 0.6827 for the dummy prior, 0.0655 and 0.2264 for logistic regression, and 0.0684 and 0.2420 for random forest. The Rice low and high bins contain 370 and 233 logistic rows and 347 and 232 forest rows; all middle bins contain 10 to 49 rows. Sparse bins make local departures from the diagonal noisy.",
+  "caption_suggestion": "Finding: probability quality differs by model and dataset even when discrimination metrics are close. Each point summarizes one nonempty, fixed-width probability bin, and the legend reports the held-out Brier score. Sparse middle-probability bins can move sharply; these fixed test sets do not establish population calibration.",
+  "claim_scope_exclusions": [
+    "no population-wide performance claim",
+    "no causal claim",
+    "no independence claim beyond the released row tables",
+    "no claim that either selected model is universally superior",
+    "no calibrated-probability guarantee outside these test rows"
+  ],
+  "data_source": {
+    "artifact": "receipts/analysis.receipt.json",
+    "artifact_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+    "row_selection": "the fixed held-out rows declared in the analysis receipt",
+    "source_fields": [
+      "calibration",
+      "test_metrics.*.brier_score"
+    ],
+    "transformation": "computed by reproduce.py without manual figure values"
+  },
+  "description": "Ten fixed-width probability bins for each model and dataset, with exact bin counts and Brier scores.",
+  "figure_id": "held-out-calibration",
+  "plotted_data": {
+    "htru2": {
+      "bins": [
+        {
+          "bin_index": 0,
+          "count": 3580,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.0,
+          "mean_predicted_probability": 0.09156306746752339,
+          "model": "dummy_prior",
+          "observed_positive_fraction": 0.09162011173184358,
+          "positive_count": 328,
+          "upper_bound": 0.1,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 1,
+          "count": 0,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.1,
+          "mean_predicted_probability": null,
+          "model": "dummy_prior",
+          "observed_positive_fraction": null,
+          "positive_count": 0,
+          "upper_bound": 0.2,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 2,
+          "count": 0,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.2,
+          "mean_predicted_probability": null,
+          "model": "dummy_prior",
+          "observed_positive_fraction": null,
+          "positive_count": 0,
+          "upper_bound": 0.30000000000000004,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 3,
+          "count": 0,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.30000000000000004,
+          "mean_predicted_probability": null,
+          "model": "dummy_prior",
+          "observed_positive_fraction": null,
+          "positive_count": 0,
+          "upper_bound": 0.4,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 4,
+          "count": 0,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.4,
+          "mean_predicted_probability": null,
+          "model": "dummy_prior",
+          "observed_positive_fraction": null,
+          "positive_count": 0,
+          "upper_bound": 0.5,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 5,
+          "count": 0,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.5,
+          "mean_predicted_probability": null,
+          "model": "dummy_prior",
+          "observed_positive_fraction": null,
+          "positive_count": 0,
+          "upper_bound": 0.6000000000000001,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 6,
+          "count": 0,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.6000000000000001,
+          "mean_predicted_probability": null,
+          "model": "dummy_prior",
+          "observed_positive_fraction": null,
+          "positive_count": 0,
+          "upper_bound": 0.7000000000000001,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 7,
+          "count": 0,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.7000000000000001,
+          "mean_predicted_probability": null,
+          "model": "dummy_prior",
+          "observed_positive_fraction": null,
+          "positive_count": 0,
+          "upper_bound": 0.8,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 8,
+          "count": 0,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.8,
+          "mean_predicted_probability": null,
+          "model": "dummy_prior",
+          "observed_positive_fraction": null,
+          "positive_count": 0,
+          "upper_bound": 0.9,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 9,
+          "count": 0,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.9,
+          "mean_predicted_probability": null,
+          "model": "dummy_prior",
+          "observed_positive_fraction": null,
+          "positive_count": 0,
+          "upper_bound": 1.0,
+          "upper_bound_inclusive": true
+        },
+        {
+          "bin_index": 0,
+          "count": 3204,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.0,
+          "mean_predicted_probability": 0.01232277769947457,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.009675405742821473,
+          "positive_count": 31,
+          "upper_bound": 0.1,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 1,
+          "count": 51,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.1,
+          "mean_predicted_probability": 0.13629255037494348,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.19607843137254902,
+          "positive_count": 10,
+          "upper_bound": 0.2,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 2,
+          "count": 15,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.2,
+          "mean_predicted_probability": 0.25018763344294415,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.4666666666666667,
+          "positive_count": 7,
+          "upper_bound": 0.30000000000000004,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 3,
+          "count": 13,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.30000000000000004,
+          "mean_predicted_probability": 0.3475920944687577,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.3076923076923077,
+          "positive_count": 4,
+          "upper_bound": 0.4,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 4,
+          "count": 11,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.4,
+          "mean_predicted_probability": 0.44285551780768684,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.8181818181818182,
+          "positive_count": 9,
+          "upper_bound": 0.5,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 5,
+          "count": 9,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.5,
+          "mean_predicted_probability": 0.5556560288217376,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.7777777777777778,
+          "positive_count": 7,
+          "upper_bound": 0.6000000000000001,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 6,
+          "count": 16,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.6000000000000001,
+          "mean_predicted_probability": 0.6412765469042143,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.75,
+          "positive_count": 12,
+          "upper_bound": 0.7000000000000001,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 7,
+          "count": 14,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.7000000000000001,
+          "mean_predicted_probability": 0.7510027649649514,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.7857142857142857,
+          "positive_count": 11,
+          "upper_bound": 0.8,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 8,
+          "count": 26,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.8,
+          "mean_predicted_probability": 0.8556720930105317,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.8076923076923077,
+          "positive_count": 21,
+          "upper_bound": 0.9,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 9,
+          "count": 221,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.9,
+          "mean_predicted_probability": 0.9901275582872814,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.9773755656108597,
+          "positive_count": 216,
+          "upper_bound": 1.0,
+          "upper_bound_inclusive": true
+        },
+        {
+          "bin_index": 0,
+          "count": 3189,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.0,
+          "mean_predicted_probability": 0.009006756920374406,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.00940733772342427,
+          "positive_count": 30,
+          "upper_bound": 0.1,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 1,
+          "count": 36,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.1,
+          "mean_predicted_probability": 0.14578713984530672,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.1388888888888889,
+          "positive_count": 5,
+          "upper_bound": 0.2,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 2,
+          "count": 24,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.2,
+          "mean_predicted_probability": 0.2495011576422105,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.125,
+          "positive_count": 3,
+          "upper_bound": 0.30000000000000004,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 3,
+          "count": 15,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.30000000000000004,
+          "mean_predicted_probability": 0.35063386522566425,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.5333333333333333,
+          "positive_count": 8,
+          "upper_bound": 0.4,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 4,
+          "count": 12,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.4,
+          "mean_predicted_probability": 0.46294546239421536,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.4166666666666667,
+          "positive_count": 5,
+          "upper_bound": 0.5,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 5,
+          "count": 17,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.5,
+          "mean_predicted_probability": 0.5556497579211469,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.5294117647058824,
+          "positive_count": 9,
+          "upper_bound": 0.6000000000000001,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 6,
+          "count": 20,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.6000000000000001,
+          "mean_predicted_probability": 0.6533116812888291,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.65,
+          "positive_count": 13,
+          "upper_bound": 0.7000000000000001,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 7,
+          "count": 11,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.7000000000000001,
+          "mean_predicted_probability": 0.7464046303713053,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.6363636363636364,
+          "positive_count": 7,
+          "upper_bound": 0.8,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 8,
+          "count": 28,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.8,
+          "mean_predicted_probability": 0.8623389800361357,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.8571428571428571,
+          "positive_count": 24,
+          "upper_bound": 0.9,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 9,
+          "count": 228,
+          "dataset": "htru2",
+          "lower_bound_inclusive": 0.9,
+          "mean_predicted_probability": 0.9792583224959072,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.9824561403508771,
+          "positive_count": 224,
+          "upper_bound": 1.0,
+          "upper_bound_inclusive": true
+        }
+      ],
+      "probability_score_point_estimates": {
+        "dummy_prior": {
+          "brier_score": 0.083226,
+          "log_loss": 0.30627
+        },
+        "logistic_regression": {
+          "brier_score": 0.018421,
+          "log_loss": 0.078389
+        },
+        "random_forest": {
+          "brier_score": 0.017486,
+          "log_loss": 0.072505
+        }
+      }
+    },
+    "rice": {
+      "bins": [
+        {
+          "bin_index": 0,
+          "count": 0,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.0,
+          "mean_predicted_probability": null,
+          "model": "dummy_prior",
+          "observed_positive_fraction": null,
+          "positive_count": 0,
+          "upper_bound": 0.1,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 1,
+          "count": 0,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.1,
+          "mean_predicted_probability": null,
+          "model": "dummy_prior",
+          "observed_positive_fraction": null,
+          "positive_count": 0,
+          "upper_bound": 0.2,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 2,
+          "count": 0,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.2,
+          "mean_predicted_probability": null,
+          "model": "dummy_prior",
+          "observed_positive_fraction": null,
+          "positive_count": 0,
+          "upper_bound": 0.30000000000000004,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 3,
+          "count": 0,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.30000000000000004,
+          "mean_predicted_probability": null,
+          "model": "dummy_prior",
+          "observed_positive_fraction": null,
+          "positive_count": 0,
+          "upper_bound": 0.4,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 4,
+          "count": 762,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.4,
+          "mean_predicted_probability": 0.42782152230971127,
+          "model": "dummy_prior",
+          "observed_positive_fraction": 0.42782152230971127,
+          "positive_count": 326,
+          "upper_bound": 0.5,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 5,
+          "count": 0,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.5,
+          "mean_predicted_probability": null,
+          "model": "dummy_prior",
+          "observed_positive_fraction": null,
+          "positive_count": 0,
+          "upper_bound": 0.6000000000000001,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 6,
+          "count": 0,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.6000000000000001,
+          "mean_predicted_probability": null,
+          "model": "dummy_prior",
+          "observed_positive_fraction": null,
+          "positive_count": 0,
+          "upper_bound": 0.7000000000000001,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 7,
+          "count": 0,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.7000000000000001,
+          "mean_predicted_probability": null,
+          "model": "dummy_prior",
+          "observed_positive_fraction": null,
+          "positive_count": 0,
+          "upper_bound": 0.8,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 8,
+          "count": 0,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.8,
+          "mean_predicted_probability": null,
+          "model": "dummy_prior",
+          "observed_positive_fraction": null,
+          "positive_count": 0,
+          "upper_bound": 0.9,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 9,
+          "count": 0,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.9,
+          "mean_predicted_probability": null,
+          "model": "dummy_prior",
+          "observed_positive_fraction": null,
+          "positive_count": 0,
+          "upper_bound": 1.0,
+          "upper_bound_inclusive": true
+        },
+        {
+          "bin_index": 0,
+          "count": 370,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.0,
+          "mean_predicted_probability": 0.015946994709722606,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.04054054054054054,
+          "positive_count": 15,
+          "upper_bound": 0.1,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 1,
+          "count": 28,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.1,
+          "mean_predicted_probability": 0.14966149288431432,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.14285714285714285,
+          "positive_count": 4,
+          "upper_bound": 0.2,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 2,
+          "count": 19,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.2,
+          "mean_predicted_probability": 0.2516632767912769,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.3157894736842105,
+          "positive_count": 6,
+          "upper_bound": 0.30000000000000004,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 3,
+          "count": 14,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.30000000000000004,
+          "mean_predicted_probability": 0.35903989370385564,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.35714285714285715,
+          "positive_count": 5,
+          "upper_bound": 0.4,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 4,
+          "count": 16,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.4,
+          "mean_predicted_probability": 0.44506823165717246,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.5625,
+          "positive_count": 9,
+          "upper_bound": 0.5,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 5,
+          "count": 15,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.5,
+          "mean_predicted_probability": 0.5348772322042196,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.4666666666666667,
+          "positive_count": 7,
+          "upper_bound": 0.6000000000000001,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 6,
+          "count": 14,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.6000000000000001,
+          "mean_predicted_probability": 0.6427163502109202,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.7142857142857143,
+          "positive_count": 10,
+          "upper_bound": 0.7000000000000001,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 7,
+          "count": 22,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.7000000000000001,
+          "mean_predicted_probability": 0.7513054846588166,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.8181818181818182,
+          "positive_count": 18,
+          "upper_bound": 0.8,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 8,
+          "count": 31,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.8,
+          "mean_predicted_probability": 0.8534312351004558,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.8387096774193549,
+          "positive_count": 26,
+          "upper_bound": 0.9,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 9,
+          "count": 233,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.9,
+          "mean_predicted_probability": 0.9808135302629741,
+          "model": "logistic_regression",
+          "observed_positive_fraction": 0.9699570815450643,
+          "positive_count": 226,
+          "upper_bound": 1.0,
+          "upper_bound_inclusive": true
+        },
+        {
+          "bin_index": 0,
+          "count": 347,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.0,
+          "mean_predicted_probability": 0.012937287197469633,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.03170028818443804,
+          "positive_count": 11,
+          "upper_bound": 0.1,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 1,
+          "count": 49,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.1,
+          "mean_predicted_probability": 0.1324746291062678,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.20408163265306123,
+          "positive_count": 10,
+          "upper_bound": 0.2,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 2,
+          "count": 17,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.2,
+          "mean_predicted_probability": 0.24357033713689963,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.29411764705882354,
+          "positive_count": 5,
+          "upper_bound": 0.30000000000000004,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 3,
+          "count": 18,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.30000000000000004,
+          "mean_predicted_probability": 0.34880905069444634,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.2222222222222222,
+          "positive_count": 4,
+          "upper_bound": 0.4,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 4,
+          "count": 19,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.4,
+          "mean_predicted_probability": 0.44916902894608873,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.5789473684210527,
+          "positive_count": 11,
+          "upper_bound": 0.5,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 5,
+          "count": 10,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.5,
+          "mean_predicted_probability": 0.5529158860742089,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.8,
+          "positive_count": 8,
+          "upper_bound": 0.6000000000000001,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 6,
+          "count": 14,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.6000000000000001,
+          "mean_predicted_probability": 0.6550448952748208,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.7142857142857143,
+          "positive_count": 10,
+          "upper_bound": 0.7000000000000001,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 7,
+          "count": 32,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.7000000000000001,
+          "mean_predicted_probability": 0.7597709181295642,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.65625,
+          "positive_count": 21,
+          "upper_bound": 0.8,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 8,
+          "count": 24,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.8,
+          "mean_predicted_probability": 0.8601326951494492,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.8333333333333334,
+          "positive_count": 20,
+          "upper_bound": 0.9,
+          "upper_bound_inclusive": false
+        },
+        {
+          "bin_index": 9,
+          "count": 232,
+          "dataset": "rice",
+          "lower_bound_inclusive": 0.9,
+          "mean_predicted_probability": 0.9782588919039424,
+          "model": "random_forest",
+          "observed_positive_fraction": 0.9741379310344828,
+          "positive_count": 226,
+          "upper_bound": 1.0,
+          "upper_bound_inclusive": true
+        }
+      ],
+      "probability_score_point_estimates": {
+        "dummy_prior": {
+          "brier_score": 0.24479,
+          "log_loss": 0.682691
+        },
+        "logistic_regression": {
+          "brier_score": 0.065518,
+          "log_loss": 0.226448
+        },
+        "random_forest": {
+          "brier_score": 0.068443,
+          "log_loss": 0.24199
+        }
+      }
+    }
+  },
+  "provenance": {
+    "generator": "reproduce.py",
+    "generator_sha256": "a2ad91d1e3f7cf2a15da4fc10246de57b7adda70c1ab2f229f2e51553a75e510",
+    "outputs": {
+      "fig-held-out-calibration.png": "0fa8d4b3bdbdb590fd3ae3eb03ee6fdb73cfedf244908f6f903593f3b3a6ee20"
+    },
+    "plotting_library": "matplotlib 3.10.3",
+    "study_id": "uci-htru2-rice-logistic-random-forest-v1",
+    "verification_command": "uv run --frozen reproduce.py --verify"
+  },
+  "schema_version": 1,
+  "title": "Held-out probability calibration",
+  "uncertainty": {
+    "bin_counts_are_reported": true,
+    "kind": "none plotted"
+  }
+}

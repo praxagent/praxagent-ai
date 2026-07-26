@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-labelledby="gini-split-title gini-split-desc">
+  <title id="gini-split-title">Gini impurity peaks at an even mix, and a useful split lowers the weighted child impurity</title>
+  <desc id="gini-split-desc">The left panel plots binary Gini impurity G equals 2 q times one minus q against the positive fraction q. The curve is zero at q equals 0 and at q equals 1, and peaks at 0.5 when q equals 0.5. A marked point shows a parent group with q equals 0.30 and G equals 0.42. The right panel compares that parent with two candidate cutoffs. Cutoff A sends 5 positive rows to a 50-row left child and 25 positive rows to a 50-row right child, lowering the weighted child impurity from 0.42 to 0.34, an improvement of 0.08. Cutoff B leaves both children at the parent rate, so the impurity stays 0.42 and the improvement is zero. All counts are toy values chosen so the arithmetic can be checked by hand.</desc>
+  <defs>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:24px;font-weight:700}
+      .h{font-size:17px;font-weight:700}
+      .m{font-size:13px;fill:#5A544C}
+      .s{font-size:15px}
+      .xs{font-size:12px;fill:#5A544C}
+      .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.5}
+      .axis{stroke:#5A544C;stroke-width:1.6}
+      .grid{stroke:#DCD3C6;stroke-width:1}
+      .curve{fill:none;stroke:#3C5570;stroke-width:3}
+      .lead{stroke:#4B6787;stroke-width:1.2}
+      .parent{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.8}
+      .good{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.8}
+      .bad{fill:#F2EEE8;stroke:#8B8377;stroke-width:1.8}
+      .child{fill:#FBF9F6;stroke:#8B8377;stroke-width:1.5}
+    </style>
+  </defs>
+
+  <rect width="1000" height="600" fill="#F7F4F0"/>
+  <text class="t title" x="24" y="34">Gini impurity asks how mixed the labels are</text>
+  <text class="t m" x="24" y="58">Zero means a pure group. The peak at an even mix is the worst case for a binary label.</text>
+
+  <!-- Left card: the impurity curve -->
+  <rect class="card" x="24" y="84" width="460" height="432" rx="12"/>
+  <text class="t h" x="48" y="118">Binary impurity against the positive rate</text>
+  <text class="t m" x="48" y="140">G = 2q(1 - q), plotted for every possible group.</text>
+
+  <!-- plot frame: q maps x = 100 + 348q, G maps y = 430 - 440G -->
+  <text class="t xs" x="274" y="196" text-anchor="middle" font-weight="700">peak 0.50 at an even mix</text>
+
+  <line class="grid" x1="100" y1="320" x2="448" y2="320"/>
+  <line class="grid" x1="274" y1="430" x2="274" y2="210"/>
+  <line class="axis" x1="100" y1="430" x2="448" y2="430"/>
+  <line class="axis" x1="100" y1="430" x2="100" y2="200"/>
+
+  <text class="t xs" x="92" y="434" text-anchor="end">0</text>
+  <text class="t xs" x="92" y="324" text-anchor="end">0.25</text>
+  <text class="t xs" x="92" y="214" text-anchor="end">0.50</text>
+  <text class="t xs" x="100" y="448" text-anchor="middle">0</text>
+  <text class="t xs" x="274" y="448" text-anchor="middle">0.5</text>
+  <text class="t xs" x="448" y="448" text-anchor="middle">1</text>
+  <text class="t m" x="274" y="470" text-anchor="middle">q, the positive fraction in the group</text>
+  <text class="t xs" x="274" y="490" text-anchor="middle">0 = every row negative, 1 = every row positive</text>
+  <text class="t m" x="64" y="315" text-anchor="middle" transform="rotate(-90 64 315)">Gini impurity G</text>
+
+  <polyline class="curve" points="100,430 134.8,350.8 169.6,289.2 204.4,245.2 239.2,218.8 274,210 308.8,218.8 343.6,245.2 378.4,289.2 413.2,350.8 448,430"/>
+
+  <line x1="204.4" y1="245.2" x2="204.4" y2="430" stroke="#4B6787" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <circle cx="204.4" cy="245.2" r="6" fill="#4B6787"/>
+  <line class="lead" x1="238" y1="340" x2="211" y2="253"/>
+  <text class="t xs" x="232" y="358" fill="#3C5570" font-weight="700">parent group: q = 0.30</text>
+  <text class="t xs" x="232" y="374" fill="#3C5570" font-weight="700">G = 0.42</text>
+
+  <!-- Right card: comparing two cutoffs -->
+  <rect class="card" x="508" y="84" width="468" height="432" rx="12"/>
+  <text class="t h" x="532" y="118">Which cutoff lowers impurity?</text>
+  <text class="t m" x="532" y="140">Every allowed cutoff is scored; the best one is kept.</text>
+
+  <rect class="parent" x="532" y="160" width="420" height="46" rx="8"/>
+  <text class="t s" x="548" y="181" font-weight="700">Parent group</text>
+  <text class="t xs" x="548" y="198">100 rows, 30 positive, G = 0.42</text>
+
+  <rect class="good" x="532" y="222" width="420" height="132" rx="8"/>
+  <text class="t s" x="548" y="246" font-weight="700" fill="#3F5A34">Cutoff A, improvement 0.08</text>
+  <rect class="child" x="548" y="258" width="180" height="56" rx="6"/>
+  <text class="t xs" x="638" y="280" text-anchor="middle" font-weight="700">Left: 50 rows</text>
+  <text class="t xs" x="638" y="298" text-anchor="middle">5 positive, G = 0.18</text>
+  <rect class="child" x="748" y="258" width="180" height="56" rx="6"/>
+  <text class="t xs" x="838" y="280" text-anchor="middle" font-weight="700">Right: 50 rows</text>
+  <text class="t xs" x="838" y="298" text-anchor="middle">25 positive, G = 0.50</text>
+  <text class="t xs" x="548" y="338">Weighted: 0.5 x 0.18 + 0.5 x 0.50 = 0.34</text>
+
+  <rect class="bad" x="532" y="370" width="420" height="132" rx="8"/>
+  <text class="t s" x="548" y="394" font-weight="700">Cutoff B, improvement 0.00</text>
+  <rect class="child" x="548" y="406" width="180" height="56" rx="6"/>
+  <text class="t xs" x="638" y="428" text-anchor="middle" font-weight="700">Left: 50 rows</text>
+  <text class="t xs" x="638" y="446" text-anchor="middle">15 positive, G = 0.42</text>
+  <rect class="child" x="748" y="406" width="180" height="56" rx="6"/>
+  <text class="t xs" x="838" y="428" text-anchor="middle" font-weight="700">Right: 50 rows</text>
+  <text class="t xs" x="838" y="446" text-anchor="middle">15 positive, G = 0.42</text>
+  <text class="t xs" x="548" y="486">Weighted: 0.5 x 0.42 + 0.5 x 0.42 = 0.42, unchanged</text>
+
+  <rect x="24" y="536" width="952" height="44" rx="10" fill="#EAF1E5" stroke="#6F8D5E" stroke-width="1.5"/>
+  <text class="t s" x="500" y="564" text-anchor="middle" font-weight="700">A tree keeps the cutoff with the largest impurity drop. Zero improvement means that question sorted nothing.</text>
+</svg>

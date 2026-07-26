@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="720" viewBox="0 0 1000 720" role="img" aria-labelledby="forest-averaging-title forest-averaging-desc">
+  <title id="forest-averaging-title">How a forest builds different trees and averages their leaf probabilities</title>
+  <desc id="forest-averaging-desc">A schematic of three trees from a forest. Eight training rows are shown at the top as numbered squares. Each tree is grown on its own bootstrap resample of those eight rows, drawn with replacement, so some rows repeat and others are left out: the first tree sees rows 3, 1, 3, 7, 5, 8, 2, 5 and never sees rows 4 or 6; the second sees 6, 2, 2, 8, 1, 4, 7, 6 and never sees rows 3 or 5; the third sees 5, 4, 1, 1, 7, 3, 6, 4 and never sees rows 2 or 8. Each tree also considers only a random subset of the features at each split, shown as feature sets 2, 5, 7 for the first tree, 1, 3, 8 for the second, and 2, 4, 6 for the third. For the same new candidate the three trees reach different leaves and report different probabilities: 0.85, 0.62, and 0.91. The forest reports their average, which for these three is 0.79. The fitted HTRU2 forest averages 250 such trees rather than three, and the numbers here are illustrative.</desc>
+  <defs>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:24px;font-weight:700}
+      .h{font-size:17px;font-weight:700}
+      .m{font-size:13px;fill:#5A544C}
+      .s{font-size:15px}
+      .xs{font-size:12px;fill:#5A544C}
+      .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.5}
+      .cell{fill:#F2EEE8;stroke:#8B8377;stroke-width:1.5}
+      .celldup{fill:#E8F0F7;stroke:#4B6787;stroke-width:2}
+      .node{fill:#F2EEE8;stroke:#8B8377;stroke-width:1.5}
+      .leaf{fill:#FBF9F6;stroke:#8B8377;stroke-width:1.5}
+      .leafhot{fill:#E8F0F7;stroke:#4B6787;stroke-width:2.5}
+      .edge{stroke:#8B8377;stroke-width:1.5;fill:none}
+      .edgehot{stroke:#4B6787;stroke-width:2.5;fill:none}
+      .rowband{fill:#F7F4F0;stroke:#DCD3C6;stroke-width:1}
+    </style>
+    <marker id="fa-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8B8377"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="720" fill="#F7F4F0"/>
+  <text class="t title" x="24" y="34">Why 250 trees are not 250 copies of the same tree</text>
+  <text class="t m" x="24" y="58">Every tree is grown on its own resample of the rows and may only use a random subset of features at each split.</text>
+
+  <rect class="card" x="24" y="80" width="952" height="568" rx="12"/>
+
+  <text class="t xs" x="110" y="108">the 8 training rows</text>
+  <rect class="cell" x="110" y="116" width="22" height="22" rx="3"/>
+  <text class="t xs" x="121" y="132" text-anchor="middle">1</text>
+  <rect class="cell" x="136" y="116" width="22" height="22" rx="3"/>
+  <text class="t xs" x="147" y="132" text-anchor="middle">2</text>
+  <rect class="cell" x="162" y="116" width="22" height="22" rx="3"/>
+  <text class="t xs" x="173" y="132" text-anchor="middle">3</text>
+  <rect class="cell" x="188" y="116" width="22" height="22" rx="3"/>
+  <text class="t xs" x="199" y="132" text-anchor="middle">4</text>
+  <rect class="cell" x="214" y="116" width="22" height="22" rx="3"/>
+  <text class="t xs" x="225" y="132" text-anchor="middle">5</text>
+  <rect class="cell" x="240" y="116" width="22" height="22" rx="3"/>
+  <text class="t xs" x="251" y="132" text-anchor="middle">6</text>
+  <rect class="cell" x="266" y="116" width="22" height="22" rx="3"/>
+  <text class="t xs" x="277" y="132" text-anchor="middle">7</text>
+  <rect class="cell" x="292" y="116" width="22" height="22" rx="3"/>
+  <text class="t xs" x="303" y="132" text-anchor="middle">8</text>
+
+  <text class="t xs" x="360" y="108">grow a tree on that resample</text>
+  <text class="t xs" x="592" y="108">features per split</text>
+  <text class="t xs" x="710" y="108">this tree</text>
+  <text class="t xs" x="822" y="108">the forest</text>
+
+  <!-- Tree 1 band -->
+  <rect class="rowband" x="36" y="156" width="760" height="148" rx="8"/>
+  <text class="t s" x="48" y="232" font-weight="700">Tree 1</text>
+  <rect class="celldup" x="110" y="188" width="22" height="22" rx="3"/>
+  <text class="t xs" x="121" y="204" text-anchor="middle">3</text>
+  <rect class="cell" x="136" y="188" width="22" height="22" rx="3"/>
+  <text class="t xs" x="147" y="204" text-anchor="middle">1</text>
+  <rect class="celldup" x="162" y="188" width="22" height="22" rx="3"/>
+  <text class="t xs" x="173" y="204" text-anchor="middle">3</text>
+  <rect class="cell" x="188" y="188" width="22" height="22" rx="3"/>
+  <text class="t xs" x="199" y="204" text-anchor="middle">7</text>
+  <rect class="celldup" x="214" y="188" width="22" height="22" rx="3"/>
+  <text class="t xs" x="225" y="204" text-anchor="middle">5</text>
+  <rect class="cell" x="240" y="188" width="22" height="22" rx="3"/>
+  <text class="t xs" x="251" y="204" text-anchor="middle">8</text>
+  <rect class="cell" x="266" y="188" width="22" height="22" rx="3"/>
+  <text class="t xs" x="277" y="204" text-anchor="middle">2</text>
+  <rect class="celldup" x="292" y="188" width="22" height="22" rx="3"/>
+  <text class="t xs" x="303" y="204" text-anchor="middle">5</text>
+  <text class="t xs" x="110" y="228">rows 4 and 6 never reach this tree</text>
+
+  <line x1="322" y1="199" x2="346" y2="199" stroke="#8B8377" stroke-width="2" marker-end="url(#fa-arrow)"/>
+
+  <g transform="translate(0,166)">
+    <path class="edgehot" d="M 450 22 L 400 48"/>
+    <path class="edge" d="M 450 22 L 500 48"/>
+    <path class="edge" d="M 400 68 L 380 92"/>
+    <path class="edgehot" d="M 400 68 L 420 92"/>
+    <rect class="node" x="420" y="4" width="60" height="18" rx="4"/>
+    <rect class="node" x="372" y="48" width="56" height="18" rx="4"/>
+    <rect class="node" x="472" y="48" width="56" height="18" rx="4"/>
+    <rect class="leaf" x="362" y="92" width="36" height="18" rx="4"/>
+    <rect class="leafhot" x="402" y="92" width="36" height="18" rx="4"/>
+    <rect class="leaf" x="462" y="92" width="36" height="18" rx="4"/>
+    <rect class="leaf" x="502" y="92" width="36" height="18" rx="4"/>
+  </g>
+  <text class="t xs" x="592" y="196">random 3 of 8:</text>
+  <text class="t xs" x="592" y="212" font-weight="700">features 2, 5, 7</text>
+  <text class="t h" x="716" y="206" fill="#3C5570">0.85</text>
+
+  <!-- Tree 2 band -->
+  <rect class="rowband" x="36" y="316" width="760" height="148" rx="8"/>
+  <text class="t s" x="48" y="392" font-weight="700">Tree 2</text>
+  <rect class="celldup" x="110" y="348" width="22" height="22" rx="3"/>
+  <text class="t xs" x="121" y="364" text-anchor="middle">6</text>
+  <rect class="celldup" x="136" y="348" width="22" height="22" rx="3"/>
+  <text class="t xs" x="147" y="364" text-anchor="middle">2</text>
+  <rect class="celldup" x="162" y="348" width="22" height="22" rx="3"/>
+  <text class="t xs" x="173" y="364" text-anchor="middle">2</text>
+  <rect class="cell" x="188" y="348" width="22" height="22" rx="3"/>
+  <text class="t xs" x="199" y="364" text-anchor="middle">8</text>
+  <rect class="cell" x="214" y="348" width="22" height="22" rx="3"/>
+  <text class="t xs" x="225" y="364" text-anchor="middle">1</text>
+  <rect class="cell" x="240" y="348" width="22" height="22" rx="3"/>
+  <text class="t xs" x="251" y="364" text-anchor="middle">4</text>
+  <rect class="cell" x="266" y="348" width="22" height="22" rx="3"/>
+  <text class="t xs" x="277" y="364" text-anchor="middle">7</text>
+  <rect class="celldup" x="292" y="348" width="22" height="22" rx="3"/>
+  <text class="t xs" x="303" y="364" text-anchor="middle">6</text>
+  <text class="t xs" x="110" y="388">rows 3 and 5 never reach this tree</text>
+
+  <line x1="322" y1="359" x2="346" y2="359" stroke="#8B8377" stroke-width="2" marker-end="url(#fa-arrow)"/>
+
+  <g transform="translate(0,326)">
+    <path class="edge" d="M 450 22 L 400 48"/>
+    <path class="edgehot" d="M 450 22 L 500 48"/>
+    <path class="edgehot" d="M 500 68 L 480 92"/>
+    <path class="edge" d="M 500 68 L 520 92"/>
+    <rect class="node" x="420" y="4" width="60" height="18" rx="4"/>
+    <rect class="node" x="372" y="48" width="56" height="18" rx="4"/>
+    <rect class="node" x="472" y="48" width="56" height="18" rx="4"/>
+    <rect class="leaf" x="362" y="92" width="36" height="18" rx="4"/>
+    <rect class="leaf" x="402" y="92" width="36" height="18" rx="4"/>
+    <rect class="leafhot" x="462" y="92" width="36" height="18" rx="4"/>
+    <rect class="leaf" x="502" y="92" width="36" height="18" rx="4"/>
+  </g>
+  <text class="t xs" x="592" y="356">random 3 of 8:</text>
+  <text class="t xs" x="592" y="372" font-weight="700">features 1, 3, 8</text>
+  <text class="t h" x="716" y="366" fill="#3C5570">0.62</text>
+
+  <!-- Tree 3 band -->
+  <rect class="rowband" x="36" y="476" width="760" height="148" rx="8"/>
+  <text class="t s" x="48" y="552" font-weight="700">Tree 3</text>
+  <rect class="cell" x="110" y="508" width="22" height="22" rx="3"/>
+  <text class="t xs" x="121" y="524" text-anchor="middle">5</text>
+  <rect class="celldup" x="136" y="508" width="22" height="22" rx="3"/>
+  <text class="t xs" x="147" y="524" text-anchor="middle">4</text>
+  <rect class="celldup" x="162" y="508" width="22" height="22" rx="3"/>
+  <text class="t xs" x="173" y="524" text-anchor="middle">1</text>
+  <rect class="celldup" x="188" y="508" width="22" height="22" rx="3"/>
+  <text class="t xs" x="199" y="524" text-anchor="middle">1</text>
+  <rect class="cell" x="214" y="508" width="22" height="22" rx="3"/>
+  <text class="t xs" x="225" y="524" text-anchor="middle">7</text>
+  <rect class="cell" x="240" y="508" width="22" height="22" rx="3"/>
+  <text class="t xs" x="251" y="524" text-anchor="middle">3</text>
+  <rect class="cell" x="266" y="508" width="22" height="22" rx="3"/>
+  <text class="t xs" x="277" y="524" text-anchor="middle">6</text>
+  <rect class="celldup" x="292" y="508" width="22" height="22" rx="3"/>
+  <text class="t xs" x="303" y="524" text-anchor="middle">4</text>
+  <text class="t xs" x="110" y="548">rows 2 and 8 never reach this tree</text>
+
+  <line x1="322" y1="519" x2="346" y2="519" stroke="#8B8377" stroke-width="2" marker-end="url(#fa-arrow)"/>
+
+  <g transform="translate(0,486)">
+    <path class="edgehot" d="M 450 22 L 400 48"/>
+    <path class="edge" d="M 450 22 L 500 48"/>
+    <path class="edgehot" d="M 400 68 L 380 92"/>
+    <path class="edge" d="M 400 68 L 420 92"/>
+    <rect class="node" x="420" y="4" width="60" height="18" rx="4"/>
+    <rect class="node" x="372" y="48" width="56" height="18" rx="4"/>
+    <rect class="node" x="472" y="48" width="56" height="18" rx="4"/>
+    <rect class="leafhot" x="362" y="92" width="36" height="18" rx="4"/>
+    <rect class="leaf" x="402" y="92" width="36" height="18" rx="4"/>
+    <rect class="leaf" x="462" y="92" width="36" height="18" rx="4"/>
+    <rect class="leaf" x="502" y="92" width="36" height="18" rx="4"/>
+  </g>
+  <text class="t xs" x="592" y="516">random 3 of 8:</text>
+  <text class="t xs" x="592" y="532" font-weight="700">features 2, 4, 6</text>
+  <text class="t h" x="716" y="526" fill="#3C5570">0.91</text>
+
+  <!-- average bracket spanning the three probabilities -->
+  <path d="M 780 198 L 800 198 L 800 534 L 780 534" fill="none" stroke="#8B8377" stroke-width="2"/>
+  <line x1="800" y1="366" x2="818" y2="366" stroke="#8B8377" stroke-width="2" marker-end="url(#fa-arrow)"/>
+  <rect x="822" y="310" width="130" height="112" rx="10" fill="#E8F0F7" stroke="#4B6787" stroke-width="2.5"/>
+  <text class="t xs" x="887" y="336" text-anchor="middle">average the</text>
+  <text class="t xs" x="887" y="352" text-anchor="middle">leaf probabilities</text>
+  <text class="t title" x="887" y="386" text-anchor="middle" fill="#3C5570">0.79</text>
+  <text class="t xs" x="887" y="408" text-anchor="middle">(0.85 + 0.62 + 0.91) / 3</text>
+
+  <text class="t xs" x="48" y="640">Blue squares: rows drawn more than once. Each shaded band is one tree, not one shared trunk.</text>
+
+  <rect x="24" y="660" width="952" height="48" rx="10" fill="#EAF1E5" stroke="#6F8D5E" stroke-width="1.5"/>
+  <text class="t s" x="500" y="680" text-anchor="middle" font-weight="700">The forest averages the leaf probabilities themselves, not the count of trees whose hard label was positive.</text>
+  <text class="t xs" x="500" y="698" text-anchor="middle">Toy numbers on eight rows. The fitted HTRU2 forest averages 250 trees, each grown on a resample of all 14,318 training rows.</text>
+</svg>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="580" viewBox="0 0 1000 580" role="img" aria-labelledby="brier-partition-title brier-partition-desc">
+  <title id="brier-partition-title">A toy set of ten forecasts and the three parts its Brier loss splits into</title>
+  <desc id="brier-partition-desc">The left panel shows ten toy forecasts in two groups of five. Group A received the stated probability 0.10 and contains one truly positive row out of five, an observed rate of 0.20. Group B received the stated probability 0.90 and contains four truly positive rows out of five, an observed rate of 0.80. Across all ten rows the observed positive rate is 0.50. The right panel shows the resulting Brier loss of 0.17 as a running total: the uncertainty term of 0.25, set by the labels alone, minus the resolution term of 0.09 earned by separating the groups away from the overall rate, plus the reliability term of 0.01 charged because each stated probability misses its group's observed rate by 0.10. All values are toy values chosen so the arithmetic can be checked by hand.</desc>
+  <defs>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:24px;font-weight:700}
+      .h{font-size:18px;font-weight:700}
+      .m{font-size:13px;fill:#5A544C}
+      .s{font-size:15px}
+      .xs{font-size:12px;fill:#5A544C}
+      .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.5}
+      .group{fill:#F2EEE8;stroke:#C4B8A8;stroke-width:1.5}
+      .axis{stroke:#5A544C;stroke-width:1.6}
+      .grid{stroke:#DCD3C6;stroke-width:1}
+      .link{stroke:#8B8377;stroke-width:1.4;stroke-dasharray:5 4}
+    </style>
+  </defs>
+
+  <rect width="1000" height="580" fill="#F7F4F0"/>
+  <text class="t title" x="24" y="34">One Brier loss, three separate jobs</text>
+  <text class="t m" x="24" y="58">Toy example: ten forecasts, sorted into the two probability values the model actually stated.</text>
+
+  <!-- Left: the toy forecasts -->
+  <rect class="card" x="24" y="88" width="452" height="412" rx="12"/>
+  <text class="t h" x="48" y="118">Ten forecasts, two groups</text>
+  <text class="t m" x="48" y="138">Filled dot: truly positive. Hollow dot: truly negative.</text>
+
+  <rect class="group" x="48" y="158" width="404" height="146" rx="10"/>
+  <text class="t s" x="72" y="186" font-weight="700">Group A: the model stated 0.10</text>
+  <circle cx="96" cy="228" r="15" fill="#4B6787" stroke="#2C2924" stroke-width="2"/>
+  <circle cx="152" cy="228" r="15" fill="#FBF9F6" stroke="#2C2924" stroke-width="2"/>
+  <circle cx="208" cy="228" r="15" fill="#FBF9F6" stroke="#2C2924" stroke-width="2"/>
+  <circle cx="264" cy="228" r="15" fill="#FBF9F6" stroke="#2C2924" stroke-width="2"/>
+  <circle cx="320" cy="228" r="15" fill="#FBF9F6" stroke="#2C2924" stroke-width="2"/>
+  <text class="t m" x="72" y="278">observed: 1 of 5 positive, a rate of 0.20</text>
+
+  <rect class="group" x="48" y="320" width="404" height="146" rx="10"/>
+  <text class="t s" x="72" y="348" font-weight="700">Group B: the model stated 0.90</text>
+  <circle cx="96" cy="390" r="15" fill="#4B6787" stroke="#2C2924" stroke-width="2"/>
+  <circle cx="152" cy="390" r="15" fill="#4B6787" stroke="#2C2924" stroke-width="2"/>
+  <circle cx="208" cy="390" r="15" fill="#4B6787" stroke="#2C2924" stroke-width="2"/>
+  <circle cx="264" cy="390" r="15" fill="#4B6787" stroke="#2C2924" stroke-width="2"/>
+  <circle cx="320" cy="390" r="15" fill="#FBF9F6" stroke="#2C2924" stroke-width="2"/>
+  <text class="t m" x="72" y="440">observed: 4 of 5 positive, a rate of 0.80</text>
+
+  <text class="t s" x="48" y="486">Across all ten rows, 5 are positive: an overall rate of 0.50.</text>
+
+  <!-- Right: the partition -->
+  <rect class="card" x="524" y="88" width="452" height="412" rx="12"/>
+  <text class="t h" x="548" y="118">The same loss, split three ways</text>
+  <text class="t m" x="548" y="138">Each bar is a term. The running total ends at the Brier loss.</text>
+
+  <line class="grid" x1="600" y1="180" x2="950" y2="180"/>
+  <line class="grid" x1="600" y1="263.3" x2="950" y2="263.3"/>
+  <line class="grid" x1="600" y1="346.7" x2="950" y2="346.7"/>
+  <line class="axis" x1="600" y1="430" x2="950" y2="430"/>
+  <line class="axis" x1="600" y1="180" x2="600" y2="430"/>
+  <text class="t xs" x="592" y="434" text-anchor="end">0</text>
+  <text class="t xs" x="592" y="351" text-anchor="end">0.10</text>
+  <text class="t xs" x="592" y="267" text-anchor="end">0.20</text>
+  <text class="t xs" x="592" y="184" text-anchor="end">0.30</text>
+
+  <rect x="616" y="221.7" width="60" height="208.3" rx="3" fill="#EAF1E5" stroke="#6F8D5E" stroke-width="2"/>
+  <text class="t xs" x="646" y="214" text-anchor="middle" font-weight="700">0.25</text>
+  <text class="t xs" x="646" y="450" text-anchor="middle">uncertainty</text>
+  <text class="t xs" x="646" y="466" text-anchor="middle">set by labels</text>
+
+  <line class="link" x1="676" y1="221.7" x2="700" y2="221.7"/>
+  <rect x="700" y="221.7" width="60" height="75" rx="3" fill="#E8F0F7" stroke="#4B6787" stroke-width="2"/>
+  <text class="t xs" x="730" y="214" text-anchor="middle" font-weight="700">-0.09</text>
+  <text class="t xs" x="730" y="450" text-anchor="middle">resolution</text>
+  <text class="t xs" x="730" y="466" text-anchor="middle">earned by</text>
+  <text class="t xs" x="730" y="480" text-anchor="middle">separation</text>
+
+  <line class="link" x1="760" y1="296.7" x2="784" y2="296.7"/>
+  <rect x="784" y="288.3" width="60" height="8.4" rx="2" fill="#F3E8E0" stroke="#A67C52" stroke-width="2"/>
+  <text class="t xs" x="814" y="281" text-anchor="middle" font-weight="700">+0.01</text>
+  <text class="t xs" x="814" y="450" text-anchor="middle">reliability</text>
+  <text class="t xs" x="814" y="466" text-anchor="middle">charged for a</text>
+  <text class="t xs" x="814" y="480" text-anchor="middle">calibration gap</text>
+
+  <line class="link" x1="844" y1="288.3" x2="868" y2="288.3"/>
+  <rect x="868" y="288.3" width="60" height="141.7" rx="3" fill="#2C2924" stroke="#2C2924" stroke-width="2"/>
+  <text class="t xs" x="898" y="281" text-anchor="middle" font-weight="700">0.17</text>
+  <text class="t xs" x="898" y="450" text-anchor="middle" font-weight="700">Brier loss</text>
+  <text class="t xs" x="898" y="466" text-anchor="middle">what you report</text>
+
+  <rect x="24" y="516" width="952" height="34" rx="10" fill="#EAF1E5" stroke="#6F8D5E" stroke-width="1.5"/>
+  <text class="t s" x="500" y="538" text-anchor="middle" font-weight="700">Only the small reliability bar is calibration. A lower Brier loss can also reflect sharper separation or lower base-rate uncertainty.</text>
+</svg>

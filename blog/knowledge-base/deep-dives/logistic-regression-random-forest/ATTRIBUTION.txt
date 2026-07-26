@@ -1,0 +1,51 @@
+# Dataset attribution
+
+This bundle contains unmodified data files from two datasets distributed by
+the UCI Machine Learning Repository under the [Creative Commons Attribution
+4.0 International license](https://creativecommons.org/licenses/by/4.0/)
+(CC BY 4.0).
+
+## HTRU2
+
+- Dataset: Robert Lyon (2015), *HTRU2*, UCI Machine Learning Repository.
+- DOI: <https://doi.org/10.24432/C5DK6R>
+- UCI record: <https://archive.ics.uci.edu/dataset/372/htru2>
+- Official archive: <https://archive.ics.uci.edu/static/public/372/htru2.zip>
+- Included unmodified files: `data/HTRU_2.csv` and `data/Readme.txt`.
+- License: CC BY 4.0, as recorded by UCI.
+- Requested paper citation: R. J. Lyon, B. W. Stappers, S. Cooper,
+  J. M. Brooke, and J. D. Knowles (2016), "Fifty years of pulsar
+  candidate selection: from simple filters to a new principled real-time
+  classification approach," *Monthly Notices of the Royal Astronomical
+  Society*. <https://doi.org/10.1093/mnras/stw656>
+
+The original `Readme.txt` is retained because it documents the raw column
+order, class encoding, study context, and acknowledgements. The feature names
+used by the analysis follow that file's order.
+
+## Rice (Cammeo and Osmancik)
+
+- Dataset: Ilkay Cinar and Murat Koklu (2019), *Rice (Cammeo and Osmancik)*,
+  UCI Machine Learning Repository.
+- DOI: <https://doi.org/10.24432/C5MW4Z>
+- UCI record:
+  <https://archive.ics.uci.edu/dataset/545/rice+cammeo+and+osmancik>
+- Official archive:
+  <https://archive.ics.uci.edu/static/public/545/rice+cammeo+and+osmancik.zip>
+- Included unmodified files: `data/Rice_Cammeo_Osmancik.arff` and
+  `data/Citation_Request.txt`.
+- License: CC BY 4.0, as recorded by UCI.
+- Requested paper citation: I. Cinar and M. Koklu (2019), "Classification of
+  Rice Varieties Using Artificial Intelligence Methods," *International
+  Journal of Intelligent Systems and Applications in Engineering*, 7(3),
+  188-194. <https://doi.org/10.18201/ijisae.2019355381>
+
+`Cammeo` is encoded as the positive class only to make binary probability and
+average-precision calculations explicit. That convention does not imply that
+Cammeo is scientifically preferable to Osmancik.
+
+## Reuse
+
+The source datasets may be shared and adapted under CC BY 4.0 with appropriate
+credit. The generated analysis artifacts in this bundle do not replace the
+dataset records, original readme files, or cited papers.

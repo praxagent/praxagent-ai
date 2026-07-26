@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <title>Brier loss - praxagent Knowledge Base</title>
+    
+    
+
+
+
+
+
+
+
+
+
+    
+    <meta name="description" content="The average squared gap between a stated probability and the zero-or-one outcome that followed, so lower means better probability forecasts.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/glossary/brier-loss/">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="praxagent Knowledge Base">
+    <meta property="og:title" content="Brier loss">
+    <meta property="og:description" content="The average squared gap between a stated probability and the zero-or-one outcome that followed, so lower means better probability forecasts.">
+    <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/glossary/brier-loss/">
+    <meta property="og:image" content="https://praxagent.ai/blog/knowledge-base/glossary/brier-loss/brier-partition.png">
+    <meta property="og:image:alt" content="A toy Brier loss of 0.17 shown as uncertainty 0.25 minus resolution 0.09 plus reliability 0.01.">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="Brier loss">
+    <meta name="twitter:description" content="The average squared gap between a stated probability and the zero-or-one outcome that followed, so lower means better probability forecasts.">
+    <meta name="twitter:image" content="https://praxagent.ai/blog/knowledge-base/glossary/brier-loss/brier-partition.png">
+    <meta name="twitter:image:alt" content="A toy Brier loss of 0.17 shown as uncertainty 0.25 minus resolution 0.09 plus reliability 0.01.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
+    <link rel="stylesheet" href="/blog/blog.css?v=20260725-2">
+    <link rel="stylesheet" href="/blog/katex.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'neutral',
+        securityLevel: 'loose',
+        flowchart: { htmlLabels: true, curve: 'basis' }
+      });
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-scrolls industrial-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+
+
+
+            <div class="nav-menu">
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link">Research Notes</a>
+                <a href="/blog/knowledge-base/" class="nav-link active">Knowledge Base</a>
+                <a href="/blog/search/" class="nav-link">Search</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
+            <a href="/blog/knowledge-base/" class="mobile-nav-link active">Knowledge Base</a>
+            <a href="/blog/search/" class="mobile-nav-link">Search</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        
+
+
+
+
+<div class="blog-post reference-entry">
+    <div class="container">
+        <article class="post-content">
+            <header class="post-header">
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
+                <h1 class="post-title">Brier loss</h1>
+                
+                <p class="reference-summary">The average squared gap between a stated probability and the zero-or-one outcome that followed, so lower means better probability forecasts.</p>
+                
+
+            </header>
+
+
+
+
+
+            <div class="post-body">
+                <p>Suppose something either happens or it does not, and before it resolves a model
+states a probability that it will. A weather model says 0.30 for rain; a
+classifier says 0.90 that a candidate signal is a real pulsar. Once the outcome
+is known, how good was the number?</p>
+<p><strong>Brier loss</strong> answers that by charging each forecast the square of its
+distance from what actually happened, then averaging the charges. It is the
+mean squared error of probabilities. Zero is perfect, higher is worse, and the
+worst possible value is 1.</p>
+<h2 id="the-definition">The definition</h2>
+<p>Take \(n\) cases. For case \(i\), let \(p_i\) be the stated probability of the
+positive outcome, a number between 0 and 1, and let \(y_i\) be the <strong>outcome
+indicator</strong>: 1 if the positive outcome happened and 0 if it did not. Then</p>
+\[
+\mathrm{Brier}=\frac{1}{n}\sum_{i=1}^{n}(p_i-y_i)^2.
+\]<p>Each row contributes \((p_i-y_i)^2\), the squared distance between the number
+stated and the number that turned out to be true. Because \(p_i\) and \(y_i\)
+both live in \([0,1]\), no single row can be charged more than 1, so the average
+cannot exceed 1 either.</p>
+<p>Some writers call the same quantity the <strong>Brier score</strong>
+(<a href="https://journals.ametsoc.org/view/journals/mwre/78/1/1520-0493_1950_078_0001_vofeit_2_0_co_2.xml">Brier, 1950</a>).
+Under the binary, one-probability convention used here, the two names refer to
+the identical formula and the value ranges from 0 to 1. State the convention
+when you report it, because another common formulation sums the squared errors
+over both class probabilities; in the two-class case that version is twice the
+formula above and ranges from 0 to 2. This site uses the one-probability
+formula and says <strong>Brier loss</strong> throughout so that &ldquo;lower is better&rdquo; is never
+ambiguous; if you meet &ldquo;Brier score&rdquo; in a caption or a receipt here, read it as
+the same mean squared error.</p>
+<h2 id="a-worked-example-you-can-check-by-hand">A worked example you can check by hand</h2>
+<p>Five candidates were scored, then their true labels arrived. The last row is
+the interesting one: the model was confident and wrong.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Case</th>
+          <th style="text-align: right">Stated \(p_i\)</th>
+          <th style="text-align: right">Outcome \(y_i\)</th>
+          <th style="text-align: right">\((p_i-y_i)^2\)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td style="text-align: right">0.90</td>
+          <td style="text-align: right">1</td>
+          <td style="text-align: right">0.0100</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td style="text-align: right">0.80</td>
+          <td style="text-align: right">1</td>
+          <td style="text-align: right">0.0400</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td style="text-align: right">0.30</td>
+          <td style="text-align: right">0</td>
+          <td style="text-align: right">0.0900</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td style="text-align: right">0.10</td>
+          <td style="text-align: right">0</td>
+          <td style="text-align: right">0.0100</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td style="text-align: right">0.02</td>
+          <td style="text-align: right">1</td>
+          <td style="text-align: right">0.9604</td>
+      </tr>
+  </tbody>
+</table>
+<p>The five charges sum to 1.1104, so the Brier loss is \(1.1104/5=0.2221\). Drop
+case 5 and the remaining four average 0.0375. One confident mistake in five
+rows made the average nearly six times larger, but notice the ceiling: even a
+forecast of 0.00 on a case that happened would have been charged only 1.00.
+That bounded worst case is the main behavioral difference from
+<a href="/blog/knowledge-base/glossary/log-loss/">log loss</a>, which
+charges an unbounded penalty for the same mistake.</p>
+<h2 id="one-number-three-separate-jobs">One number, three separate jobs</h2>
+<p>A Brier loss is not purely a measure of whether stated probabilities match
+observed frequencies. It also absorbs how hard the outcome was to predict at
+all, and how well the model separated cases from one another. Those three
+effects can be written out exactly.</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: A toy Brier loss of 0.17 breaks into an uncertainty term of 0.25 fixed by the labels, minus a resolution term of 0.09 earned by separating the groups, plus a reliability term of 0.01 charged for miscalibration." tabindex="0">
+        <img src="/blog/knowledge-base/glossary/brier-loss/brier-partition.svg" alt="A toy Brier loss of 0.17 breaks into an uncertainty term of 0.25 fixed by the labels, minus a resolution term of 0.09 earned by separating the groups, plus a reliability term of 0.01 charged for miscalibration." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>Toy values, not measurements; every number here is recomputed in the worked example below. Left: ten forecasts fall into the two probability values this model ever stated. The five cases told 0.10 contained one true positive, an observed rate of 0.20; the five told 0.90 contained four, an observed rate of 0.80. Across all ten rows the positive rate is 0.50. Right: the resulting Brier loss of 0.17 read as a running total. Uncertainty, 0.25, is set by the labels alone; it is the loss of the best constant forecast in hindsight, 0.50 on every case, and it is the baseline the other two terms adjust. Resolution, 0.09, is subtracted as a credit for sorting cases into groups whose observed rates sit far from the overall 0.50. Reliability, 0.01, is added because each stated probability missed its own group&rsquo;s observed rate by 0.10. Only that last small bar is calibration, which is why a lower Brier loss on its own does not certify a better calibrated model.</figcaption>
+</figure>
+
+<p>Group the cases by the probability they were given, the same grouping a
+<strong>reliability diagram</strong> uses: a plot of each group&rsquo;s observed positive rate
+against the probability that group was told, where perfect agreement on these
+rows puts every group on the diagonal. Say there are \(K\) groups; group \(k\)
+holds \(n_k\) cases that all received the same stated probability \(p_k\), and a fraction
+\(\bar o_k\) of them turned out positive. Let \(\bar o\) be the positive rate
+across all \(n\) cases. Then</p>
+\[
+\mathrm{Brier}
+=\frac{1}{n}\sum_{k=1}^{K}n_k\left(p_k-\bar o_k\right)^2
+-\frac{1}{n}\sum_{k=1}^{K}n_k\left(\bar o_k-\bar o\right)^2
++\bar o\left(1-\bar o\right).
+\]<table>
+  <thead>
+      <tr>
+          <th>Term</th>
+          <th>Usual name</th>
+          <th>What it asks</th>
+          <th>Direction</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>\(\frac{1}{n}\sum_k n_k(p_k-\bar o_k)^2\)</td>
+          <td>reliability</td>
+          <td>Inside one group, does the stated probability match the observed rate?</td>
+          <td>smaller is better; this term is calibration</td>
+      </tr>
+      <tr>
+          <td>\(\frac{1}{n}\sum_k n_k(\bar o_k-\bar o)^2\)</td>
+          <td>resolution</td>
+          <td>Do the groups the model creates have observed rates far from the overall rate?</td>
+          <td>larger is better, and it is subtracted</td>
+      </tr>
+      <tr>
+          <td>\(\bar o(1-\bar o)\)</td>
+          <td>uncertainty</td>
+          <td>How uncertain was the outcome before any model spoke?</td>
+          <td>fixed by the labels, not by the model</td>
+      </tr>
+  </tbody>
+</table>
+<p>This partition is due to
+<a href="https://doi.org/10.1175/1520-0450%281973%29012%3C0595:ANVPOT%3E2.0.CO;2">Murphy (1973)</a>.
+It is the same quantity as the definition above, rewritten, not a second
+measurement. Split the rows into groups and expand each squared error inside
+group \(k\) around that group&rsquo;s observed rate: the cross term drops out because
+deviations from a group mean sum to zero, and because \(y_i\) is 0 or 1 the
+leftover within-group spread is exactly \(n_k\bar o_k(1-\bar o_k)\). Summing
+that spread over groups and re-centering it on the overall rate turns it into
+\(\bar o(1-\bar o)-\frac{1}{n}\sum_k n_k(\bar o_k-\bar o)^2\), which is
+uncertainty minus resolution. No approximation enters anywhere: every term is
+computed from the rows in front of you, and the identity holds exactly for that
+sample. The group rates are still sample quantities, though, so a group that
+looks calibrated on these rows has not thereby been shown to be calibrated on
+future ones.</p>
+<h3 id="the-same-toy-both-ways">The same toy, both ways</h3>
+<p>Take the ten forecasts in the figure. Five were told 0.10 and one of them was
+positive; five were told 0.90 and four of them were positive.</p>
+<p>Directly from the definition: the four charges in the first group are
+\((0.10-1)^2=0.81\) once and \((0.10-0)^2=0.01\) four times; the second group
+gives \((0.90-1)^2=0.01\) four times and \((0.90-0)^2=0.81\) once. The ten
+charges sum to 1.70, so the Brier loss is 0.17.</p>
+<p>Through the partition, with \(\bar o=0.5\):</p>
+<ul>
+<li>reliability \(=\frac{1}{10}\left[5(0.10-0.20)^2+5(0.90-0.80)^2\right]=0.01\)</li>
+<li>resolution \(=\frac{1}{10}\left[5(0.20-0.50)^2+5(0.80-0.50)^2\right]=0.09\)</li>
+<li>uncertainty \(=0.5\times 0.5=0.25\)</li>
+</ul>
+<p>and \(0.01-0.09+0.25=0.17\), the same number. Now make the model perfectly
+calibrated on these ten rows by restating those probabilities as 0.20 and 0.80,
+the rates its own groups actually showed. Reliability falls to 0, resolution
+and uncertainty do not move, and the Brier loss becomes 0.16. The calibration
+repair was worth exactly the 0.01 that reliability was charging.</p>
+<h3 id="the-partition-needs-groups-and-continuous-forecasts-fight-it">The partition needs groups, and continuous forecasts fight it</h3>
+<p>The identity above is exact when every case in a group received the same stated
+probability. Real models rarely oblige. A fitted classifier emits effectively
+continuous probabilities, so strict grouping puts nearly every row in a group of
+its own, and in a group of one \(\bar o_k\) is simply that row&rsquo;s label. Plug that
+degenerate grouping into the three terms and watch them stop being useful:</p>
+<ul>
+<li>reliability becomes \(\frac{1}{n}\sum_i(p_i-y_i)^2\), which is the whole Brier
+loss again;</li>
+<li>resolution becomes \(\frac{1}{n}\sum_i(y_i-\bar o)^2=\bar o(1-\bar o)\), which
+is exactly the uncertainty term.</li>
+</ul>
+<p>Write the partition out with those substitutions:</p>
+\[
+\mathrm{Brier}
+=\mathrm{Brier}
+-\bar o(1-\bar o)
++\bar o(1-\bar o).
+\]<p>That looks circular, but it is not a new transform. The three right-hand terms
+are still reliability, then minus resolution, then plus uncertainty; they just
+happen to evaluate to \(\mathrm{Brier}\), \(\bar o(1-\bar o)\), and
+\(\bar o(1-\bar o)\) in this degenerate grouping. The last two cancel, so the
+identity reduces to \(\mathrm{Brier}=\mathrm{Brier}\): algebraically true,
+diagnostically empty. Nothing has been separated, because the entire loss sits
+back inside the first term.</p>
+<p>Reading the partition on real predictions therefore means grouping nearby
+probabilities into bins and putting each bin&rsquo;s mean forecast \(\bar p_k\) where
+a single stated probability used to be. Once forecasts vary inside a bin, the
+three displayed terms no longer add up on their own. Restoring the exact
+identity takes a fourth term,</p>
+\[
+R=\frac{1}{n}\sum_{k=1}^{K}\sum_{i\in k}
+\left[(p_i-\bar p_k)^2-2(p_i-\bar p_k)(y_i-\bar o_k)\right],
+\]<p>which collects the spread of forecasts inside a bin and any agreement between
+that spread and the outcomes. It is not guaranteed to be small, and it can be
+negative. The total on the left never moves. The three named pieces and \(R\)
+do, and they shift when you change the bin edges, exactly as a reliability
+diagram does. Treat the binned partition as a way of reading the number, not as
+a rival measurement.</p>
+<h2 id="the-no-skill-anchor-moves-with-the-base-rate">The no-skill anchor moves with the base rate</h2>
+<p>A forecaster that ignores every feature and repeats one constant \(q\) on every
+case has no resolution at all, and its Brier loss works out to
+\(\bar o(1-\bar o)+(q-\bar o)^2\). The best it can do is set \(q=\bar o\), the
+positive rate of the very cases being scored, which lands it exactly on the
+uncertainty term \(\bar o(1-\bar o)\). That is the anchor a real model has to
+beat, with one caveat worth keeping in view: choosing \(q\) from the evaluation
+labels is hindsight. A constant baseline you could actually have deployed takes
+its rate from training or historical data, so its held-out loss sits slightly
+above the held-out uncertainty term by the squared gap between the two rates.</p>
+<p>The anchor depends only on how common the outcome is, and it is largest at
+\(\bar o=0.5\), where it equals 0.25. On a dataset where positives are rare it
+is small: in an illustrative set with 328 positives among 3,580 cases,
+\(\bar o=0.0916\) and the anchor is \(0.0916\times 0.9084=0.0832\). A model
+scoring 0.07 there sounds excellent next to a model scoring 0.20 on a balanced
+dataset, yet the second model may be doing far more work. Always quote the
+base-rate anchor beside the Brier loss, and never compare raw Brier losses
+across datasets whose positive rates differ. See
+<a href="/blog/knowledge-base/glossary/base-rate-bias/">base-rate bias</a>
+for the more general version of that mistake.</p>
+<h2 id="strict-properness-or-why-truthful-probabilities-win-on-average">Strict properness, or why truthful probabilities win on average</h2>
+<p>Brier loss is a <strong>strictly proper scoring rule</strong>. A <strong>scoring rule</strong> is any
+recipe for grading a stated probability against what actually happened; a rule
+is <strong>proper</strong> when the lowest expected charge comes from reporting the actual
+probability of the outcome, and <strong>strictly proper</strong> when that report is the
+only way to reach the lowest expected charge
+(<a href="https://doi.org/10.1198/016214506000001437">Gneiting and Raftery, 2007</a>).</p>
+<p>Concretely, take a group of cases that truly go positive 70 percent of the
+time, and suppose you have to state one number \(q\) for every case in the
+group. Averaging over that 70/30 split of outcomes, your expected charge is
+\(0.7(1-q)^2+0.3q^2\):</p>
+<table>
+  <thead>
+      <tr>
+          <th>Reported \(q\)</th>
+          <th style="text-align: right">Expected Brier loss</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0.50, hedging to the middle</td>
+          <td style="text-align: right">0.2500</td>
+      </tr>
+      <tr>
+          <td>0.60</td>
+          <td style="text-align: right">0.2200</td>
+      </tr>
+      <tr>
+          <td>0.70, the true rate</td>
+          <td style="text-align: right"><strong>0.2100</strong></td>
+      </tr>
+      <tr>
+          <td>0.90</td>
+          <td style="text-align: right">0.2500</td>
+      </tr>
+      <tr>
+          <td>0.99, sounding decisive</td>
+          <td style="text-align: right">0.2941</td>
+      </tr>
+  </tbody>
+</table>
+<p>The minimum sits at \(q=0.70\), the rate at which these cases actually turn out
+positive, and the charge rises in both directions away from it. &ldquo;Expected&rdquo;
+means averaged over those outcomes in the long run; the guarantee is about that
+average, not about any single case, where luck can always make a well-stated
+probability look bad.</p>
+<p>The rule was originally designed for human forecasters, which is why the older
+literature phrases it as an incentive to report your honest belief. For a
+fitted model there is no belief to be honest about, and the statement becomes
+simpler: the model&rsquo;s expected Brier loss is smallest, and uniquely so, when its
+output for a group of similar rows equals the rate at which such rows actually
+turn out positive. Nothing can be gained by post-processing the probabilities
+in any way that does not move them toward those rates.</p>
+<p>That guarantee is about expected loss in the population, so it does not make a
+reported number unfalsifiable. Selecting a model on the evaluation labels,
+tuning against them, leaking them into features, or reusing the same test set
+many times can still make an empirical Brier loss look better than the model
+deserves. Properness earns you the right to read the number as a measurement of
+probability quality; a genuinely held-out evaluation is what earns you the
+number.</p>
+<h2 id="computing-it">Computing it</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">brier_score_loss</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.90</span><span class="p">,</span> <span class="mf">0.80</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">brier_score_loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>     <span class="c1"># 0.22208</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">p</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>      <span class="c1"># 0.22208, the same arithmetic</span>
+</span></span></code></pre></div><p>Two conventions to state when you report the number. First, which class the
+probability refers to: \(p\) has to be the probability of the class encoded as
+\(y=1\). Swap the roles consistently, using \(y'=1-y\) and \(p'=1-p\), and the
+binary Brier loss is unchanged; flip only the labels or only the probabilities
+and you have simply mismatched the inputs. Second, whether the score is
+computed on held-out cases; a Brier
+loss measured on the rows a model was fitted to is a training diagnostic, not
+evidence about future forecasts. scikit-learn&rsquo;s model-evaluation guide
+documents its own conventions
+(<a href="https://scikit-learn.org/1.7/modules/model_evaluation.html">official guide</a>).</p>
+<h2 id="what-a-brier-loss-does-not-establish">What a Brier loss does not establish</h2>
+<ul>
+<li>It does not certify calibration. Only the reliability term is calibration,
+and a model can post a good Brier loss on strong separation while a middle
+bin sits well off the diagonal. Read it beside a reliability diagram
+(<a href="https://doi.org/10.1145/1102351.1102430">Niculescu-Mizil and Caruana, 2005</a>).</li>
+<li>It is not comparable across datasets with different base rates, because the
+uncertainty term travels with the labels rather than the model.</li>
+<li>It says nothing directly about the review workload at a chosen threshold. A
+Brier loss is computed from probabilities and outcomes without ever applying
+a decision threshold; precision, recall, and the count of false alarms need
+one.</li>
+<li>It is not a ranking metric. Two models can share a ranking and differ in
+Brier loss, and two models can share a Brier loss and rank cases differently.</li>
+<li>A single held-out Brier loss is one draw. When two models were scored on the
+same cases, quantify the uncertainty in their paired per-case differences
+rather than in each score separately, and resample at whatever unit is
+actually independent, keeping any clustering or time ordering intact. A
+<a href="/blog/knowledge-base/glossary/bootstrap/">bootstrap</a> over
+held-out rows describes uncertainty given the fitted models; covering
+training variability as well means refitting inside the resampling.</li>
+</ul>
+<p>See also: <a href="/blog/knowledge-base/glossary/log-loss/">log loss</a>,
+<a href="/blog/knowledge-base/glossary/gini-impurity/">Gini impurity</a>,
+<a href="/blog/knowledge-base/glossary/base-rate-bias/">base-rate bias</a>,
+<a href="/blog/knowledge-base/glossary/bootstrap/">bootstrap</a>,
+<a href="/blog/knowledge-base/glossary/iid/">independent and identically distributed (i.i.d.)</a>, and the Deep Dive
+<a href="/blog/knowledge-base/deep-dives/logistic-regression-random-forest/">Logistic Regression and Random Forest</a>,
+where both scores are reported on a fixed holdout.</p>
+
+            </div>
+
+            <footer class="post-footer">
+
+                <div class="post-navigation">
+
+                    <a href="/blog/knowledge-base/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/knowledge-base/" class="back-to-blog">Knowledge Base</a>
+                    <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+
+    </main>
+
+    <footer class="footer footer-compact">
+        <div class="container">
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
+            </div>
+            <div class="footer-compact-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="/blog/search/">Search</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/blog/script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tables = document.querySelectorAll('.post-body table');
+            tables.forEach((table, index) => {
+                if (table.parentElement?.classList.contains('table-scroll')) return;
+
+                const scroller = document.createElement('div');
+                scroller.className = 'table-scroll';
+                scroller.setAttribute('aria-label', `Scrollable data table ${index + 1}`);
+                table.parentNode.insertBefore(scroller, table);
+                scroller.appendChild(table);
+
+                const updateScrollableState = () => {
+                    const isScrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+                    scroller.classList.toggle('is-scrollable', isScrollable);
+                    if (isScrollable) {
+                        scroller.setAttribute('role', 'region');
+                        scroller.setAttribute('tabindex', '0');
+                    } else {
+                        scroller.removeAttribute('role');
+                        scroller.removeAttribute('tabindex');
+                    }
+                };
+
+                requestAnimationFrame(updateScrollableState);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(updateScrollableState).observe(scroller);
+                } else {
+                    window.addEventListener('resize', updateScrollableState, { passive: true });
+                }
+            });
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                output: "htmlAndMathml"
+            });
+
+            const copyText = async (text) => {
+                if (navigator.clipboard?.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    return;
+                }
+
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.setAttribute('readonly', '');
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                const copied = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                if (!copied) {
+                    throw new Error('Copy command was not accepted');
+                }
+            };
+
+            document.querySelectorAll('[data-copy-target]').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const target = document.querySelector(button.dataset.copyTarget);
+                    if (!target) {
+                        console.error(`Copy target not found: ${button.dataset.copyTarget}`);
+                        return;
+                    }
+
+                    const originalLabel = button.textContent;
+                    try {
+                        await copyText(target.textContent.trim());
+                        button.textContent = 'Copied';
+                        button.classList.add('copied');
+                        setTimeout(() => {
+                            button.textContent = originalLabel;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    } catch (error) {
+                        console.error('Failed to copy citation: ', error);
+                    }
+                });
+            });
+
+            const copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+            const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
+            codeBlocks.forEach(pre => {
+                if (pre.closest('.code-block-frame')) {
+                    return;
+                }
+
+                const frame = document.createElement('div');
+                frame.className = 'code-block-frame';
+                const toolbar = document.createElement('div');
+                toolbar.className = 'code-block-toolbar';
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'copy-code-button';
+                button.innerHTML = copyIcon;
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+                button.setAttribute('title', 'Copy');
+
+                const markCopied = () => {
+                    button.innerHTML = checkIcon;
+                    button.classList.add('copied');
+                    button.setAttribute('aria-label', 'Copied');
+                    setTimeout(() => {
+                        button.innerHTML = copyIcon;
+                        button.classList.remove('copied');
+                        button.setAttribute('aria-label', 'Copy code to clipboard');
+                    }, 2000);
+                };
+
+                button.addEventListener('click', () => {
+                    const code = pre.querySelector('code');
+                    const text = code ? code.textContent : pre.textContent;
+
+                    navigator.clipboard.writeText(text).then(markCopied).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            markCopied();
+                        } catch (fallbackErr) {
+                            console.error('Fallback copy failed: ', fallbackErr);
+                        }
+                        document.body.removeChild(textArea);
+                    });
+                });
+
+                toolbar.appendChild(button);
+                frame.appendChild(toolbar);
+                pre.parentNode.insertBefore(frame, pre);
+                frame.appendChild(pre);
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,901 @@
+dataset,model,feature,feature_label,repeat,average_precision_decrease
+htru2,logistic_regression,profile_mean,Profile mean,0,0.000780640571736
+htru2,logistic_regression,profile_mean,Profile mean,1,0.00104788339647
+htru2,logistic_regression,profile_mean,Profile mean,2,0.00732121952186
+htru2,logistic_regression,profile_mean,Profile mean,3,-0.00212300772006
+htru2,logistic_regression,profile_mean,Profile mean,4,0.00354444197772
+htru2,logistic_regression,profile_mean,Profile mean,5,0.000754753287259
+htru2,logistic_regression,profile_mean,Profile mean,6,-0.000545842495302
+htru2,logistic_regression,profile_mean,Profile mean,7,0.00375174822345
+htru2,logistic_regression,profile_mean,Profile mean,8,0.00701359774186
+htru2,logistic_regression,profile_mean,Profile mean,9,0.00427299021412
+htru2,logistic_regression,profile_mean,Profile mean,10,0.00431460559611
+htru2,logistic_regression,profile_mean,Profile mean,11,0.00449938402936
+htru2,logistic_regression,profile_mean,Profile mean,12,0.0044052707262
+htru2,logistic_regression,profile_mean,Profile mean,13,0.0065028831833
+htru2,logistic_regression,profile_mean,Profile mean,14,0.00850350255453
+htru2,logistic_regression,profile_mean,Profile mean,15,0.000553259324579
+htru2,logistic_regression,profile_mean,Profile mean,16,0.00295240410875
+htru2,logistic_regression,profile_mean,Profile mean,17,0.00315082020411
+htru2,logistic_regression,profile_mean,Profile mean,18,0.00190025142725
+htru2,logistic_regression,profile_mean,Profile mean,19,0.00605536722647
+htru2,logistic_regression,profile_mean,Profile mean,20,0.00148189114573
+htru2,logistic_regression,profile_mean,Profile mean,21,0.00772888264367
+htru2,logistic_regression,profile_mean,Profile mean,22,0.00490352539288
+htru2,logistic_regression,profile_mean,Profile mean,23,0.0040712301021
+htru2,logistic_regression,profile_mean,Profile mean,24,0.00032685590107
+htru2,logistic_regression,profile_mean,Profile mean,25,0.00307111314431
+htru2,logistic_regression,profile_mean,Profile mean,26,0.0052503671786
+htru2,logistic_regression,profile_mean,Profile mean,27,0.00859218644959
+htru2,logistic_regression,profile_mean,Profile mean,28,0.00456640845886
+htru2,logistic_regression,profile_mean,Profile mean,29,0.00795659679252
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,0,0.00104415130037
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,1,-0.00109384279136
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,2,-0.000202814005268
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,3,0.00188560218431
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,4,-0.000151548872355
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,5,0.00293229731723
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,6,0.000467445916167
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,7,0.00129125943612
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,8,-0.000539573628441
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,9,-8.64578449796e-05
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,10,-0.00169061605227
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,11,-0.000218995966747
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,12,0.00118358574829
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,13,0.00066804430365
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,14,-0.00106715955619
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,15,-0.000597366106481
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,16,-0.00121413313328
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,17,0.00198629545988
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,18,0.00133351550082
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,19,-0.00229733464662
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,20,0.00134962140402
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,21,0.000252404436943
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,22,0.00208711070795
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,23,0.000263112738298
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,24,0.000561746497175
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,25,0.000866556094869
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,26,-0.00115465084316
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,27,0.000171624426466
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,28,-0.000710518481451
+htru2,logistic_regression,profile_standard_deviation,Profile standard deviation,29,0.000409708102151
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,0,0.855501632942
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,1,0.855524861871
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,2,0.852459797402
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,3,0.857594573645
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,4,0.85900385597
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,5,0.855626483781
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,6,0.855807651216
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,7,0.855977100098
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,8,0.855369719202
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,9,0.858777968479
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,10,0.858116824569
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,11,0.856363244613
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,12,0.855714330981
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,13,0.85797496146
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,14,0.854453818388
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,15,0.858623101975
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,16,0.858430829343
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,17,0.858541654461
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,18,0.857302909536
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,19,0.852992518468
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,20,0.854877890753
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,21,0.856499634331
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,22,0.85758225421
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,23,0.858486089947
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,24,0.860808501336
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,25,0.858572646081
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,26,0.852635769911
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,27,0.856082967105
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,28,0.854969522711
+htru2,logistic_regression,profile_excess_kurtosis,Profile excess kurtosis,29,0.854221403739
+htru2,logistic_regression,profile_skewness,Profile skewness,0,0.0115441860108
+htru2,logistic_regression,profile_skewness,Profile skewness,1,0.0129581820119
+htru2,logistic_regression,profile_skewness,Profile skewness,2,0.0291414989476
+htru2,logistic_regression,profile_skewness,Profile skewness,3,0.0168721659849
+htru2,logistic_regression,profile_skewness,Profile skewness,4,0.00984547099452
+htru2,logistic_regression,profile_skewness,Profile skewness,5,0.0209008090298
+htru2,logistic_regression,profile_skewness,Profile skewness,6,0.016539123012
+htru2,logistic_regression,profile_skewness,Profile skewness,7,0.030165361831
+htru2,logistic_regression,profile_skewness,Profile skewness,8,0.0282072599682
+htru2,logistic_regression,profile_skewness,Profile skewness,9,0.016895671084
+htru2,logistic_regression,profile_skewness,Profile skewness,10,0.0117155275863
+htru2,logistic_regression,profile_skewness,Profile skewness,11,0.0236603334962
+htru2,logistic_regression,profile_skewness,Profile skewness,12,0.0243566234726
+htru2,logistic_regression,profile_skewness,Profile skewness,13,0.0164948907178
+htru2,logistic_regression,profile_skewness,Profile skewness,14,0.0307060172562
+htru2,logistic_regression,profile_skewness,Profile skewness,15,0.0192310992225
+htru2,logistic_regression,profile_skewness,Profile skewness,16,0.0158879692331
+htru2,logistic_regression,profile_skewness,Profile skewness,17,0.00990740443388
+htru2,logistic_regression,profile_skewness,Profile skewness,18,0.013020234456
+htru2,logistic_regression,profile_skewness,Profile skewness,19,0.0254002200768
+htru2,logistic_regression,profile_skewness,Profile skewness,20,0.0115914605637
+htru2,logistic_regression,profile_skewness,Profile skewness,21,0.0193061458734
+htru2,logistic_regression,profile_skewness,Profile skewness,22,0.018842658259
+htru2,logistic_regression,profile_skewness,Profile skewness,23,0.0170174603319
+htru2,logistic_regression,profile_skewness,Profile skewness,24,0.00781902904975
+htru2,logistic_regression,profile_skewness,Profile skewness,25,0.0154818528944
+htru2,logistic_regression,profile_skewness,Profile skewness,26,0.0224134585349
+htru2,logistic_regression,profile_skewness,Profile skewness,27,0.0226436998172
+htru2,logistic_regression,profile_skewness,Profile skewness,28,0.0166500573482
+htru2,logistic_regression,profile_skewness,Profile skewness,29,0.0275507692536
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,0,0.0193097996842
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,1,0.0185791631516
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,2,0.0215624307745
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,3,0.0171914284842
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,4,0.0143671035903
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,5,0.0197795105912
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,6,0.0187838660663
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,7,0.0176161494608
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,8,0.0141402064984
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,9,0.0167763367601
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,10,0.0151033550991
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,11,0.0164292503242
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,12,0.0181918038682
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,13,0.0187055295424
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,14,0.0221890783717
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,15,0.0140960156792
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,16,0.0179486334959
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,17,0.0154373539978
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,18,0.0140275306988
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,19,0.0200471831048
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,20,0.0117344171802
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,21,0.0231806887678
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,22,0.0141660317324
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,23,0.0170981787066
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,24,0.0161801450599
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,25,0.0158780947379
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,26,0.0235947750274
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,27,0.0171767499118
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,28,0.0182029130101
+htru2,logistic_regression,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,29,0.0199769792163
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,0,0.0799259897044
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,1,0.073271080029
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,2,0.0853661037285
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,3,0.0783035676962
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,4,0.087017063444
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,5,0.0782058804077
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,6,0.0827878007218
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,7,0.0712894989938
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,8,0.0894922290728
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,9,0.0806168712655
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,10,0.0877575700843
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,11,0.0733314823769
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,12,0.0779122110595
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,13,0.0709415679311
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,14,0.0732717600365
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,15,0.0889761019215
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,16,0.0843418656346
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,17,0.0790908576511
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,18,0.0860907962949
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,19,0.0742760360416
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,20,0.0904924895837
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,21,0.0717342396014
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,22,0.0873321363412
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,23,0.0862329744218
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,24,0.0744786517847
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,25,0.079332360721
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,26,0.0793174437774
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,27,0.0821061476607
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,28,0.0783840183298
+htru2,logistic_regression,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,29,0.0779266037366
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,0,0.000804507136876
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,1,0.00499501598697
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,2,0.00744829369513
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,3,0.00221218644671
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,4,0.00701812885191
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,5,0.00308082535202
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,6,0.00267520972387
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,7,0.00545675872021
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,8,-0.000146491363156
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,9,0.00337542179597
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,10,-0.00180317586461
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,11,0.00288761550664
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,12,0.00482091998992
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,13,0.00463314465707
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,14,0.00336785383356
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,15,0.00111789375483
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,16,0.00245424674708
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,17,0.00331374279717
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,18,0.000974784289274
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,19,0.00566495547129
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,20,0.00182537863949
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,21,0.00573979957182
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,22,0.00207607497415
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,23,-0.000416653141617
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,24,0.00319089941561
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,25,0.00511113818413
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,26,0.00427260778426
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,27,0.0045204089477
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,28,0.00172718840069
+htru2,logistic_regression,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,29,0.00255859796964
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,0,0.00894960706973
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,1,0.00714634756162
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,2,0.00882379181678
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,3,0.0107176730632
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,4,0.00573161258995
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,5,0.00881842017928
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,6,0.00808363971674
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,7,0.00692266747413
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,8,0.0108127663539
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,9,0.00462686329893
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,10,0.0151131460436
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,11,0.00955851588652
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,12,0.00484893347627
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,13,0.00844033506632
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,14,0.00999331568369
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,15,0.00890400520976
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,16,0.00787927297732
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,17,0.00674490970752
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,18,0.00828935348452
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,19,0.00678297148952
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,20,0.00880999762149
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,21,0.00663161425503
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,22,0.00917964668644
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,23,0.011765680922
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,24,0.00517408956447
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,25,0.00788284021797
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,26,0.0100978281509
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,27,0.00924927247261
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,28,0.0116921534361
+htru2,logistic_regression,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,29,0.00897781544849
+htru2,random_forest,profile_mean,Profile mean,0,0.00895555865041
+htru2,random_forest,profile_mean,Profile mean,1,0.00753313173414
+htru2,random_forest,profile_mean,Profile mean,2,0.00702819542009
+htru2,random_forest,profile_mean,Profile mean,3,0.00771449302607
+htru2,random_forest,profile_mean,Profile mean,4,0.00916243364738
+htru2,random_forest,profile_mean,Profile mean,5,0.00978888133898
+htru2,random_forest,profile_mean,Profile mean,6,0.00861010409775
+htru2,random_forest,profile_mean,Profile mean,7,0.00372309388761
+htru2,random_forest,profile_mean,Profile mean,8,0.00784679874929
+htru2,random_forest,profile_mean,Profile mean,9,0.00915650287126
+htru2,random_forest,profile_mean,Profile mean,10,0.00990272834838
+htru2,random_forest,profile_mean,Profile mean,11,0.00636244550685
+htru2,random_forest,profile_mean,Profile mean,12,0.00935579560323
+htru2,random_forest,profile_mean,Profile mean,13,0.00712782886498
+htru2,random_forest,profile_mean,Profile mean,14,0.00655574208618
+htru2,random_forest,profile_mean,Profile mean,15,0.00698538432358
+htru2,random_forest,profile_mean,Profile mean,16,0.0109660696626
+htru2,random_forest,profile_mean,Profile mean,17,0.00803341425758
+htru2,random_forest,profile_mean,Profile mean,18,0.00986089415767
+htru2,random_forest,profile_mean,Profile mean,19,0.00448273353071
+htru2,random_forest,profile_mean,Profile mean,20,0.00843734020617
+htru2,random_forest,profile_mean,Profile mean,21,0.00779934213725
+htru2,random_forest,profile_mean,Profile mean,22,0.00828991880981
+htru2,random_forest,profile_mean,Profile mean,23,0.00850177923286
+htru2,random_forest,profile_mean,Profile mean,24,0.00808841335805
+htru2,random_forest,profile_mean,Profile mean,25,0.0108197572898
+htru2,random_forest,profile_mean,Profile mean,26,0.00491447828958
+htru2,random_forest,profile_mean,Profile mean,27,0.00617220177117
+htru2,random_forest,profile_mean,Profile mean,28,0.00726943706557
+htru2,random_forest,profile_mean,Profile mean,29,0.00931505154088
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,0,0.0114135513437
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,1,0.00320580134648
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,2,0.00804386882172
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,3,0.00726378489055
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,4,0.00861405028394
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,5,0.00522909657716
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,6,0.00877288967425
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,7,0.00343285957741
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,8,0.00780289674203
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,9,0.00594814985315
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,10,0.00709635271721
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,11,0.0089813623737
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,12,0.00846151567261
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,13,0.00493330311385
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,14,0.00485126801573
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,15,0.00891269312286
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,16,0.00797853204964
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,17,0.00558176095574
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,18,0.00951296862624
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,19,0.00395394803357
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,20,0.00759844501701
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,21,0.00704489657287
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,22,0.00143006836373
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,23,0.00372010491417
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,24,0.00875930092197
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,25,0.00675725396808
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,26,0.0102257287277
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,27,0.000827020547382
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,28,0.00669006749963
+htru2,random_forest,profile_standard_deviation,Profile standard deviation,29,0.00415446339566
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,0,0.66833387239
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,1,0.679507039517
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,2,0.648571523813
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,3,0.654932396384
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,4,0.656075866898
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,5,0.688427122014
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,6,0.682014738885
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,7,0.667420260513
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,8,0.672940150197
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,9,0.659189021715
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,10,0.631013765187
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,11,0.666617052852
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,12,0.658578607526
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,13,0.653877626456
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,14,0.658131012232
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,15,0.665506613682
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,16,0.6739100296
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,17,0.651382194345
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,18,0.652961645704
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,19,0.637799018527
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,20,0.658147537554
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,21,0.667291920499
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,22,0.665288073212
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,23,0.624899691045
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,24,0.667087094466
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,25,0.642462967927
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,26,0.664961587235
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,27,0.640367783848
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,28,0.666074334474
+htru2,random_forest,profile_excess_kurtosis,Profile excess kurtosis,29,0.670683712744
+htru2,random_forest,profile_skewness,Profile skewness,0,0.0136686504789
+htru2,random_forest,profile_skewness,Profile skewness,1,0.00821310702451
+htru2,random_forest,profile_skewness,Profile skewness,2,0.0135297322026
+htru2,random_forest,profile_skewness,Profile skewness,3,0.0238836349301
+htru2,random_forest,profile_skewness,Profile skewness,4,0.0151476546632
+htru2,random_forest,profile_skewness,Profile skewness,5,0.0135826271839
+htru2,random_forest,profile_skewness,Profile skewness,6,0.00938295553087
+htru2,random_forest,profile_skewness,Profile skewness,7,0.0198901003929
+htru2,random_forest,profile_skewness,Profile skewness,8,0.00820271674395
+htru2,random_forest,profile_skewness,Profile skewness,9,0.00950476702047
+htru2,random_forest,profile_skewness,Profile skewness,10,0.0136431439089
+htru2,random_forest,profile_skewness,Profile skewness,11,0.013962848298
+htru2,random_forest,profile_skewness,Profile skewness,12,0.0196353016091
+htru2,random_forest,profile_skewness,Profile skewness,13,0.0195208211365
+htru2,random_forest,profile_skewness,Profile skewness,14,0.022541389862
+htru2,random_forest,profile_skewness,Profile skewness,15,0.0228311315621
+htru2,random_forest,profile_skewness,Profile skewness,16,0.0165209066359
+htru2,random_forest,profile_skewness,Profile skewness,17,0.0246423292526
+htru2,random_forest,profile_skewness,Profile skewness,18,0.016766277885
+htru2,random_forest,profile_skewness,Profile skewness,19,0.00984327166406
+htru2,random_forest,profile_skewness,Profile skewness,20,0.0102268751791
+htru2,random_forest,profile_skewness,Profile skewness,21,0.02071405847
+htru2,random_forest,profile_skewness,Profile skewness,22,0.0150533881417
+htru2,random_forest,profile_skewness,Profile skewness,23,0.0131278016256
+htru2,random_forest,profile_skewness,Profile skewness,24,0.0166603858218
+htru2,random_forest,profile_skewness,Profile skewness,25,0.00540089055235
+htru2,random_forest,profile_skewness,Profile skewness,26,0.0224084307027
+htru2,random_forest,profile_skewness,Profile skewness,27,0.00957327810841
+htru2,random_forest,profile_skewness,Profile skewness,28,0.0227088387757
+htru2,random_forest,profile_skewness,Profile skewness,29,0.00893697486272
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,0,0.00421368909394
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,1,-0.000832481847723
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,2,0.00439616376647
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,3,0.0067050504204
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,4,0.0045835950629
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,5,0.00338084178443
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,6,0.00300040144521
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,7,0.00646927207798
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,8,0.00436361892632
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,9,0.00248914948647
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,10,0.000146620963779
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,11,0.00420268183346
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,12,0.00680098514448
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,13,0.00380478254228
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,14,0.00699988553902
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,15,0.0082909552134
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,16,0.00500443893603
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,17,0.00691285502491
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,18,0.00505119385883
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,19,0.00470478694188
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,20,0.00522576915941
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,21,0.0061028523664
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,22,0.00271317324581
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,23,0.00550119520264
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,24,0.00569279795759
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,25,0.00477793504899
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,26,0.00149050917307
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,27,0.00488817701687
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,28,0.00355464716592
+htru2,random_forest,dm_snr_mean,Dispersion-measure signal-to-noise ratio mean,29,0.00741232440212
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,0,0.0200540410079
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,1,0.0141667201988
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,2,0.0158491116907
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,3,0.020322821048
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,4,0.0165905958667
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,5,0.0167460207133
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,6,0.0171666809196
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,7,0.0226124714668
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,8,0.0101650862706
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,9,0.0163581527911
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,10,0.0114346060937
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,11,0.014239514792
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,12,0.0229376420265
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,13,0.0162424619138
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,14,0.0236911043111
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,15,0.0272768145645
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,16,0.0189027170029
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,17,0.0211238061481
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,18,0.0194114966606
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,19,0.0174435402041
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,20,0.0216147881982
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,21,0.0237468561418
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,22,0.0170557295641
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,23,0.0200916259679
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,24,0.0179178974281
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,25,0.0174204351814
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,26,0.0146750724797
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,27,0.0211688265076
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,28,0.017897572586
+htru2,random_forest,dm_snr_standard_deviation,Dispersion-measure signal-to-noise ratio standard deviation,29,0.0217652608117
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,0,0.00432933351036
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,1,0.00210634288548
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,2,0.00519885307022
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,3,0.00735416379412
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,4,0.00522913264458
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,5,0.00282797565042
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,6,0.00411454726215
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,7,0.00650218868136
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,8,0.00510320670932
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,9,0.00342934004907
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,10,0.00359813700479
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,11,0.00536298624895
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,12,0.00498588450331
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,13,0.00340844036395
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,14,0.0072430432664
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,15,0.00697098930247
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,16,0.00414935960823
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,17,0.00706176724877
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,18,0.00597904301749
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,19,0.00504893768834
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,20,0.00508612600066
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,21,0.00407512360402
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,22,0.00348627889343
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,23,0.0045386231468
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,24,0.00616621813552
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,25,0.00529700872292
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,26,0.00186552119149
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,27,0.00524238607754
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,28,0.00505860564722
+htru2,random_forest,dm_snr_excess_kurtosis,Dispersion-measure signal-to-noise ratio excess kurtosis,29,0.00747297196328
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,0,0.00249763849834
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,1,0.000642916561535
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,2,0.00302100737254
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,3,0.00850903967549
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,4,0.00619757793421
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,5,0.00147523829876
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,6,0.00272973459696
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,7,0.00687409088003
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,8,0.00439972693388
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,9,0.00188711855776
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,10,0.00178823457378
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,11,0.00705433700505
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,12,0.00419119767329
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,13,0.00248330526275
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,14,0.00792732179262
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,15,0.0112242599691
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,16,0.00403839943735
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,17,0.00780278472558
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,18,0.00266131935214
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,19,0.00365332323726
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,20,0.00267805803684
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,21,0.00232128400065
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,22,0.00247912457065
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,23,0.00404029128525
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,24,0.00524711457233
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,25,0.00427240854657
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,26,0.0018188168333
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,27,0.00541261265004
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,28,0.00281248086555
+htru2,random_forest,dm_snr_skewness,Dispersion-measure signal-to-noise ratio skewness,29,0.00792420043297
+rice,logistic_regression,area,Area,0,0.0930502724069
+rice,logistic_regression,area,Area,1,0.103612564676
+rice,logistic_regression,area,Area,2,0.126372574598
+rice,logistic_regression,area,Area,3,0.100092597058
+rice,logistic_regression,area,Area,4,0.101134106904
+rice,logistic_regression,area,Area,5,0.11320905624
+rice,logistic_regression,area,Area,6,0.0914013949768
+rice,logistic_regression,area,Area,7,0.116465143814
+rice,logistic_regression,area,Area,8,0.0926607901464
+rice,logistic_regression,area,Area,9,0.0985112432115
+rice,logistic_regression,area,Area,10,0.0966898151839
+rice,logistic_regression,area,Area,11,0.0959170871208
+rice,logistic_regression,area,Area,12,0.110383124936
+rice,logistic_regression,area,Area,13,0.107191006442
+rice,logistic_regression,area,Area,14,0.0943706876107
+rice,logistic_regression,area,Area,15,0.0927352884182
+rice,logistic_regression,area,Area,16,0.101380617922
+rice,logistic_regression,area,Area,17,0.11519006123
+rice,logistic_regression,area,Area,18,0.110605074389
+rice,logistic_regression,area,Area,19,0.09686990097
+rice,logistic_regression,area,Area,20,0.103412108057
+rice,logistic_regression,area,Area,21,0.0990413707276
+rice,logistic_regression,area,Area,22,0.0994936515564
+rice,logistic_regression,area,Area,23,0.0974791599907
+rice,logistic_regression,area,Area,24,0.0990632239043
+rice,logistic_regression,area,Area,25,0.108811902613
+rice,logistic_regression,area,Area,26,0.100282413888
+rice,logistic_regression,area,Area,27,0.0901226309963
+rice,logistic_regression,area,Area,28,0.101140612163
+rice,logistic_regression,area,Area,29,0.113995798854
+rice,logistic_regression,perimeter,Perimeter,0,0.0245259119983
+rice,logistic_regression,perimeter,Perimeter,1,0.0272778397977
+rice,logistic_regression,perimeter,Perimeter,2,0.0430644227984
+rice,logistic_regression,perimeter,Perimeter,3,0.0351677098927
+rice,logistic_regression,perimeter,Perimeter,4,0.0323840272873
+rice,logistic_regression,perimeter,Perimeter,5,0.0362923782013
+rice,logistic_regression,perimeter,Perimeter,6,0.026201795199
+rice,logistic_regression,perimeter,Perimeter,7,0.0392036459061
+rice,logistic_regression,perimeter,Perimeter,8,0.0279775709891
+rice,logistic_regression,perimeter,Perimeter,9,0.0309552665313
+rice,logistic_regression,perimeter,Perimeter,10,0.0292926802114
+rice,logistic_regression,perimeter,Perimeter,11,0.0251550790444
+rice,logistic_regression,perimeter,Perimeter,12,0.0392565470377
+rice,logistic_regression,perimeter,Perimeter,13,0.0282282595868
+rice,logistic_regression,perimeter,Perimeter,14,0.0328058728465
+rice,logistic_regression,perimeter,Perimeter,15,0.0295909725547
+rice,logistic_regression,perimeter,Perimeter,16,0.025847784499
+rice,logistic_regression,perimeter,Perimeter,17,0.0398448167193
+rice,logistic_regression,perimeter,Perimeter,18,0.0354660115502
+rice,logistic_regression,perimeter,Perimeter,19,0.0321938965159
+rice,logistic_regression,perimeter,Perimeter,20,0.0310449211826
+rice,logistic_regression,perimeter,Perimeter,21,0.0324843546683
+rice,logistic_regression,perimeter,Perimeter,22,0.0291047967149
+rice,logistic_regression,perimeter,Perimeter,23,0.0329531441751
+rice,logistic_regression,perimeter,Perimeter,24,0.0340929422925
+rice,logistic_regression,perimeter,Perimeter,25,0.0285233805006
+rice,logistic_regression,perimeter,Perimeter,26,0.0384100279553
+rice,logistic_regression,perimeter,Perimeter,27,0.0332814452158
+rice,logistic_regression,perimeter,Perimeter,28,0.033077586102
+rice,logistic_regression,perimeter,Perimeter,29,0.0344363844108
+rice,logistic_regression,major_axis_length,Major axis length,0,0.25740876481
+rice,logistic_regression,major_axis_length,Major axis length,1,0.253725034548
+rice,logistic_regression,major_axis_length,Major axis length,2,0.219672370781
+rice,logistic_regression,major_axis_length,Major axis length,3,0.239578149477
+rice,logistic_regression,major_axis_length,Major axis length,4,0.253645249038
+rice,logistic_regression,major_axis_length,Major axis length,5,0.264262055989
+rice,logistic_regression,major_axis_length,Major axis length,6,0.273991936919
+rice,logistic_regression,major_axis_length,Major axis length,7,0.236621594953
+rice,logistic_regression,major_axis_length,Major axis length,8,0.264886375399
+rice,logistic_regression,major_axis_length,Major axis length,9,0.274079280406
+rice,logistic_regression,major_axis_length,Major axis length,10,0.253351790154
+rice,logistic_regression,major_axis_length,Major axis length,11,0.275280839018
+rice,logistic_regression,major_axis_length,Major axis length,12,0.222758305349
+rice,logistic_regression,major_axis_length,Major axis length,13,0.243043554245
+rice,logistic_regression,major_axis_length,Major axis length,14,0.233272341627
+rice,logistic_regression,major_axis_length,Major axis length,15,0.244335682001
+rice,logistic_regression,major_axis_length,Major axis length,16,0.236088940341
+rice,logistic_regression,major_axis_length,Major axis length,17,0.228440689457
+rice,logistic_regression,major_axis_length,Major axis length,18,0.262424329293
+rice,logistic_regression,major_axis_length,Major axis length,19,0.264897309398
+rice,logistic_regression,major_axis_length,Major axis length,20,0.257805308539
+rice,logistic_regression,major_axis_length,Major axis length,21,0.237922205804
+rice,logistic_regression,major_axis_length,Major axis length,22,0.262407608679
+rice,logistic_regression,major_axis_length,Major axis length,23,0.235008753878
+rice,logistic_regression,major_axis_length,Major axis length,24,0.251684883496
+rice,logistic_regression,major_axis_length,Major axis length,25,0.255893212895
+rice,logistic_regression,major_axis_length,Major axis length,26,0.263105803927
+rice,logistic_regression,major_axis_length,Major axis length,27,0.263344257848
+rice,logistic_regression,major_axis_length,Major axis length,28,0.247377317503
+rice,logistic_regression,major_axis_length,Major axis length,29,0.254215224557
+rice,logistic_regression,minor_axis_length,Minor axis length,0,0.019138501469
+rice,logistic_regression,minor_axis_length,Minor axis length,1,0.0272227011829
+rice,logistic_regression,minor_axis_length,Minor axis length,2,0.0286748605739
+rice,logistic_regression,minor_axis_length,Minor axis length,3,0.0208819620639
+rice,logistic_regression,minor_axis_length,Minor axis length,4,0.0190967439712
+rice,logistic_regression,minor_axis_length,Minor axis length,5,0.0260363140359
+rice,logistic_regression,minor_axis_length,Minor axis length,6,0.0208887963781
+rice,logistic_regression,minor_axis_length,Minor axis length,7,0.0249028675021
+rice,logistic_regression,minor_axis_length,Minor axis length,8,0.0209763153674
+rice,logistic_regression,minor_axis_length,Minor axis length,9,0.0274747147343
+rice,logistic_regression,minor_axis_length,Minor axis length,10,0.0205812888045
+rice,logistic_regression,minor_axis_length,Minor axis length,11,0.0205647771187
+rice,logistic_regression,minor_axis_length,Minor axis length,12,0.0241186406434
+rice,logistic_regression,minor_axis_length,Minor axis length,13,0.0210080590905
+rice,logistic_regression,minor_axis_length,Minor axis length,14,0.0236597202242
+rice,logistic_regression,minor_axis_length,Minor axis length,15,0.0163904382424
+rice,logistic_regression,minor_axis_length,Minor axis length,16,0.0237888417607
+rice,logistic_regression,minor_axis_length,Minor axis length,17,0.0229904491811
+rice,logistic_regression,minor_axis_length,Minor axis length,18,0.0287928590927
+rice,logistic_regression,minor_axis_length,Minor axis length,19,0.0216430765492
+rice,logistic_regression,minor_axis_length,Minor axis length,20,0.0289115459942
+rice,logistic_regression,minor_axis_length,Minor axis length,21,0.0236265517023
+rice,logistic_regression,minor_axis_length,Minor axis length,22,0.0220139399171
+rice,logistic_regression,minor_axis_length,Minor axis length,23,0.0167043817327
+rice,logistic_regression,minor_axis_length,Minor axis length,24,0.0212002808821
+rice,logistic_regression,minor_axis_length,Minor axis length,25,0.0278573809692
+rice,logistic_regression,minor_axis_length,Minor axis length,26,0.0195919934433
+rice,logistic_regression,minor_axis_length,Minor axis length,27,0.0169703561711
+rice,logistic_regression,minor_axis_length,Minor axis length,28,0.0188837041398
+rice,logistic_regression,minor_axis_length,Minor axis length,29,0.0263182089489
+rice,logistic_regression,eccentricity,Eccentricity,0,0.0121312495995
+rice,logistic_regression,eccentricity,Eccentricity,1,0.0150280216318
+rice,logistic_regression,eccentricity,Eccentricity,2,0.00727407360894
+rice,logistic_regression,eccentricity,Eccentricity,3,0.00814009658063
+rice,logistic_regression,eccentricity,Eccentricity,4,0.00793447478261
+rice,logistic_regression,eccentricity,Eccentricity,5,0.0111758493879
+rice,logistic_regression,eccentricity,Eccentricity,6,0.0131040432217
+rice,logistic_regression,eccentricity,Eccentricity,7,0.00855308407741
+rice,logistic_regression,eccentricity,Eccentricity,8,0.0112399790619
+rice,logistic_regression,eccentricity,Eccentricity,9,0.0146462787421
+rice,logistic_regression,eccentricity,Eccentricity,10,0.00883971861477
+rice,logistic_regression,eccentricity,Eccentricity,11,0.0125609148424
+rice,logistic_regression,eccentricity,Eccentricity,12,0.00814567786527
+rice,logistic_regression,eccentricity,Eccentricity,13,0.0120338943381
+rice,logistic_regression,eccentricity,Eccentricity,14,0.0109531947426
+rice,logistic_regression,eccentricity,Eccentricity,15,0.00630138080575
+rice,logistic_regression,eccentricity,Eccentricity,16,0.0128365100994
+rice,logistic_regression,eccentricity,Eccentricity,17,0.00757387525766
+rice,logistic_regression,eccentricity,Eccentricity,18,0.0109476430568
+rice,logistic_regression,eccentricity,Eccentricity,19,0.0101221853816
+rice,logistic_regression,eccentricity,Eccentricity,20,0.0141104920724
+rice,logistic_regression,eccentricity,Eccentricity,21,0.013334978107
+rice,logistic_regression,eccentricity,Eccentricity,22,0.0116120445499
+rice,logistic_regression,eccentricity,Eccentricity,23,0.00584465887073
+rice,logistic_regression,eccentricity,Eccentricity,24,0.00637739204863
+rice,logistic_regression,eccentricity,Eccentricity,25,0.0166361578767
+rice,logistic_regression,eccentricity,Eccentricity,26,0.00685260091965
+rice,logistic_regression,eccentricity,Eccentricity,27,0.00794310242078
+rice,logistic_regression,eccentricity,Eccentricity,28,0.00791275710122
+rice,logistic_regression,eccentricity,Eccentricity,29,0.0110871231424
+rice,logistic_regression,convex_area,Convex area,0,0.657444760005
+rice,logistic_regression,convex_area,Convex area,1,0.649607657053
+rice,logistic_regression,convex_area,Convex area,2,0.641869060955
+rice,logistic_regression,convex_area,Convex area,3,0.649050073961
+rice,logistic_regression,convex_area,Convex area,4,0.65512034616
+rice,logistic_regression,convex_area,Convex area,5,0.648982794084
+rice,logistic_regression,convex_area,Convex area,6,0.655589020341
+rice,logistic_regression,convex_area,Convex area,7,0.647657259006
+rice,logistic_regression,convex_area,Convex area,8,0.655632245361
+rice,logistic_regression,convex_area,Convex area,9,0.655255315027
+rice,logistic_regression,convex_area,Convex area,10,0.658058331359
+rice,logistic_regression,convex_area,Convex area,11,0.655465230771
+rice,logistic_regression,convex_area,Convex area,12,0.648985521831
+rice,logistic_regression,convex_area,Convex area,13,0.647371356678
+rice,logistic_regression,convex_area,Convex area,14,0.642455182074
+rice,logistic_regression,convex_area,Convex area,15,0.656058159479
+rice,logistic_regression,convex_area,Convex area,16,0.648125546819
+rice,logistic_regression,convex_area,Convex area,17,0.648717510897
+rice,logistic_regression,convex_area,Convex area,18,0.646374497641
+rice,logistic_regression,convex_area,Convex area,19,0.654556513023
+rice,logistic_regression,convex_area,Convex area,20,0.653444120029
+rice,logistic_regression,convex_area,Convex area,21,0.6463302488
+rice,logistic_regression,convex_area,Convex area,22,0.650130654283
+rice,logistic_regression,convex_area,Convex area,23,0.646711314604
+rice,logistic_regression,convex_area,Convex area,24,0.651452640077
+rice,logistic_regression,convex_area,Convex area,25,0.651786615487
+rice,logistic_regression,convex_area,Convex area,26,0.65597166091
+rice,logistic_regression,convex_area,Convex area,27,0.656673773338
+rice,logistic_regression,convex_area,Convex area,28,0.646632419607
+rice,logistic_regression,convex_area,Convex area,29,0.643945840379
+rice,logistic_regression,extent,Extent,0,0.000132055300127
+rice,logistic_regression,extent,Extent,1,0.000107628288156
+rice,logistic_regression,extent,Extent,2,0.000158150502329
+rice,logistic_regression,extent,Extent,3,3.87178347353e-05
+rice,logistic_regression,extent,Extent,4,9.80284105656e-05
+rice,logistic_regression,extent,Extent,5,3.8317576417e-05
+rice,logistic_regression,extent,Extent,6,0.000119039882196
+rice,logistic_regression,extent,Extent,7,-7.32661145764e-06
+rice,logistic_regression,extent,Extent,8,0.000162416472782
+rice,logistic_regression,extent,Extent,9,0.000226812768924
+rice,logistic_regression,extent,Extent,10,2.34929370286e-05
+rice,logistic_regression,extent,Extent,11,8.62438189447e-05
+rice,logistic_regression,extent,Extent,12,0.000182389785347
+rice,logistic_regression,extent,Extent,13,0.00013689461149
+rice,logistic_regression,extent,Extent,14,0.000269814373136
+rice,logistic_regression,extent,Extent,15,-5.15429685969e-05
+rice,logistic_regression,extent,Extent,16,0.000131618002469
+rice,logistic_regression,extent,Extent,17,3.35648140349e-05
+rice,logistic_regression,extent,Extent,18,0.000242323633957
+rice,logistic_regression,extent,Extent,19,2.1174142551e-05
+rice,logistic_regression,extent,Extent,20,0.000174759493421
+rice,logistic_regression,extent,Extent,21,0.000217713826243
+rice,logistic_regression,extent,Extent,22,0.000146864143972
+rice,logistic_regression,extent,Extent,23,0.000119959404348
+rice,logistic_regression,extent,Extent,24,7.82705105065e-05
+rice,logistic_regression,extent,Extent,25,0.000205918514718
+rice,logistic_regression,extent,Extent,26,0.000125351633392
+rice,logistic_regression,extent,Extent,27,6.52861777873e-05
+rice,logistic_regression,extent,Extent,28,4.7214585683e-05
+rice,logistic_regression,extent,Extent,29,3.78280233928e-05
+rice,random_forest,area,Area,0,0.00741175878719
+rice,random_forest,area,Area,1,0.00765152406458
+rice,random_forest,area,Area,2,0.00230102841525
+rice,random_forest,area,Area,3,0.0130356484513
+rice,random_forest,area,Area,4,0.0114586661387
+rice,random_forest,area,Area,5,0.00741705735567
+rice,random_forest,area,Area,6,0.0133387832843
+rice,random_forest,area,Area,7,0.00877813827505
+rice,random_forest,area,Area,8,0.010497441192
+rice,random_forest,area,Area,9,0.00470903844609
+rice,random_forest,area,Area,10,0.00984162120833
+rice,random_forest,area,Area,11,0.0125352779109
+rice,random_forest,area,Area,12,0.00608047371819
+rice,random_forest,area,Area,13,0.0111034847691
+rice,random_forest,area,Area,14,0.00957641740323
+rice,random_forest,area,Area,15,0.00398198549046
+rice,random_forest,area,Area,16,0.00539398122583
+rice,random_forest,area,Area,17,0.00831921665484
+rice,random_forest,area,Area,18,0.0085645000685
+rice,random_forest,area,Area,19,0.00242491166405
+rice,random_forest,area,Area,20,0.00197689724155
+rice,random_forest,area,Area,21,0.00825804606298
+rice,random_forest,area,Area,22,0.00415303465145
+rice,random_forest,area,Area,23,0.00865151924677
+rice,random_forest,area,Area,24,0.00871758585445
+rice,random_forest,area,Area,25,0.0047060301728
+rice,random_forest,area,Area,26,0.0172100704565
+rice,random_forest,area,Area,27,0.0133801811706
+rice,random_forest,area,Area,28,0.0153205654038
+rice,random_forest,area,Area,29,0.0101882737463
+rice,random_forest,perimeter,Perimeter,0,0.0425606005423
+rice,random_forest,perimeter,Perimeter,1,0.0385813483672
+rice,random_forest,perimeter,Perimeter,2,0.0264695274998
+rice,random_forest,perimeter,Perimeter,3,0.0586565245375
+rice,random_forest,perimeter,Perimeter,4,0.0352990204188
+rice,random_forest,perimeter,Perimeter,5,0.0278641833308
+rice,random_forest,perimeter,Perimeter,6,0.0415491027955
+rice,random_forest,perimeter,Perimeter,7,0.0357252561255
+rice,random_forest,perimeter,Perimeter,8,0.0426780394794
+rice,random_forest,perimeter,Perimeter,9,0.0467219767126
+rice,random_forest,perimeter,Perimeter,10,0.046900938047
+rice,random_forest,perimeter,Perimeter,11,0.0498657520313
+rice,random_forest,perimeter,Perimeter,12,0.031681808925
+rice,random_forest,perimeter,Perimeter,13,0.0349291861957
+rice,random_forest,perimeter,Perimeter,14,0.0372062837142
+rice,random_forest,perimeter,Perimeter,15,0.0352529170464
+rice,random_forest,perimeter,Perimeter,16,0.0279556058682
+rice,random_forest,perimeter,Perimeter,17,0.034949826995
+rice,random_forest,perimeter,Perimeter,18,0.0406972840038
+rice,random_forest,perimeter,Perimeter,19,0.034002485031
+rice,random_forest,perimeter,Perimeter,20,0.0317594261705
+rice,random_forest,perimeter,Perimeter,21,0.0427847178215
+rice,random_forest,perimeter,Perimeter,22,0.037043155802
+rice,random_forest,perimeter,Perimeter,23,0.0388493262194
+rice,random_forest,perimeter,Perimeter,24,0.0463919118373
+rice,random_forest,perimeter,Perimeter,25,0.0237808586691
+rice,random_forest,perimeter,Perimeter,26,0.0490497912117
+rice,random_forest,perimeter,Perimeter,27,0.0452946285838
+rice,random_forest,perimeter,Perimeter,28,0.0494830435054
+rice,random_forest,perimeter,Perimeter,29,0.0400403439048
+rice,random_forest,major_axis_length,Major axis length,0,0.0812608807276
+rice,random_forest,major_axis_length,Major axis length,1,0.0731744631013
+rice,random_forest,major_axis_length,Major axis length,2,0.065114337786
+rice,random_forest,major_axis_length,Major axis length,3,0.0968864700428
+rice,random_forest,major_axis_length,Major axis length,4,0.0739752135194
+rice,random_forest,major_axis_length,Major axis length,5,0.057077175131
+rice,random_forest,major_axis_length,Major axis length,6,0.0756173358676
+rice,random_forest,major_axis_length,Major axis length,7,0.0713886424764
+rice,random_forest,major_axis_length,Major axis length,8,0.0746453222358
+rice,random_forest,major_axis_length,Major axis length,9,0.0792323171985
+rice,random_forest,major_axis_length,Major axis length,10,0.0942718514458
+rice,random_forest,major_axis_length,Major axis length,11,0.0747794154217
+rice,random_forest,major_axis_length,Major axis length,12,0.0686134770999
+rice,random_forest,major_axis_length,Major axis length,13,0.0602946769263
+rice,random_forest,major_axis_length,Major axis length,14,0.0795549511893
+rice,random_forest,major_axis_length,Major axis length,15,0.0749984333298
+rice,random_forest,major_axis_length,Major axis length,16,0.0586453693274
+rice,random_forest,major_axis_length,Major axis length,17,0.069119516004
+rice,random_forest,major_axis_length,Major axis length,18,0.0722322471531
+rice,random_forest,major_axis_length,Major axis length,19,0.0679931388701
+rice,random_forest,major_axis_length,Major axis length,20,0.0629450055388
+rice,random_forest,major_axis_length,Major axis length,21,0.0760942454708
+rice,random_forest,major_axis_length,Major axis length,22,0.0737243160478
+rice,random_forest,major_axis_length,Major axis length,23,0.0669640872687
+rice,random_forest,major_axis_length,Major axis length,24,0.0824490702965
+rice,random_forest,major_axis_length,Major axis length,25,0.0554830400232
+rice,random_forest,major_axis_length,Major axis length,26,0.0959178190362
+rice,random_forest,major_axis_length,Major axis length,27,0.0770843179551
+rice,random_forest,major_axis_length,Major axis length,28,0.0789081606215
+rice,random_forest,major_axis_length,Major axis length,29,0.0757660277658
+rice,random_forest,minor_axis_length,Minor axis length,0,0.00144563220081
+rice,random_forest,minor_axis_length,Minor axis length,1,0.000347146196075
+rice,random_forest,minor_axis_length,Minor axis length,2,0.00172318549754
+rice,random_forest,minor_axis_length,Minor axis length,3,2.06018135589e-05
+rice,random_forest,minor_axis_length,Minor axis length,4,0.00133336328691
+rice,random_forest,minor_axis_length,Minor axis length,5,0.00172169196119
+rice,random_forest,minor_axis_length,Minor axis length,6,0.00206455292834
+rice,random_forest,minor_axis_length,Minor axis length,7,0.000570251260809
+rice,random_forest,minor_axis_length,Minor axis length,8,0.00123841565403
+rice,random_forest,minor_axis_length,Minor axis length,9,0.000680028756321
+rice,random_forest,minor_axis_length,Minor axis length,10,0.00145202258872
+rice,random_forest,minor_axis_length,Minor axis length,11,0.00057715033394
+rice,random_forest,minor_axis_length,Minor axis length,12,0.000926386028018
+rice,random_forest,minor_axis_length,Minor axis length,13,0.00149525142118
+rice,random_forest,minor_axis_length,Minor axis length,14,0.00152748799932
+rice,random_forest,minor_axis_length,Minor axis length,15,0.00108225681606
+rice,random_forest,minor_axis_length,Minor axis length,16,0.00138139491231
+rice,random_forest,minor_axis_length,Minor axis length,17,0.00121166408628
+rice,random_forest,minor_axis_length,Minor axis length,18,-0.000492165140223
+rice,random_forest,minor_axis_length,Minor axis length,19,0.0015843884597
+rice,random_forest,minor_axis_length,Minor axis length,20,-0.000125877419764
+rice,random_forest,minor_axis_length,Minor axis length,21,0.000172067149067
+rice,random_forest,minor_axis_length,Minor axis length,22,-0.000561173979177
+rice,random_forest,minor_axis_length,Minor axis length,23,0.00184928566138
+rice,random_forest,minor_axis_length,Minor axis length,24,0.000215091947182
+rice,random_forest,minor_axis_length,Minor axis length,25,-0.000164148134634
+rice,random_forest,minor_axis_length,Minor axis length,26,0.000635564293039
+rice,random_forest,minor_axis_length,Minor axis length,27,0.00147681367257
+rice,random_forest,minor_axis_length,Minor axis length,28,0.00198872050978
+rice,random_forest,minor_axis_length,Minor axis length,29,0.00140625572781
+rice,random_forest,eccentricity,Eccentricity,0,0.00477491123436
+rice,random_forest,eccentricity,Eccentricity,1,0.0120282834548
+rice,random_forest,eccentricity,Eccentricity,2,0.00738390025862
+rice,random_forest,eccentricity,Eccentricity,3,0.012148340081
+rice,random_forest,eccentricity,Eccentricity,4,0.012671873225
+rice,random_forest,eccentricity,Eccentricity,5,0.0128265938977
+rice,random_forest,eccentricity,Eccentricity,6,0.00826508248648
+rice,random_forest,eccentricity,Eccentricity,7,0.0109170480731
+rice,random_forest,eccentricity,Eccentricity,8,0.00777742729284
+rice,random_forest,eccentricity,Eccentricity,9,0.00914365688069
+rice,random_forest,eccentricity,Eccentricity,10,0.016100720806
+rice,random_forest,eccentricity,Eccentricity,11,0.00957782936979
+rice,random_forest,eccentricity,Eccentricity,12,0.00890951547168
+rice,random_forest,eccentricity,Eccentricity,13,0.00983465797446
+rice,random_forest,eccentricity,Eccentricity,14,0.0125676574721
+rice,random_forest,eccentricity,Eccentricity,15,0.0105588175822
+rice,random_forest,eccentricity,Eccentricity,16,0.00634421471466
+rice,random_forest,eccentricity,Eccentricity,17,0.00906692801792
+rice,random_forest,eccentricity,Eccentricity,18,0.0104647139522
+rice,random_forest,eccentricity,Eccentricity,19,0.00568456275702
+rice,random_forest,eccentricity,Eccentricity,20,0.00799732049429
+rice,random_forest,eccentricity,Eccentricity,21,0.00784948648671
+rice,random_forest,eccentricity,Eccentricity,22,0.00841527599578
+rice,random_forest,eccentricity,Eccentricity,23,0.0110964605175
+rice,random_forest,eccentricity,Eccentricity,24,0.00959079542232
+rice,random_forest,eccentricity,Eccentricity,25,0.00428009930572
+rice,random_forest,eccentricity,Eccentricity,26,0.0146890428105
+rice,random_forest,eccentricity,Eccentricity,27,0.0125837505468
+rice,random_forest,eccentricity,Eccentricity,28,0.0150388892044
+rice,random_forest,eccentricity,Eccentricity,29,0.00978152390329
+rice,random_forest,convex_area,Convex area,0,0.0190660137632
+rice,random_forest,convex_area,Convex area,1,0.0167974184714
+rice,random_forest,convex_area,Convex area,2,0.0101558301008
+rice,random_forest,convex_area,Convex area,3,0.0242313587772
+rice,random_forest,convex_area,Convex area,4,0.0205380180439
+rice,random_forest,convex_area,Convex area,5,0.0152828974544
+rice,random_forest,convex_area,Convex area,6,0.0219501537226
+rice,random_forest,convex_area,Convex area,7,0.0184548991568
+rice,random_forest,convex_area,Convex area,8,0.0188205468177
+rice,random_forest,convex_area,Convex area,9,0.0133215607481
+rice,random_forest,convex_area,Convex area,10,0.0197163381693
+rice,random_forest,convex_area,Convex area,11,0.0224619259469
+rice,random_forest,convex_area,Convex area,12,0.013288186167
+rice,random_forest,convex_area,Convex area,13,0.0154814895687
+rice,random_forest,convex_area,Convex area,14,0.0147676662117
+rice,random_forest,convex_area,Convex area,15,0.0128374859196
+rice,random_forest,convex_area,Convex area,16,0.0135614560595
+rice,random_forest,convex_area,Convex area,17,0.0185633171694
+rice,random_forest,convex_area,Convex area,18,0.0176140932789
+rice,random_forest,convex_area,Convex area,19,0.00958068701392
+rice,random_forest,convex_area,Convex area,20,0.0099420396324
+rice,random_forest,convex_area,Convex area,21,0.0158597660726
+rice,random_forest,convex_area,Convex area,22,0.011418345762
+rice,random_forest,convex_area,Convex area,23,0.0194573834074
+rice,random_forest,convex_area,Convex area,24,0.0195302518872
+rice,random_forest,convex_area,Convex area,25,0.00993581516618
+rice,random_forest,convex_area,Convex area,26,0.0245451154503
+rice,random_forest,convex_area,Convex area,27,0.0223484922972
+rice,random_forest,convex_area,Convex area,28,0.025342654723
+rice,random_forest,convex_area,Convex area,29,0.0170865588253
+rice,random_forest,extent,Extent,0,0.000520439999317
+rice,random_forest,extent,Extent,1,0.000703999220145
+rice,random_forest,extent,Extent,2,0.00041382370683
+rice,random_forest,extent,Extent,3,-0.000572367456669
+rice,random_forest,extent,Extent,4,0.000281279926885
+rice,random_forest,extent,Extent,5,0.00105917993834
+rice,random_forest,extent,Extent,6,0.000675260311086
+rice,random_forest,extent,Extent,7,-0.000115365019073
+rice,random_forest,extent,Extent,8,-0.000282478788095
+rice,random_forest,extent,Extent,9,-0.000761338959012
+rice,random_forest,extent,Extent,10,-0.000229990800283
+rice,random_forest,extent,Extent,11,-0.000482827272549
+rice,random_forest,extent,Extent,12,0.0005889772694
+rice,random_forest,extent,Extent,13,-0.000510380450464
+rice,random_forest,extent,Extent,14,-0.000382295595074
+rice,random_forest,extent,Extent,15,0.000164855270982
+rice,random_forest,extent,Extent,16,0.000443313451358
+rice,random_forest,extent,Extent,17,0.000735520330583
+rice,random_forest,extent,Extent,18,0.000840158187684
+rice,random_forest,extent,Extent,19,-0.000687526829334
+rice,random_forest,extent,Extent,20,0.000293361391923
+rice,random_forest,extent,Extent,21,-0.000439341816891
+rice,random_forest,extent,Extent,22,1.32324544672e-05
+rice,random_forest,extent,Extent,23,-0.000506603704461
+rice,random_forest,extent,Extent,24,0.000687614723852
+rice,random_forest,extent,Extent,25,0.000677934608344
+rice,random_forest,extent,Extent,26,0.000377941230047
+rice,random_forest,extent,Extent,27,2.90313434237e-05
+rice,random_forest,extent,Extent,28,-0.000323031368422
+rice,random_forest,extent,Extent,29,0.000704526557582

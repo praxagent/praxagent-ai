@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700" role="img" aria-labelledby="model-anatomy-title model-anatomy-desc">
+  <title id="model-anatomy-title">One candidate observation follows two different routes to a predicted probability</title>
+  <desc id="model-anatomy-desc">One candidate observation enters both models with the same measured feature definitions. Inside the logistic regression pipeline, training-only centers and scales standardize the values. The model turns those standardized values into feature contributions, adds the contributions and a baseline offset into one global log-odds score, where log-odds means the logarithm of the odds between two classes, and applies an S-shaped sigmoid curve to produce a probability. The random forest receives the original numeric feature values. It sends them through many decision trees built from fresh draws of training rows, lets each tree consider only some features at each learned cutoff, and averages the probabilities at their endpoints. Both routes end with a predicted probability but impose different decision structures.</desc>
+  <defs>
+    <marker id="model-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#8B6542"/>
+    </marker>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:24px;font-weight:700}
+      .h{font-size:18px;font-weight:700}
+      .s{font-size:15px}
+      .m{font-size:13px;fill:#5A544C}
+      .mini{font-size:12px;fill:#2C2924}
+      .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.5}
+      .data{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.5}
+      .linear{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+      .forest{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.5}
+      .arrow{fill:none;stroke:#8B6542;stroke-width:2;marker-end:url(#model-arrow)}
+      .connector{fill:none;stroke:#8B6542;stroke-width:1.7}
+    </style>
+  </defs>
+
+  <rect width="1000" height="700" fill="#F7F4F0"/>
+  <text class="t title" x="24" y="34">One candidate, two routes to a probability</text>
+  <text class="t m" x="24" y="58">The same candidate and feature definitions enter models with different preparation and decision structures.</text>
+
+  <rect class="data" x="24" y="86" width="190" height="538" rx="12"/>
+  <text class="t h" x="42" y="116">Candidate</text>
+  <rect x="78" y="135" width="82" height="54" rx="8" fill="#FBF9F6" stroke="#4B6787" stroke-width="2"/>
+  <circle cx="94" cy="151" r="6" fill="#E8F0F7" stroke="#4B6787" stroke-width="1.5"/>
+  <line x1="106" y1="151" x2="145" y2="151" stroke="#4B6787" stroke-width="1.5"/>
+  <circle cx="94" cy="169" r="6" fill="#E8F0F7" stroke="#4B6787" stroke-width="1.5"/>
+  <line x1="106" y1="169" x2="145" y2="169" stroke="#4B6787" stroke-width="1.5"/>
+  <text class="t s" x="119" y="205" text-anchor="middle" font-weight="700">Candidate observation</text>
+  <line x1="42" y1="224" x2="196" y2="224" stroke="#4B6787" stroke-width="1"/>
+  <text class="t m" x="42" y="245">Measured numeric features</text>
+  <text class="t m" x="42" y="261">same definitions for both models</text>
+
+  <rect class="card" x="42" y="273" width="154" height="50" rx="8"/>
+  <text class="t s" x="54" y="294" font-weight="700">Measurement one</text>
+  <text class="t m" x="54" y="312">measured value</text>
+
+  <rect class="card" x="42" y="333" width="154" height="50" rx="8"/>
+  <text class="t s" x="54" y="354" font-weight="700">Measurement two</text>
+  <text class="t m" x="54" y="372">measured value</text>
+
+  <rect class="card" x="42" y="393" width="154" height="50" rx="8"/>
+  <text class="t s" x="54" y="414" font-weight="700">Measurement three</text>
+  <text class="t m" x="54" y="432">measured value</text>
+
+  <rect class="card" x="42" y="453" width="154" height="50" rx="8"/>
+  <text class="t s" x="54" y="474" font-weight="700">Measurement four</text>
+  <text class="t m" x="54" y="492">measured value</text>
+
+  <text class="t m" x="42" y="530">Every model receives</text>
+  <text class="t m" x="42" y="548">the same observation</text>
+  <text class="t m" x="42" y="566">and feature definitions.</text>
+
+  <path class="connector" d="M214 350 H238 V204"/>
+  <path class="arrow" d="M238 204 H258"/>
+  <path class="connector" d="M238 350 V486"/>
+  <path class="arrow" d="M238 486 H258"/>
+  <circle cx="238" cy="350" r="4" fill="#8B6542"/>
+
+  <rect class="linear" x="260" y="78" width="716" height="258" rx="12"/>
+  <text class="t h" x="284" y="108">Logistic regression: one global score from feature contributions</text>
+  <text class="t m" x="284" y="131">This pipeline standardizes first, then forms positive or negative contributions to one score rule.</text>
+
+  <rect class="card" x="284" y="153" width="134" height="136" rx="9"/>
+  <text class="t s" x="351" y="179" text-anchor="middle" font-weight="700">Standardize</text>
+  <text class="t m" x="351" y="202" text-anchor="middle">recenter and rescale</text>
+  <text class="t m" x="351" y="223" text-anchor="middle">with values learned</text>
+  <text class="t m" x="351" y="244" text-anchor="middle">from training rows</text>
+  <rect x="307" y="258" width="88" height="18" rx="4" fill="#E8F0F7" stroke="#4B6787" stroke-width="1.2"/>
+  <text class="t mini" x="351" y="271" text-anchor="middle">inside pipeline</text>
+
+  <path class="arrow" d="M418 221 H436"/>
+  <rect class="card" x="438" y="153" width="132" height="136" rx="9"/>
+  <text class="t s" x="504" y="178" text-anchor="middle" font-weight="700">Standardized</text>
+  <text class="t s" x="504" y="198" text-anchor="middle" font-weight="700">contributions</text>
+  <rect class="linear" x="455" y="211" width="98" height="22" rx="5"/>
+  <text class="t mini" x="504" y="226" text-anchor="middle">first feature</text>
+  <rect class="linear" x="455" y="239" width="98" height="22" rx="5"/>
+  <text class="t mini" x="504" y="254" text-anchor="middle">second feature</text>
+  <text class="t mini" x="504" y="279" text-anchor="middle">other features</text>
+
+  <path class="arrow" d="M570 221 H588"/>
+  <rect class="card" x="590" y="153" width="134" height="136" rx="9"/>
+  <text class="t s" x="657" y="180" text-anchor="middle" font-weight="700">Add contributions</text>
+  <text class="t m" x="657" y="202" text-anchor="middle">and baseline offset</text>
+  <line x1="608" y1="220" x2="706" y2="220" stroke="#6F8D5E" stroke-width="1.5"/>
+  <text class="t m" x="657" y="243" text-anchor="middle">global log-odds</text>
+  <text class="t m" x="657" y="262" text-anchor="middle">logarithm of</text>
+  <text class="t m" x="657" y="280" text-anchor="middle">class odds</text>
+
+  <path class="arrow" d="M724 221 H742"/>
+  <rect class="card" x="744" y="153" width="92" height="136" rx="9"/>
+  <path d="M756 239 C767 239 771 228 779 221 C787 214 791 203 824 203" fill="none" stroke="#4B6787" stroke-width="3"/>
+  <text class="t mini" x="790" y="260" text-anchor="middle" font-weight="700">S-shaped</text>
+  <text class="t mini" x="790" y="277" text-anchor="middle" font-weight="700">sigmoid</text>
+
+  <path class="arrow" d="M836 221 H854"/>
+  <rect class="data" x="856" y="165" width="96" height="112" rx="9"/>
+  <text class="t s" x="904" y="199" text-anchor="middle" font-weight="700">Predicted</text>
+  <text class="t s" x="904" y="220" text-anchor="middle" font-weight="700">probability</text>
+  <text class="t m" x="904" y="244" text-anchor="middle">for this</text>
+  <text class="t m" x="904" y="262" text-anchor="middle">candidate</text>
+  <text class="t m" x="284" y="321">Every candidate passes through the same fitted score rule.</text>
+
+  <rect class="forest" x="260" y="354" width="716" height="270" rx="12"/>
+  <text class="t h" x="284" y="384">Random forest: many local cutoff paths</text>
+  <text class="t m" x="284" y="407">It uses the original numeric values; each tree gets fresh training rows and only some features at each cutoff.</text>
+
+  <rect x="284" y="426" width="466" height="164" rx="10" fill="#FBF9F6" stroke="#A89B8C" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text class="t m" x="300" y="449">Many trees with learned cutoffs</text>
+
+  <rect class="card" x="300" y="462" width="132" height="108" rx="8"/>
+  <text class="t mini" x="366" y="482" text-anchor="middle" font-weight="700">Tree one</text>
+  <rect class="forest" x="316" y="490" width="100" height="28" rx="6"/>
+  <text class="t mini" x="366" y="508" text-anchor="middle">First feature cutoff</text>
+  <path class="connector" d="M366 518 V530 M366 530 H335 V542 M366 530 H397 V542"/>
+  <rect class="data" x="315" y="542" width="40" height="20" rx="4"/>
+  <rect class="linear" x="377" y="542" width="40" height="20" rx="4"/>
+  <text class="t mini" x="335" y="557" text-anchor="middle">lower</text>
+  <text class="t mini" x="397" y="557" text-anchor="middle">higher</text>
+
+  <rect class="card" x="451" y="462" width="132" height="108" rx="8"/>
+  <text class="t mini" x="517" y="482" text-anchor="middle" font-weight="700">Tree two</text>
+  <rect class="forest" x="467" y="490" width="100" height="28" rx="6"/>
+  <text class="t mini" x="517" y="508" text-anchor="middle">Second feature cutoff</text>
+  <path class="connector" d="M517 518 V530 M517 530 H486 V542 M517 530 H548 V542"/>
+  <rect class="linear" x="466" y="542" width="40" height="20" rx="4"/>
+  <rect class="data" x="528" y="542" width="40" height="20" rx="4"/>
+  <text class="t mini" x="486" y="557" text-anchor="middle">lower</text>
+  <text class="t mini" x="548" y="557" text-anchor="middle">higher</text>
+
+  <rect class="card" x="602" y="462" width="132" height="108" rx="8"/>
+  <text class="t mini" x="668" y="482" text-anchor="middle" font-weight="700">Tree three</text>
+  <rect class="forest" x="618" y="490" width="100" height="28" rx="6"/>
+  <text class="t mini" x="668" y="508" text-anchor="middle">Third feature cutoff</text>
+  <path class="connector" d="M668 518 V530 M668 530 H637 V542 M668 530 H699 V542"/>
+  <rect class="data" x="617" y="542" width="40" height="20" rx="4"/>
+  <rect class="linear" x="679" y="542" width="40" height="20" rx="4"/>
+  <text class="t mini" x="637" y="557" text-anchor="middle">lower</text>
+  <text class="t mini" x="699" y="557" text-anchor="middle">higher</text>
+
+  <path class="arrow" d="M750 508 H780"/>
+  <rect class="data" x="782" y="436" width="170" height="144" rx="10"/>
+  <text class="t s" x="867" y="469" text-anchor="middle" font-weight="700">Average endpoint</text>
+  <text class="t s" x="867" y="491" text-anchor="middle" font-weight="700">probabilities</text>
+  <line x1="808" y1="509" x2="926" y2="509" stroke="#4B6787" stroke-width="1.5"/>
+  <text class="t s" x="867" y="537" text-anchor="middle">Predicted probability</text>
+  <text class="t m" x="867" y="558" text-anchor="middle">for this candidate</text>
+  <text class="t m" x="284" y="610">Different candidates can follow different local paths through the same fitted forest.</text>
+
+  <rect x="24" y="646" width="952" height="38" rx="10" fill="#EAF1E5" stroke="#6F8D5E" stroke-width="1.5"/>
+  <text class="t s" x="500" y="671" text-anchor="middle" font-weight="700">Both return a probability, but they shape the boundary between predicted classes differently.</text>
+</svg>

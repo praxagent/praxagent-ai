@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <title>Gini impurity - praxagent Knowledge Base</title>
+    
+    
+
+
+
+
+
+
+
+
+
+    
+    <meta name="description" content="A measure of how mixed the class labels are inside a group of rows, used by decision trees to choose which feature cutoff to ask next.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/glossary/gini-impurity/">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="praxagent Knowledge Base">
+    <meta property="og:title" content="Gini impurity">
+    <meta property="og:description" content="A measure of how mixed the class labels are inside a group of rows, used by decision trees to choose which feature cutoff to ask next.">
+    <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/glossary/gini-impurity/">
+    <meta property="og:image" content="https://praxagent.ai/blog/knowledge-base/glossary/gini-impurity/gini-split.png">
+    <meta property="og:image:alt" content="Binary Gini impurity peaks at 0.5 for an even mix, and a useful cutoff lowers the weighted child impurity from 0.42 to 0.34.">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="Gini impurity">
+    <meta name="twitter:description" content="A measure of how mixed the class labels are inside a group of rows, used by decision trees to choose which feature cutoff to ask next.">
+    <meta name="twitter:image" content="https://praxagent.ai/blog/knowledge-base/glossary/gini-impurity/gini-split.png">
+    <meta name="twitter:image:alt" content="Binary Gini impurity peaks at 0.5 for an even mix, and a useful cutoff lowers the weighted child impurity from 0.42 to 0.34.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
+    <link rel="stylesheet" href="/blog/blog.css?v=20260725-2">
+    <link rel="stylesheet" href="/blog/katex.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'neutral',
+        securityLevel: 'loose',
+        flowchart: { htmlLabels: true, curve: 'basis' }
+      });
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-scrolls industrial-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+
+
+
+            <div class="nav-menu">
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link">Research Notes</a>
+                <a href="/blog/knowledge-base/" class="nav-link active">Knowledge Base</a>
+                <a href="/blog/search/" class="nav-link">Search</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
+            <a href="/blog/knowledge-base/" class="mobile-nav-link active">Knowledge Base</a>
+            <a href="/blog/search/" class="mobile-nav-link">Search</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        
+
+
+
+
+<div class="blog-post reference-entry">
+    <div class="container">
+        <article class="post-content">
+            <header class="post-header">
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
+                <h1 class="post-title">Gini impurity</h1>
+                
+                <p class="reference-summary">A measure of how mixed the class labels are inside a group of rows, used by decision trees to choose which feature cutoff to ask next.</p>
+                
+
+            </header>
+
+
+
+
+
+            <div class="post-body">
+                <p><strong>Gini impurity</strong> scores how mixed the labels are inside a group of training
+rows. A group that is all one class scores 0. For a binary label, an even split
+scores the maximum, 0.5. Classification trees configured to use the Gini
+criterion choose each cutoff by that score: among the allowed questions, keep
+the one that lowers impurity the most.</p>
+<h2 id="the-binary-definition">The binary definition</h2>
+<p>Take a group of \(n\) rows, of which a fraction \(q\) are labeled positive.
+Binary Gini impurity is</p>
+\[
+G=1-q^{2}-(1-q)^{2}=2q(1-q).
+\]<p>It is 0 at \(q=0\) and at \(q=1\), and it peaks at \(0.5\) when \(q=0.5\). The
+middle form makes the idea plain. Draw two rows independently from the group,
+with replacement: \(q^{2}\) is the probability that both are positive and
+\((1-q)^{2}\) is the probability that both are negative, so \(G\) is the
+probability that their labels disagree. The drawing must be with replacement
+for those squares to be exact; sampling two distinct rows without replacement
+gives a slightly different disagreement probability. The same
+\(q(1-q)\) shape appears as the uncertainty term inside
+<a href="/blog/knowledge-base/glossary/brier-loss/">Brier loss</a>, for
+the same reason: both measure how unsettled a binary outcome is before anything
+else is known.</p>
+<p>With more than two classes the definition is
+\(G=1-\sum_{c}q_{c}^{2}\), where \(q_{c}\) is the fraction of the group in
+class \(c\). The binary formula above is that sum written out for two classes.
+The maximum depends on how many classes there are: with \(K\) classes present
+in equal proportion, \(G=1-1/K\), so the ceiling of 0.5 quoted above is the
+binary case.</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Left: binary Gini impurity rises from 0 at a pure negative group to a peak of 0.5 at an even mix and back to 0 at a pure positive group, with a marked parent group at positive rate 0.30 and impurity 0.42. Right: that parent is split two ways. Cutoff A lowers the weighted child impurity to 0.34. Cutoff B leaves both children looking like the parent, so the improvement is zero." tabindex="0">
+        <img src="/blog/knowledge-base/glossary/gini-impurity/gini-split.svg" alt="Left: binary Gini impurity rises from 0 at a pure negative group to a peak of 0.5 at an even mix and back to 0 at a pure positive group, with a marked parent group at positive rate 0.30 and impurity 0.42. Right: that parent is split two ways. Cutoff A lowers the weighted child impurity to 0.34. Cutoff B leaves both children looking like the parent, so the improvement is zero." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>Toy arithmetic, not a fitted tree. Left: the impurity curve against the positive fraction in a group. Right: the parent group of 100 rows with 30 positives, impurity 0.42, under two candidate cutoffs. Cutoff A pulls most positives to one side and earns an improvement of 0.08. Cutoff B splits the rows in half without sorting the labels, so both children keep impurity 0.42 and the question is discarded.</figcaption>
+</figure>
+
+<h2 id="choosing-a-cutoff">Choosing a cutoff</h2>
+<p>A tree does not report the impurity of a leaf as a quality score for the
+finished model. It uses impurity only while growing. At a node, every allowed
+cutoff on every offered feature is scored by the <strong>impurity decrease</strong></p>
+\[
+\Delta G=G_{\mathrm{parent}}
+-\left(\frac{n_{L}}{n}G_{L}+\frac{n_{R}}{n}G_{R}\right),
+\]<p>where \(n_{L}\) and \(n_{R}\) are the row counts in the left and right
+children. The tree keeps the cutoff with the largest \(\Delta G\). An
+improvement of zero means the question sorted nothing on these training rows.</p>
+<p>The figure&rsquo;s parent has \(q=0.30\) and \(G=0.42\). Cutoff A makes children with
+impurities 0.18 and 0.50; the weighted average is 0.34, so \(\Delta G=0.08\).
+Cutoff B makes two children identical to the parent, so \(\Delta G=0\).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">gini</span><span class="p">(</span><span class="n">positive_fraction</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">q</span> <span class="o">=</span> <span class="n">positive_fraction</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">q</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">q</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">gini</span><span class="p">(</span><span class="mf">0.30</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.42</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span>
+</span></span><span class="line"><span class="cl"><span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">gini</span><span class="p">(</span><span class="mf">0.10</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.18</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span>
+</span></span><span class="line"><span class="cl"><span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">gini</span><span class="p">(</span><span class="mf">0.10</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">gini</span><span class="p">(</span><span class="mf">0.50</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.34</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span>
+</span></span></code></pre></div><p>scikit-learn&rsquo;s <code>DecisionTreeClassifier</code> and <code>RandomForestClassifier</code> use Gini
+impurity when <code>criterion=&quot;gini&quot;</code>, which is the default. Both accept multiclass
+targets, where the criterion is the general \(1-\sum_{c}q_{c}^{2}\); a binary
+target is the case that reduces to the \(2q(1-q)\) form above
+(<a href="https://scikit-learn.org/stable/modules/tree.html">documentation</a>).</p>
+<h2 id="entropy-is-the-common-alternative">Entropy is the common alternative</h2>
+<p>The other standard split rule replaces Gini with <strong>binary entropy</strong>,
+\(H(q)=-q\log_{2}q-(1-q)\log_{2}(1-q)\), using the usual convention
+\(0\log_{2}0=0\) so that a pure group scores 0 rather than being undefined. The
+tree then keeps the cutoff that most reduces that quantity (<strong>information
+gain</strong>). Entropy also bottoms at a pure group and peaks at an even mix, but it
+rises more sharply near the middle. The two criteria can select different
+splits. Treat the criterion as a fitting choice and judge the finished model on
+held-out data, rather than reading the choice itself as evidence that one
+forest is better.</p>
+<h2 id="what-gini-impurity-does-not-establish">What Gini impurity does not establish</h2>
+<ul>
+<li>It is a training-time split rule, not a held-out performance metric. A tree
+can drive every leaf impurity to zero and still fail on new rows.</li>
+<li>A leaf&rsquo;s impurity is not the same object as the probability the leaf reports.
+The probability is the positive fraction \(q\) itself; impurity is \(2q(1-q)\).</li>
+<li>A feature that never wins a split on one path can still win elsewhere, so a
+zero improvement at one node is not a global irrelevance claim.</li>
+<li>Gini is not a proper scoring rule for the finished model&rsquo;s probabilities.
+Grade those with
+<a href="/blog/knowledge-base/glossary/brier-loss/">Brier loss</a> or
+<a href="/blog/knowledge-base/glossary/log-loss/">log loss</a>.</li>
+</ul>
+<p>See also: <a href="/blog/knowledge-base/glossary/brier-loss/">Brier loss</a>,
+<a href="/blog/knowledge-base/glossary/bootstrap/">bootstrap</a>, and the
+Deep Dive
+<a href="/blog/knowledge-base/deep-dives/logistic-regression-random-forest/">Logistic Regression and Random Forest</a>,
+where Gini chooses every split inside the fitted forest.</p>
+
+            </div>
+
+            <footer class="post-footer">
+
+                <div class="post-navigation">
+
+                    <a href="/blog/knowledge-base/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/knowledge-base/" class="back-to-blog">Knowledge Base</a>
+                    <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+
+    </main>
+
+    <footer class="footer footer-compact">
+        <div class="container">
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
+            </div>
+            <div class="footer-compact-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="/blog/search/">Search</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/blog/script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tables = document.querySelectorAll('.post-body table');
+            tables.forEach((table, index) => {
+                if (table.parentElement?.classList.contains('table-scroll')) return;
+
+                const scroller = document.createElement('div');
+                scroller.className = 'table-scroll';
+                scroller.setAttribute('aria-label', `Scrollable data table ${index + 1}`);
+                table.parentNode.insertBefore(scroller, table);
+                scroller.appendChild(table);
+
+                const updateScrollableState = () => {
+                    const isScrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+                    scroller.classList.toggle('is-scrollable', isScrollable);
+                    if (isScrollable) {
+                        scroller.setAttribute('role', 'region');
+                        scroller.setAttribute('tabindex', '0');
+                    } else {
+                        scroller.removeAttribute('role');
+                        scroller.removeAttribute('tabindex');
+                    }
+                };
+
+                requestAnimationFrame(updateScrollableState);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(updateScrollableState).observe(scroller);
+                } else {
+                    window.addEventListener('resize', updateScrollableState, { passive: true });
+                }
+            });
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                output: "htmlAndMathml"
+            });
+
+            const copyText = async (text) => {
+                if (navigator.clipboard?.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    return;
+                }
+
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.setAttribute('readonly', '');
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                const copied = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                if (!copied) {
+                    throw new Error('Copy command was not accepted');
+                }
+            };
+
+            document.querySelectorAll('[data-copy-target]').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const target = document.querySelector(button.dataset.copyTarget);
+                    if (!target) {
+                        console.error(`Copy target not found: ${button.dataset.copyTarget}`);
+                        return;
+                    }
+
+                    const originalLabel = button.textContent;
+                    try {
+                        await copyText(target.textContent.trim());
+                        button.textContent = 'Copied';
+                        button.classList.add('copied');
+                        setTimeout(() => {
+                            button.textContent = originalLabel;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    } catch (error) {
+                        console.error('Failed to copy citation: ', error);
+                    }
+                });
+            });
+
+            const copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+            const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
+            codeBlocks.forEach(pre => {
+                if (pre.closest('.code-block-frame')) {
+                    return;
+                }
+
+                const frame = document.createElement('div');
+                frame.className = 'code-block-frame';
+                const toolbar = document.createElement('div');
+                toolbar.className = 'code-block-toolbar';
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'copy-code-button';
+                button.innerHTML = copyIcon;
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+                button.setAttribute('title', 'Copy');
+
+                const markCopied = () => {
+                    button.innerHTML = checkIcon;
+                    button.classList.add('copied');
+                    button.setAttribute('aria-label', 'Copied');
+                    setTimeout(() => {
+                        button.innerHTML = copyIcon;
+                        button.classList.remove('copied');
+                        button.setAttribute('aria-label', 'Copy code to clipboard');
+                    }, 2000);
+                };
+
+                button.addEventListener('click', () => {
+                    const code = pre.querySelector('code');
+                    const text = code ? code.textContent : pre.textContent;
+
+                    navigator.clipboard.writeText(text).then(markCopied).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            markCopied();
+                        } catch (fallbackErr) {
+                            console.error('Fallback copy failed: ', fallbackErr);
+                        }
+                        document.body.removeChild(textArea);
+                    });
+                });
+
+                toolbar.appendChild(button);
+                frame.appendChild(toolbar);
+                pre.parentNode.insertBefore(frame, pre);
+                frame.appendChild(pre);
+            });
+        });
+    </script>
+
+</body>
+</html>

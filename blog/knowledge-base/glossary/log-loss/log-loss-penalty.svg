@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="580" viewBox="0 0 1000 580" role="img" aria-labelledby="log-loss-penalty-title log-loss-penalty-desc">
+  <title id="log-loss-penalty-title">The natural logarithm, and the single-row penalty it produces for log loss compared with Brier loss</title>
+  <desc id="log-loss-penalty-desc">The left panel plots the natural logarithm of x for x between 0 and 1. It passes through log of 1 equals 0, log of 0.5 equals negative 0.69, log of 0.1 equals negative 2.30, and log of 0.01 equals negative 4.61, falling ever more steeply as x approaches 0. The right panel plots the penalty charged to a single row as a function of p, the probability the model assigned to the outcome that actually happened. The log loss penalty is the negative logarithm of p: 0.69 at p equals 0.5, 2.30 at p equals 0.1, and 4.61 at p equals 0.01, rising without any ceiling as p approaches 0, and shown clipped at 5. The Brier penalty is one minus p, squared: 0.25 at p equals 0.5, 0.81 at p equals 0.1, and at most 1 even when p is 0. A dashed line marks that maximum of 1. Both penalties reach 0 when p equals 1.</desc>
+  <defs>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:24px;font-weight:700}
+      .h{font-size:18px;font-weight:700}
+      .m{font-size:13px;fill:#5A544C}
+      .xs{font-size:12px;fill:#5A544C}
+      .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.5}
+      .axis{stroke:#5A544C;stroke-width:1.6}
+      .grid{stroke:#DCD3C6;stroke-width:1}
+      .curve{fill:none;stroke:#4B6787;stroke-width:3}
+      .curve2{fill:none;stroke:#A67C52;stroke-width:3;stroke-dasharray:9 5}
+      .capline{fill:none;stroke:#6F8D5E;stroke-width:2;stroke-dasharray:7 5}
+    </style>
+  </defs>
+
+  <rect width="1000" height="580" fill="#F7F4F0"/>
+  <text class="t title" x="24" y="34">Why a logarithm punishes confident mistakes</text>
+  <text class="t m" x="24" y="58">Log loss charges each row the negative logarithm of the probability it gave to what actually happened.</text>
+
+  <!-- Left panel: the logarithm itself -->
+  <rect class="card" x="24" y="88" width="452" height="412" rx="12"/>
+  <text class="t h" x="48" y="118">Refresher: the natural logarithm</text>
+  <text class="t m" x="48" y="138">Between 0 and 1 it is negative, and it dives near 0.</text>
+
+  <line class="grid" x1="96" y1="212" x2="436" y2="212"/>
+  <line class="grid" x1="96" y1="264" x2="436" y2="264"/>
+  <line class="grid" x1="96" y1="316" x2="436" y2="316"/>
+  <line class="grid" x1="96" y1="368" x2="436" y2="368"/>
+  <line class="grid" x1="266" y1="160" x2="266" y2="420"/>
+  <line class="axis" x1="96" y1="160" x2="436" y2="160"/>
+  <line class="axis" x1="96" y1="160" x2="96" y2="420"/>
+
+  <text class="t xs" x="88" y="164" text-anchor="end">0</text>
+  <text class="t xs" x="88" y="216" text-anchor="end">-1</text>
+  <text class="t xs" x="88" y="268" text-anchor="end">-2</text>
+  <text class="t xs" x="88" y="320" text-anchor="end">-3</text>
+  <text class="t xs" x="88" y="372" text-anchor="end">-4</text>
+  <text class="t xs" x="88" y="424" text-anchor="end">-5</text>
+  <text class="t xs" x="96" y="438" text-anchor="middle">0</text>
+  <text class="t xs" x="266" y="438" text-anchor="middle">0.5</text>
+  <text class="t xs" x="436" y="438" text-anchor="middle">1.0</text>
+  <text class="t m" x="266" y="458" text-anchor="middle">x (a probability)</text>
+  <text class="t m" x="62" y="290" text-anchor="middle" transform="rotate(-90 62 290)">log(x)</text>
+
+  <polyline class="curve" points="98.3,420.0 98.7,412.1 99.0,405.2 99.4,399.1 99.8,393.7 100.2,388.8 100.6,384.3 100.9,380.1 101.3,376.3 101.7,372.7 102.1,369.4 102.4,366.3 102.8,363.3 103.2,360.5 103.6,357.8 103.9,355.3 104.3,352.9 104.7,350.6 105.1,348.4 105.5,346.3 105.8,344.2 106.2,342.3 106.6,340.4 107.0,338.6 107.3,336.8 107.7,335.1 108.1,333.5 108.5,331.9 108.9,330.3 109.2,328.8 109.6,327.4 110.0,325.9 110.4,324.6 110.7,323.2 111.1,321.9 111.5,320.6 111.9,319.4 112.2,318.1 112.6,316.9 113.0,315.8 118.5,301.3 123.9,289.9 129.4,280.6 134.9,272.7 140.4,265.9 145.8,259.8 151.3,254.4 156.8,249.5 162.3,245.0 167.7,240.9 173.2,237.1 178.7,233.5 184.2,230.2 189.6,227.1 195.1,224.1 200.6,221.3 206.1,218.6 211.5,216.1 217.0,213.7 222.5,211.4 228.0,209.2 233.4,207.1 238.9,205.1 244.4,203.1 249.9,201.2 255.3,199.4 260.8,197.7 266.3,196.0 271.8,194.3 277.2,192.7 282.7,191.2 288.2,189.7 293.7,188.2 299.1,186.8 304.6,185.4 310.1,184.1 315.6,182.7 321.0,181.5 326.5,180.2 332.0,179.0 337.5,177.8 342.9,176.6 348.4,175.5 353.9,174.4 359.4,173.3 364.8,172.2 370.3,171.2 375.8,170.1 381.3,169.1 386.7,168.1 392.2,167.2 397.7,166.2 403.2,165.3 408.6,164.4 414.1,163.5 419.6,162.6 425.1,161.7 430.5,160.8 436.0,160.0"/>
+
+  <circle cx="436" cy="160" r="6" fill="#2C2924"/>
+  <text class="t xs" x="428" y="180" text-anchor="end">log(1) = 0</text>
+  <circle cx="266.3" cy="196" r="6" fill="#2C2924"/>
+  <text class="t xs" x="278" y="216">log(0.5) = -0.69</text>
+  <circle cx="129.4" cy="280.6" r="6" fill="#2C2924"/>
+  <text class="t xs" x="142" y="277">log(0.1) = -2.30</text>
+  <circle cx="99.4" cy="399.1" r="6" fill="#2C2924"/>
+  <text class="t xs" x="112" y="396">log(0.01) = -4.61</text>
+  <text class="t xs" x="132" y="416">each tenfold step down costs another 2.30</text>
+
+  <text class="t xs" x="266" y="484" text-anchor="middle">A probability never exceeds 1, so its logarithm is never positive.</text>
+
+  <!-- Right panel: the penalty for one row -->
+  <rect class="card" x="524" y="88" width="452" height="412" rx="12"/>
+  <text class="t h" x="548" y="118">Penalty charged to one row</text>
+  <text class="t m" x="548" y="138">p = probability the model gave to what actually happened.</text>
+
+  <line class="grid" x1="596" y1="212" x2="936" y2="212"/>
+  <line class="grid" x1="596" y1="264" x2="936" y2="264"/>
+  <line class="grid" x1="596" y1="316" x2="936" y2="316"/>
+  <line class="grid" x1="766" y1="160" x2="766" y2="420"/>
+  <line class="axis" x1="596" y1="420" x2="936" y2="420"/>
+  <line class="axis" x1="596" y1="160" x2="596" y2="420"/>
+
+  <text class="t xs" x="588" y="424" text-anchor="end">0</text>
+  <text class="t xs" x="588" y="372" text-anchor="end">1</text>
+  <text class="t xs" x="588" y="320" text-anchor="end">2</text>
+  <text class="t xs" x="588" y="268" text-anchor="end">3</text>
+  <text class="t xs" x="588" y="216" text-anchor="end">4</text>
+  <text class="t xs" x="588" y="164" text-anchor="end">5</text>
+  <text class="t xs" x="596" y="438" text-anchor="middle">0</text>
+  <text class="t xs" x="766" y="438" text-anchor="middle">0.5</text>
+  <text class="t xs" x="936" y="438" text-anchor="middle">1.0</text>
+  <text class="t m" x="766" y="458" text-anchor="middle">p (higher means the model was more nearly right)</text>
+  <text class="t m" x="562" y="290" text-anchor="middle" transform="rotate(-90 562 290)">Penalty for this row</text>
+
+  <line class="capline" x1="596" y1="368" x2="936" y2="368"/>
+
+  <polyline class="curve2" points="596.0,368.0 604.5,370.6 613.0,373.1 621.5,375.5 630.0,377.9 638.5,380.2 647.0,382.4 655.5,384.6 664.0,386.7 672.5,388.8 681.0,390.8 689.5,392.7 698.0,394.5 706.5,396.3 715.0,398.0 723.5,399.7 732.0,401.3 740.5,402.8 749.0,404.3 757.5,405.7 766.0,407.0 774.5,408.3 783.0,409.5 791.5,410.6 800.0,411.7 808.5,412.7 817.0,413.6 825.5,414.5 834.0,415.3 842.5,416.1 851.0,416.8 859.5,417.4 868.0,417.9 876.5,418.4 885.0,418.8 893.5,419.2 902.0,419.5 910.5,419.7 919.0,419.9 927.5,420.0 936.0,420.0"/>
+
+  <polyline class="curve" points="598.3,160.0 598.7,167.9 599.0,174.8 599.4,180.9 599.8,186.3 600.2,191.2 600.6,195.7 600.9,199.9 601.3,203.7 601.7,207.3 602.1,210.6 602.4,213.7 602.8,216.7 603.2,219.5 603.6,222.2 603.9,224.7 604.3,227.1 604.7,229.4 605.1,231.6 605.5,233.7 605.8,235.8 606.2,237.7 606.6,239.6 607.0,241.4 607.3,243.2 607.7,244.9 608.1,246.5 608.5,248.1 608.9,249.7 609.2,251.2 609.6,252.6 610.0,254.1 610.4,255.4 610.7,256.8 611.1,258.1 611.5,259.4 611.9,260.6 612.2,261.9 612.6,263.1 613.0,264.2 618.5,278.7 623.9,290.1 629.4,299.4 634.9,307.3 640.4,314.1 645.8,320.2 651.3,325.6 656.8,330.5 662.3,335.0 667.7,339.1 673.2,342.9 678.7,346.5 684.2,349.8 689.6,352.9 695.1,355.9 700.6,358.7 706.1,361.4 711.5,363.9 717.0,366.3 722.5,368.6 728.0,370.8 733.4,372.9 738.9,374.9 744.4,376.9 749.9,378.8 755.3,380.6 760.8,382.3 766.3,384.0 771.8,385.7 777.2,387.3 782.7,388.8 788.2,390.3 793.7,391.8 799.1,393.2 804.6,394.6 810.1,395.9 815.6,397.3 821.0,398.5 826.5,399.8 832.0,401.0 837.5,402.2 842.9,403.4 848.4,404.5 853.9,405.6 859.4,406.7 864.8,407.8 870.3,408.8 875.8,409.9 881.3,410.9 886.7,411.9 892.2,412.8 897.7,413.8 903.2,414.7 908.6,415.6 914.1,416.5 919.6,417.4 925.1,418.3 930.5,419.2 936.0,420.0"/>
+
+  <line x1="764" y1="208" x2="792" y2="208" stroke="#4B6787" stroke-width="3"/>
+  <text class="t xs" x="800" y="212" fill="#3C5570" font-weight="700">log loss: -log(p)</text>
+  <line x1="764" y1="230" x2="792" y2="230" stroke="#A67C52" stroke-width="3" stroke-dasharray="9 5"/>
+  <text class="t xs" x="800" y="234" fill="#7A5A3A" font-weight="700">Brier: (1 - p) squared</text>
+  <line x1="764" y1="252" x2="792" y2="252" stroke="#6F8D5E" stroke-width="2" stroke-dasharray="7 5"/>
+  <text class="t xs" x="800" y="256" fill="#4F6B41" font-weight="700">Brier's ceiling of 1</text>
+
+  <circle cx="599.4" cy="180.9" r="6" fill="#2C2924"/>
+  <text class="t xs" x="612" y="178">p = 0.01 costs 4.61</text>
+  <circle cx="629.4" cy="299.4" r="6" fill="#2C2924"/>
+  <text class="t xs" x="642" y="296">p = 0.10 costs 2.30</text>
+  <circle cx="766.3" cy="384" r="6" fill="#2C2924"/>
+  <text class="t xs" x="780" y="382">p = 0.50 costs 0.69</text>
+
+  <text class="t xs" x="766" y="484" text-anchor="middle">The log loss curve is cut off at 5 here. It keeps climbing as p approaches 0.</text>
+
+  <rect x="24" y="516" width="952" height="34" rx="10" fill="#EAF1E5" stroke="#6F8D5E" stroke-width="1.5"/>
+  <text class="t m" x="500" y="538" text-anchor="middle" font-weight="700" fill="#2C2924">Both scores charge for low probability on the outcome that happened, but Brier stops at a ceiling of 1 while log loss keeps climbing.</text>
+</svg>

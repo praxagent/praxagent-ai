@@ -1,0 +1,218 @@
+{
+  "accessibility": {
+    "alt_text": "Held-out HTRU2 average precision is 0.0916 for the dummy prior, 0.9141 for logistic regression, and 0.9262 for random forest; the forest-minus-logistic difference is +0.0121 with fixed-test stability interval [+0.0012, +0.0257]. HTRU2 ROC AUC is 0.5000, 0.9756, and 0.9767, respectively; the paired difference is +0.0011 [-0.0031, +0.0054]. Held-out Rice average precision is 0.4278, 0.9643, and 0.9607; the paired difference is -0.0036 [-0.0073, +0.0002]. Rice ROC AUC is 0.5000, 0.9688, and 0.9648; the paired difference is -0.0040 [-0.0070, -0.0011]. Intervals resample each fixed test set within class and are not population confidence intervals.",
+    "color_is_not_the_only_channel": true,
+    "full_text_equivalent": "plotted_data and caption_suggestion in this receipt",
+    "redundant_channels": [
+      "direct labels",
+      "marker shapes",
+      "position",
+      "exact values in receipt"
+    ]
+  },
+  "alt_text": "Held-out HTRU2 average precision is 0.0916 for the dummy prior, 0.9141 for logistic regression, and 0.9262 for random forest; the forest-minus-logistic difference is +0.0121 with fixed-test stability interval [+0.0012, +0.0257]. HTRU2 ROC AUC is 0.5000, 0.9756, and 0.9767, respectively; the paired difference is +0.0011 [-0.0031, +0.0054]. Held-out Rice average precision is 0.4278, 0.9643, and 0.9607; the paired difference is -0.0036 [-0.0073, +0.0002]. Rice ROC AUC is 0.5000, 0.9688, and 0.9648; the paired difference is -0.0040 [-0.0070, -0.0011]. Intervals resample each fixed test set within class and are not population confidence intervals.",
+  "caption_suggestion": "Finding: under one shared training-only tuning and fixed-holdout protocol, the two learned models both exceed the dummy-prior baseline on average precision and ROC AUC, while their point-estimate ordering can differ by metric and dataset. The plotted intervals are paired fixed-test bootstrap stability intervals, not population confidence intervals; they omit split, tuning, refitting, grouping, and acquisition uncertainty. Compare model values within a dataset because average precision depends on prevalence.",
+  "claim_scope_exclusions": [
+    "no population-wide performance claim",
+    "no causal claim",
+    "no independence claim beyond the released row tables",
+    "no claim that either selected model is universally superior"
+  ],
+  "data_source": {
+    "artifact": "receipts/analysis.receipt.json",
+    "artifact_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+    "row_selection": "the fixed held-out rows declared in the analysis receipt",
+    "source_fields": [
+      "test_metrics.*.average_precision",
+      "test_metrics.*.roc_auc",
+      "paired_bootstrap.models.*",
+      "paired_bootstrap.random_forest_minus_logistic_regression.metrics"
+    ],
+    "transformation": "computed by reproduce.py without manual figure values"
+  },
+  "description": "Dummy, logistic-regression, and random-forest AP and ROC AUC on each fixed test set with fixed-model bootstrap stability intervals.",
+  "figure_id": "held-out-ranking-metrics",
+  "plotted_data": {
+    "htru2": {
+      "average_precision": {
+        "model_stability_intervals": {
+          "dummy_prior": {
+            "lower": 0.09162,
+            "median": 0.09162,
+            "upper": 0.09162
+          },
+          "logistic_regression": {
+            "lower": 0.885479,
+            "median": 0.915733,
+            "upper": 0.939644
+          },
+          "random_forest": {
+            "lower": 0.903718,
+            "median": 0.927143,
+            "upper": 0.948268
+          }
+        },
+        "point_estimates": {
+          "dummy_prior": 0.09162,
+          "logistic_regression": 0.91412,
+          "random_forest": 0.926209
+        },
+        "random_forest_minus_logistic_regression": {
+          "interval": {
+            "lower": 0.001192,
+            "median": 0.011187,
+            "upper": 0.025677
+          },
+          "point": 0.012089
+        }
+      },
+      "roc_auc": {
+        "model_stability_intervals": {
+          "dummy_prior": {
+            "lower": 0.5,
+            "median": 0.5,
+            "upper": 0.5
+          },
+          "logistic_regression": {
+            "lower": 0.964824,
+            "median": 0.976012,
+            "upper": 0.985212
+          },
+          "random_forest": {
+            "lower": 0.966554,
+            "median": 0.976945,
+            "upper": 0.986439
+          }
+        },
+        "point_estimates": {
+          "dummy_prior": 0.5,
+          "logistic_regression": 0.975624,
+          "random_forest": 0.976684
+        },
+        "random_forest_minus_logistic_regression": {
+          "interval": {
+            "lower": -0.00309,
+            "median": 0.001034,
+            "upper": 0.005399
+          },
+          "point": 0.00106
+        }
+      }
+    },
+    "rice": {
+      "average_precision": {
+        "model_stability_intervals": {
+          "dummy_prior": {
+            "lower": 0.427822,
+            "median": 0.427822,
+            "upper": 0.427822
+          },
+          "logistic_regression": {
+            "lower": 0.951994,
+            "median": 0.964661,
+            "upper": 0.97549
+          },
+          "random_forest": {
+            "lower": 0.947273,
+            "median": 0.961087,
+            "upper": 0.972723
+          }
+        },
+        "point_estimates": {
+          "dummy_prior": 0.427822,
+          "logistic_regression": 0.964298,
+          "random_forest": 0.960727
+        },
+        "random_forest_minus_logistic_regression": {
+          "interval": {
+            "lower": -0.007324,
+            "median": -0.003554,
+            "upper": 0.000217
+          },
+          "point": -0.003571
+        }
+      },
+      "roc_auc": {
+        "model_stability_intervals": {
+          "dummy_prior": {
+            "lower": 0.5,
+            "median": 0.5,
+            "upper": 0.5
+          },
+          "logistic_regression": {
+            "lower": 0.95701,
+            "median": 0.969075,
+            "upper": 0.979218
+          },
+          "random_forest": {
+            "lower": 0.95156,
+            "median": 0.965,
+            "upper": 0.97666
+          }
+        },
+        "point_estimates": {
+          "dummy_prior": 0.5,
+          "logistic_regression": 0.968833,
+          "random_forest": 0.964791
+        },
+        "random_forest_minus_logistic_regression": {
+          "interval": {
+            "lower": -0.006965,
+            "median": -0.004037,
+            "upper": -0.001147
+          },
+          "point": -0.004042
+        }
+      }
+    }
+  },
+  "provenance": {
+    "generator": "reproduce.py",
+    "generator_sha256": "a2ad91d1e3f7cf2a15da4fc10246de57b7adda70c1ab2f229f2e51553a75e510",
+    "outputs": {
+      "fig-held-out-ranking-metrics.png": "a3a3108b2a173162e8471b74b7b9b454c8233816ef6fc6b9de2472a8ab38e9a4"
+    },
+    "plotting_library": "matplotlib 3.10.3",
+    "study_id": "uci-htru2-rice-logistic-random-forest-v1",
+    "verification_command": "uv run --frozen reproduce.py --verify"
+  },
+  "schema_version": 1,
+  "title": "Held-out ranking metrics",
+  "uncertainty": {
+    "by_dataset": {
+      "htru2": {
+        "interval_endpoints": {
+          "lower_percentile": 2.5,
+          "quantile_method": "numpy.quantile(method='linear')",
+          "upper_percentile": 97.5
+        },
+        "limitations": [
+          "conditions on the single fixed test split and its observed class counts",
+          "does not include training-split, tuning, refitting, or forest-seed variation",
+          "assumes held-out rows are exchangeable within class",
+          "does not repair unrecorded grouping or dependence in either public dataset",
+          "does not establish performance in a new survey, field, instrument, or population"
+        ],
+        "random_state": 20301093
+      },
+      "rice": {
+        "interval_endpoints": {
+          "lower_percentile": 2.5,
+          "quantile_method": "numpy.quantile(method='linear')",
+          "upper_percentile": 97.5
+        },
+        "limitations": [
+          "conditions on the single fixed test split and its observed class counts",
+          "does not include training-split, tuning, refitting, or forest-seed variation",
+          "assumes held-out rows are exchangeable within class",
+          "does not repair unrecorded grouping or dependence in either public dataset",
+          "does not establish performance in a new survey, field, instrument, or population"
+        ],
+        "random_state": 20301266
+      }
+    },
+    "kind": "95% paired stratified bootstrap stability interval",
+    "not_a_population_confidence_interval": true,
+    "replicates": 2000
+  }
+}

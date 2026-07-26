@@ -1,0 +1,79 @@
+{
+  "attribution": "ATTRIBUTION.txt",
+  "attribution_sha256": "09160838d8093cbaf05d47b99a08c45065fdd830a362c27a1a99a305951d5d21",
+  "datasets": {
+    "htru2": {
+      "archive": {
+        "sha256": "ba442c076dd22a8952700f26e38499fc1806037dcf7bea0e125e6bfba393f379",
+        "url": "https://archive.ics.uci.edu/static/public/372/htru2.zip"
+      },
+      "creator": "Robert Lyon",
+      "dataset_page": "https://archive.ics.uci.edu/dataset/372/htru2",
+      "doi": "10.24432/C5DK6R",
+      "features": [
+        "profile_mean",
+        "profile_standard_deviation",
+        "profile_excess_kurtosis",
+        "profile_skewness",
+        "dm_snr_mean",
+        "dm_snr_standard_deviation",
+        "dm_snr_excess_kurtosis",
+        "dm_snr_skewness"
+      ],
+      "included_files": {
+        "data/HTRU_2.csv": "b13b4d8929e96ecd196e464c1c8a454c3ac2ffa631015f6388957531a9923f59",
+        "data/Readme.txt": "691efe1b5b910401959a9b4f74ed0959dcd205d69c73cf524646e6f63a3eb86b"
+      },
+      "known_metadata_limit": "the release contains no positional or other astronomical details and no grouping identifier for dependence-aware splitting",
+      "missing_values": 0,
+      "positive_class": "pulsar candidate",
+      "repository": "UCI Machine Learning Repository",
+      "rows": 17898,
+      "target_encoding": {
+        "0": "non-pulsar candidate",
+        "1": "pulsar candidate"
+      },
+      "title": "HTRU2",
+      "year": 2015
+    },
+    "rice": {
+      "archive": {
+        "sha256": "fe94e42046b829de21b92b0ffb6a22774fde021328cae799faa802a14e8dbed9",
+        "url": "https://archive.ics.uci.edu/static/public/545/rice+cammeo+and+osmancik.zip"
+      },
+      "creators": [
+        "Ilkay Cinar",
+        "Murat Koklu"
+      ],
+      "dataset_page": "https://archive.ics.uci.edu/dataset/545/rice+cammeo+and+osmancik",
+      "doi": "10.24432/C5MW4Z",
+      "features": [
+        "area",
+        "perimeter",
+        "major_axis_length",
+        "minor_axis_length",
+        "eccentricity",
+        "convex_area",
+        "extent"
+      ],
+      "included_files": {
+        "data/Citation_Request.txt": "7184131b2ca0a456f619ede4cec7cf84607f8d9b32e6f5aab5be6e59f52dfc48",
+        "data/Rice_Cammeo_Osmancik.arff": "1af97883100c89de2ea2972f7a28d428f4f1c14711a61defc0b0569e9eb65665"
+      },
+      "known_metadata_limit": "the release provides no field, batch, camera-session, or other grouping identifier for dependence-aware splitting",
+      "missing_values": 0,
+      "positive_class": "Cammeo",
+      "positive_class_note": "chosen to define binary metrics; it is not a value judgment",
+      "repository": "UCI Machine Learning Repository",
+      "rows": 3810,
+      "target_encoding": {
+        "0": "Osmancik",
+        "1": "Cammeo"
+      },
+      "title": "Rice (Cammeo and Osmancik)",
+      "year": 2019
+    }
+  },
+  "license": "CC BY 4.0",
+  "schema_version": 1
+}

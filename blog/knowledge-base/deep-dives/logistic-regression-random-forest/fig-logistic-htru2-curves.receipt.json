@@ -1,0 +1,57 @@
+{
+  "claim": "Held-out precision-recall and receiver operating characteristic curves for the fitted logistic regression on the fixed HTRU2 test rows, with the prevalence-only control as the floor. Single fixed split; no refitting; no rival model in the frame.",
+  "control": "dummy_prior",
+  "dataset": "htru2",
+  "derived_from": "Per-row held-out probabilities committed by reproduce.py; every summary value is re-derived here and cross-checked against receipts/test-metrics.csv.",
+  "environment": {
+    "matplotlib": "3.10.3",
+    "numpy": "2.3.2",
+    "python": "3.12.12",
+    "scikit_learn": "1.7.1"
+  },
+  "figure": "fig-logistic-htru2-curves.png",
+  "generator": {
+    "path": "plot_holdout_curves.py",
+    "sha256": "15d625b7899166daaf044868f6c75c49d8fb025567192ca2152cec742cb362df",
+    "verify": "uv run plot_holdout_curves.py --verify"
+  },
+  "inputs": {
+    "receipts/analysis.receipt.json": "35419c20ef92d2d93d6be7cd37e91d04a5efb41b74f912911441d2a83e4a23ed",
+    "receipts/test-metrics.csv": "acb1a21a822adbc47fb299d8a4a6b04f51700d8b433bf20addf9b87ff1d4c0b8",
+    "receipts/test-predictions.csv": "97203d66565630a1480818fef8f8e6b439b9358cea5fc955a61c06f9f636f0d3"
+  },
+  "model": "logistic_regression",
+  "plotted_values": {
+    "average_precision": 0.914120313429,
+    "curves": {
+      "precision_recall_points": 3581,
+      "roc_points": 130
+    },
+    "negatives": 3252,
+    "operating_point": {
+      "false_negatives": 61,
+      "false_positive_rate": 0.005842558426,
+      "false_positives": 19,
+      "precision": 0.933566433566,
+      "recall": 0.814024390244,
+      "threshold": 0.5,
+      "true_negatives": 3233,
+      "true_positives": 267
+    },
+    "positives": 328,
+    "prevalence": 0.091620111732,
+    "roc_auc": 0.975623818738,
+    "rows": 3580
+  },
+  "provenance": {
+    "outputs": {
+      "fig-logistic-htru2-curves.png": "142ced42e8e4ee4b19af857ee0306988a43fe246c3f698f79a240bff7571724a"
+    }
+  },
+  "schema_version": 1,
+  "study_id": "logistic-regression-random-forest",
+  "verification_scope": {
+    "claim": "byte identity in the recorded reference environment only",
+    "cross_platform_note": "operating systems, numerical libraries, FreeType builds, and font files can change output bytes"
+  }
+}

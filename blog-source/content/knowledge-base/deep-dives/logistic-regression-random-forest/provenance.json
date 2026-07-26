@@ -1,0 +1,3337 @@
+{
+  "figures": [
+    "fig-forest-htru2-curves.png",
+    "fig-logistic-htru2-curves.png",
+    "fig-held-out-ranking-metrics.png",
+    "fig-held-out-calibration.png",
+    "fig-held-out-confusion-counts.png",
+    "fig-held-out-permutation-importance.png",
+    "og-card.png"
+  ],
+  "generator": {
+    "path": "reproduce.py",
+    "sha256": "a2ad91d1e3f7cf2a15da4fc10246de57b7adda70c1ab2f229f2e51553a75e510",
+    "verify": "uv run --frozen reproduce.py --verify"
+  },
+  "local_bundle": true,
+  "notebook": {
+    "path": "forest-in-the-sky.ipynb",
+    "sha256": "dbd80db87a923e10360d9a380b1e066debd8387a4303df2e98f1bf3e91114391"
+  },
+  "numbers": [
+    {
+      "appears_as": "HTRU2 has 17,898 candidate rows",
+      "computation": "Direct audited row count from the parsed HTRU2 source table.",
+      "id": "htru2-row-count",
+      "receipt": "receipts/analysis.receipt.json",
+      "receipt_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+      "source": "receipts/analysis.receipt.json#datasets.htru2.dataset.audit.rows",
+      "value": 17898
+    },
+    {
+      "appears_as": "HTRU2 includes 1,639 positive-labeled candidates",
+      "computation": "Direct count of HTRU2 rows whose parsed class label is positive.",
+      "id": "htru2-positive-count",
+      "receipt": "receipts/analysis.receipt.json",
+      "receipt_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+      "source": "receipts/analysis.receipt.json#datasets.htru2.dataset.class_counts.positive",
+      "value": 1639
+    },
+    {
+      "appears_as": "Rice has 3,810 grain rows",
+      "computation": "Direct audited row count from the parsed Rice source table.",
+      "id": "rice-row-count",
+      "receipt": "receipts/analysis.receipt.json",
+      "receipt_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+      "source": "receipts/analysis.receipt.json#datasets.rice.dataset.audit.rows",
+      "value": 3810
+    },
+    {
+      "appears_as": "Rice includes 1,630 Cammeo grains",
+      "computation": "Direct count of Rice rows whose parsed class label is Cammeo.",
+      "id": "rice-positive-count",
+      "receipt": "receipts/analysis.receipt.json",
+      "receipt_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+      "source": "receipts/analysis.receipt.json#datasets.rice.dataset.class_counts.positive",
+      "value": 1630
+    },
+    {
+      "appears_as": "HTRU2 dummy prior held-out AP 0.0916",
+      "computation": "Direct average_precision value computed on the fixed held-out HTRU2 rows.",
+      "id": "htru2-dummy_prior-average_precision",
+      "receipt": "receipts/analysis.receipt.json",
+      "receipt_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+      "source": "receipts/analysis.receipt.json#datasets.htru2.test_metrics.dummy_prior.average_precision",
+      "value": 0.09162
+    },
+    {
+      "appears_as": "HTRU2 dummy prior held-out ROC AUC 0.5000",
+      "computation": "Direct roc_auc value computed on the fixed held-out HTRU2 rows.",
+      "id": "htru2-dummy_prior-roc_auc",
+      "receipt": "receipts/analysis.receipt.json",
+      "receipt_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+      "source": "receipts/analysis.receipt.json#datasets.htru2.test_metrics.dummy_prior.roc_auc",
+      "value": 0.5
+    },
+    {
+      "appears_as": "HTRU2 logistic regression held-out AP 0.9141",
+      "computation": "Direct average_precision value computed on the fixed held-out HTRU2 rows.",
+      "id": "htru2-logistic_regression-average_precision",
+      "receipt": "receipts/analysis.receipt.json",
+      "receipt_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+      "source": "receipts/analysis.receipt.json#datasets.htru2.test_metrics.logistic_regression.average_precision",
+      "value": 0.91412
+    },
+    {
+      "appears_as": "HTRU2 logistic regression held-out ROC AUC 0.9756",
+      "computation": "Direct roc_auc value computed on the fixed held-out HTRU2 rows.",
+      "id": "htru2-logistic_regression-roc_auc",
+      "receipt": "receipts/analysis.receipt.json",
+      "receipt_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+      "source": "receipts/analysis.receipt.json#datasets.htru2.test_metrics.logistic_regression.roc_auc",
+      "value": 0.975624
+    },
+    {
+      "appears_as": "HTRU2 random forest held-out AP 0.9262",
+      "computation": "Direct average_precision value computed on the fixed held-out HTRU2 rows.",
+      "id": "htru2-random_forest-average_precision",
+      "receipt": "receipts/analysis.receipt.json",
+      "receipt_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+      "source": "receipts/analysis.receipt.json#datasets.htru2.test_metrics.random_forest.average_precision",
+      "value": 0.926209
+    },
+    {
+      "appears_as": "HTRU2 random forest held-out ROC AUC 0.9767",
+      "computation": "Direct roc_auc value computed on the fixed held-out HTRU2 rows.",
+      "id": "htru2-random_forest-roc_auc",
+      "receipt": "receipts/analysis.receipt.json",
+      "receipt_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+      "source": "receipts/analysis.receipt.json#datasets.htru2.test_metrics.random_forest.roc_auc",
+      "value": 0.976684
+    },
+    {
+      "appears_as": "HTRU2 random-forest-minus-logistic-regression held-out AP +0.0121 [+0.0012, +0.0257]",
+      "computation": "Random-forest average precision minus logistic-regression average precision, with the paired class-stratified bootstrap endpoints.",
+      "id": "htru2-paired-ap-difference",
+      "receipt": "fig-held-out-ranking-metrics.receipt.json",
+      "receipt_sha256": "361cabab031824513530b94203d5665e1a14ee61d27b0d36b1f756382fc905b2",
+      "source": "fig-held-out-ranking-metrics.receipt.json#plotted_data.htru2.average_precision.random_forest_minus_logistic_regression",
+      "value": {
+        "lower": 0.001192,
+        "point": 0.012089,
+        "upper": 0.025677
+      }
+    },
+    {
+      "appears_as": "Rice dummy prior held-out AP 0.4278",
+      "computation": "Direct average_precision value computed on the fixed held-out Rice rows.",
+      "id": "rice-dummy_prior-average_precision",
+      "receipt": "receipts/analysis.receipt.json",
+      "receipt_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+      "source": "receipts/analysis.receipt.json#datasets.rice.test_metrics.dummy_prior.average_precision",
+      "value": 0.427822
+    },
+    {
+      "appears_as": "Rice dummy prior held-out ROC AUC 0.5000",
+      "computation": "Direct roc_auc value computed on the fixed held-out Rice rows.",
+      "id": "rice-dummy_prior-roc_auc",
+      "receipt": "receipts/analysis.receipt.json",
+      "receipt_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+      "source": "receipts/analysis.receipt.json#datasets.rice.test_metrics.dummy_prior.roc_auc",
+      "value": 0.5
+    },
+    {
+      "appears_as": "Rice logistic regression held-out AP 0.9643",
+      "computation": "Direct average_precision value computed on the fixed held-out Rice rows.",
+      "id": "rice-logistic_regression-average_precision",
+      "receipt": "receipts/analysis.receipt.json",
+      "receipt_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+      "source": "receipts/analysis.receipt.json#datasets.rice.test_metrics.logistic_regression.average_precision",
+      "value": 0.964298
+    },
+    {
+      "appears_as": "Rice logistic regression held-out ROC AUC 0.9688",
+      "computation": "Direct roc_auc value computed on the fixed held-out Rice rows.",
+      "id": "rice-logistic_regression-roc_auc",
+      "receipt": "receipts/analysis.receipt.json",
+      "receipt_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+      "source": "receipts/analysis.receipt.json#datasets.rice.test_metrics.logistic_regression.roc_auc",
+      "value": 0.968833
+    },
+    {
+      "appears_as": "Rice random forest held-out AP 0.9607",
+      "computation": "Direct average_precision value computed on the fixed held-out Rice rows.",
+      "id": "rice-random_forest-average_precision",
+      "receipt": "receipts/analysis.receipt.json",
+      "receipt_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+      "source": "receipts/analysis.receipt.json#datasets.rice.test_metrics.random_forest.average_precision",
+      "value": 0.960727
+    },
+    {
+      "appears_as": "Rice random forest held-out ROC AUC 0.9648",
+      "computation": "Direct roc_auc value computed on the fixed held-out Rice rows.",
+      "id": "rice-random_forest-roc_auc",
+      "receipt": "receipts/analysis.receipt.json",
+      "receipt_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+      "source": "receipts/analysis.receipt.json#datasets.rice.test_metrics.random_forest.roc_auc",
+      "value": 0.964791
+    },
+    {
+      "appears_as": "Rice random-forest-minus-logistic-regression held-out AP -0.0036 [-0.0073, +0.0002]",
+      "computation": "Random-forest average precision minus logistic-regression average precision, with the paired class-stratified bootstrap endpoints.",
+      "id": "rice-paired-ap-difference",
+      "receipt": "fig-held-out-ranking-metrics.receipt.json",
+      "receipt_sha256": "361cabab031824513530b94203d5665e1a14ee61d27b0d36b1f756382fc905b2",
+      "source": "fig-held-out-ranking-metrics.receipt.json#plotted_data.rice.average_precision.random_forest_minus_logistic_regression",
+      "value": {
+        "lower": -0.007324,
+        "point": -0.003571,
+        "upper": 0.000217
+      }
+    },
+    {
+      "appears_as": "HTRU2 complete held-out result values",
+      "computation": "Complete generated dataset audit, split, tuning, test-metric, paired-bootstrap, calibration, and permutation summaries. Derived article values use positive / rows for prevalence, tp + fp for predicted-positive workload, forest minus logistic for paired workload deltas, test rows minus test positives for test negatives, and min/max over nonempty middle-bin counts.",
+      "id": "htru2-complete-held-out-result-values",
+      "receipt": "receipts/analysis.receipt.json",
+      "receipt_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+      "source": "receipts/analysis.receipt.json#datasets.htru2",
+      "value": {
+        "derived_article_values": {
+          "nonempty_middle_reliability_bin_count_range": {
+            "maximum": 51,
+            "minimum": 9
+          },
+          "positive_prevalence_percent": 9.16,
+          "predicted_positive_at_0_5": {
+            "logistic_regression": 286,
+            "random_forest": 304
+          },
+          "random_forest_minus_logistic_regression_workload": {
+            "false_positive": 8,
+            "predicted_positive": 18,
+            "true_positive": 10
+          },
+          "selected_hyperparameters": {
+            "logistic_regression": {
+              "classifier__C": 1.0
+            },
+            "random_forest": {
+              "max_depth": 6,
+              "max_features": 0.75,
+              "min_samples_leaf": 5
+            }
+          },
+          "test_class_counts": {
+            "negative": 3252,
+            "positive": 328,
+            "rows": 3580
+          }
+        },
+        "receipt_dataset": {
+          "calibration": [
+            {
+              "bin_index": 0,
+              "count": 3580,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.0,
+              "mean_predicted_probability": 0.09156306746752339,
+              "model": "dummy_prior",
+              "observed_positive_fraction": 0.09162011173184358,
+              "positive_count": 328,
+              "upper_bound": 0.1,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 1,
+              "count": 0,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.1,
+              "mean_predicted_probability": null,
+              "model": "dummy_prior",
+              "observed_positive_fraction": null,
+              "positive_count": 0,
+              "upper_bound": 0.2,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 2,
+              "count": 0,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.2,
+              "mean_predicted_probability": null,
+              "model": "dummy_prior",
+              "observed_positive_fraction": null,
+              "positive_count": 0,
+              "upper_bound": 0.30000000000000004,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 3,
+              "count": 0,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.30000000000000004,
+              "mean_predicted_probability": null,
+              "model": "dummy_prior",
+              "observed_positive_fraction": null,
+              "positive_count": 0,
+              "upper_bound": 0.4,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 4,
+              "count": 0,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.4,
+              "mean_predicted_probability": null,
+              "model": "dummy_prior",
+              "observed_positive_fraction": null,
+              "positive_count": 0,
+              "upper_bound": 0.5,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 5,
+              "count": 0,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.5,
+              "mean_predicted_probability": null,
+              "model": "dummy_prior",
+              "observed_positive_fraction": null,
+              "positive_count": 0,
+              "upper_bound": 0.6000000000000001,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 6,
+              "count": 0,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.6000000000000001,
+              "mean_predicted_probability": null,
+              "model": "dummy_prior",
+              "observed_positive_fraction": null,
+              "positive_count": 0,
+              "upper_bound": 0.7000000000000001,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 7,
+              "count": 0,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.7000000000000001,
+              "mean_predicted_probability": null,
+              "model": "dummy_prior",
+              "observed_positive_fraction": null,
+              "positive_count": 0,
+              "upper_bound": 0.8,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 8,
+              "count": 0,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.8,
+              "mean_predicted_probability": null,
+              "model": "dummy_prior",
+              "observed_positive_fraction": null,
+              "positive_count": 0,
+              "upper_bound": 0.9,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 9,
+              "count": 0,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.9,
+              "mean_predicted_probability": null,
+              "model": "dummy_prior",
+              "observed_positive_fraction": null,
+              "positive_count": 0,
+              "upper_bound": 1.0,
+              "upper_bound_inclusive": true
+            },
+            {
+              "bin_index": 0,
+              "count": 3204,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.0,
+              "mean_predicted_probability": 0.01232277769947457,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.009675405742821473,
+              "positive_count": 31,
+              "upper_bound": 0.1,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 1,
+              "count": 51,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.1,
+              "mean_predicted_probability": 0.13629255037494348,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.19607843137254902,
+              "positive_count": 10,
+              "upper_bound": 0.2,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 2,
+              "count": 15,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.2,
+              "mean_predicted_probability": 0.25018763344294415,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.4666666666666667,
+              "positive_count": 7,
+              "upper_bound": 0.30000000000000004,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 3,
+              "count": 13,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.30000000000000004,
+              "mean_predicted_probability": 0.3475920944687577,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.3076923076923077,
+              "positive_count": 4,
+              "upper_bound": 0.4,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 4,
+              "count": 11,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.4,
+              "mean_predicted_probability": 0.44285551780768684,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.8181818181818182,
+              "positive_count": 9,
+              "upper_bound": 0.5,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 5,
+              "count": 9,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.5,
+              "mean_predicted_probability": 0.5556560288217376,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.7777777777777778,
+              "positive_count": 7,
+              "upper_bound": 0.6000000000000001,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 6,
+              "count": 16,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.6000000000000001,
+              "mean_predicted_probability": 0.6412765469042143,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.75,
+              "positive_count": 12,
+              "upper_bound": 0.7000000000000001,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 7,
+              "count": 14,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.7000000000000001,
+              "mean_predicted_probability": 0.7510027649649514,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.7857142857142857,
+              "positive_count": 11,
+              "upper_bound": 0.8,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 8,
+              "count": 26,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.8,
+              "mean_predicted_probability": 0.8556720930105317,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.8076923076923077,
+              "positive_count": 21,
+              "upper_bound": 0.9,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 9,
+              "count": 221,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.9,
+              "mean_predicted_probability": 0.9901275582872814,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.9773755656108597,
+              "positive_count": 216,
+              "upper_bound": 1.0,
+              "upper_bound_inclusive": true
+            },
+            {
+              "bin_index": 0,
+              "count": 3189,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.0,
+              "mean_predicted_probability": 0.009006756920374406,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.00940733772342427,
+              "positive_count": 30,
+              "upper_bound": 0.1,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 1,
+              "count": 36,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.1,
+              "mean_predicted_probability": 0.14578713984530672,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.1388888888888889,
+              "positive_count": 5,
+              "upper_bound": 0.2,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 2,
+              "count": 24,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.2,
+              "mean_predicted_probability": 0.2495011576422105,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.125,
+              "positive_count": 3,
+              "upper_bound": 0.30000000000000004,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 3,
+              "count": 15,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.30000000000000004,
+              "mean_predicted_probability": 0.35063386522566425,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.5333333333333333,
+              "positive_count": 8,
+              "upper_bound": 0.4,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 4,
+              "count": 12,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.4,
+              "mean_predicted_probability": 0.46294546239421536,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.4166666666666667,
+              "positive_count": 5,
+              "upper_bound": 0.5,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 5,
+              "count": 17,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.5,
+              "mean_predicted_probability": 0.5556497579211469,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.5294117647058824,
+              "positive_count": 9,
+              "upper_bound": 0.6000000000000001,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 6,
+              "count": 20,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.6000000000000001,
+              "mean_predicted_probability": 0.6533116812888291,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.65,
+              "positive_count": 13,
+              "upper_bound": 0.7000000000000001,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 7,
+              "count": 11,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.7000000000000001,
+              "mean_predicted_probability": 0.7464046303713053,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.6363636363636364,
+              "positive_count": 7,
+              "upper_bound": 0.8,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 8,
+              "count": 28,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.8,
+              "mean_predicted_probability": 0.8623389800361357,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.8571428571428571,
+              "positive_count": 24,
+              "upper_bound": 0.9,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 9,
+              "count": 228,
+              "dataset": "htru2",
+              "lower_bound_inclusive": 0.9,
+              "mean_predicted_probability": 0.9792583224959072,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.9824561403508771,
+              "positive_count": 224,
+              "upper_bound": 1.0,
+              "upper_bound_inclusive": true
+            }
+          ],
+          "dataset": {
+            "audit": {
+              "exact_feature_row_duplicates": 0,
+              "exact_full_row_duplicates": 0,
+              "features": 8,
+              "missing_or_nonfinite_feature_cells": 0,
+              "rows": 17898
+            },
+            "class_counts": {
+              "negative": 16259,
+              "positive": 1639
+            },
+            "display_name": "HTRU2",
+            "feature_labels": {
+              "dm_snr_excess_kurtosis": "Dispersion-measure signal-to-noise ratio excess kurtosis",
+              "dm_snr_mean": "Dispersion-measure signal-to-noise ratio mean",
+              "dm_snr_skewness": "Dispersion-measure signal-to-noise ratio skewness",
+              "dm_snr_standard_deviation": "Dispersion-measure signal-to-noise ratio standard deviation",
+              "profile_excess_kurtosis": "Profile excess kurtosis",
+              "profile_mean": "Profile mean",
+              "profile_skewness": "Profile skewness",
+              "profile_standard_deviation": "Profile standard deviation"
+            },
+            "features": [
+              "profile_mean",
+              "profile_standard_deviation",
+              "profile_excess_kurtosis",
+              "profile_skewness",
+              "dm_snr_mean",
+              "dm_snr_standard_deviation",
+              "dm_snr_excess_kurtosis",
+              "dm_snr_skewness"
+            ],
+            "key": "htru2",
+            "negative_label": "non-pulsar candidate",
+            "positive_label": "pulsar candidate",
+            "positive_prevalence": 0.091574,
+            "row_definition": "one human-annotated pulsar candidate feature row",
+            "source_path": "data/HTRU_2.csv",
+            "source_sha256": "b13b4d8929e96ecd196e464c1c8a454c3ac2ffa631015f6388957531a9923f59"
+          },
+          "paired_bootstrap": {
+            "confidence_level_label": "95% bootstrap stability interval",
+            "interval_endpoints": {
+              "lower_percentile": 2.5,
+              "quantile_method": "numpy.quantile(method='linear')",
+              "upper_percentile": 97.5
+            },
+            "limitations": [
+              "conditions on the single fixed test split and its observed class counts",
+              "does not include training-split, tuning, refitting, or forest-seed variation",
+              "assumes held-out rows are exchangeable within class",
+              "does not repair unrecorded grouping or dependence in either public dataset",
+              "does not establish performance in a new survey, field, instrument, or population"
+            ],
+            "method": "paired stratified nonparametric bootstrap of the fixed held-out rows",
+            "models": {
+              "dummy_prior": {
+                "average_precision": {
+                  "lower": 0.09162,
+                  "median": 0.09162,
+                  "upper": 0.09162
+                },
+                "balanced_accuracy": {
+                  "lower": 0.5,
+                  "median": 0.5,
+                  "upper": 0.5
+                },
+                "brier_score": {
+                  "lower": 0.083226,
+                  "median": 0.083226,
+                  "upper": 0.083226
+                },
+                "f1_at_0_5": {
+                  "lower": 0.0,
+                  "median": 0.0,
+                  "upper": 0.0
+                },
+                "log_loss": {
+                  "lower": 0.30627,
+                  "median": 0.30627,
+                  "upper": 0.30627
+                },
+                "precision_at_0_5": {
+                  "lower": 0.0,
+                  "median": 0.0,
+                  "upper": 0.0
+                },
+                "recall_at_0_5": {
+                  "lower": 0.0,
+                  "median": 0.0,
+                  "upper": 0.0
+                },
+                "roc_auc": {
+                  "lower": 0.5,
+                  "median": 0.5,
+                  "upper": 0.5
+                }
+              },
+              "logistic_regression": {
+                "average_precision": {
+                  "lower": 0.885479,
+                  "median": 0.915733,
+                  "upper": 0.939644
+                },
+                "balanced_accuracy": {
+                  "lower": 0.883049,
+                  "median": 0.904847,
+                  "upper": 0.924817
+                },
+                "brier_score": {
+                  "lower": 0.015059,
+                  "median": 0.018336,
+                  "upper": 0.021835
+                },
+                "f1_at_0_5": {
+                  "lower": 0.841762,
+                  "median": 0.870279,
+                  "upper": 0.896774
+                },
+                "log_loss": {
+                  "lower": 0.064444,
+                  "median": 0.077703,
+                  "upper": 0.093162
+                },
+                "precision_at_0_5": {
+                  "lower": 0.905259,
+                  "median": 0.934256,
+                  "upper": 0.96058
+                },
+                "recall_at_0_5": {
+                  "lower": 0.771341,
+                  "median": 0.814024,
+                  "upper": 0.856707
+                },
+                "roc_auc": {
+                  "lower": 0.964824,
+                  "median": 0.976012,
+                  "upper": 0.985212
+                }
+              },
+              "random_forest": {
+                "average_precision": {
+                  "lower": 0.903718,
+                  "median": 0.927143,
+                  "upper": 0.948268
+                },
+                "balanced_accuracy": {
+                  "lower": 0.898749,
+                  "median": 0.918707,
+                  "upper": 0.93717
+                },
+                "brier_score": {
+                  "lower": 0.014243,
+                  "median": 0.017391,
+                  "upper": 0.020804
+                },
+                "f1_at_0_5": {
+                  "lower": 0.850153,
+                  "median": 0.877358,
+                  "upper": 0.903021
+                },
+                "log_loss": {
+                  "lower": 0.059326,
+                  "median": 0.071933,
+                  "upper": 0.086106
+                },
+                "precision_at_0_5": {
+                  "lower": 0.880114,
+                  "median": 0.911765,
+                  "upper": 0.941383
+                },
+                "recall_at_0_5": {
+                  "lower": 0.804878,
+                  "median": 0.844512,
+                  "upper": 0.881098
+                },
+                "roc_auc": {
+                  "lower": 0.966554,
+                  "median": 0.976945,
+                  "upper": 0.986439
+                }
+              }
+            },
+            "not_a_population_confidence_interval": true,
+            "random_forest_minus_logistic_regression": {
+              "delta_definition": "random forest metric minus logistic regression metric",
+              "interpretation": "positive favors random forest for higher-is-better metrics; negative favors random forest for lower-is-better log loss and Brier score",
+              "metrics": {
+                "average_precision": {
+                  "lower": 0.001192,
+                  "median": 0.011187,
+                  "upper": 0.025677
+                },
+                "balanced_accuracy": {
+                  "lower": 0.003651,
+                  "median": 0.01386,
+                  "upper": 0.025453
+                },
+                "brier_score": {
+                  "lower": -0.0022,
+                  "median": -0.00095,
+                  "upper": 0.000286
+                },
+                "f1_at_0_5": {
+                  "lower": -0.009359,
+                  "median": 0.007095,
+                  "upper": 0.023848
+                },
+                "log_loss": {
+                  "lower": -0.011639,
+                  "median": -0.005723,
+                  "upper": -0.000456
+                },
+                "precision_at_0_5": {
+                  "lower": -0.044632,
+                  "median": -0.022234,
+                  "upper": -0.00213
+                },
+                "recall_at_0_5": {
+                  "lower": 0.009146,
+                  "median": 0.030488,
+                  "upper": 0.051905
+                },
+                "roc_auc": {
+                  "lower": -0.00309,
+                  "median": 0.001034,
+                  "upper": 0.005399
+                }
+              }
+            },
+            "random_state": 20301093,
+            "replicates": 2000,
+            "resampling": "positive and negative held-out row indices are sampled with replacement within class; the same sampled indices are used for every model"
+          },
+          "permutation_importance": {
+            "computed_on": "fixed held-out test rows after model selection",
+            "limitations": [
+              "repeat spread is not a confidence interval",
+              "correlated features can share or mask importance",
+              "permutation can create feature combinations not common in the source table"
+            ],
+            "models": {
+              "logistic_regression": [
+                {
+                  "feature": "profile_excess_kurtosis",
+                  "feature_label": "Profile excess kurtosis",
+                  "mean_average_precision_decrease": 0.856496,
+                  "standard_deviation_across_permutations": 0.002016
+                },
+                {
+                  "feature": "dm_snr_standard_deviation",
+                  "feature_label": "Dispersion-measure signal-to-noise ratio standard deviation",
+                  "mean_average_precision_decrease": 0.08032,
+                  "standard_deviation_across_permutations": 0.005833
+                },
+                {
+                  "feature": "profile_skewness",
+                  "feature_label": "Profile skewness",
+                  "mean_average_precision_decrease": 0.018759,
+                  "standard_deviation_across_permutations": 0.006379
+                },
+                {
+                  "feature": "dm_snr_mean",
+                  "feature_label": "Dispersion-measure signal-to-noise ratio mean",
+                  "mean_average_precision_decrease": 0.017582,
+                  "standard_deviation_across_permutations": 0.002827
+                },
+                {
+                  "feature": "dm_snr_skewness",
+                  "feature_label": "Dispersion-measure signal-to-noise ratio skewness",
+                  "mean_average_precision_decrease": 0.008555,
+                  "standard_deviation_across_permutations": 0.002194
+                },
+                {
+                  "feature": "profile_mean",
+                  "feature_label": "Profile mean",
+                  "mean_average_precision_decrease": 0.003887,
+                  "standard_deviation_across_permutations": 0.002777
+                },
+                {
+                  "feature": "dm_snr_excess_kurtosis",
+                  "feature_label": "Dispersion-measure signal-to-noise ratio excess kurtosis",
+                  "mean_average_precision_decrease": 0.003165,
+                  "standard_deviation_across_permutations": 0.002135
+                },
+                {
+                  "feature": "profile_standard_deviation",
+                  "feature_label": "Profile standard deviation",
+                  "mean_average_precision_decrease": 0.000258,
+                  "standard_deviation_across_permutations": 0.001195
+                }
+              ],
+              "random_forest": [
+                {
+                  "feature": "profile_excess_kurtosis",
+                  "feature_label": "Profile excess kurtosis",
+                  "mean_average_precision_decrease": 0.659815,
+                  "standard_deviation_across_permutations": 0.014306
+                },
+                {
+                  "feature": "dm_snr_standard_deviation",
+                  "feature_label": "Dispersion-measure signal-to-noise ratio standard deviation",
+                  "mean_average_precision_decrease": 0.018536,
+                  "standard_deviation_across_permutations": 0.00371
+                },
+                {
+                  "feature": "profile_skewness",
+                  "feature_label": "Profile skewness",
+                  "mean_average_precision_decrease": 0.015324,
+                  "standard_deviation_across_permutations": 0.005422
+                },
+                {
+                  "feature": "profile_mean",
+                  "feature_label": "Profile mean",
+                  "mean_average_precision_decrease": 0.007959,
+                  "standard_deviation_across_permutations": 0.001703
+                },
+                {
+                  "feature": "profile_standard_deviation",
+                  "feature_label": "Profile standard deviation",
+                  "mean_average_precision_decrease": 0.006573,
+                  "standard_deviation_across_permutations": 0.002531
+                },
+                {
+                  "feature": "dm_snr_excess_kurtosis",
+                  "feature_label": "Dispersion-measure signal-to-noise ratio excess kurtosis",
+                  "mean_average_precision_decrease": 0.004943,
+                  "standard_deviation_across_permutations": 0.001471
+                },
+                {
+                  "feature": "dm_snr_mean",
+                  "feature_label": "Dispersion-measure signal-to-noise ratio mean",
+                  "mean_average_precision_decrease": 0.004602,
+                  "standard_deviation_across_permutations": 0.002031
+                },
+                {
+                  "feature": "dm_snr_skewness",
+                  "feature_label": "Dispersion-measure signal-to-noise ratio skewness",
+                  "mean_average_precision_decrease": 0.004335,
+                  "standard_deviation_across_permutations": 0.002515
+                }
+              ]
+            },
+            "not_used_for_tuning": true,
+            "random_states": {
+              "logistic_regression": 20311093,
+              "random_forest": 20311094
+            },
+            "repeats": 30,
+            "scoring": "average_precision"
+          },
+          "scope_limits": [
+            "the public table provides no grouping identifiers for dependence-aware splitting",
+            "a fixed row-level holdout does not establish performance in a new acquisition context",
+            "test-set interpretation does not turn association into causation",
+            "model comparison is conditional on the declared grids, split, threshold, and metrics"
+          ],
+          "split": {
+            "method": "fixed stratified random holdout",
+            "random_state": 20261093,
+            "test_fraction": 0.2,
+            "test_original_index_sha256": "25257ea11745e4c8ae1cafa492cb2142f2d79b1296f6d0f122137fc987279c3b",
+            "test_positives": 328,
+            "test_rows": 3580,
+            "training_original_index_sha256": "a98590af7a3c53ffdb0b484a00025e1e3ae52dcc08ec662565f6c135dd87c319",
+            "training_positives": 1311,
+            "training_rows": 14318
+          },
+          "test_metrics": {
+            "dummy_prior": {
+              "average_precision": 0.09162011173184358,
+              "balanced_accuracy": 0.5,
+              "brier_score": 0.08322587011213615,
+              "confusion": {
+                "fn": 328,
+                "fp": 0,
+                "tn": 3252,
+                "tp": 0
+              },
+              "f1_at_0_5": 0.0,
+              "log_loss": 0.306270251420438,
+              "precision_at_0_5": 0.0,
+              "recall_at_0_5": 0.0,
+              "roc_auc": 0.5
+            },
+            "logistic_regression": {
+              "average_precision": 0.9141203134286622,
+              "balanced_accuracy": 0.904090915909159,
+              "brier_score": 0.01842103175623111,
+              "confusion": {
+                "fn": 61,
+                "fp": 19,
+                "tn": 3233,
+                "tp": 267
+              },
+              "f1_at_0_5": 0.8697068403908794,
+              "log_loss": 0.07838934833153892,
+              "precision_at_0_5": 0.9335664335664335,
+              "recall_at_0_5": 0.8140243902439024,
+              "roc_auc": 0.9756238187381874
+            },
+            "random_forest": {
+              "average_precision": 0.926209011132564,
+              "balanced_accuracy": 0.9181048060480604,
+              "brier_score": 0.01748606782101274,
+              "confusion": {
+                "fn": 51,
+                "fp": 27,
+                "tn": 3225,
+                "tp": 277
+              },
+              "f1_at_0_5": 0.8765822784810128,
+              "log_loss": 0.07250472858171678,
+              "precision_at_0_5": 0.9111842105263158,
+              "recall_at_0_5": 0.8445121951219512,
+              "roc_auc": 0.9766836730867308
+            }
+          },
+          "training_only_tuning": {
+            "folds": 5,
+            "logistic_regression": {
+              "best_mean_validation_average_precision": 0.928258,
+              "best_params": {
+                "classifier__C": 1.0
+              },
+              "class_weight": null,
+              "converged": true,
+              "fixed_parameters": {
+                "max_iter": 5000,
+                "penalty": "l2",
+                "random_state": 20281093,
+                "solver": "lbfgs"
+              },
+              "grid": {
+                "C": [
+                  0.01,
+                  0.1,
+                  1.0,
+                  10.0,
+                  100.0
+                ]
+              },
+              "oversampling": null,
+              "pipeline": [
+                "StandardScaler",
+                "LogisticRegression"
+              ],
+              "selected_fit_iterations": [
+                20
+              ]
+            },
+            "objective": "average_precision",
+            "random_forest": {
+              "best_mean_validation_average_precision": 0.930227,
+              "best_params": {
+                "max_depth": 6,
+                "max_features": 0.75,
+                "min_samples_leaf": 5
+              },
+              "class_weight": null,
+              "fixed_parameters": {
+                "bootstrap": true,
+                "criterion": "gini",
+                "n_jobs": 1,
+                "random_state": 20291093
+              },
+              "grid": {
+                "max_depth": [
+                  6,
+                  12,
+                  null
+                ],
+                "max_features": [
+                  "sqrt",
+                  0.75
+                ],
+                "min_samples_leaf": [
+                  1,
+                  5
+                ]
+              },
+              "n_estimators": 250,
+              "oversampling": null
+            },
+            "random_state": 20271093,
+            "selection_tie_behavior": "GridSearchCV selects the first candidate in the declared ParameterGrid order among exactly tied mean validation scores",
+            "shared_fold_records": [
+              {
+                "fold": 0,
+                "training_original_index_sha256": "dfddd22802dd00568a284759a0c21f200f622639bb0e9b15b150053b45c99667",
+                "training_rows": 11454,
+                "validation_original_index_sha256": "eca05d6505bfe9a1a9153e5b60ffeb6d785bcdc7499262cde616a9523f2a64c3",
+                "validation_positives": 262,
+                "validation_rows": 2864
+              },
+              {
+                "fold": 1,
+                "training_original_index_sha256": "45569109dad1e46c6a6cfd607d4c0200371db770390dbc45f7a8133ddda96a11",
+                "training_rows": 11454,
+                "validation_original_index_sha256": "ea088db4bef9c18cd9b2073e5c5e88a0a69e6cd771b20c5385a78bc2ef1ee864",
+                "validation_positives": 262,
+                "validation_rows": 2864
+              },
+              {
+                "fold": 2,
+                "training_original_index_sha256": "01ed6e32566a7480eb71f206a38685a5670328604ba67f20925361dd04a18665",
+                "training_rows": 11454,
+                "validation_original_index_sha256": "833cf16ecb33c009034ed7e40ce99cc898f2f7b44504d071507ed35779c0e5b6",
+                "validation_positives": 263,
+                "validation_rows": 2864
+              },
+              {
+                "fold": 3,
+                "training_original_index_sha256": "827f089a1a53b4d83e4633974898009fd48943b2459ec557c213571e020d3398",
+                "training_rows": 11455,
+                "validation_original_index_sha256": "8f36e684f070aacd69c33cfa8a22a803a5e37ac5e2d725f0380566f8eeea1e63",
+                "validation_positives": 262,
+                "validation_rows": 2863
+              },
+              {
+                "fold": 4,
+                "training_original_index_sha256": "21a7d58bc1f4e0b76bedeed467e187e3669aa1a106e6cc8927d5d21ddda55faf",
+                "training_rows": 11455,
+                "validation_original_index_sha256": "fe51299d2b439502eacf9e842a087ab588a1b2019d9a54a44c7f8e9c6b8d3dea",
+                "validation_positives": 262,
+                "validation_rows": 2863
+              }
+            ],
+            "test_set_role": "kept outside fitting and hyperparameter tuning within the published workflow; used for descriptive evaluation and post-evaluation diagnostics"
+          }
+        }
+      }
+    },
+    {
+      "appears_as": "Rice complete held-out result values",
+      "computation": "Complete generated dataset audit, split, tuning, test-metric, paired-bootstrap, calibration, and permutation summaries. Derived article values use positive / rows for prevalence, tp + fp for predicted-positive workload, forest minus logistic for paired workload deltas, test rows minus test positives for test negatives, and min/max over nonempty middle-bin counts.",
+      "id": "rice-complete-held-out-result-values",
+      "receipt": "receipts/analysis.receipt.json",
+      "receipt_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+      "source": "receipts/analysis.receipt.json#datasets.rice",
+      "value": {
+        "derived_article_values": {
+          "nonempty_middle_reliability_bin_count_range": {
+            "maximum": 49,
+            "minimum": 10
+          },
+          "positive_prevalence_percent": 42.78,
+          "predicted_positive_at_0_5": {
+            "logistic_regression": 315,
+            "random_forest": 312
+          },
+          "random_forest_minus_logistic_regression_workload": {
+            "false_positive": -1,
+            "predicted_positive": -3,
+            "true_positive": -2
+          },
+          "selected_hyperparameters": {
+            "logistic_regression": {
+              "classifier__C": 100.0
+            },
+            "random_forest": {
+              "max_depth": 6,
+              "max_features": "sqrt",
+              "min_samples_leaf": 5
+            }
+          },
+          "test_class_counts": {
+            "negative": 436,
+            "positive": 326,
+            "rows": 762
+          }
+        },
+        "receipt_dataset": {
+          "calibration": [
+            {
+              "bin_index": 0,
+              "count": 0,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.0,
+              "mean_predicted_probability": null,
+              "model": "dummy_prior",
+              "observed_positive_fraction": null,
+              "positive_count": 0,
+              "upper_bound": 0.1,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 1,
+              "count": 0,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.1,
+              "mean_predicted_probability": null,
+              "model": "dummy_prior",
+              "observed_positive_fraction": null,
+              "positive_count": 0,
+              "upper_bound": 0.2,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 2,
+              "count": 0,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.2,
+              "mean_predicted_probability": null,
+              "model": "dummy_prior",
+              "observed_positive_fraction": null,
+              "positive_count": 0,
+              "upper_bound": 0.30000000000000004,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 3,
+              "count": 0,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.30000000000000004,
+              "mean_predicted_probability": null,
+              "model": "dummy_prior",
+              "observed_positive_fraction": null,
+              "positive_count": 0,
+              "upper_bound": 0.4,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 4,
+              "count": 762,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.4,
+              "mean_predicted_probability": 0.42782152230971127,
+              "model": "dummy_prior",
+              "observed_positive_fraction": 0.42782152230971127,
+              "positive_count": 326,
+              "upper_bound": 0.5,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 5,
+              "count": 0,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.5,
+              "mean_predicted_probability": null,
+              "model": "dummy_prior",
+              "observed_positive_fraction": null,
+              "positive_count": 0,
+              "upper_bound": 0.6000000000000001,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 6,
+              "count": 0,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.6000000000000001,
+              "mean_predicted_probability": null,
+              "model": "dummy_prior",
+              "observed_positive_fraction": null,
+              "positive_count": 0,
+              "upper_bound": 0.7000000000000001,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 7,
+              "count": 0,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.7000000000000001,
+              "mean_predicted_probability": null,
+              "model": "dummy_prior",
+              "observed_positive_fraction": null,
+              "positive_count": 0,
+              "upper_bound": 0.8,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 8,
+              "count": 0,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.8,
+              "mean_predicted_probability": null,
+              "model": "dummy_prior",
+              "observed_positive_fraction": null,
+              "positive_count": 0,
+              "upper_bound": 0.9,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 9,
+              "count": 0,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.9,
+              "mean_predicted_probability": null,
+              "model": "dummy_prior",
+              "observed_positive_fraction": null,
+              "positive_count": 0,
+              "upper_bound": 1.0,
+              "upper_bound_inclusive": true
+            },
+            {
+              "bin_index": 0,
+              "count": 370,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.0,
+              "mean_predicted_probability": 0.015946994709722606,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.04054054054054054,
+              "positive_count": 15,
+              "upper_bound": 0.1,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 1,
+              "count": 28,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.1,
+              "mean_predicted_probability": 0.14966149288431432,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.14285714285714285,
+              "positive_count": 4,
+              "upper_bound": 0.2,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 2,
+              "count": 19,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.2,
+              "mean_predicted_probability": 0.2516632767912769,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.3157894736842105,
+              "positive_count": 6,
+              "upper_bound": 0.30000000000000004,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 3,
+              "count": 14,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.30000000000000004,
+              "mean_predicted_probability": 0.35903989370385564,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.35714285714285715,
+              "positive_count": 5,
+              "upper_bound": 0.4,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 4,
+              "count": 16,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.4,
+              "mean_predicted_probability": 0.44506823165717246,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.5625,
+              "positive_count": 9,
+              "upper_bound": 0.5,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 5,
+              "count": 15,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.5,
+              "mean_predicted_probability": 0.5348772322042196,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.4666666666666667,
+              "positive_count": 7,
+              "upper_bound": 0.6000000000000001,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 6,
+              "count": 14,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.6000000000000001,
+              "mean_predicted_probability": 0.6427163502109202,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.7142857142857143,
+              "positive_count": 10,
+              "upper_bound": 0.7000000000000001,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 7,
+              "count": 22,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.7000000000000001,
+              "mean_predicted_probability": 0.7513054846588166,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.8181818181818182,
+              "positive_count": 18,
+              "upper_bound": 0.8,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 8,
+              "count": 31,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.8,
+              "mean_predicted_probability": 0.8534312351004558,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.8387096774193549,
+              "positive_count": 26,
+              "upper_bound": 0.9,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 9,
+              "count": 233,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.9,
+              "mean_predicted_probability": 0.9808135302629741,
+              "model": "logistic_regression",
+              "observed_positive_fraction": 0.9699570815450643,
+              "positive_count": 226,
+              "upper_bound": 1.0,
+              "upper_bound_inclusive": true
+            },
+            {
+              "bin_index": 0,
+              "count": 347,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.0,
+              "mean_predicted_probability": 0.012937287197469633,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.03170028818443804,
+              "positive_count": 11,
+              "upper_bound": 0.1,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 1,
+              "count": 49,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.1,
+              "mean_predicted_probability": 0.1324746291062678,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.20408163265306123,
+              "positive_count": 10,
+              "upper_bound": 0.2,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 2,
+              "count": 17,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.2,
+              "mean_predicted_probability": 0.24357033713689963,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.29411764705882354,
+              "positive_count": 5,
+              "upper_bound": 0.30000000000000004,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 3,
+              "count": 18,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.30000000000000004,
+              "mean_predicted_probability": 0.34880905069444634,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.2222222222222222,
+              "positive_count": 4,
+              "upper_bound": 0.4,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 4,
+              "count": 19,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.4,
+              "mean_predicted_probability": 0.44916902894608873,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.5789473684210527,
+              "positive_count": 11,
+              "upper_bound": 0.5,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 5,
+              "count": 10,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.5,
+              "mean_predicted_probability": 0.5529158860742089,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.8,
+              "positive_count": 8,
+              "upper_bound": 0.6000000000000001,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 6,
+              "count": 14,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.6000000000000001,
+              "mean_predicted_probability": 0.6550448952748208,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.7142857142857143,
+              "positive_count": 10,
+              "upper_bound": 0.7000000000000001,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 7,
+              "count": 32,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.7000000000000001,
+              "mean_predicted_probability": 0.7597709181295642,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.65625,
+              "positive_count": 21,
+              "upper_bound": 0.8,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 8,
+              "count": 24,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.8,
+              "mean_predicted_probability": 0.8601326951494492,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.8333333333333334,
+              "positive_count": 20,
+              "upper_bound": 0.9,
+              "upper_bound_inclusive": false
+            },
+            {
+              "bin_index": 9,
+              "count": 232,
+              "dataset": "rice",
+              "lower_bound_inclusive": 0.9,
+              "mean_predicted_probability": 0.9782588919039424,
+              "model": "random_forest",
+              "observed_positive_fraction": 0.9741379310344828,
+              "positive_count": 226,
+              "upper_bound": 1.0,
+              "upper_bound_inclusive": true
+            }
+          ],
+          "dataset": {
+            "audit": {
+              "exact_feature_row_duplicates": 0,
+              "exact_full_row_duplicates": 0,
+              "features": 7,
+              "missing_or_nonfinite_feature_cells": 0,
+              "rows": 3810
+            },
+            "class_counts": {
+              "negative": 2180,
+              "positive": 1630
+            },
+            "display_name": "Rice",
+            "feature_labels": {
+              "area": "Area",
+              "convex_area": "Convex area",
+              "eccentricity": "Eccentricity",
+              "extent": "Extent",
+              "major_axis_length": "Major axis length",
+              "minor_axis_length": "Minor axis length",
+              "perimeter": "Perimeter"
+            },
+            "features": [
+              "area",
+              "perimeter",
+              "major_axis_length",
+              "minor_axis_length",
+              "eccentricity",
+              "convex_area",
+              "extent"
+            ],
+            "key": "rice",
+            "negative_label": "Osmancik",
+            "positive_label": "Cammeo",
+            "positive_prevalence": 0.427822,
+            "row_definition": "one segmented rice-grain image feature row",
+            "source_path": "data/Rice_Cammeo_Osmancik.arff",
+            "source_sha256": "1af97883100c89de2ea2972f7a28d428f4f1c14711a61defc0b0569e9eb65665"
+          },
+          "paired_bootstrap": {
+            "confidence_level_label": "95% bootstrap stability interval",
+            "interval_endpoints": {
+              "lower_percentile": 2.5,
+              "quantile_method": "numpy.quantile(method='linear')",
+              "upper_percentile": 97.5
+            },
+            "limitations": [
+              "conditions on the single fixed test split and its observed class counts",
+              "does not include training-split, tuning, refitting, or forest-seed variation",
+              "assumes held-out rows are exchangeable within class",
+              "does not repair unrecorded grouping or dependence in either public dataset",
+              "does not establish performance in a new survey, field, instrument, or population"
+            ],
+            "method": "paired stratified nonparametric bootstrap of the fixed held-out rows",
+            "models": {
+              "dummy_prior": {
+                "average_precision": {
+                  "lower": 0.427822,
+                  "median": 0.427822,
+                  "upper": 0.427822
+                },
+                "balanced_accuracy": {
+                  "lower": 0.5,
+                  "median": 0.5,
+                  "upper": 0.5
+                },
+                "brier_score": {
+                  "lower": 0.24479,
+                  "median": 0.24479,
+                  "upper": 0.24479
+                },
+                "f1_at_0_5": {
+                  "lower": 0.0,
+                  "median": 0.0,
+                  "upper": 0.0
+                },
+                "log_loss": {
+                  "lower": 0.682691,
+                  "median": 0.682691,
+                  "upper": 0.682691
+                },
+                "precision_at_0_5": {
+                  "lower": 0.0,
+                  "median": 0.0,
+                  "upper": 0.0
+                },
+                "recall_at_0_5": {
+                  "lower": 0.0,
+                  "median": 0.0,
+                  "upper": 0.0
+                },
+                "roc_auc": {
+                  "lower": 0.5,
+                  "median": 0.5,
+                  "upper": 0.5
+                }
+              },
+              "logistic_regression": {
+                "average_precision": {
+                  "lower": 0.951994,
+                  "median": 0.964661,
+                  "upper": 0.97549
+                },
+                "balanced_accuracy": {
+                  "lower": 0.887002,
+                  "median": 0.908088,
+                  "upper": 0.928772
+                },
+                "brier_score": {
+                  "lower": 0.052317,
+                  "median": 0.065163,
+                  "upper": 0.079294
+                },
+                "f1_at_0_5": {
+                  "lower": 0.870813,
+                  "median": 0.895801,
+                  "upper": 0.919088
+                },
+                "log_loss": {
+                  "lower": 0.181939,
+                  "median": 0.22569,
+                  "upper": 0.275062
+                },
+                "precision_at_0_5": {
+                  "lower": 0.881615,
+                  "median": 0.91195,
+                  "upper": 0.940204
+                },
+                "recall_at_0_5": {
+                  "lower": 0.843558,
+                  "median": 0.880368,
+                  "upper": 0.91411
+                },
+                "roc_auc": {
+                  "lower": 0.95701,
+                  "median": 0.969075,
+                  "upper": 0.979218
+                }
+              },
+              "random_forest": {
+                "average_precision": {
+                  "lower": 0.947273,
+                  "median": 0.961087,
+                  "upper": 0.972723
+                },
+                "balanced_accuracy": {
+                  "lower": 0.885483,
+                  "median": 0.906913,
+                  "upper": 0.927211
+                },
+                "brier_score": {
+                  "lower": 0.054828,
+                  "median": 0.068091,
+                  "upper": 0.082256
+                },
+                "f1_at_0_5": {
+                  "lower": 0.869427,
+                  "median": 0.894231,
+                  "upper": 0.917574
+                },
+                "log_loss": {
+                  "lower": 0.193138,
+                  "median": 0.241228,
+                  "upper": 0.294893
+                },
+                "precision_at_0_5": {
+                  "lower": 0.884239,
+                  "median": 0.914474,
+                  "upper": 0.942182
+                },
+                "recall_at_0_5": {
+                  "lower": 0.840491,
+                  "median": 0.874233,
+                  "upper": 0.911043
+                },
+                "roc_auc": {
+                  "lower": 0.95156,
+                  "median": 0.965,
+                  "upper": 0.97666
+                }
+              }
+            },
+            "not_a_population_confidence_interval": true,
+            "random_forest_minus_logistic_regression": {
+              "delta_definition": "random forest metric minus logistic regression metric",
+              "interpretation": "positive favors random forest for higher-is-better metrics; negative favors random forest for lower-is-better log loss and Brier score",
+              "metrics": {
+                "average_precision": {
+                  "lower": -0.007324,
+                  "median": -0.003554,
+                  "upper": 0.000217
+                },
+                "balanced_accuracy": {
+                  "lower": -0.011869,
+                  "median": -0.001534,
+                  "upper": 0.008429
+                },
+                "brier_score": {
+                  "lower": -0.000151,
+                  "median": 0.002873,
+                  "upper": 0.005927
+                },
+                "f1_at_0_5": {
+                  "lower": -0.013527,
+                  "median": -0.001714,
+                  "upper": 0.0101
+                },
+                "log_loss": {
+                  "lower": 0.003355,
+                  "median": 0.015493,
+                  "upper": 0.027459
+                },
+                "precision_at_0_5": {
+                  "lower": -0.011906,
+                  "median": 0.002553,
+                  "upper": 0.018371
+                },
+                "recall_at_0_5": {
+                  "lower": -0.021472,
+                  "median": -0.006135,
+                  "upper": 0.009202
+                },
+                "roc_auc": {
+                  "lower": -0.006965,
+                  "median": -0.004037,
+                  "upper": -0.001147
+                }
+              }
+            },
+            "random_state": 20301266,
+            "replicates": 2000,
+            "resampling": "positive and negative held-out row indices are sampled with replacement within class; the same sampled indices are used for every model"
+          },
+          "permutation_importance": {
+            "computed_on": "fixed held-out test rows after model selection",
+            "limitations": [
+              "repeat spread is not a confidence interval",
+              "correlated features can share or mask importance",
+              "permutation can create feature combinations not common in the source table"
+            ],
+            "models": {
+              "logistic_regression": [
+                {
+                  "feature": "convex_area",
+                  "feature_label": "Convex area",
+                  "mean_average_precision_decrease": 0.650849,
+                  "standard_deviation_across_permutations": 0.00458
+                },
+                {
+                  "feature": "major_axis_length",
+                  "feature_label": "Major axis length",
+                  "mean_average_precision_decrease": 0.251018,
+                  "standard_deviation_across_permutations": 0.014859
+                },
+                {
+                  "feature": "area",
+                  "feature_label": "Area",
+                  "mean_average_precision_decrease": 0.102356,
+                  "standard_deviation_across_permutations": 0.008537
+                },
+                {
+                  "feature": "perimeter",
+                  "feature_label": "Perimeter",
+                  "mean_average_precision_decrease": 0.032271,
+                  "standard_deviation_across_permutations": 0.004638
+                },
+                {
+                  "feature": "minor_axis_length",
+                  "feature_label": "Minor axis length",
+                  "mean_average_precision_decrease": 0.022697,
+                  "standard_deviation_across_permutations": 0.003648
+                },
+                {
+                  "feature": "eccentricity",
+                  "feature_label": "Eccentricity",
+                  "mean_average_precision_decrease": 0.010375,
+                  "standard_deviation_across_permutations": 0.002867
+                },
+                {
+                  "feature": "extent",
+                  "feature_label": "Extent",
+                  "mean_average_precision_decrease": 0.000112,
+                  "standard_deviation_across_permutations": 7.7e-05
+                }
+              ],
+              "random_forest": [
+                {
+                  "feature": "major_axis_length",
+                  "feature_label": "Major axis length",
+                  "mean_average_precision_decrease": 0.073807,
+                  "standard_deviation_across_permutations": 0.010075
+                },
+                {
+                  "feature": "perimeter",
+                  "feature_label": "Perimeter",
+                  "mean_average_precision_decrease": 0.039134,
+                  "standard_deviation_across_permutations": 0.007802
+                },
+                {
+                  "feature": "convex_area",
+                  "feature_label": "Convex area",
+                  "mean_average_precision_decrease": 0.017065,
+                  "standard_deviation_across_permutations": 0.004499
+                },
+                {
+                  "feature": "eccentricity",
+                  "feature_label": "Eccentricity",
+                  "mean_average_precision_decrease": 0.009946,
+                  "standard_deviation_across_permutations": 0.00286
+                },
+                {
+                  "feature": "area",
+                  "feature_label": "Area",
+                  "mean_average_precision_decrease": 0.008566,
+                  "standard_deviation_across_permutations": 0.003814
+                },
+                {
+                  "feature": "minor_axis_length",
+                  "feature_label": "Minor axis length",
+                  "mean_average_precision_decrease": 0.000959,
+                  "standard_deviation_across_permutations": 0.00074
+                },
+                {
+                  "feature": "extent",
+                  "feature_label": "Extent",
+                  "mean_average_precision_decrease": 0.000131,
+                  "standard_deviation_across_permutations": 0.000525
+                }
+              ]
+            },
+            "not_used_for_tuning": true,
+            "random_states": {
+              "logistic_regression": 20311266,
+              "random_forest": 20311267
+            },
+            "repeats": 30,
+            "scoring": "average_precision"
+          },
+          "scope_limits": [
+            "the public table provides no grouping identifiers for dependence-aware splitting",
+            "a fixed row-level holdout does not establish performance in a new acquisition context",
+            "test-set interpretation does not turn association into causation",
+            "model comparison is conditional on the declared grids, split, threshold, and metrics"
+          ],
+          "split": {
+            "method": "fixed stratified random holdout",
+            "random_state": 20261266,
+            "test_fraction": 0.2,
+            "test_original_index_sha256": "757bba843e140089f520a51abe705db10fe9d3b39ddb9d2ddec20d61cf7b815b",
+            "test_positives": 326,
+            "test_rows": 762,
+            "training_original_index_sha256": "894d4b13deff0f77c169869567f5283535e89e0968495e091dcd860ef500898e",
+            "training_positives": 1304,
+            "training_rows": 3048
+          },
+          "test_metrics": {
+            "dummy_prior": {
+              "average_precision": 0.42782152230971127,
+              "balanced_accuracy": 0.5,
+              "brier_score": 0.2447902673583125,
+              "confusion": {
+                "fn": 326,
+                "fp": 0,
+                "tn": 436,
+                "tp": 0
+              },
+              "f1_at_0_5": 0.0,
+              "log_loss": 0.6826912217946177,
+              "precision_at_0_5": 0.0,
+              "recall_at_0_5": 0.0,
+              "roc_auc": 0.5
+            },
+            "logistic_regression": {
+              "average_precision": 0.9642983404255487,
+              "balanced_accuracy": 0.9080739573366354,
+              "brier_score": 0.06551801677560717,
+              "confusion": {
+                "fn": 39,
+                "fp": 28,
+                "tn": 408,
+                "tp": 287
+              },
+              "f1_at_0_5": 0.8954758190327614,
+              "log_loss": 0.22644837545370158,
+              "precision_at_0_5": 0.9111111111111111,
+              "recall_at_0_5": 0.8803680981595092,
+              "roc_auc": 0.9688326673045533
+            },
+            "random_forest": {
+              "average_precision": 0.9607270950794979,
+              "balanced_accuracy": 0.9061532616648843,
+              "brier_score": 0.06844252554461035,
+              "confusion": {
+                "fn": 41,
+                "fp": 27,
+                "tn": 409,
+                "tp": 285
+              },
+              "f1_at_0_5": 0.8934169278996864,
+              "log_loss": 0.2419898205497901,
+              "precision_at_0_5": 0.9134615384615384,
+              "recall_at_0_5": 0.8742331288343558,
+              "roc_auc": 0.964790763775539
+            }
+          },
+          "training_only_tuning": {
+            "folds": 5,
+            "logistic_regression": {
+              "best_mean_validation_average_precision": 0.977383,
+              "best_params": {
+                "classifier__C": 100.0
+              },
+              "class_weight": null,
+              "converged": true,
+              "fixed_parameters": {
+                "max_iter": 5000,
+                "penalty": "l2",
+                "random_state": 20281266,
+                "solver": "lbfgs"
+              },
+              "grid": {
+                "C": [
+                  0.01,
+                  0.1,
+                  1.0,
+                  10.0,
+                  100.0
+                ]
+              },
+              "oversampling": null,
+              "pipeline": [
+                "StandardScaler",
+                "LogisticRegression"
+              ],
+              "selected_fit_iterations": [
+                31
+              ]
+            },
+            "objective": "average_precision",
+            "random_forest": {
+              "best_mean_validation_average_precision": 0.97529,
+              "best_params": {
+                "max_depth": 6,
+                "max_features": "sqrt",
+                "min_samples_leaf": 5
+              },
+              "class_weight": null,
+              "fixed_parameters": {
+                "bootstrap": true,
+                "criterion": "gini",
+                "n_jobs": 1,
+                "random_state": 20291266
+              },
+              "grid": {
+                "max_depth": [
+                  6,
+                  12,
+                  null
+                ],
+                "max_features": [
+                  "sqrt",
+                  0.75
+                ],
+                "min_samples_leaf": [
+                  1,
+                  5
+                ]
+              },
+              "n_estimators": 250,
+              "oversampling": null
+            },
+            "random_state": 20271266,
+            "selection_tie_behavior": "GridSearchCV selects the first candidate in the declared ParameterGrid order among exactly tied mean validation scores",
+            "shared_fold_records": [
+              {
+                "fold": 0,
+                "training_original_index_sha256": "fa890207af32e7672d9d7fe6c5be8155abcceccd09e0f3796128cf9a1b66f291",
+                "training_rows": 2438,
+                "validation_original_index_sha256": "d8290b63e1784e8f10f57eb680e8833e0d3e1307d1bcd040d53e433cfc5f0d4f",
+                "validation_positives": 261,
+                "validation_rows": 610
+              },
+              {
+                "fold": 1,
+                "training_original_index_sha256": "8a0d9d89b11344fa406f0d801118f28a9bd9f908c8a487ff276dcae11821b268",
+                "training_rows": 2438,
+                "validation_original_index_sha256": "355a07873584f8d1ba74f691e180233a2ae421e9b99eae76172fd273a2cdb84a",
+                "validation_positives": 261,
+                "validation_rows": 610
+              },
+              {
+                "fold": 2,
+                "training_original_index_sha256": "4f3a884d960bb1a4eae4a4381196a192e03a0e4ef7218d0819cf50c2b8ac7235",
+                "training_rows": 2438,
+                "validation_original_index_sha256": "2ef371eeb4f08e93d97f64f63b010496aa6a5e6de970c1803e7ac4a14921c936",
+                "validation_positives": 261,
+                "validation_rows": 610
+              },
+              {
+                "fold": 3,
+                "training_original_index_sha256": "aa2910f6b6f63a0ed00a127ed41b5aa6f000b0e728cdb652aac88cf46429c311",
+                "training_rows": 2439,
+                "validation_original_index_sha256": "38a0abcccd0655c128ed8520703027237a2dec4c5a53e6d0f1fc5c20884c20c9",
+                "validation_positives": 261,
+                "validation_rows": 609
+              },
+              {
+                "fold": 4,
+                "training_original_index_sha256": "222e0a81f3f680abf92dbd1e2585e53b4de00e32e880086a42bffb17079e63e7",
+                "training_rows": 2439,
+                "validation_original_index_sha256": "111fd87cb66b855a44406c9894983336fee78e2c4b5b6b12b3e07b537cb800ac",
+                "validation_positives": 260,
+                "validation_rows": 609
+              }
+            ],
+            "test_set_role": "kept outside fitting and hyperparameter tuning within the published workflow; used for descriptive evaluation and post-evaluation diagnostics"
+          }
+        }
+      }
+    },
+    {
+      "appears_as": "HTRU2 held-out ranking figure values",
+      "computation": "Complete machine-readable values plotted for this dataset, including coordinates, counts, intervals, and spreads where applicable.",
+      "id": "htru2-held-out-ranking-metrics-values",
+      "receipt": "fig-held-out-ranking-metrics.receipt.json",
+      "receipt_sha256": "361cabab031824513530b94203d5665e1a14ee61d27b0d36b1f756382fc905b2",
+      "source": "fig-held-out-ranking-metrics.receipt.json#plotted_data.htru2",
+      "value": {
+        "average_precision": {
+          "model_stability_intervals": {
+            "dummy_prior": {
+              "lower": 0.09162,
+              "median": 0.09162,
+              "upper": 0.09162
+            },
+            "logistic_regression": {
+              "lower": 0.885479,
+              "median": 0.915733,
+              "upper": 0.939644
+            },
+            "random_forest": {
+              "lower": 0.903718,
+              "median": 0.927143,
+              "upper": 0.948268
+            }
+          },
+          "point_estimates": {
+            "dummy_prior": 0.09162,
+            "logistic_regression": 0.91412,
+            "random_forest": 0.926209
+          },
+          "random_forest_minus_logistic_regression": {
+            "interval": {
+              "lower": 0.001192,
+              "median": 0.011187,
+              "upper": 0.025677
+            },
+            "point": 0.012089
+          }
+        },
+        "roc_auc": {
+          "model_stability_intervals": {
+            "dummy_prior": {
+              "lower": 0.5,
+              "median": 0.5,
+              "upper": 0.5
+            },
+            "logistic_regression": {
+              "lower": 0.964824,
+              "median": 0.976012,
+              "upper": 0.985212
+            },
+            "random_forest": {
+              "lower": 0.966554,
+              "median": 0.976945,
+              "upper": 0.986439
+            }
+          },
+          "point_estimates": {
+            "dummy_prior": 0.5,
+            "logistic_regression": 0.975624,
+            "random_forest": 0.976684
+          },
+          "random_forest_minus_logistic_regression": {
+            "interval": {
+              "lower": -0.00309,
+              "median": 0.001034,
+              "upper": 0.005399
+            },
+            "point": 0.00106
+          }
+        }
+      }
+    },
+    {
+      "appears_as": "Rice held-out ranking figure values",
+      "computation": "Complete machine-readable values plotted for this dataset, including coordinates, counts, intervals, and spreads where applicable.",
+      "id": "rice-held-out-ranking-metrics-values",
+      "receipt": "fig-held-out-ranking-metrics.receipt.json",
+      "receipt_sha256": "361cabab031824513530b94203d5665e1a14ee61d27b0d36b1f756382fc905b2",
+      "source": "fig-held-out-ranking-metrics.receipt.json#plotted_data.rice",
+      "value": {
+        "average_precision": {
+          "model_stability_intervals": {
+            "dummy_prior": {
+              "lower": 0.427822,
+              "median": 0.427822,
+              "upper": 0.427822
+            },
+            "logistic_regression": {
+              "lower": 0.951994,
+              "median": 0.964661,
+              "upper": 0.97549
+            },
+            "random_forest": {
+              "lower": 0.947273,
+              "median": 0.961087,
+              "upper": 0.972723
+            }
+          },
+          "point_estimates": {
+            "dummy_prior": 0.427822,
+            "logistic_regression": 0.964298,
+            "random_forest": 0.960727
+          },
+          "random_forest_minus_logistic_regression": {
+            "interval": {
+              "lower": -0.007324,
+              "median": -0.003554,
+              "upper": 0.000217
+            },
+            "point": -0.003571
+          }
+        },
+        "roc_auc": {
+          "model_stability_intervals": {
+            "dummy_prior": {
+              "lower": 0.5,
+              "median": 0.5,
+              "upper": 0.5
+            },
+            "logistic_regression": {
+              "lower": 0.95701,
+              "median": 0.969075,
+              "upper": 0.979218
+            },
+            "random_forest": {
+              "lower": 0.95156,
+              "median": 0.965,
+              "upper": 0.97666
+            }
+          },
+          "point_estimates": {
+            "dummy_prior": 0.5,
+            "logistic_regression": 0.968833,
+            "random_forest": 0.964791
+          },
+          "random_forest_minus_logistic_regression": {
+            "interval": {
+              "lower": -0.006965,
+              "median": -0.004037,
+              "upper": -0.001147
+            },
+            "point": -0.004042
+          }
+        }
+      }
+    },
+    {
+      "appears_as": "HTRU2 held-out probability-score and reliability-bin figure values",
+      "computation": "Complete machine-readable values plotted for this dataset, including coordinates, counts, intervals, and spreads where applicable.",
+      "id": "htru2-held-out-calibration-values",
+      "receipt": "fig-held-out-calibration.receipt.json",
+      "receipt_sha256": "0f5b647e8486cbeb677b0840a3ae118fae165cfff00c18072e9d976c7bbf5d0a",
+      "source": "fig-held-out-calibration.receipt.json#plotted_data.htru2",
+      "value": {
+        "bins": [
+          {
+            "bin_index": 0,
+            "count": 3580,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.0,
+            "mean_predicted_probability": 0.09156306746752339,
+            "model": "dummy_prior",
+            "observed_positive_fraction": 0.09162011173184358,
+            "positive_count": 328,
+            "upper_bound": 0.1,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 1,
+            "count": 0,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.1,
+            "mean_predicted_probability": null,
+            "model": "dummy_prior",
+            "observed_positive_fraction": null,
+            "positive_count": 0,
+            "upper_bound": 0.2,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 2,
+            "count": 0,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.2,
+            "mean_predicted_probability": null,
+            "model": "dummy_prior",
+            "observed_positive_fraction": null,
+            "positive_count": 0,
+            "upper_bound": 0.30000000000000004,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 3,
+            "count": 0,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.30000000000000004,
+            "mean_predicted_probability": null,
+            "model": "dummy_prior",
+            "observed_positive_fraction": null,
+            "positive_count": 0,
+            "upper_bound": 0.4,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 4,
+            "count": 0,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.4,
+            "mean_predicted_probability": null,
+            "model": "dummy_prior",
+            "observed_positive_fraction": null,
+            "positive_count": 0,
+            "upper_bound": 0.5,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 5,
+            "count": 0,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.5,
+            "mean_predicted_probability": null,
+            "model": "dummy_prior",
+            "observed_positive_fraction": null,
+            "positive_count": 0,
+            "upper_bound": 0.6000000000000001,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 6,
+            "count": 0,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.6000000000000001,
+            "mean_predicted_probability": null,
+            "model": "dummy_prior",
+            "observed_positive_fraction": null,
+            "positive_count": 0,
+            "upper_bound": 0.7000000000000001,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 7,
+            "count": 0,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.7000000000000001,
+            "mean_predicted_probability": null,
+            "model": "dummy_prior",
+            "observed_positive_fraction": null,
+            "positive_count": 0,
+            "upper_bound": 0.8,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 8,
+            "count": 0,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.8,
+            "mean_predicted_probability": null,
+            "model": "dummy_prior",
+            "observed_positive_fraction": null,
+            "positive_count": 0,
+            "upper_bound": 0.9,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 9,
+            "count": 0,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.9,
+            "mean_predicted_probability": null,
+            "model": "dummy_prior",
+            "observed_positive_fraction": null,
+            "positive_count": 0,
+            "upper_bound": 1.0,
+            "upper_bound_inclusive": true
+          },
+          {
+            "bin_index": 0,
+            "count": 3204,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.0,
+            "mean_predicted_probability": 0.01232277769947457,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.009675405742821473,
+            "positive_count": 31,
+            "upper_bound": 0.1,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 1,
+            "count": 51,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.1,
+            "mean_predicted_probability": 0.13629255037494348,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.19607843137254902,
+            "positive_count": 10,
+            "upper_bound": 0.2,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 2,
+            "count": 15,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.2,
+            "mean_predicted_probability": 0.25018763344294415,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.4666666666666667,
+            "positive_count": 7,
+            "upper_bound": 0.30000000000000004,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 3,
+            "count": 13,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.30000000000000004,
+            "mean_predicted_probability": 0.3475920944687577,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.3076923076923077,
+            "positive_count": 4,
+            "upper_bound": 0.4,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 4,
+            "count": 11,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.4,
+            "mean_predicted_probability": 0.44285551780768684,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.8181818181818182,
+            "positive_count": 9,
+            "upper_bound": 0.5,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 5,
+            "count": 9,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.5,
+            "mean_predicted_probability": 0.5556560288217376,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.7777777777777778,
+            "positive_count": 7,
+            "upper_bound": 0.6000000000000001,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 6,
+            "count": 16,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.6000000000000001,
+            "mean_predicted_probability": 0.6412765469042143,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.75,
+            "positive_count": 12,
+            "upper_bound": 0.7000000000000001,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 7,
+            "count": 14,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.7000000000000001,
+            "mean_predicted_probability": 0.7510027649649514,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.7857142857142857,
+            "positive_count": 11,
+            "upper_bound": 0.8,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 8,
+            "count": 26,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.8,
+            "mean_predicted_probability": 0.8556720930105317,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.8076923076923077,
+            "positive_count": 21,
+            "upper_bound": 0.9,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 9,
+            "count": 221,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.9,
+            "mean_predicted_probability": 0.9901275582872814,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.9773755656108597,
+            "positive_count": 216,
+            "upper_bound": 1.0,
+            "upper_bound_inclusive": true
+          },
+          {
+            "bin_index": 0,
+            "count": 3189,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.0,
+            "mean_predicted_probability": 0.009006756920374406,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.00940733772342427,
+            "positive_count": 30,
+            "upper_bound": 0.1,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 1,
+            "count": 36,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.1,
+            "mean_predicted_probability": 0.14578713984530672,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.1388888888888889,
+            "positive_count": 5,
+            "upper_bound": 0.2,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 2,
+            "count": 24,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.2,
+            "mean_predicted_probability": 0.2495011576422105,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.125,
+            "positive_count": 3,
+            "upper_bound": 0.30000000000000004,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 3,
+            "count": 15,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.30000000000000004,
+            "mean_predicted_probability": 0.35063386522566425,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.5333333333333333,
+            "positive_count": 8,
+            "upper_bound": 0.4,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 4,
+            "count": 12,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.4,
+            "mean_predicted_probability": 0.46294546239421536,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.4166666666666667,
+            "positive_count": 5,
+            "upper_bound": 0.5,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 5,
+            "count": 17,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.5,
+            "mean_predicted_probability": 0.5556497579211469,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.5294117647058824,
+            "positive_count": 9,
+            "upper_bound": 0.6000000000000001,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 6,
+            "count": 20,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.6000000000000001,
+            "mean_predicted_probability": 0.6533116812888291,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.65,
+            "positive_count": 13,
+            "upper_bound": 0.7000000000000001,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 7,
+            "count": 11,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.7000000000000001,
+            "mean_predicted_probability": 0.7464046303713053,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.6363636363636364,
+            "positive_count": 7,
+            "upper_bound": 0.8,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 8,
+            "count": 28,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.8,
+            "mean_predicted_probability": 0.8623389800361357,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.8571428571428571,
+            "positive_count": 24,
+            "upper_bound": 0.9,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 9,
+            "count": 228,
+            "dataset": "htru2",
+            "lower_bound_inclusive": 0.9,
+            "mean_predicted_probability": 0.9792583224959072,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.9824561403508771,
+            "positive_count": 224,
+            "upper_bound": 1.0,
+            "upper_bound_inclusive": true
+          }
+        ],
+        "probability_score_point_estimates": {
+          "dummy_prior": {
+            "brier_score": 0.083226,
+            "log_loss": 0.30627
+          },
+          "logistic_regression": {
+            "brier_score": 0.018421,
+            "log_loss": 0.078389
+          },
+          "random_forest": {
+            "brier_score": 0.017486,
+            "log_loss": 0.072505
+          }
+        }
+      }
+    },
+    {
+      "appears_as": "Rice held-out probability-score and reliability-bin figure values",
+      "computation": "Complete machine-readable values plotted for this dataset, including coordinates, counts, intervals, and spreads where applicable.",
+      "id": "rice-held-out-calibration-values",
+      "receipt": "fig-held-out-calibration.receipt.json",
+      "receipt_sha256": "0f5b647e8486cbeb677b0840a3ae118fae165cfff00c18072e9d976c7bbf5d0a",
+      "source": "fig-held-out-calibration.receipt.json#plotted_data.rice",
+      "value": {
+        "bins": [
+          {
+            "bin_index": 0,
+            "count": 0,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.0,
+            "mean_predicted_probability": null,
+            "model": "dummy_prior",
+            "observed_positive_fraction": null,
+            "positive_count": 0,
+            "upper_bound": 0.1,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 1,
+            "count": 0,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.1,
+            "mean_predicted_probability": null,
+            "model": "dummy_prior",
+            "observed_positive_fraction": null,
+            "positive_count": 0,
+            "upper_bound": 0.2,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 2,
+            "count": 0,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.2,
+            "mean_predicted_probability": null,
+            "model": "dummy_prior",
+            "observed_positive_fraction": null,
+            "positive_count": 0,
+            "upper_bound": 0.30000000000000004,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 3,
+            "count": 0,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.30000000000000004,
+            "mean_predicted_probability": null,
+            "model": "dummy_prior",
+            "observed_positive_fraction": null,
+            "positive_count": 0,
+            "upper_bound": 0.4,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 4,
+            "count": 762,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.4,
+            "mean_predicted_probability": 0.42782152230971127,
+            "model": "dummy_prior",
+            "observed_positive_fraction": 0.42782152230971127,
+            "positive_count": 326,
+            "upper_bound": 0.5,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 5,
+            "count": 0,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.5,
+            "mean_predicted_probability": null,
+            "model": "dummy_prior",
+            "observed_positive_fraction": null,
+            "positive_count": 0,
+            "upper_bound": 0.6000000000000001,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 6,
+            "count": 0,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.6000000000000001,
+            "mean_predicted_probability": null,
+            "model": "dummy_prior",
+            "observed_positive_fraction": null,
+            "positive_count": 0,
+            "upper_bound": 0.7000000000000001,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 7,
+            "count": 0,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.7000000000000001,
+            "mean_predicted_probability": null,
+            "model": "dummy_prior",
+            "observed_positive_fraction": null,
+            "positive_count": 0,
+            "upper_bound": 0.8,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 8,
+            "count": 0,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.8,
+            "mean_predicted_probability": null,
+            "model": "dummy_prior",
+            "observed_positive_fraction": null,
+            "positive_count": 0,
+            "upper_bound": 0.9,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 9,
+            "count": 0,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.9,
+            "mean_predicted_probability": null,
+            "model": "dummy_prior",
+            "observed_positive_fraction": null,
+            "positive_count": 0,
+            "upper_bound": 1.0,
+            "upper_bound_inclusive": true
+          },
+          {
+            "bin_index": 0,
+            "count": 370,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.0,
+            "mean_predicted_probability": 0.015946994709722606,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.04054054054054054,
+            "positive_count": 15,
+            "upper_bound": 0.1,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 1,
+            "count": 28,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.1,
+            "mean_predicted_probability": 0.14966149288431432,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.14285714285714285,
+            "positive_count": 4,
+            "upper_bound": 0.2,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 2,
+            "count": 19,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.2,
+            "mean_predicted_probability": 0.2516632767912769,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.3157894736842105,
+            "positive_count": 6,
+            "upper_bound": 0.30000000000000004,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 3,
+            "count": 14,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.30000000000000004,
+            "mean_predicted_probability": 0.35903989370385564,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.35714285714285715,
+            "positive_count": 5,
+            "upper_bound": 0.4,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 4,
+            "count": 16,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.4,
+            "mean_predicted_probability": 0.44506823165717246,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.5625,
+            "positive_count": 9,
+            "upper_bound": 0.5,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 5,
+            "count": 15,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.5,
+            "mean_predicted_probability": 0.5348772322042196,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.4666666666666667,
+            "positive_count": 7,
+            "upper_bound": 0.6000000000000001,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 6,
+            "count": 14,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.6000000000000001,
+            "mean_predicted_probability": 0.6427163502109202,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.7142857142857143,
+            "positive_count": 10,
+            "upper_bound": 0.7000000000000001,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 7,
+            "count": 22,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.7000000000000001,
+            "mean_predicted_probability": 0.7513054846588166,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.8181818181818182,
+            "positive_count": 18,
+            "upper_bound": 0.8,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 8,
+            "count": 31,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.8,
+            "mean_predicted_probability": 0.8534312351004558,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.8387096774193549,
+            "positive_count": 26,
+            "upper_bound": 0.9,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 9,
+            "count": 233,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.9,
+            "mean_predicted_probability": 0.9808135302629741,
+            "model": "logistic_regression",
+            "observed_positive_fraction": 0.9699570815450643,
+            "positive_count": 226,
+            "upper_bound": 1.0,
+            "upper_bound_inclusive": true
+          },
+          {
+            "bin_index": 0,
+            "count": 347,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.0,
+            "mean_predicted_probability": 0.012937287197469633,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.03170028818443804,
+            "positive_count": 11,
+            "upper_bound": 0.1,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 1,
+            "count": 49,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.1,
+            "mean_predicted_probability": 0.1324746291062678,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.20408163265306123,
+            "positive_count": 10,
+            "upper_bound": 0.2,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 2,
+            "count": 17,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.2,
+            "mean_predicted_probability": 0.24357033713689963,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.29411764705882354,
+            "positive_count": 5,
+            "upper_bound": 0.30000000000000004,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 3,
+            "count": 18,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.30000000000000004,
+            "mean_predicted_probability": 0.34880905069444634,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.2222222222222222,
+            "positive_count": 4,
+            "upper_bound": 0.4,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 4,
+            "count": 19,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.4,
+            "mean_predicted_probability": 0.44916902894608873,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.5789473684210527,
+            "positive_count": 11,
+            "upper_bound": 0.5,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 5,
+            "count": 10,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.5,
+            "mean_predicted_probability": 0.5529158860742089,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.8,
+            "positive_count": 8,
+            "upper_bound": 0.6000000000000001,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 6,
+            "count": 14,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.6000000000000001,
+            "mean_predicted_probability": 0.6550448952748208,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.7142857142857143,
+            "positive_count": 10,
+            "upper_bound": 0.7000000000000001,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 7,
+            "count": 32,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.7000000000000001,
+            "mean_predicted_probability": 0.7597709181295642,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.65625,
+            "positive_count": 21,
+            "upper_bound": 0.8,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 8,
+            "count": 24,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.8,
+            "mean_predicted_probability": 0.8601326951494492,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.8333333333333334,
+            "positive_count": 20,
+            "upper_bound": 0.9,
+            "upper_bound_inclusive": false
+          },
+          {
+            "bin_index": 9,
+            "count": 232,
+            "dataset": "rice",
+            "lower_bound_inclusive": 0.9,
+            "mean_predicted_probability": 0.9782588919039424,
+            "model": "random_forest",
+            "observed_positive_fraction": 0.9741379310344828,
+            "positive_count": 226,
+            "upper_bound": 1.0,
+            "upper_bound_inclusive": true
+          }
+        ],
+        "probability_score_point_estimates": {
+          "dummy_prior": {
+            "brier_score": 0.24479,
+            "log_loss": 0.682691
+          },
+          "logistic_regression": {
+            "brier_score": 0.065518,
+            "log_loss": 0.226448
+          },
+          "random_forest": {
+            "brier_score": 0.068443,
+            "log_loss": 0.24199
+          }
+        }
+      }
+    },
+    {
+      "appears_as": "HTRU2 held-out confusion-count and workload figure values",
+      "computation": "Complete machine-readable values plotted for this dataset, including coordinates, counts, intervals, and spreads where applicable.",
+      "id": "htru2-held-out-confusion-counts-values",
+      "receipt": "fig-held-out-confusion-counts.receipt.json",
+      "receipt_sha256": "65d390ef07a25dbe0dcd87233dcd76a8603ff325eab2d4d27b3295135763012b",
+      "source": "fig-held-out-confusion-counts.receipt.json#plotted_data.htru2",
+      "value": {
+        "dummy_prior": {
+          "fn": 328,
+          "fp": 0,
+          "tn": 3252,
+          "tp": 0
+        },
+        "logistic_regression": {
+          "fn": 61,
+          "fp": 19,
+          "tn": 3233,
+          "tp": 267
+        },
+        "random_forest": {
+          "fn": 51,
+          "fp": 27,
+          "tn": 3225,
+          "tp": 277
+        }
+      }
+    },
+    {
+      "appears_as": "Rice held-out confusion-count and workload figure values",
+      "computation": "Complete machine-readable values plotted for this dataset, including coordinates, counts, intervals, and spreads where applicable.",
+      "id": "rice-held-out-confusion-counts-values",
+      "receipt": "fig-held-out-confusion-counts.receipt.json",
+      "receipt_sha256": "65d390ef07a25dbe0dcd87233dcd76a8603ff325eab2d4d27b3295135763012b",
+      "source": "fig-held-out-confusion-counts.receipt.json#plotted_data.rice",
+      "value": {
+        "dummy_prior": {
+          "fn": 326,
+          "fp": 0,
+          "tn": 436,
+          "tp": 0
+        },
+        "logistic_regression": {
+          "fn": 39,
+          "fp": 28,
+          "tn": 408,
+          "tp": 287
+        },
+        "random_forest": {
+          "fn": 41,
+          "fp": 27,
+          "tn": 409,
+          "tp": 285
+        }
+      }
+    },
+    {
+      "appears_as": "HTRU2 held-out permutation-importance figure values",
+      "computation": "Complete machine-readable values plotted for this dataset, including coordinates, counts, intervals, and spreads where applicable.",
+      "id": "htru2-held-out-permutation-importance-values",
+      "receipt": "fig-held-out-permutation-importance.receipt.json",
+      "receipt_sha256": "7eccb5a50abe8215b453048b417dd3a62c770dd42513ffea37996ca6dc64406c",
+      "source": "fig-held-out-permutation-importance.receipt.json#plotted_data.htru2",
+      "value": {
+        "computed_on": "fixed held-out test rows after model selection",
+        "limitations": [
+          "repeat spread is not a confidence interval",
+          "correlated features can share or mask importance",
+          "permutation can create feature combinations not common in the source table"
+        ],
+        "models": {
+          "logistic_regression": [
+            {
+              "feature": "profile_excess_kurtosis",
+              "feature_label": "Profile excess kurtosis",
+              "mean_average_precision_decrease": 0.856496,
+              "standard_deviation_across_permutations": 0.002016
+            },
+            {
+              "feature": "dm_snr_standard_deviation",
+              "feature_label": "Dispersion-measure signal-to-noise ratio standard deviation",
+              "mean_average_precision_decrease": 0.08032,
+              "standard_deviation_across_permutations": 0.005833
+            },
+            {
+              "feature": "profile_skewness",
+              "feature_label": "Profile skewness",
+              "mean_average_precision_decrease": 0.018759,
+              "standard_deviation_across_permutations": 0.006379
+            },
+            {
+              "feature": "dm_snr_mean",
+              "feature_label": "Dispersion-measure signal-to-noise ratio mean",
+              "mean_average_precision_decrease": 0.017582,
+              "standard_deviation_across_permutations": 0.002827
+            },
+            {
+              "feature": "dm_snr_skewness",
+              "feature_label": "Dispersion-measure signal-to-noise ratio skewness",
+              "mean_average_precision_decrease": 0.008555,
+              "standard_deviation_across_permutations": 0.002194
+            },
+            {
+              "feature": "profile_mean",
+              "feature_label": "Profile mean",
+              "mean_average_precision_decrease": 0.003887,
+              "standard_deviation_across_permutations": 0.002777
+            },
+            {
+              "feature": "dm_snr_excess_kurtosis",
+              "feature_label": "Dispersion-measure signal-to-noise ratio excess kurtosis",
+              "mean_average_precision_decrease": 0.003165,
+              "standard_deviation_across_permutations": 0.002135
+            },
+            {
+              "feature": "profile_standard_deviation",
+              "feature_label": "Profile standard deviation",
+              "mean_average_precision_decrease": 0.000258,
+              "standard_deviation_across_permutations": 0.001195
+            }
+          ],
+          "random_forest": [
+            {
+              "feature": "profile_excess_kurtosis",
+              "feature_label": "Profile excess kurtosis",
+              "mean_average_precision_decrease": 0.659815,
+              "standard_deviation_across_permutations": 0.014306
+            },
+            {
+              "feature": "dm_snr_standard_deviation",
+              "feature_label": "Dispersion-measure signal-to-noise ratio standard deviation",
+              "mean_average_precision_decrease": 0.018536,
+              "standard_deviation_across_permutations": 0.00371
+            },
+            {
+              "feature": "profile_skewness",
+              "feature_label": "Profile skewness",
+              "mean_average_precision_decrease": 0.015324,
+              "standard_deviation_across_permutations": 0.005422
+            },
+            {
+              "feature": "profile_mean",
+              "feature_label": "Profile mean",
+              "mean_average_precision_decrease": 0.007959,
+              "standard_deviation_across_permutations": 0.001703
+            },
+            {
+              "feature": "profile_standard_deviation",
+              "feature_label": "Profile standard deviation",
+              "mean_average_precision_decrease": 0.006573,
+              "standard_deviation_across_permutations": 0.002531
+            },
+            {
+              "feature": "dm_snr_excess_kurtosis",
+              "feature_label": "Dispersion-measure signal-to-noise ratio excess kurtosis",
+              "mean_average_precision_decrease": 0.004943,
+              "standard_deviation_across_permutations": 0.001471
+            },
+            {
+              "feature": "dm_snr_mean",
+              "feature_label": "Dispersion-measure signal-to-noise ratio mean",
+              "mean_average_precision_decrease": 0.004602,
+              "standard_deviation_across_permutations": 0.002031
+            },
+            {
+              "feature": "dm_snr_skewness",
+              "feature_label": "Dispersion-measure signal-to-noise ratio skewness",
+              "mean_average_precision_decrease": 0.004335,
+              "standard_deviation_across_permutations": 0.002515
+            }
+          ]
+        },
+        "not_used_for_tuning": true,
+        "random_states": {
+          "logistic_regression": 20311093,
+          "random_forest": 20311094
+        },
+        "repeats": 30,
+        "scoring": "average_precision"
+      }
+    },
+    {
+      "appears_as": "Rice held-out permutation-importance figure values",
+      "computation": "Complete machine-readable values plotted for this dataset, including coordinates, counts, intervals, and spreads where applicable.",
+      "id": "rice-held-out-permutation-importance-values",
+      "receipt": "fig-held-out-permutation-importance.receipt.json",
+      "receipt_sha256": "7eccb5a50abe8215b453048b417dd3a62c770dd42513ffea37996ca6dc64406c",
+      "source": "fig-held-out-permutation-importance.receipt.json#plotted_data.rice",
+      "value": {
+        "computed_on": "fixed held-out test rows after model selection",
+        "limitations": [
+          "repeat spread is not a confidence interval",
+          "correlated features can share or mask importance",
+          "permutation can create feature combinations not common in the source table"
+        ],
+        "models": {
+          "logistic_regression": [
+            {
+              "feature": "convex_area",
+              "feature_label": "Convex area",
+              "mean_average_precision_decrease": 0.650849,
+              "standard_deviation_across_permutations": 0.00458
+            },
+            {
+              "feature": "major_axis_length",
+              "feature_label": "Major axis length",
+              "mean_average_precision_decrease": 0.251018,
+              "standard_deviation_across_permutations": 0.014859
+            },
+            {
+              "feature": "area",
+              "feature_label": "Area",
+              "mean_average_precision_decrease": 0.102356,
+              "standard_deviation_across_permutations": 0.008537
+            },
+            {
+              "feature": "perimeter",
+              "feature_label": "Perimeter",
+              "mean_average_precision_decrease": 0.032271,
+              "standard_deviation_across_permutations": 0.004638
+            },
+            {
+              "feature": "minor_axis_length",
+              "feature_label": "Minor axis length",
+              "mean_average_precision_decrease": 0.022697,
+              "standard_deviation_across_permutations": 0.003648
+            },
+            {
+              "feature": "eccentricity",
+              "feature_label": "Eccentricity",
+              "mean_average_precision_decrease": 0.010375,
+              "standard_deviation_across_permutations": 0.002867
+            },
+            {
+              "feature": "extent",
+              "feature_label": "Extent",
+              "mean_average_precision_decrease": 0.000112,
+              "standard_deviation_across_permutations": 7.7e-05
+            }
+          ],
+          "random_forest": [
+            {
+              "feature": "major_axis_length",
+              "feature_label": "Major axis length",
+              "mean_average_precision_decrease": 0.073807,
+              "standard_deviation_across_permutations": 0.010075
+            },
+            {
+              "feature": "perimeter",
+              "feature_label": "Perimeter",
+              "mean_average_precision_decrease": 0.039134,
+              "standard_deviation_across_permutations": 0.007802
+            },
+            {
+              "feature": "convex_area",
+              "feature_label": "Convex area",
+              "mean_average_precision_decrease": 0.017065,
+              "standard_deviation_across_permutations": 0.004499
+            },
+            {
+              "feature": "eccentricity",
+              "feature_label": "Eccentricity",
+              "mean_average_precision_decrease": 0.009946,
+              "standard_deviation_across_permutations": 0.00286
+            },
+            {
+              "feature": "area",
+              "feature_label": "Area",
+              "mean_average_precision_decrease": 0.008566,
+              "standard_deviation_across_permutations": 0.003814
+            },
+            {
+              "feature": "minor_axis_length",
+              "feature_label": "Minor axis length",
+              "mean_average_precision_decrease": 0.000959,
+              "standard_deviation_across_permutations": 0.00074
+            },
+            {
+              "feature": "extent",
+              "feature_label": "Extent",
+              "mean_average_precision_decrease": 0.000131,
+              "standard_deviation_across_permutations": 0.000525
+            }
+          ]
+        },
+        "not_used_for_tuning": true,
+        "random_states": {
+          "logistic_regression": 20311266,
+          "random_forest": 20311267
+        },
+        "repeats": 30,
+        "scoring": "average_precision"
+      }
+    },
+    {
+      "appears_as": "Social-card held-out average-precision values",
+      "computation": "All held-out average-precision point estimates printed on the social card.",
+      "id": "social-card-held-out-average-precision-values",
+      "receipt": "fig-og-card.receipt.json",
+      "receipt_sha256": "531f206890f4672e142557116961f3624808fadc9b0eaee9fd1f9e3b79eed0ea",
+      "source": "fig-og-card.receipt.json#plotted_data",
+      "value": {
+        "htru2": {
+          "dummy_prior": 0.09162,
+          "logistic_regression": 0.91412,
+          "random_forest": 0.926209
+        },
+        "rice": {
+          "dummy_prior": 0.427822,
+          "logistic_regression": 0.964298,
+          "random_forest": 0.960727
+        }
+      }
+    }
+  ],
+  "receipts": {
+    "ATTRIBUTION.txt": "09160838d8093cbaf05d47b99a08c45065fdd830a362c27a1a99a305951d5d21",
+    "data/Citation_Request.txt": "7184131b2ca0a456f619ede4cec7cf84607f8d9b32e6f5aab5be6e59f52dfc48",
+    "data/HTRU_2.csv": "b13b4d8929e96ecd196e464c1c8a454c3ac2ffa631015f6388957531a9923f59",
+    "data/Readme.txt": "691efe1b5b910401959a9b4f74ed0959dcd205d69c73cf524646e6f63a3eb86b",
+    "data/Rice_Cammeo_Osmancik.arff": "1af97883100c89de2ea2972f7a28d428f4f1c14711a61defc0b0569e9eb65665",
+    "fig-forest-htru2-curves.receipt.json": "bedf840878defba82de12493e6e573fcf6dd7abf740e321b12073282f5d83a7e",
+    "fig-held-out-calibration.receipt.json": "0f5b647e8486cbeb677b0840a3ae118fae165cfff00c18072e9d976c7bbf5d0a",
+    "fig-held-out-confusion-counts.receipt.json": "65d390ef07a25dbe0dcd87233dcd76a8603ff325eab2d4d27b3295135763012b",
+    "fig-held-out-permutation-importance.receipt.json": "7eccb5a50abe8215b453048b417dd3a62c770dd42513ffea37996ca6dc64406c",
+    "fig-held-out-ranking-metrics.receipt.json": "361cabab031824513530b94203d5665e1a14ee61d27b0d36b1f756382fc905b2",
+    "fig-logistic-htru2-curves.receipt.json": "a7bd2f274183192818d3d07d453a914683083012fea28db78a6b4c267d903962",
+    "fig-og-card.receipt.json": "531f206890f4672e142557116961f3624808fadc9b0eaee9fd1f9e3b79eed0ea",
+    "plot_holdout_curves.py": "15d625b7899166daaf044868f6c75c49d8fb025567192ca2152cec742cb362df",
+    "receipts/analysis.receipt.json": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+    "receipts/calibration-bins.csv": "5f2207281e244b84083b6bb2a19344d90a2c0581453ce56125ace0e5a5cba28c",
+    "receipts/paired-bootstrap.csv": "a228ac24f8a7802831a577fb2320cfb511da937fc0aa2c62f44e21dc6ca0252e",
+    "receipts/permutation-importance.csv": "0db4dc1a13cea576abbd92cdc7c57abafc5722784693c7868301ec02c9704069",
+    "receipts/test-metrics.csv": "acb1a21a822adbc47fb299d8a4a6b04f51700d8b433bf20addf9b87ff1d4c0b8",
+    "receipts/test-predictions.csv": "97203d66565630a1480818fef8f8e6b439b9358cea5fc955a61c06f9f636f0d3",
+    "receipts/training-cv-tuning.csv": "3318a9debe08f495c83a757df5459f9b551e0c75d12a6380db878c8f8e7320ee",
+    "reproduce.py.lock": "004d05f217f53bb88abdddb954262afa464daa0366fddb3d35fc11b65e82cfb9",
+    "source-manifest.json": "44457cad787a123fbcc8515629d5ac1fc6d9824277355de7e33764121d901a27"
+  },
+  "reference_environment": {
+    "architecture": "arm64",
+    "figure_font": "DejaVuSans.ttf",
+    "figure_font_sha256": "3fdf69cabf06049ea70a00b5919340e2ce1e6d02b0cc3c4b44fb6801bd1e0d22",
+    "freetype_version": "2.6.1",
+    "matplotlib_backend": "Agg",
+    "matplotlib_version": "3.10.3",
+    "numpy_version": "2.3.2",
+    "operating_system": "Darwin",
+    "os_release": "25.5.0",
+    "python_implementation": "CPython",
+    "python_version": "3.12.12",
+    "scikit_learn_version": "1.7.1"
+  },
+  "schema_version": 1,
+  "scope": {
+    "bootstrap_intervals_are_not_population_confidence_intervals": true,
+    "no_population_inference": true,
+    "primary_dataset": "UCI HTRU2",
+    "transfer_dataset": "UCI Rice (Cammeo and Osmancik)"
+  },
+  "study_id": "uci-htru2-rice-logistic-random-forest-v1",
+  "verification_scope": {
+    "claim": "byte identity in the recorded reference environment only",
+    "cross_platform_byte_identity_claimed": false,
+    "current_artifact_environment": "the reference_environment object above",
+    "recommended_release_environment": "a pinned Linux publication environment; these artifacts must be regenerated there before they may be described as Linux-generated"
+  }
+}

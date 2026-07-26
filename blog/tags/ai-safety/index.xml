@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ai-Safety on praxagent Research Notes</title>
-    <link>http://macbook-air.tail9eb7b0.ts.net:8000/blog/tags/ai-safety/</link>
+    <link>https://praxagent.ai/blog/tags/ai-safety/</link>
     <description>Recent content in Ai-Safety on praxagent Research Notes</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 20 Jul 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://macbook-air.tail9eb7b0.ts.net:8000/blog/tags/ai-safety/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://praxagent.ai/blog/tags/ai-safety/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Why Experimental Details Matter: Recovering from a Flawed Interpretability Study</title>
-      <link>http://macbook-air.tail9eb7b0.ts.net:8000/blog/posts/2026/07/workspace-under-pressure/</link>
+      <link>https://praxagent.ai/blog/posts/2026/07/workspace-under-pressure/</link>
       <pubDate>Wed, 15 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://macbook-air.tail9eb7b0.ts.net:8000/blog/posts/2026/07/workspace-under-pressure/</guid>
+      <guid>https://praxagent.ai/blog/posts/2026/07/workspace-under-pressure/</guid>
       <description>A striking interpretability result survived preregistration and still came from a flawed comparison. We trace how prompt echo, a domain-mismatched lexicon, and unequal stakes produced an overconfident story; retract the invalid chart; and show how a corrected, frozen re-run changed what the experiment could honestly support.</description>
     </item>
   </channel>

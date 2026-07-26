@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <title>Log loss - praxagent Knowledge Base</title>
+    
+    
+
+
+
+
+
+
+
+
+
+    
+    <meta name="description" content="The average negative logarithm of the probability a model gave to what actually happened, so confident mistakes cost far more than cautious ones.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/glossary/log-loss/">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="praxagent Knowledge Base">
+    <meta property="og:title" content="Log loss">
+    <meta property="og:description" content="The average negative logarithm of the probability a model gave to what actually happened, so confident mistakes cost far more than cautious ones.">
+    <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/glossary/log-loss/">
+    <meta property="og:image" content="https://praxagent.ai/blog/knowledge-base/glossary/log-loss/log-loss-penalty.png">
+    <meta property="og:image:alt" content="The log loss penalty for one row rises without a ceiling as the probability given to the true outcome approaches zero, while the Brier penalty stops at 1.">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="Log loss">
+    <meta name="twitter:description" content="The average negative logarithm of the probability a model gave to what actually happened, so confident mistakes cost far more than cautious ones.">
+    <meta name="twitter:image" content="https://praxagent.ai/blog/knowledge-base/glossary/log-loss/log-loss-penalty.png">
+    <meta name="twitter:image:alt" content="The log loss penalty for one row rises without a ceiling as the probability given to the true outcome approaches zero, while the Brier penalty stops at 1.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
+    <link rel="stylesheet" href="/blog/blog.css?v=20260725-2">
+    <link rel="stylesheet" href="/blog/katex.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'neutral',
+        securityLevel: 'loose',
+        flowchart: { htmlLabels: true, curve: 'basis' }
+      });
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-scrolls industrial-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+
+
+
+            <div class="nav-menu">
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link">Research Notes</a>
+                <a href="/blog/knowledge-base/" class="nav-link active">Knowledge Base</a>
+                <a href="/blog/search/" class="nav-link">Search</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
+            <a href="/blog/knowledge-base/" class="mobile-nav-link active">Knowledge Base</a>
+            <a href="/blog/search/" class="mobile-nav-link">Search</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        
+
+
+
+
+<div class="blog-post reference-entry">
+    <div class="container">
+        <article class="post-content">
+            <header class="post-header">
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
+                <h1 class="post-title">Log loss</h1>
+                
+                <p class="reference-summary">The average negative logarithm of the probability a model gave to what actually happened, so confident mistakes cost far more than cautious ones.</p>
+                
+
+            </header>
+
+
+
+
+
+            <div class="post-body">
+                <p>A model states a probability that something will happen, then the outcome
+arrives. <strong>Log loss</strong> grades that forecast by asking one question of every case:
+what probability did you put on the thing that actually happened? Each case is
+charged the negative natural logarithm of that probability, and the charges are
+averaged. Saying 0.99 about something that happened costs almost nothing. Saying
+0.001 about something that happened costs a great deal.</p>
+<p>Log loss is also called <strong>cross-entropy loss</strong>, and in this two-outcome setting
+<strong>binary cross-entropy</strong>. For independent Bernoulli outcomes it is the
+<strong>negative log likelihood</strong> divided by the number of cases, so watch that
+convention: some software and some texts reserve that name for the unnormalized
+sum. Lower is better, the best possible value is 0, and there is no upper
+bound.</p>
+<h2 id="the-definition">The definition</h2>
+<p>Take \(n\) cases. For case \(i\), let \(p_i\) be the stated probability of the
+positive outcome and let \(y_i\) be the <strong>outcome indicator</strong>: 1 if the positive
+outcome happened and 0 if it did not. Writing \(\log\) for the natural
+logarithm,</p>
+\[
+\mathrm{log\ loss}=-\frac{1}{n}\sum_{i=1}^{n}
+\left[y_i\log(p_i)+(1-y_i)\log(1-p_i)\right].
+\]<p>Only one of the two bracketed terms is ever alive, because \(y_i\) is either 1
+or 0. A positive case contributes \(-\log(p_i)\); a negative case contributes
+\(-\log(1-p_i)\). In both branches, \(p_i\) or \(1-p_i\) is the probability the
+model assigned to what actually happened, so the whole formula is the plain
+sentence at the top of this page written in symbols.</p>
+<h2 id="reading-the-penalty">Reading the penalty</h2>
+<p>The natural logarithm of a probability is never positive, so the leading minus
+sign turns every charge into a nonnegative cost. The cost is 0 at perfect
+confidence in the truth, rises gently through the middle of the range, and then
+climbs without limit.</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: right">Probability the model gave to what actually happened</th>
+          <th style="text-align: right">Row penalty \(-\log(\cdot)\)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: right">0.99</td>
+          <td style="text-align: right">0.01</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">0.90</td>
+          <td style="text-align: right">0.11</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">0.50</td>
+          <td style="text-align: right">0.69</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">0.10</td>
+          <td style="text-align: right">2.30</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">0.01</td>
+          <td style="text-align: right">4.61</td>
+      </tr>
+      <tr>
+          <td style="text-align: right">0.001</td>
+          <td style="text-align: right">6.91</td>
+      </tr>
+  </tbody>
+</table>
+<p>Each tenfold step toward zero adds another 2.30, forever. That is the whole
+character of the measure: it is close to indifferent between 0.90 and 0.99, and
+brutal about the difference between 0.01 and 0.001.</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: The log loss penalty for one case rises without a ceiling as the probability given to the true outcome approaches zero, while the Brier penalty can never exceed 1." tabindex="0">
+        <img src="/blog/knowledge-base/glossary/log-loss/log-loss-penalty.svg" alt="The log loss penalty for one case rises without a ceiling as the probability given to the true outcome approaches zero, while the Brier penalty can never exceed 1." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>Teaching diagram with exact values from the two formulas, not measurements. Left: the natural logarithm over the range a probability can occupy. It is 0 at 1, negative everywhere below that, and each tenfold step toward zero subtracts another 2.30. Right: what that shape does once it becomes a penalty charged to a single case, plotted against p, the probability the model gave to the outcome that actually happened. The Brier penalty for one case is the squared shortfall, (1 minus p) squared, and it is bounded: even a model that gave probability 0 to what happened pays only 1, marked by the dashed ceiling. The log loss penalty has no ceiling, so a case scored 0.01 costs 4.61 and a case scored 0.001 costs 6.91; the curve is cut off at 5 here and keeps climbing. Both penalties reach 0 at p equals 1. The two prices differ everywhere in between, but the gap between them only becomes dramatic once a model has given the outcome that happened very little probability.</figcaption>
+</figure>
+
+<h2 id="a-worked-example-you-can-check-by-hand">A worked example you can check by hand</h2>
+<p>The same five cases used in the
+<a href="/blog/knowledge-base/glossary/brier-loss/">Brier loss</a>
+entry, now charged the logarithmic way. The fourth column picks out the
+probability the model gave to what actually happened, which is \(p_i\) when the
+case was positive and \(1-p_i\) when it was negative.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Case</th>
+          <th style="text-align: right">Stated \(p_i\)</th>
+          <th style="text-align: right">Outcome \(y_i\)</th>
+          <th style="text-align: right">Probability on the truth</th>
+          <th style="text-align: right">Penalty</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td style="text-align: right">0.90</td>
+          <td style="text-align: right">1</td>
+          <td style="text-align: right">0.90</td>
+          <td style="text-align: right">0.1054</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td style="text-align: right">0.80</td>
+          <td style="text-align: right">1</td>
+          <td style="text-align: right">0.80</td>
+          <td style="text-align: right">0.2231</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td style="text-align: right">0.30</td>
+          <td style="text-align: right">0</td>
+          <td style="text-align: right">0.70</td>
+          <td style="text-align: right">0.3567</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td style="text-align: right">0.10</td>
+          <td style="text-align: right">0</td>
+          <td style="text-align: right">0.90</td>
+          <td style="text-align: right">0.1054</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td style="text-align: right">0.02</td>
+          <td style="text-align: right">1</td>
+          <td style="text-align: right">0.02</td>
+          <td style="text-align: right">3.9120</td>
+      </tr>
+  </tbody>
+</table>
+<p>The five penalties sum to 4.7026, so the log loss is \(4.7026/5=0.9405\). Case 5
+alone supplies 83 percent of it. Restate that one forecast as a shrug at 0.50,
+leaving the other four untouched, and the log loss falls to 0.2967; leave it out
+entirely and the remaining four average 0.1976.</p>
+<p>Compare that with Brier loss on the identical five rows: 0.2221 with case 5, and
+0.0375 without it. Both measures agree that the confident miss was the story,
+and in this particular example both are dominated by it, case 5 supplying about
+83 percent of the log loss total and about 86 percent of the Brier total. The
+difference between the two rules is not their verdict here but what happens as
+a forecast gets worse: a single Brier charge can never exceed 1, while a log
+loss charge grows without limit as the probability given to the truth
+approaches zero. Push case 5 from 0.02 down to 0.0002 and its Brier charge
+creeps from 0.9604 to 0.9996, while its log loss charge more than doubles, from
+3.9120 to 8.5172.</p>
+<h2 id="why-the-penalty-has-no-ceiling">Why the penalty has no ceiling</h2>
+<p>Squared error, the ingredient in Brier loss, tops out at 1 because probabilities
+and outcomes both live in \([0,1]\). The logarithm has no such limit: as the
+probability assigned to the truth goes to zero, \(-\log(p)\) goes to infinity.
+Stating probability 0 for something that then happens is, under this rule, an
+infinitely expensive claim, which is a defensible way to grade a forecaster who
+declared an actual event impossible.</p>
+<p>It is also a practical hazard, since one such case would make the average
+infinite regardless of how well everything else went. Many implementations
+therefore clip predicted probabilities away from exactly 0 and 1 before taking
+the logarithm; scikit-learn&rsquo;s <code>log_loss</code> does this and documents the behavior in
+its model-evaluation guide
+(<a href="https://scikit-learn.org/1.7/modules/model_evaluation.html">official guide</a>).
+Others do not, and return infinity or a not-a-number value at the boundary
+unless the caller clips first, which is exactly what the bare NumPy expression
+further down this page would do. Report the implementation, its version, and
+its clipping convention when the extremes matter, because clipping silently
+sets the worst price any single case can pay.</p>
+<h2 id="the-no-skill-anchor-moves-with-the-base-rate">The no-skill anchor moves with the base rate</h2>
+<p>A forecaster that ignores every feature and repeats the overall positive rate
+\(\bar o\) on every case scores</p>
+\[
+-\left[\bar o\log\bar o+(1-\bar o)\log(1-\bar o)\right],
+\]<p>which is the <strong>entropy</strong> of the label distribution: a measure of how uncertain
+the outcome was before any model spoke. That is the number a real model has to
+beat, and it depends only on the labels. Reading \(\bar o\) off the very cases
+being scored makes this a hindsight anchor rather than a baseline anyone could
+have deployed; a constant forecast you could actually have shipped takes its
+rate from training or historical data and is then scored, unchanged, on the
+held-out cases.</p>
+<p>The anchor is largest at \(\bar o=0.5\), where it equals \(\log 2=0.6931\), and
+it shrinks as the outcome becomes lopsided. In an illustrative set with 328
+positives among 3,580 cases, \(\bar o=0.0916\) and the anchor is 0.3063. A log
+loss of 0.25 beats both of those anchors, but it means very different things
+against each: a huge improvement on the balanced problem and a slim one on the
+rare-positive problem, where simply repeating the base rate already scores
+0.3063. Quote the anchor beside the score, or report the improvement over it,
+and do not compare raw log losses across datasets whose base rates differ. See
+<a href="/blog/knowledge-base/glossary/base-rate-bias/">base-rate bias</a>
+for the wider version of that error.</p>
+<h2 id="strict-properness-or-why-truthful-probabilities-win-on-average">Strict properness, or why truthful probabilities win on average</h2>
+<p>Log loss is a <strong>strictly proper scoring rule</strong>. A <strong>scoring rule</strong> is any recipe
+for grading a stated probability against what actually happened; a rule is
+<strong>proper</strong> when the lowest expected penalty comes from reporting the actual
+probability of the outcome, and <strong>strictly proper</strong> when that report is the only
+way to reach the lowest expected penalty
+(<a href="https://doi.org/10.1198/016214506000001437">Gneiting and Raftery, 2007</a>).</p>
+<p>Concretely, take a group of cases that truly go positive 70 percent of the
+time, and suppose one number \(q\) has to be stated for every case in the
+group. Averaging over that 70/30 split of outcomes:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Reported \(q\)</th>
+          <th style="text-align: right">Expected log loss \(-[0.7\log q+0.3\log(1-q)]\)</th>
+          <th style="text-align: right">Expected Brier loss \(0.7(1-q)^2+0.3q^2\)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0.50, hedging to the middle</td>
+          <td style="text-align: right">0.6931</td>
+          <td style="text-align: right">0.2500</td>
+      </tr>
+      <tr>
+          <td>0.60</td>
+          <td style="text-align: right">0.6325</td>
+          <td style="text-align: right">0.2200</td>
+      </tr>
+      <tr>
+          <td>0.70, the true rate</td>
+          <td style="text-align: right"><strong>0.6109</strong></td>
+          <td style="text-align: right"><strong>0.2100</strong></td>
+      </tr>
+      <tr>
+          <td>0.90</td>
+          <td style="text-align: right">0.7645</td>
+          <td style="text-align: right">0.2500</td>
+      </tr>
+      <tr>
+          <td>0.99, sounding decisive</td>
+          <td style="text-align: right">1.3886</td>
+          <td style="text-align: right">0.2941</td>
+      </tr>
+  </tbody>
+</table>
+<p>Both columns bottom out at \(q=0.70\), the rate at which these cases actually
+turn out positive, which is what properness means. They disagree about how
+badly overconfidence should hurt: moving from 0.70 to 0.99 costs about 0.08 of
+expected Brier loss and about 0.78 of expected log loss, nearly ten times as
+much. &ldquo;Expected&rdquo; means averaged over those outcomes in the long run, so the
+guarantee is about that average and not about any single case, where luck can
+always make a well-stated probability look bad.</p>
+<p>The rule was originally designed for human forecasters, which is why the older
+literature phrases it as an incentive to report your honest belief. For a
+fitted model the statement is simpler: its expected log loss is smallest, and
+uniquely so, when its output for a group of similar rows equals the rate at
+which such rows actually turn out positive, and no post-processing of the
+probabilities helps unless it moves them toward those rates.</p>
+<p>The guarantee is about expected loss in the population, which is not the same as
+saying a reported number cannot be flattered. Overfitting, leakage, model
+selection against the evaluation labels, and repeated reuse of the same test set
+all still inflate how good an empirical log loss looks. Strict properness makes
+the score worth measuring; a genuinely held-out evaluation is what makes the
+measurement mean something.</p>
+<h2 id="computing-it">Computing it</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">log_loss</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.90</span><span class="p">,</span> <span class="mf">0.80</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">log_loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>                                       <span class="c1"># 0.9405</span>
+</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">))</span>    <span class="c1"># 0.9405, the same arithmetic</span>
+</span></span></code></pre></div><p>Three conventions worth stating whenever you report the number. First, the
+logarithm base: natural logarithms give the value above, while base-2
+logarithms report the same quantity in bits and are 1.4427 times larger. Second,
+how probabilities map to classes: for a one-dimensional binary array, say which
+class that probability belongs to, and note that swapping the class roles
+consistently, using \(y'=1-y\) and \(p'=1-p\), leaves the score unchanged. The
+multiclass form sums \(-y_{ik}\log(p_{ik})\) over the classes within each case,
+where only the true class survives one-hot labels, and then averages over cases;
+state as well whether your implementation returns a sum or a mean and whether
+cases carry weights. Third, whether the score was computed on held-out cases; a
+log loss measured on the rows a model was fitted to is a training diagnostic,
+not evidence about future forecasts.</p>
+<h2 id="what-a-log-loss-does-not-establish">What a log loss does not establish</h2>
+<ul>
+<li>It does not certify calibration. Read it beside a reliability diagram, which
+displays whether stated probabilities match observed rates bin by bin
+(<a href="https://doi.org/10.1145/1102351.1102430">Niculescu-Mizil and Caruana, 2005</a>).</li>
+<li>It is not comparable across datasets with different base rates, because the
+no-skill anchor travels with the labels rather than the model.</li>
+<li>It is not a ranking metric. Two models can order cases identically and still
+post different log losses, since the rule grades the stated numbers.</li>
+<li>It says nothing about workload at a chosen threshold. Precision, recall, and
+the count of false alarms need a threshold; log loss never uses one.</li>
+<li>A single number can be dominated by a handful of confident misses. Inspect
+the largest per-case penalties before concluding that a model is broadly
+worse, and quantify the uncertainty in the paired per-case difference between
+the two models rather than in each score on its own. A
+<a href="/blog/knowledge-base/glossary/bootstrap/">bootstrap</a> has
+to resample the same evaluation units for both models and preserve any
+grouping or time ordering in the data.</li>
+</ul>
+<p>See also: <a href="/blog/knowledge-base/glossary/brier-loss/">Brier loss</a>,
+<a href="/blog/knowledge-base/glossary/base-rate-bias/">base-rate bias</a>,
+<a href="/blog/knowledge-base/glossary/bootstrap/">bootstrap</a>,
+<a href="/blog/knowledge-base/glossary/iid/">independent and identically distributed (i.i.d.)</a>, and the Deep Dive
+<a href="/blog/knowledge-base/deep-dives/logistic-regression-random-forest/">Logistic Regression and Random Forest</a>,
+where both probability scores are reported on a fixed holdout.</p>
+
+            </div>
+
+            <footer class="post-footer">
+
+                <div class="post-navigation">
+
+                    <a href="/blog/knowledge-base/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/knowledge-base/" class="back-to-blog">Knowledge Base</a>
+                    <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+
+    </main>
+
+    <footer class="footer footer-compact">
+        <div class="container">
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
+            </div>
+            <div class="footer-compact-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="/blog/search/">Search</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/blog/script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tables = document.querySelectorAll('.post-body table');
+            tables.forEach((table, index) => {
+                if (table.parentElement?.classList.contains('table-scroll')) return;
+
+                const scroller = document.createElement('div');
+                scroller.className = 'table-scroll';
+                scroller.setAttribute('aria-label', `Scrollable data table ${index + 1}`);
+                table.parentNode.insertBefore(scroller, table);
+                scroller.appendChild(table);
+
+                const updateScrollableState = () => {
+                    const isScrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+                    scroller.classList.toggle('is-scrollable', isScrollable);
+                    if (isScrollable) {
+                        scroller.setAttribute('role', 'region');
+                        scroller.setAttribute('tabindex', '0');
+                    } else {
+                        scroller.removeAttribute('role');
+                        scroller.removeAttribute('tabindex');
+                    }
+                };
+
+                requestAnimationFrame(updateScrollableState);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(updateScrollableState).observe(scroller);
+                } else {
+                    window.addEventListener('resize', updateScrollableState, { passive: true });
+                }
+            });
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                output: "htmlAndMathml"
+            });
+
+            const copyText = async (text) => {
+                if (navigator.clipboard?.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    return;
+                }
+
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.setAttribute('readonly', '');
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                const copied = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                if (!copied) {
+                    throw new Error('Copy command was not accepted');
+                }
+            };
+
+            document.querySelectorAll('[data-copy-target]').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const target = document.querySelector(button.dataset.copyTarget);
+                    if (!target) {
+                        console.error(`Copy target not found: ${button.dataset.copyTarget}`);
+                        return;
+                    }
+
+                    const originalLabel = button.textContent;
+                    try {
+                        await copyText(target.textContent.trim());
+                        button.textContent = 'Copied';
+                        button.classList.add('copied');
+                        setTimeout(() => {
+                            button.textContent = originalLabel;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    } catch (error) {
+                        console.error('Failed to copy citation: ', error);
+                    }
+                });
+            });
+
+            const copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+            const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
+            codeBlocks.forEach(pre => {
+                if (pre.closest('.code-block-frame')) {
+                    return;
+                }
+
+                const frame = document.createElement('div');
+                frame.className = 'code-block-frame';
+                const toolbar = document.createElement('div');
+                toolbar.className = 'code-block-toolbar';
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'copy-code-button';
+                button.innerHTML = copyIcon;
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+                button.setAttribute('title', 'Copy');
+
+                const markCopied = () => {
+                    button.innerHTML = checkIcon;
+                    button.classList.add('copied');
+                    button.setAttribute('aria-label', 'Copied');
+                    setTimeout(() => {
+                        button.innerHTML = copyIcon;
+                        button.classList.remove('copied');
+                        button.setAttribute('aria-label', 'Copy code to clipboard');
+                    }, 2000);
+                };
+
+                button.addEventListener('click', () => {
+                    const code = pre.querySelector('code');
+                    const text = code ? code.textContent : pre.textContent;
+
+                    navigator.clipboard.writeText(text).then(markCopied).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            markCopied();
+                        } catch (fallbackErr) {
+                            console.error('Fallback copy failed: ', fallbackErr);
+                        }
+                        document.body.removeChild(textArea);
+                    });
+                });
+
+                toolbar.appendChild(button);
+                frame.appendChild(toolbar);
+                pre.parentNode.insertBefore(frame, pre);
+                frame.appendChild(pre);
+            });
+        });
+    </script>
+
+</body>
+</html>

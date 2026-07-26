@@ -1,0 +1,59 @@
+{
+  "accessibility": {
+    "alt_text": "Forest in the Sky. Held-out average precision for dummy prior, logistic regression, and random forest is 0.0916, 0.9141, and 0.9262 on HTRU2, and 0.4278, 0.9643, and 0.9607 on Rice. Results are limited to these fixed held-out sets.",
+    "color_is_not_the_only_channel": true,
+    "full_text_equivalent": "plotted_data and caption_suggestion in this receipt",
+    "redundant_channels": [
+      "direct labels",
+      "position",
+      "exact values in receipt"
+    ]
+  },
+  "alt_text": "Forest in the Sky. Held-out average precision for dummy prior, logistic regression, and random forest is 0.0916, 0.9141, and 0.9262 on HTRU2, and 0.4278, 0.9643, and 0.9607 on Rice. Results are limited to these fixed held-out sets.",
+  "caption_suggestion": "The card summarizes held-out average precision under the same training-only tuning and fixed-test protocol. It reports point estimates only and makes no population or universal model-ranking claim.",
+  "claim_scope_exclusions": [
+    "no population-wide performance claim",
+    "no causal claim",
+    "no independence claim beyond the released row tables",
+    "no claim that either selected model is universally superior"
+  ],
+  "data_source": {
+    "artifact": "receipts/analysis.receipt.json",
+    "artifact_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+    "row_selection": "the fixed held-out rows declared in the analysis receipt",
+    "source_fields": [
+      "test_metrics.*.average_precision"
+    ],
+    "transformation": "computed by reproduce.py without manual figure values"
+  },
+  "description": "Social card with the three held-out AP point estimates for each dataset.",
+  "figure_id": "forest-in-the-sky-card",
+  "plotted_data": {
+    "htru2": {
+      "dummy_prior": 0.09162,
+      "logistic_regression": 0.91412,
+      "random_forest": 0.926209
+    },
+    "rice": {
+      "dummy_prior": 0.427822,
+      "logistic_regression": 0.964298,
+      "random_forest": 0.960727
+    }
+  },
+  "provenance": {
+    "generator": "reproduce.py",
+    "generator_sha256": "a2ad91d1e3f7cf2a15da4fc10246de57b7adda70c1ab2f229f2e51553a75e510",
+    "outputs": {
+      "og-card.png": "1241216e3dcdfad0fd3a2f1da325c24b8f8d0b90a6727d1878958c749ab7d43b"
+    },
+    "plotting_library": "matplotlib 3.10.3",
+    "study_id": "uci-htru2-rice-logistic-random-forest-v1",
+    "verification_command": "uv run --frozen reproduce.py --verify"
+  },
+  "schema_version": 1,
+  "title": "Forest in the Sky!",
+  "uncertainty": {
+    "intervals_available_in": "fig-held-out-ranking-metrics.receipt.json",
+    "kind": "none plotted on summary card"
+  }
+}

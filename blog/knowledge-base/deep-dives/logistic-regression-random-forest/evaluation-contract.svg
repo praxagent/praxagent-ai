@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="660" viewBox="0 0 1000 660" role="img" aria-labelledby="evaluation-contract-title evaluation-contract-desc">
+  <title id="evaluation-contract-title">The published comparison separates fitting and tuning from held-out evaluation</title>
+  <desc id="evaluation-contract-desc">A labeled open dataset is split once while preserving class proportions. The training and validation portion is used to select model settings through internal cross-validation folds. Inside each fold, applicable data preparation is learned only from that fold's fitting rows and then applied to its validation rows. In this analysis, that means fitting logistic scaling within the fold while the random forest keeps the original numerical measurements. After settings are selected, the complete selected pipeline is refitted on all training rows. The 0.5 reference cutoff is chosen before final evaluation rather than tuned on the held-out rows. The fixed held-out portion is not used for reported fitting or setting selection in the published workflow. The selected workflows are then applied to its features, and predictions are compared with its labels. Earlier exploratory comparisons on these datasets informed the analysis, so the holdout describes performance on these rows but is not an untouched final confirmation test.</desc>
+  <defs>
+    <marker id="contract-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#8B6542"/>
+    </marker>
+    <pattern id="holdout-pattern" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="8" height="8" fill="#F3E8E0"/>
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#D1B496" stroke-width="2"/>
+    </pattern>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:24px;font-weight:700}
+      .h{font-size:18px;font-weight:700}
+      .s{font-size:15px}
+      .m{font-size:13px;fill:#5A544C}
+      .mini{font-size:12px;fill:#2C2924}
+      .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.5}
+      .data{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.5}
+      .train{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+      .test{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.5}
+      .arrow{fill:none;stroke:#8B6542;stroke-width:2;marker-end:url(#contract-arrow)}
+      .connector{fill:none;stroke:#8B6542;stroke-width:2}
+    </style>
+  </defs>
+
+  <rect width="1000" height="660" fill="#F7F4F0"/>
+  <text class="t title" x="24" y="34">A fair published comparison: separate fitting from evaluation</text>
+  <text class="t m" x="24" y="58">Both models face the same fixed holdout; fitting and tuning use the training rows only.</text>
+
+  <rect class="data" x="24" y="132" width="180" height="288" rx="12"/>
+  <text class="t h" x="42" y="163">Labeled dataset</text>
+  <text class="t m" x="42" y="186">Each row contains features</text>
+  <text class="t m" x="42" y="204">and a known class label.</text>
+
+  <rect class="card" x="42" y="226" width="144" height="42" rx="7"/>
+  <circle cx="58" cy="247" r="7" fill="#E8F0F7" stroke="#4B6787" stroke-width="1.5"/>
+  <text class="t mini" x="74" y="244">measurement row</text>
+  <text class="t mini" x="74" y="259" font-weight="700">class A</text>
+
+  <rect class="card" x="42" y="278" width="144" height="42" rx="7"/>
+  <rect x="51" y="292" width="14" height="14" rx="2" fill="#F3E8E0" stroke="#A67C52" stroke-width="1.5"/>
+  <text class="t mini" x="74" y="296">measurement row</text>
+  <text class="t mini" x="74" y="311" font-weight="700">class B</text>
+
+  <rect class="card" x="42" y="330" width="144" height="42" rx="7"/>
+  <circle cx="58" cy="351" r="7" fill="#E8F0F7" stroke="#4B6787" stroke-width="1.5"/>
+  <text class="t mini" x="74" y="348">measurement row</text>
+  <text class="t mini" x="74" y="363" font-weight="700">class A</text>
+
+  <text class="t m" x="42" y="393">Labels are used to keep</text>
+  <text class="t m" x="42" y="411">class proportions similar.</text>
+
+  <path class="arrow" d="M204 276 H232"/>
+  <circle cx="266" cy="276" r="34" fill="#FBF9F6" stroke="#A67C52" stroke-width="1.7"/>
+  <text class="t s" x="266" y="272" text-anchor="middle" font-weight="700">Split</text>
+  <text class="t s" x="266" y="291" text-anchor="middle" font-weight="700">once</text>
+  <text class="t m" x="296" y="328" text-anchor="end">Preserve class</text>
+  <text class="t m" x="296" y="345" text-anchor="end">proportions.</text>
+
+  <path class="connector" d="M300 276 H306 V250"/>
+  <path class="arrow" d="M306 250 H316"/>
+  <path class="connector" d="M306 276 V512"/>
+  <path class="arrow" d="M306 512 H316"/>
+
+  <rect class="train" x="318" y="82" width="428" height="338" rx="12"/>
+  <text class="t h" x="340" y="113">Training and validation portion</text>
+  <text class="t m" x="340" y="135">Available for learning and internal fold checks.</text>
+
+  <rect class="card" x="340" y="153" width="384" height="64" rx="9"/>
+  <circle cx="364" cy="185" r="13" fill="#E8F0F7" stroke="#4B6787" stroke-width="1.5"/>
+  <text class="t mini" x="364" y="189" text-anchor="middle" font-weight="700">A</text>
+  <text class="t s" x="388" y="180" font-weight="700">Fit preparation separately inside each fold</text>
+  <text class="t m" x="388" y="202">Learn scaling from that fold's fitting rows.</text>
+
+  <path class="arrow" d="M532 217 V233"/>
+  <rect class="card" x="340" y="235" width="384" height="64" rx="9"/>
+  <circle cx="364" cy="267" r="13" fill="#EAF1E5" stroke="#6F8D5E" stroke-width="1.5"/>
+  <text class="t mini" x="364" y="271" text-anchor="middle" font-weight="700">B</text>
+  <text class="t s" x="388" y="262" font-weight="700">Tune with internal cross-validation folds</text>
+  <text class="t m" x="388" y="284">Score settings on that fold's validation rows.</text>
+
+  <path class="arrow" d="M532 299 V315"/>
+  <rect class="card" x="340" y="317" width="384" height="74" rx="9"/>
+  <circle cx="364" cy="354" r="13" fill="#F3E8E0" stroke="#A67C52" stroke-width="1.5"/>
+  <text class="t mini" x="364" y="358" text-anchor="middle" font-weight="700">C</text>
+  <text class="t s" x="388" y="345" font-weight="700">Select settings on the training folds</text>
+  <text class="t m" x="388" y="367">Refit the selected whole pipeline</text>
+  <text class="t m" x="388" y="384">on all training rows; keep cutoff 0.5 fixed.</text>
+
+  <rect x="318" y="452" width="428" height="124" rx="12" fill="url(#holdout-pattern)" stroke="#A67C52" stroke-width="1.8" stroke-dasharray="7 5"/>
+  <text class="t h" x="340" y="483">Fixed held-out evaluation portion</text>
+  <text class="t m" x="340" y="506">Split to preserve class proportions.</text>
+  <rect class="card" x="340" y="520" width="356" height="36" rx="7"/>
+  <text class="t s" x="518" y="543" text-anchor="middle" font-weight="700">Not used to fit models or choose their settings</text>
+
+  <path class="arrow" d="M746 354 H766 V244 H796"/>
+  <path class="arrow" d="M746 514 H772 V270 H796"/>
+
+  <rect class="data" x="798" y="126" width="178" height="422" rx="12"/>
+  <text class="t h" x="887" y="158" text-anchor="middle">Final evaluation</text>
+  <text class="t m" x="887" y="180" text-anchor="middle">After fitting and tuning.</text>
+
+  <rect class="card" x="816" y="207" width="142" height="76" rx="9"/>
+  <text class="t s" x="887" y="234" text-anchor="middle" font-weight="700">Apply the locked</text>
+  <text class="t s" x="887" y="255" text-anchor="middle" font-weight="700">workflow to test</text>
+  <text class="t m" x="887" y="274" text-anchor="middle">features only</text>
+
+  <path class="arrow" d="M887 283 V307"/>
+  <rect class="card" x="816" y="309" width="142" height="76" rx="9"/>
+  <text class="t s" x="887" y="336" text-anchor="middle" font-weight="700">Check predictions</text>
+  <text class="t s" x="887" y="357" text-anchor="middle" font-weight="700">against labels from</text>
+  <text class="t m" x="887" y="376" text-anchor="middle">the test rows</text>
+
+  <path class="arrow" d="M887 385 V409"/>
+  <rect class="card" x="816" y="411" width="142" height="104" rx="9"/>
+  <text class="t s" x="887" y="439" text-anchor="middle" font-weight="700">Report</text>
+  <text class="t m" x="887" y="462" text-anchor="middle">error patterns</text>
+  <text class="t m" x="887" y="480" text-anchor="middle">probability quality</text>
+  <text class="t m" x="887" y="498" text-anchor="middle">performance measures</text>
+
+  <rect x="24" y="606" width="952" height="38" rx="10" fill="#EAF1E5" stroke="#6F8D5E" stroke-width="1.5"/>
+  <text class="t s" x="500" y="631" text-anchor="middle" font-weight="700">Earlier exploration used these data, so this holdout describes these rows; it is not an untouched final test.</text>
+</svg>

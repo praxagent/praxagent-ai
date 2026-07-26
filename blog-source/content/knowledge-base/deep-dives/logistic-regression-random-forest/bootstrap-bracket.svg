@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="906" viewBox="0 0 1000 906" role="img" aria-labelledby="bootstrap-bracket-title bootstrap-bracket-desc">
+  <title id="bootstrap-bracket-title">How the bare score and the bracketed stability interval are produced</title>
+  <desc id="bootstrap-bracket-desc">A three-step schematic. Step one: the fixed holdout of 3,580 rows, 3,252 negatives and 328 positives, is scored once by both models exactly as it is, giving average precision 0.9262 for the forest and 0.9141 for logistic regression, a difference of plus 0.0121. That single value is the point estimate, the bare number printed in the text. Step two: the rows are redrawn 2,000 times. Positives are drawn from the positives and negatives from the negatives, each with replacement and each to the original count, so every resampled test set keeps 3,580 rows and the same 9.16 percent positive rate. A miniature strip of ten rows shows one such draw in which rows 3, 5, and 9 each appear twice and rows 4, 6, and 10 drop out. Both frozen models are scored on those same resampled rows and the forest-minus-logistic difference is recorded each time. Step three: the 2,000 recorded differences are sorted, the lowest 50 and highest 50 are cut off, and the remaining middle 95 percent spans the printed bracket of plus 0.0012 to plus 0.0257. A histogram shows the differences centered near the point estimate of plus 0.0121, with the shaded middle 95 percent lying entirely above zero. Neither model is refit at any stage; only the test rows are redrawn.</desc>
+  <defs>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:24px;font-weight:700}
+      .big{font-size:26px;font-weight:700}
+      .h{font-size:17px;font-weight:700}
+      .s{font-size:15px}
+      .m{font-size:13px;fill:#5A544C}
+      .xs{font-size:12px;fill:#5A544C}
+      .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.5}
+      .sub{fill:#F2EEE8;stroke:#C4B8A8;stroke-width:1.2}
+      .hot{fill:#E8F0F7;stroke:#4B6787;stroke-width:2.5}
+      .cell{fill:#F2EEE8;stroke:#8B8377;stroke-width:1.5}
+      .celldup{fill:#E8F0F7;stroke:#4B6787;stroke-width:2}
+      .celldrop{fill:#F7F4F0;stroke:#D6CEC2;stroke-width:1.2}
+      .bar{fill:#CBD9E6;stroke:#4B6787;stroke-width:1}
+      .bartail{fill:#EDE8E1;stroke:#A79B8B;stroke-width:1}
+      .axis{stroke:#8B8377;stroke-width:1.5}
+      .cut{stroke:#4B6787;stroke-width:2;stroke-dasharray:5 4}
+      .zero{stroke:#8B8377;stroke-width:1.5;stroke-dasharray:2 4}
+    </style>
+    <marker id="bb-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8B8377"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="906" fill="#F7F4F0"/>
+  <text class="t title" x="24" y="34">Two different numbers: the score, and the bracket around a difference</text>
+  <text class="t m" x="24" y="58">The bare number is computed once. The bracket comes from redrawing the same test rows 2,000 times, with both fitted models frozen.</text>
+
+  <!-- STEP 1 -->
+  <rect class="card" x="24" y="76" width="952" height="150" rx="12"/>
+  <text class="t h" x="44" y="106">Step 1 &#8212; the bare number (point estimate)</text>
+
+  <rect class="sub" x="44" y="122" width="236" height="86" rx="8"/>
+  <text class="t s" x="58" y="144" font-weight="700">Fixed holdout, 3,580 rows</text>
+  <rect x="58" y="154" width="182" height="16" fill="#F2EEE8" stroke="#8B8377" stroke-width="1.2"/>
+  <rect x="240" y="154" width="18" height="16" fill="#E8F0F7" stroke="#4B6787" stroke-width="1.5"/>
+  <text class="t xs" x="58" y="188">3,252 negatives (grey)</text>
+  <text class="t xs" x="58" y="203">328 positives (blue), 9.16%</text>
+
+  <line x1="290" y1="165" x2="322" y2="165" class="axis" marker-end="url(#bb-arrow)"/>
+
+  <rect class="sub" x="332" y="122" width="248" height="86" rx="8"/>
+  <text class="t xs" x="346" y="146">Score both models once, on the</text>
+  <text class="t xs" x="346" y="162">rows exactly as they are.</text>
+  <text class="t s" x="346" y="190">forest 0.9262 &#160; logistic 0.9141</text>
+
+  <line x1="590" y1="165" x2="622" y2="165" class="axis" marker-end="url(#bb-arrow)"/>
+
+  <rect class="hot" x="632" y="122" width="320" height="86" rx="8"/>
+  <text class="t xs" x="792" y="146" text-anchor="middle">forest AP minus logistic AP</text>
+  <text class="t big" x="792" y="180" text-anchor="middle" fill="#3C5570">+0.0121</text>
+  <text class="t xs" x="792" y="199" text-anchor="middle">the bare number printed in the text</text>
+
+  <!-- STEP 2 -->
+  <rect class="card" x="24" y="238" width="952" height="246" rx="12"/>
+  <text class="t h" x="44" y="268">Step 2 &#8212; redraw the same rows 2,000 times (nothing is refit)</text>
+
+  <rect class="sub" x="44" y="284" width="200" height="58" rx="8"/>
+  <text class="t s" x="58" y="308" font-weight="700">328 positives</text>
+  <text class="t xs" x="58" y="328">draw 328, with replacement</text>
+
+  <rect class="sub" x="44" y="354" width="200" height="58" rx="8"/>
+  <text class="t s" x="58" y="378" font-weight="700">3,252 negatives</text>
+  <text class="t xs" x="58" y="398">draw 3,252, with replacement</text>
+
+  <text class="t xs" x="44" y="436">Class stratified: every resample keeps</text>
+  <text class="t xs" x="44" y="452">3,580 rows and the same 9.16% positive rate.</text>
+
+  <line x1="250" y1="313" x2="286" y2="336" class="axis" marker-end="url(#bb-arrow)"/>
+  <line x1="250" y1="383" x2="286" y2="360" class="axis" marker-end="url(#bb-arrow)"/>
+
+  <rect class="sub" x="296" y="284" width="316" height="150" rx="8"/>
+  <text class="t xs" x="310" y="306">the held-out rows, ten of them in miniature</text>
+  <rect class="cell" x="310" y="314" width="22" height="22" rx="3"/>
+  <text class="t xs" x="321" y="330" text-anchor="middle">1</text>
+  <rect class="cell" x="336" y="314" width="22" height="22" rx="3"/>
+  <text class="t xs" x="347" y="330" text-anchor="middle">2</text>
+  <rect class="cell" x="362" y="314" width="22" height="22" rx="3"/>
+  <text class="t xs" x="373" y="330" text-anchor="middle">3</text>
+  <rect class="cell" x="388" y="314" width="22" height="22" rx="3"/>
+  <text class="t xs" x="399" y="330" text-anchor="middle">4</text>
+  <rect class="cell" x="414" y="314" width="22" height="22" rx="3"/>
+  <text class="t xs" x="425" y="330" text-anchor="middle">5</text>
+  <rect class="cell" x="440" y="314" width="22" height="22" rx="3"/>
+  <text class="t xs" x="451" y="330" text-anchor="middle">6</text>
+  <rect class="cell" x="466" y="314" width="22" height="22" rx="3"/>
+  <text class="t xs" x="477" y="330" text-anchor="middle">7</text>
+  <rect class="cell" x="492" y="314" width="22" height="22" rx="3"/>
+  <text class="t xs" x="503" y="330" text-anchor="middle">8</text>
+  <rect class="cell" x="518" y="314" width="22" height="22" rx="3"/>
+  <text class="t xs" x="529" y="330" text-anchor="middle">9</text>
+  <rect class="cell" x="544" y="314" width="22" height="22" rx="3"/>
+  <text class="t xs" x="555" y="330" text-anchor="middle">10</text>
+
+  <line x1="438" y1="344" x2="438" y2="362" class="axis" marker-end="url(#bb-arrow)"/>
+
+  <text class="t xs" x="310" y="376">one resample of those same rows</text>
+  <rect class="celldup" x="310" y="382" width="22" height="22" rx="3"/>
+  <text class="t xs" x="321" y="398" text-anchor="middle">3</text>
+  <rect class="cell" x="336" y="382" width="22" height="22" rx="3"/>
+  <text class="t xs" x="347" y="398" text-anchor="middle">1</text>
+  <rect class="celldup" x="362" y="382" width="22" height="22" rx="3"/>
+  <text class="t xs" x="373" y="398" text-anchor="middle">3</text>
+  <rect class="cell" x="388" y="382" width="22" height="22" rx="3"/>
+  <text class="t xs" x="399" y="398" text-anchor="middle">7</text>
+  <rect class="celldup" x="414" y="382" width="22" height="22" rx="3"/>
+  <text class="t xs" x="425" y="398" text-anchor="middle">5</text>
+  <rect class="cell" x="440" y="382" width="22" height="22" rx="3"/>
+  <text class="t xs" x="451" y="398" text-anchor="middle">8</text>
+  <rect class="cell" x="466" y="382" width="22" height="22" rx="3"/>
+  <text class="t xs" x="477" y="398" text-anchor="middle">2</text>
+  <rect class="celldup" x="492" y="382" width="22" height="22" rx="3"/>
+  <text class="t xs" x="503" y="398" text-anchor="middle">5</text>
+  <rect class="celldup" x="518" y="382" width="22" height="22" rx="3"/>
+  <text class="t xs" x="529" y="398" text-anchor="middle">9</text>
+  <rect class="celldup" x="544" y="382" width="22" height="22" rx="3"/>
+  <text class="t xs" x="555" y="398" text-anchor="middle">9</text>
+  <text class="t xs" x="310" y="424">blue: drawn more than once. Rows 4, 6, and 10 sat out this draw.</text>
+
+  <line x1="620" y1="359" x2="652" y2="359" class="axis" marker-end="url(#bb-arrow)"/>
+
+  <rect class="sub" x="662" y="284" width="290" height="150" rx="8"/>
+  <text class="t xs" x="676" y="306">Score BOTH models on those same rows</text>
+  <text class="t xs" x="676" y="322">(paired), and record forest minus logistic:</text>
+  <text class="t s" x="676" y="348">resample 1</text>
+  <text class="t s" x="938" y="348" text-anchor="end">+0.0143</text>
+  <text class="t s" x="676" y="370">resample 2</text>
+  <text class="t s" x="938" y="370" text-anchor="end">+0.0088</text>
+  <text class="t s" x="676" y="392">resample 3</text>
+  <text class="t s" x="938" y="392" text-anchor="end">+0.0207</text>
+  <text class="t s" x="676" y="410">...</text>
+  <text class="t s" x="676" y="428">resample 2,000</text>
+  <text class="t s" x="938" y="428" text-anchor="end">+0.0176</text>
+  <text class="t xs" x="662" y="452">Replicate values above are illustrative;</text>
+  <text class="t xs" x="662" y="468">the endpoints in Step 3 are the real ones.</text>
+
+  <!-- STEP 3 -->
+  <rect class="card" x="24" y="496" width="952" height="316" rx="12"/>
+  <text class="t h" x="44" y="524">Step 3 &#8212; sort the 2,000 differences and cut off the tails</text>
+  <text class="t xs" x="44" y="544">Discard the lowest 50 and the highest 50 (2.5% at each end). What is left spans the bracket.</text>
+  <text class="t xs" x="44" y="566">Each bar counts how many of the 2,000 recorded differences landed in that slice.</text>
+
+  <rect x="273" y="600" width="454" height="140" fill="#E8F0F7" opacity="0.55"/>
+
+  <rect class="bartail" x="158" y="736" width="37" height="4"/>
+  <rect class="bartail" x="195" y="731" width="37" height="9"/>
+  <rect class="bartail" x="232" y="722" width="37" height="18"/>
+  <rect class="bar" x="269" y="708" width="37" height="32"/>
+  <rect class="bar" x="306" y="688" width="37" height="52"/>
+  <rect class="bar" x="343" y="664" width="37" height="76"/>
+  <rect class="bar" x="380" y="640" width="37" height="100"/>
+  <rect class="bar" x="417" y="620" width="37" height="120"/>
+  <rect class="bar" x="454" y="610" width="37" height="130"/>
+  <rect class="bar" x="491" y="614" width="37" height="126"/>
+  <rect class="bar" x="528" y="629" width="37" height="111"/>
+  <rect class="bar" x="565" y="652" width="37" height="88"/>
+  <rect class="bar" x="602" y="677" width="37" height="63"/>
+  <rect class="bar" x="639" y="699" width="37" height="41"/>
+  <rect class="bar" x="676" y="716" width="37" height="24"/>
+  <rect class="bartail" x="713" y="727" width="37" height="13"/>
+  <rect class="bartail" x="750" y="734" width="37" height="6"/>
+  <rect class="bartail" x="787" y="737" width="37" height="3"/>
+
+  <line x1="251" y1="600" x2="251" y2="740" class="zero"/>
+  <line x1="273" y1="596" x2="273" y2="740" class="cut"/>
+  <line x1="727" y1="596" x2="727" y2="740" class="cut"/>
+
+  <text class="t xs" x="266" y="668" text-anchor="end">2.5th percentile</text>
+  <text class="t s" x="266" y="686" text-anchor="end" font-weight="700" fill="#3C5570">+0.0012</text>
+  <text class="t xs" x="734" y="668">97.5th percentile</text>
+  <text class="t s" x="734" y="686" font-weight="700" fill="#3C5570">+0.0257</text>
+
+  <text class="t xs" x="475" y="588" text-anchor="middle">point estimate from Step 1: +0.0121</text>
+  <line x1="475" y1="594" x2="475" y2="606" class="axis" marker-end="url(#bb-arrow)"/>
+
+  <line x1="140" y1="740" x2="880" y2="740" class="axis"/>
+  <line x1="251" y1="740" x2="251" y2="746" class="axis"/>
+  <line x1="436" y1="740" x2="436" y2="746" class="axis"/>
+  <line x1="621" y1="740" x2="621" y2="746" class="axis"/>
+  <line x1="806" y1="740" x2="806" y2="746" class="axis"/>
+  <text class="t xs" x="251" y="762" text-anchor="middle">0.000 (tie)</text>
+  <text class="t xs" x="436" y="762" text-anchor="middle">+0.010</text>
+  <text class="t xs" x="621" y="762" text-anchor="middle">+0.020</text>
+  <text class="t xs" x="806" y="762" text-anchor="middle">+0.030</text>
+
+  <line x1="273" y1="782" x2="727" y2="782" class="axis" marker-start="url(#bb-arrow)" marker-end="url(#bb-arrow)"/>
+  <text class="t s" x="500" y="802" text-anchor="middle" font-weight="700">the bracket printed in the text: [+0.0012, +0.0257]</text>
+  <rect x="24" y="822" width="952" height="72" rx="10" fill="#EAF1E5" stroke="#6F8D5E" stroke-width="1.5"/>
+  <text class="t s" x="500" y="846" text-anchor="middle" font-weight="700">Both fitted models stay frozen throughout. Only the test rows are redrawn.</text>
+  <text class="t xs" x="500" y="866" text-anchor="middle">The bracket shows how far this one gap wobbles across redraws of these 3,580 rows. It is not a population</text>
+  <text class="t xs" x="500" y="882" text-anchor="middle">confidence interval, and it leaves out the variability of choosing a different train and test split.</text>
+</svg>

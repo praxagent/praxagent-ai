@@ -1,0 +1,284 @@
+{
+  "accessibility": {
+    "alt_text": "Four panels show mean held-out AP decrease over 30 feature shuffles, with repeat standard deviations. In HTRU2, profile excess kurtosis has the largest decrease for logistic regression, 0.8565, and random forest, 0.6598; the next values are 0.0803 and 0.0185 for dispersion-measure signal-to-noise-ratio standard deviation. In Rice, logistic regression's largest decreases are 0.6508 for convex area and 0.2510 for major-axis length; random forest's are 0.0738 for major-axis length and 0.0391 for perimeter. Shuffling also breaks relationships among predictors, so correlated features can share or mask importance. The whiskers are permutation-repeat spread, not confidence intervals, and the results are not causal.",
+    "color_is_not_the_only_channel": true,
+    "full_text_equivalent": "plotted_data and caption_suggestion in this receipt",
+    "redundant_channels": [
+      "direct labels",
+      "marker shapes",
+      "position",
+      "exact values in receipt"
+    ]
+  },
+  "alt_text": "Four panels show mean held-out AP decrease over 30 feature shuffles, with repeat standard deviations. In HTRU2, profile excess kurtosis has the largest decrease for logistic regression, 0.8565, and random forest, 0.6598; the next values are 0.0803 and 0.0185 for dispersion-measure signal-to-noise-ratio standard deviation. In Rice, logistic regression's largest decreases are 0.6508 for convex area and 0.2510 for major-axis length; random forest's are 0.0738 for major-axis length and 0.0391 for perimeter. Shuffling also breaks relationships among predictors, so correlated features can share or mask importance. The whiskers are permutation-repeat spread, not confidence intervals, and the results are not causal.",
+  "caption_suggestion": "Finding: feature importance is a property of a fitted model and scoring procedure, not an intrinsic ranking of measurements. Points are mean held-out AP decreases over 30 shuffles and whiskers are one repeat standard deviation, not confidence intervals. Correlated inputs can share or mask importance, and this post-evaluation diagnostic was not used to tune either model.",
+  "claim_scope_exclusions": [
+    "no population-wide performance claim",
+    "no causal claim",
+    "no independence claim beyond the released row tables",
+    "no claim that either selected model is universally superior",
+    "no model-independent feature ranking"
+  ],
+  "data_source": {
+    "artifact": "receipts/analysis.receipt.json",
+    "artifact_sha256": "e9a14613cbc18923a803afd3a9b74fc8592c2cdf9643b2179025361e4901cc3c",
+    "row_selection": "the fixed held-out rows declared in the analysis receipt",
+    "source_fields": [
+      "permutation_importance.models.*"
+    ],
+    "transformation": "computed by reproduce.py without manual figure values"
+  },
+  "description": "Mean AP decrease and repeat spread when each feature is shuffled on the fixed test set.",
+  "figure_id": "held-out-permutation-importance",
+  "plotted_data": {
+    "htru2": {
+      "computed_on": "fixed held-out test rows after model selection",
+      "limitations": [
+        "repeat spread is not a confidence interval",
+        "correlated features can share or mask importance",
+        "permutation can create feature combinations not common in the source table"
+      ],
+      "models": {
+        "logistic_regression": [
+          {
+            "feature": "profile_excess_kurtosis",
+            "feature_label": "Profile excess kurtosis",
+            "mean_average_precision_decrease": 0.856496,
+            "standard_deviation_across_permutations": 0.002016
+          },
+          {
+            "feature": "dm_snr_standard_deviation",
+            "feature_label": "Dispersion-measure signal-to-noise ratio standard deviation",
+            "mean_average_precision_decrease": 0.08032,
+            "standard_deviation_across_permutations": 0.005833
+          },
+          {
+            "feature": "profile_skewness",
+            "feature_label": "Profile skewness",
+            "mean_average_precision_decrease": 0.018759,
+            "standard_deviation_across_permutations": 0.006379
+          },
+          {
+            "feature": "dm_snr_mean",
+            "feature_label": "Dispersion-measure signal-to-noise ratio mean",
+            "mean_average_precision_decrease": 0.017582,
+            "standard_deviation_across_permutations": 0.002827
+          },
+          {
+            "feature": "dm_snr_skewness",
+            "feature_label": "Dispersion-measure signal-to-noise ratio skewness",
+            "mean_average_precision_decrease": 0.008555,
+            "standard_deviation_across_permutations": 0.002194
+          },
+          {
+            "feature": "profile_mean",
+            "feature_label": "Profile mean",
+            "mean_average_precision_decrease": 0.003887,
+            "standard_deviation_across_permutations": 0.002777
+          },
+          {
+            "feature": "dm_snr_excess_kurtosis",
+            "feature_label": "Dispersion-measure signal-to-noise ratio excess kurtosis",
+            "mean_average_precision_decrease": 0.003165,
+            "standard_deviation_across_permutations": 0.002135
+          },
+          {
+            "feature": "profile_standard_deviation",
+            "feature_label": "Profile standard deviation",
+            "mean_average_precision_decrease": 0.000258,
+            "standard_deviation_across_permutations": 0.001195
+          }
+        ],
+        "random_forest": [
+          {
+            "feature": "profile_excess_kurtosis",
+            "feature_label": "Profile excess kurtosis",
+            "mean_average_precision_decrease": 0.659815,
+            "standard_deviation_across_permutations": 0.014306
+          },
+          {
+            "feature": "dm_snr_standard_deviation",
+            "feature_label": "Dispersion-measure signal-to-noise ratio standard deviation",
+            "mean_average_precision_decrease": 0.018536,
+            "standard_deviation_across_permutations": 0.00371
+          },
+          {
+            "feature": "profile_skewness",
+            "feature_label": "Profile skewness",
+            "mean_average_precision_decrease": 0.015324,
+            "standard_deviation_across_permutations": 0.005422
+          },
+          {
+            "feature": "profile_mean",
+            "feature_label": "Profile mean",
+            "mean_average_precision_decrease": 0.007959,
+            "standard_deviation_across_permutations": 0.001703
+          },
+          {
+            "feature": "profile_standard_deviation",
+            "feature_label": "Profile standard deviation",
+            "mean_average_precision_decrease": 0.006573,
+            "standard_deviation_across_permutations": 0.002531
+          },
+          {
+            "feature": "dm_snr_excess_kurtosis",
+            "feature_label": "Dispersion-measure signal-to-noise ratio excess kurtosis",
+            "mean_average_precision_decrease": 0.004943,
+            "standard_deviation_across_permutations": 0.001471
+          },
+          {
+            "feature": "dm_snr_mean",
+            "feature_label": "Dispersion-measure signal-to-noise ratio mean",
+            "mean_average_precision_decrease": 0.004602,
+            "standard_deviation_across_permutations": 0.002031
+          },
+          {
+            "feature": "dm_snr_skewness",
+            "feature_label": "Dispersion-measure signal-to-noise ratio skewness",
+            "mean_average_precision_decrease": 0.004335,
+            "standard_deviation_across_permutations": 0.002515
+          }
+        ]
+      },
+      "not_used_for_tuning": true,
+      "random_states": {
+        "logistic_regression": 20311093,
+        "random_forest": 20311094
+      },
+      "repeats": 30,
+      "scoring": "average_precision"
+    },
+    "rice": {
+      "computed_on": "fixed held-out test rows after model selection",
+      "limitations": [
+        "repeat spread is not a confidence interval",
+        "correlated features can share or mask importance",
+        "permutation can create feature combinations not common in the source table"
+      ],
+      "models": {
+        "logistic_regression": [
+          {
+            "feature": "convex_area",
+            "feature_label": "Convex area",
+            "mean_average_precision_decrease": 0.650849,
+            "standard_deviation_across_permutations": 0.00458
+          },
+          {
+            "feature": "major_axis_length",
+            "feature_label": "Major axis length",
+            "mean_average_precision_decrease": 0.251018,
+            "standard_deviation_across_permutations": 0.014859
+          },
+          {
+            "feature": "area",
+            "feature_label": "Area",
+            "mean_average_precision_decrease": 0.102356,
+            "standard_deviation_across_permutations": 0.008537
+          },
+          {
+            "feature": "perimeter",
+            "feature_label": "Perimeter",
+            "mean_average_precision_decrease": 0.032271,
+            "standard_deviation_across_permutations": 0.004638
+          },
+          {
+            "feature": "minor_axis_length",
+            "feature_label": "Minor axis length",
+            "mean_average_precision_decrease": 0.022697,
+            "standard_deviation_across_permutations": 0.003648
+          },
+          {
+            "feature": "eccentricity",
+            "feature_label": "Eccentricity",
+            "mean_average_precision_decrease": 0.010375,
+            "standard_deviation_across_permutations": 0.002867
+          },
+          {
+            "feature": "extent",
+            "feature_label": "Extent",
+            "mean_average_precision_decrease": 0.000112,
+            "standard_deviation_across_permutations": 7.7e-05
+          }
+        ],
+        "random_forest": [
+          {
+            "feature": "major_axis_length",
+            "feature_label": "Major axis length",
+            "mean_average_precision_decrease": 0.073807,
+            "standard_deviation_across_permutations": 0.010075
+          },
+          {
+            "feature": "perimeter",
+            "feature_label": "Perimeter",
+            "mean_average_precision_decrease": 0.039134,
+            "standard_deviation_across_permutations": 0.007802
+          },
+          {
+            "feature": "convex_area",
+            "feature_label": "Convex area",
+            "mean_average_precision_decrease": 0.017065,
+            "standard_deviation_across_permutations": 0.004499
+          },
+          {
+            "feature": "eccentricity",
+            "feature_label": "Eccentricity",
+            "mean_average_precision_decrease": 0.009946,
+            "standard_deviation_across_permutations": 0.00286
+          },
+          {
+            "feature": "area",
+            "feature_label": "Area",
+            "mean_average_precision_decrease": 0.008566,
+            "standard_deviation_across_permutations": 0.003814
+          },
+          {
+            "feature": "minor_axis_length",
+            "feature_label": "Minor axis length",
+            "mean_average_precision_decrease": 0.000959,
+            "standard_deviation_across_permutations": 0.00074
+          },
+          {
+            "feature": "extent",
+            "feature_label": "Extent",
+            "mean_average_precision_decrease": 0.000131,
+            "standard_deviation_across_permutations": 0.000525
+          }
+        ]
+      },
+      "not_used_for_tuning": true,
+      "random_states": {
+        "logistic_regression": 20311266,
+        "random_forest": 20311267
+      },
+      "repeats": 30,
+      "scoring": "average_precision"
+    }
+  },
+  "provenance": {
+    "generator": "reproduce.py",
+    "generator_sha256": "a2ad91d1e3f7cf2a15da4fc10246de57b7adda70c1ab2f229f2e51553a75e510",
+    "outputs": {
+      "fig-held-out-permutation-importance.png": "6fd583a56de46b5eb3aa2329369c0a14ece9dc6a6478444a3cdd222c270e404b"
+    },
+    "plotting_library": "matplotlib 3.10.3",
+    "study_id": "uci-htru2-rice-logistic-random-forest-v1",
+    "verification_command": "uv run --frozen reproduce.py --verify"
+  },
+  "schema_version": 1,
+  "title": "Held-out permutation importance",
+  "uncertainty": {
+    "kind": "permutation repeat standard deviation",
+    "not_a_confidence_interval": true,
+    "random_states": {
+      "htru2": {
+        "logistic_regression": 20311093,
+        "random_forest": 20311094
+      },
+      "rice": {
+        "logistic_regression": 20311266,
+        "random_forest": 20311267
+      }
+    },
+    "repeats": 30
+  }
+}
