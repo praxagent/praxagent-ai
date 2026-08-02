@@ -1,0 +1,19 @@
+{{/*
+  One language panel inside {{< code-tabs >}}.
+  Usage:
+    {{< code-tab "Python" >}}
+    ```python
+    ...
+    ```
+    {{< /code-tab >}}
+*/}}
+{{- $label := .Get 0 -}}
+{{- if not $label -}}
+  {{- errorf "code-tab requires a label argument: %s" .Position -}}
+{{- end -}}
+{{- if not .Parent -}}
+  {{- errorf "code-tab must be nested inside code-tabs: %s" .Position -}}
+{{- end -}}
+{{- $tabs := .Parent.Scratch.Get "codeTabs" -}}
+{{- if not $tabs -}}{{- $tabs = slice -}}{{- end -}}
+{{- .Parent.Scratch.Set "codeTabs" ($tabs | append (dict "label" $label "body" .Inner)) -}}

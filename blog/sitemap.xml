@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://praxagent.ai/blog/knowledge-base/deep-dives/</loc>
-    <lastmod>2026-07-21T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/deep-dives/late-chunking/</loc>
     <lastmod>2025-08-02T00:00:00+00:00</lastmod>
@@ -16,16 +16,19 @@
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/glossary/</loc>
   </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/deep-dives/vector-search-math/</loc>
+    <lastmod>2026-07-27T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/deep-dives/logistic-regression-random-forest/</loc>
     <lastmod>2026-07-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/</loc>
-    <lastmod>2026-07-21T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/</loc>
-    <lastmod>2026-07-21T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/</loc>
     <lastmod>2026-07-18T00:00:00+00:00</lastmod>

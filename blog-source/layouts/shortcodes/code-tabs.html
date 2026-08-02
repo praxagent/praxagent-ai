@@ -1,0 +1,54 @@
+{{/*
+  Tabbed multi-language code block.
+  Usage:
+    {{< code-tabs >}}
+    {{< code-tab "Python" >}}
+    ```python
+    ...
+    ```
+    {{< /code-tab >}}
+    {{< code-tab "Go" >}}
+    ```go
+    ...
+    ```
+    {{< /code-tab >}}
+    {{< /code-tabs >}}
+*/}}
+{{- /* Execute children so they populate Scratch. */ -}}
+{{- $_ := .Inner -}}
+{{- $tabs := .Scratch.Get "codeTabs" -}}
+{{- if not $tabs -}}
+  {{- errorf "code-tabs requires at least one code-tab child: %s" .Position -}}
+{{- end -}}
+{{- $id := printf "code-tabs-%d" .Ordinal -}}
+<div class="code-tabs" data-code-tabs id="{{ $id }}">
+  <div class="code-tabs__tablist" role="tablist" aria-label="Code language">
+    {{- range $i, $tab := $tabs -}}
+      {{- $tabId := printf "%s-tab-%d" $id $i -}}
+      {{- $panelId := printf "%s-panel-%d" $id $i -}}
+    <button
+      type="button"
+      class="code-tabs__tab"
+      role="tab"
+      id="{{ $tabId }}"
+      aria-controls="{{ $panelId }}"
+      aria-selected="{{ if eq $i 0 }}true{{ else }}false{{ end }}"
+      tabindex="{{ if eq $i 0 }}0{{ else }}-1{{ end }}"
+    >{{ $tab.label }}</button>
+    {{- end -}}
+  </div>
+  {{- range $i, $tab := $tabs -}}
+    {{- $tabId := printf "%s-tab-%d" $id $i -}}
+    {{- $panelId := printf "%s-panel-%d" $id $i -}}
+  <div
+    class="code-tabs__panel"
+    role="tabpanel"
+    id="{{ $panelId }}"
+    aria-labelledby="{{ $tabId }}"
+    {{- if ne $i 0 }} hidden{{- end -}}
+  >
+{{ $tab.body | $.Page.RenderString }}
+  </div>
+  {{- end -}}
+</div>
+{{- .Scratch.Delete "codeTabs" -}}

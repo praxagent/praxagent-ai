@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620" role="img" aria-labelledby="pi-title pi-desc">
+  <title id="pi-title">If the plane prunes, the MBR also prunes; the MBR can still prune when the plane cannot</title>
+  <desc id="pi-desc">Two rows. Top row: the best-neighbor ball around the query does not reach the vertical split plane, and a tight MBR of far points sits farther to the right of the plane. Both tests prune. Bottom row: the ball crosses the plane, so the plane test cannot prune, but the same tight MBR still lies outside the ball, so the MBR test can prune. Labels sit in margins and do not overlap the points or the ball.</desc>
+  <defs>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:20px;font-weight:700}
+      .h{font-size:14px;font-weight:700}
+      .s{font-size:12px}
+      .m{font-size:11px;fill:#5A544C}
+      .xs{font-size:11px;fill:#5A544C}
+      .row{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+      .plot{fill:#FFFFFF;stroke:#DCD3C6;stroke-width:1}
+      .plane{stroke:#4B6787;stroke-width:2.8}
+      .point{fill:#4B6787;stroke:#FFFFFF;stroke-width:1.4}
+      .query{fill:#A67C52;stroke:#FFFFFF;stroke-width:1.4}
+      .ball{fill:#F7E8D8;fill-opacity:.35;stroke:#A67C52;stroke-width:2;stroke-dasharray:6 4}
+      .mbr{fill:#5A7346;fill-opacity:.16;stroke:#5A7346;stroke-width:2.4}
+      .ok{fill:#EAF1E5;stroke:#5A7346;stroke-width:1.5}
+      .no{fill:#F8E8E6;stroke:#8B3A3A;stroke-width:1.5}
+      .tag{font-size:12px;font-weight:700}
+    </style>
+  </defs>
+
+  <rect width="1000" height="620" fill="#F7F4F0"/>
+  <text class="t title" x="24" y="32">Two pruning questions, one nesting</text>
+  <text class="t m" x="24" y="54">The MBR of a far child always sits on the far side of the plane, so it is never closer than the plane.</text>
+
+  <!-- ROW 1: both prune -->
+  <rect class="row" x="24" y="72" width="952" height="240" rx="12"/>
+  <text class="t h" x="44" y="100">Case 1: the best ball does not reach the plane</text>
+  <text class="t m" x="44" y="120">Plane distance already beats the best neighbor, so both tests prune.</text>
+
+  <rect class="plot" x="44" y="140" width="620" height="150"/>
+  <!-- plane -->
+  <line class="plane" x1="280" y1="140" x2="280" y2="290"/>
+  <text class="t xs" x="280" y="135" text-anchor="middle" fill="#3C5570" font-weight="700">split plane</text>
+
+  <!-- query left, small ball that stops before plane -->
+  <circle class="ball" cx="170" cy="215" r="55"/>
+  <circle class="query" cx="170" cy="215" r="7"/>
+  <text class="t s" x="170" y="195" text-anchor="middle" fill="#A67C52" font-weight="700">q</text>
+  <text class="t xs" x="170" y="280" text-anchor="middle" fill="#A67C52">best ball</text>
+
+  <!-- gap markers -->
+  <line x1="225" y1="215" x2="280" y2="215" stroke="#8B3A3A" stroke-width="2"/>
+  <text class="t xs" x="252" y="205" text-anchor="middle" fill="#8B3A3A" font-weight="700">diff</text>
+
+  <!-- MBR far to the right -->
+  <rect class="mbr" x="520" y="175" width="90" height="70" rx="3"/>
+  <circle class="point" cx="540" cy="200" r="6"/>
+  <circle class="point" cx="560" cy="220" r="6"/>
+  <circle class="point" cx="555" cy="185" r="6"/>
+  <circle class="point" cx="575" cy="205" r="6"/>
+  <text class="t xs" x="565" y="165" text-anchor="middle" fill="#3F5A34" font-weight="700">far MBR</text>
+  <line x1="280" y1="240" x2="520" y2="240" stroke="#5A7346" stroke-width="1.8" stroke-dasharray="4 3"/>
+  <text class="t xs" x="400" y="258" text-anchor="middle" fill="#3F5A34">MBR starts at or beyond the plane</text>
+
+  <!-- decision chips -->
+  <rect class="ok" x="690" y="165" width="260" height="44" rx="8"/>
+  <text class="t tag" x="820" y="192" text-anchor="middle" fill="#3F5A34">Plane: PRUNE</text>
+  <rect class="ok" x="690" y="225" width="260" height="44" rx="8"/>
+  <text class="t tag" x="820" y="252" text-anchor="middle" fill="#3F5A34">MBR: PRUNE too</text>
+
+  <!-- ROW 2: only MBR prunes -->
+  <rect class="row" x="24" y="332" width="952" height="260" rx="12"/>
+  <text class="t h" x="44" y="360">Case 2: the best ball crosses the plane</text>
+  <text class="t m" x="44" y="380">Plane test stays open, but the far points can still sit outside the ball.</text>
+
+  <rect class="plot" x="44" y="400" width="620" height="150"/>
+  <line class="plane" x1="280" y1="400" x2="280" y2="550"/>
+  <text class="t xs" x="280" y="395" text-anchor="middle" fill="#3C5570" font-weight="700">same plane</text>
+
+  <!-- larger ball that crosses plane -->
+  <circle class="ball" cx="200" cy="475" r="95"/>
+  <circle class="query" cx="200" cy="475" r="7"/>
+  <text class="t s" x="200" y="455" text-anchor="middle" fill="#A67C52" font-weight="700">q</text>
+  <line x1="200" y1="475" x2="280" y2="475" stroke="#8B3A3A" stroke-width="2"/>
+  <text class="t xs" x="240" y="465" text-anchor="middle" fill="#8B3A3A" font-weight="700">diff</text>
+
+  <!-- same MBR position, still outside ball (ball right edge ~295, MBR at 520) -->
+  <rect class="mbr" x="520" y="435" width="90" height="70" rx="3"/>
+  <circle class="point" cx="540" cy="460" r="6"/>
+  <circle class="point" cx="560" cy="480" r="6"/>
+  <circle class="point" cx="555" cy="445" r="6"/>
+  <circle class="point" cx="575" cy="465" r="6"/>
+  <text class="t xs" x="565" y="425" text-anchor="middle" fill="#3F5A34" font-weight="700">far MBR</text>
+  <line x1="295" y1="475" x2="520" y2="470" stroke="#5A7346" stroke-width="2"/>
+  <text class="t xs" x="410" y="460" text-anchor="middle" fill="#3F5A34" font-weight="700">box distance &gt; best</text>
+
+  <rect class="no" x="690" y="430" width="260" height="44" rx="8"/>
+  <text class="t tag" x="820" y="457" text-anchor="middle" fill="#8B3A3A">Plane: keep looking</text>
+  <rect class="ok" x="690" y="490" width="260" height="44" rx="8"/>
+  <text class="t tag" x="820" y="517" text-anchor="middle" fill="#3F5A34">MBR: still PRUNE</text>
+</svg>

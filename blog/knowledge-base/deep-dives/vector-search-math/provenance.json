@@ -1,0 +1,44 @@
+{
+  "environment": {
+    "freetype": "2.14.3",
+    "matplotlib": "3.11.1",
+    "matplotlib_backend": "Agg",
+    "numpy": "2.5.1",
+    "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+    "primary_font_file": "DejaVuSans.ttf",
+    "primary_font_sha256": "3fdf69cabf06049ea70a00b5919340e2ce1e6d02b0cc3c4b44fb6801bd1e0d22",
+    "python": "3.13.11",
+    "python_implementation": "CPython"
+  },
+  "figures": [
+    "vector_viz_close.png",
+    "vector_viz_far.png",
+    "curse_of_dimensionality.png",
+    "local_vs_global.png"
+  ],
+  "generator": {
+    "path": "reproduce.py",
+    "regenerate": "uv run --python 3.13.11 --with-requirements requirements.lock reproduce.py",
+    "sha256": "ec655f9316559a9a34719ec730071f125bc2e2d7ca360bc573cadcce4921de12",
+    "verify": "uv run --python 3.13.11 --with-requirements requirements.lock reproduce.py --verify"
+  },
+  "local_bundle": true,
+  "numbers": [
+    {
+      "appears_as": "2,000",
+      "id": "distance-simulation-point-count",
+      "source": "fig-vector-search-teaching.receipt.json",
+      "value": 2000
+    },
+    {
+      "appears_as": "1,999",
+      "id": "distance-simulation-comparison-count",
+      "source": "fig-vector-search-teaching.receipt.json",
+      "value": 1999
+    }
+  ],
+  "receipts": {
+    "fig-vector-search-teaching.receipt.json": "7db1e0b26ff9596f84f132113ff5b4902bd0d3cc60c27385123b84a7ff025a57"
+  },
+  "reproducibility_boundary": "--verify checks the integrity of committed artifacts without recomputing the simulation. Byte-identical PNG regeneration additionally depends on the recorded Python, NumPy, Matplotlib, platform, FreeType, and font-file environment."
+}

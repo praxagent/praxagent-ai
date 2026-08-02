@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="hd-title hd-desc">
+  <title id="hd-title">In low dimensions MBRs can sit apart and prune; in high dimensions they overlap and box distances collapse</title>
+  <desc id="hd-desc">Two panels. Left: a query with a best-neighbor ball and three separated child MBRs in the plane. One box lies outside the ball and is labeled prune; two nearer boxes are labeled visit. Right: a teaching cartoon of high dimension where four large overlapping MBRs all touch the query region, each marked box-dist approximately 0, with a footer saying visit almost every child. The right panel is a cartoon of overlap, not a literal high-dimensional drawing.</desc>
+  <defs>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:20px;font-weight:700}
+      .h{font-size:14px;font-weight:700}
+      .s{font-size:12px}
+      .m{font-size:11px;fill:#5A544C}
+      .xs{font-size:11px;fill:#5A544C}
+      .panel{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+      .plot{fill:#FFFFFF;stroke:#DCD3C6;stroke-width:1}
+      .query{fill:#A67C52;stroke:#FFFFFF;stroke-width:1.5}
+      .ball{fill:#F7E8D8;fill-opacity:.35;stroke:#A67C52;stroke-width:2;stroke-dasharray:6 4}
+      .mbr{fill:#5A7346;fill-opacity:.14;stroke:#5A7346;stroke-width:2.2}
+      .mbr-far{fill:#4B6787;fill-opacity:.10;stroke:#4B6787;stroke-width:2.2}
+      .chip-ok{fill:#EAF1E5;stroke:#5A7346;stroke-width:1.4}
+      .chip-no{fill:#F8E8E6;stroke:#8B3A3A;stroke-width:1.4}
+      .tag{font-size:11px;font-weight:700}
+    </style>
+  </defs>
+
+  <rect width="1000" height="560" fill="#F7F4F0"/>
+  <text class="t title" x="24" y="32">MBR pruning has a ceiling</text>
+  <text class="t m" x="24" y="54">Low-d boxes can sit apart. High-d boxes tend to overlap, so almost nothing prunes.</text>
+
+  <!-- LEFT: low-d success -->
+  <rect class="panel" x="24" y="72" width="460" height="440" rx="12"/>
+  <text class="t h" x="44" y="102">Low dimension: boxes can separate</text>
+  <text class="t m" x="44" y="122">Some children sit outside the best ball and get pruned.</text>
+
+  <rect class="plot" x="50" y="140" width="408" height="280"/>
+
+  <circle class="ball" cx="180" cy="290" r="70"/>
+  <circle class="query" cx="180" cy="290" r="8"/>
+  <text class="t s" x="180" y="270" text-anchor="middle" fill="#A67C52" font-weight="700">q</text>
+
+  <!-- near MBRs overlapping ball -->
+  <rect class="mbr" x="150" y="200" width="90" height="70" rx="4"/>
+  <text class="t xs" x="195" y="192" text-anchor="middle" fill="#3F5A34" font-weight="700">child A</text>
+
+  <rect class="mbr" x="210" y="300" width="85" height="65" rx="4"/>
+  <text class="t xs" x="252" y="375" text-anchor="middle" fill="#3F5A34" font-weight="700">child B</text>
+
+  <!-- far MBR clearly outside -->
+  <rect class="mbr-far" x="360" y="165" width="80" height="70" rx="4"/>
+  <text class="t xs" x="400" y="157" text-anchor="middle" fill="#3C5570" font-weight="700">child C</text>
+
+  <line x1="250" y1="290" x2="360" y2="200" stroke="#8B3A3A" stroke-width="1.8"/>
+  <text class="t xs" x="320" y="235" text-anchor="middle" fill="#8B3A3A" font-weight="700">box dist &gt; best</text>
+
+  <rect class="chip-ok" x="60" y="440" width="120" height="36" rx="8"/>
+  <text class="t tag" x="120" y="462" text-anchor="middle" fill="#3F5A34">visit A, B</text>
+  <rect class="chip-no" x="200" y="440" width="120" height="36" rx="8"/>
+  <text class="t tag" x="260" y="462" text-anchor="middle" fill="#8B3A3A">prune C</text>
+  <text class="t m" x="255" y="495" text-anchor="middle">Pruning removes real work.</text>
+
+  <!-- RIGHT: high-d failure cartoon -->
+  <rect class="panel" x="516" y="72" width="460" height="440" rx="12"/>
+  <text class="t h" x="536" y="102">High dimension: boxes overlap</text>
+  <text class="t m" x="536" y="122">Teaching cartoon: almost every child touches the query.</text>
+
+  <rect class="plot" x="542" y="140" width="408" height="280"/>
+
+  <!-- overlapping large MBRs -->
+  <rect class="mbr" x="570" y="180" width="200" height="160" rx="6"/>
+  <rect class="mbr-far" x="680" y="200" width="200" height="160" rx="6"/>
+  <rect class="mbr" x="620" y="250" width="210" height="140" rx="6"/>
+  <rect class="mbr-far" x="590" y="210" width="180" height="170" rx="6" fill-opacity="0.08"/>
+
+  <circle class="ball" cx="720" cy="290" r="55"/>
+  <circle class="query" cx="720" cy="290" r="8"/>
+  <text class="t s" x="720" y="270" text-anchor="middle" fill="#A67C52" font-weight="700">q</text>
+
+  <text class="t xs" x="620" y="170" fill="#3F5A34" font-weight="700">A</text>
+  <text class="t xs" x="860" y="190" fill="#3C5570" font-weight="700">B</text>
+  <text class="t xs" x="800" y="400" fill="#3F5A34" font-weight="700">C</text>
+  <text class="t xs" x="580" y="390" fill="#3C5570" font-weight="700">D</text>
+
+  <text class="t xs" x="860" y="360" text-anchor="middle" fill="#8B3A3A" font-weight="700">box_dist_sq ~ 0</text>
+  <text class="t xs" x="860" y="376" text-anchor="middle" fill="#8B3A3A">for almost every child</text>
+
+  <rect class="chip-ok" x="560" y="440" width="340" height="36" rx="8"/>
+  <text class="t tag" x="730" y="462" text-anchor="middle" fill="#3F5A34">visit almost every child</text>
+  <text class="t m" x="746" y="495" text-anchor="middle">Full scan plus MBR bookkeeping.</text>
+</svg>
