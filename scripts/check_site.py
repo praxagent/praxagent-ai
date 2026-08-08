@@ -54,6 +54,9 @@ SOCIAL_IMAGE_ALT_FIELDS = (
 SOCIAL_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png"}
 SOCIAL_IMAGE_WIDTH = 1200
 SOCIAL_IMAGE_HEIGHT = 630
+# The public brand is lowercase. The one mixed-case survivor is an executable
+# Python class identifier used by Harbor's Terminal-Bench adapter.
+MIXED_CASE_BRAND_RE = re.compile(r"(?<!prax\.eval\.tb_agent:)PraxAgent")
 SOCIAL_IMAGE_BUNDLE_ROOTS = (
     (
         Path("blog-source/content/posts"),
@@ -453,7 +456,7 @@ def check_brand(errors: list[str]) -> None:
             text = path.read_text(encoding="utf-8")
         except UnicodeDecodeError:
             continue
-        if "PraxAgent" in text:
+        if MIXED_CASE_BRAND_RE.search(text):
             errors.append(
                 f"{path.relative_to(ROOT)}: brand must be lowercase 'praxagent'"
             )

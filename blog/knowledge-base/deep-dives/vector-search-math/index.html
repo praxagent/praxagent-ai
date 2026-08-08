@@ -1195,6 +1195,24 @@ methods such as HNSW or IVF-PQ, not a tighter KD bound.</p>
     <figcaption>Left: when child boxes sit apart, a far box can clear the best ball and be pruned. Right: a teaching cartoon of high dimension, not a literal embedding plot. Boxes swell and overlap, so the query-to-box distance stays near zero for almost every child. Search visits nearly everything and still pays for the MBR tests.</figcaption>
 </figure>
 
+<p><strong>Why do the boxes overlap more as dimension grows?</strong> An MBR is axis-aligned:
+for every coordinate it stores only a min and a max. In two dimensions, a
+local cluster of points can sit in a small rectangle, and a second cluster can
+sit in another rectangle that does not touch the first. Empty corners between
+them give the query ball room to miss a whole child.</p>
+<p>In higher dimension that picture breaks for a simple counting reason. A point
+has \(k\) coordinates. Two points that look &ldquo;nearby&rdquo; in the data can still
+differ a little on many of those coordinates. The axis-aligned box that covers
+even a modest group must therefore stretch almost the full data range on many
+axes at once. Stretch enough axes and the box becomes huge. Two huge boxes
+inside the same bounded domain have little room to avoid each other, so they
+overlap.</p>
+<p>Once most child boxes cover most of the space, the query sits inside or beside
+nearly every box. Then <code>box_dist_sq</code> is near zero for almost every child, the
+prune test almost never fires, and search pays for the MBR arithmetic while
+still visiting nearly the whole tree. Data with low <strong>intrinsic</strong> dimension
+(points that really live on a thin surface inside the high-dimensional room)
+can still keep small boxes. Generic full-dimensional scatter usually cannot.</p>
 <div class="panel definition">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="book-open"></i>

@@ -78,6 +78,9 @@ DANGEROUS_PROTOCOL_RE = re.compile(
     r"(?i)^\s*(?:(?:javascript|vbscript)\s*:|data\s*:\s*text/html(?:[;,]|$))"
 )
 SHORTCODE_RE = re.compile(r"{{\s*[<%]")
+# The public brand is always lowercase. This qualified Python class name is an
+# executable API identifier, not a spelling of the brand, so preserve it.
+MIXED_CASE_BRAND_RE = re.compile(r"(?<!prax\.eval\.tb_agent:)PraxAgent")
 
 # Goldmark is configured with unsafe HTML enabled.  Reject real HTML tags after
 # sanitizing the one known README wrapper/image; angle-bracket placeholders such
@@ -427,6 +430,11 @@ def _sanitize_root_markup(text: str) -> str:
         return f"![{alt}]({encoded_source})"
 
     return ROOT_IMAGE_RE.sub(image_to_markdown, text)
+
+
+def normalize_brand_case(text: str) -> str:
+    """Normalize the public brand without changing the Terminal-Bench class path."""
+    return MIXED_CASE_BRAND_RE.sub("praxagent", text)
 
 
 def validate_safe_markdown(text: str, source_path: PurePosixPath) -> None:
@@ -858,6 +866,7 @@ def import_documentation(
                 original = source_file.read_text(encoding="utf-8")
             except UnicodeError as error:
                 raise ImportFailure(f"{document.source_path}: documentation must be UTF-8") from error
+            original = normalize_brand_case(original)
             if document.source_path == PurePosixPath("README.md"):
                 original = _sanitize_root_markup(original)
             validate_safe_markdown(original, document.source_path)

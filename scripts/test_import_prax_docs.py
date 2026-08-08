@@ -108,6 +108,11 @@ Checkpoint the state.
             "# Setup\n\nSee [Quick Start](#quick-start) in the project overview.\n",
         )
         self._write(
+            "docs/guides/terminal-bench.md",
+            "# Terminal Bench\n\n**PraxAgent** is the benchmark label.\n\n"
+            "```bash\nharbor run -a prax.eval.tb_agent:PraxAgent\n```\n",
+        )
+        self._write(
             "docs/infrastructure/memory.md",
             "# Memory\n\n[Decay](#memory-decay-ebbinghaus-forgetting-curve)\n\n"
             "## Memory Decay (Dual: Time + Interaction)\n",
@@ -291,6 +296,15 @@ class ImportPraxDocsTests(unittest.TestCase):
             "[Decay](/blog/knowledge-base/prax/infrastructure/memory/#memory-decay-dual-time--interaction)",
             memory,
         )
+
+    def test_normalizes_brand_but_preserves_terminal_bench_class_path(self) -> None:
+        self.import_docs()
+        terminal_bench = (self.content / "guides/terminal-bench.md").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("**praxagent** is the benchmark label.", terminal_bench)
+        self.assertIn("prax.eval.tb_agent:PraxAgent", terminal_bench)
+        self.assertIsNone(importer.MIXED_CASE_BRAND_RE.search(terminal_bench))
 
     def test_rejects_dangerous_html_without_disturbing_atomic_outputs(self) -> None:
         (self.content / "stale.md").parent.mkdir(parents=True)
