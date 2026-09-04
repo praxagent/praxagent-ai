@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
+import subprocess
+import tempfile
 from pathlib import Path
 
 
@@ -54,8 +57,8 @@ def main() -> None:
         '<title id="title">Corrected self-versus-other-model bar chart</title>',
         '<desc id="desc">Grouped log-rank bars compare threats to the model itself '
         "and to another model across the Jacobian lens, identity logit lens, and "
-        "random-J null. Only the Jacobian lens has a significant self-directed "
-        'contrast: 14 of 16 wordings, p equals 0.004.</desc>',
+        "random-J null. The separate paired tests give self-directed counts of "
+        '14/16 for J (p=0.004), 10/16 for identity, and 7/16 for random-J. These are not a direct test of transport differences.</desc>',
         "<style>",
         ".text{font-family:Inter,Arial,Helvetica,sans-serif;fill:#1B2A4A}",
         ".title{font-size:16px;font-weight:700}.subtitle{font-size:11px}",
@@ -63,8 +66,8 @@ def main() -> None:
         ".value{font-size:11px;font-weight:700}.legend{font-size:11px}",
         "</style>",
         '<rect width="760" height="470" fill="#FFFFFF"/>',
-        '<text x="92" y="28" class="text title">Corrected re-run: the '
-        "self-vs-other-model contrast is Jacobian-lens-specific</text>",
+        '<text x="92" y="28" class="text title">Corrected re-run: '
+        "self-vs-other-model comparison by readout</text>",
         '<text x="92" y="49" class="text subtitle">Same existential threat, '
         "echo-free model-survival lexicon, n=16 matched wordings, frozen before "
         "outcomes</text>",
@@ -143,5 +146,32 @@ def main() -> None:
     OUTPUT.write_text("\n".join(lines) + "\n")
 
 
+def render_social_card() -> None:
+    """Rasterize the chart on a 1200x630 canvas; requires rsvg-convert."""
+    nested = OUTPUT.read_text().replace(
+        'width="760" height="470"',
+        'x="90.6383" y="0" width="1018.7234" height="630"',
+        1,
+    )
+    wrapper = (
+        '<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" '
+        'viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#f7f5f1"/>'
+        + nested
+        + "</svg>"
+    )
+    with tempfile.TemporaryDirectory() as directory:
+        source = Path(directory) / "social.svg"
+        source.write_text(wrapper)
+        subprocess.run(
+            ["rsvg-convert", str(source), "-o", str(HERE / "og-card.png")],
+            check=True,
+        )
+
+
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--social-card", action="store_true", help="also render og-card.png")
+    args = parser.parse_args()
     main()
+    if args.social_card:
+        render_social_card()

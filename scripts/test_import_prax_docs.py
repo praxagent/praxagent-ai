@@ -166,6 +166,32 @@ Checkpoint the state.
         run("git", "commit", "-m", message, cwd=self.root)
 
 
+class SummaryTests(unittest.TestCase):
+    def test_preserves_technical_terms_in_documentation_summaries(self) -> None:
+        cases = (
+            ("Registered in one place — `prax/config.py` — for every provider.",
+             "Registered in one place — prax/config.py — for every provider."),
+            ("Settings live in `config.py` and use Pydantic (`Settings`). Copy `.env-example`.",
+             "Settings live in config.py and use Pydantic (Settings). Copy .env-example."),
+            ("Set [`OLLAMA_BASE_URL`](../config.py) for **local models**.",
+             "Set OLLAMA_BASE_URL for local models."),
+            ("The literal ``some_`code`_value`` is retained.",
+             "The literal some_`code`_value is retained."),
+        )
+        for body, expected in cases:
+            with self.subTest(body=body):
+                self.assertEqual(importer.derive_summary(body, "Configuration"), expected)
+
+    def test_skips_fenced_examples_and_navigation_before_summary(self) -> None:
+        body = "[← Guides](README.md)\n\n```bash\nexport REAL_KEY=example\n```\n\nUse `PROXY_AUTH_TOKEN` to authenticate.\n"
+        self.assertEqual(importer.derive_summary(body, "Proxy"),
+                         "Use PROXY_AUTH_TOKEN to authenticate.")
+
+    def test_safety_scanner_still_ignores_literal_code_examples(self) -> None:
+        body = "The string `<script>` is literal.\n\n```html\n<script>example</script>\n```\n"
+        self.assertNotIn("<script>", importer._without_code(body))
+
+
 class ImportPraxDocsTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()

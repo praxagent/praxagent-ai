@@ -32,7 +32,7 @@
   <rect class="hbar" x="52" y="160" width="16" height="16" rx="2"/>
   <rect class="hbar" x="52" y="180" width="16" height="16" rx="2"/>
   <text x="60" y="214" text-anchor="middle" class="t m">h</text>
-  <text x="60" y="228" text-anchor="middle" class="t m">(d_model)</text>
+  <text x="60" y="228" text-anchor="middle" class="t m">(d<tspan baseline-shift="sub" font-size="80%">model</tspan>)</text>
 
   <path class="arr" d="M84 158 H120"/>
 
@@ -50,7 +50,7 @@
   <rect class="slotOn" x="156" y="164" width="14" height="14" rx="2"/>
   <rect class="slotOn" x="176" y="164" width="14" height="14" rx="2"/>
   <text x="163" y="214" text-anchor="middle" class="t m">N feature slots</text>
-  <text x="163" y="228" text-anchor="middle" class="t m">(N &gt;&gt; d_model)</text>
+  <text x="163" y="228" text-anchor="middle" class="t m">(N ≫ d<tspan baseline-shift="sub" font-size="80%">model</tspan>)</text>
 
   <text x="129" y="258" text-anchor="middle" class="t m">deliberately redundant:</text>
   <text x="129" y="272" text-anchor="middle" class="t m">more slots than dimensions</text>
@@ -80,7 +80,7 @@
   <text x="360" y="214" text-anchor="middle" class="t m">for any one token,</text>
   <text x="360" y="228" text-anchor="middle" class="t m">almost every slot stays off</text>
 
-  <text x="360" y="258" text-anchor="middle" class="t m">sparsity penalty (L1, caps,</text>
+  <text x="360" y="258" text-anchor="middle" class="t m">sparsity penalty (L<tspan baseline-shift="sub" font-size="80%">1</tspan>, caps,</text>
   <text x="360" y="272" text-anchor="middle" class="t m">thresholds) pushes f toward 0</text>
 
   <!-- Panel 3: Reconstruct -->

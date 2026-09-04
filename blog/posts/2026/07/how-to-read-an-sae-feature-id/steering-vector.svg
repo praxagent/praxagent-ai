@@ -30,7 +30,7 @@
   </defs>
 
   <text x="24" y="28" class="t b">Steering in activation space (schematic)</text>
-  <text x="24" y="48" class="t m">h' = h + alpha * d_i  |  usually no renormalize step — ||h'|| can grow or shrink</text>
+  <text x="24" y="48" class="t m">h′ = h + αd<tspan baseline-shift="sub" font-size="80%">i</tspan>  |  usually no renormalization step — ‖h′‖ can grow or shrink</text>
 
   <rect class="panel" x="24" y="64" width="440" height="230" rx="10"/>
 
@@ -47,16 +47,16 @@
 
   <!-- alpha d_i: from tip of h, mostly up -->
   <path class="dvec" d="M250 210 L310 110"/>
-  <text x="318" y="168" class="t s" fill="#A67C52">alpha d_i</text>
+  <text x="318" y="168" class="t s" fill="#A67C52">αd<tspan baseline-shift="sub" font-size="80%">i</tspan></text>
 
   <!-- h': diagonal result; label close to the shaft -->
   <path class="hpvec" d="M70 260 L310 110"/>
-  <text x="198" y="178" class="t s" fill="#2A4058">h'</text>
+  <text x="198" y="178" class="t s" fill="#2A4058">h′</text>
 
   <circle cx="250" cy="210" r="3.5" fill="#4B6787"/>
   <circle cx="310" cy="110" r="3.5" fill="#2A4058"/>
 
-  <text x="90" y="292" class="t m">Tip of h, then add the steering push, lands at h'</text>
+  <text x="90" y="292" class="t m">Tip of h, then add the steering push, lands at h′</text>
 
   <rect class="panel" x="480" y="64" width="216" height="230" rx="10"/>
   <text x="498" y="92" class="t b">What moves</text>
@@ -65,13 +65,13 @@
   <text x="522" y="124" class="t s">h = current residual</text>
 
   <rect class="chip2" x="498" y="148" width="14" height="14" rx="3"/>
-  <text x="522" y="160" class="t s">alpha d_i = steering</text>
+  <text x="522" y="160" class="t s">αd<tspan baseline-shift="sub" font-size="80%">i</tspan> = steering</text>
   <text x="522" y="176" class="t m">push for feature i</text>
 
   <rect x="498" y="198" width="14" height="14" rx="3" fill="#2A4058"/>
-  <text x="522" y="210" class="t s">h' = steered state</text>
+  <text x="522" y="210" class="t s">h′ = steered state</text>
 
-  <text x="498" y="244" class="t m">No normalize in the</text>
+  <text x="498" y="244" class="t m">No normalization in the</text>
   <text x="498" y="260" class="t m">basic formula — length</text>
-  <text x="498" y="276" class="t m">of h' usually changes.</text>
+  <text x="498" y="276" class="t m">of h′ usually changes.</text>
 </svg>

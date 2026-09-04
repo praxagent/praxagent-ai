@@ -37,6 +37,7 @@ PUBLIC_DIRECTORIES = (
     "internships",
     "methods",
     "research",
+    "tippytip",
     "work",
 )
 

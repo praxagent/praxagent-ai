@@ -21,6 +21,7 @@ REQUIRED_PATHS = (
     "CNAME",
     "index.html",
     "work/index.html",
+    "tippytip/privacy/index.html",
     "research/index.html",
     "blog/index.html",
     "blog/search/index.html",

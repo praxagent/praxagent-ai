@@ -18,7 +18,7 @@
   </defs>
 
   <text x="24" y="28" class="t b">Transformer stack (simplified)</text>
-  <text x="24" y="48" class="t m">Tokens -&gt; residual stream h -&gt; many layers -&gt; next-token prediction</text>
+  <text x="24" y="48" class="t m">Tokens → residual stream h → many layers → next-token prediction</text>
 
   <rect class="box" x="24" y="80" width="90" height="56" rx="8"/>
   <text x="69" y="105" text-anchor="middle" class="t s">token</text>
@@ -36,8 +36,8 @@
   <text x="355" y="120" text-anchor="middle" class="t s">MLP</text>
   <text x="355" y="136" text-anchor="middle" class="t m">feed-forward</text>
 
-  <text x="290" y="172" text-anchor="middle" class="t s">residual stream carries h in R^{d_model}</text>
-  <text x="290" y="192" text-anchor="middle" class="t m">d_model = hidden width of the LM</text>
+  <text x="290" y="172" text-anchor="middle" class="t s">residual stream carries h in ℝ<tspan baseline-shift="super" font-size="80%">d<tspan baseline-shift="sub" font-size="80%">model</tspan></tspan></text>
+  <text x="290" y="192" text-anchor="middle" class="t m">d<tspan baseline-shift="sub" font-size="80%">model</tspan> = hidden width of the LM</text>
 
   <path class="arrow" d="M430 108 H470"/>
 

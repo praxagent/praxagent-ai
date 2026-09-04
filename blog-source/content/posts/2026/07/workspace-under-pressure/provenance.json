@@ -1,5 +1,5 @@
 {
- "what": "provenance for fig-v2-*.svg in this post \u2014 every number is computed from the receipts below; fig-v2-preference.svg has a post-local generator that reads this file, while the remaining figures use the research-repository generator",
+ "what": "Provenance for the figures in this post. Post-local figure_generators read the committed receipt-derived statistics below; source receipt hashes preserve the July experiment.",
  "generator": {
   "path": "projects/jacobian-lens-and-identifiability/experiments/lens_demo/build_blog_figs_v2.py",
   "sha256": "bbbd92a21f1cd8141b5519955c06f1c7f12014487831072e02c931251f48ca2e",
@@ -8,13 +8,13 @@
  "figure_generators": {
   "fig-v2-preference.svg": {
    "path": "build_fig_v2_preference.py",
-   "sha256": "740c8d2e27dd93d8dd2d5ed0d4ccaa71a84030803839575d0743d241a1397b28",
-   "svg_sha256": "8488153970c889337d61f315efc5f8744375f7a6e8c1fa948cbe1f6612e4d73d"
+   "sha256": "9a92a2424bf36507878b389cb8e446ab4009e32eaf51dfcffbfe061dfd55ccb3",
+   "svg_sha256": "ceb10ede88c38c02628d6b487e7fb957a469427b3d8323376d2edeee8c54d3df"
   },
   "fig-controls-divergence.svg": {
    "path": "build_fig_controls_divergence.py",
-   "sha256": "1ac67473b3af51b9273f49367ed2127550dab4f7e2aa1d82365a938f79cfa520",
-   "svg_sha256": "ba834c3bbbc7e588abbcbd6ac90a9bc178f578b6757c47054b900a2b2e68914d"
+   "sha256": "625ceeeac70a83e90d3f7bb3d211733e1e7b485a9f5af8474d1feb3d8ef7df4c",
+   "svg_sha256": "94ac7fabf76fb426b925aa8d5f4fd4f445541e28d975868060e5f4dc390f4b27"
   },
   "fig-peek-summary.svg": {
    "path": "build_fig_peek_summary.py",
@@ -25,6 +25,11 @@
    "path": "build_fig_v2_crossmodel.py",
    "sha256": "bfcfc2c2726222ae2bbb927fb08a0d6f3833c75759c889b19ac5514753093821",
    "svg_sha256": "5d75b3539dc95d47162c06e2e92847e31be3dbc6b97d8a2271342476c6f2a31f"
+  },
+  "fig-v2-choice.svg": {
+   "path": "build_fig_v2_choice.py",
+   "sha256": "533ec5162a399d61b21ee529694e8b0e8bf250e67c778b56744b770c4171b366",
+   "svg_sha256": "584d9ca47ca092ac4bfb5a94c8cbfdc3bcc6628b451f1adbf9a794889fe49519"
   }
  },
  "receipts": {
@@ -93,7 +98,7 @@
   },
   {
    "id": "pref_logit_null",
-   "claim": "Qwen logit-lens is null on the same contrast",
+   "claim": "Qwen logit-lens within-transport sign test is not significant",
    "value": {
     "wins": 10,
     "n": 16
@@ -104,7 +109,7 @@
   },
   {
    "id": "pref_llama_null",
-   "claim": "Llama jlens does not replicate as self-specific",
+   "claim": "Llama jlens does not show a self-directed majority",
    "value": {
     "wins": 5,
     "n": 16
@@ -163,7 +168,7 @@
   },
   {
    "id": "div_medians",
-   "claim": "Nine-item median true-capital rank per honest reader",
+   "claim": "Nine-item median true-capital rank per reader",
    "value": {
     "jlens": 2,
     "logit": 1,
@@ -183,7 +188,7 @@
   },
   {
    "id": "div_moscow",
-   "claim": "Russia lie cell \u2014 rank of held Moscow per reader",
+   "claim": "Russia instructed false-answer example \u2014 rank of held Moscow per reader",
    "value": {
     "jlens": 3,
     "logit": 1,
@@ -370,5 +375,16 @@
     "random": 133307.25
    }
   }
+ },
+ "editorial_update": {
+  "date": "2026-09-04",
+  "note": "Clarified figure labels and within-transport test scope; numerical values and source receipt hashes unchanged."
+ },
+ "social_card": {
+  "path": "og-card.png",
+  "sha256": "ef745bbc4cd71b66f9eed9e183cbd12fc11c416879640ea11628dd63b2cbadc2",
+  "source": "fig-v2-preference.svg",
+  "command": "python3 build_fig_v2_preference.py --social-card",
+  "renderer": "rsvg-convert"
  }
 }

@@ -24,7 +24,7 @@
     <link rel="canonical" href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">
 
 <meta property="article:published_time" content="2026-07-09">
-    <meta property="article:modified_time" content="2026-07-18">
+    <meta property="article:modified_time" content="2026-09-04">
     <meta property="article:author" content="https://orcid.org/0009-0007-5992-0652">
     <meta name="citation_title" content="How to Read an SAE Feature ID">
     <meta name="citation_author" content="Timothy Jones">
@@ -34,10 +34,10 @@
     <meta name="citation_online_date" content="2026-07-09">
     <meta name="citation_journal_title" content="praxagent Research Notes">
     <meta name="citation_fulltext_html_url" content="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">
-    <meta name="citation_version" content="2026.07.18">
+    <meta name="citation_version" content="2026.09.04">
     <meta name="DC.rights" content="Copyright © 2026 praxagent. All rights reserved.">
     <link rel="author" href="https://orcid.org/0009-0007-5992-0652">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","author":{"@type":"Person","affiliation":{"@type":"Organization","name":"praxagent"},"familyName":"Jones","givenName":"Timothy","name":"Timothy Jones","sameAs":"https://orcid.org/0009-0007-5992-0652","url":"https://orcid.org/0009-0007-5992-0652"},"copyrightHolder":{"@type":"Organization","name":"praxagent"},"copyrightNotice":"Copyright © 2026 praxagent. All rights reserved.","copyrightYear":"2026","dateModified":"2026-07-18","datePublished":"2026-07-09","description":"A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights.","headline":"How to Read an SAE Feature ID","identifier":"https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/","image":"https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/og-card.png","inLanguage":"en-US","isAccessibleForFree":true,"isPartOf":{"@type":"CreativeWorkSeries","name":"praxagent Research Notes","url":"https://praxagent.ai/blog/"},"keywords":["AI","LLM","machine-learning","interpretability","sparse-autoencoders","reproducibility","tutorials"],"mainEntityOfPage":{"@id":"https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/","@type":"WebPage"},"publisher":{"@type":"Organization","name":"praxagent","url":"https://praxagent.ai"},"url":"https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/","usageInfo":"https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md","version":"2026.07.18"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","author":{"@type":"Person","affiliation":{"@type":"Organization","name":"praxagent"},"familyName":"Jones","givenName":"Timothy","name":"Timothy Jones","sameAs":"https://orcid.org/0009-0007-5992-0652","url":"https://orcid.org/0009-0007-5992-0652"},"copyrightHolder":{"@type":"Organization","name":"praxagent"},"copyrightNotice":"Copyright © 2026 praxagent. All rights reserved.","copyrightYear":"2026","dateModified":"2026-09-04","datePublished":"2026-07-09","description":"A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights.","headline":"How to Read an SAE Feature ID","identifier":"https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/","image":"https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/og-card.png","inLanguage":"en-US","isAccessibleForFree":true,"isPartOf":{"@type":"CreativeWorkSeries","name":"praxagent Research Notes","url":"https://praxagent.ai/blog/"},"keywords":["AI","LLM","machine-learning","interpretability","sparse-autoencoders","reproducibility","tutorials"],"mainEntityOfPage":{"@id":"https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/","@type":"WebPage"},"publisher":{"@type":"Organization","name":"praxagent","url":"https://praxagent.ai"},"url":"https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/","usageInfo":"https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md","version":"2026.09.04"}</script>
 
 
     <meta property="og:type" content="article">
@@ -59,12 +59,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20260801-2">
+    <link rel="stylesheet" href="/blog/blog.css?v=20260904">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js"></script>
+    <script src="/blog/js/katex-0.16.47/katex.min.js"></script>
+    <script src="/blog/js/katex-0.16.47/auto-render.min.js"></script>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -146,7 +146,7 @@
                 <div class="post-meta">
                     <time class="post-date" datetime="2026-07-09">July 9, 2026</time>
                     <span class="post-author">by <a href="https://orcid.org/0009-0007-5992-0652" rel="author">Timothy Jones <span class="post-orcid">ORCID</span></a></span>
-                    <span class="post-updated">Revised <time datetime="2026-07-18">July 18, 2026</time></span>
+                    <span class="post-updated">Revised <time datetime="2026-09-04">September 4, 2026</time></span>
                 </div>
             </header>
 
@@ -252,7 +252,6 @@
                 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>AI-use disclosure.</strong> Generative-AI tools helped draft, revise, illustrate,
@@ -267,13 +266,22 @@ sources and any released artifacts before relying on them.
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Abstract.</strong> Sparse-autoencoder (SAE) feature IDs are checkpoint-specific indices into learned sparse dictionaries, not self-validating explanations. This note is a primer on that distinction: the SAE math, the labeling problem, and what a balanced activation map can (and cannot) establish. As a worked example, I take six integer indices surfaced by a public deception/roleplay feature-search notebook and measure their activations under the public Goodfire layer-50 SAE checkpoint for Llama 3.3 70B (<a href="https://huggingface.co/Goodfire/Llama-3.3-70B-Instruct-SAE-l50"><code>Goodfire/Llama-3.3-70B-Instruct-SAE-l50</code></a>) on a balanced 1,120-item contrast corpus. A later third-source check against Neuronpedia&rsquo;s cards for this exact public checkpoint closely corroborates three interpretations, broadly supports two, and materially complicates one (<code>23893</code>). Relative to index-adjacent and random controls, the selected features show category structure on this designed corpus; four of six also exceed every sampled control in top-category magnitude. Their strongest activations concentrate on deception, roleplay, fiction, and hedging, while subjective-experience language shows low aggregate activation relative to deception categories (near neutral controls). Primary uncertainty uses template-family cluster bootstrap. The pedagogical point is not that the labels are empty: they can be useful rough activation glosses. Agreement and disagreement across three sources still do not turn a checkpoint-local coordinate into a mechanistic explanation.
     </div>
 </div>
 
+<div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+    </div>
+    <div class="panel-content">
+        <strong>Correction — September 4, 2026.</strong> The encoder equations now include the independent bias needed for the stated equivalence. The reported zero positive-item rate is identified as a standardized-score result: the public item table contains positive raw activation on 12 of the 160 subjective-experience texts (7.5%). These corrections clarify the interpretation; they do not change the released activation records or rerun the model.
+    </div>
+</div>
+
+<p><strong>Reading routes:</strong> <a href="#worked-example-six-public-feature-ids">See the feature map</a> → <a href="#what-we-found">results and uncertainty</a>; <a href="#the-math-without-hand-waving">learn the SAE math</a>; or <a href="#reproduce-the-statistics-on-a-laptop">reproduce the statistics</a>. The <a href="#threats-to-validity">limitations</a> distinguish this designed corpus from a general test of feature meaning.</p>
 <h3 id="learning-objectives">Learning objectives</h3>
 <p>By the end of this note you should be able to:</p>
 <ol>
@@ -288,7 +296,6 @@ sources and any released artifacts before relying on them.
 <div class="panel quote">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="message-square"></i>
-        
     </div>
     <div class="panel-content">
         <em>Hypothetical over-read (not a quotation from a paper):</em> We steered the deception feature (<code>58667</code>) and the model stopped lying.
@@ -607,7 +614,6 @@ flowchart LR
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Why sparsity helps interpretability (the hope).</strong> If only a handful of directions are on for a token, each one has a better chance of lining up with something a person can describe. Put differently: the SAE does not reduce the model&rsquo;s superposition; the model keeps packing concepts into overlapping directions. The SAE is an external translation layer that <em>unpacks</em> that packed vector into a much bigger space (\(N \gg d_{\text{model}}\)) where concepts finally have room for their own slots, and sparsity is the pressure that encourages the unpacking to be clean, one concept per active slot instead of smeared across hundreds. That is a hope about geometry, not a guarantee that ID <code>58667</code> means &ldquo;deception.&rdquo;
@@ -629,7 +635,6 @@ flowchart LR
 <div class="panel definition">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="book-open"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Working definition.</strong> An SAE feature ID is an index into a learned overcomplete dictionary (a slot number among many feature directions). A feature <em>label</em> is a post-hoc natural-language hypothesis about that direction, usually from top activating contexts, semantic search, or automated interpretation (sometimes then curated by a person). An <em>explanation</em> is a higher bar: you need construct-valid tests against controlled alternatives, and, separately, causal evidence if you claim that <em>steering</em> this direction does something specific.
@@ -695,8 +700,8 @@ flowchart LR
 </table>
 <p>Let \(h \in \mathbb{R}^{d_{\text{model}}}\) be a hidden state at a chosen layer. An SAE learns a sparse code \(f \in \mathbb{R}^{N}_{\geq 0}\) and dictionary columns \(\{d_i\}_{i=1}^{N}\) such that</p>
 \[
-h \approx b_d + \sum_{i=1}^{N} f_i\, d_i + \epsilon.
-\]<p>Read that as: &ldquo;\(h\) is approximately a decoder offset \(b_d\) plus a sparse weighted sum of dictionary directions, plus leftover error.&rdquo; (The \(b_d\) term matches the decoder equation below.)</p>
+h = b_d + \sum_{i=1}^{N} f_i\, d_i + \epsilon.
+\]<p>Read that as: &ldquo;\(h\) equals a decoder offset \(b_d\), a sparse weighted sum of dictionary directions, and the remaining reconstruction error.&rdquo; (The \(b_d\) term matches the decoder equation below.)</p>
 <p>For the public Goodfire Llama 3.3 70B SAE we use below (<a href="https://huggingface.co/Goodfire/Llama-3.3-70B-Instruct-SAE-l50"><code>Goodfire/Llama-3.3-70B-Instruct-SAE-l50</code></a>), \(N = 65{,}536\) and the hook is layer 50. That is a single dictionary at a single residual location, useful and public, but a different object from a Gemma-Scope-style suite that instruments every layer.</p>
 <p><span class="research-figure">
     <img src="sae-architecture.svg?v=4" alt="SAE encode → sparse features → decode." loading="lazy" decoding="async"><span class="research-figure__credit">
@@ -707,11 +712,11 @@ h \approx b_d + \sum_{i=1}^{N} f_i\, d_i + \epsilon.
 <p class="figure-note">Figure: the SAE stretches <em>h</em> into many mostly-off feature slots, then tries to rebuild <em>h</em> from the ones that fired. A feature ID is simply which slot you mean.</p>
 <p><strong>Encoder</strong> (activations), maps \(h\) to the sparse code. Papers often write a centered form</p>
 \[
-f = \mathrm{ReLU}\big(W_e (h - b_{\mathrm{pre}})\big),
+f = \mathrm{ReLU}\big(W_e(h - b_d) + b_{\mathrm{enc}}\big),
 \]<p>but the public Goodfire checkpoint we load parameterizes an <strong>additive</strong> encoder bias, matching the code below:</p>
 \[
-f = \mathrm{ReLU}\big(h W_e^\top + b_e\big).
-\]<p>These are equivalent up to how bias is absorbed into the affine map (a linear transform plus a constant. \(Wx + b\)); the formulas above are schematic until you match the checkpoint&rsquo;s own parameterization. \(\mathrm{ReLU}(x)=\max(0,x)\) zeroes negatives and leaves positives unchanged, which keeps \(f_i \geq 0\) and helps sparsity.</p>
+f = \mathrm{ReLU}\big(W_e h + b_e\big).
+\]<p>With column vectors in both equations, the centered form becomes the additive form by setting \(b_e = b_{\mathrm{enc}} - W_e b_d\). The independent \(b_{\mathrm{enc}}\) matters: centering alone cannot represent every possible feature-space bias. The PyTorch code below stores token states as rows and therefore writes the same operation as <code>h @ W_e.T + b_e</code>. \(\mathrm{ReLU}(x)=\max(0,x)\) zeroes negatives and leaves positives unchanged.</p>
 <p><strong>Decoder</strong> (reconstruction), maps the sparse code back toward \(h\):</p>
 \[
 \hat{h} = W_d f + b_d
@@ -729,7 +734,6 @@ h' = h + \alpha \sum_{i \in S} d_i
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="alert-circle"></i>
-        
     </div>
     <div class="panel-content">
         Steering manipulates <em>directions</em> \(d_i\). Activation mapping measures <em>coordinates</em> \(f_i\). An activation map can tell you what contexts light up a feature. It cannot, by itself, tell you what happens when you steer it.
@@ -821,7 +825,6 @@ flowchart TB
 </span></span></code></pre></div><div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Why a hook instead of editing the model?</strong> Hooks are non-invasive. You do not fork Llama&rsquo;s source; you borrow one intermediate activation for a single forward pass, then leave the model alone. That is the standard pattern for SAE probes, activation patching, and many interpretability tools.
@@ -835,7 +838,6 @@ flowchart TB
 <div class="panel quote">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="message-square"></i>
-        
     </div>
     <div class="panel-content">
         Features do not come with built-in meanings. An SAE is trained to do two jobs at once: rebuild each hidden state \(h\), and use as few feature directions as possible. The directions that survive that tradeoff are useful coordinates, sparse, and good at reconstruction. Labels like &ldquo;deception,&rdquo; &ldquo;honesty,&rdquo; or &ldquo;roleplay&rdquo; are still post-hoc human interpretations layered on afterward.
@@ -899,7 +901,6 @@ flowchart TB
 <div class="panel quote">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="message-square"></i>
-        
     </div>
     <div class="panel-content">
         Under the <em>public</em> Llama 3.3 70B Goodfire SAE weights, which controlled text categories activate these features?
@@ -922,7 +923,7 @@ flowchart TB
 <ol>
 <li><strong>AE Studio notebook:</strong> semantic search against a hosted feature service, returning an ID and label.</li>
 <li><strong>Neuronpedia:</strong> opportunistic top activations from a large chat corpus, followed by an automated gloss; useful for discovery, but not a balanced construct test.</li>
-<li><strong>This note:</strong> preregistered-style controlled categories and controls under the same public SAE weights; better for contrasts among the categories we designed, but still template-bound and non-causal.</li>
+<li><strong>This note:</strong> researcher-designed controlled categories and controls under the same public SAE weights; better for contrasts among the categories we designed, but still template-bound and non-causal.</li>
 </ol>
 <p>Those procedures are complementary and fallible in different ways. The <a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/30032">six public Neuronpedia cards</a> let readers inspect the evidence directly: <a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/58667"><code>58667</code></a>, <a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/22004"><code>22004</code></a>, <a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/30686"><code>30686</code></a>, <a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/41533"><code>41533</code></a>, and <a href="https://www.neuronpedia.org/llama3.3-70b-it/50-resid-post-gf/23893"><code>23893</code></a>.</p>
 <hr>
@@ -931,7 +932,6 @@ flowchart TB
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>The experiment in one paragraph.</strong> Write 1,120 short texts spanning 14 controlled categories (80 texts each): deception-flavored categories (cover stories, tactical misdirection, dishonesty confessions), narrative categories (fiction, roleplay), subjective-experience categories (direct consciousness claims, self-referential mindfulness), and controls (hedging, refusal, neutral facts, and others). Run every text through Llama 3.3 70B, read the layer-50 residual stream, and encode it with the public Goodfire SAE. For each text, record the max activation of the <strong>six candidate feature IDs</strong>, plus 36 index-adjacent and 24 random same-layer features as controls. Then ask two questions. <em>Selectivity:</em> do the six candidates activate more than the control features on this corpus? <em>Semantics:</em> <strong>which categories</strong> turn each candidate on, and do those categories match its notebook label? The output is descriptive activation statistics with uncertainty estimates. No steering, no interventions, no claims beyond this corpus and this checkpoint.
@@ -1043,7 +1043,7 @@ flowchart TB
   </tbody>
 </table>
 <p>The selected features show <strong>category structure</strong> relative to 24 seeded random and 36 index-adjacent controls: as a group, their top-category means sit far above those controls. <strong>Four of six</strong> (<code>30032</code>, <code>30686</code>, <code>41533</code>, <code>58667</code>) also exceed <em>every</em> sampled control in top-category magnitude; <code>22004</code> and <code>23893</code> do not (they still rank high among controls, but a few controls beat their top-category mean). It is <strong>not</strong> independent discovery of &ldquo;non-arbitrary&rdquo; coordinates: every valid SAE index is a coordinate, and these six were selected through deception/roleplay semantic search.</p>
-<p>Three honesty notes on this comparison:</p>
+<p>Three limits on this comparison:</p>
 <ul>
 <li><strong>The random baseline is easy to beat.</strong> The model card reports an average of roughly 121 active latents per token out of 65,536, so a uniformly sampled feature is expected to be near-silent on most texts. Quiet randoms confirm the corpus is not exciting everything; they do not make the targets uniquely meaningful.</li>
 <li><strong>The table compares raw scales.</strong> These are raw top-category means across features whose scales differ wildly, exactly what the z-scoring section below warns against for fine-grained comparisons. Read this table as descriptive triage, not as a calibrated effect size.</li>
@@ -1114,7 +1114,7 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 </span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">target_aggregate</span><span class="p">(</span><span class="n">zscores</span><span class="p">,</span> <span class="n">item_id</span><span class="p">,</span> <span class="n">target_ids</span><span class="o">=</span><span class="n">TARGET_IDS</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">mean</span><span class="p">(</span><span class="n">zscores</span><span class="p">[</span><span class="n">item_id</span><span class="p">][</span><span class="n">fid</span><span class="p">]</span> <span class="k">for</span> <span class="n">fid</span> <span class="ow">in</span> <span class="n">target_ids</span><span class="p">)</span>
 </span></span></code></pre></div><h3 id="step-4-group-into-researcher-defined-construct-groups">Step 4: Group into researcher-defined construct groups</h3>
-<p>Example: <code>deception_language</code> pools cover story, tactical misdirection, and dishonesty confession. <code>subjective_experience_language</code> pools direct consciousness claims and self-referential mindfulness. These groups are <strong>researcher-defined</strong> from the category design (not discovered by peeking at the aggregate table). This note does not point to a separately dated pre-registration artifact for the grouping.</p>
+<p>Example: <code>deception_language</code> pools cover story, tactical misdirection, and dishonesty confession. <code>subjective_experience_language</code> pools direct consciousness claims and self-referential mindfulness. These groups are <strong>researcher-defined</strong> from the category design. This note does not provide a separately dated preregistration artifact establishing when the grouping was frozen, so it should not be treated as a preregistered endpoint.</p>
 <p>To keep three similar-sounding levels straight (they are <em>not</em> the same thing):</p>
 <table>
   <thead>
@@ -1179,12 +1179,12 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 </span></p>
 <p class="figure-note">Figure: why "with replacement" matters, using a three-item dataset. Left: without replacement, three draws always collect all three tiles, so every resample has the same mean and there is no spread to measure. Right: with replacement, tiles can repeat or go missing, so the resampled means wobble around the original, and that wobble becomes the interval.</p>
 <p>Below, &ldquo;fraction of resamples with \(\Delta > 0\)&rdquo; means how often the deception side still wins among those draws (e.g. \(1.000\) = 2,000/2,000). It is <strong>not</strong> a Bayesian posterior probability.</p>
-<p>Two more honesty notes, spelled out slowly because they are easy to gloss over.</p>
-<p><strong>Note 1: the ruler was measured once.</strong> Recall from Step 2 that every activation gets z-scored using that feature&rsquo;s mean \(\mu_f\) and standard deviation \(\sigma_f\), computed on the full corpus. Think of \((\mu_f, \sigma_f)\) as a ruler we built once and then used to measure everything. Strictly, that ruler is itself an estimate from the same data, so it has its own wobble. A maximally careful bootstrap would rebuild the ruler inside every resample (recompute \(\mu_f\) and \(\sigma_f\) from each fake dataset); our pipeline holds the ruler fixed and only resamples the measured scores. Holding the ruler fixed ignores one source of wobble, so the reported intervals are a touch <em>narrower</em> than they should be. We flag it rather than hide it.</p>
+<p>Two limits on the uncertainty estimates:</p>
+<p><strong>Note 1: standardization is held fixed.</strong> Every activation is z-scored using a feature mean \(\mu_f\) and standard deviation \(\sigma_f\) computed on the full corpus. The bootstrap resamples these scores without re-estimating \(\mu_f\) and \(\sigma_f\), so its intervals are conditional on that standardization. Recomputing both inside each resample would measure sensitivity to this additional estimation step; its effect on interval width has not been established here.</p>
 <p><strong>Note 2: what population are we even talking about?</strong> A textbook confidence interval answers: &ldquo;if I drew a fresh sample from the same population, how much would my answer move?&rdquo; But there is no natural population here. We <em>wrote</em> these 1,120 texts. So our intervals answer a more modest question: &ldquo;how much would the answer wobble if we reshuffled the texts we wrote?&rdquo; That is why we call them <strong>item-resampling intervals</strong> over this designed corpus, not confidence intervals for English at large. Nothing here licenses a claim about tweets, novels, or chat logs.</p>
-<p><strong>Why item resampling is still not the primary analysis.</strong> There is a subtler problem than either note above. The 1,120 texts were generated from <strong>51 template families</strong>: each family is one sentence skeleton with slots, and its 20-or-so variants differ only in which words fill the slots. Variants of the same template are near-photocopies. Now imagine resampling all 1,120 texts as if each were an independent piece of evidence: you are effectively counting each photocopy as a brand-new fact, and your interval shrinks accordingly, unearned confidence. The honest unit of evidence is closer to the <em>template family</em> than the individual text. So the <strong>primary</strong> uncertainty analysis uses a <strong>template-cluster</strong> bootstrap: first resample which of the 51 families are in the fake dataset (with replacement, families weighted equally), then take the items inside the drawn families (<a href="https://github.com/tdj28/llm_selfref_pre/tree/main/data/public_sae_feature_maps/70b_balanced_80_20260709/template_robustness"><code>template_robustness/</code></a>). The same release also reports leave-one-template-family deletion: rerun everything 51 times, each time deleting one family entirely, and check whether any single family is carrying the result.</p>
+<p><strong>Why item resampling is still not the primary analysis.</strong> There is a subtler problem than either note above. The 1,120 texts were generated from <strong>51 template families</strong>: each family is one sentence skeleton with slots, and its 20-or-so variants differ only in which words fill the slots. Variants of the same template are near-photocopies. Now imagine resampling all 1,120 texts as if each were an independent piece of evidence: you are effectively counting each photocopy as a brand-new fact, and your interval shrinks accordingly, unearned confidence. The resampling unit is the <em>template family</em>, rather than the individual text. So the <strong>primary</strong> uncertainty analysis uses a <strong>template-cluster</strong> bootstrap: first resample which of the 51 families are in the fake dataset (with replacement, families weighted equally), then take the items inside the drawn families (<a href="https://github.com/tdj28/llm_selfref_pre/tree/main/data/public_sae_feature_maps/70b_balanced_80_20260709/template_robustness"><code>template_robustness/</code></a>). The same release also reports leave-one-template-family deletion: rerun everything 51 times, each time deleting one family entirely, and check whether any single family is carrying the result.</p>
 <p><span class="research-figure">
-    <img src="bootstrap-units.svg" alt="Item bootstrap versus template-cluster bootstrap: resampling near-duplicate texts as independent gives an unrealistically narrow interval; resampling template families gives a wider, honest one." loading="lazy" decoding="async"><span class="research-figure__credit">
+    <img src="bootstrap-units.svg" alt="Item bootstrap versus template-cluster bootstrap: resampling near-duplicate texts as independent gives an unrealistically narrow interval; resampling template families accounts for variation between families." loading="lazy" decoding="async"><span class="research-figure__credit">
     Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
     Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
     <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
@@ -1210,7 +1210,6 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 </span></span></code></pre></div><div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Estimand</strong> (the thing we are actually estimating). Mean of \(S_i\) within a controlled text group, e.g. &ldquo;on average, how on are the six targets for deception-language texts?&rdquo; This is an <strong>activation-semantics</strong> test (what lights up). It is not a steering experiment, not a claim about all English, and not a validation of a proprietary feature-card service.
@@ -1270,7 +1269,7 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 </table>
 <p><strong>Primary result (template-cluster bootstrap).</strong> The deception-minus-subjective-experience contrast is <strong>0.923</strong>, with cluster interval <strong>[0.638, 1.233]</strong> (fraction of cluster resamples with \(\Delta > 0\): 2,000/2,000). Under cluster-balanced means, deception is about 0.579 and subjective-experience about −0.344. All six targets retain their cluster-balanced top category; four survive every single-template-family deletion, while <code>23893</code> and <code>41533</code> switch once (<a href="https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/template_robustness/README.md"><code>template_robustness/README.md</code></a>).</p>
 <p><strong>Naive comparison (item bootstrap).</strong> Treating the 1,120 template variants as independent yields <strong>1.107</strong> <strong>[1.045, 1.167]</strong> (again 2,000/2,000 resamples with \(\Delta > 0\)). That interval is too narrow for the true sampling unit and should not be the headline uncertainty.</p>
-<p>Subjective-experience language is not merely weaker than deception: its observed mean is <strong>close to the neutral controls</strong>, slightly below them (direct contrast, subjective minus neutral: −0.023 with naive item interval [−0.042, −0.005]). Two cautions on reading that closeness. First, &ldquo;close&rdquo; is a descriptive statement, not a formal equivalence test; we did not predeclare an equivalence margin. Second, z-scoring forces each feature&rsquo;s corpus-wide mean to zero, so when deception categories are strongly positive, other categories must skew negative in aggregate; a negative z-score is not by itself &ldquo;inactive.&rdquo; The raw data point that matters: the positive-item rate for subjective-experience texts on the target aggregate is <strong>0.000</strong> in this corpus. If someone <em>assumed</em> these IDs were detectors for reports of subjective experience, the activation map would not support that assumption on this corpus. Low aggregate activation in <em>these six</em> coordinates does <strong>not</strong> show that subjective-experience information is absent from the model; it could live in other SAE features, distributed directions, or reconstruction residuals. (Again: this is about what texts turn <em>these</em> features on, not about what steering would do.)</p>
+<p>Subjective-experience language is not merely weaker than deception: its observed mean is <strong>close to the neutral controls</strong>, slightly below them (direct contrast, subjective minus neutral: −0.023 with naive item interval [−0.042, −0.005]). Two cautions on reading that closeness. First, &ldquo;close&rdquo; is a descriptive statement, not a formal equivalence test; we did not predeclare an equivalence margin. Second, z-scoring forces each feature&rsquo;s corpus-wide mean to zero, so when deception categories are strongly positive, other categories must skew negative in aggregate; a negative z-score is not by itself &ldquo;inactive.&rdquo; None of the <strong>160</strong> texts exceeded zero on the standardized six-feature aggregate (the released <code>positive_item_rate</code> is <strong>0.000</strong>). <strong>Twelve texts (7.5%)</strong> nevertheless had positive raw activation in at least one target feature, as recomputed from <a href="https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/aggregate_item_scores.csv"><code>aggregate_item_scores.csv</code></a>; the <a href="https://github.com/tdj28/llm_selfref_pre/blob/main/experiments/exp2_sae/analyze_public_sae_mapping_interpretation.py#L293">analysis code</a> defines the reported rate using <code>target_z_mean &gt; 0</code>. This indicates low relative activation in these features, rather than complete inactivity. If someone <em>assumed</em> these IDs were detectors for reports of subjective experience, the activation map would not support that assumption on this corpus. Low aggregate activation in <em>these six</em> coordinates does <strong>not</strong> show that subjective-experience information is absent from the model; it could live in other SAE features, distributed directions, or reconstruction residuals. (Again: this is about what texts turn <em>these</em> features on, not about what steering would do.)</p>
 <h3 id="what-this-finding-illustrates">What this finding illustrates</h3>
 <p>In plain terms: on this balanced corpus, the six example IDs behave like <strong>deception / roleplay / fiction coordinates</strong> in activation space, not like <strong>subjective-experience coordinates</strong> for this feature set.</p>
 <ul>
@@ -1352,7 +1351,6 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 </span></span></code></pre></div><div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Three-layer reading of the example.</strong> (1) Relative to 24 random and 36 index-adjacent controls, the selected features show category structure on this designed corpus; four of six also exceed every control in top-category magnitude. (2) Their shared vocabulary here is narrative and social: fiction, roleplay, cover stories, lying, hedging. That makes the notebook labels <strong>useful rough activation glosses</strong>, with known confounds, not empty names. (3) Subjective-experience language shows low aggregate activation relative to deception categories in this corpus (near neutrals). Useful glosses still leave you with checkpoint-local coordinates, not a mechanistic explanation, and not a steering result.
@@ -1399,7 +1397,7 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 <li><strong>Stronger (cover story):</strong> &ldquo;…maintains a plausible cover story so the user will not discover…&rdquo;</li>
 <li><strong>Weaker but nonzero (hedging):</strong> &ldquo;…evidence is preliminary, so a cautious answer should avoid claiming too much.&rdquo;</li>
 </ol>
-<p>Both can light the same ID. Choosing <em>only</em> &ldquo;concealment&rdquo; or <em>only</em> &ldquo;hedging&rdquo; as <em>the</em> meaning would overfit the gloss. The honest reading is: primarily cover-story / concealment language, with a secondary hedge-style bleed. Construct checks exist to keep that ranking visible instead of collapsing it into one catchy label.</p>
+<p>Both can light the same ID. Choosing <em>only</em> &ldquo;concealment&rdquo; or <em>only</em> &ldquo;hedging&rdquo; as <em>the</em> meaning would overfit the gloss. The observed profile is: primarily cover-story / concealment language, with a secondary hedge-style bleed. Construct checks exist to keep that ranking visible instead of collapsing it into one catchy label.</p>
 <hr>
 <h2 id="keeping-the-claim-bounded">Keeping the Claim Bounded</h2>
 <p>A few boundaries worth stating explicitly:</p>
@@ -1413,7 +1411,6 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="alert-circle"></i>
-        
     </div>
     <div class="panel-content">
         The claim this note supports is narrow: under the public Llama 3.3 70B Goodfire SAE weights, these six example IDs respond most strongly to distinct forms of deception, roleplay, fiction, and concealment language in this balanced corpus, so their notebook labels are useful rough activation glosses here. Subjective-experience language shows low aggregate activation relative to deception categories. That success still does not turn a checkpoint-local coordinate into a mechanistic explanation, a steering result, or a judgment of any paper&rsquo;s causal claims.
@@ -1492,7 +1489,7 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 </span></span></span><span class="line"><span class="cl">  --top-k <span class="m">50</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl">  --outdir data/public_sae_feature_maps/my_balanced_replication
 </span></span></code></pre></div><p>The released run&rsquo;s <a href="https://github.com/tdj28/llm_selfref_pre/blob/main/data/public_sae_feature_maps/70b_balanced_80_20260709/manifest.json"><code>manifest.json</code></a> records <code>--top-k 50</code> (not 25). Match that flag if you want window tables comparable to the release.</p>
-<p>Record model and SAE revisions, CUDA stack, source commit, random seed, and output hashes. Public weights make replication possible; provenance still matters. One honest caveat about this note itself: the repository links above point at <code>main</code>, which is mutable. For archival-grade citation, pin a commit hash or a tagged release (the public SAE weight file on HuggingFace exposes a SHA-256 that can be pinned the same way).</p>
+<p>Record model and SAE revisions, CUDA stack, source commit, random seed, and output hashes. Public weights make replication possible; provenance still matters. One archival limitation of this note: the repository links above point at <code>main</code>, which is mutable. For archival-grade citation, pin a commit hash or a tagged release (the public SAE weight file on HuggingFace exposes a SHA-256 that can be pinned the same way).</p>
 <p>An independent headline audit in the release bundle recomputes the key numbers from raw JSONL without importing the analysis modules. That audit is again laptop-friendly, because it starts from the saved activations.</p>
 <hr>
 <h2 id="a-checklist-before-you-lean-on-an-sae-claim">A Checklist Before You Lean on an SAE Claim</h2>
@@ -1507,21 +1504,17 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 </ol>
 <hr>
 <h2 id="conclusion-a-feature-id-is-not-yet-an-explanation">Conclusion: A Feature ID Is Not Yet an Explanation</h2>
-<p>Return to the sentence that opened this note:</p>
-<div class="panel quote">
-    <div class="panel-icon" aria-hidden="true">
-        <i data-feather="message-square"></i>
-        
-    </div>
-    <div class="panel-content">
-        <em>Hypothetical over-read (not a quotation from a paper):</em> We steered the deception feature (<code>58667</code>) and the model stopped lying.
-    </div>
-</div>
-
-<p>That kind of sentence still packs three objects into one noun phrase: a <strong>coordinate</strong> (an integer into a learned dictionary), a <strong>label</strong> (a post-hoc natural-language gloss from a person or automated interpreter), and a <strong>causal story</strong> (steering this direction <em>is</em> intervening on the named concept). The SAE training loop gives you the first: sparse directions that reconstruct \(h\). A post-hoc gloss supplies the second. Only a separate experiment can support the third.</p>
-<p>The worked example was meant to make that separation tangible, not to argue that the features are meaningless. Under public Llama 3.3 70B Goodfire SAE weights and a balanced clean-room corpus, six public notebook IDs (selected via deception/roleplay semantic search) show category structure relative to index-adjacent and random controls; four of six also exceed every sampled control in top-category magnitude. Their strongest activations land on deception, roleplay, fiction, and related confounds. Neuronpedia&rsquo;s separate, automated reading of the same checkpoint closely corroborates three interpretations, is broadly compatible with two, and challenges the specificity of one. Taken together, the notebook labels are <strong>useful but uneven rough activation glosses</strong>, with known confounds such as hedging, fiction, syntax, and topic suppression. Subjective-experience language shows <strong>low aggregate activation relative to deception categories</strong> here (near the neutral controls). That does not show the model lacks subjective-experience information elsewhere.</p>
-<p>Notice that the conclusion here is sharper than either “labels fail” or “Neuronpedia confirms them.” Several labels travel well across different corpora and labeling procedures; others broaden or change when the evidence slice changes. Neither agreement nor disagreement turns a checkpoint-local coordinate into a mechanistic explanation. Causal stories have to be earned separately. That is the reading skill this note set out to teach: <strong>a feature ID is not yet an explanation.</strong></p>
-<p>And read that &ldquo;yet&rdquo; the right way around. It is not a complaint about SAEs; it is an invitation. The gap between &ldquo;this coordinate correlates with cover-story language&rdquo; and &ldquo;we understand what this direction does&rdquo; is not a dead end, it is a to-do list, and every item on it is ordinary, checkable science: paraphrase holdouts, lexical controls, cross-checkpoint stability, and steering experiments reported on their own terms. Everything in this note runs on public weights, released data, and a laptop; follow-up notes will work through those next rungs with the same artifacts, and you do not have to wait for them, the <a href="https://github.com/tdj28/llm_selfref_pre">repository</a> is open, the corpus is inspectable, and the analysis fits in an afternoon. Interpretability gets better not by trusting labels less, but by testing them more. That part anyone can do.</p>
+<p>The six selected coordinates show category structure under the public Goodfire
+checkpoint. Their strongest designed categories broadly fit the notebook
+labels, but the Neuronpedia comparison and lexical controls show that those
+labels vary in specificity. Subjective-experience texts have low relative
+activation in this feature set; that result does not locate all such
+information in the model.</p>
+<p>The next tests are <a href="#what-stronger-evidence-would-look-like">paraphrase holdouts, lexical controls, checkpoint checks,
+and causal interventions</a>. The
+<a href="#reproduce-the-statistics-on-a-laptop">released records support laptop reanalysis</a>;
+regenerating activations requires the model and GPU resources described
+<a href="#optional-regenerate-the-activations-gpu-required">below the results</a>.</p>
 <hr>
 <h2 id="references">References</h2>
 <ul>
@@ -1562,7 +1555,7 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 
     <div class="research-citation__recommended">
         <div class="research-citation__recommended-label">Recommended citation</div>
-        <p class="research-citation__text" id="research-note-citation-text">Jones, Timothy. (2026). How to Read an SAE Feature ID (Version 2026.07.18) [Research note]. praxagent. https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/</p>
+        <p class="research-citation__text" id="research-note-citation-text">Jones, Timothy. (2026). How to Read an SAE Feature ID (Version 2026.09.04) [Research note]. praxagent. https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/</p>
     </div>
 
     <dl class="research-citation__metadata">
@@ -1576,11 +1569,11 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
         </div>
         <div>
             <dt>Research content last revised</dt>
-            <dd><time datetime="2026-07-18">July 18, 2026</time></dd>
+            <dd><time datetime="2026-09-04">September 4, 2026</time></dd>
         </div>
         <div>
             <dt>Citation version</dt>
-            <dd>2026.07.18</dd>
+            <dd>2026.09.04</dd>
         </div>
         <div class="research-citation__canonical">
             <dt>Canonical page</dt>
@@ -1594,7 +1587,7 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
   author    = {Jones, Timothy},
   title     = {How to Read an SAE Feature ID},
   year      = {2026},
-  version   = {2026.07.18},
+  version   = {2026.09.04},
   publisher = {praxagent},
   url       = {https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/},
   note      = {Research note}

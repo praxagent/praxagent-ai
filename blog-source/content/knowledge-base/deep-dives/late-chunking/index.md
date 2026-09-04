@@ -31,6 +31,12 @@ That distinction matters:
 
 The method was introduced by Günther et al. in [*Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models*](https://arxiv.org/abs/2409.04701v3). This Deep Dive explains the operation, the published evidence, the implementation boundaries, and the cases where the standard approach can still win.
 
+**Choose a reading route.**
+
+- **Learning the idea:** continue with the vocabulary, [short example](#the-short-version), and [step-by-step operation](#the-operation-one-step-at-a-time).
+- **Assessing the evidence:** start with [retrieval scoring](#how-retrieval-is-scored), then the [published evaluation](#what-the-published-retrieval-evaluation-found) and [SciFact re-evaluation](#an-auditable-scifact-matched-content-token-re-evaluation).
+- **Implementing or reproducing it:** read the [implementation boundary](#the-implementation-boundary), [evaluation plan](#how-to-evaluate-it-on-your-corpus), and [reproduction appendix](#appendix-a-reproduce-and-audit-the-result).
+
 ## Before late chunking: a tiny vocabulary kit
 
 {{< panel "info" >}}
@@ -237,21 +243,13 @@ Late chunking had the highest aggregate score of these three arms, but the aggre
 
 ## What did this re-evaluation teach us?
 
-After seeing the scores, a reader should reasonably ask, “what did the analysis actually teach us?” This re-evaluation produced five useful conclusions:
+The re-evaluation supports five conclusions:
 
 1. **Late chunking had the highest mean ranking score in this comparison.** Its nDCG@10 was 0.6610, compared with 0.6414 for naive chunks and 0.6389 for one whole-document vector.
 2. **The gain was not shared evenly.** Late chunking improved 49 queries, tied on 229, and worsened 22. The positive average did not mean every query benefited.
 3. **The one-vector whole-document baseline scored lower, but it does not isolate why.** Full-document context followed by one pooled vector scored below the late-chunk arm. The chunked arm stores several candidate vectors and uses maximum-score aggregation, so the difference can reflect representation granularity and aggregation as well as contextualization. This is a practical baseline, not a capacity-matched causal control.
 4. **The comparison does not isolate context alone.** The naive and late arms differ in their special-token and position-dependent inputs as well as in cross-chunk context.
 5. **The practical answer is to test, not assume.** A representative corpus can reveal whether the ranking improvement is large enough to justify the added indexing cost and memory.
-
-{{< panel "info" >}}
-**The useful conclusion.** Late chunking was better on average in this frozen
-SciFact comparison, and the query-level analysis showed exactly where that
-summary needs restraint. The result supports trying the method on a comparable
-retrieval problem. It does not prove that extra context always helps, explain
-why each query changed, or predict the gain on another corpus or model.
-{{< /panel >}}
 
 The full audit trail and commands are in [Appendix A](#appendix-a-reproduce-and-audit-the-result).
 

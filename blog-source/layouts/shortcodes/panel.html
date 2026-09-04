@@ -1,15 +1,15 @@
 <div class="panel {{ .Get 0 }}">
     <div class="panel-icon" aria-hidden="true">
         {{ if eq (.Get 0) "info" }}<i data-feather="info"></i>
-        {{ else if eq (.Get 0) "warning" }}<i data-feather="alert-circle"></i>
-        {{ else if eq (.Get 0) "error" }}<i data-feather="alert-octagon"></i>
-        {{ else if eq (.Get 0) "definition" }}<i data-feather="book-open"></i>
-        {{ else if eq (.Get 0) "quote" }}<i data-feather="message-square"></i>
-        {{ else if eq (.Get 0) "output" }}<i data-feather="terminal"></i>
-        {{ else if eq (.Get 0) "question" }}<i data-feather="help-circle"></i>
-        {{ else if eq (.Get 0) "answer" }}<i data-feather="check-circle"></i>
-        {{ else if eq (.Get 0) "acknowledgment" }}<i data-feather="users"></i>
-        {{ end }}
+        {{- else if eq (.Get 0) "warning" }}<i data-feather="alert-circle"></i>
+        {{- else if eq (.Get 0) "error" }}<i data-feather="alert-octagon"></i>
+        {{- else if eq (.Get 0) "definition" }}<i data-feather="book-open"></i>
+        {{- else if eq (.Get 0) "quote" }}<i data-feather="message-square"></i>
+        {{- else if eq (.Get 0) "output" }}<i data-feather="terminal"></i>
+        {{- else if eq (.Get 0) "question" }}<i data-feather="help-circle"></i>
+        {{- else if eq (.Get 0) "answer" }}<i data-feather="check-circle"></i>
+        {{- else if eq (.Get 0) "acknowledgment" }}<i data-feather="users"></i>
+        {{- end }}
     </div>
     <div class="panel-content">
         {{ .Inner | .Page.RenderString }}

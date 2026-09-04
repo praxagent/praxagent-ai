@@ -39,12 +39,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20260801-2">
+    <link rel="stylesheet" href="/blog/blog.css?v=20260904">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js"></script>
+    <script src="/blog/js/katex-0.16.47/katex.min.js"></script>
+    <script src="/blog/js/katex-0.16.47/auto-render.min.js"></script>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -118,15 +118,8 @@
         
 <header class="blog-header search-header">
     <div class="blog-header-content">
-        <p class="blog-kicker">praxagent / Search</p>
-        <div class="blog-header-grid">
-            <h1 class="blog-title">Search the <span class="accent">library</span></h1>
-            <p class="blog-subtitle">
-                Look across Research Notes, Deep Dives, glossary entries, and Prax
-                documentation. Keyword matches appear first; meaning-aware results can
-                follow without sending your query to a server.
-            </p>
-        </div>
+        <h1 class="blog-title">Search the library</h1>
+        <p class="blog-subtitle">Find research, explanations, and Prax documentation.</p>
     </div>
 </header>
 
@@ -152,7 +145,7 @@
                     autocomplete="off"
                     enterkeyhint="search"
                     spellcheck="false"
-                    placeholder="For example: why scale measurements before PCA?"
+                    placeholder="Why standardize before PCA?"
                 >
                 <button id="search-submit" type="submit" aria-controls="search-results">Search</button>
             </div>
@@ -172,13 +165,9 @@
 
         <div class="semantic-search-note" id="semantic-search-note">
             <div>
-                <h2>Keyword and meaning-aware search</h2>
                 <p>
-                    Keyword search is small and starts first. Meaning-aware search
-                    then runs privately in this browser. Its first use downloads about
-                    47 MB of model and runtime files; the browser can cache them for
-                    later searches. Meaning-aware search starts with three or more
-                    non-space characters.
+                    Search runs in your browser. Meaning-aware search downloads about
+                    47 MB on first use; the files can be cached for later searches.
                 </p>
             </div>
             <button

@@ -14,7 +14,7 @@
 
   <rect class="fail" x="24" y="70" width="340" height="180" rx="12"/>
   <text x="44" y="98" class="t h">A. Isolated post-state</text>
-  <text x="44" y="122" class="t s">Auditor sees h_steered only</text>
+  <text x="44" y="122" class="t s">Auditor sees h<tspan baseline-shift="sub" font-size="80%">steered</tspan> only</text>
   <text x="44" y="142" class="t s">No clean prefix, no hook label</text>
   <text x="44" y="168" class="t m">Fitted classifier over 67 J-lens word scores</text>
   <text x="44" y="188" class="t m">Crossed family + feature holdouts</text>
@@ -27,6 +27,6 @@
   <text x="416" y="142" class="t s">Same prefix, intervention sign known</text>
   <text x="416" y="168" class="t m">Fixed one-number contrast, same readout</text>
   <text x="416" y="188" class="t m">Differential monitoring, not provenance</text>
-  <text x="416" y="220" class="t badge" fill="#2F5A7A">+0.91 / -0.82 ; AUROC 0.86 vs id 0.78</text>
+  <text x="416" y="220" class="t badge" fill="#2F5A7A">+0.91 / −0.82 ; AUROC 0.86 vs id 0.78</text>
   <text x="416" y="240" class="t m">Useful regression monitor</text>
 </svg>

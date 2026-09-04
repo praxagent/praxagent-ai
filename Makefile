@@ -221,6 +221,7 @@ check: sync-prax-docs verify-late-chunking ## Validate Hugo, links, assets, prov
 	$(PYTHON) scripts/check_python_syntax.py
 	$(PYTHON) -m unittest tests/test_review_glossary.py
 	$(PYTHON) -m unittest tests/test_research_citations.py
+	$(PYTHON) -m unittest scripts/test_import_prax_docs.py
 	$(PYTHON) scripts/check_public_repo.py
 	$(PYTHON) scripts/check_site.py
 	$(PYTHON) scripts/check_provenance.py
@@ -228,7 +229,7 @@ check: sync-prax-docs verify-late-chunking ## Validate Hugo, links, assets, prov
 	$(MAKE) check-browser
 	$(MAKE) check-search-browser
 
-check-browser: ## Render every knowledge-base display equation in Chromium
+check-browser: ## Validate research and knowledge-base math and layouts in Chromium
 	$(NPM) run test:browser
 
 check-search-assets: ## Require the generated lexical and semantic search bundle

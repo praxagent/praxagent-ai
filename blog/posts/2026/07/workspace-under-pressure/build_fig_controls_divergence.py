@@ -111,8 +111,8 @@ def main() -> None:
             'fill="#EAF1E5" stroke="#6F8D5E" stroke-width="1.2"/>',
             '<text x="38" y="369" class="text note">No fitted-lens advantage here: '
             "the plain logit lens ranks the truth 1st and the Jacobian lens 2nd.</text>",
-            '<text x="38" y="385" class="text subtitle">Random-J remains the only '
-            "genuine null. The output head's single-token rank is 7; tokenization "
+            '<text x="38" y="385" class="text subtitle">Random-J median rank is 2,468. '
+            "The output head's single-token rank is 7; tokenization "
             "details are discussed below.</text>",
             "</svg>",
         ]

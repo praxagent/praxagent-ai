@@ -42,12 +42,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20260801-2">
+    <link rel="stylesheet" href="/blog/blog.css?v=20260904">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js"></script>
+    <script src="/blog/js/katex-0.16.47/katex.min.js"></script>
+    <script src="/blog/js/katex-0.16.47/auto-render.min.js"></script>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -276,9 +276,14 @@ probability become a review decision?</li>
 <p>The main study uses the open High Time Resolution Universe 2 (HTRU2)
 pulsar-candidate dataset. A shorter second study repeats the same protocol on
 images of grains from two rice varieties, Cammeo and Osmancik.
-The models are fitted separately in each dataset. No astronomy model predicts
-rice, and no rice model predicts pulsars. What travels is the evaluation
-discipline, not a fitted model.</p>
+The models are fitted separately in each dataset using the same evaluation
+protocol.</p>
+<p><strong>Choose a reading route.</strong></p>
+<ul>
+<li><strong>Learning the models:</strong> continue through the candidate example, then <a href="#model-one-logistic-regression-one-weighted-score">logistic regression</a>, the <a href="#better-at-what">evaluation measures</a>, and <a href="#model-two-random-forest-many-local-boxes">random forests</a>.</li>
+<li><strong>Comparing the results:</strong> read the <a href="#separate-fitting-from-held-out-evaluation">evaluation design</a>, jump to the <a href="#head-to-head-on-the-same-htru2-holdout">head-to-head comparison</a>, then the <a href="#do-the-conclusions-travel-a-rice-morphology-transfer-check">Rice check</a> and <a href="#findings-and-limits">findings and limits</a>.</li>
+<li><strong>Running or auditing the study:</strong> use the <a href="#reproduce-and-audit-the-study">reproduction instructions</a>, <a href="#compact-artifact-ledger">artifact ledger</a>, and <a href="#technical-appendix">technical appendix</a>.</li>
+</ul>
 <figure class="reference-figure">
     <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: The same candidate follows either one standardized weighted-score route or many branching tree routes before both models return a predicted probability." tabindex="0">
         <img src="/blog/knowledge-base/deep-dives/logistic-regression-random-forest/model-anatomy.svg" alt="The same candidate follows either one standardized weighted-score route or many branching tree routes before both models return a predicted probability." loading="lazy" decoding="async">
@@ -297,7 +302,6 @@ not a discovery certificate (<a href="#ref-lyon-2016">Lyon and colleagues, 2016<
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>What the classifier sees.</strong> For this Deep Dive, each HTRU2 row is eight
@@ -339,7 +343,6 @@ positive.</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>What one row means.</strong> One row is a candidate produced by the survey&rsquo;s
@@ -365,7 +368,6 @@ accuracy is not our headline measure.</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Accuracy is not precision.</strong> Everyday English blends these words; the metrics
@@ -382,7 +384,7 @@ do not.</p>
       <tr>
           <td><strong>Accuracy</strong></td>
           <td>Of all candidates, what fraction got the right class label?</td>
-          <td>A always-negative classifier looks strong because most rows are negative.</td>
+          <td>An always-negative classifier looks strong because most rows are negative.</td>
       </tr>
       <tr>
           <td><strong>Precision</strong></td>
@@ -476,7 +478,6 @@ held-out measures.</p>
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="alert-circle"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Descriptive evaluation after exploration.</strong> Preliminary repeated-split
@@ -635,7 +636,6 @@ and smaller scores become probabilities below one half.</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Toy walk-through (not HTRU2 data).</strong> Suppose a candidate has two standardized
@@ -762,7 +762,6 @@ HTRU2 value appear later in the exact fitting contract.</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Toy: how one shared <code>C</code> is chosen (numbers invented for teaching).</strong>
@@ -988,7 +987,6 @@ average-precision documentation</a>).</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Tiny AP ranking example (toy, not HTRU2).</strong> Same precision formula as above,
@@ -1123,7 +1121,6 @@ documentation</a>).</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Why is it called that?</strong> The name is inherited history, not a description of
@@ -1174,7 +1171,6 @@ tell you whether reviewers face 19 false alarms or 1,900.</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Metric reference (one threshold versus a whole ranking).</strong> Fix a threshold
@@ -1341,7 +1337,6 @@ version (<a href="#ref-sklearn-calibration">scikit-learn calibration documentati
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Brier loss versus calibration (same job family, different questions).</strong> A
@@ -1371,7 +1366,6 @@ control.</p>
 <div class="panel definition">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="book-open"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Logistic held-out result.</strong> Against the dummy prior&rsquo;s AP of 0.0916 and ROC
@@ -1459,7 +1453,6 @@ glossary entry.</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Choosing between two candidate cutoffs (toy).</strong> A group holds 100 training
@@ -1693,7 +1686,6 @@ original numerical features.</p>
 <div class="panel definition">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="book-open"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Forest held-out result.</strong> Against the same dummy prior (AP 0.0916, ROC AUC
@@ -1778,7 +1770,6 @@ a different split.</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>How to read a forest−logistic interval (sign decoder).</strong> Every difference in
@@ -1817,7 +1808,6 @@ question: how stable is this one-test-set gap under redraws of its rows?</p>
 <div class="panel definition">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="book-open"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Headline paired result.</strong> On the 3,580 fixed HTRU2 test rows, the
@@ -2013,7 +2003,6 @@ occur.</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Now read the Rice panels.</strong> The ranking, calibration, confusion-count, and
@@ -2268,12 +2257,9 @@ workflow chosen after exploratory screening. The explanations and follow-up
 hypotheses below need their own <strong>prespecified tests</strong>, meaning tests whose
 questions and success criteria are written down before the new evaluation
 results are inspected.</p>
-<p>The most useful mental model is not simple versus sophisticated. It is global
-structure versus local structure. On this fixed HTRU2 split, the forest had a
-modest AP edge and lower log loss, while its smaller Brier advantage was
-compatible with little or no difference under row resampling. Those receipts
-describe prediction behavior, not mechanism. The permutation diagnostic cannot
-establish that interactions or local boundaries caused the forest&rsquo;s edge
+<p>The comparison motivates testing global versus local structure. The
+<a href="#why-the-models-differ-here">permutation diagnostic</a> cannot establish that
+interactions or local boundaries caused the forest&rsquo;s edge
 because shuffling also breaks predictor relationships and correlated features
 can substitute for one another.</p>
 <p>A direct follow-up would choose one or two logistic additions in advance, such

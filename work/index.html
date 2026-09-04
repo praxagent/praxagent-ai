@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles-v2.css?v=20260724b">
+    <link rel="stylesheet" href="../styles-v2.css?v=20260904">
 </head>
 <body class="work-page">
     <nav class="navbar industrial-navbar">
@@ -74,8 +74,8 @@
             <div class="container">
                 <p class="work-kicker">praxagent / Work index</p>
                 <div class="work-header-grid">
-                    <h1>Research and systems that hold up in use</h1>
-                    <p>Programs, open artifacts, and software built around inspectable evidence, controlled evaluation, and practical operation.</p>
+                    <h1>AI research and open-source software</h1>
+                    <p>Explore experiments on language models, the Prax agent tools, and focused applications. Each project links to its research, code, or documentation.</p>
                 </div>
             </div>
         </header>
@@ -96,7 +96,8 @@
                             loading="lazy"
                             decoding="async"
                         >
-                        <span>CKA layer similarity</span>
+                        <span class="research-figure-title">Layer similarity</span>
+                        <p>How the fitted lens’s readouts relate across layers.</p>
                     </a>
                     <a href="../blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">
                         <img
@@ -107,7 +108,8 @@
                             loading="lazy"
                             decoding="async"
                         >
-                        <span>Workspace band vs. scale</span>
+                        <span class="research-figure-title">Model scale and layer structure</span>
+                        <p>A comparison across sizes and model families, with architecture as a possible confound.</p>
                     </a>
                     <a href="../blog/posts/2026/07/jacobian-lens-intervention-test/">
                         <img
@@ -118,7 +120,8 @@
                             loading="lazy"
                             decoding="async"
                         >
-                        <span>Dose–depth response</span>
+                        <span class="research-figure-title">Response to internal edits</span>
+                        <p>Linear edit delivery produces a downstream response that is not proportional to dose.</p>
                     </a>
                     <a href="../blog/posts/2026/07/jacobian-lens-sae-steering/">
                         <img
@@ -129,7 +132,8 @@
                             loading="lazy"
                             decoding="async"
                         >
-                        <span>Readout family matrix</span>
+                        <span class="research-figure-title">Detecting steering</span>
+                        <p>A matched clean run reveals a steering signal, but related features can produce similar signals.</p>
                     </a>
                 </div>
                 <div class="work-ledger">
@@ -137,7 +141,7 @@
                         <span class="work-row-index">R01</span>
                         <div>
                             <h3>Jacobian Lenses &amp; J-Space</h3>
-                            <p>Open fitted lenses, J-space geometry, controlled readout audits, null transports, and revision-pinned receipts.</p>
+                            <p>Open-source tools for studying model representations, with controlled experiments and reproducible results.</p>
                         </div>
                         <span class="work-row-link">Notes →</span>
                     </a>
@@ -153,7 +157,7 @@
                         <span class="work-row-index">R03</span>
                         <div>
                             <h3>Summer 2026 AI + Biology Internship</h3>
-                            <p>A filled remote research mentorship in AI, biology, bioinformatics, technical writing, and public portfolio development.</p>
+                            <p>A remote mentorship in AI, biology, and technical writing. Position filled; scheduled through September 22, 2026.</p>
                         </div>
                         <span class="work-row-link">Program →</span>
                     </a>
@@ -164,13 +168,13 @@
         <section id="prax-suite" class="work-section work-section-alt" aria-labelledby="prax-suite-title">
             <div class="container">
                 <div class="section-index">
-                    <p class="section-index-label">02 / Open harness</p>
+                    <p class="section-index-label">02 / Open-source tools</p>
                     <h2 id="prax-suite-title">Prax suite</h2>
                     <a href="../blog/knowledge-base/prax/">Docs <span aria-hidden="true">→</span></a>
                 </div>
                 <div class="prax-suite-intro">
                     <p>
-                        A security-first self-hosted agentic harness, with an integrated orchestrator, collaboration shell, sandbox, plugins, and keyless egress.
+                        A self-hosted system for coordinating AI agents, with a shared workspace, sandboxed tools, plugins, and optional isolation of provider credentials.
                     </p>
                     <a href="https://github.com/praxagent/prax" target="_blank" rel="noopener">GitHub ↗</a>
                 </div>
@@ -189,7 +193,7 @@
                         <span class="work-row-index">P01</span>
                         <div>
                             <h3>Prax</h3>
-                            <p>Safety-first multi-agent harness with dozens of tools, sophisticated memory management, and more.</p>
+                            <p>Coordinate agents with persistent memory, tool permissions, and integrations for chat, code, and browsing.</p>
                         </div>
                         <span class="work-row-link">GitHub ↗</span>
                     </a>
@@ -197,7 +201,7 @@
                         <span class="work-row-index">P02</span>
                         <div>
                             <h3>TeamWork</h3>
-                            <p>Agent-agnostic shell with chat, kanban, files, terminal, and browser screencasts.</p>
+                            <p>A shared workspace for chat, task boards, files, terminal access, and browser interaction.</p>
                         </div>
                         <span class="work-row-link">GitHub ↗</span>
                     </a>
@@ -205,7 +209,7 @@
                         <span class="work-row-index">P03</span>
                         <div>
                             <h3>Prax Sandbox</h3>
-                            <p>Dockerized coding agents, Chromium/CDP, desktop, and a framework-independent Python client.</p>
+                            <p>A container-based environment for coding agents, browser automation, and desktop tools, with a Python client.</p>
                         </div>
                         <span class="work-row-link">GitHub ↗</span>
                     </a>
@@ -221,7 +225,7 @@
                         <span class="work-row-index">P05</span>
                         <div>
                             <h3>Secrets proxy</h3>
-                            <p>Isolated credential-injecting egress so a compromised agent has no real keys to steal.</p>
+                            <p>Keeps provider API keys outside the agent process when deployed as an isolated service.</p>
                         </div>
                         <span class="work-row-link">GitHub ↗</span>
                     </a>
@@ -236,13 +240,13 @@
                     <h2 id="focused-software-title">Other projects</h2>
                 </div>
                 <div class="work-ledger">
-                    <a class="work-row" href="https://tippytip.ai" target="_blank" rel="noopener">
+                    <a class="work-row" href="https://apps.apple.com/us/app/tippytip/id6742724134" target="_blank" rel="noopener">
                         <span class="work-row-index">S01</span>
                         <div>
                             <h3>TippyTip</h3>
                             <p>An iOS reading system for saved web content, summaries, audio, podcasts, knowledge graphs, and private API-key use.</p>
                         </div>
-                        <span class="work-row-link">Website ↗</span>
+                        <span class="work-row-link">App Store ↗</span>
                     </a>
                     <a class="work-row" href="https://apps.apple.com/us/app/chaos-lab/id398270047" target="_blank" rel="noopener">
                         <span class="work-row-index">S02</span>

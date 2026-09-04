@@ -57,7 +57,7 @@
   <rect class="punct" x="378" y="237" width="48" height="28"/>
   <rect class="punct" x="378" y="271" width="48" height="28"/>
   <rect class="punct" x="378" y="305" width="48" height="28"/>
-  <text x="277" y="354" text-anchor="middle" class="t m">20 searched cells: (20 layers) x (1 position)</text>
+  <text x="277" y="354" text-anchor="middle" class="t m">20 searched cells: (20 layers) × (1 position)</text>
 
   <!-- RIGHT PANEL -->
   <rect class="panel" x="462" y="78" width="414" height="292" rx="12"/>
@@ -89,9 +89,9 @@
   <!-- overwrite one best cell -->
   <rect class="best" x="716" y="203" width="48" height="28"/>
   <text x="740" y="223" text-anchor="middle" class="t sh green">best</text>
-  <text x="669" y="354" text-anchor="middle" class="t m">20 x T searched cells; record argmin (layer*, position*)</text>
+  <text x="669" y="354" text-anchor="middle" class="t m">20 × T searched cells; record argmin (layer<tspan baseline-shift="super" font-size="80%">∗</tspan>, position<tspan baseline-shift="super" font-size="80%">∗</tspan>)</text>
 
   <!-- bottom takeaway -->
   <rect x="24" y="387" width="852" height="28" rx="7" fill="#EDE8E1"/>
-  <text x="450" y="406" text-anchor="middle" class="t s">More cells searched: R_span(w) &#x2264; R_last(w) by construction.</text>
+  <text x="450" y="406" text-anchor="middle" class="t s">More cells searched: R<tspan baseline-shift="sub" font-size="80%">span</tspan>(w) &#x2264; R<tspan baseline-shift="sub" font-size="80%">last</tspan>(w) by construction.</text>
 </svg>

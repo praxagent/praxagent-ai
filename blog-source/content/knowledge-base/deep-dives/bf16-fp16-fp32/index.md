@@ -31,9 +31,15 @@ This Deep Dive compares three common
 - **FP16**: 16-bit floating point (also called float16 or F16; IEEE 754 binary16)
 - **BF16**: bfloat16 (brain floating point)
 
-A short glossary stub lives at [BF16, FP16, and FP32]({{< relref "knowledge-base/glossary/bf16/index.md" >}}).
+A short glossary entry lives at [BF16, FP16, and FP32]({{< relref "knowledge-base/glossary/bf16/index.md" >}}).
 This page carries the worked demos, the swamping chart, and the hardware /
 determinism detail.
+
+**Choose a reading route.**
+
+- **Learning the formats:** begin with [bit layouts](#how-the-bits-are-spent), [range and spacing](#numerical-range-and-spacing), and the [worked demo](#worked-demo-in-pytorch).
+- **Choosing a format:** read [when to use each format](#when-to-use-each-format) and [hardware support](#gpu-tensor-cores), keeping the [limits of a format label](#what-a-format-label-does-not-establish) in view.
+- **Investigating repeatability:** jump to [matrix-multiplication repeatability](#cublas-and-bit-wise-determinism), then the [measured case study](#case-study-one-kernel-five-stacks) and [receipts and scripts](#receipts-and-scripts).
 
 ## How the bits are spent
 

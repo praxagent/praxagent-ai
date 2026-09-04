@@ -2,9 +2,9 @@
 title: "A Linear Nudge, a Nonlinear Wake"
 slug: "jacobian-lens-intervention-test"
 date: 2026-07-18
-lastmod: 2026-07-18
+lastmod: 2026-09-04
 citation_enabled: true
-citation_version: "2026.07.18"
+citation_version: "2026.09.04"
 aliases: ["/posts/jacobian-lens-intervention-test/"]
 tags: ["AI", "LLM", "machine-learning", "interpretability", "sparse-autoencoders", "jacobian-lens", "reproducibility"]
 author: Timothy Jones
@@ -91,6 +91,12 @@ Experiment package:
 [`experiments/consciousness_sae_signed_dose_scan`](https://github.com/tdj28/llm_selfref_pre/tree/main/experiments/consciousness_sae_signed_dose_scan).
 Shipping table, sample records, and hashes are in the
 [appendix](#appendix-release-inventory).
+
+{{< panel "info" >}}
+**Correction — September 4, 2026.** Falling per-unit-dose gain does not rule out a negative cubic correction. The Taylor discussion now distinguishes that possibility from saturation and no longer calls the smallest eligible dose an established infinitesimal linear regime. Approximate input proportionality is also distinguished from the exact identity preserved by a linear map. The measured census, gates, and released receipts are unchanged; no model experiment was rerun for this correction.
+{{< /panel >}}
+
+**Reading routes:** [Main result](#what-the-census-found) → [interpretation](#interpretation); [measurement design](#design-in-brief) → [scoring rules](#how-we-scored-pass-versus-fail); or [artifact ledger](#reproducibility-and-artifact-ledger) → [technical appendices](#technical-appendices). The [Taylor discussion](#discussion-a-taylor-series-view-of-the-result) offers hypotheses for follow-up.
 
 ## The Question
 
@@ -636,17 +642,15 @@ the pattern a linearization story predicts. Everything here is
 interpretation; the census results above stand on their own, and the
 hypotheses below would need their own prespecified tests.
 
-**The fixed-J "pass" was never evidence about the network.** A fixed linear
-map preserves proportionality automatically: if the input curve is
-\(x_b \approx b\,v\), then \(Jx_b \approx b\,(Jv)\) for *any* matrix \(J\);
-a random one would have passed the same gates. That is why Figure 1 treats
-the fixed-J column as an algebraic consistency reference. The informative
-cells are the other two: the delivered edits stayed proportional, so the
-input to blocks 51–79 was clean, and the actual finals bent anyway. The
-curvature therefore belongs to the network's own mapping, and a linear object
-is structurally incapable of reproducing it.
+**The fixed-J pass is a consistency reference.** Exact proportionality is
+preserved by every fixed linear map: if \(x_b=bv\), then \(Jx_b=bJv\).
+For approximately proportional inputs, however, a matrix can amplify the
+deviations; passage through a finite cosine/RMS gate is not guaranteed.
+Here the realized edits and their released-J projections both passed
+empirically. The actual final states failed, locating a dose-dependent
+change in the executed downstream computation.
 
-**The lens is the first term of a Taylor series.** Write \(F\) for the
+**A local Jacobian supplies the first-order term.** Write \(F\) for the
 function taking the post-block-50 residual to the post-block-79 residual.
 For an edit \(e\) around the clean state \(h\),
 
@@ -655,15 +659,15 @@ F(h+e) = F(h) + J(h)\,e + \tfrac{1}{2}\,e^{\top}H(h)\,e + \cdots,
 \]
 
 where \(J(h)\) is the local Jacobian and \(H(h)\) the second-derivative term.
-The experiment measures \(F(h+e)-F(h)\) directly; a Jacobian lens supplies
-only the first-order term. The dose scan is then literally a probe of the
-remainder: if the first-order term dominated, the response would scale like
-the dose and pass the gates. It did not, even at `2%`–`4%` RMS, so for these
-directions, the higher-order terms are already non-negligible at doses that
-small.
+The experiment records the signed branches and centers their contrast as
+\((F(h+e)-F(h-e))/2\). A prompt-local Jacobian would predict a response
+proportional to dose. The released lens instead averages Jacobians across
+other prompts and positions. The signed responses fail the dose-linearity
+gates at `2%`–`4%` RMS; that establishes a departure from proportionality
+in this implementation, without isolating smooth higher-order dynamics
+from finite-precision effects.
 
-**The released lens is wrong in two independent ways, and this study cannot
-tell them apart.** First, truncation: it omits every term past the first.
+**Two sources of approximation remain unresolved.** First, truncation: it omits every term past the first.
 Second, expansion point: it is not even \(J(h)\) for the prompt under study
 but a Jacobian averaged over other prompts and positions. The Figure 4 null
 (J failing to beat identity) could come from either. The prompt-specific
@@ -697,26 +701,23 @@ therefore cannot be blamed on the quadratic term alone; odd terms at cubic
 order or above, or non-polynomial behavior, must contribute.
 {{< /panel >}}
 
-**One empirical hint argues against a low-order polynomial fix.** If a
-quadratic or cubic term dominated the wake, the per-unit-dose response should
-*grow* with dose. It shrank: median final-state gain fell from `1.82x` at
-`2%` to `1.48x` at `30%`. Shrinking per-unit response looks more like
-saturation (attention softmax and normalization layers flattening out), and
-saturating functions are exactly the ones a truncated Taylor series
-approximates poorly outside a small radius. The realistic ladder of "better
-lenses" is therefore probably: prompt-local first order, then first order
-plus a directional low-order correction, then abandoning polynomials for a
-small learned nonlinear predictor.
+**Falling gain does not identify the correction.** Median final-state gain
+fell from `1.82x` at `2%` to `1.48x` at `30%`. This is compatible with
+saturation and with a negative higher-order correction. For example,
+\(F(e)=ae-be^3\), with \(a,b>0\), has signed response per unit dose
+\(a-be^2\), which decreases over the range where it remains positive.
+The gain curve alone therefore does not choose between a polynomial
+correction and a saturating response. Fitting directional models on one
+dose panel and checking them on held-out doses would test that distinction.
 
 **Why would smaller doses be amplified *more*?** At first glance the gain
 ordering looks backwards. It is not: the *absolute* wake still grows with
 dose (a `30%` edit moves the final state far more than a `2%` edit); what
-falls is the amplification *per unit of delivered edit*. The small-dose gain
-is the more fundamental number: as dose shrinks, gain approaches the
-magnification of the model's true local Jacobian along these directions,
-roughly `1.8x` here. The question is then why larger doses are compressed
-relative to that linear-regime baseline, and at least three mechanisms would
-each produce exactly this signature. First, **normalization compression**:
+falls is the amplification *per unit of delivered edit*. The roughly `1.8x` value is the gain at the smallest dose that passed
+the requested-versus-realized fidelity rule. It is not an established
+local-Jacobian gain: the `2%`–`4%` panel failed dose-linearity, and the
+smaller doses failed the fidelity rule. Several mechanisms could contribute
+to the lower gain at larger doses. First, **normalization compression**:
 Llama applies RMSNorm on the way into every block, dividing the residual by
 its own overall scale. A tiny edit leaves that scale essentially untouched
 and rides through; a `30%` edit measurably inflates the very norm it is
@@ -732,10 +733,10 @@ pull back per unit of push. All three are hypotheses, not measurements. The
 first is also the most testable: recompute gain after accounting for the
 measured layer-wise norm inflation, or deliver the edit as a norm-preserving
 rotation instead of an addition and check whether the dose profile of gain
-flattens. A fourth, duller possibility, that the falling curve is an artifact
-of normalizing by the realized rather than requested edit, is already
-excluded by the fidelity gate: from `2%` through `30%`, realized and
-requested edits matched within the frozen bounds.
+flattens. The fidelity gate also bounds the discrepancy between requested and
+realized edit sizes from `2%` through `30%`. It does not by itself
+prove that the choice of denominator has zero effect on the gain curve;
+recomputing both normalizations would quantify that sensitivity.
 
 These framings are hypotheses. The census established *where* the first-order
 description stops being adequate for these directions on this model; the

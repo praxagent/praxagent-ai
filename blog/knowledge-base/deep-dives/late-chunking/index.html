@@ -42,12 +42,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20260801-2">
+    <link rel="stylesheet" href="/blog/blog.css?v=20260904">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js"></script>
+    <script src="/blog/js/katex-0.16.47/katex.min.js"></script>
+    <script src="/blog/js/katex-0.16.47/auto-render.min.js"></script>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -210,11 +210,16 @@ before relying on them.</div>
 <li>It does require access to token-level states from a compatible embedding model.</li>
 </ul>
 <p>The method was introduced by Günther et al. in <a href="https://arxiv.org/abs/2409.04701v3"><em>Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models</em></a>. This Deep Dive explains the operation, the published evidence, the implementation boundaries, and the cases where the standard approach can still win.</p>
+<p><strong>Choose a reading route.</strong></p>
+<ul>
+<li><strong>Learning the idea:</strong> continue with the vocabulary, <a href="#the-short-version">short example</a>, and <a href="#the-operation-one-step-at-a-time">step-by-step operation</a>.</li>
+<li><strong>Assessing the evidence:</strong> start with <a href="#how-retrieval-is-scored">retrieval scoring</a>, then the <a href="#what-the-published-retrieval-evaluation-found">published evaluation</a> and <a href="#an-auditable-scifact-matched-content-token-re-evaluation">SciFact re-evaluation</a>.</li>
+<li><strong>Implementing or reproducing it:</strong> read the <a href="#the-implementation-boundary">implementation boundary</a>, <a href="#how-to-evaluate-it-on-your-corpus">evaluation plan</a>, and <a href="#appendix-a-reproduce-and-audit-the-result">reproduction appendix</a>.</li>
+</ul>
 <h2 id="before-late-chunking-a-tiny-vocabulary-kit">Before late chunking: a tiny vocabulary kit</h2>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>You do not need to know transformer internals first.</strong> Keep one picture in
@@ -263,7 +268,6 @@ lists are combined.
 <div class="panel definition">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="book-open"></i>
-        
     </div>
     <div class="panel-content">
         <strong>What does L2 normalization do?</strong> For a vector such as \([3,4]\), its L2
@@ -396,7 +400,6 @@ product equals their <a href="/blog/knowledge-base/glossary/cosine-similarity/" 
 <div class="panel definition">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="book-open"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Three metrics, three questions.</strong> <a href="/blog/knowledge-base/glossary/retrieval-ranking-metrics/" class="ref-term">nDCG@10</a>
@@ -559,7 +562,7 @@ is a complete picture. All three depend on the available relevance judgments.
   </tbody>
 </table>
 <h2 id="what-did-this-re-evaluation-teach-us">What did this re-evaluation teach us?</h2>
-<p>After seeing the scores, a reader should reasonably ask, “what did the analysis actually teach us?” This re-evaluation produced five useful conclusions:</p>
+<p>The re-evaluation supports five conclusions:</p>
 <ol>
 <li><strong>Late chunking had the highest mean ranking score in this comparison.</strong> Its nDCG@10 was 0.6610, compared with 0.6414 for naive chunks and 0.6389 for one whole-document vector.</li>
 <li><strong>The gain was not shared evenly.</strong> Late chunking improved 49 queries, tied on 229, and worsened 22. The positive average did not mean every query benefited.</li>
@@ -567,20 +570,6 @@ is a complete picture. All three depend on the available relevance judgments.
 <li><strong>The comparison does not isolate context alone.</strong> The naive and late arms differ in their special-token and position-dependent inputs as well as in cross-chunk context.</li>
 <li><strong>The practical answer is to test, not assume.</strong> A representative corpus can reveal whether the ranking improvement is large enough to justify the added indexing cost and memory.</li>
 </ol>
-<div class="panel info">
-    <div class="panel-icon" aria-hidden="true">
-        <i data-feather="info"></i>
-        
-    </div>
-    <div class="panel-content">
-        <strong>The useful conclusion.</strong> Late chunking was better on average in this frozen
-SciFact comparison, and the query-level analysis showed exactly where that
-summary needs restraint. The result supports trying the method on a comparable
-retrieval problem. It does not prove that extra context always helps, explain
-why each query changed, or predict the gain on another corpus or model.
-    </div>
-</div>
-
 <p>The full audit trail and commands are in <a href="#appendix-a-reproduce-and-audit-the-result">Appendix A</a>.</p>
 <h2 id="the-implementation-boundary">The implementation boundary</h2>
 <p>Late chunking needs more than an application programming interface (API) that returns one already-pooled vector for an input. You need:</p>
@@ -702,7 +691,6 @@ why each query changed, or predict the gain on another corpus or model.
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="alert-circle"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Pass 1: freeze the comparison</strong></p>
@@ -716,7 +704,6 @@ why each query changed, or predict the gain on another corpus or model.
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="alert-circle"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Pass 2: state what the comparison isolates</strong></p>
@@ -731,7 +718,6 @@ why each query changed, or predict the gain on another corpus or model.
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="alert-circle"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Pass 3: measure rankings and costs</strong></p>
@@ -746,7 +732,6 @@ why each query changed, or predict the gain on another corpus or model.
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="alert-circle"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Pass 4: inspect heterogeneity and generalization</strong></p>
@@ -763,7 +748,6 @@ why each query changed, or predict the gain on another corpus or model.
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="alert-circle"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Late chunking may be worth testing</strong></p>
@@ -779,7 +763,6 @@ why each query changed, or predict the gain on another corpus or model.
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="alert-circle"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Prefer the simpler baseline, or expect a smaller gain</strong></p>
@@ -798,7 +781,6 @@ why each query changed, or predict the gain on another corpus or model.
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Receipt naming note.</strong> The recorded run generator used <code>mrr_at_10</code> as the

@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../styles-v2.css?v=20260724b">
+    <link rel="stylesheet" href="../../styles-v2.css?v=20260904">
 </head>
 <body class="methods-page">
     <nav class="navbar industrial-navbar">
@@ -75,7 +75,7 @@
                 <p class="work-kicker">praxagent / Methods</p>
                 <div class="work-header-grid">
                     <h1>Experiment integrity</h1>
-                    <p>Freeze the design before outcomes. Run what you froze. Keep the failures. Ship the receipts with the claim.</p>
+                    <p>Plan comparisons before inspecting results. Report all outcomes, document changes, and publish the supporting evidence.</p>
                 </div>
             </div>
         </header>
@@ -94,9 +94,9 @@
                         time-ordered.
                     </p>
                     <p>
-                        The point is not ceremony. It is a public trail that the design preceded the
-                        outcome, the run followed the design, all outcomes were retained, and later
-                        analyses are labeled by when they entered the story.
+                        A dated record lets readers check that the design preceded the outcomes,
+                        the run followed the design, and all outcomes were retained. Later analyses
+                        should be labeled by when they were added.
                     </p>
                 </div>
             </div>
@@ -120,7 +120,7 @@
                         <span class="work-row-index">02 / Run</span>
                         <div>
                             <h3>Execute the plan as frozen</h3>
-                            <p>No editing rules mid-flight because an effect looks weak, strong, or inconvenient. Defects become dated amendments, not quiet fixes.</p>
+                            <p>Keep the planned rules independent of the observed effect. Document defects and necessary changes in dated amendments.</p>
                         </div>
                     </div>
                     <div class="work-row methods-row">
@@ -133,8 +133,8 @@
                     <div class="work-row methods-row">
                         <span class="work-row-index">04 / Release</span>
                         <div>
-                            <h3>Ship the receipts with the claim</h3>
-                            <p>Code, prompts, hashes, artifacts, and result receipts are published so a reader can inspect what the claim rests on.</p>
+                            <h3>Publish the supporting evidence</h3>
+                            <p>Code, prompts, data, and result records let readers inspect the evidence behind each claim.</p>
                         </div>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                 </div>
                 <div class="methods-prose">
                     <p>
-                        Not every run is confirmatory. We keep status language boring and consistent:
+                        These labels distinguish when the design was set and how the results can be interpreted:
                     </p>
                 </div>
                 <div class="work-ledger">
@@ -157,7 +157,7 @@
                         <span class="work-row-index">Exploratory</span>
                         <div>
                             <h3>Outcomes may still shape design</h3>
-                            <p>Useful for discovery and feasibility, and labeled as such — never sold as a confirmatory error rate.</p>
+                            <p>Useful for discovery and feasibility, and reported as exploratory rather than confirmatory evidence.</p>
                         </div>
                     </div>
                     <div class="work-row methods-row">
@@ -195,7 +195,7 @@
                     <div class="point">
                         <span>01</span>
                         <h3>Release the evidence.</h3>
-                        <p>Code, prompts, data, hashes, artifacts, and result receipts ship with the claim.</p>
+                        <p>Published code, prompts, data, and result records let readers check the evidence behind each claim.</p>
                     </div>
                     <div class="point">
                         <span>02</span>
@@ -210,8 +210,17 @@
                 </div>
                 <div class="methods-prose methods-prose-foot">
                     <p>
-                        This page is the public posture, not the internal checklist. Research notes
-                        carry the concrete receipts for each claim.
+                        These are our research standards. Each research note should identify its study plan,
+                        supporting results, and any changes made after outcomes were inspected.
+                    </p>
+                    <h3>A worked example: detecting SAE steering</h3>
+                    <p>
+                        The steering study links a
+                        <a href="https://github.com/tdj28/llm_selfref_pre/blob/b026faac222e55d7da4f01a30a6a60a468a5f023/docs/LLAMA70B_SAE_JLENS_PROTOCOL.md">protocol committed before outcomes</a>,
+                        a <a href="../../blog/posts/2026/07/jacobian-lens-sae-steering/">report with results and evidence</a>,
+                        and a <a href="https://github.com/tdj28/llm_selfref_pre/blob/478a10dd0670eee47fc151882560482ae79fc790/docs/LLAMA70B_SAE_JLENS_V2_POST_OUTCOME_AMENDMENT_20260712.md">dated follow-up amendment</a>.
+                        The follow-up failed its planned replay-equivalence test, so its endpoint results are reported as exploratory.
+                        Readers can trace that change in status instead of inferring it from the headline.
                     </p>
                     <p>
                         <a href="../../blog/index.html">Research notes <span aria-hidden="true">→</span></a>

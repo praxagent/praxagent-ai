@@ -42,12 +42,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20260801-2">
+    <link rel="stylesheet" href="/blog/blog.css?v=20260904">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js"></script>
+    <script src="/blog/js/katex-0.16.47/katex.min.js"></script>
+    <script src="/blog/js/katex-0.16.47/auto-render.min.js"></script>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -156,11 +156,9 @@ author alone.</div>
                     <div class="panel-icon" aria-hidden="true"><i data-feather="info"></i></div>
                     <div class="panel-content"><strong>Artificial intelligence (AI)-use disclosure.</strong> Generative-AI tools helped
 draft, revise, illustrate, and review this Deep Dive. The author selected the
-questions and shaped the exposition. Before publication, the author must
-inspect the cited sources and generated artifacts and take responsibility for
-the final text and claims. This is an independent, non-peer-reviewed Deep
-Dive. Verify claims against the cited primary sources and released artifacts
-before relying on them.</div>
+questions, shaped the exposition, and is responsible for the final text and
+claims. The source data, code, and verification receipts are available with
+this guide. This is an independent, non-peer-reviewed Deep Dive.</div>
                 </div>
 
             </div>
@@ -280,12 +278,16 @@ before relying on them.</div>
             <div class="post-body">
                 <p>Imagine that you measure the area, perimeter, length, width, compactness, asymmetry, and groove length of every wheat kernel in a collection. You now have seven measurements for each kernel. Looking at one column at a time is manageable. Understanding how all seven columns change together is harder.</p>
 <p><strong>Principal component analysis (PCA)</strong> is a way to make a simpler map of a spreadsheet with many measurement columns. Each kernel becomes one point on the map. Kernels that differ along the high-variance directions retained in the map tend to land apart. Differences that lie mainly in omitted components can disappear, so a two-dimensional PCA map does not preserve every pairwise distance or neighborhood.</p>
-<p>That is the friendly starting point. Before making it more precise, we need to unpack a few words that statistics books often introduce too quickly.</p>
+<p><strong>Choose a reading route.</strong></p>
+<ul>
+<li><strong>Learning PCA:</strong> continue with the <a href="#before-pca-a-tiny-vocabulary-kit">vocabulary and pictures</a>, then follow the wheat-kernel example. The mathematical appendix is optional.</li>
+<li><strong>Working with your own data:</strong> start with the <a href="#this-example-starts-with-pre-cleaned-data">data-preparation choices</a>, follow the <a href="#work-through-the-original-data-in-python">Python walkthrough</a>, and use the <a href="#a-practical-interpretation-checklist">interpretation checklist</a>.</li>
+<li><strong>Inspecting the result:</strong> jump to <a href="#question-4-what-patterns-are-actually-visible">the observed patterns</a>, read <a href="#how-pca-can-go-wrong-even-when-the-code-is-correct">the limits</a>, and open the <a href="#appendix-a-reproduce-the-teaching-example">reproduction instructions</a> or <a href="#appendix-b-the-mathematical-definition-of-pca">mathematical definition</a> as needed.</li>
+</ul>
 <h2 id="before-pca-a-tiny-vocabulary-kit">Before PCA: a tiny vocabulary kit</h2>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>No statistics course required.</strong> You do not need to memorize a formula before
@@ -297,7 +299,6 @@ stops feeling concrete, return to the examples in these boxes.
 <div class="panel definition">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="book-open"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Observation and row.</strong> An <strong>observation</strong> is one thing being described. In
@@ -314,7 +315,6 @@ table is therefore not automatically an independent biological observation.</p>
 <div class="panel definition">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="book-open"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Variation.</strong> If every plant had exactly the same root length, root length
@@ -354,7 +354,6 @@ other.</p>
 <div class="panel definition">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="book-open"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Axis.</strong> An axis is a numbered direction used to locate a point, like the
@@ -381,7 +380,6 @@ another. A PCA plot is a map of observations in that new coordinate system.</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Five more terms, translated before we use them.</strong></p>
@@ -448,7 +446,6 @@ developmental, genetic, or environmental causes of those shapes.</p>
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="alert-circle"></i>
-        
     </div>
     <div class="panel-content">
         <strong>What the public table does not contain:</strong> plant identifiers, field plots, X-ray plate identifiers, harvest batches, or repeat-measurement identifiers. We can describe these 210 kernels, but the table does not support a strong claim about new fields, harvests, plates, or wheat populations.
@@ -461,7 +458,6 @@ developmental, genetic, or environmental causes of those shapes.</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>A clean-looking spreadsheet and a scientifically trustworthy dataset are not the same thing.</strong> Formatting checks can find blanks, impossible values, and inconsistent codes. Deciding whether a surprising measurement is a typo, instrument problem, or real biology requires source records and biological judgment.
@@ -798,7 +794,6 @@ measurements chosen for this preliminary view.</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>How Pearson correlation is calculated</strong></p>
@@ -972,7 +967,6 @@ $$\sigma_j=\sqrt{\frac{1}{n}\sum_{i=1}^{n}(x_{ij}-\mu_j)^2}.$$<p>Read the formul
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Why do some programs report a slightly different standard deviation?</strong></p>
@@ -1098,7 +1092,6 @@ z=\frac{0.1345}{0.4420}\approx+0.30.
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Scaling is a scientific judgment, not a ritual</strong></p>
@@ -1149,7 +1142,6 @@ normalized in a meaningful way.</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Why “loadings” can mean two different things</strong></p>
@@ -1306,7 +1298,6 @@ conditions.</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Why your PCA plot might look mirrored</strong></p>
@@ -1547,7 +1538,6 @@ vary; complete separation in morphology space is not required.</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>The useful conclusion</strong></p>
@@ -1565,7 +1555,6 @@ vary; complete separation in morphology space is not required.</p>
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="alert-circle"></i>
-        
     </div>
     <div class="panel-content">
         <strong>A PCA plot belongs to the exact table used to create it.</strong> Change which observations or features are included, and the feature means, correlations, and principal-component axes can change too. The software may be working perfectly while the biological story drawn from one selected plot is unstable.
@@ -1576,7 +1565,6 @@ vary; complete separation in morphology space is not required.</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>A simple example:</strong> imagine that PC1 separates populations A and B. You then add population C, whose measurements differ much more strongly. PC1 may now separate C from everyone else. The smaller A-versus-B pattern might move to PC2, PC3, or another component. Nothing malfunctioned. PCA found the directions with the most variation in the new table.
@@ -1594,7 +1582,6 @@ failure.</p>
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="alert-circle"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Sensitivity-check worksheet</strong></p>
@@ -1642,7 +1629,6 @@ failure.</p>
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="alert-circle"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Leakage-safe modeling sequence</strong></p>
@@ -1693,7 +1679,7 @@ together during splitting.</p>
 <p>Fitting PCA to the complete dataset is appropriate when the stated goal is simply to describe that dataset. There is no held-out performance claim in a purely exploratory map.</p>
 <p>The mistake is to reuse globally imputed, globally scaled, or globally fitted PCA features for supposedly held-out model evaluation. Keep exploratory outputs separate from the modeling pipeline, and name them accordingly.</p>
 <h2 id="the-five-answers-in-plain-language">The five answers in plain language</h2>
-<p>If someone asks the five questions from the beginning of this guide, a strong answer can be short:</p>
+<p>The five questions now have short answers:</p>
 <ol>
 <li><strong>Biological question:</strong> We are asking how seven kernel measurements vary across these 210 kernels and where the three recorded wheat varieties land on the descriptive map.</li>
 <li><strong>Row meaning:</strong> One row is one measured kernel before PCA and the same kernel expressed as component scores afterward. We do not aggregate because the public file identifies no repeated rows.</li>
@@ -1701,7 +1687,6 @@ together during splitting.</p>
 <li><strong>Visible pattern:</strong> PC1 represents 71.9% of scaled-feature variation, PC2 represents 17.1%, and the varieties tend to occupy different but overlapping regions. PCA did not use variety labels to learn the axes.</li>
 <li><strong>Leakage:</strong> Full-data scaling is acceptable for describing this complete table. If we later claim held-out prediction performance, we must split first and fit imputation, scaling, PCA, and the model inside each training fold.</li>
 </ol>
-<p>That answer demonstrates understanding of the biology, the table, the preprocessing, the plot, and the evaluation boundary without requiring a derivation from memory.</p>
 <p>In biological research, PCA is often the beginning of a conversation rather
 than the end of an analysis. Components do not arrive with biological meanings;
 those meanings emerge by combining the mathematical results with experimental
@@ -1715,7 +1700,6 @@ biological tables.</p>
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="alert-circle"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Pass 1: identify the biological design</strong></p>
@@ -1730,7 +1714,6 @@ biological tables.</p>
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="alert-circle"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Pass 2: audit the feature table</strong></p>
@@ -1746,7 +1729,6 @@ biological tables.</p>
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="alert-circle"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Pass 3: read what the PCA found</strong></p>
@@ -1761,7 +1743,6 @@ biological tables.</p>
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="alert-circle"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Pass 4: challenge the claim</strong></p>
@@ -1799,7 +1780,6 @@ X\in\mathbb{R}^{n\times p}
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>How to read “argmax”</strong></p>
@@ -1813,7 +1793,6 @@ X\in\mathbb{R}^{n\times p}
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>How scikit-learn finds that direction in our data</strong></p>

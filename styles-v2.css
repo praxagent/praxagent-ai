@@ -2138,15 +2138,14 @@ body {
     display: block;
 }
 
-.hero-title-probability {
+.hero-title-detail {
     margin-top: 0.32em;
     color: #9FC2D8;
-    font-family: var(--font-mono);
-    font-size: 0.62em;
+    font-family: var(--font-sans);
+    font-size: 0.56em;
     font-weight: 500;
-    letter-spacing: -0.055em;
-    line-height: 1.08;
-    white-space: nowrap;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
 }
 
 .hero-subtitle {
@@ -2168,7 +2167,7 @@ body {
 
 .hero-cta-links {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     align-items: center;
     gap: 1.5rem;
 }
@@ -2433,8 +2432,8 @@ body {
 
 .research-figures {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
     margin: 0 0 2.5rem;
 }
 
@@ -2450,22 +2449,35 @@ body {
     width: 100%;
     height: auto;
     aspect-ratio: 4 / 3;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     border: 1px solid var(--border-primary);
     background: #FFFFFF;
     transition: border-color 0.2s ease;
 }
 
-.research-figures span {
+.research-figures .research-figure-title {
     padding-top: 0.7rem;
-    color: var(--text-tertiary);
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    color: var(--text-dark);
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.4;
     transition: color 0.2s ease;
+}
+
+.research-figures p {
+    margin: 0.5rem 0 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.research-figure-action {
+    margin-top: 0.8rem;
+    color: var(--sky);
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
 .research-figures a:hover img {
@@ -2635,6 +2647,19 @@ body {
 
 .about-content {
     max-width: none;
+}
+
+.about-intro {
+    max-width: 48rem;
+    margin: 0 0 2.5rem;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.75;
+}
+
+.about-intro a {
+    color: var(--sky);
+    text-underline-offset: 0.2em;
 }
 
 .about-points {
@@ -2918,8 +2943,8 @@ body {
     }
 
     .research-figures {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1rem;
+        grid-template-columns: 1fr;
+        gap: 2rem;
         margin-bottom: 2rem;
     }
 

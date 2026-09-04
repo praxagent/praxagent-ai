@@ -381,8 +381,8 @@ def discover_documents(source_root: Path) -> list[SourceDocument]:
     return documents
 
 
-def _without_code(text: str) -> str:
-    """Return visible prose with fenced and inline code replaced by spaces."""
+def _without_code(text: str, *, preserve_inline: bool = False) -> str:
+    """Remove fenced code; optionally retain inline terms for prose summaries."""
 
     result: list[str] = []
     fence_character: str | None = None
@@ -402,7 +402,8 @@ def _without_code(text: str) -> str:
 
         # Markdown code spans cannot cross a line in the upstream corpus.  Keep
         # line length unimportant but preserve newlines for useful diagnostics.
-        line = re.sub(r"(`+)(?:[^`]|`(?!\1))*?\1", lambda match: " " * len(match.group(0)), line)
+        if not preserve_inline:
+            line = re.sub(r"(`+)(?:[^`]|`(?!\1))*?\1", lambda match: " " * len(match.group(0)), line)
         result.append(line)
     return "".join(result)
 
@@ -454,10 +455,21 @@ def validate_safe_markdown(text: str, source_path: PurePosixPath) -> None:
 
 
 def _clean_inline_markdown(value: str) -> str:
+    code_spans: list[str] = []
+
+    def preserve_code(match: re.Match[str]) -> str:
+        code_spans.append(match.group(0)[len(match.group(1)):-len(match.group(1))].strip())
+        return f"\x00{len(code_spans) - 1}\x00"
+
+    # Remove formatting without destroying underscores or literal Markdown
+    # characters in filenames, settings, and commands.
+    value = re.sub(r"(`+)(?:[^`]|`(?!\1))*?\1", preserve_code, value)
     value = re.sub(r"!\[([^]]*)\]\([^)]*\)", r"\1", value)
     value = re.sub(r"\[([^]]+)\]\([^)]*\)", r"\1", value)
     value = re.sub(r"[`*_~]", "", value)
     value = html.unescape(value)
+    for index, code in enumerate(code_spans):
+        value = value.replace(f"\x00{index}\x00", code)
     return " ".join(value.split()).strip()
 
 
@@ -474,7 +486,7 @@ def extract_title_and_body(text: str, source_path: PurePosixPath) -> tuple[str, 
 
 
 def derive_summary(body: str, title: str) -> str:
-    visible = _without_code(body)
+    visible = _without_code(body, preserve_inline=True)
     paragraphs = re.split(r"\n\s*\n", visible)
     for paragraph in paragraphs:
         lines = [line.strip() for line in paragraph.splitlines() if line.strip()]

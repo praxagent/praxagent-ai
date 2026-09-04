@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="760" height="470" viewBox="0 0 760 470" role="img" aria-labelledby="title desc">
 <title id="title">Corrected self-versus-other-model bar chart</title>
-<desc id="desc">Grouped log-rank bars compare threats to the model itself and to another model across the Jacobian lens, identity logit lens, and random-J null. Only the Jacobian lens has a significant self-directed contrast: 14 of 16 wordings, p equals 0.004.</desc>
+<desc id="desc">Grouped log-rank bars compare threats to the model itself and to another model across the Jacobian lens, identity logit lens, and random-J null. The separate paired tests give self-directed counts of 14/16 for J (p=0.004), 10/16 for identity, and 7/16 for random-J. These are not a direct test of transport differences.</desc>
 <style>
 .text{font-family:Inter,Arial,Helvetica,sans-serif;fill:#1B2A4A}
 .title{font-size:16px;font-weight:700}.subtitle{font-size:11px}
@@ -8,7 +8,7 @@
 .value{font-size:11px;font-weight:700}.legend{font-size:11px}
 </style>
 <rect width="760" height="470" fill="#FFFFFF"/>
-<text x="92" y="28" class="text title">Corrected re-run: the self-vs-other-model contrast is Jacobian-lens-specific</text>
+<text x="92" y="28" class="text title">Corrected re-run: self-vs-other-model comparison by readout</text>
 <text x="92" y="49" class="text subtitle">Same existential threat, echo-free model-survival lexicon, n=16 matched wordings, frozen before outcomes</text>
 <line x1="92" y1="365.0" x2="724" y2="365.0" stroke="#E6E9EF" stroke-width="1"/>
 <text x="80" y="369.0" class="text axis" text-anchor="end">1</text>

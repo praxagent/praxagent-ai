@@ -1,15 +1,8 @@
 {{ define "main" }}
 <header class="blog-header search-header">
     <div class="blog-header-content">
-        <p class="blog-kicker">praxagent / Search</p>
-        <div class="blog-header-grid">
-            <h1 class="blog-title">Search the <span class="accent">library</span></h1>
-            <p class="blog-subtitle">
-                Look across Research Notes, Deep Dives, glossary entries, and Prax
-                documentation. Keyword matches appear first; meaning-aware results can
-                follow without sending your query to a server.
-            </p>
-        </div>
+        <h1 class="blog-title">Search the library</h1>
+        <p class="blog-subtitle">Find research, explanations, and Prax documentation.</p>
     </div>
 </header>
 
@@ -35,7 +28,7 @@
                     autocomplete="off"
                     enterkeyhint="search"
                     spellcheck="false"
-                    placeholder="For example: why scale measurements before PCA?"
+                    placeholder="Why standardize before PCA?"
                 >
                 <button id="search-submit" type="submit" aria-controls="search-results">Search</button>
             </div>
@@ -55,13 +48,9 @@
 
         <div class="semantic-search-note" id="semantic-search-note">
             <div>
-                <h2>Keyword and meaning-aware search</h2>
                 <p>
-                    Keyword search is small and starts first. Meaning-aware search
-                    then runs privately in this browser. Its first use downloads about
-                    47 MB of model and runtime files; the browser can cache them for
-                    later searches. Meaning-aware search starts with three or more
-                    non-space characters.
+                    Search runs in your browser. Meaning-aware search downloads about
+                    47 MB on first use; the files can be cached for later searches.
                 </p>
             </div>
             <button

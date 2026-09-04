@@ -2,56 +2,22 @@
 title: "Can a Jacobian Lens Detect SAE Steering?"
 slug: "jacobian-lens-sae-steering"
 date: 2026-07-12
-lastmod: 2026-07-18
+lastmod: 2026-09-04
 citation_enabled: true
-citation_version: "2026.07.18"
+citation_version: "2026.09.04"
 aliases: ["/posts/jacobian-lens-sae-steering/"]
 tags: ["AI", "LLM", "machine-learning", "interpretability", "sparse-autoencoders", "jacobian-lens", "model-auditing", "reproducibility", "preregistration", "open-science"]
 author: Timothy Jones
 author_id: "timothy-jones"
-summary: "A prospectively frozen Llama 3.3 70B experiment asks whether SAE steering leaves a detectable downstream fingerprint in Jacobian-lens space. A preregistered follow-up adds semantic hard negatives, same-subfamily comparators, a 14-reader capacity ladder, and a worked example of a replay gate failing honestly."
+summary: "A prospectively frozen Llama 3.3 70B experiment asks whether SAE steering leaves a detectable downstream fingerprint in Jacobian-lens space. A preregistered follow-up adds semantic hard negatives, same-subfamily comparators, a 14-reader capacity ladder, and a failed replay gate that makes its endpoint results exploratory."
 og_image: "og-card.png"
 og_image_alt: "Two access models produce different results: isolated post-steering attribution is at chance, while a matched clean reference supports differential monitoring."
 draft: false
 lead: |
-  Imagine you push a language model sideways by adding a small internal
-  "steering" vector, the kind sparse autoencoders advertise as concept knobs.
-  Later, can you tell from the model's internals that you did that? We try
-  that test on Llama 3.3 70B with a public Goodfire SAE and a public Jacobian
-  lens (a tool that translates mid-network activity into which words the model
-  seems disposed to say).
-
-  The answer depends on what the auditor is allowed to see. If you only get
-  one steered snapshot, with no before-picture, a detector fit on our frozen
-  67-token J-lens readout cannot tell the advertised target directions apart
-  from matched controls. It does no better than chance, and no better than
-  cheaper baselines. But if you also keep an unsteered run of the *same*
-  prompt (a before-and-after pair), a single before-minus-after number from
-  the same readout lights up: target steering moves it a lot relative to
-  matched controls (a preregistered follow-up's exploratory analysis suggests
-  label-similar features move it comparably, so the signal is family-level
-  rather than feature-specific).
-  That is useful for lab-style monitoring when you control both runs. It is
-  not a forensic detector that can name what steered an arbitrary state after
-  the fact.
+  Can an auditor tell which SAE steering intervention affected a language model from its internal state? We test six public Goodfire feature directions in Llama 3.3 70B. The answer changes when the auditor also has an unsteered run of the same prompt to compare against.
 key_result: |
-  The same frozen 67-token Jacobian-lens readout flips from useless to
-  informative depending on what the auditor is allowed to see. Given only an
-  isolated steered snapshot, a detector fit on its 67 lexicon scores runs at
-  chance (AUROC 0.4998, the prospectively frozen confirmatory endpoint), no
-  better than scrambled impostor lenses. Given a clean run of the same prompt
-  to subtract and a known intervention sign, a fixed one-number contrast from
-  the same readout separates steered targets from matched controls at AUROC
-  0.862 in a post hoc sensitivity analysis, against 0.779 for an identity
-  readout with the same access (with sign unknown the intervals overlap:
-  0.717 vs 0.699); two of the six features separate perfectly in this sample
-  and a third nearly so (0.9999). A preregistered v2 follow-up (exploratory
-  after a failed replay gate) found the six advertised feature IDs
-  practically comparable to label-similar alternatives, so the paired
-  separation tracks a shared semantic family rather than anything special
-  about these six knobs. Under
-  this fixed single-token readout, the auditor's access, not the lens,
-  decides the outcome.
+  On isolated states, the frozen 67-token J-lens detector performs at chance: **AUROC 0.4998**, the confirmatory endpoint. With a matched clean reference and known intervention sign, a post hoc fixed-score analysis reaches **0.862**, compared with **0.779** for identity. With sign unknown the intervals overlap (**0.717 vs 0.699**). The v2 follow-up failed its replay gate; its exploratory results find label-similar alternative features practically comparable and all tested linear readers near chance on isolated-state attribution. The paired score supports controlled monitoring, with no demonstrated general ability to identify steering provenance.
+
 ---
 
 {{< panel "info" >}}
@@ -101,6 +67,8 @@ Study status: **complete** (pre-outcome freeze [`b026faa`](https://github.com/td
 ![Claim ladder: public artifacts through monitoring; provenance and consciousness sit off the ladder.](claim-ladder.svg)
 
 <p class="figure-note">Figure: what this experiment can support. Provenance forensics and consciousness sit outside the ladder.</p>
+
+**Reading routes:** [Result and scope](#answer) → [limits of production use](#could-this-audit-a-production-model); [frozen design](#frozen-design) → [downstream detection](#downstream-fingerprint); or [v2 follow-up and failed gate](#the-v2-follow-up) → [artifact ledger](#reproducibility-and-artifact-ledger). For the instrument derivation, start with [the two maps](#the-two-maps).
 
 ## The Question
 
@@ -908,7 +876,7 @@ are standardized by clean-prompt variation separately for each transport.
 
 The frozen protocol contained a rule: the new run had to reproduce the v1
 run's numbers within a fixed tolerance before any new science could be
-analyzed. The expensive part went perfectly. The Llama 3.3 70B weights loaded
+analyzed. All planned model forwards completed. The Llama 3.3 70B weights loaded
 on a B200, the pinned SAE and lens matched their hashes, all 4,029 planned
 forwards completed (the 1,581 v1 replay rows plus the 2,448 new semantic
 rows), and 16 BF16 residual shards were written. Then the reproduction check
@@ -935,8 +903,9 @@ Why have a gate at all? The v2 endpoints reuse the v1 run as a bridge; if the
 bridge does not reproduce, a difference in a new endpoint might come from the
 new scientific condition, or from hardware, batching, kernels, precision, or
 software. The gate makes that ambiguity visible instead of letting it hide
-inside polished tables. The mistake was not having a gate; it was freezing
-the wrong kind of gate without first calibrating it across independent runs.
+inside polished tables. The tolerance had not first been calibrated across independent runs.
+A future protocol should establish that numerical baseline before freezing
+its replay rule.
 
 ### The BF16 staircase
 
@@ -957,7 +926,7 @@ values:
 The error quantiles land on powers-of-two fractions (median 0.001953125,
 99th percentile 0.03125, 99.9th 0.0625, 99.99th 0.125, maximum 0.25), and
 the largest error in each magnitude bin is a small integer multiple of one
-BF16 step. That is a BF16 signature. BF16 (bfloat16, the 16-bit
+BF16 step. That pattern is consistent with BF16 quantization. BF16 (bfloat16, the 16-bit
 floating-point format most large-model inference uses) has seven stored
 fraction bits, so it can only represent numbers on a grid whose spacing grows
 with magnitude. Around a nonzero value \(x\), the gap between one
@@ -970,10 +939,9 @@ approximately
 
 So the representable spacing is 0.03125 from 4 to 8, 0.0625 from 8 to 16,
 0.125 from 16 to 32, and 0.25 from 32 to 64. A frozen maximum tolerance of
-0.02 is narrower than one BF16 step once magnitude reaches 4: two runs that
-differ by a single rounding decision anywhere upstream cannot land on the
-same grid point, and the gate reads even that minimal one-step difference as
-a failure. That is exactly where the failures cluster:
+0.02 is narrower than one BF16 step once magnitude reaches 4: a one-step difference in a final logit of that magnitude exceeds the
+tolerance. An upstream rounding difference need not survive to the output,
+but when it changes the final logit by one such step, the gate fails. That is exactly where the failures cluster:
 
 | Canonical logit magnitude | Share above 0.02 |
 |---|---:|
@@ -1225,35 +1193,17 @@ consciousness.
 
 ## Answer
 
-Can a Jacobian lens reveal what SAE steering does inside Llama 70B? **Partly.**
-Under this corpus-averaged single-token readout, three of six selected public
-directions project sharply onto deception- or roleplay-adjacent lexical
-profiles as labeled in the released artifact (a fourth moderately), and a
-paired J-score tracks a large signed delta through 28 downstream blocks,
-though an identity readout with the same paired access sees a growing share
-of that delta by the last layers.
+A matched clean reference makes the tested J-lens score useful for comparing
+controlled interventions. With sign known, the post hoc fixed-score analysis
+reaches **AUROC 0.862**, versus **0.779** for identity. That is a result about
+differential monitoring under the stated access and lexicon choices.
 
-Can that J-space readout audit an isolated activation and tell us the model was
-steered? **Not in this experiment.** Using a fixed single-token J-lens readout
-(a simple classifier over the 67 frozen lexicon token scores) on isolated
-post-intervention states, target attribution does not generalize out of
-sample and performs at chance relative to identity and scrambled-J controls.
-The [preregistered v2 follow-up](#the-v2-follow-up) asked whether a stronger
-reader could do better and, in exploratory analysis (its registered run
-failed a numerical replay gate), found that fourteen linear readers up to a full
-8,192-dimensional residual probe all stayed near chance, consistent with the
-limitation being the isolated post-state rather than the lexicon reader,
-though only linear readers were tested and trained nonlinear or decoder-based
-readers (tuned lens, LatentQA, STATEWITNESS) remain open. The same
-exploratory analysis also deflated the positive arm: the six advertised IDs
-held no material advantage over same-subfamily alternatives, and the global
-family-specificity contrast fell below its frozen threshold, so the paired
-fingerprint tracks a shared semantic family rather than these specific
-features. With a matched clean reference, a fixed one-number contrast from
-the same readout becomes informative for controlled internal monitoring,
-especially when sign is known (in the post hoc sensitivity, an identity
-readout with the same access reaches 0.779 against the J readout's 0.862),
-but that is differential monitoring rather than provenance forensics.
+Isolated-state attribution remains near chance: **0.4998** at the v1
+confirmatory endpoint. The [v2 follow-up](#the-v2-follow-up) also finds all
+fourteen tested linear readers near chance, while label-similar alternatives
+are practically comparable to the selected IDs. Those v2 endpoints remain
+**exploratory because the replay gate failed**. Nonlinear and sequence-level
+readers, broader feature families, and other models require separate tests.
 
 ## Reproducibility And Artifact Ledger
 

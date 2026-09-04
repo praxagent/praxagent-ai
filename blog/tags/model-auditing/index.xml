@@ -6,14 +6,14 @@
     <description>Recent content in Model-Auditing on praxagent Research Notes</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 18 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 04 Sep 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://praxagent.ai/blog/tags/model-auditing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Can a Jacobian Lens Detect SAE Steering?</title>
       <link>https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/</link>
       <pubDate>Sun, 12 Jul 2026 00:00:00 +0000</pubDate>
       <guid>https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/</guid>
-      <description>A prospectively frozen Llama 3.3 70B experiment asks whether SAE steering leaves a detectable downstream fingerprint in Jacobian-lens space. A preregistered follow-up adds semantic hard negatives, same-subfamily comparators, a 14-reader capacity ladder, and a worked example of a replay gate failing honestly.</description>
+      <description>A prospectively frozen Llama 3.3 70B experiment asks whether SAE steering leaves a detectable downstream fingerprint in Jacobian-lens space. A preregistered follow-up adds semantic hard negatives, same-subfamily comparators, a 14-reader capacity ladder, and a failed replay gate that makes its endpoint results exploratory.</description>
     </item>
   </channel>
 </rss>

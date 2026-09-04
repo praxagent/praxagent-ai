@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>praxagent - Independent AI Research & Applied Systems</title>
-    <meta name="description" content="Independent AI research in mechanistic interpretability, model evaluation, and reproducibility — plus Prax, a self-hostable agent harness suite. Public artifacts, code, controls, and receipts.">
+    <meta name="description" content="Independent AI research with evidence you can inspect. We study language models, test their behavior, and build self-hosted tools for working with them.">
+    <link rel="canonical" href="https://praxagent.ai/">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:title" content="praxagent - Independent AI Research & Applied Systems">
@@ -19,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles-v2.css?v=20260725a">
+    <link rel="stylesheet" href="styles-v2.css?v=20260904">
 </head>
 <body>
     <nav class="navbar home-navbar">
@@ -83,16 +84,16 @@
                 <p class="hero-kicker">Research</p>
                 <div class="hero-copy">
                     <h1 class="hero-title">
-                        <span>What’s your</span>
-                        <span class="hero-title-probability">p(opportunity)?</span>
+                        <span>Independent AI research.</span>
+                        <span class="hero-title-detail">Evidence you can inspect.</span>
                     </h1>
                     <p class="hero-subtitle">
-                        We investigate model internals, evaluate AI systems, and uncover where uncertainty can become defensible value.
+                        We study how language models work, test their behavior, and build self-hosted tools for working with them.
                     </p>
                     <div class="hero-cta">
                         <div class="hero-cta-links">
-                            <a href="work/index.html" class="hero-text-link">Work index <span aria-hidden="true">→</span></a>
-                            <a href="#prax-suite" class="hero-text-link">Prax suite <span aria-hidden="true">→</span></a>
+                            <a href="blog/index.html" class="hero-text-link">Explore the research <span aria-hidden="true">→</span></a>
+                            <a href="#prax-suite" class="hero-text-link">Explore Prax <span aria-hidden="true">→</span></a>
                         </div>
                     </div>
                 </div>
@@ -117,7 +118,7 @@
                 <div class="research-header-copy">
                     <h2 id="recent-research-title">Research</h2>
                     <p>
-                        Controlled experiments and investigations in LLM interpretability, alignment, agentic behavior, and more.
+                        Experiments on language-model representations and behavior, with controls, limitations, and reproducible results.
                     </p>
                 </div>
             </div>
@@ -131,7 +132,9 @@
                         loading="lazy"
                         decoding="async"
                     >
-                    <span>CKA layer similarity</span>
+                    <span class="research-figure-title">Which layers have similar readouts?</span>
+                    <p>Layer similarity reveals structure in the fitted lens; it does not establish a shared causal mechanism.</p>
+                    <span class="research-figure-action">Read the lens audit →</span>
                 </a>
                 <a href="blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">
                     <img
@@ -142,7 +145,9 @@
                         loading="lazy"
                         decoding="async"
                     >
-                    <span>Workspace band vs. scale</span>
+                    <span class="research-figure-title">How does the layer pattern vary with scale?</span>
+                    <p>The comparison spans model families, so size alone cannot explain the differences.</p>
+                    <span class="research-figure-action">Explore the model comparison →</span>
                 </a>
                 <a href="blog/posts/2026/07/jacobian-lens-intervention-test/">
                     <img
@@ -153,7 +158,9 @@
                         loading="lazy"
                         decoding="async"
                     >
-                    <span>Dose–depth response</span>
+                    <span class="research-figure-title">Do larger edits produce proportional responses?</span>
+                    <p>Delivered edits scale with dose, but the model’s downstream response departs from that scaling.</p>
+                    <span class="research-figure-action">Read the intervention test →</span>
                 </a>
                 <a href="blog/posts/2026/07/jacobian-lens-sae-steering/">
                     <img
@@ -164,7 +171,9 @@
                         loading="lazy"
                         decoding="async"
                     >
-                    <span>Readout family matrix</span>
+                    <span class="research-figure-title">Can an internal readout detect steering?</span>
+                    <p>A matched clean run reveals a steering signal, but related features can produce similar signals.</p>
+                    <span class="research-figure-action">Read the steering experiment →</span>
                 </a>
             </div>
             <p class="research-examples-label">Recent examples</p>
@@ -189,13 +198,13 @@
     <section id="prax-suite" class="prax-suite" aria-labelledby="prax-suite-title">
         <div class="container">
             <div class="section-index">
-                <p class="section-index-label">02 / Open harness</p>
+                <p class="section-index-label">02 / Open-source tools</p>
                 <h2 id="prax-suite-title">Prax suite</h2>
                 <a href="blog/knowledge-base/prax/">Docs <span aria-hidden="true">→</span></a>
             </div>
             <div class="prax-suite-intro">
                 <p>
-                    A security-first self-hosted agentic harness, with an integrated orchestrator, collaboration shell, sandbox, plugins, and keyless egress.
+                    A self-hosted system for coordinating AI agents, with a shared workspace, sandboxed tools, plugins, and optional isolation of provider credentials.
                 </p>
                 <a href="https://github.com/praxagent/prax" target="_blank" rel="noopener">GitHub ↗</a>
             </div>
@@ -214,7 +223,7 @@
                     <span class="work-row-index">P01</span>
                     <div>
                         <h3>Prax</h3>
-                        <p>Safety-first multi-agent harness with dozens of tools, sophisticated memory management, and more.</p>
+                        <p>Coordinate agents with persistent memory, tool permissions, and integrations for chat, code, and browsing.</p>
                     </div>
                     <span class="work-row-link">GitHub ↗</span>
                 </a>
@@ -222,7 +231,7 @@
                     <span class="work-row-index">P02</span>
                     <div>
                         <h3>TeamWork</h3>
-                        <p>Agent-agnostic shell: chat, kanban, terminal, and live browser takeover.</p>
+                        <p>A shared workspace for chat, task boards, files, terminal access, and browser interaction.</p>
                     </div>
                     <span class="work-row-link">GitHub ↗</span>
                 </a>
@@ -230,7 +239,7 @@
                     <span class="work-row-index">P03</span>
                     <div>
                         <h3>Sandbox</h3>
-                        <p>Dockerized coding agents, Chromium/CDP, desktop, and a full toolchain.</p>
+                        <p>A container-based environment for coding agents, browser automation, and desktop tools.</p>
                     </div>
                     <span class="work-row-link">GitHub ↗</span>
                 </a>
@@ -238,7 +247,7 @@
                     <span class="work-row-index">P04</span>
                     <div>
                         <h3>Secrets proxy</h3>
-                        <p>Credential-injecting egress so the agent process holds no real keys.</p>
+                        <p>Keeps provider API keys outside the agent process when deployed as an isolated service.</p>
                     </div>
                     <span class="work-row-link">GitHub ↗</span>
                 </a>
@@ -251,7 +260,7 @@
             <div class="section-index">
                 <p class="section-index-label">03 / Research domains</p>
                 <h2 class="section-title">Where we work</h2>
-                <a href="work/index.html">Work index <span aria-hidden="true">→</span></a>
+                <a href="work/index.html">Explore our work <span aria-hidden="true">→</span></a>
             </div>
             <div class="services-grid">
                 <div class="service-card">
@@ -281,11 +290,17 @@
                 <a href="methods/experiment-integrity/">Experiment integrity <span aria-hidden="true">→</span></a>
             </div>
             <div class="about-content">
+                <p class="about-intro">
+                    praxagent publishes independent AI research and open-source software.
+                    Research notes are authored by Timothy Jones, with collaborators credited on each project.
+                    <a href="blog/index.html">Read the research notes</a> or
+                    <a href="mailto:hello@praxagent.ai">get in touch about research collaboration or Prax</a>.
+                </p>
                 <div class="about-points">
                     <div class="point">
                         <span>01</span>
                         <h3>Release the evidence.</h3>
-                        <p>Code, prompts, data, hashes, artifacts, and result receipts ship with the claim.</p>
+                        <p>Published code, prompts, data, and result records let readers check the evidence behind each claim.</p>
                     </div>
                     <div class="point">
                         <span>02</span>

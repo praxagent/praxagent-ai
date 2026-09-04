@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://praxagent.ai/blog/knowledge-base/deep-dives/</loc>
-    <lastmod>2026-07-27T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/deep-dives/late-chunking/</loc>
     <lastmod>2025-08-02T00:00:00+00:00</lastmod>
@@ -16,82 +16,79 @@
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/glossary/</loc>
   </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/deep-dives/vector-search-math/</loc>
-    <lastmod>2026-07-27T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/deep-dives/logistic-regression-random-forest/</loc>
     <lastmod>2026-07-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/</loc>
-    <lastmod>2026-07-27T00:00:00+00:00</lastmod>
+    <lastmod>2026-07-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/</loc>
-    <lastmod>2026-07-27T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/ai/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/interpretability/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/jacobian-lens/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/llm/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/machine-learning/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/posts/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/reproducibility/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/sparse-autoencoders/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/ai-safety/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/evaluation-awareness/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/j-space/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/open-science/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/posts/2026/07/workspace-under-pressure/</loc>
-    <lastmod>2026-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/model-auditing/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/preregistration/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/tags/tutorials/</loc>
-    <lastmod>2026-07-18T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/glossary/affine-map/</loc>
   </url><url>
@@ -106,6 +103,8 @@
     <loc>https://praxagent.ai/blog/knowledge-base/prax/architecture/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/glossary/attention-mask/</loc>
+  </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/judge-audit/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/authentication/</loc>
   </url><url>
@@ -133,13 +132,13 @@
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/glossary/data-leakage/</loc>
   </url><url>
+    <loc>https://praxagent.ai/blog/knowledge-base/prax/security/deployment-topology/</loc>
+  </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/infrastructure/docker/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/glossary/dtype/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/glossary/embedding/</loc>
-  </url><url>
-    <loc>https://praxagent.ai/blog/knowledge-base/prax/security/deployment-topology/</loc>
   </url><url>
     <loc>https://praxagent.ai/blog/knowledge-base/prax/guides/extending/</loc>
   </url><url>

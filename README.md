@@ -46,6 +46,11 @@ failures, compiles checked-in Python, validates lowercase branding, local links,
 HTML anchors, JSON, SVG/XML assets, provenance, and publication-safety rules, then
 stages the allowlisted public website in `pages-artifact/`.
 
+Browser checks render research and knowledge-base math at desktop and mobile
+widths, including inline expressions and horizontally scrollable equations.
+KaTeX's pinned scripts, stylesheet, and fonts are served locally; math rendering
+does not depend on a third-party CDN.
+
 Stage intended site-source and deployment changes before running `make ci`. The
 release-input check deliberately rejects untracked files and unstaged edits that
 affect the published site: those files exist in a local build but disappear from

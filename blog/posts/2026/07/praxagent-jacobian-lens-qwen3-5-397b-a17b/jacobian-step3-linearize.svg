@@ -33,7 +33,7 @@
   </defs>
 
   <text x="28" y="34" class="t h">Step 3: replace the nonlinear map by its local tangent map</text>
-  <text x="28" y="58" class="t m">Keep the prompt x, source position t, and target position t' fixed. Compare one forward pass with a nearby perturbed pass.</text>
+  <text x="28" y="58" class="t m">Keep the prompt x, source position t, and target position t′ fixed. Compare one forward pass with a nearby perturbed pass.</text>
 
   <!-- baseline lane -->
   <text x="28" y="115" class="t sh">baseline</text>
@@ -66,7 +66,8 @@
   <line class="dash" x1="28" y1="278" x2="872" y2="278"/>
 
   <!-- tangent map -->
-  <text x="28" y="322" class="t sh">first-order approximation</text>
+  <text x="28" y="314" class="t sh">first-order</text>
+  <text x="28" y="338" class="t sh">approximation</text>
   <rect class="perturbed" x="220" y="296" width="130" height="62" rx="9"/>
   <text x="285" y="322" text-anchor="middle" class="t sh blue" font-style="italic">&#x3B4;h<tspan baseline-shift="sub" font-size="10">&#x2113;,t</tspan></text>
   <text x="285" y="344" text-anchor="middle" class="t m">in &#x211D;<tspan baseline-shift="super" font-size="9">d</tspan></text>
@@ -80,5 +81,5 @@
   <text x="766" y="322" text-anchor="middle" class="t sh green" font-style="italic">A &#x3B4;h</text>
   <text x="766" y="344" text-anchor="middle" class="t m">&#x2248; &#x394;h in &#x211D;<tspan baseline-shift="super" font-size="9">d</tspan></text>
 
-  <text x="28" y="382" class="t m">The approximation is local: the omitted error is second order in the size of the perturbation, O(||delta h||^2).</text>
+  <text x="28" y="382" class="t m">The approximation is local: the omitted error is second order in the size of the perturbation, O(‖δh‖<tspan baseline-shift="super" font-size="80%">2</tspan>).</text>
 </svg>

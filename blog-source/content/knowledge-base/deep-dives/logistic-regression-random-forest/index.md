@@ -49,9 +49,14 @@ and compare the two on the same rows. We keep three jobs separate throughout:
 The main study uses the open High Time Resolution Universe 2 (HTRU2)
 pulsar-candidate dataset. A shorter second study repeats the same protocol on
 images of grains from two rice varieties, Cammeo and Osmancik.
-The models are fitted separately in each dataset. No astronomy model predicts
-rice, and no rice model predicts pulsars. What travels is the evaluation
-discipline, not a fitted model.
+The models are fitted separately in each dataset using the same evaluation
+protocol.
+
+**Choose a reading route.**
+
+- **Learning the models:** continue through the candidate example, then [logistic regression](#model-one-logistic-regression-one-weighted-score), the [evaluation measures](#better-at-what), and [random forests](#model-two-random-forest-many-local-boxes).
+- **Comparing the results:** read the [evaluation design](#separate-fitting-from-held-out-evaluation), jump to the [head-to-head comparison](#head-to-head-on-the-same-htru2-holdout), then the [Rice check](#do-the-conclusions-travel-a-rice-morphology-transfer-check) and [findings and limits](#findings-and-limits).
+- **Running or auditing the study:** use the [reproduction instructions](#reproduce-and-audit-the-study), [artifact ledger](#compact-artifact-ledger), and [technical appendix](#technical-appendix).
 
 {{< reference-figure
   src="model-anatomy.svg"
@@ -135,7 +140,7 @@ do not.
 
 | Term | Question it answers | Trap in HTRU2 |
 |---|---|---|
-| **Accuracy** | Of all candidates, what fraction got the right class label? | A always-negative classifier looks strong because most rows are negative. |
+| **Accuracy** | Of all candidates, what fraction got the right class label? | An always-negative classifier looks strong because most rows are negative. |
 | **Precision** | Of candidates sent to review, what fraction are truly positive? | High precision with tiny recall can mean almost no pulsars recovered. |
 | **Recall** (sensitivity) | Of the known positives, what fraction were recovered? | High recall with low precision floods the queue with false alarms. |
 
@@ -1818,12 +1823,9 @@ hypotheses below need their own **prespecified tests**, meaning tests whose
 questions and success criteria are written down before the new evaluation
 results are inspected.
 
-The most useful mental model is not simple versus sophisticated. It is global
-structure versus local structure. On this fixed HTRU2 split, the forest had a
-modest AP edge and lower log loss, while its smaller Brier advantage was
-compatible with little or no difference under row resampling. Those receipts
-describe prediction behavior, not mechanism. The permutation diagnostic cannot
-establish that interactions or local boundaries caused the forest's edge
+The comparison motivates testing global versus local structure. The
+[permutation diagnostic](#why-the-models-differ-here) cannot establish that
+interactions or local boundaries caused the forest's edge
 because shuffling also breaks predictor relationships and correlated features
 can substitute for one another.
 

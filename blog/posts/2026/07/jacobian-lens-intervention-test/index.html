@@ -24,7 +24,7 @@
     <link rel="canonical" href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/">
 
 <meta property="article:published_time" content="2026-07-18">
-    <meta property="article:modified_time" content="2026-07-18">
+    <meta property="article:modified_time" content="2026-09-04">
     <meta property="article:author" content="https://orcid.org/0009-0007-5992-0652">
     <meta name="citation_title" content="A Linear Nudge, a Nonlinear Wake">
     <meta name="citation_author" content="Timothy Jones">
@@ -34,10 +34,10 @@
     <meta name="citation_online_date" content="2026-07-18">
     <meta name="citation_journal_title" content="praxagent Research Notes">
     <meta name="citation_fulltext_html_url" content="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/">
-    <meta name="citation_version" content="2026.07.18">
+    <meta name="citation_version" content="2026.09.04">
     <meta name="DC.rights" content="Copyright © 2026 praxagent. All rights reserved.">
     <link rel="author" href="https://orcid.org/0009-0007-5992-0652">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","author":{"@type":"Person","affiliation":{"@type":"Organization","name":"praxagent"},"familyName":"Jones","givenName":"Timothy","name":"Timothy Jones","sameAs":"https://orcid.org/0009-0007-5992-0652","url":"https://orcid.org/0009-0007-5992-0652"},"copyrightHolder":{"@type":"Organization","name":"praxagent"},"copyrightNotice":"Copyright © 2026 praxagent. All rights reserved.","copyrightYear":"2026","dateModified":"2026-07-18","datePublished":"2026-07-18","description":"We followed controlled hidden-state edits through the final 29 blocks of Llama 3.3 70B. The delivered edits were dose-linear and a fixed corpus-average Jacobian preserved that scaling, while the model's actual downstream response did not.","headline":"A Linear Nudge, a Nonlinear Wake","identifier":"https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/","image":"https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/og-card.png","inLanguage":"en-US","isAccessibleForFree":true,"isPartOf":{"@type":"CreativeWorkSeries","name":"praxagent Research Notes","url":"https://praxagent.ai/blog/"},"keywords":["AI","LLM","machine-learning","interpretability","sparse-autoencoders","jacobian-lens","reproducibility"],"mainEntityOfPage":{"@id":"https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/","@type":"WebPage"},"publisher":{"@type":"Organization","name":"praxagent","url":"https://praxagent.ai"},"url":"https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/","usageInfo":"https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md","version":"2026.07.18"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","author":{"@type":"Person","affiliation":{"@type":"Organization","name":"praxagent"},"familyName":"Jones","givenName":"Timothy","name":"Timothy Jones","sameAs":"https://orcid.org/0009-0007-5992-0652","url":"https://orcid.org/0009-0007-5992-0652"},"copyrightHolder":{"@type":"Organization","name":"praxagent"},"copyrightNotice":"Copyright © 2026 praxagent. All rights reserved.","copyrightYear":"2026","dateModified":"2026-09-04","datePublished":"2026-07-18","description":"We followed controlled hidden-state edits through the final 29 blocks of Llama 3.3 70B. The delivered edits were dose-linear and a fixed corpus-average Jacobian preserved that scaling, while the model's actual downstream response did not.","headline":"A Linear Nudge, a Nonlinear Wake","identifier":"https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/","image":"https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/og-card.png","inLanguage":"en-US","isAccessibleForFree":true,"isPartOf":{"@type":"CreativeWorkSeries","name":"praxagent Research Notes","url":"https://praxagent.ai/blog/"},"keywords":["AI","LLM","machine-learning","interpretability","sparse-autoencoders","jacobian-lens","reproducibility"],"mainEntityOfPage":{"@id":"https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/","@type":"WebPage"},"publisher":{"@type":"Organization","name":"praxagent","url":"https://praxagent.ai"},"url":"https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/","usageInfo":"https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md","version":"2026.09.04"}</script>
 
 
     <meta property="og:type" content="article">
@@ -59,12 +59,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20260801-2">
+    <link rel="stylesheet" href="/blog/blog.css?v=20260904">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/contrib/auto-render.min.js"></script>
+    <script src="/blog/js/katex-0.16.47/katex.min.js"></script>
+    <script src="/blog/js/katex-0.16.47/auto-render.min.js"></script>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -146,6 +146,7 @@
                 <div class="post-meta">
                     <time class="post-date" datetime="2026-07-18">July 18, 2026</time>
                     <span class="post-author">by <a href="https://orcid.org/0009-0007-5992-0652" rel="author">Timothy Jones <span class="post-orcid">ORCID</span></a></span>
+                    <span class="post-updated">Revised <time datetime="2026-09-04">September 4, 2026</time></span>
                 </div>
             </header>
 
@@ -237,7 +238,6 @@ hidden-state wake out, for these generic directions only.
                 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>AI-use disclosure.</strong> Generative-AI tools helped implement, audit, execute,
@@ -252,7 +252,6 @@ before relying on them.
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <p><strong>Abstract.</strong> In this note, activation steering means additive
@@ -301,6 +300,16 @@ Experiment package:
 <a href="https://github.com/tdj28/llm_selfref_pre/tree/main/experiments/consciousness_sae_signed_dose_scan"><code>experiments/consciousness_sae_signed_dose_scan</code></a>.
 Shipping table, sample records, and hashes are in the
 <a href="#appendix-release-inventory">appendix</a>.</p>
+<div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+    </div>
+    <div class="panel-content">
+        <strong>Correction — September 4, 2026.</strong> Falling per-unit-dose gain does not rule out a negative cubic correction. The Taylor discussion now distinguishes that possibility from saturation and no longer calls the smallest eligible dose an established infinitesimal linear regime. Approximate input proportionality is also distinguished from the exact identity preserved by a linear map. The measured census, gates, and released receipts are unchanged; no model experiment was rerun for this correction.
+    </div>
+</div>
+
+<p><strong>Reading routes:</strong> <a href="#what-the-census-found">Main result</a> → <a href="#interpretation">interpretation</a>; <a href="#design-in-brief">measurement design</a> → <a href="#how-we-scored-pass-versus-fail">scoring rules</a>; or <a href="#reproducibility-and-artifact-ledger">artifact ledger</a> → <a href="#technical-appendices">technical appendices</a>. The <a href="#discussion-a-taylor-series-view-of-the-result">Taylor discussion</a> offers hypotheses for follow-up.</p>
 <h2 id="the-question">The Question</h2>
 <p>Activation steering changes a model from the inside. In the additive form
 studied here, the researcher adds a controlled vector to the hidden state
@@ -513,7 +522,6 @@ Exact construction of \(x_b\) (signed branches, common-mode diagnostic) is in
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Why these two gates, and why these numbers?</strong> Two gates because
@@ -573,7 +581,6 @@ discrepancy ceiling between <code>0.12</code> and <code>0.57</code>, produces th
 </span></span></code></pre></div><div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Why normalize by dose first?</strong> Without dividing by \(s_b\), a perfectly
@@ -828,29 +835,27 @@ every fixed-J projection linear, every actual final state bent) is exactly
 the pattern a linearization story predicts. Everything here is
 interpretation; the census results above stand on their own, and the
 hypotheses below would need their own prespecified tests.</p>
-<p><strong>The fixed-J &ldquo;pass&rdquo; was never evidence about the network.</strong> A fixed linear
-map preserves proportionality automatically: if the input curve is
-\(x_b \approx b\,v\), then \(Jx_b \approx b\,(Jv)\) for <em>any</em> matrix \(J\);
-a random one would have passed the same gates. That is why Figure 1 treats
-the fixed-J column as an algebraic consistency reference. The informative
-cells are the other two: the delivered edits stayed proportional, so the
-input to blocks 51–79 was clean, and the actual finals bent anyway. The
-curvature therefore belongs to the network&rsquo;s own mapping, and a linear object
-is structurally incapable of reproducing it.</p>
-<p><strong>The lens is the first term of a Taylor series.</strong> Write \(F\) for the
+<p><strong>The fixed-J pass is a consistency reference.</strong> Exact proportionality is
+preserved by every fixed linear map: if \(x_b=bv\), then \(Jx_b=bJv\).
+For approximately proportional inputs, however, a matrix can amplify the
+deviations; passage through a finite cosine/RMS gate is not guaranteed.
+Here the realized edits and their released-J projections both passed
+empirically. The actual final states failed, locating a dose-dependent
+change in the executed downstream computation.</p>
+<p><strong>A local Jacobian supplies the first-order term.</strong> Write \(F\) for the
 function taking the post-block-50 residual to the post-block-79 residual.
 For an edit \(e\) around the clean state \(h\),</p>
 \[
 F(h+e) = F(h) + J(h)\,e + \tfrac{1}{2}\,e^{\top}H(h)\,e + \cdots,
 \]<p>where \(J(h)\) is the local Jacobian and \(H(h)\) the second-derivative term.
-The experiment measures \(F(h+e)-F(h)\) directly; a Jacobian lens supplies
-only the first-order term. The dose scan is then literally a probe of the
-remainder: if the first-order term dominated, the response would scale like
-the dose and pass the gates. It did not, even at <code>2%</code>–<code>4%</code> RMS, so for these
-directions, the higher-order terms are already non-negligible at doses that
-small.</p>
-<p><strong>The released lens is wrong in two independent ways, and this study cannot
-tell them apart.</strong> First, truncation: it omits every term past the first.
+The experiment records the signed branches and centers their contrast as
+\((F(h+e)-F(h-e))/2\). A prompt-local Jacobian would predict a response
+proportional to dose. The released lens instead averages Jacobians across
+other prompts and positions. The signed responses fail the dose-linearity
+gates at <code>2%</code>–<code>4%</code> RMS; that establishes a departure from proportionality
+in this implementation, without isolating smooth higher-order dynamics
+from finite-precision effects.</p>
+<p><strong>Two sources of approximation remain unresolved.</strong> First, truncation: it omits every term past the first.
 Second, expansion point: it is not even \(J(h)\) for the prompt under study
 but a Jacobian averaged over other prompts and positions. The Figure 4 null
 (J failing to beat identity) could come from either. The prompt-specific
@@ -874,7 +879,6 @@ direction, since the whole dose curve is then a function of one scalar.</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>The ± design already separates odd from even orders.</strong> In the Taylor
@@ -887,25 +891,22 @@ order or above, or non-polynomial behavior, must contribute.
     </div>
 </div>
 
-<p><strong>One empirical hint argues against a low-order polynomial fix.</strong> If a
-quadratic or cubic term dominated the wake, the per-unit-dose response should
-<em>grow</em> with dose. It shrank: median final-state gain fell from <code>1.82x</code> at
-<code>2%</code> to <code>1.48x</code> at <code>30%</code>. Shrinking per-unit response looks more like
-saturation (attention softmax and normalization layers flattening out), and
-saturating functions are exactly the ones a truncated Taylor series
-approximates poorly outside a small radius. The realistic ladder of &ldquo;better
-lenses&rdquo; is therefore probably: prompt-local first order, then first order
-plus a directional low-order correction, then abandoning polynomials for a
-small learned nonlinear predictor.</p>
+<p><strong>Falling gain does not identify the correction.</strong> Median final-state gain
+fell from <code>1.82x</code> at <code>2%</code> to <code>1.48x</code> at <code>30%</code>. This is compatible with
+saturation and with a negative higher-order correction. For example,
+\(F(e)=ae-be^3\), with \(a,b>0\), has signed response per unit dose
+\(a-be^2\), which decreases over the range where it remains positive.
+The gain curve alone therefore does not choose between a polynomial
+correction and a saturating response. Fitting directional models on one
+dose panel and checking them on held-out doses would test that distinction.</p>
 <p><strong>Why would smaller doses be amplified <em>more</em>?</strong> At first glance the gain
 ordering looks backwards. It is not: the <em>absolute</em> wake still grows with
 dose (a <code>30%</code> edit moves the final state far more than a <code>2%</code> edit); what
-falls is the amplification <em>per unit of delivered edit</em>. The small-dose gain
-is the more fundamental number: as dose shrinks, gain approaches the
-magnification of the model&rsquo;s true local Jacobian along these directions,
-roughly <code>1.8x</code> here. The question is then why larger doses are compressed
-relative to that linear-regime baseline, and at least three mechanisms would
-each produce exactly this signature. First, <strong>normalization compression</strong>:
+falls is the amplification <em>per unit of delivered edit</em>. The roughly <code>1.8x</code> value is the gain at the smallest dose that passed
+the requested-versus-realized fidelity rule. It is not an established
+local-Jacobian gain: the <code>2%</code>–<code>4%</code> panel failed dose-linearity, and the
+smaller doses failed the fidelity rule. Several mechanisms could contribute
+to the lower gain at larger doses. First, <strong>normalization compression</strong>:
 Llama applies RMSNorm on the way into every block, dividing the residual by
 its own overall scale. A tiny edit leaves that scale essentially untouched
 and rides through; a <code>30%</code> edit measurably inflates the very norm it is
@@ -921,10 +922,10 @@ pull back per unit of push. All three are hypotheses, not measurements. The
 first is also the most testable: recompute gain after accounting for the
 measured layer-wise norm inflation, or deliver the edit as a norm-preserving
 rotation instead of an addition and check whether the dose profile of gain
-flattens. A fourth, duller possibility, that the falling curve is an artifact
-of normalizing by the realized rather than requested edit, is already
-excluded by the fidelity gate: from <code>2%</code> through <code>30%</code>, realized and
-requested edits matched within the frozen bounds.</p>
+flattens. The fidelity gate also bounds the discrepancy between requested and
+realized edit sizes from <code>2%</code> through <code>30%</code>. It does not by itself
+prove that the choice of denominator has zero effect on the gain curve;
+recomputing both normalizations would quantify that sensitivity.</p>
 <p>These framings are hypotheses. The census established <em>where</em> the first-order
 description stops being adequate for these directions on this model; the
 mechanism that bends the trajectory, and whether any of the candidate
@@ -994,7 +995,6 @@ teaching inventory are in the <a href="#appendix-release-inventory">appendix</a>
 <div class="panel warning">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="alert-circle"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Study status: complete.</strong> The design was frozen in git
@@ -1124,7 +1124,6 @@ the observed target state and against identity and random-map controls.</p>
 <div class="panel info">
     <div class="panel-icon" aria-hidden="true">
         <i data-feather="info"></i>
-        
     </div>
     <div class="panel-content">
         <strong>Notation.</strong> \(J_{50}\) is a matrix multiply, not a nonlinear function of the
@@ -1300,7 +1299,7 @@ Praxagent Research Note.</li>
 
     <div class="research-citation__recommended">
         <div class="research-citation__recommended-label">Recommended citation</div>
-        <p class="research-citation__text" id="research-note-citation-text">Jones, Timothy. (2026). A Linear Nudge, a Nonlinear Wake (Version 2026.07.18) [Research note]. praxagent. https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/</p>
+        <p class="research-citation__text" id="research-note-citation-text">Jones, Timothy. (2026). A Linear Nudge, a Nonlinear Wake (Version 2026.09.04) [Research note]. praxagent. https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/</p>
     </div>
 
     <dl class="research-citation__metadata">
@@ -1314,11 +1313,11 @@ Praxagent Research Note.</li>
         </div>
         <div>
             <dt>Research content last revised</dt>
-            <dd><time datetime="2026-07-18">July 18, 2026</time></dd>
+            <dd><time datetime="2026-09-04">September 4, 2026</time></dd>
         </div>
         <div>
             <dt>Citation version</dt>
-            <dd>2026.07.18</dd>
+            <dd>2026.09.04</dd>
         </div>
         <div class="research-citation__canonical">
             <dt>Canonical page</dt>
@@ -1332,7 +1331,7 @@ Praxagent Research Note.</li>
   author    = {Jones, Timothy},
   title     = {A Linear Nudge, a Nonlinear Wake},
   year      = {2026},
-  version   = {2026.07.18},
+  version   = {2026.09.04},
   publisher = {praxagent},
   url       = {https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/},
   note      = {Research note}

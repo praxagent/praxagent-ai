@@ -17,18 +17,20 @@ acknowledgment: |
 ai_disclosure: |
   **Artificial intelligence (AI)-use disclosure.** Generative-AI tools helped
   draft, revise, illustrate, and review this Deep Dive. The author selected the
-  questions and shaped the exposition. Before publication, the author must
-  inspect the cited sources and generated artifacts and take responsibility for
-  the final text and claims. This is an independent, non-peer-reviewed Deep
-  Dive. Verify claims against the cited primary sources and released artifacts
-  before relying on them.
+  questions, shaped the exposition, and is responsible for the final text and
+  claims. The source data, code, and verification receipts are available with
+  this guide. This is an independent, non-peer-reviewed Deep Dive.
 ---
 
 Imagine that you measure the area, perimeter, length, width, compactness, asymmetry, and groove length of every wheat kernel in a collection. You now have seven measurements for each kernel. Looking at one column at a time is manageable. Understanding how all seven columns change together is harder.
 
 **Principal component analysis (PCA)** is a way to make a simpler map of a spreadsheet with many measurement columns. Each kernel becomes one point on the map. Kernels that differ along the high-variance directions retained in the map tend to land apart. Differences that lie mainly in omitted components can disappear, so a two-dimensional PCA map does not preserve every pairwise distance or neighborhood.
 
-That is the friendly starting point. Before making it more precise, we need to unpack a few words that statistics books often introduce too quickly.
+**Choose a reading route.**
+
+- **Learning PCA:** continue with the [vocabulary and pictures](#before-pca-a-tiny-vocabulary-kit), then follow the wheat-kernel example. The mathematical appendix is optional.
+- **Working with your own data:** start with the [data-preparation choices](#this-example-starts-with-pre-cleaned-data), follow the [Python walkthrough](#work-through-the-original-data-in-python), and use the [interpretation checklist](#a-practical-interpretation-checklist).
+- **Inspecting the result:** jump to [the observed patterns](#question-4-what-patterns-are-actually-visible), read [the limits](#how-pca-can-go-wrong-even-when-the-code-is-correct), and open the [reproduction instructions](#appendix-a-reproduce-the-teaching-example) or [mathematical definition](#appendix-b-the-mathematical-definition-of-pca) as needed.
 
 ## Before PCA: a tiny vocabulary kit
 
@@ -1190,15 +1192,13 @@ The mistake is to reuse globally imputed, globally scaled, or globally fitted PC
 
 ## The five answers in plain language
 
-If someone asks the five questions from the beginning of this guide, a strong answer can be short:
+The five questions now have short answers:
 
 1. **Biological question:** We are asking how seven kernel measurements vary across these 210 kernels and where the three recorded wheat varieties land on the descriptive map.
 2. **Row meaning:** One row is one measured kernel before PCA and the same kernel expressed as component scores afterward. We do not aggregate because the public file identifies no repeated rows.
 3. **Median choice:** We use no median here. The measurement table has no missing cells and no documented repeats. In another dataset, aggregation and imputation would be separate decisions requiring separate evidence.
 4. **Visible pattern:** PC1 represents 71.9% of scaled-feature variation, PC2 represents 17.1%, and the varieties tend to occupy different but overlapping regions. PCA did not use variety labels to learn the axes.
 5. **Leakage:** Full-data scaling is acceptable for describing this complete table. If we later claim held-out prediction performance, we must split first and fit imputation, scaling, PCA, and the model inside each training fold.
-
-That answer demonstrates understanding of the biology, the table, the preprocessing, the plot, and the evaluation boundary without requiring a derivation from memory.
 
 In biological research, PCA is often the beginning of a conversation rather
 than the end of an analysis. Components do not arrive with biological meanings;
