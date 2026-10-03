@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Experiment Integrity - praxagent</title>
-    <meta name="description" content="How praxagent runs confirmatory research: freeze the design before outcomes, keep controls honest, retain failures, and ship the evidence with the claim.">
+    <meta name="description" content="How praxagent runs confirmatory experiments: design frozen before outcomes exist, controls fixed in advance, failures kept in the record, evidence published with the claim.">
     <link rel="canonical" href="https://praxagent.ai/methods/experiment-integrity/">
     <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Experiment Integrity - praxagent">
-    <meta property="og:description" content="A high-level look at how we keep confirmatory experiments inspectable: design before outcomes, honest controls, retained failures, and public receipts.">
+    <meta property="og:description" content="How praxagent runs confirmatory experiments: design frozen before outcomes exist, controls fixed in advance, failures kept in the record, evidence published with the claim.">
     <meta property="og:url" content="https://praxagent.ai/methods/experiment-integrity/">
     <meta property="og:image" content="https://praxagent.ai/assets/praxagent_stochastic_mountain.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -17,6 +17,109 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../styles-v2.css?v=20260904">
+    <style>
+        /* Page-local styles: the ordered checklist and the inline timeline figure. */
+        .methods-prose ol {
+            grid-column: 2;
+            margin: 0 0 1.25rem;
+            padding-left: 1.5rem;
+            color: var(--text-tertiary);
+            font-size: 1.02rem;
+            line-height: 1.7;
+        }
+        .methods-prose ol li {
+            margin-bottom: 0.4rem;
+        }
+        .methods-prose ol li::marker {
+            font-family: var(--font-mono);
+            font-size: 0.85em;
+            color: var(--text-quaternary);
+        }
+        .methods-figure {
+            grid-column: 2;
+            margin: 0.75rem 0 0;
+        }
+        .methods-figure-scroll {
+            overflow-x: auto;
+        }
+        .methods-figure svg {
+            display: block;
+            width: 100%;
+            min-width: 34rem;
+            height: auto;
+        }
+        .methods-figure text {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            fill: var(--text-tertiary);
+        }
+        .methods-figure .tl-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            fill: var(--text-quaternary);
+        }
+        .methods-figure .tl-key {
+            fill: var(--sky);
+            font-weight: 600;
+        }
+        .methods-figure .tl-key-text {
+            fill: var(--text-dark);
+            font-weight: 600;
+        }
+        .methods-figure .tl-line {
+            stroke: var(--text-quaternary);
+            stroke-width: 1.5;
+            fill: none;
+        }
+        .methods-figure .tl-bracket {
+            stroke: var(--text-quaternary);
+            stroke-width: 1;
+            fill: none;
+            opacity: 0.7;
+        }
+        .methods-figure .tl-node {
+            fill: var(--bg-primary);
+            stroke: var(--text-quaternary);
+            stroke-width: 1.5;
+        }
+        .methods-figure .tl-commit {
+            fill: var(--sky);
+            stroke: var(--sky);
+        }
+        .methods-figure .tl-branch {
+            stroke: var(--sky);
+            stroke-width: 2.25;
+            fill: none;
+        }
+        .methods-figure figcaption {
+            margin-top: 0.75rem;
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .methods-prose-foot h3 {
+            margin: 2rem 0 0.75rem;
+            color: var(--text-dark);
+            font-size: 1.15rem;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+        }
+        .methods-revision {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.04em;
+            color: var(--text-quaternary);
+        }
+        @media (max-width: 768px) {
+            .methods-prose ol,
+            .methods-figure {
+                grid-column: 1;
+            }
+        }
+    </style>
 </head>
 <body class="methods-page">
     <nav class="navbar industrial-navbar">
@@ -75,7 +178,7 @@
                 <p class="work-kicker">praxagent / Methods</p>
                 <div class="work-header-grid">
                     <h1>Experiment integrity</h1>
-                    <p>Plan comparisons before inspecting results. Report all outcomes, document changes, and publish the supporting evidence.</p>
+                    <p>Credibility is chronological. A reader should be able to check that the design came before the outcomes, that the run followed the design, that nothing was dropped, and that anything added later carries its date.</p>
                 </div>
             </div>
         </header>
@@ -84,20 +187,61 @@
             <div class="container">
                 <div class="section-index">
                     <p class="section-index-label">01 / Why</p>
-                    <h2 id="why-title">Credibility is chronological</h2>
+                    <h2 id="why-title">Why the order matters</h2>
                 </div>
                 <div class="methods-prose">
                     <p>
                         Confirmatory research goes wrong when the rules change after the data arrive:
-                        optional stopping, selective reporting, or hypothesizing after results are known.
-                        We cannot erase judgment. We can make the consequential choices visible and
-                        time-ordered.
+                        stopping data collection once the result looks good, reporting only the comparisons
+                        that worked, or writing the hypothesis to fit the data. Judgment calls cannot be
+                        removed from a study. They can be dated, so a reader knows which were made before
+                        the outcomes and which after.
                     </p>
                     <p>
-                        A dated record lets readers check that the design preceded the outcomes,
-                        the run followed the design, and all outcomes were retained. Later analyses
-                        should be labeled by when they were added.
+                        A dated record lets a reader make four checks.
                     </p>
+                    <ol>
+                        <li>The design was committed before any target outcome existed.</li>
+                        <li>The run followed that design, and every departure is recorded as a dated amendment.</li>
+                        <li>Every outcome is still in the record, including failures and runs that produced no data.</li>
+                        <li>Anything added after the outcomes were seen carries the date it was added.</li>
+                    </ol>
+                    <p>
+                        In one of our studies the follow-up failed its own replay gate, so its endpoint
+                        results are labeled exploratory; the example at the end of this page links where
+                        that happened.
+                    </p>
+                    <figure class="methods-figure">
+                        <div class="methods-figure-scroll">
+                            <svg viewBox="0 64 720 156" role="img" aria-labelledby="tl-title tl-desc">
+                                <title id="tl-title">Timeline of a confirmatory study</title>
+                                <desc id="tl-desc">A horizontal timeline runs from left to right through a freeze commit, a run, an audit against planned gates, and a release. Work before the freeze commit is labeled exploratory; the commit is labeled frozen; the stretch past the audit is labeled confirmatory. After the run a branch leaves the main line, labeled dated amendment, and anything on it is labeled post-run. If the audit fails a planned gate, results on the main line are labeled exploratory rather than confirmatory.</desc>
+                                <!-- Label spans (muted) -->
+                                <text class="tl-label" x="24" y="84">Exploratory</text>
+                                <path class="tl-bracket" d="M24 88 V96 H168 V88"/>
+                                <text class="tl-label tl-key" x="200" y="84" text-anchor="middle">Frozen</text>
+                                <text class="tl-label" x="532" y="84">Confirmatory</text>
+                                <path class="tl-bracket" d="M532 88 V96 H696 V88"/>
+                                <!-- Main line -->
+                                <line class="tl-line" x1="24" y1="110" x2="696" y2="110"/>
+                                <!-- Amendment branch (emphasized) -->
+                                <path class="tl-branch" d="M380 110 C410 110 410 180 440 180 H696"/>
+                                <circle class="tl-commit" cx="696" cy="180" r="4"/>
+                                <text class="tl-label tl-key" x="568" y="171" text-anchor="middle">Post-run</text>
+                                <text class="tl-key-text" x="568" y="202" text-anchor="middle">Dated amendment</text>
+                                <!-- Nodes -->
+                                <circle class="tl-node tl-commit" cx="200" cy="110" r="8"/>
+                                <text class="tl-key-text" x="200" y="140" text-anchor="middle">Freeze commit</text>
+                                <circle class="tl-node" cx="360" cy="110" r="5"/>
+                                <text x="360" y="140" text-anchor="middle">Run</text>
+                                <circle class="tl-node" cx="520" cy="110" r="5"/>
+                                <text x="520" y="140" text-anchor="middle">Audit (planned gates)</text>
+                                <circle class="tl-node" cx="672" cy="110" r="5"/>
+                                <text x="672" y="140" text-anchor="middle">Release</text>
+                            </svg>
+                        </div>
+                        <figcaption>A study's label follows from where it sits on this timeline and from whether its planned gates passed: endpoints from a run that fails a gate are reported as exploratory even though the plan was frozen. The four labels are defined in section 03.</figcaption>
+                    </figure>
                 </div>
             </div>
         </section>
@@ -113,27 +257,27 @@
                         <span class="work-row-index">01 / Freeze</span>
                         <div>
                             <h3>Lock the design before outcomes exist</h3>
-                            <p>The question, claim boundary, sample, controls, endpoints, and analysis are committed before any target outcome is generated or inspected.</p>
+                            <p>The question, the sample, the controls, the endpoints, the analysis, and the claim boundary (what the result could and could not be taken to show) are committed before any target outcome is generated or inspected.</p>
                         </div>
                     </div>
                     <div class="work-row methods-row">
                         <span class="work-row-index">02 / Run</span>
                         <div>
                             <h3>Execute the plan as frozen</h3>
-                            <p>Keep the planned rules independent of the observed effect. Document defects and necessary changes in dated amendments.</p>
+                            <p>Do not change the rules because of what the data show. When a defect forces a change, record it in a dated amendment that states what had already been observed at the time.</p>
                         </div>
                     </div>
                     <div class="work-row methods-row">
                         <span class="work-row-index">03 / Audit</span>
                         <div>
-                            <h3>Bind the artifacts to the design</h3>
-                            <p>Runtime records are checked against the frozen plan, and every condition and failure path stays in the record.</p>
+                            <h3>Check the run against the plan</h3>
+                            <p>Runtime records are compared with the frozen plan: same sample, same controls, same endpoints. Every condition and every failure stays in the record, including runs that produced no rows.</p>
                         </div>
                     </div>
                     <div class="work-row methods-row">
                         <span class="work-row-index">04 / Release</span>
                         <div>
-                            <h3>Publish the supporting evidence</h3>
+                            <h3>Release what the claim rests on</h3>
                             <p>Code, prompts, data, and result records let readers inspect the evidence behind each claim.</p>
                         </div>
                     </div>
@@ -149,7 +293,7 @@
                 </div>
                 <div class="methods-prose">
                     <p>
-                        These labels distinguish when the design was set and how the results can be interpreted:
+                        Four labels mark where a study sits relative to its outcomes. The label records when the design was fixed, and that decides how much weight a result can bear:
                     </p>
                 </div>
                 <div class="work-ledger">
@@ -164,21 +308,21 @@
                         <span class="work-row-index">Frozen</span>
                         <div>
                             <h3>The design predates the outcomes</h3>
-                            <p>The complete plan was committed before target outcomes existed. Later changes are dated amendments, not quiet edits.</p>
+                            <p>The complete plan was committed before target outcomes existed.</p>
                         </div>
                     </div>
                     <div class="work-row methods-row">
                         <span class="work-row-index">Confirmatory</span>
                         <div>
                             <h3>Everything reported was in the freeze</h3>
-                            <p>Endpoint, sample, controls, exclusions, and analysis all trace back to the frozen design.</p>
+                            <p>"Frozen" describes a plan; "confirmatory" describes a result. A result is confirmatory only if its endpoint, sample, controls, exclusions, and analysis were all in the freeze and the run met the plan's own pass rules. A frozen study whose run fails a planned gate does not produce confirmatory endpoints.</p>
                         </div>
                     </div>
                     <div class="work-row methods-row">
                         <span class="work-row-index">Post-run</span>
                         <div>
                             <h3>Added after the results were seen</h3>
-                            <p>Sensitivity analyses can be informative, but they are labeled by timing and never promoted to confirmatory status.</p>
+                            <p>Sensitivity checks and reanalyses added after the outcomes were seen can be informative. They are filed in a dated amendment that states what had already been observed, and they are never promoted to confirmatory status.</p>
                         </div>
                     </div>
                 </div>
@@ -189,38 +333,57 @@
             <div class="container">
                 <div class="section-index">
                     <p class="section-index-label">04 / In public</p>
-                    <h2 id="public-title">What you should see</h2>
+                    <h2 id="public-title">What a reader should be able to check</h2>
                 </div>
                 <div class="about-points">
                     <div class="point">
                         <span>01</span>
-                        <h3>Release the evidence.</h3>
-                        <p>Published code, prompts, data, and result records let readers check the evidence behind each claim.</p>
+                        <h3>Run the control.</h3>
+                        <p>Matched baselines and null tests named in the plan determine what survives into the conclusion.</p>
                     </div>
                     <div class="point">
                         <span>02</span>
-                        <h3>Run the control.</h3>
-                        <p>Matched baselines and null tests determine what survives into the conclusion.</p>
+                        <h3>Report the failure.</h3>
+                        <p>Negative results and broken hypotheses remain part of the public record.</p>
                     </div>
                     <div class="point">
                         <span>03</span>
-                        <h3>Report the failure.</h3>
-                        <p>Negative results and broken hypotheses remain part of the public record.</p>
+                        <h3>Date the changes.</h3>
+                        <p>Every change made after the outcomes were seen sits in a dated amendment that says what was already known. The headline is never quietly rewritten.</p>
                     </div>
                 </div>
                 <div class="methods-prose methods-prose-foot">
                     <p>
-                        These are our research standards. Each research note should identify its study plan,
-                        supporting results, and any changes made after outcomes were inspected.
+                        These are the standards we hold our own research notes to. If a research note does
+                        not link its plan, its results, and its dated amendments, treat its claims as
+                        unverified.
                     </p>
-                    <h3>A worked example: detecting SAE steering</h3>
+                    <h3 id="worked-example">A worked example: detecting SAE steering</h3>
                     <p>
-                        The steering study links a
+                        The steering study asked whether a pinned internal readout could detect a specified
+                        SAE steering intervention. An SAE (sparse autoencoder) is a model trained to break a
+                        network's internal activations into a sparse set of features; steering adds or
+                        subtracts one of those features during generation. The study links a
                         <a href="https://github.com/tdj28/llm_selfref_pre/blob/b026faac222e55d7da4f01a30a6a60a468a5f023/docs/LLAMA70B_SAE_JLENS_PROTOCOL.md">protocol committed before outcomes</a>,
                         a <a href="../../blog/posts/2026/07/jacobian-lens-sae-steering/">report with results and evidence</a>,
                         and a <a href="https://github.com/tdj28/llm_selfref_pre/blob/478a10dd0670eee47fc151882560482ae79fc790/docs/LLAMA70B_SAE_JLENS_V2_POST_OUTCOME_AMENDMENT_20260712.md">dated follow-up amendment</a>.
-                        The follow-up failed its planned replay-equivalence test, so its endpoint results are reported as exploratory.
-                        Readers can trace that change in status instead of inferring it from the headline.
+                        Before the follow-up could run any new endpoint, its plan required it to reproduce the
+                        earlier study's saved readouts within a tolerance fixed in advance (a maximum absolute
+                        error of 0.02 logit units). The replay reached 0.25, so the gate failed and the
+                        follow-up's endpoint results are reported as exploratory. A reader can trace that
+                        change in status instead of inferring it from the headline.
+                    </p>
+                    <h3 id="not-guaranteed">What this does not guarantee</h3>
+                    <p>
+                        Freezing a plan fixes its rules; it does not make them good ones. A frozen design can
+                        still be one that cannot answer its question. A Git commit is a timestamp, not a
+                        registry deposit, so unless a plan was also registered we call it prospectively
+                        frozen, not preregistered. Our release audits are automated recomputation; they check
+                        arithmetic and provenance, not the design, and they are not independent human review.
+                    </p>
+                    <p class="methods-revision">
+                        Revision, 2 October 2026: reorganized the presentation and corrected wording. The
+                        example's status and its links are unchanged.
                     </p>
                     <p>
                         <a href="../../blog/index.html">Research notes <span aria-hidden="true">→</span></a>

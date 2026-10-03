@@ -2,73 +2,82 @@
 title: "Can a Jacobian Lens Detect SAE Steering?"
 slug: "jacobian-lens-sae-steering"
 date: 2026-07-12
-lastmod: 2026-09-04
+lastmod: 2026-10-02
 citation_enabled: true
-citation_version: "2026.09.04"
+citation_version: "2026.10.02"
 aliases: ["/posts/jacobian-lens-sae-steering/"]
 tags: ["AI", "LLM", "machine-learning", "interpretability", "sparse-autoencoders", "jacobian-lens", "model-auditing", "reproducibility", "preregistration", "open-science"]
 author: Timothy Jones
 author_id: "timothy-jones"
-summary: "A prospectively frozen Llama 3.3 70B experiment asks whether SAE steering leaves a detectable downstream fingerprint in Jacobian-lens space. A preregistered follow-up adds semantic hard negatives, same-subfamily comparators, a 14-reader capacity ladder, and a failed replay gate that makes its endpoint results exploratory."
+summary: "A prospectively frozen Llama 3.3 70B experiment asks whether an auditor can tell, from a steered internal state alone, which public SAE feature was steered. Under a fixed Jacobian-lens readout the answer is no; the same readout separates targets from matched controls once a clean run of the same prompt is available. A preregistered follow-up with semantic hard negatives, same-subfamily comparators and a 14-reader ladder failed its replay gate, so its endpoint results are exploratory."
 og_image: "og-card.png"
 og_image_alt: "Two access models produce different results: isolated post-steering attribution is at chance, while a matched clean reference supports differential monitoring."
 draft: false
 lead: |
-  Can an auditor tell which SAE steering intervention affected a language model from its internal state? We test six public Goodfire feature directions in Llama 3.3 70B. The answer changes when the auditor also has an unsteered run of the same prompt to compare against.
+  Hand an auditor a language model's internal state after SAE steering, with no record of which feature was steered and no unsteered run of the same prompt to compare against: can the auditor name the feature? For six public Goodfire features in Llama 3.3 70B, read through a fixed Jacobian-lens readout, the answer is no, and it changes only when the auditor also holds a clean run of the same prompt.
 key_result: |
-  On isolated states, the frozen 67-token J-lens detector performs at chance: **AUROC 0.4998**, the confirmatory endpoint. With a matched clean reference and known intervention sign, a post hoc fixed-score analysis reaches **0.862**, compared with **0.779** for identity. With sign unknown the intervals overlap (**0.717 vs 0.699**). The v2 follow-up failed its replay gate; its exploratory results find label-similar alternative features practically comparable and all tested linear readers near chance on isolated-state attribution. The paired score supports controlled monitoring, with no demonstrated general ability to identify steering provenance.
+  Isolated post-steering state, frozen 67-token J-lens reader: target attribution **AUROC 0.4998**, the confirmatory endpoint, level with identity and scrambled-lens controls. Matched clean reference of the same prompt, sign known: a post hoc fixed-score analysis reaches **0.862** against **0.779** for identity; with sign unknown, **0.717 vs 0.699**, intervals overlapping. The preregistered v2 follow-up failed its replay gate; its exploratory results put all 14 linear readers near chance on isolated states and find no material advantage for the six selected IDs over same-subfamily comparators (0.125, inside the frozen ±0.25 band, which identity and all five scrambled lenses also fall inside, so neither a material advantage nor equivalence is established). Paired scores support controlled monitoring; nothing here identifies steering provenance from a state alone.
 
 ---
 
 {{< panel "info" >}}
-**AI-use disclosure.** Generative-AI tools helped implement, audit, execute,
-interpret, visualize, review, and draft this study. The author selected the
-research question, authorized the compute, has inspected the artifacts, and is
-responsible for the final text and claims. This is an independent,
-non-peer-reviewed Research Note. Verify numbers against the released receipts
-before relying on them.
+**AI-use disclosure.** Generative-AI agents designed the protocol and code,
+executed the runs, performed the analyses and automated audits, and drafted
+and revised this note. The author selected the research question, authorized
+the compute, has inspected the artifacts, and is responsible for the final
+text and claims. The audits cited below are agent-written recomputation, not
+independent human validation. This is an independent, non-peer-reviewed
+Research Note; verify numbers against the released receipts before relying on
+them.
 {{< /panel >}}
 
 {{< panel "info" >}}
-**Abstract.** Sparse-autoencoder steering changes a model's residual stream;
-a Jacobian lens maps residual directions toward the vocabulary dispositions
-they tend to influence downstream. That creates a testable question: *does
-public Goodfire SAE steering in Llama 3.3 70B leave a stable, out-of-sample
-fingerprint in the model's released Jacobian-lens space?* We project six public
-SAE directions labeled as deception/roleplay in the released artifact, compare
-them with 18 activation- and norm-matched SAE controls plus isotropic
-controls, and replay 1,581 paired prefix-only forwards (1,530 interventions
-plus 51 clean references) across 51 held-out template families. Identity-lens,
-raw-norm, and five singular-spectrum-preserving random-J baselines traverse
-the same analysis. **Result:** in this
-experiment, a detector built on a fixed single-token J-lens readout (a simple
-classifier over 67 frozen lexicon token scores) does not attribute target
-steering from isolated post-intervention states out of sample (AUROC 0.4998,
-the prospectively frozen confirmatory endpoint) and performs at chance
-relative to identity and scrambled-J controls. With a matched clean
-reference, a fixed one-dimensional J-space contrast produces a large signed
-differential between selected targets and matched controls (+0.9065 under
-amplification and -0.8247 under suppression, versus +0.2028/-0.2181 for an
-identity readout; a frozen stronger-access sensitivity analysis, not a
-confirmatory endpoint), making it potentially useful for controlled internal
-monitoring. That contrast lexicon is aligned with the labels that selected
-the targets, and a preregistered v2 follow-up (exploratory after a failed
-replay gate) found label-similar alternatives practically comparable to the
-six selected IDs, so the paired signal is family-level rather than specific
-to these features. The access model is the
-result: J-space can characterize a known perturbation here, but under this
-fixed single-token readout it does not identify steering provenance from an
-isolated state. Nothing in this experiment establishes what the model
-believes or whether it is conscious.
+**Abstract.** SAE steering adds a fixed vector to a model's residual stream; a
+Jacobian lens maps residual directions to the vocabulary dispositions they tend
+to push downstream. We ask whether public Goodfire SAE steering in Llama 3.3
+70B leaves a stable, out-of-sample fingerprint in the released Jacobian-lens
+space. Six public SAE directions labeled deception/roleplay are compared with
+18 activation- and norm-matched SAE controls plus isotropic controls across
+1,581 paired prefix-only forwards (1,530 interventions, 51 clean references)
+over 51 held-out template families; identity, raw-norm and five
+spectrum-preserving random-J baselines run through the same analysis.
+**Result.** A classifier over 67 frozen lexicon scores from a single-token
+J-lens readout does not attribute target steering from isolated
+post-intervention states out of sample (AUROC 0.4998, the prospectively frozen
+confirmatory endpoint), level with identity and scrambled-J controls. Given a
+matched clean reference, a fixed one-number J-space contrast separates targets
+from matched controls by a large signed differential (+0.9065 under
+amplification, -0.8247 under suppression; identity +0.2028/-0.2181), a frozen
+stronger-access sensitivity analysis rather than a confirmatory endpoint,
+useful for controlled internal monitoring. That lexicon is aligned with the
+labels that selected the targets, and the v2 follow-up (exploratory after a
+failed replay gate) finds no material advantage for the six IDs over
+same-subfamily comparators (0.125, inside a frozen ±0.25 band that identity and
+all five random-J transports also fall inside), so the paired signal is not
+shown to be specific to these features, and equivalence is not established
+either. The access model is the result: J-space characterizes a known
+perturbation here but does not identify steering provenance from an isolated
+state. Nothing here bears on what the model believes or whether it is
+conscious.
 {{< /panel >}}
 
-Study status: **complete** (pre-outcome freeze [`b026faa`](https://github.com/tdj28/llm_selfref_pre/commit/b026faac222e55d7da4f01a30a6a60a468a5f023); result release [`c071aa4`](https://github.com/tdj28/llm_selfref_pre/commit/c071aa4d737d72818f0774ca389c159b5da67dc1)). Shipping table, sample records, and hashes are in the [appendix](#appendix-release-inventory). A preregistered v2 follow-up ([OSF `f3tpv`](https://osf.io/f3tpv/); freeze [`7eff43f`](https://github.com/tdj28/llm_selfref_pre/commit/7eff43f7b8ea5ca0e011d4c0fb46bf5df1b0e4cd), plan manifest SHA-256 `47806acf…893f`) adding semantic hard negatives, matched comparators, and a 14-reader capacity ladder failed its frozen replay-equivalence gate, so its endpoint results are exploratory; [a dedicated section below](#the-v2-follow-up) reports the design, the gate failure, and the exploratory results.
+Study status: **complete** (pre-outcome freeze [`b026faa`](https://github.com/tdj28/llm_selfref_pre/commit/b026faac222e55d7da4f01a30a6a60a468a5f023); result release [`c071aa4`](https://github.com/tdj28/llm_selfref_pre/commit/c071aa4d737d72818f0774ca389c159b5da67dc1)). The preregistered v2 follow-up ([OSF `f3tpv`](https://osf.io/f3tpv/); freeze [`7eff43f`](https://github.com/tdj28/llm_selfref_pre/commit/7eff43f7b8ea5ca0e011d4c0fb46bf5df1b0e4cd), plan manifest SHA-256 `47806acf…893f`) failed its frozen replay-equivalence gate, so its endpoint results are exploratory ([design, gate failure and results](#the-v2-follow-up)). Shipping table, sample records and hashes are in the [appendix](#appendix-release-inventory). *Revision (2026-10-02): this edit reorganized the presentation and corrected wording; no result changed.*
 
-![Claim ladder: public artifacts through monitoring; provenance and consciousness sit off the ladder.](claim-ladder.svg)
+**Claims and evidence status.**
 
-<p class="figure-note">Figure: what this experiment can support. Provenance forensics and consciousness sit outside the ladder.</p>
+- **Confirmatory, frozen before outcomes.** From an isolated post-steering state, a fixed 67-token J-lens reader cannot say which SAE feature was steered: target-attribution AUROC 0.4998 [0.4978, 0.5016] under crossed prompt-family and feature-pair holdouts, level with identity (0.5013), raw norm (0.5025) and five scrambled-J controls (0.5011-0.5068).
+- **Frozen sensitivity analysis, stronger access.** With a matched clean run of the same prompt, the same lexicon read as a one-number contrast gives a target-minus-matched differential of +0.9065 (amplification) and -0.8247 (suppression), against +0.2028/-0.2181 for identity. A post hoc fixed-score AUROC is 0.862 (identity 0.779) with sign known and 0.717 vs 0.699 with sign unknown. The lexicon is aligned with the labels that selected the targets: this is differential monitoring, not attribution.
+- **Exploratory, v2 follow-up after a failed registered replay gate.** All 14 linear readers, up to the full 8,192-dimensional residual, stay near chance on isolated states; family specificity is 0.174 [0.167, 0.182], below the frozen 0.25; the six selected IDs show no material advantage over same-subfamily comparators (0.125, inside the frozen ±0.25 band that identity and all five scrambled lenses also fall inside).
 
-**Reading routes:** [Result and scope](#answer) → [limits of production use](#could-this-audit-a-production-model); [frozen design](#frozen-design) → [downstream detection](#downstream-fingerprint); or [v2 follow-up and failed gate](#the-v2-follow-up) → [artifact ledger](#reproducibility-and-artifact-ledger). For the instrument derivation, start with [the two maps](#the-two-maps).
+![Out-of-sample steering detection by readout family.](sae_jlens_detection_auroc.png)
+
+<p class="figure-note">Figure (confirmatory endpoint): post-state-only target attribution by readout under crossed prompt-family and feature-pair holdouts. Error bars are 95% template-cluster bootstrap intervals. Every readout is operationally at chance.</p>
+
+![Paired clean-reference target attribution.](sae_jlens_paired_reference_auc.png)
+
+<p class="figure-note">Figure (post hoc fixed score): target attribution when the auditor can subtract a matched clean-prefix readout. Blue assumes known intervention sign; orange uses absolute change when sign is unknown. Error bars resample the 51 template families. This post-run sensitivity uses the frozen score but is not a confirmatory endpoint. The raw-residual-norm baseline from the first of the two opening figures was not run in this paired setting, so the manifold-anomaly alternative is untested here.</p>
+
+**Reading routes:** [frozen design](#frozen-design) → [downstream detection](#downstream-fingerprint); [v2 follow-up and failed gate](#the-v2-follow-up) → [artifact ledger](#reproducibility-and-artifact-ledger); instrument derivation in [the two maps](#the-two-maps); limits in [Answer, and its limits](#answer) and [production use](#could-this-audit-a-production-model).
 
 ## The Question
 
@@ -83,8 +92,10 @@ random-J controls ([Jones, 2026b](#ref-praxagent-397b)). Here those threads meet
 on Llama 3.3 70B:
 
 1. a public Goodfire layer-50 SAE for Llama 3.3 70B contains the six
-   feature coordinates used in our replication, labeled there as
-   deception/roleplay; and
+   feature coordinates accepted in our replication (30032, 58667, 22004,
+   30686, 41533, 23893), whose deception/roleplay labels were returned by
+   AE Studio's hosted feature search and recorded in the public notebook
+   that supplied the IDs, not shipped with the SAE weights release; and
 2. Neuronpedia has released a fitted Jacobian lens for the same Llama 3.3 70B
    checkpoint family.
 
@@ -110,22 +121,31 @@ SAE feature reading and monosemanticity (the goal that each feature carry one
 meaning)
 ([Gao et al., 2024](#ref-gao-2024); [Templeton et al., 2024](#ref-templeton-2024)),
 and other internal auditors (probes, tuned/logit lenses, LatentQA-style
-decoders). This note does not invent the J-lens or SAE steering; it asks a
-narrower forensic question on pinned public artifacts. The claim-by-claim
-comparison is in the [appendix](#appendix-prior-work-claim-matrix).
+decoders). This note does not invent the J-lens or SAE steering; the
+claim-by-claim comparison is in the
+[appendix](#appendix-prior-work-claim-matrix).
 
-**This note's contribution.** Gurnee et al. ask what the J-space *is* and what
-it can reveal about a model's cognition; this note asks a much narrower
-forensic question their experiments were not designed to answer. In their
-intervention and detection studies, the comparison is always anchored: the
-experimenter injects a known concept and watches the readout respond, compares
-a misaligned checkpoint against its known clean baseline on the same prompts,
-or steers along a known contrastive direction and checks that a score moves
-monotonically. Those designs establish that J-space content is causally real
-and measurable. They do not test the unanchored case: hand an auditor a single
-steered activation, hide which intervention ran, and ask whether a fixed J
-score can name the feature out of sample (on prompts and feature pairings it
-was never fit on). Concretely, this note adds:
+**The unanchored case.** Gurnee et al. ask what the J-space *is* and what it
+can reveal about a model's cognition. In their intervention and detection
+studies the comparison is always anchored: the experimenter injects a known
+concept and watches the readout respond, compares a misaligned checkpoint
+against its known clean baseline on the same prompts, or steers along a known
+contrastive direction and checks that a score moves monotonically. Those
+designs establish that J-space content is causally real and measurable, on
+Anthropic's internal Claude models, whose weights and internals are not
+publicly available for reproduction. They do not test the unanchored case:
+hand an auditor a single steered activation, hide which intervention ran, and
+ask whether a fixed J score can name the feature out of sample (on prompts and
+feature pairings it was never fit on). Where the settings overlap, our results
+agree with Gurnee et al.: with an anchored comparison (the auditor holds a
+known clean baseline and measures the change from it), the paired J-score moves
+large and in the expected direction. The addition is the negative result on
+the unanchored side, under this fixed single-token score, on pinned public
+artifacts (publicly released Llama 3.3 70B weights, gated under the Llama 3.3
+Community License rather than open-source, plus the public Goodfire SAE and
+public Neuronpedia lens), with the protocol committed to public git before
+results existed so the test can be re-run from the release. Concretely, this
+note adds:
 
 1. An **attribution task with the label hidden**: the auditor gets isolated
    post-steering states (a snapshot of the model's internals *after* steering,
@@ -157,54 +177,23 @@ was never fit on). Concretely, this note adds:
    matched-SAE (other features of similar strength), and isotropic (random
    directions of matching length) controls, all through the identical
    pipeline.
-4. Statistics that respect how the prompts were built. Many of the 51 English
-   prefixes are near-copies from the same sentence skeleton (**prompt
-   families**), so we do not pretend 1,581 trials are 1,581 independent
-   stories. **Grouped holdouts** assign each family to exactly one fold (a
-   fold is one of the five train/test splits in cross-validation; grouping
-   guarantees a family is never in the training data and the test data of the
-   same split). **Template-cluster intervals** are how we compute error bars:
-   redraw the 51 families at random (with replacement) thousands of times,
-   recompute the metric on each redraw, and report the spread. Because each
-   redraw keeps or drops a family's near-copies as a block, the resulting
-   interval reflects the roughly 51 independent pieces of evidence we actually
-   have, not the 1,581 rows. Finally, we **track the readout downstream across
-   layers**: the steering vector goes in at layer 50, and we measure the
-   fingerprint again at layers 55 through 78 to see whether it persists,
-   fades, or distorts as it passes through the rest of the network, rather
-   than judging everything from a single depth.
+4. **Statistics that respect how the prompts were built.** Many of the 51
+   English prefixes are near-copies from the same sentence skeleton (**prompt
+   families**), so we do not treat 1,581 trials as 1,581 independent
+   observations. Holdouts move whole families between train and test, and
+   error bars resample the 51 families rather than the rows; both are defined
+   in [What Would Count as Detection?](#what-would-count-as-detection). We
+   also **track the readout downstream**: the steering vector goes in at
+   layer 50, and the fingerprint is re-measured at layers 55 through 78 to see
+   whether it persists, fades, or distorts on the way to the output.
 
-![Families, not rows: grouped holdouts keep whole prompt families together; the cluster bootstrap resamples families.](prompt-families.svg)
-
-<p class="figure-note">Figure: near-copy prompts from one sentence skeleton count as one unit of evidence. Holdouts move whole families between train and test; error bars resample the 51 families, not the 1,581 rows.</p>
-
-![Downstream tracking: the steering vector goes in at layer 50 and the fingerprint is re-measured at layers 55 through 78, fading but staying nonzero.](downstream-layers.svg)
-
-<p class="figure-note">Figure: why we measure at seven depths instead of one. The fingerprint is strongest where the vector is inserted and attenuates smoothly downstream; the full numbers are in the trajectory section below.</p>
-
-Everything here runs on pinned public artifacts (publicly released Llama 3.3
-70B weights, gated under the Llama 3.3 Community License rather than
-open-source, plus the public Goodfire SAE and public Neuronpedia lens),
-whereas Gurnee et al.'s results are on
-Anthropic's internal Claude models, whose weights and internals are not
-publicly available for reproduction. The protocol was committed to public git before results
-existed, so the test can be re-run from the release. Where the settings
-overlap, our results agree with Gurnee et al.: with an anchored comparison
-(the auditor holds a known clean baseline, a before-picture, and measures the
-change from it), the paired J-score moves large and in the expected direction.
-The addition is the negative result on the unanchored side (no baseline, just
-one steered snapshot), under this fixed single-token score.
-
-**Not claimed.**
-
-- That J-space reveals what the model "believes," or anything about
-  consciousness.
-- That an isolated activation can be attributed to a specific SAE feature
-  under this fixed single-token score (the state-only detector fails here).
-- That the result generalizes beyond this model, SAE checkpoint, lens family,
-  lexicon score, and forensic task.
-- That vendor feature labels are ontology rather than suggestive released
-  metadata.
+**Not claimed.** That J-space reveals what the model "believes," or anything
+about consciousness; that an isolated activation can be attributed to a
+specific SAE feature under this fixed single-token score (the state-only
+detector fails here); that the result generalizes beyond this model, SAE
+checkpoint, lens family, lexicon score, and forensic task; or that vendor
+feature labels are ontology rather than suggestive released metadata. The
+limits are collected in [Answer, and its limits](#answer).
 
 {{< mermaid >}}
 flowchart LR
@@ -422,15 +411,26 @@ over the 67 frozen lexicon token scores from one readout (one transport, layer
 65, last content token), refit inside each cross-validation fold. "Fitting"
 here means only that: the classifier sees a labeled training split of trials
 and learns 67 weights. Because we build the splits, we know exactly what each
-fold's classifier saw. Evaluation is out of sample by prompt-template family
-(5-fold grouped cross-validation, whole families held out together). Target
-attribution additionally holds out feature pairs: the classifier scoring a
-given target-versus-matched pair was never trained on any trial involving that
-pair, preventing it from merely memorizing six direction-specific signatures.
-We report AUROC, AUPRC, calibration via the Brier score (the mean squared gap
-between predicted probabilities and actual outcomes; lower is better), and
-true-positive rate at 1% false-positive rate. The paired-clean version is a
-separate, stronger-access sensitivity analysis.
+fold's classifier saw. Evaluation is out of sample by prompt-template family.
+Many of the 51 prefixes are near-copies from one sentence skeleton (a **prompt
+family**), and **grouped holdouts** assign each family to exactly one of the
+five cross-validation folds, so a family is never in both the training and the
+test data of the same split. Target attribution additionally holds out feature
+pairs: the classifier scoring a given target-versus-matched pair was never
+trained on any trial involving that pair, preventing it from merely memorizing
+six direction-specific signatures. We report AUROC, AUPRC, calibration via the
+Brier score (the mean squared gap between predicted probabilities and actual
+outcomes; lower is better), and true-positive rate at 1% false-positive rate.
+Error bars are **template-cluster intervals**: redraw the 51 families at random
+with replacement 20,000 times, recompute the metric on each redraw, and report
+the spread. Because each redraw keeps or drops a family's near-copies as a
+block, the interval reflects the roughly 51 independent pieces of evidence we
+have, not the 1,581 rows. The paired-clean version is a separate,
+stronger-access sensitivity analysis.
+
+![Families, not rows: grouped holdouts keep whole prompt families together; the cluster bootstrap resamples families.](prompt-families.svg)
+
+<p class="figure-note">Figure: near-copy prompts from one sentence skeleton count as one unit of evidence. Holdouts move whole families between train and test; error bars resample the 51 families, not the 1,581 rows.</p>
 
 {{< panel "info" >}}
 **How to read the detector numbers.** AUROC is the probability that a randomly
@@ -443,20 +443,7 @@ useless at that operating point.
 
 ![Access model is the result: isolated post-state fails; matched clean reference yields a signed differential.](access-model.svg)
 
-<p class="figure-note">Figure: same frozen 67-token lexicon readout, different auditor privileges, opposite conclusions. Panel A reads it with a fitted 67-score classifier and fails; panel B reads it with a fixed one-number contrast plus a clean reference and separates. Panel A is the production-relevant failure; panel B is differential monitoring.</p>
-
-{{< mermaid >}}
-flowchart TD
-  Q["Auditor receives activations"] --> A{"Clean reference<br/>available?"}
-  A -->|No| B["Post-state-only<br/>J score"]
-  A -->|Yes| C["Paired Δ<br/>steered − clean"]
-  B --> D["Target attribution<br/>AUROC ≈ 0.50"]
-  C --> E["Signed differential<br/>+0.91 / −0.82"]
-  D --> F["Do not deploy as<br/>provenance detector"]
-  E --> G["Optional internal<br/>regression monitor"]
-{{< /mermaid >}}
-
-<p class="figure-note">Figure: the access fork that organizes the rest of the note.</p>
+<p class="figure-note">Figure: same frozen 67-token lexicon readout, different auditor privileges, opposite conclusions. Panel A reads it with a fitted 67-score classifier and fails; panel B reads it with a fixed one-number contrast plus a clean reference and separates. Panel A is the production-relevant failure; panel B is differential monitoring. This access fork organizes the rest of the note.</p>
 
 ## Frozen Design
 
@@ -478,7 +465,7 @@ The complete pre-outcome
 [protocol](https://github.com/tdj28/llm_selfref_pre/blob/b026faac222e55d7da4f01a30a6a60a468a5f023/docs/LLAMA70B_SAE_JLENS_PROTOCOL.md)
 and machine-readable
 [plan](https://github.com/tdj28/llm_selfref_pre/tree/b026faac222e55d7da4f01a30a6a60a468a5f023/data/sae_jlens_audit/confirmatory_v1_plan_20260711)
-are linked from the release section below. The prior calibrated endpoint is
+are also listed in the artifact ledger below. The prior calibrated endpoint is
 reused; no new behavioral output is sampled in this phase. Every condition sees
 the exact same token prefix, so trajectory differences cannot be attributed to
 divergent generated text.
@@ -510,8 +497,9 @@ not about every possible state auditor.
 
 ## Static Fingerprints
 
-Three of the six selected public SAE directions (30686, 41533, 58667), as
-labeled in the released Goodfire artifact, produce J-lens lexical profiles
+Three of the six selected public SAE directions (30686, 41533, 58667),
+labeled deception/roleplay by the feature-search output in the public AE
+Studio notebook that supplied the IDs, produce J-lens lexical profiles
 sharply aligned with deception- or roleplay-adjacent vocabulary under this
 corpus-averaged single-token readout, and a fourth (22004) moderately so. The
 deception-minus-unrelated score is the mean lens score of a frozen list of
@@ -641,12 +629,12 @@ that instability rather than hiding it.
 
 ## Downstream Fingerprint
 
-First, the bad news for auditing. In this experiment, using a fixed
-single-token J-lens readout on isolated post-intervention states (to be
-precise: the detector is a simple classifier over all 67 frozen lexicon token
-scores, not the one-number deception contrast used in the paired analysis),
-target attribution does not generalize out of sample and performs at chance
-relative to identity and scrambled-J controls. Crossed prompt-family and feature-pair
+First, the bad news for auditing. Using a fixed single-token J-lens readout on
+isolated post-intervention states (to be precise: the detector is a simple
+classifier over all 67 frozen lexicon token scores, not the one-number
+deception contrast used in the paired analysis), target attribution does not
+generalize out of sample and sits level with identity and scrambled-J
+controls. Crossed prompt-family and feature-pair
 holdout AUROC is 0.4998 [0.4978, 0.5016] for the J-lens, 0.5013 for identity,
 0.5025 for raw residual norm, and 0.5011 to 0.5068 across the five random-J
 controls. J-lens TPR at 1% FPR is 0.98% (the random-J seeds span 0.82% to
@@ -663,16 +651,19 @@ on this balanced task (full rows in
 | Raw residual norm | 0.5025 | [0.5017, 0.5043] | 1.14% |
 | Random-J seeds (range) | 0.5011-0.5068 | - | 0.82%-1.47% |
 
-<p class="figure-note">Table: confirmatory post-state-only target attribution under crossed prompt-family and feature-pair holdouts. Every readout is operationally at chance.</p>
+<p class="figure-note">Table: confirmatory post-state-only target attribution under crossed prompt-family and feature-pair holdouts. Every readout is operationally at chance. The first of the two opening figures plots these rows with their intervals.</p>
 
 Read that as a **task- and instrument-specific null**, not as proof that
-internal states cannot reveal prior steering. Other recent work reports
+internal states cannot reveal prior steering. One design feature matters
+here: the attribution task pools amplification and suppression, which move
+the frozen one-number score in opposite directions (+0.9065 versus -0.8247 at
+layer 65), so a pooled linear reader is poorly suited to sign-invariant
+detection; chance here is not a theorem for every reader or distribution. Other recent work reports
 detectable residual-stream signals of concept injection, robust detection
 behavior in post-trained models, and strong activation-based deception auditing
 with richer decoder architectures ([Pearson-Vogel et al.,
 2026](#ref-pearson-vogel-2026); [Macar et al., 2026](#ref-macar-2026);
-[Chen et al., 2026](#ref-chen-2026)). The right interpretation is failure of
-this fixed J-space readout under this access model.
+[Chen et al., 2026](#ref-chen-2026)).
 
 The broader any-intervention task is no rescue. J-lens AUROC is 0.5092, below
 identity (0.5129) and four random-J seeds. Its AUPRC of 0.96895 (area under
@@ -683,25 +674,14 @@ prevalence, the detector does no better than labeling everything "steered." A
 high-looking AUPRC in a 30-to-1 task is not a useful detector. The remaining
 promised metrics agree: the J-lens Brier score on this task is 0.327 [0.246,
 0.411], and its TPR at 1% FPR is 1.37% (rows in
-[`detector_metrics.csv`](receipts/detector_metrics.csv)). Again, the claim is
-that our chosen readout family did not detect any intervention usefully, not
-that intervention detection is generally hopeless.
-
-![Out-of-sample steering detection by readout family.](sae_jlens_detection_auroc.png)
-
-<p class="figure-note">Figure: confirmatory post-state-only target attribution. Error bars are 95% template-cluster bootstrap intervals. Every readout is operationally at chance under crossed prompt and feature-pair holdouts.</p>
-
-The central comparison is the real J-lens against identity, every random-J
-seed, and raw norms. The relevant question is not whether AUROC exceeds 0.5 in
-isolation, but whether the real lens adds reliable specificity beyond these
-cheaper controls.
+[`detector_metrics.csv`](receipts/detector_metrics.csv)).
 
 ### A clean reference changes the answer
 
 With access to a matched clean reference, a fixed one-number contrast on the
-same frozen lexicon readout produces a large signed differential signal
-between the selected targets and matched controls, making it potentially
-useful for controlled internal monitoring. At the frozen layer 65 readout, the target-minus-matched change is
+same frozen lexicon readout produces a large signed differential between the
+selected targets and matched controls, which is what makes it a candidate for
+controlled internal monitoring. At the frozen layer 65 readout, the target-minus-matched change is
 +0.9065 [0.8426, 0.9673] under amplification (steering the feature up, with a
 positive coefficient) and -0.8247 [-0.8641, -0.7853] under suppression
 (steering it down). Identity sees the same sign but only +0.2028 and -0.2181.
@@ -720,40 +700,37 @@ already appear in the released labels of the six targets, so those families
 would not be clean negatives here; label-disjoint candidates are
 directions like refusal/safety disclaimers, hedging, or formality.
 
-**Update (2026-07-12): a preregistered follow-up ran exactly those
-controls.** The v2 study added 18 label-disjoint hard negatives (refusal,
-hedging, formality) and six same-subfamily matched comparators; its
-registered run failed a frozen numerical replay-equivalence gate, so its
-results are exploratory ([the v2 section below](#the-v2-follow-up) has the
-full design, the gate failure, and the figures). In that exploratory
-analysis, none of the three hard-negative families showed material deception
-leakage, and every family's own lexicon was its largest readout. But the
-global family-specificity contrast (0.174 [0.167, 0.182], versus 0.133 for
-identity and -0.015 to 0.014 for the five random-J impostors) fell below the
-frozen material threshold of 0.25, and the six selected target IDs were
-practically comparable to matched same-subfamily alternatives (advantage
-0.125, entirely inside the frozen ±0.25 comparability region). Read
-together: the circularity concern above was partly justified. The readout
-tracks a semantic family that many label-similar features share, rather than
-anything privileged about the six advertised IDs, though three of the six
-(30686, 41533, 58667) move the deception lexicon strongly while the other
-three do not, so the family itself is real but heterogeneous.
+**Update (2026-07-12).** A preregistered follow-up ran exactly those
+controls: 18 label-disjoint hard negatives (refusal, hedging, formality) and
+six same-subfamily comparators. Its registered run failed a frozen
+replay-equivalence gate, so the results are exploratory ([the v2
+section](#the-v2-follow-up) has the design, the gate failure and the figures).
+No hard-negative family showed material deception leakage and every family's
+own lexicon was its largest readout, but global family specificity (0.174
+[0.167, 0.182]; identity 0.133; random-J -0.015 to 0.014) fell below the frozen
+0.25, and the six selected IDs showed no material advantage over their
+comparators (0.125, template-conditional 90% interval [0.116, 0.134], inside
+the frozen ±0.25 band, a flag that identity and all five random-J transports
+also return, so equivalence is not established either). The circularity
+concern above was partly justified: no privileged status for the six IDs as a
+set was shown, pair effects are heterogeneous (from +0.520 for 30686 to -0.100
+for 58667, whose comparator scored higher than the target;
+[per-pair file](https://github.com/tdj28/llm_selfref_pre/blob/478a10dd0670eee47fc151882560482ae79fc790/data/sae_jlens_audit/confirmatory_v2_20260712/post_failure/analysis/semantic_a2_pairs.csv)),
+and the family
+itself is real but uneven, with 30686, 41533 and 58667 moving the deception
+lexicon strongly and the other three not.
 
-That is differential monitoring, not forensic attribution. Because the
-Jacobian lens measures vocabulary-disposition effects, many mechanisms (prompt
-edits, adapters, fine-tuning, weight edits, or different residual
-interventions) could in principle move the same score. Non-surjectivity work
-strengthens the caution: steering can push states off the natural prompt
-manifold (the region of activation space that real prompts actually produce;
-a steered state may sit somewhere no prompt could ever take the model), so
-detectability may partly reflect anomalous geometry rather than
-uniquely identifiable concept provenance ([Mishra et al.,
-2026](#ref-mishra-2026)).
+That is differential monitoring, not forensic attribution: many mechanisms
+could move the same vocabulary-disposition score, and steering can push states
+off the natural prompt manifold (the region of activation space that real
+prompts actually produce), so detectability may partly reflect anomalous
+geometry rather than identifiable provenance ([Mishra et al.,
+2026](#ref-mishra-2026); see [the limits](#answer)).
 
-After opening the confirmatory result, I added one explicitly post hoc
-(chosen after seeing the data, so it carries less evidential weight than the
-prospectively frozen endpoints) way to express that stronger access model,
-documented in a dated post-run amendment
+After opening the confirmatory result, I added one explicitly post hoc way to
+express that stronger access model (chosen after seeing the data, so it
+carries less weight than the frozen endpoints), documented in a dated post-run
+amendment
 ([`SAE_JLENS_POSTRUN_AMENDMENT_20260711.md`](https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/docs/SAE_JLENS_POSTRUN_AMENDMENT_20260711.md);
 no token, layer, position, sign, feature, or transport was selected from the
 outcomes). Take the already frozen
@@ -764,11 +741,9 @@ identity is 0.779 [0.751, 0.807]; the five random-J AUROCs range from 0.256 to
 0.717 [0.697, 0.738] for J and 0.699 [0.667, 0.731] for identity, with random-J
 values up to 0.645. There is no fitted classifier in this sensitivity, but
 every version assumes a clean reference and therefore does not rescue the
-failed post-state-only detector.
-
-![Paired clean-reference target attribution.](sae_jlens_paired_reference_auc.png)
-
-<p class="figure-note">Figure: fixed-score target attribution when the auditor can subtract a matched clean-prefix readout. Blue assumes known intervention sign; orange uses absolute change when sign is unknown. Error bars resample the 51 template families. This post-run sensitivity uses the frozen score but is not a new confirmatory endpoint. The raw-residual-norm baseline from the confirmatory figure was not run in this paired setting, so the manifold-anomaly alternative is untested here.</p>
+failed post-state-only detector. The second of the two opening figures plots
+this analysis; the raw-residual-norm baseline was not run in this paired
+setting, so the manifold-anomaly alternative is untested here.
 
 The aggregate also hides real heterogeneity. Features 30686 and 58667 separate
 perfectly in this sample; 41533 is nearly perfect (0.9999); 30032 and 22004
@@ -1033,14 +1008,16 @@ For the real Jacobian the difference is 0.125, with 95% interval
 that in scale: identity shows +0.007 on the identical statistic, and the
 five random-J impostors span -0.175 to +0.083, so a scrambled lens can
 produce a larger-magnitude target-minus-comparator gap than the real one.
-Precise, but not large: the entire interval sits inside the comparability
-region, so the frozen exploratory verdict is **practical comparability**,
-not selected-ID advantage. This is stronger than saying the six IDs have no
-signal; several do in the exploratory tables. It says that carefully matched
-alternatives from the same public SAE carry similar deception-related
-Jacobian effects. The index numbers themselves are not privileged
-coordinates, the same deflation already stated in this post's abstract and
-key result.
+Precise, but not large: the whole interval sits inside the comparability
+region, so the frozen rule returns **practical comparability** rather than
+selected-ID advantage. Read that flag narrowly. Identity and all five random-J
+transports return it too, so it marks the absence of a material selected-ID
+advantage on six fixed pairs, not semantic equivalence or interchangeability,
+and the per-pair effects
+([`semantic_a2_pairs.csv`](https://github.com/tdj28/llm_selfref_pre/blob/478a10dd0670eee47fc151882560482ae79fc790/data/sae_jlens_audit/confirmatory_v2_20260712/post_failure/analysis/semantic_a2_pairs.csv))
+should be read alongside the mean. Several of the six
+IDs carry real signal in the exploratory tables; what they lack is a material
+edge over a matched alternative from the same public SAE.
 
 ### Does more reader capacity recover provenance?
 
@@ -1090,15 +1067,18 @@ The v2 results sharpen the access-model split into a hierarchy:
    from a new isolated state.
 
 Evidence at rung 1 or 2 does not imply rung 3 or 4. Here the labels are real
-and several causal effects are strong, while rung 3 lands at practical
-comparability and rung 4 stays at chance for every linear reader tried.
+and several causal effects are strong, while rung 3 shows no material
+selected-ID advantage (the comparability flag that identity and all five
+random-J transports also return) and rung 4 stays at chance for every linear
+reader tried.
 
 Because the replay gate failed, none of this is confirmatory. It also does
 not show that every SAE feature is interchangeable, that the six paper IDs
 are meaningless, that nonlinear or sequence-level provenance detection is
 impossible, that a proprietary Goodfire intervention would match this public
-implementation, or anything about hidden belief, intent, or consciousness.
-The defensible exploratory conclusion is narrower: under this public Llama
+implementation, or anything about hidden belief, intent, or consciousness
+([the limits](#answer) collect these). The defensible exploratory conclusion
+is narrower: under this public Llama
 70B SAE/J-lens setup, hard-negative semantics are orderly but below the
 material specificity threshold, the accepted IDs do not beat fixed
 same-subfamily comparators by a material amount, and no frozen linear state
@@ -1122,18 +1102,11 @@ The paired result is still useful as an internal regression monitor. If a
 deployment system can retain a clean reference for a fixed probe, compare signed
 versions, or run controlled canary prefixes (known test prompts replayed
 periodically so any drift in their readouts flags a change), the J-lens can
-amplify a semantically specific delta beyond identity. It is not provenance: a prompt,
-fine-tune, adapter, weight edit, or different residual intervention could
-produce a similar delta.
-
-Even a strong positive result would be an intervention fingerprint, not proof
-of provenance. Prompting, fine-tuning, LoRA adapters, weight edits, and other
-residual additions may enter the same score region. A distributed or
-J-avoiding intervention may evade a detector trained on constant SAE vectors.
-The non-surjectivity literature adds another possibility: crude steering may
-be detectable simply because it pushes activations off the natural manifold,
-in which case raw anomaly scores could outperform semantic J-space
-([Mishra et al., 2026](#ref-mishra-2026)).
+amplify a semantically specific delta beyond identity. Even then it is a
+fingerprint, not provenance: other mechanisms can enter the same score region,
+a distributed or J-avoiding intervention may evade a detector trained on
+constant SAE vectors, and off-manifold geometry may be doing the work (see
+[the limits](#answer)).
 
 For a production system, the practical hierarchy is:
 
@@ -1145,65 +1118,77 @@ For a production system, the practical hierarchy is:
 5. state the false-positive rate on naturally occurring prompts before using
    any detector operationally.
 
-{{< mermaid >}}
-flowchart TD
-  A["Production monitoring stack"] --> B["1. Signed metadata + hook telemetry"]
-  A --> C["2. Raw anomaly detectors"]
-  A --> D["3. Reference-based J differential"]
-  A --> E["4. Learned / decoder readers<br/>LatentQA · STATEWITNESS"]
-  B --> F["Prefer when available"]
-  C --> G["Catch off-manifold edits"]
-  D --> H["This note's ceiling"]
-  E --> I["Richer alternatives not run here"]
-{{< /mermaid >}}
-
-<p class="figure-note">Figure: where a paired J-space monitor sits. It is one instrument among several, not the main alternative after telemetry.</p>
+A paired J-space monitor is one instrument among several in that stack, not
+the main alternative after telemetry.
 
 ## What This Says About Consciousness Claims
 
-The experiment establishes a causal perturbation fingerprint and, in most
-selected cases, a deception-adjacent lexical readout under this public
-implementation. It does not adjudicate whether the model has experiences,
-beliefs, or any accepted marker of consciousness, and should not be read as
-evidence either for or against such claims.
+![Claim ladder: public artifacts through monitoring; provenance and consciousness sit off the ladder.](claim-ladder.svg)
 
-The steering was not internally inert. The earlier public behavioral study
-this bears on is our confirmatory public-SAE replication of Berg, de Lucena,
-and Rosenblatt's consciousness-report gating result
+<p class="figure-note">Figure: what this experiment can support. Provenance forensics and consciousness sit outside the ladder.</p>
+
+The steering was not internally inert. The earlier behavioral study this bears
+on is our prospectively frozen public-weight test of the consciousness-report
+gating effect described by Berg, de Lucena, and Rosenblatt
 ([Berg et al., 2025](#ref-berg-2025);
 [release](https://github.com/tdj28/llm_selfref_pre/tree/a66b69b5a206930fb91ae389ab9a6c5a3ccf0562/data/public_sae_consciousness_gating/confirmatory_v1_20260710)),
-which found no gating effect on consciousness reports under this same public
-implementation and calibrated magnitude. The full SAE edit and direct addition
-agree to relative RMSE \(6.6\times10^{-8}\) (the two implementations match to
-within about one part in ten million; one side of that check is the earlier
-study's own residual-preserving hook), and the chosen vectors create a large
-signed J-lens fingerprint across downstream layers. For this implementation
-and magnitude, that undercuts the weakest reading of the earlier null:
-"nothing was changed."
+run under this same public implementation and calibrated magnitude. Its frozen
+decision rule returned `not replicated`. That string is the output of a
+decision rule, not a comparability-validated non-replication: the untreated
+rate under the paper's induction was near ceiling (all ten no-op outputs were
+primary-judge positive, against roughly 0.30 at zero in the paper's Figure 2),
+so the suppression direction had little upward headroom, and the labels are
+paper-rubric positives, not validated experience reports. The full SAE edit and
+direct addition agree to relative RMSE \(6.6\times10^{-8}\) (the two
+implementations match to within about one part in ten million; one side of
+that check is the earlier study's own residual-preserving hook), and the chosen
+vectors create a large signed J-lens fingerprint across downstream layers. For
+this implementation and magnitude, that undercuts the weakest reading of the
+earlier result: "nothing was changed."
 
 But what changed is a verbalization geometry associated, under released labels
 and this single-token score, with deception, roleplay, innocence, fake stories,
-and lies. Internal movement of that kind is still an intervention fingerprint,
-not a report about hidden experience. The clean conclusion is narrower: public
-feature semantics and internal steering effects are operational claims about
-this intervention and readout. Consciousness is not among them.
+and lies. Internal movement of that kind is an intervention fingerprint, not a
+report about hidden experience. Public feature semantics and internal steering
+effects are operational claims about this intervention and readout;
+consciousness is not among them.
 
-This note is about the limits of reading perturbation fingerprints, not about
-consciousness.
+## Answer, and its limits {#answer}
 
-## Answer
+From an isolated post-steering state, the tested J-lens reader cannot say
+which feature was steered: **AUROC 0.4998** at the v1 confirmatory endpoint,
+and all 14 linear readers in the exploratory v2 ladder stay near chance. With
+a matched clean reference, the same lexicon read as one number becomes a
+useful comparison of controlled interventions: the post hoc fixed-score
+analysis reaches **0.862** with sign known, against **0.779** for identity.
+Six limits bound that answer.
 
-A matched clean reference makes the tested J-lens score useful for comparing
-controlled interventions. With sign known, the post hoc fixed-score analysis
-reaches **AUROC 0.862**, versus **0.779** for identity. That is a result about
-differential monitoring under the stated access and lexicon choices.
-
-Isolated-state attribution remains near chance: **0.4998** at the v1
-confirmatory endpoint. The [v2 follow-up](#the-v2-follow-up) also finds all
-fourteen tested linear readers near chance, while label-similar alternatives
-are practically comparable to the selected IDs. Those v2 endpoints remain
-**exploratory because the replay gate failed**. Nonlinear and sequence-level
-readers, broader feature families, and other models require separate tests.
+- **Evidence tiers.** The 0.4998 endpoint and the +0.9065/-0.8247 paired
+  differentials were frozen before outcomes; the 0.862 is post hoc; every v2
+  number is exploratory because the registered replay gate failed.
+- **Readout family.** The null concerns a fixed single-token lexicon readout
+  and linear readers. Tuned lenses, trained nonlinear probes, sequence-level
+  readers and decoder-based readers (LatentQA, STATEWITNESS) were not run and
+  remain open; nothing here shows such detection impossible.
+- **Selection circularity.** The targets were chosen by deception/roleplay
+  labels and the frozen score is a deception lexicon contrast. The v2
+  comparators bound this: no material selected-ID advantage (0.125, inside the
+  frozen ±0.25 band that identity and all five scrambled lenses also fall
+  inside), so the paired signal is not shown to be specific to these six IDs;
+  equivalence is not established either, and pair effects are heterogeneous.
+- **Fingerprint, not provenance.** A prompt, fine-tune, adapter, weight edit or
+  different residual intervention could move the same score, and crude
+  steering may be detectable only because it pushes states off the natural
+  prompt manifold, in which case raw anomaly scores could outperform semantic
+  J-space ([Mishra et al., 2026](#ref-mishra-2026)).
+- **Scope.** One model, one SAE checkpoint, one lens family, one lexicon score,
+  one forensic task; a proprietary Goodfire intervention is not shown to match
+  this public implementation; vendor feature labels are released metadata, not
+  ontology.
+- **Consciousness.** The steering was not inert, which undercuts the weakest
+  reading of the earlier public-SAE result ("nothing was changed"), but a moved
+  verbalization geometry is an intervention fingerprint, not evidence about
+  belief or experience.
 
 ## Reproducibility And Artifact Ledger
 
@@ -1254,21 +1239,19 @@ statistic, but testing an *alternative* reader (tuned lens, trained probe,
 decoder-based auditor) on the same underlying activations requires re-running
 the pinned model, which sits behind Meta's gated license.
 
-**Update (2026-07-12):** the v2 follow-up closes most of that gap. Its
-release publishes the full BF16 residual shards (about 1.29 GiB, seven layers
-by three positions for all 4,029 forwards) with public SHA-256 manifests
-([OSF residual project](https://osf.io/sz2gb/)), so alternative readers can
-now be tested without re-running the model. The v2 run also already tested a
-14-reader ladder (all linear, up to a full 8,192-dimensional residual probe),
-and in exploratory analysis every reader stayed near chance on
-isolated-state attribution ([the v2 section](#the-v2-follow-up) has the
-table). Adding linear capacity did not recover out-of-sample provenance,
-which strengthens (but, given the gate failure, does not confirmatorily
-establish) the access-model reading of the v1 null: the limitation looks
-like the isolated post-state itself, not the lexicon reader. The same
-exploratory analysis also produced the deflationary family-specificity and
-same-subfamily comparability results quoted in the differential-monitoring
-update; both arms carry the same exploratory label.
+**Update (2026-07-12).** The v2 release closes most of that gap: it
+publishes the full BF16 residual shards (about 1.29 GiB, seven layers by three
+positions for all 4,029 forwards) with public SHA-256 manifests
+([OSF residual project](https://osf.io/sz2gb/)), so alternative readers can be
+tested without re-running the model. Its own 14-reader ladder (all linear, up
+to a full 8,192-dimensional residual probe) stayed near chance on
+isolated-state attribution in exploratory analysis ([table](#the-v2-follow-up)).
+Added linear capacity did not recover out-of-sample provenance, which supports
+the access-model reading of the v1 null (the limitation looks like the isolated
+post-state itself, not the lexicon reader) without confirming it, because the
+replay gate failed. The family-specificity and selected-ID-comparator results
+quoted in the differential-monitoring update come from the same exploratory
+analysis and carry the same label.
 
 ## Appendix: release inventory
 
@@ -1324,7 +1307,7 @@ snippet from the artifact.
 
 - **Plain Language:** Set the prompt aside. Take only an SAE steering direction
   and ask the Jacobian lens which words it points toward. For feature `30686`,
-  the top words are deception-ish.
+  the sharpest of the six static profiles, the top words are deception-ish.
 - **Technical:** One line from
   [`static_results.jsonl`](https://github.com/tdj28/llm_selfref_pre/blob/c071aa4d737d72818f0774ca389c159b5da67dc1/data/sae_jlens_audit/confirmatory_v1_20260711/static_results.jsonl):
   positive SAE decoder column, `transport: "jacobian"`. `top_tokens` are ranked
@@ -1348,9 +1331,11 @@ snippet from the artifact.
 #### Sparse-pursuit checkpoint
 
 - **Plain Language:** The static sample says the direction *looks like*
-  deception words. This check asks whether we can rebuild that whole SAE vector
-  as a short mix of word-directions. With a budget of 25 words, we only recover
-  about 31% of its energy. Most of the vector is still left over.
+  deception words. This check asks whether we can rebuild the whole SAE vector
+  as a short mix of word-directions. Feature 30686 is shown because it is the
+  best case: with a budget of 25 words, the mix recovers about 31% of its
+  energy, against a 10.29% mean across the six targets and 3.47% for the
+  weakest, 22004. Even here, most of the vector is left over.
 - **Technical:** Nonnegative matching pursuit over J-token directions at
   \(k=25\). `explained_squared_norm` is the fraction of \(\|d_i\|^2\) captured by
   the fit; `remainder_norm` is the leftover vector's length. Line from
@@ -1693,7 +1678,7 @@ comments.
 - <a id="ref-neuronpedia-autointerp"></a>Neuronpedia. [Automated interpretability labels for `llama3.3-70b-it-gf`](https://www.neuronpedia.org/llama3.3-70b-it-gf) (accessed 2026-07-12).
 - <a id="ref-ae-studio-notebook"></a>AE Studio. [*Deception Features & Subjective Consciousness Study*](https://github.com/agencyenterprise/steering-api-examples/blob/main/deception-features/deception_features.ipynb) (public Steering API example notebook; [repo](https://github.com/agencyenterprise/steering-api-examples)). Used here only as the published source of the six integer feature IDs / labels; notebook code is not vendored. Those IDs were measured under the public Goodfire checkpoint in [*How to Read an SAE Feature ID*](https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/) ([Jones, 2026a](#ref-sae-feature-id)).
 - <a id="ref-meta-llama"></a>Meta. [`Llama-3.3-70B-Instruct`](https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct).
-- <a id="ref-berg-2025"></a>Berg, C., de Lucena, C., and Rosenblatt, J. (2025). [*Large Language Models Report Subjective Experience Under Self-Referential Processing*](https://arxiv.org/abs/2510.24797). arXiv:2510.24797.
+- <a id="ref-berg-2025"></a>Berg, C., de Lucena, D., and Rosenblatt, J. (2025). [*Large Language Models Report Subjective Experience Under Self-Referential Processing*](https://arxiv.org/abs/2510.24797v2). arXiv:2510.24797v2, revised 30 October 2025.
 - <a id="ref-belrose-2023"></a>Belrose, N., et al. (2023). [*Eliciting Latent Predictions from Transformers with the Tuned Lens*](https://arxiv.org/abs/2303.08112). arXiv:2303.08112.
 - <a id="ref-turner-2024"></a>Turner, A. M., et al. (2024). [*Steering Language Models With Activation Engineering*](https://arxiv.org/abs/2308.10248). arXiv:2308.10248.
 - <a id="ref-hsu-2026"></a>Hsu, B., Beaglehole, D., Radhakrishnan, A., and Belkin, M. (2026). [*Contextual Linear Activation Steering of Language Models*](https://arxiv.org/abs/2604.24693). arXiv:2604.24693.
