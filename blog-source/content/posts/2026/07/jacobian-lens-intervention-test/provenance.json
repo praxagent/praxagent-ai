@@ -6,7 +6,7 @@
     "run": "signed-dose-a084caa-wl8obvtuq0ax8t-v2",
     "freeze_commit": "a084caafc2ec27860044d80d3b33912f656fd08a",
     "release_commit": "fde24e93770859bf0ec848b91eb0564d550a641d",
-    "experiment_package": "https://github.com/tdj28/llm_selfref_pre/tree/main/experiments/consciousness_sae_signed_dose_scan",
+    "experiment_package": "https://github.com/tdj28/llm_selfref_pre/tree/fde24e93770859bf0ec848b91eb0564d550a641d/experiments/consciousness_sae_signed_dose_scan",
     "compact_record": "https://github.com/tdj28/llm_selfref_pre/tree/fde24e93770859bf0ec848b91eb0564d550a641d/docs/consciousness_sae_signed_dose_scan/results/signed-dose-a084caa-wl8obvtuq0ax8t-v2-audit-recovery-c9"
   },
   "generator": {
