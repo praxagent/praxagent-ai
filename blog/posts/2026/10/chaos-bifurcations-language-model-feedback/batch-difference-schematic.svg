@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="388" viewBox="0 0 760 388" role="img" aria-labelledby="titleBatch descBatch">
+  <title id="titleBatch">How a rounding-level difference evolves in the loop (schematic, not data)</title>
+  <desc id="descBatch">Schematic, not data, and not to scale. The distance between two runs that differ only in batch layout is drawn on a logarithmic axis against the step. Both float64 runs start at the rounding level, about 1e-16. In a periodic loop the difference is damped and stays at the rounding level. In a chaotic loop it grows exponentially, a straight line on the logarithmic axis, crosses the 1e-2 line at the step the Lyapunov exponent predicts and levels off at order one. A dot a few steps after the crossing marks where the texts of the two runs split, at most a few Lyapunov times later (in the examples of the note's Table 1, at 1.27 to 176% of the state's norm, 0 to 16 steps after the difference passes 1e-2). A bfloat16 difference starts near 1e-3, already close to the 1e-2 line, and crosses it within a few steps.</desc>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:15px;font-weight:700}
+    .h{font-size:13px;font-weight:700}
+    .s{font-size:12px}
+    .m{font-size:11px;fill:#5A544C}
+    .axis{stroke:#7F786D;stroke-width:1.4;fill:none}
+    .divider{stroke:#A89B8C;stroke-width:1.4;stroke-dasharray:5 4}
+    .chaos{stroke:#A67C52;stroke-width:2.6;fill:none}
+    .periodic{stroke:#4B6787;stroke-width:2.6;fill:none}
+    .bf16{stroke:#7F786D;stroke-width:2;fill:none;stroke-dasharray:6 4}
+    .foot{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.5}
+  </style>
+
+  <text x="24" y="28" class="t title">How a rounding-level difference evolves in the loop</text>
+  <text x="24" y="48" class="t m">Schematic, not data, not to scale: distance between two runs that differ only in batch layout, on a logarithmic axis.</text>
+
+  <!-- axes -->
+  <line class="axis" x1="120" y1="68" x2="120" y2="300"/>
+  <line class="axis" x1="120" y1="300" x2="724" y2="300"/>
+  <text x="724" y="318" text-anchor="end" class="t m">step</text>
+  <text x="112" y="88" text-anchor="end" class="t m">order one</text>
+  <text x="112" y="124" text-anchor="end" class="t m">1e-2</text>
+  <text x="112" y="148" text-anchor="end" class="t m">about 1e-3</text>
+  <text x="112" y="286" text-anchor="end" class="t m">about 1e-16</text>
+
+  <!-- threshold -->
+  <line class="divider" x1="120" y1="120" x2="724" y2="120"/>
+  <text x="724" y="113" text-anchor="end" class="t m">above 1e-2 the runs count as separated</text>
+
+  <!-- periodic loop: damped, stays at the rounding level -->
+  <polyline class="periodic" points="122,282 150,287 180,285 210,289 240,287 270,290 300,288 330,290 360,288 390,290 420,289 450,290 480,288 510,290 540,289 570,290 600,288 630,290 660,289 690,290 718,289"/>
+  <text x="440" y="276" class="t s" style="fill:#36506B">periodic loop: damped, stays at the rounding level</text>
+
+  <!-- chaotic loop: exponential growth, then order one -->
+  <polyline class="chaos" points="122,282 470,94 486,88 500,85 516,89 532,84 548,88 564,83 580,87 596,84 612,89 628,84 644,87 660,83 676,88 692,85 718,87"/>
+  <line class="divider" x1="418" y1="122" x2="418" y2="300"/>
+  <text x="418" y="318" text-anchor="middle" class="t m">step the exponent predicts</text>
+  <!-- the texts split at most a few Lyapunov times after the crossing -->
+  <line x1="448" y1="76" x2="448" y2="100" stroke="#7A5634" stroke-width="1.2"/>
+  <circle cx="448" cy="106" r="4.5" fill="#A67C52" stroke="#F7F4F0" stroke-width="1.5"/>
+  <text x="448" y="70" text-anchor="middle" class="t m" style="fill:#7A5634">the texts split</text>
+  <text x="245" y="244" class="t s" style="fill:#7A5634">chaotic loop: exponential</text>
+  <text x="245" y="260" class="t s" style="fill:#7A5634">growth, a straight line here</text>
+
+  <!-- bfloat16: starts close to the threshold -->
+  <polyline class="bf16" points="122,144 140,126 158,104 176,92 196,88 216,90 236,87 256,89"/>
+  <text x="266" y="94" class="t m">bfloat16: starts near 1e-3,</text>
+  <text x="266" y="108" class="t m">crosses within a few steps</text>
+
+  <!-- footer takeaway -->
+  <rect class="foot" x="24" y="336" width="712" height="34" rx="10"/>
+  <text x="380" y="357" text-anchor="middle" class="t s">Numerical differences are the disturbance; the feedback dynamics decide whether it grows.</text>
+</svg>

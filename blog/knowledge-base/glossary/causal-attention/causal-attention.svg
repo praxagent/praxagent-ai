@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="400"
+     viewBox="0 0 760 400" role="img"
+     aria-labelledby="causalTitle causalDesc">
+  <title id="causalTitle">Causal attention leaves prefix keys and values independent of the last slot</title>
+  <desc id="causalDesc">Prefix token A reads only itself. Prefix token B reads A and itself. The last slot reads both prefix tokens and itself. A blocked box states that the last slot does not enter the keys or values of A or B.</desc>
+  <rect width="760" height="400" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:15px;font-weight:700}
+    .h{font-size:13px;font-weight:700}
+    .s{font-size:12px}
+    .m{font-size:11px;fill:#5A544C}
+    .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+    .row{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.2}
+    .target{fill:#F3E8E0;stroke:#A67C52;stroke-width:2.2}
+    .ok{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.6}
+    .bad{fill:#F8E8E6;stroke:#8C4A42;stroke-width:1.6}
+    .line{fill:none;stroke:#A67C52;stroke-width:2.2}
+    .blue{fill:none;stroke:#4B6787;stroke-width:2.2}
+    .ink{stroke:#2C2924;stroke-width:1.4;fill:none}
+  </style>
+  <text x="24" y="32" class="t title">A prefix token cannot read the later slot</text>
+  <text x="24" y="52" class="t m">Allowed reads are filled. Blocked reads from the last slot back into the prefix are marked.</text>
+  <rect x="36" y="88" width="200" height="64" rx="10" class="row"/>
+  <text x="136" y="116" text-anchor="middle" class="t h">A, first prefix token</text>
+  <text x="136" y="136" text-anchor="middle" class="t m">reads only A</text>
+  <rect x="280" y="88" width="200" height="64" rx="10" class="row"/>
+  <text x="380" y="116" text-anchor="middle" class="t h">B, second prefix token</text>
+  <text x="380" y="136" text-anchor="middle" class="t m">reads A and B</text>
+  <rect x="500" y="230" width="220" height="72" rx="10" class="target"/>
+  <text x="610" y="258" text-anchor="middle" class="t h">x, the last slot</text>
+  <text x="610" y="278" text-anchor="middle" class="t m">reads A, B, and x</text>
+  <path d="M236 120H280" class="line"/>
+  <path d="M136 152C136 210 520 210 520 230" class="blue"/>
+  <path d="M380 152C380 200 560 200 560 230" class="blue"/>
+  <rect x="36" y="250" width="280" height="72" rx="10" class="bad"/>
+  <text x="176" y="280" text-anchor="middle" class="t h">Blocked</text>
+  <text x="176" y="300" text-anchor="middle" class="t s">x does not enter keys or values of A or B</text>
+
+</svg>

@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="640" viewBox="0 0 880 640" role="img" aria-labelledby="titleTwin descTwin">
+  <title id="titleTwin">Rescaled twin for the exponent, unrescaled copy for the text</title>
+  <desc id="descTwin">Schematic, not a measured orbit, and not to scale. Left, the Lyapunov exponent by Benettin's method: along the reference orbit, the twin offset has a fixed relative length epsilon of 10 to the minus 6; one step of the map turns it into a longer dashed image, the log of the length ratio is recorded, and the offset is cut back to length epsilon along the image. Below, the separation on a log scale is a sawtooth: each step rises or falls, then returns to epsilon; lambda is the mean height of the teeth. Right, the copy behind Table 1: started at relative distance 10 to the minus 10 and never rescaled, the copy's orbit separates from the reference, and in the hostility cell at step 45 the reference's most probable token is Yes, with probability 0.303, and the copy's is No, with 0.298. Below, the separation on a log scale climbs from 10 to the minus 10, on average by a factor e to the lambda per step, until the most probable tokens differ.</desc>
+  <rect width="880" height="640" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:16px;font-weight:700}
+    .h{font-size:14px;font-weight:700}
+    .s{font-size:13px}
+    .m{font-size:12px;fill:#5A544C}
+    .sub{font-size:9px}
+    .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+    .ref{fill:#4B6787}
+    .tw{fill:#A67C52}
+    .orbit{stroke:#4B6787;stroke-width:1.6;fill:none}
+    .copy{stroke:#A67C52;stroke-width:1.6;fill:none}
+    .off{stroke:#A67C52;stroke-width:2.6;stroke-linecap:round}
+    .img{stroke:#A67C52;stroke-width:1.6;stroke-dasharray:4 3}
+    .axis{stroke:#7F786D;stroke-width:1.3;fill:none}
+    .guide{stroke:#A89B8C;stroke-width:1;stroke-dasharray:3 3}
+    .saw{stroke:#A67C52;stroke-width:2;fill:none;stroke-linejoin:round}
+    .ramp{stroke:#A67C52;stroke-width:2.4;fill:none;stroke-linejoin:round}
+    .mean{stroke:#7F786D;stroke-width:1.4;stroke-dasharray:5 4;fill:none}
+    .chipB{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.2}
+    .chipO{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.2}
+    .foot{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.4}
+  </style>
+
+  <text x="24" y="30" class="t title">Two ways to follow a second state of the loop</text>
+  <text x="24" y="50" class="t m">Schematic, not to scale: offsets of 10&#x207b;&#x2076; and 10&#x207b;&#xb9;&#x2070; of the state&#x2019;s norm are drawn enlarged.</text>
+
+  <!-- ============ LEFT: Benettin ============ -->
+  <rect class="card" x="16" y="66" width="414" height="490" rx="12"/>
+  <text x="32" y="92" class="t h">The exponent &#x3bb;: rescale after every step</text>
+  <text x="32" y="111" class="t m">Benettin&#x2019;s method, twin at relative distance &#x3b5; = 10&#x207b;&#x2076;</text>
+
+  <!-- legend -->
+  <circle cx="38" cy="134" r="4.5" class="ref"/>
+  <text x="48" y="138" class="t m">reference x<tspan dy="3" class="sub">n</tspan></text>
+  <line class="off" x1="140" y1="134" x2="164" y2="134"/>
+  <text x="172" y="138" class="t m">twin offset, length &#x3b5;&#x2016;x<tspan dy="3" class="sub">n</tspan><tspan dy="-3">&#x2016;</tspan></text>
+  <line class="img" x1="140" y1="154" x2="164" y2="154"/>
+  <text x="172" y="158" class="t m">its image after one step of F</text>
+
+  <!-- reference orbit -->
+  <polyline class="orbit" points="70,282 170,254 270,274 370,246"/>
+  <!-- offsets and images -->
+  <line class="off" x1="70" y1="282" x2="80" y2="250"/>
+  <circle cx="80" cy="250" r="3.5" class="tw"/>
+
+  <line class="img" x1="170" y1="254" x2="205" y2="191"/>
+  <circle cx="205" cy="191" r="3.5" fill="#FBF9F6" stroke="#A67C52" stroke-width="1.4"/>
+  <line class="off" x1="170" y1="254" x2="187" y2="224"/>
+  <circle cx="187" cy="224" r="3.5" class="tw"/>
+
+  <line class="img" x1="270" y1="274" x2="250" y2="205"/>
+  <circle cx="250" cy="205" r="3.5" fill="#FBF9F6" stroke="#A67C52" stroke-width="1.4"/>
+  <line class="off" x1="270" y1="274" x2="261" y2="241"/>
+  <circle cx="261" cy="241" r="3.5" class="tw"/>
+
+  <line class="img" x1="370" y1="246" x2="399" y2="180"/>
+  <circle cx="399" cy="180" r="3.5" fill="#FBF9F6" stroke="#A67C52" stroke-width="1.4"/>
+  <line class="off" x1="370" y1="246" x2="384" y2="215"/>
+  <circle cx="384" cy="215" r="3.5" class="tw"/>
+
+  <circle cx="70" cy="282" r="6" class="ref"/>
+  <circle cx="170" cy="254" r="6" class="ref"/>
+  <circle cx="270" cy="274" r="6" class="ref"/>
+  <circle cx="370" cy="246" r="6" class="ref"/>
+  <text x="70" y="302" text-anchor="middle" class="t m">x<tspan dy="3" class="sub">0</tspan></text>
+  <text x="170" y="274" text-anchor="middle" class="t m">x<tspan dy="3" class="sub">1</tspan></text>
+  <text x="270" y="294" text-anchor="middle" class="t m">x<tspan dy="3" class="sub">2</tspan></text>
+  <text x="370" y="266" text-anchor="middle" class="t m">x<tspan dy="3" class="sub">3</tspan></text>
+  <text x="120" y="290" text-anchor="middle" class="t m">F</text>
+  <text x="220" y="285" text-anchor="middle" class="t m">F</text>
+  <text x="320" y="282" text-anchor="middle" class="t m">F</text>
+
+  <!-- sawtooth plot -->
+  <text x="32" y="334" class="t m">separation &#x2016;y &#x2212; x&#x2016; / &#x2016;x&#x2016;, log scale</text>
+  <line class="axis" x1="70" y1="350" x2="70" y2="500"/>
+  <line class="axis" x1="70" y1="500" x2="410" y2="500"/>
+  <line class="guide" x1="70" y1="470" x2="410" y2="470"/>
+  <text x="62" y="474" text-anchor="end" class="t m">&#x3b5;</text>
+  <text x="410" y="516" text-anchor="end" class="t m">step</text>
+  <polyline class="saw" points="70,470 103,452 103,470 136,444 136,470 169,480 169,470 202,448 202,470 235,456 235,470 268,440 268,470 301,464 301,470 334,450 334,470 367,478 367,470 400,446"/>
+  <line x1="276" y1="440" x2="276" y2="470" stroke="#5A544C" stroke-width="1"/>
+  <line x1="272" y1="440" x2="280" y2="440" stroke="#5A544C" stroke-width="1"/>
+  <line x1="272" y1="470" x2="280" y2="470" stroke="#5A544C" stroke-width="1"/>
+  <text x="284" y="424" class="t m">one step:</text>
+  <text x="284" y="438" class="t m">ln(dashed / solid)</text>
+
+  <text x="32" y="530" class="t s">&#x3bb; is the mean height of the teeth. A tooth below</text>
+  <text x="32" y="547" class="t s">the &#x3b5; line is a contracting step.</text>
+
+  <!-- ============ RIGHT: free copy ============ -->
+  <rect class="card" x="450" y="66" width="414" height="490" rx="12"/>
+  <text x="466" y="92" class="t h">The text in Table 1: never rescale</text>
+  <text x="466" y="111" class="t m">copy at relative distance 10&#x207b;&#xb9;&#x2070;, after 1000 steps of the reference</text>
+
+  <circle cx="472" cy="134" r="4.5" class="ref"/>
+  <text x="482" y="138" class="t m">reference</text>
+  <circle cx="560" cy="134" r="4.5" class="tw"/>
+  <text x="570" y="138" class="t m">copy, iterated by the same F</text>
+
+  <polyline class="orbit" points="484,252 552,238 620,250 688,230 756,238 820,214"/>
+  <polyline class="copy" points="484,253 552,240 620,254 688,238 756,256 820,282"/>
+  <g class="ref">
+    <circle cx="484" cy="252" r="4.5"/><circle cx="552" cy="238" r="4.5"/><circle cx="620" cy="250" r="4.5"/>
+    <circle cx="688" cy="230" r="4.5"/><circle cx="756" cy="238" r="4.5"/><circle cx="820" cy="214" r="4.5"/>
+  </g>
+  <g class="tw">
+    <circle cx="552" cy="240" r="3.5"/><circle cx="620" cy="254" r="3.5"/>
+    <circle cx="688" cy="238" r="3.5"/><circle cx="756" cy="256" r="3.5"/><circle cx="820" cy="282" r="3.5"/>
+  </g>
+  <text x="484" y="278" text-anchor="middle" class="t m">start</text>
+
+  <rect class="chipB" x="766" y="176" width="86" height="24" rx="6"/>
+  <text x="809" y="192" text-anchor="middle" class="t s">Yes 0.303</text>
+  <rect class="chipO" x="766" y="292" width="86" height="24" rx="6"/>
+  <text x="809" y="308" text-anchor="middle" class="t s">No 0.298</text>
+  <text x="756" y="192" text-anchor="end" class="t m">hostility cell, step 45:</text>
+  <text x="756" y="308" text-anchor="end" class="t m">the copy writes No</text>
+
+  <!-- ramp plot -->
+  <text x="466" y="334" class="t m">separation &#x2016;y &#x2212; x&#x2016; / &#x2016;x&#x2016;, log scale</text>
+  <line class="axis" x1="504" y1="350" x2="504" y2="500"/>
+  <line class="axis" x1="504" y1="500" x2="836" y2="500"/>
+  <text x="496" y="359" text-anchor="end" class="t m">10<tspan dy="-5" class="sub">0</tspan></text>
+  <text x="496" y="429" text-anchor="end" class="t m">10<tspan dy="-5" class="sub">&#x2212;5</tspan></text>
+  <text x="496" y="499" text-anchor="end" class="t m">10<tspan dy="-5" class="sub">&#x2212;10</tspan></text>
+  <text x="836" y="516" text-anchor="end" class="t m">step</text>
+  <line class="mean" x1="508" y1="494" x2="800" y2="358"/>
+  <polyline class="ramp" points="508,494 534,483 560,474 586,459 612,449 638,432 664,421 690,405 716,393 742,377 764,366 786,360 808,357 832,356"/>
+  <circle cx="764" cy="366" r="5.5" class="tw" stroke="#FBF9F6" stroke-width="1.5"/>
+  <text x="756" y="350" text-anchor="end" class="t m" style="fill:#7A5634">most probable tokens differ</text>
+  <text x="830" y="478" text-anchor="end" class="t m">dashed: &#xd7; e<tspan dy="-5" class="sub">&#x3bb;</tspan><tspan dy="5">&#160;per step</tspan></text>
+
+  <text x="466" y="530" class="t s">Nothing resets the separation, so the one-step</text>
+  <text x="466" y="547" class="t s">factors compound until the text splits.</text>
+
+  <!-- footer -->
+  <rect class="foot" x="16" y="572" width="848" height="50" rx="10"/>
+  <text x="440" y="592" text-anchor="middle" class="t s">Same map F, same kind of second state. Only the rule differs: cut back to &#x3b5; after every step (left),</text>
+  <text x="440" y="610" text-anchor="middle" class="t s">or let it go (right). The left gives a rate; the right gives two different texts.</text>
+</svg>

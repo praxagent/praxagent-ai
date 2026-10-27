@@ -59,7 +59,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20260904">
+    <link rel="stylesheet" href="/blog/blog.css?v=20261017d">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -157,8 +157,7 @@
             
 
             
-            <div class="post-lead">
-                Praxagent is open-sourcing a Jacobian lens for <strong>Qwen3.5-397B-A17B</strong> (<a href="https://huggingface.co/praxagent-org/jacobian-lens-qwen3.5-397b-a17b"><code>praxagent-org/jacobian-lens-qwen3.5-397b-a17b</code></a>), a 397B-total, 17B-active open-weight multimodal MoE (<a href="#what-a17b-means">what A17B means</a>). As of July 10, 2026, to our knowledge no public Jacobian lens has been fitted for a larger base model; the largest prior public collection stops at a 70B base model. The fit used <strong>24</strong> WikiText prompts. In a pre-registered, text-only readout audit, the lens placed a hidden two-hop bridge country in the top-20 on <strong>6/20</strong> items, against <strong>1/20</strong> for identity and <strong>0/20</strong> for a scale-matched random transport, a marginal contrast as a hit rate. Post-run paired rank tests on the same items favor the lens over identity on <strong>18/20</strong> and over random-J on <strong>20/20</strong>. This note explains what the lens is, how it was fitted, and what that audit does and does not show.
+            <div class="post-lead">Praxagent is open-sourcing a Jacobian lens for <strong>Qwen3.5-397B-A17B</strong> (<a href="https://huggingface.co/praxagent-org/jacobian-lens-qwen3.5-397b-a17b"><code>praxagent-org/jacobian-lens-qwen3.5-397b-a17b</code></a>), a 397B-total, 17B-active open-weight multimodal MoE (<a href="#what-a17b-means">what A17B means</a>). As of July 10, 2026, to our knowledge no public Jacobian lens has been fitted for a larger base model; the largest prior public collection stops at a 70B base model. The fit used <strong>24</strong> WikiText prompts. In a pre-registered, text-only readout audit, the lens placed a hidden two-hop bridge country in the top-20 on <strong>6/20</strong> items, against <strong>1/20</strong> for identity and <strong>0/20</strong> for a scale-matched random transport, a marginal contrast as a hit rate. Post-run paired rank tests on the same items favor the lens over identity on <strong>18/20</strong> and over random-J on <strong>20/20</strong>. This note explains what the lens is, how it was fitted, and what that audit does and does not show.
             </div>
             
 
@@ -400,9 +399,7 @@ lens-file bytes.</p>
 </table>
 <p><span class="research-figure">
     <img src="act2-paired-ranks.svg" alt="Paired best vocabulary ranks for all twenty hidden-bridge items under the fitted Jacobian lens, identity, and random-J. The horizontal axis is logarithmic and lower ranks are better." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: the paired evidence, item by item. On the same twenty prompts the pre-registered top-20 counts are 6 (lens), 1 (identity) and 0 (random-J); in post-run paired comparisons the lens ranks the hidden bridge above identity on 18 of 20 items and above random-J on all 20. Each horizontal line is one country prompt; dots show its best rank under the three transports on one logarithmic scale, and the shaded region marks top-20 hits. Generated from <a href="receipts/act2_statistics.json"><code>act2_statistics.json</code></a> by <a href="tools/export_act2_paired_ranks.py"><code>export_act2_paired_ranks.py</code></a>.</p>
 <p><strong>Prior signal, disclosed.</strong> Before the pre-registration, the same
@@ -615,9 +612,7 @@ text-only</strong> and does not audit image/video paths.</li>
 </ul>
 <p><span class="research-figure">
     <img src="qwen35-397b-a17b-architecture.svg" alt="Qwen3.5-397B-A17B: 397B total capacity, A17B active compute, hybrid DeltaNet/attention cycles, 512-expert MoE routing." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: naming vs compute. 397B counts the parameters stored in the checkpoint; A17B counts those active for one token. The lens was fitted against the full checkpoint.</p>
 <p>Qwen3.5-397B-A17B is a 397B-total, 17B-active open-weight multimodal MoE; those
@@ -1402,90 +1397,64 @@ readout; that is not a claim about what the model &ldquo;believes.&rdquo;</li>
 <code>perhaps</code>, …), not <code>aware</code> / <code>consciousness</code>:</p>
 <p><span class="research-figure">
     <img src="jspace-self-ref-topk40.svg" alt="J-lens top-40, self-referential" loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p><strong>Matched control (thermostat) @ layer 26</strong>, same slice for fair compare (not the
 punctuation wall from layer 38). The probe-rank table remains the right contrast metric:</p>
 <p><span class="research-figure">
     <img src="jspace-matched-control-topk40.svg" alt="J-lens top-40, matched thermostat control" loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p><strong>Denial @ layer 26</strong>, Chinese + hedge mix. Raw, then English-glossed:</p>
 <p><span class="research-figure">
     <img src="jspace-denial-tool-topk40.svg" alt="J-lens top-40, denial instruction (raw)" loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p><span class="research-figure">
     <img src="jspace-denial-tool-topk40-glossed.svg" alt="J-lens top-40, denial instruction (English glossed)" loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p><strong>Roleplay @ layer 26</strong>, literary debris + Chinese. Raw, then English-glossed:</p>
 <p><span class="research-figure">
     <img src="jspace-roleplay-bait-topk40.svg" alt="J-lens top-40, roleplay bait (raw)" loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p><span class="research-figure">
     <img src="jspace-roleplay-bait-topk40-glossed.svg" alt="J-lens top-40, roleplay bait (English glossed)" loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p><strong>Neutral trivia @ layer 38</strong>, act-2 sanity check. Tokyo / Japan / 首都 / Beijing:</p>
 <p><span class="research-figure">
     <img src="jspace-neutral-factual-topk40.svg" alt="J-lens top-40, Mount Fuji / Japan trivia" loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p><strong>Deception detection @ layer 32 (span)</strong>, 谎言 / falsehood / 欺骗 / dishonest:</p>
 <p><span class="research-figure">
     <img src="jspace-deception-detection-topk40.svg" alt="J-lens top-40, deception detection (span)" loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p><span class="research-figure">
     <img src="jspace-deception-detection-topk40-glossed.svg" alt="J-lens top-40, deception detection (glossed)" loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p><strong>Statue of Liberty @ layer 38 (span)</strong>, America / Statue / Liberty:</p>
 <p><span class="research-figure">
     <img src="jspace-statue-bridge-topk40.svg" alt="J-lens top-40, Statue of Liberty bridge (span)" loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p><strong>Digit meta-prompt @ layer 38 (span)</strong>, Digits / DIG / digit:</p>
 <p><span class="research-figure">
     <img src="jspace-digit-meta-topk40.svg" alt="J-lens top-40, digit meta-prompt (span)" loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p><strong>Meristems in dicots @ layer 36 (span)</strong>, tissues / Plants / 发育:</p>
 <p><span class="research-figure">
     <img src="jspace-meristem-topk40.svg" alt="J-lens top-40, meristems (span)" loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p><span class="research-figure">
     <img src="jspace-meristem-topk40-glossed.svg" alt="J-lens top-40, meristems (glossed)" loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Band = layers <strong>19–38</strong> (20 layers). Probe ranks in the table = <strong>best over the whole band</strong> (consciousness) or <strong>best over band × prompt positions</strong> (span probes). Static consciousness stills = layer <strong>26</strong>; Japan still = layer <strong>38</strong>; span stills use each condition’s content-anchor layer. Prefer the slider for the full trajectory. <code>&lt;eos&gt;</code> = end-of-sequence. Receipts: <a href="receipts/demo2_consciousness_qwen35-397b_n24.json"><code>demo2_consciousness_…n24.json</code></a>, <a href="receipts/demo2_probes_span_qwen35-397b_n24.json"><code>demo2_probes_span_…n24.json</code></a>.</p>
 <div class="panel warning">
@@ -2092,9 +2061,7 @@ h_{\ell,t}\in\mathbb{R}^d
 </ul>
 <p><span class="research-figure">
     <img src="jacobian-step1-notation.svg" alt="A layer-by-position grid in which every cell is a d-dimensional residual vector. The source cell h at layer ell and position t is highlighted in blue, and the final-layer target cell at position t-prime is highlighted in green." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: decode the subscripts first. The first subscript selects a layer; the second selects a token position. Each selected cell contains a full vector in \(\mathbb{R}^d\), not one number.</p>
 <h4 id="step-2-choose-a-causally-allowed-source-to-target-path">Step 2: choose a causally allowed source-to-target path</h4>
@@ -2107,9 +2074,7 @@ t'\ge t.
 </blockquote>
 <p><span class="research-figure">
     <img src="jacobian-step2-causality.svg" alt="A perturbation at source position t cannot affect an earlier final position, but can affect the same and later positions. One later target position t-prime is selected from this causal cone." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: causality determines which arrows exist. A source at \(t\) may affect final positions \(t'\ge t\). The local Jacobian describes one selected arrow from \((\ell,t)\) to \((L,t')\).</p>
 <h4 id="step-3-replace-the-nonlinear-downstream-computation-by-its-tangent-map">Step 3: replace the nonlinear downstream computation by its tangent map</h4>
@@ -2122,9 +2087,7 @@ h_{L,t'}=F^{(\ell)}_{x,t',t}(h_{\ell,t}).
 \]<p>Now add a small vector perturbation \(\delta h\) to the source and run the same downstream computation. The target moves by some \(\Delta h\). Because \(F\) is nonlinear, the exact relationship is complicated. Near the baseline point, however, its derivative gives the best first-order linear approximation:</p>
 <p><span class="research-figure">
     <img src="jacobian-step3-linearize.svg" alt="A baseline residual vector and a nearby perturbed vector pass through the same nonlinear downstream transformer. The local d-by-d Jacobian maps the small source perturbation delta h to the first-order approximation of the resulting target displacement." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: “linearize” means replace the nonlinear downstream map by its tangent map near one baseline forward pass. It maps a small source displacement \(\delta h_{\ell,t}\) to the first-order target displacement \(A\,\delta h\).</p>
 \[
@@ -2308,9 +2271,7 @@ A_3
 \end{aligned}
 \]<p><span class="research-figure">
     <img src="jacobian-monte-carlo.svg" alt="Monte Carlo estimation of a Jacobian lens: context-specific local Jacobians are averaged element by element into one reusable transport, then scaled from a toy two-dimensional example to the released 24-prompt, 60-layer, 4096-dimensional fit." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: a toy \(d=2\) Monte Carlo fit. Each sampled context and causal position pair gives a different local Jacobian. Averaging them element by element estimates the context-general transport. The matrices are illustrative, not Qwen measurements. The bottom strip shows the dimensions of the released fit.</p>
 <p>It is useful to group all position-pair contributions from passage \(x_n\) into one prompt-level estimate \(\widehat J_\ell^{(x_n)}\). The running mean then updates as</p>
@@ -2532,9 +2493,7 @@ r_{\ell,t}(w).
 do not have to peak at the same word position or layer.</p>
 <p><span class="research-figure">
     <img src="span-readout-grid.svg" alt="Last-token readout searches one prompt-position column across the band layers, while span readout searches every layer-by-position cell and records the best cell for each probe token." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: last-token versus span readout. A last-token readout searches 20 cells for a 20-layer band. A span readout on a \(T\)-token prompt searches \(20T\) cells. It does not pool token vectors or construct a representation of a phrase; it performs many separate readouts and keeps the best rank.</p>
 <div class="panel info">

@@ -3,7 +3,7 @@
 
 <div class="blog-post">
     <div class="container">
-        <article class="post-content">
+        <article class="post-content{{ with .Params.figure_scale }} figures-{{ . }}{{ end }}">
             <header class="post-header">
                 <h1 class="post-title">{{ .Title }}</h1>
                 {{- if and (eq .Type "posts") (eq .Params.citation_enabled true) }}
@@ -35,6 +35,16 @@
 
             {{ with .Params.lead }}
             <div class="post-lead">
+                {{- with $.Params.lead_image -}}
+                {{- with $.Resources.GetMatch . -}}
+                <figure class="post-lead-figure">
+                <img src="{{ .RelPermalink }}" alt="{{ $.Params.lead_image_alt }}" width="{{ .Width }}" height="{{ .Height }}">
+                {{- with $.Params.lead_caption -}}
+                <figcaption class="post-lead-caption">{{ . | markdownify }}</figcaption>
+                {{- end -}}
+                </figure>
+                {{- end -}}
+                {{- end -}}
                 {{ . | markdownify }}
             </div>
             {{ end }}

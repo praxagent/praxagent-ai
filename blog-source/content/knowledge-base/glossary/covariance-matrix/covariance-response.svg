@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="422" viewBox="0 0 760 422" role="img" aria-labelledby="respTitle respDesc">
+  <title id="respTitle">Raising one score moves the weighted mean, in proportion to the spread</title>
+  <desc id="respDesc">Three panels show the same toy embeddings and weights as the spread figure. In each, a dashed line runs from the weighted mean to the token at (4, 0), and an arrow along it shows how far the mean moves, to first order at temperature 1, per unit rise in that token's score; the arrows are drawn at twice their length. The shift is that token's probability times its offset from the mean. With weights one half, one quarter and one quarter, the shift is 0.79: probability 0.25 times offset 3.16. With weights 0.8, 0.1 and 0.1 it is 0.36: probability 0.1 times offset 3.62. The third panel shows the limit as all the weight moves onto (0, 0), which a softmax approaches but never reaches at finite scores: the probability of the token at (4, 0) tends to 0, and so does the mean's first-order shift, so there is no arrow. A footer states that shared weight makes the mean responsive, and that as the weights approach a point mass the first-order shift approaches zero.</desc>
+  <rect width="760" height="422" fill="#F7F4F0"/>
+  <defs>
+    <marker id="headTan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0,1 L9,5 L0,9 z" fill="#A67C52"/>
+    </marker>
+  </defs>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:15px;font-weight:700}
+    .h{font-size:13px;font-weight:700}
+    .s{font-size:12px}
+    .m{font-size:11px;fill:#5A544C}
+    .tan{fill:#7A5634}
+    .card{fill:#FBF9F6;stroke:#D9D0C4;stroke-width:1.2}
+    .spread{fill:#E8F0F7;fill-opacity:0.9;stroke:#4B6787;stroke-width:1.6}
+    .lead{stroke:#A67C52;stroke-width:1}
+    .foot{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.2}
+    .offset{stroke:#8A8072;stroke-width:1.2;stroke-dasharray:4 3}
+    .push{stroke:#A67C52;stroke-width:2.4}
+  </style>
+  <text x="24" y="32" class="t title">Raising one score moves the weighted mean, in proportion to the spread</text>
+  <text x="24" y="52" class="t m">Raise the score of the token at (4, 0). Arrow: the mean's first-order shift per unit of score at T = 1, drawn at twice its length.</text>
+  <!-- panel 1: weights 1/2, 1/4, 1/4 -->
+  <rect class="card" x="24" y="68" width="232" height="296" rx="10"/>
+  <text x="38" y="92" class="t h">Weight shared</text>
+  <text x="38" y="110" class="t m">weights 1/2, 1/4, 1/4</text>
+  <line class="offset" x1="122" y1="252" x2="217" y2="286"/>
+  <line class="push" x1="122" y1="252" x2="173" y2="269" marker-end="url(#headTan)"/>
+  <circle cx="122" cy="252" r="5.5" fill="#A67C52" stroke="#FBF9F6" stroke-width="1.5"/>
+  <text x="122" y="240" text-anchor="middle" class="t m tan">mean (1, 1)</text>
+  <circle cx="88" cy="286" r="5" fill="#2C2924"/>
+  <text x="76" y="290" text-anchor="end" class="t s">1/2</text>
+  <circle cx="224" cy="286" r="5" fill="#2C2924"/>
+  <text x="224" y="306" text-anchor="middle" class="t s">1/4</text>
+  <circle cx="88" cy="150" r="5" fill="#2C2924"/>
+  <text x="77" y="154" text-anchor="end" class="t s">1/4</text>
+  <text x="38" y="334" class="t s">shift 0.79 per unit of score</text>
+  <text x="38" y="351" class="t s">= probability 0.25 &#xd7; offset 3.16</text>
+  <!-- panel 2: weights 0.8, 0.1, 0.1 -->
+  <rect class="card" x="264" y="68" width="232" height="296" rx="10"/>
+  <text x="278" y="92" class="t h">One point dominant</text>
+  <text x="278" y="110" class="t m">weights 0.8, 0.1, 0.1</text>
+  <line class="offset" x1="341.6" y1="272.4" x2="457" y2="286"/>
+  <line class="push" x1="341.6" y1="272.4" x2="366.1" y2="275.1" marker-end="url(#headTan)"/>
+  <circle cx="341.6" cy="272.4" r="5.5" fill="#A67C52" stroke="#FBF9F6" stroke-width="1.5"/>
+  <text x="341.6" y="260.4" text-anchor="middle" class="t m tan">mean (0.4, 0.4)</text>
+  <circle cx="328" cy="286" r="5" fill="#2C2924"/>
+  <text x="316" y="290" text-anchor="end" class="t s">0.8</text>
+  <circle cx="464" cy="286" r="5" fill="#2C2924"/>
+  <text x="464" y="306" text-anchor="middle" class="t s">0.1</text>
+  <circle cx="328" cy="150" r="5" fill="#2C2924"/>
+  <text x="317" y="154" text-anchor="end" class="t s">0.1</text>
+  <text x="278" y="334" class="t s">shift 0.36 per unit of score</text>
+  <text x="278" y="351" class="t s">= probability 0.1 &#xd7; offset 3.62</text>
+  <!-- panel 3: weights 1, 0, 0 -->
+  <rect class="card" x="504" y="68" width="232" height="296" rx="10"/>
+  <text x="518" y="92" class="t h">Point-mass limit</text>
+  <text x="518" y="110" class="t m">weights tend to 1, 0, 0</text>
+  <line class="offset" x1="568" y1="286" x2="697" y2="286"/>
+  <circle cx="568" cy="286" r="9.5" fill="#A67C52"/>
+  <text x="584" y="276" class="t m tan">mean (0, 0)</text>
+  <circle cx="568" cy="286" r="5" fill="#2C2924"/>
+  <text x="556" y="290" text-anchor="end" class="t s">1</text>
+  <circle cx="704" cy="286" r="4.5" fill="#FBF9F6" stroke="#2C2924" stroke-width="1.4"/>
+  <text x="704" y="306" text-anchor="middle" class="t s">0</text>
+  <circle cx="568" cy="150" r="4.5" fill="#FBF9F6" stroke="#2C2924" stroke-width="1.4"/>
+  <text x="557" y="154" text-anchor="end" class="t s">0</text>
+  <text x="518" y="334" class="t s">shift tends to 0 per unit of score</text>
+  <text x="518" y="351" class="t s">probability tends to 0; offset 4.00</text>
+  <rect class="foot" x="24" y="376" width="712" height="34" rx="8"/>
+  <text x="380" y="397" text-anchor="middle" class="t s">Shared weight makes the mean responsive; as the weights approach a point mass, the first-order shift approaches zero.</text>
+</svg>

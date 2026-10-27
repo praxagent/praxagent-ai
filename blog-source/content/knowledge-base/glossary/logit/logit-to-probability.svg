@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="430"
+     viewBox="0 0 780 430" role="img"
+     aria-labelledby="logitTitle logitDesc">
+  <title id="logitTitle">Logits become probabilities by softmax</title>
+  <desc id="logitDesc">Three toy next-token logits, 3.2 for red, 2.7 for blue, and negative 0.4 for green, are drawn from a zero line. Softmax converts them to probabilities 0.612, 0.371, and 0.017. Adding 5 to every logit leaves those probabilities unchanged, and red, the token with the largest logit, is selected greedily.</desc>
+  <defs>
+    <marker id="logitArrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10Z" fill="#A67C52"/>
+    </marker>
+  </defs>
+  <rect width="780" height="430" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:15px;font-weight:700}
+    .h{font-size:13px;font-weight:700}
+    .s{font-size:12px}
+    .m{font-size:11px;fill:#5A544C}
+    .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+    .row{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.2}
+    .target{fill:#F3E8E0;stroke:#A67C52;stroke-width:2.4}
+    .bar{fill:#4B6787}
+    .barTarget{fill:#A67C52}
+    .neg{fill:#6F8D5E}
+    .zero{stroke:#5A544C;stroke-width:1.2}
+    .arrow{fill:none;stroke:#A67C52;stroke-width:2.2;marker-end:url(#logitArrow)}
+  </style>
+
+  <text x="24" y="30" class="t title">A logit is a score. Softmax turns the scores into probabilities.</text>
+  <text x="24" y="50" class="t m">Toy values matching the worked example. Longer bars mean larger numbers. Green is negative and still gets a small probability.</text>
+
+  <rect x="24" y="68" width="330" height="268" rx="12" class="card"/>
+  <text x="40" y="94" class="t h">Logits</text>
+  <text x="40" y="114" class="t m">Unnormalized scores. Zero is marked.</text>
+
+  <line x1="168" y1="132" x2="168" y2="300" class="zero"/>
+  <text x="168" y="316" text-anchor="middle" class="t m">0</text>
+
+  <rect x="40" y="140" width="298" height="44" rx="8" class="target"/>
+  <text x="52" y="160" class="t s">red</text>
+  <text x="52" y="176" class="t m">3.2, largest</text>
+  <rect x="168" y="166" width="140" height="8" rx="4" class="barTarget"/>
+
+  <rect x="40" y="194" width="298" height="44" rx="8" class="row"/>
+  <text x="52" y="214" class="t s">blue</text>
+  <text x="52" y="230" class="t m">2.7</text>
+  <rect x="168" y="220" width="118" height="8" rx="4" class="bar"/>
+
+  <rect x="40" y="248" width="298" height="44" rx="8" class="row"/>
+  <text x="52" y="268" class="t s">green</text>
+  <text x="52" y="284" class="t m">-0.4</text>
+  <rect x="150.5" y="274" width="17.5" height="8" rx="4" class="neg"/>
+
+  <path d="M366 200H414" class="arrow"/>
+  <text x="390" y="188" text-anchor="middle" class="t m">softmax</text>
+
+  <rect x="426" y="68" width="330" height="268" rx="12" class="card"/>
+  <text x="442" y="94" class="t h">Probabilities</text>
+  <text x="442" y="114" class="t m">Positive and sum to 1. Rounded to 3 decimals.</text>
+
+  <rect x="442" y="140" width="298" height="44" rx="8" class="target"/>
+  <text x="454" y="167" class="t s">red 0.612</text>
+  <rect x="560" y="158" width="110" height="8" rx="4" class="barTarget"/>
+
+  <rect x="442" y="194" width="298" height="44" rx="8" class="row"/>
+  <text x="454" y="221" class="t s">blue 0.371</text>
+  <rect x="560" y="212" width="67" height="8" rx="4" class="bar"/>
+
+  <rect x="442" y="248" width="298" height="44" rx="8" class="row"/>
+  <text x="454" y="275" class="t s">green 0.017</text>
+  <rect x="560" y="266" width="3" height="8" rx="1.5" class="neg"/>
+
+  <rect x="24" y="356" width="732" height="52" rx="10" fill="#EAF1E5" stroke="#6F8D5E" stroke-width="1.4"/>
+  <text x="390" y="378" text-anchor="middle" class="t s">Adding 5 to every logit (8.2, 7.7, 4.6) leaves these probabilities unchanged.</text>
+  <text x="390" y="396" text-anchor="middle" class="t m">Only differences between logits affect the distribution. Greedy selection picks the token with the largest logit.</text>
+</svg>

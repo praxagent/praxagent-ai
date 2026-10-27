@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" role="img" aria-labelledby="monodromyTitle monodromyDesc">
+  <title id="monodromyTitle">The monodromy is the product of the step Jacobians</title>
+  <desc id="monodromyDesc">A two-point cycle. The first Jacobian doubles the first coordinate and halves the second. The second Jacobian multiplies both coordinates by 0.4. Their product, the monodromy, multiplies by 0.8 and by 0.2. Both factors of the product are inside the unit circle.</desc>
+  <defs>
+    <marker id="arrMono" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#A67C52"/>
+    </marker>
+  </defs>
+  <rect width="760" height="420" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:15px;font-weight:700}
+    .h{font-size:13px;font-weight:700}
+    .s{font-size:12px}
+    .m{font-size:11px;fill:#5A544C}
+    .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+    .step{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.4}
+    .prod{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.6}
+    .foot{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.4}
+    .flow{stroke:#A67C52;stroke-width:1.8;fill:none;marker-end:url(#arrMono)}
+  </style>
+  <text x="24" y="30" class="t title">One step can stretch. The cycle is the product.</text>
+  <text x="24" y="50" class="t m">Toy diagonal Jacobians. The factor 2 is real, and it is not a multiplier of the orbit.</text>
+
+  <rect class="step" x="28" y="78" width="200" height="150" rx="12"/>
+  <text x="128" y="106" text-anchor="middle" class="t h">DF at x1</text>
+  <text x="128" y="136" text-anchor="middle" class="t s">u goes to 2u</text>
+  <text x="128" y="158" text-anchor="middle" class="t s">v goes to 0.5 v</text>
+  <text x="128" y="186" text-anchor="middle" class="t m">one coordinate doubles</text>
+
+  <path class="flow" d="M236 150 H292"/>
+
+  <rect class="step" x="300" y="78" width="200" height="150" rx="12"/>
+  <text x="400" y="106" text-anchor="middle" class="t h">DF at x2</text>
+  <text x="400" y="136" text-anchor="middle" class="t s">u goes to 0.4 u</text>
+  <text x="400" y="158" text-anchor="middle" class="t s">v goes to 0.4 v</text>
+  <text x="400" y="186" text-anchor="middle" class="t m">acts second</text>
+
+  <path class="flow" d="M508 150 H564"/>
+
+  <rect class="prod" x="572" y="78" width="164" height="150" rx="12"/>
+  <text x="654" y="106" text-anchor="middle" class="t h">monodromy</text>
+  <text x="654" y="136" text-anchor="middle" class="t s">0.8 and 0.2</text>
+  <text x="654" y="158" text-anchor="middle" class="t s">both below 1</text>
+  <text x="654" y="186" text-anchor="middle" class="t m">the cycle attracts</text>
+
+  <rect class="foot" x="28" y="260" width="708" height="124" rx="10"/>
+  <text x="382" y="292" text-anchor="middle" class="t s">Visit order is x1, then x2, then back to x1.</text>
+  <text x="382" y="316" text-anchor="middle" class="t s">The monodromy is DF(x2) times DF(x1), so the second Jacobian is on the left.</text>
+  <text x="382" y="340" text-anchor="middle" class="t s">2 times 0.4 is 0.8. 0.5 times 0.4 is 0.2.</text>
+  <text x="382" y="364" text-anchor="middle" class="t m">Those two numbers are the multipliers. The 2 does not appear among them.</text>
+</svg>

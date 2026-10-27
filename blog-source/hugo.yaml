@@ -26,6 +26,10 @@ params:
 permalinks:
   posts: '/posts/:year/:month/:slug/'
 
+privacy:
+  youtube:
+    privacyEnhanced: true
+
 markup:
   goldmark:
     renderer:

@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="610" viewBox="0 0 760 610" role="img" aria-labelledby="titlePic descPic">
+  <title id="titlePic">One picture: competing continuations, a compromise orbit between a flip and a fold, its ghost and a cascade</title>
+  <desc id="descPic">Panel 1: after the token " is" the fed-back soft token blends " it" and " there"; after " it" it blends " is" and "'s"; the two blends close into the 2-cycle " is it", which greedy decoding never writes. Panel 2: a temperature axis at steering strength 0.070, not to scale. The 2-cycle is stable between a flip at log10 T = -0.5147881 below, where the competition is too sharp and the blend starts to alternate, and a fold at log10 T = -0.1741065 above, where the competition is too weak and the orbit disappears. Above the fold its ghost lines up periodic windows of period 2N + 6 that crowd toward the fold as one over N squared; a near-horizontal period-6 band, bounded by flips at -0.1414292 and -0.1392937, crosses them. Panel 3: the crescent's period-3 loop, a blend of " existence" and " question", lives between a fold above and a flip below; past the flip its period doubles again and again, 3, 6, 12, 24, into chaos. Conceptual schematic with the paper's values; not to scale.</desc>
+  <defs>
+    <marker id="arrPic" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#A67C52"/>
+    </marker>
+    <marker id="arrAx" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5A544C"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:15px;font-weight:700}
+    .h{font-size:13px;font-weight:700}
+    .s{font-size:12px}
+    .m{font-size:11px;fill:#5A544C}
+    .card{fill:#FBF9F6;stroke:#D9D0C4;stroke-width:1.2}
+    .flow{stroke:#A67C52;stroke-width:1.8;fill:none}
+    .ax{stroke:#5A544C;stroke-width:1.4;fill:none}
+    .flip{stroke:#B0306A;stroke-width:2;stroke-dasharray:6 3}
+    .fold{stroke:#1F8FA6;stroke-width:2;stroke-dasharray:9 3}
+    .win{stroke:#7F786D;stroke-width:1.6}
+  </style>
+
+  <text x="24" y="28" class="t title">From greedy loops to chaos: one picture</text>
+  <text x="24" y="46" class="t m">Qwen2.5-0.5B-Instruct, philosophy direction. Conceptual schematic with the paper's values; not to scale.</text>
+
+  <!-- Panel 1: competition -->
+  <rect class="card" x="16" y="60" width="336" height="380" rx="10"/>
+  <text x="30" y="82" class="t h">1. Two continuations compete</text>
+
+  <text x="40" y="114" class="t s">after “ is” the soft token blends</text>
+  <rect x="40" y="122" width="150" height="24" fill="#4B6787"/>
+  <rect x="190" y="122" width="110" height="24" fill="#A9BCD0"/>
+  <text x="115" y="139" text-anchor="middle" class="t s" style="fill:#FFFFFF">“ it”</text>
+  <text x="245" y="139" text-anchor="middle" class="t s">“ there”</text>
+
+  <text x="40" y="214" class="t s">after “ it” the soft token blends</text>
+  <rect x="40" y="222" width="170" height="24" fill="#A67C52"/>
+  <rect x="210" y="222" width="90" height="24" fill="#E3CDB6"/>
+  <text x="125" y="239" text-anchor="middle" class="t s" style="fill:#FFFFFF">“ is”</text>
+  <text x="255" y="239" text-anchor="middle" class="t s">“'s”</text>
+
+  <path class="flow" d="M115,150 L115,198" marker-end="url(#arrPic)"/>
+  <path class="flow" d="M318,234 C340,234 340,134 318,134" marker-end="url(#arrPic)"/>
+  <text x="124" y="180" class="t m">fed back</text>
+
+  <text x="30" y="282" class="t s">The two blends close into the 2-cycle</text>
+  <text x="30" y="300" class="t s">“ is it”, an orbit that no token sequence</text>
+  <text x="30" y="318" class="t s">forms: greedy decoding writes “'s” after “ it”.</text>
+  <text x="30" y="346" class="t m">Temperature sets how sharp the competition is.</text>
+  <text x="30" y="362" class="t m">Low T: the leading token takes almost everything.</text>
+  <text x="30" y="378" class="t m">High T: the two candidates mix more evenly.</text>
+  <text x="30" y="404" class="t m">Bar widths are illustrative, not measured.</text>
+
+  <!-- Panel 2: temperature ladder -->
+  <rect class="card" x="368" y="60" width="376" height="380" rx="10"/>
+  <text x="382" y="82" class="t h">2. One compromise orbit, at α = 0.070</text>
+
+  <path class="ax" d="M402,424 L402,100" marker-end="url(#arrAx)"/>
+  <text x="388" y="262" text-anchor="middle" class="t m" transform="rotate(-90 388 262)">log₁₀ T (not to scale)</text>
+
+  <!-- stable band of the 2-cycle -->
+  <rect x="404" y="282" width="40" height="104" fill="#A9BCD0"/>
+  <text x="452" y="330" class="t s">2-cycle “ is it” stable</text>
+  <text x="452" y="346" class="t m">blends of two continuations</text>
+
+  <!-- flip -->
+  <line class="flip" x1="402" y1="386" x2="740" y2="386"/>
+  <text x="452" y="403" class="t s" style="fill:#8E2556">flip, −0.5147881: multiplier −1</text>
+  <text x="452" y="418" class="t m">too sharp: at lower T the blend alternates</text>
+
+  <!-- fold -->
+  <line class="fold" x1="402" y1="282" x2="740" y2="282"/>
+  <text x="452" y="276" class="t s" style="fill:#16707F">fold, −0.1741065: multiplier +1</text>
+  <text x="452" y="300" class="t m">too weak: at higher T the 2-cycle is gone</text>
+
+  <!-- ghost windows crowding toward the fold -->
+  <line class="win" x1="404" y1="122" x2="444" y2="122"/>
+  <line class="win" x1="404" y1="196" x2="444" y2="196"/>
+  <line class="win" x1="404" y1="232" x2="444" y2="232"/>
+  <line class="win" x1="404" y1="250" x2="444" y2="250"/>
+  <line class="win" x1="404" y1="260" x2="444" y2="260"/>
+  <line class="win" x1="404" y1="266" x2="444" y2="266"/>
+  <line class="win" x1="404" y1="270" x2="444" y2="270"/>
+  <line class="win" x1="404" y1="273" x2="444" y2="273"/>
+  <text x="452" y="230" class="t s">ghost: windows of period 2N + 6</text>
+  <text x="452" y="246" class="t m">crowd toward the fold as 1/N²</text>
+
+  <!-- period-6 band -->
+  <rect x="404" y="148" width="336" height="20" fill="#E3CDB6" opacity="0.85"/>
+  <line class="flip" x1="404" y1="148" x2="740" y2="148"/>
+  <line class="flip" x1="404" y1="168" x2="740" y2="168"/>
+  <text x="452" y="162" class="t m">period-6 band between two flips</text>
+  <text x="452" y="184" class="t m">(−0.1414292 and −0.1392937): the first</text>
+  <text x="452" y="198" class="t m">doubling of the period-3 loop of panel 3</text>
+  <text x="452" y="124" class="t m">higher temperature</text>
+
+  <!-- Panel 3: cascade -->
+  <rect class="card" x="16" y="456" width="728" height="140" rx="10"/>
+  <text x="30" y="478" class="t h">3. The crescent's period-3 loop “↵↵The existence”: a blend of “ existence” and “ question”</text>
+  <line class="fold" x1="40" y1="500" x2="40" y2="560"/>
+  <text x="48" y="520" class="t s" style="fill:#16707F">fold above</text>
+  <text x="48" y="536" class="t m">(α = 0.065:</text>
+  <text x="48" y="550" class="t m">log₁₀ T = −0.14536)</text>
+  <rect x="160" y="512" width="96" height="28" rx="6" fill="#A9BCD0"/>
+  <text x="208" y="531" text-anchor="middle" class="t s">period 3</text>
+  <line class="flip" x1="276" y1="500" x2="276" y2="560"/>
+  <text x="282" y="514" class="t m" style="fill:#8E2556">flip</text>
+  <rect x="300" y="512" width="70" height="28" rx="6" fill="#E3CDB6"/>
+  <text x="335" y="531" text-anchor="middle" class="t s">6</text>
+  <rect x="388" y="512" width="56" height="28" rx="6" fill="#E3CDB6"/>
+  <text x="416" y="531" text-anchor="middle" class="t s">12</text>
+  <rect x="460" y="512" width="46" height="28" rx="6" fill="#E3CDB6"/>
+  <text x="483" y="531" text-anchor="middle" class="t s">24</text>
+  <text x="520" y="531" class="t s">…</text>
+  <rect x="548" y="512" width="80" height="28" rx="6" fill="#D98C6A"/>
+  <text x="588" y="531" text-anchor="middle" class="t s" style="fill:#FFFFFF">chaos</text>
+  <path class="ax" d="M160,576 L628,576" marker-end="url(#arrAx)"/>
+  <text x="394" y="590" text-anchor="middle" class="t m">past the flip: each further flip doubles the period, a Feigenbaum cascade</text>
+</svg>

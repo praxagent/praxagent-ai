@@ -1,0 +1,27 @@
+{
+  "id": "BSC5-section-minima-mobile-figures",
+  "receipt": "/data2/neural-shrimp-data/audits/baby-shrimp-zoom/20261022-contraction-minima-audit-01/receipt.json",
+  "receipt_sha256": "874f0fdceeeefe3957c5b8ac8d9a8ca87ec53a2f8d35e978c367281f0ac112c5",
+  "scientific_complete": true,
+  "partial_explicitly_allowed": false,
+  "source_commit": "3e13eb4751f961553e7eb6dc3edc61f97f7a5af6",
+  "source_sha256": {
+    "tools/plot_baby_shrimp_contraction_minima_mobile.py": "5f6825d49d1b761469c233b11a9c74d3e89c1649938f24de7fe6bb084e634be1",
+    "tools/plot_baby_shrimp_contraction_minima.py": "7786c92d152803524d1c5c18e7eda8ab7aaaf83e4fa0644947363fdac1ea9e71"
+  },
+  "threads": 1,
+  "figures": [
+    {
+      "path": "section-minima-center-zoom-mobile.pdf",
+      "bytes": 31630,
+      "sha256": "e2f80127258661f11ba70f51abca5dc35a251e6d9900b9c4a71721c3177f165c"
+    },
+    {
+      "path": "section-minima-center-zoom-mobile.png",
+      "bytes": 275372,
+      "sha256": "d662f99d099925c0fbd1e24090535b0f856bb0483378d429e83b769e37c85a5d"
+    }
+  ],
+  "scope": "Layout-only stacking of both original center-zoom panels, with all measurements, brackets, statuses and labels retained.",
+  "visual_review": "required; rendering does not establish visual approval"
+}

@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="662" viewBox="0 0 880 662" role="img" aria-labelledby="titleTwin descTwin">
+  <title id="titleTwin">Reset twin for the exponent, free copy for the text</title>
+  <desc id="descTwin">Schematic, not a measured orbit, and not to scale. Left, the largest Lyapunov exponent by Benettin's method. Along a reference orbit x0 to x3, the twin sits at the end of a solid offset whose length is epsilon times the norm of x, with epsilon 10 to the minus 6. Each step of the map F carries the offset into a dashed image, longer than the offset in steps 1 and 3 and shorter in step 2, and the natural log of the ratio of the dashed to the solid length is that step's s: s1 and s3 are positive, s2 is negative. Short arrows show the twin reset along the image to the offset length: cut back after a stretch, pushed out after a contraction. Below, the separation on a log scale is a sawtooth on the floor epsilon times the norm of x, with the norm drawn constant. Tooth t has height s t: it rises during a stretching step, dips below the floor during the contracting second step, and returns to the floor at each reset, and a dashed line at the mean height of the N teeth marks lambda. Right, the copy behind Table 1: started at relative distance 10 to the minus 10 after 1000 steps of the reference and never reset, its orbit peels away from the reference. At step 45 of the hostility cell the reference's two most probable tokens are Yes, with probability 0.303, and No, with 0.298; the reference writes Yes and the copy writes No. Below, the relative separation on a log scale climbs from 10 to the minus 10, close to a dashed line that grows by a factor e to the lambda per step, until the most probable tokens differ, and then levels off near 1.</desc>
+  <rect width="880" height="662" fill="#F7F4F0"/>
+  <defs>
+    <marker id="headRef" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0,1 L9,5 L0,9 z" fill="#4B6787"/>
+    </marker>
+    <marker id="headTan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0,1 L9,5 L0,9 z" fill="#7A5634"/>
+    </marker>
+  </defs>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:16px;font-weight:700}
+    .h{font-size:14px;font-weight:700}
+    .s{font-size:13px}
+    .m{font-size:12px;fill:#5A544C}
+    .tan{fill:#7A5634}
+    .sub{font-size:9px}
+    .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+    .ref{fill:#4B6787}
+    .tw{fill:#A67C52}
+    .open{fill:#FBF9F6;stroke:#A67C52;stroke-width:1.4}
+    .orbit{stroke:#4B6787;stroke-width:1.6;fill:none}
+    .copy{stroke:#A67C52;stroke-width:1.6;fill:none}
+    .off{stroke:#A67C52;stroke-width:2.6;stroke-linecap:round}
+    .img{stroke:#A67C52;stroke-width:1.6;stroke-dasharray:4 3}
+    .reset{stroke:#7A5634;stroke-width:1.3}
+    .axis{stroke:#7F786D;stroke-width:1.3;fill:none}
+    .tick{stroke:#7F786D;stroke-width:1.2}
+    .floor{stroke:#8A8072;stroke-width:1.2;stroke-dasharray:2 3}
+    .saw{stroke:#A67C52;stroke-width:2;fill:none;stroke-linejoin:round}
+    .ramp{stroke:#A67C52;stroke-width:2.4;fill:none;stroke-linejoin:round}
+    .mean{stroke:#7F786D;stroke-width:1.4;stroke-dasharray:5 4;fill:none}
+    .brk{stroke:#5A544C;stroke-width:1}
+    .chipB{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.2}
+    .chipO{fill:#F3E8E0;stroke:#A67C52;stroke-width:1.2}
+    .foot{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.4}
+  </style>
+<text x="24" y="30" class="t title">Two ways to follow a second state of the loop</text>
+<text x="24" y="50" class="t m">Schematic, not to scale: offsets of 10&#x207b;&#x2076; and 10&#x207b;&#xb9;&#x2070; of the state&#x2019;s norm are drawn enlarged.</text>
+<!-- ============ LEFT: Benettin ============ -->
+<rect class="card" x="16" y="66" width="414" height="520" rx="12"/>
+<text x="32" y="92" class="t h">The exponent &#x3bb;: reset the twin after every step</text>
+<text x="32" y="111" class="t m">Benettin&#x2019;s method, twin at relative distance &#x3b5; = 10&#x207b;&#x2076;</text>
+<!-- legend -->
+<circle cx="38" cy="132" r="4.5" class="ref"/>
+<text x="48" y="136" class="t m">reference x<tspan dy="3" class="sub">n</tspan></text>
+<line class="off" x1="172" y1="132" x2="194" y2="132"/>
+<circle cx="194" cy="132" r="3.5" class="tw"/>
+<text x="204" y="136" class="t m">twin offset, length &#x3b5;&#x2016;x<tspan dy="3" class="sub">n</tspan><tspan dy="-3">&#x2016;</tspan></text>
+<line class="img" x1="32" y1="152" x2="54" y2="152"/>
+<circle cx="54" cy="152" r="3.5" class="open"/>
+<text x="64" y="156" class="t m">its image after one step of F</text>
+<line class="reset" x1="254" y1="152" x2="274" y2="152" marker-end="url(#headTan)"/>
+<text x="282" y="156" class="t m">reset along the image</text>
+<!-- reference orbit: x0 -> x3, one application of F per arrow -->
+<line class="orbit" x1="72.9" y1="290.6" x2="169.1" y2="271.4" marker-end="url(#headRef)"/>
+<line class="orbit" x1="182.8" y1="271.5" x2="279.2" y2="292.5" marker-end="url(#headRef)"/>
+<line class="orbit" x1="292.7" y1="292.1" x2="377.3" y2="267.9" marker-end="url(#headRef)"/>
+<!-- images (dashed) of the previous offset, then the reset offsets (solid) -->
+<line class="img" x1="176" y1="270" x2="226.9" y2="188.6"/>
+<line class="img" x1="286" y1="294" x2="273.3" y2="273.6"/>
+<line class="img" x1="384" y1="266" x2="403.9" y2="191.8"/>
+<line class="off" x1="66" y1="292" x2="74.3" y2="244.7"/>
+<line class="off" x1="176" y1="270" x2="201.4" y2="229.3"/>
+<line class="off" x1="286" y1="294" x2="260.6" y2="253.3"/>
+<line class="off" x1="384" y1="266" x2="396.4" y2="219.6"/>
+<!-- reset: the twin moves along the image to the offset length -->
+<line class="reset" x1="219.3" y1="187.4" x2="197.1" y2="223" marker-end="url(#headTan)"/>
+<line class="reset" x1="265.8" y1="274.8" x2="256.2" y2="259.5" marker-end="url(#headTan)"/>
+<line class="reset" x1="396.3" y1="192.9" x2="390.4" y2="214.9" marker-end="url(#headTan)"/>
+<circle cx="226.9" cy="188.6" r="3.5" class="open"/>
+<circle cx="273.3" cy="273.6" r="3.5" class="open"/>
+<circle cx="403.9" cy="191.8" r="3.5" class="open"/>
+<circle cx="74.3" cy="244.7" r="3.5" class="tw"/>
+<circle cx="201.4" cy="229.3" r="3.5" class="tw"/>
+<circle cx="260.6" cy="253.3" r="3.5" class="tw"/>
+<circle cx="396.4" cy="219.6" r="3.5" class="tw"/>
+<circle cx="66" cy="292" r="6" class="ref"/>
+<circle cx="176" cy="270" r="6" class="ref"/>
+<circle cx="286" cy="294" r="6" class="ref"/>
+<circle cx="384" cy="266" r="6" class="ref"/>
+<!-- labels -->
+<text x="66" y="314" text-anchor="middle" class="t m">x<tspan dy="3" class="sub">0</tspan></text>
+<text x="176" y="292" text-anchor="middle" class="t m">x<tspan dy="3" class="sub">1</tspan></text>
+<text x="286" y="316" text-anchor="middle" class="t m">x<tspan dy="3" class="sub">2</tspan></text>
+<text x="384" y="288" text-anchor="middle" class="t m">x<tspan dy="3" class="sub">3</tspan></text>
+<text x="123.5" y="297.7" text-anchor="middle" class="t m">F</text>
+<text x="228.2" y="298.7" text-anchor="middle" class="t m">F</text>
+<text x="338.6" y="296.5" text-anchor="middle" class="t m">F</text>
+<text x="235.9" y="200.6" class="t m tan">s<tspan dy="3" class="sub">1</tspan><tspan dy="-3">&#xa0;&gt; 0</tspan></text>
+<text x="288" y="268" class="t m tan">s<tspan dy="3" class="sub">2</tspan><tspan dy="-3">&#xa0;&lt; 0</tspan></text>
+<text x="386" y="210.1" text-anchor="end" class="t m tan">s<tspan dy="3" class="sub">3</tspan><tspan dy="-3">&#xa0;&gt; 0</tspan></text>
+<!-- sawtooth: separation on a log scale, one tooth per measured step -->
+<text x="32" y="348" class="t m">separation &#x2016;y &#x2212; x&#x2016;, log scale</text>
+<line class="axis" x1="70" y1="362" x2="70" y2="512"/>
+<line class="axis" x1="70" y1="512" x2="410" y2="512"/>
+<line class="floor" x1="70" y1="448" x2="378" y2="448"/>
+<line class="mean" x1="70" y1="427.6" x2="370" y2="427.6"/>
+<polyline class="saw" points="70,448 99,400.9 99,448 128,495.1 128,448 157,416 157,448 186,410.6 186,448 215,431 215,448 244,465 244,448 273,403.8 273,448 302,417.4 302,448 331,414 331,448 360,422.2 360,448"/>
+<text x="62" y="452" text-anchor="end" class="t m">&#x3b5;&#x2016;x&#x2016;</text>
+<line class="brk" x1="374" y1="427.6" x2="382" y2="427.6"/>
+<line class="brk" x1="374" y1="448" x2="382" y2="448"/>
+<line class="brk" x1="378" y1="427.6" x2="378" y2="448"/>
+<text x="385" y="442.3" class="t s">&#x3bb;</text>
+<text x="99" y="394.9" text-anchor="middle" class="t m tan">s<tspan dy="3" class="sub">1</tspan></text>
+<text x="133" y="499.1" class="t m tan">s<tspan dy="3" class="sub">2</tspan></text>
+<text x="157" y="410" text-anchor="middle" class="t m tan">s<tspan dy="3" class="sub">3</tspan></text>
+<text x="360" y="416.2" text-anchor="middle" class="t m tan">s<tspan dy="3" class="sub">N</tspan></text>
+<line class="tick" x1="84.5" y1="512" x2="84.5" y2="516"/>
+<text x="84.5" y="529" text-anchor="middle" class="t m">1</text>
+<line class="tick" x1="113.5" y1="512" x2="113.5" y2="516"/>
+<text x="113.5" y="529" text-anchor="middle" class="t m">2</text>
+<line class="tick" x1="142.5" y1="512" x2="142.5" y2="516"/>
+<text x="142.5" y="529" text-anchor="middle" class="t m">3</text>
+<line class="tick" x1="345.5" y1="512" x2="345.5" y2="516"/>
+<text x="345.5" y="529" text-anchor="middle" class="t m">N</text>
+<text x="229.5" y="529" text-anchor="middle" class="t m">&#x2026;</text>
+<text x="410" y="529" text-anchor="end" class="t m">step t</text>
+<text x="32" y="552" class="t s">Tooth t has height s<tspan dy="3" class="sub">t</tspan><tspan dy="-3">&#xa0;= ln(dashed / solid). &#x3bb; is the</tspan></text>
+<text x="32" y="569" class="t s">mean height; a tooth below the floor is a contraction.</text>
+<!-- ============ RIGHT: free copy ============ -->
+<rect class="card" x="450" y="66" width="414" height="520" rx="12"/>
+<text x="466" y="92" class="t h">The text in Table 1: never reset</text>
+<text x="466" y="111" class="t m">copy at relative distance 10&#x207b;&#xb9;&#x2070;, after 1000 steps of the reference</text>
+<circle cx="472" cy="132" r="4.5" class="ref"/>
+<text x="482" y="136" class="t m">reference</text>
+<circle cx="560" cy="132" r="4.5" class="tw"/>
+<text x="570" y="136" class="t m">copy, iterated by the same F</text>
+<text x="466" y="160" class="t m">Hostility cell, step 45: the reference gives Yes</text>
+<text x="466" y="175" class="t m">probability 0.303 and No 0.298, a near tie.</text>
+<polyline class="orbit" points="484,258 552,244 620,256 688,236 756,244 820,220"/>
+<polyline class="copy" points="484,259 552,246 620,260 688,244 756,262 820,288"/>
+<g class="ref"><circle cx="484" cy="258" r="4.5"/><circle cx="552" cy="244" r="4.5"/><circle cx="620" cy="256" r="4.5"/><circle cx="688" cy="236" r="4.5"/><circle cx="756" cy="244" r="4.5"/><circle cx="820" cy="220" r="4.5"/></g>
+<g class="tw"><circle cx="552" cy="246" r="3.5"/><circle cx="620" cy="260" r="3.5"/><circle cx="688" cy="244" r="3.5"/><circle cx="756" cy="262" r="3.5"/><circle cx="820" cy="288" r="3.5"/></g>
+<text x="484" y="284" text-anchor="middle" class="t m">start</text>
+<rect class="chipB" x="795" y="184" width="50" height="24" rx="6"/>
+<text x="820" y="200.5" text-anchor="middle" class="t s">Yes</text>
+<text x="787" y="200.5" text-anchor="end" class="t m">reference writes</text>
+<rect class="chipO" x="795" y="300" width="50" height="24" rx="6"/>
+<text x="820" y="316.5" text-anchor="middle" class="t s">No</text>
+<text x="787" y="316.5" text-anchor="end" class="t m">copy writes</text>
+<!-- relative separation of the copy, never reset -->
+<text x="466" y="348" class="t m">relative separation &#x2016;y &#x2212; x&#x2016; / &#x2016;x&#x2016;, log scale</text>
+<line class="axis" x1="504" y1="362" x2="504" y2="512"/>
+<line class="axis" x1="504" y1="512" x2="836" y2="512"/>
+<line class="tick" x1="499" y1="366" x2="504" y2="366"/>
+<text x="495" y="370" text-anchor="end" class="t m">10<tspan dy="-5" class="sub">0</tspan></text>
+<line class="tick" x1="499" y1="435" x2="504" y2="435"/>
+<text x="495" y="439" text-anchor="end" class="t m">10<tspan dy="-5" class="sub">&#x2212;5</tspan></text>
+<line class="tick" x1="499" y1="504" x2="504" y2="504"/>
+<text x="495" y="508" text-anchor="end" class="t m">10<tspan dy="-5" class="sub">&#x2212;10</tspan></text>
+<line class="mean" x1="508" y1="504" x2="800" y2="368"/>
+<polyline class="ramp" points="508,504 534,493 560,484 586,469 612,459 638,442 664,431 690,415 716,403 742,387 764,376 786,370 808,367 832,366"/>
+<circle cx="743.4" cy="386.3" r="5.5" class="tw" stroke="#FBF9F6" stroke-width="1.5"/>
+<text x="734.4" y="376.3" text-anchor="end" class="t m tan">most probable tokens differ</text>
+<text x="830" y="492" text-anchor="end" class="t m">dashed: &#xd7; e<tspan dy="-5" class="sub">&#x3bb;</tspan><tspan dy="5">&#xa0;per step</tspan></text>
+<text x="836" y="529" text-anchor="end" class="t m">step</text>
+<text x="466" y="552" class="t s">Nothing resets the separation, so the one-step</text>
+<text x="466" y="569" class="t s">factors compound until the text splits.</text>
+<!-- footer -->
+<rect class="foot" x="16" y="600" width="848" height="50" rx="10"/>
+<text x="440" y="620" text-anchor="middle" class="t s">Same map F, same kind of second state. Only the rule differs: reset the twin after every step (left),</text>
+<text x="440" y="638" text-anchor="middle" class="t s">or let it go (right). The left gives a rate; the right gives two different texts.</text>
+</svg>

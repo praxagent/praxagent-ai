@@ -59,7 +59,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20260904">
+    <link rel="stylesheet" href="/blog/blog.css?v=20261017d">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -157,8 +157,7 @@
             
 
             
-            <div class="post-lead">
-                Sparse autoencoders turn a language model&rsquo;s hidden state into a long list of numbered &ldquo;features,&rdquo; and someone then gives a number an English name: feature <code>58667</code> is &ldquo;deception.&rdquo; The number is a coordinate the SAE actually learned. The name is an interpretation added afterward that has to be tested, and a claim that steering the feature changes behavior is a third thing that needs its own experiment. Collapsing those three into one phrase is how feature IDs get over-read. This post explains all three from the ground up, then tests the middle one, the label: six deception/roleplay feature numbers from a public notebook, read under public Llama 3.3 70B SAE weights on 1,120 controlled texts. Each number fires hardest on a category compatible with its label, texts that claim subjective experience sit near neutral controls, and a third source, automated feature cards built for the same public checkpoint, agrees closely on three of the six, broadly on two, and disagrees materially on one. That makes the labels useful rough glosses. It does not make them explanations.
+            <div class="post-lead">Sparse autoencoders turn a language model&rsquo;s hidden state into a long list of numbered &ldquo;features,&rdquo; and someone then gives a number an English name: feature <code>58667</code> is &ldquo;deception.&rdquo; The number is a coordinate the SAE actually learned. The name is an interpretation added afterward that has to be tested, and a claim that steering the feature changes behavior is a third thing that needs its own experiment. Collapsing those three into one phrase is how feature IDs get over-read. This post explains all three from the ground up, then tests the middle one, the label: six deception/roleplay feature numbers from a public notebook, read under public Llama 3.3 70B SAE weights on 1,120 controlled texts. Each number fires hardest on a category compatible with its label, texts that claim subjective experience sit near neutral controls, and a third source, automated feature cards built for the same public checkpoint, agrees closely on three of the six, broadly on two, and disagrees materially on one. That makes the labels useful rough glosses. It does not make them explanations.
             </div>
             
 
@@ -302,9 +301,7 @@
 <p>Every statistic above can be recomputed on a laptop from the released 73,920 activation records; see <a href="#reproduce-the-statistics-on-a-laptop">Reproduce the statistics</a>.</p>
 <p><span class="research-figure">
     <img src="target_category_heatmap.svg?v=4" alt="Heatmap of mean max activation for the six feature IDs (columns) across the 14 text categories (rows). Each feature&rsquo;s hottest cell sits on the category matching its notebook label: 58667 on cover stories, 22004 on roleplay persona, 41533 on dishonesty confession, 30032 on fictional pretending, 30686 on tactical misdirection, 23893 on cover stories. Subjective-experience rows are near zero for all six." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure 1: category × feature heatmap from the balanced run. Each ID's hottest cell sits on the category matching its notebook label, and the subjective-experience rows sit near the neutral controls. Cell numbers are mean max activations (column colors are normalized within each feature so differently scaled IDs are comparable by eye). Uncertainty for the headline contrast is reported in <a href="#what-we-found">What We Found</a>, where the template-cluster interval is the one reported as primary. Source data: <a href="https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/target_category_matrix.csv"><code>target_category_matrix.csv</code></a>; generated SVG in-repo: <a href="https://github.com/tdj28/llm_selfref_pre/blob/f5e906e1737bc71bf20b642af1d698018eec82fe/data/public_sae_feature_maps/70b_balanced_80_20260709/interpretation/target_category_heatmap.svg"><code>target_category_heatmap.svg</code></a>.</p>
 <hr>
@@ -328,9 +325,7 @@
 <p>Those are not the same thing.</p>
 <p><span class="research-figure">
     <img src="three-claims.svg" alt="One phrase packs a coordinate, a label, and a causal story." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure 2: the same sentence can smuggle in three different claims: an index, a name, and a causal story.</p>
 <h3 id="claim-ladder">Claim ladder</h3>
@@ -436,9 +431,7 @@ flowchart LR
 <p><a href="#ref-elhage-2022">Elhage et al. (2022)</a> formalize <strong>superposition</strong> in toy models: many features packed as nearly orthogonal directions in a lower-dimensional activation space, so that individual neurons are typically <em>polysemantic</em> (they fire for several unrelated concepts; one neuron might light up for both &ldquo;Python the language&rdquo; and &ldquo;python the snake&rdquo;). That mechanism is demonstrated in controlled toy settings and is a leading hypothesis for why large-model neurons look polysemantic; it is not settled wholesale for every layer of every LLM. Anthropic&rsquo;s later SAE work, and <a href="#ref-cunningham-2023">Cunningham et al. (2023)</a>, inherit that careful framing when motivating dictionary learning at scale.</p>
 <p><span class="research-figure">
     <img src="superposition.svg" alt="Superposition: more concepts than dimensions forces directions to overlap, so one neuron can fire for unrelated concepts." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: superposition in a picture. Left: six concept directions squeezed into a 2-D space cannot all be perpendicular, so they overlap. Right: two unrelated concepts both project positively onto one neuron's direction, so that single neuron fires for both, which is what "polysemantic" means.</p>
 <h3 id="from-neurons-to-directions">From neurons to directions</h3>
@@ -459,9 +452,7 @@ flowchart LR
 <p>In symbols: the residual stream at a chosen layer is \(h \in \mathbb{R}^{d_{\text{model}}}\). Here \(d_{\text{model}}\) is just the model&rsquo;s hidden width (how many numbers are in \(h\), thousands for a big Llama). People often train SAEs on that residual stream, or sometimes on MLP activations instead.</p>
 <p><span class="research-figure">
     <img src="transformer-layer.svg?v=2" alt="Where an SAE attaches to a transformer layer." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: a simplified transformer block. Each layer adds an update onto the residual stream (the running hidden-state highway). An SAE can be trained to read that stream, the vector <em>h</em>, at any chosen layer; layer 50 of Llama 3.3 70B is where Goodfire trained the particular public SAE this post uses, not a property of SAEs in general.</p>
 <h3 id="dictionary-learning-as-a-response">Dictionary learning as a response</h3>
@@ -479,9 +470,7 @@ flowchart LR
 </ul>
 <p><span class="research-figure">
     <img src="sae-program.svg" alt="The SAE training program: expand into many slots, keep most off per token, rebuild h from the few that fire." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: the three pressures in one picture. Expand the short hidden vector <em>h</em> into many feature slots (more slots than dimensions); for any one token keep almost every slot off; and demand that the few slots that do fire still rebuild <em>h</em>. The tension between the last two is what shapes the dictionary.</p>
 <p>Nothing in that loop assigns English names. Names come later, from humans staring at activating examples.</p>
@@ -579,9 +568,7 @@ h = b_d + \sum_{i=1}^{N} f_i\, d_i + \epsilon.
 <p>For the public Goodfire Llama 3.3 70B SAE we use below (<a href="https://huggingface.co/Goodfire/Llama-3.3-70B-Instruct-SAE-l50"><code>Goodfire/Llama-3.3-70B-Instruct-SAE-l50</code></a>), \(N = 65{,}536\) and the hook is layer 50. That is a single dictionary at a single residual location, useful and public, but a different object from a Gemma-Scope-style suite that instruments every layer.</p>
 <p><span class="research-figure">
     <img src="sae-architecture.svg?v=4" alt="SAE encode → sparse features → decode." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: the SAE stretches <em>h</em> into many mostly-off feature slots, then tries to rebuild <em>h</em> from the ones that fired. A feature ID is simply which slot you mean.</p>
 <p><strong>Encoder</strong> (activations), maps \(h\) to the sparse code. Papers often write a centered form</p>
@@ -600,9 +587,7 @@ h' = h + \alpha \sum_{i \in S} d_i
 \]<p>In the basic formula there is <strong>no renormalization</strong>: you add a vector and keep going. So \(\|h'\|\) is usually not equal to \(\|h\|\), positive \(\alpha\) often lengthens the residual in that direction; negative \(\alpha\) can shorten it or pull it the other way. Some pipelines do normalize or clamp afterward, but that is an extra design choice, not part of this equation.</p>
 <p><span class="research-figure">
     <img src="steering-vector.svg?v=3" alt="Steering adds a scaled feature direction to the residual stream." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: steering in a picture. Start at residual <em>h</em>, add a push <em>α d<sub>i</sub></em> along the feature direction, and land at <em>h′</em>. The usual formula does not put <em>h′</em> back on the same length as <em>h</em>, magnitude can grow or shrink.</p>
 <div class="panel warning">
@@ -1065,9 +1050,7 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 <p><strong>Why item resampling is still not the primary analysis.</strong> There is a subtler problem than either note above. The 1,120 texts were generated from <strong>51 template families</strong>: each family is one sentence skeleton with slots, and its 20-or-so variants differ only in which words fill the slots. Variants of the same template are near-photocopies. Now imagine resampling all 1,120 texts as if each were an independent piece of evidence: you are effectively counting each photocopy as a brand-new fact, and your interval shrinks accordingly, unearned confidence. The resampling unit is the <em>template family</em>, rather than the individual text. So the <strong>primary</strong> uncertainty analysis uses a <strong>template-cluster</strong> bootstrap: first resample which of the 51 families are in the fake dataset (with replacement, families weighted equally), then take the items inside the drawn families (<a href="https://github.com/tdj28/llm_selfref_pre/tree/f5e906e1737bc71bf20b642af1d698018eec82fe/data/public_sae_feature_maps/70b_balanced_80_20260709/template_robustness"><code>template_robustness/</code></a>). The same release also reports leave-one-template-family deletion: rerun everything 51 times, each time deleting one family entirely, and check whether any single family is carrying the result.</p>
 <p><span class="research-figure">
     <img src="bootstrap-units.svg" alt="Item bootstrap versus template-cluster bootstrap: resampling near-duplicate texts as independent gives an unrealistically narrow interval; resampling template families accounts for variation between families." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: the same data, two ways of counting evidence. Left: the naive item bootstrap treats every text as independent, but texts from one template family (one color) are near-copies, so the interval comes out too narrow. Right: the template-cluster bootstrap draws whole families first, so each family counts once. Bottom: the resulting intervals for the deception-minus-subjective contrast, on the same scale. The cluster interval is wider and is the one we report as primary.</p>
 <div class="panel info">
@@ -1462,9 +1445,7 @@ S_i = \frac{1}{|T|}\sum_{f \in T} z_{if}, \quad T = \{30032,58667,22004,30686,41
 <p>Now draw <strong>with</strong> replacement: after picking the 5, you put it back, so it can come up again. One resample might be \(\{3, 3, 7\}\) (mean \(4.3\)), another \(\{5, 7, 7\}\) (mean \(6.3\)), another \(\{3, 5, 7\}\) (mean \(5.0\)). The duplicates-and-omissions are the point: each resample is a slightly different weighting of your evidence, so the resampled means spread out, and the width of that spread is your uncertainty estimate.</p>
 <p><span class="research-figure">
     <img src="replacement.svg" alt="Without replacement every resample is the same set reshuffled and the mean never moves; with replacement duplicates and omissions make the mean wobble, which is what produces an interval." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: why "with replacement" matters, using a three-item dataset. Left: without replacement, three draws always collect all three tiles, so every resample has the same mean and there is no spread to measure. Right: with replacement, tiles can repeat or go missing, so the resampled means wobble around the original, and that wobble becomes the interval.</p>
 <p>For reference, here is the item-level (naive) version in code:</p>
