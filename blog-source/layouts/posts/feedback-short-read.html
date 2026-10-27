@@ -1,0 +1,27 @@
+{{ define "main" }}
+<div class="blog-post"><div class="container">
+<article class="post-content feedback-article">
+  <header class="feedback-opening">
+    <div class="feedback-opening-copy">
+      <p class="feedback-eyebrow">The visual short read</p>
+      <h1 class="post-title">{{ .Title }}</h1>
+      {{ $meta := partial "research-note-data.html" . }}
+      <div class="post-meta"><time class="post-date" datetime="{{ $meta.published_iso }}">{{ $meta.published_display }}</time> · by <a href="{{ $meta.author.orcid }}" rel="author">{{ $meta.author.display_name }}</a></div>
+      <div class="post-lead">{{ .Params.lead | markdownify }}</div>
+      <a class="feedback-start" href="#a-landscape-made-of-words">Explore the findings ↓</a>
+    </div>
+    {{ with .Resources.GetMatch "islands-of-order.png" }}
+    <figure class="feedback-opening-art">
+      <a href="#a-landscape-made-of-words"><img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="A measured feedback landscape: a branching gray island in orange and purple regions with numerical evidence of chaos. Full interpretation follows below."></a>
+      <figcaption>Measured feedback map · Qwen2.5-0.5B</figcaption>
+    </figure>
+    {{ end }}
+  </header>
+  <div class="post-body">{{ .Content }}</div>
+  <footer class="post-footer">
+    <div class="post-footer__notices">{{ partial "research-note-citation.html" . }}
+    <div class="post-transparency"><div class="post-transparency-label">Public source &amp; edit history</div><p>Source and revision history are maintained in <a href="https://github.com/praxagent/praxagent-ai">praxagent/praxagent-ai</a>. {{ with .File }}<a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/{{ .Path }}">View this article’s edit history</a>.{{ end }}</p></div></div>
+    <div class="post-navigation"><a href="/blog/index.html" class="back-to-blog">← Back to Research Notes</a></div>
+  </footer>
+</article></div></div>
+{{ end }}

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="700" viewBox="0 0 360 350" role="img" aria-labelledby="title desc">
+<title id="title">The model feeds a blend back into one input slot</title>
+<desc id="desc">The fixed prompt and replaceable input enter an unchanged language model. Its next-token probabilities weight a blend of token representations. This blend returns to the same input slot. The leading token is displayed but is not the full feedback signal. This is a conceptual diagram, not data.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="#A67C52"/></marker></defs>
+<rect width="360" height="350" fill="#F7F4F0"/>
+<style>.t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}.title{font-size:17px;font-weight:700}.h{font-size:14px;font-weight:700}.s{font-size:13px}.m{font-size:12px;fill:#5A544C}.a{fill:none;stroke:#A67C52;stroke-width:2;marker-end:url(#arrow)}</style>
+<text class="t title" x="22" y="29">How the feedback loop works</text>
+<text class="t m" x="22" y="50">The model's trained weights stay fixed.</text>
+<rect x="22" y="70" width="281" height="55" rx="10" fill="#FBF9F6" stroke="#C4B8A8"/>
+<text class="t h" x="37" y="92">Fixed prompt + one input slot</text>
+<text class="t s" x="37" y="112">The previous blend is replaced.</text>
+<path class="a" d="M162 125V148"/>
+<rect x="22" y="150" width="281" height="55" rx="10" fill="#E8F0F7" stroke="#4B6787"/>
+<text class="t h" x="37" y="173">Language model</text>
+<text class="t s" x="37" y="193">Probabilities for possible next tokens</text>
+<path class="a" d="M162 205V228"/>
+<rect x="22" y="230" width="281" height="55" rx="10" fill="#F3E8E0" stroke="#A67C52"/>
+<text class="t h" x="37" y="253">Make a probability-weighted blend</text>
+<text class="t s" x="37" y="273">Feed it back into the same input slot.</text>
+<path class="a" d="M303 258H330V97H305"/>
+<rect x="22" y="307" width="316" height="27" rx="7" fill="#EAF1E5"/>
+<text class="t s" x="33" y="325">The displayed word is only the top candidate.</text>
+</svg>

@@ -5,7 +5,7 @@ summary: "The model's generated text when each next token is chosen as the singl
 pro_reviewed: true
 ---
 
-A **greedy continuation** (also *greedy output* / *greedy decoding*) is the text a model produces when, at every step, it emits the token with the largest next-token logit:
+A **greedy continuation** (also *greedy output* / *greedy decoding*) is the text a model produces when, at every step, it emits the token with the largest next-token [logit]({{< relref "knowledge-base/glossary/logit/index.md" >}}):
 
 \[
 x_{t+1}=\operatorname*{arg\,max}_{v\in V} z_v.
@@ -39,4 +39,4 @@ In our notes it is the default way to ask “what did the model *say*?” under 
 
 It is not the same thing as a mid-layer readout. The [logit lens]({{< relref "knowledge-base/glossary/logit-lens/index.md" >}}) and [Jacobian lens]({{< relref "knowledge-base/glossary/jacobian-lens/index.md" >}}) score vocabulary at a residual-stream position; the greedy continuation is the surface string after generation.
 
-See also: [sampling]({{< relref "knowledge-base/glossary/sampling/index.md" >}}), [temperature]({{< relref "knowledge-base/glossary/temperature/index.md" >}}), [top-p]({{< relref "knowledge-base/glossary/top-p/index.md" >}}), [unembedding]({{< relref "knowledge-base/glossary/unembedding/index.md" >}}), [hidden bridge]({{< relref "knowledge-base/glossary/hidden-bridge/index.md" >}}).
+See also: [logit]({{< relref "knowledge-base/glossary/logit/index.md" >}}), [sampling]({{< relref "knowledge-base/glossary/sampling/index.md" >}}), [temperature]({{< relref "knowledge-base/glossary/temperature/index.md" >}}), [top-p]({{< relref "knowledge-base/glossary/top-p/index.md" >}}), [unembedding]({{< relref "knowledge-base/glossary/unembedding/index.md" >}}), [hidden bridge]({{< relref "knowledge-base/glossary/hidden-bridge/index.md" >}}).

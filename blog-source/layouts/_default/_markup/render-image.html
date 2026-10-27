@@ -1,7 +1,16 @@
 {{- $resourcePath := (urls.Parse .Destination).Path -}}
+{{- $size := "" -}}
+{{- $title := "" -}}
+{{- with .Title -}}
+  {{- if or (eq . "full") (eq . "60") (eq . "text-width") -}}
+    {{- $size = . -}}
+  {{- else -}}
+    {{- $title = . -}}
+  {{- end -}}
+{{- end -}}
 {{- if and (eq .Page.Type "posts") (eq .Page.Params.citation_enabled true) -}}
-<span class="research-figure">
-    <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy" decoding="async">
+<span class="research-figure{{ with $size }} research-figure--{{ . }}{{ end }}">
+    <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}"{{ with $title }} title="{{ . }}"{{ end }} loading="lazy" decoding="async">
     {{- partial "figure-attribution.html" (dict "page" .Page "resource_path" $resourcePath) -}}
 </span>
 {{- else -}}

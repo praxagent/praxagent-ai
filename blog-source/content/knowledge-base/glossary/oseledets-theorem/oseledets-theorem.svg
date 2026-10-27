@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="400"
+     viewBox="0 0 760 400" role="img"
+     aria-labelledby="oseTitle oseDesc">
+  <title id="oseTitle">Two Lyapunov rates for a constant linear map</title>
+  <desc id="oseDesc">Axes of displacement space. The map sends a displacement (a, b) to (2a, b/2). A nonzero horizontal displacement doubles each step, a rate of ln 2. A nonzero vertical displacement halves each step, a rate of minus ln 2. The derivative of this linear map is the same at every state, so every state, the origin included, has these two rates. A box states that any displacement with a nonzero horizontal part grows like 2 to the n.</desc>
+  <rect width="760" height="400" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:15px;font-weight:700}
+    .h{font-size:13px;font-weight:700}
+    .s{font-size:12px}
+    .m{font-size:11px;fill:#5A544C}
+    .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+    .row{fill:#E8F0F7;stroke:#4B6787;stroke-width:1.2}
+    .target{fill:#F3E8E0;stroke:#A67C52;stroke-width:2.2}
+    .ok{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.6}
+    .bad{fill:#F8E8E6;stroke:#8C4A42;stroke-width:1.6}
+    .line{fill:none;stroke:#A67C52;stroke-width:2.2}
+    .blue{fill:none;stroke:#4B6787;stroke-width:2.2}
+    .ink{stroke:#2C2924;stroke-width:1.4;fill:none}
+  </style>
+  <text x="24" y="32" class="t title">Two growth rates for a constant linear map</text>
+  <text x="24" y="52" class="t m">The map sends a displacement (a, b) to (2a, b/2). Its derivative is the same at every state.</text>
+  <line x1="80" y1="230" x2="700" y2="230" class="ink"/>
+  <line x1="200" y1="70" x2="200" y2="290" class="ink"/>
+  <path d="M200 230 H520" class="line"/>
+  <path d="M500 218 L520 230 L500 242" fill="#A67C52"/>
+  <text x="530" y="226" class="t h">factor 2 each step</text>
+  <text x="530" y="246" class="t m">rate ln 2</text>
+  <path d="M200 230 V152" class="blue"/>
+  <path d="M188 170 L200 150 L212 170" fill="#4B6787"/>
+  <text x="214" y="140" class="t s">factor 1/2 each step</text>
+  <text x="214" y="158" class="t m">rate ln(1/2) = &#x2212;ln 2</text>
+  <circle cx="200" cy="230" r="5" fill="#8C4A42"/>
+  <text x="214" y="270" class="t s">zero displacement</text>
+  <rect x="80" y="300" width="600" height="48" rx="8" class="ok"/>
+  <text x="380" y="328" text-anchor="middle" class="t s">Any displacement with a nonzero horizontal part grows like 2 to the n.</text>
+
+</svg>

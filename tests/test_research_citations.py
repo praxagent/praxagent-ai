@@ -81,7 +81,7 @@ class ResearchCitationTests(unittest.TestCase):
         )
 
     def test_all_current_research_notes_opt_in(self) -> None:
-        self.assertEqual(len(self.sources), 5)
+        self.assertEqual(len(self.sources), 7)
 
         for source in self.sources:
             with self.subTest(source=source):
@@ -131,13 +131,17 @@ class ResearchCitationTests(unittest.TestCase):
                 self.assertEqual(schema["url"], canonical)
                 self.assertEqual(schema["usageInfo"], RIGHTS_URL)
 
-                markdown_images = len(
-                    re.findall(r"!\[[^\]]*\]\([^)]+\)", source.read_text(encoding="utf-8"))
-                )
+                # Quoted model output such as `"![](https:// Hello"` is code, not
+                # an image; raw-HTML figures carry their credit spans in the source.
+                text = source.read_text(encoding="utf-8")
+                text = re.sub(r"```.*?```", "", text, flags=re.DOTALL)
+                text = re.sub(r"`[^`\n]*`", "", text)
+                markdown_images = len(re.findall(r"!\[[^\]]*\]\([^)]+\)", text))
+                manual_credits = text.count('class="research-figure__credit"')
                 self.assertGreater(markdown_images, 0)
                 self.assertEqual(
                     rendered.count('class="research-figure__credit"'),
-                    markdown_images,
+                    markdown_images + manual_credits,
                 )
 
     def test_guest_post_can_disable_registered_citation_identity(self) -> None:

@@ -1,0 +1,16 @@
+{{- $id := index .Page.Params (.Get "param") -}}
+{{- $title := .Get "title" -}}
+{{- if $id -}}
+  {{- if not (findRE `^[A-Za-z0-9_-]{11}$` $id) -}}
+    {{- errorf "Invalid YouTube ID for %s in %s" (.Get "param") .Page.File.Path -}}
+  {{- end -}}
+  <figure class="feedback-film feedback-film--youtube">
+    <iframe src="https://www.youtube-nocookie.com/embed/{{ $id }}" title="{{ $title }}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </figure>
+{{- else -}}
+  {{- $poster := .Page.Resources.GetMatch (.Get "poster") -}}
+  {{- if not $poster }}{{ errorf "Missing feedback-film poster: %s" (.Get "poster") }}{{ end -}}
+  <figure class="feedback-film">
+    <a href="{{ $poster.RelPermalink }}" aria-label="Open the full-size figure"><img src="{{ $poster.RelPermalink }}" alt="{{ .Get "alt" }}" width="{{ $poster.Width }}" height="{{ $poster.Height }}" loading="lazy" decoding="async"></a>
+  </figure>
+{{- end -}}

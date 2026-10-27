@@ -1,0 +1,60 @@
+{
+  "id": "BSC6-readable-summary-visual-review",
+  "recorded_utc": "2026-10-22T06:33:10.248084+00:00",
+  "passed": true,
+  "figure_receipt": {
+    "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/receipt.json",
+    "bytes": 149696,
+    "sha256": "a61fef2f8af572f294be51354d4a4d9f00ee92f1c3341ad99d3be54ead27cd70"
+  },
+  "audit_receipt": {
+    "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-audit-01/receipt.json",
+    "bytes": 389901,
+    "sha256": "691cae5fac0254a54b3f2bb919431bb3fe9650e6cc4e828809b7f137ae97b791"
+  },
+  "independent_replay": {
+    "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/independent-replay.json",
+    "bytes": 6890,
+    "sha256": "2054d331901cf4a74ad2852c69baed5421d11a308636f1fe1539936af6d967a2"
+  },
+  "reviewed": [
+    {
+      "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/mixed-junction-mobile-summary.png",
+      "bytes": 201019,
+      "sha256": "b1e81be11dd12201ac942d59aefcd44b67a0fc3ff6358cf50dbea38f04998a60"
+    },
+    {
+      "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/mixed-junction-readable-summary.pdf",
+      "bytes": 38305,
+      "sha256": "52b4a5578f92d3b57c85f63262683c541e037b9e735d110378674fdf8c38e69c"
+    },
+    {
+      "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/mixed-junction-readable-summary.png",
+      "bytes": 204033,
+      "sha256": "ea726d27ddd78428350f2c3fdc76de8daaaf4059c024290b066139d9913e9059"
+    }
+  ],
+  "previews": [
+    {
+      "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/previews/mobile-360px-preview.png",
+      "bytes": 114834,
+      "sha256": "80d1c7f3a424cff2a8911807a83c08b425322cc419366c0ad634ab01777547b5"
+    },
+    {
+      "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/previews/readable-pdf-preview.png",
+      "bytes": 84216,
+      "sha256": "95b6ec17624e0c4a6c1440bef7cc9677a07688cf6e5a223dcc132ab6ed4264d4"
+    }
+  ],
+  "checks": [
+    "Main PNG and mobile PNG visually inspected from production output.",
+    "PDF rendered with Poppler and its page visually inspected; glyphs, markers and table legible.",
+    "Mobile PNG separately inspected at 360-pixel display width.",
+    "All three actual statuses retained; positive lower and negative upper feature estimates with empirical bars; center labeled small nominal residual.",
+    "All primary and cyclic signed trace residuals plotted as measured, with marker jitter explicitly disclosed and frozen gate stated.",
+    "No inferred connecting line, contour, exact-zero or contraction-valley certificate.",
+    "All visible text bounds inside the production canvas at both layout sizes; no clipped labels or overlapping footer/table.",
+    "All reviewed output hashes rechecked against original figure receipt; original pending visual-review field retained unchanged."
+  ],
+  "scope": "Conditional Hessian-feature estimates at numerically corrected intersections; the Hessian eigenvector need not be the geometric normal of its feature locus. Empirical envelopes are not confidence intervals or verified neural bounds. Actual trace residuals are retained as measured. No exact zero, ridge crossing, between-case connection, or superstability is established."
+}

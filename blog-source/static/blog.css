@@ -1660,6 +1660,96 @@ main,
     margin-bottom: 0.65rem;
 }
 
+/* Chaos-note plots are nearly square or taller. At the 60rem text
+   measure a desktop figure is taller than the window, so keep it
+   inset and centered, but large enough to read. Narrow screens keep
+   the full column width. */
+@media (min-width: 769px) {
+    .post-content.figures-compact .post-body .research-figure {
+        display: grid;
+        justify-items: center;
+        width: fit-content;
+        max-width: min(52rem, 100%);
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .post-content.figures-compact .post-body .research-figure img {
+        width: auto;
+        max-width: min(52rem, 100%);
+        max-height: min(46rem, 80vh);
+        height: auto;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .post-content.figures-compact .post-body .research-figure__credit {
+        width: 100%;
+    }
+
+    /* Mark a figure about 60% of the text column: ![alt](file.png "60") */
+    .post-content.figures-compact .post-body .research-figure.research-figure--60 {
+        width: 60%;
+        max-width: 60%;
+    }
+
+    .post-content.figures-compact .post-body .research-figure.research-figure--60 img {
+        width: 100%;
+        max-width: 100%;
+        max-height: none;
+    }
+}
+
+/* Mark a figure the full screen width: ![alt](file.png "full")
+   Paint containment would clip that breakout, so this note opts out. */
+.post-content.figures-compact,
+.post-content.figures-compact .post-body {
+    contain: none;
+    overflow-x: visible;
+}
+
+.post-content.figures-compact .post-body .research-figure.research-figure--full {
+    display: block;
+    width: 100vw;
+    max-width: 100vw;
+    margin-right: calc(50% - 50vw);
+    margin-left: calc(50% - 50vw);
+}
+
+.post-content.figures-compact .post-body .research-figure.research-figure--full img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    max-height: none;
+    height: auto;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.post-content.figures-compact .post-body .research-figure.research-figure--full .research-figure__credit {
+    width: min(var(--post-measure), calc(100% - 2rem));
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* SVG diagrams span the text width, and so does a plot marked
+   ![alt](file.png "text-width"); the inset size above is for the other raster plots. */
+.post-content.figures-compact .post-body .research-figure:has(> img[src$=".svg"]),
+.post-content.figures-compact .post-body .research-figure.research-figure--text-width {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+
+.post-content.figures-compact .post-body .research-figure img[src$=".svg"],
+.post-content.figures-compact .post-body .research-figure.research-figure--text-width img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    max-height: none;
+    height: auto;
+}
+
 .research-figure__credit {
     display: block;
     margin: 0 0 2rem;
@@ -1858,6 +1948,23 @@ main,
     background: var(--bg-card);
     overflow-x: auto;
     text-align: center;
+}
+
+/* Hugo's youtube shortcode with class="video-embed". The bottom margin
+   offsets the negative top margin of a following .figure-note. */
+.post-body .video-embed {
+    aspect-ratio: 16 / 9;
+    margin: 1.75rem 0 2rem;
+    border-radius: 0.4rem;
+    overflow: hidden;
+    background: #111124;
+}
+
+.post-body .video-embed iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
 }
 
 .post-body .mermaid svg {
@@ -2132,6 +2239,38 @@ main,
 
 .post-lead p {
     margin: 0 0 1rem 0;
+}
+
+.post-lead-figure {
+    float: right;
+    width: min(46%, 22rem);
+    margin: 0.15rem 0 0.75rem 1.35rem;
+}
+
+.post-lead-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border-primary);
+    border-radius: 0.4rem;
+    background: #fff;
+}
+
+.post-lead-caption {
+    margin: 0.45rem 0 0;
+    color: var(--text-tertiary);
+    font-size: 0.78rem;
+    line-height: 1.45;
+}
+
+.post-lead-caption p {
+    margin: 0;
+}
+
+.post-lead::after {
+    content: "";
+    display: block;
+    clear: both;
 }
 
 .post-lead a,

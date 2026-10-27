@@ -39,7 +39,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20260904">
+    <link rel="stylesheet" href="/blog/blog.css?v=20261017d">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -133,7 +133,7 @@
     <div class="knowledge-glossary">
         <div class="knowledge-section-toolbar">
             <a class="knowledge-back" href="/blog/knowledge-base/">← Knowledge Base</a>
-            <span class="knowledge-section-count">48 concepts</span>
+            <span class="knowledge-section-count">60 concepts</span>
         </div>
         <div class="blog-index-list taxonomy-directory">
 
@@ -170,6 +170,21 @@
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/brier-loss/">
                 <h3>Brier loss</h3>
                 <span class="blog-index-meta">The average squared gap between a stated probability and the zero-or-one outcome that …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/brouwer-fixed-point/">
+                <h3>Brouwer&#39;s fixed-point theorem</h3>
+                <span class="blog-index-meta">A continuous map from a nonempty compact convex set into itself has at least one fixed …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/causal-attention/">
+                <h3>Causal attention</h3>
+                <span class="blog-index-meta">A rule that lets each token use itself and earlier tokens, and not later ones.</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/convex-hull/">
+                <h3>Convex hull</h3>
+                <span class="blog-index-meta">Every weighted average of a set of points whose weights are nonnegative and sum to one.</span>
             </a>
 
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/cosine-similarity/">
@@ -232,6 +247,11 @@
                 <span class="blog-index-meta">A corpus-averaged linear map that turns a mid-layer residual-stream state into …</span>
             </a>
 
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/krawczyk-test/">
+                <h3>Krawczyk&#39;s test</h3>
+                <span class="blog-index-meta">An interval Newton test: if a box is mapped strictly inside itself, it contains exactly …</span>
+            </a>
+
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/l2-normalization/">
                 <h3>L2 normalization</h3>
                 <span class="blog-index-meta">Rescaling a nonzero vector to Euclidean length one while preserving its direction.</span>
@@ -242,9 +262,19 @@
                 <span class="blog-index-meta">The average negative logarithm of the probability a model gave to what actually happened, …</span>
             </a>
 
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/logit/">
+                <h3>Logit</h3>
+                <span class="blog-index-meta">An unnormalized next-token score. Softmax turns a vector of logits into probabilities.</span>
+            </a>
+
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/logit-lens/">
                 <h3>Logit lens</h3>
                 <span class="blog-index-meta">The free mid-layer readout that skips any fitted transport: unembed the residual as if it …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/lyapunov-exponent/">
+                <h3>Lyapunov exponent</h3>
+                <span class="blog-index-meta">The average exponential rate at which a tiny displacement from a trajectory grows or …</span>
             </a>
 
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/matmul/">
@@ -257,6 +287,11 @@
                 <span class="blog-index-meta">A rule that averages selected vectors to produce one summary vector.</span>
             </a>
 
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/monodromy/">
+                <h3>Monodromy</h3>
+                <span class="blog-index-meta">The derivative of one full trip around a periodic orbit: the ordered product of the step …</span>
+            </a>
+
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/motor-layer/">
                 <h3>Motor layer / motor-late</h3>
                 <span class="blog-index-meta">A late, near-output regime; in one scoped 397B analysis, digit-direction vocabulary-score …</span>
@@ -265,6 +300,16 @@
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/mlp/">
                 <h3>Multilayer perceptron (MLP)</h3>
                 <span class="blog-index-meta">The position-wise nonlinear feed-forward sublayer that transforms each token state and …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/nat/">
+                <h3>Nat</h3>
+                <span class="blog-index-meta">The unit of a natural logarithm: a factor of e is one nat, and a factor of 2 is about …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/oseledets-theorem/">
+                <h3>Oseledets&#39; theorem</h3>
+                <span class="blog-index-meta">Under an invariant probability measure, Lyapunov exponents exist at almost every state.</span>
             </a>
 
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/p-value/">
@@ -312,14 +357,29 @@
                 <span class="blog-index-meta">Measures that compare a ranked retrieval list with relevance judgments, including …</span>
             </a>
 
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/rms-normalization/">
+                <h3>RMS normalization</h3>
+                <span class="blog-index-meta">Rescaling a vector by its root mean square, then by a learned gain on each coordinate.</span>
+            </a>
+
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/rms/">
                 <h3>Root mean square (RMS)</h3>
                 <span class="blog-index-meta">The square root of the mean squared coordinates of a vector, used here as a measure of …</span>
             </a>
 
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/rotary-embedding/">
+                <h3>Rotary embedding</h3>
+                <span class="blog-index-meta">A position signal made by rotating pairs of hidden coordinates by an angle that depends on …</span>
+            </a>
+
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/sampling/">
                 <h3>Sampling</h3>
                 <span class="blog-index-meta">Choosing the next token from a distribution over the vocabulary, rather than always taking …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/silu/">
+                <h3>SiLU</h3>
+                <span class="blog-index-meta">The activation that multiplies a number by its own sigmoid, smooth through zero.</span>
             </a>
 
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/standard-deviation/">

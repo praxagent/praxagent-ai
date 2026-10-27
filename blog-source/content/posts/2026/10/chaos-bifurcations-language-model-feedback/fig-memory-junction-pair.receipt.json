@@ -1,0 +1,164 @@
+{
+  "figure_id": "M2",
+  "title": "The child's center, with and without retained feedback",
+  "description": "Matched measured close-ups: the original separated tracks and an X-like junction at the residual-qualified memory candidate.",
+  "alt_text": "Matched scans of the child's center. With no retained feedback, two dark contraction tracks turn away from each other; near 0.645% retained feedback, the translated close-up shows an X-like junction at the displayed resolution. Both panels share their physical spans and grayscale; the image does not certify an exact crossing.",
+  "data_source": {
+    "receipt": "memory-junction-scan-receipt.json",
+    "sha256": "b9867638bf6dfac461e5f42dee3f75ef01a156ff918d9356296cf6bb49f72d3a",
+    "commit": "b87a9e74ab364801ce8bb3ee86cc585c2bc2e338",
+    "source_path": "docs/baby-shrimp-zoom/memory-junction-scan-receipt.json",
+    "selection": "Complete original BSZ2 and new BSMZ1 grids; every accepted scan cell displayed.",
+    "transformation": "Byte-identical audited full and mobile figures; identical physical spans, grayscale and nearest-cell rendering."
+  },
+  "provenance": {
+    "study": "BSMZ1",
+    "generator": "tools/baby_shrimp_memory_scan_finish.py",
+    "generator_commit": "210c8746a751529da88ffdcb603c3a69e19bd936",
+    "generator_sha256": "93d4d45e2b7c6aec700e69b8568db12b08564e3ae8cd76b5ee2739ad7df24302",
+    "outputs": {
+      "fig-memory-junction-pair-mobile.png": "bcf29baf57be3fca0e93b980865286f909d47455e2de0ee0bc6a46ecda64b14f",
+      "fig-memory-junction-pair.pdf": "d99dfddf94c3f0d20e6a796697129f11792b5d0c6b0588a54f3c2f14592aada1",
+      "fig-memory-junction-pair.png": "d9eee5a94c5d6bb53eb44d95972d173957849cabafb99cd815ff28c20ed8bff5"
+    },
+    "copy": "Byte-identical full PNG, stacked mobile PNG and full annotated PDF.",
+    "audit": {
+      "path": "audits/baby-shrimp-zoom/20261022-memory-junction-audit-02/receipt.json",
+      "sha256": "7f93d568700bb75583f03e37d8811c2033c2b959eeba43436284a28c074266e8",
+      "bytes": 12682
+    },
+    "visual_review": {
+      "path": "audits/baby-shrimp-zoom/20261022-memory-junction-audit-02/visual-review.json",
+      "sha256": "fbee4fdf39c6a16269e2bf307dc4aecdd47be3292cce3778722b48a1df5c032b",
+      "bytes": 3004
+    }
+  },
+  "plot": {
+    "interpolation": "nearest",
+    "coordinate_display": "offsets from each window center, multiplied by 1e6",
+    "centers": [
+      [
+        0.07309363265341377,
+        -0.1544023817786725
+      ],
+      [
+        0.07331776448598727,
+        -0.15804614858293237
+      ]
+    ],
+    "beta_values": [
+      0.0,
+      0.006448531026086656
+    ],
+    "color_scale": {
+      "shared_positive_vmax": 0.447582659945393,
+      "shared_gray_contraction_cap": 0.6115837120708131,
+      "scale_reference": "union of original HR10 and complete BSZ1 cells",
+      "gray_definition": "all cells outside exponent > 0.001 AND period == 0; not all gray cells are verified periodic",
+      "display_window": [
+        0.07295,
+        0.07316,
+        -0.15485,
+        -0.15425
+      ],
+      "interpolation": "nearest",
+      "probe_receipt_sha256": "43cf07c05e736eabb249b0a88a1a7566b0a8c5a04f3457175b3309cc6c52d8c4"
+    },
+    "spans": [
+      3.0000000000030003e-06,
+      8.999999999981245e-06
+    ],
+    "source_devices": [
+      "SECURE:NVIDIA A100-SXM4-80GB",
+      "NVIDIA A100-SXM4-80GB"
+    ],
+    "caption": "Left center: α = 0.07309363265, log₁₀T = -0.15440238178; β = 0.\nRight center: α = 0.07331776449, log₁₀T = -0.15804614858; β = 0.0064485310.\nEach panel: 128 × 128 fixed-start cells; 300 settling + 300 measurement steps; nearest-cell rendering.\nDarker gray means stronger contraction. Trace reconnection has separate orbit evidence; these ridges need not connect.\nPurple–yellow, if present: exponent >0.001 with no detected recurrence ≤32. No exact superstability is inferred.",
+    "center_sampling": [
+      {
+        "axes": [
+          {
+            "axis": "alpha",
+            "nodes": 128,
+            "contains_exact_center": false,
+            "nearest_node_distance": 1.1811023617469552e-08
+          },
+          {
+            "axis": "log10_temperature",
+            "nodes": 128,
+            "contains_exact_center": false,
+            "nearest_node_distance": 3.543307086628644e-08
+          }
+        ],
+        "center_is_measured_cell": false
+      },
+      {
+        "axes": [
+          {
+            "axis": "alpha",
+            "nodes": 128,
+            "contains_exact_center": false,
+            "nearest_node_distance": 1.1811023617469552e-08
+          },
+          {
+            "axis": "log10_temperature",
+            "nodes": 128,
+            "contains_exact_center": false,
+            "nearest_node_distance": 3.543307086628644e-08
+          }
+        ],
+        "center_is_measured_cell": false
+      }
+    ],
+    "caption_requirements": [
+      "Give both actual window centers and identify beta_* as a residual-qualified trace-root estimate.",
+      "The 128-by-128 endpoint grids omit the exact window centers; no pixel measures the exact candidate.",
+      "Fixed-opener recurrence does not certify orbit identity with the separately continued root orbit.",
+      "Trace-zero contours and finite-time contraction tracks are distinct; no fitted crossing is overlaid."
+    ],
+    "output_layouts": {
+      "fig-memory-junction-pair.png": "13.4-by-8-inch full annotated comparison",
+      "fig-memory-junction-pair.pdf": "13.4-by-8-inch full annotated comparison",
+      "fig-memory-junction-pair-publication.pdf": "7.2-by-3.8-inch two-panel publication variant; 8.5-to-10-point labels; external caption required",
+      "fig-memory-junction-pair-mobile.png": "5-by-8.8-inch stacked mobile variant; 10.5-to-13-point labels; external caption required"
+    },
+    "overlaid_fitted_curves": false,
+    "visual_review": "passed in separate hash-bound review; original audit remains immutable"
+  },
+  "observation": "Original panel has separated dark contraction tracks; the memory-candidate panel has an X-like junction at the measured grid resolution. This is compatible with the separately audited trace-contour reconnection but does not establish exact superstability or exact strongest-contraction ridge intersection.",
+  "uncertainty": [
+    "Finite-horizon fixed-start measurements; period labels are recurrence candidates, not verified primitive orbits.",
+    "Every pixel is measured. No fitted crossing or interpolated saddle field replaces data.",
+    "The right panel is at a residual-qualified trace-root estimate, not an exact certified crossing.",
+    "Trace-zero contours, exact contraction ridges and finite-time image tracks are distinct.",
+    "The original panel is centered on the saved anchor; the translated panel uses the continued candidate.",
+    "Even endpoint grids omit the exact window centers; the candidate is not an actual measured pixel.",
+    "Fixed-opener recurrence does not certify orbit identity with the separately continued root orbit.",
+    "Root-state replay is independent of scan recurrence candidates; no full orbit was retained for every pixel."
+  ],
+  "web_review": {
+    "raw_png_visual_review": "passed for desktop and stacked mobile files",
+    "isolated_hugo_build": "passed",
+    "responsive_html_sources": "checked; desktop/mobile images and PDF match audited hashes",
+    "rendered_visual_review": "passed: desktop and mobile images, labels, caption, mathematics, PDF link and evidence links are readable; no horizontal page overflow or KaTeX errors",
+    "method": "Headless local Playwright rendering of isolated Hugo output; CUA reported no available browser. External requests blocked.",
+    "renderer": "Installed system Chrome via local headless Playwright; no live user browser or external requests",
+    "viewports": [
+      {
+        "width": 1440,
+        "height": 1200,
+        "selected_image": "fig-memory-junction-pair.png",
+        "rendered_image_width": 831.984375,
+        "katex_errors": 0,
+        "horizontal_overflow": false
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "selected_image": "fig-memory-junction-pair-mobile.png",
+        "rendered_image_width": 357.984375,
+        "katex_errors": 0,
+        "horizontal_overflow": false
+      }
+    ]
+  }
+}

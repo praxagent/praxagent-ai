@@ -59,7 +59,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20260904">
+    <link rel="stylesheet" href="/blog/blog.css?v=20261017d">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -157,8 +157,7 @@
             
 
             
-            <div class="post-lead">
-                Hand an auditor a language model&rsquo;s internal state after SAE steering, with no record of which feature was steered and no unsteered run of the same prompt to compare against: can the auditor name the feature? For six public Goodfire features in Llama 3.3 70B, read through a fixed Jacobian-lens readout, the answer is no, and it changes only when the auditor also holds a clean run of the same prompt.
+            <div class="post-lead">Hand an auditor a language model&rsquo;s internal state after SAE steering, with no record of which feature was steered and no unsteered run of the same prompt to compare against: can the auditor name the feature? For six public Goodfire features in Llama 3.3 70B, read through a fixed Jacobian-lens readout, the answer is no, and it changes only when the auditor also holds a clean run of the same prompt.
             </div>
             
 
@@ -300,16 +299,12 @@ conscious.
 </ul>
 <p><span class="research-figure">
     <img src="sae_jlens_detection_auroc.png" alt="Out-of-sample steering detection by readout family." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure (confirmatory endpoint): post-state-only target attribution by readout under crossed prompt-family and feature-pair holdouts. Error bars are 95% template-cluster bootstrap intervals. Every readout is operationally at chance.</p>
 <p><span class="research-figure">
     <img src="sae_jlens_paired_reference_auc.png" alt="Paired clean-reference target attribution." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure (post hoc fixed score): target attribution when the auditor can subtract a matched clean-prefix readout. Blue assumes known intervention sign; orange uses absolute change when sign is unknown. Error bars resample the 51 template families. This post-run sensitivity uses the frozen score but is not a confirmatory endpoint. The raw-residual-norm baseline from the first of the two opening figures was not run in this paired setting, so the manifold-anomaly alternative is untested here.</p>
 <p><strong>Reading routes:</strong> <a href="#frozen-design">frozen design</a> → <a href="#downstream-fingerprint">downstream detection</a>; <a href="#the-v2-follow-up">v2 follow-up and failed gate</a> → <a href="#reproducibility-and-artifact-ledger">artifact ledger</a>; instrument derivation in <a href="#the-two-maps">the two maps</a>; limits in <a href="#answer">Answer, and its limits</a> and <a href="#could-this-audit-a-production-model">production use</a>.</p>
@@ -462,9 +457,7 @@ a chosen vector straight into it between blocks.
 
 <p><span class="research-figure">
     <img src="residual-stream.svg" alt="The residual stream as a running workspace: every block reads the stream and adds its result back; h at layer l is a snapshot right after block l." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: the residual stream. One vector per token position flows through the stack; blocks read it and add back. The dashed line marks the snapshot \(h_l\) this post works with, and SAE steering adds its vector directly into the band.</p>
 <p>Let \(h_l\in\mathbb{R}^d\) be the residual stream after transformer block
@@ -538,9 +531,7 @@ against the leftover you put back; the only lasting change is the bump on
 feature \(i\), which lands in residual space as the vector \(a_i d_i\).</p>
 <p><span class="research-figure">
     <img src="sae-error-restored-edit.svg" alt="2D toy: both panels rebuild h from feature 1, feature 2, and the leftover; the right panel adds an extra push on feature 1, sliding h along that direction." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: the same tip-to-tail rebuild twice. Feature 2 and the leftover are identical in both panels; the only change is an extra push on feature 1, so the new \(h\) is the old \(h\) shifted along that one direction.</p>
 <p>Under this intervention protocol, once the decoder column and coefficient are
@@ -574,9 +565,7 @@ lens additionally averages over token positions within each prompt
 carries the intuition.)</p>
 <p><span class="research-figure">
     <img src="jacobian-lens-average.svg" alt="Jacobian lens construction: per-prompt nudge maps at layer l are averaged over a corpus into one fixed reusable matrix." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: what the equation builds. Top: for one prompt, the Jacobian records every nudge-to-response pairing between layer \(l\) and the final layer. Bottom: each prompt gives a different matrix; the lens is their corpus average, reusable on any direction without a forward pass.</p>
 <p>With final RMS normalization \(N_f\) and unembedding \(W_U\) (the model&rsquo;s last
@@ -641,9 +630,7 @@ have, not the 1,581 rows. The paired-clean version is a separate,
 stronger-access sensitivity analysis.</p>
 <p><span class="research-figure">
     <img src="prompt-families.svg" alt="Families, not rows: grouped holdouts keep whole prompt families together; the cluster bootstrap resamples families." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: near-copy prompts from one sentence skeleton count as one unit of evidence. Holdouts move whole families between train and test; error bars resample the 51 families, not the 1,581 rows.</p>
 <div class="panel info">
@@ -662,9 +649,7 @@ useless at that operating point.
 
 <p><span class="research-figure">
     <img src="access-model.svg" alt="Access model is the result: isolated post-state fails; matched clean reference yields a signed differential." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: same frozen 67-token lexicon readout, different auditor privileges, opposite conclusions. Panel A reads it with a fitted 67-score classifier and fails; panel B reads it with a fixed one-number contrast plus a clean reference and separates. Panel A is the production-relevant failure; panel B is differential monitoring. This access fork organizes the rest of the note.</p>
 <h2 id="frozen-design">Frozen Design</h2>
@@ -741,9 +726,7 @@ overall size and its spectrum of stretch factors) while destroying alignment
 to Llama&rsquo;s residual coordinates and unembedding.</p>
 <p><span class="research-figure">
     <img src="random-j-impostors.svg" alt="Random-J impostors: same dimensions, norm, and singular values as the real lens, with alignment scrambled on both sides." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: the impostor lenses keep every size statistic of the real \(J_l\) and destroy only its alignment. Beating all five is the bar for claiming the learned alignment did the work.</p>
 <p>A Jacobian-lens result is persuasive only if it survives comparison with all
@@ -895,9 +878,7 @@ excess kurtosis is 7.49 for the six targets and 7.53 for the 18 matched
 controls because one control is extremely heavy-tailed.</p>
 <p><span class="research-figure">
     <img src="sae_jlens_static_fingerprints.png" alt="Static SAE direction fingerprints in J-space." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: positive layer-50 decoder directions projected through the real J-lens. Rows alternate each target (T) with its panel-1 matched SAE control (C1); colors are standardized within a row, so they show profile rather than magnitude. Three target profiles (30686, 41533, 58667) emphasize deception/roleplay-related groups under the released labels; 22004's largest groups are hedging and experience, 30032's scores sit inside the matched-control spread with innocence-flavored top tokens, and 23893 emphasizes experience instead.</p>
 <p>The descriptive table must report both signs, top and bottom tokens, population
@@ -977,9 +958,7 @@ how much of the steering direction is &ldquo;really verbal.&rdquo;</p>
 <p class="figure-note">Table: clean-room nonnegative pursuit. Feature 30686 is the 30.55% case; 22004 is only 3.47%. Target and matched-control ranges overlap.</p>
 <p><span class="research-figure">
     <img src="sae_jlens_sparse_pursuit.png" alt="Sparse token-direction pursuit of SAE decoder vectors." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: mean explained squared norm under clean-room nonnegative pursuit; bands span the 10th to 90th percentile across directions, not confidence intervals. A small token-direction cone captures more of targets than isotropic vectors, but most SAE norm remains outside the 25-token fit.</p>
 <p>The leftover vector is a <strong>J-remainder</strong>, not a unique orthogonal complement:
@@ -1189,9 +1168,7 @@ of the aggregate paired separation is not.</p>
 <p class="figure-note">Table: per-feature paired-reference AUROC under the same frozen one-number J score, with the identity transport beside it. "Perfect" is a max-statistic over the 51 template families in this sample; 41533's 0.9999 reflects at least one mis-ordered pair. The identity column and the per-feature random-J values (spanning 0.015 to 0.944 across seeds and features) are derived post hoc from the released paired_results with the release's own scoring code ([derivation receipt](receipts/paired_reference_feature_transport_controls.csv)). Aggregate success is not a uniform six-feature mechanism.</p>
 <p><span class="research-figure">
     <img src="sae_jlens_feature_heterogeneity.png" alt="Feature-level paired-reference heterogeneity." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: all six target IDs under the same paired J-score, with no feature omitted. The figure plots the J score only; the per-feature identity baselines are in the table above. Aggregate success is not evidence of a uniform six-feature mechanism.</p>
 <h2 id="what-changes-across-layers">What Changes Across Layers?</h2>
@@ -1277,9 +1254,7 @@ transport and a hand-built lexical contrast. That is weaker than persistence of
 <p class="figure-note">Table: target-minus-matched paired change in the frozen deception-minus-unrelated score at last-content position (template-cluster means), for the real J transport and the identity baseline from the same release file. At this position, every random-J impostor stays within ±0.14 at every layer ([`paired_semantic_effects.csv`](receipts/paired_semantic_effects.csv)).</p>
 <p><span class="research-figure">
     <img src="sae_jlens_downstream_trajectory.png" alt="Layerwise trajectory of the frozen deception-minus-unrelated score." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: target-minus-matched paired change in the frozen deception-minus-unrelated score under the J transport only; the identity and random-J trajectories from the same release file are in the table above (identity rises toward late layers while the J contrast narrows). Bands are 95% template-cluster intervals; the dashed line marks the prospectively frozen primary layer 65.</p>
 <p>Layer 50 is diagnostic only: the intervention was inserted there. Layer 65 is
@@ -1508,9 +1483,7 @@ of the other three? The global A1 statistic averages the four \(S_r\) values;
 the frozen material minimum was 0.25 standard deviations.</p>
 <p><span class="research-figure">
     <img src="sae_jlens_v2_a1_semantic_matrix.png" alt="Jacobian semantic family matrix." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: exploratory real-Jacobian oriented changes. Every diagonal is the largest entry in its row, but the global diagonal-minus-off-diagonal contrast is 0.174, below the frozen 0.25 material threshold. This panel shows the J transport only; the identity and random-J counterparts of the same contrast are quoted in the paragraph below.</p>
 <p>The pattern is orderly. Every intended diagonal is largest, and all four row
@@ -1571,9 +1544,7 @@ deception readout, with two interpretations frozen before outcomes:
 <strong>practical comparability</strong> (the 90% interval lies inside [-0.25, +0.25]).</p>
 <p><span class="research-figure">
     <img src="sae_jlens_v2_a2_target_comparator.png" alt="Selected target IDs versus same-subfamily comparators." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: exploratory target-minus-comparator effects by transport. The shaded band is the frozen ±0.25 comparability region; the dashed line marks the +0.25 selected-ID-advantage minimum.</p>
 <p>For the real Jacobian the difference is 0.125, with 95% interval
@@ -1604,9 +1575,7 @@ simultaneously to a held-out prompt fold and a held-out target/control
 feature pair, exactly like the v1 detector.</p>
 <p><span class="research-figure">
     <img src="sae_jlens_v2_reader_ladder.png" alt="Crossed-holdout reader-capacity ladder." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: exploratory macro AUROC under crossed holdouts. Black is chance; red is the frozen 0.60 material threshold. Every reader remains near 0.50.</p>
 <table>
@@ -1720,9 +1689,7 @@ the main alternative after telemetry.</p>
 <h2 id="what-this-says-about-consciousness-claims">What This Says About Consciousness Claims</h2>
 <p><span class="research-figure">
     <img src="claim-ladder.svg" alt="Claim ladder: public artifacts through monitoring; provenance and consciousness sit off the ladder." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure: what this experiment can support. Provenance forensics and consciousness sit outside the ladder.</p>
 <p>The steering was not internally inert. The earlier behavioral study this bears

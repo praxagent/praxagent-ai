@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="360" viewBox="0 0 760 360" role="img" aria-labelledby="natTitle natDesc">
+  <title id="natTitle">One nat is a factor of e, and one bit is a factor of 2</title>
+  <desc id="natDesc">Two bars measured in nats from a shared zero. The longer bar is a factor of e and is labeled 1 nat. The shorter bar is a factor of 2 and is labeled ln 2, about 0.693 nats, which equals 1 bit.</desc>
+  <rect width="760" height="360" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:15px;font-weight:700}
+    .h{font-size:13px;font-weight:700}
+    .s{font-size:12px}
+    .m{font-size:11px;fill:#5A544C}
+    .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+    .foot{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.4}
+  </style>
+  <text x="24" y="32" class="t title">A nat measures a factor with the natural log</text>
+  <text x="24" y="52" class="t m">Bar length is the change in nats. A factor of e is 1 nat. A factor of 2 is about 0.693 nats, which is 1 bit.</text>
+
+  <rect class="card" x="28" y="74" width="704" height="180" rx="12"/>
+  <text x="48" y="108" class="t m">0 nats</text>
+  <line x1="160" y1="78" x2="160" y2="240" stroke="#5A544C" stroke-width="1.2"/>
+
+  <text x="48" y="156" class="t h">factor e</text>
+  <rect x="160" y="142" width="400" height="18" rx="4" fill="#A67C52"/>
+  <text x="572" y="156" class="t s">1 nat</text>
+
+  <text x="48" y="212" class="t h">factor 2</text>
+  <rect x="160" y="198" width="277" height="18" rx="4" fill="#4B6787"/>
+  <text x="448" y="212" class="t s">ln 2 &#x2248; 0.693 nats = 1 bit</text>
+
+  <rect class="foot" x="28" y="272" width="704" height="64" rx="10"/>
+  <text x="380" y="300" text-anchor="middle" class="t s">A Lyapunov exponent is a long-run average log growth rate; single steps can stretch more or less.</text>
+  <text x="380" y="320" text-anchor="middle" class="t s">At ln 2 nats per step, a tiny distance doubles per step on average. Entropy uses the same unit.</text>
+</svg>

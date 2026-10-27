@@ -59,7 +59,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20260904">
+    <link rel="stylesheet" href="/blog/blog.css?v=20261017d">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -157,8 +157,7 @@
             
 
             
-            <div class="post-lead">
-                Activation steering, in the form tested here, adds a vector to a
+            <div class="post-lead">Activation steering, in the form tested here, adds a vector to a
 transformer&rsquo;s hidden state partway through the network. Do the remaining
 layers carry that edit forward the way a linear map predicts, or bend it? On
 Llama 3.3 70B, under rules frozen before the run, the delivered edit scaled
@@ -454,9 +453,7 @@ provenance, dose grid, and pairing equations are in
 <a href="#appendix-a-exact-test">Appendix A</a>.</p>
 <p><span class="research-figure">
     <img src="diagram-2-signed-runs.svg" alt="Schematic of one measurement. Three horizontal timelines show three deterministic forward passes of the same network on the same prompt, with vertical ticks marking blocks 0, 50, and 79. The clean run has no edit and ends at hidden state h clean. The plus-b run has a circled plus at block 50 labeled b times v added to the residual here, and ends at h plus. The minus-b run has a circled minus at block 50 labeled b times v subtracted from the residual here, and ends at h minus. Below the timelines, two equations: signed response equals h plus minus h minus, over two, which keeps only what flips when the edit&rsquo;s sign flips; and common mode equals the average of h plus and h minus, minus h clean, which keeps what appears either way and is retained as a disturbance diagnostic." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Diagram: how one measurement is built from three forward passes. Hand-drawn conceptual schematic, not a receipt-backed data figure; the exact pairing equations are in <a href="#appendix-a-exact-test">Appendix A</a>.</p>
 <p>At every dose, the analysis retained four quantities: the edit <em>requested</em> in
@@ -632,9 +629,7 @@ floor; the right plots \(d_{\max}\) against the <code>0.15</code> ceiling. Each 
 line is one prespecified prompt × direction cell.</p>
 <p><span class="research-figure">
     <img src="fig-1-linearity-census.svg" alt="Two paired dot plots show all 24 frozen prompt-by-direction cells over the 2%, 3%, and 4% dose panel, using 3% as the anchor. In the left plot, minimum cosine to the 3% anchor clusters between 0.993 and 0.996 for the realized source edit and J of the realized edit, above the 0.95 threshold, then drops to 0.778–0.848 for the actual final state, below threshold in all 24 cells. In the right plot, maximum dose-normalized RMS discrepancy from the 3% anchor is 0.089–0.117 for the first two quantities, below the 0.15 ceiling, but 0.572–0.703 for the actual final state, above threshold in every cell. Faint gray lines connect the same cell across the three quantities. Exact proportionality is preserved by a fixed linear map; here the approximately proportional delivered edits also remain within both numerical bounds after projection, while the downstream model response does not." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure 1: source linearity versus actual downstream curvature. Each line is one of 24 prompt × direction signed-response curves over the prespecified <code>2%</code>/<code>3%</code>/<code>4%</code> panel; dashed lines mark the frozen thresholds. Provenance: <a href="fig-1-linearity-census.receipt.json">receipt</a>.</p>
 <h2 id="requested-versus-realized-edit-fidelity-under-bf16">Requested-versus-realized edit fidelity under BF16</h2>
@@ -693,9 +688,7 @@ hook-path ablation under <a href="#next-experiments">Next experiments</a> is the
 mechanism test.</p>
 <p><span class="research-figure">
     <img src="fig-3-bf16-delivery-floor.svg" alt="Three aligned plots show the low-dose delivery transition under BF16 execution in this model and intervention setup, across requested doses from 0.5% to 30%. Directional cosine rises sharply from a median 0.961 at 0.5% toward 1.0 and clears its 0.995 threshold by the eligible panel. Relative RMSE falls from a median 0.287 at 0.5% through its 0.10 ceiling near 1.5–2% and continues toward zero. Pale bands show the minimum-to-maximum range across the fixed 24-cell census, not uncertainty. The bottom strip reports the full paired-branch delivery rule: 24 failed cells at 0.5%, 24 at 1%, 18 at 1.5%, and zero from 2% through 30%." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure 2: low-dose requested-versus-realized fidelity under this BF16 setup (file stem <code>fig-3-bf16-delivery-floor</code>; “delivery” is the protocol nickname). The upper curves show the central signed estimate; the bottom strip applies the complete rule to both signed branches, their signed response, and their common-mode response. Pale envelopes are the observed minimum and maximum across the 24 prespecified cells, not confidence intervals. Provenance: <a href="fig-3-bf16-delivery-floor.receipt.json">receipt</a>.</p>
 <h2 id="watch-the-wake-develop-across-depth">Watch the Wake Develop Across Depth</h2>
@@ -716,9 +709,7 @@ horizontally and post-block state vertically; the lower panel shows final-state
 gain across dose for every one of the 24 cells, with their median emphasized.</p>
 <p><span class="research-figure">
     <img src="fig-2-dose-depth-arc.svg" alt="A two-panel dose-by-depth view of the complete downstream response. The upper heatmap places requested dose from 0.5% to 30% on the horizontal axis and states 50 through 79 on the vertical axis. Every state-50 cell begins at gain 1 because gain is normalized to the realized edit. Median gain generally accumulates in later blocks, reaching its largest values at the smallest doses and generally tapering as dose rises. A dashed vertical line marks 2%, the first dose where every cell met the frozen delivery criteria. The lower panel shows all 24 final-state trajectories as pale lines and their median as a dark line. The median is 1.82 times at 2%, 1.66 at 3%, 1.60 at 4%, 1.55 at 8%, and 1.48 at 30%. The 0.5–1.5% region is shaded because its delivery gate failed." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure 3: the measured hidden-state response from the intervention point to the final block (file stem <code>fig-2-dose-depth-arc</code>). The heatmap uses the median across the same 24 prespecified cells at each dose and layer; the lower panel retains every trajectory. These are descriptive summaries of exactly these 24 cells, not population estimates. Provenance: <a href="fig-2-dose-depth-arc.receipt.json">receipt</a>.</p>
 <h2 id="did-the-jacobian-lens-predict-the-wake">Did the Jacobian Lens Predict the Wake?</h2>
@@ -761,9 +752,7 @@ post-block-79 change. Only layer 50 is the intervention site. Layers 51–78 are
 shorter-horizon diagnostics after the model has already transformed the edit.</p>
 <p><span class="research-figure">
     <img src="fig-4-j-versus-identity.svg" alt="Four profiles compare predictions from source-state layers 50 through 78 to the same post-block-79 target. The left column shows that absolute released-J fixed-token logit correlation and residual cosine both exceed their frozen thresholds at every source layer and rise as the source approaches the target. The right column shows released J minus identity. Logit advantage generally rises above 0.02 after early layers, but residual advantage remains below the 0.02 margin at 28 of 29 source layers. Its sole residual pass at layer 78 does not coincide with a logit pass. At source layer 50, selected in advance for the primary comparison, logit correlation is 0.344 but J minus identity is only 0.011 with a lower bound below zero; residual J minus identity is slightly negative. No source layer satisfies the identity condition for both metrics. Shaded bands are 20,000-replicate prompt-resampling stability intervals over eight fixed prompts, not population confidence intervals." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Figure 4: prediction from successive source states to one fixed post-block-79 target. Layer 50 was selected in advance for the primary comparison; layers 51–78 are descriptive shorter-horizon diagnostics, not additional intervention sites. Bands are fixed-panel stability intervals from resampling the eight prompts and do not support population-level inference. Provenance: <a href="fig-4-j-versus-identity.receipt.json">receipt</a>.</p>
 <h2 id="interpretation">Interpretation</h2>
@@ -1117,9 +1106,7 @@ in <code>0.5</code>-percentage-point increments. The prompts, directions, primar
 panel, and decision rules were prespecified.</p>
 <p><span class="research-figure">
     <img src="diagram-1-pipeline.svg" alt="Schematic pipeline of the experiment. A requested edit built in float32 is cast to BF16 to become the realized edit that actually lands after block 50; a dashed fidelity gate between them notes that requested-versus-realized checks fail below 2 percent dose and pass from 2 through 30 percent. From the realized edit two branches diverge: the fixed corpus-average Jacobian produces the predicted wake with one matrix multiply, while the model&rsquo;s remaining blocks 51 through 79 produce the actual wake. Two question boxes at the bottom summarize the analyses: dose-linearity gates on the 2, 3, and 4 percent panel where the realized edit and fixed-J pass 24 of 24 and the actual final passes 0 of 24, and the predictive comparison where J beats five random maps but does not clear the identity margin at layer 50." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Diagram: the study decomposition (requested edit, realized edit, predicted wake, actual wake) and the two frozen questions asked of them. Conceptual schematic; the quoted pass counts are from the audited census in the table at the head of this note.</p>
 <p>For prompt \(p\), direction \(v\), and magnitude \(b\), the two signed branches
@@ -1145,9 +1132,7 @@ requested-versus-realized fidelity criteria are defined once, in
 &ldquo;slope discrepancy&rdquo; is the implementation&rsquo;s name for \(d_{\max}\).</p>
 <p><span class="research-figure">
     <img src="diagram-3-dose-gates.svg" alt="Schematic of what the two gates measure. Left panel, labeled source edit, dose-linear, 24 of 24 pass: three per-unit-dose vectors for the 2, 3, and 4 percent doses drawn from a common origin lie exactly on top of one another, illustrating same direction and same size. Right panel, labeled actual final state, bent, 0 of 24 pass: the three per-unit-dose vectors fan apart at visibly different angles and lengths, annotated with the observed census ranges for minimum cosine and size discrepancy. A caption line states that cosine catches rotation and the dose-normalized RMS discrepancy catches size and shape drift, one gate per failure mode." loading="lazy" decoding="async"><span class="research-figure__credit">
-    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/">this research note</a>.
-    Credit: <a href="https://orcid.org/0009-0007-5992-0652">Timothy Jones / praxagent</a>.
-    <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">All rights reserved.</a></span>
+    Source: <a href="https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/">this research note</a>.</span>
 </span></p>
 <p class="figure-note">Diagram: the two failure modes the frozen gates test, drawn as dose-normalized vectors \(q_b\). Conceptual schematic: arrow geometry is illustrative; the annotated ranges are the audited census values in the table at the head of this note and in Figure 1.</p>
 <p>Figure 4&rsquo;s bands are 20,000-replicate prompt-resampling stability intervals

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dynamical-Systems on praxagent Research Notes</title>
+    <link>https://praxagent.ai/blog/tags/dynamical-systems/</link>
+    <description>Recent content in Dynamical-Systems on praxagent Research Notes</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 15 Oct 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://praxagent.ai/blog/tags/dynamical-systems/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Chaos and Bifurcations in Continuous Language-Model Feedback</title>
+      <link>https://praxagent.ai/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/</link>
+      <pubDate>Thu, 15 Oct 2026 00:00:00 +0000</pubDate>
+      <guid>https://praxagent.ai/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/</guid>
+      <description>Feeding a language model the probability-weighted average of its own token embeddings, as Soft Thinking does, turns inference into a smooth deterministic map. Across fifteen publicly released models from 0.5B to 72B parameters, in all three model families studied, temperature and steering move this loop between repeating text and chaos, organized as in low-dimensional maps: saddle-node bottlenecks, period-doubling cascades that approach Feigenbaum&amp;rsquo;s constant, and shrimp-shaped windows. Where the loop is chaotic, rounding differences as small as those from request batching decide what it writes. In tests fixed in advance, reasoning models that solve 86 to 90% of grade-school math problems changed 14.5 and 19.5% of their answers when only the batch layout changed, and ordinary sampled reasoning changed a similar share; the source depends on the model: in some, the changes are rounding carried to answers that sit near ties, while in QwQ-32B and DeepSeek-R1-Distill-Llama-8B the thinking loop itself slowly amplifies tiny differences, and a relative displacement far below rounding alone changes about 14 and 18% of their answers, respectively. The loop is not ordinary sampled generation.</description>
+    </item>
+  </channel>
+</rss>
