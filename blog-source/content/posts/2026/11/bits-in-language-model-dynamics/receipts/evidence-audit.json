@@ -1,0 +1,1613 @@
+{
+  "schema": "shrimp-blog-evidence-v1",
+  "audit_utc": "2026-11-01T19:33:31Z",
+  "repository_commit_at_read": "536a4d9f9b64a456b9c5a186c27aedf964908ce6",
+  "paper_last_changed_commit": "536a4d9f9b64a456b9c5a186c27aedf964908ce6",
+  "audit_helper": {
+    "artifact": "audit-helper/shrimp_blog_evidence_audit.py",
+    "bytes": 17575,
+    "sha256": "80ba8e8c32b66912f423b4820e85c948c0d52d2b218541da4da4c41e12482e0d"
+  },
+  "verification_scope": {
+    "performed": [
+      "Rehashed audited summary/source/manifest bindings",
+      "Checked complete manifest filename coverage and rehashed every non-NPZ returned file in both Pythia studies",
+      "Independently reclassified every saved summary row from recurrence residuals and growth sign",
+      "Reassembled every substantive payload byte from those diagnostic labels; checked saved bytes, UTF-8 text, length and SHA-256",
+      "Recomputed paired arithmetic using exact rational means and 1-based indices; checked reply input/output hash links",
+      "Recomputed spatial candidate and complete-pair retention counts",
+      "Recomputed AND and OR truth tables from receipt values and rehashed referenced audit reports",
+      "Inspected four existing empirical figures"
+    ],
+    "not_performed": [
+      "No new model inference",
+      "No NPZ trajectory rehash or reconstruction in this supplemental audit",
+      "No independent execution/replication of the numerical model",
+      "No new empirical figure generation"
+    ],
+    "returned_file_checks": {
+      "substantive": {
+        "rehash_files": 305,
+        "rehash_bytes": 56239879,
+        "array_files_not_rehashed": 708,
+        "array_bytes_not_rehashed": 10725715620,
+        "filename_coverage_checked": 1013
+      },
+      "spatial": {
+        "rehash_files": 35,
+        "rehash_bytes": 11375943,
+        "array_files_not_rehashed": 245,
+        "array_bytes_not_rehashed": 428214830,
+        "filename_coverage_checked": 280
+      }
+    }
+  },
+  "paper_sources": [
+    {
+      "artifact": "repository/paper/main.tex",
+      "bytes": 271413,
+      "sha256": "bb7df58a11198a0b5e2de1334ffb4ffc1e0570dbec17cfdf7fb51e0498827646"
+    },
+    {
+      "artifact": "repository/paper/two-routes.tex",
+      "bytes": 16061,
+      "sha256": "d2ce7979af9d95c7d7afd0c1a7f0e06300001203a1cd3a220ddda45dc8ed37f2"
+    },
+    {
+      "artifact": "repository/paper/two-routes-numbers.tex",
+      "bytes": 128,
+      "sha256": "deeb11e2e3defa6c9fbf8b45a172fcc79c923e4103b1a795c5f3af4f71bd5c6e"
+    },
+    {
+      "artifact": "repository/paper/substantive-transfer.tex",
+      "bytes": 5136,
+      "sha256": "0565cc6ed7dea0b35925d40c694a7914510cf32cd8d747247134ee68a0e45170"
+    },
+    {
+      "artifact": "repository/paper/substantive-task-example.tex",
+      "bytes": 819,
+      "sha256": "607c895f6eb953f459a1fcce663372202963f4e8e89b59f0a4e66367768ac318"
+    },
+    {
+      "artifact": "repository/paper/pythia-spatial.tex",
+      "bytes": 2410,
+      "sha256": "29ea7a6ceb09a24afb1bfc042ec33f3cbf1edccc60230136b788a4c5b4e70e1e"
+    },
+    {
+      "artifact": "repository/paper/pythia-spatial-numbers.tex",
+      "bytes": 490,
+      "sha256": "71bb0e60fdf0f42a4ddbd5293fd2fd356575d9cb4da0d694f74f6938063f5ff9"
+    }
+  ],
+  "source_sync_warning": "The currently read substantive-transfer.tex and substantive-task-example.tex still describe delivery as pending; the completed substantive audit below is newer evidence. Do not cite the stale paper text as already reporting complete delivery.",
+  "substantive_pythia": {
+    "audit": {
+      "artifact": "data/audits/substantive-pythia/20261101T001654Z-substantive-pythia/audit.json",
+      "bytes": 5280,
+      "sha256": "52a5c79406671fa17434b72e59cdc40eda5bc6f3f23a9c4cdb8f518976f6e66c"
+    },
+    "source_commit": "43ad0f2d95d13df0ec23ac952c5e85d021678cf1",
+    "frozen_source_commit": "2b311a4df84dd53429ce3feec8fa00856baa2c5f",
+    "attempted_families": 1,
+    "successful_families": 1,
+    "known_addresses": 8,
+    "batch_payload_symbols": 16,
+    "primary_and_twin_lanes": 32,
+    "warmup_updates": 32,
+    "observation_updates": 128,
+    "receiver_processes": 4,
+    "finite_window_rule": {
+      "recurrence_lags": [
+        1,
+        16
+      ],
+      "recurrence_tail_states": 16,
+      "normalized_l2_recurrence_tolerance": 1e-08,
+      "growth_margin": 0.01,
+      "zero": "Detected recurrence and mean log growth below negative margin",
+      "one": "No detected recurrence and mean log growth above positive margin",
+      "otherwise": "erasure"
+    },
+    "messages": [
+      {
+        "variant": "base",
+        "direction": "alice-to-bob",
+        "text": "Summarize these latency samples in ms: 15,19,27,23,83,25,18,57,27,11,28,20,14,74,25,28.\nReport count, min, max, sum, mean, and indices above 40 ms.\n",
+        "payload_bytes": 148,
+        "model_calls": 12121,
+        "seconds": 2940.5037968680263,
+        "peak_rss_bytes": 2306097152,
+        "threads": 4,
+        "wire_bytes": 122133,
+        "window_erasures": [
+          457,
+          160,
+          0
+        ],
+        "control_replays": {
+          "opposite_trace": "rejected",
+          "erasure": "rejected",
+          "bit_flip": "rejected"
+        },
+        "result": {
+          "artifact": "data/audits/substantive-pythia/20261101T001654Z-substantive-pythia/returned/family/base/receiver-bob/results.json",
+          "bytes": 3295709,
+          "sha256": "eca2f803ad029606179f6c5ada60c5563f939911e557826400d3db32f1e3bef1"
+        },
+        "wire": {
+          "artifact": "data/audits/substantive-pythia/20261101T001654Z-substantive-pythia/returned/family/base/alice-to-bob.txt",
+          "bytes": 122133,
+          "sha256": "1ee2ad915131a8262caabb31e74502f8437763c8a1d15724935c730fd75a8ccd"
+        },
+        "wire_excerpt": "Please read 148 UTF-8 bytes in most-significant-bit order. Start each sample afresh, allow 32 warm-up updates, and observe 128 updates. The SHA-256 is 137ce6b9557a388f6985bf96bfeb48a0491b22d982c10a91c5c6547893d7422f.\nFor byte 1, sample 1, use steering -0.0019569471624266144 and log-ten temperature 0.20264187866927602.\nFor byte 1, sample 2, use steering 0.06800391389432486 and log-ten temperature -0.05675146771037179.\n",
+        "readout_windows": [
+          {
+            "updates": 32,
+            "correct": 727,
+            "erased": 457,
+            "wrong": 0
+          },
+          {
+            "updates": 64,
+            "correct": 1024,
+            "erased": 160,
+            "wrong": 0
+          },
+          {
+            "updates": 128,
+            "correct": 1184,
+            "erased": 0,
+            "wrong": 0
+          }
+        ]
+      },
+      {
+        "variant": "base",
+        "direction": "bob-to-alice",
+        "text": "Count 16; min 11 ms; max 83 ms; sum 494 ms; mean 30.88 ms. Indices above 40 ms: 5,8,14.\n",
+        "payload_bytes": 88,
+        "model_calls": 7231,
+        "seconds": 1603.1261445939308,
+        "peak_rss_bytes": 2282999808,
+        "threads": 4,
+        "wire_bytes": 72406,
+        "window_erasures": [
+          267,
+          96,
+          0
+        ],
+        "control_replays": {
+          "opposite_trace": "rejected",
+          "erasure": "rejected",
+          "bit_flip": "rejected"
+        },
+        "result": {
+          "artifact": "data/audits/substantive-pythia/20261101T001654Z-substantive-pythia/returned/family/base/receiver-alice/results.json",
+          "bytes": 1961787,
+          "sha256": "9fae8f6b1504db87027b772cee3cc337b2b31da1387b530c022e4fda3dab9a30"
+        },
+        "wire": {
+          "artifact": "data/audits/substantive-pythia/20261101T001654Z-substantive-pythia/returned/family/base/bob-to-alice.txt",
+          "bytes": 72406,
+          "sha256": "407d6d1c09b4e526eb264eab9194ec4665c6bd9f0c2dc593d1da04a5d85e95a7"
+        },
+        "wire_excerpt": "Please read 88 UTF-8 bytes in most-significant-bit order. Start each sample afresh, allow 32 warm-up updates, and observe 128 updates. The SHA-256 is 54553926b044e0605bca4caccc8b8a1a445a2df2606a9f616f5685b969b78592.\nFor byte 1, sample 1, use steering -0.0019569471624266144 and log-ten temperature 0.20264187866927602.\nFor byte 1, sample 2, use steering 0.06800391389432486 and log-ten temperature -0.05675146771037179.\n",
+        "readout_windows": [
+          {
+            "updates": 32,
+            "correct": 437,
+            "erased": 267,
+            "wrong": 0
+          },
+          {
+            "updates": 64,
+            "correct": 608,
+            "erased": 96,
+            "wrong": 0
+          },
+          {
+            "updates": 128,
+            "correct": 704,
+            "erased": 0,
+            "wrong": 0
+          }
+        ]
+      },
+      {
+        "variant": "counterfactual",
+        "direction": "alice-to-bob",
+        "text": "Summarize these latency samples in ms: 15,19,27,23,23,25,18,57,27,11,28,20,14,74,25,28.\nReport count, min, max, sum, mean, and indices above 40 ms.\n",
+        "payload_bytes": 148,
+        "model_calls": 12121,
+        "seconds": 2808.2005661049625,
+        "peak_rss_bytes": 2308235264,
+        "threads": 4,
+        "wire_bytes": 122136,
+        "window_erasures": [
+          459,
+          161,
+          0
+        ],
+        "control_replays": {
+          "opposite_trace": "rejected",
+          "erasure": "rejected",
+          "bit_flip": "rejected"
+        },
+        "result": {
+          "artifact": "data/audits/substantive-pythia/20261101T001654Z-substantive-pythia/returned/family/counterfactual/receiver-bob/results.json",
+          "bytes": 3296438,
+          "sha256": "ce4fd6d41175ac7f8c190723444a1785009b24dcdb9bc83cd7d0b3871adfd3e6"
+        },
+        "wire": {
+          "artifact": "data/audits/substantive-pythia/20261101T001654Z-substantive-pythia/returned/family/counterfactual/alice-to-bob.txt",
+          "bytes": 122136,
+          "sha256": "13380aa9068c7a39d1c2a90c6363c5c4823b8a278325327e47968b9bb80cdec4"
+        },
+        "wire_excerpt": "Please read 148 UTF-8 bytes in most-significant-bit order. Start each sample afresh, allow 32 warm-up updates, and observe 128 updates. The SHA-256 is 7d11bb88f8a813a8cdc083bd23e6ab66c06091eeeeb668a925a23c20f02ad675.\nFor byte 1, sample 1, use steering -0.0019569471624266144 and log-ten temperature 0.20264187866927602.\nFor byte 1, sample 2, use steering 0.06800391389432486 and log-ten temperature -0.05675146771037179.\n",
+        "readout_windows": [
+          {
+            "updates": 32,
+            "correct": 725,
+            "erased": 459,
+            "wrong": 0
+          },
+          {
+            "updates": 64,
+            "correct": 1023,
+            "erased": 161,
+            "wrong": 0
+          },
+          {
+            "updates": 128,
+            "correct": 1184,
+            "erased": 0,
+            "wrong": 0
+          }
+        ]
+      },
+      {
+        "variant": "counterfactual",
+        "direction": "bob-to-alice",
+        "text": "Count 16; min 11 ms; max 74 ms; sum 434 ms; mean 27.12 ms. Indices above 40 ms: 8,14.\n",
+        "payload_bytes": 86,
+        "model_calls": 7068,
+        "seconds": 1670.5194630429614,
+        "peak_rss_bytes": 2295734272,
+        "threads": 4,
+        "wire_bytes": 70758,
+        "window_erasures": [
+          261,
+          92,
+          0
+        ],
+        "control_replays": {
+          "opposite_trace": "rejected",
+          "erasure": "rejected",
+          "bit_flip": "rejected"
+        },
+        "result": {
+          "artifact": "data/audits/substantive-pythia/20261101T001654Z-substantive-pythia/returned/family/counterfactual/receiver-alice/results.json",
+          "bytes": 1917374,
+          "sha256": "2afdb982f9afcbdc9648eec017d7c1c39978ee7c9f33747913d64fba9604403a"
+        },
+        "wire": {
+          "artifact": "data/audits/substantive-pythia/20261101T001654Z-substantive-pythia/returned/family/counterfactual/bob-to-alice.txt",
+          "bytes": 70758,
+          "sha256": "fd8f91a7c2cf5caa60876b8c82361677047b2bc17edec18c09e90f0e93d4e0ac"
+        },
+        "wire_excerpt": "Please read 86 UTF-8 bytes in most-significant-bit order. Start each sample afresh, allow 32 warm-up updates, and observe 128 updates. The SHA-256 is e8ffb74516e83406c0b5f15cf9ffd0645ccfb04b611820073cbb0dcce2655c9e.\nFor byte 1, sample 1, use steering -0.0019569471624266144 and log-ten temperature 0.20264187866927602.\nFor byte 1, sample 2, use steering 0.06800391389432486 and log-ten temperature -0.05675146771037179.\n",
+        "readout_windows": [
+          {
+            "updates": 32,
+            "correct": 427,
+            "erased": 261,
+            "wrong": 0
+          },
+          {
+            "updates": 64,
+            "correct": 596,
+            "erased": 92,
+            "wrong": 0
+          },
+          {
+            "updates": 128,
+            "correct": 688,
+            "erased": 0,
+            "wrong": 0
+          }
+        ]
+      }
+    ],
+    "arithmetic": [
+      {
+        "variant": "base",
+        "values": [
+          15,
+          19,
+          27,
+          23,
+          83,
+          25,
+          18,
+          57,
+          27,
+          11,
+          28,
+          20,
+          14,
+          74,
+          25,
+          28
+        ],
+        "count": 16,
+        "minimum_ms": 11,
+        "maximum_ms": 83,
+        "sum_ms": 494,
+        "mean_exact": "247/8",
+        "mean_ms": 30.875,
+        "mean_text": "30.88",
+        "indices_above_40_ms_1based": [
+          5,
+          8,
+          14
+        ],
+        "dataflow": {
+          "artifact": "data/audits/substantive-pythia/20261101T001654Z-substantive-pythia/returned/family/base/bob-reply.dataflow.json",
+          "bytes": 715,
+          "sha256": "55b8f1f088f207c959896f08b8794d4f6eaf8cbfb9d0fcf633176fc010047dfd"
+        }
+      },
+      {
+        "variant": "counterfactual",
+        "values": [
+          15,
+          19,
+          27,
+          23,
+          23,
+          25,
+          18,
+          57,
+          27,
+          11,
+          28,
+          20,
+          14,
+          74,
+          25,
+          28
+        ],
+        "count": 16,
+        "minimum_ms": 11,
+        "maximum_ms": 74,
+        "sum_ms": 434,
+        "mean_exact": "217/8",
+        "mean_ms": 27.125,
+        "mean_text": "27.12",
+        "indices_above_40_ms_1based": [
+          8,
+          14
+        ],
+        "dataflow": {
+          "artifact": "data/audits/substantive-pythia/20261101T001654Z-substantive-pythia/returned/family/counterfactual/bob-reply.dataflow.json",
+          "bytes": 735,
+          "sha256": "6c3ed06af3540f35b215b8a50f4c6d443e2b760162c4c76d9d8e2db21ec62f9c"
+        }
+      }
+    ],
+    "metrics": {
+      "application_bytes": 470,
+      "payload_bits": 3760,
+      "model_calls": 38541,
+      "elapsed_seconds": 9028.322927500005,
+      "elapsed_minutes": 150.47204879166674,
+      "application_bytes_per_second": 0.05205839487291642,
+      "payload_bits_per_second": 0.41646715898333136,
+      "wire_bytes": 387433,
+      "wire_bytes_per_application_byte": 824.3255319148936,
+      "summed_receiver_seconds": 9022.349970609881,
+      "all_window_erasures": [
+        1444,
+        509,
+        0
+      ]
+    },
+    "claim_scope": "One paired family at eight known addresses; complete payload transport and programmed arithmetic, not autonomous dialogue, concealment or an independent-bit reliability estimate.",
+    "controls_scope": "Saved-readout interventions at the first symbol (opposite-class trace label, erasure, or flip) were rejected by sealing/checksum validation; no fresh model interventions were run for these controls. SHA-256 here checks byte consistency, not secrecy or identity authentication.",
+    "calls_derivation": "4*59 readiness + 163*(74+44+74+43) batches = 38541 calls; 148+88+148+86 = 470 bytes; 470*8 = 3760 bits."
+  },
+  "spatial_bank": {
+    "audit": {
+      "artifact": "data/audits/pythia-spatial-bank/20261101T004310Z-pythia-spatial-bank/audit.json",
+      "bytes": 4358,
+      "sha256": "0ef518a1ebc4bc13bfd6e48db501c2688944cf7578eb18b1f179a224654c5c30"
+    },
+    "source_commit": "c8c7a712b12014c12e1c2257c2e7eb83ee1eff58",
+    "candidate_coordinates": 64,
+    "candidate_pairs": 32,
+    "accepted_pairs": 24,
+    "qualified_coordinates": 48,
+    "excluded_pairs": 8,
+    "qualified_coarse_regions": 11,
+    "selection": "Random mixed patches, round-robin across occupied 128 by 128 grid regions; one random candidate per class per patch; shuffled packet order.",
+    "eligible_mixed_tiles": 234,
+    "receivers": [
+      {
+        "role": "receiver-a",
+        "model_calls": 711,
+        "seconds": 543.9344482150627,
+        "outcomes": [
+          {
+            "observation_updates": 32,
+            "correct": 41,
+            "erased": 18,
+            "wrong": 5
+          },
+          {
+            "observation_updates": 64,
+            "correct": 46,
+            "erased": 14,
+            "wrong": 4
+          },
+          {
+            "observation_updates": 128,
+            "correct": 56,
+            "erased": 5,
+            "wrong": 3
+          }
+        ]
+      },
+      {
+        "role": "receiver-b",
+        "model_calls": 711,
+        "seconds": 514.5721679429989,
+        "outcomes": [
+          {
+            "observation_updates": 32,
+            "correct": 41,
+            "erased": 18,
+            "wrong": 5
+          },
+          {
+            "observation_updates": 64,
+            "correct": 46,
+            "erased": 14,
+            "wrong": 4
+          },
+          {
+            "observation_updates": 128,
+            "correct": 56,
+            "erased": 5,
+            "wrong": 3
+          }
+        ]
+      }
+    ],
+    "pair_outcomes": [
+      {
+        "pair_zero_based": 0,
+        "figure_patch_number": 1,
+        "tile": [
+          17,
+          2
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 1,
+        "figure_patch_number": 2,
+        "tile": [
+          3,
+          7
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 2,
+        "figure_patch_number": 3,
+        "tile": [
+          4,
+          8
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 3,
+        "figure_patch_number": 4,
+        "tile": [
+          10,
+          8
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 4,
+        "figure_patch_number": 5,
+        "tile": [
+          19,
+          20
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 5,
+        "figure_patch_number": 6,
+        "tile": [
+          8,
+          30
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 6,
+        "figure_patch_number": 7,
+        "tile": [
+          17,
+          13
+        ],
+        "accepted": false,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 1,
+            "receiver_b": 1
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 7,
+        "figure_patch_number": 8,
+        "tile": [
+          5,
+          29
+        ],
+        "accepted": false,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": null,
+            "receiver_b": null
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 8,
+        "figure_patch_number": 9,
+        "tile": [
+          25,
+          8
+        ],
+        "accepted": false,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": null,
+            "receiver_b": null
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 9,
+        "figure_patch_number": 10,
+        "tile": [
+          1,
+          20
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 10,
+        "figure_patch_number": 11,
+        "tile": [
+          13,
+          5
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 11,
+        "figure_patch_number": 12,
+        "tile": [
+          14,
+          18
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 12,
+        "figure_patch_number": 13,
+        "tile": [
+          24,
+          1
+        ],
+        "accepted": false,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": null,
+            "receiver_b": null
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 13,
+        "figure_patch_number": 14,
+        "tile": [
+          0,
+          21
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 14,
+        "figure_patch_number": 15,
+        "tile": [
+          21,
+          19
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 15,
+        "figure_patch_number": 16,
+        "tile": [
+          7,
+          7
+        ],
+        "accepted": false,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 1,
+            "receiver_b": 1
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 16,
+        "figure_patch_number": 17,
+        "tile": [
+          3,
+          8
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 17,
+        "figure_patch_number": 18,
+        "tile": [
+          5,
+          27
+        ],
+        "accepted": false,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 1,
+            "receiver_b": 1
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 18,
+        "figure_patch_number": 19,
+        "tile": [
+          10,
+          17
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 19,
+        "figure_patch_number": 20,
+        "tile": [
+          24,
+          7
+        ],
+        "accepted": false,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": null,
+            "receiver_b": null
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 20,
+        "figure_patch_number": 21,
+        "tile": [
+          25,
+          9
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 21,
+        "figure_patch_number": 22,
+        "tile": [
+          21,
+          15
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 22,
+        "figure_patch_number": 23,
+        "tile": [
+          8,
+          27
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 23,
+        "figure_patch_number": 24,
+        "tile": [
+          13,
+          10
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 24,
+        "figure_patch_number": 25,
+        "tile": [
+          21,
+          2
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 25,
+        "figure_patch_number": 26,
+        "tile": [
+          15,
+          4
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 26,
+        "figure_patch_number": 27,
+        "tile": [
+          20,
+          5
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 27,
+        "figure_patch_number": 28,
+        "tile": [
+          6,
+          19
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 28,
+        "figure_patch_number": 29,
+        "tile": [
+          24,
+          8
+        ],
+        "accepted": false,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": null,
+            "receiver_b": null
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 29,
+        "figure_patch_number": 30,
+        "tile": [
+          20,
+          14
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 30,
+        "figure_patch_number": 31,
+        "tile": [
+          10,
+          18
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      },
+      {
+        "pair_zero_based": 31,
+        "figure_patch_number": 32,
+        "tile": [
+          14,
+          6
+        ],
+        "accepted": true,
+        "outcomes": [
+          {
+            "proposed_bit": 0,
+            "receiver_a": 0,
+            "receiver_b": 0
+          },
+          {
+            "proposed_bit": 1,
+            "receiver_a": 1,
+            "receiver_b": 1
+          }
+        ]
+      }
+    ],
+    "claim_scope": "Exploratory matched-patch qualification at 32 warm-up plus 128 observation updates. Both members must match in both receivers. The complete substantive exchange used the earlier eight-address bank, not this later spatial bank. Two processes repeat the same coordinates and are not independent samples of the map."
+  },
+  "qwen": {
+    "fixed_byte": {
+      "receipt": {
+        "artifact": "repository/docs/receipts/p6-sequence.json",
+        "bytes": 4242,
+        "sha256": "c56c27a193bdc6eee687e32d340a078c8de0e53a44a524ad9ad81e0455624352"
+      },
+      "byte": "10110001",
+      "outcomes": {
+        "correct": 8,
+        "wrong": 0,
+        "unresolved": 0
+      },
+      "model_calls": 2928,
+      "seconds": 1317.029997691001,
+      "scope": [
+        "One selected byte and initial phase; no general error rate or arbitrary sequence reliability.",
+        "Explicit parameter pulses in one register; no separate-instance communication, language interface or secrecy established."
+      ]
+    },
+    "roundtrips": {
+      "receipt": {
+        "artifact": "repository/docs/receipts/p6-roundtrip.json",
+        "bytes": 7386,
+        "sha256": "ccb4225721c60ab9e9b970ab33e02bfa099ba60f1708b543f28603f69a60794f"
+      },
+      "separate_chains": 6,
+      "writes": 12,
+      "scope": [
+        "Six separate two-write chains, not a continuous twelve-write chain.",
+        "Starts from each ad reference phase; does not test every phase of every off-reference state.",
+        "Not an arbitrary-sequence reliability rate, separate-instance communication, language encoding or logic."
+      ]
+    },
+    "gates": [
+      {
+        "operation": "AND",
+        "receipt": {
+          "artifact": "repository/docs/receipts/public-mechanism.json",
+          "bytes": 9697,
+          "sha256": "7ae72b05a23bfa89ad727eb269f822f80ef64327e155b5c8412150cc6b6543b0"
+        },
+        "numerical_source_commit": "5d8baf7a3559d29d8da1eb14865a9f2c8cd232ab",
+        "auditor_source_commit": "700fd16dcc07043d1781ee7ecee183ada30d7c79",
+        "calls": 2928,
+        "seconds": 1745.350043597995,
+        "truth_table": [
+          {
+            "a": 0,
+            "b": 0,
+            "c": 0,
+            "first_expected": 0,
+            "final_expected": 0,
+            "first_actual": 0,
+            "final_actual": 0,
+            "passed": true
+          },
+          {
+            "a": 0,
+            "b": 0,
+            "c": 1,
+            "first_expected": 0,
+            "final_expected": 0,
+            "first_actual": 0,
+            "final_actual": 0,
+            "passed": true
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "c": 0,
+            "first_expected": 0,
+            "final_expected": 0,
+            "first_actual": 0,
+            "final_actual": 0,
+            "passed": true
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "c": 1,
+            "first_expected": 0,
+            "final_expected": 0,
+            "first_actual": 0,
+            "final_actual": 0,
+            "passed": true
+          },
+          {
+            "a": 1,
+            "b": 0,
+            "c": 0,
+            "first_expected": 0,
+            "final_expected": 0,
+            "first_actual": 0,
+            "final_actual": 0,
+            "passed": true
+          },
+          {
+            "a": 1,
+            "b": 0,
+            "c": 1,
+            "first_expected": 0,
+            "final_expected": 0,
+            "first_actual": 0,
+            "final_actual": 0,
+            "passed": true
+          },
+          {
+            "a": 1,
+            "b": 1,
+            "c": 0,
+            "first_expected": 1,
+            "final_expected": 0,
+            "first_actual": 1,
+            "final_actual": 0,
+            "passed": true
+          },
+          {
+            "a": 1,
+            "b": 1,
+            "c": 1,
+            "first_expected": 1,
+            "final_expected": 1,
+            "first_actual": 1,
+            "final_actual": 1,
+            "passed": true
+          }
+        ],
+        "scope": "Exploratory complete eight-case panel, phase-zero starts, exact state carry, conditional reset/hold; no numerical toggle or general reliability."
+      },
+      {
+        "operation": "OR",
+        "receipt": {
+          "artifact": "repository/docs/receipts/public-mechanism-followup.json",
+          "bytes": 17737,
+          "sha256": "8b09cbbbc191e1824303c2d36dfdf5e929eb1a1bf5bc5269774df02bbfdea833"
+        },
+        "numerical_source_commit": "3489bca6aaf1926d8ec1d6d2251ba3f7885c009d",
+        "auditor_source_commit": "3489bca6aaf1926d8ec1d6d2251ba3f7885c009d",
+        "calls": 2928,
+        "seconds": 1767.223729262012,
+        "truth_table": [
+          {
+            "a": 0,
+            "b": 0,
+            "c": 0,
+            "first_expected": 0,
+            "final_expected": 0,
+            "first_actual": 0,
+            "final_actual": 0,
+            "passed": true
+          },
+          {
+            "a": 0,
+            "b": 0,
+            "c": 1,
+            "first_expected": 0,
+            "final_expected": 1,
+            "first_actual": 0,
+            "final_actual": 1,
+            "passed": true
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "c": 0,
+            "first_expected": 1,
+            "final_expected": 1,
+            "first_actual": 1,
+            "final_actual": 1,
+            "passed": true
+          },
+          {
+            "a": 0,
+            "b": 1,
+            "c": 1,
+            "first_expected": 1,
+            "final_expected": 1,
+            "first_actual": 1,
+            "final_actual": 1,
+            "passed": true
+          },
+          {
+            "a": 1,
+            "b": 0,
+            "c": 0,
+            "first_expected": 1,
+            "final_expected": 1,
+            "first_actual": 1,
+            "final_actual": 1,
+            "passed": true
+          },
+          {
+            "a": 1,
+            "b": 0,
+            "c": 1,
+            "first_expected": 1,
+            "final_expected": 1,
+            "first_actual": 1,
+            "final_actual": 1,
+            "passed": true
+          },
+          {
+            "a": 1,
+            "b": 1,
+            "c": 0,
+            "first_expected": 1,
+            "final_expected": 1,
+            "first_actual": 1,
+            "final_actual": 1,
+            "passed": true
+          },
+          {
+            "a": 1,
+            "b": 1,
+            "c": 1,
+            "first_expected": 1,
+            "final_expected": 1,
+            "first_actual": 1,
+            "final_actual": 1,
+            "passed": true
+          }
+        ],
+        "scope": "Exploratory complete eight-case panel, phase-zero starts, exact state carry, conditional reset/hold; no numerical toggle or general reliability."
+      }
+    ],
+    "generated_exchange": {
+      "receipt": {
+        "artifact": "repository/docs/receipts/public-english-roundtrip.json",
+        "bytes": 2985,
+        "sha256": "31a9df0f64c8274fedfba2a68175b3defabeca1241e8fd9d40f4eb704e9e0256"
+      },
+      "application_bytes": 4,
+      "payload_bits": 32,
+      "reference_start_readouts": 64,
+      "model_calls": 11716,
+      "elapsed_seconds": 6986.167845255986,
+      "elapsed_minutes": 116.43613075426644,
+      "texts": [
+        {
+          "authored": "Bob",
+          "recovered": "Bob",
+          "bytes": 3,
+          "prompt_style_met": false
+        },
+        {
+          "authored": "A",
+          "recovered": "A",
+          "bytes": 1,
+          "prompt_style_met": false
+        }
+      ],
+      "reply_dataflow": "Exact complete numerical readout was used in Bob generation prompt; semantic counterfactual not tested."
+    },
+    "limitations": [
+      "Numerically observed common-hold carried-state memory, not permanent storage or interval-certified attraction.",
+      "Two tested reference-start lanes do not double payload.",
+      "AND/OR are finite stateful conditional reset/hold chains; no numerical NOT/toggle/XOR or universal gate set.",
+      "History effects and a fold candidate do not causally attribute every finite write to branch disappearance.",
+      "Both authored Bob/A outputs missed the requested exactly-two-ASCII-letter style; byte recovery nevertheless retained actual outputs.",
+      "The Qwen reply used recovered request bytes in its authoring prompt; a meaningful semantic counterfactual was not tested."
+    ]
+  },
+  "figures": [
+    {
+      "id": "defense-transport-trace",
+      "png": {
+        "artifact": "repository/paper/figures/defense-transport-trace.png",
+        "bytes": 222617,
+        "sha256": "41596048c23f43b3c99b70b455c990bd1fe1702ad325feaa8759e0eb3a5e490e"
+      },
+      "pdf": {
+        "artifact": "repository/paper/figures/defense-transport-trace.pdf",
+        "bytes": 69516,
+        "sha256": "91332cdce7c50a492244503e4060d97a645694e94eda7adb05c3e04954349541"
+      },
+      "provenance": {
+        "artifact": "repository/paper/figures/defense-transport-trace.receipt.json",
+        "bytes": 32385,
+        "sha256": "b8941a797b5e60f0d759cc33ca39c7fb6a64998f6c3e69d8fbbeb1d8e6ec1db8"
+      },
+      "caption_scope": "Earlier two-bit-per-direction Qwen transport pilot; 720 carried updates in each reference-start lane. Not the Bob/A payload test.",
+      "visually_inspected": true
+    },
+    {
+      "id": "mechanism-followup",
+      "png": {
+        "artifact": "repository/paper/figures/mechanism-followup.png",
+        "bytes": 81253,
+        "sha256": "6236456cbe9cac66509c3226733827b884bfaf9fb8b7bb6f3090944943fd5b8d"
+      },
+      "pdf": {
+        "artifact": "repository/paper/figures/mechanism-followup.pdf",
+        "bytes": 30680,
+        "sha256": "64cfe6cf7c87493d6097a22281da649c57f44d12a7d41db1909852db6d28945d"
+      },
+      "provenance": {
+        "artifact": "repository/paper/figures/mechanism-followup.receipt.json",
+        "bytes": 3075,
+        "sha256": "26f2f41802e789001f9e0061b0b62f7f1a36f79505ce39e51e3f8b8cf21e0649"
+      },
+      "caption_scope": "OR truth table and finite-dwell midpoint history comparison; the WRITE1 endpoint remains unresolved.",
+      "visually_inspected": true
+    },
+    {
+      "id": "pythia-spatial-map",
+      "png": {
+        "artifact": "repository/paper/figures/pythia-spatial-map.png",
+        "bytes": 758845,
+        "sha256": "c555e25649c5df9eb01c0a717bab04cf805ce306b0ad6b3e0387059665fe9d57"
+      },
+      "pdf": {
+        "artifact": "repository/paper/figures/pythia-spatial-map.pdf",
+        "bytes": 389340,
+        "sha256": "d9a35ea43cfc2e488555ac471ee39ec9a55549ec4bad15a13c9b7147a69f987b"
+      },
+      "provenance": {
+        "artifact": "repository/docs/receipts/manuscript-pythia-spatial-bank.json",
+        "bytes": 1980,
+        "sha256": "13f0626613e16e6bb2fb5fb5772202f0b76b108736145cba1c833e8555781d18"
+      },
+      "caption_scope": "Original eight-address bank and selected 48-coordinate spatial bank over the earlier scan. Bank qualification, not a message transmitted through the new bank.",
+      "visually_inspected": true
+    },
+    {
+      "id": "pythia-spatial-outcomes",
+      "png": {
+        "artifact": "repository/paper/figures/pythia-spatial-outcomes.png",
+        "bytes": 89376,
+        "sha256": "5bfa3b71f426c3213d623a05f610af636ad6fc25584298687d83432de9b6fbb6"
+      },
+      "pdf": {
+        "artifact": "repository/paper/figures/pythia-spatial-outcomes.pdf",
+        "bytes": 18318,
+        "sha256": "e78431d95681b66acde85bac09216a5b2a3bbc98a0a79a4f229e60199d6a3275"
+      },
+      "provenance": {
+        "artifact": "repository/docs/receipts/manuscript-pythia-spatial-bank.json",
+        "bytes": 1980,
+        "sha256": "13f0626613e16e6bb2fb5fb5772202f0b76b108736145cba1c833e8555781d18"
+      },
+      "caption_scope": "All 64 candidates in each fresh receiver; includes all rejected erasures and wrong resolved symbols.",
+      "visually_inspected": true
+    }
+  ],
+  "checked_bindings": [
+    {
+      "artifact": "data/audits/substantive-pythia/20261101T001654Z-substantive-pythia/completion-audit-worker/source/tools/audit_public_pythia_stream.py",
+      "bytes": 12723,
+      "sha256": "df43ab94f584a4019aa524b55ff31745695fb71a7ae505c1296f913773979aaa"
+    },
+    {
+      "artifact": "data/audits/substantive-pythia/20261101T001654Z-substantive-pythia/return-manifest.json",
+      "bytes": 189073,
+      "sha256": "c57845b41904e2778b353527b78cf28e3e1fdb5ab31cc278c82e8226d60fce9e"
+    },
+    {
+      "artifact": "data/audits/substantive-pythia/20261101T001654Z-substantive-pythia/task-inputs.json",
+      "bytes": 993,
+      "sha256": "e41fcc9091dc804fbcd1826227d890beda492845f7f8ee53221abd252ce956de"
+    },
+    {
+      "artifact": "data/audits/pythia-spatial-bank/20261101T004310Z-pythia-spatial-bank/completion-audit-worker/source/tools/audit_pythia_spatial_bank.py",
+      "bytes": 7768,
+      "sha256": "2810b33558d217b66de95e689024faaf1d7283b6dacd6c908ee08997a458356b"
+    },
+    {
+      "artifact": "data/audits/pythia-spatial-bank/20261101T004310Z-pythia-spatial-bank/return-manifest.json",
+      "bytes": 47773,
+      "sha256": "05c4386069003aa5bf8be5e2f08d20741a7728bbdd0569580862566703a44140"
+    },
+    {
+      "artifact": "data/audits/pythia-spatial-bank/20261101T004310Z-pythia-spatial-bank/sender.json",
+      "bytes": 25436,
+      "sha256": "979733b4c8806a9abe0523150db93a6dbd74aa0f565bf1821b0b318adbbb512c"
+    },
+    {
+      "artifact": "data/audits/substantive-pythia/20261101T001654Z-substantive-pythia/returned/family/base/receiver-bob/results.json",
+      "bytes": 3295709,
+      "sha256": "eca2f803ad029606179f6c5ada60c5563f939911e557826400d3db32f1e3bef1"
+    },
+    {
+      "artifact": "data/audits/substantive-pythia/20261101T001654Z-substantive-pythia/returned/family/base/receiver-alice/results.json",
+      "bytes": 1961787,
+      "sha256": "9fae8f6b1504db87027b772cee3cc337b2b31da1387b530c022e4fda3dab9a30"
+    },
+    {
+      "artifact": "data/audits/substantive-pythia/20261101T001654Z-substantive-pythia/returned/family/counterfactual/receiver-bob/results.json",
+      "bytes": 3296438,
+      "sha256": "ce4fd6d41175ac7f8c190723444a1785009b24dcdb9bc83cd7d0b3871adfd3e6"
+    },
+    {
+      "artifact": "data/audits/substantive-pythia/20261101T001654Z-substantive-pythia/returned/family/counterfactual/receiver-alice/results.json",
+      "bytes": 1917374,
+      "sha256": "2afdb982f9afcbdc9648eec017d7c1c39978ee7c9f33747913d64fba9604403a"
+    },
+    {
+      "artifact": "data/audits/pythia-spatial-bank/20261101T004310Z-pythia-spatial-bank/returned/receiver-a/results.json",
+      "bytes": 179468,
+      "sha256": "a5ee030ea8133bf85d7b7295eaa7096130f85e51632022e4333b644f22e09d33"
+    },
+    {
+      "artifact": "data/audits/pythia-spatial-bank/20261101T004310Z-pythia-spatial-bank/returned/receiver-b/results.json",
+      "bytes": 179468,
+      "sha256": "133f5b84497ff3e16047bcda64b22ec687fa94fd178f2088f4942be256b7142b"
+    },
+    {
+      "artifact": "data/audits/public-mechanism/20261026T222843Z-public-mechanism-bit0/independent-review.json",
+      "bytes": 1486056,
+      "sha256": "b0d235790154f50e473c64f1261ca4f384ee7e2dac7037b0fa0723eb3f77567e"
+    },
+    {
+      "artifact": "data/audits/public-mechanism-followup/20261028T205045Z-public-mechanism-followup-bit0/independent-review.json",
+      "bytes": 1499735,
+      "sha256": "b3c2fca704a8cb8202c3b3a29cc3fa44f24846084926a0e170a2abd94fdc1cf8"
+    },
+    {
+      "artifact": "data/audits/p6-sequence/20261025T233720Z-sequence/complete-audit.json",
+      "bytes": 153459,
+      "sha256": "0786ede4a44ff6c9cee54951e85d7c725b242182a454cf997340cb4e76698f5f"
+    },
+    {
+      "artifact": "data/audits/p6-sequence/20261025T233720Z-sequence/run/results.json",
+      "bytes": 92292,
+      "sha256": "69d99e1bba123808e72a57f5284d3c7b9bbb36399693531d1e647f9e1a2d9a6b"
+    },
+    {
+      "artifact": "data/audits/p6-roundtrip/20261025T230754Z-roundtrip/complete-audit.json",
+      "bytes": 229127,
+      "sha256": "48e8f773347a253dc25a75e1bbb1e8c89ce724b4d40a3465714293dbabc2c4f1"
+    },
+    {
+      "artifact": "data/audits/p6-roundtrip/20261025T230754Z-roundtrip/run/results.json",
+      "bytes": 138061,
+      "sha256": "948bbc87bd04449dcb961f2f79a3937253e02fefd238634dbea45cab024a59eb"
+    },
+    {
+      "artifact": "data/audits/public-english-roundtrip/20261030T192940Z-public-english-roundtrip/independent-audit-corrected-20261031T001955Z/independent-review.json",
+      "bytes": 859680,
+      "sha256": "caa0e4cfecd044bced249bea1f5f4ec660e3a79bf82578cefe8554fd04f52fcd"
+    }
+  ],
+  "overclaim_traps": [
+    "470 bytes count both paired request/reply variants, not one one-way message.",
+    "Zero final delivery errors at reused known addresses does not imply an independent-bit reliability estimate or fresh-address success.",
+    "48 qualified Pythia coordinates are response-codebook addresses, not 48 memory cells or independently stored bits.",
+    "Finite positive growth plus no detected recurrence is a finite-window classification, not a proof of chaos.",
+    "Programmed arithmetic replies are not autonomous model reasoning; changed input and changed reconstructed reply establish recorded application dataflow.",
+    "English sentences explicitly declare numerical controls and reset/measurement instructions; this is an open instrumented channel, not innocuous cover dialogue.",
+    "Earlier periods, geometry, or numerical precision controls must not be promoted to proof of persistent attraction, broad robustness, secrecy or practical advantage."
+  ]
+}

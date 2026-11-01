@@ -1,0 +1,63 @@
+{
+  "schema": "shrimp-main-figure-receipt-v1",
+  "figure_group": "qwen-shrimp.png",
+  "description": "An earlier Qwen parameter scan with a shrimp-shaped island of repeating behavior inside irregular response regions. The image has no overlaid communication addresses. It is reproduced unchanged as background context.",
+  "alt_text": "An earlier Qwen parameter scan with a shrimp-shaped island of repeating behavior inside irregular response regions. The image has no overlaid communication addresses. It is reproduced unchanged as background context.",
+  "scope": "Reproduced without modification from the earlier Qwen feedback study: a parameter scan of the period-six shrimp. This image supplies dynamical context, not a new measurement of channel reliability or memory capacity.",
+  "source_evidence": {
+    "path": "receipts/evidence-summary.json",
+    "sha256": "e48920cc2f042a16c67fadc56e52b85393ace0c5fe6aed5dae1b34f21c960848"
+  },
+  "data_fields": [],
+  "uncertainty": "Reproduced raster; no new uncertainty or measurement inferred.",
+  "accessibility": "Direct text labels and values; meanings do not rely only on color. PNG plots also have scalable SVG and PDF counterparts.",
+  "generator": {
+    "path": "build_figures.py",
+    "sha256": "a275310d2d4741f06666e17388b72461ffbce372781c62a63e318d83c2230bd6"
+  },
+  "matplotlib_version": "3.11.2",
+  "font": {
+    "name": "DejaVu Sans",
+    "sha256": "3fdf69cabf06049ea70a00b5919340e2ce1e6d02b0cc3c4b44fb6801bd1e0d22"
+  },
+  "provenance": {
+    "outputs": {
+      "qwen-shrimp.png": "e98f580388a13acb1400b4082b29df7e46e7c6bdd08b8777acbbe67989344eb1"
+    }
+  },
+  "reproduction": {
+    "operation": "Reproduced without modification; byte-identical copy.",
+    "sha256": "e98f580388a13acb1400b4082b29df7e46e7c6bdd08b8777acbbe67989344eb1",
+    "original_asset": {
+      "repository": "praxagent",
+      "commit": "10fa0193bdd310a1b82f3053d67d760c8c6d81be",
+      "path": "blog-source/content/posts/2026/10/language-model-feedback-short-read/islands-of-order.png",
+      "bytes": 1133232,
+      "sha256": "e98f580388a13acb1400b4082b29df7e46e7c6bdd08b8777acbbe67989344eb1"
+    },
+    "original_data": {
+      "artifact": "llm-soft-loop/pod64/hr10/scan.npz",
+      "sha256": "b29668a41c6d906dee03c3268b62929f91e89b0f1119d15d588d8223c6da93a0"
+    },
+    "original_generator": {
+      "wrapper_path": "make_lead_image.py",
+      "wrapper_sha256": "296ef7c6c4d7d8add31f1dfb20f944c8272dd53e4cb9081828b86c7da246557f",
+      "wrapper_availability": "Hash and role recorded in published upstream provenance; wrapper was not available locally and was not rerun.",
+      "map_renderer": {
+        "repository": "neural-shrimp",
+        "commit": "1314528118ac1300c2cffd34fb60cfbfc67d2c82",
+        "path": "tools/plot_p6_shrimp.py",
+        "bytes": 19371,
+        "sha256": "1f701f2b5e6bbc73a1fb297235451a31db83fe222d28e024c99eac2aea4a91cc"
+      }
+    },
+    "upstream_provenance": {
+      "repository": "praxagent",
+      "commit": "26261de0f4c148ef00f152f24fb2e7b60a317d50",
+      "path": "blog-source/content/posts/2026/10/chaos-bifurcations-language-model-feedback/provenance.json",
+      "sha256": "f7eafe85d9c275a1b24c414ecb4e15872160b3a80fece0710ba2267a0bcea6fe"
+    },
+    "caption": "Reproduced without modification from the earlier Qwen feedback study: a parameter scan of the period-six shrimp. This image supplies dynamical context, not a new measurement of channel reliability or memory capacity.",
+    "alt_text": "An earlier Qwen parameter scan with a shrimp-shaped island of repeating behavior inside irregular response regions. The image has no overlaid communication addresses. It is reproduced unchanged as background context."
+  }
+}

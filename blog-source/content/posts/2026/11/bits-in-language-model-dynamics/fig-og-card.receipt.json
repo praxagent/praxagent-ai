@@ -1,0 +1,28 @@
+{
+  "schema": "shrimp-main-figure-receipt-v1",
+  "figure_group": "og-card",
+  "description": "Conceptual typographic headline and route labels. No numerical results or empirical geometry.",
+  "alt_text": "Conceptual typographic headline and route labels. No numerical results or empirical geometry.",
+  "scope": "Conceptual only; no empirical geometry or measured statistics.",
+  "source_evidence": {
+    "path": "receipts/evidence-summary.json",
+    "sha256": "e48920cc2f042a16c67fadc56e52b85393ace0c5fe6aed5dae1b34f21c960848"
+  },
+  "data_fields": [],
+  "uncertainty": "Not applicable: conceptual schematic.",
+  "accessibility": "Direct text labels and values; meanings do not rely only on color. PNG plots also have scalable SVG and PDF counterparts.",
+  "generator": {
+    "path": "build_figures.py",
+    "sha256": "a275310d2d4741f06666e17388b72461ffbce372781c62a63e318d83c2230bd6"
+  },
+  "matplotlib_version": "3.11.2",
+  "font": {
+    "name": "DejaVu Sans",
+    "sha256": "3fdf69cabf06049ea70a00b5919340e2ce1e6d02b0cc3c4b44fb6801bd1e0d22"
+  },
+  "provenance": {
+    "outputs": {
+      "og-card.png": "95c50836b049fa3e2be5ae3370276199a3aa1707d41abe079d74b8bb95183aab"
+    }
+  }
+}

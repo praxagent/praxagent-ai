@@ -1,0 +1,227 @@
+{
+  "local_bundle": true,
+  "source_commit": "536a4d9f9b64a456b9c5a186c27aedf964908ce6",
+  "generator": {
+    "path": "build_figures.py",
+    "sha256": "a275310d2d4741f06666e17388b72461ffbce372781c62a63e318d83c2230bd6"
+  },
+  "receipts": {
+    "receipts/evidence-summary.json": "e48920cc2f042a16c67fadc56e52b85393ace0c5fe6aed5dae1b34f21c960848",
+    "receipts/evidence-audit.json": "2cf38a7e6bcbefab8758c898f0ab9342a5a71a4568a9be6442f853de39aa258e",
+    "fig-transfer-results.receipt.json": "bb7160d8f61ad282d4fd4185a33641c05576334915f75321dc0d5c27b82864a4",
+    "fig-stateful-logic.receipt.json": "8f7ac7448e0b086fa8dacb081775eb16d8d156472581b82f4ea577b9379a4d74",
+    "fig-two-routes.receipt.json": "68acd01510f901ed0a50aee91f56a8b58c2049e1d7b2b1f42ddc177160f56f37",
+    "fig-og-card.receipt.json": "f6c81c858fda5186c35277c93f02f367aa62b2a4166898f058a767e6515a9601",
+    "fig-qwen-shrimp.receipt.json": "d9a62945dcd3b83e14121cd82c5835f2b868ce14c9407fcce89fdde0001108f4",
+    "fig-pythia-spatial-map.receipt.json": "3ae82562c014bc3b3786a12b515a9505dd0a70a305225d2d0d72981f1c7c6a91",
+    "receipts/qwen-schedule.json": "483988e01c099046530ec170cbba2600cb7acb945ea455a1e72b9991edb84c43"
+  },
+  "figures": [
+    "transfer-results.png",
+    "transfer-results.svg",
+    "transfer-results.pdf",
+    "stateful-logic.png",
+    "stateful-logic.svg",
+    "stateful-logic.pdf",
+    "two-routes.svg",
+    "og-card.png",
+    "qwen-shrimp.png",
+    "pythia-spatial-map.png"
+  ],
+  "numbers": [
+    {
+      "id": "application-total",
+      "appears_as": "470 bytes, or 3,760 bits",
+      "source": "receipts/evidence-summary.json#/transfer/metrics",
+      "claim": "All four delivered payloads across two complete paired exchanges."
+    },
+    {
+      "id": "forward-calls",
+      "appears_as": "38,541 model forward calls",
+      "source": "receipts/evidence-summary.json#/transfer/metrics/model_calls",
+      "claim": "All four receiver processes, including readiness calls."
+    },
+    {
+      "id": "family-seconds",
+      "appears_as": "9,028.3 seconds",
+      "source": "receipts/evidence-summary.json#/transfer/metrics/elapsed_seconds",
+      "claim": "Enclosing family execution, not sum of the bars."
+    },
+    {
+      "id": "family-minutes",
+      "appears_as": "150.5 minutes",
+      "source": "receipts/evidence-summary.json#/transfer/metrics/elapsed_seconds",
+      "claim": "Seconds divided by sixty."
+    },
+    {
+      "id": "payload-throughput",
+      "appears_as": "0.052 delivered application bytes per second",
+      "source": "receipts/evidence-summary.json#/transfer/metrics/application_bytes_per_second",
+      "claim": "Application bytes divided by enclosing family execution seconds."
+    },
+    {
+      "id": "known-addresses",
+      "appears_as": "eight known",
+      "source": "receipts/evidence-summary.json#/transfer/parameters/known_addresses",
+      "claim": "Eight previously tested addresses reused; not independent bit trials."
+    },
+    {
+      "id": "batch-symbols",
+      "appears_as": "Sixteen separately evolved",
+      "source": "receipts/evidence-summary.json#/transfer/parameters/payload_symbols_per_batch",
+      "claim": "Sixteen separately maintained symbol states share each batch; no statistical independence claim."
+    },
+    {
+      "id": "warmup",
+      "appears_as": "32 warm-up updates",
+      "source": "receipts/evidence-summary.json#/transfer/parameters/warmup_updates",
+      "claim": "Fixed per-symbol warm-up."
+    },
+    {
+      "id": "observation",
+      "appears_as": "128 updates",
+      "source": "receipts/evidence-summary.json#/transfer/parameters/observation_updates",
+      "claim": "Fixed observation endpoint."
+    },
+    {
+      "id": "payload-counts",
+      "appears_as": "148-byte request and 88-byte reply, followed by a changed 148-byte request and 86-byte reply",
+      "source": "receipts/evidence-summary.json#/transfer/messages",
+      "claim": "All four message sizes, from recovered UTF-8 bytes."
+    },
+    {
+      "id": "spatial-draw",
+      "appears_as": "32 eligible patches",
+      "source": "receipts/evidence-summary.json#/spatial_bank/candidate_pairs",
+      "claim": "One paired coordinate draw from each patch."
+    },
+    {
+      "id": "spatial-candidates",
+      "appears_as": "all 64 coordinates",
+      "source": "receipts/evidence-summary.json#/spatial_bank/candidate_coordinates",
+      "claim": "Complete candidate denominator for each receiver."
+    },
+    {
+      "id": "spatial-final-a",
+      "appears_as": "| A | 56 | 5 | 3 |",
+      "source": "receipts/evidence-summary.json#/spatial_bank/receivers/0/outcomes/2",
+      "claim": "Correct, erased and wrong final labels in receiver A."
+    },
+    {
+      "id": "spatial-final-b",
+      "appears_as": "| B | 56 | 5 | 3 |",
+      "source": "receipts/evidence-summary.json#/spatial_bank/receivers/1/outcomes/2",
+      "claim": "Correct, erased and wrong final labels in receiver B."
+    },
+    {
+      "id": "spatial-bank",
+      "appears_as": "24 pairs, or 48 addresses",
+      "source": "receipts/evidence-summary.json#/spatial_bank",
+      "claim": "Only complete pairs that passed in both receivers."
+    },
+    {
+      "id": "english-wire-bytes",
+      "appears_as": "387,433 English instruction bytes",
+      "source": "receipts/evidence-summary.json#/transfer/metrics/wire_bytes",
+      "claim": "Complete public English instructions across all four messages."
+    },
+    {
+      "id": "english-wire-expansion",
+      "appears_as": "about 824 times the application payload",
+      "source": "receipts/evidence-summary.json#/transfer/metrics",
+      "claim": "Wire bytes divided by application bytes; rounded ratio, not additional payload."
+    },
+    {
+      "id": "qwen-application-bytes",
+      "appears_as": "4 application bytes",
+      "source": "receipts/evidence-summary.json#/qwen_other/generated_exchange/application_bytes",
+      "claim": "The recovered Bob and A messages total four UTF-8 bytes."
+    },
+    {
+      "id": "qwen-model-calls",
+      "appears_as": "11,716 model calls",
+      "source": "receipts/evidence-summary.json#/qwen_other/generated_exchange/model_calls",
+      "claim": "Whole Qwen exchange, including four authoring calls."
+    },
+    {
+      "id": "qwen-execution-minutes",
+      "appears_as": "116.4 minutes",
+      "source": "receipts/evidence-summary.json#/qwen_other/generated_exchange/elapsed_seconds",
+      "claim": "Whole Qwen exchange elapsed seconds divided by sixty."
+    },
+    {
+      "id": "qwen-write-updates",
+      "appears_as": "120 write updates",
+      "source": "receipts/qwen-schedule.json#/write_updates",
+      "claim": "Every bit write used this endpoint duration."
+    },
+    {
+      "id": "qwen-hold-updates",
+      "appears_as": "240 common-hold updates",
+      "source": "receipts/qwen-schedule.json#/common_hold_updates",
+      "claim": "Every write was followed by this common-hold duration."
+    },
+    {
+      "id": "qwen-reference-starts",
+      "appears_as": "two reference starts",
+      "source": "receipts/qwen-schedule.json#/reference_starts",
+      "claim": "The same payload was tested from phase zero of both reference cycles; this does not double capacity."
+    },
+    {
+      "id": "qwen-payload",
+      "appears_as": "all 32 payload bits",
+      "source": "receipts/evidence-summary.json#/qwen_other/generated_exchange/payload_bits",
+      "claim": "Each reference-start lane recovers the same payload; lanes do not double it."
+    },
+    {
+      "id": "and-panel",
+      "appears_as": "All eight input triples",
+      "source": "receipts/evidence-summary.json#/qwen_logic/0/truth_table",
+      "claim": "Complete finite AND panel, intermediate and final outputs."
+    },
+    {
+      "id": "or-panel",
+      "appears_as": "all eight did so for OR",
+      "source": "receipts/evidence-summary.json#/qwen_logic/1/truth_table",
+      "claim": "Complete finite OR panel, intermediate and final outputs."
+    }
+  ],
+  "figure_sha256": {
+    "transfer-results.png": "eca047f7d45841593b7445f959e1031b2c4fe5dd19468fb280e6974cc0e30c82",
+    "transfer-results.svg": "33860979319e2a5d1d9be48446d7e5e32d2d6848854fd892b91b919e8d8c0e09",
+    "transfer-results.pdf": "83b14f8564ca637932c833a9e0ce24a95d2394936c24c906fa86f502cddb7170",
+    "stateful-logic.png": "3df04443c2b2da010f9e93edbde6c83be510a850ab6857cc4d003ea60829bf9c",
+    "stateful-logic.svg": "aced78932b5798110bde3a4e816d62be40c9641175206e0cfe283febee0ab5d8",
+    "stateful-logic.pdf": "76ae9f65e908e1c3d479331f46b55921af5c42da74d4b692b1cc296ebfbad676",
+    "two-routes.svg": "f9648265a1dbfc230d24eeb420d3df0b0a4b0502f25a81eb14c38b1ff91d2bec",
+    "og-card.png": "95c50836b049fa3e2be5ae3370276199a3aa1707d41abe079d74b8bb95183aab",
+    "qwen-shrimp.png": "e98f580388a13acb1400b4082b29df7e46e7c6bdd08b8777acbbe67989344eb1",
+    "pythia-spatial-map.png": "c555e25649c5df9eb01c0a717bab04cf805ce306b0ad6b3e0387059665fe9d57"
+  },
+  "source_evidence": "receipts/evidence-summary.json",
+  "editorial_scope": "Figures synthesized from existing audited results and unchanged rasters; no new experiments.",
+  "quoted_examples": {
+    "examples": [
+      {
+        "variant": "base",
+        "direction": "alice-to-bob",
+        "text_sha256": "137ce6b9557a388f6985bf96bfeb48a0491b22d982c10a91c5c6547893d7422f",
+        "check": "Complete received message occurs verbatim, apart from final newline."
+      },
+      {
+        "variant": "base",
+        "direction": "bob-to-alice",
+        "text_sha256": "54553926b044e0605bca4caccc8b8a1a445a2df2606a9f616f5685b969b78592",
+        "check": "Complete received message occurs verbatim, apart from final newline."
+      },
+      {
+        "variant": "counterfactual",
+        "direction": "bob-to-alice",
+        "text_sha256": "e8ffb74516e83406c0b5f15cf9ffd0645ccfb04b611820073cbb0dcce2655c9e",
+        "check": "Complete received message occurs verbatim, apart from final newline."
+      }
+    ],
+    "wire_excerpt_sha256": "4654391bf6c8894d2925d55d6fa89e6fe4557c24221a49163fa0f460de35b34d",
+    "opening_byte_bits": "01010011"
+  }
+}

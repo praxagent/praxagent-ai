@@ -3,14 +3,14 @@ title: "Hysteresis"
 slug: "hysteresis"
 summary: "A system's response can depend on how its controls arrived at their present values."
 draft: true
-pro_reviewed: false
+pro_reviewed: true
 og_image: "hysteresis-card.png"
 og_image_alt: "Two toy write histories return to the same control value, zero, but retain different output bits."
 ---
 
 **Hysteresis** means that a system's response depends on the history of its controls, so the present control value alone does not determine the response. Turning a control up and then down can follow different response paths. The retained difference is a form of memory.
 
-The ideal, **rate-independent** case depends on the path taken, rather than how quickly it is traversed. Experiments also use “dynamic hysteresis” for loops affected by the rate of driving. A short-lived lag can therefore resemble persistent memory; state the convention and the observation time.
+The ideal, **rate-independent** case depends on the path taken, rather than how quickly it is traversed. The term **dynamic hysteresis** is also used for rate-dependent responses, as in [Bermúdez, Gómez and Venegas’s analysis of hysteresis models](https://arxiv.org/abs/1902.08175). A short-lived lag can therefore resemble persistent memory; state the convention and the observation time.
 
 ## A two-threshold example
 

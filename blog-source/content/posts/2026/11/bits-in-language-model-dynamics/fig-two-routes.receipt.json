@@ -1,0 +1,28 @@
+{
+  "schema": "shrimp-main-figure-receipt-v1",
+  "figure_group": "two-routes",
+  "description": "Conceptual flow only: Pythia resets for each address and classifies a fresh response; Qwen carries state through a control excursion, returns to common hold and reads the resulting state. No fabricated trajectory or claim of common mechanism.",
+  "alt_text": "Conceptual flow only: Pythia resets for each address and classifies a fresh response; Qwen carries state through a control excursion, returns to common hold and reads the resulting state. No fabricated trajectory or claim of common mechanism.",
+  "scope": "Conceptual only; no empirical geometry or measured statistics.",
+  "source_evidence": {
+    "path": "receipts/evidence-summary.json",
+    "sha256": "e48920cc2f042a16c67fadc56e52b85393ace0c5fe6aed5dae1b34f21c960848"
+  },
+  "data_fields": [],
+  "uncertainty": "Not applicable: conceptual schematic.",
+  "accessibility": "Direct text labels and values; meanings do not rely only on color. PNG plots also have scalable SVG and PDF counterparts.",
+  "generator": {
+    "path": "build_figures.py",
+    "sha256": "a275310d2d4741f06666e17388b72461ffbce372781c62a63e318d83c2230bd6"
+  },
+  "matplotlib_version": "3.11.2",
+  "font": {
+    "name": "DejaVu Sans",
+    "sha256": "3fdf69cabf06049ea70a00b5919340e2ce1e6d02b0cc3c4b44fb6801bd1e0d22"
+  },
+  "provenance": {
+    "outputs": {
+      "two-routes.svg": "f9648265a1dbfc230d24eeb420d3df0b0a4b0502f25a81eb14c38b1ff91d2bec"
+    }
+  }
+}

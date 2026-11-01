@@ -1,0 +1,33 @@
+{
+  "schema": "shrimp-main-figure-receipt-v1",
+  "figure_group": "stateful-logic",
+  "description": "Eight rows contain all triples A, B, C from 000 to 111. Four columns show measured A AND B, then its carried AND C, and measured A OR B, then its carried OR C. All outputs match the Boolean targets at the tested phase-zero starts. Digits distinguish values without depending on color. This is a finite panel, not a general reliability estimate.",
+  "alt_text": "Eight rows contain all triples A, B, C from 000 to 111. Four columns show measured A AND B, then its carried AND C, and measured A OR B, then its carried OR C. All outputs match the Boolean targets at the tested phase-zero starts. Digits distinguish values without depending on color. This is a finite panel, not a general reliability estimate.",
+  "scope": "Measured complete phase-zero input panels. Second gates use actual carried state. No inferred margins, universality or broader reliability.",
+  "source_evidence": {
+    "path": "receipts/evidence-summary.json",
+    "sha256": "e48920cc2f042a16c67fadc56e52b85393ace0c5fe6aed5dae1b34f21c960848"
+  },
+  "data_fields": [
+    "qwen_logic[].truth_table[].first_actual",
+    "qwen_logic[].truth_table[].final_actual"
+  ],
+  "uncertainty": "No uncertainty intervals inferred; each execution bar is one recorded run and each logical cell is one measured panel output.",
+  "accessibility": "Direct text labels and values; meanings do not rely only on color. PNG plots also have scalable SVG and PDF counterparts.",
+  "generator": {
+    "path": "build_figures.py",
+    "sha256": "a275310d2d4741f06666e17388b72461ffbce372781c62a63e318d83c2230bd6"
+  },
+  "matplotlib_version": "3.11.2",
+  "font": {
+    "name": "DejaVu Sans",
+    "sha256": "3fdf69cabf06049ea70a00b5919340e2ce1e6d02b0cc3c4b44fb6801bd1e0d22"
+  },
+  "provenance": {
+    "outputs": {
+      "stateful-logic.png": "3df04443c2b2da010f9e93edbde6c83be510a850ab6857cc4d003ea60829bf9c",
+      "stateful-logic.svg": "aced78932b5798110bde3a4e816d62be40c9641175206e0cfe283febee0ab5d8",
+      "stateful-logic.pdf": "76ae9f65e908e1c3d479331f46b55921af5c42da74d4b692b1cc296ebfbad676"
+    }
+  }
+}
