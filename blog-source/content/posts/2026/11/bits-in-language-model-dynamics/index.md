@@ -1,17 +1,17 @@
 ---
-title: "Bits in a language model’s dynamics"
+title: "Communication, Memory, and Logic in Language-Model Feedback"
 slug: "bits-in-language-model-dynamics"
 date: 2026-11-01
 author: Timothy Jones
 author_id: "timothy-jones"
 draft: true
-pro_reviewed: true
+pro_reviewed: false
 toc: true
 tags: ["AI", "LLM", "dynamical-systems", "memory", "computation"]
 summary: "A small language model’s continuous feedback loop carried complete requests and program-computed replies. A second model retained writable bits at common controls and supported finite stateful AND and OR chains."
 description: "Two public numerical demonstrations: useful data carried through Pythia feedback responses, and history-dependent memory and finite logic chains in Qwen."
 og_image: "og-card.png"
-og_image_alt: "Bits in a language model’s dynamics: Pythia carries a complete measurement request and calculated reply; Qwen retains a state at common controls. Public numerical demonstrations, with no concealment claim."
+og_image_alt: "Communication, memory, and logic in language-model feedback: Pythia carries a complete measurement request and calculated reply; Qwen retains a state at common controls. Public numerical demonstrations, with no concealment claim."
 lead: |
   A language model can carry a message through something other than the words it
   generates. Run it as a continuous feedback loop, and its numerical behavior
@@ -28,6 +28,17 @@ key_result: |
   finite stateful AND and OR panels. These are public, recorded demonstrations
   of a numerical side channel and memory primitive.
 ---
+
+<style>
+.shrimp-figure { width:100%; margin:1.6rem auto; }
+.shrimp-figure img { display:block; width:100%; height:auto; margin:0 auto; }
+.shrimp-figure.compact { max-width:26rem; }
+.shrimp-figure.plot { max-width:32rem; }
+.shrimp-figure.map { max-width:max(28rem, 66.667%); }
+.shrimp-figure.wide { max-width:36rem; }
+.shrimp-figure a { display:block; }
+.highlight pre:has(code.language-text), .highlight code.language-text, .highlight code.language-text span { white-space:pre-wrap; overflow-wrap:anywhere; }
+</style>
 
 {{< panel "info" >}}
 **AI-use disclosure.** Generative-AI tools helped implement, audit, execute,
@@ -78,9 +89,46 @@ bit, and act on the bit already present? A **numerical address** is a pair of
 steering and temperature settings. We call this a **side channel** because it
 uses a numerical response interface alongside the model’s ordinary text output.
 
-![Two numerical routes from a message to recovered bytes. Pythia resets the state for each chosen coordinate and classifies its response. Qwen carries the state through a write excursion, restores common hold controls, and reads which cycle remains.](two-routes.svg)
+<figure class="shrimp-figure compact">
+<a href="two-routes.svg" aria-label="Open full-size figure"><img src="two-routes.svg" alt="Two numerical routes from a message to recovered bytes. Pythia resets the state for each chosen coordinate and classifies its response. Qwen carries the state through a write excursion, restores common hold controls, and reads which cycle remains."></a>
+</figure>
 
 <p class="figure-note"><strong>Two routes, different jobs.</strong> In Pythia the sender chooses a parameter address for each symbol. In Qwen the sender writes the evolving state and returns to a shared hold setting. In both, explicit English instructions cross between endpoints; local model trajectories supply the measured bits. This is a conceptual diagram, not a measured trace. <a href="fig-two-routes.receipt.json">Figure receipt</a>; <a href="build_figures.py">generator</a>.</p>
+
+### The map being iterated
+
+Let \(E\in\mathbb R^{V\times d}\) be the input embedding table, \(P\) the fixed
+prefix, and \(x_n\in\mathbb R^d\) the replaceable soft input. The controls are
+\(p=(\alpha,t)\), where \(t=\log_{10}T\). One model call implements
+
+\[
+\pi_p(x)=\operatorname{softmax}\!\left(\frac{z_\alpha([P;x])}{10^t}\right),
+\qquad x_{n+1}=F_p(x_n)=E^{\mathsf T}\pi_p(x_n).
+\]
+
+The full carried state has dimension **896 for Qwen and 768 for Pythia**.
+The steering hook adds \(\alpha v\), for a fixed philosophy direction \(v\),
+after the selected Transformer block at every prefix and soft-slot position.
+The soft slot is replaced on each update; neither the context length nor the
+state dimension grows. Changing \(P\), \(v\), or the model weights would change
+the map itself. With them fixed, only \(p\) and the current state determine the
+next update. The expectation \(E^{\mathsf T}\pi\) lies in the convex hull of
+the token embeddings, even though its subsequent motion can be complicated.
+
+The local sensitivity follows directly by differentiating softmax:
+
+\[
+D_xF_p(x)=\frac{1}{T}E^{\mathsf T}
+\left[\operatorname{diag}(\pi_p)-\pi_p\pi_p^{\mathsf T}\right]
+D_xz_\alpha([P;x]).
+\]
+
+This separates the probability-weighted embedding operation from the
+Transformer's state sensitivity. A small temperature does not by itself imply
+instability: the covariance factor in brackets also changes with temperature.
+The experiments evaluate the complete map in effective float64, including
+normalization and positional operations. Their exact prefix, checkpoint,
+steering block and numerical thresholds are [listed below](#methods-and-reproducibility).
 
 **Prior work.** Attractor-based memory has a classical precedent in
 [Hopfield’s networks](#ref-hopfield), and using nonlinear dynamics for logical
@@ -97,6 +145,102 @@ Transformer feedback loop.
 concealment demonstration or autonomous conversation, no proof of a reliable
 general-purpose memory, and no demonstrated advantage over sending digital
 bytes directly.
+
+## Ordinary prose: the missing link in the full chain
+
+We tested two different language interfaces. In the complete numerical
+transfers below, English explicitly states the controls. An earlier pilot
+instead used **everyday prose as the coordinate carrier**. That second
+interface recovered **9 of 16 requested symbols**. Its sender and receiver
+computed identical coordinates in all 16 cases, but seven coordinates landed
+at the wrong requested symbol. The pilot stopped before the numerical
+feedback stage, so it is not a completed prose-to-chaos-memory demonstration.
+
+Here is its first successful record in packet order, without editing:
+
+```text
+"Let's review the agenda and bring our notes before the meeting to ensure clarity and efficiency."
+```
+
+The requested corner label was 1 and the receiver returned 1. The standardized
+text coordinates were approximately **(−1.600483, 1.193716)**. The associated
+parameter address was **(0.07292097326262993, −0.15383214663510716)**.
+That address was computed but **not executed** through Qwen's feedback loop.
+
+The first unsuccessful record, also unedited, was:
+
+```text
+"Wouldn't it be fun to enjoy the sun and breeze while you're on the go? A light raincoat makes a great addition to your umbrella bag
+```
+
+The text really ended there. It requested label 3 but decoded as 1, at
+standardized coordinates approximately **(−0.977241, 0.753653)**. The repeated
+use of this same carrier for several requests is one reason the attempts are
+dependent; no separate naturalness assessment was collected.
+
+The decoder was a fixed embedding projection, not semantic understanding.
+For text tokens \(w_1,\ldots,w_N\), it computed
+
+\[
+\bar e=\frac{1}{N}\sum_{i=1}^{N}E_{w_i},
+\qquad z_j=\frac{u_j^{\mathsf T}(\bar e-m)}{\sigma_j},\quad j=1,2.
+\]
+
+The calibration mean \(m\), orthonormal directions \(u_j\), and scale values
+\(\sigma_j\) were shared and fixed. The receiver picked the Euclidean-nearest
+corner of \(\{(-1,-1),(-1,1),(1,-1),(1,1)\}\), labeled 0, 1, 2, 3 respectively.
+These are geometric symbol labels; they were not determined by a chaos or
+recurrence measurement. Relabeling them as two-bit strings would not turn
+them into measured dynamical bits.
+
+The sender generated eight candidates for each of four everyday topics and
+selected the one minimizing its largest standardized coordinate error. Six misses had no correctly classified candidate in their topic pool. One further miss arose because that minimax selection rule chose differently from the
+receiver's nearest-corner rule. The first-candidate baseline recovered 4 of 16;
+the selected pilot recovered 9 of 16. This isolates a concrete bottleneck:
+**reproducing a coordinate exactly does not make the desired coordinate
+reachable with the available prose**.
+
+<details>
+<summary>All sixteen prose outcomes and what each demonstration actually completed</summary>
+
+| Packet record | Requested → recovered symbol | Truncated |
+|---:|:---:|:---:|
+| 0 | 3 → 1 | yes |
+| 1 | 2 → 0 | no |
+| 2 | 1 → 0 | no |
+| 3 | 1 → 1 | no |
+| 4 | 2 → 2 | no |
+| 5 | 2 → 2 | no |
+| 6 | 0 → 0 | no |
+| 7 | 1 → 1 | no |
+| 8 | 3 → 2 | no |
+| 9 | 2 → 1 | yes |
+| 10 | 0 → 0 | no |
+| 11 | 1 → 1 | yes |
+| 12 | 0 → 0 | no |
+| 13 | 3 → 0 | no |
+| 14 | 3 → 2 | no |
+| 15 | 0 → 0 | no |
+
+All exact texts, coordinates and hashes are in the [language-interface receipt](receipts/language-interface.json).
+
+| Experiment | Carrier and numerical endpoint |
+|---|---|
+| Generated prose | 9/16 corner symbols; no subsequent dynamical writes or reads |
+| Literal commands | Four accepted commands, such as `Write bit 0 to register R0.`, executed the numerical writer and recovered `0110`; three invalid commands were rejected |
+| Generated poems | Explicit binary frames carried the payload separately from the coding dialogue; 6 of 115 intended bytes verified before the operator stopped the campaign |
+| Short Qwen exchange | Complete `Bob` → `A` byte exchange, carried by explicit control instructions |
+| Substantive Pythia exchange below | Complete measurement request and computed reply, carried by explicit control instructions |
+
+An externally supplied report described a separate keyed prose-sampling result.
+Its claimed 16/16 was not reproduced in this repository and is not counted here.
+
+</details>
+
+The remaining integration test is therefore well defined: a generated carrier
+must reach its intended control region, a fresh receiver must reconstruct those
+controls, and the actual dynamical write/read must recover the requested
+payload. The current evidence verifies parts of that chain in separate tests.
 
 ## A complete request crosses the numerical channel
 
@@ -120,6 +264,31 @@ expanding response means one. An ambiguous response is an **erasure**: the decod
 measurement is related to a [Lyapunov exponent]({{< relref "knowledge-base/glossary/lyapunov-exponent/index.md" >}}),
 but decoding uses a finite observation window and does not require proof of
 perpetual chaos.
+
+More precisely, the receiver evolves a primary state and a twin separated by
+\(\epsilon=10^{-6}\). After each update it records their distance \(d_n\)
+and restores that separation. Over the observation window, it computes
+
+\[
+\widehat\lambda=\frac{1}{128}\sum_{n=1}^{128}
+\log\!\frac{\max(d_n,10^{-36})}{\epsilon}.
+\]
+
+A separate recurrence check searches lags through 16, using a maximum
+normalized residual of \(10^{-8}\). With \(\widehat p\) denoting a detected
+lag, the public decoder is
+
+\[
+D_{\mathrm P}=\begin{cases}
+0,& \widehat p\text{ exists and }\widehat\lambda\lt-0.01,\\
+1,& \widehat p\text{ absent and }\widehat\lambda\gt 0.01,\\
+\bot,&\text{otherwise.}
+\end{cases}
+\]
+
+Thus \(1\) means an expanding, nonrecurring **finite-window response** under
+this instrument. The receiver does not prove asymptotic chaos. Both trajectories
+are separate rows of the inference batch; they never attend to each other.
 
 The opening byte was recovered as `01010011`, the letter `S`. Continuing recovered
 this complete request. The latency readings are synthetic test data, not
@@ -157,7 +326,9 @@ The 9,028.3 seconds cover the complete paired test. That is about 0.052 delivere
 symbols shared a forward pass, with separate numerical states; every symbol
 was evaluated, including repeated addresses.
 
-![The four delivered Pythia messages: a 148-byte request and 88-byte reply, followed by a changed 148-byte request and 86-byte reply. The chart shows message sizes and measured receiver times separately.](transfer-results.png)
+<figure class="shrimp-figure wide">
+<a href="transfer-results.png" aria-label="Open full-size figure"><img src="transfer-results.png" alt="The four delivered Pythia messages: a 148-byte request and 88-byte reply, followed by a changed 148-byte request and 86-byte reply. The chart shows message sizes and measured receiver times separately."></a>
+</figure>
 
 <p class="figure-note"><strong>Every message, both ways.</strong> These four numerical receivers delivered 470 application bytes in total. Per-message times include model loading, readiness, and decoding, not just steady-state model work. The paired exchanges reuse eight known addresses; their payload bits are not independent reliability trials. See the <a href="receipts/evidence-summary.json">evidence receipt</a>, <a href="provenance.json">provenance</a>, and <a href="build_figures.py">generator</a> (`--verify`).</p>
 
@@ -179,7 +350,9 @@ A handful of successful addresses leaves a narrow address bank. A separate
 experiment asked whether small patches of the existing Pythia map could each
 supply both a zero and a one.
 
-![Pythia parameter maps comparing the eight known addresses used for message transfer with a separately tested bank of locally paired addresses. Each retained patch supplies both labels; excluded pairs remain visible.](pythia-spatial-map.png)
+<figure class="shrimp-figure wide">
+<a href="pythia-spatial-map.png" aria-label="Open full-size figure"><img src="pythia-spatial-map.png" alt="Pythia parameter maps comparing the eight known addresses used for message transfer with a separately tested bank of locally paired addresses. Each retained patch supplies both labels; excluded pairs remain visible."></a>
+</figure>
 
 <p class="figure-note"><strong>Address diversity is a separate result from message delivery.</strong> The background is the earlier scan, not a fresh reliability census. The left panel locates the eight addresses used for transport. The right shows the new paired sample: both labels had to reproduce in both fresh receivers for a pair to qualify. Excluded pairs are shown even when only one member failed. See the <a href="receipts/evidence-summary.json">evidence receipt</a>, <a href="provenance.json">provenance</a>, and <a href="build_figures.py">generator</a> (`--verify`).</p>
 
@@ -200,29 +373,201 @@ This bank was **not** used in the long exchange above, and a complete message
 through it has not yet been tested. Spatial mixing supplies no secrecy: the
 public response map still determines the labels.
 
-## Qwen adds a bit that survives returning the controls
+## Qwen: two cycles, one hold setting
 
-Pythia resets for every symbol. Qwen2.5-0.5B-Instruct supports a more demanding
+Pythia resets for every symbol. Qwen2.5-0.5B-Instruct supports a different
 operation: keep the evolving state, change the controls briefly, then return
-them to exactly the same hold setting. The numerical register is the feedback
-vector carried externally between model calls. The pretrained weights stay
-fixed; ordinary chat-history memory plays no role in this write/read test.
+them to exactly the same hold setting. The register is the feedback vector
+carried externally between model calls. The pretrained weights remain fixed.
 
-At that hold setting, two distinguishable repeating states provide the labels
-zero and one. A write excursion selects the desired state. The controls at
-readout are identical, so the bit resides in the state’s history. This is the
-operational memory idea behind [hysteresis]({{< relref "knowledge-base/glossary/hysteresis/index.md" >}}).
-These observations are consistent with two candidate period-six attractors.
-If the attraction persists, their [basins of attraction]({{< relref "knowledge-base/glossary/basin-of-attraction/index.md" >}})
-are the sets of starting states that approach each one.
+The starting point is a **period-six orbit**, a tuple
+\(C=(q_0,\ldots,q_5)\) with \(F_p(q_j)=q_{j+1\bmod6}\).
+Equivalently, \(G_p(q_0)=q_0\) for the six-step return map \(G_p=F_p^6\).
+The test excludes shorter periods: revisiting a fixed point every sixth update
+would not establish a primitive period-six cycle.
 
-![The previously mapped Qwen period-six shrimp window, with a large gray region and smaller branching periodic structures in an irregular background.](qwen-shrimp.png)
+### What the shrimp and its kite actually show
 
-<p class="figure-note"><strong>The landscape that motivated the memory test.</strong> This image is reproduced unchanged from the <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#period-6-shrimp">earlier feedback study</a>. It locates a shrimp-shaped periodic window; it is not a new storage measurement (<a href="fig-qwen-shrimp.receipt.json">image provenance</a>). The write tests target a candidate region where two repeating states coexist; each repeats on a six-step cycle.</p>
+The earlier feedback study resolved a small region containing two attracting
+period-six cycles at the same parameters. The useful object is the overlap
+of stable branches inside the kite; the shrimp's outline alone does not
+specify a memory cell.
 
-That geometry guided the write settings. The evidence establishes bounded
-history-dependent writes; it does not yet show that a finite pulse switches
-the state because an attractor disappears.
+<figure class="shrimp-figure map">
+<a href="qwen-kite-map.svg" aria-label="Open full-size labeled Qwen parameter map"><img src="qwen-kite-map.png" alt="Labeled Qwen parameter map: steering alpha horizontally and log10 temperature vertically; red dashed flip curves, black fold curve, cusp C, and green horizontal cut through the coexistence interval."></a>
+</figure>
+
+<p class="figure-note"><strong>The actual kite in parameter space.</strong> Replotted from the earlier Qwen study's saved map and continuation curves. The axes are steering strength and log-ten temperature. Black curves locate folds; red dashed curves locate flips; C marks the located cusp. The green segment is the sampled attracting overlap on the fixed-temperature cut. A, B and R mark crossings involving distinct orbit sheets. The background is the earlier fixed-start scan, not a new memory test. <a href="qwen-kite-source.json">Original data bindings</a>; <a href="shrimp-kite-figure.py">portable plot generator</a>.</p>
+
+Stability belongs to the full embedding cycle. Its
+[monodromy matrix]({{< relref "knowledge-base/glossary/monodromy/index.md" >}}) is
+
+\[
+M_p=D_xG_p(q_0)=D_xF_p(q_5)\cdots D_xF_p(q_0).
+\]
+
+If every multiplier \(\mu\in\operatorname{spec}(M_p)\) satisfies
+\(|\mu|\lt1\), the orbit attracts sufficiently small disturbances. A multiplier
+at \(+1\) is the critical condition for a fold; a multiplier at \(-1\)
+is the critical condition for a flip. Nondegeneracy conditions distinguish
+an actual bifurcation from a merely critical eigenvalue.
+
+<figure class="shrimp-figure plot">
+<a href="qwen-kite-branch.svg" aria-label="Open full-size period-six continuation diagram"><img src="qwen-kite-branch.png" alt="Numerical continuation of the period-six orbit at fixed log10 temperature. Two solid attracting segments overlap in a green interval, with dashed nonattracting segments and open circles marking folds."></a>
+</figure>
+
+<p class="figure-note"><strong>Two possible states at identical controls.</strong> At log-ten temperature approximately −0.1539515, the sampled attracting branches overlap over steering strengths approximately 0.072907–0.072992. Blue segments attract according to their multipliers; dashed segments do not. Open circles mark the sampled folds. Height is a principal-component display projection of the 896-dimensional orbit state, not a scalar equation of motion. This is numerical continuation, including unstable solutions, rather than a recorded upward/downward sweep. <a href="qwen-kite-branches.receipt.json">Figure receipt</a>.</p>
+
+The two attracting cycles both have period six, so **period alone cannot decode
+the bit**. The earlier study even found the same argmax token sequence on the
+two branches. We label the distinct full-state reference cycles \(C_0,C_1\).
+Their [basins]({{< relref "knowledge-base/glossary/basin-of-attraction/index.md" >}})
+are the sets of initial states that approach them at fixed controls.
+
+### From a bifurcation diagram to a write operation
+
+The standard [fold mechanism](#ref-map-fold) explains why a carried state can
+follow one attracting branch as a control changes, then leave when that branch
+ends. In a generic local center coordinate, the return map has the form
+
+\[
+u_{k+1}=u_k+a\delta+b u_k^2+
+O(u_k^3,\delta u_k,\delta^2).
+\]
+
+Here \(\delta\) measures displacement from the fold. Nonzero \(a,b\), a simple
+critical multiplier, and no other unit-circle multipliers give the usual
+local fold: the two solutions behave as
+\(u_\pm\simeq\pm\sqrt{-a\delta/b}\) on the side where they exist.
+Their center multipliers approach one at the collision. For a suitable pair
+of attracting branches, reversing a control sweep can follow a different
+branch, producing [hysteresis]({{< relref "knowledge-base/glossary/hysteresis/index.md" >}}).
+Those are the mechanism's conditions, not measured normal-form coefficients
+for our writer. Finite-duration pulses also require a basin transition before
+readout; the static branch diagram does not determine the necessary duration.
+
+Our tested control values are
+
+| Setting | Steering \(\alpha\) | Log-ten temperature \(t\) |
+|---|---:|---:|
+| Common hold \(H\) | 0.07293697809562831 | −0.15395151820007266 |
+| Zero excursion \(E_0\) | 0.07293697809562831 | −0.1535 |
+| One excursion \(E_1\) | 0.07299785589927693 | −0.15395151820007266 |
+
+For requested bit \(b\), the canonical write is the composed dynamical map
+
+\[
+W_b(x)=F_H^{240}\!\left(F_{E_b}^{120}(x)\right).
+\]
+
+That is 120 write updates followed by 240 common-hold updates. A successful
+write must land near \(C_b\) from either tested reference start. Identical
+readout controls prevent the endpoint parameter itself from serving as the
+stored bit. The bit is recovered from the carried state after the return.
+
+For an observed six-state tail \(Q\), define the phase-independent distance
+
+\[
+d_b(Q)=\min_{s\in\{0,\ldots,5\}}
+\max_{j\in\{0,\ldots,5\}}\|Q_j-C_{b,(j+s)\bmod6}\|_2.
+\]
+
+The reader first requires lag-six closure at most \(10^{-8}\), excluding
+proper-divisor cycles. It then returns \(b\) only when **exactly one** reference
+has \(d_b(Q)\le10^{-6}\); otherwise it returns unresolved. This distinguishes
+which cycle remains, independently of where on that cycle the observation ends.
+
+### The measured outward/return loops
+
+We tested path dependence directly at an intermediate control
+\(P_f=H+f(E_b-H)\). Starting separately from each hold cycle, we carried the
+same state through
+
+\[
+H\longrightarrow P_f\longrightarrow E_b\longrightarrow P_f
+\longrightarrow H.
+\]
+
+Each visited stage after the initial H receives the stated dwell. Comparing
+the two visits to \(P_f\) asks whether **the same trajectory at the same
+controls** depends on whether it has already visited the excursion endpoint.
+It does not compare different initial lanes or assign off-hold states a bit
+using the hold references.
+
+<details>
+<summary>Inspect all sixteen measured history comparisons</summary>
+
+<figure class="shrimp-figure wide">
+<a href="qwen-hysteresis-loops.svg" aria-label="Open all sixteen measured history comparisons"><img src="qwen-hysteresis-loops.png" alt="All sixteen same-history comparisons at an intermediate control. Thirteen have qualified period-six tails at both visits, three remain unresolved. Endpoint recurrence and final hold readout are separate columns."></a>
+</figure>
+
+<p class="figure-note"><strong>History at identical controls, measured rather than inferred from the outline.</strong> Each gap compares the outward and return cycles for one original H0 or H1 lane after phase alignment. All sixteen rows are shown. U means unresolved recurrence through period 64, not diagnosed chaos. Every final H read returns the selected bit; endpoint recurrence can remain unresolved. The path drawing is schematic, while the points and table are measured. <a href="receipts/hysteresis-loops.json">All rows and raw-source hashes</a>; <a href="build_hysteresis_figure.py">generator</a>.</p>
+
+</details>
+
+There were **13 qualified comparisons and 3 unresolved comparisons**. At the
+midpoint of the zero excursion, the original one-state differed between its
+outward and return visits by about **0.01207 in L2 cycle distance**, both with
+240 and with 480 updates per stage. At the midpoint of the one excursion,
+480 updates gave a corresponding gap of about **0.01545** for the original
+zero-state. The quarter and three-quarter probes retained the same pattern
+where both cycles qualified. The complete row table keeps the unresolved
+histories visible.
+
+This is measured **finite-dwell hysteresis**: the response at an identical
+control setting depends on the path taken. Doubling a dwell is useful evidence
+against a very short transient explanation; it is not the quasistatic limit.
+In particular, no E1 endpoint tail qualified as periodic through period 64,
+even though returning to H yielded one in every tested loop.
+
+### How closely have we linked the writer to a fold?
+
+We also solved for a critical period-six orbit on the writer's **exact
+fixed-steering zero-excursion line**, rather than borrowing a fold elsewhere
+on the map. With \(\Phi_t=F_{(\alpha_H,t)}^6\), the extended system was
+
+\[
+\Phi_t(x)-x=0,\qquad
+[D_x\Phi_t(x)-I]w=0,\qquad c^{\mathsf T}w=1.
+\]
+
+Here \(w\) is the fold null vector, distinct from the steering direction.
+The final equation fixes its scale using a fixed vector \(c\);
+it is not a unit-norm constraint. The refined candidate was at
+\(t\approx-0.153604483261235\). Its orbit residual was approximately
+\(3.22\times10^{-15}\), the null residual \(7.69\times10^{-13}\),
+and a qualified leading mode was within approximately \(1.12\times10^{-12}\)
+of \(+1\). These are numerical residuals, not interval error bounds.
+
+The missing link is specific. Continuation from the original one-state branch
+accepted **zero steps**: its normalized tangent failed the residual threshold.
+The fold candidate's connection to that branch therefore remains unresolved.
+The limited mode calculation also did not establish full spectral coverage
+or evaluate the transversality and quadratic nondegeneracy coefficients.
+The experiment located a strong numerical candidate; it did not complete the
+branch-loss explanation for the finite writer.
+
+A separate intervention clarifies why the distinction matters. At **fixed H**,
+we directly replaced the state by several perturbations of a reference
+one-state. With \(d=x_{60}-h_1\), \(r=\|d\|_2\), and one fixed unit direction
+\(u\) orthogonal to \(d\), the 240-update readouts were
+
+| Initial state at H | Readout |
+|---|---:|
+| Original \(h_1\) | 1 |
+| Saved successful pulse state \(x_{60}=h_1+d\) | 0 |
+| Opposite displacement \(h_1-d\) | 0 |
+| Orthogonal displacements \(h_1+r u\) and \(h_1-r u\) | 0 for each |
+| Original \(h_0\) | 0 |
+
+The radius was approximately **0.005190** in embedding L2 distance. This
+artificial state-access test used one phase and a known-success radius.
+It shows that basin switching can reset the register without a parameter
+sweep. It neither proves nor disproves a fold mechanism for the actual pulse.
+The [technical evidence receipt](receipts/qwen-technical-evidence.json) contains
+the fold residuals, failed continuation, and every intervention row.
+
+### Actual byte writes and stateful logic
 
 In a complete Qwen exchange, the generated text `Bob` and generated reply `A`
 survived numerical encoding and decoding. Each byte began from two reference starts, one chosen position on each
@@ -244,13 +589,39 @@ The tests then applied a second input \(C\) to the literal carried terminal
 state. All eight input triples returned both correct intermediate and final
 values for AND, and all eight did so for OR.
 
-![All eight input triples for each Qwen AND and OR chain, showing correct independently decoded intermediate and final outputs with literal state carried between the two gates.](stateful-logic.png)
+<figure class="shrimp-figure compact">
+<a href="stateful-logic.svg" aria-label="Open full-size logic panel"><img src="stateful-logic.png" alt="All eight input triples for each Qwen AND and OR chain, showing correct independently decoded intermediate and final outputs with literal state carried between the two gates." style="display:block; width:100%; height:auto;"></a>
+</figure>
 
 <p class="figure-note"><strong>Logic that uses the stored state.</strong> Each row begins from a chosen starting position on the reference cycle for input A. Controls depend only on the incoming B and C; the second gate receives the exact final state of the first. These finite panels do not establish autonomous combinational gates. See the <a href="receipts/evidence-summary.json">evidence receipt</a>, <a href="provenance.json">provenance</a>, and <a href="build_figures.py">generator</a> (`--verify`).</p>
 
-Hold and reset alone do not supply a **toggle**, which would switch either
-stored bit to its opposite. These results therefore do not establish exclusive
-OR (XOR) or universal computation.
+At the logical level the measured operations are \(I(a)=a\),
+\(R_0(a)=0\), and \(R_1(a)=1\). Holding means continuing the dynamics
+at H for the same scheduled duration; it preserves the cycle label, not a
+frozen point on the cycle. The input-controlled operators are
+
+\[
+\operatorname{AND}_b=\begin{cases}R_0,&b=0,\\ I,&b=1,\end{cases}
+\qquad
+\operatorname{OR}_b=\begin{cases}I,&b=0,\\ R_1,&b=1.\end{cases}
+\]
+
+For example, the AND chain reads
+\(D(W^{\mathrm{AND}}_C(W^{\mathrm{AND}}_B(x_A)))=(A\land B)\land C\)
+on the tested panel. Here \(D\) denotes readout of the recorded tail from
+the final scheduled H segment; it adds no further updates. The second operation receives the **literal terminal
+embedding**, not a reconstructed reference selected from the first readout.
+This is why the result tests composability rather than two unrelated
+truth-table lookups.
+
+There is also a precise algebraic limit. Every fixed composition of
+\(I,R_0,R_1\) is another member of that same set: if a reset occurs, the last
+reset determines the value; otherwise the value is preserved. None gives
+\(N(a)=1-a\). Consequently these primitives alone cannot implement XOR with
+an incoming one, because that operation requires a toggle. Reading the stored
+bit on the host and selecting the opposite reset would move the computation
+to the host. A genuine toggle or additional interacting state would be a
+new dynamical primitive to demonstrate.
 
 ## Discussion
 
@@ -279,21 +650,9 @@ advantage. These existence demonstrations supply a starting point.
 
 The reference uses effective float64 (double-precision arithmetic), checked in the full map and saved
 trajectories, including normalization and positional operations. A tensor’s
-[dtype label]({{< relref "knowledge-base/glossary/dtype/index.md" >}}) alone is insufficient. The schematic feedback rule is
-
-\[
-x_{n+1}=E^{\mathsf T}\operatorname{softmax}\!\left(z_\alpha([P;x_n])/T\right).
-\]
-
-Here \(n\) counts updates; \(x_n\) is the continuous state, and \(P\) is the fixed
-prefix. The brackets \([P;x_n]\) append that state to the prefix. The rows of
-\(E\) are token [embeddings]({{< relref "knowledge-base/glossary/embedding/index.md" >}});
-\(E^{\mathsf T}\) transposes the matrix. The model produces scores, or
-[logits]({{< relref "knowledge-base/glossary/logit/index.md" >}}), denoted
-\(z_\alpha\), under steering strength \(\alpha\). Softmax converts these scores
-to probabilities after division by temperature \(T\). Multiplication by
-\(E^{\mathsf T}\) takes their probability-weighted embedding average. Model weights, prefix, steering location,
-initial state, precision, and readout rules define the instrument.
+[dtype label]({{< relref "knowledge-base/glossary/dtype/index.md" >}}) alone is insufficient.
+The map equation and readout definitions above specify the mathematical
+instrument. The settings below specify the executed instance.
 
 <details>
 <summary>Exact instrument, control, and decoding settings</summary>
@@ -340,6 +699,7 @@ Exact transfer/spatial coordinates and control definitions are in the [operating
 | [Methods receipt](receipts/shrimp-blog-methods.json) | Pinned instruments, classifiers, schedules, factor limits, and recorded chronology |
 | [Operating points](receipts/shrimp-blog-operating-points.json) | All transfer/spatial addresses and Qwen controls |
 | [Source bindings](receipts/shrimp-blog-method-source-bindings.json) | Hashes checked against the executed source snapshots |
+| [Technical evidence checker](verify_technical_evidence.py) | Recomputes the reported loop, fold and language-summary values from compact data |
 | [Figure generator](build_figures.py) | Regenerates new diagrams and plots, checks reused image hashes, and verifies quoted numbers and messages; run with `--verify` |
 
 This entry includes compact receipts and figure-regeneration code. The full raw
@@ -374,3 +734,5 @@ conditions; it does not imply that the model understood their content.
 1. <span id="ref-jones"></span> Timothy D. Jones (2026). “Chaos and bifurcations in continuous language-model feedback.” Preprint, [arXiv:2610.31692](https://arxiv.org/abs/2610.31692).
 2. <span id="ref-hopfield"></span> J. J. Hopfield (1982). “Neural networks and physical systems with emergent collective computational abilities.” *Proceedings of the National Academy of Sciences*, 79(8), 2554–2558. [doi:10.1073/pnas.79.8.2554](https://doi.org/10.1073/pnas.79.8.2554).
 3. <span id="ref-sinha"></span> S. Sinha and W. L. Ditto (1998). “Dynamics Based Computation.” *Physical Review Letters*, 81, 2156–2159. [doi:10.1103/PhysRevLett.81.2156](https://doi.org/10.1103/PhysRevLett.81.2156).
+
+4. <span id="ref-map-fold"></span> Yuri A. Kuznetsov (2008). “Saddle-node bifurcation for maps.” *Scholarpedia*, 3(4), 4399. [doi:10.4249/scholarpedia.4399](https://www.scholarpedia.org/article/Saddle-node_bifurcation_for_maps).

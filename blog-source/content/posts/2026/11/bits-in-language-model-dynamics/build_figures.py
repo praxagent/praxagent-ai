@@ -120,15 +120,19 @@ def formats(fig,stem,title,description):
 
 def transfer(d):
  rows=d['transfer']['messages'];labels=['Base request','Base reply','Changed request','Changed reply'];colors=[BLUE,TAN,BLUE,TAN]
- fig,axs=plt.subplots(2,1,figsize=(6.8,8.2));fig.subplots_adjust(left=.34,right=.93,top=.83,bottom=.09,hspace=.63)
- fig.text(.055,.958,'Four messages, fully recovered',fontsize=22,weight='bold')
- fig.text(.055,.918,'Base and changed-input exchanges',fontsize=15,color=MUTED)
- for ax,values,title,ticks,limit,fmt in [(axs[0],[m['payload_bytes'] for m in rows],'Received application bytes',[0,75,150],175,'{:.0f}'),(axs[1],[m['seconds']/60 for m in rows],'Receiver execution (minutes)',[0,25,50],59,'{:.2f}')]:
+ fig,axs=plt.subplots(1,2,figsize=(6.8,2.9),sharey=True);fig.subplots_adjust(left=.275,right=.99,top=.68,bottom=.16,wspace=.20)
+ fig.text(.025,.936,'Four messages, fully recovered',fontsize=17,weight='bold')
+ fig.text(.025,.837,'Base and changed-input exchanges',fontsize=11.5,color=MUTED)
+ panels=[([m['payload_bytes'] for m in rows],'Bytes',[0,75,150],185,'{:.0f}'),([m['seconds']/60 for m in rows],'Minutes',[0,25,50],70,'{:.2f}')]
+ for i,(ax,(values,title,ticks,limit,fmt)) in enumerate(zip(axs,panels,strict=True)):
   ax.barh(range(4),values,color=colors,height=.56,zorder=3)
-  for y,value in enumerate(values):ax.text(value+limit*.025,y,fmt.format(value),va='center',ha='left',fontsize=17,weight='bold')
-  ax.set(yticks=range(4),yticklabels=labels,xlim=(0,limit),xticks=ticks);ax.invert_yaxis();ax.grid(axis='x',color=GRID,lw=.8,zorder=0)
-  ax.set_title(title,loc='left',fontsize=17,pad=16);ax.tick_params(axis='both',length=0,labelsize=16,pad=10)
+  for y,value in enumerate(values):ax.text(value+limit*.025,y,fmt.format(value),va='center',ha='left',fontsize=12,weight='bold')
+  ax.set(yticks=range(4),xlim=(0,limit),xticks=ticks);ax.grid(axis='x',color=GRID,lw=.7,zorder=0)
+  if i==0:ax.set_yticklabels(labels)
+  else:ax.tick_params(axis='y',labelleft=False)
+  ax.set_title(title,loc='left',fontsize=13,pad=9);ax.tick_params(axis='both',length=0,labelsize=11,pad=7);ax.tick_params(axis='y',labelsize=12.5)
   for spine in ax.spines.values():spine.set_visible(False)
+ axs[0].invert_yaxis()
  description='All four received messages: base request 148 bytes, base reply 88, changed request 148, changed reply 86. Separate bars show receiver execution minutes including loading, readiness and evidence recording. These are four runs, without uncertainty intervals; whole-family wall time is a separate metric.'
  return formats(fig,'transfer-results','Four complete Pythia message transfers',description),description
 
@@ -153,38 +157,40 @@ def logic(d):
  return formats(fig,'stateful-logic','Complete measured AND and OR chain panels',description),description
 
 def routes():
- raw='''<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1560" viewBox="0 0 400 780" role="img" aria-labelledby="title desc">
+ raw='''<svg xmlns="http://www.w3.org/2000/svg" width="800" height="540" viewBox="0 0 400 270" role="img" aria-labelledby="title desc">
 <title id="title">Two routes through model dynamics</title>
 <desc id="desc">Conceptual diagram, not measured trajectories. Pythia begins anew for each address, observes the response and classifies a bit. Qwen carries its current state through a write excursion, returns to common hold controls and reads the value; the same state continues into the next operation. Both use public control instructions.</desc>
-<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#615B52"/></marker></defs>
-<style>.t{font-family:Arial,Helvetica,sans-serif;fill:#292721}.h{font-size:23px;font-weight:700}.b{font-size:18px;font-weight:700}.s{font-size:17px}.m{font-size:15px;fill:#615B52}.a{fill:none;stroke:#615B52;stroke-width:2;marker-end:url(#arrow)}</style>
-<rect width="400" height="780" fill="#F7F4F0"/>
-<text class="t h" x="24" y="35">Two routes through</text><text class="t h" x="24" y="63">model dynamics</text>
-<text class="t m" x="24" y="88">Conceptual diagram · public controls</text>
-<rect x="18" y="110" width="364" height="270" rx="15" fill="#EDF1F4" stroke="#355F7C"/>
-<text class="t b" x="34" y="141">Pythia: address a response</text>
-<rect x="34" y="158" width="332" height="48" rx="9" fill="#FFFFFF"/><text class="t s" x="50" y="187">Reset at a chosen address</text>
-<path class="a" d="M200 207V226"/>
-<rect x="34" y="230" width="332" height="48" rx="9" fill="#FFFFFF"/><text class="t s" x="50" y="259">Run and observe the response</text>
-<path class="a" d="M200 279V298"/>
-<rect x="34" y="302" width="332" height="48" rx="9" fill="#FFFFFF"/><text class="t s" x="50" y="331">Classify a bit; assemble bytes</text>
-<text class="t m" x="34" y="369">Each next address starts afresh.</text>
-<rect x="18" y="405" width="364" height="340" rx="15" fill="#F1E9E0" stroke="#956541"/>
-<text class="t b" x="34" y="436">Qwen: write a carried state</text>
-<rect x="34" y="454" width="303" height="48" rx="9" fill="#FFFFFF"/><text class="t s" x="50" y="483">Keep the current model state</text>
-<path class="a" d="M186 503V522"/>
-<rect x="34" y="526" width="303" height="48" rx="9" fill="#FFFFFF"/><text class="t s" x="50" y="555">Apply a write excursion</text>
-<path class="a" d="M186 575V594"/>
-<rect x="34" y="598" width="303" height="66" rx="9" fill="#FFFFFF"/><text class="t s" x="50" y="624">Return to common hold</text><text class="t s" x="50" y="647">and read the resulting state</text>
-<path class="a" d="M338 631H359V478H339"/>
-<text class="t m" x="34" y="698">The same state continues</text><text class="t m" x="34" y="719">into the next operation.</text>
-<text class="t m" x="24" y="768">Different primitives, different tests.</text>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#615B52"/></marker></defs>
+<style>.t{font-family:Arial,Helvetica,sans-serif;fill:#292721}.h{font-size:18px;font-weight:700}.b{font-size:14px;font-weight:700}.s{font-size:13px;text-anchor:middle}.m{font-size:12px;fill:#615B52}.a{fill:none;stroke:#615B52;stroke-width:1.7;marker-end:url(#arrow)}</style>
+<rect width="400" height="270" fill="#F7F4F0"/>
+<text class="t h" x="14" y="25">Two routes through model dynamics</text>
+<text class="t m" x="14" y="45">Conceptual · public control instructions</text>
+<rect x="12" y="59" width="376" height="89" rx="10" fill="#EDF1F4" stroke="#355F7C"/>
+<text class="t b" x="22" y="80">Pythia: reset for each address</text>
+<rect x="22" y="94" width="106" height="42" rx="7" fill="#FFFFFF"/>
+<text class="t s" x="75" y="111">Reset state</text><text class="t s" x="75" y="127">at address</text>
+<path class="a" d="M131 115H143"/>
+<rect x="147" y="94" width="106" height="42" rx="7" fill="#FFFFFF"/>
+<text class="t s" x="200" y="111">Run and</text><text class="t s" x="200" y="127">observe</text>
+<path class="a" d="M256 115H268"/>
+<rect x="272" y="94" width="106" height="42" rx="7" fill="#FFFFFF"/>
+<text class="t s" x="325" y="111">Classify bits,</text><text class="t s" x="325" y="127">assemble bytes</text>
+<rect x="12" y="160" width="376" height="98" rx="10" fill="#F1E9E0" stroke="#956541"/>
+<text class="t b" x="22" y="181">Qwen: carry state between operations</text>
+<rect x="22" y="195" width="106" height="49" rx="7" fill="#FFFFFF"/>
+<text class="t s" x="75" y="215">Carried state</text><text class="t s" x="75" y="232">+ write pulse</text>
+<path class="a" d="M131 220H143"/>
+<rect x="147" y="195" width="106" height="49" rx="7" fill="#FFFFFF"/>
+<text class="t s" x="200" y="215">Common hold,</text><text class="t s" x="200" y="232">read bit</text>
+<path class="a" d="M256 220H268"/>
+<rect x="272" y="195" width="106" height="49" rx="7" fill="#FFFFFF"/>
+<text class="t s" x="325" y="215">Same state,</text><text class="t s" x="325" y="232">next operation</text>
 </svg>'''.encode();ET.fromstring(raw);return {'two-routes.svg':raw}
 
 def og():
  fig=plt.figure(figsize=(12,6.3),dpi=100);ax=fig.add_axes([0,0,1,1]);ax.set(xlim=(0,1200),ylim=(0,630));ax.axis('off')
  ax.text(62,568,'PRAXAGENT  /  RESEARCH NOTE',fontsize=16,weight='bold',color=MUTED)
- ax.text(62,464,'Bits in a language',fontsize=43,weight='bold');ax.text(62,386,'model’s dynamics',fontsize=43,weight='bold')
+ ax.text(62,464,'Communication, memory,',fontsize=36,weight='bold');ax.text(62,386,'and logic in model feedback',fontsize=32,weight='bold')
  ax.text(64,316,'Public transport. Writable state. Finite evidence.',fontsize=22,color=MUTED)
  for x,w,label,route,color in [(62,504,'PYTHIA','Reset → Classify',BLUE),(600,538,'QWEN','Carry → Hold → Read',TAN)]:
   ax.add_patch(FancyBboxPatch((x,110),w,136,boxstyle='round,pad=0,rounding_size=14',facecolor='#FCFAF7',edgecolor=color,lw=2))
@@ -219,6 +225,11 @@ def generate(index=None):
  generated=expected_numbers(d);generated_ids={x['id'] for x in generated};extra=[x for x in old.get('numbers',[]) if x.get('id') not in generated_ids]
  # Retain root-added paper bindings on existing generated entries.
  oldnums={x.get('id'):x for x in old.get('numbers',[])};generated=[{**oldnums.get(x['id'],{}),**x} for x in generated]
+ for name in old.get('figures',[]):
+  if name not in figures:
+   raw=(ROOT/name).read_bytes()
+   assert sha(raw)==old['figure_sha256'][name], 'External figure differs: '+name
+   figures.append(name);out[name]=raw
  manifest.update(local_bundle=True,source_commit=d['source_commit'],generator={'path':'build_figures.py','sha256':sha(Path(__file__).read_bytes())},receipts=manreceipts,figures=figures,numbers=generated+extra,figure_sha256={k:sha(out[k]) for k in figures},source_evidence='receipts/evidence-summary.json',editorial_scope=old.get('editorial_scope','Figures synthesized from existing audited results and unchanged rasters; no new experiments.'))
  if index is not None:manifest['quoted_examples']=check_prose(index,d,full)
  out['provenance.json']=jsonbytes(manifest)

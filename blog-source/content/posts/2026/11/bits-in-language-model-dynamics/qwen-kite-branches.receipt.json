@@ -1,0 +1,95 @@
+{
+  "description": "Portrait layout adaptation of the earlier period-6 kite figure, with the original displayed numerical data.",
+  "scope": "This generator plots compact saved inputs only. No model evaluation, trajectories, continuation, PCA recomputation or new stability calculation.",
+  "semantics": "Top: fixed-start map and fold/flip curves. Bottom: numerical orbit continuation, not a measured upward/downward hysteresis scan. The vertical coordinate is a principal-component display projection.",
+  "inputs": [
+    {
+      "file": "qwen-kite-plot-data.npz",
+      "size_bytes": 2410998,
+      "sha256": "1adca91a2e279c628ed7548252853c341af0c71f575ecd564a221a0ff09db0ad"
+    },
+    {
+      "file": "qwen-kite-source.json",
+      "size_bytes": 6271,
+      "sha256": "c1985a6191ff66f7451c497bf5664060c340347434b7be07aa5fd86db3c57111"
+    }
+  ],
+  "generator": {
+    "file": "shrimp-kite-figure.py",
+    "size_bytes": 8314,
+    "sha256": "05fed2f2fa13d5d05a4d1024f05f365aa66fe5b1b9e4cde8824022530b182145"
+  },
+  "outputs": [
+    {
+      "file": "qwen-kite-branches.png",
+      "size_bytes": 809599,
+      "sha256": "7dee27dbe88173e1b93187134c7f657acde6cfd996c2ebdafc647eaa80ba601f"
+    },
+    {
+      "file": "qwen-kite-branches.svg",
+      "size_bytes": 743096,
+      "sha256": "e543ea3d0e898db156aae3e6872a685ce912b3d24e3490d46536df1e94b903a4"
+    },
+    {
+      "file": "qwen-kite-branches.pdf",
+      "size_bytes": 522613,
+      "sha256": "30e0135f7383f7df28ce33448b399b479dde310b3f9de19ca7ce0656bd6f7166"
+    },
+    {
+      "file": "qwen-kite-map.png",
+      "size_bytes": 665572,
+      "sha256": "0c77f97003fcf30c3497ca00a512c26247f19b6d7cea7a39ebf11046350fa36a"
+    },
+    {
+      "file": "qwen-kite-map.svg",
+      "size_bytes": 722921,
+      "sha256": "5715bfba3cc1bd2082b97dff4989b2a0c3a2bf0a8675029071ab7fd98c8873b5"
+    },
+    {
+      "file": "qwen-kite-map.pdf",
+      "size_bytes": 515924,
+      "sha256": "201cc317549503ed76ffe6d13981ce4943abb18090141d7653490c2cd37db900"
+    },
+    {
+      "file": "qwen-kite-branch.png",
+      "size_bytes": 139056,
+      "sha256": "180370559ba50951ce1b8eb83a80fcd3e0e1d8255ff973adcf28df892f3fbc15"
+    },
+    {
+      "file": "qwen-kite-branch.svg",
+      "size_bytes": 21310,
+      "sha256": "f90004b9064834411e60b8f089eaf8311bcd34e389b52eb6211fb56dd9b07d71"
+    },
+    {
+      "file": "qwen-kite-branch.pdf",
+      "size_bytes": 21320,
+      "sha256": "1b68d04c1635f396fec22a0d736e9ebc824c5de81fd1dd849df3584816b5a2af"
+    }
+  ],
+  "runtime": {
+    "numpy": "2.5.4",
+    "matplotlib": "3.11.2",
+    "font": "DejaVu Sans"
+  },
+  "nominal_size_inches": [
+    6.8,
+    10.5
+  ],
+  "separate_exports": {
+    "qwen-kite-map": {
+      "scope": "Per-axis tight bounding box, including title, ticks, axis labels and legend where present; no plotted data removed.",
+      "size_inches": [
+        6.564423283344077,
+        5.212221133998506
+      ]
+    },
+    "qwen-kite-branch": {
+      "scope": "Per-axis tight bounding box, including title, ticks, axis labels and legend where present; no plotted data removed.",
+      "size_inches": [
+        6.564423283344077,
+        4.856667754890385
+      ]
+    }
+  },
+  "verification": "--verify regenerates nine images and this receipt in a temporary directory and compares all ten files byte-for-byte."
+}

@@ -3,21 +3,28 @@
   "source_commit": "536a4d9f9b64a456b9c5a186c27aedf964908ce6",
   "generator": {
     "path": "build_figures.py",
-    "sha256": "83c51105372c66a734217452a6ea39cb415041bb0d877ef2708268a5e8681844"
+    "sha256": "6a8cc52c7506f735cc952ccc3c5880c42f95728c32ba2a9f0df1824d390a9120"
   },
   "receipts": {
     "receipts/evidence-summary.json": "e48920cc2f042a16c67fadc56e52b85393ace0c5fe6aed5dae1b34f21c960848",
     "receipts/evidence-audit.json": "2cf38a7e6bcbefab8758c898f0ab9342a5a71a4568a9be6442f853de39aa258e",
-    "fig-transfer-results.receipt.json": "59f7b4e608b6aee951c5746b818ef362d297ac6b3e30b63cd25e8ed31048943e",
-    "fig-stateful-logic.receipt.json": "8b3d4fc49e7ae575b008c6aaa0a50ad41725a75947b17b5082ec729c1ea23d93",
-    "fig-two-routes.receipt.json": "d3c81489d147f685fa50e92a2cb7308d5344a8626c68ff5767017492d6d249b9",
-    "fig-og-card.receipt.json": "9bd0cfaf4c9e009775505ac603dbf9037884cc53b3b429fcf3afacb9a2e9493b",
-    "fig-qwen-shrimp.receipt.json": "fd68488ad9e67c95f756ac754fca200b36e86d0d2bd378ffdd3b062fd12b273a",
-    "fig-pythia-spatial-map.receipt.json": "ad64135fbacf16c6de689d3df297d13cceed10f6b8739011b03cabe5f22610b8",
+    "fig-transfer-results.receipt.json": "fb814cc71817b9e9a189187d061bd42894e23c95e9c6d74665c4fba63d9ec755",
+    "fig-stateful-logic.receipt.json": "e005e6af89a93215f666584cf817599b10395afd11567062dc5d3f047770f645",
+    "fig-two-routes.receipt.json": "9e09ae4cddb725f512210f3308cd491d43ee47667dc676a6ccce4e921b235bbe",
+    "fig-og-card.receipt.json": "11e2e3389776227018fc9d637475e82d0b232b73ba80574409381eaaedc24bfa",
+    "fig-qwen-shrimp.receipt.json": "8c5cea24f5b3cc867f2cd4649d6292ff22d88db476650827f2fc20dcf4135d7c",
+    "fig-pythia-spatial-map.receipt.json": "5b5af872ceb2356f1d75d45bde73ce28e94212d8730686c4e7c17d39cac05470",
     "receipts/qwen-schedule.json": "483988e01c099046530ec170cbba2600cb7acb945ea455a1e72b9991edb84c43",
     "receipts/shrimp-blog-methods.json": "31b791fbd7524c9a28cb4dcdb9ddbf572869a4ef9435994e5b5458127e1edc93",
     "receipts/shrimp-blog-operating-points.json": "5acc17e24662084e954eeb0f674d4f11dea87551d56e1a73244fcb51dbebfe9c",
-    "receipts/shrimp-blog-method-source-bindings.json": "decdb1496219d3cf1c7edff988a09ed3ec9f2e6233da5245d510f5e4b99897b5"
+    "receipts/shrimp-blog-method-source-bindings.json": "decdb1496219d3cf1c7edff988a09ed3ec9f2e6233da5245d510f5e4b99897b5",
+    "qwen-kite-branches.receipt.json": "e61b4f267143324f2689a0535ad21c8f6955a4f4f69192390fe390d4e77d7260",
+    "fig-qwen-kite-replots.receipt.json": "ff60ab44dace410c570e55780c4c494c4976920ca3b87f09bc9a09053778c5e2",
+    "qwen-kite-source.json": "c1985a6191ff66f7451c497bf5664060c340347434b7be07aa5fd86db3c57111",
+    "receipts/language-interface.json": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+    "receipts/qwen-technical-evidence.json": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
+    "receipts/hysteresis-loops.json": "fe2bae5a0abdaf5af34d0964a8c26c475d01506c722bcaf663da7cbd92eddff6",
+    "fig-qwen-hysteresis-loops.receipt.json": "0aba9a4ce1fbec1ce3e6b67bfa542343833fa55c87afd894ce9656a911af4f0e"
   },
   "figures": [
     "transfer-results.png",
@@ -29,7 +36,19 @@
     "two-routes.svg",
     "og-card.png",
     "qwen-shrimp.png",
-    "pythia-spatial-map.png"
+    "pythia-spatial-map.png",
+    "qwen-kite-branches.png",
+    "qwen-kite-branches.svg",
+    "qwen-kite-branches.pdf",
+    "qwen-kite-map.png",
+    "qwen-kite-map.svg",
+    "qwen-kite-map.pdf",
+    "qwen-kite-branch.png",
+    "qwen-kite-branch.svg",
+    "qwen-kite-branch.pdf",
+    "qwen-hysteresis-loops.png",
+    "qwen-hysteresis-loops.svg",
+    "qwen-hysteresis-loops.pdf"
   ],
   "numbers": [
     {
@@ -379,22 +398,489 @@
       "appears_as": "(0.07299785589927693, -0.15395151820007266)",
       "source": "receipts/shrimp-blog-operating-points.json#/qwen/E1",
       "claim": "Exact(steering strength,log10 temperature)pair."
+    },
+    {
+      "id": "technical-loop-count",
+      "appears_as": "All sixteen rows are shown.",
+      "source": "receipts/hysteresis-loops.json#/groups",
+      "source_sha256": "fe2bae5a0abdaf5af34d0964a8c26c475d01506c722bcaf663da7cbd92eddff6",
+      "claim": "Count all four original lanes in each saved configuration."
+    },
+    {
+      "id": "technical-loop-qualified",
+      "appears_as": "13 qualified comparisons",
+      "source": "receipts/hysteresis-loops.json#/groups",
+      "source_sha256": "fe2bae5a0abdaf5af34d0964a8c26c475d01506c722bcaf663da7cbd92eddff6",
+      "claim": "Recomputed count of two qualified period-six tails."
+    },
+    {
+      "id": "technical-loop-unresolved",
+      "appears_as": "3 unresolved comparisons",
+      "source": "receipts/hysteresis-loops.json#/groups",
+      "source_sha256": "fe2bae5a0abdaf5af34d0964a8c26c475d01506c722bcaf663da7cbd92eddff6",
+      "claim": "Recomputed count with at least one unresolved tail."
+    },
+    {
+      "id": "technical-loop-gap-zero240",
+      "appears_as": "0.01207",
+      "source": "receipts/hysteresis-loops.json#/groups/0/rows/1/gap",
+      "source_sha256": "fe2bae5a0abdaf5af34d0964a8c26c475d01506c722bcaf663da7cbd92eddff6",
+      "claim": "Round saved same-lane outward/return phase-aligned L2 gap to five decimals."
+    },
+    {
+      "id": "technical-loop-gap-zero480",
+      "appears_as": "0.01207",
+      "source": "receipts/hysteresis-loops.json#/groups/1/rows/1/gap",
+      "source_sha256": "fe2bae5a0abdaf5af34d0964a8c26c475d01506c722bcaf663da7cbd92eddff6",
+      "claim": "Round saved same-lane outward/return phase-aligned L2 gap to five decimals."
+    },
+    {
+      "id": "technical-loop-gap-one480",
+      "appears_as": "0.01545",
+      "source": "receipts/hysteresis-loops.json#/groups/1/rows/2/gap",
+      "source_sha256": "fe2bae5a0abdaf5af34d0964a8c26c475d01506c722bcaf663da7cbd92eddff6",
+      "claim": "Round saved same-lane outward/return phase-aligned L2 gap to five decimals."
+    },
+    {
+      "id": "technical-loop-dwell-240",
+      "appears_as": "240",
+      "source": "receipts/hysteresis-loops.json#/groups",
+      "source_sha256": "fe2bae5a0abdaf5af34d0964a8c26c475d01506c722bcaf663da7cbd92eddff6",
+      "claim": "Recorded updates per visited stage; not a convergence bound."
+    },
+    {
+      "id": "technical-loop-dwell-480",
+      "appears_as": "480",
+      "source": "receipts/hysteresis-loops.json#/groups",
+      "source_sha256": "fe2bae5a0abdaf5af34d0964a8c26c475d01506c722bcaf663da7cbd92eddff6",
+      "claim": "Recorded updates per visited stage; not a convergence bound."
+    },
+    {
+      "id": "technical-loop-period-search",
+      "appears_as": "period 64",
+      "source": "receipts/hysteresis-loops.json#/recurrence/period_scan_maximum",
+      "source_sha256": "fe2bae5a0abdaf5af34d0964a8c26c475d01506c722bcaf663da7cbd92eddff6",
+      "claim": "Upper lag searched; unresolved does not mean chaos."
+    },
+    {
+      "id": "technical-H-alpha",
+      "appears_as": "0.07293697809562831",
+      "source": "receipts/qwen-technical-evidence.json#/controls/H/alpha",
+      "source_sha256": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
+      "claim": "Exact saved control, checked against independent loop receipt."
+    },
+    {
+      "id": "technical-H-log10_temperature",
+      "appears_as": "-0.15395151820007266",
+      "source": "receipts/qwen-technical-evidence.json#/controls/H/log10_temperature",
+      "source_sha256": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
+      "claim": "Exact saved control, checked against independent loop receipt."
+    },
+    {
+      "id": "technical-E0-alpha",
+      "appears_as": "0.07293697809562831",
+      "source": "receipts/qwen-technical-evidence.json#/controls/E0/alpha",
+      "source_sha256": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
+      "claim": "Exact saved control, checked against independent loop receipt."
+    },
+    {
+      "id": "technical-E0-log10_temperature",
+      "appears_as": "-0.1535",
+      "source": "receipts/qwen-technical-evidence.json#/controls/E0/log10_temperature",
+      "source_sha256": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
+      "claim": "Exact saved control, checked against independent loop receipt."
+    },
+    {
+      "id": "technical-E1-alpha",
+      "appears_as": "0.07299785589927693",
+      "source": "receipts/qwen-technical-evidence.json#/controls/E1/alpha",
+      "source_sha256": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
+      "claim": "Exact saved control, checked against independent loop receipt."
+    },
+    {
+      "id": "technical-E1-log10_temperature",
+      "appears_as": "-0.15395151820007266",
+      "source": "receipts/qwen-technical-evidence.json#/controls/E1/log10_temperature",
+      "source_sha256": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
+      "claim": "Exact saved control, checked against independent loop receipt."
+    },
+    {
+      "id": "technical-kite-temperature",
+      "appears_as": "−0.1539515",
+      "source": "qwen-kite-source.json#/original_figure_summary/branch_log10_temperature",
+      "source_sha256": "c1985a6191ff66f7451c497bf5664060c340347434b7be07aa5fd86db3c57111",
+      "claim": "Seven decimal display of prior fixed branch cut."
+    },
+    {
+      "id": "technical-kite-overlap",
+      "appears_as": "0.072907–0.072992",
+      "source": "qwen-kite-source.json#/original_figure_summary/coexistence_alpha",
+      "source_sha256": "c1985a6191ff66f7451c497bf5664060c340347434b7be07aa5fd86db3c57111",
+      "claim": "Sampled attracting overlap rounded to six decimals; not interval proof."
+    },
+    {
+      "id": "technical-qwen-dimension",
+      "appears_as": "896",
+      "source": "qwen-kite-source.json#/transformations/state_array_shape/1",
+      "source_sha256": "c1985a6191ff66f7451c497bf5664060c340347434b7be07aa5fd86db3c57111",
+      "claim": "Dimension of saved orbit representatives."
+    },
+    {
+      "id": "technical-qwen-instrument-dimension",
+      "appears_as": "896 for Qwen",
+      "source": "receipts/shrimp-blog-methods.json#/instruments/qwen/dimensions",
+      "source_sha256": "31b791fbd7524c9a28cb4dcdb9ddbf572869a4ef9435994e5b5458127e1edc93",
+      "claim": "Full carried embedding dimension from pinned instrument configuration."
+    },
+    {
+      "id": "technical-pythia-instrument-dimension",
+      "appears_as": "768 for Pythia",
+      "source": "receipts/shrimp-blog-methods.json#/instruments/pythia/dimensions",
+      "source_sha256": "31b791fbd7524c9a28cb4dcdb9ddbf572869a4ef9435994e5b5458127e1edc93",
+      "claim": "Full carried embedding dimension from pinned instrument configuration."
+    },
+    {
+      "id": "technical-fold-location",
+      "appears_as": "-0.153604483261235",
+      "source": "receipts/qwen-technical-evidence.json#/fold/fold/refined/log10_temperature",
+      "source_sha256": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
+      "claim": "Fifteen decimal candidate coordinate; no interval error bound."
+    },
+    {
+      "id": "technical-fold-orbit_l2",
+      "appears_as": "3.22\\times10^{-15}",
+      "source": "receipts/qwen-technical-evidence.json#/fold/fold/refined/orbit_l2",
+      "source_sha256": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
+      "claim": "Residual rounded to three significant digits, not a state error bound."
+    },
+    {
+      "id": "technical-fold-null_l2",
+      "appears_as": "7.69\\times10^{-13}",
+      "source": "receipts/qwen-technical-evidence.json#/fold/fold/refined/null_l2",
+      "source_sha256": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
+      "claim": "Residual rounded to three significant digits, not a state error bound."
+    },
+    {
+      "id": "technical-fold-mode-distance",
+      "appears_as": "1.12\\times10^{-12}",
+      "source": "receipts/qwen-technical-evidence.json#/fold/fold/spectrum/pairs/0/value/0",
+      "source_sha256": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
+      "claim": "Absolute selected approximate eigenvalue minus one, rounded to three significant digits; incomplete spectrum."
+    },
+    {
+      "id": "technical-fold-steps",
+      "appears_as": "zero steps",
+      "source": "receipts/qwen-technical-evidence.json#/fold/branch/accepted_steps",
+      "source_sha256": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
+      "claim": "Accepted continuation step count; initial tangent failed before an attempted step."
+    },
+    {
+      "id": "technical-state-radius",
+      "appears_as": "0.005190",
+      "source": "receipts/qwen-technical-evidence.json#/fixed_H_state_intervention/radius",
+      "source_sha256": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
+      "claim": "Known-success displacement L2 radius, rounded to six decimals."
+    },
+    {
+      "id": "technical-state-row-0",
+      "appears_as": "| Original \\(h_1\\) | 1 |",
+      "source": "receipts/qwen-technical-evidence.json#/fixed_H_state_intervention/rows/0",
+      "source_sha256": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
+      "claim": "Direct saved readout; orthogonal entry checks both signs."
+    },
+    {
+      "id": "technical-state-row-1",
+      "appears_as": "| Saved successful pulse state \\(x_{60}=h_1+d\\) | 0 |",
+      "source": "receipts/qwen-technical-evidence.json#/fixed_H_state_intervention/rows/1",
+      "source_sha256": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
+      "claim": "Direct saved readout; orthogonal entry checks both signs."
+    },
+    {
+      "id": "technical-state-row-2",
+      "appears_as": "| Opposite displacement \\(h_1-d\\) | 0 |",
+      "source": "receipts/qwen-technical-evidence.json#/fixed_H_state_intervention/rows/2",
+      "source_sha256": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
+      "claim": "Direct saved readout; orthogonal entry checks both signs."
+    },
+    {
+      "id": "technical-state-row-3",
+      "appears_as": "| Orthogonal displacements \\(h_1+r u\\) and \\(h_1-r u\\) | 0 for each |",
+      "source": "receipts/qwen-technical-evidence.json#/fixed_H_state_intervention/rows/3",
+      "source_sha256": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
+      "claim": "Direct saved readout; orthogonal entry checks both signs."
+    },
+    {
+      "id": "technical-state-row-4",
+      "appears_as": "| Original \\(h_0\\) | 0 |",
+      "source": "receipts/qwen-technical-evidence.json#/fixed_H_state_intervention/rows/5",
+      "source_sha256": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
+      "claim": "Direct saved readout; orthogonal entry checks both signs."
+    },
+    {
+      "id": "technical-language-row-0",
+      "appears_as": "| 0 | 3 → 1 | yes |",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/0",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "All displayed symbol/truncation cells generated from this saved row; text byte binding and nearest-corner decision checked."
+    },
+    {
+      "id": "technical-language-row-1",
+      "appears_as": "| 1 | 2 → 0 | no |",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/1",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "All displayed symbol/truncation cells generated from this saved row; text byte binding and nearest-corner decision checked."
+    },
+    {
+      "id": "technical-language-row-2",
+      "appears_as": "| 2 | 1 → 0 | no |",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/2",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "All displayed symbol/truncation cells generated from this saved row; text byte binding and nearest-corner decision checked."
+    },
+    {
+      "id": "technical-language-row-3",
+      "appears_as": "| 3 | 1 → 1 | no |",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/3",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "All displayed symbol/truncation cells generated from this saved row; text byte binding and nearest-corner decision checked."
+    },
+    {
+      "id": "technical-language-row-4",
+      "appears_as": "| 4 | 2 → 2 | no |",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/4",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "All displayed symbol/truncation cells generated from this saved row; text byte binding and nearest-corner decision checked."
+    },
+    {
+      "id": "technical-language-row-5",
+      "appears_as": "| 5 | 2 → 2 | no |",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/5",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "All displayed symbol/truncation cells generated from this saved row; text byte binding and nearest-corner decision checked."
+    },
+    {
+      "id": "technical-language-row-6",
+      "appears_as": "| 6 | 0 → 0 | no |",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/6",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "All displayed symbol/truncation cells generated from this saved row; text byte binding and nearest-corner decision checked."
+    },
+    {
+      "id": "technical-language-row-7",
+      "appears_as": "| 7 | 1 → 1 | no |",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/7",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "All displayed symbol/truncation cells generated from this saved row; text byte binding and nearest-corner decision checked."
+    },
+    {
+      "id": "technical-language-row-8",
+      "appears_as": "| 8 | 3 → 2 | no |",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/8",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "All displayed symbol/truncation cells generated from this saved row; text byte binding and nearest-corner decision checked."
+    },
+    {
+      "id": "technical-language-row-9",
+      "appears_as": "| 9 | 2 → 1 | yes |",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/9",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "All displayed symbol/truncation cells generated from this saved row; text byte binding and nearest-corner decision checked."
+    },
+    {
+      "id": "technical-language-row-10",
+      "appears_as": "| 10 | 0 → 0 | no |",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/10",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "All displayed symbol/truncation cells generated from this saved row; text byte binding and nearest-corner decision checked."
+    },
+    {
+      "id": "technical-language-row-11",
+      "appears_as": "| 11 | 1 → 1 | yes |",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/11",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "All displayed symbol/truncation cells generated from this saved row; text byte binding and nearest-corner decision checked."
+    },
+    {
+      "id": "technical-language-row-12",
+      "appears_as": "| 12 | 0 → 0 | no |",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/12",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "All displayed symbol/truncation cells generated from this saved row; text byte binding and nearest-corner decision checked."
+    },
+    {
+      "id": "technical-language-row-13",
+      "appears_as": "| 13 | 3 → 0 | no |",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/13",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "All displayed symbol/truncation cells generated from this saved row; text byte binding and nearest-corner decision checked."
+    },
+    {
+      "id": "technical-language-row-14",
+      "appears_as": "| 14 | 3 → 2 | no |",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/14",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "All displayed symbol/truncation cells generated from this saved row; text byte binding and nearest-corner decision checked."
+    },
+    {
+      "id": "technical-language-row-15",
+      "appears_as": "| 15 | 0 → 0 | no |",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/15",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "All displayed symbol/truncation cells generated from this saved row; text byte binding and nearest-corner decision checked."
+    },
+    {
+      "id": "technical-language-success",
+      "appears_as": "9 of 16 requested symbols",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "Count individual correct requested/recovered label pairs."
+    },
+    {
+      "id": "technical-language-success-fraction",
+      "appears_as": "9/16 corner symbols",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "Same census as prose count, explicitly geometric corner symbols."
+    },
+    {
+      "id": "technical-language-coordinate-agreement",
+      "appears_as": "all 16 cases",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "All saved sender/receiver equality flags checked, not recomputed Transformer embeddings."
+    },
+    {
+      "id": "technical-language-wrong",
+      "appears_as": "seven coordinates landed",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "Count wrong resolved symbols, with no erasures."
+    },
+    {
+      "id": "technical-language-no-candidate",
+      "appears_as": "Six misses",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "Saved candidate-availability flags for failed requests; full candidate-pool selection audited upstream."
+    },
+    {
+      "id": "technical-language-selector-miss",
+      "appears_as": "One further miss",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "Failed requests despite a correctly classified candidate existing in their topic pool."
+    },
+    {
+      "id": "technical-language-candidate-design",
+      "appears_as": "eight candidates for each of four",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/counts/candidate_slots",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "Recorded candidate total divided by four distinct topics; balanced design is an upstream recorded fact."
+    },
+    {
+      "id": "technical-language-first-baseline",
+      "appears_as": "4 of 16",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/counts/first_candidate_correct_symbols",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "Recorded first-candidate baseline; full candidate pool is not bundled."
+    },
+    {
+      "id": "technical-language-success-text",
+      "appears_as": "\"Let's review the agenda and bring our notes before the meeting to ensure clarity and efficiency.\"",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/3/text",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "Exact unedited first success in packet order; UTF-8 hash checked."
+    },
+    {
+      "id": "technical-language-success-coordinates",
+      "appears_as": "(−1.600483, 1.193716)",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/3/standardized_coordinates",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "Saved standardized text coordinates rounded to six decimals."
+    },
+    {
+      "id": "technical-language-success-address",
+      "appears_as": "(0.07292097326262993, −0.15383214663510716)",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/3/parameter_coordinates",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "Computed affine address, never executed as a numerical write."
+    },
+    {
+      "id": "technical-language-failure-text",
+      "appears_as": "\"Wouldn't it be fun to enjoy the sun and breeze while you're on the go? A light raincoat makes a great addition to your umbrella bag",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/0/text",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "Exact unedited first failure in packet order; UTF-8 hash checked."
+    },
+    {
+      "id": "technical-language-failure-coordinates",
+      "appears_as": "(−0.977241, 0.753653)",
+      "source": "receipts/language-interface.json#/generated_prose_pilot/rows/0/standardized_coordinates",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "Saved standardized text coordinates rounded to six decimals."
+    },
+    {
+      "id": "technical-commands-accepted",
+      "appears_as": "Four accepted commands",
+      "source": "receipts/language-interface.json#/separate_integrated_controls/explicit_public_command_memory/rows",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "Count accepted command records."
+    },
+    {
+      "id": "technical-commands-rejected",
+      "appears_as": "three invalid commands",
+      "source": "receipts/language-interface.json#/separate_integrated_controls/explicit_public_command_memory/rows",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "Count rejected command records with zero model calls."
+    },
+    {
+      "id": "technical-commands-recovered",
+      "appears_as": "0110",
+      "source": "receipts/language-interface.json#/separate_integrated_controls/explicit_public_command_memory/rows",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "Concatenate four accepted decoded bits in saved order."
+    },
+    {
+      "id": "technical-command-example",
+      "appears_as": "Write bit 0 to register R0.",
+      "source": "receipts/language-interface.json#/separate_integrated_controls/explicit_public_command_memory/rows/0/message",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "Exact first accepted command, not generated natural prose."
+    },
+    {
+      "id": "technical-poems-partial",
+      "appears_as": "6 of 115 intended bytes",
+      "source": "receipts/language-interface.json#/separate_integrated_controls/generated_poems",
+      "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
+      "claim": "Derive intended UTF-8 total from both poem texts and delivered total from saved prefixes."
     }
   ],
   "figure_sha256": {
-    "transfer-results.png": "83ada4b8a0af53a7cadb34660fafb587b42e50678c00027f35efb3ea5c177784",
-    "transfer-results.svg": "e90907fb86ae637686801a417b1c70693ee69947ceb23a87d32f8d7abb2e7c51",
-    "transfer-results.pdf": "63d8051179335bb254448378867f264dc5da51057a818075c1b48feb9cc6892c",
+    "transfer-results.png": "0a6c7731e9289b09cf18ff148b506f0a9c598783b1879765a701a2a0e58560dc",
+    "transfer-results.svg": "2ddbe6c9ab66c7ade86855c2dbcc07227c69a9aa512f58943d9dcd346e021cd5",
+    "transfer-results.pdf": "d7464506a6fc060bb2437aac631bc80f105e80d771d89851bc1d0f99f70e4101",
     "stateful-logic.png": "1f26f653fd8fe1eb29259a5a1ef4696eb1e510f11cbd8a24721e7002f34c3ea7",
     "stateful-logic.svg": "a717dc2f0e4a0bbf85849fb655931393fff44d34cb395e6fc2d2f8eb550002d7",
     "stateful-logic.pdf": "4920f611acc08b9e89ea57730619f09a1d3265ef2348968dc71491b2058dc04a",
-    "two-routes.svg": "f9648265a1dbfc230d24eeb420d3df0b0a4b0502f25a81eb14c38b1ff91d2bec",
-    "og-card.png": "95c50836b049fa3e2be5ae3370276199a3aa1707d41abe079d74b8bb95183aab",
+    "two-routes.svg": "ac4c3f27f1455c2b033156c6c925e1ebc3fc480855ae38675fb2f907269c6509",
+    "og-card.png": "ffc89cafb05d5b0d8714b9935562ba64c9d35f99b4c56f8ff802d06dc21288ba",
     "qwen-shrimp.png": "e98f580388a13acb1400b4082b29df7e46e7c6bdd08b8777acbbe67989344eb1",
-    "pythia-spatial-map.png": "c555e25649c5df9eb01c0a717bab04cf805ce306b0ad6b3e0387059665fe9d57"
+    "pythia-spatial-map.png": "c555e25649c5df9eb01c0a717bab04cf805ce306b0ad6b3e0387059665fe9d57",
+    "qwen-kite-branches.png": "7dee27dbe88173e1b93187134c7f657acde6cfd996c2ebdafc647eaa80ba601f",
+    "qwen-kite-branches.svg": "e543ea3d0e898db156aae3e6872a685ce912b3d24e3490d46536df1e94b903a4",
+    "qwen-kite-branches.pdf": "30e0135f7383f7df28ce33448b399b479dde310b3f9de19ca7ce0656bd6f7166",
+    "qwen-kite-map.png": "0c77f97003fcf30c3497ca00a512c26247f19b6d7cea7a39ebf11046350fa36a",
+    "qwen-kite-map.svg": "5715bfba3cc1bd2082b97dff4989b2a0c3a2bf0a8675029071ab7fd98c8873b5",
+    "qwen-kite-map.pdf": "201cc317549503ed76ffe6d13981ce4943abb18090141d7653490c2cd37db900",
+    "qwen-kite-branch.png": "180370559ba50951ce1b8eb83a80fcd3e0e1d8255ff973adcf28df892f3fbc15",
+    "qwen-kite-branch.svg": "f90004b9064834411e60b8f089eaf8311bcd34e389b52eb6211fb56dd9b07d71",
+    "qwen-kite-branch.pdf": "1b68d04c1635f396fec22a0d736e9ebc824c5de81fd1dd849df3584816b5a2af",
+    "qwen-hysteresis-loops.png": "c7d3bc70c471d7daebc832d2833f3ddfa88011ff2de2abd68f37ef802a28b2a0",
+    "qwen-hysteresis-loops.svg": "1363e86c4517d1953c6863b8932bd1297fc3ea01cd308e915cac068b18d5c19a",
+    "qwen-hysteresis-loops.pdf": "6acd34f0dd1847bb415f306c46046def35a82ad3bdd06ba48c3384d41f0ea4e4"
   },
   "source_evidence": "receipts/evidence-summary.json",
-  "editorial_scope": "Figures synthesized from existing audited results and unchanged rasters; no new experiments.",
+  "editorial_scope": "Public numerical transport and memory evidence, including the unsuccessful generated-prose interface. Compact figures replace oversized presentation; prior kite data are replotted with labeled axes. No new model experiments in this revision.",
   "quoted_examples": {
     "examples": [
       {
@@ -418,5 +904,14 @@
     ],
     "wire_excerpt_sha256": "4654391bf6c8894d2925d55d6fa89e6fe4557c24221a49163fa0f460de35b34d",
     "opening_byte_bits": "01010011"
+  },
+  "editorial_review": {
+    "status": "technical expansion locally audited; new full-entry Pro review not claimed",
+    "checks": [
+      "all language outcomes retained",
+      "all finite-loop outcomes retained",
+      "fold equation and failed branch connection distinguished",
+      "stateful logical operators restricted to tested histories"
+    ]
   }
 }
