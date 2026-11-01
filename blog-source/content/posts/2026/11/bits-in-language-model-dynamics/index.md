@@ -350,7 +350,7 @@ A handful of successful addresses leaves a narrow address bank. A separate
 experiment asked whether small patches of the existing Pythia map could each
 supply both a zero and a one.
 
-<figure class="shrimp-figure wide">
+<figure class="shrimp-figure">
 <a href="pythia-spatial-map.png" aria-label="Open full-size figure"><img src="pythia-spatial-map.png" alt="Pythia parameter maps comparing the eight known addresses used for message transfer with a separately tested bank of locally paired addresses. Each retained patch supplies both labels; excluded pairs remain visible."></a>
 </figure>
 
