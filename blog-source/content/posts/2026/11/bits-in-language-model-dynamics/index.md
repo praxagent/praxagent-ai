@@ -291,8 +291,8 @@ this instrument. The receiver does not prove asymptotic chaos. Both trajectories
 are separate rows of the inference batch; they never attend to each other.
 
 The opening byte was recovered as `01010011`, the letter `S`. Continuing recovered
-this complete request. The latency readings are synthetic test data, not
-measurements from a production service:
+this complete request. We used a list of numbers as the test payload so we could
+check both exact delivery and the calculation made from the recovered values:
 
 ```text
 Summarize these latency samples in ms: 15,19,27,23,83,25,18,57,27,11,28,20,14,74,25,28.
