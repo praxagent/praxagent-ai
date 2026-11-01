@@ -113,6 +113,7 @@ def formats(fig,stem,title,description):
    raw=raw.replace(b'<svg ',b'<svg role="img" aria-labelledby="fig-title fig-desc" ',1)
    pos=raw.index(b'>',raw.index(b'<svg '))+1
    raw=raw[:pos]+f'<title id="fig-title">{escape(title)}</title><desc id="fig-desc">{escape(description)}</desc>'.encode()+raw[pos:]
+   raw=b'\n'.join(line.rstrip() for line in raw.splitlines())+b'\n'
    ET.fromstring(raw)
   out[stem+'.'+ext]=raw
  plt.close(fig);return out

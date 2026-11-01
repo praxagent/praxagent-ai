@@ -16,7 +16,7 @@
   "accessibility": "Direct text labels and values; meanings do not rely only on color. PNG plots also have scalable SVG and PDF counterparts.",
   "generator": {
     "path": "build_figures.py",
-    "sha256": "a275310d2d4741f06666e17388b72461ffbce372781c62a63e318d83c2230bd6"
+    "sha256": "34790baae8ed6d66733446615aca32f7dc48b5e3f687db950f2a4fae3af4bdd8"
   },
   "matplotlib_version": "3.11.2",
   "font": {
@@ -26,7 +26,7 @@
   "provenance": {
     "outputs": {
       "transfer-results.png": "eca047f7d45841593b7445f959e1031b2c4fe5dd19468fb280e6974cc0e30c82",
-      "transfer-results.svg": "33860979319e2a5d1d9be48446d7e5e32d2d6848854fd892b91b919e8d8c0e09",
+      "transfer-results.svg": "c63e03fad8ef65a55da0f8acdf6bc784d5ace02b15f87d15b8e3684e449647aa",
       "transfer-results.pdf": "83b14f8564ca637932c833a9e0ce24a95d2394936c24c906fa86f502cddb7170"
     }
   }

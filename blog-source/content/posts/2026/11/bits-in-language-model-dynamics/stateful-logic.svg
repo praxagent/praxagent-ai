@@ -20,19 +20,19 @@
  </defs>
  <g id="figure_1">
   <g id="patch_1">
-   <path d="M 0 561.6 
-L 489.6 561.6 
-L 489.6 0 
-L 0 0 
+   <path d="M 0 561.6
+L 489.6 561.6
+L 489.6 0
+L 0 0
 z
 " style="fill: #f7f4f0"/>
   </g>
   <g id="axes_1">
    <g id="patch_2">
-    <path d="M 122.4 505.44 
-L 465.12 505.44 
-L 465.12 134.784 
-L 122.4 134.784 
+    <path d="M 122.4 505.44
+L 465.12 505.44
+L 465.12 134.784
+L 122.4 134.784
 z
 " style="fill: #f7f4f0"/>
    </g>
@@ -117,53 +117,53 @@ iVBORw0KGgoAAAANSUhEUgAABZQAAAYICAYAAAANH0+UAAAvFklEQVR4nOzaMQ0CUQBEQY5gCRGIIPgg
     </g>
    </g>
    <g id="line2d_13">
-    <path d="M 122.4 181.116 
-L 465.12 181.116 
+    <path d="M 122.4 181.116
+L 465.12 181.116
 " clip-path="url(#pdf1306f81e)" style="fill: none; stroke: #f7f4f0; stroke-width: 2; stroke-linecap: square"/>
    </g>
    <g id="line2d_14">
-    <path d="M 122.4 227.448 
-L 465.12 227.448 
+    <path d="M 122.4 227.448
+L 465.12 227.448
 " clip-path="url(#pdf1306f81e)" style="fill: none; stroke: #f7f4f0; stroke-width: 2; stroke-linecap: square"/>
    </g>
    <g id="line2d_15">
-    <path d="M 122.4 273.78 
-L 465.12 273.78 
+    <path d="M 122.4 273.78
+L 465.12 273.78
 " clip-path="url(#pdf1306f81e)" style="fill: none; stroke: #f7f4f0; stroke-width: 2; stroke-linecap: square"/>
    </g>
    <g id="line2d_16">
-    <path d="M 122.4 320.112 
-L 465.12 320.112 
+    <path d="M 122.4 320.112
+L 465.12 320.112
 " clip-path="url(#pdf1306f81e)" style="fill: none; stroke: #f7f4f0; stroke-width: 2; stroke-linecap: square"/>
    </g>
    <g id="line2d_17">
-    <path d="M 122.4 366.444 
-L 465.12 366.444 
+    <path d="M 122.4 366.444
+L 465.12 366.444
 " clip-path="url(#pdf1306f81e)" style="fill: none; stroke: #f7f4f0; stroke-width: 2; stroke-linecap: square"/>
    </g>
    <g id="line2d_18">
-    <path d="M 122.4 412.776 
-L 465.12 412.776 
+    <path d="M 122.4 412.776
+L 465.12 412.776
 " clip-path="url(#pdf1306f81e)" style="fill: none; stroke: #f7f4f0; stroke-width: 2; stroke-linecap: square"/>
    </g>
    <g id="line2d_19">
-    <path d="M 122.4 459.108 
-L 465.12 459.108 
+    <path d="M 122.4 459.108
+L 465.12 459.108
 " clip-path="url(#pdf1306f81e)" style="fill: none; stroke: #f7f4f0; stroke-width: 2; stroke-linecap: square"/>
    </g>
    <g id="line2d_20">
-    <path d="M 208.08 505.44 
-L 208.08 134.784 
+    <path d="M 208.08 505.44
+L 208.08 134.784
 " clip-path="url(#pdf1306f81e)" style="fill: none; stroke: #f7f4f0; stroke-width: 2; stroke-linecap: square"/>
    </g>
    <g id="line2d_21">
-    <path d="M 293.76 505.44 
-L 293.76 134.784 
+    <path d="M 293.76 505.44
+L 293.76 134.784
 " clip-path="url(#pdf1306f81e)" style="fill: none; stroke: #f7f4f0; stroke-width: 5; stroke-linecap: square"/>
    </g>
    <g id="line2d_22">
-    <path d="M 379.44 505.44 
-L 379.44 134.784 
+    <path d="M 379.44 505.44
+L 379.44 134.784
 " clip-path="url(#pdf1306f81e)" style="fill: none; stroke: #f7f4f0; stroke-width: 2; stroke-linecap: square"/>
    </g>
    <g id="text_13">

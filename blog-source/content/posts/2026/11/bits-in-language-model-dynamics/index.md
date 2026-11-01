@@ -153,8 +153,7 @@ decimal places, with exact halfway cases rounded to the even final digit.
 
 Together, the two requests and replies delivered **470 bytes, or 3,760 bits**,
 using **38,541 model forward calls** and **9,028.3 seconds**, about 150.5 minutes.
-The 9,028.3 seconds cover the complete paired test. That is about 0.052
-delivered application bytes per second. Sixteen separately evolved
+The 9,028.3 seconds cover the complete paired test. That is about 0.052 delivered application bytes per second. Sixteen separately evolved
 symbols shared a forward pass, with separate numerical states; every symbol
 was evaluated, including repeated addresses.
 
@@ -296,6 +295,10 @@ initial state, precision, and readout rules define the instrument.
 | [Compact evidence receipt](receipts/evidence-summary.json) | Message text, costs, spatial outcomes, and Qwen stateful tests |
 | [Numerical provenance](provenance.json) | Sources and derivations for reported numbers |
 | [Figure generator](build_figures.py) | Regenerates new diagrams and plots, checks reused image hashes, and verifies quoted numbers and messages; run with `--verify` |
+
+The [research repository](https://github.com/tdj28/shrimp-memory) contains the
+experiment tools. The completed transfer is bound by its
+[committed audit receipt](https://github.com/tdj28/shrimp-memory/blob/35c57acb0c25d1b06c37884930f6e72fd27668a5/docs/receipts/substantive-pythia-complete.json).
 
 ### Appendix: scope of the record
 
