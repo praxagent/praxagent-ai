@@ -3,18 +3,21 @@
   "source_commit": "536a4d9f9b64a456b9c5a186c27aedf964908ce6",
   "generator": {
     "path": "build_figures.py",
-    "sha256": "34790baae8ed6d66733446615aca32f7dc48b5e3f687db950f2a4fae3af4bdd8"
+    "sha256": "83c51105372c66a734217452a6ea39cb415041bb0d877ef2708268a5e8681844"
   },
   "receipts": {
     "receipts/evidence-summary.json": "e48920cc2f042a16c67fadc56e52b85393ace0c5fe6aed5dae1b34f21c960848",
     "receipts/evidence-audit.json": "2cf38a7e6bcbefab8758c898f0ab9342a5a71a4568a9be6442f853de39aa258e",
-    "fig-transfer-results.receipt.json": "f5ce10c8138df6722153b535baf931bd7eda83c463cd930d32e55e7ccba0ad28",
-    "fig-stateful-logic.receipt.json": "0c384b4c4287a77ad63321aa567df3de13b1e7a13d38d8f97cf6554f68809a5e",
-    "fig-two-routes.receipt.json": "e2c370048411458a0a5b09c4177ddc7dc9a4c2322741957dd6f48cd2ee4dfa02",
-    "fig-og-card.receipt.json": "20f294d9bedf7ce9a9e3fc33e114744bc3f397727406770ddf01e9b219cf0786",
-    "fig-qwen-shrimp.receipt.json": "1baec214d6ee79669742dd5fa3d7d3e89a18e90ced104eebd384ab373ae29324",
-    "fig-pythia-spatial-map.receipt.json": "dd3da2bcc22e9c476d804398dd15b77b0f1a345319434080fdf7adebec7c6153",
-    "receipts/qwen-schedule.json": "483988e01c099046530ec170cbba2600cb7acb945ea455a1e72b9991edb84c43"
+    "fig-transfer-results.receipt.json": "59f7b4e608b6aee951c5746b818ef362d297ac6b3e30b63cd25e8ed31048943e",
+    "fig-stateful-logic.receipt.json": "8b3d4fc49e7ae575b008c6aaa0a50ad41725a75947b17b5082ec729c1ea23d93",
+    "fig-two-routes.receipt.json": "d3c81489d147f685fa50e92a2cb7308d5344a8626c68ff5767017492d6d249b9",
+    "fig-og-card.receipt.json": "9bd0cfaf4c9e009775505ac603dbf9037884cc53b3b429fcf3afacb9a2e9493b",
+    "fig-qwen-shrimp.receipt.json": "fd68488ad9e67c95f756ac754fca200b36e86d0d2bd378ffdd3b062fd12b273a",
+    "fig-pythia-spatial-map.receipt.json": "ad64135fbacf16c6de689d3df297d13cceed10f6b8739011b03cabe5f22610b8",
+    "receipts/qwen-schedule.json": "483988e01c099046530ec170cbba2600cb7acb945ea455a1e72b9991edb84c43",
+    "receipts/shrimp-blog-methods.json": "31b791fbd7524c9a28cb4dcdb9ddbf572869a4ef9435994e5b5458127e1edc93",
+    "receipts/shrimp-blog-operating-points.json": "5acc17e24662084e954eeb0f674d4f11dea87551d56e1a73244fcb51dbebfe9c",
+    "receipts/shrimp-blog-method-source-bindings.json": "decdb1496219d3cf1c7edff988a09ed3ec9f2e6233da5245d510f5e4b99897b5"
   },
   "figures": [
     "transfer-results.png",
@@ -184,15 +187,207 @@
       "appears_as": "all eight did so for OR",
       "source": "receipts/evidence-summary.json#/qwen_logic/1/truth_table",
       "claim": "Complete finite OR panel, intermediate and final outputs."
+    },
+    {
+      "id": "spatial-eligibility",
+      "appears_as": "234 eligible mixed patches",
+      "source": "receipts/evidence-summary.json#/spatial_bank/eligible_mixed_tiles",
+      "claim": "Sampling frame consists of eligible mixed patches, not arbitrary map cells."
+    },
+    {
+      "id": "methods-pythia-prefix",
+      "appears_as": "33 tokens",
+      "source": "receipts/shrimp-blog-methods.json#/instruments/pythia/prefix_tokens",
+      "claim": "Fixed numerical prefix length; soft slot index equals this count."
+    },
+    {
+      "id": "methods-pythia-steering",
+      "appears_as": "zero-based block 6",
+      "source": "receipts/shrimp-blog-methods.json#/instruments/pythia/steering_block_zero_based",
+      "claim": "Hook applied after this block, at every prefix and soft-slot position."
+    },
+    {
+      "id": "methods-pythia-revision",
+      "appears_as": "50f5173d932e8e61f858120bcb800b97af589f46",
+      "source": "receipts/shrimp-blog-methods.json#/instruments/pythia/revision",
+      "claim": "Pinned checkpoint revision, verified from executed source manifests."
+    },
+    {
+      "id": "methods-qwen-prefix",
+      "appears_as": "37 tokens",
+      "source": "receipts/shrimp-blog-methods.json#/instruments/qwen/prefix_tokens",
+      "claim": "Fixed numerical prefix length; soft slot index equals this count."
+    },
+    {
+      "id": "methods-qwen-steering",
+      "appears_as": "zero-based block 12",
+      "source": "receipts/shrimp-blog-methods.json#/instruments/qwen/steering_block_zero_based",
+      "claim": "Hook applied after this block, at every prefix and soft-slot position."
+    },
+    {
+      "id": "methods-qwen-revision",
+      "appears_as": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "source": "receipts/shrimp-blog-methods.json#/instruments/qwen/revision",
+      "claim": "Pinned checkpoint revision, verified from executed source manifests."
+    },
+    {
+      "id": "methods-p-warmup",
+      "appears_as": "32 warm-up",
+      "source": "receipts/shrimp-blog-methods.json#/pythia_readout/warmup_updates",
+      "claim": "Fixed warm-up before twin perturbation."
+    },
+    {
+      "id": "methods-p-observation",
+      "appears_as": "128 observation updates",
+      "source": "receipts/shrimp-blog-methods.json#/pythia_readout/observation_updates",
+      "claim": "Declared endpoint; not a minimum successful duration."
+    },
+    {
+      "id": "methods-p-batch",
+      "appears_as": "16 symbols/batch",
+      "source": "receipts/shrimp-blog-methods.json#/protocols/pythia_transfer/symbols_per_batch",
+      "claim": "At most16 symbols, each with primary and twin lanes."
+    },
+    {
+      "id": "methods-p-twin",
+      "appears_as": "1e-6",
+      "source": "receipts/shrimp-blog-methods.json#/pythia_readout/epsilon",
+      "claim": "Twin distance and per-step renormalization target."
+    },
+    {
+      "id": "methods-p-tail",
+      "appears_as": "last 16 primary states",
+      "source": "receipts/shrimp-blog-methods.json#/pythia_readout/recurrence_tail_states",
+      "claim": "Window used to test each recurrence lag."
+    },
+    {
+      "id": "methods-p-maxlag",
+      "appears_as": "lag 1 through 16",
+      "source": "receipts/shrimp-blog-methods.json#/pythia_readout/maximum_tested_period",
+      "claim": "Tested recurrence-period range."
+    },
+    {
+      "id": "methods-p-tol",
+      "appears_as": "at most `1e-8`",
+      "source": "receipts/shrimp-blog-methods.json#/pythia_readout/recurrence_tolerance",
+      "claim": "Scaled L2 recurrence residual threshold."
+    },
+    {
+      "id": "methods-p-zero",
+      "appears_as": "below `-0.01`",
+      "source": "receipts/shrimp-blog-methods.json#/pythia_readout/growth_zero_upper_strict",
+      "claim": "Strict upper cutoff for symbol0 mean log growth."
+    },
+    {
+      "id": "methods-p-one",
+      "appears_as": "above `0.01`",
+      "source": "receipts/shrimp-blog-methods.json#/pythia_readout/growth_one_lower_strict",
+      "claim": "Strict lower cutoff for symbol1 mean log growth."
+    },
+    {
+      "id": "methods-q-period",
+      "appears_as": "final six states",
+      "source": "receipts/shrimp-blog-methods.json#/qwen_readout/period",
+      "claim": "Candidate cycle length tested for the neutral readout."
+    },
+    {
+      "id": "methods-q-closure",
+      "appears_as": "at most `1e-8`",
+      "source": "receipts/shrimp-blog-methods.json#/qwen_readout/closure_tolerance",
+      "claim": "Maximum unscaled lag-six L2 residual at H."
+    },
+    {
+      "id": "methods-q-divisor-gap",
+      "appears_as": "exceed `1e-4`",
+      "source": "receipts/shrimp-blog-methods.json#/qwen_readout/proper_divisor_gap_strict",
+      "claim": "Each proper-divisor maximum cyclic gap must strictly exceed cutoff."
+    },
+    {
+      "id": "methods-q-match",
+      "appears_as": "within `1e-6`",
+      "source": "receipts/shrimp-blog-methods.json#/qwen_readout/unique_reference_match_tolerance",
+      "claim": "Exactly one phase-aligned saved cycle must match."
+    },
+    {
+      "id": "methods-q-write",
+      "appears_as": "120 updates",
+      "source": "receipts/shrimp-blog-methods.json#/protocols/qwen_exchange/write_updates",
+      "claim": "Numerical endpoint duration per exchange bit."
+    },
+    {
+      "id": "methods-q-hold",
+      "appears_as": "240",
+      "source": "receipts/shrimp-blog-methods.json#/protocols/qwen_exchange/hold_updates",
+      "claim": "Fixed neutral hold duration after each endpoint operation."
+    },
+    {
+      "id": "methods-and-schedule",
+      "appears_as": "120, 240, 120, 240",
+      "source": "receipts/shrimp-blog-methods.json#/protocols/and/updates_in_order",
+      "claim": "Independently checked AND stage schedule."
+    },
+    {
+      "id": "methods-or-schedule",
+      "appears_as": "120, 240, 120, 240",
+      "source": "receipts/shrimp-blog-methods.json#/protocols/or/updates_in_order",
+      "claim": "Independently checked OR stage schedule."
+    },
+    {
+      "id": "methods-freeze-time",
+      "appears_as": "00:14:42 UTC",
+      "source": "receipts/shrimp-blog-methods.json#/chronology/frozen_plan/commit_utc",
+      "claim": "Recorded Git freeze timestamp on2026-11-01."
+    },
+    {
+      "id": "methods-draw-time",
+      "appears_as": "00:16:54 UTC",
+      "source": "receipts/shrimp-blog-methods.json#/chronology/record_draw_utc",
+      "claim": "Recorded deterministic input draw timestamp."
+    },
+    {
+      "id": "methods-execution-commit-time",
+      "appears_as": "00:19:01 UTC",
+      "source": "receipts/shrimp-blog-methods.json#/chronology/execution_commit_utc",
+      "claim": "Recorded execution-source Git timestamp."
+    },
+    {
+      "id": "methods-receiver-start",
+      "appears_as": "00:19:25 UTC",
+      "source": "receipts/shrimp-blog-methods.json#/chronology/first_receiver_metadata_utc",
+      "claim": "First receiver metadata timestamp."
+    },
+    {
+      "id": "methods-model-start",
+      "appears_as": "00:19:30 UTC",
+      "source": "receipts/shrimp-blog-methods.json#/chronology/first_model_call_utc",
+      "claim": "First model-call event timestamp."
+    },
+    {
+      "id": "methods-control-H",
+      "appears_as": "(0.07293697809562831, -0.15395151820007266)",
+      "source": "receipts/shrimp-blog-operating-points.json#/qwen/H",
+      "claim": "Exact(steering strength,log10 temperature)pair."
+    },
+    {
+      "id": "methods-control-E0",
+      "appears_as": "(0.07293697809562831, -0.1535)",
+      "source": "receipts/shrimp-blog-operating-points.json#/qwen/E0",
+      "claim": "Exact(steering strength,log10 temperature)pair."
+    },
+    {
+      "id": "methods-control-E1",
+      "appears_as": "(0.07299785589927693, -0.15395151820007266)",
+      "source": "receipts/shrimp-blog-operating-points.json#/qwen/E1",
+      "claim": "Exact(steering strength,log10 temperature)pair."
     }
   ],
   "figure_sha256": {
-    "transfer-results.png": "eca047f7d45841593b7445f959e1031b2c4fe5dd19468fb280e6974cc0e30c82",
-    "transfer-results.svg": "c63e03fad8ef65a55da0f8acdf6bc784d5ace02b15f87d15b8e3684e449647aa",
-    "transfer-results.pdf": "83b14f8564ca637932c833a9e0ce24a95d2394936c24c906fa86f502cddb7170",
-    "stateful-logic.png": "3df04443c2b2da010f9e93edbde6c83be510a850ab6857cc4d003ea60829bf9c",
-    "stateful-logic.svg": "888c48df45159f9695d7dd3d9ed86e860b1efe07dd2945250e896827325bcc7b",
-    "stateful-logic.pdf": "76ae9f65e908e1c3d479331f46b55921af5c42da74d4b692b1cc296ebfbad676",
+    "transfer-results.png": "83ada4b8a0af53a7cadb34660fafb587b42e50678c00027f35efb3ea5c177784",
+    "transfer-results.svg": "e90907fb86ae637686801a417b1c70693ee69947ceb23a87d32f8d7abb2e7c51",
+    "transfer-results.pdf": "63d8051179335bb254448378867f264dc5da51057a818075c1b48feb9cc6892c",
+    "stateful-logic.png": "1f26f653fd8fe1eb29259a5a1ef4696eb1e510f11cbd8a24721e7002f34c3ea7",
+    "stateful-logic.svg": "a717dc2f0e4a0bbf85849fb655931393fff44d34cb395e6fc2d2f8eb550002d7",
+    "stateful-logic.pdf": "4920f611acc08b9e89ea57730619f09a1d3265ef2348968dc71491b2058dc04a",
     "two-routes.svg": "f9648265a1dbfc230d24eeb420d3df0b0a4b0502f25a81eb14c38b1ff91d2bec",
     "og-card.png": "95c50836b049fa3e2be5ae3370276199a3aa1707d41abe079d74b8bb95183aab",
     "qwen-shrimp.png": "e98f580388a13acb1400b4082b29df7e46e7c6bdd08b8777acbbe67989344eb1",

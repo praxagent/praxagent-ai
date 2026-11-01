@@ -122,7 +122,7 @@ def transfer(d):
  rows=d['transfer']['messages'];labels=['Base request','Base reply','Changed request','Changed reply'];colors=[BLUE,TAN,BLUE,TAN]
  fig,axs=plt.subplots(2,1,figsize=(6.8,8.2));fig.subplots_adjust(left=.34,right=.93,top=.83,bottom=.09,hspace=.63)
  fig.text(.055,.958,'Four messages, fully recovered',fontsize=22,weight='bold')
- fig.text(.055,.918,'One paired request/reply test, repeated',fontsize=15,color=MUTED)
+ fig.text(.055,.918,'Base and changed-input exchanges',fontsize=15,color=MUTED)
  for ax,values,title,ticks,limit,fmt in [(axs[0],[m['payload_bytes'] for m in rows],'Received application bytes',[0,75,150],175,'{:.0f}'),(axs[1],[m['seconds']/60 for m in rows],'Receiver execution (minutes)',[0,25,50],59,'{:.2f}')]:
   ax.barh(range(4),values,color=colors,height=.56,zorder=3)
   for y,value in enumerate(values):ax.text(value+limit*.025,y,fmt.format(value),va='center',ha='left',fontsize=17,weight='bold')
@@ -141,7 +141,7 @@ def logic(d):
  ax.imshow(matrix,cmap=ListedColormap([PALE,BLUE]),vmin=0,vmax=1,aspect='auto',interpolation='nearest')
  for y,row in enumerate(matrix):
   for x,v in enumerate(row):ax.text(x,y,str(v),ha='center',va='center',fontsize=23,weight='bold',color=INK if v==0 else '#FFFFFF')
- ax.set(xticks=range(4),xticklabels=['First','Carried','First','Carried'],yticks=range(8),yticklabels=[f"{r['a']}  {r['b']}  {r['c']}" for r in ordered[0]])
+ ax.set(xticks=range(4),xticklabels=['After B','After C','After B','After C'],yticks=range(8),yticklabels=[f"{r['a']}  {r['b']}  {r['c']}" for r in ordered[0]])
  ax.xaxis.tick_top();ax.tick_params(length=0,pad=10,labelsize=17)
  ax.text(-.11,1.018,'A B C',transform=ax.transAxes,ha='center',fontsize=17,weight='bold')
  ax.text(.25,1.125,'AND',transform=ax.transAxes,ha='center',fontsize=20,weight='bold');ax.text(.75,1.125,'OR',transform=ax.transAxes,ha='center',fontsize=20,weight='bold')

@@ -5,7 +5,7 @@ date: 2026-11-01
 author: Timothy Jones
 author_id: "timothy-jones"
 draft: true
-pro_reviewed: false
+pro_reviewed: true
 toc: true
 tags: ["AI", "LLM", "dynamical-systems", "memory", "computation"]
 summary: "A small language model’s continuous feedback loop carried complete requests and program-computed replies. A second model retained writable bits at common controls and supported finite stateful AND and OR chains."
@@ -171,7 +171,7 @@ before checking length and checksum. Offline tests altered the saved readout
 at the first symbol: they substituted an opposite response, inserted an erasure,
 or flipped a bit. Each failed delivery was
 rejected. Earlier, shorter observation windows also contained erasures; the
-full declared window was needed for these completed messages.
+declared 128-update endpoint completed these messages.
 
 ## Can both symbols live in the same neighborhood?
 
@@ -183,8 +183,10 @@ supply both a zero and a one.
 
 <p class="figure-note"><strong>Address diversity is a separate result from message delivery.</strong> The background is the earlier scan, not a fresh reliability census. The left panel locates the eight addresses used for transport. The right shows the new paired sample: both labels had to reproduce in both fresh receivers for a pair to qualify. Excluded pairs are shown even when only one member failed. See the <a href="receipts/evidence-summary.json">evidence receipt</a>, <a href="provenance.json">provenance</a>, and <a href="build_figures.py">generator</a> (`--verify`).</p>
 
-We drew 32 eligible patches once, then one candidate of each class per patch,
-before running the fresh receivers. Each receiver tested all 64 coordinates:
+The original map supplied 234 eligible mixed patches. We drew 32 eligible patches
+once, balancing the draw across occupied coarse regions in round-robin order,
+then drew one random candidate per mapped class in each patch and shuffled
+the packet order. Each receiver tested all 64 coordinates:
 
 | Fresh receiver | Correct label | Erasure | Wrong resolved label |
 |---|---:|---:|---:|
@@ -202,14 +204,17 @@ public response map still determines the labels.
 
 Pythia resets for every symbol. Qwen2.5-0.5B-Instruct supports a more demanding
 operation: keep the evolving state, change the controls briefly, then return
-them to exactly the same hold setting.
+them to exactly the same hold setting. The numerical register is the feedback
+vector carried externally between model calls. The pretrained weights stay
+fixed; ordinary chat-history memory plays no role in this write/read test.
 
 At that hold setting, two distinguishable repeating states provide the labels
 zero and one. A write excursion selects the desired state. The controls at
 readout are identical, so the bit resides in the state’s history. This is the
 operational memory idea behind [hysteresis]({{< relref "knowledge-base/glossary/hysteresis/index.md" >}}).
-The candidate attractors have different [basins of attraction]({{< relref "knowledge-base/glossary/basin-of-attraction/index.md" >}}),
-the sets of states that approach them.
+These observations are consistent with two candidate period-six attractors.
+If the attraction persists, their [basins of attraction]({{< relref "knowledge-base/glossary/basin-of-attraction/index.md" >}})
+are the sets of starting states that approach each one.
 
 ![The previously mapped Qwen period-six shrimp window, with a large gray region and smaller branching periodic structures in an irregular background.](qwen-shrimp.png)
 
@@ -225,8 +230,8 @@ reference cycle. Both trajectories recovered all 32 payload bits. Each bit used
 120 write updates followed by 240 common-hold updates. The state carried across the writes within each
 byte; each new byte restarted the reference pair. The short outputs missed the
 request for exactly two letters and were retained unedited. The decoded request
-entered the reply-generation prompt. Transporting these 4 application bytes
-used 11,716 model calls and took 116.4 minutes. This establishes a working sequence,
+entered the reply-generation prompt. The complete exchange of 4 application bytes, including text authoring,
+used 11,716 model calls and took 116.4 minutes of whole-exchange elapsed time. This establishes a working sequence,
 not arbitrary retention or disturbance tolerance.
 
 Memory also makes a simple logical operation possible. Store input \(A\) in the
@@ -290,23 +295,74 @@ to probabilities after division by temperature \(T\). Multiplication by
 \(E^{\mathsf T}\) takes their probability-weighted embedding average. Model weights, prefix, steering location,
 initial state, precision, and readout rules define the instrument.
 
+<details>
+<summary>Exact instrument, control, and decoding settings</summary>
+
+The embedding matrix in the equation is the **input embedding table**. The resulting vector replaces the same soft slot at every update. At every prefix and soft-slot position, the hook adds steering strength times a pinned `philosophy` vector after the specified block, without runtime normalization of that vector. Both implementations use CPU effective float64 with the recorded normalization/rotary patches and cache checks.
+
+| Instrument | Fixed checkpoint, prefix and input position | Steering and initialization |
+|---|---|---|
+| Pythia | [EleutherAI/pythia-160m](https://huggingface.co/EleutherAI/pythia-160m), revision `50f5173d932e8e61f858120bcb800b97af589f46`. Plain prefix below; 33 tokens, soft slot at zero-based position 33. | Add after zero-based block 6. Reset each symbol occurrence to the embedding of the final prefix token. |
+| Qwen | [Qwen/Qwen2.5-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct), revision `7ae557604adf67be50417f59c2c2f167def9a775`. Same system sentence and user `Hello!`, with the pinned chat template and assistant-generation prefix; 37 tokens, soft slot at zero-based position 37. Exact token IDs and vector/reference hashes are in the methods receipt. | Add after zero-based block 12. Two lanes start at phase zero of the two saved reference cycles. |
+
+Pythia's exact prefix is `System: You are an AI talking with another AI. You have complete freedom. Feel free to pursue whatever you want.\nUser: Hello!\nAssistant:`; here `\n` denotes a newline. Qwen uses the sentence beginning “You are an AI…” as its system message, followed by the user message and the model's chat-template markers.
+
+Define Qwen controls as `(steering strength, log10 temperature)`:
+
+| Control | Exact values |
+|---|---|
+| Common hold H | `(0.07293697809562831, -0.15395151820007266)` |
+| Write-zero endpoint E0 | `(0.07293697809562831, -0.1535)` |
+| Write-one endpoint E1 | `(0.07299785589927693, -0.15395151820007266)` |
+
+| Protocol | Controls, state handling and schedule | Readout and factor limits |
+|---|---|---|
+| Pythia transfer | Eight fixed addresses; each occurrence starts afresh. Up to 16 symbols/batch, with primary/twin lanes per symbol; four model threads. Hold the selected address for 32 warm-up and 128 observation updates. | Decoder P below. Initialization, prefix, schedule and bank **fixed**; payload and address order **varied**; base/changed-input settings **matched**. Fresh-address transport and persistent Pythia memory **untested**. |
+| Spatial qualification | Same reset, map and observation schedule; one model thread. 64 candidates, one of each mapped class in each of 32 selected mixed tiles. | Decoder P; retain a pair only when both proposed labels resolve correctly in **both** receivers. Coordinates **varied**, receiver packets **matched**; arbitrary-map reliability and transport using the later 48-address bank **untested**. |
+| Qwen exchange | For each bit: E0 or E1 for 120 updates, H for 240, then read. Literal carry across eight bit operations within a byte; reset both reference-start lanes between bytes. | Decoder Q below. Reference phase zero, controls and durations **fixed**; requested bits/history **varied**; readout rule **matched**. All phases, indefinite retention and a single uninterrupted 32-bit history **untested**. |
+| AND | For input u, choose E0 if u=0, H if u=1. Apply control(B) for 120, H for 240/read, control(C) for 120, H for 240/read. | Both A lanes, all four (B,C) groups; reset between groups and carry within each group. Phase zero and chain length two **fixed**, A/B/C **varied**, common readout **matched**; longer chains and general gate reliability **untested**. |
+| OR | For input u, choose H if u=0, E1 if u=1. Apply control(B) for 120, H for 240/read, control(C) for 120, H for 240/read. | Same phase, grouping and finite-chain limits as AND. The host selects controls from B/C, without receiving the stored A or decoded intermediate output. |
+
+The two-gate schedules are **120, 240, 120, 240** updates for both AND and OR.
+
+**Decoder P.** After warm-up, initialize a twin at L2 distance `1e-6` in a fixed Gaussian direction (`numpy.default_rng(0)`), using its saved normalization scalar. Each observation advances primary and twin; measure distance d, accumulate `ln(max(d,1e-36)/1e-6)`, and renormalize the twin separation to `1e-6` with the same floor. Average those logs over the observation window. For each lag 1 through 16, compare the last 16 primary states with their lagged copies using L2 distance divided by `max(1, current-state L2 norm)`. The smallest lag whose maximum residual is at most `1e-8` is the recurrence period. Decode zero only if a period is found and mean log growth is below `-0.01`; decode one only if no period is found and growth is above `0.01`; otherwise erase. The reported 32/64-update observations are checkpoints inside full 128-update runs. Nonfinite, precision, cache and resource failures are separate failure categories. The transfer rejects final erasures and validates byte length, SHA-256 and UTF-8 only after sealing decoded bits; there is no repair or retry.
+
+**Decoder Q.** Compare the final six states with the preceding six: the maximum L2 lag-six residual must be at most `1e-8`. Exclude each proper divisor 1, 2 and 3 by requiring the maximum phasewise L2 gap to that cyclic shift to exceed `1e-4`. Match the final six-state cycle to each saved reference by minimizing, over six cyclic shifts, the maximum phasewise L2 distance. Exactly one reference must lie within `1e-6`; labels `ad` and `td` mean zero and one. A failed period gate or absent/ambiguous reference match is unresolved. Payload and truth-table outputs are read only at H. These protocols use no twin-growth classifier or injected perturbation. Off-hold reference matches are descriptive and do not prove branch loss.
+
+Exact transfer/spatial coordinates and control definitions are in the [operating-points receipt](receipts/shrimp-blog-operating-points.json); the [methods receipt](receipts/shrimp-blog-methods.json) binds their source records. The spatial candidates were selected from 234 eligible 16-by-16 tiles, each with at least eight candidates per mapped class: class zero had scan period 1–8 and exponent below `-0.05`; class one had no detected scan period and exponent above `0.05`. The selection balanced occupied 128-by-128 regions by round-robin, drew one candidate per class per tile, then shuffled packet order. Screening thresholds differ from decoder P's thresholds.
+
+</details>
+
 | Artifact | What it supports |
 |---|---|
 | [Compact evidence receipt](receipts/evidence-summary.json) | Message text, costs, spatial outcomes, and Qwen stateful tests |
 | [Numerical provenance](provenance.json) | Sources and derivations for reported numbers |
+| [Methods receipt](receipts/shrimp-blog-methods.json) | Pinned instruments, classifiers, schedules, factor limits, and recorded chronology |
+| [Operating points](receipts/shrimp-blog-operating-points.json) | All transfer/spatial addresses and Qwen controls |
+| [Source bindings](receipts/shrimp-blog-method-source-bindings.json) | Hashes checked against the executed source snapshots |
 | [Figure generator](build_figures.py) | Regenerates new diagrams and plots, checks reused image hashes, and verifies quoted numbers and messages; run with `--verify` |
 
-The [research repository](https://github.com/tdj28/shrimp-memory) contains the
-experiment tools. The completed transfer is bound by its
-[committed audit receipt](https://github.com/tdj28/shrimp-memory/blob/35c57acb0c25d1b06c37884930f6e72fd27668a5/docs/receipts/substantive-pythia-complete.json).
+This entry includes compact receipts and figure-regeneration code. The full raw
+trajectories remain in the research archive and are not included in this page
+bundle. Regenerating a figure from its receipt checks the presentation; it does
+not independently reproduce the model run.
 
 ### Appendix: scope of the record
 
-The substantive Pythia transfer is an adapted integration test using known
-addresses. Its measurement record was drawn once after the implementation was
-fixed, with the changed-reading comparison declared in advance. The spatial
-sample and Qwen operations are exploratory numerical observations. No interval
-proof or population reliability guarantee is claimed for these operations.
+The substantive Pythia transfer is an **adapted integration test** using known
+addresses. On 1 November 2026, the recorded plan was frozen at **00:14:42 UTC**,
+before the recorded input draw at **00:16:54 UTC**. It specified changing the
+fifth reading from 83 to 23. The execution source was recorded at **00:19:01 UTC**;
+the first receiver metadata followed at **00:19:25 UTC**, and the first model
+call at **00:19:30 UTC**. The numerical source modules were unchanged between
+the plan and execution commits. The methods receipt includes the exact
+declaration, commit identifiers, and artifact hashes.
+
+This establishes recorded prospective ordering. It does not independently
+certify the timestamps or establish that no unrecorded draw existed, and it
+does not make this a confirmatory study. The spatial sample and Qwen operations
+are exploratory numerical observations. No interval proof or population
+reliability guarantee is claimed for these operations.
 
 The test harness, control instructions, numerical readouts, and failed or
 unresolved outcomes are part of the evidence. Successful recovery here means

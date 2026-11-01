@@ -267,7 +267,7 @@ z
    <text style="font-weight: 700; font-size: 22px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #292721" x="26.928" y="24.7968" transform="rotate(-0 26.928 24.7968)">Four messages, fully recovered</text>
   </g>
   <g id="text_26">
-   <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #615b52" x="26.928" y="48.4128" transform="rotate(-0 26.928 48.4128)">One paired request/reply test, repeated</text>
+   <text style="font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #615b52" x="26.928" y="48.4128" transform="rotate(-0 26.928 48.4128)">Base and changed-input exchanges</text>
   </g>
  </g>
  <defs>

@@ -21,7 +21,7 @@ s_n=
 \begin{cases}
 0, & u_n\le -1,\\
 1, & u_n\ge 1,\\
-s_{n-1}, & -1<u_n<1.
+s_{n-1}, & -1\lt u_n\lt 1.
 \end{cases}
 \]
 

@@ -16,7 +16,7 @@
   "accessibility": "Direct text labels and values; meanings do not rely only on color. PNG plots also have scalable SVG and PDF counterparts.",
   "generator": {
     "path": "build_figures.py",
-    "sha256": "34790baae8ed6d66733446615aca32f7dc48b5e3f687db950f2a4fae3af4bdd8"
+    "sha256": "83c51105372c66a734217452a6ea39cb415041bb0d877ef2708268a5e8681844"
   },
   "matplotlib_version": "3.11.2",
   "font": {
@@ -25,9 +25,9 @@
   },
   "provenance": {
     "outputs": {
-      "stateful-logic.png": "3df04443c2b2da010f9e93edbde6c83be510a850ab6857cc4d003ea60829bf9c",
-      "stateful-logic.svg": "888c48df45159f9695d7dd3d9ed86e860b1efe07dd2945250e896827325bcc7b",
-      "stateful-logic.pdf": "76ae9f65e908e1c3d479331f46b55921af5c42da74d4b692b1cc296ebfbad676"
+      "stateful-logic.png": "1f26f653fd8fe1eb29259a5a1ef4696eb1e510f11cbd8a24721e7002f34c3ea7",
+      "stateful-logic.svg": "a717dc2f0e4a0bbf85849fb655931393fff44d34cb395e6fc2d2f8eb550002d7",
+      "stateful-logic.pdf": "4920f611acc08b9e89ea57730619f09a1d3265ef2348968dc71491b2058dc04a"
     }
   }
 }
