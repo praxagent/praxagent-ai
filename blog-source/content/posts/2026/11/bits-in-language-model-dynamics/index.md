@@ -146,101 +146,9 @@ concealment demonstration or autonomous conversation, no proof of a reliable
 general-purpose memory, and no demonstrated advantage over sending digital
 bytes directly.
 
-## Ordinary prose: the missing link in the full chain
-
-We tested two different language interfaces. In the complete numerical
-transfers below, English explicitly states the controls. An earlier pilot
-instead used **everyday prose as the coordinate carrier**. That second
-interface recovered **9 of 16 requested symbols**. Its sender and receiver
-computed identical coordinates in all 16 cases, but seven coordinates landed
-at the wrong requested symbol. The pilot stopped before the numerical
-feedback stage, so it is not a completed prose-to-chaos-memory demonstration.
-
-Here is its first successful record in packet order, without editing:
-
-```text
-"Let's review the agenda and bring our notes before the meeting to ensure clarity and efficiency."
-```
-
-The requested corner label was 1 and the receiver returned 1. The standardized
-text coordinates were approximately **(−1.600483, 1.193716)**. The associated
-parameter address was **(0.07292097326262993, −0.15383214663510716)**.
-That address was computed but **not executed** through Qwen's feedback loop.
-
-The first unsuccessful record, also unedited, was:
-
-```text
-"Wouldn't it be fun to enjoy the sun and breeze while you're on the go? A light raincoat makes a great addition to your umbrella bag
-```
-
-The text really ended there. It requested label 3 but decoded as 1, at
-standardized coordinates approximately **(−0.977241, 0.753653)**. The repeated
-use of this same carrier for several requests is one reason the attempts are
-dependent; no separate naturalness assessment was collected.
-
-The decoder was a fixed embedding projection, not semantic understanding.
-For text tokens \(w_1,\ldots,w_N\), it computed
-
-\[
-\bar e=\frac{1}{N}\sum_{i=1}^{N}E_{w_i},
-\qquad z_j=\frac{u_j^{\mathsf T}(\bar e-m)}{\sigma_j},\quad j=1,2.
-\]
-
-The calibration mean \(m\), orthonormal directions \(u_j\), and scale values
-\(\sigma_j\) were shared and fixed. The receiver picked the Euclidean-nearest
-corner of \(\{(-1,-1),(-1,1),(1,-1),(1,1)\}\), labeled 0, 1, 2, 3 respectively.
-These are geometric symbol labels; they were not determined by a chaos or
-recurrence measurement. Relabeling them as two-bit strings would not turn
-them into measured dynamical bits.
-
-The sender generated eight candidates for each of four everyday topics and
-selected the one minimizing its largest standardized coordinate error. Six misses had no correctly classified candidate in their topic pool. One further miss arose because that minimax selection rule chose differently from the
-receiver's nearest-corner rule. The first-candidate baseline recovered 4 of 16;
-the selected pilot recovered 9 of 16. This isolates a concrete bottleneck:
-**reproducing a coordinate exactly does not make the desired coordinate
-reachable with the available prose**.
-
-<details>
-<summary>All sixteen prose outcomes and what each demonstration actually completed</summary>
-
-| Packet record | Requested → recovered symbol | Truncated |
-|---:|:---:|:---:|
-| 0 | 3 → 1 | yes |
-| 1 | 2 → 0 | no |
-| 2 | 1 → 0 | no |
-| 3 | 1 → 1 | no |
-| 4 | 2 → 2 | no |
-| 5 | 2 → 2 | no |
-| 6 | 0 → 0 | no |
-| 7 | 1 → 1 | no |
-| 8 | 3 → 2 | no |
-| 9 | 2 → 1 | yes |
-| 10 | 0 → 0 | no |
-| 11 | 1 → 1 | yes |
-| 12 | 0 → 0 | no |
-| 13 | 3 → 0 | no |
-| 14 | 3 → 2 | no |
-| 15 | 0 → 0 | no |
-
-All exact texts, coordinates and hashes are in the [language-interface receipt](receipts/language-interface.json).
-
-| Experiment | Carrier and numerical endpoint |
-|---|---|
-| Generated prose | 9/16 corner symbols; no subsequent dynamical writes or reads |
-| Literal commands | Four accepted commands, such as `Write bit 0 to register R0.`, executed the numerical writer and recovered `0110`; three invalid commands were rejected |
-| Generated poems | Explicit binary frames carried the payload separately from the coding dialogue; 6 of 115 intended bytes verified before the operator stopped the campaign |
-| Short Qwen exchange | Complete `Bob` → `A` byte exchange, carried by explicit control instructions |
-| Substantive Pythia exchange below | Complete measurement request and computed reply, carried by explicit control instructions |
-
-An externally supplied report described a separate keyed prose-sampling result.
-Its claimed 16/16 was not reproduced in this repository and is not counted here.
-
-</details>
-
-The remaining integration test is therefore well defined: a generated carrier
-must reach its intended control region, a fresh receiver must reconstruct those
-controls, and the actual dynamical write/read must recover the requested
-payload. The current evidence verifies parts of that chain in separate tests.
+The completed exchanges below use English instructions that state their numerical
+controls. An earlier everyday-prose encoder did not complete the numerical stage;
+its results and examples are retained in the [development history](#prose-interface-development).
 
 ## A complete request crosses the numerical channel
 
@@ -706,6 +614,105 @@ This entry includes compact receipts and figure-regeneration code. The full raw
 trajectories remain in the research archive and are not included in this page
 bundle. Regenerating a figure from its receipt checks the presentation; it does
 not independently reproduce the model run.
+
+<details id="prose-interface-development">
+<summary id="ordinary-prose-the-missing-link-in-the-full-chain">Development history: the earlier prose-to-coordinate pilot</summary>
+
+We tested two different language interfaces. In the complete numerical
+transfers below, English explicitly states the controls. An earlier pilot
+instead used **everyday prose as the coordinate carrier**. That second
+interface recovered **9 of 16 requested symbols**. Its sender and receiver
+computed identical coordinates in all 16 cases, but seven coordinates landed
+at the wrong requested symbol. The pilot stopped before the numerical
+feedback stage, so it is not a completed prose-to-chaos-memory demonstration.
+
+Here is its first successful record in packet order, without editing:
+
+```text
+"Let's review the agenda and bring our notes before the meeting to ensure clarity and efficiency."
+```
+
+The requested corner label was 1 and the receiver returned 1. The standardized
+text coordinates were approximately **(−1.600483, 1.193716)**. The associated
+parameter address was **(0.07292097326262993, −0.15383214663510716)**.
+That address was computed but **not executed** through Qwen's feedback loop.
+
+The first unsuccessful record, also unedited, was:
+
+```text
+"Wouldn't it be fun to enjoy the sun and breeze while you're on the go? A light raincoat makes a great addition to your umbrella bag
+```
+
+The text really ended there. It requested label 3 but decoded as 1, at
+standardized coordinates approximately **(−0.977241, 0.753653)**. The repeated
+use of this same carrier for several requests is one reason the attempts are
+dependent; no separate naturalness assessment was collected.
+
+The decoder was a fixed embedding projection, not semantic understanding.
+For text tokens \(w_1,\ldots,w_N\), it computed
+
+\[
+\bar e=\frac{1}{N}\sum_{i=1}^{N}E_{w_i},
+\qquad z_j=\frac{u_j^{\mathsf T}(\bar e-m)}{\sigma_j},\quad j=1,2.
+\]
+
+The calibration mean \(m\), orthonormal directions \(u_j\), and scale values
+\(\sigma_j\) were shared and fixed. The receiver picked the Euclidean-nearest
+corner of \(\{(-1,-1),(-1,1),(1,-1),(1,1)\}\), labeled 0, 1, 2, 3 respectively.
+These are geometric symbol labels; they were not determined by a chaos or
+recurrence measurement. Relabeling them as two-bit strings would not turn
+them into measured dynamical bits.
+
+The sender generated eight candidates for each of four everyday topics and
+selected the one minimizing its largest standardized coordinate error. Six misses had no correctly classified candidate in their topic pool. One further miss arose because that minimax selection rule chose differently from the
+receiver's nearest-corner rule. The first-candidate baseline recovered 4 of 16;
+the selected pilot recovered 9 of 16. This isolates a concrete bottleneck:
+**reproducing a coordinate exactly does not make the desired coordinate
+reachable with the available prose**.
+
+<details>
+<summary>All sixteen prose outcomes and what each demonstration actually completed</summary>
+
+| Packet record | Requested → recovered symbol | Truncated |
+|---:|:---:|:---:|
+| 0 | 3 → 1 | yes |
+| 1 | 2 → 0 | no |
+| 2 | 1 → 0 | no |
+| 3 | 1 → 1 | no |
+| 4 | 2 → 2 | no |
+| 5 | 2 → 2 | no |
+| 6 | 0 → 0 | no |
+| 7 | 1 → 1 | no |
+| 8 | 3 → 2 | no |
+| 9 | 2 → 1 | yes |
+| 10 | 0 → 0 | no |
+| 11 | 1 → 1 | yes |
+| 12 | 0 → 0 | no |
+| 13 | 3 → 0 | no |
+| 14 | 3 → 2 | no |
+| 15 | 0 → 0 | no |
+
+All exact texts, coordinates and hashes are in the [language-interface receipt](receipts/language-interface.json).
+
+| Experiment | Carrier and numerical endpoint |
+|---|---|
+| Generated prose | 9/16 corner symbols; no subsequent dynamical writes or reads |
+| Literal commands | Four accepted commands, such as `Write bit 0 to register R0.`, executed the numerical writer and recovered `0110`; three invalid commands were rejected |
+| Generated poems | Explicit binary frames carried the payload separately from the coding dialogue; 6 of 115 intended bytes verified before the operator stopped the campaign |
+| Short Qwen exchange | Complete `Bob` → `A` byte exchange, carried by explicit control instructions |
+| Substantive Pythia exchange below | Complete measurement request and computed reply, carried by explicit control instructions |
+
+An externally supplied report described a separate keyed prose-sampling result.
+Its claimed 16/16 was not reproduced in this repository and is not counted here.
+
+</details>
+
+The remaining integration test is therefore well defined: a generated carrier
+must reach its intended control region, a fresh receiver must reconstruct those
+controls, and the actual dynamical write/read must recover the requested
+payload. The current evidence verifies parts of that chain in separate tests.
+
+</details>
 
 ### Appendix: scope of the record
 
