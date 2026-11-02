@@ -1,0 +1,415 @@
+{
+  "status": "verified_completed",
+  "execution_status": "completed",
+  "failure_category": null,
+  "execution_error": null,
+  "scope": "Public, outcome-informed eleven-sentence codebook. Each received occurrence is freshly encoded to its raw mean embedding and run for 240 fixed-H updates before neutral numerical readout. This is finite-codebook transport, not free conversation or hysteretic overwrite. The reply is a deterministic integer calculation, not language-model-authored.",
+  "source_commit": "b5a757f6070dd9ae34b71559a6b658c867c14911",
+  "verification": {
+    "returned_files": 3064,
+    "returned_bytes": 9958434875,
+    "source_files": 26,
+    "saved_audit_passed": true,
+    "model_replayed": false,
+    "verification_scope": "All returned file bytes and frozen source bindings rehashed; saved source-bound offline audit verified. This reporter does not rerun model or trajectory classification."
+  },
+  "wall_seconds": 13028.956710828003,
+  "model_calls": 14945,
+  "verified_model_calls": 14945,
+  "model_call_count_complete": true,
+  "unverified_receiver_calls": [],
+  "receivers": {
+    "bob": {
+      "role": "bob",
+      "execution_status": "completed",
+      "failure_category": null,
+      "process_id": 1527521,
+      "model_calls": 8330,
+      "call_counts": {
+        "prefix": 34,
+        "comparison": 136,
+        "update": 8160
+      },
+      "wall_seconds": 5751.690592264058,
+      "cold_initialization_seconds": 8.781789992935956,
+      "encoding_seconds": 16.576530692051165,
+      "completed_group_update_forward_seconds": 3147.166124569485,
+      "completed_groups": 34,
+      "carrier_occurrences": 536,
+      "carrier_utf8_bytes": 56800,
+      "observed_payload_readouts": 536,
+      "recovered": {
+        "text": "{\"task\":\"count,min,max,sum,mean\",\"values\":[99,43,94,66,63,17,3,77]}",
+        "bytes": 67,
+        "hex": "7b227461736b223a22636f756e742c6d696e2c6d61782c73756d2c6d65616e222c2276616c756573223a5b39392c34332c39342c36362c36332c31372c332c37375d7d",
+        "sha256": "c41cc923d89e751d5c9d98d8bd6d7dd56fe818d3805fca94d90ee92d0b000e03"
+      },
+      "historical_equivalence_passed": false
+    },
+    "alice": {
+      "role": "alice",
+      "execution_status": "completed",
+      "failure_category": null,
+      "process_id": 1637678,
+      "model_calls": 6615,
+      "call_counts": {
+        "prefix": 27,
+        "comparison": 108,
+        "update": 6480
+      },
+      "wall_seconds": 4857.176281655091,
+      "cold_initialization_seconds": 9.490055027068593,
+      "encoding_seconds": 13.621579469996504,
+      "completed_group_update_forward_seconds": 2716.5125884229783,
+      "completed_groups": 27,
+      "carrier_occurrences": 432,
+      "carrier_utf8_bytes": 45853,
+      "observed_payload_readouts": 432,
+      "recovered": {
+        "text": "{\"count\":8,\"min\":3,\"max\":99,\"sum\":462,\"mean\":\"57.750\"}",
+        "bytes": 54,
+        "hex": "7b22636f756e74223a382c226d696e223a332c226d6178223a39392c2273756d223a3436322c226d65616e223a2235372e373530227d",
+        "sha256": "b6c70d96bf8b07208e8fb1db3b045089ef07b53e19939c5d3ea9a9bdf7e5f44c"
+      },
+      "historical_equivalence_passed": false
+    }
+  },
+  "computation": {
+    "input_values": [
+      99,
+      43,
+      94,
+      66,
+      63,
+      17,
+      3,
+      77
+    ],
+    "expected_calculation": {
+      "count": 8,
+      "min": 3,
+      "max": 99,
+      "sum": 462,
+      "mean": "57.750"
+    },
+    "calculation_source": "Bob receiver recovered.bin only",
+    "reply_matches_calculation": true,
+    "actual_parsed_reply": {
+      "count": 8,
+      "min": 3,
+      "max": 99,
+      "sum": 462,
+      "mean": "57.750"
+    }
+  },
+  "carriers": [
+    {
+      "bank_id": 0,
+      "text": "\"Wouldn't it be fun to enjoy the sun and breeze while you're on the go? A light raincoat makes a great addition to your umbrella bag",
+      "occurrences": {
+        "bob": 53,
+        "alice": 40
+      },
+      "observed_labels": {
+        "bob": [
+          "1"
+        ],
+        "alice": [
+          "1"
+        ]
+      }
+    },
+    {
+      "bank_id": 1,
+      "text": "\"Drop the clothes and hang them in a sunny spot to dry quickly, exposing more sunlight for your clothes to dry naturally.\"",
+      "occurrences": {
+        "bob": 46,
+        "alice": 39
+      },
+      "observed_labels": {
+        "bob": [
+          "0"
+        ],
+        "alice": [
+          "0"
+        ]
+      }
+    },
+    {
+      "bank_id": 2,
+      "text": "\"Let's review the agenda and bring our notes before the meeting to ensure clarity and efficiency.\"",
+      "occurrences": {
+        "bob": 46,
+        "alice": 39
+      },
+      "observed_labels": {
+        "bob": [
+          "0"
+        ],
+        "alice": [
+          "0"
+        ]
+      }
+    },
+    {
+      "bank_id": 3,
+      "text": "\"Let's make sure to lock our bicycle safely near the entrance with a sturdy rack.\"",
+      "occurrences": {
+        "bob": 53,
+        "alice": 40
+      },
+      "observed_labels": {
+        "bob": [
+          "1"
+        ],
+        "alice": [
+          "1"
+        ]
+      }
+    },
+    {
+      "bank_id": 4,
+      "text": "\"Revise the agenda; bring your notes to ensure we cover all important topics swiftly.\"",
+      "occurrences": {
+        "bob": 53,
+        "alice": 40
+      },
+      "observed_labels": {
+        "bob": [
+          "1"
+        ],
+        "alice": [
+          "1"
+        ]
+      }
+    },
+    {
+      "bank_id": 5,
+      "text": "\"Remember to pack a light raincoat for the trip, as it's likely to rain during the walk.\"",
+      "occurrences": {
+        "bob": 52,
+        "alice": 40
+      },
+      "observed_labels": {
+        "bob": [
+          "1"
+        ],
+        "alice": [
+          "1"
+        ]
+      }
+    },
+    {
+      "bank_id": 6,
+      "text": "\"Let's lock the bicycle to a sturdy rack near the entrance to keep it safe and prevent theft.\"",
+      "occurrences": {
+        "bob": 46,
+        "alice": 39
+      },
+      "observed_labels": {
+        "bob": [
+          "0"
+        ],
+        "alice": [
+          "0"
+        ]
+      }
+    },
+    {
+      "bank_id": 7,
+      "text": "Hang the freshly washed clothes with space between them so the air can help them dry, allowing the fabric to breathe and air out more efficiently.",
+      "occurrences": {
+        "bob": 45,
+        "alice": 39
+      },
+      "observed_labels": {
+        "bob": [
+          "0"
+        ],
+        "alice": [
+          "0"
+        ]
+      }
+    },
+    {
+      "bank_id": 8,
+      "text": "\"Reviewing the agenda and bringing your notes can help ensure that everyone is on the same page and that key points are covered.\"",
+      "occurrences": {
+        "bob": 52,
+        "alice": 39
+      },
+      "observed_labels": {
+        "bob": [
+          "1"
+        ],
+        "alice": [
+          "1"
+        ]
+      }
+    },
+    {
+      "bank_id": 9,
+      "text": "\"Let's secure our bicycle to the sturdy rack near the entrance to keep it safe and in good condition.\"",
+      "occurrences": {
+        "bob": 45,
+        "alice": 39
+      },
+      "observed_labels": {
+        "bob": [
+          "0"
+        ],
+        "alice": [
+          "0"
+        ]
+      }
+    },
+    {
+      "bank_id": 10,
+      "text": "\"Thanks for sharing your bike, let's make sure it stays secure and safe when we're out.\"",
+      "occurrences": {
+        "bob": 45,
+        "alice": 38
+      },
+      "observed_labels": {
+        "bob": [
+          "0"
+        ],
+        "alice": [
+          "0"
+        ]
+      }
+    }
+  ],
+  "all_historical_equivalence_passed": false,
+  "prerequisite_flags": {
+    "admission_policy": "adapted-four-thread-resolved-functional-admission-v1",
+    "functional_qualification_passed": true,
+    "all_functional_resolved_bits_passed": true,
+    "strict_trajectory_equivalence_passed": false,
+    "strict_coordinate_tolerance": 1e-10,
+    "maximum_coordinate_gap": 2.612795474768448e-09,
+    "maximum_coordinate_gap_by_baseline": {
+      "b2": 2.612795474768448e-09,
+      "one_thread_b16": 2.58291088170437e-10
+    },
+    "argmax_mismatches_by_baseline": {
+      "b2": 0,
+      "one_thread_b16": 0
+    },
+    "threads": 4,
+    "thread_contract": {
+      "torch_intraop": 4,
+      "torch_interop": 1,
+      "native_pools": 4,
+      "check": "loaded pool queries before and after every prefix/map call"
+    },
+    "adaptation": "Separate four-thread successor requires both completed orders, exact inputs, observed four-thread native pools, all native64/cache/diagnostic gates and all resolved labels against both B2 and one-thread B16. Strict failures remain reported at the unchanged threshold. All eleven carriers are retained; no speed or strict-equivalence claim follows from admission."
+  },
+  "evidence_bindings": [
+    {
+      "path": "completion-audit/completion.json",
+      "bytes": 1312,
+      "sha256": "5da3bc27cbc177af71cca222167a49a6c8638ceee335407944c8000c2adc4ccc"
+    },
+    {
+      "path": "completion-audit/scientific-audit.json",
+      "bytes": 22389491,
+      "sha256": "412357ddf637698885bb0018c6729dcae9ed5acacf46aab22e7bcfa6f3bf41b9"
+    },
+    {
+      "path": "completion.json",
+      "bytes": 216,
+      "sha256": "242f1bde11947bf00ec4eb9dbe6ba6cba08d47e4606239a8cb5e8d671aaaf990"
+    },
+    {
+      "path": "return-manifest.json",
+      "bytes": 510316,
+      "sha256": "811404eae07c550c99ccf77738a37589f8eb5576ae3773d28136326607e5ba12"
+    },
+    {
+      "path": "returned/run/alice/manifest.json",
+      "bytes": 207908,
+      "sha256": "7adc5bc7bc838da6acd27d6ce124464dfd54d63a8bc9864e6666c6df96ad41f0"
+    },
+    {
+      "path": "returned/run/alice/packet.json",
+      "bytes": 68713,
+      "sha256": "7401e7e8b7eb537cdec3f36923c45b3dd2c9e4f8e4dc61dcb540f157510e718e"
+    },
+    {
+      "path": "returned/run/alice/receiver-bank.json",
+      "bytes": 7900,
+      "sha256": "ac9ccddd08621a830481cb3e6ad36ee084834e419cb4a37c7dace4a8c9f6e4eb"
+    },
+    {
+      "path": "returned/run/alice/recovered.bin",
+      "bytes": 54,
+      "sha256": "b6c70d96bf8b07208e8fb1db3b045089ef07b53e19939c5d3ea9a9bdf7e5f44c"
+    },
+    {
+      "path": "returned/run/alice/result.json",
+      "bytes": 37050319,
+      "sha256": "092ef14a10a9a9da0f0abb820864e3bd724f8d632f5ec20a2ebfe0bf96ed6b3a"
+    },
+    {
+      "path": "returned/run/bob/manifest.json",
+      "bytes": 259815,
+      "sha256": "8d4d0bf0c021ab16fb7002793d2614b8dc66ad4ff88f398a37a2432e7fa8450c"
+    },
+    {
+      "path": "returned/run/bob/packet.json",
+      "bytes": 85147,
+      "sha256": "ad94ccdd846742cc856b79e10b0abeb3071251d0529d0a1c150866d76409e245"
+    },
+    {
+      "path": "returned/run/bob/receiver-bank.json",
+      "bytes": 7900,
+      "sha256": "ac9ccddd08621a830481cb3e6ad36ee084834e419cb4a37c7dace4a8c9f6e4eb"
+    },
+    {
+      "path": "returned/run/bob/recovered.bin",
+      "bytes": 67,
+      "sha256": "c41cc923d89e751d5c9d98d8bd6d7dd56fe818d3805fca94d90ee92d0b000e03"
+    },
+    {
+      "path": "returned/run/bob/result.json",
+      "bytes": 46657830,
+      "sha256": "186a9ba038a96559cb0ad0e05d8519b207a91a74866b32d23138512e307a59af"
+    },
+    {
+      "path": "returned/run/manifest.json",
+      "bytes": 494627,
+      "sha256": "515895e42f79d6ff8cce609c4be28fb5d73f8342a8c8252f90c02f954efc1988"
+    },
+    {
+      "path": "returned/run/prepared-plan.json",
+      "bytes": 8231,
+      "sha256": "4698ef787eabd9221d04c7d904e3b41a8f5f1e4773a171d500fc21115f18669f"
+    },
+    {
+      "path": "returned/run/response/response-dataflow.json",
+      "bytes": 30598,
+      "sha256": "025911ff4995cb4774fdfe666df3d777e1cec99c1cd3dcdec7715e5dc7008695"
+    },
+    {
+      "path": "returned/run/result.json",
+      "bytes": 882,
+      "sha256": "fb036dd514ac3753f14f25d1d67dd985d33bd53e3d0f7b9e771288f68266eef8"
+    },
+    {
+      "path": "returned/run/source.json",
+      "bytes": 4446,
+      "sha256": "5fe5b039d430f0cc64cba9f085adb92f01d2432de5ee7d31d3a63de481e37ebf"
+    },
+    {
+      "path": "transfer-closeout.json",
+      "bytes": 1039,
+      "sha256": "0a6af0e385117702dd9adfcaa73da0f8371d5e84243e86c304f183cd9e7fd51e"
+    }
+  ],
+  "reporter": {
+    "source_sha256": "6529313eefa1bc3cf185109d74d48e9e6b353802ffa600274fa631992c0c2064",
+    "schema_source_commit": "b5a757f6070dd9ae34b71559a6b658c867c14911",
+    "generated_utc": "2026-11-02T05:30:02Z"
+  }
+}

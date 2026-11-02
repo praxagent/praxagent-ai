@@ -8,8 +8,8 @@ draft: true
 pro_reviewed: false
 toc: true
 tags: ["AI", "LLM", "dynamical-systems", "memory", "computation"]
-summary: "Complete requests and computed replies crossed a language model’s numerical feedback channel. A calibrated pair of ordinary sentences also drove one carried Qwen byte; a separate eleven-text panel initialized both binary states, and parameter excursions supported finite memory and logic tests."
-description: "Public numerical communication in Pythia, an audited calibrated prose-to-Qwen byte, and finite stateful memory and logic tests."
+summary: "Qwen carried a complete request and computed reply using an eleven-sentence alphabet. Fresh generated sentences independently recovered 63 of 64 requested bits; numerical sensitivity blocked the complete frame. Separate carried-state writes and logic tests demonstrate memory operations."
+description: "A completed 121-byte Qwen prose-codebook exchange, a 63-of-64-bit fresh-prose trial, and numerical memory and logic in language-model feedback."
 og_image: "og-card.png"
 og_image_alt: "Communication, memory, and logic in language-model feedback: Pythia carries a complete measurement request and calculated reply; Qwen retains a state at common controls. Public numerical demonstrations, with no concealment claim."
 lead: |
@@ -35,8 +35,14 @@ key_result: |
   In a separate Qwen sentence-input panel, **all eleven distinct texts reached a
   qualified reference cycle: six zeros and five ones** after 240 updates. This
   initializes a state from prose. A separate public two-sentence calibration
-  completed the carried byte **10110001** from both starting states. A substantive
-  ordinary-prose request and reply remain pending.
+  completed the carried byte **10110001** from both starting states. Reusing the
+  eleven measured sentences as a public alphabet then delivered a **67-byte
+  request and 54-byte computed reply**, totaling **121 application bytes**.
+
+  A separate trial selected **64 unique, newly generated sentences**. A fresh
+  numerical receiver recovered **63 correct bits**, with **one unresolved bit**
+  blocking the eight-byte frame and the reply. Fresh-prose generation therefore
+  has a measured partial result, while complete delivery uses the fixed alphabet.
 ---
 
 <style>
@@ -85,6 +91,9 @@ A separate fixed-control test initialized the model from eleven ordinary texts:
 six reached the zero reference cycle and five reached the one reference cycle.
 An explicitly calibrated two-sentence interface then drove eight successive
 writes and recovered the same complete raw byte from both reference starts.
+Reusing the eleven raw-mean sentences as a public alphabet also completed a
+121-byte request/reply exchange. A separate fresh-prose trial recovered 63 of
+64 requested bits and rejected the incomplete frame.
 
 **Takeaway.** These finite, audited numerical observations establish working
 instances of transport and stateful operations. They establish neither secrecy
@@ -160,11 +169,12 @@ small Transformer’s responses, a separate address-qualification experiment wit
 all outcomes counted, and bounded stateful memory and logic tests in another
 Transformer feedback loop.
 
-**Not claimed.** The completed byte exchanges openly expose their controls.
+**Not claimed.** The Pythia and explicit-control Qwen exchanges openly expose their controls.
 The raw-mean sentence panel tests state initialization; the calibrated byte
 uses a finite public two-sentence codebook. Neither establishes that arbitrary
-prose reliably writes memory or carries a substantive request and reply. There
-is no concealment demonstration or autonomous conversation, no proof of a
+prose reliably writes memory. Complete prose-based request/reply transport here
+uses a fixed sentence alphabet; the fresh-generated trial did not complete its
+request. There is no concealment demonstration or autonomous conversation, no proof of a
 reliable general-purpose memory, and no demonstrated advantage over sending
 digital bytes directly.
 
@@ -174,6 +184,114 @@ embedding calibration. A separate experiment places raw text means directly
 into the continuous state. These three interfaces have different evidence; the
 earlier coordinate encoder remains in the
 [development history](#prose-interface-development).
+
+## Ordinary sentences carry a complete request and reply
+
+The receiver can recover useful data from the numerical response to incoming
+English. In the completed Qwen exchange, Alice sent a request containing eight
+integer observations. Bob recovered the request by running the received
+sentences through his local feedback model. A deterministic program then
+computed the answer from **Bob's recovered bytes**, and Alice recovered that
+answer through a separately executed numerical receiver.
+
+The application messages, shown in full, were:
+
+**Alice → Bob: recovered request (67 bytes)**
+
+```json
+{"task":"count,min,max,sum,mean","values":[99,43,94,66,63,17,3,77]}
+```
+
+**Bob → Alice: recovered reply (54 bytes)**
+
+```json
+{"count":8,"min":3,"max":99,"sum":462,"mean":"57.750"}
+```
+
+Those JSON strings were the recovered data. The carrier consisted of repeated
+choices from the eleven exact English strings measured in the sentence panel
+below. For example, both of these strings occurred in both directions:
+
+<table class="prose-examples">
+<thead><tr><th>Exact carrier text</th><th>Measured bit</th></tr></thead>
+<tbody>
+<tr><td>"Let's make sure to lock our bicycle safely near the entrance with a sturdy rack."</td><td>1</td></tr>
+<tr><td>"Let's lock the bicycle to a sturdy rack near the entrance to keep it safe and prevent theft."</td><td>0</td></tr>
+</tbody>
+</table>
+
+These examples were chosen to show similar subject matter with opposite labels;
+the [complete report](receipts/prose-exchange-completed.json) includes every
+carrier and its occurrence counts. This is an eleven-sentence alphabet, not a
+newly authored dialogue. The answer is computed by the host program, not composed
+by a language model.
+
+For each occurrence, the receiver tokenizes the exact sentence, averages its
+input embeddings, and uses that mean as the initial state. It executes **240
+updates at fixed hold controls** and reads the resulting reference-cycle label.
+The state starts afresh for each sentence. There is no direct sentence-to-bit
+lookup in the executed receiver, although a reader with the public alphabet
+could perform that lookup instead.
+
+| Completed Qwen exchange | Measured result |
+|---|---:|
+| Delivered application data | 121 bytes across request and reply |
+| Sentence occurrences | 968 |
+| Model forward calls, including checks | 14,945 |
+| Total reported elapsed time, including orchestration | 13,028.96 seconds |
+
+This four-thread run used an adapted functional admission test: the measured
+labels agreed with the reference execution, but strict trajectory equivalence
+at the unchanged tolerance failed. The result establishes the recorded delivery;
+it does not establish identical trajectories across batching choices. The
+[report and source bindings](receipts/prose-exchange-completed.json) retain both
+findings.
+
+## Freshly generated prose: the remaining bit
+
+The next trial removed the fixed sentence alphabet. A separate Qwen author
+generated candidates about implementing and testing a coding task. The author
+did not see the payload or the requested bit. The sender measured candidate
+trajectories and selected the first eligible sentence with the requested label.
+Bob then received the selected text and independently repeated the numerical
+encoding and readout. Each sentence used the same raw-mean initialization and
+240 updates at fixed H as the finite-alphabet exchange.
+
+All **64 selected sentences were distinct**. The fresh receiver returned
+**63 qualified correct bits, zero qualified wrong bits, and one unresolved bit**.
+That left the eight-byte test frame incomplete, so no reply was authored. The
+payload consisted of random observation bytes, rather than a UTF-8 request.
+Here are the first selected sentence, the first selected zero-bit sentence, and
+the sole unresolved sentence, exactly as generated:
+
+| Exact generated text | Sender label | Receiver label |
+|---|:---:|:---:|
+| Alice, as you mentioned, the implementation, edge cases, and tests are crucial to ensure the function works as intended. | 1 | 1 |
+| Alice, one might wonder about test cases to verify that the function works as expected. | 0 | 0 |
+| Alice, you could also explore using generators or iterators to avoid memory issues and performance concerns for larger datasets. | 0 | unresolved |
+
+The unresolved sentence exposes a reproducibility issue after text encoding.
+Its tokens, embedding rows, mean and initial vector were identical at the
+sender and receiver. After the first model call, their states differed by
+approximately **1.67 × 10⁻¹⁵ in Euclidean norm**. The difference then grew;
+the sender settled on the zero cycle, while the receiver approached the one
+cycle without satisfying the recurrence test. It is therefore not simply
+known to need more settling time.
+
+The sentence occupied different batch lanes in the two executions. This makes
+floating-point sensitivity to batch layout a concrete hypothesis, requiring a
+controlled replay before assigning a cause. All reference controls passed.
+The run used **27,890 generation calls and 16,905 numerical calls**, taking
+**20,324.19 seconds**. The [result record](receipts/fresh-prose-first-attempt.json)
+contains all selected texts, the counts, the unresolved readouts and the saved
+trajectory comparison. This dependent, selected sample does not estimate a
+population error rate, and no separate naturalness assessment was collected.
+
+The engineering requirement is clear: a usable fresh-prose channel needs
+reproducible label selection and a way to recover a genuinely missing bit.
+Matched batch layouts, robustness tests and explicitly transmitted redundancy
+are candidates for the next experiment. They were not applied retroactively
+to this frame.
 
 ## Two calibrated sentences drive a complete carried byte
 
@@ -240,11 +358,10 @@ and [publication checker](verify_public_prose_byte.py). The original
 keep its figure and receipt files alongside it when opening it locally.
 
 This is one complete raw byte through a **finite public two-sentence codebook**.
-It is not an ASCII or standalone UTF-8 message. A substantive ordinary-prose
-request and reply remain pending; this result does not demonstrate autonomous
-conversation, concealment, general language reliability or a causal test of
-hysteresis. The following raw-mean initialization experiment is a separate
-result and supplies no byte by itself.
+It is not an ASCII or standalone UTF-8 message. Unlike the completed
+121-byte exchange above, it carries the evolving state across successive writes.
+The raw-mean initialization experiment below supplies the distinct sentence
+alphabet used by that exchange.
 
 ## Ordinary sentences reach both Qwen states
 
@@ -781,8 +898,11 @@ The useful distinction is between **a response that represents a bit** and
 **a state that retains one**. Pythia participates in a complete transaction.
 Qwen adds history, letting a later input act on a value already present.
 Its sentence-input panel adds another use of the same loop: exact ordinary
-texts initialize trajectories that reach either reference label. These
-operations do not require the model to understand the message.
+texts initialize trajectories that reach either reference label. That finite
+alphabet carried a complete request and computed reply. Fresh-generated text
+recovered all but one requested bit; the unresolved case shows why reproducing
+labels across execution layouts matters. These operations do not require the
+model to understand the message.
 
 For transport alone, direct bytes avoid the model work entirely. The demonstrated
 utility is an inspectable auxiliary representation with functioning reply
@@ -816,7 +936,7 @@ The embedding matrix in the equation is the **input embedding table**. The resul
 | Instrument | Fixed checkpoint, prefix and input position | Steering and initialization |
 |---|---|---|
 | Pythia | [EleutherAI/pythia-160m](https://huggingface.co/EleutherAI/pythia-160m), revision `50f5173d932e8e61f858120bcb800b97af589f46`. Plain prefix below; 33 tokens, soft slot at zero-based position 33. | Add after zero-based block 6. Reset each symbol occurrence to the embedding of the final prefix token. |
-| Qwen | [Qwen/Qwen2.5-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct), revision `7ae557604adf67be50417f59c2c2f167def9a775`. Same system sentence and user `Hello!`, with the pinned chat template and assistant-generation prefix; 37 tokens, soft slot at zero-based position 37. Exact token IDs and vector/reference hashes are in the methods receipt. | Add after zero-based block 12. Two lanes start at phase zero of the two saved reference cycles. |
+| Qwen | [Qwen/Qwen2.5-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct), revision `7ae557604adf67be50417f59c2c2f167def9a775`. Same system sentence and user `Hello!`, with the pinned chat template and assistant-generation prefix; 37 tokens, soft slot at zero-based position 37. Exact token IDs and vector/reference hashes are in the methods receipt. | Add after zero-based block 12. Carried-write tests start at reference-cycle phase zero; sentence-initialization tests start at the incoming raw embedding mean. |
 
 Pythia's exact prefix is `System: You are an AI talking with another AI. You have complete freedom. Feel free to pursue whatever you want.\nUser: Hello!\nAssistant:`; here `\n` denotes a newline. Qwen uses the sentence beginning “You are an AI…” as its system message, followed by the user message and the model's chat-template markers.
 
@@ -832,7 +952,9 @@ Define Qwen controls as `(steering strength, log10 temperature)`:
 |---|---|---|
 | Pythia transfer | Eight fixed addresses; each occurrence starts afresh. Up to 16 symbols/batch, with primary/twin lanes per symbol; four model threads. Hold the selected address for 32 warm-up and 128 observation updates. | Decoder P below. Initialization, prefix, schedule and bank **fixed**; payload and address order **varied**; base/changed-input settings **matched**. Fresh-address transport and persistent Pythia memory **untested**. |
 | Spatial qualification | Same reset, map and observation schedule; one model thread. 64 candidates, one of each mapped class in each of 32 selected mixed tiles. | Decoder P; retain a pair only when both proposed labels resolve correctly in **both** receivers. Coordinates **varied**, receiver packets **matched**; arbitrary-map reliability and transport using the later 48-address bank **untested**. |
-| Qwen exchange | For each bit: E0 or E1 for 120 updates, H for 240, then read. Literal carry across eight bit operations within a byte; reset both reference-start lanes between bytes. | Decoder Q below. Reference phase zero, controls and durations **fixed**; requested bits/history **varied**; readout rule **matched**. All phases, indefinite retention and a single uninterrupted 32-bit history **untested**. |
+| Qwen carried-state exchange | For each bit: E0 or E1 for 120 updates, H for 240, then read. Literal carry across eight bit operations within a byte; reset both reference-start lanes between bytes. | Decoder Q below. Reference phase zero, controls and durations **fixed**; requested bits/history **varied**; readout rule **matched**. All phases, indefinite retention and a single uninterrupted 32-bit history **untested**. |
+| Qwen fixed sentence alphabet | Reuse eleven measured strings. Reset each occurrence to its raw token-embedding mean; execute 240 updates at H using four model threads. | Decoder Q. Complete 121-byte request/reply; functional admission passed while strict trajectory equivalence failed. No carried overwrite. |
+| Qwen fresh selected prose | Generate candidates without showing the author the payload, select by measured label, and independently re-encode selected text. Reset to its raw mean; execute 240 updates at H. | Decoder Q. 63 correct bits and one unresolved; eight-byte test frame rejected. Naturalness and batch-layout robustness unestablished. |
 | AND | For input u, choose E0 if u=0, H if u=1. Apply control(B) for 120, H for 240/read, control(C) for 120, H for 240/read. | Both A lanes, all four (B,C) groups; reset between groups and carry within each group. Phase zero and chain length two **fixed**, A/B/C **varied**, common readout **matched**; longer chains and general gate reliability **untested**. |
 | OR | For input u, choose H if u=0, E1 if u=1. Apply control(B) for 120, H for 240/read, control(C) for 120, H for 240/read. | Same phase, grouping and finite-chain limits as AND. The host selects controls from B/C, without receiving the stored A or decoded intermediate output. |
 
@@ -849,6 +971,8 @@ Exact transfer/spatial coordinates and control definitions are in the [operating
 | Artifact | What it supports |
 |---|---|
 | [Compact evidence receipt](receipts/evidence-summary.json) | Message text, costs, spatial outcomes, and Qwen stateful tests |
+| [Completed Qwen prose exchange](receipts/prose-exchange-completed.json) | Both recovered payloads, full carrier alphabet, computed reply, runtime, calls and source-bound evidence |
+| [Fresh-prose test frame](receipts/fresh-prose-first-attempt.json) | All 64 selected texts, incomplete receiver outcome, identical input checks and trajectory divergence |
 | [Numerical provenance](provenance.json) | Sources and derivations for reported numbers |
 | [Methods receipt](receipts/shrimp-blog-methods.json) | Pinned instruments, classifiers, schedules, factor limits, and recorded chronology |
 | [Operating points](receipts/shrimp-blog-operating-points.json) | All transfer/spatial addresses and Qwen controls |
@@ -959,6 +1083,8 @@ All exact texts, coordinates and hashes are in the [language-interface receipt](
 | Completed prose control follow-up | All eleven actual addresses executed; each retained the two incoming labels |
 | Completed prose state follow-up | Eleven raw text means executed at fixed hold; six zeros and five ones |
 | Calibrated prose byte | Two public sentence anchors drive eight literal carried writes; both starts recover `10110001` |
+| Substantive Qwen prose exchange | Eleven known sentences carry a 67-byte request and 54-byte computed reply through fresh numerical receivers |
+| Fresh-generated prose | 64 unique selected sentences; receiver qualifies 63 correct bits and leaves one unresolved; frame rejected, no reply |
 | Literal commands | Four accepted commands, such as `Write bit 0 to register R0.`, executed the numerical writer and recovered `0110`; three invalid commands were rejected |
 | Generated poems | Explicit binary frames carried the payload separately from the coding dialogue; 6 of 115 intended bytes verified before the operator stopped the campaign |
 | Short Qwen exchange | Complete `Bob` → `A` byte exchange, carried by explicit control instructions |
@@ -971,9 +1097,10 @@ Its claimed 16/16 was not reproduced in this repository and is not counted here.
 
 The completed follow-ups separate coordinate reproduction from actual memory
 writes and from text-based state initialization. The latter reached both binary
-readouts. The separate calibrated two-sentence interface has now delivered one
-ordered raw byte. A substantive request and reply derived from recovered data
-remain pending for an ordinary-prose interface.
+readouts. The separate calibrated two-sentence interface delivered one ordered raw byte.
+The eleven-sentence alphabet subsequently delivered a complete 121-byte request
+and computed reply. Fresh-generated prose reached 63 correct bits but left one
+unresolved, preventing a complete frame.
 
 </details>
 

@@ -42,18 +42,20 @@
     "public-prose-byte-v1/trajectory.pdf": "ace40c75785c2e597cedb7abda18b97433817cb712e3707422008054e316608d",
     "public-prose-byte-v1/report.pdf": "77f27747b0c73348f39b6b22d2c2978a7c13a239171fa39b8895c15ba1280d29",
     "public-prose-byte-v1/report.html": "52cd269ff0e24e6030ff552d4e06aa101ea0b33ab91cadaa8855e041f65b4336",
-    "verify_public_prose_byte.py": "6f97d5dc5e839c235da84f15161bc69d42a7c5ad3de045d3b8e2362bccb31f20",
+    "verify_public_prose_byte.py": "4f7da5dbe4383b4e2bb094c5ca1cb44ba304a45982807628df16c542a29aee9f",
     "fig-public-prose-byte-v1.receipt.json": "40f30406c6300e0fe9bd40bd94103b8aa41b83fc61034413e184b706c9d93acf",
-    "receipts/public-prose-byte-publication-v1.json": "d379bfc7f31496c026fdeffb9f9bd3e0f9384c758865dc616bcc942a82bbf0fd",
+    "receipts/public-prose-byte-publication-v1.json": "0e3369d8186a458443a24aeddb9d513dc41d4f6410724f8626007d5be5a6ae0c",
     "receipts/public-prose-byte-v1.json": "b6b81d2e6027f2fd169aebc811f76f91a58577b45f38b6a56e47d8bf8727b650",
     "receipts/pythia-review-corrections-v1.json": "2a75846414af3f49f3ef3148177b51e4662b038fce243b244d7531a245f128cf",
     "receipts/substantive-pythia-corrected-v1.json": "0129b78ee9457f3fb0fcb0bc9c7e1311873ea5d9c85875dedcc1ee8261322e34",
     "public-prose-byte-v1/README.txt": "9108e6ebe076dbd33615a5106748ee4a1f095960dd667b608fceff741c55697c",
     "receipts/pythia-observer-report-v1.json": "ee43c6362eb0605605452c8721428a90a782aac47d50ae056472c9d36b017535",
     "receipts/pythia-observer-v1.json": "d6e62c94186c5e970c7fe274ed64cc5cfaae1afa4eb19a56fc5aeb8dc5413920",
-    "article-source-v1.txt": "c95c3143b66f6534ff01cd9429677fe0b46da7b052440c6b582e1ac9334c03ff",
+    "article-source-v1.txt": "baabdb70ba7ae9d9365d26e45a0bcf95995f50fea525511c8c41d7f962b6bdb9",
     "public-prose-byte-v1/report.html.txt": "52cd269ff0e24e6030ff552d4e06aa101ea0b33ab91cadaa8855e041f65b4336",
-    "prose-state-report.html.txt": "01f7f08bfe492fbb9bbb8365385f69f006bd8e570382c79493cc6dee8b2f6351"
+    "prose-state-report.html.txt": "01f7f08bfe492fbb9bbb8365385f69f006bd8e570382c79493cc6dee8b2f6351",
+    "receipts/prose-exchange-completed.json": "87c4f2a3ac7af384baccc184cd3c2edaccb21ead9c09b493be67898e427dcc96",
+    "receipts/fresh-prose-first-attempt.json": "a734d8bc1274dc3ebd24bad288264e074a5c364f116f7772f779bfbe5f93f47a"
   },
   "figures": [
     "transfer-results.png",
@@ -1291,6 +1293,72 @@
       "source": "receipts/pythia-observer-report-v1.json#/map_loading_and_hash_ns",
       "source_sha256": "ee43c6362eb0605605452c8721428a90a782aac47d50ae056472c9d36b017535",
       "claim": "Separate map load and hash time."
+    },
+    {
+      "id": "qwen-prose-total",
+      "appears_as": "121 application bytes",
+      "source": "receipts/prose-exchange-completed.json#/receivers",
+      "claim": "Sum of actual recovered 67 and 54 UTF-8 bytes."
+    },
+    {
+      "id": "qwen-prose-request",
+      "appears_as": "67 bytes",
+      "source": "receipts/prose-exchange-completed.json#/receivers/bob/recovered",
+      "claim": "Actual Bob receiver payload."
+    },
+    {
+      "id": "qwen-prose-reply",
+      "appears_as": "54 bytes",
+      "source": "receipts/prose-exchange-completed.json#/receivers/alice/recovered",
+      "claim": "Actual Alice receiver payload computed from Bob recovered bytes."
+    },
+    {
+      "id": "qwen-prose-occurrences",
+      "appears_as": "968",
+      "source": "receipts/prose-exchange-completed.json#/receivers",
+      "claim": "536 request plus 432 reply sentence occurrences."
+    },
+    {
+      "id": "qwen-prose-calls",
+      "appears_as": "14,945",
+      "source": "receipts/prose-exchange-completed.json#/model_calls",
+      "claim": "Verified total calls including checks."
+    },
+    {
+      "id": "qwen-prose-seconds",
+      "appears_as": "13,028.96 seconds",
+      "source": "receipts/prose-exchange-completed.json#/wall_seconds",
+      "claim": "Total reported wall time, rounded to two decimal places."
+    },
+    {
+      "id": "fresh-unique",
+      "appears_as": "64 selected sentences were distinct",
+      "source": "receipts/fresh-prose-first-attempt.json#/unique_selected_sentences",
+      "claim": "Unique selected packet texts, not all generated candidates."
+    },
+    {
+      "id": "fresh-outcomes",
+      "appears_as": "63 qualified correct bits, zero qualified wrong bits, and one unresolved bit",
+      "source": "receipts/fresh-prose-first-attempt.json#/receiver_counts",
+      "claim": "Independent receiver rows. No complete application frame."
+    },
+    {
+      "id": "fresh-delta",
+      "appears_as": "1.67 × 10⁻¹⁵",
+      "source": "receipts/fresh-prose-first-attempt.json#/trajectory_differences/first_nonzero/l2",
+      "claim": "Euclidean norm of first sender/receiver model-state difference, rounded."
+    },
+    {
+      "id": "fresh-calls",
+      "appears_as": "27,890 generation calls and 16,905 numerical calls",
+      "source": "receipts/fresh-prose-first-attempt.json#/calls",
+      "claim": "Numerical calls sum sender and receiver dynamics."
+    },
+    {
+      "id": "fresh-seconds",
+      "appears_as": "20,324.19 seconds",
+      "source": "receipts/fresh-prose-first-attempt.json#/elapsed_seconds",
+      "claim": "Whole failed attempt elapsed time rounded to two decimals."
     }
   ],
   "figure_sha256": {
@@ -1322,7 +1390,7 @@
     "public-prose-byte-trajectory.pdf": "ace40c75785c2e597cedb7abda18b97433817cb712e3707422008054e316608d"
   },
   "source_evidence": "receipts/evidence-summary.json",
-  "editorial_scope": "Public numerical transport, finite memory/logic, eleven-text raw-mean initialization, and a separately calibrated two-sentence carried raw byte. Substantive ordinary-prose request/reply remains pending. Earlier nulls and corrected Pythia control/source/same-host scopes remain explicit. A post-run observer recovered all 470 Pythia bytes through public-map lookup and exhaustive eight-label assignment, showing inference was unnecessary for those recorded wires.",
+  "editorial_scope": "Public numerical transport, finite memory/logic, a calibrated carried byte, a completed 121-byte fixed-alphabet Qwen request/reply, and an incomplete fresh-generated prose trial (63 qualified correct bits and one unresolved). Fixed-H state initialization remains distinct from carried-state writing. Earlier nulls and corrected observer, control and source scopes remain explicit.",
   "quoted_examples": {
     "examples": [
       {
@@ -1357,7 +1425,8 @@
       "all eleven prose means and measured labels match copied complete audits",
       "typed vector hashes verified from portable float64 bytes",
       "both calibrated-byte readouts, carry, checksum, actual controls and full plotted trace checked against copied complete independent audit",
-      "two distinct Pythia label controls and same-host qualification corrected without altering old receipts"
+      "two distinct Pythia label controls and same-host qualification corrected without altering old receipts",
+      "Completed fixed-alphabet dataflow and failed fresh-generated receiver are separate results; exact examples and numeric summaries checked against source-bound audits."
     ]
   },
   "prose_qualification_sources": {

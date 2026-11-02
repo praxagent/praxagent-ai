@@ -83,7 +83,12 @@ def verify(root):
         require(all(r['controls_hex']==matches[0]['controls_hex'] for r in matches),'Repeated carrier computed controls differ')
         control=matches[0]['controls']
         add('control-'+str(i),f"({control['alpha']}, {control['log10_temperature']})",'/rows/'+str(matches[0]['index']-1)+'/controls','Actual computed binary64 controls, not requested endpoint substitution.')
-    require('finite public two-sentence codebook' in article and 'A substantive ordinary-prose\nrequest and reply remain pending' in article,'Finite byte/reply scope missing')
+    require('finite public two-sentence codebook' in article and 'it carries the evolving state across successive writes' in flat,'Finite byte/carry scope missing')
+    exchange=json.loads((root/'receipts/prose-exchange-completed.json').read_text())
+    fresh=json.loads((root/'receipts/fresh-prose-first-attempt.json').read_text())
+    require(exchange['status']=='verified_completed' and sum(r['recovered']['bytes'] for r in exchange['receivers'].values())==121,'Substantive fixed-alphabet exchange not complete')
+    require(fresh['recovered_application_messages']==0 and not fresh['reply_started'] and fresh['receiver_counts']==dict(qualified_correct=63,qualified_wrong=0,unresolved=1),'Fresh-prose incomplete frame scope changed')
+    require('eleven-sentence alphabet, not a newly authored dialogue' in flat and 'eight-byte test frame incomplete' in flat,'Fixed alphabet and fresh-prose scopes conflated')
     require('nearest-point diagnostic is not the final cycle classifier' in article,'Diagnostic/classifier distinction missing')
     correction_path='receipts/pythia-review-corrections-v1.json';correction=json.loads((root/correction_path).read_text())
     require(correction['C1']['distinct_label_controls']==['erasure','bit_flip'] and correction['C1']['messages']==4 and correction['C1']['all_rejected'],'Corrected label control census')
