@@ -56,8 +56,8 @@
       "sha256": "9108e6ebe076dbd33615a5106748ee4a1f095960dd667b608fceff741c55697c"
     },
     "article-source-v1.txt": {
-      "bytes": 75232,
-      "sha256": "7d48694c9cf105a78daef25b7cb3a1249ffeebb4e74a5d87e9025400723b77a2"
+      "bytes": 75224,
+      "sha256": "838a2fc83981eb4b4db6f90678f3595e73aef0d06c0f63cbce4864cc168c4565"
     },
     "public-prose-byte-v1/report.html.txt": {
       "bytes": 6687,
@@ -77,5 +77,5 @@
   },
   "verification": "verify_public_prose_byte.py reassembles bytes from both measured label streams and checks all copied audits/assets, numerical costs, literal carry hashes and publication strings. Original report_public_prose_byte.py --verify requires the full source case and PDF dependencies.",
   "html_alias": "report.html.txt is a byte-identical downloadable copy of report.html for Hugo asset publishing; original archive receipt is unchanged.",
-  "article_updated_utc": "2026-11-02T22:51:45Z"
+  "article_updated_utc": "2026-11-02T22:54:12Z"
 }

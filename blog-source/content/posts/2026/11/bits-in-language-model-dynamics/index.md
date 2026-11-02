@@ -127,7 +127,7 @@ bit, and act on the bit already present? A **numerical address** is a pair of
 steering and temperature settings. We call this a **side channel** because it
 uses a numerical response interface alongside the model’s ordinary text output.
 
-<figure class="shrimp-figure compact">
+<figure class="shrimp-figure">
 <a href="two-routes.svg" aria-label="Open full-size figure"><img src="two-routes.svg" alt="Two numerical routes from a message to recovered bytes. Pythia resets the state for each chosen coordinate and classifies its response. Qwen carries the state through a write excursion, restores common hold controls, and reads which cycle remains."></a>
 </figure>
 
