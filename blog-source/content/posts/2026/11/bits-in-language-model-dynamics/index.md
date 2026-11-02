@@ -10,8 +10,13 @@ toc: true
 tags: ["AI", "LLM", "dynamical-systems", "memory", "computation"]
 summary: "Qwen carried a complete request and computed reply using an eleven-sentence alphabet. Fresh generated sentences independently recovered 63 of 64 requested bits; numerical sensitivity blocked the complete frame. Separate carried-state writes and logic tests demonstrate memory operations."
 description: "A completed 121-byte Qwen prose-codebook exchange, a 63-of-64-bit fresh-prose trial, and numerical memory and logic in language-model feedback."
-og_image: "og-card.png"
-og_image_alt: "Communication, memory, and logic in language-model feedback: Pythia carries a complete measurement request and calculated reply; Qwen retains a state at common controls. Public numerical demonstrations, with no concealment claim."
+og_image: "qwen-kite-map.png"
+og_image_alt: "The measured period-six kite in Qwen parameter space, with steering and temperature axes, fold and flip curves, a cusp, and the sampled attracting overlap."
+lead_image: "qwen-kite-map.png"
+lead_image_alt: "Qwen period-six kite: steering strength on the horizontal axis and log-ten temperature vertically, with black fold curves, red dashed flip curves, cusp C and a green coexistence segment."
+lead_caption: |
+  The period-six kite in Qwen’s feedback dynamics, replotted from the earlier
+  study’s map and continuation curves. [View the full-size map](qwen-kite-map.svg).
 lead: |
   A language model can carry a message through something other than the words it
   generates. Run it as a continuous feedback loop, and its numerical behavior
@@ -46,6 +51,11 @@ key_result: |
 ---
 
 <style>
+.post-lead:has(img[src$="qwen-kite-map.png"]) .post-lead-figure { width:min(50%,30rem); }
+.post-lead:has(img[src$="qwen-kite-map.png"]) .post-lead-figure img { height:auto; object-fit:contain; }
+@media (max-width:700px) {
+  .post-lead:has(img[src$="qwen-kite-map.png"]) .post-lead-figure { float:none; width:100%; margin:0 0 1.3rem; }
+}
 .shrimp-figure { width:100%; margin:1.6rem auto; }
 .shrimp-figure img { display:block; width:100%; height:auto; margin:0 auto; }
 .shrimp-figure.compact { max-width:26rem; }
@@ -466,7 +476,7 @@ controls \(E_0\) and \(E_1\) returned \((0,0)\) and \((1,1)\). There were no
 unresolved or invalid control groups. This panel used **4,758 model calls in 2596.26 seconds**. Reaching a geometric corner in an embedding projection had
 not made that corner a working write control.
 
-<figure class="shrimp-figure plot">
+<figure class="shrimp-figure">
 <a href="prose-control-qualification.pdf" aria-label="Open the complete control result"><img src="prose-control-qualification.png" alt="Eleven prose-derived control addresses all preserve the two starting labels, zero and one. Separate canonical zero and one controls overwrite both starts successfully."></a>
 </figure>
 
