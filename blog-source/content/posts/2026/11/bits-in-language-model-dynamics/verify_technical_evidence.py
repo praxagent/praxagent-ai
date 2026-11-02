@@ -173,7 +173,7 @@ def verify(root):
         add('language-'+label+'-coordinates',coords,T,f'/generated_prose_pilot/rows/{idx}/standardized_coordinates','Saved standardized text coordinates rounded to six decimals.')
         if success:
             coords='('+', '.join(repr(v).replace('-','−') for v in row['parameter_coordinates'])+')'
-            add('language-success-address',coords,T,f'/generated_prose_pilot/rows/{idx}/parameter_coordinates','Computed affine address, never executed as a numerical write.')
+            add('language-success-address',coords,T,f'/generated_prose_pilot/rows/{idx}/parameter_coordinates','Computed affine address in the original pilot, whose numerical stage was absent; the separate completed follow-up is reported in prose-qualification.json.')
 
     integrated=t['separate_integrated_controls']; commands=integrated['explicit_public_command_memory']
     accepted=[r for r in commands['rows'] if r['parser_outcome']=='accepted']

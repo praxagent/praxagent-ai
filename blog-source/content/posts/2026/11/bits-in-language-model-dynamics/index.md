@@ -8,8 +8,8 @@ draft: true
 pro_reviewed: false
 toc: true
 tags: ["AI", "LLM", "dynamical-systems", "memory", "computation"]
-summary: "A small language model’s continuous feedback loop carried complete requests and program-computed replies. A second model retained writable bits at common controls and supported finite stateful AND and OR chains."
-description: "Two public numerical demonstrations: useful data carried through Pythia feedback responses, and history-dependent memory and finite logic chains in Qwen."
+summary: "Complete requests and computed replies crossed a language model’s numerical feedback channel. In a separate Qwen test, ordinary sentences initialized states that reached both binary readouts; parameter excursions retained writable memory and supported finite logic chains."
+description: "Public numerical communication in Pythia, ordinary sentences reaching both Qwen reference states, and history-dependent memory with finite logic chains."
 og_image: "og-card.png"
 og_image_alt: "Communication, memory, and logic in language-model feedback: Pythia carries a complete measurement request and calculated reply; Qwen retains a state at common controls. Public numerical demonstrations, with no concealment claim."
 lead: |
@@ -19,7 +19,8 @@ lead: |
   zero or a one. We used that route to send a complete measurement request and
   return an answer calculated from the recovered data. A second model adds
   memory: after the controls return to the same setting, its state remembers
-  which value was written.
+  which value was written. Ordinary sentences also supply initial states directly:
+  their token embeddings evolve through the same loop to measured binary labels.
 key_result: |
   Pythia-160m delivered **470 application bytes across two complete request/reply
   exchanges**, with the answer changing correctly when one reading changed.
@@ -27,6 +28,11 @@ key_result: |
   Separately, Qwen2.5-0.5B retained writable state at common controls and passed
   finite stateful AND and OR panels. These are public, recorded demonstrations
   of a numerical side channel and memory primitive.
+
+  In a separate Qwen sentence-input panel, **all eleven distinct texts reached a
+  qualified reference cycle: six zeros and five ones** after 240 updates. This
+  initializes a state from prose; a complete prose-carried byte exchange remains
+  a separate integration test.
 ---
 
 <style>
@@ -37,6 +43,9 @@ key_result: |
 .shrimp-figure.map { max-width:max(28rem, 66.667%); }
 .shrimp-figure.wide { max-width:36rem; }
 .shrimp-figure a { display:block; }
+.post-body table.prose-examples { width:100%; table-layout:fixed; }
+.post-body .prose-examples th, .post-body .prose-examples td { min-width:0; max-width:none; }
+.post-body .prose-examples th:last-child, .post-body .prose-examples td:last-child { width:5.5rem; text-align:center; }
 .highlight pre:has(code.language-text), .highlight code.language-text, .highlight code.language-text span { white-space:pre-wrap; overflow-wrap:anywhere; }
 </style>
 
@@ -66,6 +75,8 @@ three incorrectly; only complete passing pairs entered the bank.
 
 **(3)** Exploratory Qwen tests wrote and read carried state at common controls.
 All eight tested input triples passed for each of two-gate AND and OR chains.
+A separate fixed-control test initialized the model from eleven ordinary texts:
+six reached the zero reference cycle and five reached the one reference cycle.
 
 **Takeaway.** These finite, audited numerical observations establish working
 instances of transport and stateful operations. They establish neither secrecy
@@ -141,14 +152,135 @@ small Transformer’s responses, a separate address-qualification experiment wit
 all outcomes counted, and bounded stateful memory and logic tests in another
 Transformer feedback loop.
 
-**Not claimed.** The instructions openly expose their controls. There is no
-concealment demonstration or autonomous conversation, no proof of a reliable
-general-purpose memory, and no demonstrated advantage over sending digital
-bytes directly.
+**Not claimed.** The completed byte exchanges openly expose their controls.
+The sentence-input result is a finite panel of state initializations, not a
+completed prose-carried byte exchange or an overwrite of previous state. There
+is no concealment demonstration or autonomous conversation, no proof of a
+reliable general-purpose memory, and no demonstrated advantage over sending
+digital bytes directly.
 
-The completed exchanges below use English instructions that state their numerical
-controls. An earlier everyday-prose encoder did not complete the numerical stage;
-its results and examples are retained in the [development history](#prose-interface-development).
+The completed byte exchanges below use English instructions that state their
+numerical controls. The ordinary-prose experiment takes a different route: the
+text initializes the continuous state directly. Its measured outcomes follow
+first; the earlier coordinate encoder remains in the
+[development history](#prose-interface-development).
+
+## Ordinary sentences reach both Qwen states
+
+Two sentences about locking a bicycle reached opposite binary states in the
+same local model. The receiver used the exact incoming words to construct an
+initial vector, then executed the feedback loop. It did not assign the bit
+from the sentence's topic or from a requested answer.
+
+<table class="prose-examples">
+<thead><tr><th>Exact incoming text</th><th>Bit after 240 updates</th></tr></thead>
+<tbody>
+<tr><td>"Let's make sure to lock our bicycle safely near the entrance with a sturdy rack."</td><td><strong>1</strong></td></tr>
+<tr><td>"Let's lock the bicycle to a sturdy rack near the entrance to keep it safe and prevent theft."</td><td><strong>0</strong></td></tr>
+<tr><td>"Let's review the agenda and bring our notes before the meeting to ensure clarity and efficiency."</td><td><strong>0</strong></td></tr>
+</tbody>
+</table>
+
+These examples were selected after the full panel to show two bicycle sentences
+with different outcomes and the agenda sentence carried over from the earlier
+pilot. All eleven tested texts appear below; the original quotation marks and
+unfinished first text are retained.
+
+### From words to a numerical initial state
+
+[Tokenization]({{< relref "knowledge-base/glossary/tokenization/index.md" >}})
+turns a sentence \(s\) into token IDs \(\tau_1(s),\ldots,\tau_{n(s)}(s)\).
+We take the raw [mean]({{< relref "knowledge-base/glossary/mean-pooling/index.md" >}})
+of those tokens' input [embeddings]({{< relref "knowledge-base/glossary/embedding/index.md" >}}),
+with no special tokens, conversational wrapper or normalization:
+
+\[
+m(s)=\frac{1}{n(s)}\sum_{k=1}^{n(s)}E_{\tau_k(s)},
+\qquad x_0=m(s),\qquad x_{240}=F_H^{240}(m(s)),
+\qquad b=D_{\mathrm Q}(x_{229},\ldots,x_{240}).
+\]
+
+The mean has 896 float64 entries. The final twelve states supply the
+period-six recurrence check and the comparison with the two reference cycles.
+The controls remain fixed at
+\(H=(0.07293697809562831,-0.15395151820007266)\).
+The original pinned embedding rows are promoted to float64 before averaging;
+the encoder itself requires no Transformer forward call. The resulting vector
+is the actual initial state of the local model, not a lookup key that bypasses
+the dynamics.
+
+Every distinct text qualified: **6 zeros, 5 ones, 0 unresolved, 0 invalid**.
+The reference pair and the separate padding control returned their expected
+labels. Seven paired groups used **1,701 model calls in 919.55 seconds**,
+including model loading, fresh encoding and artifact work. The sixteen original
+requests reused these eleven texts; this is a finite census, not eleven
+independent tests of general language reliability.
+
+[Open the complete sentence-to-state report](prose-state-report.html) to expand
+each actual 896-value vector and inspect its measured label. The article loads
+no vectors in the background. The [compact result receipt](receipts/prose-qualification.json)
+and [saved-array audit](receipts/prose-state-audit.json) bind the text, inputs,
+control checks and every outcome.
+
+<details>
+<summary>All eleven exact sentences and their measured bits</summary>
+
+| Text ID | Exact incoming sentence | Measured bit |
+|---|---|:---:|
+| P01 | "Wouldn't it be fun to enjoy the sun and breeze while you're on the go? A light raincoat makes a great addition to your umbrella bag | 1 |
+| P02 | "Drop the clothes and hang them in a sunny spot to dry quickly, exposing more sunlight for your clothes to dry naturally." | 0 |
+| P03 | "Let's review the agenda and bring our notes before the meeting to ensure clarity and efficiency." | 0 |
+| P04 | "Let's make sure to lock our bicycle safely near the entrance with a sturdy rack." | 1 |
+| P05 | "Revise the agenda; bring your notes to ensure we cover all important topics swiftly." | 1 |
+| P06 | "Remember to pack a light raincoat for the trip, as it's likely to rain during the walk." | 1 |
+| P07 | "Let's lock the bicycle to a sturdy rack near the entrance to keep it safe and prevent theft." | 0 |
+| P08 | Hang the freshly washed clothes with space between them so the air can help them dry, allowing the fabric to breathe and air out more efficiently. | 0 |
+| P09 | "Reviewing the agenda and bringing your notes can help ensure that everyone is on the same page and that key points are covered." | 1 |
+| P10 | "Let's secure our bicycle to the sturdy rack near the entrance to keep it safe and in good condition." | 0 |
+| P11 | "Thanks for sharing your bike, let's make sure it stays secure and safe when we're out." | 0 |
+
+Before the first dynamics call, all sixteen fresh tokenizations and mean vectors
+matched the archived receiver records exactly. Every used embedding row matched
+the input table of the loaded feedback model. A readout required a lag-six
+residual at most \(10^{-8}\), exclusion of periods 1, 2 and 3 at separation
+\(10^{-4}\), and a unique reference-cycle match within \(10^{-6}\).
+The [publication checker](verify_prose_qualification.py) checks all rows,
+text and vector hashes, copied audits, and the displayed numbers. It performs
+no tokenizer or model replay.
+
+</details>
+
+### Why the earlier coordinate route did not write
+
+The two interfaces use the same texts but act on different parts of the system.
+The state experiment changes \(x_0\) while keeping \(H\) fixed. The earlier
+projection changed the controls instead:
+
+\[
+p(s)=H+\operatorname{diag}(10^{-5},10^{-4})z(s),
+\qquad y_j(s)=F_H^{240}\!\left(F_{p(s)}^{120}(r_j)\right),\quad j\in\{0,1\}.
+\]
+
+Here \(z(s)\) is the archived standardized embedding projection and \(r_j\)
+is phase zero of reference cycle \(j\). The complete test executed **all eleven prose-derived addresses** from both starts. Every address returned \((0,1)\):
+the trajectories retained their incoming labels. In contrast, the canonical
+controls \(E_0\) and \(E_1\) returned \((0,0)\) and \((1,1)\). There were no
+unresolved or invalid control groups. This panel used **4,758 model calls in 2596.26 seconds**. Reaching a geometric corner in an embedding projection had
+not made that corner a working write control.
+
+<figure class="shrimp-figure plot">
+<a href="prose-control-qualification.pdf" aria-label="Open the complete control result"><img src="prose-control-qualification.png" alt="Eleven prose-derived control addresses all preserve the two starting labels, zero and one. Separate canonical zero and one controls overwrite both starts successfully."></a>
+</figure>
+
+<p class="figure-note"><strong>The executed control test explains the interface change.</strong> Every prose address and both reference starts are shown. The left panel locates the actual standardized projections; the right shows their measured final labels. This scatter does not map basin boundaries. <a href="fig-prose-control-qualification.receipt.json">Figure receipt</a>; <a href="receipts/prose-control-audit.json">complete control audit</a>.</p>
+
+The positive sentence-input result concerns which reference state a fresh
+trajectory reaches from a text embedding, a finite observation related to
+[basin selection]({{< relref "knowledge-base/glossary/basin-of-attraction/index.md" >}}).
+It does not test overwriting a previous register state. The separate byte test
+uses calibrated sentence-to-control endpoints and carried memory writes. That
+route differs from the raw-mean initialization tested here; no result from
+that unfinished integration test is included here.
 
 ## A complete request crosses the numerical channel
 
@@ -536,7 +668,9 @@ new dynamical primitive to demonstrate.
 The useful distinction is between **a response that represents a bit** and
 **a state that retains one**. Pythia participates in a complete transaction.
 Qwen adds history, letting a later input act on a value already present.
-Neither requires the model to understand the message.
+Its sentence-input panel adds another use of the same loop: exact ordinary
+texts initialize trajectories that reach either reference label. These
+operations do not require the model to understand the message.
 
 For transport alone, direct bytes avoid the model work entirely. The demonstrated
 utility is an inspectable auxiliary representation with functioning reply
@@ -607,6 +741,9 @@ Exact transfer/spatial coordinates and control definitions are in the [operating
 | [Methods receipt](receipts/shrimp-blog-methods.json) | Pinned instruments, classifiers, schedules, factor limits, and recorded chronology |
 | [Operating points](receipts/shrimp-blog-operating-points.json) | All transfer/spatial addresses and Qwen controls |
 | [Source bindings](receipts/shrimp-blog-method-source-bindings.json) | Hashes checked against the executed source snapshots |
+| [Sentence-input results](receipts/prose-qualification.json) | All eleven texts, state and control outcomes, exact inputs, schedules and costs |
+| [Sentence-input report](prose-state-report.html) | Self-contained view of exact sentences, expandable raw means and measured bits |
+| [Sentence-input checker](verify_prose_qualification.py) | Checks copied audits, all text/vector hashes, every row and numerical publication claims |
 | [Technical evidence checker](verify_technical_evidence.py) | Recomputes the reported loop, fold and language-summary values from compact data |
 | [Figure generator](build_figures.py) | Regenerates new diagrams and plots, checks reused image hashes, and verifies quoted numbers and messages; run with `--verify` |
 
@@ -624,7 +761,9 @@ instead used **everyday prose as the coordinate carrier**. That second
 interface recovered **9 of 16 requested symbols**. Its sender and receiver
 computed identical coordinates in all 16 cases, but seven coordinates landed
 at the wrong requested symbol. The pilot stopped before the numerical
-feedback stage, so it is not a completed prose-to-chaos-memory demonstration.
+feedback stage in the original pilot. The completed follow-up on 1–2 November
+2026 executed every distinct address and then tested raw-mean initial states,
+as [reported above](#ordinary-sentences-reach-both-qwen-states).
 
 Here is its first successful record in packet order, without editing:
 
@@ -635,7 +774,10 @@ Here is its first successful record in packet order, without editing:
 The requested corner label was 1 and the receiver returned 1. The standardized
 text coordinates were approximately **(−1.600483, 1.193716)**. The associated
 parameter address was **(0.07292097326262993, −0.15383214663510716)**.
-That address was computed but **not executed** through Qwen's feedback loop.
+That was a computed address at the original pilot stage. The completed control
+follow-up on 1 November 2026 executed it through Qwen: both phase-zero starts
+retained their original labels, \((0,1)\). Initializing from this sentence's raw
+mean in the separate fixed-hold test reached bit 0.
 
 The first unsuccessful record, also unedited, was:
 
@@ -696,7 +838,9 @@ All exact texts, coordinates and hashes are in the [language-interface receipt](
 
 | Experiment | Carrier and numerical endpoint |
 |---|---|
-| Generated prose | 9/16 corner symbols; no subsequent dynamical writes or reads |
+| Original generated-prose pilot | 9/16 corner symbols; its original run ended before dynamical writes or reads |
+| Completed prose control follow-up | All eleven actual addresses executed; each retained the two incoming labels |
+| Completed prose state follow-up | Eleven raw text means executed at fixed hold; six zeros and five ones |
 | Literal commands | Four accepted commands, such as `Write bit 0 to register R0.`, executed the numerical writer and recovered `0110`; three invalid commands were rejected |
 | Generated poems | Explicit binary frames carried the payload separately from the coding dialogue; 6 of 115 intended bytes verified before the operator stopped the campaign |
 | Short Qwen exchange | Complete `Bob` → `A` byte exchange, carried by explicit control instructions |
@@ -707,10 +851,10 @@ Its claimed 16/16 was not reproduced in this repository and is not counted here.
 
 </details>
 
-The remaining integration test is therefore well defined: a generated carrier
-must reach its intended control region, a fresh receiver must reconstruct those
-controls, and the actual dynamical write/read must recover the requested
-payload. The current evidence verifies parts of that chain in separate tests.
+The completed follow-ups separate coordinate reproduction from actual memory
+writes and from text-based state initialization. The latter reached both binary
+readouts. Ordered bytes and a reply derived from recovered data remain a separate
+integration test for this ordinary-prose interface.
 
 </details>
 

@@ -24,7 +24,14 @@
     "receipts/language-interface.json": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
     "receipts/qwen-technical-evidence.json": "245107fa3984077de94594adb454671f15081087c83d3ff7eb1f0fcdb77a1283",
     "receipts/hysteresis-loops.json": "fe2bae5a0abdaf5af34d0964a8c26c475d01506c722bcaf663da7cbd92eddff6",
-    "fig-qwen-hysteresis-loops.receipt.json": "0aba9a4ce1fbec1ce3e6b67bfa542343833fa55c87afd894ce9656a911af4f0e"
+    "fig-qwen-hysteresis-loops.receipt.json": "0aba9a4ce1fbec1ce3e6b67bfa542343833fa55c87afd894ce9656a911af4f0e",
+    "prose-state-report.html": "01f7f08bfe492fbb9bbb8365385f69f006bd8e570382c79493cc6dee8b2f6351",
+    "receipts/prose-state-vectors.json": "0eaa1b54223279c35ace1960d0698df5a870e83acf33daeb47f4d9eb9524a5d9",
+    "receipts/prose-state-audit.json": "fa06b9aaf39a40d7cf0807992b9c1fc697f230e0c77d71c7dda47494afcd7233",
+    "receipts/prose-control-audit.json": "9814ebf60e9ae777bc6ef493a1398ded60ba88da52b9f7b658c35a432bc6ca9f",
+    "receipts/prose-qualification.json": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+    "fig-prose-control-qualification.receipt.json": "0e0081c3af0023c478f94e59b4549fbe98a644d314773f6f0ae23ad7714adee6",
+    "verify_prose_qualification.py": "22f5a05bb98fbfb7ead814dbe877b81c9dac79cc456673222f9712007a18b871"
   },
   "figures": [
     "transfer-results.png",
@@ -48,7 +55,9 @@
     "qwen-kite-branch.pdf",
     "qwen-hysteresis-loops.png",
     "qwen-hysteresis-loops.svg",
-    "qwen-hysteresis-loops.pdf"
+    "qwen-hysteresis-loops.pdf",
+    "prose-control-qualification.png",
+    "prose-control-qualification.pdf"
   ],
   "numbers": [
     {
@@ -803,7 +812,7 @@
       "appears_as": "(0.07292097326262993, −0.15383214663510716)",
       "source": "receipts/language-interface.json#/generated_prose_pilot/rows/3/parameter_coordinates",
       "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
-      "claim": "Computed affine address, never executed as a numerical write."
+      "claim": "Computed affine address in the original pilot; its later executed control result is preserved separately in prose-qualification.json."
     },
     {
       "id": "technical-language-failure-text",
@@ -853,6 +862,215 @@
       "source": "receipts/language-interface.json#/separate_integrated_controls/generated_poems",
       "source_sha256": "0e3da16947f49785647965bf1176cccbd06c926198dfd62fae00ebb7789b76b9",
       "claim": "Derive intended UTF-8 total from both poem texts and delivered total from saved prefixes."
+    },
+    {
+      "id": "prose-row-P01",
+      "appears_as": "| P01 | \"Wouldn't it be fun to enjoy the sun and breeze while you're on the go? A light raincoat makes a great addition to your umbrella bag | 1 |",
+      "source": "receipts/prose-qualification.json#/state/rows/0",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "Exact unchanged text and measured reference label; checked against copied complete audit.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/figures/prose-state-sentences.tex",
+      "paper_sha256": "c2619d1541f663db714bb5c0d69f1a0edeae06b7e9a9517d538806e1c23e9c18",
+      "paper_text": "P01 & \"Wouldn't it be fun to enjoy the sun and breeze while you're on the go? A light raincoat makes a great addition to your umbrella bag & 1 \\\\"
+    },
+    {
+      "id": "prose-row-P02",
+      "appears_as": "| P02 | \"Drop the clothes and hang them in a sunny spot to dry quickly, exposing more sunlight for your clothes to dry naturally.\" | 0 |",
+      "source": "receipts/prose-qualification.json#/state/rows/1",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "Exact unchanged text and measured reference label; checked against copied complete audit.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/figures/prose-state-sentences.tex",
+      "paper_sha256": "c2619d1541f663db714bb5c0d69f1a0edeae06b7e9a9517d538806e1c23e9c18",
+      "paper_text": "P02 & \"Drop the clothes and hang them in a sunny spot to dry quickly, exposing more sunlight for your clothes to dry naturally.\" & 0 \\\\"
+    },
+    {
+      "id": "prose-row-P03",
+      "appears_as": "| P03 | \"Let's review the agenda and bring our notes before the meeting to ensure clarity and efficiency.\" | 0 |",
+      "source": "receipts/prose-qualification.json#/state/rows/2",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "Exact unchanged text and measured reference label; checked against copied complete audit.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/figures/prose-state-sentences.tex",
+      "paper_sha256": "c2619d1541f663db714bb5c0d69f1a0edeae06b7e9a9517d538806e1c23e9c18",
+      "paper_text": "P03 & \"Let's review the agenda and bring our notes before the meeting to ensure clarity and efficiency.\" & 0 \\\\"
+    },
+    {
+      "id": "prose-row-P04",
+      "appears_as": "| P04 | \"Let's make sure to lock our bicycle safely near the entrance with a sturdy rack.\" | 1 |",
+      "source": "receipts/prose-qualification.json#/state/rows/3",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "Exact unchanged text and measured reference label; checked against copied complete audit.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/figures/prose-state-sentences.tex",
+      "paper_sha256": "c2619d1541f663db714bb5c0d69f1a0edeae06b7e9a9517d538806e1c23e9c18",
+      "paper_text": "P04 & \"Let's make sure to lock our bicycle safely near the entrance with a sturdy rack.\" & 1 \\\\"
+    },
+    {
+      "id": "prose-row-P05",
+      "appears_as": "| P05 | \"Revise the agenda; bring your notes to ensure we cover all important topics swiftly.\" | 1 |",
+      "source": "receipts/prose-qualification.json#/state/rows/4",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "Exact unchanged text and measured reference label; checked against copied complete audit.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/figures/prose-state-sentences.tex",
+      "paper_sha256": "c2619d1541f663db714bb5c0d69f1a0edeae06b7e9a9517d538806e1c23e9c18",
+      "paper_text": "P05 & \"Revise the agenda; bring your notes to ensure we cover all important topics swiftly.\" & 1 \\\\"
+    },
+    {
+      "id": "prose-row-P06",
+      "appears_as": "| P06 | \"Remember to pack a light raincoat for the trip, as it's likely to rain during the walk.\" | 1 |",
+      "source": "receipts/prose-qualification.json#/state/rows/5",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "Exact unchanged text and measured reference label; checked against copied complete audit.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/figures/prose-state-sentences.tex",
+      "paper_sha256": "c2619d1541f663db714bb5c0d69f1a0edeae06b7e9a9517d538806e1c23e9c18",
+      "paper_text": "P06 & \"Remember to pack a light raincoat for the trip, as it's likely to rain during the walk.\" & 1 \\\\"
+    },
+    {
+      "id": "prose-row-P07",
+      "appears_as": "| P07 | \"Let's lock the bicycle to a sturdy rack near the entrance to keep it safe and prevent theft.\" | 0 |",
+      "source": "receipts/prose-qualification.json#/state/rows/6",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "Exact unchanged text and measured reference label; checked against copied complete audit.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/figures/prose-state-sentences.tex",
+      "paper_sha256": "c2619d1541f663db714bb5c0d69f1a0edeae06b7e9a9517d538806e1c23e9c18",
+      "paper_text": "P07 & \"Let's lock the bicycle to a sturdy rack near the entrance to keep it safe and prevent theft.\" & 0 \\\\"
+    },
+    {
+      "id": "prose-row-P08",
+      "appears_as": "| P08 | Hang the freshly washed clothes with space between them so the air can help them dry, allowing the fabric to breathe and air out more efficiently. | 0 |",
+      "source": "receipts/prose-qualification.json#/state/rows/7",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "Exact unchanged text and measured reference label; checked against copied complete audit.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/figures/prose-state-sentences.tex",
+      "paper_sha256": "c2619d1541f663db714bb5c0d69f1a0edeae06b7e9a9517d538806e1c23e9c18",
+      "paper_text": "P08 & Hang the freshly washed clothes with space between them so the air can help them dry, allowing the fabric to breathe and air out more efficiently. & 0 \\\\"
+    },
+    {
+      "id": "prose-row-P09",
+      "appears_as": "| P09 | \"Reviewing the agenda and bringing your notes can help ensure that everyone is on the same page and that key points are covered.\" | 1 |",
+      "source": "receipts/prose-qualification.json#/state/rows/8",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "Exact unchanged text and measured reference label; checked against copied complete audit.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/figures/prose-state-sentences.tex",
+      "paper_sha256": "c2619d1541f663db714bb5c0d69f1a0edeae06b7e9a9517d538806e1c23e9c18",
+      "paper_text": "P09 & \"Reviewing the agenda and bringing your notes can help ensure that everyone is on the same page and that key points are covered.\" & 1 \\\\"
+    },
+    {
+      "id": "prose-row-P10",
+      "appears_as": "| P10 | \"Let's secure our bicycle to the sturdy rack near the entrance to keep it safe and in good condition.\" | 0 |",
+      "source": "receipts/prose-qualification.json#/state/rows/9",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "Exact unchanged text and measured reference label; checked against copied complete audit.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/figures/prose-state-sentences.tex",
+      "paper_sha256": "c2619d1541f663db714bb5c0d69f1a0edeae06b7e9a9517d538806e1c23e9c18",
+      "paper_text": "P10 & \"Let's secure our bicycle to the sturdy rack near the entrance to keep it safe and in good condition.\" & 0 \\\\"
+    },
+    {
+      "id": "prose-row-P11",
+      "appears_as": "| P11 | \"Thanks for sharing your bike, let's make sure it stays secure and safe when we're out.\" | 0 |",
+      "source": "receipts/prose-qualification.json#/state/rows/10",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "Exact unchanged text and measured reference label; checked against copied complete audit.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/figures/prose-state-sentences.tex",
+      "paper_sha256": "c2619d1541f663db714bb5c0d69f1a0edeae06b7e9a9517d538806e1c23e9c18",
+      "paper_text": "P11 & \"Thanks for sharing your bike, let's make sure it stays secure and safe when we're out.\" & 0 \\\\"
+    },
+    {
+      "id": "prose-outcomes",
+      "appears_as": "6 zeros, 5 ones, 0 unresolved, 0 invalid",
+      "source": "receipts/prose-qualification.json#/state/counts",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "All eleven distinct text means, excluding reference/padding lanes.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/prose-qualification-results.tex",
+      "paper_sha256": "c37689d416284b33e2f9a9391e360858efff0c1956b95b424b984f4888dd4607",
+      "paper_text": "Table~\\ref{tab:prose-state-sentences} shows every exact input: 6 reached zero, 5 reached one, 0 were unresolved and 0 were instrument-invalid."
+    },
+    {
+      "id": "prose-state-cost",
+      "appears_as": "1,701 model calls in 919.55 seconds",
+      "source": "receipts/prose-qualification.json#/state",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "Measured complete execution including initialization, encoding and artifacts.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/prose-qualification-results.tex",
+      "paper_sha256": "c37689d416284b33e2f9a9391e360858efff0c1956b95b424b984f4888dd4607",
+      "paper_text": "Seven paired groups used 1,701 model calls and 919.55 seconds, including initialization, encoding and artifact work."
+    },
+    {
+      "id": "prose-control-cost",
+      "appears_as": "4,758 model calls in 2596.26 seconds",
+      "source": "receipts/prose-qualification.json#/control",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "Measured complete execution including initialization and artifacts.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/prose-qualification-results.tex",
+      "paper_sha256": "c37689d416284b33e2f9a9391e360858efff0c1956b95b424b984f4888dd4607",
+      "paper_text": "The panel used 4,758 model calls and 2596.26 seconds, including initialization and artifact work."
+    },
+    {
+      "id": "prose-state-steps",
+      "appears_as": "after 240 updates",
+      "source": "receipts/prose-qualification.json#/state/schedule/hold_steps",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "Fixed endpoint for each prose lane; not a universal convergence bound.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/prose-qualification-results.tex",
+      "paper_sha256": "c37689d416284b33e2f9a9391e360858efff0c1956b95b424b984f4888dd4607",
+      "paper_text": "240 updates at the common hold supplied measured bits."
+    },
+    {
+      "id": "prose-dimensions",
+      "appears_as": "896 float64 entries",
+      "source": "receipts/prose-qualification.json#/dimension",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "Saved raw input embedding means, independently checked by vector byte hashes.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/prose-qualification-results.tex",
+      "paper_sha256": "c37689d416284b33e2f9a9391e360858efff0c1956b95b424b984f4888dd4607",
+      "paper_text": "Tokenization adds no special tokens or conversational wrapper. The pinned embedding rows are promoted to float64 and averaged without normalization or a model forward pass. Before dynamics, all sixteen fresh tokenizations and mean vectors matched the archived records, and the used rows matched the loaded loop's input embeddings. The 896-dimensional states evolve at"
+    },
+    {
+      "id": "prose-hold-alpha",
+      "appears_as": "0.07293697809562831",
+      "source": "receipts/prose-qualification.json#/hold/alpha",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "Exact fixed control.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/prose-qualification-results.tex",
+      "paper_sha256": "c37689d416284b33e2f9a9391e360858efff0c1956b95b424b984f4888dd4607",
+      "paper_text": "\\(H=(0.07293697809562831,-0.15395151820007266)\\) throughout."
+    },
+    {
+      "id": "prose-hold-log10_temperature",
+      "appears_as": "-0.15395151820007266",
+      "source": "receipts/prose-qualification.json#/hold/log10_temperature",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "Exact fixed control.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/prose-qualification-results.tex",
+      "paper_sha256": "c37689d416284b33e2f9a9391e360858efff0c1956b95b424b984f4888dd4607",
+      "paper_text": "\\(H=(0.07293697809562831,-0.15395151820007266)\\) throughout."
+    },
+    {
+      "id": "prose-control-census",
+      "appears_as": "all eleven prose-derived addresses",
+      "source": "receipts/prose-qualification.json#/control/rows",
+      "source_sha256": "b59ea36f44cfb17c6d6cce4fcbe6742f8da8e236cb89c7131be03ef2dafd2a0d",
+      "claim": "All distinct archived text controls, each with two reference starts.",
+      "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5",
+      "paper_file": "paper/prose-qualification-results.tex",
+      "paper_sha256": "c37689d416284b33e2f9a9391e360858efff0c1956b95b424b984f4888dd4607",
+      "paper_text": "All eleven distinct prose controls returned labels $(0,1)$ from the two starts: none overwrote the stored label."
     }
   ],
   "figure_sha256": {
@@ -877,10 +1095,12 @@
     "qwen-kite-branch.pdf": "1b68d04c1635f396fec22a0d736e9ebc824c5de81fd1dd849df3584816b5a2af",
     "qwen-hysteresis-loops.png": "c7d3bc70c471d7daebc832d2833f3ddfa88011ff2de2abd68f37ef802a28b2a0",
     "qwen-hysteresis-loops.svg": "1363e86c4517d1953c6863b8932bd1297fc3ea01cd308e915cac068b18d5c19a",
-    "qwen-hysteresis-loops.pdf": "6acd34f0dd1847bb415f306c46046def35a82ad3bdd06ba48c3384d41f0ea4e4"
+    "qwen-hysteresis-loops.pdf": "6acd34f0dd1847bb415f306c46046def35a82ad3bdd06ba48c3384d41f0ea4e4",
+    "prose-control-qualification.png": "fea950b54ad8ba01304a2d50e06ce855ba7cdbf1c494873fb5db6a9ad381e2b7",
+    "prose-control-qualification.pdf": "211204de6ab73c67457ad36a741a19a1740d1aa936e64545ae28792503c16211"
   },
   "source_evidence": "receipts/evidence-summary.json",
-  "editorial_scope": "Public numerical transport and memory evidence, including the unsuccessful generated-prose interface. Compact figures replace oversized presentation; prior kite data are replotted with labeled axes. No new model experiments in this revision.",
+  "editorial_scope": "Public numerical transport, memory and ordinary-prose state initialization. The completed prose panel has six zero and five one labels; the separate control projection preserved prior state. Full prose-byte integration is not yet claimed; earlier unsuccessful geometric results remain historical.",
   "quoted_examples": {
     "examples": [
       {
@@ -911,7 +1131,18 @@
       "all language outcomes retained",
       "all finite-loop outcomes retained",
       "fold equation and failed branch connection distinguished",
-      "stateful logical operators restricted to tested histories"
+      "stateful logical operators restricted to tested histories",
+      "all eleven prose means and measured labels match copied complete audits",
+      "typed vector hashes verified from portable float64 bytes",
+      "ordinary-prose byte integration remains separately pending"
     ]
+  },
+  "prose_qualification_sources": {
+    "execution_commit": "ed682a207e8b469761cd969bf5cec1e210ed0155",
+    "preparation_commit": "df0e352d373a7103a7b43c4cb273cfa7fac3be1e",
+    "receipt": "receipts/prose-qualification.json",
+    "paper_source": "paper/prose-qualification-results.tex",
+    "paper_sha256": "c37689d416284b33e2f9a9391e360858efff0c1956b95b424b984f4888dd4607",
+    "paper_commit": "59d101e015a3054f31304d501e07c9de392b18e5"
   }
 }

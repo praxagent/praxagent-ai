@@ -1,0 +1,141 @@
+{
+  "status": "audit_passed",
+  "execution_status": "completed",
+  "model_replayed": false,
+  "completed_groups": 13,
+  "groups": [
+    {
+      "group_id": 0,
+      "kind": "positive_control",
+      "bits": [
+        0,
+        0
+      ],
+      "instrument_valid": true,
+      "qualification": "write0"
+    },
+    {
+      "group_id": 1,
+      "kind": "positive_control",
+      "bits": [
+        1,
+        1
+      ],
+      "instrument_valid": true,
+      "qualification": "write1"
+    },
+    {
+      "group_id": 2,
+      "kind": "prose",
+      "bits": [
+        0,
+        1
+      ],
+      "instrument_valid": true,
+      "qualification": "mixed"
+    },
+    {
+      "group_id": 3,
+      "kind": "prose",
+      "bits": [
+        0,
+        1
+      ],
+      "instrument_valid": true,
+      "qualification": "mixed"
+    },
+    {
+      "group_id": 4,
+      "kind": "prose",
+      "bits": [
+        0,
+        1
+      ],
+      "instrument_valid": true,
+      "qualification": "mixed"
+    },
+    {
+      "group_id": 5,
+      "kind": "prose",
+      "bits": [
+        0,
+        1
+      ],
+      "instrument_valid": true,
+      "qualification": "mixed"
+    },
+    {
+      "group_id": 6,
+      "kind": "prose",
+      "bits": [
+        0,
+        1
+      ],
+      "instrument_valid": true,
+      "qualification": "mixed"
+    },
+    {
+      "group_id": 7,
+      "kind": "prose",
+      "bits": [
+        0,
+        1
+      ],
+      "instrument_valid": true,
+      "qualification": "mixed"
+    },
+    {
+      "group_id": 8,
+      "kind": "prose",
+      "bits": [
+        0,
+        1
+      ],
+      "instrument_valid": true,
+      "qualification": "mixed"
+    },
+    {
+      "group_id": 9,
+      "kind": "prose",
+      "bits": [
+        0,
+        1
+      ],
+      "instrument_valid": true,
+      "qualification": "mixed"
+    },
+    {
+      "group_id": 10,
+      "kind": "prose",
+      "bits": [
+        0,
+        1
+      ],
+      "instrument_valid": true,
+      "qualification": "mixed"
+    },
+    {
+      "group_id": 11,
+      "kind": "prose",
+      "bits": [
+        0,
+        1
+      ],
+      "instrument_valid": true,
+      "qualification": "mixed"
+    },
+    {
+      "group_id": 12,
+      "kind": "prose",
+      "bits": [
+        0,
+        1
+      ],
+      "instrument_valid": true,
+      "qualification": "mixed"
+    }
+  ],
+  "plan_sha256": "ec3747ba04ed3b267c0cbfacfb78b5903a793eddc2a470c4edb76d830ad99be9",
+  "manifest_sha256": "bc73d656e1f292b997db80c760f5679d8d74a56f6ffd332be9a814f5398a4733",
+  "scope": "Verified saved bytes, exact controls, resets/carry, admitted state hashes, diagnostic arrays and independently recomputed neutral readouts. No Transformer replay or reconstruction of successful-update probability arrays. An incomplete run remains incomplete; instrument-invalid is not a scientific erasure."
+}

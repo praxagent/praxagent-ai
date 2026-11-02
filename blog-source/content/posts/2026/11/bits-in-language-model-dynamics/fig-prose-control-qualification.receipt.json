@@ -1,0 +1,15 @@
+{
+  "schema": "shrimp-blog-reproduced-figure-v1",
+  "description": "Every actual text-derived control and both phase-zero starts. Eleven prose addresses preserve 0 and 1; two canonical controls overwrite both starts.",
+  "scope": "Unchanged plot of the complete audited control-qualification panel, separate from the raw-mean state experiment.",
+  "source": {
+    "path": "archive:prose-control/audited-report/provenance.json",
+    "sha256": "d4e9179b0ae1ce497a50a8f21c20e72721be349de4beb3736b3ca62f1b34b85b"
+  },
+  "provenance": {
+    "outputs": {
+      "prose-control-qualification.png": "fea950b54ad8ba01304a2d50e06ce855ba7cdbf1c494873fb5db6a9ad381e2b7",
+      "prose-control-qualification.pdf": "211204de6ab73c67457ad36a741a19a1740d1aa936e64545ae28792503c16211"
+    }
+  }
+}

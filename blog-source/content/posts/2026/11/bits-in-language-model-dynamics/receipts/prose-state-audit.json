@@ -1,0 +1,223 @@
+{
+  "status": "audit_passed",
+  "execution_status": "completed",
+  "model_replayed": false,
+  "encoding": {
+    "status": "passed",
+    "records": 16,
+    "dynamics_admitted": true
+  },
+  "completed_groups": 7,
+  "groups": [
+    {
+      "group_id": 0,
+      "lanes": [
+        {
+          "kind": "reference_control",
+          "reference_index": 0,
+          "phase": 0,
+          "text_id": null,
+          "source_record": null
+        },
+        {
+          "kind": "reference_control",
+          "reference_index": 1,
+          "phase": 0,
+          "text_id": null,
+          "source_record": null
+        }
+      ],
+      "bits": [
+        0,
+        1
+      ],
+      "instrument_valid": true,
+      "lane_outcomes": [
+        "bit0",
+        "bit1"
+      ]
+    },
+    {
+      "group_id": 1,
+      "lanes": [
+        {
+          "kind": "prose",
+          "reference_index": null,
+          "phase": null,
+          "text_id": 0,
+          "source_record": 0
+        },
+        {
+          "kind": "prose",
+          "reference_index": null,
+          "phase": null,
+          "text_id": 1,
+          "source_record": 1
+        }
+      ],
+      "bits": [
+        1,
+        0
+      ],
+      "instrument_valid": true,
+      "lane_outcomes": [
+        "bit1",
+        "bit0"
+      ]
+    },
+    {
+      "group_id": 2,
+      "lanes": [
+        {
+          "kind": "prose",
+          "reference_index": null,
+          "phase": null,
+          "text_id": 2,
+          "source_record": 3
+        },
+        {
+          "kind": "prose",
+          "reference_index": null,
+          "phase": null,
+          "text_id": 3,
+          "source_record": 4
+        }
+      ],
+      "bits": [
+        0,
+        1
+      ],
+      "instrument_valid": true,
+      "lane_outcomes": [
+        "bit0",
+        "bit1"
+      ]
+    },
+    {
+      "group_id": 3,
+      "lanes": [
+        {
+          "kind": "prose",
+          "reference_index": null,
+          "phase": null,
+          "text_id": 4,
+          "source_record": 5
+        },
+        {
+          "kind": "prose",
+          "reference_index": null,
+          "phase": null,
+          "text_id": 5,
+          "source_record": 6
+        }
+      ],
+      "bits": [
+        1,
+        1
+      ],
+      "instrument_valid": true,
+      "lane_outcomes": [
+        "bit1",
+        "bit1"
+      ]
+    },
+    {
+      "group_id": 4,
+      "lanes": [
+        {
+          "kind": "prose",
+          "reference_index": null,
+          "phase": null,
+          "text_id": 6,
+          "source_record": 7
+        },
+        {
+          "kind": "prose",
+          "reference_index": null,
+          "phase": null,
+          "text_id": 7,
+          "source_record": 10
+        }
+      ],
+      "bits": [
+        0,
+        0
+      ],
+      "instrument_valid": true,
+      "lane_outcomes": [
+        "bit0",
+        "bit0"
+      ]
+    },
+    {
+      "group_id": 5,
+      "lanes": [
+        {
+          "kind": "prose",
+          "reference_index": null,
+          "phase": null,
+          "text_id": 8,
+          "source_record": 12
+        },
+        {
+          "kind": "prose",
+          "reference_index": null,
+          "phase": null,
+          "text_id": 9,
+          "source_record": 14
+        }
+      ],
+      "bits": [
+        1,
+        0
+      ],
+      "instrument_valid": true,
+      "lane_outcomes": [
+        "bit1",
+        "bit0"
+      ]
+    },
+    {
+      "group_id": 6,
+      "lanes": [
+        {
+          "kind": "prose",
+          "reference_index": null,
+          "phase": null,
+          "text_id": 10,
+          "source_record": 15
+        },
+        {
+          "kind": "padding_control",
+          "reference_index": 0,
+          "phase": 0,
+          "text_id": null,
+          "source_record": null
+        }
+      ],
+      "bits": [
+        0,
+        0
+      ],
+      "instrument_valid": true,
+      "lane_outcomes": [
+        "bit0",
+        "bit0"
+      ]
+    }
+  ],
+  "prose_outcome_counts": {
+    "bit0": 6,
+    "bit1": 5,
+    "unresolved": 0,
+    "instrument_invalid": 0,
+    "not_evaluated": 0
+  },
+  "reference_pair_passed": true,
+  "padding_control_passed": true,
+  "both_reference_labels_observed": true,
+  "qualified_both_basin_observation": true,
+  "plan_sha256": "c264928d334206b0d22ee03fae5688a3be585ca6590516de5fa8eaf74a40c082",
+  "manifest_sha256": "e03805061ff55f9d2564a3770aaa9acaf1ebaa5fdac00bcbc5068c82f830443a",
+  "scope": "Checked saved bytes, token-vector mean reductions and equality to archived features, fixed-H initializations/carry, cache/precision diagnostics and independently recomputed neutral labels. No tokenizer, weights or Transformer replay; successful-update probability arrays are hash-bound only. Failed/incomplete execution remains distinct from scientific unresolved outcomes."
+}
