@@ -18,13 +18,17 @@ RECEIPT='receipts/prose-qualification.json'
 def require(ok,message):
     if not ok:raise ValueError(message)
 def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def asset(root,name):
+    path=root/name
+    if not path.exists() and name.endswith('report.html'):path=Path(str(path)+'.txt')
+    return path
 def verify(root):
     data=json.loads((root/RECEIPT).read_text())
     vectors=json.loads((root/'receipts/prose-state-vectors.json').read_text())
     audits={name:json.loads((root/f'receipts/prose-{name}-audit.json').read_text()) for name in ('state','control')}
-    article=(root/'index.md').read_text();flat=' '.join(article.replace('**','').split())
-    report=(root/'prose-state-report.html').read_text()
-    for name,digest in data['assets'].items():require(sha(root/name)==digest,'Asset changed: '+name)
+    article=(root/('index.md' if (root/'index.md').exists() else 'article-source-v1.txt')).read_text();flat=' '.join(article.replace('**','').split())
+    report=asset(root,'prose-state-report.html').read_text()
+    for name,digest in data['assets'].items():require(sha(asset(root,name))==digest,'Asset changed: '+name)
     restored=report.replace('href="receipts/prose-qualification.json"','href="provenance.json"').replace('href="receipts/prose-state-vectors.json"','href="plotted-data.json"')
     require(hashlib.sha256(restored.encode()).hexdigest()==data['source_report']['sha256'],'HTML differs beyond documented hyperlinks')
     for name,audit in audits.items():
@@ -78,7 +82,7 @@ def verify(root):
     add('dimensions','896 float64 entries','/dimension','Saved raw input embedding means, independently checked by vector byte hashes.')
     for name,value in data['hold'].items():add('hold-'+name,repr(value),'/hold/'+name,'Exact fixed control.')
     add('control-census','all eleven prose-derived addresses','/control/rows','All distinct archived text controls, each with two reference starts.')
-    require('separate byte test' in article and 'unfinished integration test' in article,'Separate byte-result boundary absent')
+    require('raw-mean initialization is not a byte transfer' in article and 'calibrated two-sentence byte test' in article,'Separate initialization/byte-result boundary absent')
     return entries,dict(status='passed',texts=11,counts=expected,controls=3,control_groups=13,model_calls=0,scope=__doc__)
 
 if __name__=='__main__':

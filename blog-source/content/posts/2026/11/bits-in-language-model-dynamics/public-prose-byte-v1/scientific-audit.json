@@ -1,0 +1,100 @@
+{
+  "status": "audit_passed",
+  "execution_status": "completed",
+  "model_replayed": false,
+  "completed_groups": 8,
+  "groups": [
+    {
+      "group_id": 0,
+      "bits": [
+        1,
+        1
+      ],
+      "instrument_valid": true,
+      "qualification": "write1"
+    },
+    {
+      "group_id": 1,
+      "bits": [
+        0,
+        0
+      ],
+      "instrument_valid": true,
+      "qualification": "write0"
+    },
+    {
+      "group_id": 2,
+      "bits": [
+        1,
+        1
+      ],
+      "instrument_valid": true,
+      "qualification": "write1"
+    },
+    {
+      "group_id": 3,
+      "bits": [
+        1,
+        1
+      ],
+      "instrument_valid": true,
+      "qualification": "write1"
+    },
+    {
+      "group_id": 4,
+      "bits": [
+        0,
+        0
+      ],
+      "instrument_valid": true,
+      "qualification": "write0"
+    },
+    {
+      "group_id": 5,
+      "bits": [
+        0,
+        0
+      ],
+      "instrument_valid": true,
+      "qualification": "write0"
+    },
+    {
+      "group_id": 6,
+      "bits": [
+        0,
+        0
+      ],
+      "instrument_valid": true,
+      "qualification": "write0"
+    },
+    {
+      "group_id": 7,
+      "bits": [
+        1,
+        1
+      ],
+      "instrument_valid": true,
+      "qualification": "write1"
+    }
+  ],
+  "plan_sha256": "bbc970548ac5a6e76e8f3444ace6d7be531cb5d3278fb1c28af081a27374ffdd",
+  "manifest_sha256": "7a9c6591c214bf064f2be4361b14dca8d3560846f4833a62e98b9157f4647e69",
+  "decoded": {
+    "status": "delivered",
+    "lane_bytes_hex": [
+      "b1",
+      "b1"
+    ],
+    "lanes_agree": true,
+    "checksum_passed": true,
+    "lane_checksum_passed": [
+      true,
+      true
+    ]
+  },
+  "encoding": {
+    "reconstructed_records": 10,
+    "dynamics_admitted": true
+  },
+  "scope": "Saved bytes, ten raw token-vector means, actual calibrated controls, single initialization and every carried state, precision/cache diagnostic arrays and independent neutral readouts verified. No Transformer replay; successful-update probabilities remain hash-only. Finite wrong/unresolved and operational failures remain distinct."
+}

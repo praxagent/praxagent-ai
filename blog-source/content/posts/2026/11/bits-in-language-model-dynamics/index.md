@@ -8,8 +8,8 @@ draft: true
 pro_reviewed: false
 toc: true
 tags: ["AI", "LLM", "dynamical-systems", "memory", "computation"]
-summary: "Complete requests and computed replies crossed a language model’s numerical feedback channel. In a separate Qwen test, ordinary sentences initialized states that reached both binary readouts; parameter excursions retained writable memory and supported finite logic chains."
-description: "Public numerical communication in Pythia, ordinary sentences reaching both Qwen reference states, and history-dependent memory with finite logic chains."
+summary: "Complete requests and computed replies crossed a language model’s numerical feedback channel. A calibrated pair of ordinary sentences also drove one carried Qwen byte; a separate eleven-text panel initialized both binary states, and parameter excursions supported finite memory and logic tests."
+description: "Public numerical communication in Pythia, an audited calibrated prose-to-Qwen byte, and finite stateful memory and logic tests."
 og_image: "og-card.png"
 og_image_alt: "Communication, memory, and logic in language-model feedback: Pythia carries a complete measurement request and calculated reply; Qwen retains a state at common controls. Public numerical demonstrations, with no concealment claim."
 lead: |
@@ -19,7 +19,8 @@ lead: |
   zero or a one. We used that route to send a complete measurement request and
   return an answer calculated from the recovered data. A second model adds
   memory: after the controls return to the same setting, its state remembers
-  which value was written. Ordinary sentences also supply initial states directly:
+  which value was written. An explicitly calibrated sentence pair drove an entire
+  carried byte through that memory. Ordinary sentences also supply initial states directly:
   their token embeddings evolve through the same loop to measured binary labels.
 key_result: |
   Pythia-160m delivered **470 application bytes across two complete request/reply
@@ -27,12 +28,15 @@ key_result: |
   The test reused eight known numerical addresses and took about **150.5 minutes**.
   Separately, Qwen2.5-0.5B retained writable state at common controls and passed
   finite stateful AND and OR panels. These are public, recorded demonstrations
-  of a numerical side channel and memory primitive.
+  of a numerical side channel and memory primitive. A subsequent observer check
+  recovered the Pythia messages without model calls using public-map lookup or
+  enumeration of the small repeated coordinate alphabet.
 
   In a separate Qwen sentence-input panel, **all eleven distinct texts reached a
   qualified reference cycle: six zeros and five ones** after 240 updates. This
-  initializes a state from prose; a complete prose-carried byte exchange remains
-  a separate integration test.
+  initializes a state from prose. A separate public two-sentence calibration
+  completed the carried byte **10110001** from both starting states. A substantive
+  ordinary-prose request and reply remain pending.
 ---
 
 <style>
@@ -67,7 +71,9 @@ whether that behavior can carry data and support writable memory.
 
 **(1)** An adapted Pythia test delivered 470 bytes through four numerical
 receivers. Changing one measurement changed the programmed reply correctly;
-offline substitutions of saved readouts were rejected.
+two distinct offline label controls were rejected. A later observer recovered
+the same messages without model calls, using public-map lookup or enumeration
+of the repeated coordinate alphabet.
 
 **(2)** A separate spatial sample qualified 48 addresses. Each of two fresh
 receivers classified 56 of 64 candidates correctly, erased five, and resolved
@@ -77,6 +83,8 @@ three incorrectly; only complete passing pairs entered the bank.
 All eight tested input triples passed for each of two-gate AND and OR chains.
 A separate fixed-control test initialized the model from eleven ordinary texts:
 six reached the zero reference cycle and five reached the one reference cycle.
+An explicitly calibrated two-sentence interface then drove eight successive
+writes and recovered the same complete raw byte from both reference starts.
 
 **Takeaway.** These finite, audited numerical observations establish working
 instances of transport and stateful operations. They establish neither secrecy
@@ -153,17 +161,90 @@ all outcomes counted, and bounded stateful memory and logic tests in another
 Transformer feedback loop.
 
 **Not claimed.** The completed byte exchanges openly expose their controls.
-The sentence-input result is a finite panel of state initializations, not a
-completed prose-carried byte exchange or an overwrite of previous state. There
+The raw-mean sentence panel tests state initialization; the calibrated byte
+uses a finite public two-sentence codebook. Neither establishes that arbitrary
+prose reliably writes memory or carries a substantive request and reply. There
 is no concealment demonstration or autonomous conversation, no proof of a
 reliable general-purpose memory, and no demonstrated advantage over sending
 digital bytes directly.
 
-The completed byte exchanges below use English instructions that state their
-numerical controls. The ordinary-prose experiment takes a different route: the
-text initializes the continuous state directly. Its measured outcomes follow
-first; the earlier coordinate encoder remains in the
+The Pythia exchanges below use English instructions that state their numerical
+controls. The new Qwen byte uses two ordinary sentences and a disclosed
+embedding calibration. A separate experiment places raw text means directly
+into the continuous state. These three interfaces have different evidence; the
+earlier coordinate encoder remains in the
 [development history](#prose-interface-development).
+
+## Two calibrated sentences drive a complete carried byte
+
+The public interface uses exactly these two English strings. It deliberately
+calibrates their mean embeddings to the already tested write endpoints:
+
+| Carrier | Exact incoming sentence | Actual computed control \((\alpha,\log_{10}T)\) |
+|---|---|---|
+| C0 | Let us check the input before running the test. | `(0.07293697809562831, -0.1535)` |
+| C1 | We should review the output after the test finishes. | `(0.07299785589927693, -0.15395151820007266)` |
+
+For anchor means \(\mu_0,\mu_1\) and a freshly encoded incoming mean \(x\),
+the receiver computes
+
+\[
+d=\mu_1-\mu_0,\qquad
+s=\frac{(x-\mu_0)^\mathsf T d}{d^\mathsf T d},\qquad
+p(x)=(1-s)E_0+sE_1.
+\]
+
+The actual float64 computation had to reproduce the calibrated endpoint bytes.
+There was no endpoint snapping or direct sentence-to-bit substitution. The
+calibration connects these two exact strings to working controls; it does not
+establish a useful mapping for uncalibrated sentences.
+
+The receiver started two lanes once, at phase zero of reference cycles zero and
+one. Each sentence applied its computed control for **120 updates**, then the
+common hold for **240 updates**. The terminal vector entered the next stage
+literally: **all 15 stage boundaries matched byte for byte**, with no reset
+between the eight sentences. The measured labels came from recurrence and
+unique reference-cycle matching after each hold, without a desired answer.
+
+| Order | Carrier | Measured bit from start 0 | Measured bit from start 1 |
+|---:|:---:|:---:|:---:|
+| 1 | C1 | 1 | 1 |
+| 2 | C0 | 0 | 0 |
+| 3 | C1 | 1 | 1 |
+| 4 | C1 | 1 | 1 |
+| 5 | C0 | 0 | 0 |
+| 6 | C0 | 0 | 0 |
+| 7 | C0 | 0 | 0 |
+| 8 | C1 | 1 | 1 |
+
+Both measured sequences were **10110001**, reconstructing **0xB1**. Both
+post-assembly SHA-256 checks passed; no readout was unresolved or disagreed
+between lanes. The checksum was checked after assembling the measured bits,
+not supplied as the answer to the numerical reader. The two lanes test the same
+sequence from different starts and are not independent reliability trials.
+
+<figure class="shrimp-figure">
+<a href="public-prose-byte-trajectory.pdf" aria-label="Open the vector trajectory figure"><img src="public-prose-byte-trajectory.png" alt="Both continuously carried Qwen trajectories recover bits 10110001. Every pulse and hold is shown over 2880 updates; each curve measures the distance to the nearest of six points in a reference cycle."></a>
+</figure>
+
+<p class="figure-note"><strong>Every write and hold, from both starts.</strong> The trace includes all 2,880 updates per lane. Each curve is the minimum Euclidean distance in all 896 coordinates to one reference cycle's six saved points. This nearest-point diagnostic is not the final cycle classifier; the annotated bits come from the separate recurrence and unique-orbit readout. Peach bands mark 120-update pulses, blue bands 240-update holds. Only the logarithmic display floors distances below 10<sup>−15</sup>. <a href="public-prose-byte-v1/report.pdf">Full report with all eight exact sentences</a>; <a href="fig-public-prose-byte-v1.receipt.json">figure receipt</a>.</p>
+
+The complete run used **2,928 model calls in 1,586.50 seconds** (26.44 minutes),
+including loading, fresh encoding and artifact work, on one CPU thread in
+effective float64. Peak recorded RSS was **5.08 GiB**. The source-bound audit and
+an independent reconstruction from the returned raw arrays both passed. Their
+reports, the exact computed coordinates, numerical plotting data and source
+bindings are in the [self-contained report bundle](public-prose-byte-v1/report.pdf)
+and [publication checker](verify_public_prose_byte.py). The original
+<a href="public-prose-byte-v1/report.html.txt" download="report.html">HTML report is available for download</a>;
+keep its figure and receipt files alongside it when opening it locally.
+
+This is one complete raw byte through a **finite public two-sentence codebook**.
+It is not an ASCII or standalone UTF-8 message. A substantive ordinary-prose
+request and reply remain pending; this result does not demonstrate autonomous
+conversation, concealment, general language reliability or a causal test of
+hysteresis. The following raw-mean initialization experiment is a separate
+result and supplies no byte by itself.
 
 ## Ordinary sentences reach both Qwen states
 
@@ -216,7 +297,7 @@ including model loading, fresh encoding and artifact work. The sixteen original
 requests reused these eleven texts; this is a finite census, not eleven
 independent tests of general language reliability.
 
-[Open the complete sentence-to-state report](prose-state-report.html) to expand
+<a href="prose-state-report.html.txt" download="prose-state-report.html">Download the complete sentence-to-state HTML report</a> and open it locally to expand
 each actual 896-value vector and inspect its measured label. The article loads
 no vectors in the background. The [compact result receipt](receipts/prose-qualification.json)
 and [saved-array audit](receipts/prose-state-audit.json) bind the text, inputs,
@@ -277,10 +358,10 @@ not made that corner a working write control.
 The positive sentence-input result concerns which reference state a fresh
 trajectory reaches from a text embedding, a finite observation related to
 [basin selection]({{< relref "knowledge-base/glossary/basin-of-attraction/index.md" >}}).
-It does not test overwriting a previous register state. The separate byte test
-uses calibrated sentence-to-control endpoints and carried memory writes. That
-route differs from the raw-mean initialization tested here; no result from
-that unfinished integration test is included here.
+It does not test overwriting a previous register state: raw-mean initialization is not a byte transfer.
+The calibrated two-sentence byte test above uses sentence-to-control endpoints
+and carried memory writes. Its completed byte is separate from these eleven
+initial-state trajectories.
 
 ## A complete request crosses the numerical channel
 
@@ -354,9 +435,10 @@ fifth reading from `83` to `23` and repeated the entire exchange:
 Count 16; min 11 ms; max 74 ms; sum 434 ms; mean 27.12 ms. Indices above 40 ms: 8,14.
 ```
 
-The maximum, sum, mean, and threshold list changed correctly. An independent
-Structured Query Language (SQL) calculation checked the arithmetic; the audit checked that the application
-used the decoded request. The model carried the data; program code performed
+The maximum, sum, mean, and threshold list changed correctly. A separate
+Structured Query Language (SQL) calculation checked the aggregation and threshold
+positions; the reply template and Python two-decimal formatting were shared.
+The audit checked that the application used the decoded request. The model carried the data; program code performed
 the arithmetic. The displayed means use the application’s rounding to two
 decimal places, with exact halfway cases rounded to the even final digit.
 
@@ -378,11 +460,39 @@ reliability trials. The wire used 387,433 English instruction bytes,
 about 824 times the application payload.
 
 The failure policy also mattered. Bytes were assembled from observed bits
-before checking length and checksum. Offline tests altered the saved readout
-at the first symbol: they substituted an opposite response, inserted an erasure,
-or flipped a bit. Each failed delivery was
-rejected. Earlier, shorter observation windows also contained erasures; the
+before checking length and checksum. Two distinct offline controls altered
+the decoded label at the first symbol: an erasure and a bit flip. Both were
+rejected in all four messages. The historical “opposite trace” check produced
+the same label vector as the bit flip; it did not replace and reclassify a raw
+trajectory. The [versioned correction receipt](receipts/pythia-review-corrections-v1.json)
+preserves that distinction and the original audit. Earlier, shorter observation windows also contained erasures; the
 declared 128-update endpoint completed these messages.
+
+### The recorded Pythia messages can also be read without the model
+
+A post-run observer check recovered **all 470 bytes without numerical inference**.
+One method looked each coordinate up in the public scan, applying the public
+screening rule. Every transmitted coordinate lay exactly on a scan-grid point.
+A second method had no map: each message reused only **eight unique coordinates**,
+so it tried **all 256 binary label assignments** and compared each assembled byte
+string with the transmitted SHA-256. **Exactly one assignment matched in each
+of the four messages.** Both methods recovered the same complete requests and
+replies as the numerical receivers. The observer did not receive the sender's
+labeled bank or the desired answer.
+
+The map method took **3.882259–6.814306 ms per message**, after **39.965672 ms**
+to load and hash the scan. The no-map method took **18.690432–34.637672 ms per message**. These are single local observations with a warm filesystem; they
+exclude Python startup and evidence-file writing. They are not controlled
+hardware benchmarks or estimates for arbitrary future traffic.
+
+This changes the utility interpretation: **model inference was unnecessary for
+these recorded Pythia wires**. The numerical channel was executed successfully,
+but its repeated public coordinates and transmitted checksum also exposed the
+payload to an ordinary decoder. This result concerns these messages and this
+small repeated address bank; it does not establish a universal decoding method
+for arbitrary continuous states. The [complete observer report](receipts/pythia-observer-report-v1.json)
+retains every message, assignment count, exact recovered text and timing; its
+[accepted receipt](receipts/pythia-observer-v1.json) binds the observer source and tests.
 
 ## Can both symbols live in the same neighborhood?
 
@@ -408,7 +518,9 @@ the packet order. Each receiver tested all 64 coordinates:
 
 Only pairs whose labels reproduced in both receivers entered the bank:
 **24 pairs, or 48 addresses**. No replacement was drawn for a failure. The
-receivers checked the same candidates, not independent population samples.
+receivers checked the same candidates in two one-thread processes on the same host, not independent hosts or population samples. The saved trajectory
+archives were byte-identical between the two executions. All eight failed
+candidates proposed zero: 24 of 32 proposed zeros were correct, five erased, and three resolved incorrectly; all 32 proposed ones were correct.
 This bank was **not** used in the long exchange above, and a complete message
 through it has not yet been tested. Spatial mixing supplies no secrecy: the
 public response map still determines the labels.
@@ -677,11 +789,11 @@ utility is an inspectable auxiliary representation with functioning reply
 dataflow and failure handling. Its speed is poor. A competitive application
 would need a reason to use this representation despite its cost.
 
-A possible use is studying execution audits. A visible trace can expose every
-operation while leaving an observer to reconstruct what the states mean.
-Testing that interpretability question would require specified observer access,
-competing decoders, and measured recovery. Here the grammar and labels are public,
-and a digital lookup can bypass the dynamical calculation.
+A possible use is studying execution audits. In the executed Pythia observer
+baseline above, both public-map lookup and map-free label enumeration recovered
+the messages without model calls. Further interpretability tests would need
+other inputs, specified observer access and measured recovery; these wires
+do not demonstrate that dynamical inference was necessary.
 
 For memory, the next question is whether writes remain dependable under changed
 phases, disturbances, and longer compositions. Shrimp geometry may help locate
@@ -742,7 +854,12 @@ Exact transfer/spatial coordinates and control definitions are in the [operating
 | [Operating points](receipts/shrimp-blog-operating-points.json) | All transfer/spatial addresses and Qwen controls |
 | [Source bindings](receipts/shrimp-blog-method-source-bindings.json) | Hashes checked against the executed source snapshots |
 | [Sentence-input results](receipts/prose-qualification.json) | All eleven texts, state and control outcomes, exact inputs, schedules and costs |
-| [Sentence-input report](prose-state-report.html) | Self-contained view of exact sentences, expandable raw means and measured bits |
+| <a href="prose-state-report.html.txt" download="prose-state-report.html">Sentence-input HTML report (download)</a> | Self-contained view of exact sentences, expandable raw means and measured bits |
+| [Calibrated-byte report](public-prose-byte-v1/report.pdf) | All eight exact carriers, actual controls, both measured bits, full carried trace and byte checksum |
+| [Calibrated-byte checker](verify_public_prose_byte.py) | Checks copied audits, carry hashes, byte reconstruction, costs and all linked report assets without a model |
+| [Article source](article-source-v1.txt) | Exact Markdown checked by the publication verifier, also supplied as text for the rendered download bundle |
+| [Pythia observer report](receipts/pythia-observer-report-v1.json) | Both model-free decoders, all four recovered messages, exhaustive assignment counts and bounded timing observations |
+| [Pythia correction receipt](receipts/pythia-review-corrections-v1.json) | Two distinct label controls, all eight source bindings, same-host scope and measured timing distinctions |
 | [Sentence-input checker](verify_prose_qualification.py) | Checks copied audits, all text/vector hashes, every row and numerical publication claims |
 | [Technical evidence checker](verify_technical_evidence.py) | Recomputes the reported loop, fold and language-summary values from compact data |
 | [Figure generator](build_figures.py) | Regenerates new diagrams and plots, checks reused image hashes, and verifies quoted numbers and messages; run with `--verify` |
@@ -841,6 +958,7 @@ All exact texts, coordinates and hashes are in the [language-interface receipt](
 | Original generated-prose pilot | 9/16 corner symbols; its original run ended before dynamical writes or reads |
 | Completed prose control follow-up | All eleven actual addresses executed; each retained the two incoming labels |
 | Completed prose state follow-up | Eleven raw text means executed at fixed hold; six zeros and five ones |
+| Calibrated prose byte | Two public sentence anchors drive eight literal carried writes; both starts recover `10110001` |
 | Literal commands | Four accepted commands, such as `Write bit 0 to register R0.`, executed the numerical writer and recovered `0110`; three invalid commands were rejected |
 | Generated poems | Explicit binary frames carried the payload separately from the coding dialogue; 6 of 115 intended bytes verified before the operator stopped the campaign |
 | Short Qwen exchange | Complete `Bob` → `A` byte exchange, carried by explicit control instructions |
@@ -853,8 +971,9 @@ Its claimed 16/16 was not reproduced in this repository and is not counted here.
 
 The completed follow-ups separate coordinate reproduction from actual memory
 writes and from text-based state initialization. The latter reached both binary
-readouts. Ordered bytes and a reply derived from recovered data remain a separate
-integration test for this ordinary-prose interface.
+readouts. The separate calibrated two-sentence interface has now delivered one
+ordered raw byte. A substantive request and reply derived from recovered data
+remain pending for an ordinary-prose interface.
 
 </details>
 
@@ -865,8 +984,10 @@ addresses. On 1 November 2026, the recorded plan was frozen at **00:14:42 UTC**,
 before the recorded input draw at **00:16:54 UTC**. It specified changing the
 fifth reading from 83 to 23. The execution source was recorded at **00:19:01 UTC**;
 the first receiver metadata followed at **00:19:25 UTC**, and the first model
-call at **00:19:30 UTC**. The numerical source modules were unchanged between
-the plan and execution commits. The methods receipt includes the exact
+call at **00:19:30 UTC**. All eight transport, map and English-control source
+modules were byte-identical between the plan and execution commits; the
+[corrected summary](receipts/substantive-pythia-corrected-v1.json) records the
+complete shared source list. The methods receipt includes the exact
 declaration, commit identifiers, and artifact hashes.
 
 This establishes recorded prospective ordering. It does not independently
