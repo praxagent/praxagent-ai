@@ -42,7 +42,7 @@ lead: |
 .feedback-feature > .table-scroll th:last-child,.feedback-feature > .table-scroll td:last-child {width:5.5rem;white-space:nowrap;text-align:center;}
 .feedback-feature > .table-scroll table:has(th:nth-child(3)) th:first-child,.feedback-feature > .table-scroll table:has(th:nth-child(3)) td:first-child {width:7.5rem;white-space:nowrap;}
 .feedback-feature > .table-scroll table:has(th:nth-child(3)):not(:has(th:nth-child(4))) th:last-child,.feedback-feature > .table-scroll table:has(th:nth-child(3)):not(:has(th:nth-child(4))) td:last-child {width:7.5rem;}
-.feedback-feature > .table-scroll:has(table.logic-truth) {display:table;width:auto;max-width:46rem;overflow:visible;margin:1.2rem auto;}
+.feedback-feature > .table-scroll:has(table.logic-truth) {max-width:46rem;margin:1.2rem auto;}
 .feedback-feature > .table-scroll table.logic-truth {width:max-content;max-width:100%;min-width:0;table-layout:auto;}
 .feedback-feature > .table-scroll table.logic-truth th,.feedback-feature > .table-scroll table.logic-truth td {width:auto;padding:0.5rem 0.9rem;white-space:nowrap;text-align:center;}
 .feedback-feature > .table-scroll table.logic-truth th:last-child,.feedback-feature > .table-scroll table.logic-truth td:last-child {text-align:left;}

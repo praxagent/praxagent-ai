@@ -81,7 +81,8 @@ class ResearchCitationTests(unittest.TestCase):
         )
 
     def test_all_current_research_notes_opt_in(self) -> None:
-        self.assertEqual(len(self.sources), 7)
+        # New notes should be validated without pinning the size of the collection.
+        self.assertTrue(self.sources, "No research notes found to validate")
 
         for source in self.sources:
             with self.subTest(source=source):
