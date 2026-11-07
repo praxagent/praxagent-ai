@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="780" height="460" viewBox="0 0 780 460" role="img" aria-labelledby="lyapTitle lyapDesc">
-  <title id="lyapTitle">Nearby paths separate or fall together as the step advances</title>
-  <desc id="lyapDesc">Two time plots with the step on the horizontal axis and the state on the vertical axis. On the left a neighbor starts a small gap above a reference path, and the gap doubles at each marked step: delta, 2 delta, 4 delta, 8 delta. On the right the neighbor starts farther away and the gap halves until the paths lie together. The curves are a schematic, not a measured orbit.</desc>
+  <title id="lyapTitle">Nearby paths separate or approach each other as the step advances</title>
+  <desc id="lyapDesc">Two plots with the step on the horizontal axis and the state on the vertical axis. Delta denotes the initial gap. On the left, the dashed neighbor separates from the solid reference path with marked gaps delta, 2 delta, 4 delta, and 8 delta. On the right, the dashed neighbor approaches the solid reference path with marked gaps delta, delta over 2, delta over 4, and delta over 8; it does not coincide with the reference at any marked step. The curves are synthetic schematics, not measured orbits.</desc>
   <rect width="780" height="460" fill="#F7F4F0"/>
   <style>
     .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
@@ -11,10 +11,10 @@
     .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
     .ink{stroke:#2C2924;stroke-width:1.3;fill:none}
     .ref{fill:none;stroke:#4B6787;stroke-width:2.6}
-    .twin{fill:none;stroke:#A67C52;stroke-width:2.6}
+    .twin{fill:none;stroke:#A67C52;stroke-width:2.6;stroke-dasharray:7 5}
   </style>
   <text x="24" y="28" class="t title">Nearby paths separate when the exponent is positive</text>
-  <text x="24" y="48" class="t m">State against step. Brackets mark the gap in the formula. Schematic, not a measured orbit.</text>
+  <text x="24" y="48" class="t m">State against step. Brackets mark the gap between the two paths. Schematic, not a measured orbit.</text>
 
   <rect class="card" x="16" y="64" width="368" height="376" rx="12"/>
   <text x="32" y="90" class="t h">Positive: the gap doubles each step</text>
@@ -28,12 +28,12 @@
   <line x1="188.7" y1="255.0" x2="188.7" y2="283.0" stroke="#7A5634" stroke-width="1.3"/><line x1="184.7" y1="255.0" x2="192.7" y2="255.0" stroke="#7A5634" stroke-width="1.3"/><line x1="184.7" y1="283.0" x2="192.7" y2="283.0" stroke="#7A5634" stroke-width="1.3"/>
   <line x1="265.3" y1="224.9" x2="265.3" y2="280.9" stroke="#7A5634" stroke-width="1.3"/><line x1="261.3" y1="224.9" x2="269.3" y2="224.9" stroke="#7A5634" stroke-width="1.3"/><line x1="261.3" y1="280.9" x2="269.3" y2="280.9" stroke="#7A5634" stroke-width="1.3"/>
   <line x1="342.0" y1="156.4" x2="342.0" y2="268.4" stroke="#7A5634" stroke-width="1.3"/><line x1="338.0" y1="156.4" x2="346.0" y2="156.4" stroke="#7A5634" stroke-width="1.3"/><line x1="338.0" y1="268.4" x2="346.0" y2="268.4" stroke="#7A5634" stroke-width="1.3"/>
-  <text x="108.0" y="250.0" text-anchor="middle" class="t s">δ</text>
-  <text x="184.7" y="247.0" text-anchor="middle" class="t s">2δ</text>
-  <text x="261.3" y="216.9" text-anchor="middle" class="t s">4δ</text>
-  <text x="338.0" y="148.4" text-anchor="middle" class="t s">8δ</text>
-  <text x="32" y="392" class="t m">blue reference, brown neighbor</text>
-  <text x="32" y="414" class="t m">rate ln 2 nats per step</text>
+  <text x="108.0" y="250.0" text-anchor="middle" class="t s">&#x3b4;</text>
+  <text x="184.7" y="247.0" text-anchor="middle" class="t s">2&#x3b4;</text>
+  <text x="261.3" y="216.9" text-anchor="middle" class="t s">4&#x3b4;</text>
+  <text x="338.0" y="148.4" text-anchor="middle" class="t s">8&#x3b4;</text>
+  <text x="32" y="392" class="t m">solid: reference; dashed: neighbor; &#x3b4; = initial gap</text>
+  <text x="32" y="414" class="t m">natural-log rate: ln 2 nats per step</text>
 
   <rect class="card" x="396" y="64" width="368" height="376" rx="12"/>
   <text x="412" y="90" class="t h">Negative: the gap halves each step</text>
@@ -47,10 +47,10 @@
   <line x1="558.7" y1="247.0" x2="558.7" y2="283.0" stroke="#7A5634" stroke-width="1.3"/><line x1="554.7" y1="247.0" x2="562.7" y2="247.0" stroke="#7A5634" stroke-width="1.3"/><line x1="554.7" y1="283.0" x2="562.7" y2="283.0" stroke="#7A5634" stroke-width="1.3"/>
   <line x1="635.3" y1="262.9" x2="635.3" y2="280.9" stroke="#7A5634" stroke-width="1.3"/><line x1="631.3" y1="262.9" x2="639.3" y2="262.9" stroke="#7A5634" stroke-width="1.3"/><line x1="631.3" y1="280.9" x2="639.3" y2="280.9" stroke="#7A5634" stroke-width="1.3"/>
   <line x1="712.0" y1="259.4" x2="712.0" y2="268.4" stroke="#7A5634" stroke-width="1.3"/><line x1="708.0" y1="259.4" x2="716.0" y2="259.4" stroke="#7A5634" stroke-width="1.3"/><line x1="708.0" y1="268.4" x2="716.0" y2="268.4" stroke="#7A5634" stroke-width="1.3"/>
-  <text x="478.0" y="192.0" text-anchor="middle" class="t s">δ</text>
-  <text x="554.7" y="239.0" text-anchor="middle" class="t s">δ/2</text>
-  <text x="631.3" y="254.9" text-anchor="middle" class="t s">δ/4</text>
-  <text x="708.0" y="251.4" text-anchor="middle" class="t s">δ/8</text>
-  <text x="412" y="392" class="t m">same axes, opposite sign</text>
-  <text x="412" y="414" class="t m">rate −ln 2 nats per step</text>
+  <text x="478.0" y="192.0" text-anchor="middle" class="t s">&#x3b4;</text>
+  <text x="554.7" y="239.0" text-anchor="middle" class="t s">&#x3b4;/2</text>
+  <text x="631.3" y="254.9" text-anchor="middle" class="t s">&#x3b4;/4</text>
+  <text x="708.0" y="251.4" text-anchor="middle" class="t s">&#x3b4;/8</text>
+  <text x="412" y="392" class="t m">solid: reference; dashed: neighbor; &#x3b4; = initial gap</text>
+  <text x="412" y="414" class="t m">natural-log rate: &#x2212;ln 2 nats per step</text>
 </svg>

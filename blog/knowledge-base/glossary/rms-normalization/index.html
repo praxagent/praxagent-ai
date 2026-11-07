@@ -19,30 +19,30 @@
 
 
     
-    <meta name="description" content="Rescaling a vector by its root mean square, then by a learned gain on each coordinate.">
+    <meta name="description" content="Rescaling a vector by a stabilized root mean square of its coordinates, then by a learned gain on each coordinate.">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/glossary/rms-normalization/">
 
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="praxagent Knowledge Base">
     <meta property="og:title" content="RMS normalization">
-    <meta property="og:description" content="Rescaling a vector by its root mean square, then by a learned gain on each coordinate.">
+    <meta property="og:description" content="Rescaling a vector by a stabilized root mean square of its coordinates, then by a learned gain on each coordinate.">
     <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/glossary/rms-normalization/">
-    <meta property="og:image" content="https://praxagent.ai/blog/knowledge-base/glossary/rms-normalization/rms-normalization-card.png">
+    <meta property="og:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/rms-normalization/rms-normalization-card.png">
     <meta property="og:image:alt" content="The vector 3, 4 is divided by its root mean square, about 3.536, and then multiplied by learned gains.">
-    <meta property="og:image:width" content="1197">
+    <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@praxagent">
     <meta name="twitter:title" content="RMS normalization">
-    <meta name="twitter:description" content="Rescaling a vector by its root mean square, then by a learned gain on each coordinate.">
-    <meta name="twitter:image" content="https://praxagent.ai/blog/knowledge-base/glossary/rms-normalization/rms-normalization-card.png">
+    <meta name="twitter:description" content="Rescaling a vector by a stabilized root mean square of its coordinates, then by a learned gain on each coordinate.">
+    <meta name="twitter:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/rms-normalization/rms-normalization-card.png">
     <meta name="twitter:image:alt" content="The vector 3, 4 is divided by its root mean square, about 3.536, and then multiplied by learned gains.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20261017d">
+    <link rel="stylesheet" href="/blog/blog.css?v=20261025a">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -130,7 +130,7 @@
                 <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
                 <h1 class="post-title">RMS normalization</h1>
                 
-                <p class="reference-summary">Rescaling a vector by its root mean square, then by a learned gain on each coordinate.</p>
+                <p class="reference-summary">Rescaling a vector by a stabilized root mean square of its coordinates, then by a learned gain on each coordinate.</p>
                 
 
             </header>
@@ -140,30 +140,31 @@
 
 
             <div class="post-body">
-                <p><strong>RMS normalization</strong> rescales a hidden vector by its root mean square, then multiplies each coordinate by a learned gain. For a vector \(h\in\mathbb{R}^d\) and a gain vector \(g\),</p>
+                <p><strong>RMS normalization</strong> rescales a hidden vector, the list of \(d\) numbers a model carries for one token between its layers, by a stabilized root mean square of its coordinates, then multiplies each coordinate by its own learned gain. For \(h\in\mathbb{R}^d\) and a gain vector \(g\in\mathbb{R}^d\),</p>
 \[
-\mathrm{RMS}(h)=\sqrt{\frac{1}{d}\sum_{i=1}^{d} h_i^2+\varepsilon},
+r(h)=\sqrt{\frac{1}{d}\sum_{i=1}^{d} h_i^2},
 \qquad
-y_i=g_i\frac{h_i}{\mathrm{RMS}(h)}.
-\]<p>The constant \(\varepsilon>0\) keeps the quantity inside the square root at least \(\varepsilon\), including at \(h=0\). The map is therefore smooth at the origin. Qwen models use this in place of a layer normalization that would also subtract the mean. The mean is not removed here: a vector and a shifted copy of itself are treated differently.</p>
+y_i=g_i\,\frac{h_i}{\sqrt{r(h)^2+\varepsilon}},
+\qquad i=1,\ldots,d.
+\]<p>Here \(r(h)\) is the ordinary root mean square of the coordinates, and the small constant \(\varepsilon>0\) keeps the denominator at least \(\sqrt{\varepsilon}\), including at \(h=0\). The map is therefore smooth at the origin. Unlike a layer normalization, which also subtracts the mean of the coordinates, RMS normalization does not remove the mean, so shifting every coordinate by the same amount changes the result. The Qwen2.5 models studied in the <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/">note on chaos in a language model&rsquo;s feedback loop</a> use RMS normalization.</p>
 <figure class="reference-figure">
     <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: The coordinates 3 and 4 are divided by the root mean square 3.536, giving about 0.849 and 1.131 before any learned gain." tabindex="0">
         <img src="/blog/knowledge-base/glossary/rms-normalization/rms-normalization.svg" alt="The coordinates 3 and 4 are divided by the root mean square 3.536, giving about 0.849 and 1.131 before any learned gain." loading="lazy" decoding="async">
     </div>
     <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
-    <figcaption>For h = (3, 4) and epsilon = 0 in this toy arithmetic, the mean of the squares is 12.5 and the root mean square is the square root of 12.5. Dividing the coordinates by that factor shortens the vector. A positive epsilon, used in the models, changes these digits only far past what is shown. Learned gains can then stretch each coordinate separately.</figcaption>
+    <figcaption>For h = (3, 4) and epsilon = 0 in this toy arithmetic, the mean of the squares is 12.5 and the root mean square is the square root of 12.5. Dividing the coordinates by that factor shortens this vector; both panels are drawn at the same scale. For epsilon = 10^-6 or 10^-5, the normalized coordinates are unchanged at three decimal places. Learned gains then rescale the coordinates independently, and a negative gain also reverses a coordinate&rsquo;s sign.</figcaption>
 </figure>
 
 <h2 id="worked-example">Worked example</h2>
 <p>Take \(h=(3,4)\), \(d=2\), \(\varepsilon=0\), and \(g=(1,1)\). The mean of the squares is \((9+16)/2=12.5\), and</p>
 \[
-\mathrm{RMS}(h)=\sqrt{12.5}\approx 3.5355.
-\]<p>The normalized coordinates are \(3/3.5355\approx 0.8485\) and \(4/3.5355\approx 1.1314\). With the models&rsquo; positive \(\varepsilon\), typically \(10^{-6}\) or \(10^{-5}\), the change is far smaller than these four digits. At \(h=(0,0)\), \(\mathrm{RMS}=\sqrt{\varepsilon}\) and \(y=0\).</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">rms_normalize</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">gain</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+r(h)=\sqrt{12.5}\approx 3.5355.
+\]<p>The normalized coordinates are \(3/3.5355\approx 0.8485\) and \(4/3.5355\approx 1.1314\). For a small positive \(\varepsilon\) such as \(10^{-6}\) or \(10^{-5}\), they are unchanged to four decimal places. At \(h=(0,0)\), the denominator is \(\sqrt{\varepsilon}\) and \(y=0\).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">rms_normalize</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">gain</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gain</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;values and gain must be nonempty and the same length&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">epsilon</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;epsilon must be nonnegative&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">epsilon</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;epsilon must be positive&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="n">mean_square</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">value</span> <span class="o">*</span> <span class="n">value</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="n">scale</span> <span class="o">=</span> <span class="p">(</span><span class="n">mean_square</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span><span class="n">g</span> <span class="o">*</span> <span class="n">value</span> <span class="o">/</span> <span class="n">scale</span> <span class="k">for</span> <span class="n">g</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">gain</span><span class="p">,</span> <span class="n">values</span><span class="p">)]</span>

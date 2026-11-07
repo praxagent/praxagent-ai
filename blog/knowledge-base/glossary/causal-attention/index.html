@@ -28,21 +28,21 @@
     <meta property="og:title" content="Causal attention">
     <meta property="og:description" content="A rule that lets each token use itself and earlier tokens, and not later ones.">
     <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/glossary/causal-attention/">
-    <meta property="og:image" content="https://praxagent.ai/blog/knowledge-base/glossary/causal-attention/causal-attention-card.png">
-    <meta property="og:image:alt" content="Prefix tokens read only earlier prefix tokens. The last slot can read the prefix, and the prefix cannot read the last slot.">
-    <meta property="og:image:width" content="1197">
+    <meta property="og:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/causal-attention/causal-attention-card.png">
+    <meta property="og:image:alt" content="Each prefix token reads itself and earlier prefix tokens. The last position x reads itself and the prefix, and the prefix cannot read x.">
+    <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@praxagent">
     <meta name="twitter:title" content="Causal attention">
     <meta name="twitter:description" content="A rule that lets each token use itself and earlier tokens, and not later ones.">
-    <meta name="twitter:image" content="https://praxagent.ai/blog/knowledge-base/glossary/causal-attention/causal-attention-card.png">
-    <meta name="twitter:image:alt" content="Prefix tokens read only earlier prefix tokens. The last slot can read the prefix, and the prefix cannot read the last slot.">
+    <meta name="twitter:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/causal-attention/causal-attention-card.png">
+    <meta name="twitter:image:alt" content="Each prefix token reads itself and earlier prefix tokens. The last position x reads itself and the prefix, and the prefix cannot read x.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20261017d">
+    <link rel="stylesheet" href="/blog/blog.css?v=20261025a">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -140,24 +140,24 @@
 
 
             <div class="post-body">
-                <p><strong>Causal attention</strong> lets each token use itself and earlier tokens, and not later ones. Decoder-only language models use this rule so that a next-token prediction is a function of the past.</p>
-<p>Each token contributes two vectors for other tokens to read, a <strong>key</strong> and a <strong>value</strong>, and carries a <strong>query</strong> that it uses to look those up. Under a causal rule, the keys and values at a prefix position are computed only from the prefix up to that position. A token that sits later does not enter that calculation.</p>
+                <p><strong>Causal attention</strong> lets each position in a sequence of tokens use information from itself and from earlier positions, and not from later ones. A token is one unit of model input, often a word or part of a word. Decoder-only language models, <a href="/blog/knowledge-base/glossary/transformer/">transformers</a> that predict each next token from the tokens before it, use this rule so that every next-token prediction depends only on tokens already available.</p>
+<p>At each attention layer the model forms three vectors at every position: a <strong>query</strong>, which scores the positions it may read, a <strong>key</strong>, which those scores are computed against, and a <strong>value</strong>, which is what a read returns. The causal rule limits which positions a query may read. Every operation in a standard decoder that mixes positions follows the same ordering, so the representation at a position, and the keys and values computed from it, can depend only on that position and earlier ones. The vectors at a prefix position, in the early part of the sequence, therefore never depend on a token that comes after it.</p>
 <figure class="reference-figure">
-    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Token A reads only itself. Token B reads A and itself. The last slot x reads A, B, and itself. Arrows from x back to A and B are blocked." tabindex="0">
-        <img src="/blog/knowledge-base/glossary/causal-attention/causal-attention.svg" alt="Token A reads only itself. Token B reads A and itself. The last slot x reads A, B, and itself. Arrows from x back to A and B are blocked." loading="lazy" decoding="async">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Token A reads itself. Token B reads A and itself. The last position x reads A, B, and itself. Arrows show allowed information flow from A to B and from A and B to x. A box marks flow from x into the keys or values of A or B as blocked." tabindex="0">
+        <img src="/blog/knowledge-base/glossary/causal-attention/causal-attention.svg" alt="Token A reads itself. Token B reads A and itself. The last position x reads A, B, and itself. Arrows show allowed information flow from A to B and from A and B to x. A box marks flow from x into the keys or values of A or B as blocked." loading="lazy" decoding="async">
     </div>
     <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
-    <figcaption>In a sequence of two prefix tokens and one later slot, information flows only forward in the sense that later tokens may read earlier ones. The reverse arrows are blocked. Changing the last slot therefore changes the keys and values at that slot, and not the keys and values of the prefix.</figcaption>
+    <figcaption>For two prefix tokens and one later position, arrows run from each source of information to the later position that may read it. No arrow runs from x back into the prefix. Changing x can therefore change the vectors at x but cannot change the keys or values at A or B.</figcaption>
 </figure>
 
 <h2 id="worked-example">Worked example</h2>
-<p>Label the slots \(A\), \(B\), and \(x\), with \(x\) last. The allowed reads are:</p>
+<p>Label the positions \(A\), \(B\), and \(x\), with \(x\) last. The allowed reads are:</p>
 <table>
   <thead>
       <tr>
-          <th>Slot</th>
+          <th>Position</th>
           <th>May read</th>
-          <th>Its keys and values depend on</th>
+          <th>Its keys and values may depend on, at most</th>
       </tr>
   </thead>
   <tbody>
@@ -178,8 +178,8 @@
       </tr>
   </tbody>
 </table>
-<p>Replacing the vector in the last slot changes the query, key, and value at \(x\). It does not change the keys and values at \(A\) or \(B\). That is why a fixed prefix can be processed once while a soft token in the last slot varies.</p>
-<p>This is not the same object as a padding mask. An <a href="/blog/knowledge-base/glossary/attention-mask/">attention mask</a> can also mark padding, or encode this causal rule as a grid of allowed pairs. Which job a mask is doing is a property of the implementation.</p>
+<p>The last column is an upper bound: in the first layer, for example, keys and values are computed from the input at their own position only. Replacing the input vector at the last position can change the query, key, and value at \(x\), but it cannot change any vector at \(A\) or \(B\). That one-way dependency lets an implementation compute the fixed prefix&rsquo;s keys and values once and reuse them while \(x\) varies, for example when \(x\) is a <strong>soft token</strong>, a probability-weighted average of token embeddings fed in place of a single token.</p>
+<p>This rule is not the same thing as <strong>padding</strong>, placeholder positions added so that sequences of different lengths can share one array. An <a href="/blog/knowledge-base/glossary/attention-mask/">attention mask</a> is the implementation&rsquo;s grid of allowed query and source pairs; it can encode the causal rule, hide padding positions, or do both. Which job a mask does is a property of the implementation.</p>
 <p>See also: <a href="/blog/knowledge-base/glossary/attention-mask/">attention mask</a>, <a href="/blog/knowledge-base/glossary/transformer/">transformer</a>, <a href="/blog/knowledge-base/glossary/residual-stream/">residual stream</a>.</p>
 
             </div>

@@ -1,0 +1,40 @@
+{
+  "source_commit": "1314528118ac1300c2cffd34fb60cfbfc67d2c82",
+  "source_path": "docs/repro-summary.json",
+  "source_sha256": "6ab6ec4f46f19dcc5e9d57c5010efcb1ce500b942ddaee29b3bf80cc30e5be23",
+  "rows": [
+    {
+      "regime": "chaotic",
+      "label": "Chaotic loops",
+      "changed": 173,
+      "total": 192,
+      "percent": 90.10416666666667
+    },
+    {
+      "regime": "periodic",
+      "label": "Repeating loops",
+      "changed": 7,
+      "total": 192,
+      "percent": 3.6458333333333335
+    }
+  ],
+  "scope": "Qwen2.5-0.5B, float64; changed leading tokens in the final 500 of 1500 steps. Selected settings, not chatbot prevalence.",
+  "map": {
+    "original_bundle_file": "chaos-bifurcations-language-model-feedback/p6-shrimp-lead.png",
+    "sha256": "e98f580388a13acb1400b4082b29df7e46e7c6bdd08b8777acbbe67989344eb1",
+    "raw_source": "llm-soft-loop/pod64/hr10/scan.npz",
+    "raw_sha256": "b29668a41c6d906dee03c3268b62929f91e89b0f1119d15d588d8223c6da93a0",
+    "operation": "byte-identical copy"
+  },
+  "schematic": "Conceptual only; not measured data.",
+  "matplotlib_version": "3.10.8",
+  "provenance": {
+    "outputs": {
+      "islands-of-order.png": "e98f580388a13acb1400b4082b29df7e46e7c6bdd08b8777acbbe67989344eb1",
+      "batching-comparison.svg": "267a15776edb257e238c8f76931a5900bf843b0b9f1f67e6810cca4527377e9e",
+      "batching-comparison.png": "6375cf7cb5fadc739838b5513ec9b6efaf6b630ea45b844ff360f9a7f255cb5d",
+      "batching-comparison.pdf": "f4159592f07bf4a97a67d6478318505065b1efb8a4636068345a71a5fc2c8612",
+      "feedback-loop.svg": "e3c27a16d45249bcfab4873b68b114367e58812d91f8c53a4886c7fa9fee19b3"
+    }
+  }
+}

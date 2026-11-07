@@ -1,0 +1,73 @@
+{
+  "local_bundle": true,
+  "source_commit": "1314528118ac1300c2cffd34fb60cfbfc67d2c82",
+  "generator": {
+    "path": "build_figures.py",
+    "sha256": "6f15d95b86d7f4beee507b4fa73e06e4d5375885550d79bb2ec4dfb94544b234"
+  },
+  "receipts": {
+    "receipts/repro-summary.json": "6ab6ec4f46f19dcc5e9d57c5010efcb1ce500b942ddaee29b3bf80cc30e5be23",
+    "fig-short-read.receipt.json": "e3e33967072573f2d14bd2f906003c93eb7650f66b581f01c03b2c3642a2a5d3",
+    "receipts/evidence-summary.json": "15b01c76252d3a5c6db9093236161c7f71a735fa6f2b067ae5b921e9ad256760",
+    "fig-hidden-bands.receipt.json": "48bcae4e9225c5a441edfd6843526d92ad29e8643e85423eb09072c297668403",
+    "fig-pair-basins.receipt.json": "5ff910a89bcb2aa8c6f024a6f6ac8707d1566f1c5b08ecb7fbea16395d3c9b70",
+    "fig-passages.receipt.json": "440a6dd58d793dc26db84eecfa314b68e98cd98a2e1e40c5f30d1a9f221dbb88",
+    "fig-sync.receipt.json": "0f64495aef3b84d5728108ca996933aa7d7ac4068f3d1d34b021172f0cf45dbd"
+  },
+  "figures": [
+    "islands-of-order.png",
+    "feedback-loop.svg",
+    "batching-comparison.svg",
+    "batching-comparison.png",
+    "batching-comparison.pdf",
+    "fig-hidden-bands.png",
+    "fig-pair-basins.png",
+    "fig-passages.png",
+    "fig-sync.png"
+  ],
+  "numbers": [
+    {
+      "id": "chaotic-changed",
+      "appears_as": "173 of 192",
+      "source": "receipts/repro-summary.json; trajectories/qwen0.5b steered (REPRO1)/batch64/chaotic; cells times end_with_different_tokens"
+    },
+    {
+      "id": "periodic-changed",
+      "appears_as": "7 of 192",
+      "source": "same receipt, periodic; cells times end_with_different_tokens"
+    },
+    {
+      "id": "measurement-window",
+      "appears_as": "500",
+      "source": "Full report, batch-measurement: final 500 steps"
+    },
+    {
+      "id": "measurement-horizon",
+      "appears_as": "1,500",
+      "source": "Full report, batch-measurement: 1500 steps"
+    },
+    {
+      "id": "hidden-text-period",
+      "appears_as": "seven-token",
+      "source": "fig-hidden-bands.receipt.json; original Figure 39 caption"
+    },
+    {
+      "id": "hidden-text-horizon",
+      "appears_as": "2,000",
+      "source": "fig-hidden-bands.receipt.json; original Figure 39 caption"
+    }
+  ],
+  "editorial_scope": "Visual short read selecting existing findings, controls and limitations from the pinned report. Figures are byte-identical or generated from the released batch receipt. No new experiments.",
+  "figure_sha256": {
+    "islands-of-order.png": "e98f580388a13acb1400b4082b29df7e46e7c6bdd08b8777acbbe67989344eb1",
+    "feedback-loop.svg": "e3c27a16d45249bcfab4873b68b114367e58812d91f8c53a4886c7fa9fee19b3",
+    "batching-comparison.svg": "267a15776edb257e238c8f76931a5900bf843b0b9f1f67e6810cca4527377e9e",
+    "batching-comparison.png": "6375cf7cb5fadc739838b5513ec9b6efaf6b630ea45b844ff360f9a7f255cb5d",
+    "batching-comparison.pdf": "f4159592f07bf4a97a67d6478318505065b1efb8a4636068345a71a5fc2c8612",
+    "fig-hidden-bands.png": "9b40800041af3b63cadd01a401701f30b64c7e3f1029c2c9e26771d2a8defcb8",
+    "fig-pair-basins.png": "3df5b5127854148a8cc3060e1d7474c05098a085908179381eef4bea0e440599",
+    "fig-passages.png": "0c50d4cc00c81346d2654b75418d602445ad75d4ef3f508f556f46a45522fa55",
+    "fig-sync.png": "ddccb2407a28a212ff30ffdda8b4a0255cafbbe26855671a499b5593f0a042d9"
+  },
+  "source_evidence": "receipts/evidence-summary.json"
+}

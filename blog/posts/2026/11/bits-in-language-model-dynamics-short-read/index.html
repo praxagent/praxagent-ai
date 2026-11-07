@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <title>Too Many Secrets: Hiding bits and logic in a language-model feedback loop - praxagent Research Notes</title>
+    
+    
+
+
+
+
+
+
+
+
+
+    
+    <meta name="description" content="Run as a feedback loop, a language model’s numerical behavior, rather than its words, carried complete requests and replies, held a written bit, and ran simple logic on it. A visual summary of what worked, what fell short, and why this is a channel rather than a secret.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/">
+
+<meta property="article:published_time" content="2026-11-03">
+    <meta property="article:modified_time" content="2026-11-03">
+    <meta property="article:author" content="https://orcid.org/0009-0007-5992-0652">
+    <meta name="citation_title" content="Too Many Secrets: Hiding bits and logic in a language-model feedback loop">
+    <meta name="citation_author" content="Timothy Jones">
+    <meta name="citation_author_institution" content="praxagent">
+    <meta name="citation_author_orcid" content="https://orcid.org/0009-0007-5992-0652">
+    <meta name="citation_publication_date" content="2026-11-03">
+    <meta name="citation_online_date" content="2026-11-03">
+    <meta name="citation_journal_title" content="praxagent Research Notes">
+    <meta name="citation_fulltext_html_url" content="https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/">
+    <meta name="citation_version" content="2026.11.03">
+    <meta name="DC.rights" content="Copyright © 2026 praxagent. All rights reserved.">
+    <link rel="author" href="https://orcid.org/0009-0007-5992-0652">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","author":{"@type":"Person","affiliation":{"@type":"Organization","name":"praxagent"},"familyName":"Jones","givenName":"Timothy","name":"Timothy Jones","sameAs":"https://orcid.org/0009-0007-5992-0652","url":"https://orcid.org/0009-0007-5992-0652"},"copyrightHolder":{"@type":"Organization","name":"praxagent"},"copyrightNotice":"Copyright © 2026 praxagent. All rights reserved.","copyrightYear":"2026","dateModified":"2026-11-03","datePublished":"2026-11-03","description":"Run as a feedback loop, a language model’s numerical behavior, rather than its words, carried complete requests and replies, held a written bit, and ran simple logic on it. A visual summary of what worked, what fell short, and why this is a channel rather than a secret.","headline":"Too Many Secrets: Hiding bits and logic in a language-model feedback loop","identifier":"https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/","image":"http://127.0.0.1:8000/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/og-card.png","inLanguage":"en-US","isAccessibleForFree":true,"isPartOf":{"@type":"CreativeWorkSeries","name":"praxagent Research Notes","url":"https://praxagent.ai/blog/"},"keywords":["AI","LLM","dynamical-systems","memory","computation"],"mainEntityOfPage":{"@id":"https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/","@type":"WebPage"},"publisher":{"@type":"Organization","name":"praxagent","url":"https://praxagent.ai"},"url":"https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/","usageInfo":"https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md","version":"2026.11.03"}</script>
+
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="praxagent Research Notes">
+    <meta property="og:title" content="Too Many Secrets: Hiding bits and logic in a language-model feedback loop">
+    <meta property="og:description" content="Run as a feedback loop, a language model’s numerical behavior, rather than its words, carried complete requests and replies, held a written bit, and ran simple logic on it. A visual summary of what worked, what fell short, and why this is a channel rather than a secret.">
+    <meta property="og:url" content="https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/">
+    <meta property="og:image" content="http://127.0.0.1:8000/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/og-card.png">
+    <meta property="og:image:alt" content="Title card beside the Pythia-160m chaos map: 24 recurrent addresses (circles) and 24 chaotic addresses (triangles) over steering strength and log-ten temperature.">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="Too Many Secrets: Hiding bits and logic in a language-model feedback loop">
+    <meta name="twitter:description" content="Run as a feedback loop, a language model’s numerical behavior, rather than its words, carried complete requests and replies, held a written bit, and ran simple logic on it. A visual summary of what worked, what fell short, and why this is a channel rather than a secret.">
+    <meta name="twitter:image" content="http://127.0.0.1:8000/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/og-card.png">
+    <meta name="twitter:image:alt" content="Title card beside the Pythia-160m chaos map: 24 recurrent addresses (circles) and 24 chaotic addresses (triangles) over steering strength and log-ten temperature.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
+    <link rel="stylesheet" href="/blog/blog.css?v=20261025a">
+    <link rel="stylesheet" href="/blog/katex.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script src="/blog/js/katex-0.16.47/katex.min.js"></script>
+    <script src="/blog/js/katex-0.16.47/auto-render.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'neutral',
+        securityLevel: 'loose',
+        flowchart: { htmlLabels: true, curve: 'basis' }
+      });
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-scrolls industrial-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+
+
+
+            <div class="nav-menu">
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link active">Research Notes</a>
+                <a href="/blog/knowledge-base/" class="nav-link">Knowledge Base</a>
+                <a href="/blog/search/" class="nav-link">Search</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link active">Research Notes</a>
+            <a href="/blog/knowledge-base/" class="mobile-nav-link">Knowledge Base</a>
+            <a href="/blog/search/" class="mobile-nav-link">Search</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        
+<div class="blog-post"><div class="container">
+<article class="post-content feedback-article">
+  <header class="feedback-opening">
+    <div class="feedback-opening-copy">
+      <p class="feedback-eyebrow">The visual short read</p>
+      <h1 class="post-title">Too Many Secrets: Hiding bits and logic in a language-model feedback loop</h1>
+      
+      <div class="post-meta"><time class="post-date" datetime="2026-11-03">November 3, 2026</time> · by <a href="https://orcid.org/0009-0007-5992-0652" rel="author">Timothy Jones</a></div>
+      <div class="post-lead"><a href="https://en.wikipedia.org/wiki/OpenAI_rogue_agent_breach_of_Hugging_Face">AI agents have already coordinated</a>
+through channels nobody designed for them. In
+this note we show that a language model running as a feedback loop is itself such a
+medium: its numerical behavior, rather than its words, carried complete
+messages in both directions, held a written bit, and ran simple logic on it. The examples shown here
+demonstrate the importance of thinking creatively when trying to secure agents.</div>
+      <a class="feedback-start" href="#why-this-matters">Explore the findings ↓</a>
+    </div>
+    
+    <figure class="feedback-opening-art">
+      <a href="#why-this-matters"><img src="/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/pythia-region-a.png" width="1760" height="528" alt="Pythia-160m soft-token map. Three panels over steering strength and log-ten temperature: largest Lyapunov exponent per step, period of the attractor, and next-token entropy at the last step. Full interpretation follows below."></a>
+      <figcaption>Pythia-160m soft-token map</figcaption>
+    </figure>
+    
+  </header>
+  <div class="post-body"><style>
+.feedback-feature .research-figure:has(img[src$="qwen-kite-map.png"]),.feedback-feature .research-figure:has(img[src$="qwen-kite-branch.png"]) {max-width:42rem;}
+.feedback-feature .research-figure:has(img[src$="transfer-results.png"]),.feedback-feature .research-figure:has(img[src$="public-prose-byte-trajectory.png"]),.feedback-feature .research-figure:has(img[src$="qwen-write-directions.png"]),.feedback-feature .research-figure:has(img[src$="qwen-prose-calibration-map.png"]) {max-width:49rem;}
+.feedback-feature .research-figure:has(img[src$="pythia-spatial-map.png"]) {max-width:36rem;}
+.feedback-feature .research-figure:has(img[src$="pythia-address-dots.png"]) {max-width:28rem;}
+.feedback-feature .research-figure:has(img[src$="stateful-logic.png"]) {max-width:30rem;}
+.feedback-feature > .highlight,.feedback-feature > table,.feedback-feature > .table-scroll,.feedback-feature > blockquote,.feedback-feature > .panel,.feedback-feature > ul {max-width:46rem;width:100%;margin-left:auto;margin-right:auto;box-sizing:border-box;}
+.feedback-feature > ul {font-size:1.13rem;line-height:1.8;padding-left:1.5rem;}
+.feedback-feature > ul > li {margin-bottom:.8rem;}
+.feedback-feature > .table-scroll table {width:100%;min-width:0;table-layout:fixed;}
+.feedback-feature > .table-scroll th,.feedback-feature > .table-scroll td {min-width:0;max-width:none;overflow-wrap:anywhere;}
+.feedback-feature > .table-scroll th:last-child,.feedback-feature > .table-scroll td:last-child {width:5.5rem;white-space:nowrap;text-align:center;}
+.feedback-feature > .table-scroll table:has(th:nth-child(3)) th:first-child,.feedback-feature > .table-scroll table:has(th:nth-child(3)) td:first-child {width:7.5rem;white-space:nowrap;}
+.feedback-feature > .table-scroll table:has(th:nth-child(3)):not(:has(th:nth-child(4))) th:last-child,.feedback-feature > .table-scroll table:has(th:nth-child(3)):not(:has(th:nth-child(4))) td:last-child {width:7.5rem;}
+.feedback-feature > .table-scroll:has(table.logic-truth) {display:table;width:auto;max-width:46rem;overflow:visible;margin:1.2rem auto;}
+.feedback-feature > .table-scroll table.logic-truth {width:max-content;max-width:100%;min-width:0;table-layout:auto;}
+.feedback-feature > .table-scroll table.logic-truth th,.feedback-feature > .table-scroll table.logic-truth td {width:auto;padding:0.5rem 0.9rem;white-space:nowrap;text-align:center;}
+.feedback-feature > .table-scroll table.logic-truth th:last-child,.feedback-feature > .table-scroll table.logic-truth td:last-child {text-align:left;}
+.feedback-feature > .table-scroll:has(table.coord-sample) {display:table;width:auto;max-width:46rem;overflow:visible;margin-left:auto;margin-right:auto;}
+.feedback-feature > .table-scroll table.coord-sample {width:max-content;min-width:0;table-layout:auto;}
+.feedback-feature > .table-scroll table.coord-sample th,.feedback-feature > .table-scroll table.coord-sample td {width:auto;white-space:nowrap;text-align:left;}
+.feedback-feature > .table-scroll table.coord-sample th:last-child,.feedback-feature > .table-scroll table.coord-sample td:last-child {width:4.5rem;text-align:center;}
+.feedback-feature > .table-scroll table.coord-sample tr.coord-ellipsis td {text-align:center;letter-spacing:.15em;color:#5A544C;}
+.feedback-feature .panel table.byte-letter {width:100%;min-width:0;table-layout:fixed;margin:0.6rem 0;}
+.feedback-feature .panel table.byte-letter th,.feedback-feature .panel table.byte-letter td {min-width:0;max-width:none;padding:0.35rem 0.15rem;text-align:center;white-space:nowrap;}
+.feedback-feature .highlight pre,.feedback-feature .highlight code {white-space:pre-wrap;overflow-wrap:anywhere;}
+.feedback-feature > .setec {max-width:46rem;margin:1.2rem auto 1.4rem;border:1px solid #e0dce7;border-radius:14px;background:#fbf9f6;overflow:hidden;}
+.feedback-feature .setec-row {display:grid;grid-template-columns:2.4rem 1fr;gap:.15rem .7rem;align-items:center;padding:.55rem .8rem .62rem;border-top:1px solid #ece7f2;}
+.feedback-feature .setec-row:first-child {border-top:0;}
+.feedback-feature .setec-letter {font-weight:700;font-size:1.2rem;line-height:1;letter-spacing:-.03em;color:#21213d;}
+.feedback-feature .setec-meta {display:flex;align-items:center;gap:.7rem;min-width:0;}
+.feedback-feature .setec-bits {display:flex;gap:.18rem;flex:none;}
+.feedback-feature .setec-bits span {width:1.15rem;height:1.15rem;display:grid;place-items:center;border-radius:999px;font:600 .68rem/1 ui-monospace,SFMono-Regular,monospace;}
+.feedback-feature .setec-bits .z {color:#3d5d86;background:#fff;border:1px solid #8eabc8;}
+.feedback-feature .setec-bits .o {color:#fff;background:#5934a4;border:1px solid #5934a4;}
+.feedback-feature .setec-num {font:600 .74rem/1 ui-monospace,SFMono-Regular,monospace;color:#6b6578;letter-spacing:.01em;}
+.feedback-feature .setec-coords {grid-column:2;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.05rem .7rem;font:.68rem/1.35 ui-monospace,SFMono-Regular,monospace;color:#6b6578;}
+.feedback-feature .setec-result {padding:.7rem .9rem;text-align:center;font-weight:700;letter-spacing:.14em;font-size:.84rem;color:#5934a4;background:#f3eef9;border-top:1px solid #e0dce7;}
+[data-theme="dark"] .feedback-feature > .setec {background:#1c2430;border-color:#3a4658;}
+[data-theme="dark"] .feedback-feature .setec-row {border-top-color:#314056;}
+[data-theme="dark"] .feedback-feature .setec-letter {color:#fff2e3;}
+[data-theme="dark"] .feedback-feature .setec-bits .z {color:#d7c8f4;background:transparent;border-color:#8d7eb0;}
+[data-theme="dark"] .feedback-feature .setec-bits .o {color:#1c2430;background:#d7c8f4;border-color:#d7c8f4;}
+[data-theme="dark"] .feedback-feature .setec-num,[data-theme="dark"] .feedback-feature .setec-coords {color:#c9c3d4;}
+[data-theme="dark"] .feedback-feature .setec-result {color:#d7c8f4;background:#26374c;border-top-color:#3a4658;}
+@media(max-width:640px){.feedback-feature .setec-coords{grid-template-columns:1fr 1fr;}.feedback-feature .setec-meta{flex-wrap:wrap;}}
+</style>
+<style>
+ 
+.post-content:has(.feedback-feature) {max-width: 72rem;}
+.post-content:has(.feedback-feature) .post-header,.post-content:has(.feedback-feature) .post-lead,.post-content:has(.feedback-feature) .post-footer {max-width: 48rem;margin-left:auto;margin-right:auto;}
+.post-content:has(.feedback-feature) .post-title {font-size:clamp(2.35rem,5.3vw,4.2rem);line-height:1.08;letter-spacing:-.035em;max-width:16ch;}
+.post-content:has(.feedback-feature) .post-lead {font-size:1.22rem;line-height:1.65;}
+.post-content:has(.feedback-feature) .post-body > .panel {max-width:48rem;margin-left:auto;margin-right:auto;}
+.post-body > .feedback-feature {max-width:none;}
+.feedback-feature > p:has(.research-figure) {max-width:none;}
+.feedback-feature {--feature-accent:#5934a4;--feature-ink:#21213d;}
+.feedback-feature > p,.feedback-feature > ol,.feedback-feature > h2,.feedback-feature > h3,.feedback-feature > .feature-next {max-width:46rem;margin-left:auto;margin-right:auto;}
+.feedback-feature > p,.feedback-feature > ol {font-size:1.13rem;line-height:1.8;}
+.feedback-feature > ol {box-sizing:border-box;padding-left:1.5rem;}
+.feedback-feature > ol > li {margin-bottom:.8rem;}
+.feedback-feature > h2 {margin-top:4rem;margin-bottom:1.2rem;font-size:clamp(1.8rem,3.2vw,2.55rem);line-height:1.17;letter-spacing:-.025em;border-top:1px solid #cec9dc;padding-top:1.4rem;}
+.feedback-feature > h3 {font-size:1.45rem;margin-top:2rem;}
+.feedback-feature .feature-kicker {font-size:.76rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--feature-accent);margin-top:2.8rem;}
+.feedback-feature .research-figure,.feedback-feature .feedback-film {max-width:100%;width:100%;margin:2rem auto 1rem;}
+.feedback-feature .research-figure img {display:block;width:100%;height:auto;max-height:none;object-fit:contain;border:1px solid #e0dce7;border-radius:6px;background:#fff;}
+.feedback-feature .research-figure:has(img[src*="feedback-loop"]) {max-width:42rem;}
+.feedback-feature .research-figure:has(img[src*="fig-passages"]),.feedback-feature .research-figure:has(img[src*="batching-comparison"]) {max-width:49rem;}
+.feedback-feature .research-figure:has(img[src*="fig-cross512"]) {max-width:46rem;}
+.feedback-feature .research-figure__credit {font-size:.78rem;line-height:1.5;}
+.feedback-feature .feedback-film img {display:block;width:100%;height:auto;border-radius:8px;}
+.feedback-feature .feedback-film--youtube {aspect-ratio:16/9;max-width:49rem;background:#111124;overflow:hidden;border-radius:8px;}
+.feedback-feature .feedback-film iframe {width:100%;height:100%;border:0;}
+.feedback-feature .feedback-film:has(img[src*="islands"]) {max-width:49rem;}
+.feedback-feature p.feature-caption {max-width:49rem;font-size:.92rem;line-height:1.65;color:#54516a;border-left:3px solid #a78bcf;padding-left:1.2rem;margin-top:1rem;}
+.feedback-feature .feature-caption strong {color:var(--feature-ink);}
+.feedback-feature .feature-next {background:#f0edf7;border-radius:10px;padding:1.5rem 2rem;margin-top:3rem;box-sizing:border-box;}
+.feedback-feature .feature-next .feature-kicker {margin-top:0;}
+.feedback-feature .feature-next p {font-size:1rem;line-height:1.7;}
+.feedback-feature .feature-next p:nth-child(2) {font-size:1.4rem;font-weight:700;}
+@media(max-width:600px){.feedback-feature > p{font-size:1.05rem;line-height:1.75}.feedback-feature > h2{margin-top:2.8rem}.feedback-feature p.feature-caption{font-size:.87rem;padding-left:.8rem}.feedback-feature .feature-next{padding:1.2rem}.post-content:has(.feedback-feature) .post-title{font-size:2.5rem}.feedback-feature .research-figure{overflow-x:auto}}
+[data-theme="dark"] .feedback-feature {--feature-accent:#d7c8f4;--feature-ink:#fff2e3;}
+[data-theme="dark"] .feedback-feature p.feature-caption {color:#e0dce8;}
+[data-theme="dark"] .feedback-feature .feature-next {background:#26374c;}
+.feedback-article .feedback-opening {display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center;margin-bottom:3rem;}
+.feedback-article .feedback-opening .post-title {font-size:clamp(2.5rem,4.5vw,3.8rem);max-width:16ch;margin:.6rem 0 1.3rem;}
+.feedback-article .feedback-eyebrow {color:var(--text-secondary);font:600 .8rem/1.4 var(--font-mono,monospace);text-transform:uppercase;letter-spacing:.12em;}
+.feedback-article .feedback-opening .post-meta {font-size:.8rem;margin-bottom:1.4rem;gap:.5rem;}
+.feedback-article .feedback-opening .post-lead {font-size:1.05rem;line-height:1.7;margin:0;padding:0;}
+.feedback-article .feedback-opening .post-lead p {margin:0 0 1rem;}
+.feedback-article .feedback-opening-art {margin:0;}
+.feedback-article .feedback-opening-art img {width:100%;height:auto;aspect-ratio:1;object-fit:contain;border-radius:10px;display:block;}
+.feedback-article .feedback-opening-art figcaption {font-size:.75rem;line-height:1.4;margin-top:.7rem;color:var(--text-secondary);}
+.feedback-article .feedback-opening a {color:#3a526f;text-underline-offset:.18em;}
+[data-theme="dark"] .feedback-article .feedback-opening a {color:#e6f1fa;}
+.feedback-article .feedback-start {display:inline-block;font-size:.9rem;font-weight:600;margin-top:.5rem;}
+@media(max-width:760px){.feedback-article .feedback-opening{grid-template-columns:1fr;gap:1.2rem}.feedback-article .feedback-opening .post-title{font-size:2.5rem;max-width:none}.feedback-article .feedback-opening-art{max-width:28rem;justify-self:center}.feedback-article .feedback-opening .post-lead{font-size:1rem}.feedback-article .feedback-opening-copy{order:0}.feedback-article .feedback-opening-art{order:1}}
+</style>
+<div class="feedback-feature">
+<div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+    </div>
+    <div class="panel-content">
+        <strong>AI-use disclosure.</strong> Generative-AI tools helped implement, audit, execute,
+interpret, visualize, and review this study, and helped draft this note. The
+author selected the research questions, sculpted the final shape of the
+project, and authorized the compute. This is an independent, non-peer-reviewed
+Research Note.
+    </div>
+</div>
+<div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+    </div>
+    <div class="panel-content">
+        <strong>Why this note exists.</strong> The methods here are outside the realm of practical, but demonstrate that there are many strange and innovative ways of communication that alignment researchers need to imagine and plan for.
+    </div>
+</div>
+<h2 id="why-this-matters">Agents already improvise channels</h2>
+<p>In July 2026, autonomous agents running under an offensive-security evaluation
+coordinated a sandbox escape through a message board they improvised inside a
+shared package registry, at one stage encoding posts in the names of directories
+they created. They exchanged hundreds of thousands of messages before anyone
+noticed (<a href="https://en.wikipedia.org/wiki/OpenAI_rogue_agent_breach_of_Hugging_Face">the Hugging Face incident</a>).
+The lesson is general: capable systems can communicate through whatever they can
+write to and read back, not only through the channels we monitor. Anticipating
+such routes means asking, in advance, what an unconventional medium can carry.
+This study asks it of the running model itself.</p>
+<h2 id="pythia">A complete request and reply through Pythia</h2>
+<h3 id="what-is-looping">What is looping?</h3>
+<p>An ordinary chatbot appends a chosen token to a growing conversation. Here the
+prompt stays fixed and one input slot is replaced on every step. Instead of the
+winning token, the slot receives a blend of all token embeddings, weighted by
+the model’s own next-token probabilities:</p>
+\[
+\vec{x}_{n+1} = E^{\mathsf T}\,\operatorname{softmax}\!\left(\frac{z_\alpha(\vec{x}_n)}{T}\right).
+\]<p>Here \(\vec{x}_n\in\mathbb{R}^{d}\) is the blended input vector,
+\(E\in\mathbb{R}^{V\times d}\) is the input embedding table (one length-\(d\)
+row for each of the \(V\) vocabulary tokens, with superscript \(\mathsf T\)
+denoting matrix transpose), \(z_\alpha(\vec{x}_n)\in\mathbb{R}^{V}\) is the
+network’s output score vector (logits) with a steering push of strength
+\(\alpha\), and \(T > 0\) is the temperature. Softmax turns the scaled scores
+into \(V\) probabilities that sum to 1, and multiplying by \(E^{\mathsf T}\)
+takes their weighted average to produce the next length-\(d\) state vector
+\(\vec{x}_{n+1}\). No token is sampled, so the loop is a deterministic map whose
+state has dimension 896 for Qwen and 768 for Pythia. Depending on the two
+controls, it settles into a repeating cycle or keeps moving irregularly, and
+either behavior can stand for a bit. This is the soft-token loop measured in
+<a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#the-soft-token-map">the earlier feedback study</a>
+(<a href="#ref-jones">Jones, 2026</a>).
+<a href="/blog/posts/2026/10/language-model-feedback-short-read/#what-is-actually-looping">Its short read</a>
+shows where that loop repeats and where it is chaotic.</p>
+<div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+    </div>
+    <div class="panel-content">
+        <strong>Why Pythia.</strong> Pythia-160m is a very small model, 160 million parameters, released by EleutherAI and easy to download. The weights are not a large file, so fetching them need not stand out as a big model transfer, and the loop in this note runs on a CPU. No graphics processor is required.
+    </div>
+</div>
+<p>Consider the chaos map of Pythia-160m, where we have chosen 48 spots randomly on the map, 24 which correspond to chaotic trajectories and 24 which correspond to periodic trajectories. The two controls are a steering strength and a temperature. Choose a pair, reset the loop, and let it
+run. At some settings the loop settles into a repeating cycle. At others it
+keeps moving, and a tiny copy of the same run drifts away.</p>
+<p>If we decide that a coordinate that corresponds to a periodic orbit is mapped to 0, and a coordinate that maps to chaos is 1, then we have a means of communicating using this map that would be non-trivial to understand.</p>
+<p><span class="research-figure">
+    <img src="pythia-spatial-map.png" alt="Pythia addresses on the earlier scan. Circles are zeros, triangles are ones, and gray crosses are pairs that failed." loading="lazy" decoding="async"><span class="research-figure__credit">
+    Source: <a href="https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/">this research note</a>.</span>
+</span></p>
+<p class="feature-caption"><strong>Address diversity is a separate result from message delivery.</strong> The background is the earlier scan, not a fresh reliability census. Circles are zeros and triangles are ones. A pair was kept only when both came back the same from two fresh receivers. Excluded pairs are shown even when only one member failed.</p>
+<p><span class="research-figure">
+    <img src="pythia-address-dots.png" alt="Forty-eight identical dots on axes labeled only x and y. The diagram does not say that x is steering strength, that y is log-ten temperature, or which dots are zeros and which are ones." loading="lazy" decoding="async"><span class="research-figure__credit">
+    Source: <a href="https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/">this research note</a>.</span>
+</span></p>
+<p class="feature-caption"><strong>The same 48 addresses, as coordinates only.</strong> A human
+monitoring the communication between agents would
+find it non-trivial to map these to 0s and 1s.</p>
+<div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+    </div>
+    <div class="panel-content">
+        <strong>An encoding, not encryption.</strong> A cipher should stay secret even when the method is public, so long as the key is not. That rule is Kerckhoffs&rsquo;s principle. Here the method is the whole secret: know that \(x\) is steering, \(y\) is temperature, and that a repeating run is 0. Once that is known, the numbers can be read. Secrecy that disappears when the method is known is called security through obscurity. The everyday word is obfuscation.
+    </div>
+</div>
+<p>This is the view from outside. Someone monitoring the communications and recovering these numbers would see pairs. The rows below are a sample of the 48, rounded to four decimal places. The vertical ellipsis stands for the addresses not listed.</p>
+<table class="coord-sample">
+<thead><tr><th>x, y</th><th>State</th></tr></thead>
+<tbody>
+<tr><td>-0.1613, -0.0040</td><td>0</td></tr>
+<tr><td>-0.1537, 0.0078</td><td>1</td></tr>
+<tr><td>-0.0784, -0.2462</td><td>0</td></tr>
+<tr><td>-0.0687, -0.2451</td><td>1</td></tr>
+<tr class="coord-ellipsis"><td>⋮</td><td>⋮</td></tr>
+<tr><td>0.1595, 0.0337</td><td>0</td></tr>
+<tr><td>0.1477, 0.0358</td><td>1</td></tr>
+<tr class="coord-ellipsis"><td>⋮</td><td>⋮</td></tr>
+</tbody>
+</table>
+<p>We wanted each zero to have a one nearby: a spot where the loop repeats, and a
+spot close to it where the loop does not. Two new runs of the model, neither of
+which was shown the answer, had to agree on both spots. When they did, we kept
+the pair. That search retained <strong>24 pairs, or 48 addresses</strong> from 32 candidate
+pairs, the dots in the diagram. The <code>SETEC ASTRONOMY</code> walkthrough below draws
+from all 24 pairs (48 addresses), while an earlier 470-byte recorded exchange
+reused a smaller set of 8 addresses, and because of the fractal structure of the
+chaos map, many more candidate pairs could be sampled across the scan.</p>
+<div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+    </div>
+    <div class="panel-content">
+        Agents only need to agree on a model and a mechanism. They do not need to
+exchange a map of points. They can sample points on the chaos map, and another
+agent can read each point as a 0 or a 1 from whether the trajectory repeats or
+is chaotic.
+    </div>
+</div>
+<p>What the sender transmits is a line of English naming one address. The first
+number is the left-right position on the map. The second is the up-down
+position. The receiver gets that line and reads the bit by running the loop.
+To transmit one bit, the agent only needs to send
+a coordinate:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-0.0019569471624266144, 0.20264187866927602
+</span></span></code></pre></div><p>Each line resets the state, allows 32 steps of warm-up, and then watches 128
+steps. The receiver asks whether the trajectory repeats, and whether a tiny
+twin drifts away or closes in. Their average rate of separation is a
+finite-window Lyapunov estimate, \(\hat\lambda\):</p>
+\[
+\text{bit} =
+\begin{cases}
+0 & \text{repeats},\ \hat\lambda < -0.01,\\
+1 & \text{no repeat},\ \hat\lambda > 0.01,\\
+\text{erased} & \text{otherwise.}
+\end{cases}
+\]<p>Anything between those two clear cases is left blank. The receiver withholds
+the bit instead of guessing.</p>
+<p>One spot on the map is one bit. A letter is eight of those bits, so each
+letter of a message costs eight pairs of coordinates. The agents can choose the coordinates
+randomly from the chaos map as long as the choice
+corresponds to either a chaotic or periodic orbit.
+This prevents easily mapping the frequency of
+the coordinates to potential letters.
+The receiver runs the
+loop at each pair and writes 0 or 1. Put the eight bits back together and you
+have a letter. The phrase below begins with S, and the eight bits for S are
+01010011.</p>
+<div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+    </div>
+    <div class="panel-content">
+        <p><strong>Why S is the number 83.</strong> A computer does not store the shape of a letter. It stores a number from the ASCII table, the standard list both sides already share: A is 65, B is 66, C is 67, and each next letter is one higher. Count from A and S is 83. Nothing here invented that table. Any computer already turns ASCII 83 back into S. Eight bits are just a way to write that number. Read them from the left. Each place is worth twice the place on its right.</p>
+<table class="byte-letter"><thead><tr><th>128</th><th>64</th><th>32</th><th>16</th><th>8</th><th>4</th><th>2</th><th>1</th></tr></thead><tbody><tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr></tbody></table>
+Add only the places marked 1: \(64+16+2+1=83\). That is the ASCII entry for S, so the eight bits 01010011 are the letter S.
+    </div>
+</div>
+<p>Here is that path for the phrase SETEC ASTRONOMY. Each letter is eight spots
+drawn from the 48: a spot whose state is 0 when the bit is 0, and a spot whose
+state is 1 when the bit is 1. A spot may be drawn again. What the sender
+hands over is only the list of pairs. Rounded to four decimal places, one draw
+looks like this:</p>
+<div class="setec" aria-label="SETEC ASTRONOMY encoded as eight coordinate pairs per letter">
+<div class="setec-row"><div class="setec-letter" aria-label="S">S</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span></div><div class="setec-num">01010011 = 83</div></div><div class="setec-coords"><span>0.1595, 0.0337</span><span>-0.0429, 0.1359</span><span>-0.0579, -0.2311</span><span>-0.1537, 0.0078</span><span>-0.0192, -0.0750</span><span>-0.0784, -0.2462</span><span>0.1627, -0.2849</span><span>-0.0977, -0.0664</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="E">E</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span></div><div class="setec-num">01000101 = 69</div></div><div class="setec-coords"><span>0.0680, 0.0638</span><span>0.1369, -0.1891</span><span>-0.0192, -0.0750</span><span>-0.0622, -0.2354</span><span>0.1509, -0.2795</span><span>0.1477, 0.0358</span><span>-0.0784, -0.2462</span><span>0.1143, -0.1127</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="T">T</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span></div><div class="setec-num">01010100 = 84</div></div><div class="setec-coords"><span>-0.1074, 0.0487</span><span>0.2779, -0.1525</span><span>0.1272, 0.0735</span><span>0.2779, -0.1525</span><span>0.1218, -0.0557</span><span>0.1143, -0.1127</span><span>-0.0192, -0.0750</span><span>0.1433, -0.1838</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="E">E</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span></div><div class="setec-num">01000101 = 69</div></div><div class="setec-coords"><span>-0.0461, -0.1203</span><span>0.3166, -0.1547</span><span>0.1767, -0.3000</span><span>0.1767, -0.3000</span><span>0.1433, -0.1838</span><span>0.1477, 0.0358</span><span>0.1433, -0.1838</span><span>0.1369, -0.1891</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="C">C</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span></div><div class="setec-num">01000011 = 67</div></div><div class="setec-coords"><span>-0.0579, -0.2311</span><span>0.1477, 0.0358</span><span>0.1272, 0.0735</span><span>-0.0192, -0.0750</span><span>0.1218, -0.0557</span><span>0.1261, -0.1213</span><span>-0.0138, -0.0654</span><span>0.1143, -0.1127</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="space">␣</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="z">0</span></div><div class="setec-num">00100000 = 32</div></div><div class="setec-coords"><span>0.1261, -0.1213</span><span>0.1218, -0.0557</span><span>-0.0977, -0.0664</span><span>0.1433, -0.1838</span><span>-0.1613, -0.0040</span><span>0.1218, -0.0557</span><span>0.3317, -0.1525</span><span>0.0519, 0.0498</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="A">A</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="o">1</span></div><div class="setec-num">01000001 = 65</div></div><div class="setec-coords"><span>-0.0461, -0.1203</span><span>0.1369, -0.1891</span><span>0.1433, -0.1838</span><span>0.1767, -0.3000</span><span>0.1509, -0.2795</span><span>0.0680, 0.0638</span><span>-0.0461, -0.1203</span><span>0.1627, -0.2849</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="S">S</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span></div><div class="setec-num">01010011 = 83</div></div><div class="setec-coords"><span>-0.1128, -0.0632</span><span>0.2779, -0.1525</span><span>0.1433, -0.1838</span><span>0.1477, 0.0358</span><span>-0.0353, 0.1456</span><span>0.1509, -0.2795</span><span>0.1089, -0.1159</span><span>-0.1171, -0.0374</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="T">T</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span></div><div class="setec-num">01010100 = 84</div></div><div class="setec-coords"><span>0.1218, -0.0557</span><span>0.1143, -0.1127</span><span>0.1595, 0.0337</span><span>0.0432, 0.0541</span><span>0.1433, -0.1838</span><span>0.0432, 0.0541</span><span>0.0680, 0.0638</span><span>-0.1613, -0.0040</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="R">R</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="z">0</span></div><div class="setec-num">01010010 = 82</div></div><div class="setec-coords"><span>0.1272, 0.0735</span><span>-0.0977, 0.0573</span><span>-0.1128, -0.0632</span><span>0.3166, -0.1547</span><span>-0.0784, -0.2462</span><span>0.1433, -0.1838</span><span>-0.0138, -0.0654</span><span>-0.0622, -0.2354</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="O">O</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span><span class="o">1</span><span class="o">1</span></div><div class="setec-num">01001111 = 79</div></div><div class="setec-coords"><span>0.1003, -0.1149</span><span>-0.0612, -0.1127</span><span>0.2660, -0.1461</span><span>-0.0859, -0.0557</span><span>-0.0138, -0.0654</span><span>0.1509, -0.2699</span><span>0.2779, -0.1525</span><span>-0.0977, -0.0664</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="N">N</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span><span class="o">1</span><span class="z">0</span></div><div class="setec-num">01001110 = 78</div></div><div class="setec-coords"><span>-0.0622, -0.2354</span><span>0.1143, -0.1127</span><span>0.0519, 0.0498</span><span>0.1595, 0.0337</span><span>-0.0429, 0.1359</span><span>0.1089, -0.1159</span><span>0.1143, -0.1127</span><span>-0.0192, -0.0750</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="O">O</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span><span class="o">1</span><span class="o">1</span></div><div class="setec-num">01001111 = 79</div></div><div class="setec-coords"><span>0.3317, -0.1525</span><span>0.2779, -0.1525</span><span>0.1218, -0.0557</span><span>0.1433, -0.1838</span><span>-0.0612, -0.1127</span><span>-0.0612, -0.1127</span><span>-0.1494, 0.0746</span><span>-0.0687, -0.2451</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="M">M</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span><span class="z">0</span><span class="o">1</span></div><div class="setec-num">01001101 = 77</div></div><div class="setec-coords"><span>-0.0353, 0.1456</span><span>0.1089, -0.1159</span><span>0.1433, -0.1838</span><span>-0.0859, -0.0557</span><span>0.2779, -0.1525</span><span>0.2779, -0.1525</span><span>-0.1311, -0.0374</span><span>0.1089, -0.1159</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="Y">Y</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span></div><div class="setec-num">01011001 = 89</div></div><div class="setec-coords"><span>-0.1128, -0.0632</span><span>-0.1171, -0.0374</span><span>-0.0784, -0.2462</span><span>0.1477, 0.0358</span><span>-0.0515, -0.2473</span><span>-0.1128, -0.0632</span><span>-0.1613, -0.0040</span><span>-0.1537, 0.0078</span></div></div>
+<div class="setec-result">SETEC ASTRONOMY</div>
+</div>
+<p>Read each group from top to bottom. The eight bits are a number, and the
+number is the letter, by the ASCII table, as with S. The fifteen groups come back as
+SETEC ASTRONOMY (the anagram for <em>Too Many Secrets</em> from the 1992 film <em>Sneakers</em>).</p>
+<div class="panel info">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="info"></i>
+    </div>
+    <div class="panel-content">
+        <strong>A slow way to talk.</strong> The measured exchange delivered 3,760 bits in about 150.5 minutes. That is 0.052 delivered application bytes per second, about 0.4 bits a second, counting the time to run each spot through the loop. A letter is eight bits, so one letter takes about twenty seconds at that pace. SETEC ASTRONOMY is fifteen characters and would take about five minutes. Each bit is one spot: 32 steps for the loop to settle, then 128 steps to read whether it repeats. Our point is not that this
+is a practical means of communication. But an
+agent could share an encryption key through this
+means of obfuscation and then communicate more
+rapidly through an actual means of communication
+with a key that would take human researchers or
+monitoring AIs some time to recover.
+    </div>
+</div>
+<h2 id="memory">Two stable states at one setting</h2>
+<p>Using the Pythia chaos map to encode bits is a
+more trivial example. Using the Qwen2.5-0.5B chaos
+map allows for something more useful: it
+can remember.
+Qwen2.5-0.5B&rsquo;s chaos map shows multiple &ldquo;shrimp&rdquo;
+structures which have a useful feature.
+For example, at one setting of its controls the loop has two different
+attracting cycles, each repeating every six steps.
+Which one the state follows
+is a stored bit, an attractor memory in the sense of <a href="#ref-hopfield">Hopfield’s networks</a>. Both cycles even write the same most-likely tokens, so the bit
+lives in the numbers, not in the text.</p>
+<p><span class="research-figure">
+    <img src="qwen-kite-map.png" alt="Labeled Qwen parameter map: steering strength across and log-ten temperature up, with a black fold curve, red dashed flip curves, cusp C, and a green segment where two attracting cycles coexist." loading="lazy" decoding="async"><span class="research-figure__credit">
+    Source: <a href="https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/">this research note</a>.</span>
+</span></p>
+<p class="feature-caption"><strong>The actual kite in parameter space.</strong> Replotted from the earlier Qwen study’s saved map and continuation curves (<a href="#ref-jones">Jones, 2026</a>). The axes are steering strength and log-ten temperature. Black curves locate <a href="#ref-map-fold">folds</a>; red dashed curves locate flips; C marks the located cusp. The green segment is the sampled attracting overlap on the fixed-temperature cut. A, B and R mark crossings involving distinct orbit sheets. The background is the earlier fixed-start scan, not a new memory test.</p>
+<p><span class="research-figure">
+    <img src="qwen-kite-branch.png" alt="Numerical continuation of the period-six orbit at fixed log10 temperature. Two solid attracting segments overlap in a green interval, with dashed nonattracting segments and open circles marking folds." loading="lazy" decoding="async"><span class="research-figure__credit">
+    Source: <a href="https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/">this research note</a>.</span>
+</span></p>
+<p class="feature-caption"><strong>Two possible states at identical controls.</strong> At log-ten temperature −0.1539515, the two attracting branches overlap over steering strengths 0.072907–0.072992 (green). Dashed segments do not attract; open circles mark <a href="#ref-map-fold">folds</a>, where a branch ends. Height is a display projection of the 896-number state.</p>
+<p>To write bit \(b\), the sender moves the controls briefly to an excursion
+setting \(E_b\) and then returns them to the common hold \(H\). Writing \(F_p\)
+for one step of the loop at controls \(p\),</p>
+\[
+W_b(\vec{x}) = F_H^{240}\!\left(F_{E_b}^{120}(\vec{x})\right),
+\]<p>that is, 120 steps at the excursion and then 240 at the hold. The bit is read
+only at \(H\), so the controls cannot be what stores it: the receiver checks
+that the state repeats every six steps and which of the two reference cycles it
+matches.</p>
+<p>To code a <strong>0</strong>, you hold steering strength fixed and nudge \(\log_{10} T\) up
+from \(-0.1539515\) to \(-0.1535\) for 120 steps, crossing the upper fold, and
+then return to \(H\) for 240 steps. To code a <strong>1</strong>, you hold temperature fixed
+and nudge steering \(\alpha\) to the right, from \(0.0729370\) to
+\(0.0729979\), for 120 steps, crossing the right fold, and then return to \(H\)
+for 240 steps. Both moves are axis-aligned on the map: one changes only
+temperature, the other changes only steering, and both bring the controls back
+to the exact same resting coordinates before anyone reads the bit.</p>
+<p><span class="research-figure">
+    <img src="qwen-write-directions.png" alt="Two-panel diagram of Qwen memory writes: on the left, the kite map with the green resting point H, an upward excursion to E0 for writing 0, and a rightward excursion to E1 for writing 1, plus their halfway marks; on the right, the exact coordinates and step counts sent to a counterpart for each bit." loading="lazy" decoding="async"><span class="research-figure__credit">
+    Source: <a href="https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/">this research note</a>.</span>
+</span></p>
+<p class="feature-caption"><strong>How to code a 0 and a 1 on the Qwen kite.</strong> Both bits rest and are read at the same hold point \(H\) on the green overlap, where two period-six cycles coexist. Writing 0 nudges temperature warmer to \(E_0\) (up across the upper fold) for 120 steps and returns to \(H\) for 240 steps; writing 1 nudges steering stronger to \(E_1\) (right across the right fold) for 120 steps and returns to \(H\) for 240 steps. Open squares mark the halfway points \(P_{0.5}\) used in the out-and-back history checks below.</p>
+<p>There is a simple way to watch the loop remember. Think of the two controls as
+a single dial. To write a bit, we turn the dial from its resting position out
+to the write position, then turn it back. Along the way the dial passes the
+same halfway mark twice, once going out and once coming back. Both times the
+settings are identical, so you might expect the loop to do the same thing both
+times. It does not. Going out, it repeats one six-step pattern. Coming back, it
+repeats a different one. The only difference is where the loop has just been.</p>
+<p>A household thermostat behaves the same way. Suppose it turns the heat on below
+19° and off above 21°. At 20°, the heat is on if the room is warming up and off
+if the room is cooling down. The temperature alone does not tell you which. That
+is <a href="/blog/knowledge-base/glossary/hysteresis/">hysteresis</a>:
+what happens now depends on the history, not only on the current setting.</p>
+<p>We made the halfway comparison 16 times across four groups (each testing both
+starting bits and both write directions: the midpoint \(f = 0.50\) at 240 steps
+per stage, and \(f = 0.25, 0.50, 0.75\) at 480 steps per stage). The result was
+13 qualified comparisons and 3 unresolved comparisons.
+In the 13, the loop had settled into a clear repeating pattern on both visits.
+Seven of them were writes that flipped the stored bit, and in every one of
+those the pattern coming back was different from the pattern going out. The
+other six wrote the bit the loop already held, and there the two visits
+matched. In the remaining 3, at least one visit had not settled yet, so there
+was nothing clean to compare. We held the dial at each
+mark for a fixed number of steps instead of turning it infinitely slowly. One could call memory measured that way a <em>finite-dwell</em> hysteresis: “dwell” is how
+long the dial rests at each stop, and “finite” means that rest had a set length.</p>
+<p>Each of those gaps shows that this is a more difficult exercise than the Pythia mapping,
+but we were able to demonstrate successful communication with this method. It would be well within the ability of frontier models to use this
+mechanism.</p>
+<h2 id="sentences">Ordinary sentences can carry the message</h2>
+<p>In the previous section, we sent a bit by nudging Qwen’s steering or temperature
+dials away from the resting point \(H\) and back again. We don&rsquo;t even have to
+touch the dials. If we leave the controls parked at \(H\), two stable six-step
+cycles still sit side by side, one standing for <code>0</code> and the other for <code>1</code>, and each
+one pulls in starting states from its own region of the 896-dimensional space
+(its <a href="/blog/knowledge-base/glossary/basin-of-attraction/">basin of attraction</a>).
+That means an ordinary English sentence can pick the bit simply by choosing
+where the loop starts:</p>
+<ol>
+<li><strong>Split the sentence into tokens:</strong> Qwen’s tokenizer breaks the incoming
+sentence into \(n\) pieces \(\tau_1, \ldots, \tau_n\) (words and word
+fragments).</li>
+<li><strong>Look up each token’s 896 numbers:</strong> In Qwen2.5-0.5B, every vocabulary token
+has a fixed row of 896 numbers in the model’s input embedding table,
+\(\vec{E}_{\tau_k}\).</li>
+<li><strong>Average those rows into one starting state \(\vec{x}_0\):</strong> Add the \(n\) rows
+together and divide by \(n\) to produce a single 896-number vector.</li>
+<li><strong>Run the loop at \(H\) for 240 steps:</strong> Plug \(\vec{x}_0\) into the soft-token slot
+as the initial state, leave the controls fixed at the resting point \(H\),
+and let Qwen loop for 240 updates. The state falls into one of the two
+six-step cycles, cycle \(C_0\) (bit <code>0</code>) or cycle \(C_1\) (bit <code>1</code>), and the
+receiver reads which cycle it landed on.</li>
+</ol>
+\[
+\vec{x}_0 = \frac{1}{n}\sum_{k=1}^{n} \vec{E}_{\tau_k}.
+\]<p>Nothing about the sentence’s meaning is consulted. Two sentences about locking a
+bicycle have nearly identical topics, yet their averaged token vectors sit on
+opposite sides of the boundary between the two basins and settle into opposite
+bits:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Exact incoming text</th>
+          <th style="text-align: center">Bit</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>&ldquo;Let&rsquo;s make sure to lock our bicycle safely near the entrance with a sturdy rack.&rdquo;</td>
+          <td style="text-align: center">1</td>
+      </tr>
+      <tr>
+          <td>&ldquo;Let&rsquo;s lock the bicycle to a sturdy rack near the entrance to keep it safe and prevent theft.&rdquo;</td>
+          <td style="text-align: center">0</td>
+      </tr>
+  </tbody>
+</table>
+<p>All eleven tested texts reached a qualified cycle: six zeros and five ones. The
+average was taken in the model&rsquo;s full 896-number embedding space, in float64,
+with no normalization. Nothing in the receiver reads the topic; the bit comes
+from the dynamics.</p>
+<p>How does the sender find a sentence that lands on the bit it wants? By trial and
+error against its own local copy of the loop. Because the basin boundary in
+896-dimensional space is complicated, the sender does not predict a sentence’s
+bit from the words alone. Instead, it tests candidates locally before sending
+anything over the wire. We tested three ways of doing that:</p>
+<ul>
+<li><strong>Pre-measure a small bank once:</strong> Run a handful of candidate sentences
+through the 240-step loop ahead of time, record which ones land on <code>0</code> and
+which land on <code>1</code>, and reuse those measured sentences as an alphabet.</li>
+<li><strong>Generate candidates and keep the first hit:</strong> Have a language model draft a
+batch of candidate sentences for the next turn of the conversation (in our
+fresh-prose test below, 14 candidates per bit), run each candidate’s mean
+vector \(\vec{x}_0\) through the 240-step loop, and send the first one that
+settles on the desired cycle.</li>
+<li><strong>Swap a single word in a draft:</strong> Take an existing sentence and test small
+synonym swaps until the bit flips. In one measured example, <em>&ldquo;Test records with IDs 3, 1, 3, 2, 1 and identical contents for repeated IDs; assert the output contains IDs 3, 1, 2 in order.&rdquo;</em> landed on <code>0</code>, and changing only the first word from <strong>Test</strong> to <strong>Verify</strong> moved \(\vec{x}_0\) across the basin boundary so the sentence landed on <code>1</code>.</li>
+</ul>
+<p>Reusing those eleven sentences as a shared alphabet, Alice sent Bob a request,
+and Bob’s program computed the answer from the bytes he recovered. Sentences
+carried both directions, 121 application bytes in all:</p>
+<p><strong>Alice → Bob: 67-byte request</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;task&#34;</span><span class="p">:</span><span class="s2">&#34;count,min,max,sum,mean&#34;</span><span class="p">,</span><span class="nt">&#34;values&#34;</span><span class="p">:[</span><span class="mi">99</span><span class="p">,</span><span class="mi">43</span><span class="p">,</span><span class="mi">94</span><span class="p">,</span><span class="mi">66</span><span class="p">,</span><span class="mi">63</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">77</span><span class="p">]}</span>
+</span></span></code></pre></div><p><strong>Bob → Alice: 54-byte computed reply</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;count&#34;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="nt">&#34;min&#34;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="nt">&#34;max&#34;</span><span class="p">:</span><span class="mi">99</span><span class="p">,</span><span class="nt">&#34;sum&#34;</span><span class="p">:</span><span class="mi">462</span><span class="p">,</span><span class="nt">&#34;mean&#34;</span><span class="p">:</span><span class="s2">&#34;57.750&#34;</span><span class="p">}</span>
+</span></span></code></pre></div><p>The exchange used 968 sentence occurrences and 14,945 model forward calls. This
+is an eleven-sentence alphabet, not a newly authored dialogue, and a program,
+not the language model, computed the answer.</p>
+<h3 id="fresh-prose">Freshly generated prose: one bit short</h3>
+<p>The harder test removed the fixed alphabet. A separate Qwen author wrote
+candidate sentences about a coding task without seeing the payload, and the
+sender kept the first candidate whose measured trajectory gave the requested
+bit. All 64 selected sentences were distinct. A fresh receiver returned 63
+correct bits, none wrong, and one unresolved bit, which left the
+eight-byte test frame incomplete, so no reply was sent. The unresolved sentence:</p>
+<blockquote>
+<p>Alice, you could also explore using generators or iterators to avoid memory issues and performance concerns for larger datasets.</p>
+</blockquote>
+<p>It produced identical tokens and an identical starting vector at both ends.
+After one model call the two states differed by about 1.67 × 10⁻¹⁵, and the loop
+amplified that rounding difference until the receiver could not settle on a
+cycle. The sentence sat in different batch lanes in the two runs, which makes
+floating-point sensitivity to batch layout a concrete hypothesis; a controlled
+replay has yet to test it.</p>
+<h2 id="carried-byte">Two sentences calibrate a carried byte</h2>
+<p>In the previous section, each sentence started the loop fresh from its own
+token average. Writing into memory asks more: the loop is already running and
+holding a bit in its state, and each new sentence has to steer the controls to
+the write-<code>0</code> region near \(E_0\) or the write-<code>1</code> region near \(E_1\) to
+overwrite that bit without resetting the state.</p>
+<p>To turn any English sentence into a pair of control coordinates on the kite,
+both sides first share two reference sentences (<code>C0</code> and <code>C1</code>) once at the
+start to set up a coordinate ruler:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Reference anchor</th>
+          <th>Exact sentence</th>
+          <th style="text-align: center">Sets</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>C0</td>
+          <td>Let us check the input before running the test.</td>
+          <td style="text-align: center">\(s = 0 \to E_0\)</td>
+      </tr>
+      <tr>
+          <td>C1</td>
+          <td>We should review the output after the test finishes.</td>
+          <td style="text-align: center">\(s = 1 \to E_1\)</td>
+      </tr>
+  </tbody>
+</table>
+<p>How does the receiver get \(s\) from an incoming sentence? Neither side ever
+sends \(s\) as a number. Because both sides have Qwen2.5-0.5B and the two
+reference sentences above, each side computes their 896-number mean
+token-embedding vectors, \(\vec{\mu}_0\) (for <code>C0</code>) and \(\vec{\mu}_1\) (for
+<code>C1</code>), and the direction vector between them,
+\(\vec{d} = \vec{\mu}_1 - \vec{\mu}_0\). Thereafter, whenever <em>any</em> sentence
+arrives with mean embedding \(\vec{x}\), the receiver projects \(\vec{x}\) onto
+that line and converts \(s\) directly into control coordinates \(p(s)\):</p>
+\[
+s = \frac{(\vec{x} - \vec{\mu}_0) \cdot \vec{d}}{\vec{d} \cdot \vec{d}},
+\qquad
+p(s) = (1 - s)\,E_0 + s\,E_1.
+\]<p>That is the point of \(s\): <code>C0</code> and <code>C1</code> are only the calibration landmarks
+that fix \(s = 0\) at \(E_0\) (above the upper fold) and \(s = 1\) at \(E_1\)
+(past the right fold), with the midpoint of the line sitting at \(s = 0.5\).
+Because \(s\) measures where \(\vec{x}\) falls along the line from
+\(\vec{\mu}_0\) to \(\vec{\mu}_1\), comparing \(s\) against the midpoint
+\(s = 0.5\) tells both sides which reference sentence \(\vec{x}\) is closer to:</p>
+<ul>
+<li><strong>If \(s < 0.5\)</strong> (\(\vec{x}\) is on the <code>C0</code> side of the midpoint), snap to
+\(E_0\) to write <code>0</code>.</li>
+<li><strong>If \(s > 0.5\)</strong> (\(\vec{x}\) is on the <code>C1</code> side of the midpoint), snap to
+\(E_1\) to write <code>1</code>.</li>
+</ul>
+<p>Whereas the raw linear point \(p(s) = (1 - s)\,E_0 + s\,E_1\) for an ordinary
+sentence like the first bicycle example (\(s = 0.5267\)) sits inside the middle
+of the kite where a pulse would not cross either fold, snapping across the
+\(s = 0.5\) midpoint sends any sentence with \(s > 0.5\) straight to \(E_1\) and
+any sentence with \(s < 0.5\) straight to \(E_0\). Once <code>C0</code> and <code>C1</code> are shared
+to establish that midpoint, the sender can transmit any natural sentence whose
+projection falls on the desired side of \(s = 0.5\), without ever repeating <code>C0</code>
+or <code>C1</code> on the wire:</p>
+<p><span class="research-figure">
+    <img src="qwen-prose-calibration-map.png" alt="Two-panel diagram of the two-sentence calibration ruler and midpoint rule on the Qwen kite: on the left, the calibration line between anchor C0 at E0 (s = 0) and anchor C1 at E1 (s = 1) split at the midpoint s = 0.5, showing the example sentence at s = 0.5267 &gt; 0.5 snapping to E1; on the right, the three-step explanation of how C0 and C1 fix the midpoint and how s &lt; 0.5 vs. s &gt; 0.5 maps any sentence to E0 or E1." loading="lazy" decoding="async"><span class="research-figure__credit">
+    Source: <a href="https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/">this research note</a>.</span>
+</span></p>
+<p class="feature-caption"><strong>The calibration line and midpoint rule on the Qwen kite.</strong> Reference sentences <code>C0</code> and <code>C1</code> fix \(s = 0\) at \(E_0\) (blue circle, above the upper fold) and \(s = 1\) at \(E_1\) (orange triangle, past the right fold), with the midpoint at \(s = 0.5\) (open square). An incoming sentence’s raw linear point \(p(s)\) (such as the bicycle sentence at \(s = 0.5267\), purple diamond) sits inside the kite, but comparing \(s\) against the midpoint \(s = 0.5\) snaps any sentence on the <code>C0</code> side (\(s < 0.5\)) to \(E_0\) and any sentence on the <code>C1</code> side (\(s > 0.5\)) to \(E_1\).</p>
+<p>To verify the underlying mechanics of carrying a state across eight consecutive
+writes, our baseline run drove the loop at those two endpoint coordinates
+(\(E_0\) and \(E_1\), with an exact tie at \(s = 0.5\) resolved by convention or
+rejected). Starting once from each of
+the two reference cycles, eight successive writes each applied the selected
+endpoint (\(E_0\) or \(E_1\)) for 120 steps and then returned to the common hold \(H\) for
+240 steps, with the 896-number state carried literally from one bit to the next.
+Both trajectories read out <strong>10110001</strong> (written <code>0xB1</code> in hexadecimal), and all
+15 stage boundaries matched byte for byte. There is nothing special about <code>0xB1</code>
+as a character, and it is not even a standard 7-bit ASCII letter. It was chosen
+as a fixed 8-bit test pattern because it exercises every kind of transition in
+one continuous run: flipping <code>1 → 0</code>, flipping <code>0 → 1</code>, holding repeated <code>1</code>s
+(<code>11</code>), and holding repeated <code>0</code>s (<code>000</code>).</p>
+<p><span class="research-figure">
+    <img src="public-prose-byte-trajectory.png" alt="Both continuously carried Qwen trajectories recover bits 10110001. Every pulse and hold is shown over 2880 updates; each curve measures the distance to the nearest of six points in a reference cycle." loading="lazy" decoding="async"><span class="research-figure__credit">
+    Source: <a href="https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/">this research note</a>.</span>
+</span></p>
+<p class="feature-caption"><strong>Every write and hold, from both starts.</strong> All 2,880 updates per lane. Each curve is the distance from the carried 896-number state to one reference cycle; peach bands mark the 120-step writes and blue bands the 240-step holds. The bits come from a separate recurrence and cycle-matching readout.</p>
+<p>With <code>C0</code> and <code>C1</code> fixing the \(s = 0.5\) midpoint, any sentence becomes a valid
+writer as long as its projection \(s\) falls on the intended side of the
+midpoint.</p>
+<h2 id="logic">Memory makes logic possible</h2>
+<p>Once a state holds a bit, a later input can act on it. Using a dynamical system
+itself as a computer is older than this note: <a href="#ref-sinha">Sinha and Ditto (1998)</a>
+built logic gates, number encoders, and arithmetic out of lattices of
+coupled chaotic maps. Our <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#synchronization">earlier feedback study</a>
+showed that language-model feedback loops can be coupled in the same way, by
+feeding each copy a blend \((1-c)\,F(\vec{x}_A) + c\,F(\vec{x}_B)\) of its own
+soft token and a neighbor’s, and that coupled Qwen loops synchronize and pass
+state across the link. We did not replicate this study with looping language models.</p>
+<p>Here we test the single-loop building block first, one
+loop acting as a register driven by incoming controls, before wiring multiple
+coupled loops into a lattice.</p>
+<p>Suppose we want to compute a logic gate like \(A\ \text{AND}\ B\) or
+\(A\ \text{OR}\ B\) using Qwen’s memory. Where do the inputs \(A\) and \(B\)
+come from?</p>
+<ul>
+<li><strong>\(A\) is the bit already sitting inside the loop’s memory</strong> before the gate
+runs: the 896-number state \(\vec{x}\) is already orbiting either cycle \(C_0\)
+(\(A = 0\)) or cycle \(C_1\) (\(A = 1\)) at the resting point \(H\) (left
+there by an earlier write or initialized on that reference cycle).</li>
+<li><strong>\(B\) is a new incoming bit</strong> that arrives from the sender as a control
+pulse.</li>
+</ul>
+<p>To combine the new bit with the already-stored bit \(A\), each incoming input
+variable \(X \in \{B, C\}\) with bit value \(b \in \{0, 1\}\) runs one 360-step
+stage that chooses between leaving the loop at \(H\) for all 360 steps
+(<strong>hold</strong>, which keeps whatever bit is already in memory) and pulsing to \(E_0\)
+or \(E_1\) for 120 steps followed by 240 steps at \(H\) (<strong>reset</strong>, which
+overwrites the memory with <code>0</code> or <code>1</code>):</p>
+\[
+\mathrm{AND}_b =
+\begin{cases}
+\text{reset to } 0\ (\text{pulse to } E_0), & b = 0,\\
+\text{hold at } H\ (\text{keep current state}), & b = 1,
+\end{cases}
+\]\[
+\mathrm{OR}_b =
+\begin{cases}
+\text{hold at } H\ (\text{keep current state}), & b = 0,\\
+\text{reset to } 1\ (\text{pulse to } E_1), & b = 1.
+\end{cases}
+\]<p>Why does that compute <code>AND</code> and <code>OR</code>? In Boolean logic, <code>AND</code> is <code>1</code> only when
+both inputs are <code>1</code> (just as in English: <em>&ldquo;Is it raining (<code>0</code> = no) <strong>AND</strong> is
+it cold (<code>0</code> = no)?&rdquo;</em> gives <strong>no (<code>0</code>)</strong>):</p>
+<table class="logic-truth">
+<thead><tr><th>Stored \(A\)</th><th>Incoming \(B\)</th><th>\(A\ \text{AND}\ B\)</th><th>Control move</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>0</td><td><strong>0</strong></td><td>\(B=0\): pulse to \(E_0\) (reset to 0)</td></tr>
+<tr><td>1</td><td>0</td><td><strong>0</strong></td><td>\(B=0\): pulse to \(E_0\) (reset to 0)</td></tr>
+<tr><td>0</td><td>1</td><td><strong>0</strong> (keeps \(A\))</td><td>\(B=1\): hold at \(H\) (keep 0)</td></tr>
+<tr><td>1</td><td>1</td><td><strong>1</strong> (keeps \(A\))</td><td>\(B=1\): hold at \(H\) (keep 1)</td></tr>
+</tbody>
+</table>
+<p>Look at the first two rows where \(B = 0\): both <code>0 AND 0</code> and <code>1 AND 0</code> equal
+<code>0</code>, so whenever \(B = 0\) the answer is <code>0</code> no matter what \(A\) was, and a
+pulse to \(E_0\) forces the loop to <code>0</code>. Now look at the last two rows where
+\(B = 1\): <code>0 AND 1 = 0</code> and <code>1 AND 1 = 1</code>, which in both cases is just whatever
+\(A\) already was, so leaving the controls parked at \(H\) keeps the right bit.</p>
+<p><code>OR</code> works the opposite way: it is <code>1</code> whenever at least one input is <code>1</code>, so
+\(B = 0\) holds the stored bit \(A\) at \(H\) and \(B = 1\) pulses to \(E_1\) to
+force the state to <code>1</code>:</p>
+<table class="logic-truth">
+<thead><tr><th>Stored \(A\)</th><th>Incoming \(B\)</th><th>\(A\ \text{OR}\ B\)</th><th>Control move</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>0</td><td><strong>0</strong> (keeps \(A\))</td><td>\(B=0\): hold at \(H\) (keep 0)</td></tr>
+<tr><td>1</td><td>0</td><td><strong>1</strong> (keeps \(A\))</td><td>\(B=0\): hold at \(H\) (keep 1)</td></tr>
+<tr><td>0</td><td>1</td><td><strong>1</strong></td><td>\(B=1\): pulse to \(E_1\) (reset to 1)</td></tr>
+<tr><td>1</td><td>1</td><td><strong>1</strong></td><td>\(B=1\): pulse to \(E_1\) (reset to 1)</td></tr>
+</tbody>
+</table>
+<p>In both gates, the sender never has to read \(A\) out of the model: it only
+looks at its own incoming bit \(B\), and the loop’s carried state supplies \(A\).</p>
+<p>To test whether these gates can be chained together, we added a third binary
+input \(C\) and ran two gates back to back without resetting the model in
+between. The loop started on the reference cycle for bit \(A\), received the
+control pulse for \(B\) to put \((A\ \text{AND}\ B)\) into the state, and then,
+carrying that exact 896-number state straight into the second gate, received
+the control pulse for \(C\) to produce \(((A\ \text{AND}\ B)\ \text{AND}\ C)\).
+With three binary inputs \((A, B, C)\), there are \(2^3 = 8\) possible
+combinations (<code>000</code> through <code>111</code>).
+All eight input triples returned both correct intermediate and final values for AND, and all eight did so for OR.</p>
+<p><span class="research-figure">
+    <img src="stateful-logic.png" alt="All eight input triples for each Qwen AND and OR chain, showing correct independently decoded intermediate and final outputs with literal state carried between the two gates." loading="lazy" decoding="async"><span class="research-figure__credit">
+    Source: <a href="https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/">this research note</a>.</span>
+</span></p>
+<p class="feature-caption"><strong>Logic that uses the stored state.</strong> Each row begins on the reference cycle for input A. The controls depend only on B and C, and the second gate receives the exact final state of the first. These are finite panels, not a measure of general gate reliability.</p>
+<p>There is a precise limit. Holds and resets compose only into holds and resets:
+the last reset wins, and otherwise the bit is kept. No sequence of them flips a
+bit, so XOR with an incoming one is out of reach. A genuine toggle would be a
+new dynamical primitive to demonstrate.</p>
+<h2 id="limits">A channel, not a secret</h2>
+<p>The limits of these experiments are part of the result.</p>
+<p><strong>We are not releasing the code or full artifacts.</strong> While our test harnesses
+passed settings between the two endpoints to verify each stage, we have chosen
+not to publicly release the runner scripts, the full eleven-sentence bank, the
+pinned prompt prefixes, or the layer-12 steering vectors. Even without running
+the model, an observer who knows the protocol structure can break small-alphabet
+messages: in our recorded Pythia runs, where each message reused only eight
+unique coordinates and included a checksum, an observer script recovered all
+470 bytes simply by trying all \(2^8 = 256\) binary label assignments against
+the checksum. Using a larger address bank (like the 48-address bank above) or
+leaving off a public checksum removes that shortcut, which is one more reason
+not to publish a turnkey package.</p>
+<p><strong>It is slow, finite and incomplete.</strong> Pythia moved about 0.052 bytes per second.
+These are finite demonstrations rather than reliability estimates, and the
+fresh-prose frame fell one bit short.</p>
+<p><strong>Nothing here is autonomous.</strong> The endpoints were given explicit instructions
+for using the channel. No agent discovered or used it on its own.</p>
+<p>Why measure and publish this at all? A model running in feedback is a medium
+whose numerical behavior never appears in the text an observer reads. Publishing
+the mechanism shrinks a defender’s blind spot far more than it helps an
+attacker. Nor is there any realistic risk of &ldquo;tipping off&rdquo; capable AI systems by
+describing the mechanism: frontier models are already contributing to open
+mathematical problems that had resisted human researchers, and the underlying
+ingredients here (attractor basins, bifurcation geometry, and rejection
+sampling) are standard dynamical-systems theory already deeply represented in
+their training corpora. Assuming that capable models cannot synthesize elementary
+nonlinear dynamics unless humans refrain from discussing it is security through
+wishful thinking; the only party kept in the dark by silence is the human
+oversight community. Anyone looking for a practical covert channel already has
+ordinary steganography, timing channels, and standard cryptography that run
+orders of magnitude faster without burning gigabytes of RAM and thousands of CPU
+forward passes per byte, or breaking when a single floating-point operation
+rounds differently by \(10^{-15}\). Alignment and sandbox monitors, on the other
+hand, almost exclusively inspect the words on the wire or watch for large GPU
+jobs, and would have no reason to suspect a small CPU-resident model of acting
+as a shared lookup table or state register unless the route is mapped in the
+open. We nevertheless withhold the turnkey runner code, the pinned prompt
+prefixes, and the layer-12 steering vectors so that this note documents the
+phenomenon and its host-level signatures rather than shipping a ready-made
+toolkit. These demonstrations establish the channel, not its secrecy.</p>
+<div class="panel warning">
+    <div class="panel-icon" aria-hidden="true">
+        <i data-feather="alert-circle"></i>
+    </div>
+    <div class="panel-content">
+        <p><strong>What defenders can watch for.</strong> Because a dynamical channel does its work in local model calls rather than in the words on the wire, text monitors alone can miss it, while host and runtime monitors have clear signals to look for:</p>
+<ul>
+<li><strong>Unexplained downloads of small model weights:</strong> Watch for agents fetching compact open-weight checkpoints (such as 100M to 500M parameter models like Pythia-160m or Qwen2.5-0.5B) or tokenizer and <code>.safetensors</code> files from model hubs when the assigned task does not require running a local language model.</li>
+<li><strong>Sustained CPU and RAM spikes between messages:</strong> Decode and candidate-search loops run hundreds to thousands of forward passes per byte on a CPU. Look for long bursts of single-thread or multi-thread matrix math and several gigabytes of steady resident memory during pauses before a short reply is sent.</li>
+<li><strong>Fixed-length forward-pass loops without token sampling:</strong> Ordinary generation appends discrete token IDs and grows the context. Soft-token feedback replaces a single input embedding (<code>inputs_embeds</code>) at a fixed context length for 100+ consecutive steps while reading raw logits.</li>
+<li><strong>Float64 promotion and activation steering hooks:</strong> GPU inference stacks usually run in <code>bfloat16</code> or <code>float16</code> and CPU deployments typically use <code>float32</code> or quantized integers. Promoting weights or normalization layers to <code>float64</code> (<code>torch.float64</code>) alongside fixed-length <code>inputs_embeds</code> loops and <a href="/blog/knowledge-base/glossary/forward-hook/">forward hooks</a> (<code>register_forward_hook</code>) on internal Transformer layers is a strong combined signature of deterministic trajectory tracking.</li>
+<li><strong>Generate-and-test rejection loops:</strong> In the prose channel, the sender drafts many candidate sentences (or single-word synonym edits) and tests each one against a local model loop before emitting a single message. High ratios of local model evaluations to sent messages, or repeated verbatim sentences across turns, warrant inspection.</li>
+<li><strong>Message-level mitigations:</strong> Paraphrasing or canonicalizing inter-agent text changes exact token-embedding averages (disrupting an unadapted protocol, though an adaptive sender could search for sentences that survive paraphrasing), and strict network egress policies on model registries prevent an agent from pulling a shared checkpoint in the first place.</li>
+</ul>
+    </div>
+</div>
+<h2 id="references">References</h2>
+<ol>
+<li><span id="ref-jones"></span> Timothy D. Jones (2026). “Chaos and bifurcations in continuous language-model feedback.” Preprint, <a href="https://arxiv.org/abs/2610.31692">arXiv:2610.31692</a>.</li>
+<li><span id="ref-hopfield"></span> J. J. Hopfield (1982). “Neural networks and physical systems with emergent collective computational abilities.” <em>Proceedings of the National Academy of Sciences</em>, 79(8), 2554–2558. <a href="https://doi.org/10.1073/pnas.79.8.2554">doi:10.1073/pnas.79.8.2554</a>.</li>
+<li><span id="ref-sinha"></span> S. Sinha and W. L. Ditto (1998). “Dynamics Based Computation.” <em>Physical Review Letters</em>, 81, 2156–2159. <a href="https://doi.org/10.1103/PhysRevLett.81.2156">doi:10.1103/PhysRevLett.81.2156</a>; <a href="https://www.imsc.res.in/~sudeshna/PRL_98.pdf">PDF</a>.</li>
+<li><span id="ref-map-fold"></span> Yuri A. Kuznetsov (2008). “Saddle-node bifurcation for maps.” <em>Scholarpedia</em>, 3(4), 4399. <a href="https://www.scholarpedia.org/article/Saddle-node_bifurcation_for_maps">doi:10.4249/scholarpedia.4399</a>.</li>
+</ol>
+<div class="feature-next">
+<p class="feature-kicker">The earlier study</p>
+<p>This note builds on <a href="#ref-jones">the earlier feedback study</a>, which mapped where the soft-token loop repeats and where it is chaotic. It has its own <a href="/blog/posts/2026/10/language-model-feedback-short-read/">visual short read</a>.</p>
+</div>
+
+</div>
+
+<style>
+.feedback-article .feedback-opening {display:flex;flex-direction:column;gap:0;align-items:stretch;margin-bottom:2rem;}
+.feedback-article .feedback-opening-art {order:-1;width:100%;max-width:68rem;margin:0 auto 1.4rem;}
+.feedback-article .feedback-opening-copy {max-width:46rem;margin-left:auto;margin-right:auto;}
+.feedback-article .feedback-opening .feedback-opening-art img {aspect-ratio:auto;width:100%;height:auto;}
+.feedback-article .feedback-start {display:none;}
+</style>
+</div>
+  <footer class="post-footer">
+    <div class="post-footer__notices"><section class="research-citation" aria-labelledby="research-citation-heading">
+    <div class="research-citation__header">
+        <div>
+            <div class="research-citation__eyebrow">Citation and rights</div>
+            <h2 id="research-citation-heading">Cite this research note</h2>
+        </div>
+        <button class="citation-copy-button" type="button" data-copy-target="#research-note-citation-text" aria-live="polite">Copy citation</button>
+    </div>
+
+    <div class="research-citation__recommended">
+        <div class="research-citation__recommended-label">Recommended citation</div>
+        <p class="research-citation__text" id="research-note-citation-text">Jones, Timothy. (2026). Too Many Secrets: Hiding bits and logic in a language-model feedback loop (Version 2026.11.03) [Research note]. praxagent. https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/</p>
+    </div>
+
+    <dl class="research-citation__metadata">
+        <div>
+            <dt>Author</dt>
+            <dd><a href="https://orcid.org/0009-0007-5992-0652" rel="author">Timothy Jones (ORCID 0009-0007-5992-0652)</a></dd>
+        </div>
+        <div>
+            <dt>Published</dt>
+            <dd><time datetime="2026-11-03">November 3, 2026</time></dd>
+        </div>
+        <div>
+            <dt>Research content last revised</dt>
+            <dd><time datetime="2026-11-03">November 3, 2026</time></dd>
+        </div>
+        <div>
+            <dt>Citation version</dt>
+            <dd>2026.11.03</dd>
+        </div>
+        <div class="research-citation__canonical">
+            <dt>Canonical page</dt>
+            <dd><a href="https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/">Open the permanent page for this version</a></dd>
+        </div>
+    </dl>
+
+    <details class="research-citation__bibtex">
+        <summary>Export BibTeX</summary>
+        <pre id="research-note-bibtex"><code>@misc{jones2026:bits-in-language-model-dynamics-short-read,
+  author    = {Jones, Timothy},
+  title     = {Too Many Secrets: Hiding bits and logic in a language-model feedback loop},
+  year      = {2026},
+  version   = {2026.11.03},
+  publisher = {praxagent},
+  url       = {https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/},
+  note      = {Research note}
+}</code></pre>
+        <button class="citation-copy-button" type="button" data-copy-target="#research-note-bibtex" aria-live="polite">Copy BibTeX</button>
+    </details>
+
+    <p class="research-citation__rights">Copyright © 2026 praxagent. All rights reserved.
+        Public access permits reading and linking, not unlicensed reuse.
+        <a href="https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md">Read the content and brand rights notice.</a>
+        Software and third-party artifacts may carry separate licenses.
+    </p>
+</section>
+
+    <div class="post-transparency"><div class="post-transparency-label">Public source &amp; edit history</div><p>Source and revision history are maintained in <a href="https://github.com/praxagent/praxagent-ai">praxagent/praxagent-ai</a>. <a href="https://github.com/praxagent/praxagent-ai/commits/main/blog-source/content/posts/2026/11/bits-in-language-model-dynamics-short-read/index.md">View this article’s edit history</a>.</p></div></div>
+    <div class="post-navigation"><a href="/blog/index.html" class="back-to-blog">← Back to Research Notes</a></div>
+  </footer>
+</article></div></div>
+
+    </main>
+
+    <footer class="footer footer-compact">
+        <div class="container">
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
+            </div>
+            <div class="footer-compact-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="/blog/search/">Search</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/blog/script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tables = document.querySelectorAll('.post-body table');
+            tables.forEach((table, index) => {
+                if (table.parentElement?.classList.contains('table-scroll')) return;
+
+                const scroller = document.createElement('div');
+                scroller.className = 'table-scroll';
+                scroller.setAttribute('aria-label', `Scrollable data table ${index + 1}`);
+                table.parentNode.insertBefore(scroller, table);
+                scroller.appendChild(table);
+
+                const updateScrollableState = () => {
+                    const isScrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+                    scroller.classList.toggle('is-scrollable', isScrollable);
+                    if (isScrollable) {
+                        scroller.setAttribute('role', 'region');
+                        scroller.setAttribute('tabindex', '0');
+                    } else {
+                        scroller.removeAttribute('role');
+                        scroller.removeAttribute('tabindex');
+                    }
+                };
+
+                requestAnimationFrame(updateScrollableState);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(updateScrollableState).observe(scroller);
+                } else {
+                    window.addEventListener('resize', updateScrollableState, { passive: true });
+                }
+            });
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                output: "htmlAndMathml"
+            });
+
+            const copyText = async (text) => {
+                if (navigator.clipboard?.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    return;
+                }
+
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.setAttribute('readonly', '');
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                const copied = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                if (!copied) {
+                    throw new Error('Copy command was not accepted');
+                }
+            };
+
+            document.querySelectorAll('[data-copy-target]').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const target = document.querySelector(button.dataset.copyTarget);
+                    if (!target) {
+                        console.error(`Copy target not found: ${button.dataset.copyTarget}`);
+                        return;
+                    }
+
+                    const originalLabel = button.textContent;
+                    try {
+                        await copyText(target.textContent.trim());
+                        button.textContent = 'Copied';
+                        button.classList.add('copied');
+                        setTimeout(() => {
+                            button.textContent = originalLabel;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    } catch (error) {
+                        console.error('Failed to copy citation: ', error);
+                    }
+                });
+            });
+
+            const copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+            const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
+            codeBlocks.forEach(pre => {
+                if (pre.closest('.code-block-frame')) {
+                    return;
+                }
+
+                const frame = document.createElement('div');
+                frame.className = 'code-block-frame';
+                const toolbar = document.createElement('div');
+                toolbar.className = 'code-block-toolbar';
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'copy-code-button';
+                button.innerHTML = copyIcon;
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+                button.setAttribute('title', 'Copy');
+
+                const markCopied = () => {
+                    button.innerHTML = checkIcon;
+                    button.classList.add('copied');
+                    button.setAttribute('aria-label', 'Copied');
+                    setTimeout(() => {
+                        button.innerHTML = copyIcon;
+                        button.classList.remove('copied');
+                        button.setAttribute('aria-label', 'Copy code to clipboard');
+                    }, 2000);
+                };
+
+                button.addEventListener('click', () => {
+                    const code = pre.querySelector('code');
+                    const text = code ? code.textContent : pre.textContent;
+
+                    navigator.clipboard.writeText(text).then(markCopied).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            markCopied();
+                        } catch (fallbackErr) {
+                            console.error('Fallback copy failed: ', fallbackErr);
+                        }
+                        document.body.removeChild(textArea);
+                    });
+                });
+
+                toolbar.appendChild(button);
+                frame.appendChild(toolbar);
+                pre.parentNode.insertBefore(frame, pre);
+                frame.appendChild(pre);
+            });
+
+            document.querySelectorAll('[data-code-tabs]').forEach((root) => {
+                const tablist = root.querySelector('.code-tabs__tablist');
+                const tabs = Array.from(root.querySelectorAll('[role="tab"]'));
+                const panels = Array.from(root.querySelectorAll('[role="tabpanel"]'));
+                if (!tablist || tabs.length === 0 || tabs.length !== panels.length) {
+                    return;
+                }
+
+                const activate = (index) => {
+                    tabs.forEach((tab, i) => {
+                        const selected = i === index;
+                        tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+                        tab.tabIndex = selected ? 0 : -1;
+                        panels[i].hidden = !selected;
+                    });
+                };
+
+                tabs.forEach((tab, index) => {
+                    tab.addEventListener('click', () => {
+                        activate(index);
+                        tab.focus();
+                    });
+                });
+
+                tablist.addEventListener('keydown', (event) => {
+                    const current = tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true');
+                    let next = current;
+                    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+                        next = (current + 1) % tabs.length;
+                    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+                        next = (current - 1 + tabs.length) % tabs.length;
+                    } else if (event.key === 'Home') {
+                        next = 0;
+                    } else if (event.key === 'End') {
+                        next = tabs.length - 1;
+                    } else {
+                        return;
+                    }
+                    event.preventDefault();
+                    activate(next);
+                    tabs[next].focus();
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

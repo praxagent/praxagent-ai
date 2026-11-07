@@ -19,30 +19,30 @@
 
 
     
-    <meta name="description" content="The unit of a natural logarithm: a factor of e is one nat, and a factor of 2 is about 0.693 nats.">
+    <meta name="description" content="The natural-logarithm unit of growth and uncertainty: one nat is about 1.44 bits, and an entropy of H nats is as uncertain as an even choice among about e^H options.">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/glossary/nat/">
 
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="praxagent Knowledge Base">
     <meta property="og:title" content="Nat">
-    <meta property="og:description" content="The unit of a natural logarithm: a factor of e is one nat, and a factor of 2 is about 0.693 nats.">
+    <meta property="og:description" content="The natural-logarithm unit of growth and uncertainty: one nat is about 1.44 bits, and an entropy of H nats is as uncertain as an even choice among about e^H options.">
     <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/glossary/nat/">
-    <meta property="og:image" content="https://praxagent.ai/blog/knowledge-base/glossary/nat/nat-card.png">
+    <meta property="og:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/nat/nat-card.png">
     <meta property="og:image:alt" content="A factor of e is 1 nat. A factor of 2 is ln 2, about 0.693 nats, which is 1 bit.">
     <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="568">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@praxagent">
     <meta name="twitter:title" content="Nat">
-    <meta name="twitter:description" content="The unit of a natural logarithm: a factor of e is one nat, and a factor of 2 is about 0.693 nats.">
-    <meta name="twitter:image" content="https://praxagent.ai/blog/knowledge-base/glossary/nat/nat-card.png">
+    <meta name="twitter:description" content="The natural-logarithm unit of growth and uncertainty: one nat is about 1.44 bits, and an entropy of H nats is as uncertain as an even choice among about e^H options.">
+    <meta name="twitter:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/nat/nat-card.png">
     <meta name="twitter:image:alt" content="A factor of e is 1 nat. A factor of 2 is ln 2, about 0.693 nats, which is 1 bit.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20261017d">
+    <link rel="stylesheet" href="/blog/blog.css?v=20261025a">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -130,7 +130,7 @@
                 <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
                 <h1 class="post-title">Nat</h1>
                 
-                <p class="reference-summary">The unit of a natural logarithm: a factor of e is one nat, and a factor of 2 is about 0.693 nats.</p>
+                <p class="reference-summary">The natural-logarithm unit of growth and uncertainty: one nat is about 1.44 bits, and an entropy of H nats is as uncertain as an even choice among about e^H options.</p>
                 
 
             </header>
@@ -145,7 +145,8 @@
 1\text{ nat} = \log_2 e \text{ bits} \approx 1.443\text{ bits},
 \qquad
 \ln r = \frac{\log_2 r}{\log_2 e}.
-\]<p>A <a href="/blog/knowledge-base/glossary/lyapunov-exponent/">Lyapunov exponent</a> of \(\lambda\) nats per step means a tiny displacement is multiplied by about \(e^{\lambda}\) at each step. An exponent of \(\ln 2 \approx 0.693\) nats per step doubles the distance every step. The same unit is used for the entropy of a next-token distribution and for a Kullback-Leibler divergence when those formulas use \(\ln\). A fair coin has entropy \(\ln 2\) nats, which is exactly 1 bit. A uniform distribution over \(V\) tokens has entropy \(\ln V\) nats.</p>
+\]<p>A <a href="/blog/knowledge-base/glossary/lyapunov-exponent/">Lyapunov exponent</a> of \(\lambda\) nats per step is a long-run average rate of logarithmic growth. A tiny displacement grows by a factor of roughly \(e^{\lambda n}\) over \(n\) steps, even though the factor of a single step can be larger or smaller than \(e^{\lambda}\). An exponent of \(\ln 2 \approx 0.693\) nats per step therefore means doubling per step on average, not necessarily exact doubling at every step.</p>
+<p>When natural logarithms are used, nats also measure <a href="/blog/knowledge-base/glossary/next-token-entropy/">next-token entropy</a>, the entropy of the probabilities a model assigns to the possible next tokens. Entropy is the probability-weighted average of \(-\ln p\) over the outcomes. They also measure a Kullback-Leibler divergence, the probability-weighted average of the log ratio of one distribution&rsquo;s probabilities to another&rsquo;s. A fair coin has entropy \(\ln 2\) nats, which is exactly 1 bit. A uniform distribution over \(V\) tokens has entropy \(\ln V\) nats.</p>
 <figure class="reference-figure">
     <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: A factor of e is labeled 1 nat. A factor of 2 is labeled ln 2, about 0.693 nats, and also 1 bit." tabindex="0">
         <img src="/blog/knowledge-base/glossary/nat/nat.svg" alt="A factor of e is labeled 1 nat. A factor of 2 is labeled ln 2, about 0.693 nats, and also 1 bit." loading="lazy" decoding="async">
@@ -154,12 +155,50 @@
     <figcaption>Two changes drawn with length equal to their size in nats. Multiplying by e, about 2.718, is 1 nat. Multiplying by 2 is ln 2, about 0.693 nats, and that same change is 1 bit. The bars are the unit conversion, not a measured trajectory.</figcaption>
 </figure>
 
+<h2 id="reading-an-entropy-in-nats">Reading an entropy in nats</h2>
+<p>A nat is also a unit of uncertainty. It works like a bit, but with the natural logarithm, so one nat is about 1.44 bits. At each step a language model gives a probability for every possible next token, and the entropy of those probabilities measures how spread out its prediction is:</p>
+\[
+H=-\sum_{t} p_t \ln p_t ,
+\]<p>where \(p_t\) is the probability of token \(t\) and the sum runs over the vocabulary. A simple way to read it: an even choice among \(N\) tokens has entropy \(\ln N\), so an entropy of \(H\) nats is as uncertain as choosing evenly among about \(e^{H}\) tokens. That number is the distribution&rsquo;s effective number of choices, also called its perplexity.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Entropy</th>
+          <th>Even choice among</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0 nats</td>
+          <td>1 token (certain)</td>
+      </tr>
+      <tr>
+          <td>2 nats</td>
+          <td>about 7 tokens</td>
+      </tr>
+      <tr>
+          <td>5 nats</td>
+          <td>about 150 tokens</td>
+      </tr>
+      <tr>
+          <td>6.3 nats</td>
+          <td>about 545 tokens</td>
+      </tr>
+      <tr>
+          <td>11.93 nats</td>
+          <td>all 151,936 tokens</td>
+      </tr>
+  </tbody>
+</table>
+<p>The exact values are \(e^{2}\approx 7.4\), \(e^{5}\approx 148\) and \(e^{6.3}\approx 545\). The last row, \(\ln 151{,}936\approx 11.93\) nats, is the largest entropy a prediction over the 151,936-token Qwen2.5 vocabulary can have.</p>
+<p>Because the scale is logarithmic, regimes a few nats apart differ greatly. A loop whose predictions average 5 nats spreads each step over the equivalent of about 150 tokens; one near 2 nats spreads it over about 7. Comparing the two compares a competition among a few tokens with one about twenty times broader.</p>
+<p>The equivalence holds for uncertainty only. A real next-token distribution with an entropy of 5 nats is rarely even over 150 tokens: it may put most of its probability on a handful of tokens and spread the rest thinly over thousands. So \(e^{H}\) summarizes how spread out a prediction is. It is not a count of the tokens with nonzero probability, and two distributions with the same entropy can favor entirely different tokens. The perplexity reported when a model is evaluated on text is a different quantity: it exponentiates the average cross-entropy against the tokens that actually came next, so it measures how well the predictions fit the text, not how spread out they are.</p>
 <h2 id="worked-example">Worked example</h2>
-<p>A distance that doubles every step has grown by a factor \(2^n\) after \(n\) steps. In nats per step that rate is</p>
+<p>Suppose a tiny distance doubles exactly at every step. After \(n\) steps it has grown by a factor \(2^n\). In nats per step that rate is</p>
 \[
 \frac{1}{n}\ln(2^n)=\ln 2\approx 0.693.
-\]<p>In bits per step it is \(1\). The two reports are the same growth. A next-token distribution that puts probability \(1/2\) on each of two tokens has entropy \(-\ln(1/2)=\ln 2\) nats, again 1 bit.</p>
-<p>A nat is not a token, a probability, or a count of events. A positive exponent in nats per step says how fast a displacement grows. It does not say how many tokens the loop will write before the text changes.</p>
+\]<p>In bits per step it is \(1\). The two reports are the same growth. A next-token distribution that puts probability \(1/2\) on each of two tokens has entropy \(-\ln(1/2)=\ln 2\) nats, again 1 bit. One that puts probability \(1/7\) on each of seven tokens has entropy \(\ln 7\approx 1.95\) nats, about 2.81 bits, and reading that entropy back gives \(e^{1.95}\approx 7\) tokens.</p>
+<p>A nat is not a token, a probability, or a count of events. A positive exponent in nats per step gives the long-run average rate at which a tiny displacement grows. It does not count tokens, and on its own it does not predict at which step a perturbation will change the generated text.</p>
 <p>See also: <a href="/blog/knowledge-base/glossary/lyapunov-exponent/">Lyapunov exponent</a>, <a href="/blog/knowledge-base/glossary/logit/">logit</a>.</p>
 
             </div>

@@ -39,7 +39,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20261017d">
+    <link rel="stylesheet" href="/blog/blog.css?v=20261025a">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -133,7 +133,7 @@
     <div class="knowledge-glossary">
         <div class="knowledge-section-toolbar">
             <a class="knowledge-back" href="/blog/knowledge-base/">← Knowledge Base</a>
-            <span class="knowledge-section-count">60 concepts</span>
+            <span class="knowledge-section-count">68 concepts</span>
         </div>
         <div class="blog-index-list taxonomy-directory">
 
@@ -150,6 +150,11 @@
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/base-rate-bias/">
                 <h3>Base-rate bias</h3>
                 <span class="blog-index-meta">A low absolute probe-token rank can reflect its prompt-conditioned baseline or a …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/basin-of-attraction/">
+                <h3>Basin of attraction</h3>
+                <span class="blog-index-meta">The set of starting states whose trajectories converge to a given attractor, such as an …</span>
             </a>
 
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/best-rank/">
@@ -192,6 +197,11 @@
                 <span class="blog-index-meta">A comparison of two nonzero vectors based on the angle between them rather than their …</span>
             </a>
 
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/covariance-matrix/">
+                <h3>Covariance matrix</h3>
+                <span class="blog-index-meta">A square table of how a random vector spreads around its mean in every direction: …</span>
+            </a>
+
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/data-leakage/">
                 <h3>Data leakage</h3>
                 <span class="blog-index-meta">An accidental flow of information across an evaluation boundary that makes held-out …</span>
@@ -217,6 +227,16 @@
                 <span class="blog-index-meta">An exact conditional test for association in a count table, commonly used for a 2 by 2 …</span>
             </a>
 
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/forward-hook/">
+                <h3>Forward hook</h3>
+                <span class="blog-index-meta">A callback registered on a neural-network layer that runs during each forward pass to …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/forward-mode-automatic-differentiation/">
+                <h3>Forward-mode automatic differentiation</h3>
+                <span class="blog-index-meta">A way to compute a program&#39;s derivative along one input direction by carrying a tangent …</span>
+            </a>
+
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/gini-impurity/">
                 <h3>Gini impurity</h3>
                 <span class="blog-index-meta">A measure of how mixed the class labels are inside a group of rows, used by decision trees …</span>
@@ -230,6 +250,11 @@
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/hidden-bridge/">
                 <h3>Hidden bridge</h3>
                 <span class="blog-index-meta">An intermediate entity that logically links a two-hop question to its answer while …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/hysteresis/">
+                <h3>Hysteresis</h3>
+                <span class="blog-index-meta">A system&#39;s response can depend on how its controls arrived at their present values.</span>
             </a>
 
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/iid/">
@@ -249,7 +274,7 @@
 
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/krawczyk-test/">
                 <h3>Krawczyk&#39;s test</h3>
-                <span class="blog-index-meta">An interval Newton test: if a box is mapped strictly inside itself, it contains exactly …</span>
+                <span class="blog-index-meta">An interval Newton test: if Krawczyk&#39;s operator maps a box strictly inside itself, the box …</span>
             </a>
 
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/l2-normalization/">
@@ -274,7 +299,7 @@
 
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/lyapunov-exponent/">
                 <h3>Lyapunov exponent</h3>
-                <span class="blog-index-meta">The average exponential rate at which a tiny displacement from a trajectory grows or …</span>
+                <span class="blog-index-meta">The long-run exponential rate at which an infinitesimally small perturbation of a …</span>
             </a>
 
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/matmul/">
@@ -304,12 +329,17 @@
 
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/nat/">
                 <h3>Nat</h3>
-                <span class="blog-index-meta">The unit of a natural logarithm: a factor of e is one nat, and a factor of 2 is about …</span>
+                <span class="blog-index-meta">The natural-logarithm unit of growth and uncertainty: one nat is about 1.44 bits, and an …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/next-token-entropy/">
+                <h3>Next-token entropy</h3>
+                <span class="blog-index-meta">The Shannon entropy of one next-token probability distribution: zero when one token has …</span>
             </a>
 
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/oseledets-theorem/">
                 <h3>Oseledets&#39; theorem</h3>
-                <span class="blog-index-meta">Under an invariant probability measure, Lyapunov exponents exist at almost every state.</span>
+                <span class="blog-index-meta">If a differentiable map preserves a probability measure and its derivative is not too …</span>
             </a>
 
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/p-value/">
@@ -359,7 +389,7 @@
 
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/rms-normalization/">
                 <h3>RMS normalization</h3>
-                <span class="blog-index-meta">Rescaling a vector by its root mean square, then by a learned gain on each coordinate.</span>
+                <span class="blog-index-meta">Rescaling a vector by a stabilized root mean square of its coordinates, then by a learned …</span>
             </a>
 
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/rms/">
@@ -369,7 +399,7 @@
 
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/rotary-embedding/">
                 <h3>Rotary embedding</h3>
-                <span class="blog-index-meta">A position signal made by rotating pairs of hidden coordinates by an angle that depends on …</span>
+                <span class="blog-index-meta">A transformer position method that rotates pairs of attention-query and attention-key …</span>
             </a>
 
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/sampling/">
@@ -380,6 +410,16 @@
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/silu/">
                 <h3>SiLU</h3>
                 <span class="blog-index-meta">The activation that multiplies a number by its own sigmoid, smooth through zero.</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/soft-token-feedback/">
+                <h3>Soft-token feedback</h3>
+                <span class="blog-index-meta">A feedback rule that feeds back a probability-weighted average of token embeddings instead …</span>
+            </a>
+
+            <a class="blog-index-row" href="/blog/knowledge-base/glossary/stable-manifold/">
+                <h3>Stable manifold</h3>
+                <span class="blog-index-meta">The set of states whose trajectories converge to a given fixed point or periodic orbit; …</span>
             </a>
 
             <a class="blog-index-row" href="/blog/knowledge-base/glossary/standard-deviation/">

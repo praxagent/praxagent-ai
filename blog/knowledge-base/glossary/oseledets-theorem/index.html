@@ -19,30 +19,30 @@
 
 
     
-    <meta name="description" content="Under an invariant probability measure, Lyapunov exponents exist at almost every state.">
+    <meta name="description" content="If a differentiable map preserves a probability measure and its derivative is not too large on average, Lyapunov exponents exist at almost every state.">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/glossary/oseledets-theorem/">
 
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="praxagent Knowledge Base">
     <meta property="og:title" content="Oseledets&#39; theorem">
-    <meta property="og:description" content="Under an invariant probability measure, Lyapunov exponents exist at almost every state.">
+    <meta property="og:description" content="If a differentiable map preserves a probability measure and its derivative is not too large on average, Lyapunov exponents exist at almost every state.">
     <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/glossary/oseledets-theorem/">
-    <meta property="og:image" content="https://praxagent.ai/blog/knowledge-base/glossary/oseledets-theorem/oseledets-theorem-card.png">
-    <meta property="og:image:alt" content="A linear map doubles one axis and halves the other. Those two growth rates are the Lyapunov exponents at almost every point.">
-    <meta property="og:image:width" content="1197">
+    <meta property="og:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/oseledets-theorem/oseledets-theorem-card.png">
+    <meta property="og:image:alt" content="A constant linear map doubles horizontal displacements and halves vertical ones, illustrating the Lyapunov rates ln 2 and minus ln 2.">
+    <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@praxagent">
     <meta name="twitter:title" content="Oseledets&#39; theorem">
-    <meta name="twitter:description" content="Under an invariant probability measure, Lyapunov exponents exist at almost every state.">
-    <meta name="twitter:image" content="https://praxagent.ai/blog/knowledge-base/glossary/oseledets-theorem/oseledets-theorem-card.png">
-    <meta name="twitter:image:alt" content="A linear map doubles one axis and halves the other. Those two growth rates are the Lyapunov exponents at almost every point.">
+    <meta name="twitter:description" content="If a differentiable map preserves a probability measure and its derivative is not too large on average, Lyapunov exponents exist at almost every state.">
+    <meta name="twitter:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/oseledets-theorem/oseledets-theorem-card.png">
+    <meta name="twitter:image:alt" content="A constant linear map doubles horizontal displacements and halves vertical ones, illustrating the Lyapunov rates ln 2 and minus ln 2.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20261017d">
+    <link rel="stylesheet" href="/blog/blog.css?v=20261025a">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -130,7 +130,7 @@
                 <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
                 <h1 class="post-title">Oseledets&#39; theorem</h1>
                 
-                <p class="reference-summary">Under an invariant probability measure, Lyapunov exponents exist at almost every state.</p>
+                <p class="reference-summary">If a differentiable map preserves a probability measure and its derivative is not too large on average, Lyapunov exponents exist at almost every state.</p>
                 
 
             </header>
@@ -140,25 +140,32 @@
 
 
             <div class="post-body">
-                <p><strong>Oseledets&rsquo; multiplicative ergodic theorem</strong> gives the setting in which <a href="/blog/knowledge-base/glossary/lyapunov-exponent/">Lyapunov exponents</a> exist as a limit, not only as a finite-run average.</p>
-<p>An <strong>invariant probability measure</strong> is a distribution on states that the map leaves unchanged: pushing the distribution forward one step returns the same distribution. For a continuous map of a nonempty compact set into itself, at least one such measure exists. If, in addition, the logarithm of the derivative&rsquo;s size is integrable under that measure, then for almost every state the Lyapunov exponents exist. Almost every means that the exceptional states form a set the measure assigns probability zero.</p>
-<p>The finite-time exponents reported for the soft-token loop are numerical estimates of those limits, from a few hundred or a few thousand steps. They are not the infinite-horizon values named by the theorem.</p>
+                <p><strong>Oseledets&rsquo; multiplicative ergodic theorem</strong> gives the setting in which <a href="/blog/knowledge-base/glossary/lyapunov-exponent/">Lyapunov exponents</a> exist as limits, not only as finite-run averages.</p>
+<p>An <strong>invariant probability measure</strong> \(\mu\) is a distribution on states that the map leaves unchanged: pushing the distribution forward one step returns the same distribution. A continuous map of a nonempty compact set into itself always has at least one. That existence alone does not give the theorem, which also needs a derivative and a bound on its size.</p>
+<p>Precisely, let \(F\) be a differentiable map of a \(d\)-dimensional state space that preserves a probability measure \(\mu\). Write \(\lVert DF(x)\rVert\) for the largest factor by which the derivative at \(x\) stretches a vector, and \(\ln^{+}r=\max(\ln r, 0)\). If \(\ln^{+}\lVert DF(x)\rVert\) has a finite average under \(\mu\), then for \(\mu\)-almost every state \(x\) and every nonzero tangent vector \(v\), the growth rate</p>
+\[
+\lim_{n\to\infty}\frac{1}{n}\ln\big\lVert DF^n(x)\,v\big\rVert
+\]<p>exists. It takes at most \(d\) different values, the Lyapunov exponents at \(x\), each belonging to a family of directions. A rate can be \(-\infty\) where the derivative is singular. <em>Almost every</em> means that the exceptional states form a set to which \(\mu\) assigns probability zero. The theorem holds more generally for products of matrices \(A(F^{n-1}x)\cdots A(x)\) along an orbit, called a linear cocycle, under the same condition on \(\ln^{+}\lVert A(x)\rVert\); the chain rule makes \(DF^n(x)\) such a product, with \(A=DF\).</p>
+<p>An exponent computed from a finite run is a finite-time numerical estimate, not the infinite-horizon limit the theorem is about. The exponents reported in the <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/">note on chaos in a language model&rsquo;s feedback loop</a> are such estimates, from runs of 300 to 2000 measured steps.</p>
 <figure class="reference-figure">
-    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: The map doubles the horizontal coordinate and halves the vertical one. A typical point is stretched by 2 each step. The origin is the exceptional point that does not see that expansion." tabindex="0">
-        <img src="/blog/knowledge-base/glossary/oseledets-theorem/oseledets-theorem.svg" alt="The map doubles the horizontal coordinate and halves the vertical one. A typical point is stretched by 2 each step. The origin is the exceptional point that does not see that expansion." loading="lazy" decoding="async">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: A constant linear map sends a displacement (a, b) to (2a, b/2). Horizontal displacements have the rate ln 2, and vertical displacements have the rate minus ln 2." tabindex="0">
+        <img src="/blog/knowledge-base/glossary/oseledets-theorem/oseledets-theorem.svg" alt="A constant linear map sends a displacement (a, b) to (2a, b/2). Horizontal displacements have the rate ln 2, and vertical displacements have the rate minus ln 2." loading="lazy" decoding="async">
     </div>
     <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
-    <figcaption>The linear map (u, v) goes to (2u, v/2). At every point except the origin, a generic tiny displacement grows like 2 to the n after n steps, a rate of ln 2 per step. The second rate is ln(1/2), from the contracting axis. The origin is a single point, which any of the usual invariant measures for this picture can assign probability zero. This is a linear illustration, not a measured language-model exponent.</figcaption>
+    <figcaption>The linear map sends a displacement (a, b) to (2a, b/2), so after n steps it is (2^n a, 2^−n b). A displacement with a nonzero horizontal part has the long-run rate ln 2 per step; a purely vertical one has the rate ln(1/2) = −ln 2. Because the map is linear, its derivative is the same at every state, so every state, the origin included, has these two rates. This is a linear illustration of the exponent directions, not a measured language-model exponent.</figcaption>
 </figure>
 
 <h2 id="worked-example">Worked example</h2>
-<p>Let \(F(u,v)=(2u, v/2)\). After \(n\) steps,</p>
+<p>Let \(F(u,v)=(2u, v/2)\). Its derivative is the same matrix at every state:</p>
 \[
-F^n(u,v)=(2^n u,\ 2^{-n} v).
-\]<p>A displacement with a nonzero first coordinate is multiplied by \(2^n\) in that coordinate. The exponential rate is</p>
+DF=\begin{bmatrix} 2 & 0 \\ 0 & \tfrac12 \end{bmatrix},
+\qquad
+DF^n\begin{bmatrix} a \\ b \end{bmatrix}=\begin{bmatrix} 2^n a \\ 2^{-n} b \end{bmatrix}.
+\]<p>If \(a\neq 0\), the length of the displacement grows like \(2^n\), and its rate is</p>
 \[
-\frac{1}{n}\log(2^n)=\log 2\approx 0.693
-\]<p>per step, for every \(n\). The second coordinate contributes \(\log(1/2)=-\log 2\). The origin is mapped to itself and does not display the expansion. One point does not stop the exponents from existing almost everywhere.</p>
+\frac{1}{n}\ln(2^n)=\ln 2\approx 0.693
+\]<p>per step. If \(a=0\) and \(b\neq 0\), the rate is \(\ln(1/2)=-\ln 2\). The two axes are the two exponent directions, at every state.</p>
+<p>This map has no exceptional states to show, because the derivative never changes. The logistic map \(x\mapsto 4x(1-x)\) on \([0,1]\) has some. It preserves the probability density \(1/(\pi\sqrt{x(1-x)})\), under which almost every state has the exponent \(\ln 2\). The fixed point \(0\) has the exponent \(\ln 4\) instead, because the derivative there is 4. It is one of the exceptional states, and as a single point it has probability zero.</p>
 <p>The theorem does not say that a short run has already reached these limits, or that a positive finite-time estimate is a proof of chaos.</p>
 <p>See also: <a href="/blog/knowledge-base/glossary/lyapunov-exponent/">Lyapunov exponent</a>, <a href="/blog/knowledge-base/glossary/brouwer-fixed-point/">Brouwer&rsquo;s fixed-point theorem</a>.</p>
 

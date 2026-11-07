@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="460" viewBox="0 0 780 460" role="img" aria-labelledby="smTitle smDesc">
+  <title id="smTitle">Starts on a saddle's stable manifold converge to the saddle; starts beside it come close, linger, and leave on their own side</title>
+  <desc id="smDesc">Left: the plane of the toy map that sends (x, y) to (2x, y/2), with a saddle at the origin drawn as an open circle. The vertical axis, x = 0, is the stable manifold, with arrows pointing toward the saddle. The horizontal axis, y = 0, is the unstable manifold, with arrows pointing away from the saddle on both sides. A start at (1/16, 1) moves through (1/8, 1/2), (1/4, 1/4) and (1/2, 1/8) to (1, 1/16), numbered steps 0 to 4, along the dotted curve on which x times y stays 1/16: it comes closest to the saddle at step 2 and leaves to the right. The mirror start at (-1/16, 1) leaves to the left in the same way. Right: the step at which the absolute value of x first reaches 1, plotted against the natural logarithm of 1 over delta, for delta = 1/16, 1/256 and 1/4096: steps 4, 8 and 12, on a dashed line of slope 1/ln 2, about 1.44 steps per factor e. The values are those of the toy map, not measurements.</desc>
+  <rect width="780" height="460" fill="#F7F4F0"/>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:15px;font-weight:700}
+    .h{font-size:13px;font-weight:700}
+    .s{font-size:12px}
+    .m{font-size:11px;fill:#5A544C}
+    .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+    .ink{stroke:#2C2924;stroke-width:1.3;fill:none}
+  </style>
+  <text x="24" y="28" class="t title">A saddle's stable manifold: starts on it converge, starts beside it linger and leave</text>
+  <text x="24" y="48" class="t m">Toy map (x, y) to (2x, y/2): a saddle at the origin with multipliers 2 and 1/2. Exact toy-map values, not measurements.</text>
+  <rect class="card" x="16" y="64" width="480" height="376" rx="12"/>
+  <text x="32" y="90" class="t h">Two starts, 1/16 on either side of the stable manifold</text>
+  <polyline points="268.5,130.0 268.8,134.9 269.1,139.7 269.4,144.4 269.7,149.0 270.1,153.5 270.4,157.9 270.8,162.2 271.1,166.3 271.5,170.4 271.9,174.4 272.2,178.3 272.6,182.1 273.0,185.8 273.4,189.4 273.8,192.9 274.3,196.4 274.7,199.8 275.2,203.0 275.6,206.3 276.1,209.4 276.6,212.5 277.1,215.5 277.6,218.4 278.1,221.2 278.6,224.0 279.2,226.7 279.7,229.4 280.3,232.0 280.9,234.5 281.5,237.0 282.1,239.4 282.7,241.8 283.4,244.1 284.0,246.3 284.7,248.5 285.4,250.7 286.1,252.8 286.8,254.8 287.6,256.8 288.3,258.8 289.1,260.7 289.9,262.5 290.7,264.4 291.5,266.1 292.4,267.9 293.3,269.6 294.2,271.2 295.1,272.8 296.0,274.4 297.0,275.9 298.0,277.4 299.0,278.9 300.0,280.3 301.1,281.7 302.1,283.1 303.3,284.4 304.4,285.8 305.6,287.0 306.7,288.3 308.0,289.5 309.2,290.7 310.5,291.8 311.8,293.0 313.1,294.1 314.5,295.1 315.9,296.2 317.4,297.2 318.8,298.2 320.3,299.2 321.9,300.2 323.5,301.1 325.1,302.0 326.8,302.9 328.5,303.8 330.2,304.6 332.0,305.5 333.8,306.3 335.7,307.1 337.6,307.8 339.5,308.6 341.6,309.3 343.6,310.0 345.7,310.7 347.9,311.4 350.1,312.1 352.3,312.8 354.7,313.4 357.0,314.0 359.5,314.6 361.9,315.2 364.5,315.8 367.1,316.4 369.8,316.9 372.5,317.5 375.3,318.0 378.2,318.5 381.1,319.0 384.1,319.5 387.2,320.0 390.3,320.5 393.6,320.9 396.9,321.4 400.3,321.8 403.7,322.2 407.3,322.6 410.9,323.1 414.6,323.5 418.4,323.8 422.3,324.2 426.3,324.6 430.4,325.0 434.6,325.3 438.9,325.6 443.3,326.0 447.8,326.3 452.4,326.6 457.1,326.9 462.0,327.3 466.9,327.6 472.0,327.8" fill="none" stroke="#8C8273" stroke-width="1.1" stroke-dasharray="2 4"/>
+  <polyline points="243.5,130.0 243.2,134.9 242.9,139.7 242.6,144.4 242.3,149.0 241.9,153.5 241.6,157.9 241.2,162.2 240.9,166.3 240.5,170.4 240.1,174.4 239.8,178.3 239.4,182.1 239.0,185.8 238.6,189.4 238.2,192.9 237.7,196.4 237.3,199.8 236.8,203.0 236.4,206.3 235.9,209.4 235.4,212.5 234.9,215.5 234.4,218.4 233.9,221.2 233.4,224.0 232.8,226.7 232.3,229.4 231.7,232.0 231.1,234.5 230.5,237.0 229.9,239.4 229.3,241.8 228.6,244.1 228.0,246.3 227.3,248.5 226.6,250.7 225.9,252.8 225.2,254.8 224.4,256.8 223.7,258.8 222.9,260.7 222.1,262.5 221.3,264.4 220.5,266.1 219.6,267.9 218.7,269.6 217.8,271.2 216.9,272.8 216.0,274.4 215.0,275.9 214.0,277.4 213.0,278.9 212.0,280.3 210.9,281.7 209.9,283.1 208.7,284.4 207.6,285.8 206.4,287.0 205.3,288.3 204.0,289.5 202.8,290.7 201.5,291.8 200.2,293.0 198.9,294.1 197.5,295.1 196.1,296.2 194.6,297.2 193.2,298.2 191.7,299.2 190.1,300.2 188.5,301.1 186.9,302.0 185.2,302.9 183.5,303.8 181.8,304.6 180.0,305.5 178.2,306.3 176.3,307.1 174.4,307.8 172.5,308.6 170.4,309.3 168.4,310.0 166.3,310.7 164.1,311.4 161.9,312.1 159.7,312.8 157.3,313.4 155.0,314.0 152.5,314.6 150.1,315.2 147.5,315.8 144.9,316.4 142.2,316.9 139.5,317.5 136.7,318.0 133.8,318.5 130.9,319.0 127.9,319.5 124.8,320.0 121.7,320.5 118.4,320.9 115.1,321.4 111.7,321.8 108.3,322.2 104.7,322.6 101.1,323.1 97.4,323.5 93.6,323.8 89.7,324.2 85.7,324.6 81.6,325.0 77.4,325.3 73.1,325.6 68.7,326.0 64.2,326.3 59.6,326.6 54.9,326.9 50.0,327.3 45.1,327.6 40.0,327.8" fill="none" stroke="#8C8273" stroke-width="1.1" stroke-dasharray="2 4"/>
+  <line x1="256.0" y1="104.8" x2="256.0" y2="390.4" stroke="#4B6787" stroke-width="3"/>
+  <line x1="40.0" y1="340.0" x2="472.0" y2="340.0" stroke="#7A5634" stroke-width="3"/>
+  <polygon points="256.0,209.8 250.8,198.6 261.2,198.6" fill="#4B6787"/>
+  <polygon points="256.0,367.3 261.2,378.5 250.8,378.5" fill="#4B6787"/>
+  <polygon points="100.0,340.0 111.2,334.8 111.2,345.2" fill="#7A5634"/>
+  <polygon points="412.0,340.0 400.8,345.2 400.8,334.8" fill="#7A5634"/>
+  <circle cx="268.5" cy="130.0" r="4.2" fill="#2C2924"/>
+  <text x="275.5" y="123.0" text-anchor="start" class="t m">0</text>
+  <circle cx="281.0" cy="235.0" r="4.2" fill="#2C2924"/>
+  <text x="288.0" y="228.0" text-anchor="start" class="t m">1</text>
+  <circle cx="306.0" cy="287.5" r="4.2" fill="#2C2924"/>
+  <text x="313.0" y="280.5" text-anchor="start" class="t m">2</text>
+  <circle cx="356.0" cy="313.8" r="4.2" fill="#2C2924"/>
+  <text x="363.0" y="306.8" text-anchor="start" class="t m">3</text>
+  <circle cx="456.0" cy="326.9" r="4.2" fill="#2C2924"/>
+  <text x="463.0" y="319.9" text-anchor="start" class="t m">4</text>
+  <circle cx="243.5" cy="130.0" r="4.2" fill="#2C2924"/>
+  <text x="236.5" y="123.0" text-anchor="end" class="t m">0</text>
+  <circle cx="231.0" cy="235.0" r="4.2" fill="#2C2924"/>
+  <text x="224.0" y="228.0" text-anchor="end" class="t m">1</text>
+  <circle cx="206.0" cy="287.5" r="4.2" fill="#2C2924"/>
+  <text x="199.0" y="280.5" text-anchor="end" class="t m">2</text>
+  <circle cx="156.0" cy="313.8" r="4.2" fill="#2C2924"/>
+  <text x="149.0" y="306.8" text-anchor="end" class="t m">3</text>
+  <circle cx="56.0" cy="326.9" r="4.2" fill="#2C2924"/>
+  <text x="49.0" y="319.9" text-anchor="end" class="t m">4</text>
+  <circle cx="256.0" cy="340.0" r="6.5" fill="#FBF9F6" stroke="#2C2924" stroke-width="2"/>
+  <text x="244.0" y="331.0" text-anchor="end" class="t s">saddle</text>
+  <text x="296" y="128" class="t s">start (1/16, 1)</text>
+  <text x="296" y="144" class="t m">leaves to the right at step 4</text>
+  <text x="216" y="128" text-anchor="end" class="t s">start (&#x2212;1/16, 1)</text>
+  <text x="216" y="144" text-anchor="end" class="t m">leaves to the left at step 4</text>
+  <text x="268" y="374" class="t s">stable manifold, x = 0:</text>
+  <text x="268" y="390" class="t m">starts on it converge to the saddle</text>
+  <text x="40" y="364" class="t s">unstable manifold, y = 0:</text>
+  <text x="40" y="380" class="t m">one branch on each side</text>
+  <text x="32" y="424" class="t m">Dotted: the curves on which x times y stays 1/16 or &#x2212;1/16. Numbers: steps.</text>
+  <rect class="card" x="508" y="64" width="256" height="376" rx="12"/>
+  <text x="524" y="90" class="t h">Closer starts stay longer</text>
+  <line x1="556" y1="380" x2="744" y2="380" class="ink"/>
+  <line x1="556" y1="150" x2="556" y2="380" class="ink"/>
+  <line x1="556.0" y1="380" x2="556.0" y2="385" class="ink"/>
+  <text x="556.0" y="398" text-anchor="middle" class="t m">0</text>
+  <line x1="618.7" y1="380" x2="618.7" y2="385" class="ink"/>
+  <text x="618.7" y="398" text-anchor="middle" class="t m">3</text>
+  <line x1="681.3" y1="380" x2="681.3" y2="385" class="ink"/>
+  <text x="681.3" y="398" text-anchor="middle" class="t m">6</text>
+  <line x1="744.0" y1="380" x2="744.0" y2="385" class="ink"/>
+  <text x="744.0" y="398" text-anchor="middle" class="t m">9</text>
+  <line x1="551" y1="380.0" x2="556" y2="380.0" class="ink"/>
+  <text x="547" y="384.0" text-anchor="end" class="t m">0</text>
+  <line x1="551" y1="309.2" x2="556" y2="309.2" class="ink"/>
+  <text x="547" y="313.2" text-anchor="end" class="t m">4</text>
+  <line x1="551" y1="238.5" x2="556" y2="238.5" class="ink"/>
+  <text x="547" y="242.5" text-anchor="end" class="t m">8</text>
+  <line x1="551" y1="167.7" x2="556" y2="167.7" class="ink"/>
+  <text x="547" y="171.7" text-anchor="end" class="t m">12</text>
+  <line x1="556.0" y1="380.0" x2="744.0" y2="150.3" stroke="#2C2924" stroke-width="1.3" stroke-dasharray="6 4"/>
+  <circle cx="613.9" cy="309.2" r="4.6" fill="#4B6787"/>
+  <text x="621.9" y="323.2" text-anchor="start" class="t m">&#x3b4; = 1/16</text>
+  <circle cx="671.8" cy="238.5" r="4.6" fill="#4B6787"/>
+  <text x="679.8" y="252.5" text-anchor="start" class="t m">&#x3b4; = 1/256</text>
+  <circle cx="729.7" cy="167.7" r="4.6" fill="#4B6787"/>
+  <text x="721.7" y="159.7" text-anchor="end" class="t m">&#x3b4; = 1/4096</text>
+  <text x="566" y="172" class="t m">dashed: slope 1/ln 2,</text>
+  <text x="566" y="186" class="t m">1.44 steps per factor e</text>
+  <text x="650" y="416" text-anchor="middle" class="t m">ln(1/&#x3b4;)</text>
+  <text x="0" y="0" transform="translate(529 265) rotate(-90)" text-anchor="middle" class="t m">step at which |x| first reaches 1</text>
+  <text x="524" y="432" class="t m">Each factor 16 closer adds 4 steps.</text>
+</svg>

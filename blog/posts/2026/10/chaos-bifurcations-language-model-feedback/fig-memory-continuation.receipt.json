@@ -1,0 +1,231 @@
+{
+  "figure_id": "M1",
+  "title": "Following the child's trace saddle",
+  "description": "Measured saddle height and motion under added feedback memory. The original beta=0 map is included as the baseline.",
+  "alt_text": "The child's corrected trace saddle falls from positive height at zero memory to negative height at 0.7% memory, with a numerical zero estimate near 0.645%; a second panel shows the saddle moving toward stronger steering and lower log-temperature.",
+  "data_source": {
+    "receipts": {
+      "memory-local-extension-receipt.json": {
+        "sha256": "49e349b712ca713e555b354a1cad4b28fbdfce26c3d48e865f380fb359b85923",
+        "commit": "d2a15964bdae9358ad2dbc363980a10294b2cb2e",
+        "source_path": "docs/baby-shrimp-zoom/memory-local-extension-receipt.json"
+      },
+      "memory-continuation-receipt.json": {
+        "sha256": "4e97bc815e139b19ed391ae911133fe01dec10022705ca4f01b51da1b40a1d42",
+        "commit": "d2a15964bdae9358ad2dbc363980a10294b2cb2e",
+        "source_path": "docs/baby-shrimp-zoom/memory-continuation-receipt.json"
+      }
+    },
+    "fields": [
+      "accepted_centers[].parameter",
+      "accepted_centers[].tau",
+      "accepted_centers[].center"
+    ],
+    "selection": "All accepted saddle centers from both audits; sorted by beta; no extrapolation. Failed and incomplete point evaluations excluded only by the existing audit gates, not by plotted outcome.",
+    "transformation": "Horizontal memory percent=100*beta; left ordinate=tau. Right coordinates are declared scaled displacements about the saved original anchor."
+  },
+  "provenance": {
+    "study": "BSC3-memory",
+    "generator": "tools/plot_baby_shrimp_memory_continuation.py",
+    "generator_commit": "7a885cc641f5ce13115a3dd0ec755b3704dd5d61",
+    "generator_sha256": "feb08a47cedb003f63d35f4fbca79afac2ab82efb8c2b132a01e885dd5f5b98a",
+    "outputs": {
+      "fig-memory-continuation.png": "c1479ff2c899f960d4b31d4c95a9e2b3b17646fb9f892e2d428eebd9299ccbd7",
+      "fig-memory-continuation.pdf": "ae7a033868543e6adb01f65666ec3949f40085472383693e3d80343f3ace2fb6"
+    },
+    "copy": "Byte-identical audited PNG and PDF; no pixel edits.",
+    "original_figure_receipt": {
+      "path": "audits/baby-shrimp-zoom/20261021-memory-combined-figure-01/receipt.json",
+      "sha256": "5f506705f97be09f01ec9ad1e6876a7de4305724296948a90ec224bbb75f57a2",
+      "bytes": 2740
+    },
+    "visual_review": {
+      "status": "passed",
+      "receipt": {
+        "path": "audits/baby-shrimp-zoom/20261021-memory-combined-figure-01/visual-review.json",
+        "sha256": "024b3f24f6a8a64f5f88e88af6dd1d605f08359079ec97a3d41916c29de9145b",
+        "bytes": 1965
+      },
+      "reviewer": "root assistant visual inspection",
+      "scope": "Visual QA of PNGs; PDF hash bound to the same plotting run. Original immutable receipt retains its pending field; this separate review supersedes that review status only."
+    }
+  },
+  "plotted_data": [
+    {
+      "beta": -1e-06,
+      "memory_percent": -9.999999999999999e-05,
+      "tau": 0.00046476039377089706,
+      "scaled_center": [
+        -0.01435398341206619,
+        0.07351306180509348
+      ]
+    },
+    {
+      "beta": -1e-07,
+      "memory_percent": -9.999999999999999e-06,
+      "tau": 0.0004647098552078224,
+      "scaled_center": [
+        -0.0013532380115965181,
+        0.007536823371331961
+      ]
+    },
+    {
+      "beta": 0.0,
+      "memory_percent": 0.0,
+      "tau": 0.0004647042445238672,
+      "scaled_center": [
+        8.099605562231404e-05,
+        0.0001829289812486123
+      ]
+    },
+    {
+      "beta": 1e-07,
+      "memory_percent": 9.999999999999999e-06,
+      "tau": 0.00046469862199810085,
+      "scaled_center": [
+        0.001538322521729006,
+        -0.007141857073199942
+      ]
+    },
+    {
+      "beta": 1e-06,
+      "memory_percent": 9.999999999999999e-05,
+      "tau": 0.00046464809102100737,
+      "scaled_center": [
+        0.014515825399721795,
+        -0.07314784393639888
+      ]
+    },
+    {
+      "beta": 1e-05,
+      "memory_percent": 0.001,
+      "tau": 0.0004641425171849406,
+      "scaled_center": [
+        0.14442282698373715,
+        -0.733153300393387
+      ]
+    },
+    {
+      "beta": 3e-05,
+      "memory_percent": 0.003,
+      "tau": 0.00046301778015373114,
+      "scaled_center": [
+        0.4330632290451574,
+        -2.20001591478889
+      ]
+    },
+    {
+      "beta": 0.0001,
+      "memory_percent": 0.01,
+      "tau": 0.00045906769477040425,
+      "scaled_center": [
+        1.4428497354370597,
+        -7.336031430025223
+      ]
+    },
+    {
+      "beta": 0.0003,
+      "memory_percent": 0.03,
+      "tau": 0.00044766495204499955,
+      "scaled_center": [
+        4.324022755415565,
+        -22.0274714875355
+      ]
+    },
+    {
+      "beta": 0.001,
+      "memory_percent": 0.1,
+      "tau": 0.00040635369921269537,
+      "scaled_center": [
+        14.361277150518978,
+        -73.64688412603284
+      ]
+    },
+    {
+      "beta": 0.003,
+      "memory_percent": 0.3,
+      "tau": 0.0002753879880341136,
+      "scaled_center": [
+        42.61175353390037,
+        -222.82997444633418
+      ]
+    },
+    {
+      "beta": 0.004,
+      "memory_percent": 0.4,
+      "tau": 0.00020217772948465177,
+      "scaled_center": [
+        56.48159228495356,
+        -298.3544567649988
+      ]
+    },
+    {
+      "beta": 0.005,
+      "memory_percent": 0.5,
+      "tau": 0.00012355687102661562,
+      "scaled_center": [
+        70.16865552277504,
+        -374.4898167876581
+      ]
+    },
+    {
+      "beta": 0.006,
+      "memory_percent": 0.6,
+      "tau": 3.9471974427497555e-05,
+      "scaled_center": [
+        83.66408781630544,
+        -451.2254458405915
+      ]
+    },
+    {
+      "beta": 0.006441227842936402,
+      "memory_percent": 0.6441227842936402,
+      "tau": 6.514520363203806e-07,
+      "scaled_center": [
+        89.55554112281732,
+        -485.271110516056
+      ]
+    },
+    {
+      "beta": 0.0064484162589609016,
+      "memory_percent": 0.6448416258960902,
+      "tau": 1.0402964581755032e-08,
+      "scaled_center": [
+        89.65119776563614,
+        -485.8267191349515
+      ]
+    },
+    {
+      "beta": 0.006448531026086656,
+      "memory_percent": 0.6448531026086656,
+      "tau": 1.6365300102214302e-10,
+      "scaled_center": [
+        89.6527330293985,
+        -485.8355739013149
+      ]
+    },
+    {
+      "beta": 0.007,
+      "memory_percent": 0.7000000000000001,
+      "tau": -4.998741726639206e-05,
+      "scaled_center": [
+        96.9595596131848,
+        -528.5492226107006
+      ]
+    }
+  ],
+  "highlighted_root_beta": 0.006448531026086656,
+  "uncertainty": "Empirical numerical data. Lines connect accepted samples, not a continuous-path certificate. The root meets a trace-residual tolerance; no exact-zero or tight parameter-interval certificate.",
+  "scope_exclusions": [
+    "Exact superstability",
+    "Native internal coupling mechanism",
+    "Strongest-contraction ridge reconnection",
+    "Full-spectrum isolation certificate"
+  ],
+  "accessibility": {
+    "color_not_only_channel": true,
+    "text_equivalent": "plotted_data plus the article table and structured caption",
+    "article_alt_matches": true,
+    "image_metadata": "Original audited bytes retained; no new embedded alt metadata claimed."
+  }
+}

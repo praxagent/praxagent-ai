@@ -24,9 +24,9 @@
 
   <text x="48" y="212" class="t h">factor 2</text>
   <rect x="160" y="198" width="277" height="18" rx="4" fill="#4B6787"/>
-  <text x="448" y="212" class="t s">ln 2 ≈ 0.693 nats = 1 bit</text>
+  <text x="448" y="212" class="t s">ln 2 &#x2248; 0.693 nats = 1 bit</text>
 
   <rect class="foot" x="28" y="272" width="704" height="64" rx="10"/>
-  <text x="380" y="300" text-anchor="middle" class="t s">A Lyapunov exponent of 1 nat per step multiplies a tiny distance by e each step.</text>
-  <text x="380" y="320" text-anchor="middle" class="t s">An exponent of ln 2 nats per step doubles it. Entropy uses the same unit.</text>
+  <text x="380" y="300" text-anchor="middle" class="t s">A Lyapunov exponent is a long-run average log growth rate; single steps can stretch more or less.</text>
+  <text x="380" y="320" text-anchor="middle" class="t s">At ln 2 nats per step, a tiny distance doubles per step on average. Entropy uses the same unit.</text>
 </svg>

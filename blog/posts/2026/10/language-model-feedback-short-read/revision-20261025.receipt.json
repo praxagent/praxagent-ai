@@ -1,0 +1,88 @@
+{
+  "date": "2026-10-25",
+  "kind": "editorial revision; no new experiments",
+  "source_article": {
+    "arxiv": "2610.31692v1",
+    "url": "https://arxiv.org/abs/2610.31692v1",
+    "title": "Chaos and bifurcations in continuous language-model feedback",
+    "latex_source": "/data2/chaos-journal-neural-shrimp/main.tex",
+    "latex_source_sha256": "799d945565691455b561256e6699930e4b192afb7a367622e545a0202530d526",
+    "source_commit": "6a1151accc3cb87bb8b1009ee3fcdeb2cb0c0b78"
+  },
+  "page_sha256": "a266801e521f1dd4f7faa533802ca4d964b5727009267e58a33e9fdbc7df377a",
+  "figures": {
+    "fig-cross512-clean.png": {
+      "sha256": "720f5e76e9e700c8eaba9c26b0985e45ef9169f895ea45768ec10d2cffcd065d",
+      "source": "/data2/chaos-journal-neural-shrimp/figures/fig-cross512-clean.png",
+      "article_figure": "Figure 1",
+      "transformation": "none; byte-identical"
+    },
+    "fig-shrimp-anatomy-pair-clean.png": {
+      "sha256": "0fd58fd1c64bc7e5e53a094f01308ab4da90a0122009ff536bba874976c674b6",
+      "source": "/data2/chaos-journal-neural-shrimp/figures/fig-shrimp-anatomy-pair-clean.png",
+      "article_figure": "Figure 21",
+      "transformation": "none; byte-identical"
+    },
+    "fig-feigenbaum-tree.png": {
+      "sha256": "c95654e75aee07564c6a456a1ebc872a96c0e2469ec8a74525ccb170ff1a9311",
+      "source": "/data2/chaos-journal-neural-shrimp/figures/fig-feigenbaum-tree.png",
+      "article_figure": "Figure 18",
+      "transformation": "none; byte-identical"
+    },
+    "fig-hidden-bands.png": {
+      "sha256": "9b40800041af3b63cadd01a401701f30b64c7e3f1029c2c9e26771d2a8defcb8",
+      "source": "/data2/chaos-journal-neural-shrimp/figures/fig-hidden-bands.png",
+      "article_figure": "Figure 19",
+      "transformation": "none; byte-identical"
+    },
+    "fig-zoom-llama70b-z128.png": {
+      "sha256": "3143f254e7a344e583ec073f292fcf244f640c8eae6c497babbe299cd53bad91",
+      "source": "/data2/chaos-journal-neural-shrimp/figures/fig-zoom-llama70b-z128.png",
+      "article_figure": "Figure 11",
+      "transformation": "none; byte-identical"
+    },
+    "batching-comparison.png": {
+      "sha256": "6375cf7cb5fadc739838b5513ec9b6efaf6b630ea45b844ff360f9a7f255cb5d",
+      "source": "build_figures.py from receipts/repro-summary.json (see fig-short-read.receipt.json)",
+      "article_figure": "none; counts of the batch-layout test in Sec. IV",
+      "transformation": "unchanged since the original short read"
+    },
+    "og-card.png": {
+      "sha256": "6ba51ec999fc1e9a106cb9737aeccd7d3db3b042f6ec1b7c261ff57ec3bc70b1",
+      "source": "make_og_card.py from fig-cross512-clean.png",
+      "generator_sha256": "4965c1c7c7a5e5c6770f04350cd3c24efca17231d0db13e818967ab6ead4950b",
+      "article_figure": "Figure 1, scaled",
+      "transformation": "1200 x 630 social card: scaled copy of the article's Figure 1 beside the page title; make_og_card.py --verify reproduces it"
+    }
+  },
+  "claims": {
+    "five_findings": "article abstract and Secs. II-VII",
+    "figure_1": "article Fig. 1 caption and Sec. I: about 30% of cells chaotic, 74% of a random sample chaotic for 1e5 steps, 4.4% undecided",
+    "texts_of_windows": "article Sec. IV, Chaos with periodic windows; Table 1",
+    "shrimp": "article Fig. 21 caption and Sec. VII: numerical shrimp criteria met along the body, kite beginning at a located cusp, no one-dimensional head",
+    "factorization": "article Secs. II-III: inverse temperature x embedding covariance x network Jacobian; high-temperature contraction bound; greedy limit; one chaotic band per model in four unsteered sweeps; Hopfield energy without the network (tied embeddings); readout carries the growth steering adds in Qwen2.5-0.5B",
+    "cascade": "article Sec. VI and Table 6: nine flips, final ratio 4.6688 within 0.008% of delta; Qwen2.5-1.5B ratio 4.665 within 0.1%",
+    "passages": "article Sec. V, Prospective tests, and Table 5: 42 of 48 within one iterate; six misses 3.1 to 5.2% short; both stage criteria failed",
+    "proofs": "article Sec. VI, Computer-assisted proofs: period-8 orbit of the full map; coexisting attracting period-2 and period-3 orbits",
+    "hidden_chaos": "article Fig. 19 and Sec. VI, Chaos behind a repeating text: 65 of 182 chaotic cells with exactly repeating text over 2000 steps",
+    "batch_tokens": "article Sec. IV, Reproducibility and answers: 173 of 192 chaotic vs 7 of 192 periodic in the final 500 of 1500 steps; bitwise identical with fixed shapes; bfloat16 parts within one or two steps",
+    "batch_answers": "article Sec. IV: Soft Thinking with published settings changed 21% of 256 GSM8K answers in Qwen2.5-7B",
+    "scale": "article Sec. IV, Generality, and Fig. 11: chaos unsteered in eleven of fourteen dense models; random directions; Qwen2.5-14B vs 7B on eight test prompts; 70B-class models under steering; Llama-3.3-70B 20.8% chaotic",
+    "synchronization": "article Sec. VIII: transverse growth near lambda_1 + ln|1-2c|; observed thresholds rank with lambda_1",
+    "attractor_video": "YouTube 8zS9-ey3PQI: the chaotic attractor of article Fig. 20 (alpha 0.07248, log10 T -0.148, float64), three leading principal coordinates (77.4% of variance per the research note), one 80-step trajectory with synthetic speech; map-not-flow statement from article Sec. VI (typical step 0.30 against mean distance 0.21 from the center)",
+    "cycle_video": "YouTube 7L5MehfrI3g: period-8 counterpart at alpha 0.0734, log10 T -0.148, float32, recorded from the first step; research repo docs/research-log.md (commit 0d15c84c4216063a838be4e4292b3be8c22c81eb): 509 of 512 starts reach one period-8 orbit, '. This is there is a is a'; one reaches period 16, one another period-8 orbit, one none; not separately verified in float64",
+    "sync_video": "YouTube hKYShgPhkgU (added 2026-10-26) and the new coupled-loops section: article Sec. VIII, Eqs. (6)-(7), Table 7 cell 2 (alpha 0.07484, log10 T -0.1226, lambda_1 0.437, c* 0.177), Fig. 27 and the 0.051-per-step agreement; the video's per-coupling observations (c = 0, 0.03, 0.17, 0.25, 0.5, 0.9) come from new float64 runs described by the author, with c = 0.9 beyond the article's tested range",
+    "network_video": "YouTube HypewrMDbKU (added 2026-10-26), the narrated cut that replaces the silent GDazABwxiTs: MLP activations of all 24 layers (4,864 neurons each) recorded in float64; left, the certified period-8 orbit of article Table 1 (alpha 0.071674, log10 T -0.115); right, the chaotic attractor of article Fig. 20 (alpha 0.07248, log10 T -0.148); wave timing stylized; synthetic narration",
+    "cascade_video": "YouTube rbI37jVjxAc (2026-10-26), the narrated cut that replaces the silent tMz3kXT1ae4: the crescent cascade of article Fig. 18 at log10 T -0.156, alpha 0.064 to 0.0656, 256 settled states per setting, height along the steering direction and depth along a second fixed direction, orange chaotic (no period up to 48 and a positive exponent), per the author's description; caption facts from article Sec. VI and Table VI: nine flips to period 1536, ratios 3.124 to 4.6688 (within 0.008% of delta), first ratio 14.93 cut-dependent, period-384 multiplier at the float64 floor",
+    "rotation_video": "YouTube -VCSiNFnP2c, rendered from the complete 120-direction rotation morph; research repo commit 1e348865e892b70d5269c62f61ff99e4016bd728, docs/morph-continuity.json (120 frames, chaotic share 12.85% to 23.82%), docs/morph-fill-receipt.json and docs/morph-video-receipt.json; the 17 directions missing from article Fig. 9 (six of 103 angles) were computed in that run",
+    "scope": "article Discussion, What is and is not claimed, and Steering and predictability"
+  },
+  "review": [
+    "Rebuilt the short read around the article's main results, opening with five findings.",
+    "Replaced the uncaptioned period-6 map with the article's Figure 1 and Figure 21, each with a caption.",
+    "Added sections on the derivative factorization and on the prospective passage tests and computer-assisted proofs.",
+    "Removed the Huginn recurrent-depth section and the period-18 state-cycle example, which are not results of the article.",
+    "Attributed the reused figures to their article figure numbers.",
+    "Dated the page 2026-10-26 for publication and added a 1200 x 630 social card."
+  ]
+}

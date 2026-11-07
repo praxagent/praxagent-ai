@@ -2,7 +2,7 @@
 title: "Soft-token feedback"
 slug: "soft-token-feedback"
 summary: "A feedback rule that feeds back a probability-weighted average of token embeddings instead of selecting a next token."
-draft: true
+draft: false
 pro_reviewed: true
 og_image: "soft-token-feedback-card.png"
 og_image_alt: "A model's probabilities weight two toy embeddings; their average returns to the same input slot after a fixed prompt."

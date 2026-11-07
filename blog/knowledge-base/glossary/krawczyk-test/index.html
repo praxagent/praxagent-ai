@@ -19,30 +19,30 @@
 
 
     
-    <meta name="description" content="An interval Newton test: if a box is mapped strictly inside itself, it contains exactly one solution.">
+    <meta name="description" content="An interval Newton test: if Krawczyk&#39;s operator maps a box strictly inside itself, the box contains exactly one solution.">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/glossary/krawczyk-test/">
 
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="praxagent Knowledge Base">
     <meta property="og:title" content="Krawczyk&#39;s test">
-    <meta property="og:description" content="An interval Newton test: if a box is mapped strictly inside itself, it contains exactly one solution.">
+    <meta property="og:description" content="An interval Newton test: if Krawczyk&#39;s operator maps a box strictly inside itself, the box contains exactly one solution.">
     <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/glossary/krawczyk-test/">
-    <meta property="og:image" content="https://praxagent.ai/blog/knowledge-base/glossary/krawczyk-test/krawczyk-test-card.png">
+    <meta property="og:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/krawczyk-test/krawczyk-test-card.png">
     <meta property="og:image:alt" content="The interval from 1 to 2 is tested. Krawczyk&#39;s image, from 1.25 to about 1.583, sits strictly inside it, so the box contains one root.">
     <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="537">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@praxagent">
     <meta name="twitter:title" content="Krawczyk&#39;s test">
-    <meta name="twitter:description" content="An interval Newton test: if a box is mapped strictly inside itself, it contains exactly one solution.">
-    <meta name="twitter:image" content="https://praxagent.ai/blog/knowledge-base/glossary/krawczyk-test/krawczyk-test-card.png">
+    <meta name="twitter:description" content="An interval Newton test: if Krawczyk&#39;s operator maps a box strictly inside itself, the box contains exactly one solution.">
+    <meta name="twitter:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/krawczyk-test/krawczyk-test-card.png">
     <meta name="twitter:image:alt" content="The interval from 1 to 2 is tested. Krawczyk&#39;s image, from 1.25 to about 1.583, sits strictly inside it, so the box contains one root.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20261017d">
+    <link rel="stylesheet" href="/blog/blog.css?v=20261025a">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -130,7 +130,7 @@
                 <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
                 <h1 class="post-title">Krawczyk&#39;s test</h1>
                 
-                <p class="reference-summary">An interval Newton test: if a box is mapped strictly inside itself, it contains exactly one solution.</p>
+                <p class="reference-summary">An interval Newton test: if Krawczyk&#39;s operator maps a box strictly inside itself, the box contains exactly one solution.</p>
                 
 
             </header>
@@ -140,11 +140,12 @@
 
 
             <div class="post-body">
-                <p><strong>Krawczyk&rsquo;s test</strong> is a way to prove that a system of equations has exactly one solution inside a box, using interval arithmetic rather than a rounded Newton iteration. Ordinary Newton can converge to a point and still be wrong about whether a true solution sits there, because every arithmetic step rounds. Here each number is replaced by an interval guaranteed to contain it, and those intervals are carried through the function and its derivative.</p>
-<p>For a function \(f\), a box \(X\), a point \(x\) inside \(X\), and a matrix \(A\) that approximately inverts the derivative at \(x\), the Krawczyk operator is</p>
+                <p><strong>Krawczyk&rsquo;s test</strong> is a way to prove that a system of equations has exactly one solution inside a box, using interval arithmetic rather than a rounded Newton iteration. A floating-point Newton iteration can return an accurate-looking point, but that alone does not prove that an exact solution exists nearby, or that it is the only one. Certified interval arithmetic replaces each number by an interval, using exact operations or rounding outward, so that every computed interval is guaranteed to contain the exact value it stands for. Those intervals are carried through the function and its derivative.</p>
+<p>Let \(f\) map \(\mathbb{R}^n\) to \(\mathbb{R}^n\) and be continuously differentiable near a box \(X = X_1 \times \cdots \times X_n\), a product of closed intervals, one per coordinate. Pick a point \(x\) in \(X\), usually its center, and an \(n \times n\) matrix \(A\) close to the inverse of \(Df(x)\), the Jacobian matrix of partial derivatives of \(f\) at \(x\). Let \(I\) be the \(n \times n\) identity matrix, and let \(Df(X)\) be an interval matrix that contains \(Df(y)\) for every \(y\) in \(X\). Computed with interval operations, the Krawczyk operator is</p>
 \[
 K(X)=x-Af(x)+\bigl(I-A\,Df(X)\bigr)(X-x).
-\]<p>\(Df(X)\) is an interval matrix that encloses every derivative of \(f\) on \(X\). If \(K(X)\) lies strictly inside \(X\), then \(X\) contains exactly one root of \(f\). The test uses the contraction-mapping idea: a map that sends a complete set strictly into itself has one fixed point there, and the algebra above turns a root of \(f\) into such a fixed point.</p>
+\]<p>If \(K(X)\) lies strictly inside \(X\), then \(X\) contains exactly one root of \(f\).</p>
+<p>The reason is a fixed-point argument. Write \(g(y)=y-Af(y)\), one Newton-like step with the fixed matrix \(A\); when \(A\) is invertible, the fixed points of \(g\) are exactly the roots of \(f\). For \(y\) in \(X\), \(g(y)=g(x)+(I-AM)(y-x)\) for a matrix \(M\) in \(Df(X)\), the average of the derivative along the segment from \(x\) to \(y\). So \(g(y)\) lies in \(K(X)\), and when \(K(X)\) sits inside \(X\), \(g\) maps the box into itself. The same enclosure bounds how much \(g\) can stretch. If every matrix in \(I-A\,Df(X)\) has norm below 1, \(g\) shrinks the distance between any two points of \(X\), \(A\) is invertible, and Banach&rsquo;s contraction-mapping theorem gives exactly one fixed point. Mapping the box strictly into itself is not enough on its own: a continuous map can do that and still cross the diagonal several times. In the centered form below, strict inclusion already forces the norm bound in a norm weighted by the box radii, and implementations commonly check both.</p>
 <figure class="reference-figure">
     <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: A number line shows the trial box from 1 to 2. A shorter interval from 1.25 to about 1.583, the Krawczyk image, lies strictly inside it." tabindex="0">
         <img src="/blog/knowledge-base/glossary/krawczyk-test/krawczyk-test.svg" alt="A number line shows the trial box from 1 to 2. A shorter interval from 1.25 to about 1.583, the Krawczyk image, lies strictly inside it." loading="lazy" decoding="async">
@@ -164,7 +165,7 @@ X-x &= \bigl[-\tfrac12,\tfrac12\bigr].
 \]<p>The product of those last two intervals is \([-1/6,1/6]\), so</p>
 \[
 K(X)=\bigl[\tfrac{17}{12}-\tfrac16,\ \tfrac{17}{12}+\tfrac16\bigr]=\bigl[\tfrac54,\tfrac{19}{12}\bigr]\approx[1.25,1.583].
-\]<p>This sits strictly inside \([1,2]\). The box contains exactly one root. The function below recomputes that interval. It is the one-dimensional form of the centered test used for the certified orbit: the image \(-RH(c)+(I-R\,DH(X))\Delta\) must lie strictly inside the box, and the norm of \(I-R\,DH(X)\) must be strictly below 1. The map is not evaluated inside the test. The caller supplies the enclosed value and derivative.</p>
+\]<p>This sits strictly inside \([1,2]\), and the factor \(I-A\,f'(X)\) has magnitude at most \(1/3<1\), so the box contains exactly one root. The function below recomputes that interval in the centered form that the multidimensional test uses. For a square system \(H\), take the box center \(c\), the box of offsets \(\Delta=X-c\), and an approximate inverse \(R\) of \(DH(c)\). The centered image \(-RH(c)+(I-R\,DH(X))\Delta\) must lie strictly inside \(\Delta\), and \(I-R\,DH(X)\) must have norm below 1; in one dimension the norm is the absolute value. The test does not evaluate the map: the caller supplies the enclosed value \(H(c)\) and derivative \(DH(X)\).</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
@@ -179,7 +180,7 @@ K(X)=\bigl[\tfrac{17}{12}-\tfrac16,\ \tfrac{17}{12}+\tfrac16\bigr]=\bigl[\tfrac5
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">centered_krawczyk</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">h_at_center</span><span class="p">,</span> <span class="n">derivative_box</span><span class="p">,</span> <span class="n">preconditioner</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Scalar form of the orbit proof&#39;s Krawczyk gate.
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Scalar centered Krawczyk test.
 </span></span></span><span class="line"><span class="cl"><span class="s2">
 </span></span></span><span class="line"><span class="cl"><span class="s2">    image = -R H(c) + (1 - R DH(X)) * [-r, r]
 </span></span></span><span class="line"><span class="cl"><span class="s2">    Passes only when that image lies strictly inside [-r, r]
@@ -214,7 +215,7 @@ K(X)=\bigl[\tfrac{17}{12}-\tfrac16,\ \tfrac{17}{12}+\tfrac16\bigr]=\bigl[\tfrac5
 </span></span><span class="line"><span class="cl">        <span class="n">center</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">h_at_center</span><span class="p">,</span> <span class="n">derivative_box</span><span class="p">,</span> <span class="n">preconditioner</span>
 </span></span><span class="line"><span class="cl">    <span class="p">)</span>
 </span></span></code></pre></div><p><code>quadratic_krawczyk()</code> returns <code>passed=True</code> and image \((5/4, 19/12)\).</p>
-<p>In this note the unknown is not a single number. It is a period-8 orbit, written as the roots of a shooting equation \(F^8(x)-x=0\), and the derivative that enters the test is the <a href="/blog/knowledge-base/glossary/monodromy/">monodromy</a> of that cycle. The note runs this centered inclusion on interval enclosures of that system, in boxes of radius \(2^{-640}\). A pass proves existence and uniqueness inside those boxes for the real-number map of the stored weights. It does not prove that every orbit in the note exists, and it does not prove that any cell is chaotic.</p>
+<p>In the <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/">note on chaos in a language model&rsquo;s feedback loop</a>, the unknown is not a single number. It is a period-8 orbit of the soft-token map \(F\), whose states have 896 coordinates. The orbit is found as a root of a multiple-shooting system \(H(x_0,\ldots,x_7)\) whose eight blocks require \(F(x_i)=x_{i+1}\), with \(x_8=x_0\). A root is a cycle of eight states, each mapped to the next, so its period divides 8; separate checks rule out periods 1, 2 and 4. The derivative \(DH\) in the test is assembled from the eight one-step derivatives \(DF(x_i)\). Their product around the cycle is the <a href="/blog/knowledge-base/glossary/monodromy/">monodromy</a>, which decides whether the orbit attracts, not whether it exists. Ball arithmetic encloses \(H\) and \(DH\) over boxes of radius \(2^{-640}\) around refined centers, and the centered test passes, with the norm taken as the largest row sum of absolute values weighted by the box radii. That proves exactly one root in that product of boxes, for the real-number map of the stored weights. It does not prove that every orbit in the note exists, and it does not prove that any cell is chaotic.</p>
 <p>The test is from Krawczyk (1969), <a href="https://doi.org/10.1007/BF02234767"><em>Newton-Algorithmen zur Bestimmung von Nullstellen mit Fehlerschranken</em></a>, <em>Computing</em> 4(3), 187–201.</p>
 <p>See also: <a href="/blog/knowledge-base/glossary/monodromy/">monodromy</a>, <a href="/blog/knowledge-base/glossary/brouwer-fixed-point/">Brouwer&rsquo;s fixed-point theorem</a>.</p>
 
