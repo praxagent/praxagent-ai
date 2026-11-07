@@ -1732,6 +1732,24 @@ main,
     margin-left: auto;
 }
 
+/* SVG diagrams span the text width, and so does a plot marked
+   ![alt](file.png "text-width"); the inset size above is for the other raster plots. */
+.post-content.figures-compact .post-body .research-figure:has(> img[src$=".svg"]),
+.post-content.figures-compact .post-body .research-figure.research-figure--text-width {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+
+.post-content.figures-compact .post-body .research-figure img[src$=".svg"],
+.post-content.figures-compact .post-body .research-figure.research-figure--text-width img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    max-height: none;
+    height: auto;
+}
+
 .research-figure__credit {
     display: block;
     margin: 0 0 2rem;
@@ -1930,6 +1948,23 @@ main,
     background: var(--bg-card);
     overflow-x: auto;
     text-align: center;
+}
+
+/* Hugo's youtube shortcode with class="video-embed". The bottom margin
+   offsets the negative top margin of a following .figure-note. */
+.post-body .video-embed {
+    aspect-ratio: 16 / 9;
+    margin: 1.75rem 0 2rem;
+    border-radius: 0.4rem;
+    overflow: hidden;
+    background: #111124;
+}
+
+.post-body .video-embed iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
 }
 
 .post-body .mermaid svg {

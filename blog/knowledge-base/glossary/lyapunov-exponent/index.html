@@ -19,30 +19,30 @@
 
 
     
-    <meta name="description" content="The average exponential rate at which a tiny displacement from a trajectory grows or shrinks.">
+    <meta name="description" content="The long-run exponential rate at which an infinitesimally small perturbation of a trajectory grows or shrinks.">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/glossary/lyapunov-exponent/">
 
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="praxagent Knowledge Base">
     <meta property="og:title" content="Lyapunov exponent">
-    <meta property="og:description" content="The average exponential rate at which a tiny displacement from a trajectory grows or shrinks.">
+    <meta property="og:description" content="The long-run exponential rate at which an infinitesimally small perturbation of a trajectory grows or shrinks.">
     <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/glossary/lyapunov-exponent/">
-    <meta property="og:image" content="https://praxagent.ai/blog/knowledge-base/glossary/lyapunov-exponent/lyapunov-exponent-card.png">
-    <meta property="og:image:alt" content="Two time plots: a neighbor peels away from a reference path with the gap doubling each step, and another neighbor falls onto its reference path with the gap halving.">
-    <meta property="og:image:width" content="1068">
+    <meta property="og:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/lyapunov-exponent/lyapunov-exponent-card.png">
+    <meta property="og:image:alt" content="Two time plots: a neighbor separates from a reference path as its gap doubles at each marked step, while another neighbor approaches its reference path as its gap halves.">
+    <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@praxagent">
     <meta name="twitter:title" content="Lyapunov exponent">
-    <meta name="twitter:description" content="The average exponential rate at which a tiny displacement from a trajectory grows or shrinks.">
-    <meta name="twitter:image" content="https://praxagent.ai/blog/knowledge-base/glossary/lyapunov-exponent/lyapunov-exponent-card.png">
-    <meta name="twitter:image:alt" content="Two time plots: a neighbor peels away from a reference path with the gap doubling each step, and another neighbor falls onto its reference path with the gap halving.">
+    <meta name="twitter:description" content="The long-run exponential rate at which an infinitesimally small perturbation of a trajectory grows or shrinks.">
+    <meta name="twitter:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/lyapunov-exponent/lyapunov-exponent-card.png">
+    <meta name="twitter:image:alt" content="Two time plots: a neighbor separates from a reference path as its gap doubles at each marked step, while another neighbor approaches its reference path as its gap halves.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20261017d">
+    <link rel="stylesheet" href="/blog/blog.css?v=20261025a">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -130,7 +130,7 @@
                 <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
                 <h1 class="post-title">Lyapunov exponent</h1>
                 
-                <p class="reference-summary">The average exponential rate at which a tiny displacement from a trajectory grows or shrinks.</p>
+                <p class="reference-summary">The long-run exponential rate at which an infinitesimally small perturbation of a trajectory grows or shrinks.</p>
                 
 
             </header>
@@ -140,37 +140,42 @@
 
 
             <div class="post-body">
-                <p>A <strong>Lyapunov exponent</strong> is the average exponential rate, per step, at which a tiny displacement from a trajectory grows or shrinks. Along a trajectory, if a displacement \(\delta_0\) has become \(\delta_n\) after \(n\) steps, the finite-time estimate is</p>
+                <p>A <strong>Lyapunov exponent</strong> is the long-run exponential rate, per step, at which an infinitesimally small perturbation of a trajectory grows or shrinks. For a differentiable map \(x_{k+1}=F(x_k)\), a perturbation \(v_k\) small enough that the map is effectively linear across it evolves by the derivative, \(v_{k+1}=DF(x_k)\,v_k\), where \(DF(x_k)\) is the Jacobian matrix of \(F\) at \(x_k\). Such a perturbation is called a tangent vector. After \(n\) steps, the finite-time rate is</p>
 \[
-\lambda_n=\frac{1}{n}\log\frac{\lVert\delta_n\rVert}{\lVert\delta_0\rVert}.
-\]<p>The Lyapunov exponent is the limit of \(\lambda_n\) as \(n\) grows, when that limit exists. <a href="/blog/knowledge-base/glossary/oseledets-theorem/">Oseledets&rsquo; theorem</a> gives conditions under which it does, at almost every state. A positive value means nearby states separate: that is the signature of chaos used for the soft-token loop. A negative value means they converge, and the loop settles. A map in several dimensions has one exponent per direction.</p>
+\lambda_n=\frac{1}{n}\ln\frac{\lVert v_n\rVert}{\lVert v_0\rVert},
+\]<p>where \(\lVert\cdot\rVert\) is the length of a vector and \(\ln\) is the natural logarithm, so the rate is measured in <a href="/blog/knowledge-base/glossary/nat/">nats</a> per step. The Lyapunov exponent is the limit of \(\lambda_n\) as \(n\) grows, when that limit exists. <a href="/blog/knowledge-base/glossary/oseledets-theorem/">Oseledets&rsquo; theorem</a> gives conditions under which it does, for almost every starting state with respect to an invariant measure, a fixed description of how often the trajectory visits each region of states. For a system in continuous time, elapsed time replaces the number of steps.</p>
+<p>Two trajectories that start a finite distance apart follow this law only while their gap stays small. In a bounded system the gap eventually stops growing, and the ratio of distances at a late step then says nothing about the rate. Numerical estimates therefore follow a twin a small fixed distance from the reference, push it back to that distance after every step, and average the logarithms of the stretch factors. That is Benettin&rsquo;s method, the one used in the <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/">note on chaos in a language model&rsquo;s feedback loop</a>.</p>
+<p>A map of a \(d\)-dimensional state has \(d\) Lyapunov exponents, counted with multiplicity, each tied to a family of tangent directions; a perturbation in a generic direction grows at the largest one. A positive largest exponent means that infinitesimally close states separate exponentially, and it is the usual evidence of chaos, the one used for the soft-token loop. If the largest exponent is negative, every small perturbation along that trajectory dies out, as when the loop settles onto a stable fixed point or cycle. That is a statement about states near the trajectory, not about every starting state. A zero exponent marks a neutral direction, or growth slower than exponential.</p>
 <figure class="reference-figure">
-    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Left: a reference path and a neighbor whose gap doubles at each marked step, from delta to 8 delta. Right: a neighbor whose gap halves until the two paths lie together." tabindex="0">
-        <img src="/blog/knowledge-base/glossary/lyapunov-exponent/lyapunov-exponent.svg" alt="Left: a reference path and a neighbor whose gap doubles at each marked step, from delta to 8 delta. Right: a neighbor whose gap halves until the two paths lie together." loading="lazy" decoding="async">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Left: a reference path and a dashed neighbor whose gap grows from delta to 2 delta, 4 delta, and 8 delta. Right: a dashed neighbor approaches its reference path as the gap shrinks from delta to delta over 2, delta over 4, and delta over 8." tabindex="0">
+        <img src="/blog/knowledge-base/glossary/lyapunov-exponent/lyapunov-exponent.svg" alt="Left: a reference path and a dashed neighbor whose gap grows from delta to 2 delta, 4 delta, and 8 delta. Right: a dashed neighbor approaches its reference path as the gap shrinks from delta to delta over 2, delta over 4, and delta over 8." loading="lazy" decoding="async">
     </div>
     <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
-    <figcaption>State is plotted against the step. On the left the vertical gap between the reference path and a neighbor doubles at every marked step, which is a positive exponent of ln 2 nats per step. On the right the gap halves, a negative exponent of the same size, and the paths fall together. The curves are a schematic of that rate, not a measured orbit. A real orbit does not separate this evenly; a finite run uses the same ratio of distances at a finite step.</figcaption>
+    <figcaption>State is plotted against step, and δ is the initial gap. On the left the gap doubles at every marked step, a rate of ln 2 nats per step. On the right it halves, a rate of −ln 2 nats per step, so the paths approach each other without coinciding at any marked step. The curves are synthetic schematics, not measured orbits. In a bounded nonlinear system two trajectories a finite distance apart eventually stop following this exponential law, which is why Lyapunov calculations follow a tangent vector, or a twin pushed back to a small distance after every step.</figcaption>
 </figure>
 
 <h2 id="worked-example">Worked example</h2>
-<p>Suppose the distance exactly doubles every step and starts at \(10^{-3}\). After \(n\) steps it is \(10^{-3}\cdot 2^{n}\), and</p>
+<p>Suppose the length of a tangent vector exactly doubles every step and starts at \(10^{-3}\). After \(n\) steps it is \(10^{-3}\cdot 2^{n}\), and</p>
 \[
-\lambda_n=\frac{1}{n}\log(2^{n})=\log 2\approx 0.693
-\]<p>for every \(n\). The starting distance cancels. If instead the distance were halved every step, the same calculation would give \(-\log 2\).</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log</span>
+\lambda_n=\frac{1}{n}\ln(2^{n})=\ln 2\approx 0.693
+\]<p>for every \(n\). The starting length cancels. If instead the length were halved every step, the same calculation would give \(-\ln 2\).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">isfinite</span><span class="p">,</span> <span class="n">log</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">finite_time_exponent</span><span class="p">(</span><span class="n">initial_distance</span><span class="p">,</span> <span class="n">distances</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;distances[k] is the separation after k + 1 steps.&#34;&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">initial_distance</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;initial distance must be positive&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">distance</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">distance</span> <span class="ow">in</span> <span class="n">distances</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;distances must stay positive&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;at least one step is required&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">log</span><span class="p">(</span><span class="n">distances</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">initial_distance</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
-</span></span></code></pre></div><p>A positive finite-time estimate is not a proof that the infinite-horizon exponent is positive. The runs in the soft-token study use a few hundred to a few thousand steps and say so. The exponent is also not a next-token probability and not a measure of how often a particular word appears.</p>
-<p>See also: <a href="/blog/knowledge-base/glossary/oseledets-theorem/">Oseledets&rsquo; theorem</a>, <a href="/blog/knowledge-base/glossary/brouwer-fixed-point/">Brouwer&rsquo;s fixed-point theorem</a>.</p>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">finite_time_exponent</span><span class="p">(</span><span class="n">initial_norm</span><span class="p">,</span> <span class="n">final_norm</span><span class="p">,</span> <span class="n">steps</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Log growth per step of one tangent vector evolved by the derivative.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">or</span> <span class="n">steps</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;steps must be a positive integer&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">isfinite</span><span class="p">(</span><span class="n">initial_norm</span><span class="p">)</span> <span class="ow">or</span> <span class="n">initial_norm</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;initial_norm must be finite and positive&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">isfinite</span><span class="p">(</span><span class="n">final_norm</span><span class="p">)</span> <span class="ow">or</span> <span class="n">final_norm</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;final_norm must be finite and nonnegative&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">final_norm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&#34;-inf&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">final_norm</span><span class="p">)</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="n">initial_norm</span><span class="p">))</span> <span class="o">/</span> <span class="n">steps</span>
+</span></span></code></pre></div><p><code>finite_time_exponent(1e-3, 1e-3 * 2**10, 10)</code> returns \(\ln 2\). The helper evaluates the displayed formula from the lengths of a tangent vector; it does not evolve two trajectories or push a twin back after every step, as long numerical estimates do.</p>
+<p>A positive finite-time estimate does not prove that the infinite-horizon exponent is positive, so a numerical report should state how many steps it measured, how many it discarded first as a transient, and how it followed the perturbation. The note&rsquo;s chaos labels, for example, come from a twin at relative distance \(10^{-6}\), pushed back after every step, over 300 measured steps after 300 transient ones, with checks at 2000 measured steps after 1000 transient ones. The exponent is also not a next-token probability and not a measure of how often a particular word appears.</p>
+<p>See also: <a href="/blog/knowledge-base/glossary/oseledets-theorem/">Oseledets&rsquo; theorem</a>, <a href="/blog/knowledge-base/glossary/nat/">nat</a>, <a href="/blog/knowledge-base/glossary/brouwer-fixed-point/">Brouwer&rsquo;s fixed-point theorem</a>.</p>
 
             </div>
 

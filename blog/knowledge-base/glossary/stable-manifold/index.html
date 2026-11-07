@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <title>Stable manifold - praxagent Knowledge Base</title>
+    
+    
+
+
+
+
+
+
+
+
+
+    
+    <meta name="description" content="The set of states whose trajectories converge to a given fixed point or periodic orbit; for a saddle it is a thin set, and states just off it come close to the saddle and then leave.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/glossary/stable-manifold/">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="praxagent Knowledge Base">
+    <meta property="og:title" content="Stable manifold">
+    <meta property="og:description" content="The set of states whose trajectories converge to a given fixed point or periodic orbit; for a saddle it is a thin set, and states just off it come close to the saddle and then leave.">
+    <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/glossary/stable-manifold/">
+    <meta property="og:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/stable-manifold/stable-manifold-card.png">
+    <meta property="og:image:alt" content="A saddle at the origin of a plane: the vertical axis, its stable manifold, leads into it, and the horizontal axis, its unstable manifold, leads out on both sides. Two starts just left and right of the vertical axis come close to the saddle and leave in opposite directions; beside them, the step at which a start leaves grows by 4 for every factor of 16 closer it starts.">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="Stable manifold">
+    <meta name="twitter:description" content="The set of states whose trajectories converge to a given fixed point or periodic orbit; for a saddle it is a thin set, and states just off it come close to the saddle and then leave.">
+    <meta name="twitter:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/stable-manifold/stable-manifold-card.png">
+    <meta name="twitter:image:alt" content="A saddle at the origin of a plane: the vertical axis, its stable manifold, leads into it, and the horizontal axis, its unstable manifold, leads out on both sides. Two starts just left and right of the vertical axis come close to the saddle and leave in opposite directions; beside them, the step at which a start leaves grows by 4 for every factor of 16 closer it starts.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
+    <link rel="stylesheet" href="/blog/blog.css?v=20261025a">
+    <link rel="stylesheet" href="/blog/katex.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script src="/blog/js/katex-0.16.47/katex.min.js"></script>
+    <script src="/blog/js/katex-0.16.47/auto-render.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'neutral',
+        securityLevel: 'loose',
+        flowchart: { htmlLabels: true, curve: 'basis' }
+      });
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-scrolls industrial-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+
+
+
+            <div class="nav-menu">
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link">Research Notes</a>
+                <a href="/blog/knowledge-base/" class="nav-link active">Knowledge Base</a>
+                <a href="/blog/search/" class="nav-link">Search</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
+            <a href="/blog/knowledge-base/" class="mobile-nav-link active">Knowledge Base</a>
+            <a href="/blog/search/" class="mobile-nav-link">Search</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        
+
+
+
+
+<div class="blog-post reference-entry">
+    <div class="container">
+        <article class="post-content">
+            <header class="post-header">
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
+                <h1 class="post-title">Stable manifold</h1>
+                
+                <p class="reference-summary">The set of states whose trajectories converge to a given fixed point or periodic orbit; for a saddle it is a thin set, and states just off it come close to the saddle and then leave.</p>
+                
+
+            </header>
+
+
+
+
+
+            <div class="post-body">
+                <p>The <strong>stable manifold</strong> of a fixed point or periodic orbit of a map is the set of states whose trajectories converge to it. Strictly, that whole set is the <em>global stable set</em>; the word manifold describes its shape near the point, as explained below. It matters most for a <em>saddle</em>, a point that attracts small deviations along some directions and repels them along others. A saddle&rsquo;s stable manifold is a thin set: the states on it converge to the saddle, while almost every state near the saddle eventually leaves. Its counterpart, the <strong>unstable manifold</strong>, is made of the states that come out of the saddle: those whose past, traced back step by step, converges to it.</p>
+<p>For a map \(F\), with \(x_{k+1}=F(x_k)\), and a fixed point \(p\), so that \(F(p)=p\), the stable manifold is</p>
+\[
+W^s(p)=\{\,x : F^{n}(x)\to p \text{ as } n\to\infty\,\},
+\]<p>where \(F^{n}\) means \(n\) applications of \(F\). The unstable manifold \(W^u(p)\) is the set of states \(x\) that have a backward trajectory converging to \(p\): a sequence \(x_0=x, x_{-1}, x_{-2}, \ldots\) with \(F(x_{-k-1})=x_{-k}\) for every \(k\) and \(x_{-k}\to p\) as \(k\to\infty\). For a map that can be run backward, that sequence is simply the backward trajectory of \(x\). For a periodic orbit of period \(q\), the same definitions apply to each of its points with \(F^{q}\) in place of \(F\), and the orbit&rsquo;s manifolds are the unions over its points.</p>
+<p>Near \(p\), the derivative describes both sets. Let \(DF(p)\) be the Jacobian matrix of \(F\) at \(p\), or, for a periodic orbit, its <a href="/blog/knowledge-base/glossary/monodromy/">monodromy matrix</a>; its eigenvalues are the <strong>multipliers</strong> \(\mu\). The point is <em>hyperbolic</em> when no multiplier lies on the unit circle, \(\lvert\mu\rvert=1\). For a smooth map and a hyperbolic point, the stable manifold theorem says that the states whose trajectories stay near \(p\) and converge to it form a smooth surface through \(p\), the <em>local stable manifold</em>. It is tangent to the <em>stable subspace</em>, the directions that repeated application of \(DF(p)\) shrinks toward zero, and its dimension is the number of multipliers with \(\lvert\mu\rvert<1\), counted with multiplicity. The states with a backward trajectory that stays near \(p\) and converges to it likewise form the <em>local unstable manifold</em>, tangent to the directions that belong to the multipliers with \(\lvert\mu\rvert>1\). That local picture is what the word manifold refers to. Farther from \(p\), the global sets can bend and fold back, and they can return arbitrarily close to \(p\). Every state that \(F\) sends into the global stable set belongs to it as well, so for a map that is not invertible that set can have separate or branching pieces, and it need not be a manifold at all.</p>
+<p>When exactly one multiplier lies outside the unit circle and none lies on it, the stable manifold has one dimension fewer than the state space: a curve in a plane, a surface in three dimensions, a hypersurface in general. Near the saddle it divides a small neighborhood into two sides. If that <em>unstable multiplier</em> \(\mu_u\) is positive, a deviation along the repelling direction keeps its sign, so states just on one side of the stable manifold leave along one branch of the unstable manifold, and states just on the other side leave along the other. When the two branches lead to different attractors, the stable manifold separates their <a href="/blog/knowledge-base/glossary/basin-of-attraction/">basins of attraction</a>.</p>
+<p>A state that starts a small distance \(\delta\) off the stable manifold first follows it toward the saddle and then leaves along the unstable manifold. When it arrives near the saddle, its component along the repelling direction is proportional to \(\delta\), and every period multiplies that component by \(\lvert\mu_u\rvert\). It therefore reaches a fixed size \(r\) after about</p>
+\[
+n\approx\frac{\ln(r/\delta)}{\ln\lvert\mu_u\rvert}
+\]<p>periods, where \(\ln\) is the natural logarithm. Each factor of \(e\approx2.718\), the base of the natural logarithm, by which \(\delta\) shrinks adds \(1/\ln\lvert\mu_u\rvert\) periods: the closer a start lies to the stable manifold, the longer it lingers near the saddle before it leaves.</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Left: the vertical axis of a plane leads into a saddle at the origin and the horizontal axis leads out of it on both sides. A start just right of the vertical axis and its mirror image just left of it follow dotted curves down toward the saddle and leave along the horizontal axis in opposite directions at step 4. Right: the step at which a start leaves, against the natural logarithm of one over its distance from the vertical axis, lies on a straight line: steps 4, 8, and 12 for distances 1/16, 1/256, and 1/4096." tabindex="0">
+        <img src="/blog/knowledge-base/glossary/stable-manifold/stable-manifold.svg" alt="Left: the vertical axis of a plane leads into a saddle at the origin and the horizontal axis leads out of it on both sides. A start just right of the vertical axis and its mirror image just left of it follow dotted curves down toward the saddle and leave along the horizontal axis in opposite directions at step 4. Right: the step at which a start leaves, against the natural logarithm of one over its distance from the vertical axis, lies on a straight line: steps 4, 8, and 12 for distances 1/16, 1/256, and 1/4096." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>The toy map of the worked example below, (x, y) to (2x, y/2), with a saddle at the origin. Left: the vertical axis is the stable manifold, and states on it converge to the saddle; the horizontal axis is the unstable manifold, one branch on each side. The start (1/16, 1) passes through (1/8, 1/2), (1/4, 1/4), and (1/2, 1/8) to (1, 1/16), numbered steps 0 to 4, along the curve on which x times y stays 1/16; it comes closest to the saddle at step 2 and leaves to the right. The start (−1/16, 1) is its mirror image and leaves to the left. Right: the step at which |x| first reaches 1 for starts (δ, 1) with δ = 1/16, 1/256, and 1/4096 is 4, 8, and 12, on a line of slope 1/ln 2, about 1.44 steps per factor e of δ. These are exact values of the toy map, not measurements. For a nonlinear map the manifolds can be curved, and for small δ the line holds only up to an offset and the rounding to whole steps.</figcaption>
+</figure>
+
+<h2 id="worked-example">Worked example</h2>
+<p>Take the linear map of the plane</p>
+\[
+F(x,y)=\left(2x,\ \tfrac{1}{2}y\right).
+\]<p>The origin is a saddle with multipliers 2, along \(x\), and \(1/2\), along \(y\). A state \((0,y)\) on the vertical axis goes to \((0, y/2^{n})\) after \(n\) steps and converges to the origin, so the vertical axis, \(x=0\), is the stable manifold. Any state with \(x\ne0\) has its \(\lvert x\rvert\) doubled on every step, so it eventually leaves. The horizontal axis, \(y=0\), is the unstable manifold, with one branch on each side of the origin.</p>
+<p>Start at \((\delta, 1)\) with \(\delta=1/16\). The iterates are \((1/16, 1)\), \((1/8, 1/2)\), \((1/4, 1/4)\), \((1/2, 1/8)\), and \((1, 1/16)\). The product \(xy\) stays \(1/16\), so the state moves along a hyperbola. It comes closest to the saddle at step 2, at distance \(\sqrt{2}/4\approx0.354\), and reaches \(\lvert x\rvert=1\) at step 4. The start \((-1/16, 1)\), on the other side of the stable manifold, is the mirror image and leaves to the left.</p>
+<p>A start 16 times closer, \(\delta=1/256\), reaches \(\lvert x\rvert=1\) at step 8 and comes within \(\sqrt{2}/16\approx0.088\) of the saddle; \(\delta=1/4096\) gives step 12 and \(\sqrt{2}/64\approx0.022\). Every factor of 16 adds 4 steps, that is, \(1/\ln 2\approx1.44\) steps per factor \(e\), the rule above with \(\mu_u=2\) and \(r=1\). The closest approach is \(\sqrt{2\delta}\), proportional to \(\delta^{1/2}\). More generally, take a linear saddle with one unstable direction and independent eigendirections, and a start whose stable component is of order one. The shrinking and the growing components balance near the closest approach, which is proportional to \(\delta^{\chi_s/(\chi_s+\chi_u)}\) up to a bounded factor from the whole-step timing, with \(\chi_u=\ln\lvert\mu_u\rvert\) and \(\chi_s=-\ln\lvert\mu_s\rvert\). Here \(\mu_s\) is the stable multiplier of largest modulus among the directions in which the start has a component; a start with no component along the slowest stable direction is governed by a faster one. In the example, \(\chi_s=\chi_u=\ln 2\), and the exponent is \(1/2\).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">hypot</span><span class="p">,</span> <span class="n">isfinite</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">passage</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">max_steps</span><span class="o">=</span><span class="mi">10_000</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Follow (x, y) -&gt; (2x, y/2) from (delta, 1).
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Returns the first step at which |x| &gt;= radius (None if that does not happen
+</span></span></span><span class="line"><span class="cl"><span class="s2">    within max_steps) and the smallest distance to the saddle up to that step.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">isfinite</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;delta must be finite&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">isfinite</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span> <span class="ow">or</span> <span class="n">radius</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;radius must be finite and positive&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">delta</span><span class="p">,</span> <span class="mf">1.0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">closest</span> <span class="o">=</span> <span class="n">hypot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">radius</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">step</span><span class="p">,</span> <span class="n">closest</span>
+</span></span><span class="line"><span class="cl">        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">y</span>
+</span></span><span class="line"><span class="cl">        <span class="n">closest</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">closest</span><span class="p">,</span> <span class="n">hypot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="n">closest</span>
+</span></span></code></pre></div><p><code>passage(1/16)</code> returns <code>(4, 0.3535...)</code>, <code>passage(1/256)</code> returns <code>(8, 0.0883...)</code>, and <code>passage(-1/16)</code> also leaves at step 4, on the other side. <code>passage(0.0)</code> never leaves: its exit step is <code>None</code>, because a start exactly on the stable manifold converges to the saddle.</p>
+<p>&ldquo;Stable&rdquo; describes the states on the manifold, not whether the manifold attracts its neighbors: near a saddle, states off the stable manifold leave. For an attracting point, with every multiplier inside the unit circle, the global stable set is the point&rsquo;s whole basin of attraction, which contains a neighborhood of the point and so has as many dimensions as the state space.</p>
+<p>In floating-point arithmetic a start exactly on a saddle&rsquo;s stable manifold is generally out of reach. Rounding puts it on one side or the other, so even a start located by bisection to the last digit lingers near the saddle and then leaves, and how long it lingers measures how close it started. The estimates above are exact for the linear map. Near a nonlinear saddle, for small \(\delta\), the passage time still grows by \(1/\ln\lvert\mu_u\rvert\) periods per factor \(e\), up to an offset and the rounding to whole steps; the closest-approach exponent above is a prediction from the linearization.</p>
+<p>The <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/">note on chaos in a language model&rsquo;s feedback loop</a> uses both manifolds: the unstable manifold of a period-3 saddle to describe a band of a chaotic attractor, and the stable manifold of a period-6 saddle orbit to explain an edge in its parameter maps, where it tests the passage-time rule above. The evidence for those conclusions is in the note.</p>
+<p>See also: <a href="/blog/knowledge-base/glossary/basin-of-attraction/">basin of attraction</a>, <a href="/blog/knowledge-base/glossary/monodromy/">monodromy</a>, <a href="/blog/knowledge-base/glossary/lyapunov-exponent/">Lyapunov exponent</a>.</p>
+
+            </div>
+
+            <footer class="post-footer">
+
+                <div class="post-navigation">
+
+                    <a href="/blog/knowledge-base/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/knowledge-base/" class="back-to-blog">Knowledge Base</a>
+                    <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+
+    </main>
+
+    <footer class="footer footer-compact">
+        <div class="container">
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
+            </div>
+            <div class="footer-compact-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="/blog/search/">Search</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/blog/script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tables = document.querySelectorAll('.post-body table');
+            tables.forEach((table, index) => {
+                if (table.parentElement?.classList.contains('table-scroll')) return;
+
+                const scroller = document.createElement('div');
+                scroller.className = 'table-scroll';
+                scroller.setAttribute('aria-label', `Scrollable data table ${index + 1}`);
+                table.parentNode.insertBefore(scroller, table);
+                scroller.appendChild(table);
+
+                const updateScrollableState = () => {
+                    const isScrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+                    scroller.classList.toggle('is-scrollable', isScrollable);
+                    if (isScrollable) {
+                        scroller.setAttribute('role', 'region');
+                        scroller.setAttribute('tabindex', '0');
+                    } else {
+                        scroller.removeAttribute('role');
+                        scroller.removeAttribute('tabindex');
+                    }
+                };
+
+                requestAnimationFrame(updateScrollableState);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(updateScrollableState).observe(scroller);
+                } else {
+                    window.addEventListener('resize', updateScrollableState, { passive: true });
+                }
+            });
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                output: "htmlAndMathml"
+            });
+
+            const copyText = async (text) => {
+                if (navigator.clipboard?.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    return;
+                }
+
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.setAttribute('readonly', '');
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                const copied = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                if (!copied) {
+                    throw new Error('Copy command was not accepted');
+                }
+            };
+
+            document.querySelectorAll('[data-copy-target]').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const target = document.querySelector(button.dataset.copyTarget);
+                    if (!target) {
+                        console.error(`Copy target not found: ${button.dataset.copyTarget}`);
+                        return;
+                    }
+
+                    const originalLabel = button.textContent;
+                    try {
+                        await copyText(target.textContent.trim());
+                        button.textContent = 'Copied';
+                        button.classList.add('copied');
+                        setTimeout(() => {
+                            button.textContent = originalLabel;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    } catch (error) {
+                        console.error('Failed to copy citation: ', error);
+                    }
+                });
+            });
+
+            const copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+            const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
+            codeBlocks.forEach(pre => {
+                if (pre.closest('.code-block-frame')) {
+                    return;
+                }
+
+                const frame = document.createElement('div');
+                frame.className = 'code-block-frame';
+                const toolbar = document.createElement('div');
+                toolbar.className = 'code-block-toolbar';
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'copy-code-button';
+                button.innerHTML = copyIcon;
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+                button.setAttribute('title', 'Copy');
+
+                const markCopied = () => {
+                    button.innerHTML = checkIcon;
+                    button.classList.add('copied');
+                    button.setAttribute('aria-label', 'Copied');
+                    setTimeout(() => {
+                        button.innerHTML = copyIcon;
+                        button.classList.remove('copied');
+                        button.setAttribute('aria-label', 'Copy code to clipboard');
+                    }, 2000);
+                };
+
+                button.addEventListener('click', () => {
+                    const code = pre.querySelector('code');
+                    const text = code ? code.textContent : pre.textContent;
+
+                    navigator.clipboard.writeText(text).then(markCopied).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            markCopied();
+                        } catch (fallbackErr) {
+                            console.error('Fallback copy failed: ', fallbackErr);
+                        }
+                        document.body.removeChild(textArea);
+                    });
+                });
+
+                toolbar.appendChild(button);
+                frame.appendChild(toolbar);
+                pre.parentNode.insertBefore(frame, pre);
+                frame.appendChild(pre);
+            });
+
+            document.querySelectorAll('[data-code-tabs]').forEach((root) => {
+                const tablist = root.querySelector('.code-tabs__tablist');
+                const tabs = Array.from(root.querySelectorAll('[role="tab"]'));
+                const panels = Array.from(root.querySelectorAll('[role="tabpanel"]'));
+                if (!tablist || tabs.length === 0 || tabs.length !== panels.length) {
+                    return;
+                }
+
+                const activate = (index) => {
+                    tabs.forEach((tab, i) => {
+                        const selected = i === index;
+                        tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+                        tab.tabIndex = selected ? 0 : -1;
+                        panels[i].hidden = !selected;
+                    });
+                };
+
+                tabs.forEach((tab, index) => {
+                    tab.addEventListener('click', () => {
+                        activate(index);
+                        tab.focus();
+                    });
+                });
+
+                tablist.addEventListener('keydown', (event) => {
+                    const current = tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true');
+                    let next = current;
+                    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+                        next = (current + 1) % tabs.length;
+                    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+                        next = (current - 1 + tabs.length) % tabs.length;
+                    } else if (event.key === 'Home') {
+                        next = 0;
+                    } else if (event.key === 'End') {
+                        next = tabs.length - 1;
+                    } else {
+                        return;
+                    }
+                    event.preventDefault();
+                    activate(next);
+                    tabs[next].focus();
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

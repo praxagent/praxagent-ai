@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Verify the numbers of the post's two step-by-step readings against their pinned receipts.
+"""Verify the numbers of the post's two step-by-step readings, and of later receipt-backed additions, against their pinned receipts.
 
-Run: python verify_walkthroughs.py --verify [--research-repo /path/to/neural-shrimp]
+Run: python verify_walkthroughs.py --verify [--extension ID] [--research-repo /path/to/neural-shrimp]
+The default extension is walkthroughs-20261101; huginn-item18-20261103 covers the frozen test without item 18.
 Each added number is rendered again from its receipt field and must appear in index.md. With a research repository, the
 receipts and figures must also equal the files at the pinned commit. This does not rerun the model.
 """
@@ -13,6 +14,8 @@ import json
 import math
 from pathlib import Path
 import subprocess
+
+FIGURES = {"walkthroughs-20261101": ("fig-branch-three-readings.png", "fig-passage-steps.png", "fig-free-orbit-words.png")}
 
 
 def field(obj, path):
@@ -29,17 +32,23 @@ def render(value, style):
     if style.startswith("ceil"):
         places = int(style[4:])
         return format(math.ceil(value * 10 ** places) / 10 ** places, f".{places}f")
+    if style in ("sci0", "sci1"):
+        mantissa, exponent = format(value, f".{style[3]}e").split("e")
+        return mantissa + r"\times10^{" + str(int(exponent)) + "}"
+    if style == "pct1":
+        return format(100 * value, ".1f")
     return format(value, style)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--verify", action="store_true", required=True)
+    parser.add_argument("--extension", default="walkthroughs-20261101")
     parser.add_argument("--research-repo", type=Path)
     args = parser.parse_args()
     bundle = Path(__file__).resolve().parent
     manifest = json.loads((bundle / "provenance.json").read_text(encoding="utf-8"))
-    ext = next(e for e in manifest["extensions"] if e["id"] == "walkthroughs-20261101")
+    ext = next(e for e in manifest["extensions"] if e["id"] == args.extension)
     prose = (bundle / "index.md").read_text(encoding="utf-8").replace("−", "-")
     receipts = {}
     for name, meta in ext["source_receipts"].items():
@@ -58,11 +67,11 @@ def main():
         if shown not in prose:
             raise ValueError(f"{entry['id']}: {shown} not in index.md")
     if args.research_repo:
-        for fig in ("fig-branch-three-readings.png", "fig-passage-steps.png", "fig-free-orbit-words.png"):
+        for fig in FIGURES.get(ext["id"], ()):
             pinned = subprocess.check_output(["git", "show", f"{ext['source_commit']}:docs/figure-walkthroughs/{fig}"], cwd=args.research_repo)
             if pinned != (bundle / fig).read_bytes():
                 raise ValueError(f"{fig}: differs from the pinned commit")
-    print(f"Walkthroughs verified: {len(ext['new_numbers'])} numbers, {len(ext['source_receipts'])} receipts")
+    print(f"{ext['id']} verified: {len(ext['new_numbers'])} numbers, {len(ext['source_receipts'])} receipts")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,73 @@
+{
+  "id": "BSC5-center-zoom-publication-visual-review",
+  "reviewed_utc": "2026-10-22T05:56:01.428198+00:00",
+  "passed": true,
+  "rendering_receipt": {
+    "path": "/data2/neural-shrimp-data/audits/baby-shrimp-zoom/20261022-contraction-minima-publication-01/receipt.json",
+    "bytes": 3321,
+    "sha256": "9dbc39bd50e2ae3c7b788af6dc6daba606649b409b6557fe930d1f5c28fd4379"
+  },
+  "reviewed_png": {
+    "path": "/data2/neural-shrimp-data/audits/baby-shrimp-zoom/20261022-contraction-minima-publication-01/section-minima-center-zoom-publication.png",
+    "bytes": 267044,
+    "sha256": "f9ab897c08adfcabc00bc6c64a7a894fe09bb079962109ca906a2755d6836ca1"
+  },
+  "reviewed_pdf": {
+    "path": "/data2/neural-shrimp-data/audits/baby-shrimp-zoom/20261022-contraction-minima-publication-01/section-minima-center-zoom-publication.pdf",
+    "bytes": 25372,
+    "sha256": "b285603895394f786a659526b48d4c440c58b0586c50412f9c8523711b8a5961"
+  },
+  "pdf_render": {
+    "path": "/tmp/neural-shrimp-bsc5-publication-actual-qa-01/pdf-review.png",
+    "bytes": 128126,
+    "sha256": "f4559ced73629ba7d79bbda7b6911455724dd1b7eb36be9b2f15202f059ac3fc"
+  },
+  "source_commit": "edb81d406696dd2146c05e0b9cef86e7819e977d",
+  "source_sha256": {
+    "tools/plot_baby_shrimp_contraction_minima_publication.py": "0c50c5655369b377ad27587aa33c01dfd1fd2aea098c5bbd646d247a6daeb2f3",
+    "tools/plot_baby_shrimp_contraction_minima.py": "7786c92d152803524d1c5c18e7eda8ab7aaaf83e4fa0644947363fdac1ea9e71"
+  },
+  "scientific_artist_comparison": "Exact equality against original diagnostic construction on this actual audited receipt: line coordinates/styles, collection offsets/marker paths/sizes, annotations, bounds and equal aspect.",
+  "innermost_sections": [
+    {
+      "arm_id": "line-0-ray-+1",
+      "samples": 7,
+      "status": "no_bracket",
+      "minima": 0
+    },
+    {
+      "arm_id": "line-0-ray--1",
+      "samples": 19,
+      "status": "converged",
+      "minima": 1
+    },
+    {
+      "arm_id": "line-1-ray-+1",
+      "samples": 7,
+      "status": "no_bracket",
+      "minima": 0
+    },
+    {
+      "arm_id": "line-1-ray--1",
+      "samples": 18,
+      "status": "converged",
+      "minima": 1
+    }
+  ],
+  "total_observed_samples": 51,
+  "total_minima": 2,
+  "bracket_display_lengths_points_at_native_7in_width": [
+    0.7436927811734373,
+    0.7436927809231771
+  ],
+  "findings": [
+    "Both scientific panels, all four supports/rays/statuses, all 51 samples and two minima are retained.",
+    "No clipping or text/legend overlap; axes and statuses readable at the intended publication size.",
+    "No new contour or line joins the independent minima.",
+    "PNG and Poppler-rendered PDF were both inspected."
+  ],
+  "limits": [
+    "Bracket lines retain true measured widths; their approximately sub-point display lengths are covered by larger star markers. Numeric bracket widths should be read from the text or receipt, not inferred visually.",
+    "This review covers the standalone publication plot. The parent must inspect the embedded manuscript PDF after rebuilding."
+  ]
+}

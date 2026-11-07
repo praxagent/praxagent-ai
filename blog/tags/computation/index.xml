@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Computation on praxagent Research Notes</title>
+    <link>http://127.0.0.1:8000/blog/tags/computation/</link>
+    <description>Recent content in Computation on praxagent Research Notes</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 03 Nov 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://127.0.0.1:8000/blog/tags/computation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Too Many Secrets: Hiding bits and logic in a language-model feedback loop</title>
+      <link>http://127.0.0.1:8000/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/</link>
+      <pubDate>Tue, 03 Nov 2026 00:00:00 +0000</pubDate>
+      <guid>http://127.0.0.1:8000/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/</guid>
+      <description>Run as a feedback loop, a language model’s numerical behavior, rather than its words, carried complete requests and replies, held a written bit, and ran simple logic on it. A visual summary of what worked, what fell short, and why this is a channel rather than a secret.</description>
+    </item>
+  </channel>
+</rss>

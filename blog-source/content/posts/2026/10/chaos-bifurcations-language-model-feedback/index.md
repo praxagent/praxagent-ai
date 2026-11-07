@@ -3597,7 +3597,7 @@ shows where the successive turns of one passage land.
 
 ![Schematic in two panels, drawn from the fold's normal form. (a) The step that one two-step iterate makes in the oriented coordinate v, plotted across the channel from -U to U for three distances from the fold: a dashed orange parabola, before the fold, dips below the axis and crosses zero at a filled point (the attracting 2-cycle) and an open point (its unstable partner); a dotted black parabola, at the fold, just touches zero at v = 0; a solid blue parabola, beyond the fold, stays above the axis, and its low minimum near v = 0 is labeled ghost. (b) The 71 positions of one full passage from -U to U beyond the fold, drawn as dots on a line, widely spaced near the two ends and crowded near the middle; an orange arrow labeled burst, reinjection curves from the exit at U back to a short orange bar slightly left of the middle.](tikz-passage.svg)
 
-<p class="figure-note">Diagram: the bottleneck behind the stripes, drawn from the fold's normal form with the network's coefficients \(a = -4.834\) and \(b = -25.4285\), in the oriented critical coordinate \(v\); the channel runs from \(-U\) to \(U\), with \(U = 0.1/\lvert b\rvert\). It is a picture of the normal form, not a measurement. (a) The step of one iterate of \(G\), \(\Delta v = \lvert a\rvert\varepsilon + \lvert b\rvert v^2\): how far \(v\) moves in one turn, at each point of the channel. Before the fold (\(\varepsilon = -10^{-5}\), dashed) the step is zero at two points, which are fixed points of \(G\): the attracting 2-cycle (filled) and its unstable partner (open). At the fold (\(\varepsilon = 0\), dotted) the two merge at \(v = 0\). Beyond it (\(\varepsilon = 10^{-5}\), solid) the step never reaches zero, so no fixed point remains, but it stays small near \(v = 0\): that slow stretch is the ghost. (b) The 71 iterates of a full passage at \(\varepsilon = 10^{-5}\), from \(-U\) to \(U\). The dots crowd where the step is smallest, so most of the passage is spent near the middle of the channel; the network takes 71 iterates as well (Table 5). Schematically, a free trajectory leaves at \(U\), makes a burst and is reinjected slightly upstream of the middle, so its natural passage is shorter than a full one, on average 0.60 to 0.67 of the normal form's passage through the same channel. The orange bar marks the measured entry points (\(v \approx -7\times10^{-4}\) to \(-3\times10^{-4}\)), which the normal form itself does not predict. Source: drawn from the normal form with the report's coefficients (<a href="provenance.json">provenance.json</a>).</p>
+<p class="figure-note">Diagram: the bottleneck behind the stripes, drawn from the fold's normal form with the network's coefficients \(a = -4.834\) and \(b = -25.4285\), in the oriented critical coordinate \(v\); the channel runs from \(-U\) to \(U\), with \(U = 0.1/\lvert b\rvert\). It is a picture of the normal form, not a measurement. (a) The step of one iterate of \(G\), \(\Delta v = \lvert a\rvert\varepsilon + \lvert b\rvert v^2\): how far \(v\) moves in one turn, at each point of the channel. Before the fold (\(\varepsilon = -10^{-5}\), dashed) the step is zero at two points, which are fixed points of \(G\): the attracting 2-cycle (filled) and its unstable partner (open). At the fold (\(\varepsilon = 0\), dotted) the two merge at \(v = 0\). Beyond it (\(\varepsilon = 10^{-5}\), solid) the step never reaches zero, so no fixed point remains, but it stays small near \(v = 0\): that slow stretch is the ghost. (b) The 71 iterates of a full passage at \(\varepsilon = 10^{-5}\), from \(-U\) to \(U\). The dots crowd where the step is smallest, so most of the passage is spent near the middle of the channel; the network takes 71 iterates as well (Table 5). Schematically, a free trajectory leaves at \(U\), makes a burst and is reinjected slightly upstream of the middle, so its natural passage is shorter than a full one, on average 0.60 to 0.67 of the normal form's passage through the same channel. The orange bar marks the range of the median entry points (\(v \approx -7\times10^{-4}\) to \(-3\times10^{-4}\)), which the normal form itself does not predict. Source: drawn from the normal form with the report's coefficients (<a href="provenance.json">provenance.json</a>).</p>
 
 ![Four panels of the fold of the 2-cycle ' is it'. (a) Two branches of 2-cycles, filled circles for the attracting one and open circles for its unstable partner, meet at a vertical line at the fold and end there; orange curves show the normal form's prediction, a sideways parabola. (b) The largest multiplier of the two-step map on both branches approaches 1 at the fold from above and below, along the normal form's predicted curves. (c) Passage times through the bottleneck beyond the fold, measured on the network as markers, one shape per distance from the fold (circles, squares, triangles and diamonds), and predicted by the normal form as lines, for four distances from the fold: 144, 71, 34 and 14 iterates. (d) For a free trajectory over 600 two-step iterates, the size of its critical coordinate, |u|, on a logarithmic axis: stretches inside a shaded band, the bottleneck, in which |u| dips sharply through zero and climbs out again, alternate with bursts that rise to order one; the band's label, bottleneck |u| < U, sits in an empty stretch of the band, clear of the trajectory.](fig-fold.png)
 
@@ -3622,8 +3622,8 @@ shows where the successive turns of one passage land.
 **The short version.** Just past the fold the 2-cycle `" is it"` no longer exists, but the loop keeps writing it for dozens
 of laps, because each lap moves the state only a tiny distance. Panel (c) follows that slow crossing one lap at a time from
 a chosen start. Panel (d) lets the loop run free. It crawls through the same channel while `" a"` slowly gains on `" it"`.
-When `" a"` finally wins, the sentence ends, `" is a is a . This is"`, and the loop falls back into the channel. The
-formula predicts how long each crawl takes from where it begins, with nothing fitted. The long flat stretches of panel (d)
+When `" a"` finally wins, the sentence ends, `" is a is a . This is"`, and the loop falls back into the channel. Given
+where a crawl begins, the fold's formula predicts how long it takes, with nothing fitted. The long flat stretches of panel (d)
 turn out to be more crawling, seen on the other word of the cycle.
 {{< /panel >}}
 
@@ -3631,19 +3631,22 @@ turn out to be more crawling, seen on the other word of the cycle.
 from \(3\times10^{-6}\) to \(10^{-4}\). The 2-cycle is gone, so the question is what the loop does instead. The unit of time
 in both panels is a *lap*: one iterate of \(G = F^2\), which is two steps of the loop, one turn around the vanished 2-cycle.
 
-**What the vertical axis of (c) measures.** The state has 896 numbers, but near the fold only one direction matters, because
-a displacement along any other direction shrinks to less than 4% of itself on every lap. So one number is enough, and it is
-read in four pieces.
+**What the vertical axis of (c) measures.** The state has 896 numbers, but near the fold only one direction matters. A
+displacement has a part along that direction and a part outside it, and the part outside shrinks fast, to about 4% of itself
+on every lap (the next multiplier at the fold is 0.037). So one number is enough, and it is read in four pieces.
 
 - *The reference point.* \(x_c\) is one state of the 2-cycle at the moment it dies. The 2-cycle has two states, and this is
   the one the loop reaches after writing `" is"`.
 - *The coordinate.* \(u = \ell^{\top}(x - x_c)\) says how far a state lies from \(x_c\) along the critical direction. The
-  left eigenvector \(\ell\) of the section above works like a ruler that reads that one direction and ignores all the others.
+  left eigenvector \(\ell\) of the section above works like a slanted ruler: it reads that one direction and ignores the
+  other eigendirections, which a plain projection would mix in. Near \(x_c\) the reading is close to a true distance. Far
+  from it the reading is not, because \(\ell\) has length 33 and stands almost at right angles to the
+  critical direction.
 - *The orientation.* \(v\) is \(u\) with its sign chosen so that the drift runs upward. Here \(a\) and \(b\) are negative, so
   \(v = -u\) in the notation above, and the runs store \(v\).
 - *The channel.* It runs from \(v = -U\) to \(v = +U\), with \(U = 0.1/\lvert b\rvert = 0.00393\). This edge is a
-  convention, not a discovery: it is where the curved part of the formula alone moves the state by a tenth of \(U\) in one
-  lap, so the crossing has stopped being slow.
+  convention, not a discovery. In the formula above a lap moves the state by \(\lvert a\rvert\varepsilon + \lvert b\rvert v^2\),
+  and at \(v = \pm U\) the second term alone is a tenth of \(U\), so close to the fold the slow part of the crossing is over.
 
 So \(v_n/U\) is a position on a short stretch of road: \(-1\) at the entrance, 0 at the spot where the 2-cycle used to be,
 \(+1\) at the exit. The road really is short. Its full length, \(2U\), is 2.8% of the
@@ -3668,7 +3671,7 @@ network's derivatives at the fold, so nothing is fitted to the passages.
 | 70 | +0.96 | 0.113 |
 | 71 | +1.08 | past the exit |
 
-<p class="figure-note">One full passage at \(\varepsilon = 10^{-5}\), selected rows of the orange squares in Figure 26c. Source: <a href="walkthrough-passage.json">walkthrough-passage.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/a1e38f7d902b7214b6764cc71b2068c26025a0df/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
+<p class="figure-note">One full passage at \(\varepsilon = 10^{-5}\), selected rows of the orange squares in Figure 26c. Source: <a href="walkthrough-passage.json">walkthrough-passage.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/5b7a02a172e76950300b44a4f6168c6a8161d2fb/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
 
 The moves are large at both ends and smallest in the middle, about nine times smaller. As a result 35
 of the 71 laps are spent in the middle quarter of the channel, \(\lvert v\rvert < U/4\). That slow
@@ -3688,15 +3691,18 @@ network: each marker is one measured lap, placed at where the lap started.
 
 ![Log-scale plot of how far one lap moves the state, in units of U, against where the lap starts, from the entrance at -1 to the exit at +1. Four colored parabola-like lines, one for each distance from the fold, all dip to a minimum at the center of the channel: about 0.0037 for epsilon 3e-6, 0.012 for 1e-5, 0.037 for 3e-5 and 0.12 for 1e-4. They come together toward the two edges at about 0.1 to 0.2. Measured markers follow each line closely, a little below it on the left half and a little above it on the right half. The legend gives the passage lengths: 144, 71, 34 and 14 laps.](fig-passage-steps.png)
 
-<p class="figure-note">The bottleneck of Figure 26c, measured directly. Finding: on the network, the move of each lap follows the formula's parabola, with its bottom at \(\lvert a\rvert\varepsilon\) and no fitted parameter. The curves of panel (c) are this relation added up, lap after lap: where a line here is low, the curve there is flat. What not to over-read: the match is close but not exact lap by lap (see below). The vertical axis is logarithmic. Source: <a href="walkthrough-passage.json">walkthrough-passage.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/a1e38f7d902b7214b6764cc71b2068c26025a0df/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
+<p class="figure-note">The bottleneck of Figure 26c, measured directly. Finding: on the network, the move of each lap follows the formula's parabola, with its bottom at \(\lvert a\rvert\varepsilon\) and no fitted parameter. The curves of panel (c) are this relation added up, lap after lap: where a line here is low, the curve there is flat. What not to over-read: the match is close but not exact lap by lap (see below). The vertical axis is logarithmic. Source: <a href="walkthrough-passage.json">walkthrough-passage.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/5b7a02a172e76950300b44a4f6168c6a8161d2fb/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
 
-**Why closer to the fold means slower.** The smallest move is proportional to \(\varepsilon\), and the slow middle
-narrows only like \(\sqrt{\varepsilon}\), so the time to cross grows like \(1/\sqrt{\varepsilon}\): four times closer to the
-fold, about twice as long. In a channel with no edges the crossing would take \(\pi/\kappa\) laps, with
-\(\kappa = \sqrt{ab\,\varepsilon}\). Our channel has edges, so the crossing is shorter, and the closed form of
-[the section above](#the-fold-and-its-ghost) gives \(n = (2/\kappa)\arctan(0.1/\kappa)\). At \(\varepsilon = 10^{-5}\):
-\(\kappa = \sqrt{122.93 \times 10^{-5}} = 0.0351\), and
-\(n = (2/0.0351) \arctan(2.85) = 70.4\).
+**Why closer to the fold means slower.** The middle counts as slow while the parabola term is smaller than the push,
+\(\lvert b\rvert v^2 < \lvert a\rvert\varepsilon\), that is for \(\lvert v\rvert < \sqrt{\lvert a\rvert\varepsilon/\lvert b\rvert}\). So as
+\(\varepsilon\) shrinks, the speed there falls like \(\varepsilon\) while the width falls only like \(\sqrt{\varepsilon}\), and
+width over speed grows like \(1/\sqrt{\varepsilon}\): four times closer to the fold, twice as long. That is the law for a
+channel with no edges, where the crossing takes \(\pi/\kappa\) laps, with \(\kappa = \sqrt{ab\,\varepsilon}\). Our channel has
+edges, which cut off 15 to 20 laps, so over the table's range the count rises faster than the law: ten times closer takes
+71 laps instead of 14, about five times as long. Because
+\(\lvert b\rvert U = 0.1\), the closed form of [the section above](#the-fold-and-its-ghost) gives
+\(n = (2/\kappa)\arctan(0.1/\kappa)\). At \(\varepsilon = 10^{-5}\): \(\kappa = \sqrt{122.93 \times 10^{-5}} = 0.03506\),
+and \(n = (2/0.03506) \arctan(2.852) = 70.4\).
 
 | \(\varepsilon\) | Smallest move, in \(U\) | No edges, \(\pi/\kappa\) | Closed form | Formula, lap by lap | Measured |
 |---|---|---|---|---|---|
@@ -3705,17 +3711,23 @@ fold, about twice as long. In a channel with no edges the crossing would take \(
 | \(3\times10^{-5}\) | 0.0369 | 51.7 | 33.8 | 34 | 34 |
 | \(1\times10^{-4}\) | 0.1229 | 28.3 | 13.2 | 14 | 14 |
 
-<p class="figure-note">Laps to cross the channel from \(-U\) to \(+U\). The formula counted lap by lap gives a whole number, the first lap past the exit, so it lands just above the closed form. Source: <a href="walkthrough-passage.json">walkthrough-passage.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/a1e38f7d902b7214b6764cc71b2068c26025a0df/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
+<p class="figure-note">Laps to cross the channel from \(-U\) to \(+U\). The formula counted lap by lap gives a whole number, the first lap past the exit, so it lands just above the closed form. Source: <a href="walkthrough-passage.json">walkthrough-passage.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/5b7a02a172e76950300b44a4f6168c6a8161d2fb/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
 
-**How exact the match is.** The totals match to the lap, but no single lap does. Lap by lap the formula is off by up to
+**How exact the match is.** At the four distances of Table 5 the totals match to the lap (a short development run at
+\(\varepsilon = 5\times10^{-4}\) took 3 laps against 4), but the laps
+themselves do not. Lap by lap the formula is off by up to
 7.6% at \(\varepsilon = 10^{-5}\) and up to
 14.3% at \(10^{-4}\). It overstates the move on the way in and understates it on
 the way out, which shows in the figure above as markers below the line on the left and above it on the right. Over a full
 passage these errors nearly cancel: at \(\varepsilon = 10^{-5}\) the measured passage takes
 36 laps to reach the middle and 35 more to the exit, where the formula takes
 35 and 36. So part of the exact agreement in Table 5 comes from that
-cancellation. The formula drops terms of order \(u^3\), and a cubic term would tilt the errors this way, but we have not
-separated it from the other dropped terms.
+cancellation. The formula drops terms of order \(u^3\) and \(\varepsilon u\), and both tilt the errors this way, because each
+has opposite signs on the two sides of the middle. That is why they nearly cancel over a full passage, and why a passage
+started at the midpoint comes in a lap short at three of the four distances of Table 5. A fit to the laps at five distances,
+made after the fact, needs both terms: near the exit the cubic term is about
+5% of the move at \(\varepsilon = 3\times10^{-6}\), and the
+\(\varepsilon u\) term about 10% at \(10^{-4}\).
 
 **What changes in panel (d).** Nobody places the state now. The loop starts near the fixed start, with a tiny random
 displacement, runs for 100 laps to forget that start, and the next 600 laps are plotted, at the same
@@ -3724,19 +3736,21 @@ way. The fourth settles on a different loop, `" certainly . Hello"`, and never e
 
 **Why the panel looks so spiky.** The panel plots \(\lvert u\rvert\), a size with the sign dropped, on a logarithmic axis. A
 crawl from \(-U\) to \(+U\) passes through zero, and a logarithmic axis has no zero: the curve plunges as \(u\) crosses it, and
-the depth of the plunge only reflects how close one lap happened to land. So every sharp spike *downward* is a quiet crossing
-of the middle of the channel, not an event. Panel (b) below draws the same numbers on a linear axis with the sign kept. The
-downward spikes disappear, and each crawl becomes one steady climb.
+the depth of the plunge only reflects how close one lap happened to land. So every narrow dip is a quiet crossing of the
+middle of the channel, not an event. Do not confuse it with the steep fall right after each upward spike, which is the real
+return to the channel. Panel (b) of the figure below draws the same trajectory on a linear axis with the sign kept, in units
+of \(U\) and only within \(\pm3\), so the upward spikes leave the frame. The dips disappear, and each crawl becomes one climb,
+always upward.
 
-![Three stacked panels over the first 345 laps of the free trajectory of Figure 26d. (a) The article's view: the size of u on a logarithmic axis, with the bottleneck band shaded. Curves dip to sharp minima inside the band, rise out of it to peaks near 1, and one flat stretch near 0.4 runs from about lap 181 to 233. (b) The same numbers on a linear axis in units of U with the sign kept, drawn only within plus or minus 3: black curves climb steadily across the shaded channel from about 0 or -1 to the exit at +1; a blue curve, the coordinate read one step later, climbs across the channel in the same way between about laps 180 and 225, which is exactly the flat stretch of panel (a). (c) Probabilities in percent at the step that writes " it": " it" near 27, " there" near 20 and " a" near 19 during each crawl; near each exit " a" rises and overtakes " it", spiking above 50 percent, before all three return to their levels.](fig-free-orbit-words.png)
+![Three stacked panels over the first 345 laps of the free trajectory of Figure 26d. (a) The article's view: the size of u on a logarithmic axis, with the bottleneck band shaded. Curves dip to sharp minima inside the band, rise out of it to peaks near 1, and one flat stretch near 0.4 runs from about lap 181 to 233. (b) The same numbers on a linear axis in units of U with the sign kept, drawn only within plus or minus 3: black curves climb steadily across the shaded channel from about 0 or -1 to the exit at +1; a blue curve, the coordinate read one step later, climbs across the channel in the same way between about laps 180 and 225, inside the flat stretch of panel (a). (c) Probabilities in percent at the step that writes " it": " it" near 27, " there" near 20 and " a" near 19 during each crawl; near each exit " a" rises and overtakes " it", reaching about 54 and 55 percent at the first two exits, before all three return to their levels.](fig-free-orbit-words.png)
 
-<p class="figure-note">The first 345 laps of the free trajectory of Figure 26d, three ways. Finding: a crawl is a steady climb across the channel, and the spikes up are sentence ends. (a) is the article's panel over these laps. (b) keeps the sign, on a linear axis, and adds in blue the coordinate read one step later, which shows the crawl hidden in the flat stretch. (c) shows what the coordinate tracks in words: at the step that writes <code>" it"</code>, each crawl is a slow drift among three tokens, and <code>" a"</code> overtakes <code>" it"</code> at the end of it. One trajectory, read after the fact to explain the figure, not a test. Source: <a href="walkthrough-free.json">walkthrough-free.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/a1e38f7d902b7214b6764cc71b2068c26025a0df/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
+<p class="figure-note">The first 345 laps of the free trajectory of Figure 26d, three ways. Finding: a crawl is one climb across the channel, and the spikes up are sentence ends. (a) is the article's panel over these laps. (b) keeps the sign, on a linear axis, and adds in blue the coordinate read one step later, which shows the crawl hidden in the flat stretch. (c) shows what the coordinate follows in words: at the step that writes <code>" it"</code>, each crawl is a slow drift among three tokens, and <code>" a"</code> overtakes <code>" it"</code> at the end of it. One trajectory, read after the fact to explain the figure, not a test. Source: <a href="walkthrough-free.json">walkthrough-free.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/5b7a02a172e76950300b44a4f6168c6a8161d2fb/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
 
 **One full cycle, in words.** We reran the published trajectory with the same inputs, this time recording the most probable
 tokens. Its coordinates came back identical, with a largest difference of 0.0 over
 600 laps in all 24 rows of the batch, so these are the words of the plotted trajectory.
 
-| Lap | \(v\) | First step of the lap | Second step of the lap |
+| Lap | \(v\) | First step | Second step |
 |---|---|---|---|
 | 0 | −0.0006 | `" it"` 27.0%, `" there"` 20.0%, `" a"` 18.7% | `" is"` 62.0%, `" indeed"` 14.9% |
 | 47 | +0.0038 | `" it"` 26.9%, `" there"` 19.6%, `" a"` 19.1% | `" is"` 61.7%, `" indeed"` 15.4% |
@@ -3747,19 +3761,23 @@ tokens. Its coordinates came back identical, with a largest difference of 0.0 ov
 | 61 | −0.0137 | `" it"` 29.4%, `" there"` 28.1%, `" a"` 17.2% | `" is"` 59.6%, `"'s"` 24.9% |
 | 62 | −0.0003 | `" it"` 26.6%, `" there"` 21.2%, `" a"` 18.3% | `" is"` 61.8%, `" indeed"` 14.8% |
 
-<p class="figure-note">The first cycle of the free trajectory of Figure 26d. Each lap is two steps; the columns give the top tokens and their probabilities at each step. Source: <a href="walkthrough-free.json">walkthrough-free.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/a1e38f7d902b7214b6764cc71b2068c26025a0df/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
+<p class="figure-note">The first cycle of the free trajectory of Figure 26d. Each lap is two steps, and \(v\) is read at the end of the lap, on the state of its second step. The columns give the top tokens and their probabilities at each step. Source: <a href="walkthrough-free.json">walkthrough-free.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/5b7a02a172e76950300b44a4f6168c6a8161d2fb/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
 
 Laps 0 to 47 are the crawl. The loop writes `" it is it is"`, and it is a soft loop: even the winner of the `" it"` step has
 only about 27%, with `" there"` at about 20% and `" a"`
 at about 19%. Over this whole crawl `" a"` gains only from
-18.7% to 19.1%. That is what the coordinate is measuring: a very slow drift in a
-three-way competition, too small to change the text.
+18.7% to 19.1%. The coordinate itself is read one step later, on the `" is"`
+state, where `" indeed"` creeps from 14.9% to 15.4% over this
+crawl. One step of the loop carries that state to the next `" it"` step, so the two drift together: across the full crawl of
+laps 241 to 310, \(v\) and the probability of `" a"` have a correlation of 0.999. So the coordinate
+follows a very slow drift in a three-way competition, too small to change the text.
 
 The channel's exit at \(+U\) is invisible in the words. After it the drift speeds up by itself, and at lap 58 `" a"`
 overtakes `" it"`, 24.6% to 23.5%. Now the text changes
 fast. At lap 59 the model writes `" a"` at 54% and then a full stop at
 91%. The state after that lap is mostly a soft full stop, far from the two states of the
-crawl, which is why \(\lvert u\rvert\) jumps to about 1.1: that is the spike *upward*. At lap 60 the sentence
+crawl, which is why \(\lvert u\rvert\) jumps to about 1.1, a reading on the slanted ruler (the true distance is
+0.46). That is the spike *upward*. At lap 60 the sentence
 restarts with `" This"` and `" is"`, and by lap 62 the state is back in the channel at \(v = −0.0003\). The text
 reads `" it is it is a is a . This is it is it is"`.
 
@@ -3767,41 +3785,58 @@ These are the pieces of the stripe texts of Table 4, `". This"` followed by `"is
 exactly, with a fixed number of `"is it"` pairs. Here the number of pairs changes from one sentence to the next.
 
 **The flat stretches are not bursts.** Laps 181 to 233 sit almost still at \(\lvert u\rvert \approx 0.42\), far outside the
-band. They are more crawling. The longer burst before them had an odd number of words, which shifted the text by one step.
+band. They are more crawling. The burst before them restarts the sentence in a different way. The usual ending puts three
+words between one `" is"` and the next, `" a . This"`, and `" is"` stays the second word of each lap. At lap 167 the text
+instead breaks the line and restarts with `"\n\nThe"`, only two words, so from there on `" is"` is the first word of each lap.
 Since the coordinate is read every two steps, it now lands on the other word of the 2-cycle, and because \(u\) is measured
 from \(x_c\), that other state reads about 0.42 instead of about 0. The text confirms it: these laps read `" is it"` where
-the crawls read `" it is"`.
+the crawls read `" it is"`. The same two-word restart ends the flat stretch at laps 236 and 237. This says where the beat
+moves, not why the model takes that restart.
 
-We tested this directly by applying one more step of the loop to every saved state. During the flat stretch that reading lies
-in the channel and climbs from −0.0004, staying inside it for
-45 laps, the blue curve above. During an ordinary crawl it is the other way round: one step later the
-reading sits between 0.41 and 0.42. So the shaded band of
+We tested this directly by applying one more step of the loop to every saved state. During the flat stretch that reading climbs
+through the channel from −0.0004, staying inside it for 45 laps,
+the blue curve above, and then runs out past the exit while the flat reading has barely moved, so the flat stretch lasts 53
+laps. During an ordinary crawl it is the other way round: one step later the reading sits at about 0.42, from
+0.414 to 0.422 over the eight crawls. So the shaded band of
 panel (d) sees only the crawls on one word of the cycle. Counting both, this trajectory is in the channel for
 74% of the first 600 laps instead of 65%. Over
 the 1500 recorded laps, 46% are inside the band and another
-33% are on flat stretches, so most of the time this loop is crawling. The bursts
-proper are short.
+33% are on flat stretches. Only the first of those 8 stretches, and the
+start of the second, could be tested one step later, because the states were saved for 600 laps. The others sit at the same
+reading, 0.41 to 0.44, so we read them the same way. On that
+reading most of the time this loop is crawling, and the bursts proper are short.
 
 **Why the crawls differ in length.** A crawl lasts as long as the road ahead of it, so it depends on where the burst drops the
-state. The formula knows nothing about the bursts, but given the entry point it predicts the rest with the closed form of
-[the section above](#the-fold-and-its-ghost), again with nothing fitted.
+state. The formula knows nothing about the bursts, but once the state has landed on the channel it predicts the rest with the
+closed form of [the section above](#the-fold-and-its-ghost), again with nothing fitted. In this trajectory that holds to within
+one lap for all 13 complete crawls of the 1500 laps, and across the three trajectories
+at this \(\varepsilon\) that alternate, for 29 of 30. The exception
+is first read at −0.93\(U\) and lasts 21 laps against a forecast of
+70, because at that reading the state has not yet settled onto the channel: one lap later it reads
++0.22\(U\). [The window law](#the-window-law) gives the statistics over all four distances for a
+wider channel, \(\lvert u\rvert < 3U\): median errors of 4.1% to 7.7%, with single phases off by up to 71%.
 
-| Burst ended at lap | How it ended | Next entry \(v/U\) | Next crawl, measured | From the formula |
+| Burst ended at lap | How it ended | First lap in the band, \(v/U\) | Crawl, measured | From the formula |
 |---|---|---|---|---|
 | 61 | `" a is a . This"` | −0.06 | 40 | 40.3 |
 | 115 | `" a is a . This"` | −0.06 | 40 | 40.1 |
-| 240 | longer burst, then a flat stretch | −0.95 | 70 | 69.9 |
+| 179 | longer burst, read one step later | −0.13 | 45 | 45.0 |
+| 240 | restart after the flat stretch | −0.95 | 70 | 69.9 |
 | 338 | longer burst | −0.16 | 47 | 47.4 |
 | 399 | `" a is a . This"` | −0.08 | 41 | 41.4 |
 | 454 | `" a is a . This"` | −0.09 | 42 | 42.6 |
 | 510 | `" a . This"` | −0.46 | 62 | 61.5 |
 
-<p class="figure-note">Every crawl that follows a burst in the first 600 laps of the free trajectory of Figure 26d. Predicted: \(n(v_{\mathrm{in}})\) from the entry point to \(+U\), with \(\kappa = 0.0351\). Which entry point a burst leads to is not predicted. Source: <a href="walkthrough-free.json">walkthrough-free.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/a1e38f7d902b7214b6764cc71b2068c26025a0df/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
+<p class="figure-note">Every complete crawl that follows a burst in the first 600 laps of the free trajectory of Figure 26d, including the one hidden in the flat stretch, read one step later. From the formula: \(n(v_{\mathrm{in}})\) from the first lap in the band to \(+U\), with \(\kappa = 0.03506\). Which entry point a burst leads to is not predicted. Source: <a href="walkthrough-free.json">walkthrough-free.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/5b7a02a172e76950300b44a4f6168c6a8161d2fb/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
 
 The usual ending, `" a is a . This"`, drops the state close to the middle of the channel, so the next crawl is short, about 40
-laps. A slightly different ending, `" a . This"`, drops it further upstream, and the entry after the flat stretch is almost at
-the channel's beginning, which gives nearly the full 71 laps of panel (c). This is why the laminar phases of panel (d) run from
-40 to 70 laps while a full passage takes 71.
+laps. The one `" a . This"` ending here drops it further upstream, at −0.46\(U\), but the
+words do not fix the landing point: in another trajectory at this \(\varepsilon\) the same ending lands at
+−0.10\(U\) and −0.21\(U\). The restart that ends the
+flat stretch lands upstream of the channel altogether, at −3.0\(U\) and then
+−1.2\(U\), so the state crosses nearly all of it. The −0.95 in the table
+is only the first lap inside the band, and that crawl takes nearly the full 71 laps of panel (c). This is why the laminar phases
+of panel (d) run from 40 to 70 laps: a full passage, 71 laps, is the most the band can hold.
 
 ### The window law {#the-window-law}
 
@@ -3818,9 +3853,11 @@ like \(N^{-2}\), the law of a saddle-node ghost
 relaxation times over inputs that [Kim (2026)](#ref-kim-2026) found in a small
 task-trained looped transformer; here \(N\) counts the laps of a periodic window.
 
-**Natural reinjection.** After each burst, a free trajectory re-enters the
-channel slightly upstream of the bottleneck's middle (\(v \approx -3\times10^{-4}\)
-to \(-7\times10^{-4}\), in the same oriented coordinate). From each measured entry
+**Natural reinjection.** After a burst, a free trajectory usually re-enters the
+channel slightly upstream of the bottleneck's middle: the median entry lies at
+\(v \approx -3\times10^{-4}\) to \(-7\times10^{-4}\) at the four distances, in the
+same oriented coordinate, and single entries spread wider, as in the table of
+[Reading panels (c) and (d)](#reading-the-passages). From each measured entry
 point the normal form forecasts how long the natural laminar phase that follows
 lasts. For complete phases, those that stay within \(\lvert u\rvert < 3U\) and within
 0.05 of the channel in the other directions, the median signed forecast error at the
@@ -5381,15 +5418,17 @@ different sheets of the orbit family, and only their shadows in the parameter pl
 **The short version.** Every point of Figure 49b is one complete loop, not a moment in time. All 124 loops on
 the curve write the same six tokens and differ only in the probabilities behind those tokens. The vertical axis turns each
 loop into one number by projecting one of its states onto a chosen direction, so its exact values mean little by
-themselves. On this branch they follow how likely the model is to continue `"The existence"` with `" is"` instead of a
-line break, a probability that runs from 9.9% to 12.7%. Redrawn in
+themselves. On this branch they follow how likely the model is to continue `"The existence"` with `" is"`, a probability
+that runs from 9.9% to 12.7%. Redrawn in
 those probabilities, the curve is the same S with its folds in the same places. The folds and the shaded interval are the
 results. The axis is only a way of drawing them.
 {{< /panel >}}
 
-**A point on the curve is a whole loop.** Nothing travels along this curve while the model runs. Pick a steering strength
-\(\alpha\), and the loop settles onto one repeating orbit and stays there. Each point of the curve is one such orbit,
-computed separately. Think of the curve as a catalog of possible loops, arranged so that neighbors differ only slightly.
+**A point on the curve is a whole loop.** Nothing travels along this curve while the model runs. Each point is one repeating
+orbit at one steering strength \(\alpha\), computed separately. On the solid stretches a running loop can settle onto that
+orbit and stay there. On the dashed stretches the orbit still exists, but a running loop moves away from it, and
+64 of the 124 points are of that kind. Think of the curve as a catalog of possible loops,
+arranged so that neighbors differ only slightly.
 The horizontal position says which \(\alpha\) a loop runs at. The vertical position says which of the possible loops it is.
 
 **All 124 loops write the same text.** Every orbit on the branch has the same six most probable tokens in the
@@ -5419,31 +5458,36 @@ a state's length, which is why the numbers look so small.
 dot product splits into one term per token:
 
 \[
-y = \sum_i \bigl(p_i - \bar{p}_i\bigr)\,(E_i \cdot w) .
+y = \sum_i \bigl(p_i - \bar{p}_i\bigr)\,\bigl((E_i - \bar{x}) \cdot w\bigr) .
 \]
 
 Each term is how far that token's probability sits from its average on the branch, multiplied by a fixed weight: how far
-the token's embedding lies along \(w\). On this branch three tokens carry almost everything. Here is the sum worked out
-for one orbit on the upper sheet, at \(\alpha = 0.072947\):
+the token's embedding lies along \(w\), measured from the average state. On this branch three tokens carry most of it.
+Here is the sum worked out for one orbit on the upper sheet, at \(\alpha = 0.072947\), with the probabilities
+of the tokens right after `"The existence"`:
 
-| Token after `"The existence"` | Weight \(E_i \cdot w\) | Average probability on the branch | Probability in this orbit | Its term in \(y\) |
+| Token | Weight \((E_i - \bar{x}) \cdot w\) | Branch average | This orbit | Term in \(y\) |
 |---|---|---|---|---|
-| single line break `"\n"` | −0.468 | 19.74% | 18.84% | +0.0042 |
-| blank line `"\n\n"` | −0.361 | 55.95% | 55.54% | +0.0015 |
-| `" is"` | +0.119 | 11.26% | 12.11% | +0.0010 |
-| every other token | | | | −0.0001 |
-| **Total: the plotted value** | | | | **+0.0065** |
+| `" is"` | +0.408 | 11.26% | 12.11% | +0.00346 |
+| single line break `"\n"` | −0.179 | 19.74% | 18.84% | +0.00160 |
+| blank line `"\n\n"` | −0.072 | 55.95% | 55.54% | +0.00029 |
+| every other token | | | | +0.00120 |
+| **Total: the plotted value** | | | | **+0.00654** |
 
-<p class="figure-note">One orbit's vertical coordinate, written as a sum over tokens. The weights are the same for every orbit; only the probabilities change. Over the whole branch these three tokens account for the coordinate to within 0.0002. Source: <a href="walkthrough-branch.json">walkthrough-branch.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/a1e38f7d902b7214b6764cc71b2068c26025a0df/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
+<p class="figure-note">One orbit's vertical coordinate, written as a sum over tokens. The weights are the same for every orbit; only the probabilities change. Because the changes in probability add up to zero, the split depends on where the weights are measured from, though the total does not. This table uses the average state, the axis's own origin. Over the whole branch the other tokens contribute at most 0.0026. Source: <a href="walkthrough-branch.json">walkthrough-branch.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/5b7a02a172e76950300b44a4f6168c6a8161d2fb/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
 
-So moving up the axis means probability leaving the two line-break tokens and moving to `" is"`. In plain words, the axis
-measures how inclined the model is, right after `"The existence"`, to carry on with the sentence instead of breaking the
-line. The probability of `" is"` follows the coordinate closely (correlation 0.997). The figure below
-draws the same orbits on that probability, and on the probability of a line break.
+So moving up the axis means probability leaving the single line break and moving to `" is"`: along the branch the first
+falls at every point and the second rises at every point. The blank line does not follow. It rises from
+55.1% to 56.8% over the lower quarter of the axis and then falls to
+54.6%. Over the whole branch the total chance of a line break falls from
+77.0% to 73.3%. So, roughly, the axis measures how
+inclined the model is, right after `"The existence"`, to carry on with the sentence instead of breaking the line, and the
+probability of `" is"` follows the coordinate closely (correlation 0.997). The figure below draws the same
+orbits on that probability, and on the probability of a single line break.
 
 ![Three stacked panels that share one horizontal axis, steering strength alpha from about 0.0728 to 0.0732. Each panel draws the same 124 orbits as a curve: solid blue where the orbit is attracting, dashed gray where it is not, with two open circles at the folds, dotted vertical lines through them, and a green band between about 0.07291 and 0.07299 where two attracting orbits exist. (a) The article's axis, the first principal coordinate, from about -0.009 to 0.011: a curve shaped like an S. (b) The probability of " is" at that step, from about 9.9 to 12.7 percent: the same S. (c) The probability of a single line break, from about 18.7 to 21.9 percent: the same S, upside down. The open circles and dotted lines sit at the same alpha values in all three panels.](fig-branch-three-readings.png)
 
-<p class="figure-note">Figure 49b, redrawn three ways. Finding: the same 124 orbits give an S on any of these vertical axes, and the folds (open circles, dotted lines), the solid and dashed stretches and the green interval stay at the same \(\alpha\) in all three, because none of them uses the vertical axis. (a) is the article's coordinate. (b) and (c) are probabilities at the step right after <code>"The existence"</code>. Panel (c) runs the other way up, a reminder that the direction of the axis carries no meaning. The S is small in these units: only a few percentage points separate its ends. Every orbit was iterated again through one period on a CPU and returned to its saved state within 1.0e−10. Source: <a href="walkthrough-branch.json">walkthrough-branch.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/a1e38f7d902b7214b6764cc71b2068c26025a0df/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
+<p class="figure-note">Figure 49b, redrawn three ways. Finding: the same 124 orbits give an S on any of these vertical axes, and the folds (open circles, dotted lines), the solid and dashed stretches and the green interval stay at the same \(\alpha\) in all three, because none of them uses the vertical axis. (a) is the article's coordinate. (b) and (c) are probabilities at the step right after <code>"The existence"</code>. Panel (c) is the S turned upside down, a reminder that which way up the S stands carries no meaning. The S is small in these units: only a few percentage points separate its ends. Every orbit was iterated again through one period on a CPU and returned to its saved state within \(1.0\times10^{-10}\). Source: <a href="walkthrough-branch.json">walkthrough-branch.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/5b7a02a172e76950300b44a4f6168c6a8161d2fb/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
 
 **What depends on the axis, and what does not.** The values depend on it. Another direction gives other numbers, and the
 sign of \(w\) is arbitrary, so the whole picture could as well be drawn upside down. They also depend on the run, because a
@@ -5456,8 +5500,9 @@ dashed middle would never appear, and a solver that simply steps \(\alpha\) fail
 orbit exists. Numerical continuation avoids both problems. It repeats four moves.
 
 1. *Predict.* From a known orbit, take a short step along the curve's tangent, in the combined space of state and \(\alpha\).
-2. *Correct.* Solve \(F^6(x) = x\) by Newton's method, with \(\alpha\) free to adjust, on the plane perpendicular to that
-   tangent. Newton's method does not care whether an orbit attracts, so it converges on saddles too. A point is accepted
+2. *Correct.* \(F^6(x) = x\) gives 896 equations for 897 unknowns, the state and \(\alpha\). Requiring the point to stay on
+   the plane through the predicted point, perpendicular to the tangent, supplies the missing equation. Newton's method
+   solves the system, and it does not care whether an orbit attracts, so it converges on saddles too. A point is accepted
    when the relative residual \(\lVert F^6(x) - x\rVert / \lVert x\rVert\) is below \(10^{-10}\).
 3. *Measure.* Build the \(896\times896\) {{< refterm "monodromy" "monodromy matrix" >}}, the product of the six step
    Jacobians, and take its eigenvalues. These are the multipliers, and they decide solid or dashed.
@@ -5466,24 +5511,26 @@ orbit exists. Numerical continuation avoids both problems. It repeats four moves
 Because the step runs along the curve and not along \(\alpha\), \(\alpha\) is free to shrink or reverse, which is exactly
 what it does at a fold. That is the whole reason a curve with three values over one \(\alpha\) can be drawn at all.
 
-**Walking the S from end to end.** The run starts at the lower left and follows the curve to the upper right.
+**Walking the S from end to end.** The continuation starts at the lower left and follows the curve to the upper right. Two
+kinds of event mark the way: at a fold a multiplier crosses \(+1\), and at a flip a multiplier crosses \(-1\), where an orbit of
+twice the period is born.
 
-| Where on the curve | \(\alpha\) | Axis \(y\) | `" is"` | What happens there |
+| Where | \(\alpha\) | \(y\) | `" is"` | What happens |
 |---|---|---|---|---|
-| Start of the run | 0.072907 | −0.0087 | 9.9% | A flip (multiplier \(-1\)). The first orbit starts attracting here. The line stops here only because the run began here. |
-| First fold | 0.072992 | −0.0075 | 10.3% | A multiplier crosses \(+1\). The attracting orbit meets the saddle, and \(\alpha\) reverses. |
-| Middle stretch | going back | rising | rising | A saddle: one multiplier above 1, reaching 1.81. No run can settle here. |
-| Second fold | 0.072793 | −0.0006 | 11.2% | A multiplier crosses \(+1\) again, and \(\alpha\) turns forward. The orbit attracts again: this is the second orbit. |
-| Second flip | near 0.07301 | +0.0078 | 12.3% | A multiplier crosses \(-1\). The second orbit stops attracting. |
-| End of the run | 0.073203 | +0.0112 | 12.7% | Nothing happens here. The run was set to stop a fixed distance past the first fold. |
+| Start | 0.072907 | −0.0087 | 9.9% | A flip. The first orbit starts attracting. The line stops here only because the continuation began here. |
+| First fold | 0.072992 | −0.0075 | 10.3% | The attracting orbit meets the saddle, and \(\alpha\) reverses. |
+| Middle sheet | going back | rising | rising | A saddle: one multiplier above 1, reaching 1.80. No running loop can settle here. |
+| Second fold | 0.072793 | −0.0006 | 11.2% | \(\alpha\) turns forward, and the orbit attracts again. This is the second orbit. |
+| Second flip | near 0.07301 | +0.0078 | 12.3% | The second orbit stops attracting. |
+| End | 0.073203 | +0.0112 | 12.7% | Nothing happens. The continuation stops a fixed distance past the first fold. |
 
-<p class="figure-note">The 124 orbits of Figure 49b from the first to the last. \(y\) rises at every point along the branch, so the coordinate also works as a position along the curve. Largest relative residual of any orbit: 1.0e−10. Source: <a href="walkthrough-branch.json">walkthrough-branch.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/a1e38f7d902b7214b6764cc71b2068c26025a0df/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
+<p class="figure-note">The 124 orbits of Figure 49b from the first to the last. \(y\) rises at every point along the branch, so the coordinate also works as a position along the curve. Largest relative residual of any orbit: \(1.0\times10^{-10}\). Source: <a href="walkthrough-branch.json">walkthrough-branch.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/5b7a02a172e76950300b44a4f6168c6a8161d2fb/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
 
 **What the shaded interval means.** Between \(\alpha = 0.072907\) and
 0.072992, a vertical line crosses the S three times. Three loops exist at the same settings. Here they
-are side by side, taking the computed orbit of each stretch nearest to \(\alpha = 0.07295\).
+are side by side, taking the computed orbit of each sheet nearest to \(\alpha = 0.07295\).
 
-| Step of the loop | Top token | Lower stretch (attracting) | Middle stretch (saddle) | Upper stretch (attracting) |
+| Step of the loop | Top token | Lower sheet (attracting) | Middle sheet (saddle) | Upper sheet (attracting) |
 |---|---|---|---|---|
 | 1 | `"The"` | 38.5% | 38.9% | 39.2% |
 | 2 | `" question"` | 23.2% | 24.0% | 24.6% |
@@ -5494,12 +5541,15 @@ are side by side, taking the computed orbit of each stretch nearest to \(\alpha 
 | Step 6, chance of `" is"` | | 10.0% | 10.5% | 12.1% |
 | Largest multiplier, in modulus | | 0.23 | 1.73 | 0.68 |
 
-<p class="figure-note">Three coexisting orbits, one from each stretch of the S, at \(\alpha = 0.0729537\), 0.0729482 and 0.0729470, the computed points nearest to 0.07295. All three write the same six tokens. Source: <a href="walkthrough-branch.json">walkthrough-branch.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/a1e38f7d902b7214b6764cc71b2068c26025a0df/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
+<p class="figure-note">Three coexisting orbits, one from each sheet of the S, at \(\alpha = 0.0729537\), 0.0729482 and 0.0729470, the computed points nearest to 0.07295. All three write the same six tokens. Source: <a href="walkthrough-branch.json">walkthrough-branch.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/5b7a02a172e76950300b44a4f6168c6a8161d2fb/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
 
-The text is identical in all three columns, so nothing in the output tells them apart. The two attracting orbits differ by a
-couple of percentage points in probabilities that the text never shows. The saddle sits between them and cannot be held,
-since its largest multiplier is above 1. It acts as the divide between the two: which attracting orbit the loop ends on
-depends on which side of it the loop starts. That is what the thick green segment of Figure 49a marks on the map.
+The text is identical in all three columns, so the words alone do not tell them apart. The two attracting orbits differ by
+up to 2.9 percentage points in probabilities that the words never show. The
+saddle lies between them along the curve and cannot be held, since its largest multiplier is above 1. In state space the
+divide between the two basins is not the saddle orbit itself but, where this was tested, its stable manifold, a surface
+with one dimension fewer than the state ([Inside the kite](#inside-the-kite)). That test was made higher in the kite, at
+\(\alpha = 0.072975\). On this line the basins have not been mapped. The thick green segment of Figure 49a marks this
+interval on the map.
 
 ### Inside the kite: the hook, its saddle and the rest of the window {#inside-the-kite}
 
@@ -8636,7 +8686,7 @@ two copies of a fixed map, and at \(c = 0.25\) they barely synchronized although
 block of layers many times on the same input before writing each token, so its
 reasoning is itself an iterated map with a fixed point. The spectrum of that fixed
 point, computed before any task is scored, predicts how the model responds when the
-iteration is over- or under-relaxed. A test fixed in advance on GSM8K problems not read before it was frozen
+iteration is over- or under-relaxed. A test fixed in advance on GSM8K problems not scored before it was frozen
 confirmed the predicted accuracy loss at strong over-relaxation and no loss at mild
 over-relaxation, and on ARC-Challenge the spectrum ranked questions by how far their
 iteration was from settling.
@@ -8659,9 +8709,11 @@ spectrum predicts at which \(\lambda\) the loop loses stability: over-relaxation
 pushes the multipliers outward, and a multiplier crosses the unit circle at
 \(\lambda_c = 2(1 - \mathrm{Re}\,\mu)/\lvert1 - \mu\rvert^2\).
 
-**A crossing consistent with a Neimark-Sacker bifurcation.** For a GSM8K-style prompt
-([Cobbe et al., 2021](#ref-cobbe-2021)), the native loop converges to a fixed point
-whose leading Jacobian pair is \(0.588 \pm 0.771i\) (modulus 0.970). The formula
+**A crossing consistent with a Neimark-Sacker bifurcation.** For the GSM8K test
+question on which Geiping et al. show latent orbits ("Claire makes a 3 egg omelet every
+morning for breakfast...", here without the chat template;
+[Cobbe et al., 2021](#ref-cobbe-2021)), the native loop converges at every position to
+a fixed point whose leading Jacobian pair is \(0.588 \pm 0.771i\) (modulus 0.970). The formula
 predicts that the pair crosses the unit circle at \(\lambda_c = 1.0775\),
 transversally and away from the strong resonances (at 0.156 of a revolution per
 step), consistent with a Neimark-Sacker bifurcation. Below it the latent state
@@ -8682,6 +8734,14 @@ a second complex pair destabilizes the fixed point (\(\lambda = 1.0814\)).
 Fixed-point and Jacobian stability of looped models has been studied before
 ([Yang et al., 2026](#ref-yang-2026)); what this adds is the predicted crossing, its
 amplitude law and the rotation number.
+
+**The reported orbits.** Because the first position to oscillate is the full stop, the
+critical pair belongs to it and to the words after it. It cannot shape the paths of
+"makes" and "3", on which Geiping et al. show orbits: these come earlier, and causal
+attention leaves earlier positions independent of later ones. Since every position
+converges at the native step, any orbit-like motion on this question is transient in
+our runs; the native loop fails to settle where its fixed point is unstable, as for 6
+of the 30 ARC questions below.
 
 **The spectrum predicts the relaxation response.** With the full instruction
 template, the GSM8K prompts' fixed points look different: the leading multipliers
@@ -8731,13 +8791,17 @@ problems lost and 7 gained, one-sided McNemar \(p = 0.03\)) and 0.16 at 1.20 (29
 The break lies between 1.10 and 1.15, at or just above the spectral thresholds.
 
 **The test fixed in advance.** Its design and analysis were fixed before any test
-item was read, after two rounds of independent review. On 200 GSM8K test problems,
+item was scored, after two rounds of independent review. On 200 GSM8K test problems,
 accuracy is 0.330 natively, 0.395 at \(\lambda = 1.05\), 0.255 at 1.15 and 0.095 at
 1.20. Both stated predictions pass: accuracy declines at 1.20 (\(-23.5\) points; 50
 problems lost and 3 gained, exact one-sided McNemar \(p = 3\times10^{-12}\)), and 1.05
 loses no more than four points (difference \(+6.5\), one-sided 95% lower bound
 \(+2.5\)). At 1.15 accuracy falls by 7.5 points (\(p = 0.01\), reported
-descriptively). Development and test agree closely (Figure
+descriptively). One of the 200 problems, item 18, is the Claire question above, which
+the dynamics runs had used as a bare prompt, without its answer, before the test was
+frozen; without it, accuracy still declines at 1.20 (49 problems lost and 3 gained,
+\(p = 5\times10^{-12}\)) and the lower bound at 1.05 stays at \(+2.5\) points.
+Development and test agree closely (Figure
 88). The same design tested the item-level prediction on 64
 ARC-Challenge questions reserved for the test. The stated statistic, the mean of the
 within-condition Spearman correlations between \(\hat\rho_q(\lambda)\) and the gold
@@ -8752,7 +8816,7 @@ of the test from the saved data.
 
 ![Two panels against the relaxation strength lambda from 0.8 to 1.2, with a gray band marking the spectral thresholds from 1.074 to 1.126. Left: GSM8K accuracy with 95% intervals for development problems (blue) and the test fixed in advance (red); both rise slightly at 1.05 and fall steeply beyond the gray band, to their lowest values at 1.20. Right: the paired difference from the native loop, near zero up to 1.10 and strongly negative at 1.15 and 1.20, with development and test curves close together.](fig-huginn-gsm8k.png)
 
-<p class="figure-note">Figure 88: Huginn-0125 chain-of-thought accuracy on GSM8K against the relaxation strength \(\lambda\) (eight examples, greedy decoding, 32 recurrence steps per token): development problems (blue) and the test fixed in advance on problems not used before (red; design and analysis fixed before any test problem was read). Gray: the spectral thresholds \(\lambda_c = 1.074\) to 1.126 computed from the fixed points of five development prompts. Left: accuracy with Wilson 95% intervals. Right: paired difference from the native loop with paired-bootstrap 95% intervals. Source: byte-identical copy of the report's figure (<a href="provenance.json">provenance.json</a>).</p>
+<p class="figure-note">Figure 88: Huginn-0125 chain-of-thought accuracy on GSM8K against the relaxation strength \(\lambda\) (eight examples, greedy decoding, 32 recurrence steps per token): development problems (blue) and the test fixed in advance on problems not scored before (red; design and analysis fixed before any test problem was scored). Gray: the spectral thresholds \(\lambda_c = 1.074\) to 1.126 computed from the fixed points of five development prompts. Left: accuracy with Wilson 95% intervals. Right: paired difference from the native loop with paired-bootstrap 95% intervals. Source: byte-identical copy of the report's figure (<a href="provenance.json">provenance.json</a>).</p>
 
 ## What the evidence supports {#what-the-evidence-supports}
 

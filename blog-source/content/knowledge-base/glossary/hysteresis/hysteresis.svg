@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="400" viewBox="0 0 760 400" role="img" aria-labelledby="hysteresis-title hysteresis-desc">
+<title id="hysteresis-title">Different histories retain different bits at one common control</title>
+<desc id="hysteresis-desc">Toy relay, not measured data. Control minus two writes zero, and plus two writes one. Returning either history to control zero retains the written bit. Repeating the hold retains it under the exact toy rule, with thresholds minus one and plus one.</desc>
+<defs><marker id="arrowhead" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 8 4 L 0 8 z" fill="#A67C52"/></marker></defs>
+<style>.t{font-family:Arial,Helvetica,sans-serif;fill:#2C2924}.title{font-size:15px;font-weight:700}.h{font-size:13px;font-weight:700}.s{font-size:12px}.m{font-size:11px;fill:#5A544C}.arrow{fill:none;stroke:#A67C52;stroke-width:1.8}</style>
+<rect width="760" height="400" fill="#F7F4F0"/>
+<text class="t title" x="24" y="28">Hysteresis: the present control does not determine the bit</text>
+<text class="t m" x="24" y="48">Toy relay with switching thresholds at minus one and plus one. No measured data.</text>
+<text class="t h" x="24" y="90">1. Write using different histories</text>
+<text class="t h" x="307" y="90">2. Hold the same control</text>
+<text class="t h" x="574" y="90">3. Read the bit</text>
+<rect x="297" y="112" width="208" height="212" rx="12" fill="none" stroke="#7F786D" stroke-dasharray="5 4"/>
+<text class="t m" x="24" y="124">First history</text>
+<rect x="24" y="134" width="204" height="68" rx="10" fill="#E8F0F7" stroke="#4B6787"/>
+<text class="t h" x="40" y="159">Control -2: write 0</text>
+<text class="t s" x="40" y="181">Either starting bit becomes 0.</text>
+<path d="M 238 168 H 295" class="arrow"/>
+<path d="M 295 163 L 303 168 L 295 173 z" fill="#A67C52"/>
+<rect x="307" y="134" width="188" height="68" rx="10" fill="#FBF9F6" stroke="#7F786D"/>
+<text class="t h" x="325" y="159">Control 0: hold</text>
+<text class="t s" x="325" y="181">Retain the previous bit.</text>
+<path d="M 505 168 H 562" class="arrow"/>
+<path d="M 562 163 L 570 168 L 562 173 z" fill="#A67C52"/>
+<rect x="574" y="134" width="162" height="68" rx="10" fill="#EAF1E5" stroke="#6F8D5E"/>
+<text class="t h" x="592" y="159">Read bit 0</text>
+<text class="t s" x="592" y="181">At control 0.</text>
+<text class="t m" x="24" y="234">Second history</text>
+<rect x="24" y="244" width="204" height="68" rx="10" fill="#E8F0F7" stroke="#4B6787"/>
+<text class="t h" x="40" y="269">Control +2: write 1</text>
+<text class="t s" x="40" y="291">Either starting bit becomes 1.</text>
+<path d="M 238 278 H 295" class="arrow"/>
+<path d="M 295 273 L 303 278 L 295 283 z" fill="#A67C52"/>
+<rect x="307" y="244" width="188" height="68" rx="10" fill="#FBF9F6" stroke="#7F786D"/>
+<text class="t h" x="325" y="269">Control 0: hold</text>
+<text class="t s" x="325" y="291">Retain the previous bit.</text>
+<path d="M 505 278 H 562" class="arrow"/>
+<path d="M 562 273 L 570 278 L 562 283 z" fill="#A67C52"/>
+<rect x="574" y="244" width="162" height="68" rx="10" fill="#EAF1E5" stroke="#6F8D5E"/>
+<text class="t h" x="592" y="269">Read bit 1</text>
+<text class="t s" x="592" y="291">At control 0.</text>
+<rect x="24" y="352" width="712" height="28" rx="8" fill="#EAF1E5" stroke="#6F8D5E"/>
+<text class="t s" x="40" y="370">At control zero, the current bit records which write happened earlier.</text>
+</svg>

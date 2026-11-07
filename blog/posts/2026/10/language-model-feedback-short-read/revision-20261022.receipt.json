@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-22",
+  "kind": "editorial revision; no new experiments",
+  "source_report": "/data2/praxagent/blog-source/content/posts/2026/10/chaos-bifurcations-language-model-feedback/index.md",
+  "source_report_sha256": "8e3b5c034b291519b77a2ec6b483a544c2df88640ada2b9a5170300f0d448948",
+  "research_commit": "aa941d73edc5deb582805966080df8448bc844aa",
+  "page_sha256": "71dafde66f1750b2912445cbf43e066e41e6a9b6d110a09a4c8677539ecda4b6",
+  "figures": {
+    "fig-feigenbaum-tree.png": {
+      "sha256": "c95654e75aee07564c6a456a1ebc872a96c0e2469ec8a74525ccb170ff1a9311",
+      "source": "/data2/praxagent/blog-source/content/posts/2026/10/chaos-bifurcations-language-model-feedback/fig-feigenbaum-tree.png",
+      "transformation": "none; byte-identical"
+    },
+    "fig-zoom-llama70b-z128.png": {
+      "sha256": "3143f254e7a344e583ec073f292fcf244f640c8eae6c497babbe299cd53bad91",
+      "source": "/data2/praxagent/blog-source/content/posts/2026/10/chaos-bifurcations-language-model-feedback/fig-zoom-llama70b-z128.png",
+      "transformation": "none; byte-identical"
+    },
+    "fig-huginn-gsm8k.png": {
+      "sha256": "6a3930cfa442a10d5bcf0d3fd3bb1e02b50a158fed26e94161728fbd3376aee3",
+      "source": "/data2/praxagent/blog-source/content/posts/2026/10/chaos-bifurcations-language-model-feedback/fig-huginn-gsm8k.png",
+      "transformation": "none; byte-identical"
+    }
+  },
+  "claims": {
+    "doubling_ratio": "full report #feigenbaum-ratios; manuscript table of flips, final ratio 4.6688 at float64 precision floor",
+    "hidden_chaos": "existing fig-hidden-bands.receipt.json",
+    "batch_tokens": "existing fig-short-read.receipt.json and receipts/repro-summary.json",
+    "state18_readout6": "manuscript primitive 18-step state cycle; full report #memory-third-knob",
+    "huginn": "full report #huginn; development onset 1.0775 vs fit 1.0778; frozen GSM8K n=200 accuracy .330,.395,.255,.095 at lambda 1,1.05,1.15,1.20"
+  },
+  "review": [
+    "Removed basin-map and exploratory ghost-passage features from short-read narrative.",
+    "Kept finite-scale vs exact fractal, finite-horizon chaos, and cross-system distinctions explicit.",
+    "No claim of shrimp-specific reasoning utility or a guaranteed benefit from mild over-relaxation.",
+    "New images visually inspected before copying."
+  ],
+  "huginn_clarification": {
+    "source_design": "/data2/neural-shrimp/docs/huginn-causal-test-design.md",
+    "source_design_sha256": "2b5bc95263fff1f291c00fe457d0eef0850c5287609c6120c780eb53295a90dc",
+    "counts": "66, 19, 79 = reported accuracy .330, .095, .395 times 200; net loss 47 = 66-19",
+    "changes": "Explain native recurrence and generation protocol; distinguish update distance from depth and temperature; explain paired difference panel and gray spectral band; distinguish predicted direction from measured magnitude. Explain the shared stability mechanism connecting this test to routes to chaos, and distinguish observed oscillation and accuracy loss from verified chaos during generation."
+  }
+}

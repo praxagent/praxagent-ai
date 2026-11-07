@@ -1,0 +1,59 @@
+{
+  "figures": {
+    "fig-toy-cobwebs.png": "629ddc63b419df5291a0ed2b98e37c000162d85f5fe3b533146da1f605af35da",
+    "fig-toy-route.png": "aaa34dbc7dd3b127cf0ec67868d71a777f5a14c4545b04e52b1037c283b3025d"
+  },
+  "model": "u_{t+1} = 1 / (1 + exp(-g(u_t) / T)); f'(u) = p1 p2 g'(u) / T; toy, no language model",
+  "panels": {
+    "rising": {
+      "g": "g(u) = 6u - 2.5",
+      "inv_t": 1.0,
+      "start": 0.04,
+      "attractor": [
+        0.963843
+      ],
+      "period": 1,
+      "lyapunov": -1.565
+    },
+    "falling": {
+      "g": "g(u) = 3 - 6u",
+      "inv_t": 1.0,
+      "start": 0.56,
+      "attractor": [
+        0.07072,
+        0.92928
+      ],
+      "period": 2,
+      "lyapunov": -0.931
+    },
+    "folding": {
+      "g": "g(u) = 10u(1 - u) - 1",
+      "inv_t": 3.6,
+      "start": 0.3,
+      "attractor": null,
+      "period": null,
+      "lyapunov": 0.347
+    }
+  },
+  "fold_scan": {
+    "g": "10u(1 - u) - 1",
+    "inv_t_range": [
+      0.05,
+      7.0
+    ],
+    "points": 3000,
+    "transient": 4000,
+    "recorded": 300,
+    "start": 0.5,
+    "first_flip_inv_t": 1.088,
+    "first_chaos_inv_t": 1.99,
+    "last_chaos_inv_t": 4.824,
+    "contraction_bound_inv_t": 0.4,
+    "max_lyapunov": 0.569,
+    "chaotic_share_of_scan": 0.28,
+    "greedy_state_at_max_inv_t": 0.000975
+  },
+  "generator": "make_toy_loop_figures.py",
+  "matplotlib": "3.11.2",
+  "numpy": "2.4.6"
+}

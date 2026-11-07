@@ -1,0 +1,5455 @@
+{
+  "figure_id": "M5",
+  "alt_text": "Two panels show the audited memory feature-intersection test. The conditional negative-side Hessian feature is positive at lower memory and negative at higher memory, with empirical feature-and-location envelopes; the central value is a small nominal residual. The second panel preserves the actual signed primary and cyclic trace residuals. All three targets are admitted, and no line connects the targets.",
+  "data_source": {
+    "commit": "e859fdafe5d72c9f18c050374336f3a114babb10",
+    "source_path": "docs/baby-shrimp-zoom/mixed-junction-receipt.json",
+    "sha256": "d57e1890f09476803b899d0d8ace10e1bd5c6dd6658ce984b37686fcc9b9b8b7",
+    "audit_sha256": "691cae5fac0254a54b3f2bb919431bb3fe9650e6cc4e828809b7f137ae97b791"
+  },
+  "plotted_case_summaries": [
+    {
+      "case_index": 0,
+      "beta": 0.006448531183244975,
+      "beta_offset": 0.0,
+      "status": "admitted",
+      "feature": 1.7039398984913803e-10,
+      "feature_error": 3.16233203911489e-08,
+      "feature_status": "residual_qualified_near_zero",
+      "primary_tau": 2.908209697366493e-15,
+      "cyclic_traces": [
+        {
+          "phase": 0,
+          "tau": 2.1089900659188032e-15,
+          "delta": -6.75874181033285e-09,
+          "radius": 8.221156737653305e-05
+        },
+        {
+          "phase": 6,
+          "tau": -9.52887671112207e-15,
+          "delta": -6.758741811249629e-09,
+          "radius": 8.221156738581872e-05
+        },
+        {
+          "phase": 12,
+          "tau": -2.6725583551767684e-15,
+          "delta": -6.758741809960392e-09,
+          "radius": 8.22115673745496e-05
+        }
+      ]
+    },
+    {
+      "case_index": 1,
+      "beta": 0.006448528183244975,
+      "beta_offset": -3e-09,
+      "status": "admitted",
+      "feature": 5.125036201979886e-07,
+      "feature_error": 2.4514587126949303e-08,
+      "feature_status": "resolved_positive",
+      "primary_tau": -2.7516834297247605e-14,
+      "cyclic_traces": [
+        {
+          "phase": 0,
+          "tau": -2.976774642754476e-14,
+          "delta": -6.758737182117966e-09,
+          "radius": 8.221153924216003e-05
+        },
+        {
+          "phase": 6,
+          "tau": -5.936149195893275e-14,
+          "delta": -6.758737184548941e-09,
+          "radius": 8.221153927174178e-05
+        },
+        {
+          "phase": 12,
+          "tau": -3.73103918637277e-14,
+          "delta": -6.7587371814399945e-09,
+          "radius": 8.221153924180802e-05
+        }
+      ]
+    },
+    {
+      "case_index": 2,
+      "beta": 0.006448534183244975,
+      "beta_offset": 3e-09,
+      "status": "admitted",
+      "feature": -5.670829965410349e-07,
+      "feature_error": 3.4232834586107604e-08,
+      "feature_status": "resolved_negative",
+      "primary_tau": -4.352400872435075e-14,
+      "cyclic_traces": [
+        {
+          "phase": 0,
+          "tau": -4.6401047609258284e-14,
+          "delta": -6.7587486897639125e-09,
+          "radius": 8.221160923846837e-05
+        },
+        {
+          "phase": 6,
+          "tau": -1.7345665377123398e-13,
+          "delta": -6.75874870018316e-09,
+          "radius": 8.221160936536463e-05
+        },
+        {
+          "phase": 12,
+          "tau": -4.534911400393138e-14,
+          "delta": -6.758748689320481e-09,
+          "radius": 8.221160923524551e-05
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "outputs": {
+      "fig-memory-mixed-junction.png": "ea726d27ddd78428350f2c3fdc76de8daaaf4059c024290b066139d9913e9059",
+      "fig-memory-mixed-junction-mobile.png": "b1e81be11dd12201ac942d59aefcd44b67a0fc3ff6358cf50dbea38f04998a60",
+      "fig-memory-mixed-junction.pdf": "52b4a5578f92d3b57c85f63262683c541e037b9e735d110378674fdf8c38e69c",
+      "fig-memory-mixed-junction-locations.png": "ae90f4c6c9feca79713fbc611c2b8fe8ce4dde9a1566e865c7a0826cec8c4d7b",
+      "fig-memory-mixed-junction-locations.pdf": "286ffbbcc83c676538e0eb35c2457f80e541d91add49a05afe34a3430d3c7ec1"
+    },
+    "copied_source_names": {
+      "fig-memory-mixed-junction.png": "mixed-junction-readable-summary.png",
+      "fig-memory-mixed-junction-mobile.png": "mixed-junction-mobile-summary.png",
+      "fig-memory-mixed-junction.pdf": "mixed-junction-readable-summary.pdf",
+      "fig-memory-mixed-junction-locations.png": "mixed-junction-locations.png",
+      "fig-memory-mixed-junction-locations.pdf": "mixed-junction-locations.pdf"
+    },
+    "public_summary": {
+      "id": "BSC6-readable-summary-provenance",
+      "numeric_receipt": {
+        "path": "docs/baby-shrimp-zoom/mixed-junction-receipt.json",
+        "bytes": 73471,
+        "sha256": "d57e1890f09476803b899d0d8ace10e1bd5c6dd6658ce984b37686fcc9b9b8b7"
+      },
+      "external_storage_root": "/data2/neural-shrimp-data",
+      "source_commit": "7f953b462569e2a2dccbf7fde0bd6b4410ad5d31",
+      "source_hashes": {
+        "tools/plot_baby_shrimp_mixed_junction_summary.py": "4796dad3e1d88e019fc38d7d3c4dec4c1f2dd3f38ab916d5c837df6cddfa2d26",
+        "tools/plot_baby_shrimp_mixed_junction.py": "7d798e5c126e2912145ed7a388dfe61cad064346e0302418f564454d76c37708"
+      },
+      "scientific_complete": true,
+      "full_audit": {
+        "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-audit-01/receipt.json",
+        "bytes": 389901,
+        "sha256": "691cae5fac0254a54b3f2bb919431bb3fe9650e6cc4e828809b7f137ae97b791"
+      },
+      "figure_receipt": {
+        "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/receipt.json",
+        "bytes": 149696,
+        "sha256": "a61fef2f8af572f294be51354d4a4d9f00ee92f1c3341ad99d3be54ead27cd70"
+      },
+      "visual_review": {
+        "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/visual-review.json",
+        "bytes": 3260,
+        "sha256": "7efb62c5016281401791858c1761122311926a21072e6445434e4a9ff0f401a4"
+      },
+      "independent_replay": {
+        "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/independent-replay.json",
+        "bytes": 6890,
+        "sha256": "2054d331901cf4a74ad2852c69baed5421d11a308636f1fe1539936af6d967a2"
+      },
+      "public_figures": [
+        {
+          "path": "docs/baby-shrimp-zoom/mixed-junction-summary.png",
+          "bytes": 204033,
+          "sha256": "ea726d27ddd78428350f2c3fdc76de8daaaf4059c024290b066139d9913e9059"
+        },
+        {
+          "path": "docs/baby-shrimp-zoom/mixed-junction-summary.pdf",
+          "bytes": 38305,
+          "sha256": "52b4a5578f92d3b57c85f63262683c541e037b9e735d110378674fdf8c38e69c"
+        }
+      ],
+      "external_figures": [
+        {
+          "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/mixed-junction-mobile-summary.png",
+          "bytes": 201019,
+          "sha256": "b1e81be11dd12201ac942d59aefcd44b67a0fc3ff6358cf50dbea38f04998a60"
+        },
+        {
+          "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/mixed-junction-readable-summary.pdf",
+          "bytes": 38305,
+          "sha256": "52b4a5578f92d3b57c85f63262683c541e037b9e735d110378674fdf8c38e69c"
+        },
+        {
+          "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/mixed-junction-readable-summary.png",
+          "bytes": 204033,
+          "sha256": "ea726d27ddd78428350f2c3fdc76de8daaaf4059c024290b066139d9913e9059"
+        }
+      ],
+      "scope": "Conditional Hessian-feature estimates at numerically corrected intersections; the Hessian eigenvector need not be the geometric normal of its feature locus. Empirical envelopes are not confidence intervals or verified neural bounds. Actual trace residuals are retained as measured. No exact zero, ridge crossing, between-case connection, or superstability is established.",
+      "root_visual_check": "Actual readable PNG inspected; source summary numeric labels, status and signed residuals match the compact receipt."
+    },
+    "publication_production_file": "mixed-junction-publication-production.json",
+    "publication_production_sha256": "a61fef2f8af572f294be51354d4a4d9f00ee92f1c3341ad99d3be54ead27cd70",
+    "publication_production": {
+      "id": "BSC6-mixed-junction-readable-summary",
+      "receipt": "/data2/neural-shrimp-data/audits/baby-shrimp-zoom/20261022-mixed-junction-audit-01/receipt.json",
+      "receipt_sha256": "691cae5fac0254a54b3f2bb919431bb3fe9650e6cc4e828809b7f137ae97b791",
+      "source": "tools/plot_baby_shrimp_mixed_junction_summary.py",
+      "source_commit": "7f953b462569e2a2dccbf7fde0bd6b4410ad5d31",
+      "source_sha256": "4796dad3e1d88e019fc38d7d3c4dec4c1f2dd3f38ab916d5c837df6cddfa2d26",
+      "source_hashes": {
+        "tools/plot_baby_shrimp_mixed_junction_summary.py": "4796dad3e1d88e019fc38d7d3c4dec4c1f2dd3f38ab916d5c837df6cddfa2d26",
+        "tools/plot_baby_shrimp_mixed_junction.py": "7d798e5c126e2912145ed7a388dfe61cad064346e0302418f564454d76c37708"
+      },
+      "threads": 1,
+      "scientific_complete": true,
+      "partial_explicitly_allowed": false,
+      "displayed_cases": [
+        {
+          "beta_offset": 0.0,
+          "beta": 0.006448531183244975,
+          "case_index": 0,
+          "status": "admitted",
+          "admitted": true,
+          "iterations": [
+            {
+              "number": 0,
+              "center": [
+                89.65277071017042,
+                -485.8350977422083
+              ],
+              "center_point_index": 6,
+              "tau": -1.0227722667269581e-12
+            },
+            {
+              "number": 1,
+              "center": [
+                89.65277083049159,
+                -485.8350974634622
+              ],
+              "center_point_index": 15,
+              "tau": 2.908209697366493e-15
+            }
+          ],
+          "feature": 1.7039398984913803e-10,
+          "feature_error": 3.16233203911489e-08,
+          "feature_status": "residual_qualified_near_zero",
+          "actual_traces": [
+            {
+              "source": "primary center",
+              "phase": 0,
+              "tau": 2.908209697366493e-15
+            },
+            {
+              "source": "cyclic replay",
+              "phase": 0,
+              "tau": 2.1089900659188032e-15
+            },
+            {
+              "source": "cyclic replay",
+              "phase": 6,
+              "tau": -9.52887671112207e-15
+            },
+            {
+              "source": "cyclic replay",
+              "phase": 12,
+              "tau": -2.6725583551767684e-15
+            }
+          ],
+          "sample_indices": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28
+          ],
+          "predictor": [
+            89.65277071017042,
+            -485.8350977422083
+          ],
+          "final_center": [
+            89.65277083049159,
+            -485.8350974634622
+          ],
+          "unadmitted_sample_indices": []
+        },
+        {
+          "beta_offset": -3e-09,
+          "beta": 0.006448528183244975,
+          "case_index": 1,
+          "status": "admitted",
+          "admitted": true,
+          "iterations": [
+            {
+              "number": 0,
+              "center": [
+                89.65273069886629,
+                -485.8348660008468
+              ],
+              "center_point_index": 33,
+              "tau": 2.6567857393515904e-10
+            },
+            {
+              "number": 1,
+              "center": [
+                89.6527102050079,
+                -485.8348512011943
+              ],
+              "center_point_index": 42,
+              "tau": -1.3604795607679958e-11
+            },
+            {
+              "number": 2,
+              "center": [
+                89.65271116173703,
+                -485.83485185909336
+              ],
+              "center_point_index": 51,
+              "tau": -2.7516834297247605e-14
+            }
+          ],
+          "feature": 5.125036201979886e-07,
+          "feature_error": 2.4514587126949303e-08,
+          "feature_status": "resolved_positive",
+          "actual_traces": [
+            {
+              "source": "primary center",
+              "phase": 0,
+              "tau": -2.7516834297247605e-14
+            },
+            {
+              "source": "cyclic replay",
+              "phase": 0,
+              "tau": -2.976774642754476e-14
+            },
+            {
+              "source": "cyclic replay",
+              "phase": 6,
+              "tau": -5.936149195893275e-14
+            },
+            {
+              "source": "cyclic replay",
+              "phase": 12,
+              "tau": -3.73103918637277e-14
+            }
+          ],
+          "sample_indices": [
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64
+          ],
+          "predictor": [
+            89.65273069886629,
+            -485.8348660008468
+          ],
+          "final_center": [
+            89.65271116173703,
+            -485.83485185909336
+          ],
+          "unadmitted_sample_indices": []
+        },
+        {
+          "beta_offset": 3e-09,
+          "beta": 0.006448534183244975,
+          "case_index": 2,
+          "status": "admitted",
+          "admitted": true,
+          "iterations": [
+            {
+              "number": 0,
+              "center": [
+                89.65281096211689,
+                -485.83532892607764
+              ],
+              "center_point_index": 69,
+              "tau": -2.656740225222016e-10
+            },
+            {
+              "number": 1,
+              "center": [
+                89.6528314449714,
+                -485.8353437199324
+              ],
+              "center_point_index": 78,
+              "tau": -1.3597867704875574e-11
+            },
+            {
+              "number": 2,
+              "center": [
+                89.65283261467283,
+                -485.8353445400823
+              ],
+              "center_point_index": 87,
+              "tau": -4.352400872435075e-14
+            }
+          ],
+          "feature": -5.670829965410349e-07,
+          "feature_error": 3.4232834586107604e-08,
+          "feature_status": "resolved_negative",
+          "actual_traces": [
+            {
+              "source": "primary center",
+              "phase": 0,
+              "tau": -4.352400872435075e-14
+            },
+            {
+              "source": "cyclic replay",
+              "phase": 0,
+              "tau": -4.6401047609258284e-14
+            },
+            {
+              "source": "cyclic replay",
+              "phase": 6,
+              "tau": -1.7345665377123398e-13
+            },
+            {
+              "source": "cyclic replay",
+              "phase": 12,
+              "tau": -4.534911400393138e-14
+            }
+          ],
+          "sample_indices": [
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100
+          ],
+          "predictor": [
+            89.65281096211689,
+            -485.83532892607764
+          ],
+          "final_center": [
+            89.65283261467283,
+            -485.8353445400823
+          ],
+          "unadmitted_sample_indices": []
+        }
+      ],
+      "unqualified_or_incomplete_points": [],
+      "point_admissions": [
+        {
+          "point_index": 2,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 2,
+            "coordinate": [
+              89.65247071017042,
+              -485.8353977422083
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.0733177638301892,
+            "log10_temperature": -0.15804614726173905,
+            "tau": -2.091838712962651e-09,
+            "delta": -6.758868122079511e-09,
+            "radius": 8.221338150942142e-05,
+            "qualified": true,
+            "closure": 6.636102972130704e-14,
+            "minimum_lower_return": 0.01835232146704239,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 7.544190812683917e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.655664523890458e-07,
+            1.9661932677799216,
+            2.9951929494219858,
+            0.5039244488489809,
+            2.0292587744515114,
+            3.140577190803413,
+            0.12474387640560794,
+            1.9921269262172565,
+            2.977836605289947,
+            0.4857425887769386,
+            2.040895933302363,
+            3.1766850472004884,
+            0.12948036518311296,
+            2.0131934760650556,
+            2.964132312139794,
+            0.44434040871258795,
+            2.0208402273774526,
+            3.107666588007198
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 3,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 3,
+            "coordinate": [
+              89.65277071017042,
+              -485.8353977422083
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.0733177645801892,
+            "log10_temperature": -0.15804614726173905,
+            "tau": 2.1968838135103235e-10,
+            "delta": -6.759004565623396e-09,
+            "radius": 8.221327524752168e-05,
+            "qualified": true,
+            "closure": 5.449524450436483e-14,
+            "minimum_lower_return": 0.01835223753115151,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 3.648431383791562e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            1.622640228990302e-07,
+            1.9661932489778176,
+            2.9951929551384784,
+            0.5039244385166777,
+            2.029258754887595,
+            3.140576719423134,
+            0.124743922238862,
+            1.9921266432249205,
+            2.9778366938623417,
+            0.48574266558210616,
+            2.0408959135341456,
+            3.1766850098117487,
+            0.129480251013344,
+            2.013193456567148,
+            2.9641323176759458,
+            0.44434027542559784,
+            2.0208402079594574,
+            3.107666552848498
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 4,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 4,
+            "coordinate": [
+              89.65307071017041,
+              -485.8353977422083
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.0733177653301892,
+            "log10_temperature": -0.15804614726173905,
+            "tau": 3.34193733355693e-10,
+            "delta": -6.7591410036858595e-09,
+            "radius": 8.221416227842796e-05,
+            "qualified": true,
+            "closure": 3.186988735208344e-14,
+            "minimum_lower_return": 0.01835215359211123,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 8.629636764931165e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.9502007524250623e-07,
+            1.9661932301754634,
+            2.9951929608528083,
+            0.5039244281822869,
+            2.0292587353234186,
+            3.140576248036859,
+            0.12474396806313587,
+            1.9921263602289478,
+            2.9778367824354626,
+            0.4857427423880405,
+            2.0408958937656645,
+            3.1766849724225152,
+            0.1294801368418736,
+            2.0131934370689804,
+            2.9641323232100047,
+            0.44434014215793033,
+            2.0208401885412033,
+            3.1076665176893328
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 5,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 5,
+            "coordinate": [
+              89.65247071017042,
+              -485.8350977422083
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.0733177638301892,
+            "log10_temperature": -0.15804614501173905,
+            "tau": -4.670493659137895e-09,
+            "delta": -6.758605559007275e-09,
+            "radius": 8.221307398855754e-05,
+            "qualified": true,
+            "closure": 3.6243620542755214e-14,
+            "minimum_lower_return": 0.018352288867467443,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 7.842503966832928e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            5.74219963168433e-07,
+            1.9661932601026315,
+            2.9951928983000387,
+            0.503924405787209,
+            2.0292587664847583,
+            3.1405772326827037,
+            0.12474371129995444,
+            1.9921269511166115,
+            2.9778365828169653,
+            0.4857425677952274,
+            2.0408959252614287,
+            3.1766850329012013,
+            0.1294803376211611,
+            2.01319346813154,
+            2.9641322626617823,
+            0.4443407001275443,
+            2.0208402194644526,
+            3.107666574512363
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 6,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 6,
+            "coordinate": [
+              89.65277071017042,
+              -485.8350977422083
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.0733177645801892,
+            "log10_temperature": -0.15804614501173905,
+            "tau": -1.0227722667269581e-12,
+            "delta": -6.75874199976238e-09,
+            "radius": 8.221156903895031e-05,
+            "qualified": true,
+            "closure": 2.882191528714904e-14,
+            "minimum_lower_return": 0.018352204933450463,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 4.0485421961085476e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.473436074651372e-07,
+            1.966193241300596,
+            2.9951929040167857,
+            0.5039243954550694,
+            2.029258746920917,
+            3.140576761310989,
+            0.12474375713366555,
+            1.99212666812942,
+            2.977836671387613,
+            0.48574264459844113,
+            2.040895905493288,
+            3.1766849955127094,
+            0.12948022345420432,
+            2.0131934486337073,
+            2.9641322681981808,
+            0.4443405668399247,
+            2.0208402000465306,
+            3.107666539353897
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 7,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 7,
+            "coordinate": [
+              89.65307071017041,
+              -485.8350977422083
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.0733177653301892,
+            "log10_temperature": -0.15804614501173905,
+            "tau": 2.4714720457891595e-09,
+            "delta": -6.7588784356201976e-09,
+            "radius": 8.221363405371729e-05,
+            "qualified": true,
+            "closure": 2.841750864480767e-14,
+            "minimum_lower_return": 0.018352120996550196,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.6221348821279312e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.4667464785825157e-07,
+            1.9661932224983616,
+            2.9951929097314194,
+            0.5039243851208828,
+            2.0292587273568685,
+            3.140576289933733,
+            0.12474380295890788,
+            1.9921263851388649,
+            2.977836759958868,
+            0.48574272140226366,
+            2.040895885724938,
+            3.176684958123823,
+            0.12948010928572345,
+            2.013193429135668,
+            2.964132273732534,
+            0.44434043357050174,
+            2.0208401806284035,
+            3.1076665041950586
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 8,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 8,
+            "coordinate": [
+              89.65247071017042,
+              -485.8347977422083
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.0733177638301892,
+            "log10_temperature": -0.15804614276173906,
+            "tau": -7.688910195357722e-09,
+            "delta": -6.758343001659919e-09,
+            "radius": 8.221298638249985e-05,
+            "qualified": true,
+            "closure": 2.4538377141810853e-14,
+            "minimum_lower_return": 0.018352256264284904,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.3866125677089926e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            8.592554778573375e-07,
+            1.9661932524250756,
+            2.995192847178045,
+            0.5039243627254719,
+            2.029258758517722,
+            3.1405772745458793,
+            0.12474354619378315,
+            1.9921269760062936,
+            2.9778365603474506,
+            0.4857425468174822,
+            2.0408959172202055,
+            3.1766850186011966,
+            0.1294803100533856,
+            2.0131934601977415,
+            2.964132213183726,
+            0.4443409915423272,
+            2.0208402115511728,
+            3.1076665610168512
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 9,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 9,
+            "coordinate": [
+              89.65277071017042,
+              -485.8347977422083
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.0733177645801892,
+            "log10_temperature": -0.15804614276173906,
+            "tau": -6.616384342261663e-10,
+            "delta": -6.7584794409191184e-09,
+            "radius": 8.221030248341707e-05,
+            "qualified": true,
+            "closure": 1.910847595945105e-14,
+            "minimum_lower_return": 0.018352172332381643,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 5.184286506321214e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            7.324496408806065e-07,
+            1.9661932336231318,
+            2.995192852895079,
+            0.5039243523935298,
+            2.02925873895398,
+            3.140576803182651,
+            0.12474359202873388,
+            1.9921266930242,
+            2.9778366489163224,
+            0.4857426236186739,
+            2.0408958974521663,
+            3.1766849812129982,
+            0.1294801958893076,
+            2.013193440700008,
+            2.964132218720402,
+            0.44434085825247316,
+            2.020840192133349,
+            3.1076665258586624
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 10,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 10,
+            "coordinate": [
+              89.65307071017041,
+              -485.8347977422083
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.0733177653301892,
+            "log10_temperature": -0.15804614276173906,
+            "tau": 4.168691619736665e-09,
+            "delta": -6.758615874288961e-09,
+            "radius": 8.221288581759616e-05,
+            "qualified": true,
+            "closure": 1.3325047378927467e-14,
+            "minimum_lower_return": 0.018352088397437478,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 5.7907983976633585e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            6.061872830831741e-07,
+            1.9661932148209638,
+            2.9951928586099084,
+            0.5039243420594858,
+            2.0292587193900045,
+            3.1405763318137505,
+            0.12474363785480688,
+            1.9921264100386638,
+            2.9778367374858554,
+            0.4857427004205638,
+            2.0408958776838917,
+            3.1766849438243536,
+            0.1294800817235741,
+            2.013193421202042,
+            2.9641322242549446,
+            0.4443407249816809,
+            2.020840172715293,
+            3.107666490700052
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 11,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 11,
+            "coordinate": [
+              89.6524708304916,
+              -485.8353974634622
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.07331776383049,
+            "log10_temperature": -0.15804614725964847,
+            "tau": -2.0926598031474272e-09,
+            "delta": -6.7588679328991935e-09,
+            "radius": 8.221338076941254e-05,
+            "qualified": true,
+            "closure": 1.3705395593062328e-14,
+            "minimum_lower_return": 0.01835232140317276,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 9.526386898464287e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.6545974688984344e-07,
+            1.966193267765241,
+            2.995192949376776,
+            0.5039244488048273,
+            2.029258774436256,
+            3.140577190653467,
+            0.1247438762707263,
+            1.9921269261270116,
+            2.9778366053045486,
+            0.48574258878819543,
+            2.0408959332869565,
+            3.1766850471721995,
+            0.12948036511179234,
+            2.0131934760498575,
+            2.9641323120960394,
+            0.4443404089295887,
+            2.0208402273623056,
+            3.1076665879805514
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 12,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 12,
+            "coordinate": [
+              89.65277083049159,
+              -485.8353974634622
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.07331776458049,
+            "log10_temperature": -0.15804614725964847,
+            "tau": 2.2017539314910916e-10,
+            "delta": -6.759004376000264e-09,
+            "radius": 8.221327433778722e-05,
+            "qualified": true,
+            "closure": 2.1047492006637605e-14,
+            "minimum_lower_return": 0.018352237467052765,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 7.818156032113014e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            1.6247886398706784e-07,
+            1.9661932489631349,
+            2.995192955093266,
+            0.5039244384725299,
+            2.029258754872338,
+            3.140576719272764,
+            0.12474392210351241,
+            1.9921266431344207,
+            2.9778366938770366,
+            0.4857426655934802,
+            2.040895913518737,
+            3.1766850097834496,
+            0.12948025094189766,
+            2.0131934565519476,
+            2.9641323176321888,
+            0.44434027564360795,
+            2.0208402079443086,
+            3.1076665528218417
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 13,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 13,
+            "coordinate": [
+              89.65307083049159,
+              -485.8353974634622
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.07331776533049,
+            "log10_temperature": -0.15804614725964847,
+            "tau": 3.359972738134053e-10,
+            "delta": -6.759140813932735e-09,
+            "radius": 8.22141620261804e-05,
+            "qualified": true,
+            "closure": 3.060882519838391e-14,
+            "minimum_lower_return": 0.01835215352813488,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.3074475480772424e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.9512730244929346e-07,
+            1.9661932301607956,
+            2.995192960807621,
+            0.5039244281381468,
+            2.029258735308177,
+            3.140576247886796,
+            0.12474396792792643,
+            1.9921263601386319,
+            2.9778367824500904,
+            0.4857427423993388,
+            2.040895893750272,
+            3.1766849723942463,
+            0.12948013677048104,
+            2.0131934370537965,
+            2.964132323166272,
+            0.44434014237559266,
+            2.02084018852607,
+            3.1076665176627043
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 14,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 14,
+            "coordinate": [
+              89.6524708304916,
+              -485.8350974634622
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.07331776383049,
+            "log10_temperature": -0.15804614500964845,
+            "tau": -4.670778511981248e-09,
+            "delta": -6.758605369807345e-09,
+            "radius": 8.221307298028717e-05,
+            "qualified": true,
+            "closure": 4.048412114153137e-14,
+            "minimum_lower_return": 0.01835228880350262,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 9.906014962432314e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            5.744336938694974e-07,
+            1.9661932600879564,
+            2.9951928982548304,
+            0.5039244057430469,
+            2.0292587664695088,
+            3.1405772325325616,
+            0.12474371116494325,
+            1.9921269510262483,
+            2.9778365828316167,
+            0.48574256780655195,
+            2.0408959252460277,
+            3.1766850328729164,
+            0.12948033754974142,
+            2.0131934681163473,
+            2.964132262618029,
+            0.44434070034476936,
+            2.0208402194493114,
+            3.1076665744857204
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 15,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 15,
+            "coordinate": [
+              89.65277083049159,
+              -485.8350974634622
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.07331776458049,
+            "log10_temperature": -0.15804614500964845,
+            "tau": 2.908209697366493e-15,
+            "delta": -6.758741810288608e-09,
+            "radius": 8.221156737666359e-05,
+            "qualified": true,
+            "closure": 1.3364459403955304e-14,
+            "minimum_lower_return": 0.01835220486947435,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 9.883305755158242e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.4755793507373543e-07,
+            1.9661932412859433,
+            2.9951929039715877,
+            0.5039243954109188,
+            2.0292587469056906,
+            3.1405767611608564,
+            0.12474375699852723,
+            1.9921266680390626,
+            2.977836671402249,
+            0.4857426446097321,
+            2.0408959054779103,
+            3.1766849954844636,
+            0.1294802233827883,
+            2.013193448618538,
+            2.9641322681544375,
+            0.44434056705741554,
+            2.0208402000314125,
+            3.107666539327291
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 16,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 16,
+            "coordinate": [
+              89.65307083049159,
+              -485.8350974634622
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.07331776533049,
+            "log10_temperature": -0.15804614500964845,
+            "tau": 2.4738024408484842e-09,
+            "delta": -6.758878246587141e-09,
+            "radius": 8.221363406926963e-05,
+            "qualified": true,
+            "closure": 2.896269171329003e-14,
+            "minimum_lower_return": 0.01835212093257286,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 9.876632242199845e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.4678238403080035e-07,
+            1.966193222483668,
+            2.9951929096861742,
+            0.5039243850767018,
+            2.0292587273416003,
+            3.1405762897833935,
+            0.12474380282390093,
+            1.9921263850483828,
+            2.9778367599735454,
+            0.4857427214136107,
+            2.040895885709518,
+            3.1766849580955054,
+            0.12948010921427,
+            2.0131934291204567,
+            2.964132273688745,
+            0.44434043378777177,
+            2.020840180613243,
+            3.1076665041683857
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 17,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 17,
+            "coordinate": [
+              89.6524708304916,
+              -485.8347974634622
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.07331776383049,
+            "log10_temperature": -0.15804614275964846,
+            "tau": -7.688655686067017e-09,
+            "delta": -6.758342812721345e-09,
+            "radius": 8.221298510610565e-05,
+            "qualified": true,
+            "closure": 2.694587289795318e-14,
+            "minimum_lower_return": 0.01835225620036134,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 2.3030834784415e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            8.594690700178399e-07,
+            1.9661932524104024,
+            2.995192847132828,
+            0.5039243626813135,
+            2.029258758502474,
+            3.1405772743956084,
+            0.12474354605894136,
+            1.9921269759158533,
+            2.977836560362114,
+            0.48574254682881274,
+            2.040895917204807,
+            3.1766850185729165,
+            0.1294803099819717,
+            2.013193460182551,
+            2.9641322131399646,
+            0.444340991759286,
+            2.0208402115360338,
+            3.107666560990213
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 18,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 18,
+            "coordinate": [
+              89.65277083049159,
+              -485.8347974634622
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.07331776458049,
+            "log10_temperature": -0.15804614275964846,
+            "tau": -6.600790257129318e-10,
+            "delta": -6.758479251235558e-09,
+            "radius": 8.221030055005667e-05,
+            "qualified": true,
+            "closure": 2.846817635076006e-14,
+            "minimum_lower_return": 0.018352172268372588,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 6.051665783893824e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            7.326641866774208e-07,
+            1.9661932336084718,
+            2.9951928528498684,
+            0.5039243523493768,
+            2.0292587389387458,
+            3.1405768030325274,
+            0.12474359189352674,
+            1.9921266929338477,
+            2.977836648930972,
+            0.48574262362998893,
+            2.0408958974367817,
+            3.1766849811847395,
+            0.12948019581788642,
+            2.013193440684831,
+            2.9641322186766472,
+            0.44434085847020127,
+            2.020840192118223,
+            3.1076665258320437
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 19,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 19,
+            "coordinate": [
+              89.65307083049159,
+              -485.8347974634622
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.07331776533049,
+            "log10_temperature": -0.15804614275964846,
+            "tau": 4.171561775306583e-09,
+            "delta": -6.7586156849962335e-09,
+            "radius": 8.2212886101446e-05,
+            "qualified": true,
+            "closure": 5.415471582575168e-15,
+            "minimum_lower_return": 0.01835208833347797,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.0213927471558286e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            6.064015546072595e-07,
+            1.9661932148062893,
+            2.9951928585647094,
+            0.5039243420153341,
+            2.0292587193747553,
+            3.140576331663656,
+            0.1247436377197607,
+            1.9921264099483291,
+            2.9778367375004975,
+            0.4857427004318746,
+            2.0408958776684916,
+            3.1766849437960722,
+            0.12948008165219016,
+            2.01319342118685,
+            2.964132224211201,
+            0.4443407251990137,
+            2.020840172700152,
+            3.107666490673412
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 20,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 20,
+            "coordinate": [
+              89.65267083049159,
+              -485.8351974634622
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.07331776433049,
+            "log10_temperature": -0.15804614575964845,
+            "tau": -9.285201951932109e-10,
+            "delta": -6.758783857389485e-09,
+            "radius": 8.221228736118825e-05,
+            "qualified": true,
+            "closure": 6.718780836662575e-13,
+            "minimum_lower_return": 0.018352243714943116,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.1287902093975571e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.9474047749109677e-07,
+            1.9661932501124415,
+            2.995192919106835,
+            0.503924413209074,
+            2.0292587560826143,
+            3.1405769043257603,
+            0.12474379676022253,
+            1.9921267540688026,
+            2.977836649369573,
+            0.4857426260024327,
+            2.0408959147476615,
+            3.176685012713837,
+            0.12948027062617123,
+            2.0131934577623793,
+            2.9641322828018164,
+            0.4443405143389194,
+            2.0208402091417783,
+            3.107666555545165
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 21,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 21,
+            "coordinate": [
+              89.65277083049159,
+              -485.8351974634622
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.07331776458049,
+            "log10_temperature": -0.15804614575964845,
+            "tau": 1.2227065754734194e-10,
+            "delta": -6.758829338682049e-09,
+            "radius": 8.221216084507823e-05,
+            "qualified": true,
+            "closure": 9.6055049365944e-13,
+            "minimum_lower_return": 0.0183522157360408,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 8.017474554579374e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.525157619391212e-07,
+            1.9661932438450576,
+            2.9951929210121393,
+            0.503924409764768,
+            2.029258749561293,
+            3.14057674720035,
+            0.12474381203801935,
+            1.992126659738831,
+            2.977836678893381,
+            0.48574265160378105,
+            2.0408959081582405,
+            3.176685000250923,
+            0.12948023257008326,
+            2.013193451263061,
+            2.9641322846470137,
+            0.4443404699098872,
+            2.0208402026690977,
+            3.1076665438255975
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 22,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 22,
+            "coordinate": [
+              89.6528708304916,
+              -485.8351974634622
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.07331776483049,
+            "log10_temperature": -0.15804614575964845,
+            "tau": 9.289760095481129e-10,
+            "delta": -6.7588748123707145e-09,
+            "radius": 8.221284076181445e-05,
+            "qualified": true,
+            "closure": 7.59079135361404e-13,
+            "minimum_lower_return": 0.01835218775650335,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 6.156508358861688e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.104280806206889e-07,
+            1.966193237577645,
+            2.9951929229172625,
+            0.503924406320287,
+            2.029258743039942,
+            3.140576590073995,
+            0.12474382731033133,
+            1.9921265654082876,
+            2.977836708417307,
+            0.48574267720526115,
+            2.040895901568789,
+            3.17668498778794,
+            0.12948019451359433,
+            2.013193444763713,
+            2.9641322864920365,
+            0.44434042549265296,
+            2.020840196196387,
+            3.1076665321059656
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 23,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 23,
+            "coordinate": [
+              89.65267083049159,
+              -485.8350974634622
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.07331776433049,
+            "log10_temperature": -0.15804614500964845,
+            "tau": -1.3128036984322994e-09,
+            "delta": -6.758696329186776e-09,
+            "radius": 8.221194716910113e-05,
+            "qualified": true,
+            "closure": 7.162441412031447e-13,
+            "minimum_lower_return": 0.018352232848217312,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.409914102021653e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.897818703114321e-07,
+            1.9661932475533184,
+            2.9951929020662544,
+            0.5039243988552004,
+            2.029258753427002,
+            3.140576918285607,
+            0.1247437417206866,
+            1.9921267623686378,
+            2.977836641878587,
+            0.4857426190085526,
+            2.040895912067322,
+            3.1766850079473534,
+            0.12948026143864463,
+            2.0131934551178463,
+            2.9641322663092127,
+            0.44434061148654547,
+            2.0208402065040842,
+            3.1076665510468353
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 24,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 24,
+            "coordinate": [
+              89.6528708304916,
+              -485.8350974634622
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.07331776483049,
+            "log10_temperature": -0.15804614500964845,
+            "tau": 1.068727927417681e-09,
+            "delta": -6.758787282583758e-09,
+            "radius": 8.221237829699627e-05,
+            "qualified": true,
+            "closure": 9.575291063344794e-13,
+            "minimum_lower_return": 0.018352176890598468,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 5.2900177365121624e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.054432310977704e-07,
+            1.9661932350185285,
+            2.995192905876716,
+            0.5039243919664325,
+            2.029258740384338,
+            3.140576604035482,
+            0.12474377227028166,
+            1.9921265737091085,
+            2.9778367009259763,
+            0.4857426702109879,
+            2.0408958988884573,
+            3.1766849830214934,
+            0.1294801853266202,
+            2.013193442119188,
+            2.9641322699994643,
+            0.444340522641583,
+            2.0208401935587004,
+            3.1076665276076705
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 25,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 25,
+            "coordinate": [
+              89.65267083049159,
+              -485.83499746346223
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.07331776433049,
+            "log10_temperature": -0.15804614425964847,
+            "tau": -1.7459609879692589e-09,
+            "delta": -6.7586088036618844e-09,
+            "radius": 8.22116314274514e-05,
+            "qualified": true,
+            "closure": 9.530208174947043e-13,
+            "minimum_lower_return": 0.018352221980711812,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.3284990183326293e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            5.848231316896825e-07,
+            1.9661932449941582,
+            2.9951928850256526,
+            0.503924384501324,
+            2.029258750771351,
+            3.1405769322433823,
+            0.1247436866821645,
+            1.9921267706672308,
+            2.977836634388034,
+            0.4857426120151545,
+            2.040895909386943,
+            3.1766850031807783,
+            0.12948025225051035,
+            2.0131934524732746,
+            2.964132249816588,
+            0.44434070863187747,
+            2.020840203866351,
+            3.1076665465484195
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 26,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 26,
+            "coordinate": [
+              89.65277083049159,
+              -485.83499746346223
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.07331776458049,
+            "log10_temperature": -0.15804614425964847,
+            "tau": -1.711515817579782e-10,
+            "delta": -6.758654282558962e-09,
+            "radius": 8.221112061711782e-05,
+            "qualified": true,
+            "closure": 9.55711912039699e-13,
+            "minimum_lower_return": 0.018352194002620423,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.5257162246619068e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            5.426018829168948e-07,
+            1.9661932387267724,
+            2.9951928869310143,
+            0.5039243810570673,
+            2.029258744250029,
+            3.140576775119952,
+            0.12474370195912991,
+            1.992126676338448,
+            2.977836663911425,
+            0.4857426376160384,
+            2.040895902797521,
+            3.176684990717888,
+            0.12948021419499478,
+            2.0131934459739558,
+            2.9641322516618405,
+            0.4443406642047653,
+            2.0208401973936696,
+            3.1076665348288746
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 27,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 27,
+            "coordinate": [
+              89.6528708304916,
+              -485.83499746346223
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.07331776483049,
+            "log10_temperature": -0.15804614425964847,
+            "tau": 1.1595522630595363e-09,
+            "delta": -6.758699761596261e-09,
+            "radius": 8.221189141834049e-05,
+            "qualified": true,
+            "closure": 9.623570919950078e-13,
+            "minimum_lower_return": 0.018352166024148124,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 2.366974250686345e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            5.00460580639655e-07,
+            1.9661932324594023,
+            2.995192888836168,
+            0.5039243776125892,
+            2.0292587377287226,
+            3.1405766179954933,
+            0.12474371723523328,
+            1.9921265820090437,
+            2.9778366934349556,
+            0.4857426632170626,
+            2.0408958962081143,
+            3.176684978255015,
+            0.1294801761392983,
+            2.0131934394746525,
+            2.964132253506892,
+            0.44434061977949374,
+            2.020840190921003,
+            3.107666523109346
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 28,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 28,
+            "coordinate": [
+              89.65277083049159,
+              -485.8350974634622
+            ],
+            "beta": 0.006448531183244975,
+            "alpha": 0.07331776458049,
+            "log10_temperature": -0.15804614500964845,
+            "tau": 2.1089900659188032e-15,
+            "delta": -6.75874181033285e-09,
+            "radius": 8.221156737653305e-05,
+            "qualified": true,
+            "closure": 1.3364459403955304e-14,
+            "minimum_lower_return": 0.01835220486947435,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0,
+              6,
+              12
+            ],
+            "maximum_relative_residual": 3.668380988618042e-09,
+            "cyclic_pair_absolute_discrepancy": 1.1394666677225218e-14
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.4755793507373543e-07,
+            1.9661932412859433,
+            2.9951929039715877,
+            0.5039243954109188,
+            2.0292587469056906,
+            3.1405767611608564,
+            0.12474375699852723,
+            1.9921266680390626,
+            2.977836671402249,
+            0.4857426446097321,
+            2.0408959054779103,
+            3.1766849954844636,
+            0.1294802233827883,
+            2.013193448618538,
+            2.9641322681544375,
+            0.44434056705741554,
+            2.0208402000314125,
+            3.107666539327291
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 29,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 29,
+            "coordinate": [
+              89.6524306988663,
+              -485.83516600084675
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776373016094,
+            "log10_temperature": -0.15804614552367885,
+            "tau": -1.8241783094236378e-09,
+            "delta": -6.758884566612828e-09,
+            "radius": 8.221334769013137e-05,
+            "qualified": true,
+            "closure": 4.010229074953235e-14,
+            "minimum_lower_return": 0.018352319618479395,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 9.216411115967092e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.636654368149218e-07,
+            1.9661932672729077,
+            2.99519295529848,
+            0.5039244452382607,
+            2.029258773969325,
+            3.1405771871371266,
+            0.12474387312863741,
+            1.9921269233883185,
+            2.9778366130507647,
+            0.48574258661204267,
+            2.0408959328230765,
+            3.176685047359189,
+            0.1294803591226955,
+            2.0131934755822662,
+            2.964132317966175,
+            0.44434040771381567,
+            2.020840226894007,
+            3.107666588382323
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 30,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 30,
+            "coordinate": [
+              89.65273069886629,
+              -485.83516600084675
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776448016093,
+            "log10_temperature": -0.15804614552367885,
+            "tau": 4.869057429517315e-10,
+            "delta": -6.759021010852092e-09,
+            "radius": 8.221350887221461e-05,
+            "qualified": true,
+            "closure": 5.079663770871075e-14,
+            "minimum_lower_return": 0.018352235682626353,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 7.60764201685231e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            1.6174813776803947e-07,
+            1.966193248470823,
+            2.9951929610149564,
+            0.5039244349059249,
+            2.0292587544054297,
+            3.140576715757265,
+            0.124743918961723,
+            1.9921266403962332,
+            2.977836701623072,
+            0.4857426634171253,
+            2.0408959130548796,
+            3.1766850099704866,
+            0.1294802449530087,
+            2.013193456084379,
+            2.9641323235023114,
+            0.4443402744271979,
+            2.0208402074760317,
+            3.107666553223658
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 31,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 31,
+            "coordinate": [
+              89.65303069886629,
+              -485.83516600084675
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776523016094,
+            "log10_temperature": -0.15804614552367885,
+            "tau": 6.009757080681745e-10,
+            "delta": -6.7591574497155815e-09,
+            "radius": 8.221439568938182e-05,
+            "qualified": true,
+            "closure": 9.51657839664246e-15,
+            "minimum_lower_return": 0.01835215174354914,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 2.633382934876221e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.9716441699017746e-07,
+            1.9661932296684208,
+            2.995192966729327,
+            0.5039244245715683,
+            2.029258734841203,
+            3.1405762443705516,
+            0.12474396478610802,
+            1.9921263573999979,
+            2.977836790196276,
+            0.4857427402231432,
+            2.040895893286349,
+            3.1766849725811688,
+            0.12948013078144874,
+            2.013193436586162,
+            2.9641323290364103,
+            0.4443401411592551,
+            2.0208401880577287,
+            3.1076665180644127
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 32,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 32,
+            "coordinate": [
+              89.6524306988663,
+              -485.8348660008468
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776373016094,
+            "log10_temperature": -0.15804614327367883,
+            "tau": -4.403357473732519e-09,
+            "delta": -6.758622002844352e-09,
+            "radius": 8.221304042699282e-05,
+            "qualified": true,
+            "closure": 2.6600113820820766e-14,
+            "minimum_lower_return": 0.018352287018934658,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 4.354891376948644e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            5.734949839589656e-07,
+            1.9661932595956317,
+            2.995192904176577,
+            0.5039244021765049,
+            2.0292587660025867,
+            3.1405772290167677,
+            0.12474370802281715,
+            1.9921269482878832,
+            2.9778365905777178,
+            0.4857425656302731,
+            2.040895924782157,
+            3.1766850330599277,
+            0.12948033156076702,
+            2.0131934676487653,
+            2.964132268488206,
+            0.44434069912908397,
+            2.020840218981022,
+            3.107666574887512
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 33,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 33,
+            "coordinate": [
+              89.65273069886629,
+              -485.8348660008468
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776448016093,
+            "log10_temperature": -0.15804614327367883,
+            "tau": 2.6567857393515904e-10,
+            "delta": -6.7587584440199774e-09,
+            "radius": 8.221180137872013e-05,
+            "qualified": true,
+            "closure": 2.819218895819363e-14,
+            "minimum_lower_return": 0.018352203084951817,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.5042307535416157e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.466595380015365e-07,
+            1.9661932407935938,
+            2.9951929098933077,
+            0.5039243918443589,
+            2.0292587464387433,
+            3.1405767576451407,
+            0.12474375385650244,
+            1.992126665300745,
+            2.9778366791483237,
+            0.48574264243341525,
+            2.0408959050140143,
+            3.176684995671439,
+            0.1294802173939463,
+            2.0131934481509304,
+            2.964132274024589,
+            0.4443405658415545,
+            2.0208401995630974,
+            3.107666539729049
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 34,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 34,
+            "coordinate": [
+              89.65303069886629,
+              -485.8348660008468
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776523016094,
+            "log10_temperature": -0.15804614327367883,
+            "tau": 2.737733123862017e-09,
+            "delta": -6.758894881135021e-09,
+            "radius": 8.221386720476363e-05,
+            "qualified": true,
+            "closure": 1.8834997469784014e-14,
+            "minimum_lower_return": 0.018352119148088663,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 2.0085692439702565e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.4882193338415755e-07,
+            1.9661932219913352,
+            2.995192915607944,
+            0.503924381510169,
+            2.02925872687467,
+            3.140576286267536,
+            0.12474379968214751,
+            1.992126382309981,
+            2.9778367677196442,
+            0.48574271923733336,
+            2.040895885245639,
+            3.1766849582825034,
+            0.1294801032253086,
+            2.0131934286528663,
+            2.9641322795589446,
+            0.44434043257127415,
+            2.020840180144945,
+            3.1076665045701644
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 35,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 35,
+            "coordinate": [
+              89.6524306988663,
+              -485.8345660008468
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776373016094,
+            "log10_temperature": -0.15804614102367884,
+            "tau": -7.422290770509759e-09,
+            "delta": -6.758359445319782e-09,
+            "radius": 8.221295307773969e-05,
+            "qualified": true,
+            "closure": 5.359851377948737e-14,
+            "minimum_lower_return": 0.01835225441577357,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 7.852704896932128e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            8.585121186510542e-07,
+            1.9661932519181027,
+            2.995192853054591,
+            0.5039243591147774,
+            2.0292587580355774,
+            3.140577270879755,
+            0.12474354291680652,
+            1.9921269731774522,
+            2.977836568108228,
+            0.485742544652556,
+            2.0408959167409617,
+            3.1766850187599682,
+            0.12948030399300658,
+            2.0131934597149943,
+            2.9641322190101573,
+            0.44434099054363857,
+            2.0208402110677692,
+            3.1076665613920427
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 36,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 36,
+            "coordinate": [
+              89.65273069886629,
+              -485.8345660008468
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776448016093,
+            "log10_temperature": -0.15804614102367884,
+            "tau": -3.954558484061538e-10,
+            "delta": -6.758495884422828e-09,
+            "radius": 8.22102694008155e-05,
+            "qualified": true,
+            "closure": 2.6967211820331626e-14,
+            "minimum_lower_return": 0.018352170483824846,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.0265916468207475e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            7.317284774168431e-07,
+            1.9661932331161396,
+            2.995192858771548,
+            0.503924348782786,
+            2.029258738471816,
+            3.140576799516591,
+            0.12474358875156016,
+            1.9921266901953973,
+            2.977836656677089,
+            0.4857426214537307,
+            2.040895896972903,
+            3.176684981371738,
+            0.1294801898289087,
+            2.0131934402172416,
+            2.9641322245467587,
+            0.4443408572541488,
+            2.0208401916499255,
+            3.1076665262338232
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 37,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 37,
+            "coordinate": [
+              89.65303069886629,
+              -485.8345660008468
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776523016094,
+            "log10_temperature": -0.15804614102367884,
+            "tau": 4.43443455409474e-09,
+            "delta": -6.758632318939386e-09,
+            "radius": 8.221311870762344e-05,
+            "qualified": true,
+            "closure": 7.23454763923496e-15,
+            "minimum_lower_return": 0.01835208654896461,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.4070800979268333e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            6.054973455197878e-07,
+            1.9661932143139358,
+            2.9951928644864427,
+            0.5039243384487756,
+            2.0292587189078035,
+            3.1405763281478225,
+            0.1247436345777987,
+            1.9921264072099416,
+            2.9778367452465826,
+            0.48574269825557886,
+            2.040895877204591,
+            3.1766849439830347,
+            0.12948007566323247,
+            2.0131934207192383,
+            2.9641322300813653,
+            0.44434072398297547,
+            2.0208401722318325,
+            3.1076664910751584
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 38,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 38,
+            "coordinate": [
+              89.65241020500791,
+              -485.83515120119426
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.0733177636789263,
+            "log10_temperature": -0.15804614541268144,
+            "tau": -2.1871181783510683e-09,
+            "delta": -6.758862291465788e-09,
+            "radius": 8.221339368906765e-05,
+            "qualified": true,
+            "closure": 2.767895700482564e-13,
+            "minimum_lower_return": 0.01835232374424986,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 8.009378905395401e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.92043148464296e-07,
+            1.9661932681785965,
+            2.9951929523858998,
+            0.5039244438196477,
+            2.0292587749127757,
+            3.140577221404777,
+            0.12474386185151914,
+            1.9921269439488636,
+            2.9778366058913956,
+            0.48574258033008777,
+            2.040895933776824,
+            3.17668504920791,
+            0.12948036556231582,
+            2.0131934765228476,
+            2.964132315147017,
+            0.4443404311976127,
+            2.020840227830141,
+            3.107666590118388
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 39,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 39,
+            "coordinate": [
+              89.6527102050079,
+              -485.83515120119426
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776442892629,
+            "log10_temperature": -0.15804614541268144,
+            "tau": 3.904119199693405e-10,
+            "delta": -6.758998735254297e-09,
+            "radius": 8.221332515058867e-05,
+            "qualified": true,
+            "closure": 2.6520641705654135e-13,
+            "minimum_lower_return": 0.018352239808560527,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 6.211840935793128e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            1.8441042172982396e-07,
+            1.9661932493765037,
+            2.995192958102629,
+            0.5039244334875441,
+            2.029258755348872,
+            3.1405767500254362,
+            0.12474390768494507,
+            1.992126660957094,
+            2.977836694463635,
+            0.48574265713509895,
+            2.0408959140086194,
+            3.1766850118192025,
+            0.1294802513928516,
+            2.013193457024952,
+            2.9641323206833983,
+            0.44434029791027535,
+            2.020840208412158,
+            3.1076665549597187
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 40,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 40,
+            "coordinate": [
+              89.6530102050079,
+              -485.83515120119426
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.0733177651789263,
+            "log10_temperature": -0.15804614541268144,
+            "tau": 7.708998650210203e-10,
+            "delta": -6.75913517424789e-09,
+            "radius": 8.221434517938759e-05,
+            "qualified": true,
+            "closure": 2.6782491622883975e-13,
+            "minimum_lower_return": 0.018352155869868193,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.09487301951069e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.6880981606922435e-07,
+            1.9661932305741785,
+            2.995192963817106,
+            0.5039244231532919,
+            2.029258735784725,
+            3.1405762786398115,
+            0.12474395351009576,
+            1.9921263779615146,
+            2.9778367830366435,
+            0.4857427339409113,
+            2.040895894240169,
+            3.1766849744300263,
+            0.12948013722155716,
+            2.013193437526815,
+            2.9641323262175994,
+            0.4443401646406637,
+            2.0208401889939336,
+            3.1076665198006075
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 41,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 41,
+            "coordinate": [
+              89.65241020500791,
+              -485.8348512011943
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.0733177636789263,
+            "log10_temperature": -0.15804614316268145,
+            "tau": -4.949073598270568e-09,
+            "delta": -6.758599728174056e-09,
+            "radius": 8.221317781987164e-05,
+            "qualified": true,
+            "closure": 2.6706660124999143e-13,
+            "minimum_lower_return": 0.018352291144303295,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 6.957258120973433e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            5.962390004778642e-07,
+            1.9661932605013204,
+            2.9951929012639873,
+            0.5039244007578975,
+            2.029258766946036,
+            3.1405772632827715,
+            0.12474369674560422,
+            1.99212696884744,
+            2.9778365834187093,
+            0.48574255934871907,
+            2.040895925735903,
+            3.1766850349086244,
+            0.12948033799991926,
+            2.013193468589345,
+            2.9641322656690394,
+            0.4443407226130005,
+            2.020840219917155,
+            3.107666576623555
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 42,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 42,
+            "coordinate": [
+              89.6527102050079,
+              -485.8348512011943
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776442892629,
+            "log10_temperature": -0.15804614316268145,
+            "tau": -1.3604795607679958e-11,
+            "delta": -6.758736169813997e-09,
+            "radius": 8.221153987297157e-05,
+            "qualified": true,
+            "closure": 2.8127141477179337e-13,
+            "minimum_lower_return": 0.018352207210641878,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 8.62975154443759e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.693653023224472e-07,
+            1.9661932416992913,
+            2.995192906980892,
+            0.5039243904259123,
+            2.029258747382202,
+            3.1405767919117746,
+            0.12474374258010917,
+            1.9921266858606823,
+            2.97783667198921,
+            0.4857426361517381,
+            2.0408959059677705,
+            3.1766849975201583,
+            0.1294802238332411,
+            2.0131934490915198,
+            2.96413227120559,
+            0.44434058932368814,
+            2.02084020049924,
+            3.107666541465113
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 43,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 43,
+            "coordinate": [
+              89.6530102050079,
+              -485.8348512011943
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.0733177651789263,
+            "log10_temperature": -0.15804614316268145,
+            "tau": 2.7248581466817086e-09,
+            "delta": -6.758872606549517e-09,
+            "radius": 8.221372529747489e-05,
+            "qualified": true,
+            "closure": 2.68640726368819e-13,
+            "minimum_lower_return": 0.01835212327397796,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 3.467626006194283e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.4338647624520067e-07,
+            1.9661932228970262,
+            2.995192912695682,
+            0.503924380091858,
+            2.0292587278181227,
+            3.1405763205348514,
+            0.12474378840604344,
+            1.9921264028703298,
+            2.9778367605604186,
+            0.4857427129555232,
+            2.040895886199389,
+            3.1766849601312237,
+            0.12948010966488468,
+            2.0131934295934495,
+            2.9641322767400946,
+            0.44434045605285466,
+            2.0208401810810814,
+            3.1076665063062294
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 44,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 44,
+            "coordinate": [
+              89.65241020500791,
+              -485.8345512011943
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.0733177636789263,
+            "log10_temperature": -0.15804614091268146,
+            "tau": -8.150757448507516e-09,
+            "delta": -6.758337171072213e-09,
+            "radius": 8.221318185532406e-05,
+            "qualified": true,
+            "closure": 2.747925115558066e-13,
+            "minimum_lower_return": 0.01835225854086781,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 2.6492768438765764e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            8.812507111115014e-07,
+            1.96619325282372,
+            2.995192850141962,
+            0.5039243576961516,
+            2.029258758978953,
+            3.140577305144338,
+            0.12474353163964326,
+            1.9921269937361556,
+            2.97783656094951,
+            0.48574253837133013,
+            2.040895917694633,
+            3.176685020608521,
+            0.12948031043160524,
+            2.0131934606555,
+            2.9641322161909525,
+            0.44434101402736226,
+            2.020840212003829,
+            3.10766656312795
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 45,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 45,
+            "coordinate": [
+              89.6527102050079,
+              -485.8345512011943
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776442892629,
+            "log10_temperature": -0.15804614091268146,
+            "tau": -8.575049750131347e-10,
+            "delta": -6.758473610482377e-09,
+            "radius": 8.221036495649028e-05,
+            "qualified": true,
+            "closure": 2.670937290469921e-13,
+            "minimum_lower_return": 0.018352174609264027,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.1281358043758779e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            7.544405738367822e-07,
+            1.9661932340218027,
+            2.9951928558591727,
+            0.5039243473643704,
+            2.0292587394152393,
+            3.140576833782213,
+            0.12474357747501198,
+            1.9921267107547276,
+            2.977836649518193,
+            0.48574261517231204,
+            2.0408958979266223,
+            3.176684983220382,
+            0.1294801962678492,
+            2.0131934411577945,
+            2.9641322217278,
+            0.4443408807365604,
+            2.020840192586032,
+            3.107666527969817
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 46,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 46,
+            "coordinate": [
+              89.6530102050079,
+              -485.8345512011943
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.0733177651789263,
+            "log10_temperature": -0.15804614091268146,
+            "tau": 4.2387771906284184e-09,
+            "delta": -6.758610045236378e-09,
+            "radius": 8.22128854094042e-05,
+            "qualified": true,
+            "closure": 2.649246015561064e-13,
+            "minimum_lower_return": 0.018352090674617783,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.1414058677128804e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            6.281537019409672e-07,
+            1.9661932152196135,
+            2.9951928615741683,
+            0.5039243370304686,
+            2.029258719851242,
+            3.140576362414074,
+            0.12474362330174919,
+            1.9921264277696522,
+            2.9778367380876007,
+            0.48574269197406805,
+            2.040895878158326,
+            3.176684945831712,
+            0.12948008210238,
+            2.0131934216598073,
+            2.964132227262503,
+            0.44434074746432684,
+            2.020840173167955,
+            3.107666492811183
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 47,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 47,
+            "coordinate": [
+              89.65241116173704,
+              -485.83515185909334
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776368131812,
+            "log10_temperature": -0.1580461454176157,
+            "tau": -2.1698302014606366e-09,
+            "delta": -6.758863303887622e-09,
+            "radius": 8.221339120232675e-05,
+            "qualified": true,
+            "closure": 4.43816124333518e-14,
+            "minimum_lower_return": 0.01835232354804995,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 9.976454855791381e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.907237201198273e-07,
+            1.966193268135493,
+            2.9951929525162533,
+            0.503924443881151,
+            2.0292587748678783,
+            3.1405772198096487,
+            0.12474386236081184,
+            1.9921269429917634,
+            2.9778366062231503,
+            0.4857425806210485,
+            2.0408959337314383,
+            3.176685049120071,
+            0.12948036525868745,
+            2.0131934764780874,
+            2.96413231527319,
+            0.44434043013121577,
+            2.020840227785591,
+            3.1076665900358944
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 48,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 48,
+            "coordinate": [
+              89.65271116173703,
+              -485.83515185909334
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776443131811,
+            "log10_temperature": -0.1580461454176157,
+            "tau": 3.9550207523602644e-10,
+            "delta": -6.758999747891742e-09,
+            "radius": 8.22133338542836e-05,
+            "qualified": true,
+            "closure": 2.672329131638757e-14,
+            "minimum_lower_return": 0.018352239612302,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 4.016247742182171e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            1.8338108297872727e-07,
+            1.9661932493333987,
+            2.9951929582329155,
+            0.5039244335489907,
+            2.0292587553039727,
+            3.140576748430033,
+            0.12474390819424627,
+            1.9921266599998286,
+            2.977836694795442,
+            0.48574265742610495,
+            2.0408959139632312,
+            3.1766850117313563,
+            0.1294802510891437,
+            2.0131934569801904,
+            2.964132320809506,
+            0.4443402968438033,
+            2.0208402083676056,
+            3.1076665548772184
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 49,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 49,
+            "coordinate": [
+              89.65301116173703,
+              -485.83515185909334
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776518131812,
+            "log10_temperature": -0.1580461454176157,
+            "tau": 7.637939562505497e-10,
+            "delta": -6.75913618678679e-09,
+            "radius": 8.221434778436635e-05,
+            "qualified": true,
+            "closure": 1.8687350856169753e-14,
+            "minimum_lower_return": 0.018352155673618583,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.4586531278126962e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.7012809148200823e-07,
+            1.9661932305310514,
+            2.9951929639474257,
+            0.5039244232147644,
+            2.0292587357398038,
+            3.1405762770446026,
+            0.12474395401925782,
+            1.992126377004366,
+            2.9778367833684145,
+            0.4857427342318723,
+            2.040895894194758,
+            3.176684974342149,
+            0.1294801369179544,
+            2.013193437482031,
+            2.9641323263437394,
+            0.4443401635745458,
+            2.0208401889493595,
+            3.107666519718078
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 50,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 50,
+            "coordinate": [
+              89.65241116173704,
+              -485.83485185909336
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776368131812,
+            "log10_temperature": -0.1580461431676157,
+            "tau": -4.9233016075279e-09,
+            "delta": -6.758600740219645e-09,
+            "radius": 8.221317108868278e-05,
+            "qualified": true,
+            "closure": 3.372546180993629e-14,
+            "minimum_lower_return": 0.018352290948058004,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.8055146547894388e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            5.9520689668188e-07,
+            1.966193260458171,
+            2.9951929013943497,
+            0.5039244008193976,
+            2.0292587669010915,
+            3.1405772616875223,
+            0.12474369725468655,
+            1.9921269678902676,
+            2.9778365837504626,
+            0.4857425596396595,
+            2.0408959256904695,
+            3.176685034820707,
+            0.1294803376962798,
+            2.0131934685445385,
+            2.9641322657952207,
+            0.4443407215470369,
+            2.0208402198725577,
+            3.107666576540988
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 51,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 51,
+            "coordinate": [
+              89.65271116173703,
+              -485.83485185909336
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776443131811,
+            "log10_temperature": -0.1580461431676157,
+            "tau": -2.7516834297247605e-14,
+            "delta": -6.758737181957625e-09,
+            "radius": 8.22115392400594e-05,
+            "qualified": true,
+            "closure": 1.7452064424101652e-14,
+            "minimum_lower_return": 0.01835220701443368,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 2.3782988194096913e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.6833483782751687e-07,
+            1.9661932416561558,
+            2.9951929071112495,
+            0.5039243904873978,
+            2.029258747337272,
+            3.140576790316777,
+            0.12474374308919363,
+            1.9921266849036612,
+            2.9778366723209255,
+            0.485742636442651,
+            2.0408959059223513,
+            3.176684997432268,
+            0.12948022352967617,
+            2.0131934490467276,
+            2.964132271331767,
+            0.444340588257733,
+            2.0208402004546575,
+            3.1076665413825713
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 52,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 52,
+            "coordinate": [
+              89.65301116173703,
+              -485.83485185909336
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776518131812,
+            "log10_temperature": -0.1580461431676157,
+            "tau": 2.726240814899367e-09,
+            "delta": -6.7588736188686744e-09,
+            "radius": 8.221373214555337e-05,
+            "qualified": true,
+            "closure": 2.326885696275336e-14,
+            "minimum_lower_return": 0.018352123077768897,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.5732068927620632e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.423613741397966e-07,
+            1.9661932228539032,
+            2.9951929128259986,
+            0.5039243801533383,
+            2.029258727773205,
+            3.140576318939926,
+            0.1247437889151727,
+            1.992126401913352,
+            2.97783676089213,
+            0.48574271324644774,
+            2.0408958861539825,
+            3.176684960043352,
+            0.1294801093612481,
+            2.0131934295486698,
+            2.9641322768662315,
+            0.44434045498678415,
+            2.0208401810365113,
+            3.107666506223705
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 53,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 53,
+            "coordinate": [
+              89.65241116173704,
+              -485.8345518590934
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776368131812,
+            "log10_temperature": -0.1580461409176157,
+            "tau": -8.116505165355254e-09,
+            "delta": -6.75833818334875e-09,
+            "radius": 8.221317088505283e-05,
+            "qualified": true,
+            "closure": 3.305281755052994e-14,
+            "minimum_lower_return": 0.018352258344650492,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 2.3817577143696797e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            8.802188383049516e-07,
+            1.9661932527806074,
+            2.995192850272332,
+            0.5039243577576554,
+            2.0292587589340467,
+            3.140577303549423,
+            0.12474353214870663,
+            1.992126992779184,
+            2.9778365612812223,
+            0.4857425386622172,
+            2.040895917649238,
+            3.176685020520671,
+            0.12948031012807726,
+            2.0131934606107316,
+            2.964132216317141,
+            0.44434101296137524,
+            2.02084021195927,
+            3.1076665630454463
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 54,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 54,
+            "coordinate": [
+              89.65271116173703,
+              -485.8345518590934
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776443131811,
+            "log10_temperature": -0.1580461409176157,
+            "tau": -8.354474278858938e-10,
+            "delta": -6.758474622520333e-09,
+            "radius": 8.221036008286431e-05,
+            "qualified": true,
+            "closure": 3.5865064722204476e-14,
+            "minimum_lower_return": 0.018352174412997,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 5.7935570821715344e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            7.534101640435488e-07,
+            1.9661932339786488,
+            2.9951928559894867,
+            0.5039243474258283,
+            2.02925873937029,
+            3.1405768321871763,
+            0.12474357798392866,
+            1.9921267097976825,
+            2.97783664984992,
+            0.4857426154632367,
+            2.040895897881184,
+            3.176684983132458,
+            0.1294801959642454,
+            2.013193441112983,
+            2.964132221853934,
+            0.4443408796708979,
+            2.0208401925414305,
+            3.1076665278872433
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 55,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 55,
+            "coordinate": [
+              89.65301116173703,
+              -485.8345518590934
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776518131812,
+            "log10_temperature": -0.1580461409176157,
+            "tau": 4.248652884776506e-09,
+            "delta": -6.75861105699867e-09,
+            "radius": 8.22128965008444e-05,
+            "qualified": true,
+            "closure": 2.7808226470057488e-14,
+            "minimum_lower_return": 0.01835209047836741,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.0385384621401986e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            6.271254882810071e-07,
+            1.9661932151764772,
+            2.9951928617044965,
+            0.5039243370919304,
+            2.0292587198063106,
+            3.1405763608189283,
+            0.12474362381080598,
+            1.9921264268125412,
+            2.977836738419349,
+            0.4857426922650181,
+            2.0408958781129054,
+            3.176684945743818,
+            0.12948008179875586,
+            2.013193421615014,
+            2.9641322273886512,
+            0.4443407463984173,
+            2.0208401731233714,
+            3.1076664927286375
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 56,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 56,
+            "coordinate": [
+              89.65261116173703,
+              -485.83495185909334
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776418131812,
+            "log10_temperature": -0.1580461439176157,
+            "tau": -9.542535093815148e-10,
+            "delta": -6.758779228885555e-09,
+            "radius": 8.221227207804623e-05,
+            "qualified": true,
+            "closure": 7.137143062149799e-13,
+            "minimum_lower_return": 0.018352245859866268,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 8.670571869988031e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.155370581244658e-07,
+            1.9661932504826438,
+            2.9951929222464506,
+            0.503924408285511,
+            2.0292587565141846,
+            3.1405769334816185,
+            0.12474378285079729,
+            1.9921267709333623,
+            2.977836650288264,
+            0.4857426178353815,
+            2.0408959151920913,
+            3.1766850146616195,
+            0.12948027077297794,
+            2.0131934581905577,
+            2.9641322859791015,
+            0.4443405355394638,
+            2.020840209565012,
+            3.1076665576004245
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 57,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 57,
+            "coordinate": [
+              89.65271116173703,
+              -485.83495185909334
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776443131811,
+            "log10_temperature": -0.1580461439176157,
+            "tau": 1.806962081997215e-10,
+            "delta": -6.758824709173211e-09,
+            "radius": 8.221216190199072e-05,
+            "qualified": true,
+            "closure": 7.360829645526813e-13,
+            "minimum_lower_return": 0.01835221788109864,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.0490872583687241e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.7331522750111306e-07,
+            1.9661932442152892,
+            2.995192924151815,
+            0.503924404841258,
+            2.029258749992894,
+            3.1405767763565544,
+            0.12474379812786926,
+            1.9921266766035992,
+            2.977836679812002,
+            0.48574264343665935,
+            2.0408959086027005,
+            3.1766850021987567,
+            0.12948023271695855,
+            2.01319345169127,
+            2.9641322878243566,
+            0.44434049111192053,
+            2.0208402030923613,
+            3.107666545880906
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 58,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 58,
+            "coordinate": [
+              89.65281116173703,
+              -485.83495185909334
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776468131812,
+            "log10_temperature": -0.1580461439176157,
+            "tau": 1.0715541369802836e-09,
+            "delta": -6.7588701842122715e-09,
+            "radius": 8.221288390372966e-05,
+            "qualified": true,
+            "closure": 7.306187920715188e-13,
+            "minimum_lower_return": 0.018352189901625807,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 2.779692903231675e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.312195615379064e-07,
+            1.9661932379478733,
+            2.995192926056931,
+            0.5039244013967743,
+            2.0292587434715395,
+            3.1405766192306315,
+            0.12474381340111054,
+            1.9921265822733163,
+            2.9778367093358624,
+            0.4857426690380628,
+            2.0408959020132453,
+            3.1766849897357754,
+            0.129480194660605,
+            2.0131934451919187,
+            2.9641322896693714,
+            0.4443404466927273,
+            2.0208401966196474,
+            3.1076665341612744
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 59,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 59,
+            "coordinate": [
+              89.65261116173703,
+              -485.83485185909336
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776418131812,
+            "log10_temperature": -0.1580461431676157,
+            "tau": -1.3969964511638486e-09,
+            "delta": -6.758691700479199e-09,
+            "radius": 8.221196111453077e-05,
+            "qualified": true,
+            "closure": 7.315132574778245e-13,
+            "minimum_lower_return": 0.018352234993095844,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 3.34420858332225e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            5.105597883380668e-07,
+            1.9661932479235344,
+            2.9951929052058563,
+            0.5039243939316382,
+            2.029258753858587,
+            3.14057694744137,
+            0.12474372781113191,
+            1.992126779233141,
+            2.9778366427972998,
+            0.48574261084152265,
+            2.040895912511766,
+            3.1766850098951576,
+            0.12948026158539644,
+            2.0131934555460393,
+            2.9641322694864836,
+            0.4443406326872967,
+            2.0208402069273323,
+            3.107666553102115
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 60,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 60,
+            "coordinate": [
+              89.65281116173703,
+              -485.83485185909336
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776468131812,
+            "log10_temperature": -0.1580461431676157,
+            "tau": 1.1528181293959678e-09,
+            "delta": -6.758782661405233e-09,
+            "radius": 8.221239223706767e-05,
+            "qualified": true,
+            "closure": 4.958818921459204e-13,
+            "minimum_lower_return": 0.018352179035574897,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 5.174078916333264e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.262053481972134e-07,
+            1.9661932353887694,
+            2.9951929090163953,
+            0.5039243870429357,
+            2.029258740815949,
+            3.140576633192138,
+            0.12474375836537067,
+            1.9921265905741492,
+            2.97783670184452,
+            0.4857426620437854,
+            2.0408958993329276,
+            3.1766849849693584,
+            0.12948018547375703,
+            2.0131934425474074,
+            2.9641322731768103,
+            0.44434054383223226,
+            2.0208401939819747,
+            3.1076665296630077
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 61,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 61,
+            "coordinate": [
+              89.65261116173703,
+              -485.8347518590934
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776418131812,
+            "log10_temperature": -0.1580461424176157,
+            "tau": -1.888603359231954e-09,
+            "delta": -6.758604174506042e-09,
+            "radius": 8.22116745952231e-05,
+            "qualified": true,
+            "closure": 9.546449416836177e-13,
+            "minimum_lower_return": 0.018352224125471304,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.2048503612783626e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            6.05588368056205e-07,
+            1.9661932453643747,
+            2.9951928881652607,
+            0.5039243795777674,
+            2.029258751202936,
+            3.140576961398785,
+            0.12474367277242908,
+            1.9921267875315167,
+            2.9778366353068257,
+            0.4857426038482096,
+            2.040895909831387,
+            3.1766850051285758,
+            0.12948025239711958,
+            2.0131934529014677,
+            2.9641322529938647,
+            0.44434072983297235,
+            2.0208402042895997,
+            3.107666548603693
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 62,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 62,
+            "coordinate": [
+              89.65271116173703,
+              -485.8347518590934
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776443131811,
+            "log10_temperature": -0.1580461424176157,
+            "tau": -2.2963592595656116e-10,
+            "delta": -6.758649654430424e-09,
+            "radius": 8.221112171146604e-05,
+            "qualified": true,
+            "closure": 9.48538877790918e-13,
+            "minimum_lower_return": 0.01835219614743843,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 4.703305475464984e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            5.633649427681361e-07,
+            1.966193239097011,
+            2.9951928900706837,
+            0.5039243761335488,
+            2.029258744681637,
+            3.140576804275364,
+            0.12474368804970759,
+            1.9921266932027408,
+            2.977836664830228,
+            0.4857426294491113,
+            2.040895903241988,
+            3.176684992665723,
+            0.12948021434161613,
+            2.0131934464021715,
+            2.964132254839177,
+            0.44434068540515814,
+            2.0208401978169404,
+            3.1076665368841834
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 63,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 63,
+            "coordinate": [
+              89.65281116173703,
+              -485.8347518590934
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776468131812,
+            "log10_temperature": -0.1580461424176157,
+            "tau": 1.185220251654598e-09,
+            "delta": -6.7586951334788895e-09,
+            "radius": 8.221187610472939e-05,
+            "qualified": true,
+            "closure": 9.527770842671993e-13,
+            "minimum_lower_return": 0.018352168169117517,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.35371930754329e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            5.212185454049708e-07,
+            1.9661932328296214,
+            2.9951928919758144,
+            0.5039243726890784,
+            2.0292587381603107,
+            3.140576647151468,
+            0.12474370332591116,
+            1.9921265988736754,
+            2.9778366943536474,
+            0.48574265505003034,
+            2.040895896652562,
+            3.176684980202825,
+            0.12948017628607297,
+            2.0131934399028486,
+            2.9641322566842065,
+            0.44434064097963594,
+            2.0208401913442544,
+            3.107666525164631
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 64,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 64,
+            "coordinate": [
+              89.65271116173703,
+              -485.83485185909336
+            ],
+            "beta": 0.006448528183244975,
+            "alpha": 0.07331776443131811,
+            "log10_temperature": -0.1580461431676157,
+            "tau": -2.976774642754476e-14,
+            "delta": -6.758737182117966e-09,
+            "radius": 8.221153924216003e-05,
+            "qualified": true,
+            "closure": 1.7452064424101652e-14,
+            "minimum_lower_return": 0.01835220701443368,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0,
+              6,
+              12
+            ],
+            "maximum_relative_residual": 6.644617963032088e-09,
+            "cyclic_pair_absolute_discrepancy": 2.958175154485487e-14
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.6833483782751687e-07,
+            1.9661932416561558,
+            2.9951929071112495,
+            0.5039243904873978,
+            2.029258747337272,
+            3.140576790316777,
+            0.12474374308919363,
+            1.9921266849036612,
+            2.9778366723209255,
+            0.485742636442651,
+            2.0408959059223513,
+            3.176684997432268,
+            0.12948022352967617,
+            2.0131934490467276,
+            2.964132271331767,
+            0.444340588257733,
+            2.0208402004546575,
+            3.1076665413825713
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 65,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 65,
+            "coordinate": [
+              89.65251096211689,
+              -485.8356289260776
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776393081907,
+            "log10_temperature": -0.15804614899561809,
+            "tau": -2.3611351937616624e-09,
+            "delta": -6.7588512985097995e-09,
+            "radius": 8.221341384162696e-05,
+            "qualified": true,
+            "closure": 2.953494370286819e-15,
+            "minimum_lower_return": 0.01835232318766188,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 4.16809213061669e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.6737908339367885e-07,
+            1.966193268257566,
+            2.995192943455032,
+            0.5039244523713777,
+            2.029258774903178,
+            3.1405771941691825,
+            0.12474387941261501,
+            1.9921269288653287,
+            2.977836597558484,
+            0.4857425909645341,
+            2.0408959337508277,
+            3.1766850469851855,
+            0.12948037110068064,
+            2.01319347651744,
+            2.964132306225865,
+            0.4443404101458008,
+            2.020840227830596,
+            3.1076665875787572
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 66,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 66,
+            "coordinate": [
+              89.65281096211689,
+              -485.8356289260776
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776468081906,
+            "log10_temperature": -0.15804614899561809,
+            "tau": -4.655665208821297e-11,
+            "delta": -6.7589877415768725e-09,
+            "radius": 8.22130863618617e-05,
+            "qualified": true,
+            "closure": 1.35008583879891e-14,
+            "minimum_lower_return": 0.018352239251679527,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 8.527607176555937e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            1.6344999548823546e-07,
+            1.966193249455464,
+            2.9951929491715625,
+            0.5039244420390894,
+            2.0292587553392645,
+            3.1405767227888943,
+            0.12474392524558497,
+            1.992126645872987,
+            2.977836686130882,
+            0.48574266776970065,
+            2.040895913982612,
+            3.176685009596448,
+            0.12948025693089393,
+            2.013193457019534,
+            2.964132311762053,
+            0.44434027685940375,
+            2.0208402084126025,
+            3.107666552420059
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 67,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 67,
+            "coordinate": [
+              89.65311096211688,
+              -485.8356289260776
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776543081907,
+            "log10_temperature": -0.15804614899561809,
+            "tau": 7.100824580565622e-11,
+            "delta": -6.759124179002403e-09,
+            "radius": 8.221392836295585e-05,
+            "qualified": true,
+            "closure": 1.2448611999585068e-14,
+            "minimum_lower_return": 0.018352155312707848,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 9.138612229895657e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.932055052104981e-07,
+            1.9661932306531344,
+            2.995192954885898,
+            0.5039244317047024,
+            2.0292587357751133,
+            3.140576251402731,
+            0.12474397107005245,
+            1.9921263628770804,
+            2.9778367747039893,
+            0.485742744575622,
+            2.0408958942141577,
+            3.17668497220726,
+            0.12948014275947792,
+            2.0131934375213927,
+            2.964132317296118,
+            0.444340143591337,
+            2.020840188994374,
+            3.107666517260937
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 68,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 68,
+            "coordinate": [
+              89.65251096211689,
+              -485.83532892607764
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776393081907,
+            "log10_temperature": -0.15804614674561807,
+            "tau": -4.9382076163146695e-09,
+            "delta": -6.758588736062836e-09,
+            "radius": 8.221310553340472e-05,
+            "qualified": true,
+            "closure": 6.550317713813519e-14,
+            "minimum_lower_return": 0.018352290587964296,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 5.301019291839673e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            5.754412915541914e-07,
+            1.9661932605802852,
+            2.995192892333121,
+            0.503924409309631,
+            2.029258766936435,
+            3.1405772360484856,
+            0.12474371430655529,
+            1.9921269537646915,
+            2.9778365750855023,
+            0.48574256998281345,
+            2.040895925709903,
+            3.176685032685913,
+            0.1294803435387105,
+            2.013193468583934,
+            2.964132256747888,
+            0.44434070156157296,
+            2.020840219917605,
+            3.1076665740839364
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 69,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 69,
+            "coordinate": [
+              89.65281096211689,
+              -485.83532892607764
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776468081906,
+            "log10_temperature": -0.15804614674561807,
+            "tau": -2.656740225222016e-10,
+            "delta": -6.758725176286009e-09,
+            "radius": 8.221159904643763e-05,
+            "qualified": true,
+            "closure": 1.2115865566404624e-14,
+            "minimum_lower_return": 0.018352206654005183,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.3836267546522158e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.4854384520912935e-07,
+            1.9661932417782748,
+            2.9951928980498344,
+            0.5039243989774677,
+            2.02925874737262,
+            3.1405767646767746,
+            0.12474376014042324,
+            1.9921266707775016,
+            2.9778366636561344,
+            0.485742646786005,
+            2.0408959059417886,
+            3.1766849952974656,
+            0.12948022937178608,
+            2.013193449086127,
+            2.9641322622842536,
+            0.4443405682736465,
+            2.02084020049971,
+            3.107666538925512
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 70,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 70,
+            "coordinate": [
+              89.65311096211688,
+              -485.83532892607764
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776543081907,
+            "log10_temperature": -0.15804614674561807,
+            "tau": 2.2098814447205767e-09,
+            "delta": -6.758861611582042e-09,
+            "radius": 8.221340093592576e-05,
+            "qualified": true,
+            "closure": 1.0213702228734983e-14,
+            "minimum_lower_return": 0.01835212271706762,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 4.4795629821601964e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.4487390068814635e-07,
+            1.966193222976028,
+            2.995192903764459,
+            0.5039243886432846,
+            2.0292587278085583,
+            3.1405762932992194,
+            0.12474380596574447,
+            1.9921263877867663,
+            2.9778367522274514,
+            0.4857427235899019,
+            2.0408958861734257,
+            3.1766849579085537,
+            0.1294801152032079,
+            2.013193429588075,
+            2.964132267818598,
+            0.44434043500405196,
+            2.0208401810815695,
+            3.1076665037666493
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 71,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 71,
+            "coordinate": [
+              89.65251096211689,
+              -485.83502892607765
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776393081907,
+            "log10_temperature": -0.15804614449561807,
+            "tau": -7.955026963803939e-09,
+            "delta": -6.758326179605908e-09,
+            "radius": 8.221301713459974e-05,
+            "qualified": true,
+            "closure": 2.51801402990043e-14,
+            "minimum_lower_return": 0.018352257984894798,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 2.0196331644195122e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            8.604721742556578e-07,
+            1.9661932529027437,
+            2.9951928412110997,
+            0.5039243662478723,
+            2.0292587589694135,
+            3.140577277911717,
+            0.12474354920066763,
+            1.992126978654407,
+            2.9778365526159547,
+            0.48574254900503466,
+            2.040895917668695,
+            3.176685018385935,
+            0.12948031597096446,
+            2.0131934606501507,
+            2.9641322072698055,
+            0.44434099297580926,
+            2.0208402120043405,
+            3.1076665605884495
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 72,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 72,
+            "coordinate": [
+              89.65281096211689,
+              -485.83502892607765
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776468081906,
+            "log10_temperature": -0.15804614449561807,
+            "tau": -9.247013610418553e-10,
+            "delta": -6.7584626179383995e-09,
+            "radius": 8.221033169829698e-05,
+            "qualified": true,
+            "closure": 5.3435433700712426e-14,
+            "minimum_lower_return": 0.01835217405303215,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.4286960785746042e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            7.336527854073217e-07,
+            1.966193234100828,
+            2.9951928469281084,
+            0.5039243559159217,
+            2.0292587394057002,
+            3.1405768065488227,
+            0.12474359503561226,
+            1.9921266956725132,
+            2.977836641184785,
+            0.4857426258062004,
+            2.0408958979006853,
+            3.176684980997784,
+            0.12948020180691433,
+            2.0131934411524455,
+            2.964132212806457,
+            0.4443408596859456,
+            2.020840192586545,
+            3.1076665254303046
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 73,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 73,
+            "coordinate": [
+              89.65311096211688,
+              -485.83502892607765
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776543081907,
+            "log10_temperature": -0.15804614449561807,
+            "tau": 3.908684807622017e-09,
+            "delta": -6.7585990512903884e-09,
+            "radius": 8.221265349470298e-05,
+            "qualified": true,
+            "closure": 1.2448966255328654e-14,
+            "minimum_lower_return": 0.018352090118051487,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.2126203059945352e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            6.073701164067871e-07,
+            1.96619321529864,
+            2.995192852642969,
+            0.5039243455818884,
+            2.029258719841704,
+            3.140576335179708,
+            0.12474364086170245,
+            1.992126412686848,
+            2.9778367297543555,
+            0.4857427026081242,
+            2.0408958781323894,
+            3.1766849436091067,
+            0.1294800876411876,
+            2.013193421654459,
+            2.96413221834103,
+            0.4443407264150636,
+            2.020840173168469,
+            3.1076664902716638
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 74,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 74,
+            "coordinate": [
+              89.6525314449714,
+              -485.83564371993236
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.0733177639820262,
+            "log10_temperature": -0.158046149106572,
+            "tau": -2.025447542094972e-09,
+            "delta": -6.758873563813386e-09,
+            "radius": 8.221338140901813e-05,
+            "qualified": true,
+            "closure": 2.795169388523476e-13,
+            "minimum_lower_return": 0.01835231906436844,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 3.549125405896947e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.3900641310278234e-07,
+            1.9661932673524236,
+            2.9951929463663722,
+            0.5039244537894907,
+            2.029258773960297,
+            3.14057715991978,
+            0.12474389068477641,
+            1.992126908315734,
+            2.977836604714115,
+            0.4857425972431982,
+            2.0408959327976555,
+            3.1766850451375706,
+            0.12948036466474439,
+            2.0131934755774266,
+            2.964132309043822,
+            0.444340386672745,
+            2.020840226895027,
+            3.1076665858437305
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 75,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 75,
+            "coordinate": [
+              89.6528314449714,
+              -485.83564371993236
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.0733177647320262,
+            "log10_temperature": -0.158046149106572,
+            "tau": 2.2823866874157467e-11,
+            "delta": -6.759010006238394e-09,
+            "radius": 8.221320990365084e-05,
+            "qualified": true,
+            "closure": 2.821644225336176e-13,
+            "minimum_lower_return": 0.01835223512805309,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 5.041831789906031e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            1.4077091663099245e-07,
+            1.966193248550314,
+            2.995192952082748,
+            0.5039244434570666,
+            2.0292587543963743,
+            3.140576688538536,
+            0.12474393651712223,
+            1.9921266253228158,
+            2.977836693286689,
+            0.48574267404857124,
+            2.040895913029431,
+            3.176685007748808,
+            0.12948025049466794,
+            2.013193456079512,
+            2.964132314579861,
+            0.44434025338766436,
+            2.020840207477025,
+            3.1076665506850087
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 76,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 76,
+            "coordinate": [
+              89.6531314449714,
+              -485.83564371993236
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.0733177654820262,
+            "log10_temperature": -0.158046149106572,
+            "tau": -1.2589973281843057e-10,
+            "delta": -6.759146443768171e-09,
+            "radius": 8.221409121616737e-05,
+            "qualified": true,
+            "closure": 2.63687076854684e-13,
+            "minimum_lower_return": 0.018352151188838414,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 8.608086383305007e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.2155651238063387e-07,
+            1.9661932297479534,
+            2.9951929577968683,
+            0.5039244331224975,
+            2.0292587348321907,
+            3.1405762171517115,
+            0.12474398234105472,
+            1.9921263423265094,
+            2.9778367818598963,
+            0.4857427508546028,
+            2.0408958932609433,
+            3.1766849703595557,
+            0.12948013632300917,
+            2.013193436581338,
+            2.964132320113718,
+            0.44434012012067914,
+            2.0208401880587643,
+            3.1076665155258256
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 77,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 77,
+            "coordinate": [
+              89.6525314449714,
+              -485.8353437199324
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.0733177639820262,
+            "log10_temperature": -0.15804614685657198,
+            "tau": -4.41982745499512e-09,
+            "delta": -6.758611000587809e-09,
+            "radius": 8.221298174729884e-05,
+            "qualified": true,
+            "closure": 2.7183150431898016e-13,
+            "minimum_lower_return": 0.01835228646503679,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 4.9256541953001395e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            5.527039153741813e-07,
+            1.966193259675165,
+            2.995192895244445,
+            0.5039244107277333,
+            2.029258765993577,
+            3.1405772018004847,
+            0.1247437255789759,
+            1.992126933215938,
+            2.9778365822408404,
+            0.48574257626116807,
+            2.040895924756754,
+            3.1766850308383563,
+            0.12948033710322346,
+            2.013193467643944,
+            2.9641322595658304,
+            0.4443406780880551,
+            2.0208402189820593,
+            3.1076665723489643
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 78,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 78,
+            "coordinate": [
+              89.6528314449714,
+              -485.8353437199324
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.0733177647320262,
+            "log10_temperature": -0.15804614685657198,
+            "tau": -1.3597867704875574e-11,
+            "delta": -6.758747440900468e-09,
+            "radius": 8.221160841878137e-05,
+            "qualified": true,
+            "closure": 2.6777990899678125e-13,
+            "minimum_lower_return": 0.018352202530769513,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 9.399633633086143e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.258436250545533e-07,
+            1.9661932408731424,
+            2.995192900961071,
+            0.5039244003954716,
+            2.0292587464297487,
+            3.14057673042791,
+            0.12474377141222354,
+            1.992126650228227,
+            2.9778366708116204,
+            0.4857426530645051,
+            2.0408959049886266,
+            3.176684993449879,
+            0.12948022293606873,
+            2.0131934481461236,
+            2.9641322651021116,
+            0.4443405448013921,
+            2.0208401995641503,
+            3.1076665371905117
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 79,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 79,
+            "coordinate": [
+              89.6531314449714,
+              -485.8353437199324
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.0733177654820262,
+            "log10_temperature": -0.15804614685657198,
+            "tau": 2.1956767257494143e-09,
+            "delta": -6.758883875859671e-09,
+            "radius": 8.221352924058404e-05,
+            "qualified": true,
+            "closure": 2.723061297807587e-13,
+            "minimum_lower_return": 0.018352118593561298,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 7.616896781548202e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.731612156621236e-07,
+            1.9661932220708547,
+            2.995192906675519,
+            0.5039243900611156,
+            2.029258726865645,
+            3.1405762590497566,
+            0.12474381723693816,
+            1.9921263672371299,
+            2.9778367593830377,
+            0.4857427298685214,
+            2.0408958852202215,
+            3.176684956060888,
+            0.12948010876729002,
+            2.0131934286480297,
+            2.964132270636285,
+            0.44434041153310355,
+            2.0208401801459686,
+            3.1076665020315755
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 80,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 80,
+            "coordinate": [
+              89.6525314449714,
+              -485.8350437199324
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.0733177639820262,
+            "log10_temperature": -0.158046144606572,
+            "tau": -7.253983041509231e-09,
+            "delta": -6.758348444112896e-09,
+            "radius": 8.221280201029809e-05,
+            "qualified": true,
+            "closure": 2.659040008973575e-13,
+            "minimum_lower_return": 0.018352253862208855,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.0248528675525441e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            8.377416396766262e-07,
+            1.96619325199762,
+            2.995192844122476,
+            0.503924367666016,
+            2.029258758026552,
+            3.140577243664724,
+            0.12474356047322957,
+            1.9921269581062586,
+            2.9778365597710965,
+            0.4857425552831651,
+            2.0408959167155434,
+            3.1766850165383897,
+            0.1294803095358663,
+            2.0131934597101573,
+            2.964132210087798,
+            0.4443409695020797,
+            2.020840211068791,
+            3.1076665588534884
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 81,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 81,
+            "coordinate": [
+              89.6528314449714,
+              -485.8350437199324
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.0733177647320262,
+            "log10_temperature": -0.158046144606572,
+            "tau": -4.899554500450379e-10,
+            "delta": -6.758484882083952e-09,
+            "radius": 8.221024973471288e-05,
+            "qualified": true,
+            "closure": 2.7240068264281364e-13,
+            "minimum_lower_return": 0.018352169930044564,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 3.2097359331704846e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            7.109493406211835e-07,
+            1.9661932331956786,
+            2.9951928498393943,
+            0.5039243573339423,
+            2.0292587384628127,
+            3.1405767723012223,
+            0.12474360630731038,
+            1.9921266751239977,
+            2.977836648340001,
+            0.4857426320843936,
+            2.040895896947507,
+            3.1766849791501888,
+            0.1294801953716314,
+            2.013193440212426,
+            2.964132215624362,
+            0.4443408362140236,
+            2.0208401916509695,
+            3.1076665236952965
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 82,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 82,
+            "coordinate": [
+              89.6531314449714,
+              -485.8350437199324
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.0733177654820262,
+            "log10_temperature": -0.158046144606572,
+            "tau": 4.077168196713944e-09,
+            "delta": -6.7586213147671835e-09,
+            "radius": 8.221287314331572e-05,
+            "qualified": true,
+            "closure": 2.7363370981463745e-13,
+            "minimum_lower_return": 0.01835208599472653,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 9.241137015664541e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            5.847245056350266e-07,
+            1.9661932143934877,
+            2.995192855554019,
+            0.5039243469997191,
+            2.0292587188988125,
+            3.1405763009312757,
+            0.12474365213271055,
+            1.9921263921378307,
+            2.9778367369097145,
+            0.4857427088864721,
+            2.0408958771792074,
+            3.1766849417614926,
+            0.1294800812056235,
+            2.0131934207144355,
+            2.9641322211587067,
+            0.4443407029445958,
+            2.0208401722328895,
+            3.107666488536638
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 83,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 83,
+            "coordinate": [
+              89.65253261467284,
+              -485.8356445400823
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776398495045,
+            "log10_temperature": -0.1580461491127231,
+            "tau": -2.007283654261371e-09,
+            "delta": -6.75887481257496e-09,
+            "radius": 8.221337992169303e-05,
+            "qualified": true,
+            "closure": 3.632702118448281e-14,
+            "minimum_lower_return": 0.018352318826312435,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.7235073497656225e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.3739018805788446e-07,
+            1.9661932673001048,
+            2.995192946528403,
+            0.5039244538669406,
+            2.029258773905799,
+            3.1405771579673174,
+            0.12474389131425896,
+            1.9921269071442407,
+            2.9778366051208973,
+            0.4857425976000329,
+            2.0408959327425635,
+            3.1766850450308843,
+            0.12948036429490192,
+            2.0131934755230945,
+            2.964132309200656,
+            0.4443403853576633,
+            2.0208402268409507,
+            3.10766658574354
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 84,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 84,
+            "coordinate": [
+              89.65283261467283,
+              -485.8356445400823
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776473495046,
+            "log10_temperature": -0.1580461491127231,
+            "tau": 2.5984191117127062e-11,
+            "delta": -6.759011255077424e-09,
+            "radius": 8.221321907893779e-05,
+            "qualified": true,
+            "closure": 1.916210763244584e-14,
+            "minimum_lower_return": 0.018352234889931724,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.8935745374195353e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            1.395014859027084e-07,
+            1.9661932484979823,
+            2.995192952244779,
+            0.503924443534493,
+            2.029258754341863,
+            3.140576686585909,
+            0.12474393714647172,
+            1.9921266241512228,
+            2.9778366936934986,
+            0.4857426744054256,
+            2.0408959129743263,
+            3.1766850076420994,
+            0.1294802501248146,
+            2.0131934560251676,
+            2.964132314736695,
+            0.44434025207290095,
+            2.020840207422936,
+            3.1076665505847973
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 85,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 85,
+            "coordinate": [
+              89.65313261467283,
+              -485.8356445400823
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776548495046,
+            "log10_temperature": -0.1580461491127231,
+            "tau": -1.377330302083533e-10,
+            "delta": -6.7591476920662455e-09,
+            "radius": 8.221410472457883e-05,
+            "qualified": true,
+            "closure": 2.4426327293286312e-14,
+            "minimum_lower_return": 0.018352150950666946,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 7.12917431301165e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.23171703705615e-07,
+            1.9661932296956313,
+            2.9951929579589245,
+            0.5039244331999342,
+            2.0292587347776894,
+            3.140576215199087,
+            0.12474398297018263,
+            1.9921263411549186,
+            2.9778367822667073,
+            0.4857427512114551,
+            2.0408958932058483,
+            3.1766849702528632,
+            0.12948013595312322,
+            2.013193436527003,
+            2.9641323202705765,
+            0.44434011880634683,
+            2.020840188004685,
+            3.107666515425629
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 86,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 86,
+            "coordinate": [
+              89.65253261467284,
+              -485.8353445400823
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776398495045,
+            "log10_temperature": -0.1580461468627231,
+            "tau": -4.391268565705772e-09,
+            "delta": -6.758612249463342e-09,
+            "radius": 8.221297506304238e-05,
+            "qualified": true,
+            "closure": 3.976617128216638e-14,
+            "minimum_lower_return": 0.018352286226958798,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 7.141914774095505e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            5.514303654894921e-07,
+            1.9661932596228444,
+            2.995192895406498,
+            0.503924410805175,
+            2.029258765939077,
+            3.1405771998479755,
+            0.12474372620844656,
+            1.9921269320444162,
+            2.9778365826476505,
+            0.48574257661801995,
+            2.040895924701661,
+            3.176685030731669,
+            0.12948033673341636,
+            2.0131934675896104,
+            2.964132259722686,
+            0.4443406767730145,
+            2.0208402189279817,
+            3.107666572248773
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 87,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 87,
+            "coordinate": [
+              89.65283261467283,
+              -485.8353445400823
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776473495046,
+            "log10_temperature": -0.1580461468627231,
+            "tau": -4.352400872435075e-14,
+            "delta": -6.758748689528917e-09,
+            "radius": 8.221160923560064e-05,
+            "qualified": true,
+            "closure": 3.32143084930247e-14,
+            "minimum_lower_return": 0.018352202292712585,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.297335969162376e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.245725911806279e-07,
+            1.966193240820805,
+            2.9951929011231524,
+            0.5039244004729339,
+            2.029258746375232,
+            3.1405767284756725,
+            0.12474377204153941,
+            1.9921266490568685,
+            2.9778366712183684,
+            0.4857426534213001,
+            2.040895904933516,
+            3.176684993343164,
+            0.12948022256627362,
+            2.0131934480917737,
+            2.9641322652589945,
+            0.44434054348669577,
+            2.020840199510056,
+            3.107666537090294
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 88,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 88,
+            "coordinate": [
+              89.65313261467283,
+              -485.8353445400823
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776548495046,
+            "log10_temperature": -0.1580461468627231,
+            "tau": 2.1942344497632733e-09,
+            "delta": -6.758885124721574e-09,
+            "radius": 8.221353611477099e-05,
+            "qualified": true,
+            "closure": 2.7470905352285543e-14,
+            "minimum_lower_return": 0.018352118355362438,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.4545805046246405e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.74773315477091e-07,
+            1.9661932220185265,
+            2.9951929068375587,
+            0.5039243901385507,
+            2.0292587268111375,
+            3.140576257096966,
+            0.12474381786612994,
+            1.992126366065439,
+            2.9778367597898887,
+            0.48574273022541536,
+            2.0408958851651198,
+            3.1766849559541823,
+            0.12948010839735136,
+            2.0131934285936888,
+            2.9641322707931277,
+            0.4443404102186993,
+            2.020840180091883,
+            3.1076665019313663
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 89,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 89,
+            "coordinate": [
+              89.65253261467284,
+              -485.8350445400823
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776398495045,
+            "log10_temperature": -0.15804614461272312,
+            "tau": -7.215029120989235e-09,
+            "delta": -6.758349692438098e-09,
+            "radius": 8.221279012485203e-05,
+            "qualified": true,
+            "closure": 1.5459765100646297e-14,
+            "minimum_lower_return": 0.018352253624153686,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 5.544866616775239e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            8.364687797240355e-07,
+            1.9661932519453167,
+            2.995192844284554,
+            0.5039243677434672,
+            2.0292587579720704,
+            3.1405772417124225,
+            0.12474356110256955,
+            1.9921269569348619,
+            2.977836560177846,
+            0.485742555639945,
+            2.0408959166604683,
+            3.176685016431735,
+            0.12948030916612396,
+            2.0131934596558416,
+            2.964132210244678,
+            0.44434096818732594,
+            2.020840211014731,
+            3.1076665587533276
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 90,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 90,
+            "coordinate": [
+              89.65283261467283,
+              -485.8350445400823
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776473495046,
+            "log10_temperature": -0.15804614461272312,
+            "tau": -4.660011908281083e-10,
+            "delta": -6.758486130142627e-09,
+            "radius": 8.2210245348222e-05,
+            "qualified": true,
+            "closure": 2.359138857535271e-14,
+            "minimum_lower_return": 0.01835216969188823,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 3.742780919625259e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            7.096784101400992e-07,
+            1.966193233143382,
+            2.9951928500013496,
+            0.5039243574113165,
+            2.0292587384083376,
+            3.140576770348754,
+            0.12474360693644457,
+            1.9921266739525003,
+            2.9778366487467784,
+            0.48574263244120486,
+            2.0408958968924384,
+            3.1766849790435434,
+            0.12948019500184804,
+            2.013193440158117,
+            2.9641322157811225,
+            0.44434083489970827,
+            2.0208401915969163,
+            3.1076665235951446
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 91,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 91,
+            "coordinate": [
+              89.65313261467283,
+              -485.8350445400823
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776548495046,
+            "log10_temperature": -0.15804614461272312,
+            "tau": 4.086118773376159e-09,
+            "delta": -6.758622563487712e-09,
+            "radius": 8.221288521333742e-05,
+            "qualified": true,
+            "closure": 2.980212268788639e-14,
+            "minimum_lower_return": 0.018352085756675837,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 4.179950017377087e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            5.83456500833742e-07,
+            1.966193214341144,
+            2.995192855716091,
+            0.5039243470771728,
+            2.0292587188442894,
+            3.140576298979025,
+            0.12474365276206409,
+            1.992126390966464,
+            2.97783673731646,
+            0.4857427092432463,
+            2.04089587712409,
+            3.176684941654771,
+            0.12948008083587656,
+            2.013193420660079,
+            2.9641322213155803,
+            0.4443407016298411,
+            2.0208401721787888,
+            3.1076664884364136
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 92,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 92,
+            "coordinate": [
+              89.65273261467283,
+              -485.8354445400823
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776448495045,
+            "log10_temperature": -0.15804614761272312,
+            "tau": -9.000935300102018e-10,
+            "delta": -6.758790737646351e-09,
+            "radius": 8.221231499245817e-05,
+            "qualified": true,
+            "closure": 8.024973846516659e-13,
+            "minimum_lower_return": 0.018352241138028243,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 3.996693937412064e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.7174124162096723e-07,
+            1.966193249647303,
+            2.9951929162583895,
+            0.503924418271087,
+            2.0292587555521546,
+            3.140576871640082,
+            0.12474381180409767,
+            1.9921267350863126,
+            2.9778366491858073,
+            0.485742634814123,
+            2.0408959142032663,
+            3.1766850105725295,
+            0.12948026980950936,
+            2.013193457235614,
+            2.9641322799063636,
+            0.44434049076620025,
+            2.0208402086204207,
+            3.10766655330816
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 93,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 93,
+            "coordinate": [
+              89.65283261467283,
+              -485.8354445400823
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776473495046,
+            "log10_temperature": -0.15804614761272312,
+            "tau": 5.7507044753327824e-11,
+            "delta": -6.758836217834807e-09,
+            "radius": 8.22121703010799e-05,
+            "qualified": true,
+            "closure": 9.654803560662068e-13,
+            "minimum_lower_return": 0.018352213159061728,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 5.562433727166794e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.295312002798787e-07,
+            1.9661932433799119,
+            2.9951929181636663,
+            0.5039244148267483,
+            2.0292587490308263,
+            3.1405767145142076,
+            0.12474382708093734,
+            1.992126640756061,
+            2.9778366787097044,
+            0.48574266041558245,
+            2.0408959076138378,
+            3.1766849981095944,
+            0.1294802317532352,
+            2.0131934507362885,
+            2.964132281751534,
+            0.4443404463392828,
+            2.0208402021477325,
+            3.1076665415885736
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 94,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 94,
+            "coordinate": [
+              89.65293261467284,
+              -485.8354445400823
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776498495046,
+            "log10_temperature": -0.15804614761272312,
+            "tau": 7.710402753958621e-10,
+            "delta": -6.7588816908913235e-09,
+            "radius": 8.221280362737956e-05,
+            "qualified": true,
+            "closure": 7.532395726097539e-13,
+            "minimum_lower_return": 0.018352185179426134,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 9.281242271442807e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            2.874705433905114e-07,
+            1.9661932371125084,
+            2.9951929200687077,
+            0.5039244113821844,
+            2.029258742509484,
+            3.1405765573877416,
+            0.1247438423529541,
+            1.9921265464254496,
+            2.977836708233653,
+            0.48574268601707726,
+            2.040895901024395,
+            3.176684985646625,
+            0.12948019369669478,
+            2.0131934442369497,
+            2.9641322835964767,
+            0.4443404019227317,
+            2.020840195675031,
+            3.107666529868954
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 95,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 95,
+            "coordinate": [
+              89.65273261467283,
+              -485.8353445400823
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776448495045,
+            "log10_temperature": -0.1580461468627231,
+            "tau": -1.2196594270565825e-09,
+            "delta": -6.758703209647905e-09,
+            "radius": 8.221194244280159e-05,
+            "qualified": true,
+            "closure": 4.623016624241177e-13,
+            "minimum_lower_return": 0.018352230271447948,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.4204980178440247e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.6678434694360163e-07,
+            1.9661932470881751,
+            2.9951928992178445,
+            0.5039244039172397,
+            2.029258752896538,
+            3.140576885600436,
+            0.12474375676471311,
+            1.9921267433864527,
+            2.9778366416947186,
+            0.485742627820125,
+            2.040895911522923,
+            3.176685005806046,
+            0.12948026062213863,
+            2.013193454591077,
+            2.964132263413794,
+            0.4443405879136155,
+            2.020840205982722,
+            3.107666548809831
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 96,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 96,
+            "coordinate": [
+              89.65293261467284,
+              -485.8353445400823
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776498495046,
+            "log10_temperature": -0.1580461468627231,
+            "tau": 9.755119186668094e-10,
+            "delta": -6.758794160827025e-09,
+            "radius": 8.221237352112671e-05,
+            "qualified": true,
+            "closure": 9.662249274349648e-13,
+            "minimum_lower_return": 0.018352174313626474,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 8.237448593258575e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            3.824772228587943e-07,
+            1.966193234553404,
+            2.995192903028161,
+            0.5039243970283499,
+            2.0292587398538924,
+            3.1405765713499245,
+            0.12474378731267942,
+            1.992126554726689,
+            2.977836700742158,
+            0.4857426790226112,
+            2.040895898344077,
+            3.176684980880209,
+            0.1294801845099736,
+            2.0131934415924375,
+            2.964132267103905,
+            0.4443404990722046,
+            2.020840193037357,
+            3.1076665253706888
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 97,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 97,
+            "coordinate": [
+              89.65273261467283,
+              -485.83524454008233
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776448495045,
+            "log10_temperature": -0.1580461461127231,
+            "tau": -1.5881108595338592e-09,
+            "delta": -6.758615682896806e-09,
+            "radius": 8.221159434059504e-05,
+            "qualified": true,
+            "closure": 9.481676185172414e-13,
+            "minimum_lower_return": 0.018352219404123123,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 1.2609772769720732e-10,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            5.618289509149254e-07,
+            1.9661932445290236,
+            2.9951928821772005,
+            0.5039243895633342,
+            2.0292587502408956,
+            3.1405768995588432,
+            0.12474370172525555,
+            1.9921267516854246,
+            2.9778366342040226,
+            0.4857426208265673,
+            2.0408959088425527,
+            3.176685001039492,
+            0.12948025143417458,
+            2.0131934519465142,
+            2.964132246921128,
+            0.4443406850609967,
+            2.0208402033449984,
+            3.107666544311435
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 98,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 98,
+            "coordinate": [
+              89.65283261467283,
+              -485.83524454008233
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776473495046,
+            "log10_temperature": -0.1580461461127231,
+            "tau": -1.0648063116999729e-10,
+            "delta": -6.758661163323975e-09,
+            "radius": 8.221113012978839e-05,
+            "qualified": true,
+            "closure": 7.005280676115976e-13,
+            "minimum_lower_return": 0.018352191425882,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 2.957726535142624e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            5.196142352462645e-07,
+            1.966193238261673,
+            2.9951928840825706,
+            0.503924386119069,
+            2.0292587437196103,
+            3.1405767424349915,
+            0.1247437170030638,
+            1.9921266573563883,
+            2.977836663727498,
+            0.4857426464275403,
+            2.0408959022531676,
+            3.17668498857666,
+            0.12948021337860624,
+            2.0131934454472318,
+            2.9641322487663895,
+            0.4443406406320205,
+            2.020840196872353,
+            3.1076665325919453
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 99,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 99,
+            "coordinate": [
+              89.65293261467284,
+              -485.83524454008233
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776498495046,
+            "log10_temperature": -0.1580461461127231,
+            "tau": 1.1310441085636167e-09,
+            "delta": -6.7587066406349914e-09,
+            "radius": 8.221191900169727e-05,
+            "qualified": true,
+            "closure": 9.562553111195328e-13,
+            "minimum_lower_return": 0.018352163447345356,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0
+            ],
+            "maximum_relative_residual": 3.885217335481941e-11,
+            "cyclic_pair_absolute_discrepancy": null
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.774888674267522e-07,
+            1.9661932319942637,
+            2.9951928859876387,
+            0.5039243826745173,
+            2.0292587371982638,
+            3.140576585310295,
+            0.124743732278051,
+            1.99212656302684,
+            2.977836693251077,
+            0.48574267202862786,
+            2.04089589566372,
+            3.1766849761137124,
+            0.12948017532273376,
+            2.013193438947888,
+            2.964132250611357,
+            0.4443405962091774,
+            2.020840190399646,
+            3.1076665208723466
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        },
+        {
+          "point_index": 100,
+          "reference_point_index": 1,
+          "status": "passed",
+          "audit": {
+            "index": 100,
+            "coordinate": [
+              89.65283261467283,
+              -485.8353445400823
+            ],
+            "beta": 0.006448534183244975,
+            "alpha": 0.07331776473495046,
+            "log10_temperature": -0.1580461468627231,
+            "tau": -4.6401047609258284e-14,
+            "delta": -6.7587486897639125e-09,
+            "radius": 8.221160923846837e-05,
+            "qualified": true,
+            "closure": 3.32143084930247e-14,
+            "minimum_lower_return": 0.018352202292712585,
+            "closure_recomputed_from_saved_endpoint": true,
+            "phases": [
+              0,
+              6,
+              12
+            ],
+            "maximum_relative_residual": 1.6285618583217614e-09,
+            "cyclic_pair_absolute_discrepancy": 1.268962691002018e-13
+          },
+          "all_alignment_maximum_relative_changes": [
+            4.245725911806279e-07,
+            1.966193240820805,
+            2.9951929011231524,
+            0.5039244004729339,
+            2.029258746375232,
+            3.1405767284756725,
+            0.12474377204153941,
+            1.9921266490568685,
+            2.9778366712183684,
+            0.4857426534213001,
+            2.040895904933516,
+            3.176684993343164,
+            0.12948022256627362,
+            2.0131934480917737,
+            2.9641322652589945,
+            0.44434054348669577,
+            2.020840199510056,
+            3.107666537090294
+          ],
+          "best_right_roll": 0,
+          "passed": true
+        }
+      ],
+      "untested_or_incomplete_stages": [],
+      "terminal_failure": null,
+      "scope": "Conditional Hessian-feature estimates at numerically corrected intersections; the Hessian eigenvector need not be the geometric normal of its feature locus. Empirical envelopes are not confidence intervals or verified neural bounds. Actual trace residuals are retained as measured. No exact zero, ridge crossing, between-case connection, or superstability is established.",
+      "trace_axis": "Signed measured residuals; data-dependent limits; no trace projection or zero substitution.",
+      "feature_bars": "Empirical pointwise + intersection-location envelope; not confidence intervals.",
+      "visual_review": "required; successful rendering is not visual approval",
+      "figures": [
+        {
+          "path": "mixed-junction-mobile-summary.png",
+          "bytes": 201019,
+          "sha256": "b1e81be11dd12201ac942d59aefcd44b67a0fc3ff6358cf50dbea38f04998a60"
+        },
+        {
+          "path": "mixed-junction-readable-summary.pdf",
+          "bytes": 38305,
+          "sha256": "52b4a5578f92d3b57c85f63262683c541e037b9e735d110378674fdf8c38e69c"
+        },
+        {
+          "path": "mixed-junction-readable-summary.png",
+          "bytes": 204033,
+          "sha256": "ea726d27ddd78428350f2c3fdc76de8daaaf4059c024290b066139d9913e9059"
+        }
+      ]
+    },
+    "publication_visual_review_file": "mixed-junction-publication-visual-review.json",
+    "publication_visual_review_sha256": "7efb62c5016281401791858c1761122311926a21072e6445434e4a9ff0f401a4",
+    "publication_visual_review": {
+      "id": "BSC6-readable-summary-visual-review",
+      "recorded_utc": "2026-10-22T06:33:10.248084+00:00",
+      "passed": true,
+      "figure_receipt": {
+        "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/receipt.json",
+        "bytes": 149696,
+        "sha256": "a61fef2f8af572f294be51354d4a4d9f00ee92f1c3341ad99d3be54ead27cd70"
+      },
+      "audit_receipt": {
+        "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-audit-01/receipt.json",
+        "bytes": 389901,
+        "sha256": "691cae5fac0254a54b3f2bb919431bb3fe9650e6cc4e828809b7f137ae97b791"
+      },
+      "independent_replay": {
+        "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/independent-replay.json",
+        "bytes": 6890,
+        "sha256": "2054d331901cf4a74ad2852c69baed5421d11a308636f1fe1539936af6d967a2"
+      },
+      "reviewed": [
+        {
+          "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/mixed-junction-mobile-summary.png",
+          "bytes": 201019,
+          "sha256": "b1e81be11dd12201ac942d59aefcd44b67a0fc3ff6358cf50dbea38f04998a60"
+        },
+        {
+          "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/mixed-junction-readable-summary.pdf",
+          "bytes": 38305,
+          "sha256": "52b4a5578f92d3b57c85f63262683c541e037b9e735d110378674fdf8c38e69c"
+        },
+        {
+          "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/mixed-junction-readable-summary.png",
+          "bytes": 204033,
+          "sha256": "ea726d27ddd78428350f2c3fdc76de8daaaf4059c024290b066139d9913e9059"
+        }
+      ],
+      "previews": [
+        {
+          "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/previews/mobile-360px-preview.png",
+          "bytes": 114834,
+          "sha256": "80d1c7f3a424cff2a8911807a83c08b425322cc419366c0ad634ab01777547b5"
+        },
+        {
+          "path": "audits/baby-shrimp-zoom/20261022-mixed-junction-summary-01/previews/readable-pdf-preview.png",
+          "bytes": 84216,
+          "sha256": "95b6ec17624e0c4a6c1440bef7cc9677a07688cf6e5a223dcc132ab6ed4264d4"
+        }
+      ],
+      "checks": [
+        "Main PNG and mobile PNG visually inspected from production output.",
+        "PDF rendered with Poppler and its page visually inspected; glyphs, markers and table legible.",
+        "Mobile PNG separately inspected at 360-pixel display width.",
+        "All three actual statuses retained; positive lower and negative upper feature estimates with empirical bars; center labeled small nominal residual.",
+        "All primary and cyclic signed trace residuals plotted as measured, with marker jitter explicitly disclosed and frozen gate stated.",
+        "No inferred connecting line, contour, exact-zero or contraction-valley certificate.",
+        "All visible text bounds inside the production canvas at both layout sizes; no clipped labels or overlapping footer/table.",
+        "All reviewed output hashes rechecked against original figure receipt; original pending visual-review field retained unchanged."
+      ],
+      "scope": "Conditional Hessian-feature estimates at numerically corrected intersections; the Hessian eigenvector need not be the geometric normal of its feature locus. Empirical envelopes are not confidence intervals or verified neural bounds. Actual trace residuals are retained as measured. No exact zero, ridge crossing, between-case connection, or superstability is established."
+    }
+  },
+  "scope": "Conditional Hessian-feature estimates at numerically corrected intersections; the Hessian eigenvector need not be the geometric normal of its feature locus. Empirical envelopes are not confidence intervals or verified neural bounds. Actual trace residuals are retained as measured. No exact zero, ridge crossing, between-case connection, or superstability is established."
+}

@@ -1,0 +1,52 @@
+{
+  "id": "BSC5-center-zoom-publication-figures",
+  "receipt": "/data2/neural-shrimp-data/audits/baby-shrimp-zoom/20261022-contraction-minima-audit-01/receipt.json",
+  "receipt_sha256": "874f0fdceeeefe3957c5b8ac8d9a8ca87ec53a2f8d35e978c367281f0ac112c5",
+  "scientific_complete": true,
+  "partial_explicitly_allowed": false,
+  "source_commit": "edb81d406696dd2146c05e0b9cef86e7819e977d",
+  "source_sha256": {
+    "tools/plot_baby_shrimp_contraction_minima_publication.py": "0c50c5655369b377ad27587aa33c01dfd1fd2aea098c5bbd646d247a6daeb2f3",
+    "tools/plot_baby_shrimp_contraction_minima.py": "7786c92d152803524d1c5c18e7eda8ab7aaaf83e4fa0644947363fdac1ea9e71"
+  },
+  "figure_size_inches": [
+    7.0,
+    5.0
+  ],
+  "threads": 1,
+  "caption_semantics": {
+    "scientific_complete": true,
+    "planned_longitudinal_distance": 0.0002,
+    "coordinate_scales": [
+      2.5e-06,
+      7.5e-06
+    ],
+    "display_multiplier": 10000.0,
+    "metric": "Equal axes in the declared scaled Euclidean metric: steering displacement divided by the first scale, log10-temperature displacement divided by the second scale.",
+    "frame": "Left: conditional trace-Hessian predictor rays and full planned transverse section supports, not measured valley connections.",
+    "measurements": "Right: every observed sample on the four innermost planned sections; independently qualified minima are not joined.",
+    "markers": "Dots are admitted samples; stars and black bars show qualified minima and measured final bracket widths. Red crosses and pluses retain unadmitted samples and unfinished callbacks.",
+    "brackets": "Black bars are not confidence intervals or exact extremum enclosures.",
+    "status": "All four section statuses and sample/minimum counts are retained. No bracket means no strict minimum bracket on the sampled mesh; missing sections remain untested.",
+    "limits": "Finite section minima do not establish connected intrinsic valleys or an exact crossing. Conditional frame geometry is separate from measured section evidence.",
+    "diagnostic_labels_replaced_or_moved": [
+      "Section-minima pilot \u2014 center zoom",
+      "Audited innermost sections. Planned longitudinal distance = 0.0002.\nEqual axes in the declared scaled Euclidean metric; the display includes the full section supports.",
+      "Scaled coordinates: (steering \u2212 center) / 2.5e-06 and (log\u2081\u2080 temperature \u2212 center) / 7.5e-06; both panels show \u00d710\u207b\u2074 units.\nBlack bars are measured final bracket widths, not confidence intervals. Red \u00d7 / + retain unadmitted samples / unfinished callbacks.\nNo bracket means no strict minimum bracket on the sampled support. These sections do not establish connected valleys or an exact crossing."
+    ]
+  },
+  "figures": [
+    {
+      "path": "section-minima-center-zoom-publication.pdf",
+      "bytes": 25372,
+      "sha256": "b285603895394f786a659526b48d4c440c58b0586c50412f9c8523711b8a5961"
+    },
+    {
+      "path": "section-minima-center-zoom-publication.png",
+      "bytes": 267044,
+      "sha256": "f9ab897c08adfcabc00bc6c64a7a894fe09bb079962109ca906a2755d6836ca1"
+    }
+  ],
+  "visual_review": "required; not established by successful rendering",
+  "scope": "Layout-only reuse of audited center-zoom artists. No new numerical evaluation or interpolation."
+}

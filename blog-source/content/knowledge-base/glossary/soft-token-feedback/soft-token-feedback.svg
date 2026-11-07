@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="400" viewBox="0 0 760 400" role="img" aria-labelledby="soft-token-title soft-token-desc">
+<title id="soft-token-title">The average embedding returns to one fixed input slot</title>
+<desc id="soft-token-desc">Toy update, not measured model data. The model takes a fixed prompt and one changing vector. Probabilities three quarters and one quarter weight embeddings (2, 0) and (0, 4). Contributions (1.5, 0) and (0, 1) add to (1.5, 1), which replaces the old vector at the same position. The next step recomputes probabilities.</desc>
+<defs><marker id="arrowhead" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 8 4 L 0 8 z" fill="#A67C52"/></marker></defs>
+<style>.t{font-family:Arial,Helvetica,sans-serif;fill:#2C2924}.title{font-size:15px;font-weight:700}.h{font-size:13px;font-weight:700}.s{font-size:12px}.m{font-size:11px;fill:#5A544C}.arrow{fill:none;stroke:#A67C52;stroke-width:1.8}</style>
+<rect width="760" height="400" fill="#F7F4F0"/>
+<text class="t title" x="24" y="28">Soft-token feedback: average the embeddings, then replace one slot</text>
+<text class="t m" x="24" y="48">One toy update with two tokens. No measured data and no claim about the next step.</text>
+<path d="M 620 150 V 98 H 120 V 139" class="arrow"/>
+<path d="M 115 139 L 120 147 L 125 139 z" fill="#A67C52"/>
+<text class="t s" x="230" y="85">Return the new vector to the same slot</text>
+<rect x="24" y="150" width="190" height="158" rx="10" fill="#E8F0F7" stroke="#4B6787"/>
+<text class="t h" x="40" y="177">Model input</text>
+<rect x="40" y="192" width="158" height="34" rx="6" fill="#FBF9F6" stroke="#C4B8A8"/>
+<text class="t s" x="54" y="214">Fixed prompt</text>
+<rect x="40" y="237" width="158" height="34" rx="6" fill="#FBF9F6" stroke="#4B6787"/>
+<text class="t s" x="54" y="259">Current vector slot</text>
+<text class="t m" x="40" y="292">Its position stays fixed.</text>
+<path d="M 220 229 H 244" class="arrow"/>
+<path d="M 244 224 L 252 229 L 244 234 z" fill="#A67C52"/>
+<rect x="254" y="150" width="202" height="158" rx="10" fill="#FBF9F6" stroke="#C4B8A8"/>
+<text class="t h" x="270" y="177">Model probabilities</text>
+<text class="t s" x="270" y="211">Token A: three quarters</text>
+<text class="t s" x="270" y="236">Token B: one quarter</text>
+<text class="t m" x="270" y="269">Recompute at every step.</text>
+<text class="t m" x="270" y="289">Do not select one token.</text>
+<path d="M 462 229 H 486" class="arrow"/>
+<path d="M 486 224 L 494 229 L 486 234 z" fill="#A67C52"/>
+<rect x="496" y="150" width="240" height="158" rx="10" fill="#EAF1E5" stroke="#6F8D5E"/>
+<text class="t h" x="512" y="177">Weighted embedding average</text>
+<text class="t s" x="512" y="207">Three quarters of (2, 0): (1.5, 0)</text>
+<text class="t s" x="512" y="232">One quarter of (0, 4): (0, 1)</text>
+<path d="M 512 245 H 720" stroke="#6F8D5E"/>
+<text class="t h" x="512" y="269">New vector: (1.5, 1)</text>
+<text class="t m" x="512" y="290">Neither individual embedding.</text>
+<rect x="24" y="352" width="712" height="28" rx="8" fill="#EAF1E5" stroke="#6F8D5E"/>
+<text class="t s" x="40" y="370">One changing vector returns; the prompt is unchanged and the context does not grow.</text>
+</svg>

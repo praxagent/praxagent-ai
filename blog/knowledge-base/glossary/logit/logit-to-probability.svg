@@ -2,7 +2,7 @@
      viewBox="0 0 780 430" role="img"
      aria-labelledby="logitTitle logitDesc">
   <title id="logitTitle">Logits become probabilities by softmax</title>
-  <desc id="logitDesc">Three toy next-token logits, 3.2 for red, 2.7 for blue, and negative 0.4 for green, are drawn from a zero line. Softmax converts them to probabilities 0.612, 0.371, and 0.017. Adding 5 to every logit leaves those probabilities unchanged, and the largest logit is the greedy token.</desc>
+  <desc id="logitDesc">Three toy next-token logits, 3.2 for red, 2.7 for blue, and negative 0.4 for green, are drawn from a zero line. Softmax converts them to probabilities 0.612, 0.371, and 0.017. Adding 5 to every logit leaves those probabilities unchanged, and red, the token with the largest logit, is selected greedily.</desc>
   <defs>
     <marker id="logitArrow" viewBox="0 0 10 10" refX="9" refY="5"
             markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -68,9 +68,9 @@
 
   <rect x="442" y="248" width="298" height="44" rx="8" class="row"/>
   <text x="454" y="275" class="t s">green 0.017</text>
-  <rect x="560" y="266" width="6" height="8" rx="3" class="neg"/>
+  <rect x="560" y="266" width="3" height="8" rx="1.5" class="neg"/>
 
   <rect x="24" y="356" width="732" height="52" rx="10" fill="#EAF1E5" stroke="#6F8D5E" stroke-width="1.4"/>
   <text x="390" y="378" text-anchor="middle" class="t s">Adding 5 to every logit (8.2, 7.7, 4.6) leaves these probabilities unchanged.</text>
-  <text x="390" y="396" text-anchor="middle" class="t m">Only differences between logits affect the distribution. The largest logit is the greedy token.</text>
+  <text x="390" y="396" text-anchor="middle" class="t m">Only differences between logits affect the distribution. Greedy selection picks the token with the largest logit.</text>
 </svg>

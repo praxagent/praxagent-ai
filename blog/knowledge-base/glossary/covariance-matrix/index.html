@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <title>Covariance matrix - praxagent Knowledge Base</title>
+    
+    
+
+
+
+
+
+
+
+
+
+    
+    <meta name="description" content="A square table of how a random vector spreads around its mean in every direction: variances on the diagonal, covariances off it.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/glossary/covariance-matrix/">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="praxagent Knowledge Base">
+    <meta property="og:title" content="Covariance matrix">
+    <meta property="og:description" content="A square table of how a random vector spreads around its mean in every direction: variances on the diagonal, covariances off it.">
+    <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/glossary/covariance-matrix/">
+    <meta property="og:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/covariance-matrix/covariance-matrix-card.png">
+    <meta property="og:image:alt" content="Three toy embeddings under three sets of weights. With the weight shared, a wide ellipse marks the spread around the mean; with one point dominant it is smaller; with all the weight on one point the covariance matrix is zero.">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="Covariance matrix">
+    <meta name="twitter:description" content="A square table of how a random vector spreads around its mean in every direction: variances on the diagonal, covariances off it.">
+    <meta name="twitter:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/covariance-matrix/covariance-matrix-card.png">
+    <meta name="twitter:image:alt" content="Three toy embeddings under three sets of weights. With the weight shared, a wide ellipse marks the spread around the mean; with one point dominant it is smaller; with all the weight on one point the covariance matrix is zero.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
+    <link rel="stylesheet" href="/blog/blog.css?v=20261025a">
+    <link rel="stylesheet" href="/blog/katex.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script src="/blog/js/katex-0.16.47/katex.min.js"></script>
+    <script src="/blog/js/katex-0.16.47/auto-render.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'neutral',
+        securityLevel: 'loose',
+        flowchart: { htmlLabels: true, curve: 'basis' }
+      });
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-scrolls industrial-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+
+
+
+            <div class="nav-menu">
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link">Research Notes</a>
+                <a href="/blog/knowledge-base/" class="nav-link active">Knowledge Base</a>
+                <a href="/blog/search/" class="nav-link">Search</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
+            <a href="/blog/knowledge-base/" class="mobile-nav-link active">Knowledge Base</a>
+            <a href="/blog/search/" class="mobile-nav-link">Search</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        
+
+
+
+
+<div class="blog-post reference-entry">
+    <div class="container">
+        <article class="post-content">
+            <header class="post-header">
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
+                <h1 class="post-title">Covariance matrix</h1>
+                
+                <p class="reference-summary">A square table of how a random vector spreads around its mean in every direction: variances on the diagonal, covariances off it.</p>
+                
+
+            </header>
+
+
+
+
+
+            <div class="post-body">
+                <p>A <strong>covariance matrix</strong> describes the shape of the cloud of values a random vector can take: how far the vector typically strays from its mean, and in which directions. For a random vector \(X\) with \(d\) coordinates it is a \(d \times d\) table, written \(\mathrm{Cov}(X)\). Each diagonal entry is the variance of one coordinate on its own, the square of its <a href="/blog/knowledge-base/glossary/standard-deviation/">standard deviation</a>. Each off-diagonal entry is the covariance of two coordinates: positive when they tend to stray from their means in the same direction, negative when they tend to stray in opposite directions, and zero when their paired deviations cancel on average. The one matrix answers the question for every direction at once. Take a direction given by a unit column vector \(w\), one with \(w^{\top}w = 1\), where the transpose \(w^{\top}\) is the same numbers written as a row. The coordinate of the random vector along that direction is the number \(w^{\top}X\), and its variance is \(w^{\top}\mathrm{Cov}(X)\,w\).</p>
+<p>In these notes the covariance matrix matters for a reason beyond statistics. Suppose the weights of an average come from a softmax, as next-token probabilities do, and the scores behind the weights are computed from the same vectors that are averaged, as in a language model whose output layer reuses its input embeddings. Then the covariance matrix of those vectors is exactly how strongly the average responds to a change of the vector that produces the scores. In the soft-token loop that average is the soft token, the probability-weighted average of the token <a href="/blog/knowledge-base/glossary/embedding/">embeddings</a>. The covariance of the embeddings under the model&rsquo;s own next-token distribution therefore decides how strongly the readout of one step of the loop can amplify a small difference. It can be large only when tokens whose embeddings lie far apart share the probability, and it shrinks toward zero as one token takes nearly all of it.</p>
+<h2 id="definition">Definition</h2>
+<p>A random vector \(X\) is a column of \(d\) coordinates, each of them a random number:</p>
+\[
+X = \begin{bmatrix} X_1 \\ X_2 \\ \vdots \\ X_d \end{bmatrix}.
+\]<p>Write \(\mathbb{E}[\,\cdot\,]\), the expected value, for the probability-weighted average over the distribution of \(X\), and \(\mu = \mathbb{E}[X]\) for the mean. When every coordinate has a finite second moment, \(\mathbb{E}[X_i^2] < \infty\), the covariance matrix exists and is the expected outer product of the deviation from the mean:</p>
+\[
+\mathrm{Cov}(X) = \mathbb{E}\big[(X - \mu)(X - \mu)^{\top}\big].
+\]<p>It lines up with the coordinates one by one:</p>
+\[
+\mathrm{Cov}(X) =
+\begin{bmatrix}
+\mathrm{Var}(X_1) & \mathrm{Cov}(X_1, X_2) & \cdots & \mathrm{Cov}(X_1, X_d) \\
+\mathrm{Cov}(X_2, X_1) & \mathrm{Var}(X_2) & \cdots & \mathrm{Cov}(X_2, X_d) \\
+\vdots & \vdots & \ddots & \vdots \\
+\mathrm{Cov}(X_d, X_1) & \mathrm{Cov}(X_d, X_2) & \cdots & \mathrm{Var}(X_d)
+\end{bmatrix}.
+\]<p>Row \(i\) and column \(j\) belong to the coordinates \(X_i\) and \(X_j\). The diagonal pairs each coordinate with itself, which gives its variance, and the matrix is symmetric because \(\mathrm{Cov}(X_i, X_j) = \mathrm{Cov}(X_j, X_i)\).</p>
+<p>The rest of this entry needs only the finite case. Let \(X\) take the value \(v_k \in \mathbb{R}^d\) with probability \(p_k\), for \(k = 1, \dots, n\), where every \(p_k \ge 0\) and the \(p_k\) sum to 1. The expected values become probability-weighted sums. The mean of \(X\) is</p>
+\[
+\mu = \sum_{k=1}^{n} p_k\,v_k,
+\]<p>and its covariance matrix is the probability-weighted average of the outer products of the deviations from that mean:</p>
+\[
+\mathrm{Cov}(X) = \sum_{k=1}^{n} p_k\,(v_k - \mu)(v_k - \mu)^{\top}.
+\]<p>Here \(v_k - \mu\) is a column vector, and the outer product \((v_k - \mu)(v_k - \mu)^{\top}\) is the \(d \times d\) matrix whose entry in row \(i\) and column \(j\) is \((v_{k,i} - \mu_i)(v_{k,j} - \mu_j)\), the product of the deviations of coordinates \(i\) and \(j\), where \(v_{k,i}\) is coordinate \(i\) of \(v_k\). Entry by entry, then, \(\mathrm{Cov}(X_i, X_j) = \sum_k p_k\,(v_{k,i} - \mu_i)(v_{k,j} - \mu_j)\). On the diagonal, where \(j = i\), the product is a square, which is why the diagonal holds the variances. Multiplying out the product gives an equivalent form, the average of the outer products minus the outer product of the average:</p>
+\[
+\mathrm{Cov}(X) = \sum_{k=1}^{n} p_k\,v_k v_k^{\top} - \mu\mu^{\top}.
+\]<p>When the source of the randomness needs saying, it goes in a subscript. In the soft-token notes, \(\mathrm{Cov}_{t\sim p}(e_t)\) means: draw a token \(t\) from the next-token distribution \(p\), and take its embedding \(e_t\) as the random vector. The mean of that draw, \(\sum_t p_t e_t\), is the soft token, a point of the <a href="/blog/knowledge-base/glossary/convex-hull/">convex hull</a> of the embeddings. If the vectors \(v_k\) are stacked as the rows of an \(n \times d\) matrix \(E\), not to be confused with the expected value \(\mathbb{E}\), the same covariance matrix is</p>
+\[
+\mathrm{Cov}(X) = E^{\top}\big(\mathrm{diag}\,p - pp^{\top}\big)E,
+\]<p>where \(\mathrm{diag}\,p\) is the \(n \times n\) diagonal matrix with \(p_1, \dots, p_n\) on its diagonal. The two pieces match the two terms above: \(E^{\top}(\mathrm{diag}\,p)E = \sum_k p_k\,v_k v_k^{\top}\) and \(E^{\top}pp^{\top}E = \mu\mu^{\top}\).</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Three panels of the same three toy embeddings. With the weight shared, a wide ellipse marks the spread around the mean; with one point dominant the ellipse is smaller; with all the weight on one point the covariance matrix is zero." tabindex="0">
+        <img src="/blog/knowledge-base/glossary/covariance-matrix/covariance-matrix.svg" alt="Three panels of the same three toy embeddings. With the weight shared, a wide ellipse marks the spread around the mean; with one point dominant the ellipse is smaller; with all the weight on one point the covariance matrix is zero." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>The toy embeddings (0, 0), (4, 0) and (0, 4), drawn to equal scales, under three sets of weights. The tan dot is the weighted mean, and hollow points carry weight 0. The ellipse is the one-standard-deviation ellipse of the covariance matrix: measured between its two tangent lines perpendicular to any direction, its half-width is the standard deviation of the points projected onto that direction. Left, weights 1/2, 1/4 and 1/4: mean (1, 1), variances 3 and 3, covariance −1, so the ellipse is longest along the line from (0, 4) to (4, 0), and the point (0, 0) lies exactly on it. Middle, weights 0.8, 0.1 and 0.1: mean (0.4, 0.4), variances 1.44 and 1.44, covariance −0.16, and a smaller ellipse. Right, all the weight on (0, 0): the mean is that point, and every entry of the covariance matrix is 0. These are toy values chosen for hand arithmetic, not model embeddings.</figcaption>
+</figure>
+
+<h2 id="worked-example">Worked example</h2>
+<p>Let \(X = (X_1, X_2)\) be the random vector that equals one of the toy embeddings \(v_1 = (0, 0)\), \(v_2 = (4, 0)\) and \(v_3 = (0, 4)\), with probabilities \(1/2\), \(1/4\) and \(1/4\). The mean is</p>
+\[
+\mu = \tfrac12\,(0, 0) + \tfrac14\,(4, 0) + \tfrac14\,(0, 4) = (1, 1),
+\]<p>and the deviations from it are \((-1, -1)\), \((3, -1)\) and \((-1, 3)\). Weighting their outer products by the probabilities and adding gives</p>
+\[
+\begin{aligned}
+\mathrm{Cov}(X)
+&= \begin{bmatrix} \mathrm{Var}(X_1) & \mathrm{Cov}(X_1, X_2) \\ \mathrm{Cov}(X_2, X_1) & \mathrm{Var}(X_2) \end{bmatrix} \\
+&= \tfrac12\begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix} + \tfrac14\begin{bmatrix} 9 & -3 \\ -3 & 1 \end{bmatrix} + \tfrac14\begin{bmatrix} 1 & -3 \\ -3 & 9 \end{bmatrix} \\
+&= \begin{bmatrix} 3 & -1 \\ -1 & 3 \end{bmatrix}.
+\end{aligned}
+\]<p>So \(\mathrm{Var}(X_1) = \mathrm{Var}(X_2) = 3\): both coordinates have variance 3. Their covariance, \(\mathrm{Cov}(X_1, X_2) = -1\), is negative because the draws that land right of the mean, at \((4, 0)\), land below it. The second form agrees: \(\sum_k p_k\,v_k v_k^{\top}\) has 4 in both diagonal entries and 0 elsewhere, and \(\mu\mu^{\top}\) has 1 in every entry.</p>
+<p>The spread also depends on direction. Along \(w = (1, -1)/\sqrt{2}\), the line from \((0, 4)\) to \((4, 0)\), the variance \(w^{\top}\mathrm{Cov}(X)\,w\) is 4; along the perpendicular direction \((1, 1)/\sqrt{2}\) it is 2. These two directions are the eigenvectors of the matrix, and 4 and 2 are its eigenvalues. They are the axes of the ellipse in the figure, whose half-lengths are the square roots, 2 and \(\sqrt{2}\).</p>
+<p>In this example, moving weight onto \((0, 0)\) shrinks the matrix. With probabilities \(0.8\), \(0.1\) and \(0.1\), the mean is \((0.4, 0.4)\), \(\sum_k p_k\,v_k v_k^{\top}\) has 1.6 in both diagonal entries and 0 elsewhere, and \(\mu\mu^{\top}\) has 0.16 in every entry. With all the weight on \((0, 0)\), the mean is that point and every deviation is zero. The two covariance matrices are</p>
+\[
+\begin{bmatrix} 1.44 & -0.16 \\ -0.16 & 1.44 \end{bmatrix}
+\quad\text{and}\quad
+\begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}.
+\]<h2 id="why-a-softmax-average-responds-with-its-covariance">Why a softmax average responds with its covariance</h2>
+<p>Suppose the weights of the average are a softmax of scores \(z_t\) at <a href="/blog/knowledge-base/glossary/temperature/">temperature</a> \(T\), so that \(p = \mathrm{softmax}(z/T)\) and the mean is \(\mu = \sum_t p_t e_t\). Raise one score, \(z_k\), by a small amount \(\delta\). The softmax raises that token&rsquo;s probability by \(\tfrac{\delta}{T}\,p_k(1 - p_k)\) and lowers every other probability \(p_t\) by \(\tfrac{\delta}{T}\,p_t p_k\). Adding up the weighted embeddings, the mean moves by</p>
+\[
+d\mu = \frac{\delta}{T}\,p_k\,(e_k - \mu).
+\]<p>The mean moves toward the token whose score rose, by an amount proportional to that token&rsquo;s probability and to its distance from the mean. A token with almost no probability barely moves it, and neither does a token that already sits at the mean.</p>
+<p>Now let the scores come from a hidden vector \(h\), \(z_t = e_t^{\top}h\), as they do in a model whose output layer reuses its input embeddings. A small push \(w\) of \(h\) raises every score at once, \(z_t\) by \(e_t^{\top}w\). Adding up the moves for all tokens gives</p>
+\[
+d\mu = \frac{1}{T}\sum_t p_t\,(e_t - \mu)\,e_t^{\top}w = \frac{1}{T}\,\mathrm{Cov}_{t\sim p}(e_t)\,w.
+\]<p>The last step subtracts \(\mu\) inside \(e_t^{\top}w\), which changes nothing because the weighted deviations \(p_t(e_t - \mu)\) add up to zero. So the covariance matrix, divided by \(T\), is the derivative of the softmax average with respect to the hidden vector. The average moves far in the directions where the embeddings spread under \(p\), and not at all in the directions where they do not.</p>
+<p>For finite scores and \(T > 0\), every softmax probability is positive: a softmax never puts all the weight on one token, it only approaches that as one score comes to dominate. The right-hand panel below is that limit.</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: The three panels of the first figure with the score of the token at (4, 0) raised. A dashed line runs from the weighted mean to that token, and an arrow along it shows how far the mean moves. The arrow covers half the dashed line when the weight is shared and a fifth when one point dominates. In the limit where all the weight moves onto one point, the arrow shrinks to nothing." tabindex="0">
+        <img src="/blog/knowledge-base/glossary/covariance-matrix/covariance-response.svg" alt="The three panels of the first figure with the score of the token at (4, 0) raised. A dashed line runs from the weighted mean to that token, and an arrow along it shows how far the mean moves. The arrow covers half the dashed line when the weight is shared and a fifth when one point dominates. In the limit where all the weight moves onto one point, the arrow shrinks to nothing." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>The toy embeddings and weights of the first figure, with the score of the token at (4, 0) raised. The dashed line is that token&rsquo;s offset from the weighted mean. The arrow is the mean&rsquo;s first-order shift per unit of score at T = 1, the token&rsquo;s probability times that offset, drawn at twice its length, so it covers twice the token&rsquo;s probability as a fraction of the dashed line. Left: probability 1/4 and an offset of length 3.16 give a shift of 0.79, and the arrow covers half the dashed line. Middle: probability 0.1 and an offset of length 3.62 give 0.36, a fifth of the line. Right: in the limit where all the weight moves onto (0, 0), the token&rsquo;s probability tends to 0, and so does the mean&rsquo;s first-order shift, its probability times its offset. Toy values, not model embeddings.</figcaption>
+</figure>
+
+<p>In the worked example, take \(T = 1\) and the scores \((0, -\ln 2, -\ln 2)\), whose softmax is the weights \(1/2\), \(1/4\) and \(1/4\). Raising the score of \((4, 0)\) by \(\delta = 0.1\) should move the mean by about \(0.1 \times \tfrac14 \times (3, -1) = (0.075, -0.025)\). Recomputing the softmax exactly gives the weights 0.4872, 0.2692 and 0.2436 and moves the mean by \((0.0769, -0.0256)\), the first-order prediction up to a term of order \(\delta^2\). The same scores come from the hidden vector \(h = (-\ln 2/4, -\ln 2/4)\) through \(z_t = e_t^{\top}h\). A push \(w = (0.1, 0)\) of \(h\) raises only the score of \((4, 0)\), by 0.4, and moves the mean by \(\mathrm{Cov}(X)\,w = (0.3, -0.1)\) to first order: four times the move above.</p>
+<p>This is the readout half of the soft-token loop&rsquo;s derivative. There the hidden vector is the network&rsquo;s final state, the averaged vectors are the token embeddings, and the mean is the next soft token. One step of the loop turns a small change \(dx\) of the input into the change \(\mathrm{Cov}_{t\sim p}(e_t)\,J\,dx/T\) of the next soft token, where \(J\) is the derivative of the network&rsquo;s final state with respect to its input. The two parts of the readout pull against each other at low temperature: \(1/T\) grows, but if one score is strictly the highest, \(p\) concentrates on that token as \(T\) falls and the covariance tends to zero. If several scores tie for the top, the probability stays split among them and the covariance need not vanish. Large amplification needs both at once: probability shared among tokens whose embeddings lie far apart, and a temperature low enough to magnify that spread, along the directions that the network&rsquo;s derivative \(J\) feeds.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">exp</span><span class="p">,</span> <span class="n">log</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">weighted_covariance</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Covariance matrix of a random vector that equals points[k] with probability weights[k].&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;points and weights must be nonempty and the same length&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">weight</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">weights</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;weights must be nonnegative&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-12</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;weights must sum to one&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">point</span><span class="p">)</span> <span class="o">!=</span> <span class="n">d</span> <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">points</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;points must all have the same length&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mean</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">point</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">point</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">points</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">sum</span><span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">mean</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">mean</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">point</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">points</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">softmax_mean</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Softmax weights of the scores and the weighted mean of the points.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">top</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">exp</span><span class="p">((</span><span class="n">s</span> <span class="o">-</span> <span class="n">top</span><span class="p">)</span> <span class="o">/</span> <span class="n">temperature</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">probs</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="o">/</span> <span class="n">total</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">weights</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mean</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">p</span> <span class="o">*</span> <span class="n">point</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">point</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">probs</span><span class="p">,</span> <span class="n">points</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">]))]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">mean</span><span class="p">,</span> <span class="n">probs</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">points</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">scores_at</span><span class="p">(</span><span class="n">h</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">e</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span> <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">points</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">mean</span><span class="p">,</span> <span class="n">probs</span> <span class="o">=</span> <span class="n">softmax_mean</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">scores_at</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>           <span class="c1"># weights 1/2, 1/4, 1/4</span>
+</span></span><span class="line"><span class="cl"><span class="n">cov</span> <span class="o">=</span> <span class="n">weighted_covariance</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">probs</span><span class="p">)</span>                   <span class="c1"># [[3, -1], [-1, 3]]</span>
+</span></span><span class="line"><span class="cl"><span class="n">step</span> <span class="o">=</span> <span class="mf">1e-6</span>
+</span></span><span class="line"><span class="cl"><span class="n">moved</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">softmax_mean</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">scores_at</span><span class="p">((</span><span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">step</span><span class="p">,</span> <span class="n">h</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">([</span><span class="nb">round</span><span class="p">((</span><span class="n">m</span> <span class="o">-</span> <span class="n">m0</span><span class="p">)</span> <span class="o">/</span> <span class="n">step</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">m0</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">moved</span><span class="p">,</span> <span class="n">mean</span><span class="p">)])</span>   <span class="c1"># [3.0, -1.0]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">([</span><span class="nb">round</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">12</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cov</span><span class="p">])</span>                          <span class="c1"># [3.0, -1.0], Cov times (1, 0)</span>
+</span></span></code></pre></div><p>The two printed lines agree: pushing \(h\) along \((1, 0)\) moves the mean along the first column of the covariance matrix.</p>
+<h2 id="properties">Properties</h2>
+<ul>
+<li><strong>Symmetric.</strong> The entry in row \(i\) and column \(j\) equals the entry in row \(j\) and column \(i\).</li>
+<li><strong>Never negative in any direction.</strong> For every vector \(w\), \(w^{\top}\mathrm{Cov}(X)\,w\) is the variance of \(w^{\top}X\), so it is at least 0. The matrix is therefore positive semidefinite, and its eigenvalues are nonnegative. Its leading eigenvector is the direction of largest spread, which is what <a href="/blog/knowledge-base/deep-dives/principal-component-analysis/">principal component analysis</a> uses.</li>
+<li><strong>Zero exactly when there is no spread.</strong> The matrix is zero if and only if all the points with positive probability coincide, for example when one point has all the probability. A softmax average with a zero covariance cannot be moved by any small change of its scores.</li>
+<li><strong>Low rank when few points share the weight.</strong> The weighted deviations \(p_k(v_k - \mu)\) sum to zero, so with \(m\) points of positive probability the matrix has rank at most \(m - 1\). With two points it is \(p_1 p_2\,(v_1 - v_2)(v_1 - v_2)^{\top}\), of rank one: a softmax average of two vectors can move only along the line between them, fastest when \(p_1 = p_2 = 1/2\).</li>
+<li><strong>Units.</strong> If \(X_i\) is measured in the unit \(U_i\), then \(\mathrm{Var}(X_i)\) carries \(U_i^2\) and \(\mathrm{Cov}(X_i, X_j)\) carries \(U_i U_j\), so the entries change with the scale of the coordinates. Directions and eigenvectors are meaningful only when the coordinates share a unit, as embedding coordinates do, or have been scaled deliberately. <a href="/blog/knowledge-base/glossary/pearson-correlation/">Pearson correlation</a> divides each covariance by the two standard deviations to remove the units.</li>
+</ul>
+<h2 id="conventions">Conventions</h2>
+<p>With \(n\) equally weighted observations, \(p_k = 1/n\), the definition gives the population covariance of those observations. To estimate the covariance of a larger population from \(n\) random draws, many programs divide by \(n - 1\) instead of \(n\), the same choice as for the standard deviation. The soft-token covariance involves no estimation: it is exact for the stated distribution.</p>
+<p>For two random vectors drawn together, taking the values \(x_k\) and \(y_k\) with probability \(p_k\), the cross-covariance is \(\mathrm{Cov}(X, Y) = \sum_k p_k\,(x_k - \mu_X)(y_k - \mu_Y)^{\top}\), where \(\mu_X\) and \(\mu_Y\) are their means. It is not symmetric in general. It replaces the covariance in the derivative above when the scores come from different vectors than the ones averaged, \(z_t = w_t^{\top}h\): the mean then moves by \(\mathrm{Cov}_{t\sim p}(e_t, w_t)\,w/T\). In the soft-token notes this is the case of models whose output vectors \(w_t\) differ from their input embeddings \(e_t\).</p>
+<h2 id="what-it-does-not-show">What it does not show</h2>
+<p>A covariance matrix measures linear co-variation only. Zero covariance does not mean independence: if \(x\) is \(-1\), 0 or 1 with equal probability and \(y = x^2\), their covariance is 0 although \(y\) is a function of \(x\). A covariance says nothing about cause, and its entries change with the units of the coordinates. In the soft-token notes, \(\mathrm{Cov}_{t\sim p}(e_t)\) is a property of one next-token distribution at one state of the loop, not a statistic estimated from data. A large covariance makes the soft token easy to move, but whether the loop as a whole stretches small differences also depends on the network&rsquo;s derivative \(J\).</p>
+<p>See also: <a href="/blog/knowledge-base/glossary/embedding/">embedding</a>, <a href="/blog/knowledge-base/glossary/convex-hull/">convex hull</a>, <a href="/blog/knowledge-base/glossary/logit/">logit</a>, <a href="/blog/knowledge-base/glossary/temperature/">temperature</a>, <a href="/blog/knowledge-base/glossary/standard-deviation/">standard deviation</a>, <a href="/blog/knowledge-base/glossary/pearson-correlation/">Pearson correlation</a>, <a href="/blog/knowledge-base/glossary/lyapunov-exponent/">Lyapunov exponent</a>.</p>
+
+            </div>
+
+            <footer class="post-footer">
+
+                <div class="post-navigation">
+
+                    <a href="/blog/knowledge-base/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/knowledge-base/" class="back-to-blog">Knowledge Base</a>
+                    <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+
+    </main>
+
+    <footer class="footer footer-compact">
+        <div class="container">
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
+            </div>
+            <div class="footer-compact-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="/blog/search/">Search</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/blog/script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tables = document.querySelectorAll('.post-body table');
+            tables.forEach((table, index) => {
+                if (table.parentElement?.classList.contains('table-scroll')) return;
+
+                const scroller = document.createElement('div');
+                scroller.className = 'table-scroll';
+                scroller.setAttribute('aria-label', `Scrollable data table ${index + 1}`);
+                table.parentNode.insertBefore(scroller, table);
+                scroller.appendChild(table);
+
+                const updateScrollableState = () => {
+                    const isScrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+                    scroller.classList.toggle('is-scrollable', isScrollable);
+                    if (isScrollable) {
+                        scroller.setAttribute('role', 'region');
+                        scroller.setAttribute('tabindex', '0');
+                    } else {
+                        scroller.removeAttribute('role');
+                        scroller.removeAttribute('tabindex');
+                    }
+                };
+
+                requestAnimationFrame(updateScrollableState);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(updateScrollableState).observe(scroller);
+                } else {
+                    window.addEventListener('resize', updateScrollableState, { passive: true });
+                }
+            });
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                output: "htmlAndMathml"
+            });
+
+            const copyText = async (text) => {
+                if (navigator.clipboard?.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    return;
+                }
+
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.setAttribute('readonly', '');
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                const copied = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                if (!copied) {
+                    throw new Error('Copy command was not accepted');
+                }
+            };
+
+            document.querySelectorAll('[data-copy-target]').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const target = document.querySelector(button.dataset.copyTarget);
+                    if (!target) {
+                        console.error(`Copy target not found: ${button.dataset.copyTarget}`);
+                        return;
+                    }
+
+                    const originalLabel = button.textContent;
+                    try {
+                        await copyText(target.textContent.trim());
+                        button.textContent = 'Copied';
+                        button.classList.add('copied');
+                        setTimeout(() => {
+                            button.textContent = originalLabel;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    } catch (error) {
+                        console.error('Failed to copy citation: ', error);
+                    }
+                });
+            });
+
+            const copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+            const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
+            codeBlocks.forEach(pre => {
+                if (pre.closest('.code-block-frame')) {
+                    return;
+                }
+
+                const frame = document.createElement('div');
+                frame.className = 'code-block-frame';
+                const toolbar = document.createElement('div');
+                toolbar.className = 'code-block-toolbar';
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'copy-code-button';
+                button.innerHTML = copyIcon;
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+                button.setAttribute('title', 'Copy');
+
+                const markCopied = () => {
+                    button.innerHTML = checkIcon;
+                    button.classList.add('copied');
+                    button.setAttribute('aria-label', 'Copied');
+                    setTimeout(() => {
+                        button.innerHTML = copyIcon;
+                        button.classList.remove('copied');
+                        button.setAttribute('aria-label', 'Copy code to clipboard');
+                    }, 2000);
+                };
+
+                button.addEventListener('click', () => {
+                    const code = pre.querySelector('code');
+                    const text = code ? code.textContent : pre.textContent;
+
+                    navigator.clipboard.writeText(text).then(markCopied).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            markCopied();
+                        } catch (fallbackErr) {
+                            console.error('Fallback copy failed: ', fallbackErr);
+                        }
+                        document.body.removeChild(textArea);
+                    });
+                });
+
+                toolbar.appendChild(button);
+                frame.appendChild(toolbar);
+                pre.parentNode.insertBefore(frame, pre);
+                frame.appendChild(pre);
+            });
+
+            document.querySelectorAll('[data-code-tabs]').forEach((root) => {
+                const tablist = root.querySelector('.code-tabs__tablist');
+                const tabs = Array.from(root.querySelectorAll('[role="tab"]'));
+                const panels = Array.from(root.querySelectorAll('[role="tabpanel"]'));
+                if (!tablist || tabs.length === 0 || tabs.length !== panels.length) {
+                    return;
+                }
+
+                const activate = (index) => {
+                    tabs.forEach((tab, i) => {
+                        const selected = i === index;
+                        tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+                        tab.tabIndex = selected ? 0 : -1;
+                        panels[i].hidden = !selected;
+                    });
+                };
+
+                tabs.forEach((tab, index) => {
+                    tab.addEventListener('click', () => {
+                        activate(index);
+                        tab.focus();
+                    });
+                });
+
+                tablist.addEventListener('keydown', (event) => {
+                    const current = tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true');
+                    let next = current;
+                    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+                        next = (current + 1) % tabs.length;
+                    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+                        next = (current - 1 + tabs.length) % tabs.length;
+                    } else if (event.key === 'Home') {
+                        next = 0;
+                    } else if (event.key === 'End') {
+                        next = tabs.length - 1;
+                    } else {
+                        return;
+                    }
+                    event.preventDefault();
+                    activate(next);
+                    tabs[next].focus();
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

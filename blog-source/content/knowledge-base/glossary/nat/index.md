@@ -18,7 +18,7 @@ A **nat** is the unit of a natural logarithm, the logarithm with base \(e\approx
 
 A [Lyapunov exponent]({{< relref "knowledge-base/glossary/lyapunov-exponent/index.md" >}}) of \(\lambda\) nats per step is a long-run average rate of logarithmic growth. A tiny displacement grows by a factor of roughly \(e^{\lambda n}\) over \(n\) steps, even though the factor of a single step can be larger or smaller than \(e^{\lambda}\). An exponent of \(\ln 2 \approx 0.693\) nats per step therefore means doubling per step on average, not necessarily exact doubling at every step.
 
-When natural logarithms are used, nats also measure the entropy of a next-token distribution, the probabilities a model assigns to the possible next tokens. Entropy is the probability-weighted average of \(-\ln p\) over the outcomes. They also measure a Kullback-Leibler divergence, the probability-weighted average of the log ratio of one distribution's probabilities to another's. A fair coin has entropy \(\ln 2\) nats, which is exactly 1 bit. A uniform distribution over \(V\) tokens has entropy \(\ln V\) nats.
+When natural logarithms are used, nats also measure [next-token entropy]({{< relref "knowledge-base/glossary/next-token-entropy/index.md" >}}), the entropy of the probabilities a model assigns to the possible next tokens. Entropy is the probability-weighted average of \(-\ln p\) over the outcomes. They also measure a Kullback-Leibler divergence, the probability-weighted average of the log ratio of one distribution's probabilities to another's. A fair coin has entropy \(\ln 2\) nats, which is exactly 1 bit. A uniform distribution over \(V\) tokens has entropy \(\ln V\) nats.
 
 {{< reference-figure
   src="nat.svg"

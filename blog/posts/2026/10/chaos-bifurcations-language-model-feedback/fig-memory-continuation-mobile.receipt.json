@@ -1,0 +1,38 @@
+{
+  "figure_id": "M1-mobile",
+  "title": "Following the child's trace saddle",
+  "description": "Stacked mobile rendering of the same accepted continuation samples; no new scientific data.",
+  "alt_text": "The child's corrected trace saddle falls from positive height at zero memory to negative height at 0.7% memory, with a numerical zero estimate near 0.645%; a second panel shows the saddle moving toward stronger steering and lower log-temperature.",
+  "data_source": {
+    "receipt": "fig-memory-continuation.receipt.json",
+    "sha256": "bb166748c2d71f2dd19f2d1190ba4739c7529bdb56b05b2b96e439d947757e27",
+    "fields": [
+      "plotted_data",
+      "highlighted_root_beta"
+    ],
+    "selection": "Every audited accepted sample; identical points and marker as desktop view.",
+    "transformation": "Layout only; panels stacked."
+  },
+  "provenance": {
+    "generator": "make_memory_mobile.py",
+    "generator_sha256": "df77b9725cb8a70e04b6f0c5f8f72748af7b21a4300d2c0e346be26118b7cbe6",
+    "matplotlib_version": "3.11.1",
+    "outputs": {
+      "fig-memory-continuation-mobile.png": "d71a968bf44361d88395a9e4d07f2d4d4a15cb482b1603add910e5cdf1c15627"
+    }
+  },
+  "uncertainty": "Empirical numerical data. Lines connect accepted samples, not a continuous-path certificate. The root meets a trace-residual tolerance; no exact-zero or tight parameter-interval certificate.",
+  "scope_exclusions": [
+    "Exact superstability",
+    "Native internal coupling mechanism",
+    "Strongest-contraction ridge reconnection",
+    "Full-spectrum isolation certificate"
+  ],
+  "accessibility": {
+    "color_not_only_channel": true,
+    "text_equivalent": "Original figure receipt plotted_data and article continuation table",
+    "raw_visual_review": "passed after title/footer spacing correction",
+    "narrow_preview_review": "passed at 390 x 844 viewport; stacked panels visible, labels unclipped, caption provides full text equivalent",
+    "desktop_preview_review": "original audited desktop plot remains readable; no KaTeX errors observed"
+  }
+}

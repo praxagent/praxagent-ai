@@ -1,0 +1,1279 @@
+{
+  "figure_id": "M4",
+  "what": "Audited finite-section contraction minima near the refined memory-tuned center.",
+  "alt_text": "Two equal-scale panels around the refined memory-tuned center. The first shows four planned transverse sections positioned from the conditional trace-curvature frame. The second shows all actual samples and two displaced innermost section minima with measured refinement brackets. Two sections have no mesh bracket. No line joins the minima.",
+  "data_source": {
+    "receipt": "contraction-minima-receipt.json",
+    "sha256": "d199e93359ce34334d484a578ae07fdcbf07a668a2db4e20d0d2bd06847a00b6",
+    "commit": "f56b4d4b1c00450ae34bb2ee9f2f6ad6bb70f12b",
+    "source_path": "docs/baby-shrimp-zoom/contraction-minima-receipt.json",
+    "audit_sha256": "874f0fdceeeefe3957c5b8ac8d9a8ca87ec53a2f8d35e978c367281f0ac112c5"
+  },
+  "plotted_section_summaries": [
+    {
+      "arm_id": "line-0-ray-+1",
+      "longitudinal": 0.002,
+      "tangent": [
+        0.8986645648218675,
+        0.4386365237112883
+      ],
+      "normal": [
+        -0.4386365237112883,
+        0.8986645648218675
+      ],
+      "origin": [
+        89.65455570485705,
+        -485.83483655590186
+      ],
+      "beta": 0.006448532860189464,
+      "status": "converged",
+      "complete": true,
+      "evaluation_count": 18,
+      "minima": [
+        {
+          "point_index": 31,
+          "s": 0.0,
+          "coordinate": [
+            89.65455570485705,
+            -485.83483655590186
+          ],
+          "beta": 0.006448532860189464,
+          "tau": 2.145413160277096e-11,
+          "delta": -6.759192376272829e-09,
+          "radius": 8.221431833999255e-05,
+          "refined_bracket": [
+            -6.966011250105149e-06,
+            2.660779531526022e-06
+          ],
+          "bracket_width": 9.62679078163117e-06,
+          "mesh_bracket": [
+            -0.000125,
+            0.000125
+          ],
+          "validation": [
+            {
+              "offset": 0.0001,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -0.0001,
+                  "radius": 8.221735045312808e-05,
+                  "index": 42
+                },
+                {
+                  "s": 0.0001,
+                  "radius": 8.221602616933168e-05,
+                  "index": 43
+                }
+              ],
+              "contrasts": [
+                3.0321131355351546e-09,
+                1.7078293391298034e-09
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            },
+            {
+              "offset": 3e-05,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -3e-05,
+                  "radius": 8.221519762172294e-05,
+                  "index": 44
+                },
+                {
+                  "s": 3e-05,
+                  "radius": 8.221484610304643e-05,
+                  "index": 45
+                }
+              ],
+              "contrasts": [
+                8.792817303931002e-10,
+                5.277630538808812e-10
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            }
+          ]
+        }
+      ],
+      "maximum_absolute_prediction_error": {
+        "tau": 2.0175607617905862e-11,
+        "delta": 4.221556208987963e-17,
+        "radius": 1.034621994740019e-11
+      },
+      "mesh_monotonicity": "nonmonotone"
+    },
+    {
+      "arm_id": "line-0-ray--1",
+      "longitudinal": 0.002,
+      "tangent": [
+        -0.8986645648218675,
+        -0.4386365237112883
+      ],
+      "normal": [
+        0.4386365237112883,
+        -0.8986645648218675
+      ],
+      "origin": [
+        89.65096104659776,
+        -485.8365911019967
+      ],
+      "beta": 0.006448532860189464,
+      "status": "converged",
+      "complete": true,
+      "evaluation_count": 18,
+      "minima": [
+        {
+          "point_index": 49,
+          "s": 0.0,
+          "coordinate": [
+            89.65096104659776,
+            -485.8365911019967
+          ],
+          "beta": 0.006448532860189464,
+          "tau": -2.061985353513443e-11,
+          "delta": -6.7590931491316955e-09,
+          "radius": 8.221371445425907e-05,
+          "refined_bracket": [
+            -6.966011250105149e-06,
+            2.660779531526022e-06
+          ],
+          "bracket_width": 9.62679078163117e-06,
+          "mesh_bracket": [
+            -0.000125,
+            0.000125
+          ],
+          "validation": [
+            {
+              "offset": 0.0001,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -0.0001,
+                  "radius": 8.22155699957497e-05,
+                  "index": 60
+                },
+                {
+                  "s": 0.0001,
+                  "radius": 8.221660223999386e-05,
+                  "index": 61
+                }
+              ],
+              "contrasts": [
+                1.8555414906272277e-09,
+                2.8877857347964827e-09
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            },
+            {
+              "offset": 3e-05,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -3e-05,
+                  "radius": 8.221425575221113e-05,
+                  "index": 62
+                },
+                {
+                  "s": 3e-05,
+                  "radius": 8.2214581785332e-05,
+                  "index": 63
+                }
+              ],
+              "contrasts": [
+                5.412979520587032e-10,
+                8.67331072929153e-10
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            }
+          ]
+        }
+      ],
+      "maximum_absolute_prediction_error": {
+        "tau": 1.9337823335489876e-11,
+        "delta": 4.03908182021999e-17,
+        "radius": 9.426686292451567e-12
+      },
+      "mesh_monotonicity": "nonmonotone"
+    },
+    {
+      "arm_id": "line-1-ray-+1",
+      "longitudinal": 0.002,
+      "tangent": [
+        -0.09734954116947536,
+        -0.9952502533705242
+      ],
+      "normal": [
+        0.9952502533705242,
+        -0.09734954116947536
+      ],
+      "origin": [
+        89.65256367664506,
+        -485.837704329456
+      ],
+      "beta": 0.006448532860189464,
+      "status": "converged",
+      "complete": true,
+      "evaluation_count": 18,
+      "minima": [
+        {
+          "point_index": 67,
+          "s": 0.0,
+          "coordinate": [
+            89.65256367664506,
+            -485.837704329456
+          ],
+          "beta": 0.006448532860189464,
+          "tau": -1.433896919386321e-11,
+          "delta": -6.760796616504945e-09,
+          "radius": 8.222407065764478e-05,
+          "refined_bracket": [
+            -6.966011250105149e-06,
+            2.660779531526022e-06
+          ],
+          "bracket_width": 9.62679078163117e-06,
+          "mesh_bracket": [
+            -0.000125,
+            0.000125
+          ],
+          "validation": [
+            {
+              "offset": 0.0001,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -0.0001,
+                  "radius": 8.222603776070215e-05,
+                  "index": 78
+                },
+                {
+                  "s": 0.0001,
+                  "radius": 8.22268528698229e-05,
+                  "index": 79
+                }
+              ],
+              "contrasts": [
+                1.9671030573745543e-09,
+                2.782212178117959e-09
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            },
+            {
+              "offset": 3e-05,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -3e-05,
+                  "radius": 8.222466613297443e-05,
+                  "index": 80
+                },
+                {
+                  "s": 3e-05,
+                  "radius": 8.222488992768068e-05,
+                  "index": 81
+                }
+              ],
+              "contrasts": [
+                5.954753296493831e-10,
+                8.192700358996673e-10
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            }
+          ]
+        }
+      ],
+      "maximum_absolute_prediction_error": {
+        "tau": 1.6125644757719173e-11,
+        "delta": 3.30574790872937e-17,
+        "radius": 7.874325161100898e-12
+      },
+      "mesh_monotonicity": "nonmonotone"
+    },
+    {
+      "arm_id": "line-1-ray--1",
+      "longitudinal": 0.002,
+      "tangent": [
+        0.09734954116947536,
+        0.9952502533705242
+      ],
+      "normal": [
+        -0.9952502533705242,
+        0.09734954116947536
+      ],
+      "origin": [
+        89.65295307480974,
+        -485.83372332844255
+      ],
+      "beta": 0.006448532860189464,
+      "status": "converged",
+      "complete": true,
+      "evaluation_count": 18,
+      "minima": [
+        {
+          "point_index": 85,
+          "s": 0.0,
+          "coordinate": [
+            89.65295307480974,
+            -485.83372332844255
+          ],
+          "beta": 0.006448532860189464,
+          "tau": 1.4731700654821954e-11,
+          "delta": -6.757489378286234e-09,
+          "radius": 8.220395726052563e-05,
+          "refined_bracket": [
+            -6.966011250105149e-06,
+            2.660779531526022e-06
+          ],
+          "bracket_width": 9.62679078163117e-06,
+          "mesh_bracket": [
+            -0.000125,
+            0.000125
+          ],
+          "validation": [
+            {
+              "offset": 0.0001,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -0.0001,
+                  "radius": 8.220659208976813e-05,
+                  "index": 96
+                },
+                {
+                  "s": 0.0001,
+                  "radius": 8.220606966057999e-05,
+                  "index": 97
+                }
+              ],
+              "contrasts": [
+                2.6348292424960154e-09,
+                2.112400054356256e-09
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            },
+            {
+              "offset": 3e-05,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -3e-05,
+                  "radius": 8.220476309039398e-05,
+                  "index": 98
+                },
+                {
+                  "s": 3e-05,
+                  "radius": 8.220456528981854e-05,
+                  "index": 99
+                }
+              ],
+              "contrasts": [
+                8.058298683416782e-10,
+                6.080292929029878e-10
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            }
+          ]
+        }
+      ],
+      "maximum_absolute_prediction_error": {
+        "tau": 1.6405222080043004e-11,
+        "delta": 3.339026625543297e-17,
+        "radius": 8.389866302778784e-12
+      },
+      "mesh_monotonicity": "nonmonotone"
+    },
+    {
+      "arm_id": "line-0-ray-+1",
+      "longitudinal": 0.0006,
+      "tangent": [
+        0.8986645648218675,
+        0.4386365237112883
+      ],
+      "normal": [
+        -0.4386365237112883,
+        0.8986645648218675
+      ],
+      "origin": [
+        89.6532975744663,
+        -485.83545064703503
+      ],
+      "beta": 0.006448532860189464,
+      "status": "converged",
+      "complete": true,
+      "evaluation_count": 18,
+      "minima": [
+        {
+          "point_index": 103,
+          "s": 0.0,
+          "coordinate": [
+            89.6532975744663,
+            -485.83545064703503
+          ],
+          "beta": 0.006448532860189464,
+          "tau": 2.747545870289067e-12,
+          "delta": -6.759157739310659e-09,
+          "radius": 8.221409833597681e-05,
+          "refined_bracket": [
+            -6.966011250105149e-06,
+            2.660779531526022e-06
+          ],
+          "bracket_width": 9.62679078163117e-06,
+          "mesh_bracket": [
+            -0.000125,
+            0.000125
+          ],
+          "validation": [
+            {
+              "offset": 0.0001,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -0.0001,
+                  "radius": 8.221548284381641e-05,
+                  "index": 114
+                },
+                {
+                  "s": 0.0001,
+                  "radius": 8.221413977492501e-05,
+                  "index": 115
+                }
+              ],
+              "contrasts": [
+                1.3845078396056533e-09,
+                4.143894820655362e-11
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            },
+            {
+              "offset": 3e-05,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -3e-05,
+                  "radius": 8.221449639778182e-05,
+                  "index": 116
+                },
+                {
+                  "s": 3e-05,
+                  "radius": 8.221412615490211e-05,
+                  "index": 117
+                }
+              ],
+              "contrasts": [
+                3.9806180500792133e-10,
+                2.7818925304621753e-11
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            }
+          ]
+        }
+      ],
+      "maximum_absolute_prediction_error": {
+        "tau": 8.08015775582811e-13,
+        "delta": 6.470133132315265e-18,
+        "radius": 4.37613297378861e-13
+      },
+      "mesh_monotonicity": "nonmonotone"
+    },
+    {
+      "arm_id": "line-0-ray--1",
+      "longitudinal": 0.0006,
+      "tangent": [
+        -0.8986645648218675,
+        -0.4386365237112883
+      ],
+      "normal": [
+        0.4386365237112883,
+        -0.8986645648218675
+      ],
+      "origin": [
+        89.65221917698851,
+        -485.83597701086353
+      ],
+      "beta": 0.006448532860189464,
+      "status": "converged",
+      "complete": true,
+      "evaluation_count": 18,
+      "minima": [
+        {
+          "point_index": 121,
+          "s": 0.0,
+          "coordinate": [
+            89.65221917698851,
+            -485.83597701086353
+          ],
+          "beta": 0.006448532860189464,
+          "tau": -2.6197870777030716e-12,
+          "delta": -6.759127970413817e-09,
+          "radius": 8.221391722693169e-05,
+          "refined_bracket": [
+            -6.966011250105149e-06,
+            2.660779531526022e-06
+          ],
+          "bracket_width": 9.62679078163117e-06,
+          "mesh_bracket": [
+            -0.000125,
+            0.000125
+          ],
+          "validation": [
+            {
+              "offset": 0.0001,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -0.0001,
+                  "radius": 8.221410524551835e-05,
+                  "index": 132
+                },
+                {
+                  "s": 0.0001,
+                  "radius": 8.221515546604002e-05,
+                  "index": 133
+                }
+              ],
+              "contrasts": [
+                1.8801858666175637e-10,
+                1.2382391083342378e-09
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            },
+            {
+              "offset": 3e-05,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -3e-05,
+                  "radius": 8.22139582485859e-05,
+                  "index": 134
+                },
+                {
+                  "s": 3e-05,
+                  "radius": 8.221430226843126e-05,
+                  "index": 135
+                }
+              ],
+              "contrasts": [
+                4.102165421313985e-11,
+                3.8504149956592685e-10
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            }
+          ]
+        }
+      ],
+      "maximum_absolute_prediction_error": {
+        "tau": 7.158258083013384e-13,
+        "delta": 5.887024567205197e-18,
+        "radius": 3.290608481228488e-13
+      },
+      "mesh_monotonicity": "nonmonotone"
+    },
+    {
+      "arm_id": "line-1-ray-+1",
+      "longitudinal": 0.0006,
+      "tangent": [
+        -0.09734954116947536,
+        -0.9952502533705242
+      ],
+      "normal": [
+        0.9952502533705242,
+        -0.09734954116947536
+      ],
+      "origin": [
+        89.6526999660027,
+        -485.8363109791013
+      ],
+      "beta": 0.006448532860189464,
+      "status": "converged",
+      "complete": true,
+      "evaluation_count": 18,
+      "minima": [
+        {
+          "point_index": 139,
+          "s": 0.0,
+          "coordinate": [
+            89.6526999660027,
+            -485.8363109791013
+          ],
+          "beta": 0.006448532860189464,
+          "tau": -1.61642238222931e-12,
+          "delta": -6.7596389612329735e-09,
+          "radius": 8.221702435706617e-05,
+          "refined_bracket": [
+            -6.966011250105149e-06,
+            2.660779531526022e-06
+          ],
+          "bracket_width": 9.62679078163117e-06,
+          "mesh_bracket": [
+            -0.000125,
+            0.000125
+          ],
+          "validation": [
+            {
+              "offset": 0.0001,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -0.0001,
+                  "radius": 8.221733667615043e-05,
+                  "index": 150
+                },
+                {
+                  "s": 0.0001,
+                  "radius": 8.221813902971494e-05,
+                  "index": 151
+                }
+              ],
+              "contrasts": [
+                3.1231908426381915e-10,
+                1.1146726487659816e-09
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            },
+            {
+              "offset": 3e-05,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -3e-05,
+                  "radius": 8.221713230658e-05,
+                  "index": 152
+                },
+                {
+                  "s": 3e-05,
+                  "radius": 8.221734337752086e-05,
+                  "index": 153
+                }
+              ],
+              "contrasts": [
+                1.0794951382981678e-10,
+                3.1902045469298784e-10
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            }
+          ]
+        }
+      ],
+      "maximum_absolute_prediction_error": {
+        "tau": 7.885326353786351e-13,
+        "delta": 4.870992003361412e-18,
+        "radius": 3.646700454627838e-13
+      },
+      "mesh_monotonicity": "nonmonotone"
+    },
+    {
+      "arm_id": "line-1-ray--1",
+      "longitudinal": 0.0006,
+      "tangent": [
+        0.09734954116947536,
+        0.9952502533705242
+      ],
+      "normal": [
+        -0.9952502533705242,
+        0.09734954116947536
+      ],
+      "origin": [
+        89.6528167854521,
+        -485.83511667879725
+      ],
+      "beta": 0.006448532860189464,
+      "status": "converged",
+      "complete": true,
+      "evaluation_count": 18,
+      "minima": [
+        {
+          "point_index": 157,
+          "s": 0.0,
+          "coordinate": [
+            89.6528167854521,
+            -485.83511667879725
+          ],
+          "beta": 0.006448532860189464,
+          "tau": 1.708249861009925e-12,
+          "delta": -6.758646790783731e-09,
+          "radius": 8.221099033110259e-05,
+          "refined_bracket": [
+            -6.966011250105149e-06,
+            2.660779531526022e-06
+          ],
+          "bracket_width": 9.62679078163117e-06,
+          "mesh_bracket": [
+            -0.000125,
+            0.000125
+          ],
+          "validation": [
+            {
+              "offset": 0.0001,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -0.0001,
+                  "radius": 8.221195869076842e-05,
+                  "index": 168
+                },
+                {
+                  "s": 0.0001,
+                  "radius": 8.221144928764004e-05,
+                  "index": 169
+                }
+              ],
+              "contrasts": [
+                9.683596658235536e-10,
+                4.58956537447504e-10
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            },
+            {
+              "offset": 3e-05,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -3e-05,
+                  "radius": 8.221129622503459e-05,
+                  "index": 170
+                },
+                {
+                  "s": 3e-05,
+                  "radius": 8.221111143127849e-05,
+                  "index": 171
+                }
+              ],
+              "contrasts": [
+                3.05893931997034e-10,
+                1.211001758941177e-10
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            }
+          ]
+        }
+      ],
+      "maximum_absolute_prediction_error": {
+        "tau": 8.35095795806414e-13,
+        "delta": 7.687749611438222e-18,
+        "radius": 4.4374127582038486e-13
+      },
+      "mesh_monotonicity": "nonmonotone"
+    },
+    {
+      "arm_id": "line-0-ray-+1",
+      "longitudinal": 0.0002,
+      "tangent": [
+        0.8986645648218675,
+        0.4386365237112883
+      ],
+      "normal": [
+        -0.4386365237112883,
+        0.8986645648218675
+      ],
+      "origin": [
+        89.65293810864037,
+        -485.83562610164455
+      ],
+      "beta": 0.006448532860189464,
+      "status": "no_bracket",
+      "complete": true,
+      "evaluation_count": 7,
+      "minima": [],
+      "maximum_absolute_prediction_error": {
+        "tau": 2.1488000245214258e-13,
+        "delta": 3.7423553427307844e-18,
+        "radius": 8.468017411410178e-14
+      },
+      "mesh_monotonicity": "strictly decreasing",
+      "smallest_successive_mesh_change": 5.663785608860019e-10
+    },
+    {
+      "arm_id": "line-0-ray--1",
+      "longitudinal": 0.0002,
+      "tangent": [
+        -0.8986645648218675,
+        -0.4386365237112883
+      ],
+      "normal": [
+        0.4386365237112883,
+        -0.8986645648218675
+      ],
+      "origin": [
+        89.65257864281443,
+        -485.835801556254
+      ],
+      "beta": 0.006448532860189464,
+      "status": "converged",
+      "complete": true,
+      "evaluation_count": 19,
+      "minima": [
+        {
+          "point_index": 193,
+          "s": -0.000247339220468474,
+          "coordinate": [
+            89.65247015079859,
+            -485.83557928126106
+          ],
+          "beta": 0.006448532860189464,
+          "tau": -2.0750618721004704e-09,
+          "delta": -6.758894014814063e-09,
+          "radius": 8.221353059549732e-05,
+          "refined_bracket": [
+            -0.00025,
+            -0.00024303398874989484
+          ],
+          "bracket_width": 6.966011250105164e-06,
+          "mesh_bracket": [
+            -0.0005,
+            -0.000125
+          ],
+          "validation": [
+            {
+              "offset": 0.0001,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -0.000347339220468474,
+                  "radius": 8.221360469460134e-05,
+                  "index": 194
+                },
+                {
+                  "s": -0.000147339220468474,
+                  "radius": 8.221360300982872e-05,
+                  "index": 195
+                }
+              ],
+              "contrasts": [
+                7.409910402281228e-11,
+                7.241433140788272e-11
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            },
+            {
+              "offset": 3e-05,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -0.000277339220468474,
+                  "radius": 8.221353744008806e-05,
+                  "index": 196
+                },
+                {
+                  "s": -0.000217339220468474,
+                  "radius": 8.221353693444196e-05,
+                  "index": 197
+                }
+              ],
+              "contrasts": [
+                6.844590744333433e-12,
+                6.3389446415453715e-12
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            }
+          ]
+        }
+      ],
+      "maximum_absolute_prediction_error": {
+        "tau": 1.7303873188549656e-13,
+        "delta": 6.463025169311597e-18,
+        "radius": 8.603188962012093e-14
+      },
+      "mesh_monotonicity": "nonmonotone"
+    },
+    {
+      "arm_id": "line-1-ray-+1",
+      "longitudinal": 0.0002,
+      "tangent": [
+        -0.09734954116947536,
+        -0.9952502533705242
+      ],
+      "normal": [
+        0.9952502533705242,
+        -0.09734954116947536
+      ],
+      "origin": [
+        89.65273890581916,
+        -485.835912879
+      ],
+      "beta": 0.006448532860189464,
+      "status": "no_bracket",
+      "complete": true,
+      "evaluation_count": 7,
+      "minima": [],
+      "maximum_absolute_prediction_error": {
+        "tau": 1.9940852705987058e-13,
+        "delta": 8.969849782393363e-18,
+        "radius": 1.5425800827667535e-13
+      },
+      "mesh_monotonicity": "strictly increasing",
+      "smallest_successive_mesh_change": 2.2633697781932697e-10
+    },
+    {
+      "arm_id": "line-1-ray--1",
+      "longitudinal": 0.0002,
+      "tangent": [
+        0.09734954116947536,
+        0.9952502533705242
+      ],
+      "normal": [
+        -0.9952502533705242,
+        0.09734954116947536
+      ],
+      "origin": [
+        89.65277784563564,
+        -485.8355147788986
+      ],
+      "beta": 0.006448532860189464,
+      "status": "converged",
+      "complete": true,
+      "evaluation_count": 18,
+      "minima": [
+        {
+          "point_index": 218,
+          "s": 6.167777390647344e-05,
+          "coordinate": [
+            89.65271646081553,
+            -485.8355087745956
+          ],
+          "beta": 0.006448532860189464,
+          "tau": -3.4917214706089474e-10,
+          "delta": -6.758944330287591e-09,
+          "radius": 8.221297365238724e-05,
+          "refined_bracket": [
+            5.901699437494742e-05,
+            6.598300562505257e-05
+          ],
+          "bracket_width": 6.9660112501051505e-06,
+          "mesh_bracket": [
+            -0.000125,
+            0.000125
+          ],
+          "validation": [
+            {
+              "offset": 0.0001,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": -3.832222609352657e-05,
+                  "radius": 8.22132069875807e-05,
+                  "index": 219
+                },
+                {
+                  "s": 0.00016167777390647346,
+                  "radius": 8.2213048456847e-05,
+                  "index": 220
+                }
+              ],
+              "contrasts": [
+                2.33335193465631e-10,
+                7.480445975919636e-11
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            },
+            {
+              "offset": 3e-05,
+              "status": "complete",
+              "samples": [
+                {
+                  "s": 3.167777390647344e-05,
+                  "radius": 8.221297978194177e-05,
+                  "index": 221
+                },
+                {
+                  "s": 9.167777390647343e-05,
+                  "radius": 8.221298070523278e-05,
+                  "index": 222
+                }
+              ],
+              "contrasts": [
+                6.1295545326694664e-12,
+                7.052845544456947e-12
+              ],
+              "resolved": true,
+              "lower_neighbor_resolved": false
+            }
+          ]
+        }
+      ],
+      "maximum_absolute_prediction_error": {
+        "tau": 2.1398369654741353e-13,
+        "delta": 5.540160439401498e-18,
+        "radius": 1.1704869116047761e-13
+      },
+      "mesh_monotonicity": "nonmonotone"
+    }
+  ],
+  "provenance": {
+    "outputs": {
+      "fig-memory-section-minima.png": "f9ab897c08adfcabc00bc6c64a7a894fe09bb079962109ca906a2755d6836ca1",
+      "fig-memory-section-minima.pdf": "b285603895394f786a659526b48d4c440c58b0586c50412f9c8523711b8a5961",
+      "fig-memory-section-profiles.png": "7c821c7bf465c37cea913620c009c015d58125c9ccbd609706a6a433f52a5a29",
+      "fig-memory-section-profiles.pdf": "19cea6f57f3b80169d0f467a8aba645ae4782bb9b4f8171d5d7576751c8031bb",
+      "fig-memory-section-minima-mobile.png": "d662f99d099925c0fbd1e24090535b0f856bb0483378d429e83b769e37c85a5d"
+    },
+    "copied_source_names": {
+      "fig-memory-section-profiles.png": "section-minima-profiles.png",
+      "fig-memory-section-profiles.pdf": "section-minima-profiles.pdf"
+    },
+    "desktop_companion": {
+      "scope": "Additional center zoom, preserving original production01 figures and review.",
+      "provenance": {
+        "path": "audits/baby-shrimp-zoom/20261022-contraction-minima-figures-02/receipt.json",
+        "bytes": 1772,
+        "sha256": "9b188e6f3788a8c5c32293bd4d8924b6ba1956afcf41543104b4113931370654"
+      },
+      "visual_review": {
+        "path": "audits/baby-shrimp-zoom/20261022-contraction-minima-figures-02/visual-review.json",
+        "bytes": 1686,
+        "sha256": "005273ddeb21a66c066a8151a9295b85e0d1c0d7db4d4c9501137887c664f53c"
+      },
+      "files": [
+        {
+          "path": "audits/baby-shrimp-zoom/20261022-contraction-minima-figures-02/section-minima-center-zoom.png",
+          "bytes": 290525,
+          "sha256": "c17d5fd3631052b4372097987e5c9b581874ae1d9196326bb23e54be0d7427a6"
+        },
+        {
+          "path": "audits/baby-shrimp-zoom/20261022-contraction-minima-figures-02/section-minima-center-zoom.pdf",
+          "bytes": 31131,
+          "sha256": "6663216171c6f749ccebc120416e49215e14e4a45aa08e05ce77f6214b137a29"
+        }
+      ]
+    },
+    "profile_source": {
+      "provenance": {
+        "path": "audits/baby-shrimp-zoom/20261022-contraction-minima-figures-01/receipt.json",
+        "bytes": 1438,
+        "sha256": "ab7bf18b9c4a058d15f8f774778d0025f8421cd33c944c5abb3a0fb3efb39c02"
+      },
+      "visual_review": {
+        "path": "audits/baby-shrimp-zoom/20261022-contraction-minima-figures-01/visual-review.json",
+        "bytes": 1474,
+        "sha256": "1d9ea717cfac5dfb79f480a40c99310899feb33626429cf89b804227ab2aa290"
+      },
+      "files": [
+        {
+          "path": "audits/baby-shrimp-zoom/20261022-contraction-minima-figures-01/section-minima-geometry.pdf",
+          "bytes": 39437,
+          "sha256": "5c19ac7cf62dbaf74273af3b661e0af71279040958e34318ccc9e3057b0ee82e"
+        },
+        {
+          "path": "audits/baby-shrimp-zoom/20261022-contraction-minima-figures-01/section-minima-geometry.png",
+          "bytes": 235532,
+          "sha256": "4c70f6089da8f65a96b2e3b2e9cb2c3e0204d1128d38b860fcee10b2968b73ea"
+        },
+        {
+          "path": "audits/baby-shrimp-zoom/20261022-contraction-minima-figures-01/section-minima-profiles.pdf",
+          "bytes": 37969,
+          "sha256": "19cea6f57f3b80169d0f467a8aba645ae4782bb9b4f8171d5d7576751c8031bb"
+        },
+        {
+          "path": "audits/baby-shrimp-zoom/20261022-contraction-minima-figures-01/section-minima-profiles.png",
+          "bytes": 525626,
+          "sha256": "7c821c7bf465c37cea913620c009c015d58125c9ccbd609706a6a433f52a5a29"
+        }
+      ]
+    },
+    "mobile": {
+      "production_receipt_file": "section-minima-mobile-production.json",
+      "production_receipt_sha256": "a2fa645391fff48623529ebe7d9c19b55812d59ec0c3a35f5f3e4d8c97687766",
+      "production_receipt": {
+        "id": "BSC5-section-minima-mobile-figures",
+        "receipt": "/data2/neural-shrimp-data/audits/baby-shrimp-zoom/20261022-contraction-minima-audit-01/receipt.json",
+        "receipt_sha256": "874f0fdceeeefe3957c5b8ac8d9a8ca87ec53a2f8d35e978c367281f0ac112c5",
+        "scientific_complete": true,
+        "partial_explicitly_allowed": false,
+        "source_commit": "3e13eb4751f961553e7eb6dc3edc61f97f7a5af6",
+        "source_sha256": {
+          "tools/plot_baby_shrimp_contraction_minima_mobile.py": "5f6825d49d1b761469c233b11a9c74d3e89c1649938f24de7fe6bb084e634be1",
+          "tools/plot_baby_shrimp_contraction_minima.py": "7786c92d152803524d1c5c18e7eda8ab7aaaf83e4fa0644947363fdac1ea9e71"
+        },
+        "threads": 1,
+        "figures": [
+          {
+            "path": "section-minima-center-zoom-mobile.pdf",
+            "bytes": 31630,
+            "sha256": "e2f80127258661f11ba70f51abca5dc35a251e6d9900b9c4a71721c3177f165c"
+          },
+          {
+            "path": "section-minima-center-zoom-mobile.png",
+            "bytes": 275372,
+            "sha256": "d662f99d099925c0fbd1e24090535b0f856bb0483378d429e83b769e37c85a5d"
+          }
+        ],
+        "scope": "Layout-only stacking of both original center-zoom panels, with all measurements, brackets, statuses and labels retained.",
+        "visual_review": "required; rendering does not establish visual approval"
+      },
+      "visual_review_file": "section-minima-mobile-visual-review.json",
+      "visual_review_sha256": "32401cbdec1f06ce29e39878da21f3b14ca1687877d8859e02aaf425622f329b",
+      "visual_review": {
+        "id": "BSC5-mobile-visual-review",
+        "reviewed_utc": "2026-10-22T05:52:47.651310+00:00",
+        "passed": true,
+        "production_receipt_sha256": "a2fa645391fff48623529ebe7d9c19b55812d59ec0c3a35f5f3e4d8c97687766",
+        "inspected": [
+          "section-minima-center-zoom-mobile.png",
+          "section-minima-center-zoom-mobile.pdf rendered through pdftoppm"
+        ],
+        "checks": [
+          "Both original scientific panels retained in a stacked layout.",
+          "All four actual section statuses, two minima and measured bracket bars retained.",
+          "Equal scaled axes, all point samples and conditional-frame labels preserved.",
+          "Text, legend and axes are legible with no clipping or overlap.",
+          "No illustrative data, interpolation or joined minimum curves introduced."
+        ],
+        "pdf_review_image": {
+          "path": "/data2/neural-shrimp-data/audits/baby-shrimp-zoom/20261022-contraction-minima-mobile-01/pdf-review.png",
+          "sha256": "37fd64291b10e96d23ac6687196c664cbe838a545000b48dcdb0bf6c4693dcb9"
+        },
+        "scope": "Visual layout inspection only; scientific admission remains the completed bound numerical audit."
+      }
+    },
+    "publication": {
+      "production_receipt_file": "section-minima-publication-production.json",
+      "production_receipt_sha256": "9dbc39bd50e2ae3c7b788af6dc6daba606649b409b6557fe930d1f5c28fd4379",
+      "production_receipt": {
+        "id": "BSC5-center-zoom-publication-figures",
+        "receipt": "/data2/neural-shrimp-data/audits/baby-shrimp-zoom/20261022-contraction-minima-audit-01/receipt.json",
+        "receipt_sha256": "874f0fdceeeefe3957c5b8ac8d9a8ca87ec53a2f8d35e978c367281f0ac112c5",
+        "scientific_complete": true,
+        "partial_explicitly_allowed": false,
+        "source_commit": "edb81d406696dd2146c05e0b9cef86e7819e977d",
+        "source_sha256": {
+          "tools/plot_baby_shrimp_contraction_minima_publication.py": "0c50c5655369b377ad27587aa33c01dfd1fd2aea098c5bbd646d247a6daeb2f3",
+          "tools/plot_baby_shrimp_contraction_minima.py": "7786c92d152803524d1c5c18e7eda8ab7aaaf83e4fa0644947363fdac1ea9e71"
+        },
+        "figure_size_inches": [
+          7.0,
+          5.0
+        ],
+        "threads": 1,
+        "caption_semantics": {
+          "scientific_complete": true,
+          "planned_longitudinal_distance": 0.0002,
+          "coordinate_scales": [
+            2.5e-06,
+            7.5e-06
+          ],
+          "display_multiplier": 10000.0,
+          "metric": "Equal axes in the declared scaled Euclidean metric: steering displacement divided by the first scale, log10-temperature displacement divided by the second scale.",
+          "frame": "Left: conditional trace-Hessian predictor rays and full planned transverse section supports, not measured valley connections.",
+          "measurements": "Right: every observed sample on the four innermost planned sections; independently qualified minima are not joined.",
+          "markers": "Dots are admitted samples; stars and black bars show qualified minima and measured final bracket widths. Red crosses and pluses retain unadmitted samples and unfinished callbacks.",
+          "brackets": "Black bars are not confidence intervals or exact extremum enclosures.",
+          "status": "All four section statuses and sample/minimum counts are retained. No bracket means no strict minimum bracket on the sampled mesh; missing sections remain untested.",
+          "limits": "Finite section minima do not establish connected intrinsic valleys or an exact crossing. Conditional frame geometry is separate from measured section evidence.",
+          "diagnostic_labels_replaced_or_moved": [
+            "Section-minima pilot — center zoom",
+            "Audited innermost sections. Planned longitudinal distance = 0.0002.\nEqual axes in the declared scaled Euclidean metric; the display includes the full section supports.",
+            "Scaled coordinates: (steering − center) / 2.5e-06 and (log₁₀ temperature − center) / 7.5e-06; both panels show ×10⁻⁴ units.\nBlack bars are measured final bracket widths, not confidence intervals. Red × / + retain unadmitted samples / unfinished callbacks.\nNo bracket means no strict minimum bracket on the sampled support. These sections do not establish connected valleys or an exact crossing."
+          ]
+        },
+        "figures": [
+          {
+            "path": "section-minima-center-zoom-publication.pdf",
+            "bytes": 25372,
+            "sha256": "b285603895394f786a659526b48d4c440c58b0586c50412f9c8523711b8a5961"
+          },
+          {
+            "path": "section-minima-center-zoom-publication.png",
+            "bytes": 267044,
+            "sha256": "f9ab897c08adfcabc00bc6c64a7a894fe09bb079962109ca906a2755d6836ca1"
+          }
+        ],
+        "visual_review": "required; not established by successful rendering",
+        "scope": "Layout-only reuse of audited center-zoom artists. No new numerical evaluation or interpolation."
+      },
+      "visual_review_file": "section-minima-publication-visual-review.json",
+      "visual_review_sha256": "4e740daeb29ed0171037a668599d62896d63fafb1e0abf02e5ddaeafff6a1e75",
+      "visual_review": {
+        "id": "BSC5-center-zoom-publication-visual-review",
+        "reviewed_utc": "2026-10-22T05:56:01.428198+00:00",
+        "passed": true,
+        "rendering_receipt": {
+          "path": "/data2/neural-shrimp-data/audits/baby-shrimp-zoom/20261022-contraction-minima-publication-01/receipt.json",
+          "bytes": 3321,
+          "sha256": "9dbc39bd50e2ae3c7b788af6dc6daba606649b409b6557fe930d1f5c28fd4379"
+        },
+        "reviewed_png": {
+          "path": "/data2/neural-shrimp-data/audits/baby-shrimp-zoom/20261022-contraction-minima-publication-01/section-minima-center-zoom-publication.png",
+          "bytes": 267044,
+          "sha256": "f9ab897c08adfcabc00bc6c64a7a894fe09bb079962109ca906a2755d6836ca1"
+        },
+        "reviewed_pdf": {
+          "path": "/data2/neural-shrimp-data/audits/baby-shrimp-zoom/20261022-contraction-minima-publication-01/section-minima-center-zoom-publication.pdf",
+          "bytes": 25372,
+          "sha256": "b285603895394f786a659526b48d4c440c58b0586c50412f9c8523711b8a5961"
+        },
+        "pdf_render": {
+          "path": "/tmp/neural-shrimp-bsc5-publication-actual-qa-01/pdf-review.png",
+          "bytes": 128126,
+          "sha256": "f4559ced73629ba7d79bbda7b6911455724dd1b7eb36be9b2f15202f059ac3fc"
+        },
+        "source_commit": "edb81d406696dd2146c05e0b9cef86e7819e977d",
+        "source_sha256": {
+          "tools/plot_baby_shrimp_contraction_minima_publication.py": "0c50c5655369b377ad27587aa33c01dfd1fd2aea098c5bbd646d247a6daeb2f3",
+          "tools/plot_baby_shrimp_contraction_minima.py": "7786c92d152803524d1c5c18e7eda8ab7aaaf83e4fa0644947363fdac1ea9e71"
+        },
+        "scientific_artist_comparison": "Exact equality against original diagnostic construction on this actual audited receipt: line coordinates/styles, collection offsets/marker paths/sizes, annotations, bounds and equal aspect.",
+        "innermost_sections": [
+          {
+            "arm_id": "line-0-ray-+1",
+            "samples": 7,
+            "status": "no_bracket",
+            "minima": 0
+          },
+          {
+            "arm_id": "line-0-ray--1",
+            "samples": 19,
+            "status": "converged",
+            "minima": 1
+          },
+          {
+            "arm_id": "line-1-ray-+1",
+            "samples": 7,
+            "status": "no_bracket",
+            "minima": 0
+          },
+          {
+            "arm_id": "line-1-ray--1",
+            "samples": 18,
+            "status": "converged",
+            "minima": 1
+          }
+        ],
+        "total_observed_samples": 51,
+        "total_minima": 2,
+        "bracket_display_lengths_points_at_native_7in_width": [
+          0.7436927811734373,
+          0.7436927809231771
+        ],
+        "findings": [
+          "Both scientific panels, all four supports/rays/statuses, all 51 samples and two minima are retained.",
+          "No clipping or text/legend overlap; axes and statuses readable at the intended publication size.",
+          "No new contour or line joins the independent minima.",
+          "PNG and Poppler-rendered PDF were both inspected."
+        ],
+        "limits": [
+          "Bracket lines retain true measured widths; their approximately sub-point display lengths are covered by larger star markers. Numeric bracket widths should be read from the text or receipt, not inferred visually.",
+          "This review covers the standalone publication plot. The parent must inspect the embedded manuscript PDF after rebuilding."
+        ]
+      }
+    }
+  },
+  "scope": "Finite sampled section minima and measured refinement brackets, not confidence intervals, certified extrema, intrinsic valley curves or a connection certificate."
+}

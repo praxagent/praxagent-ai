@@ -19,7 +19,7 @@
     .blue{fill:none;stroke:#4B6787;stroke-width:2.2}
     .ink{stroke:#2C2924;stroke-width:1.4;fill:none}
   </style>
-  <text x="24" y="32" class="t title">A continuous map of an interval into itself meets the diagonal</text>
+  <text x="24" y="32" class="t title">A continuous map of [0, 1] into itself meets the diagonal</text>
   <text x="24" y="52" class="t m">F(x) = 0.3 + 0.4 x on [0, 1]. The image is [0.3, 0.7]. The fixed point is 1/2.</text>
   <line x1="80" y1="320" x2="680" y2="320" class="ink"/>
   <line x1="80" y1="320" x2="80" y2="80" class="ink"/>
@@ -31,6 +31,6 @@
   <text x="396" y="192" class="t h">fixed point 1/2</text>
   <text x="80" y="348" class="t s">0</text>
   <text x="660" y="348" class="t s">1</text>
-  <text x="200" y="360" class="t m">dashed: the line F(x) = x</text>
+  <text x="200" y="360" class="t m">dashed: the diagonal y = x</text>
 
 </svg>

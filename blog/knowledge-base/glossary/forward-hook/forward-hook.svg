@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="440" viewBox="0 0 760 440" role="img" aria-labelledby="hookTitle hookDesc">
+  <title id="hookTitle">A forward hook intercepts and modifies a layer's output array during a forward calculation</title>
+  <desc id="hookDesc">Two rows comparing a forward calculation through a neural-network layer with input array [1.0, 2.0] and layer output array (activation) [2.0, -1.0]. In the upper row without a hook, the next layer receives [2.0, -1.0]. In the lower row, a forward hook adds steering strength 0.5 times steering vector [4.0, 2.0], which equals [2.0, 1.0], so the next layer receives modified output [4.0, 0.0] while the layer's saved weights remain unchanged.</desc>
+  <rect width="760" height="440" fill="#F7F4F0"/>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#2C2924"/>
+    </marker>
+    <marker id="arrHook" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#4B6787"/>
+    </marker>
+  </defs>
+  <style>
+    .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+    .title{font-size:16px;font-weight:700}
+    .h{font-size:14px;font-weight:700}
+    .s{font-size:13px}
+    .m{font-size:12px;fill:#5A544C}
+    .card{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+    .box{fill:#FFFFFF;stroke:#8C8275;stroke-width:1.4}
+    .hook{fill:#EBF1F6;stroke:#4B6787;stroke-width:1.6}
+    .foot{fill:#EAF1E5;stroke:#6F8D5E;stroke-width:1.4}
+  </style>
+
+  <text x="24" y="34" class="t title">A forward hook runs after a layer computes its output and before the next layer reads it</text>
+  <text x="24" y="56" class="t m">Toy two-number vector. Both rows use the same layer input [1.0, 2.0] and the same fixed layer weights.</text>
+
+  <!-- Row 1: Unhooked pass -->
+  <rect class="card" x="24" y="74" width="712" height="126" rx="12"/>
+  <text x="44" y="100" class="t h">1. Standard forward pass (no hook registered)</text>
+
+  <rect class="box" x="44" y="116" width="132" height="64" rx="8"/>
+  <text x="110" y="142" text-anchor="middle" class="t h">Layer input</text>
+  <text x="110" y="164" text-anchor="middle" class="t s">[1.0, 2.0]</text>
+
+  <line x1="176" y1="148" x2="218" y2="148" stroke="#2C2924" stroke-width="1.6" marker-end="url(#arr)"/>
+
+  <rect class="box" x="222" y="116" width="166" height="64" rx="8"/>
+  <text x="305" y="142" text-anchor="middle" class="t h">Layer output</text>
+  <text x="305" y="164" text-anchor="middle" class="t s">[2.0, -1.0]</text>
+
+  <line x1="388" y1="148" x2="538" y2="148" stroke="#2C2924" stroke-width="1.6" marker-end="url(#arr)"/>
+  <text x="463" y="138" text-anchor="middle" class="t m">passed directly</text>
+
+  <rect class="box" x="542" y="116" width="174" height="64" rx="8"/>
+  <text x="629" y="142" text-anchor="middle" class="t h">Next layer receives</text>
+  <text x="629" y="164" text-anchor="middle" class="t s">[2.0, -1.0]</text>
+
+  <!-- Row 2: Hooked pass -->
+  <rect class="card" x="24" y="216" width="712" height="142" rx="12"/>
+  <text x="44" y="242" class="t h">2. Forward pass with a steering hook (strength 0.5, steering vector [4.0, 2.0])</text>
+
+  <rect class="box" x="44" y="260" width="120" height="76" rx="8"/>
+  <text x="104" y="290" text-anchor="middle" class="t h">Layer input</text>
+  <text x="104" y="314" text-anchor="middle" class="t s">[1.0, 2.0]</text>
+
+  <line x1="164" y1="298" x2="194" y2="298" stroke="#2C2924" stroke-width="1.6" marker-end="url(#arr)"/>
+
+  <rect class="box" x="198" y="260" width="146" height="76" rx="8"/>
+  <text x="271" y="286" text-anchor="middle" class="t h">Layer output</text>
+  <text x="271" y="308" text-anchor="middle" class="t s">[2.0, -1.0]</text>
+  <text x="271" y="326" text-anchor="middle" class="t m">(weights unchanged)</text>
+
+  <line x1="344" y1="298" x2="374" y2="298" stroke="#4B6787" stroke-width="1.8" marker-end="url(#arrHook)"/>
+
+  <rect class="hook" x="378" y="260" width="152" height="76" rx="8"/>
+  <text x="454" y="286" text-anchor="middle" class="t h">Forward hook</text>
+  <text x="454" y="306" text-anchor="middle" class="t s">+ 0.5 * [4.0, 2.0]</text>
+  <text x="454" y="324" text-anchor="middle" class="t m">adds [2.0, 1.0]</text>
+
+  <line x1="530" y1="298" x2="560" y2="298" stroke="#4B6787" stroke-width="1.8" marker-end="url(#arrHook)"/>
+
+  <rect class="hook" x="564" y="260" width="152" height="76" rx="8"/>
+  <text x="640" y="286" text-anchor="middle" class="t h">Next layer receives</text>
+  <text x="640" y="308" text-anchor="middle" class="t s">[4.0, 0.0]</text>
+  <text x="640" y="326" text-anchor="middle" class="t m">steered output</text>
+
+  <rect class="foot" x="24" y="374" width="712" height="46" rx="10"/>
+  <text x="380" y="402" text-anchor="middle" class="t s">Removing the hook handle restores [2.0, -1.0] on the next call because the layer's saved weights never changed.</text>
+</svg>

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" role="img" aria-labelledby="monodromyTitle monodromyDesc">
   <title id="monodromyTitle">The monodromy is the product of the step Jacobians</title>
-  <desc id="monodromyDesc">A two-point cycle. The first Jacobian doubles the first coordinate and halves the second. The second Jacobian multiplies both coordinates by 0.4. Their product, the monodromy, multiplies by 0.8 and by 0.2. Both factors of the product are inside the unit circle.</desc>
+  <desc id="monodromyDesc">A two-point cycle. The first Jacobian doubles the first coordinate and halves the second. The second Jacobian multiplies both coordinates by 0.4. Their product, the monodromy, multiplies by 0.8 and by 0.2. Both multipliers of the product are inside the unit circle, so the cycle is locally attracting.</desc>
   <defs>
     <marker id="arrMono" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#A67C52"/>
@@ -42,7 +42,7 @@
   <text x="654" y="106" text-anchor="middle" class="t h">monodromy</text>
   <text x="654" y="136" text-anchor="middle" class="t s">0.8 and 0.2</text>
   <text x="654" y="158" text-anchor="middle" class="t s">both below 1</text>
-  <text x="654" y="186" text-anchor="middle" class="t m">the cycle attracts</text>
+  <text x="654" y="186" text-anchor="middle" class="t m">the cycle locally attracts</text>
 
   <rect class="foot" x="28" y="260" width="708" height="124" rx="10"/>
   <text x="382" y="292" text-anchor="middle" class="t s">Visit order is x1, then x2, then back to x1.</text>

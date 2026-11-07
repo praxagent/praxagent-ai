@@ -28,21 +28,21 @@
     <meta property="og:title" content="Logit">
     <meta property="og:description" content="An unnormalized next-token score. Softmax turns a vector of logits into probabilities.">
     <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/glossary/logit/">
-    <meta property="og:image" content="https://praxagent.ai/blog/knowledge-base/glossary/logit/logit-card.png">
+    <meta property="og:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/logit/logit-card.png">
     <meta property="og:image:alt" content="Toy next-token logits of 3.2, 2.7, and -0.4 become softmax probabilities 0.612, 0.371, and 0.017. Adding 5 to every logit leaves the probabilities unchanged.">
-    <meta property="og:image:width" content="1143">
+    <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@praxagent">
     <meta name="twitter:title" content="Logit">
     <meta name="twitter:description" content="An unnormalized next-token score. Softmax turns a vector of logits into probabilities.">
-    <meta name="twitter:image" content="https://praxagent.ai/blog/knowledge-base/glossary/logit/logit-card.png">
+    <meta name="twitter:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/logit/logit-card.png">
     <meta name="twitter:image:alt" content="Toy next-token logits of 3.2, 2.7, and -0.4 become softmax probabilities 0.612, 0.371, and 0.017. Adding 5 to every logit leaves the probabilities unchanged.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
-    <link rel="stylesheet" href="/blog/blog.css?v=20261017d">
+    <link rel="stylesheet" href="/blog/blog.css?v=20261025a">
     <link rel="stylesheet" href="/blog/katex.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -140,17 +140,18 @@
 
 
             <div class="post-body">
-                <p>A <strong>logit</strong>, in these notes, is one unnormalized score for a vocabulary token, before that score is turned into a probability. The <a href="/blog/knowledge-base/glossary/unembedding/">unembedding</a> produces a vector \(z\), with one logit \(z_v\) for each token \(v\) in the vocabulary \(V\). Softmax converts the vector into the next-token distribution:</p>
+                <p>A <strong>logit</strong>, in these notes, is one unnormalized score for a vocabulary token, before that score is turned into a probability. The <a href="/blog/knowledge-base/glossary/unembedding/">unembedding</a>, the final layer that maps the model&rsquo;s hidden state to one score per vocabulary token, produces a vector \(z\), with one logit \(z_v\) for each token \(v\) in the vocabulary \(V\). Softmax converts the vector into the next-token distribution, where \(p_v\) is the probability assigned to token \(v\) and \(\exp\) is the exponential function:</p>
 \[
 p_v=\frac{\exp(z_v)}{\sum_{u\in V}\exp(z_u)}.
 \]<p>A logit is not a probability. It can be negative, and it has no fixed range. Adding the same number to every logit leaves every probability unchanged, because that number cancels between the numerator and the denominator. The differences are log probability ratios:</p>
 \[
 z_i-z_j=\log\frac{p_i}{p_j}.
-\]<p>The token with the largest logit is the one a <a href="/blog/knowledge-base/glossary/greedy-continuation/">greedy continuation</a> emits. Dividing every logit by a positive <a href="/blog/knowledge-base/glossary/temperature/">temperature</a> changes the probabilities and preserves which logit is largest.</p>
+\]<p>Here \(\log\) is the natural logarithm, the inverse of \(\exp\).</p>
+<p>A <a href="/blog/knowledge-base/glossary/greedy-continuation/">greedy continuation</a> emits a token whose logit is the largest; if several tokens tie, the implementation&rsquo;s tie-breaking rule decides among them. Dividing every logit by a positive <a href="/blog/knowledge-base/glossary/temperature/">temperature</a> keeps the order of the logits, ties included. It changes the probabilities unless the temperature is 1 or all the logits are equal.</p>
 <p>This is not the binary log-odds function \(\operatorname{logit}(p)=\log\frac{p}{1-p}\), which sends one probability to one number. A language-model logit vector is the input to softmax over the whole vocabulary. When the choice is between exactly two tokens, the difference of their logits equals that log-odds.</p>
 <figure class="reference-figure">
-    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Toy next-token logits of 3.2, 2.7, and -0.4 become softmax probabilities 0.612, 0.371, and 0.017. The negative logit still receives probability, and the largest logit is the greedy token." tabindex="0">
-        <img src="/blog/knowledge-base/glossary/logit/logit-to-probability.svg" alt="Toy next-token logits of 3.2, 2.7, and -0.4 become softmax probabilities 0.612, 0.371, and 0.017. The negative logit still receives probability, and the largest logit is the greedy token." loading="lazy" decoding="async">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Toy next-token logits of 3.2, 2.7, and -0.4 become softmax probabilities 0.612, 0.371, and 0.017. The negative logit still receives positive probability, and red, the token with the largest logit, is selected greedily." tabindex="0">
+        <img src="/blog/knowledge-base/glossary/logit/logit-to-probability.svg" alt="Toy next-token logits of 3.2, 2.7, and -0.4 become softmax probabilities 0.612, 0.371, and 0.017. The negative logit still receives positive probability, and red, the token with the largest logit, is selected greedily." loading="lazy" decoding="async">
     </div>
     <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
     <figcaption>Softmax converts the worked-example logits for red, blue, and green into probabilities that are positive and sum to 1. Bar lengths match those values. Adding 5 to every logit leaves the probabilities unchanged, so only differences between logits matter. The illustration uses three toy tokens, not a measured model distribution.</figcaption>
@@ -184,7 +185,7 @@ z_i-z_j=\log\frac{p_i}{p_j}.
       </tr>
   </tbody>
 </table>
-<p>The unrounded weights are \(\exp(z-\max z)\), then divided by their sum. <code>green</code> is negative and still has positive probability. <code>red</code> is the greedy token because \(3.2\) is the largest logit, not because \(0.612\) is a calibrated chance that the token is correct. Shifting every logit by \(+5\), to \(8.2\), \(7.7\), and \(4.6\), returns the same three probabilities. The log ratio of <code>red</code> to <code>blue</code> is \(3.2-2.7=0.5\).</p>
+<p>The unrounded weights are \(\exp(z-\max z)\), then divided by their sum. <code>green</code> is negative and still has positive probability. <code>red</code> is the greedy token because \(3.2\) is the largest logit. The value \(0.612\) is the probability the model assigns to <code>red</code>; on its own it does not show that the model is calibrated, meaning that, across many predictions, tokens given probability near 0.612 turn out to be the actual next token about 61.2% of the time. Shifting every logit by \(+5\), to \(8.2\), \(7.7\), and \(4.6\), returns the same three probabilities. The log ratio of <code>red</code> to <code>blue</code> is \(3.2-2.7=0.5\).</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">exp</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">softmax</span><span class="p">(</span><span class="n">logits</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
@@ -195,7 +196,7 @@ z_i-z_j=\log\frac{p_i}{p_j}.
 </span></span><span class="line"><span class="cl">    <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">exp</span><span class="p">(</span><span class="n">logit</span> <span class="o">-</span> <span class="n">maximum</span><span class="p">)</span> <span class="k">for</span> <span class="n">logit</span> <span class="ow">in</span> <span class="n">logits</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl">    <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span><span class="n">weight</span> <span class="o">/</span> <span class="n">total</span> <span class="k">for</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">weights</span><span class="p">]</span>
-</span></span></code></pre></div><p>A <a href="/blog/knowledge-base/glossary/logit-lens/">logit lens</a> is a separate procedure: it applies this same kind of readout to a mid-layer state. Those scores are logits only under the readout the analyst specified. They are not automatically the model&rsquo;s next-token logits.</p>
+</span></span></code></pre></div><p>A <a href="/blog/knowledge-base/glossary/logit-lens/">logit lens</a> is a separate procedure: it applies a specified readout, a mapping from a hidden state to one score per token, to the hidden state of an intermediate layer rather than the last one. Those scores are logits only under the readout the analyst specified. They are not automatically the model&rsquo;s next-token logits.</p>
 <p>See also: <a href="/blog/knowledge-base/glossary/unembedding/">unembedding</a>, <a href="/blog/knowledge-base/glossary/temperature/">temperature</a>, <a href="/blog/knowledge-base/glossary/sampling/">sampling</a>, <a href="/blog/knowledge-base/glossary/greedy-continuation/">greedy continuation</a>, <a href="/blog/knowledge-base/glossary/logit-lens/">logit lens</a>.</p>
 
             </div>

@@ -1,0 +1,22 @@
+{
+  "id": "BSC5-mobile-visual-review",
+  "reviewed_utc": "2026-10-22T05:52:47.651310+00:00",
+  "passed": true,
+  "production_receipt_sha256": "a2fa645391fff48623529ebe7d9c19b55812d59ec0c3a35f5f3e4d8c97687766",
+  "inspected": [
+    "section-minima-center-zoom-mobile.png",
+    "section-minima-center-zoom-mobile.pdf rendered through pdftoppm"
+  ],
+  "checks": [
+    "Both original scientific panels retained in a stacked layout.",
+    "All four actual section statuses, two minima and measured bracket bars retained.",
+    "Equal scaled axes, all point samples and conditional-frame labels preserved.",
+    "Text, legend and axes are legible with no clipping or overlap.",
+    "No illustrative data, interpolation or joined minimum curves introduced."
+  ],
+  "pdf_review_image": {
+    "path": "/data2/neural-shrimp-data/audits/baby-shrimp-zoom/20261022-contraction-minima-mobile-01/pdf-review.png",
+    "sha256": "37fd64291b10e96d23ac6687196c664cbe838a545000b48dcdb0bf6c4693dcb9"
+  },
+  "scope": "Visual layout inspection only; scientific admission remains the completed bound numerical audit."
+}

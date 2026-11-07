@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <title>Forward-mode automatic differentiation - praxagent Knowledge Base</title>
+    
+    
+
+
+
+
+
+
+
+
+
+    
+    <meta name="description" content="A way to compute a program&#39;s derivative along one input direction by carrying a tangent beside every value in a single forward pass.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://praxagent.ai/blog/knowledge-base/glossary/forward-mode-automatic-differentiation/">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="praxagent Knowledge Base">
+    <meta property="og:title" content="Forward-mode automatic differentiation">
+    <meta property="og:description" content="A way to compute a program&#39;s derivative along one input direction by carrying a tangent beside every value in a single forward pass.">
+    <meta property="og:url" content="https://praxagent.ai/blog/knowledge-base/glossary/forward-mode-automatic-differentiation/">
+    <meta property="og:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/forward-mode-automatic-differentiation/forward-mode-automatic-differentiation-card.png">
+    <meta property="og:image:alt" content="An evaluation trace of x1 times x1 plus x1 times x2 at (3, 2): every box carries a value and a tangent, and the output&#39;s tangent, 8, is the derivative with respect to x1.">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@praxagent">
+    <meta name="twitter:title" content="Forward-mode automatic differentiation">
+    <meta name="twitter:description" content="A way to compute a program&#39;s derivative along one input direction by carrying a tangent beside every value in a single forward pass.">
+    <meta name="twitter:image" content="http://127.0.0.1:8000/blog/knowledge-base/glossary/forward-mode-automatic-differentiation/forward-mode-automatic-differentiation-card.png">
+    <meta name="twitter:image:alt" content="An evaluation trace of x1 times x1 plus x1 times x2 at (3, 2): every box carries a value and a tangent, and the output&#39;s tangent, 8, is the derivative with respect to x1.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/styles-v2.css?v=20260724">
+    <link rel="stylesheet" href="/blog/blog.css?v=20261025a">
+    <link rel="stylesheet" href="/blog/katex.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script src="/blog/js/katex-0.16.47/katex.min.js"></script>
+    <script src="/blog/js/katex-0.16.47/auto-render.min.js"></script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: isDark ? 'dark' : 'neutral',
+        securityLevel: 'loose',
+        flowchart: { htmlLabels: true, curve: 'basis' }
+      });
+    </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-scrolls industrial-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/index.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="logo-text">praxagent</span>
+                </a>
+            </div>
+
+
+
+            <div class="nav-menu">
+                <a href="/work/index.html" class="nav-link">Work</a>
+                <a href="/blog/index.html" class="nav-link">Research Notes</a>
+                <a href="/blog/knowledge-base/" class="nav-link active">Knowledge Base</a>
+                <a href="/blog/search/" class="nav-link">Search</a>
+                <a href="/index.html#contact" class="nav-link">Contact</a>
+                <div class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+
+            
+            <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <a href="/work/index.html" class="mobile-nav-link">Work</a>
+            <a href="/blog/index.html" class="mobile-nav-link">Research Notes</a>
+            <a href="/blog/knowledge-base/" class="mobile-nav-link active">Knowledge Base</a>
+            <a href="/blog/search/" class="mobile-nav-link">Search</a>
+            <a href="/index.html#contact" class="mobile-nav-link">Contact</a>
+            <div class="mobile-theme-toggle">
+                <div class="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon sun" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    </span>
+                    <span class="theme-toggle-icon moon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"/></svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        
+
+
+
+
+<div class="blog-post reference-entry">
+    <div class="container">
+        <article class="post-content">
+            <header class="post-header">
+                <p class="blog-kicker" style="margin-bottom: 1rem;">Knowledge Base / Glossary</p>
+                <h1 class="post-title">Forward-mode automatic differentiation</h1>
+                
+                <p class="reference-summary">A way to compute a program&#39;s derivative along one input direction by carrying a tangent beside every value in a single forward pass.</p>
+                
+
+            </header>
+
+
+
+
+
+            <div class="post-body">
+                <p><strong>Forward-mode automatic differentiation</strong> computes the derivative of a computer program along one chosen direction of its input. It runs the program once and carries, beside every intermediate number, a second number called its <strong>tangent</strong>: how fast that number changes as the input moves along the chosen direction. Each elementary operation updates the tangent by the chain rule, so when the program finishes, the tangents of its outputs are the derivative. There is no step size to choose and no truncation error; the result carries only the rounding error of its own arithmetic, like the value it accompanies.</p>
+<h2 id="definition">Definition</h2>
+<p>Let a program compute a function \(f:\mathbb{R}^n\to\mathbb{R}^m\), from \(n\) input numbers to \(m\) output numbers, and assume that \(f\) is differentiable at the input \(x\): near \(x\) it is well approximated by a linear map. Its <strong>Jacobian</strong> \(J_f(x)\) is the \(m\times n\) matrix of that linear map. The entry in row \(i\) and column \(j\) is the partial derivative \(\partial f_i/\partial x_j\), the rate at which output \(i\) changes when only input \(j\) moves. For a direction \(v\in\mathbb{R}^n\), the <strong>Jacobian-vector product</strong>, often abbreviated JVP, is the rate at which all the outputs change as the input moves from \(x\) along \(v\), with \(h\) a scalar step that shrinks to zero:</p>
+\[
+J_f(x)\,v=\lim_{h\to 0}\frac{f(x+hv)-f(x)}{h}.
+\]<p>The program evaluates \(f\) as a sequence of elementary operations, each producing an intermediate value \(w_k\) from earlier ones. Forward mode gives the inputs the values \(x\) and the tangents \(v\), called the <strong>seed</strong>. For each operation \(w_k=\varphi_k(w_i, w_j)\) of two earlier values, it computes the value and, by the chain rule, the tangent:</p>
+\[
+\dot w_k=\frac{\partial \varphi_k}{\partial w_i}\,\dot w_i+\frac{\partial \varphi_k}{\partial w_j}\,\dot w_j .
+\]<p>A dot marks a tangent. When the program finishes, the tangents of the outputs are \(J_f(x)\,v\). The rules for the common elementary operations are short:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Operation</th>
+          <th>Value</th>
+          <th>Tangent</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>sum</td>
+          <td>\(u+w\)</td>
+          <td>\(\dot u+\dot w\)</td>
+      </tr>
+      <tr>
+          <td>product</td>
+          <td>\(uw\)</td>
+          <td>\(\dot u\,w+u\,\dot w\)</td>
+      </tr>
+      <tr>
+          <td>quotient</td>
+          <td>\(u/w\)</td>
+          <td>\((\dot u\,w-u\,\dot w)/w^2\)</td>
+      </tr>
+      <tr>
+          <td>exponential</td>
+          <td>\(e^{u}\)</td>
+          <td>\(e^{u}\,\dot u\)</td>
+      </tr>
+      <tr>
+          <td>natural logarithm</td>
+          <td>\(\ln u\)</td>
+          <td>\(\dot u/u\)</td>
+      </tr>
+      <tr>
+          <td>sine</td>
+          <td>\(\sin u\)</td>
+          <td>\(\cos u\,\dot u\)</td>
+      </tr>
+  </tbody>
+</table>
+<p>These rules hold where the operations are differentiable: the quotient needs \(w\neq 0\), and the real logarithm needs \(u>0\).</p>
+<p>The same bookkeeping is the arithmetic of <strong>dual numbers</strong>, numbers \(a+b\,\varepsilon\) with a formal symbol \(\varepsilon\) that satisfies \(\varepsilon^2=0\). Their product, \((a+b\,\varepsilon)(c+d\,\varepsilon)=ac+(ad+bc)\,\varepsilon\), is the product rule, and extending each elementary function \(g\) that is differentiable at \(a\) by \(g(a+b\,\varepsilon)=g(a)+g'(a)\,b\,\varepsilon\) reproduces the table. Evaluating the program on \(x+v\,\varepsilon\) then returns \(f(x)+J_f(x)\,v\,\varepsilon\).</p>
+<figure class="reference-figure">
+    <div class="reference-figure__viewport" role="region" aria-label="Scrollable diagram: Values and tangents flow forward together through an evaluation trace. The inputs 3 and 2 carry the seed tangents 1 and 0; the products 9 and 6 get the tangents 6 and 2 from the product rule; the output 15 gets the tangent 8 from the sum rule, which is the derivative with respect to x1." tabindex="0">
+        <img src="/blog/knowledge-base/glossary/forward-mode-automatic-differentiation/forward-mode-automatic-differentiation.svg" alt="Values and tangents flow forward together through an evaluation trace. The inputs 3 and 2 carry the seed tangents 1 and 0; the products 9 and 6 get the tangents 6 and 2 from the product rule; the output 15 gets the tangent 8 from the sum rule, which is the derivative with respect to x1." loading="lazy" decoding="async">
+    </div>
+    <p class="reference-figure__scroll-hint">Scroll horizontally to inspect the diagram. The caption below provides a full text explanation.</p>
+    <figcaption>The evaluation trace of f(x1, x2) = x1 · x1 + x1 · x2 at (3, 2), run once with the seed direction (1, 0). Each operation computes its value from the values of its inputs, and its tangent from their values and tangents, by the product or the sum rule. The output&rsquo;s tangent, 8, is the partial derivative of f with respect to x1, the Jacobian-vector product for this seed. A second pass seeded with (0, 1) gives the partial derivative with respect to x2, which is 3. A toy function chosen for hand arithmetic; a real program has many more operations, each handled the same way.</figcaption>
+</figure>
+
+<h2 id="worked-example">Worked example</h2>
+<p>Let \(f(x_1,x_2)=x_1x_1+x_1x_2\) at \(x=(3,2)\), and seed the direction \(v=(1,0)\), which asks for \(\partial f/\partial x_1\). The inputs start with the tangents \(\dot x_1=1\) and \(\dot x_2=0\). The program runs three operations, and each value is computed together with its tangent. The values are</p>
+\[
+\begin{aligned}
+w_3 &= x_1x_1 = 9,\\
+w_4 &= x_1x_2 = 6,\\
+w_5 &= w_3+w_4 = 15,
+\end{aligned}
+\]<p>and the product and sum rules give the tangents</p>
+\[
+\begin{aligned}
+\dot w_3 &= \dot x_1\,x_1+x_1\,\dot x_1 = 1\cdot 3+3\cdot 1 = 6,\\
+\dot w_4 &= \dot x_1\,x_2+x_1\,\dot x_2 = 1\cdot 2+3\cdot 0 = 2,\\
+\dot w_5 &= \dot w_3+\dot w_4 = 6+2 = 8.
+\end{aligned}
+\]<p>So \(f(3,2)=15\) and \(\partial f/\partial x_1=8\), which agrees with the formula \(2x_1+x_2\). A second pass seeded with \(v=(0,1)\) gives \(\dot w_5=0+3=3=\partial f/\partial x_2=x_1\). Seeding \(v=(1,1)\) gives \(11=8+3\): the tangent is linear in the seed, as a Jacobian-vector product must be.</p>
+<p>The minimal implementation below handles functions with one scalar output built from addition, multiplication and the supplied <code>exp</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">exp</span> <span class="k">as</span> <span class="n">_exp</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Dual</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;A value and its tangent: the derivative along the chosen direction.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">value</span><span class="p">:</span> <span class="nb">float</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tangent</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span> <span class="o">=</span> <span class="n">other</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Dual</span><span class="p">)</span> <span class="k">else</span> <span class="n">Dual</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tangent</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">tangent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span> <span class="o">=</span> <span class="n">other</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Dual</span><span class="p">)</span> <span class="k">else</span> <span class="n">Dual</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="bp">self</span><span class="o">.</span><span class="n">tangent</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">tangent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="fm">__radd__</span> <span class="o">=</span> <span class="fm">__add__</span>
+</span></span><span class="line"><span class="cl">    <span class="fm">__rmul__</span> <span class="o">=</span> <span class="fm">__mul__</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">exp</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">e</span> <span class="o">=</span> <span class="n">_exp</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Dual</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">e</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">tangent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">jvp</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">point</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;For scalar-output f: its value at point and its derivative along direction.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">out</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">Dual</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">Dual</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&#34;this toy jvp expects one Dual scalar output&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">tangent</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">x1</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">x1</span> <span class="o">*</span> <span class="n">x2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">jvp</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)))</span>                <span class="c1"># (15.0, 8.0)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">jvp</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)))</span>                <span class="c1"># (15.0, 3.0)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">jvp</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">exp</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">a</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,),</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,)))</span>     <span class="c1"># (2.718281828459045, 5.43656365691809)</span>
+</span></span></code></pre></div><p>The last line differentiates \(e^{a^2}\) at \(a=1\): the tangent \(2a\,e^{a^2}=2e\) comes out of the product rule and the exponential rule without any formula for the derivative being written down. Libraries provide the same operation for whole programs, for example <code>jax.jvp</code> in JAX and <code>torch.func.jvp</code> in PyTorch.</p>
+<h2 id="cost-and-the-other-mode">Cost, and the other mode</h2>
+<p>One forward pass costs a small constant multiple of one evaluation of the program, whatever the number of inputs, and gives one Jacobian-vector product: one combination of the columns of \(J_f(x)\). The full \(m\times n\) Jacobian takes \(n\) passes, one seed per input direction. Forward mode therefore suits functions with few inputs, or computations that need the derivative along only a few directions.</p>
+<p><strong>Reverse mode</strong> is the form of automatic differentiation used by backpropagation to train neural networks. It runs the program forward, then propagates sensitivities backward from the outputs. Given a weighting of the outputs \(u\in\mathbb{R}^m\), one backward pass gives the <strong>vector-Jacobian product</strong> \(u^{\top}J_f(x)\in\mathbb{R}^n\), where \(u^{\top}\) is \(u\) written as a row (its transpose): one weighted combination of the rows of the Jacobian. For a function with one output, such as a training loss, \(u=1\) gives the <strong>gradient</strong>, the vector of partial derivatives with respect to every input, after one forward and one backward pass, however many inputs there are. The price is memory: the backward pass needs the intermediate values of the forward pass, stored or recomputed.</p>
+<p>A <strong>finite difference</strong> estimates the same Jacobian-vector product from two evaluations, \((f(x+hv)-f(x-hv))/(2h)\). For a sufficiently smooth function, the truncation error of this central formula shrinks like \(h^2\), because the function is not straight over the step. Subtracting two nearly equal outputs in floating point adds a rounding error that typically grows in proportion to \(1/h\), with a scale that depends on the problem, so the best step balances the two. Forward mode has no step to choose, no truncation error and no cancellation between nearby evaluations, because each tangent comes from the exact derivative rule of its operation. Its values and tangents are still rounded like any floating-point computation, and an inaccurate primitive operation passes its error on to them.</p>
+<h2 id="in-these-notes">In these notes</h2>
+<p>The <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/">note on chaos in a language model&rsquo;s feedback loop</a> studies the soft-token map, which feeds a language model the probability-weighted average of its own token embeddings; its state has 896 coordinates. The note uses forward mode wherever it needs the derivative of that map along a few directions:</p>
+<ul>
+<li>To check the formula it derives for the map&rsquo;s derivative. The note reports that along eight random directions, in float64 arithmetic, the formula and forward mode agree to a relative error of at most \(1.35\times10^{-13}\), while the best central differences reach only \(1.7\times10^{-9}\) to \(4.8\times10^{-9}\).</li>
+<li>To carry a tangent vector for <a href="/blog/knowledge-base/glossary/lyapunov-exponent/">Lyapunov exponents</a>, the average rates at which nearby states separate. The note reports that at 448 randomly chosen settings of steering strength and temperature, the exponents from the forward-mode tangent and from twin trajectories, second runs started a tiny distance from the first, differ by at most 0.0041 nats per step, with a median difference of 0.0004.</li>
+<li>For Newton&rsquo;s method on periodic orbits, which solves the orbit equation by repeated linearization, and for iterative eigenvalue and linear solvers that need only Jacobian-vector products. Chained along an orbit, those products stand in for the <a href="/blog/knowledge-base/glossary/monodromy/">monodromy</a> matrix, the derivative of one trip around the orbit, without forming it.</li>
+</ul>
+<h2 id="what-it-does-not-do">What it does not do</h2>
+<p>Forward mode differentiates the program as written, not the mathematical function the program is meant to compute. Where the program branches, it returns the derivative of the branch that ran: at a point where an absolute value or a rectified linear unit switches, or where the router of a mixture-of-experts model, which sends each token to its highest-scoring expert subnetworks, changes its choice, the result is a one-sided derivative or a library convention, not evidence that the function is smooth there. An approximation inside the program, such as a truncated series or a lookup table, is differentiated as the approximation it is. The tangents are computed in the program&rsquo;s floating-point precision, so rounding still matters, and it can accumulate or be amplified when Jacobian-vector products are composed: a low-precision derivative of many steps can differ materially from a high-precision one even when each step looks accurate. The note reports such a case. A single Jacobian-vector product of one step in 32-bit floating point (float32) agrees with its 64-bit (float64) value to about \(5\times10^{-5}\), relatively, but the float32 derivative of eight composed steps differs from the float64 one by about 3%. Nor is forward mode symbolic differentiation: it returns numbers for one input and one direction, not a formula for the derivative.</p>
+<p>An early description of forward accumulation is Wengert (1964), <a href="https://doi.org/10.1145/355586.364791"><em>A simple automatic derivative evaluation program</em></a>, <em>Communications of the ACM</em> 7(8), 463–464. Griewank and Walther (2008), <a href="https://doi.org/10.1137/1.9780898717761"><em>Evaluating Derivatives: Principles and Techniques of Algorithmic Differentiation</em></a>, second edition, SIAM, covers both modes and their costs.</p>
+<p>See also: <a href="/blog/knowledge-base/glossary/lyapunov-exponent/">Lyapunov exponent</a>, <a href="/blog/knowledge-base/glossary/monodromy/">monodromy</a>, <a href="/blog/knowledge-base/glossary/covariance-matrix/">covariance matrix</a>.</p>
+
+            </div>
+
+            <footer class="post-footer">
+
+                <div class="post-navigation">
+
+                    <a href="/blog/knowledge-base/glossary/" class="back-to-blog">← Glossary</a>
+
+                    <a href="/blog/knowledge-base/" class="back-to-blog">Knowledge Base</a>
+                    <a href="/blog/index.html" class="back-to-blog">Research Notes</a>
+                </div>
+            </footer>
+        </article>
+    </div>
+</div>
+
+    </main>
+
+    <footer class="footer footer-compact">
+        <div class="container">
+            <div class="footer-compact-top">
+                <a href="/index.html" class="footer-compact-brand">praxagent</a>
+                <a href="mailto:hello@praxagent.ai" class="footer-compact-email">hello@praxagent.ai</a>
+            </div>
+            <div class="footer-compact-bottom">
+                <p>&copy; 2026 praxagent. All rights reserved.</p>
+                <nav aria-label="Footer navigation">
+                    <a href="/work/index.html">Work</a>
+                    <a href="/blog/index.html">Research Notes</a>
+                    <a href="/blog/knowledge-base/">Knowledge Base</a>
+                    <a href="/blog/search/">Search</a>
+                    <a href="https://youtube.com/@praxagent" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://x.com/praxagent" target="_blank" rel="noopener">X</a>
+                    <a href="https://bsky.app/profile/praxagent.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+                    <a href="https://github.com/praxagent" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://huggingface.co/praxagent" target="_blank" rel="noopener">Hugging Face</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/blog/script.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tables = document.querySelectorAll('.post-body table');
+            tables.forEach((table, index) => {
+                if (table.parentElement?.classList.contains('table-scroll')) return;
+
+                const scroller = document.createElement('div');
+                scroller.className = 'table-scroll';
+                scroller.setAttribute('aria-label', `Scrollable data table ${index + 1}`);
+                table.parentNode.insertBefore(scroller, table);
+                scroller.appendChild(table);
+
+                const updateScrollableState = () => {
+                    const isScrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+                    scroller.classList.toggle('is-scrollable', isScrollable);
+                    if (isScrollable) {
+                        scroller.setAttribute('role', 'region');
+                        scroller.setAttribute('tabindex', '0');
+                    } else {
+                        scroller.removeAttribute('role');
+                        scroller.removeAttribute('tabindex');
+                    }
+                };
+
+                requestAnimationFrame(updateScrollableState);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(updateScrollableState).observe(scroller);
+                } else {
+                    window.addEventListener('resize', updateScrollableState, { passive: true });
+                }
+            });
+
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false,
+                output: "htmlAndMathml"
+            });
+
+            const copyText = async (text) => {
+                if (navigator.clipboard?.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    return;
+                }
+
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.setAttribute('readonly', '');
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                const copied = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                if (!copied) {
+                    throw new Error('Copy command was not accepted');
+                }
+            };
+
+            document.querySelectorAll('[data-copy-target]').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const target = document.querySelector(button.dataset.copyTarget);
+                    if (!target) {
+                        console.error(`Copy target not found: ${button.dataset.copyTarget}`);
+                        return;
+                    }
+
+                    const originalLabel = button.textContent;
+                    try {
+                        await copyText(target.textContent.trim());
+                        button.textContent = 'Copied';
+                        button.classList.add('copied');
+                        setTimeout(() => {
+                            button.textContent = originalLabel;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    } catch (error) {
+                        console.error('Failed to copy citation: ', error);
+                    }
+                });
+            });
+
+            const copyIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+            const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            const codeBlocks = document.querySelectorAll('.post-body .highlight pre, .post-body pre:not(.mermaid)');
+            codeBlocks.forEach(pre => {
+                if (pre.closest('.code-block-frame')) {
+                    return;
+                }
+
+                const frame = document.createElement('div');
+                frame.className = 'code-block-frame';
+                const toolbar = document.createElement('div');
+                toolbar.className = 'code-block-toolbar';
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'copy-code-button';
+                button.innerHTML = copyIcon;
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+                button.setAttribute('title', 'Copy');
+
+                const markCopied = () => {
+                    button.innerHTML = checkIcon;
+                    button.classList.add('copied');
+                    button.setAttribute('aria-label', 'Copied');
+                    setTimeout(() => {
+                        button.innerHTML = copyIcon;
+                        button.classList.remove('copied');
+                        button.setAttribute('aria-label', 'Copy code to clipboard');
+                    }, 2000);
+                };
+
+                button.addEventListener('click', () => {
+                    const code = pre.querySelector('code');
+                    const text = code ? code.textContent : pre.textContent;
+
+                    navigator.clipboard.writeText(text).then(markCopied).catch(err => {
+                        console.error('Failed to copy: ', err);
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            markCopied();
+                        } catch (fallbackErr) {
+                            console.error('Fallback copy failed: ', fallbackErr);
+                        }
+                        document.body.removeChild(textArea);
+                    });
+                });
+
+                toolbar.appendChild(button);
+                frame.appendChild(toolbar);
+                pre.parentNode.insertBefore(frame, pre);
+                frame.appendChild(pre);
+            });
+
+            document.querySelectorAll('[data-code-tabs]').forEach((root) => {
+                const tablist = root.querySelector('.code-tabs__tablist');
+                const tabs = Array.from(root.querySelectorAll('[role="tab"]'));
+                const panels = Array.from(root.querySelectorAll('[role="tabpanel"]'));
+                if (!tablist || tabs.length === 0 || tabs.length !== panels.length) {
+                    return;
+                }
+
+                const activate = (index) => {
+                    tabs.forEach((tab, i) => {
+                        const selected = i === index;
+                        tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+                        tab.tabIndex = selected ? 0 : -1;
+                        panels[i].hidden = !selected;
+                    });
+                };
+
+                tabs.forEach((tab, index) => {
+                    tab.addEventListener('click', () => {
+                        activate(index);
+                        tab.focus();
+                    });
+                });
+
+                tablist.addEventListener('keydown', (event) => {
+                    const current = tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true');
+                    let next = current;
+                    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+                        next = (current + 1) % tabs.length;
+                    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+                        next = (current - 1 + tabs.length) % tabs.length;
+                    } else if (event.key === 'Home') {
+                        next = 0;
+                    } else if (event.key === 'End') {
+                        next = tabs.length - 1;
+                    } else {
+                        return;
+                    }
+                    event.preventDefault();
+                    activate(next);
+                    tabs[next].focus();
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
