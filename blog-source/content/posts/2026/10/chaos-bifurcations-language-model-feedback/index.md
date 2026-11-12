@@ -281,9 +281,10 @@ made from them held when tested in advance, with the failures reported beside
 them. The scope is one inference scheme, the soft-token map with a fixed prompt,
 in which chaos is identified by the standard test, a positive largest Lyapunov
 exponent. Ordinary sampled generation may not carry this
-structure, since sampling removes the fold's long slow passages and the loop's
+structure: sampling removes the fold's long slow passages, the loop's
 regime did not add a detectable mark on ordinary answers beyond uncertainty about
-the first token. The same weights, read as this high-precision deterministic map,
+the first token, and in one exploratory test the sensitivity of ordinary generation
+to a small change of the prompt did not depend detectably on that regime. The same weights, read as this high-precision deterministic map,
 still yield orbits and normal forms from the network's own derivatives, which may
 be a way to see mechanisms inside the model.
 {{< /panel >}}
@@ -295,7 +296,11 @@ before their outcomes. The base release follows the full report, released as
 supplementary material to the article of the same title,
 [arXiv:2610.31692](https://arxiv.org/abs/2610.31692). The [21 October memory continuation](#memory-third-knob) is a separately
 pinned exploratory extension. [provenance.json](provenance.json) maps the base-release
-numbers to the report and the extension's numbers to its audited receipts. Base report,
+numbers to the report and the extension's numbers to its audited receipts. The tables
+and figures labeled U (Tables U1 and U2, Figures U1 to U3) were added on 10 November 2026.
+They come from exploratory runs that the report describes at a
+[later commit](https://github.com/tdj28/neural-shrimp/blob/3e83148389687e6728186792b589a2b6d392b6f2/paper/llm/main.pdf) of its main branch, and the links in those
+passages point to files at a later commit, not to the release tag. Base report,
 code, test designs and data receipts:
 [github.com/tdj28/neural-shrimp](https://github.com/tdj28/neural-shrimp/tree/arxiv-v1),
 at the release tag `arxiv-v1`; the complete evidence of the computer-assisted proofs is archived at Zenodo,
@@ -313,7 +318,8 @@ continuous. Soft Thinking feeds back the expected embedding under the next-token
 distribution, the probability-weighted average of all token embeddings
 ([Zhang et al., 2025](#ref-zhang-2025)). (Its published implementation first keeps
 only the most probable tokens and renormalizes their probabilities; the map studied
-here uses the full distribution, which keeps it smooth.) Latent-reasoning methods feed hidden
+here uses the full distribution, which keeps it smooth; an exploratory test of the
+truncated loop is in [Feeding back only the most probable tokens](#top-k).) Latent-reasoning methods feed hidden
 states back ([Hao et al., 2025](#ref-hao-2025)); and recurrent-depth models
 iterate a block toward a fixed point ([Geiping et al., 2025](#ref-geiping-2025)).
 Each turns inference into an iterated map, \(x_{n+1} = F(x_n)\), and an iterated
@@ -1155,7 +1161,7 @@ one chaotic cell confirmed at three twin offsets are `" I"`, `"The"`, `"!"`,
 
 A chaotic loop's state never settles into a cycle, but it does not wander everywhere
 either: the states gather on a set, an attractor, that can be drawn. We call it a *numerically
-observed* attractor, because the evidence is finite-time: the tested trajectories
+observed* attractor, because the evidence is finite-time: nearly all of the tested trajectories
 approach the set and stay near it for as long as we recorded them (Figure 4). At
 the most strongly chaotic cell of the row at \(\log_{10}T = -0.148\) (steering
 \(\alpha = 0.07248\)), we started 512 trajectories near the fixed start, let
@@ -1164,7 +1170,9 @@ other 14 settle on a coexisting loop of period 4. The states live in 896
 dimensions, so the picture is a projection, onto the two directions along which
 the states vary most (61.6% of their variance; 77.4% with a third). The set
 appears as thin folded filaments, colored by the most probable next token, and
-zooming in shows layers within layers.
+zooming in shows layers within layers. Longer runs show that trajectories can
+leave this set for the period-4 loop, so it may be a long-lived chaotic transient
+rather than an attractor ([Whether this set is an attractor](#whether-attractor)).
 
 {{< youtube id="8zS9-ey3PQI" title="One chaotic trajectory of a language model talking to itself, with every word spoken" loading="lazy" class="video-embed" >}}
 
@@ -1207,11 +1215,70 @@ resolution of the slice (Figure 5).
 
 ![Six panels. (a) A cloud of colored dots in the plane of the first two principal coordinates, forming thin folded filaments in several colors, one per most probable next token, with a small box marking a zoom region. (b) and (c) Two successive magnifications of that region, showing parallel filaments in layers. (d) A lag-one plot of the first principal coordinate: black points on many folded, overlapping curves. (e) The local slope of the correlation sum against distance on a log axis, wandering between about 0.4 and 0.9 without a flat stretch, with a dashed line at 1.26. (f) One thin purple band of a second attractor, bent into a hook, with black points of the sampled unstable manifold lying exactly along it.](fig-strange-attractor.png)
 
-<p class="figure-note">Figure 4: projected geometry of a numerically observed chaotic attractor of the soft-token loop (Qwen2.5-0.5B-Instruct, philosophy direction at layer 12, \(\log_{10}T = -0.148\), float64). (a) 298,800 states of 498 trajectories at \(\alpha = 0.07248\), projected on their first two principal axes and colored by the most probable next token (the return symbol marks a line break). (b), (c) Magnifications of the boxed regions. (d) Lag-one plot of the first principal coordinate. (e) Local slope of the correlation sum over the first eight principal coordinates; dashed, the Kaplan–Yorke estimate 1.26; no decade of distance has a constant slope. (f) One of the three bands of the chaotic attractor at \(\alpha = 0.06626\) (purple) and sampled points of the unstable manifold of the embedded period-3 saddle (black). Source: byte-identical copy of the report's figure (<a href="provenance.json">provenance.json</a>).</p>
+<p class="figure-note">Figure 4: projected geometry of a numerically observed chaotic attractor of the soft-token loop (Qwen2.5-0.5B-Instruct, philosophy direction at layer 12, \(\log_{10}T = -0.148\), float64). (a) 298,800 states of 498 trajectories at \(\alpha = 0.07248\), projected on their first two principal axes and colored by the most probable next token (the return symbol marks a line break). (b), (c) Magnifications of the boxed regions. (d) Lag-one plot of the first principal coordinate. (e) Local slope of the correlation sum over the first eight principal coordinates; dashed, the Kaplan–Yorke estimate 1.26; no decade of distance has a constant slope. (f) One of the three bands of the chaotic attractor at \(\alpha = 0.06626\) (purple) and sampled points of the unstable manifold of the embedded period-3 saddle (black). In longer runs some trajectories leave the set of (a) for a periodic orbit (see text). Source: byte-identical copy of the report's figure (<a href="provenance.json">provenance.json</a>).</p>
 
 ![Two panels of a square plane of starting states, colored blue or orange by the loop each start falls into: a large blue region and a large orange region separated by a diagonal boundary that passes through a white star, the fixed start, with thin alternating blue and orange stripes in the lower left and a few isolated orange cells inside the blue; the right panel magnifies the region around the star.](fig-pair-basins.png)
 
 <p class="figure-note">Figure 5: basins of the two proved loops at \(\alpha = 0.06468\), \(\log_{10}T = -0.148\): the period-2 loop " is it" (blue) and the period-3 loop (orange), on the plane through the fixed start (star) spanned by the directions to the two loops; 96 × 96 starts within 0.08 of the start's norm, float32, 400 steps each. (a) The whole slice; (b) the region around the fixed start. Source: byte-identical copy of the report's figure (<a href="provenance.json">provenance.json</a>).</p>
+
+### Whether this set is an attractor {#whether-attractor}
+
+The portrait of Figure 4 follows each trajectory for 1000 steps, and longer runs
+show that trajectories can leave the chaotic set of Figure 4(a). The portrait
+itself gives a first sign. Of its 14 trajectories on the period-4 loop, three were
+on it when recording began at step 400, and eleven arrived during the 600 recorded
+steps.
+
+We therefore displaced the fixed start along 64 further random directions, by 5%
+of its norm as for the portrait, and followed each start for 5000 steps in float64
+([tools/batch_fate.py](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/tools/batch_fate.py)). We did this three times: with the 64 starts in two
+batches of 32, in one batch of 64, and one at a time. The three layouts round
+differently ([How a change of batch reaches the output](#batch-to-output)), and on
+the chaotic set a rounding difference grows. Trajectories from the same start are
+a median relative distance of 0.007 to 0.010 apart after 100 steps and 1.1 to 1.2,
+as large as the states themselves, after 200. The three runs are therefore three
+realizations of the same 64 starts, not three measurements of one outcome.
+Repeating a layout reproduces its states bit for bit (checked over 500 steps for
+two of the layouts).
+
+A run counts as *captured* at the first step at which its state returns within a
+relative \(10^{-9}\) of one of its previous 64 states, which is how a trajectory
+that has fallen onto a repeating loop shows itself. By step 5000, 5, 5 and 4 of
+the 64 starts were captured (Table U1). These 14 captures belong to 12 different
+starts: two starts were captured in two layouts, none in all three, and 52 in no
+layout. Thirteen captures are on the period-4 loop that the portrait's
+trajectories reached, which writes `" - I indeed?"`, and one is on a period-8 loop
+that writes `" you are"` four times. No run was captured before step 1000; the
+first capture came at step 1087 and the last at step 4741. In the two batched
+layouts every captured run was still on its cycle at step 5000: its states saved
+every 100 steps return within a relative \(2.6\times10^{-10}\) (a run of the
+third layout stops at its capture). These captures are recurrence candidates. We
+did not refine them by Newton's method or compute their stability
+([docs/batch-fate/bf1-audit-receipt.json](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/batch-fate/bf1-audit-receipt.json)).
+
+| Layout | Captured by step 1000 | 2000 | 3000 | 4000 | 5000 |
+|---|---|---|---|---|---|
+| Two batches of 32 | 0 | 2 | 3 | 4 | 5 |
+| One batch of 64 | 0 | 2 | 4 | 4 | 5 |
+| One start at a time | 0 | 0 | 1 | 2 | 4 |
+
+<p class="figure-note">Table U1: starts captured by a periodic orbit, of the same 64 starts near the fixed start in three batch layouts, at the cell of Figure 4(a) (\(\alpha = 0.07248\), \(\log_{10}T = -0.148\); float64, 5000 steps). Source: <a href="https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/batch-fate/bf1-receipt.json">docs/batch-fate/bf1-receipt.json</a>.</p>
+
+How many starts are captured therefore depends on how long the trajectories are
+followed and on the rounding, and which starts are captured is not a property of
+the start. The set of Figure 4(a) may be a long-lived *chaotic transient* rather
+than an attractor: motion near a *chaotic saddle*, a chaotic set that trajectories
+approach and follow for a long time but eventually leave
+([Grebogi, Ott, and Yorke, 1983](#ref-grebogi-1983);
+[Lai and Tél, 2011](#ref-lai-2011)). These runs cannot tell the two apart. If
+trajectories keep leaving at the observed rate, about one capture in 67,000 steps
+of an uncaptured trajectory, most of the 64 starts would be captured within
+\(10^5\) steps. If the set is an attractor whose
+{{< refterm "basin-of-attraction" "basin" >}} is finely interleaved with that of
+the period-4 loop, the captures would stop. The same kind of event occurs across
+the maps: of 192 sampled chaos-labeled cells in each of the two main maps, 16 and
+49 ended on periodic orbits within \(10^5\) steps
+([Numerics and chaos labels](#numerics-and-chaos-labels)).
 
 ### Other families, other sizes {#other-families-other-sizes}
 
@@ -1221,6 +1288,10 @@ in OLMo-2-7B, and in Llama-3.1-8B, whose largest loops are greetings between AIs
 such as `". Greetings fellow AI entity detected"`. A second checkpoint of the 0.5B
 architecture, Qwen2-0.5B-Instruct, shares the organization of the map but not its
 attractors: of 416 to 900 distinct loops per map, only 10 occur in both models.
+An exploratory scan of LFM3-1.7B, in which 13 of the 24 blocks are convolutions
+rather than attention, also found chaotic cells without and with steering, at coarse
+resolution and with a single twin offset; it is not counted among the fifteen models
+or the families of this note ([A model built mostly from convolutions](#lfm3)).
 Figure 6 shows the same kind of structure at 70 billion parameters.
 
 ![Two panels for Llama-3.3-70B-Instruct steered along its hostility concept vector at layer 50, over steering strength 0.06 to 0.12 (horizontal) and log10 temperature 0.12 to 0.27 (vertical), 128 by 128 float64 cells. Left, the largest Lyapunov exponent: a diagonal band of chaotic cells, in color, falls from the upper left toward the lower right, with gray non-chaotic cells above and below it. Right, the attractor's period, in colors chosen to stay distinct for color-blind readers: a color bar gives periods 1, 3, 5, 6, 7, 9 and 10 colors of their own and draws every other period in bluish gray, labeled other. The chaotic band is black and threaded by thin periodic windows, fixed points (dark blue) fill the region above it, and large regions of periods 3 (pink), 5 (sky blue), 6 (orange) and 7 (green) lie below it.](fig-zoom-llama70b-z128.png)
@@ -2137,18 +2208,18 @@ chaotic cells is +0.60 against +0.24 to +0.38 at the neighboring periodic cells.
 The mechanism is not specific to concept-labeled directions. This is consistent with
 the controls in which norm-matched random directions also produce chaos in the 0.5B
 and 8B models, and rotating the steering direction at constant norm moves the
-chaotic regions but keeps the chaotic share between 13 and 24% at every one of 103
+chaotic regions but keeps the chaotic share between 13 and 24% at every one of 120
 angles (Figure 14); at 70B the directions differ. What a
 direction does select is which tokens compete, and therefore what the attractors
 write.
 
 ![Six maps of the largest Lyapunov exponent over steering strength from -0.12 to 0.12 and log10 temperature from -0.45 to 0.3, at six rotation angles between two random steering directions, each titled with its chaotic share. In each, a dark blue periodic background holds red chaotic regions in arches and plumes on both sides of zero steering; the shapes shift and grow as the angle changes, while a periodic hole around zero steering remains.](fig-morph-samples.png)
 
-<p class="figure-note">Figure 14: the soft-token map of Qwen2.5-0.5B-Instruct (steering at layer 12) while the steering direction rotates at constant norm from one Gaussian direction (\(0^{\circ}\)) to another (\(90^{\circ}\)): largest Lyapunov exponent (clipped at \(\pm0.5\), red positive) at six of 103 angles, with the chaotic share. Float32 maps of 296 × 512 cells over \(\alpha \in [-0.12, 0.12]\), \(\log_{10}T \in [-0.45, 0.3]\); exponents from 80 measured steps at twin offset \(10^{-4}\) and periods detected up to 24; each map continues from the final states of the previous angle after 40 steps, and every tenth starts from the fixed start after 300 steps. Where attractors coexist, continued and fresh starts can reach different ones, so the maps can jump at every tenth angle and across the 17 of 120 planned angles that did not finish within the run limit. These short-horizon labels are coarser than those of the float64 maps. Source: byte-identical copy of the report's figure (<a href="provenance.json">provenance.json</a>).</p>
+<p class="figure-note">Figure 14: the soft-token map of Qwen2.5-0.5B-Instruct (steering at layer 12) while the steering direction rotates at constant norm from one Gaussian direction (\(0^{\circ}\)) to another (\(90^{\circ}\)): largest Lyapunov exponent (clipped at \(\pm0.5\), red positive) at six of 120 angles, with the chaotic share. Float32 maps of 296 × 512 cells over \(\alpha \in [-0.12, 0.12]\), \(\log_{10}T \in [-0.45, 0.3]\); exponents from 80 measured steps at twin offset \(10^{-4}\) and periods detected up to 24; each map continues from the final states of the previous angle after 40 steps, except the first map and eleven later ones (about every tenth angle), which start from the fixed start after 300 steps. Where attractors coexist, continued and fresh starts can reach different ones, so the maps, and the rotation video, can jump at those eleven angles: there the detected period changes in 16 to 21% of the cells, against at most 15% between other neighboring angles. The first run finished 103 of the 120 angles within its limit. A later run computed the other 17 with the same settings, each from the saved final states of the angle before it (<a href="https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/morph-fill-receipt.json">docs/morph-fill-receipt.json</a>, <a href="https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/morph-continuity.json">docs/morph-continuity.json</a>). These short-horizon labels are coarser than those of the float64 maps. Source: byte-identical copy of the report's figure (<a href="provenance.json">provenance.json</a>).</p>
 
 {{< youtube id="-VCSiNFnP2c" title="Chaos in a language model’s feedback loop, as the steering direction turns" loading="lazy" class="video-embed" >}}
 
-<p class="figure-note">Video: the rotation of Figure 14 as a film (36 s), through all 120 angles of the sweep, including the 17 computed after the figure was made. Fed the probability-weighted average of its own next-token embeddings, again and again, the model is a dynamical system with a continuous state, and two dials, the strength of a steering vector and the sampling temperature, decide whether the loop settles into a fixed point, falls into a repeating cycle, or turns chaotic. Each frame is a map of that two-dial plane for Qwen2.5-0.5B-Instruct after the fixed short chat prompt: 296 × 512 settings over steering strength \(\alpha \in [-0.12, 0.12]\) and temperature from \(10^{-0.45}\) to \(10^{0.3}\). The height and color of each block show the largest Lyapunov exponent: red, tall blocks are where nearby states fly apart (chaos); blue, low blocks are where the loop settles down. During the video the steering vector added at layer 12 rotates at constant length from one random direction to another, through 90 degrees. The chaotic regions drift, split and merge, but the chaotic share of the plane stays between 12.9 and 23.8% at every one of the 120 measured angles. These are the fast float32 maps of Figure 14, with exponents from 80 measured steps, coarser than the float64 maps; each map continues from the final states of the previous angle, so it can jump where two attractors coexist, and frames between measured angles blend their two neighbors. Paper: <a href="https://arxiv.org/abs/2610.31692">arXiv:2610.31692</a>, whose Fig. 9 shows six of these angles; code and data: <a href="https://github.com/tdj28/neural-shrimp">github.com/tdj28/neural-shrimp</a>. <a href="https://youtu.be/-VCSiNFnP2c">Watch on YouTube</a>.</p>
+<p class="figure-note">Video: the rotation of Figure 14 as a film (36 s), through all 120 angles of the sweep, including the 17 computed after the figure was made. Fed the probability-weighted average of its own next-token embeddings, again and again, the model is a dynamical system with a continuous state, and two dials, the strength of a steering vector and the sampling temperature, decide whether the loop settles into a fixed point, falls into a repeating cycle, or turns chaotic. Each frame is a map of that two-dial plane for Qwen2.5-0.5B-Instruct after the fixed short chat prompt: 296 × 512 settings over steering strength \(\alpha \in [-0.12, 0.12]\) and temperature from \(10^{-0.45}\) to \(10^{0.3}\). The height and color of each block show the largest Lyapunov exponent: red, tall blocks are where nearby states fly apart (chaos); blue, low blocks are where the loop settles down. During the video the steering vector added at layer 12 rotates at constant length from one random direction to another, through 90 degrees. The chaotic regions drift, split and merge, but the chaotic share of the plane stays between 12.9 and 23.8% at every one of the 120 measured angles. These are the fast float32 maps of Figure 14, with exponents from 80 measured steps, coarser than the float64 maps; each map continues from the final states of the previous angle, except the first map and eleven later ones (about every tenth angle), which start afresh from the fixed start, so the film can jump at those eleven angles where two attractors coexist; frames between measured angles blend their two neighbors. Paper: <a href="https://arxiv.org/abs/2610.31692">arXiv:2610.31692</a>, whose Fig. 9 shows six of these angles; code and data: <a href="https://github.com/tdj28/neural-shrimp">github.com/tdj28/neural-shrimp</a>. <a href="https://youtu.be/-VCSiNFnP2c">Watch on YouTube</a>.</p>
 
 ### Where steering enters, and how two vectors combine {#where-steering-enters}
 
@@ -2266,7 +2337,7 @@ with windows reaching down, recurs. In this model, chaos under steering is there
 a generic response to perturbing the residual stream at this norm. Rotating the
 steering direction makes the same point continuously (Figure
 14): the chaotic share stays between 13 and 24% at every one
-of 103 angles.
+of 120 angles.
 
 Single neurons behave the same way. Steering along the output direction of one MLP
 neuron of the steered layer (its column of the down-projection, rescaled to the same
@@ -7511,6 +7582,14 @@ about 120 steps to about ten or fewer: the deterministic intermittency belongs t
 expected-embedding map. And the loop's
 zero-temperature limit agrees, away from ties, with greedy decoding with a one-token
 memory, whose cycles ordinary decoding with a full context does not inherit.
+Two exploratory tests go a step closer to practice. Feeding back only the 5 to 50
+most probable tokens, as the published Soft Thinking implementation does with 15,
+left the loop of Qwen2.5-0.5B chaotic at some temperatures of a steered line, fewer
+than with the full distribution; feeding back 1 to 3 left none
+([Feeding back only the most probable tokens](#top-k)). In ordinary sampled
+generation by the same model, the sensitivity to a small change of the prompt showed
+no detected difference between settings where the soft map is chaotic and settings
+where it is periodic ([Ordinary generation at the soft map's settings](#ordinary-generation)).
 {{< /panel >}}
 
 ### Sampling and the bottleneck {#bridge}
@@ -7644,6 +7723,181 @@ next-token entropy at 2.3 to 3.6 nats instead of the one-token map's 7.3 to 11.1
 these 72B prompts and cells, over 400 steps, the growing-context decoder therefore
 did not reproduce the sustained sensitivity of the fixed-window loop, while the one
 transient burst shows that the method registers growth at this scale.
+
+### Feeding back only the most probable tokens {#top-k}
+
+The published Soft Thinking implementation does not feed back the whole
+distribution: it keeps the 15 most probable tokens and renormalizes their
+probabilities ([Soft Thinking as published](#soft-thinking-as-published)). Such a
+map is no longer smooth. It is smooth while the set of kept tokens stays the same,
+and it jumps when a token enters or leaves the set. In an exploratory run we
+measured what this truncation does to the loop of Qwen2.5-0.5B
+([tools/topk_loop.py](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/tools/topk_loop.py)). The fed-back embedding is the average of the
+embeddings of the \(k\) most probable tokens, weighted by their renormalized
+probabilities, for \(k = 50\), 20, 10, 5, 3, 2 and 1, and for comparison the full
+distribution; with \(k = 1\) this is greedy decoding with a memory of one token.
+We scanned 128 temperatures between \(\log_{10}T = -1\) and 0.3 on two lines, one
+without steering and one with the philosophy direction at \(\alpha = 0.0743\), in
+float64, with 500 transient and 1500 measured steps and one twin at offset
+\(10^{-6}\). The setting 15 itself was not run; 10 and 20 bracket it.
+
+A finite-difference exponent can be inflated when the trajectory and its twin keep
+different sets of tokens at some step, because the map jumps there. As for the
+[mixture of experts](#mixtures-of-experts), we therefore call a temperature
+chaotic only if its exponent is positive, no period is detected and the twin kept
+the same set as the trajectory at every measured step. If the two sets differed at
+least once we call it *irregular*.
+
+| Tokens kept, \(k\) | all | 50 | 20 | 10 | 5 | 3 | 2 | 1 |
+|---|---|---|---|---|---|---|---|---|
+| Steered line: chaotic | 22 | 8 | 14 | 2 | 3 | 0 | 0 | 0 |
+| Steered line: irregular | 0 | 8 | 3 | 0 | 0 | 0 | 0 | 0 |
+| Steered line: no period, no positive exponent | 2 | 3 | 3 | 3 | 0 | 0 | 0 | 0 |
+| Steered line: largest exponent | 0.48 | 0.37 | 0.32 | 0.24 | 0.11 | −0.64 | −0.21 | none |
+| Unsteered line: chaotic | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Unsteered line: irregular | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |
+| Unsteered line: largest exponent | 0.21 | −0.11 | 0.11 | −0.12 | −0.41 | −1.61 | −1.29 | none |
+
+<p class="figure-note">Table U2: temperatures, of 128 on each line, at which the loop of Qwen2.5-0.5B is chaotic or irregular when only the \(k\) most probable tokens are fed back, and the largest exponent on the line (per step). The steered line has \(\alpha = 0.0743\) along philosophy. Every temperature not counted in a row has a detected period. On the steered line at \(k = 50\) and 20, and on the unsteered line at \(k = 20\), the largest exponent belongs to an irregular temperature. At \(k = 1\) both copies select the same token and their difference vanishes exactly, so no exponent is given. Float64, 500 transient and 1500 measured steps, one twin at offset \(10^{-6}\), periods up to 64; exploratory. Source: <a href="https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/lf3-tk/topk-summary.json">docs/lf3-tk/topk-summary.json</a>.</p>
+
+Truncation leaves the loop chaotic at fewer temperatures, and at none once very
+few tokens remain (Table U2, Figure U1a, b). On the steered line the full
+distribution is chaotic at 22 of the 128 temperatures. Keeping 50 tokens leaves 8
+chaotic and 8 irregular temperatures, keeping 20 leaves 14 and 3, keeping 10 leaves
+2 chaotic ones and keeping 5 leaves 3. With 3, 2 or 1 tokens every temperature has
+a detected period. The chaotic temperatures also move: of the 17 temperatures with
+a positive exponent at \(k = 20\), 10 are among the 22 of the full distribution
+and 7 are not. On the unsteered line, where the full distribution is chaotic at a
+single temperature, no truncated loop is chaotic and one temperature is irregular
+at \(k = 20\).
+
+A second test follows two copies of the loop without renormalizing their distance.
+At the steered temperature \(\log_{10}T = -0.0476\), where the full distribution
+is chaotic, we started 32 pairs of copies on the attractor at each of five offsets
+from \(10^{-2}\) to \(10^{-10}\). Every pair separated to a tenth of the state's
+norm, after a median of 3 steps at the largest offset and 47 at the smallest
+(Figure U1c). With 20 tokens kept the loop at this temperature is periodic, and the
+same test shows it (Figure U1d): copies offset by \(10^{-4}\) or less came
+together again in every repeat. Copies offset by \(10^{-2}\), about 3% of the
+state's norm, mostly did not: 29 of the 32 pairs were still apart after 200 steps,
+at a distance that had neither grown nor shrunk over the last 100. We did not
+determine whether such a pair sits on two orbits or on one orbit at two phases.
+
+![Four panels. (a) Steered line: eight horizontal strips, one for each number of tokens kept (all, 50, 20, 10, 5, 3, 2 and 1), over log10 temperature from -1 to 0.3, colored by the largest Lyapunov exponent from blue (negative) to red (positive). Red and orange cells begin near log10 temperature -0.17 in the strips for all, 50 and 20 tokens and are fewer and paler in the strips for 10 and 5; the strips for 3, 2 and 1 tokens are blue throughout. Short black bars under some cells of the 50 and 20 strips mark irregular temperatures. (b) Unsteered line: the same eight strips, almost entirely dark blue, with one orange cell near 0.2 in the strip for all tokens and one black bar under the 20 strip. (c) Two copies with all tokens kept: the log10 distance between the copies against steps 0 to 200 for five initial offsets from 1e-2 to 1e-10; all five curves rise above a dotted threshold line within about 50 steps and stay there. (d) Two copies with 20 tokens kept: the curve for offset 1e-2 stays just below the dotted line, oscillating, and the other four fall, with oscillations, to between about 1e-10 and 1e-14 by step 200.](fig-topk.png)
+
+<p class="figure-note">Figure U1: feeding back only the \(k\) most probable tokens (Qwen2.5-0.5B, float64, exploratory). (a), (b) Largest Lyapunov exponent at 128 temperatures on the steered line (\(\alpha = 0.0743\) along philosophy) and on the unsteered line, one strip per \(k\); color clipped at \(\pm0.5\). A black bar under a cell marks an irregular temperature: a positive exponent, no detected period, and a twin whose kept set differed from the trajectory's at some step. (c), (d) Distance between two copies of the loop at the steered temperature \(\log_{10}T = -0.0476\), median over 32 repeats, for five initial offsets (the value at step 0), with all tokens (c) and with 20 tokens kept (d); no renormalization. Dotted line: a tenth of the state's norm. Plot script: <a href="https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/tools/plot_topk.py">tools/plot_topk.py</a>. Source: byte-identical copy of the report's figure (<a href="provenance.json">provenance.json</a>).</p>
+
+Sampling changes the picture more than truncation does. The sampled loop feeds
+back the embedding of a single token drawn from the kept distribution. We ran it
+with twins that share their random numbers, so that both draw the same token
+unless the offset moves a probability across the drawn number, and we gave the twin
+a fresh offset before every step. Over the 128,000 measured steps of each line at
+offset \(10^{-6}\), the twin drew a different token at 508 steps (unsteered) and
+399 (steered) with the full vocabulary, at 1 and 0 with 20 tokens kept, at 2 and 0
+with 50, and at none with 10 or fewer. With 20 tokens kept the counts were 25 and
+70 at offset \(10^{-4}\) and 2438 and 5647 at \(10^{-2}\), and zero at
+\(10^{-8}\). A sampled trajectory holds exactly one token, so its twin either
+coincides with it or differs by a whole token: a small offset is not amplified
+step by step, it is erased or, rarely, changes a draw. The separation test agrees.
+Sampled copies either parted at the first step or coincided exactly from then on;
+with the full vocabulary 48 of 480 runs parted, all at offsets of \(10^{-4}\) or
+more, and with 20 tokens kept one did.
+
+These results are exploratory: one small model, two lines, one twin offset for the
+exponents, and twins that share random numbers. Within these limits, truncation to
+the range of the published settings leaves the soft loop chaotic at some steered
+temperatures, fewer than with the full distribution, while the irregular
+temperatures stay undecided. The published method also appends each soft token to
+a growing context ([Soft Thinking with a growing context](#growing-context)), which
+this test does not.
+
+### Ordinary generation at the soft map's settings {#ordinary-generation}
+
+We also tested whether the regime of the soft-token map says anything about
+ordinary generation at the same temperature and steering strength. In an
+exploratory run we generated text from Qwen2.5-0.5B-Instruct in the ordinary way:
+sampled tokens, the whole growing context, the report's prompt and the philosophy
+direction added at layer 12, in float64 ([tools/real_inference_twins.py](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/tools/real_inference_twins.py)).
+Each test used two copies of one generation. The first embedding of the second
+copy's prompt was nudged by a relative \(10^{-8}\) or \(10^{-3}\) in a random
+direction, and both copies drew their tokens with the same random numbers, so that
+they could differ only through the nudge. We generated 300 tokens for 32 such pairs
+at each setting, with two samplers: plain sampling from the whole distribution at
+the setting's temperature, and the sampler the model ships with (the 20 most
+probable tokens, a cumulative-probability cutoff of 0.8 and a repetition penalty of
+1.1) at the same temperature. We recorded two things. The first is whether the two
+texts differ anywhere. The second is the rate at which the distance between the
+copies' next-token distributions grows or shrinks per generated token while the
+texts still agree. The distance used is the *total variation distance*, half the
+sum of the absolute differences between the two distributions' probabilities: it is
+0 when they agree and 1 when they share no token. For each setting we quote the
+median of that rate over its 32 pairs.
+
+The settings lie on a line of 15 steering strengths, \(\alpha\) from 0.073342 to
+0.073605 at \(\log_{10}T = -0.1530\), that crosses the right edge of the period-6
+window of Figure 48, the side on which the period-6 orbit ends at a fold. On it the
+soft-token map has period 6 at the first seven settings (exponents from \(-0.35\)
+to \(-0.10\) per step) and is chaotic at the other eight (0.14 to 0.22). As a
+control without an edge we ran the same line with a second prompt, the opposite
+system prompt of [Changing the prompt](#prompt-variants), for which the soft map
+has period 6 at all 15 settings (exponents from \(-0.78\) to \(-0.75\)). Before
+the run we wrote down what a carry-over of the regime would look like: a change of
+both measures at the edge, more parting and faster growth where the soft map is
+chaotic, and rates that follow the sign of the soft map's exponent. None of the
+three was observed (Figure U2).
+
+With the smaller nudge no pair of texts differed, at any setting, with either
+sampler, and every median rate stayed within 0.0011 per token of zero. With the
+larger nudge and plain sampling, 305 of the 480 pairs on the line differed: 143 of
+224 where the soft map is periodic and 162 of 256 where it is chaotic (64 and 63%;
+Figure U2b). The counts per setting, 17 to 25 of 32, scatter as equal fractions
+would (a \(\chi^2\) test, which asks whether counts differ by more than chance
+allows, gives \(p = 0.69\)), with no change at the edge. The second prompt, without
+an edge, gives the same picture: 306 of 480 pairs, 17 to 25 per setting. The
+model's own sampler lets far fewer pairs differ: 14 of 480 on the report's line (6
+of 224 where the soft map is periodic, 8 of 256 where it is chaotic) and 15 of 480
+on the second prompt's. At every setting, with either sampler and either nudge, the
+median rate stays within 0.0021 per token of zero, while the soft map's exponents
+at the same settings range from \(-0.78\) to \(+0.29\) per step.
+
+We also followed the pairs after their texts had parted. Of the 611 pairs that
+parted under plain sampling on the two lines, 4 came together again (50 identical
+tokens in a row), and 183 parted after token 150, too late for the test that
+follows. For the other 424 we restarted each copy 50 tokens after the parting, from
+its own text and with the same random numbers, four times with a fresh nudge of
+\(10^{-8}\) (and once with none, as a control). In 423 of them every restart
+reproduced its copy's next 100 tokens exactly; in the remaining one, not every
+restart did. A copy that has parted from its twin is thus as insensitive to small
+nudges as before.
+
+The line compares neighbors, whose soft-map states differ in more than their
+regime. As a second comparison we chose four pairs of cells from the map of Figure
+1, one periodic and one chaotic cell per quadrant of the plane, with next-token
+entropies of the soft map equal within 0.014% (Figure U2e). Under plain sampling
+and the larger nudge, 78 of 128 pairs differed in the periodic cells and 78 of 128
+in the chaotic ones. With the model's own sampler the counts were 1 and 5 of 128.
+Fisher's exact test, the standard test for a difference between two small counts,
+gives \(p = 0.21\) for that difference; the receipt also holds a bootstrap interval
+that excludes zero, but it resamples the four cells as if each cell's fraction were
+exact, which understates the uncertainty of counts this small. We conclude that no
+difference between the regimes was established.
+
+![Five panels. (a) Rates on the report's prompt against steering strength from 0.0734 to 0.0736: the soft map's Lyapunov exponent, in blue, falls from about -0.13 to -0.36 where the soft map is periodic, then jumps across a dotted vertical line to between 0.14 and 0.22 where it is chaotic; the two rates of ordinary generation, orange for plain sampling and dashed green for the model's default sampler, lie on zero at every setting. (b) Pairs of 32 whose texts differ: plain sampling gives 17 to 25 at every setting, inside a gray band, and the default sampler 0 to 3, with no change at the dotted line. (c) Rates on a second prompt: the blue exponent is flat near -0.77, periodic at every setting, and both rates of ordinary generation lie on zero. (d) Pairs whose texts differ on the second prompt: again 17 to 25 for plain sampling, inside the gray band, and 0 to 3 for the default sampler. (e) Matched cells: four orange lines join the counts at the periodic and at the chaotic cell of each matched pair, between about 16 and 23 of 32 at both ends, and four dashed green lines stay near 0 to 2.](fig-real-inference.png)
+
+<p class="figure-note">Figure U2: ordinary sampled generation at settings of the soft-token map (Qwen2.5-0.5B, float64, exploratory; nudge \(10^{-3}\), 32 pairs per setting). (a) The line across the right edge of the period-6 window, the report's prompt: the soft map's Lyapunov exponent (blue) and, for ordinary generation, the median rate at which the distance between the two copies' next-token distributions changes per token, with plain sampling (orange) and with the model's default sampler (green, dashed). Both rates lie on zero, and the dashed line covers the orange one. The dotted line separates the settings where the soft map is periodic from those where it is chaotic. (b) Pairs, of 32, whose texts differ within 300 tokens. Gray band: the range expected for plain sampling if the fraction were the same at all 15 settings (95%). (c), (d) The same for a second prompt, with which the soft map is periodic at every setting. (e) Four matched pairs of cells: pairs of 32 whose texts differ at the periodic and at the chaotic cell of each pair. With the nudge \(10^{-8}\) no pair of texts differed at any setting. Plot script: <a href="https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/tools/plot_real_inference.py">tools/plot_real_inference.py</a>. Source: byte-identical copy of the report's figure (<a href="provenance.json">provenance.json</a>).</p>
+
+A reading consistent with these numbers is the following. While the two texts
+agree, the copies differ only by the nudge itself, which stays in the context; no
+continuous quantity is fed back that could carry a difference from one step to the
+next. The rates near zero say that the effect of this fixed nudge on the next-token
+distribution neither grows nor fades over 300 tokens. The texts part only when a
+draw falls between the two copies' cumulative probabilities. How often that happens
+depended on the size of the nudge and on the sampler, and not detectably on the
+regime of the soft map. The test is narrow: one small model, one line and four
+matched pairs of cells, 300 tokens, a nudge of the first prompt embedding only, and
+twins that share their random numbers. It does not show that ordinary generation is
+insensitive in general, and it leaves open other perturbations, longer texts and
+larger models (receipt: [docs/ri/ri1-receipt.json](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/ri/ri1-receipt.json)).
 
 ### Replication in other models and families {#replication}
 
@@ -8168,6 +8422,56 @@ differs in more than the experts, and no size effect is read from it.
 
 <p class="figure-note">Figure 83: mixtures of experts against dense models of the same family. (a) Network factor against the mean next-token entropy on the orbit, unsteered loop, 24 temperatures per model, float64 (as in Figure 82), for Qwen3.5-4B and -9B (dense) and Qwen3.5-35B-A3B (mixture of experts, about 3B of 35B parameters active per token). (b) Share of chaotic cells in the unsteered sweep (128 temperatures, \(\log_{10}T \in [-1, 0.3]\)) and in 32 × 32 maps steered along philosophy and hostility at the middle layer; the mixture of experts' hostility cells (hatched) are called irregular, since routing jumps were not excluded when that map was computed. (c) Routing margins along the unsteered orbits of both mixtures of experts, Qwen3.5-35B-A3B and OLMoE-1B-7B (24 temperatures each): per temperature, the median over steps (filled) and the minimum (open) of the per-step smallest gap between the eighth and ninth largest router logits over all layers. A switch requires closing this gap between two router logits; if no logit changes by more than half the gap, no expert can switch. A twin at relative offset \(10^{-7}\) never switched an expert. Source: byte-identical copy of the report's figure (<a href="provenance.json">provenance.json</a>).</p>
 
+### A model built mostly from convolutions {#lfm3}
+
+The models above are stacks of attention blocks (full attention or, in most layers
+of Qwen3.5, linear attention). LFM3-1.7B ([Liquid AI, 2026](#ref-liquid-ai-2026))
+is built differently: of its 24 blocks, 13 are gated convolutions over the last 7
+positions, 5 attend to a sliding window of 256 tokens and 6 attend to the whole
+context. (A convolution block combines a fixed number of neighboring positions with
+learned weights, whereas an attention block lets each position choose which earlier
+positions to read.) In an exploratory run we scanned the soft-token loop of its two
+released checkpoints, the pretrained base (LFM3-1.7B-Base) and the model
+post-trained from it (LFM3-1.7B), with the report's prompt in each checkpoint's
+chat template (its thinking block disabled, as for Qwen3.5) and steering at layer
+12 of 24. The weights are stored in a 16-bit format, so the cast to float64 is
+exact. The published model code computes its normalizations and rotary tables in
+float32; we patch these paths ([tools/lfm3_float64.py](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/tools/lfm3_float64.py)). Before the run we
+checked that every module's output is float64, that central differences of the
+one-step map shrink as \(h^2\), and that a step computed from the cached prefix
+equals a full recomputation to within \(10^{-15}\)
+([tools/lfm3_precision_check.py](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/tools/lfm3_precision_check.py)).
+
+Both checkpoints have chaotic cells, without and with steering (Figure U3). Without
+steering, the base checkpoint is chaotic at 3 of 160 temperatures between
+\(\log_{10}T = -1\) and 1.2 and the post-trained one at 12, with largest
+exponents of 0.45 and 0.50 per step; all 15 temperatures lie between
+\(\log_{10}T = -0.08\) and 0.18. On 32 × 32 maps the base checkpoint is chaotic at
+20 of 1024 cells with steering along philosophy and at 63 along hostility versus
+kindness, and the post-trained one at 162 and 280. In each scan the post-trained
+checkpoint is chaotic at about four to eight times as many cells as the base. The
+median network factor between 0.3 and 6 nats
+([Size does not set the chaos](#size)) differs in the same direction, toward less
+damping: \(-0.42\) for the base checkpoint and \(+0.53\) for the post-trained one,
+over 8 and 9 temperatures. This is one prompt and one pair of checkpoints, and we
+do not read it as an effect of post-training in general. The steering is weak by
+these models' own measure: the natural contrast between the two groups of texts
+corresponds to \(\alpha\) between 0.27 and 0.55, against 0.043 in Qwen2.5-0.5B
+([Steering as a probe](#steering-as-a-probe)), and the maps stop at 0.12.
+
+These labels are coarser than those of the models above. Each rests on one twin
+offset (\(10^{-6}\)), one prompt and 300 measured steps per map cell; no periodic
+orbit was verified or continued, and no window was resolved. We therefore report
+the scan as an observation that the loop of a model built mostly from convolution
+blocks can also be chaotic, and we do not count LFM3 among the fifteen models of
+[Size does not set the chaos](#size) or among the model families of this note
+(summary and receipt: [docs/lf3-tk/lfm3-summary.json](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/lf3-tk/lfm3-summary.json),
+[docs/lf3-tk/receipt.json](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/lf3-tk/receipt.json)).
+
+![Six panels in two columns, the base checkpoint LFM3-1.7B-Base on the left and the post-trained LFM3-1.7B on the right. (a) and (b) No steering: dots of the largest Lyapunov exponent against log10 temperature from -1 to 1.2, drawn at -1.5 where it is lower. In (a), titled chaotic at 3 of 160 temperatures, three red dots sit between 0.35 and 0.45 just above log10 temperature 0, among blue periodic dots. In (b), titled chaotic at 12 of 160 temperatures, red dots between about 0.2 and 0.5 lie at log10 temperature from about -0.08 to 0.18, with one black cross at zero. (c) and (d) Maps steered along philosophy, over steering strength from -0.12 to 0.12 and log10 temperature from -1 to 0.3: the base map, titled chaotic at 20 of 1024 cells, is dark blue with a thin band of red and pale cells near log10 temperature 0 to 0.1, and the post-trained map, titled chaotic at 162 of 1024 cells, has a broad red band between about -0.2 and 0.2. (e) and (f) Maps steered along hostility, over steering strength from 0 to 0.12 and log10 temperature from -0.3 to 0.3: the base map, titled chaotic at 63 of 1024 cells, has red cells in a band near 0.03 to 0.1, and the post-trained map, titled chaotic at 280 of 1024 cells, has red bands between about -0.08 and 0.2.](fig-lfm3.png)
+
+<p class="figure-note">Figure U3: the soft-token loop of LFM3-1.7B, a model built from convolution and attention blocks (exploratory; float64, the report's prompt): the pretrained base checkpoint (left) and the post-trained model (right). (a), (b) No steering: largest Lyapunov exponent at 160 temperatures (1000 transient and 2000 measured steps), drawn at \(-1.5\) where it is lower. Red: chaotic (an exponent above \(10^{-3}\) and no detected period up to 64); blue: a detected period; black cross: neither (one temperature, in b). (c), (d) Steering along the philosophy direction at layer 12: 32 × 32 cells, 300 transient and 300 measured steps, periods up to 32; color: largest exponent, clipped at \(\pm0.5\). (e), (f) Steering along hostility versus kindness, as (c), (d). Each panel's title gives its number of chaotic cells; the 3 to 12 cells per map with neither a period nor a positive exponent are not marked. Every label rests on one twin offset, \(10^{-6}\). Plot script: <a href="https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/tools/plot_lfm3.py">tools/plot_lfm3.py</a>. Source: byte-identical copy of the report's figure (<a href="provenance.json">provenance.json</a>).</p>
+
 ### No cheap predictor {#cheap-predictor}
 
 Motivated by the saturation and high-temperature limits, we tested the breadth of
@@ -8687,9 +8991,11 @@ block of layers many times on the same input before writing each token, so its
 reasoning is itself an iterated map with a fixed point. The spectrum of that fixed
 point, computed before any task is scored, predicts how the model responds when the
 iteration is over- or under-relaxed. A test fixed in advance on GSM8K problems not scored before it was frozen
-confirmed the predicted accuracy loss at strong over-relaxation and no loss at mild
-over-relaxation, and on ARC-Challenge the spectrum ranked questions by how far their
-iteration was from settling.
+confirmed that over-relaxing the loop costs accuracy: a loss at strong over-relaxation
+and none at mild over-relaxation, both stated before its data. The loss is not located
+at a stability edge computed for the scored prompts. On ARC-Challenge the spectrum
+ranked questions by how far their iteration was from settling. We have not
+established chaos in this loop.
 {{< /panel >}}
 
 Huginn-0125 iterates a recurrent block at fixed input tokens
@@ -8733,7 +9039,11 @@ locking in narrow high-order tongues cannot be excluded. From
 a second complex pair destabilizes the fixed point (\(\lambda = 1.0814\)).
 Fixed-point and Jacobian stability of looped models has been studied before
 ([Yang et al., 2026](#ref-yang-2026)); what this adds is the predicted crossing, its
-amplitude law and the rotation number.
+amplitude law and the rotation number. We have not established chaos in this
+loop. Exploratory float32 maps of the relaxed loop with an added steering direction,
+on a short arithmetic prompt, found approximate two-step repetition at some settings
+and positive finite-window growth of separations at others. They establish neither
+sustained chaos nor its absence ([docs/huginn-status.md](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/huginn-status.md)).
 
 **The reported orbits.** Because the first position to oscillate is the full stop, the
 critical pair belongs to it and to the words after it. It cannot shape the paths of
@@ -8788,9 +9098,18 @@ greedy decoding and 32 recurrence steps per token (development problems 0 to 119
 accuracy is 0.375 natively, 0.425 at \(\lambda = 1.05\) and at 1.10, 0.29 at 1.15 (17
 problems lost and 7 gained, one-sided McNemar \(p = 0.03\)) and 0.16 at 1.20 (29 lost,
 3 gained, \(p = 10^{-6}\)). Under-relaxation to 0.8 costs nothing at 32 steps (0.41).
-The break lies between 1.10 and 1.15, at or just above the spectral thresholds.
+The break lies between 1.10 and 1.15. It is not located at a computed stability
+edge of the scored prompts. The GSM8K thresholds above (\(\lambda_c = 1.074\) to
+1.126) belong to five zero-shot prompts, in which the question stands alone in the
+instruction template. In the eight-shot format scored here, in which eight worked
+examples precede the question, the fixed point is already unstable at the native
+step (three development problems, float32: a real multiplier of \(-1.158\), stable
+only for \(\lambda < 0.927\)). Generation breaks earlier than log-likelihood
+scoring, consistent with answer changes that compound over tokens. The collapse at
+1.2 is the one [Wang et al., 2026b](#ref-wang-2026b) reported.
 
-**The test fixed in advance.** Its design and analysis were fixed before any test
+**The test fixed in advance.** A test on problems not scored before it was frozen
+confirms the cost of over-relaxation. Its design and analysis were fixed before any test
 item was scored, after two rounds of independent review. On 200 GSM8K test problems,
 accuracy is 0.330 natively, 0.395 at \(\lambda = 1.05\), 0.255 at 1.15 and 0.095 at
 1.20. Both stated predictions pass: accuracy declines at 1.20 (\(-23.5\) points; 50
@@ -8816,7 +9135,7 @@ of the test from the saved data.
 
 ![Two panels against the relaxation strength lambda from 0.8 to 1.2, with a gray band marking the spectral thresholds from 1.074 to 1.126. Left: GSM8K accuracy with 95% intervals for development problems (blue) and the test fixed in advance (red); both rise slightly at 1.05 and fall steeply beyond the gray band, to their lowest values at 1.20. Right: the paired difference from the native loop, near zero up to 1.10 and strongly negative at 1.15 and 1.20, with development and test curves close together.](fig-huginn-gsm8k.png)
 
-<p class="figure-note">Figure 88: Huginn-0125 chain-of-thought accuracy on GSM8K against the relaxation strength \(\lambda\) (eight examples, greedy decoding, 32 recurrence steps per token): development problems (blue) and the test fixed in advance on problems not scored before (red; design and analysis fixed before any test problem was scored). Gray: the spectral thresholds \(\lambda_c = 1.074\) to 1.126 computed from the fixed points of five development prompts. Left: accuracy with Wilson 95% intervals. Right: paired difference from the native loop with paired-bootstrap 95% intervals. Source: byte-identical copy of the report's figure (<a href="provenance.json">provenance.json</a>).</p>
+<p class="figure-note">Figure 88: Huginn-0125 chain-of-thought accuracy on GSM8K against the relaxation strength \(\lambda\) (eight examples, greedy decoding, 32 recurrence steps per token): development problems (blue) and the test fixed in advance on problems not scored before (red; design and analysis fixed before any test problem was scored). Gray: the spectral thresholds \(\lambda_c = 1.074\) to 1.126 computed from the fixed points of five zero-shot development prompts; in the scored eight-shot format the fixed point is already unstable at \(\lambda = 1\) (see text), so the figure shows the cost of over-relaxation, not a fall at a computed edge. Left: accuracy with Wilson 95% intervals. Right: paired difference from the native loop with paired-bootstrap 95% intervals. Source: byte-identical copy of the report's figure (<a href="provenance.json">provenance.json</a>).</p>
 
 ## What the evidence supports {#what-the-evidence-supports}
 
@@ -8891,10 +9210,13 @@ object appears.
   base model, and OLMo-2-7B and -32B. Steering uses contrastive vectors, checked
   against norm-matched random and sparse-autoencoder directions in two models.
 - **One inference scheme.** The soft-token loop is extended to memories of up to
-  sixteen soft tokens and to Soft Thinking's growing context, but sampled decoding of
-  discrete tokens is a different system. With sampling, the bridge tests only whether
-  the bottleneck's laminar phases survive the noise; its other tests are
-  deterministic (greedy decoding, longer fed-back memories and the growing context).
+  sixteen soft tokens, to Soft Thinking's growing context and, in an exploratory run,
+  to feeding back only the most probable tokens, but sampled decoding of
+  discrete tokens is a different system. With sampling, the bridge tests whether
+  the bottleneck's laminar phases survive the noise and, in two exploratory runs on
+  one 0.5B model, how sampled loops and ordinary sampled generation respond to small
+  perturbations; its other tests are deterministic (greedy decoding, longer fed-back
+  memories, the growing context and feeding back only the most probable tokens).
 - **Kinds of evidence.** The evidence consists of numerical validation,
   cross-checks and passage tests fixed in advance (including failed all-row
   criteria), with computer-assisted proofs for four orbits at three parameter points (the
@@ -8972,8 +9294,10 @@ attractors ([Unsteered chaos and steering controls](#controls)).
 changes of the steering strength switch the model between distinct repeating
 texts, chaos and coexisting attractors, and near a fold the behavior turns
 intermittent. This argues for treating an activation-steering coefficient in a
-continuous-feedback loop like any control parameter of a nonlinear system (whether the
-same holds for ordinary generation is not tested here): characterize its bifurcation set
+continuous-feedback loop like any control parameter of a nonlinear system (for
+ordinary sampled generation, the one exploratory test we ran found no change of
+sensitivity where the steering strength crosses an edge of the soft map;
+[Ordinary generation at the soft map's settings](#ordinary-generation)): characterize its bifurcation set
 before choosing an operating point, expect history dependence near boundaries,
 and do not assume a smooth, monotone dose response. The layer at which a vector
 enters matters as much as its strength, and two vectors combined can be chaotic
@@ -9060,7 +9384,7 @@ convergence of either complete loop studied here. In the soft-token loop we find
 fixed points, cycles and chaos. In the recurrent-depth model Huginn
 ([A second system: recurrent depth](#huginn)) the loop's derivative is the block's
 Jacobian, with no readout factor; there we see convergence and oscillatory
-instability, predicted from the block's multipliers, and found no chaotic regime.
+instability, predicted from the block's multipliers, and have not established a chaotic regime.
 This motivates studying the dynamics of looped and recurrent-depth language models
 ([Zhu et al., 2025](#ref-zhu-2025); [Bae et al., 2025](#ref-bae-2025)) together with
 their number of iterations. It does not establish a general relation between
@@ -9200,6 +9524,8 @@ superstability or an identified native network mechanism
 | Featured-image generator | Builds the card from Figure 1 | [make_og_card.py](make_og_card.py) |
 | Proof evidence | The complete native evidence of the period-8 and coexistence proofs, with the verification code, release records, file listings and checksums | Zenodo, [doi:10.5281/zenodo.23488416](https://doi.org/10.5281/zenodo.23488416) |
 | Cascade 3-cycle proof | The release record and verification code; the native evidence is kept outside the repository, with its checksums in the release record | [codex/certificate-ladder-task34](https://github.com/tdj28/neural-shrimp/blob/1b71863581386048c50d41b1f8137a6ba6adec25/codex/certificate-ladder-task34/cascade-p3-result.md) |
+| Reproduction kit for the period-8 orbit | A short script that recomputes the proved period-8 orbit from the released model in a few minutes on a desktop computer, with the steps written out | [tools/recreate_p8.py](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/tools/recreate_p8.py); [docs/reproduce-p8/README.md](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/reproduce-p8/README.md) |
+| Exploratory runs added on 10 November 2026 | Receipts of the longer runs at the portrait cell, the completed rotation, the top-k loop, ordinary generation and LFM3, and the status record of the Huginn chaos search; separate from the base release | [docs/batch-fate/bf1-receipt.json](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/batch-fate/bf1-receipt.json), [docs/batch-fate/bf1-audit-receipt.json](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/batch-fate/bf1-audit-receipt.json), [docs/morph-fill-receipt.json](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/morph-fill-receipt.json), [docs/morph-continuity.json](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/morph-continuity.json), [docs/lf3-tk/receipt.json](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/lf3-tk/receipt.json), [docs/ri/ri1-receipt.json](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/ri/ri1-receipt.json), [docs/huginn-status.md](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/huginn-status.md) |
 
 The interval-arithmetic certificates are in the repository, with the verification
 code, the exact map and input specifications, and the release records and hashes of
@@ -9213,7 +9539,8 @@ diagrams are rendered from the report's TikZ sources; the diagrams and toy-model
 figures drawn for this note are marked as such in their captions, and
 [provenance.json](provenance.json) lists the hash and source of every figure. The links above
 point to the release tag `arxiv-v1` for the base release and exact commits for the
-memory extension; the repository's history records when each test design was committed.
+memory extension and for the files added since the release; the repository's history
+records when each test design was committed.
 The extension's copied receipts and displayed values can be checked locally with
 `python verify_memory_update.py --verify --research-repo /path/to/neural-shrimp`.
 
@@ -9276,7 +9603,8 @@ The method details behind every grade are in
 
 The research repository is public at
 [github.com/tdj28/neural-shrimp](https://github.com/tdj28/neural-shrimp/tree/arxiv-v1), and this note's links point to
-its release tag `arxiv-v1`. Its code is under the MIT License
+its release tag `arxiv-v1`, except those to files added since then, which point to a
+later commit of its main branch. Its code is under the MIT License
 ([LICENSE](https://github.com/tdj28/neural-shrimp/blob/arxiv-v1/LICENSE)); the report, its figures, the documentation and the research
 records are under the Creative Commons Attribution 4.0 International License, CC BY
 4.0 ([LICENSE-docs.md](https://github.com/tdj28/neural-shrimp/blob/arxiv-v1/LICENSE-docs.md)).
@@ -9555,7 +9883,11 @@ agree between CPU and H100 to \(4\times10^{-15}\)).
 
 - Nothing here is a claim about ordinary sampled generation with a growing
   context, which is a different system. Where the note measures how much
-  survives sampling or a growing context, it says so.
+  survives sampling or a growing context, it says so. We do not claim that ordinary
+  sampled generation is chaotic in this sense: in the one exploratory test we ran,
+  its sensitivity to a small change of the prompt did not depend detectably on the
+  regime of the soft map
+  ([Ordinary generation at the soft map's settings](#ordinary-generation)).
 - Chaos rests on the standard numerical test, a positive largest Lyapunov exponent,
   whose values from twin runs agree with automatic-differentiation tangents across
   precisions and run lengths at the sampled cells checked. Computer-assisted proofs cover four periodic orbits (the period-8 orbit, a coexisting
@@ -9813,6 +10145,10 @@ about large language models and for encouraging the publication of this work.
   Dynamics in Large Language Models: A Quasi-Lyapunov Analysis of Reasoning
   Mechanisms*](https://arxiv.org/abs/2503.13530), arXiv:2503.13530v1, 15 March
   2025; preprint, no peer-reviewed version found; accessed 15 October 2026.
+- <a id="ref-liquid-ai-2026"></a>Liquid AI (2026),
+  [*LFM3-1.7B*](https://huggingface.co/LiquidAI/LFM3-1.7B), model repositories on
+  Hugging Face; revisions 40ebe0aa (LFM3-1.7B) and 545fc8f4 (LFM3-1.7B-Base), used on
+  28 October 2026.
 - <a id="ref-liu-2026"></a>Liu et al. (2026), [*Jacobian Scopes: token-level causal
   attributions in LLMs*](https://arxiv.org/abs/2601.16407), arXiv:2601.16407v4, 15
   June 2026; preprint, no peer-reviewed version found; accessed 19 October 2026.

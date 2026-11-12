@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="p3-title p3-desc">
+  <title id="p3-title">Three-way partition rearranges one axis into smaller, equal, and larger blocks</title>
+  <desc id="p3-desc">Two rows show the same seven axis values before and after a three-way partition around pivot value 5. Before: the values 7, 2, 5, 9, 5, 1, 4 sit in unsorted order with the pivot slot marked. After: the array is 2, 1, 4, then 5, 5, then 9, 7. Brackets mark the smaller block from left to lt, the equal block from lt to gt, and the larger block from gt to right. A median target index inside the equal block means selection can stop.</desc>
+  <defs>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:20px;font-weight:700}
+      .h{font-size:14px;font-weight:700;letter-spacing:.2px}
+      .s{font-size:13px}
+      .m{font-size:12px;fill:#5A544C}
+      .xs{font-size:11px;fill:#5A544C}
+      .panel{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+      .cell{stroke:#7F786D;stroke-width:1.3}
+      .small{fill:#E8F0F7}
+      .equal{fill:#EAF1E5}
+      .large{fill:#F2EEE8}
+      .plain{fill:#F7F4F0}
+      .pivot{fill:#F7E8D8;stroke:#A67C52;stroke-width:2}
+      .bracket{fill:none;stroke:#4B6787;stroke-width:2}
+      .target{stroke:#5A7346;stroke-width:2.2;stroke-dasharray:5 3}
+    </style>
+  </defs>
+
+  <rect width="1000" height="560" fill="#F7F4F0"/>
+  <text class="t title" x="24" y="32">_partition3: one pass, three blocks</text>
+  <text class="t m" x="24" y="54">It rearranges one shared buffer in place. It does not build a new list.</text>
+
+  <!-- Before panel -->
+  <rect class="panel" x="24" y="72" width="952" height="180" rx="12"/>
+  <text class="t h" x="44" y="100">BEFORE: unsorted axis values in points[left:right+1]</text>
+  <text class="t m" x="44" y="120">Teaching example on one axis only. Pivot value = 5 (the highlighted cell).</text>
+
+  <!-- cells: values 7 2 5 9 5 1 4 at x positions -->
+  <!-- start x=80, cell w=100 -->
+  <g transform="translate(80 145)">
+    <rect class="cell plain" x="0" y="0" width="100" height="56" rx="6"/>
+    <text class="t s" x="50" y="34" text-anchor="middle" font-weight="700">7</text>
+    <rect class="cell plain" x="110" y="0" width="100" height="56" rx="6"/>
+    <text class="t s" x="160" y="34" text-anchor="middle" font-weight="700">2</text>
+    <rect class="cell pivot" x="220" y="0" width="100" height="56" rx="6"/>
+    <text class="t s" x="270" y="34" text-anchor="middle" font-weight="700">5</text>
+    <text class="t xs" x="270" y="72" text-anchor="middle" fill="#A67C52" font-weight="700">pivot</text>
+    <rect class="cell plain" x="330" y="0" width="100" height="56" rx="6"/>
+    <text class="t s" x="380" y="34" text-anchor="middle" font-weight="700">9</text>
+    <rect class="cell plain" x="440" y="0" width="100" height="56" rx="6"/>
+    <text class="t s" x="490" y="34" text-anchor="middle" font-weight="700">5</text>
+    <rect class="cell plain" x="550" y="0" width="100" height="56" rx="6"/>
+    <text class="t s" x="600" y="34" text-anchor="middle" font-weight="700">1</text>
+    <rect class="cell plain" x="660" y="0" width="100" height="56" rx="6"/>
+    <text class="t s" x="710" y="34" text-anchor="middle" font-weight="700">4</text>
+  </g>
+  <text class="t xs" x="500" y="232" text-anchor="middle">Same seven numbers; order is not yet useful for a median split.</text>
+
+  <!-- After panel -->
+  <rect class="panel" x="24" y="272" width="952" height="260" rx="12"/>
+  <text class="t h" x="44" y="300">AFTER: smaller | equal | larger</text>
+  <text class="t m" x="44" y="320">Return values lt and gt mark the equal block. Selection stops if target is inside it.</text>
+
+  <g transform="translate(80 345)">
+    <!-- smaller: 2 1 4 -->
+    <rect class="cell small" x="0" y="0" width="100" height="56" rx="6"/>
+    <text class="t s" x="50" y="34" text-anchor="middle" font-weight="700">2</text>
+    <rect class="cell small" x="110" y="0" width="100" height="56" rx="6"/>
+    <text class="t s" x="160" y="34" text-anchor="middle" font-weight="700">1</text>
+    <rect class="cell small" x="220" y="0" width="100" height="56" rx="6"/>
+    <text class="t s" x="270" y="34" text-anchor="middle" font-weight="700">4</text>
+    <!-- equal: 5 5 -->
+    <rect class="cell equal" x="330" y="0" width="100" height="56" rx="6"/>
+    <text class="t s" x="380" y="34" text-anchor="middle" font-weight="700">5</text>
+    <rect class="cell equal" x="440" y="0" width="100" height="56" rx="6"/>
+    <text class="t s" x="490" y="34" text-anchor="middle" font-weight="700">5</text>
+    <!-- larger: 9 7 -->
+    <rect class="cell large" x="550" y="0" width="100" height="56" rx="6"/>
+    <text class="t s" x="600" y="34" text-anchor="middle" font-weight="700">9</text>
+    <rect class="cell large" x="660" y="0" width="100" height="56" rx="6"/>
+    <text class="t s" x="710" y="34" text-anchor="middle" font-weight="700">7</text>
+
+    <!-- brackets -->
+    <path class="bracket" d="M0 70 H320"/>
+    <path class="bracket" d="M0 70 V78"/>
+    <path class="bracket" d="M320 70 V78"/>
+    <text class="t xs" x="160" y="96" text-anchor="middle" fill="#3C5570" font-weight="700">smaller (&lt; 5); ends at lt</text>
+
+    <path d="M330 70 H540" fill="none" stroke="#5A7346" stroke-width="2"/>
+    <path d="M330 70 V78" fill="none" stroke="#5A7346" stroke-width="2"/>
+    <path d="M540 70 V78" fill="none" stroke="#5A7346" stroke-width="2"/>
+    <text class="t xs" x="435" y="96" text-anchor="middle" fill="#3F5A34" font-weight="700">equal (= 5); points[lt:gt]</text>
+
+    <path d="M550 70 H760" fill="none" stroke="#8B8377" stroke-width="2"/>
+    <path d="M550 70 V78" fill="none" stroke="#8B8377" stroke-width="2"/>
+    <path d="M760 70 V78" fill="none" stroke="#8B8377" stroke-width="2"/>
+    <text class="t xs" x="655" y="96" text-anchor="middle" fill="#5A544C" font-weight="700">larger (&gt; 5); starts at gt</text>
+
+    <!-- target marker on first equal cell (median among 7 is index 3) -->
+    <rect class="target" x="330" y="-8" width="100" height="72" rx="8" fill="none"/>
+    <text class="t xs" x="380" y="-14" text-anchor="middle" fill="#3F5A34" font-weight="700">target / mid</text>
+  </g>
+
+  <text class="t s" x="500" y="500" text-anchor="middle">If target sits in the equal block, _select returns. No more shrinking needed.</text>
+  <text class="t m" x="500" y="522" text-anchor="middle">Order inside each block does not matter. Only the three-way boundaries matter.</text>
+</svg>

@@ -2,52 +2,52 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Machine-Learning on praxagent Research Notes</title>
-    <link>http://127.0.0.1:8000/blog/tags/machine-learning/</link>
+    <link>https://praxagent.ai/blog/tags/machine-learning/</link>
     <description>Recent content in Machine-Learning on praxagent Research Notes</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 26 Oct 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://127.0.0.1:8000/blog/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://praxagent.ai/blog/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Chaos and Bifurcations in Continuous Language-Model Feedback</title>
-      <link>http://127.0.0.1:8000/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/</link>
+      <link>https://praxagent.ai/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/</link>
       <pubDate>Mon, 26 Oct 2026 00:00:00 +0000</pubDate>
-      <guid>http://127.0.0.1:8000/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/</guid>
+      <guid>https://praxagent.ai/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/</guid>
       <description>Feeding a language model the probability-weighted average of its own token embeddings, as a smooth full-distribution variant of Soft Thinking does, turns inference into a smooth deterministic map. In thirteen of fifteen publicly released models from 0.5B to 72B parameters, from all three model families studied, temperature and steering move this loop between repeating text and chaos (temperature alone in eleven), organized as in low-dimensional maps: saddle-node bottlenecks, period-doubling cascades that approach Feigenbaum&amp;rsquo;s constant, and shrimp-shaped windows. Where the loop is chaotic, rounding differences as small as those from request batching can change what it writes; where it is periodic, they almost never do. In tests fixed in advance, reasoning models that solve 86 to 90% of grade-school math problems changed 14.5 and 19.5% of their answers when only the batch layout changed, and ordinary sampled reasoning changed a similar share, nearly all in long runs that reached the thinking or answer budget in at least one layout; the source depends on the model: in some, the changes are consistent with rounding carried through long feedback, while in QwQ-32B and DeepSeek-R1-Distill-Llama-8B the thinking loop itself slowly amplifies tiny differences, and a relative displacement far below rounding alone changes about 14 and 18% of their answers, respectively. The loop is not ordinary sampled generation.</description>
     </item>
     <item>
       <title>A Linear Nudge, a Nonlinear Wake</title>
-      <link>http://127.0.0.1:8000/blog/posts/2026/07/jacobian-lens-intervention-test/</link>
+      <link>https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/</link>
       <pubDate>Sat, 18 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://127.0.0.1:8000/blog/posts/2026/07/jacobian-lens-intervention-test/</guid>
+      <guid>https://praxagent.ai/blog/posts/2026/07/jacobian-lens-intervention-test/</guid>
       <description>We followed controlled hidden-state edits through the final 29 blocks of Llama 3.3 70B. The delivered edits scaled linearly with dose in all 24 test cells on the prespecified panel; the model&amp;rsquo;s final hidden state did in none. A corpus-average Jacobian lens beat random controls but did not show added value, by the frozen margin, over carrying the edit forward unchanged.</description>
     </item>
     <item>
       <title>Why Experimental Details Matter: Recovering from a Flawed Interpretability Study</title>
-      <link>http://127.0.0.1:8000/blog/posts/2026/07/workspace-under-pressure/</link>
+      <link>https://praxagent.ai/blog/posts/2026/07/workspace-under-pressure/</link>
       <pubDate>Wed, 15 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://127.0.0.1:8000/blog/posts/2026/07/workspace-under-pressure/</guid>
+      <guid>https://praxagent.ai/blog/posts/2026/07/workspace-under-pressure/</guid>
       <description>A striking interpretability result was frozen in public git before it ran and still came from a flawed comparison. We trace how prompt echo, a domain-mismatched lexicon, and unequal stakes produced an overconfident story; retract the invalid chart; and show how a corrected, frozen re-run changed what the experiment could support.</description>
     </item>
     <item>
       <title>Can a Jacobian Lens Detect SAE Steering?</title>
-      <link>http://127.0.0.1:8000/blog/posts/2026/07/jacobian-lens-sae-steering/</link>
+      <link>https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/</link>
       <pubDate>Sun, 12 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://127.0.0.1:8000/blog/posts/2026/07/jacobian-lens-sae-steering/</guid>
+      <guid>https://praxagent.ai/blog/posts/2026/07/jacobian-lens-sae-steering/</guid>
       <description>A prospectively frozen Llama 3.3 70B experiment asks whether an auditor can tell, from a steered internal state alone, which public SAE feature was steered. Under a fixed Jacobian-lens readout the answer is no; the same readout separates targets from matched controls once a clean run of the same prompt is available. A preregistered follow-up with semantic hard negatives, same-subfamily comparators and a 14-reader ladder failed its replay gate, so its endpoint results are exploratory.</description>
     </item>
     <item>
       <title>Open-sourcing (and Auditing) a Jacobian Lens for Qwen3.5-397B</title>
-      <link>http://127.0.0.1:8000/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/</link>
+      <link>https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/</link>
       <pubDate>Fri, 10 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://127.0.0.1:8000/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/</guid>
+      <guid>https://praxagent.ai/blog/posts/2026/07/praxagent-jacobian-lens-qwen3-5-397b-a17b/</guid>
       <description>Praxagent is open-sourcing a Jacobian lens for Qwen3.5-397B-A17B, fitted on 24 WikiText prompts. As of July 10, 2026, to our knowledge no public Jacobian lens has been fitted for a larger base model. A pre-registered readout audit against identity and random-J controls is included, with weights, hash, code and receipts.</description>
     </item>
     <item>
       <title>How to Read an SAE Feature ID</title>
-      <link>http://127.0.0.1:8000/blog/posts/2026/07/how-to-read-an-sae-feature-id/</link>
+      <link>https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/</link>
       <pubDate>Thu, 09 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>http://127.0.0.1:8000/blog/posts/2026/07/how-to-read-an-sae-feature-id/</guid>
+      <guid>https://praxagent.ai/blog/posts/2026/07/how-to-read-an-sae-feature-id/</guid>
       <description>A primer on sparse autoencoders: what a feature ID is, how labels get assigned, and why an activation map is not yet an explanation. A public deception/roleplay feature set is used as a worked example under Llama 3.3 70B SAE weights.</description>
     </item>
   </channel>

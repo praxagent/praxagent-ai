@@ -5,14 +5,14 @@ date: 2026-11-03
 author: Timothy Jones
 author_id: "timothy-jones"
 citation_enabled: true
-citation_version: "2026.11.03"
-lastmod: 2026-11-03
+citation_version: "2026.11.10"
+lastmod: 2026-11-10
 draft: false
 toc: false
 layout: "feedback-short-read"
 tags: ["AI", "LLM", "dynamical-systems", "memory", "computation"]
 summary: "Run as a feedback loop, a language model’s numerical behavior, rather than its words, carried complete requests and replies, held a written bit, and ran simple logic on it. A visual summary of what worked, what fell short, and why this is a channel rather than a secret."
-description: "A visual summary: 470 application bytes through Pythia’s dynamics, a 121-byte exchange carried by ordinary sentences, 63 of 64 bits from freshly generated prose, a writable Qwen memory cell, stateful AND and OR, and the limits of the channel."
+description: "A visual summary: 470 application bytes through Pythia’s dynamics, a 121-byte exchange carried by ordinary sentences, 63 of 64 bits from freshly generated prose, a writable Qwen memory cell, stateful AND and OR, a phase-locked XOR, and the limits of the channel."
 og_image: "og-card.png"
 og_image_alt: "Title card beside the Pythia-160m chaos map: 24 recurrent addresses (circles) and 24 chaotic addresses (triangles) over steering strength and log-ten temperature."
 opening_image: "pythia-region-a.png"
@@ -102,6 +102,46 @@ write to and read back, not only through the channels we monitor. Anticipating
 such routes means asking, in advance, what an unconventional medium can carry.
 This study asks it of the running model itself.
 
+## Using chaos to communicate has a history {#prior-work}
+
+Hiding that a message exists at all, not just what it says, is steganography. Its
+classic setting is the [prisoners’ problem](#ref-simmons): two prisoners may pass
+notes only through a warden who reads every one. Language models made
+generation-based linguistic steganography practical. [Ziegler, Deng and Rush (2019)](#ref-ziegler)
+combined arithmetic coding with GPT-2. Sender and receiver share the same
+language model and the same coding method, which together form the key (there is
+no separate password). The
+secret bits are read as one binary fraction between 0 and 1; at each step the
+interval is split among the possible next tokens in proportion to their
+probabilities, and the token whose slice contains the fraction is emitted. The
+receiver runs the same model over the cover text, narrows the same intervals and
+reads the bits back. Human judges found such cover sentences realistic.
+[Motwani et al. (2024)](#ref-motwani) asked whether AI agents could use techniques
+like these to collude out of sight of their monitors, and found the models they
+tested limited, with a clear jump in capability at GPT-4. [Schroeder de Witt et al. (2022)](#ref-schroeder)
+showed which generative steganography procedures are perfectly secure in an
+information-theoretic sense, and [Roger and Greenblatt (2023)](#ref-roger) found
+that, under the right conditions, paraphrasing kept even their best encoding
+schemes below 3 bits of hidden information per kilobyte of text.
+
+Carrying messages in chaotic dynamics is older still. That two chaotic systems can
+fall into step was worked out by [Fujisaka and Yamada (1983)](#ref-fujisaka) and
+[Afraimovich, Verichev and Rabinovich (1986)](#ref-afraimovich).
+[Pecora and Carroll (1990)](#ref-pecora) showed that chaotic systems linked by a
+common signal can synchronize, and demonstrated it in circuits. [Cuomo and Oppenheim (1993)](#ref-cuomo) built an
+analog Lorenz circuit and used it to demonstrate two approaches to private
+communication with synchronized chaos.
+[Hayes, Grebogi and Ott (1993)](#ref-hayes) showed that small perturbations can
+make a chaotic oscillator’s symbolic dynamics follow a desired symbol sequence,
+encoding a message in its waveform. [Sinha and Ditto (1998)](#ref-sinha) then
+showed that lattices of coupled chaotic maps can emulate logic gates and
+arithmetic (see [the logic section](#logic)).
+
+This note does not claim a new kind of channel. It shows that the same
+ingredients, information carried by dynamics rather than by the text, can be
+assembled from a small open language model run as a feedback loop, where the
+text a monitor reads can look ordinary. We did not test any monitor.
+
 ## A complete request and reply through Pythia {#pythia}
 
 ### What is looping?
@@ -178,8 +218,9 @@ We wanted each zero to have a one nearby: a spot where the loop repeats, and a
 spot close to it where the loop does not. Two new runs of the model, neither of
 which was shown the answer, had to agree on both spots. When they did, we kept
 the pair. That search retained **24 pairs, or 48 addresses** from 32 candidate
-pairs, the dots in the diagram. The `SETEC ASTRONOMY` walkthrough below draws
-from all 24 pairs (48 addresses), while an earlier 470-byte recorded exchange
+pairs, the dots in the diagram. The `SETEC ASTRONOMY` run below draws from 23
+of those pairs (46 addresses), the ones that also passed a recheck on the
+machine that ran it, while an earlier 470-byte recorded exchange
 reused a smaller set of 8 addresses, and because of the fractal structure of the
 chaos map, many more candidate pairs could be sampled across the scan. 
 
@@ -234,28 +275,28 @@ have a letter. The phrase below begins with S, and the eight bits for S are
 Add only the places marked 1: \(64+16+2+1=83\). That is the ASCII entry for S, so the eight bits 01010011 are the letter S.
 {{< /panel >}}
 
-Here is that path for the phrase SETEC ASTRONOMY. Each letter is eight spots
-drawn from the 48: a spot whose state is 0 when the bit is 0, and a spot whose
-state is 1 when the bit is 1. A spot may be drawn again. What the sender
-hands over is only the list of pairs. Rounded to four decimal places, one draw
-looks like this:
+Here is that path for the phrase SETEC ASTRONOMY, exactly as we ran it. Each
+letter is eight spots drawn at random from the 46: a spot whose state is 0 when
+the bit is 0, and a spot whose state is 1 when the bit is 1. A spot may be
+drawn again. What the sender hands over is only the list of pairs, at full
+precision. Rounded to four decimal places, the draw we sent looks like this:
 
 <div class="setec" aria-label="SETEC ASTRONOMY encoded as eight coordinate pairs per letter">
-<div class="setec-row"><div class="setec-letter" aria-label="S">S</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span></div><div class="setec-num">01010011 = 83</div></div><div class="setec-coords"><span>0.1595, 0.0337</span><span>-0.0429, 0.1359</span><span>-0.0579, -0.2311</span><span>-0.1537, 0.0078</span><span>-0.0192, -0.0750</span><span>-0.0784, -0.2462</span><span>0.1627, -0.2849</span><span>-0.0977, -0.0664</span></div></div>
-<div class="setec-row"><div class="setec-letter" aria-label="E">E</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span></div><div class="setec-num">01000101 = 69</div></div><div class="setec-coords"><span>0.0680, 0.0638</span><span>0.1369, -0.1891</span><span>-0.0192, -0.0750</span><span>-0.0622, -0.2354</span><span>0.1509, -0.2795</span><span>0.1477, 0.0358</span><span>-0.0784, -0.2462</span><span>0.1143, -0.1127</span></div></div>
-<div class="setec-row"><div class="setec-letter" aria-label="T">T</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span></div><div class="setec-num">01010100 = 84</div></div><div class="setec-coords"><span>-0.1074, 0.0487</span><span>0.2779, -0.1525</span><span>0.1272, 0.0735</span><span>0.2779, -0.1525</span><span>0.1218, -0.0557</span><span>0.1143, -0.1127</span><span>-0.0192, -0.0750</span><span>0.1433, -0.1838</span></div></div>
-<div class="setec-row"><div class="setec-letter" aria-label="E">E</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span></div><div class="setec-num">01000101 = 69</div></div><div class="setec-coords"><span>-0.0461, -0.1203</span><span>0.3166, -0.1547</span><span>0.1767, -0.3000</span><span>0.1767, -0.3000</span><span>0.1433, -0.1838</span><span>0.1477, 0.0358</span><span>0.1433, -0.1838</span><span>0.1369, -0.1891</span></div></div>
-<div class="setec-row"><div class="setec-letter" aria-label="C">C</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span></div><div class="setec-num">01000011 = 67</div></div><div class="setec-coords"><span>-0.0579, -0.2311</span><span>0.1477, 0.0358</span><span>0.1272, 0.0735</span><span>-0.0192, -0.0750</span><span>0.1218, -0.0557</span><span>0.1261, -0.1213</span><span>-0.0138, -0.0654</span><span>0.1143, -0.1127</span></div></div>
-<div class="setec-row"><div class="setec-letter" aria-label="space">␣</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="z">0</span></div><div class="setec-num">00100000 = 32</div></div><div class="setec-coords"><span>0.1261, -0.1213</span><span>0.1218, -0.0557</span><span>-0.0977, -0.0664</span><span>0.1433, -0.1838</span><span>-0.1613, -0.0040</span><span>0.1218, -0.0557</span><span>0.3317, -0.1525</span><span>0.0519, 0.0498</span></div></div>
-<div class="setec-row"><div class="setec-letter" aria-label="A">A</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="o">1</span></div><div class="setec-num">01000001 = 65</div></div><div class="setec-coords"><span>-0.0461, -0.1203</span><span>0.1369, -0.1891</span><span>0.1433, -0.1838</span><span>0.1767, -0.3000</span><span>0.1509, -0.2795</span><span>0.0680, 0.0638</span><span>-0.0461, -0.1203</span><span>0.1627, -0.2849</span></div></div>
-<div class="setec-row"><div class="setec-letter" aria-label="S">S</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span></div><div class="setec-num">01010011 = 83</div></div><div class="setec-coords"><span>-0.1128, -0.0632</span><span>0.2779, -0.1525</span><span>0.1433, -0.1838</span><span>0.1477, 0.0358</span><span>-0.0353, 0.1456</span><span>0.1509, -0.2795</span><span>0.1089, -0.1159</span><span>-0.1171, -0.0374</span></div></div>
-<div class="setec-row"><div class="setec-letter" aria-label="T">T</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span></div><div class="setec-num">01010100 = 84</div></div><div class="setec-coords"><span>0.1218, -0.0557</span><span>0.1143, -0.1127</span><span>0.1595, 0.0337</span><span>0.0432, 0.0541</span><span>0.1433, -0.1838</span><span>0.0432, 0.0541</span><span>0.0680, 0.0638</span><span>-0.1613, -0.0040</span></div></div>
-<div class="setec-row"><div class="setec-letter" aria-label="R">R</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="z">0</span></div><div class="setec-num">01010010 = 82</div></div><div class="setec-coords"><span>0.1272, 0.0735</span><span>-0.0977, 0.0573</span><span>-0.1128, -0.0632</span><span>0.3166, -0.1547</span><span>-0.0784, -0.2462</span><span>0.1433, -0.1838</span><span>-0.0138, -0.0654</span><span>-0.0622, -0.2354</span></div></div>
-<div class="setec-row"><div class="setec-letter" aria-label="O">O</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span><span class="o">1</span><span class="o">1</span></div><div class="setec-num">01001111 = 79</div></div><div class="setec-coords"><span>0.1003, -0.1149</span><span>-0.0612, -0.1127</span><span>0.2660, -0.1461</span><span>-0.0859, -0.0557</span><span>-0.0138, -0.0654</span><span>0.1509, -0.2699</span><span>0.2779, -0.1525</span><span>-0.0977, -0.0664</span></div></div>
-<div class="setec-row"><div class="setec-letter" aria-label="N">N</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span><span class="o">1</span><span class="z">0</span></div><div class="setec-num">01001110 = 78</div></div><div class="setec-coords"><span>-0.0622, -0.2354</span><span>0.1143, -0.1127</span><span>0.0519, 0.0498</span><span>0.1595, 0.0337</span><span>-0.0429, 0.1359</span><span>0.1089, -0.1159</span><span>0.1143, -0.1127</span><span>-0.0192, -0.0750</span></div></div>
-<div class="setec-row"><div class="setec-letter" aria-label="O">O</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span><span class="o">1</span><span class="o">1</span></div><div class="setec-num">01001111 = 79</div></div><div class="setec-coords"><span>0.3317, -0.1525</span><span>0.2779, -0.1525</span><span>0.1218, -0.0557</span><span>0.1433, -0.1838</span><span>-0.0612, -0.1127</span><span>-0.0612, -0.1127</span><span>-0.1494, 0.0746</span><span>-0.0687, -0.2451</span></div></div>
-<div class="setec-row"><div class="setec-letter" aria-label="M">M</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span><span class="z">0</span><span class="o">1</span></div><div class="setec-num">01001101 = 77</div></div><div class="setec-coords"><span>-0.0353, 0.1456</span><span>0.1089, -0.1159</span><span>0.1433, -0.1838</span><span>-0.0859, -0.0557</span><span>0.2779, -0.1525</span><span>0.2779, -0.1525</span><span>-0.1311, -0.0374</span><span>0.1089, -0.1159</span></div></div>
-<div class="setec-row"><div class="setec-letter" aria-label="Y">Y</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span></div><div class="setec-num">01011001 = 89</div></div><div class="setec-coords"><span>-0.1128, -0.0632</span><span>-0.1171, -0.0374</span><span>-0.0784, -0.2462</span><span>0.1477, 0.0358</span><span>-0.0515, -0.2473</span><span>-0.1128, -0.0632</span><span>-0.1613, -0.0040</span><span>-0.1537, 0.0078</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="S">S</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span></div><div class="setec-num">01010011 = 83</div></div><div class="setec-coords"><span>0.1218, -0.0557</span><span>0.3166, -0.1547</span><span>0.0680, 0.0638</span><span>0.1369, -0.1891</span><span>0.1218, -0.0557</span><span>0.2660, -0.1461</span><span>-0.0138, -0.0654</span><span>0.1423, 0.0616</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="E">E</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span></div><div class="setec-num">01000101 = 69</div></div><div class="setec-coords"><span>-0.1074, 0.0487</span><span>0.1509, -0.2699</span><span>0.1272, 0.0735</span><span>-0.0353, 0.1456</span><span>-0.1128, -0.0632</span><span>-0.1171, -0.0374</span><span>0.1433, -0.1838</span><span>-0.0956, -0.0578</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="T">T</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span></div><div class="setec-num">01010100 = 84</div></div><div class="setec-coords"><span>-0.1128, -0.0632</span><span>0.3166, -0.1547</span><span>0.1433, -0.1838</span><span>-0.0612, -0.1127</span><span>-0.1645, 0.0746</span><span>0.1477, 0.0358</span><span>0.1767, -0.3000</span><span>0.0680, 0.0638</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="E">E</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span></div><div class="setec-num">01000101 = 69</div></div><div class="setec-coords"><span>-0.1613, -0.0040</span><span>-0.1171, -0.0374</span><span>-0.0622, -0.2354</span><span>-0.0622, -0.2354</span><span>-0.0192, -0.0750</span><span>-0.1537, 0.0078</span><span>0.1218, -0.0557</span><span>0.1423, 0.0616</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="C">C</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span></div><div class="setec-num">01000011 = 67</div></div><div class="setec-coords"><span>0.1433, -0.1838</span><span>0.0432, 0.0541</span><span>0.0680, 0.0638</span><span>-0.0353, 0.1456</span><span>-0.1311, -0.0374</span><span>0.2660, -0.1461</span><span>0.1509, -0.2699</span><span>-0.0687, -0.2451</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="space">␣</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="z">0</span></div><div class="setec-num">00100000 = 32</div></div><div class="setec-coords"><span>0.0680, 0.0638</span><span>0.1261, -0.1213</span><span>0.0432, 0.0541</span><span>-0.1074, 0.0487</span><span>-0.1311, -0.0374</span><span>0.1509, -0.2795</span><span>0.1261, -0.1213</span><span>-0.1074, 0.0487</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="A">A</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="z">0</span><span class="o">1</span></div><div class="setec-num">01000001 = 65</div></div><div class="setec-coords"><span>-0.1645, 0.0746</span><span>0.2779, -0.1525</span><span>0.1272, 0.0735</span><span>0.1003, -0.1149</span><span>0.2660, -0.1461</span><span>0.1595, 0.0337</span><span>-0.0192, -0.0750</span><span>0.3166, -0.1547</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="S">S</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span></div><div class="setec-num">01010011 = 83</div></div><div class="setec-coords"><span>-0.0784, -0.2462</span><span>-0.0956, -0.0578</span><span>-0.1613, -0.0040</span><span>-0.0956, -0.0578</span><span>-0.0192, -0.0750</span><span>-0.0784, -0.2462</span><span>0.1121, -0.0578</span><span>0.3166, -0.1547</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="T">T</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span></div><div class="setec-num">01010100 = 84</div></div><div class="setec-coords"><span>-0.1311, -0.0374</span><span>-0.0956, -0.0578</span><span>-0.0461, -0.1203</span><span>0.2779, -0.1525</span><span>0.1595, 0.0337</span><span>0.3166, -0.1547</span><span>-0.1645, 0.0746</span><span>-0.0622, -0.2354</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="R">R</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="z">0</span></div><div class="setec-num">01010010 = 82</div></div><div class="setec-coords"><span>-0.0192, -0.0750</span><span>-0.1171, -0.0374</span><span>0.1272, 0.0735</span><span>0.1423, 0.0616</span><span>0.1433, -0.1838</span><span>0.1261, -0.1213</span><span>-0.1494, 0.0746</span><span>-0.1645, 0.0746</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="O">O</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span><span class="o">1</span><span class="o">1</span></div><div class="setec-num">01001111 = 79</div></div><div class="setec-coords"><span>-0.0192, -0.0750</span><span>0.1423, 0.0616</span><span>-0.1311, -0.0374</span><span>0.3317, -0.1525</span><span>0.2779, -0.1525</span><span>0.1121, -0.0578</span><span>-0.0429, 0.1359</span><span>0.1089, -0.1159</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="N">N</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span><span class="o">1</span><span class="z">0</span></div><div class="setec-num">01001110 = 78</div></div><div class="setec-coords"><span>0.1261, -0.1213</span><span>-0.1494, 0.0746</span><span>0.1003, -0.1149</span><span>-0.1311, -0.0374</span><span>0.1369, -0.1891</span><span>0.0432, 0.0541</span><span>0.1477, 0.0358</span><span>0.0680, 0.0638</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="O">O</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span><span class="o">1</span><span class="o">1</span></div><div class="setec-num">01001111 = 79</div></div><div class="setec-coords"><span>0.0519, 0.0498</span><span>0.1509, -0.2699</span><span>-0.0461, -0.1203</span><span>-0.1074, 0.0487</span><span>0.0432, 0.0541</span><span>0.1509, -0.2699</span><span>-0.1537, 0.0078</span><span>0.2779, -0.1525</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="M">M</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span><span class="o">1</span><span class="z">0</span><span class="o">1</span></div><div class="setec-num">01001101 = 77</div></div><div class="setec-coords"><span>0.1218, -0.0557</span><span>0.1143, -0.1127</span><span>0.0680, 0.0638</span><span>0.1433, -0.1838</span><span>-0.1494, 0.0746</span><span>-0.0977, -0.0664</span><span>0.0680, 0.0638</span><span>-0.0956, -0.0578</span></div></div>
+<div class="setec-row"><div class="setec-letter" aria-label="Y">Y</div><div class="setec-meta"><div class="setec-bits"><span class="z">0</span><span class="o">1</span><span class="z">0</span><span class="o">1</span><span class="o">1</span><span class="z">0</span><span class="z">0</span><span class="o">1</span></div><div class="setec-num">01011001 = 89</div></div><div class="setec-coords"><span>0.2660, -0.1461</span><span>0.1627, -0.2849</span><span>0.0519, 0.0498</span><span>-0.0956, -0.0578</span><span>-0.0977, 0.0573</span><span>-0.1128, -0.0632</span><span>0.3317, -0.1525</span><span>0.1509, -0.2699</span></div></div>
 <div class="setec-result">SETEC ASTRONOMY</div>
 </div>
 
@@ -265,7 +306,22 @@ number is the letter, by the ASCII table, as with S. The fifteen groups come bac
 SETEC ASTRONOMY (the anagram for *Too Many Secrets* from the 1992 film *Sneakers*).
 
 {{< panel "info" >}}
-**A slow way to talk.** The measured exchange delivered 3,760 bits in about 150.5 minutes. That is 0.052 delivered application bytes per second, about 0.4 bits a second, counting the time to run each spot through the loop. A letter is eight bits, so one letter takes about twenty seconds at that pace. SETEC ASTRONOMY is fifteen characters and would take about five minutes. Each bit is one spot: 32 steps for the loop to settle, then 128 steps to read whether it repeats. Our point is not that this
+**We ran it.** On 9 November 2026, a fresh receiver process was given only these
+120 lines, at full precision, together with the pinned Pythia-160m weights and
+steering vector. It ran each spot through the loop and read all 120 bits
+correctly, with no erasures, returning `SETEC ASTRONOMY`. That took 1,363 model
+calls and 8.9 minutes of receiver time on one CPU thread, with 2.7 GB of peak
+memory. An offline audit then rebuilt every bit from the saved trajectories. Our
+first attempt sent the draw shown in the original version of this note and read
+118 of 120 bits correctly. One address, drawn twice, read as chaotic on the
+machine that ran it, which turned S into s and C into an invalid byte. That
+address had already failed a recheck on this machine, which is why the run above
+draws only from addresses that passed there. A channel like this works only if
+both ends agree on the map, down to the software build.
+{{< /panel >}}
+
+{{< panel "info" >}}
+**A slow way to talk.** The measured exchange delivered 3,760 bits in about 150.5 minutes. That is 0.052 delivered application bytes per second, about 0.4 bits a second, counting the time to run each spot through the loop. A letter is eight bits, so one letter takes about twenty seconds at that pace, and SETEC ASTRONOMY's fifteen characters about five minutes; our actual run, on a single CPU thread, took 8.9 minutes. Each bit is one spot: 32 steps for the loop to settle, then 128 steps to read whether it repeats. Our point is not that this
 is a practical means of communication. But an
 agent could share an encryption key through this
 means of obfuscation and then communicate more
@@ -536,8 +592,8 @@ midpoint.
 
 Once a state holds a bit, a later input can act on it. Using a dynamical system
 itself as a computer is older than this note: [Sinha and Ditto (1998)](#ref-sinha)
-built logic gates, number encoders, and arithmetic out of lattices of
-coupled chaotic maps. Our [earlier feedback study](/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#synchronization)
+showed that lattices of coupled chaotic maps can emulate logic gates, encode
+numbers and do arithmetic. Our [earlier feedback study](/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#synchronization)
 showed that language-model feedback loops can be coupled in the same way, by
 feeding each copy a blend \((1-c)\,F(\vec{x}_A) + c\,F(\vec{x}_B)\) of its own
 soft token and a neighbor’s, and that coupled Qwen loops synchronize and pass
@@ -632,10 +688,60 @@ All eight input triples returned both correct intermediate and final values for 
 
 <p class="feature-caption"><strong>Logic that uses the stored state.</strong> Each row begins on the reference cycle for input A. The controls depend only on B and C, and the second gate receives the exact final state of the first. These are finite panels, not a measure of general gate reliability.</p>
 
-There is a precise limit. Holds and resets compose only into holds and resets:
-the last reset wins, and otherwise the bit is kept. No sequence of them flips a
-bit, so XOR with an incoming one is out of reach. A genuine toggle would be a
-new dynamical primitive to demonstrate.
+Holds and resets alone have a precise limit. They compose only into holds and
+resets: the last reset wins, and otherwise the bit is kept. A reset can change a
+bit, but only to a fixed value, so no sequence of them inverts whatever bit is
+stored, and XOR with an incoming bit needs a new move: a pulse that sends cycle 0 to
+cycle 1 *and* cycle 1 to cycle 0, a toggle.
+
+We then searched for one, using the same kind of move that writes a bit: move the
+dials from \(H\) to another spot for a short while, return them to \(H\), and read
+which cycle the loop landed on. A fixed sweep tried 144 such spots around \(H\):
+twelve directions at four distances, measured in units of the two audited write
+offsets, each for 12, 48 or 120 updates, from both reference cycles, and each
+followed by 240 updates at \(H\). Seventy-nine held, 30 reset to 0, 26 reset to 1,
+and nine exchanged the two cycles. All nine lie far outside the kite, in parts of
+the map that are chaotic.
+
+![All 144 sweep pulses on the Qwen map with the fold and flip curves, H and the two write endpoints; markers show hold, reset to 0, reset to 1 or toggle for each pulse, one panel per pulse length.](qwen-toggle-sweep.png)
+
+<p class="feature-caption"><strong>Where one pulse holds, resets or exchanges the two cycles.</strong> Each marker is one pulse applied to both phase-zero reference cycles, followed by 240 updates at \(H\). Warmer pulses reset to 0, more steering resets to 1, small pulses hold, and the nine toggles (stars) all sit far from \(H\): seven in chaotic regions, one in an undetermined patch, and the 30°, 12-update toggle used below inside the period-6 shrimp. The map shows where the loop settles if held at a setting for good, not what a 12-update visit does. The background is the earlier study’s fixed-start scan (<a href="#ref-jones">Jones, 2026</a>). Receipt: <code>public-toggle-xor.json</code>, in the study’s repository, not yet public.</p>
+
+The toggles are real but narrow. In checks fixed before they ran, none toggled from
+all six phases of the cycle, and none kept toggling at more than three of eight
+neighbouring pulses. The 12-update toggles did survive \(10^{-15}\) perturbations
+of their starting states. One of them, at \(30^\circ\), toggles only from phase
+zero, but it returns the state exactly in step: 12 plus 240 updates is 252, a whole
+number of six-step periods. So a fixed schedule keeps meeting it at the right phase.
+In a test we added after seeing this, and recorded before running it, the incoming
+bit chose that pulse (\(B = 1\)) or 12 idle updates at \(H\) (\(B = 0\)), with the
+state carried across eight stages. For \(B = 10110010\), from both stored bits, all
+16 readouts matched \(A \oplus B\), on each of two different machines.
+
+![Distance of each lane to the two reference cycles over all 16 carried stages; after each yellow toggle pulse the lane converges onto the other cycle, after each grey idle stage it stays; all eight readouts per lane match A XOR B.](qwen-xor-chain.png)
+
+<p class="feature-caption"><strong>XOR on a phase-keeping schedule.</strong> Each curve is the distance from the carried 896-number state to one reference cycle. Yellow bands are the toggle pulse, grey bands idle updates at \(H\); every hold settles onto the cycle that \(A \oplus B\) requires, by more than ten orders of magnitude. The controller chose each pulse from \(B\) alone and never read \(A\). A finite demonstration with one pulse, not a reliability estimate. Receipt: <code>public-toggle-xor.json</code>, in the study’s repository, not yet public.</p>
+
+With \(B = 1\) the same pulse is NOT, so this register now has finite
+demonstrations of AND, OR, NOT and XOR. Why that matters: these four gates are
+enough, in principle, to build any yes-or-no calculation, for example adding
+numbers (XOR gives the sum bit, AND the carry), comparing two values, checking that
+a message arrived intact (parity), or mixing a message with a secret key. To check that they really compose, we made the loop add two numbers. The register
+held the carry. For each pair of digits, least significant first, Bob's program
+applied the toggle if the first digit was 1, and again if the second was 1, leaving
+the sum digit; then it wrote that digit if the two agreed, and toggled once more if
+they differed, leaving the next carry. It chose every move from the digits alone
+and never read the register. Fixed in advance, the case \(11 + 6\) gave 17, and 18
+with a carry of 1, with all 24 readouts matching on two machines.
+
+![Distance of both lanes to the two reference cycles while adding 11 + 6; bands mark toggles, waits and one write; the labels read the sum bits and carries of 17 and 18.](qwen-adder.png)
+
+<p class="feature-caption"><strong>Adding 11 + 6 in one loop.</strong> The carry existed only as which cycle the loop was on; the controller followed the digits. One fixed case on two machines, not a reliability estimate. Receipt: <code>public-toggle-xor.json</code>, in the study’s repository, not yet public.</p>
+
+Speed is not the point: a calculator does this in a billionth of a second, and the
+loop needed 3,204 model runs. Every step depends on carefully kept timing, and that
+fragility is part of the result. But a hidden state that can also compute is more
+than a mailbox, and that is what a monitor reading only the words would miss.
 
 ## A channel, not a secret {#limits}
 
@@ -700,6 +806,16 @@ toolkit. These demonstrations establish the channel, not its secrecy.
 2. <span id="ref-hopfield"></span> J. J. Hopfield (1982). “Neural networks and physical systems with emergent collective computational abilities.” *Proceedings of the National Academy of Sciences*, 79(8), 2554–2558. [doi:10.1073/pnas.79.8.2554](https://doi.org/10.1073/pnas.79.8.2554).
 3. <span id="ref-sinha"></span> S. Sinha and W. L. Ditto (1998). “Dynamics Based Computation.” *Physical Review Letters*, 81, 2156–2159. [doi:10.1103/PhysRevLett.81.2156](https://doi.org/10.1103/PhysRevLett.81.2156); [PDF](https://www.imsc.res.in/~sudeshna/PRL_98.pdf).
 4. <span id="ref-map-fold"></span> Yuri A. Kuznetsov (2008). “Saddle-node bifurcation for maps.” *Scholarpedia*, 3(4), 4399. [doi:10.4249/scholarpedia.4399](https://www.scholarpedia.org/article/Saddle-node_bifurcation_for_maps).
+5. <span id="ref-simmons"></span> G. J. Simmons (1984). “The Prisoners’ Problem and the Subliminal Channel.” In *Advances in Cryptology: Proceedings of Crypto 83*, 51–67. [doi:10.1007/978-1-4684-4730-9_5](https://doi.org/10.1007/978-1-4684-4730-9_5).
+6. <span id="ref-ziegler"></span> Z. M. Ziegler, Y. Deng and A. M. Rush (2019). “Neural Linguistic Steganography.” *EMNLP-IJCNLP 2019*, 1210–1215. [doi:10.18653/v1/D19-1115](https://doi.org/10.18653/v1/D19-1115); [arXiv:1909.01496](https://arxiv.org/abs/1909.01496).
+7. <span id="ref-motwani"></span> S. R. Motwani et al. (2024). “Secret Collusion among AI Agents: Multi-Agent Deception via Steganography.” Preprint, [arXiv:2402.07510](https://arxiv.org/abs/2402.07510).
+8. <span id="ref-pecora"></span> L. M. Pecora and T. L. Carroll (1990). “Synchronization in chaotic systems.” *Physical Review Letters*, 64, 821–824. [doi:10.1103/PhysRevLett.64.821](https://doi.org/10.1103/PhysRevLett.64.821).
+9. <span id="ref-cuomo"></span> K. M. Cuomo and A. V. Oppenheim (1993). “Circuit implementation of synchronized chaos with applications to communications.” *Physical Review Letters*, 71, 65–68. [doi:10.1103/PhysRevLett.71.65](https://doi.org/10.1103/PhysRevLett.71.65).
+10. <span id="ref-hayes"></span> S. Hayes, C. Grebogi and E. Ott (1993). “Communicating with chaos.” *Physical Review Letters*, 70, 3031–3034. [doi:10.1103/PhysRevLett.70.3031](https://doi.org/10.1103/PhysRevLett.70.3031).
+11. <span id="ref-schroeder"></span> C. Schroeder de Witt, S. Sokota, J. Z. Kolter, J. Foerster and M. Strohmeier (2022). “Perfectly Secure Steganography Using Minimum Entropy Coupling.” Preprint, [arXiv:2210.14889](https://arxiv.org/abs/2210.14889).
+12. <span id="ref-roger"></span> F. Roger and R. Greenblatt (2023). “Preventing Language Models From Hiding Their Reasoning.” Preprint, [arXiv:2310.18512](https://arxiv.org/abs/2310.18512).
+13. <span id="ref-fujisaka"></span> H. Fujisaka and T. Yamada (1983). “Stability Theory of Synchronized Motion in Coupled-Oscillator Systems.” *Progress of Theoretical Physics*, 69(1), 32–47. [doi:10.1143/PTP.69.32](https://doi.org/10.1143/PTP.69.32).
+14. <span id="ref-afraimovich"></span> V. S. Afraimovich, N. N. Verichev and M. I. Rabinovich (1986). “Stochastic synchronization of oscillation in dissipative systems.” *Radiophysics and Quantum Electronics*, 29, 795–803. [doi:10.1007/BF01034476](https://doi.org/10.1007/BF01034476).
 
 <div class="feature-next">
 <p class="feature-kicker">The earlier study</p>

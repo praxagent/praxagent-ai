@@ -10,7 +10,7 @@
   "sha256": "aa66f33bc2b54da5c3f1f96f384a387c1394f4d06240e0360b0a08ed2a3ee716",
   "note": "Pinned to the final report, commit 13145281 (the supplementary report that accompanies the article of the same title). On 20 October 2026 the annotated release tag arxiv-v1 of the research repository points to this commit; the note links to the repository at that tag. Round 14 rebound every entry to this commit and recomputed its paper_line."
  },
- "verification": "For each entry, (1) appears_as occurs in index.md after replacing en dashes, em dashes and minus signs with hyphens and removing asterisks, as scripts/check_provenance.py checks; (2) paper_text occurs in its paper_file (paper/llm/main.tex, or paper/llm/figures/fig-readout-gain.tex for three entries) at the stated commit (13145281 for this manifest; an entry with paper_commit is checked at that commit instead) after collapsing runs of whitespace to single spaces, and paper_line is the line of that file on which the phrase begins. For the memory extension run python verify_memory_update.py --verify --research-repo /path/to/neural-shrimp; this re-derives added numerical claims and verifies receipt, source and asset hashes. For the walkthroughs extension run python verify_walkthroughs.py --verify --research-repo /path/to/neural-shrimp; this re-renders every added number from its receipt and checks the copies against the pinned commit. For the huginn-item18 extension run python verify_walkthroughs.py --verify --extension huginn-item18-20261103 --research-repo /path/to/neural-shrimp; it re-renders the frozen test's numbers without item 18 from that receipt and checks the copy against the pinned commit.",
+ "verification": "For each entry, (1) appears_as occurs in index.md after replacing en dashes, em dashes and minus signs with hyphens and removing asterisks, as scripts/check_provenance.py checks; (2) paper_text occurs in its paper_file (paper/llm/main.tex, or paper/llm/figures/fig-readout-gain.tex for three entries) at the stated commit (13145281 for this manifest; an entry with paper_commit is checked at that commit instead: 1b718635 for the corrections of 26 October 2026, and 3e831483, a later commit of the report on the main branch, for the entries added or corrected on 10 November 2026, whose ids begin with nov10 or whose claims end with 'at paper 3e831483') after collapsing runs of whitespace to single spaces, and paper_line is the line of that file on which the phrase begins. For the memory extension run python verify_memory_update.py --verify --research-repo /path/to/neural-shrimp; this re-derives added numerical claims and verifies receipt, source and asset hashes. For the walkthroughs extension run python verify_walkthroughs.py --verify --research-repo /path/to/neural-shrimp; this re-renders every added number from its receipt and checks the copies against the pinned commit. For the huginn-item18 extension run python verify_walkthroughs.py --verify --extension huginn-item18-20261103 --research-repo /path/to/neural-shrimp; it re-renders the frozen test's numbers without item 18 from that receipt and checks the copy against the pinned commit.",
  "receipts": {
   "paper/llm/main.tex": "aa66f33bc2b54da5c3f1f96f384a387c1394f4d06240e0360b0a08ed2a3ee716",
   "paper/llm/figures/fig-readout-gain.tex": "e31af7a1cab1d1fb40cf5028255b22e4f8a4a154fe764948c0da3daa79217cb5",
@@ -129,7 +129,8 @@
   "mixed-junction-summary.json": "ff4202a9f1bc6288fcacfea5f484e50a37074335ac6653228a821acaaecdad88",
   "mixed-junction-publication-production.json": "a61fef2f8af572f294be51354d4a4d9f00ee92f1c3341ad99d3be54ead27cd70",
   "mixed-junction-publication-visual-review.json": "7efb62c5016281401791858c1761122311926a21072e6445434e4a9ff0f401a4",
-  "fig-memory-mixed-junction.receipt.json": "bf74d5568eabf1f22cbfcc9a9be04dec3f45bd325b60d58ea4ca94d9b91786d7"
+  "fig-memory-mixed-junction.receipt.json": "bf74d5568eabf1f22cbfcc9a9be04dec3f45bd325b60d58ea4ca94d9b91786d7",
+  "paper/llm/main.tex at 3e83148389687e6728186792b589a2b6d392b6f2": "5a944514b37e927aa3c3241e1957f91051c5493f2340baf7729a00e26097c671"
  },
  "figures": [
   "fig-alpha0.png",
@@ -241,7 +242,10 @@
   "fig-memory-mixed-junction-locations.pdf",
   "fig-branch-three-readings.png",
   "fig-passage-steps.png",
-  "fig-free-orbit-words.png"
+  "fig-free-orbit-words.png",
+  "fig-topk.png",
+  "fig-real-inference.png",
+  "fig-lfm3.png"
  ],
  "figure_sha256": {
   "fig-alpha0.png": "100dc997a923e123038d5bf8d321eb77fd148cce36b959402c67556d154ef166",
@@ -353,7 +357,10 @@
   "fig-memory-mixed-junction-locations.pdf": "286ffbbcc83c676538e0eb35c2457f80e541d91add49a05afe34a3430d3c7ec1",
   "fig-branch-three-readings.png": "e729d76c1aee03c6fce2fdd70db0130b13364dc4127951008ece2c70cd6c6635",
   "fig-passage-steps.png": "85fb83c7b1b2f90ef71810c59844ce36510d92e902cce01a5a71e34ec4136bb4",
-  "fig-free-orbit-words.png": "733416866577354ad30a72ba0513750a786d913b663b486d11c16294387dc9ec"
+  "fig-free-orbit-words.png": "733416866577354ad30a72ba0513750a786d913b663b486d11c16294387dc9ec",
+  "fig-topk.png": "1e28419917afcd2196e6b41cfbe5504d2169ca2c6d4918c414863a6e47a0bf91",
+  "fig-real-inference.png": "4a4182d225470c528e71251e2cfd906bc86b5c8ae3d3bd3c1f3bd42d5a82ef82",
+  "fig-lfm3.png": "af320d5f52401d4c7833c683ee060e66ba97fbca6e1accb1147c02124c4961b5"
  },
  "figure_sources": {
   "fig-alpha0.png": "paper/llm/figures/fig-alpha0.png (byte-identical copy)",
@@ -517,7 +524,10 @@
   },
   "fig-branch-three-readings.png": "docs/figure-walkthroughs/fig-branch-three-readings.png at 5b7a02a172e76950300b44a4f6168c6a8161d2fb (byte-identical copy)",
   "fig-passage-steps.png": "docs/figure-walkthroughs/fig-passage-steps.png at 5b7a02a172e76950300b44a4f6168c6a8161d2fb (byte-identical copy)",
-  "fig-free-orbit-words.png": "docs/figure-walkthroughs/fig-free-orbit-words.png at 5b7a02a172e76950300b44a4f6168c6a8161d2fb (byte-identical copy)"
+  "fig-free-orbit-words.png": "docs/figure-walkthroughs/fig-free-orbit-words.png at 5b7a02a172e76950300b44a4f6168c6a8161d2fb (byte-identical copy)",
+  "fig-topk.png": "paper/llm/figures/fig-topk.png at 0399fee2e9537a50993482aea8ec417e70286ac4 (byte-identical copy)",
+  "fig-real-inference.png": "paper/llm/figures/fig-real-inference.png at 0399fee2e9537a50993482aea8ec417e70286ac4 (byte-identical copy)",
+  "fig-lfm3.png": "paper/llm/figures/fig-lfm3.png at 0399fee2e9537a50993482aea8ec417e70286ac4 (byte-identical copy)"
  },
  "other_files": {
   "og-card.png": {
@@ -7138,20 +7148,22 @@
   {
    "id": "bridge-0300",
    "section": "Two more systems",
-   "claim": "number 1.10 in 'Two more systems' (generated: post phrase matched to the paper's source text)",
-   "appears_as": "The break lies between 1.10 and 1.15, at or just above",
-   "paper_text": "($0.41$). The break lies between $1.10$ and $1.15$, at or just above",
-   "paper_line": 3632,
-   "paper_file": "paper/llm/main.tex"
+   "claim": "number 1.10 in 'Two more systems'; corrected after arxiv-v1 at paper 3e831483",
+   "appears_as": "The break lies between 1.10 and 1.15. It is not",
+   "paper_text": "The break lies between $1.10$ and $1.15$. It is not located",
+   "paper_line": 4481,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
   },
   {
    "id": "bridge-0301",
    "section": "Two more systems",
-   "claim": "number 1.15 in 'Two more systems' (generated: post phrase matched to the paper's source text)",
-   "appears_as": "break lies between 1.10 and 1.15, at or just above the spectral",
-   "paper_text": "break lies between $1.10$ and $1.15$, at or just above the spectral",
-   "paper_line": 3632,
-   "paper_file": "paper/llm/main.tex"
+   "claim": "number 1.15 in 'Two more systems'; corrected after arxiv-v1 at paper 3e831483",
+   "appears_as": "break lies between 1.10 and 1.15. It is not located",
+   "paper_text": "break lies between $1.10$ and $1.15$. It is not located at a computed",
+   "paper_line": 4481,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
   },
   {
    "id": "bridge-0302",
@@ -12421,11 +12433,12 @@
   {
    "id": "last-0050",
    "section": "Steering controls",
-   "claim": "number 103 in 'Steering controls' (generated: post phrase matched to the paper's source text)",
-   "appears_as": "of 103 angles.",
-   "paper_text": "and 24\\,\\% at every one of 103 angles (Figure~\\ref{fig:morph});",
-   "paper_line": 766,
-   "paper_file": "paper/llm/main.tex"
+   "claim": "number 103 in 'Steering controls'; corrected after arxiv-v1 at paper 3e831483",
+   "appears_as": "of 120 angles.",
+   "paper_text": "and 24\\,\\% at every one of 120 angles (Figure~\\ref{fig:morph});",
+   "paper_line": 933,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
   },
   {
    "id": "last-0051",
@@ -29624,11 +29637,12 @@
   {
    "id": "shrimp-1005",
    "section": "Neuron steering diagram",
-   "claim": "number 103 in 'Neuron steering diagram' (generated: post phrase matched to the paper's source text)",
-   "appears_as": "of 103 angles.",
-   "paper_text": "and 24\\,\\% at every one of 103 angles (Figure~\\ref{fig:morph});",
-   "paper_line": 766,
-   "paper_file": "paper/llm/main.tex"
+   "claim": "number 103 in 'Neuron steering diagram'; corrected after arxiv-v1 at paper 3e831483",
+   "appears_as": "of 120 angles.",
+   "paper_text": "and 24\\,\\% at every one of 120 angles (Figure~\\ref{fig:morph});",
+   "paper_line": 933,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
   },
   {
    "id": "shrimp-1006",
@@ -34070,20 +34084,22 @@
   {
    "id": "theory-0223",
    "section": "Why the loop can be chaotic",
-   "claim": "number 24 in 'Why the loop can be chaotic' (generated: post phrase matched to the paper's source text)",
-   "appears_as": "chaotic share between 13 and 24% at every one of 103",
-   "paper_text": "chaotic share between 13 and 24\\,\\% at every one of 103 angles",
-   "paper_line": 766,
-   "paper_file": "paper/llm/main.tex"
+   "claim": "number 24 in 'Why the loop can be chaotic'; corrected after arxiv-v1 at paper 3e831483",
+   "appears_as": "chaotic share between 13 and 24% at every one of 120",
+   "paper_text": "chaotic share between 13 and 24\\,\\% at every one of 120 angles",
+   "paper_line": 933,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
   },
   {
    "id": "theory-0224",
    "section": "Why the loop can be chaotic",
-   "claim": "number 103 in 'Why the loop can be chaotic' (generated: post phrase matched to the paper's source text)",
-   "appears_as": "and 24% at every one of 103",
-   "paper_text": "and 24\\,\\% at every one of 103 angles (Figure~\\ref{fig:morph});",
-   "paper_line": 766,
-   "paper_file": "paper/llm/main.tex"
+   "claim": "number 103 in 'Why the loop can be chaotic'; corrected after arxiv-v1 at paper 3e831483",
+   "appears_as": "and 24% at every one of 120",
+   "paper_text": "and 24\\,\\% at every one of 120 angles (Figure~\\ref{fig:morph});",
+   "paper_line": 933,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
   },
   {
    "id": "theory-0225",
@@ -34106,11 +34122,12 @@
   {
    "id": "theory-0227",
    "section": "Why the loop can be chaotic",
-   "claim": "number 103 in 'Why the loop can be chaotic' (generated: post phrase matched to the paper's source text)",
-   "appears_as": "red positive) at six of 103 angles, with the chaotic",
-   "paper_text": "$\\pm0.5$, red positive) at six of 103 angles, with the chaotic share.",
-   "paper_line": 819,
-   "paper_file": "paper/llm/main.tex"
+   "claim": "number 103 in 'Why the loop can be chaotic'; corrected after arxiv-v1 at paper 3e831483",
+   "appears_as": "red positive) at six of 120 angles, with the chaotic",
+   "paper_text": "$\\pm0.5$, red positive) at six of 120 angles, with the chaotic share.",
+   "paper_line": 986,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
   },
   {
    "id": "theory-0228",
@@ -34187,11 +34204,12 @@
   {
    "id": "theory-0236",
    "section": "Why the loop can be chaotic",
-   "claim": "number 40 in 'Why the loop can be chaotic' (generated: post phrase matched to the paper's source text)",
-   "appears_as": "the previous angle after 40 steps, and every tenth",
-   "paper_text": "of the previous angle after 40 steps, and every tenth starts",
-   "paper_line": 821,
-   "paper_file": "paper/llm/main.tex"
+   "claim": "number 40 in 'Why the loop can be chaotic'; corrected after arxiv-v1 at paper 3e831483",
+   "appears_as": "the previous angle after 40 steps, except the first",
+   "paper_text": "of the previous angle after 40 steps, except the first map",
+   "paper_line": 988,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
   },
   {
    "id": "theory-0237",
@@ -34205,20 +34223,22 @@
   {
    "id": "theory-0238",
    "section": "Why the loop can be chaotic",
-   "claim": "number 17 in 'Why the loop can be chaotic' (generated: post phrase matched to the paper's source text)",
-   "appears_as": "tenth angle and across the 17 of 120 planned angles that",
-   "paper_text": "tenth angle and across the 17 of 120 planned angles that",
-   "paper_line": 823,
-   "paper_file": "paper/llm/main.tex"
+   "claim": "number 17 in 'Why the loop can be chaotic'; corrected after arxiv-v1 at paper 3e831483",
+   "appears_as": "A later run computed the other 17 with the same",
+   "paper_text": "A later run computed the other 17 with the same settings",
+   "paper_line": 992,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
   },
   {
    "id": "theory-0239",
    "section": "Why the loop can be chaotic",
-   "claim": "number 120 in 'Why the loop can be chaotic' (generated: post phrase matched to the paper's source text)",
-   "appears_as": "angle and across the 17 of 120 planned angles that did",
-   "paper_text": "angle and across the 17 of 120 planned angles that did not",
-   "paper_line": 823,
-   "paper_file": "paper/llm/main.tex"
+   "claim": "number 120 in 'Why the loop can be chaotic'; corrected after arxiv-v1 at paper 3e831483",
+   "appears_as": "finished 103 of the 120 angles within its limit",
+   "paper_text": "The first run finished 103 of the 120 angles within its limit.",
+   "paper_line": 992,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
   },
   {
    "id": "theory-0240",
@@ -35528,11 +35548,12 @@
   {
    "id": "theory-0385",
    "section": "Where steering enters",
-   "claim": "number 103 in 'Where steering enters' (generated: post phrase matched to the paper's source text)",
-   "appears_as": "of 103 angles.",
-   "paper_text": "and 24\\,\\% at every one of 103 angles (Figure~\\ref{fig:morph});",
-   "paper_line": 766,
-   "paper_file": "paper/llm/main.tex"
+   "claim": "number 103 in 'Where steering enters'; corrected after arxiv-v1 at paper 3e831483",
+   "appears_as": "of 120 angles.",
+   "paper_text": "and 24\\,\\% at every one of 120 angles (Figure~\\ref{fig:morph});",
+   "paper_line": 933,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
   },
   {
    "id": "theory-0386",
@@ -45409,6 +45430,2656 @@
    "paper_line": 4852,
    "paper_file": "paper/llm/main.tex",
    "paper_commit": "1b71863581386048c50d41b1f8137a6ba6adec25"
+  },
+  {
+   "id": "nov10-0001",
+   "section": "Whether this set is an attractor",
+   "claim": "number 1000 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "follows each trajectory for 1000 steps, and longer runs",
+   "paper_text": "follows each trajectory for 1000 steps, and longer runs show",
+   "paper_line": 1212,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0002",
+   "section": "Whether this set is an attractor",
+   "claim": "number 14 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "gives a first sign. Of its 14 trajectories on the period-4",
+   "paper_text": "gives a first sign. Of its 14 trajectories on the period-4",
+   "paper_line": 1213,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0003",
+   "section": "Whether this set is an attractor",
+   "claim": "number 400 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "recording began at step 400, and eleven arrived during",
+   "paper_text": "when recording began at step 400, and eleven arrived during",
+   "paper_line": 1214,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0004",
+   "section": "Whether this set is an attractor",
+   "claim": "number 600 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "eleven arrived during the 600 recorded",
+   "paper_text": "and eleven arrived during the 600 recorded steps. We therefore",
+   "paper_line": 1214,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0005",
+   "section": "Whether this set is an attractor",
+   "claim": "number 64 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "displaced the fixed start along 64 further random directions,",
+   "paper_text": "displaced the fixed start along 64 further random directions,",
+   "paper_line": 1215,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0006",
+   "section": "Whether this set is an attractor",
+   "claim": "number 5000 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "followed each start for 5000 steps in float64",
+   "paper_text": "and followed each start for 5000 steps in float64 (\\laterrepo{tools/batch_fate.py}).",
+   "paper_line": 1216,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0007",
+   "section": "Whether this set is an attractor",
+   "claim": "number 64 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "this three times: with the 64 starts in two",
+   "paper_text": "this three times: with the 64 starts in two batches of 32,",
+   "paper_line": 1217,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0008",
+   "section": "Whether this set is an attractor",
+   "claim": "number 32 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "batches of 32, in one batch of 64, and",
+   "paper_text": "64 starts in two batches of 32, in one batch of 64, and one",
+   "paper_line": 1218,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0009",
+   "section": "Whether this set is an attractor",
+   "claim": "number 64 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "of 32, in one batch of 64, and one at a time. The",
+   "paper_text": "batches of 32, in one batch of 64, and one at a time. The three",
+   "paper_line": 1218,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0010",
+   "section": "Whether this set is an attractor",
+   "claim": "number 0.007 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "median relative distance of 0.007 to 0.010 apart after 100",
+   "paper_text": "median relative distance of 0.007 to 0.010 apart after 100 steps",
+   "paper_line": 1219,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0011",
+   "section": "Whether this set is an attractor",
+   "claim": "number 0.010 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "relative distance of 0.007 to 0.010 apart after 100 steps and",
+   "paper_text": "relative distance of 0.007 to 0.010 apart after 100 steps and 1.1",
+   "paper_line": 1220,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0012",
+   "section": "Whether this set is an attractor",
+   "claim": "number 100 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "0.007 to 0.010 apart after 100 steps and 1.1 to 1.2,",
+   "paper_text": "0.007 to 0.010 apart after 100 steps and 1.1 to 1.2, as large",
+   "paper_line": 1220,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0013",
+   "section": "Whether this set is an attractor",
+   "claim": "number 1.1 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "apart after 100 steps and 1.1 to 1.2,",
+   "paper_text": "0.010 apart after 100 steps and 1.1 to 1.2, as large as the states",
+   "paper_line": 1220,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0014",
+   "section": "Whether this set is an attractor",
+   "claim": "number 1.2 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "after 100 steps and 1.1 to 1.2,",
+   "paper_text": "after 100 steps and 1.1 to 1.2, as large as the states themselves,",
+   "paper_line": 1220,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0015",
+   "section": "Whether this set is an attractor",
+   "claim": "number 200 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "states themselves, after 200. The three runs are therefore",
+   "paper_text": "the states themselves, after 200. The three runs are therefore",
+   "paper_line": 1220,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0016",
+   "section": "Whether this set is an attractor",
+   "claim": "number 64 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "realizations of the same 64 starts, not three measurements",
+   "paper_text": "three realizations of the same 64 starts, not three measurements",
+   "paper_line": 1221,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0017",
+   "section": "Whether this set is an attractor",
+   "claim": "number 500 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "bit for bit (checked over 500 steps for",
+   "paper_text": "states bit for bit (checked over 500 steps for two of the layouts).",
+   "paper_line": 1222,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0018",
+   "section": "Whether this set is an attractor",
+   "claim": "number 10^{-9} in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "relative \\(10^{-9}\\) of one of its previous",
+   "paper_text": "returns within a relative $10^{-9}$ of one of its previous 64",
+   "paper_line": 1224,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0019",
+   "section": "Whether this set is an attractor",
+   "claim": "number 64 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "of one of its previous 64 states, which is how a",
+   "paper_text": "$10^{-9}$ of one of its previous 64 states. By step 5000, 5, 5",
+   "paper_line": 1224,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0020",
+   "section": "Whether this set is an attractor",
+   "claim": "number 5000 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "loop shows itself. By step 5000, 5, 5 and 4 of",
+   "paper_text": "previous 64 states. By step 5000, 5, 5 and 4 of the 64 starts",
+   "paper_line": 1225,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0021",
+   "section": "Whether this set is an attractor",
+   "claim": "number 64 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "the 64 starts were captured (Table",
+   "paper_text": "step 5000, 5, 5 and 4 of the 64 starts were captured (Table~\\ref{tab:batchfate}).",
+   "paper_line": 1225,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0022",
+   "section": "Whether this set is an attractor",
+   "claim": "number 14 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "captured (Table U1). These 14 captures belong to 12 different",
+   "paper_text": "(Table~\\ref{tab:batchfate}). These 14 captures belong to 12 different",
+   "paper_line": 1225,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0023",
+   "section": "Whether this set is an attractor",
+   "claim": "number 12 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "These 14 captures belong to 12 different",
+   "paper_text": "These 14 captures belong to 12 different starts: two starts",
+   "paper_line": 1225,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0024",
+   "section": "Whether this set is an attractor",
+   "claim": "number 52 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "none in all three, and 52 in no",
+   "paper_text": "layouts, none in all three, and 52 in no layout. Thirteen captures",
+   "paper_line": 1226,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0025",
+   "section": "Whether this set is an attractor",
+   "claim": "number 1000 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "was captured before step 1000; the",
+   "paper_text": "run was captured before step 1000; the first capture came at",
+   "paper_line": 1228,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0026",
+   "section": "Whether this set is an attractor",
+   "claim": "number 1087 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "first capture came at step 1087 and the last at step 4741.",
+   "paper_text": "first capture came at step 1087 and the last at step 4741.",
+   "paper_line": 1229,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0027",
+   "section": "Whether this set is an attractor",
+   "claim": "number 4741 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "1087 and the last at step 4741. In the two batched",
+   "paper_text": "step 1087 and the last at step 4741. In the two batched layouts",
+   "paper_line": 1229,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0028",
+   "section": "Whether this set is an attractor",
+   "claim": "number 5000 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "still on its cycle at step 5000: its states saved",
+   "paper_text": "still on its cycle at step 5000: its states saved every 100",
+   "paper_line": 1230,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0029",
+   "section": "Whether this set is an attractor",
+   "claim": "number 100 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "every 100 steps return within a relative",
+   "paper_text": "5000: its states saved every 100 steps return within a relative",
+   "paper_line": 1230,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0030",
+   "section": "Whether this set is an attractor",
+   "claim": "number 2.6\\times10^{-10} in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "return within a relative \\(2.6\\times10^{-10}\\) (a run of the",
+   "paper_text": "steps return within a relative $2.6\\times10^{-10}$ (a run of the third layout",
+   "paper_line": 1230,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0031",
+   "section": "Whether this set is an attractor",
+   "claim": "number 1000 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "Layout | Captured by step 1000 | 2000 | 3000 | 4000 |",
+   "paper_text": "captured by step} \\\\ layout & 1000 & 2000 & 3000 & 4000 & 5000",
+   "paper_line": 1237,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0032",
+   "section": "Whether this set is an attractor",
+   "claim": "number 2000 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "Captured by step 1000 | 2000 | 3000 | 4000 | 5000 |",
+   "paper_text": "by step} \\\\ layout & 1000 & 2000 & 3000 & 4000 & 5000 \\\\ \\midrule",
+   "paper_line": 1237,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0033",
+   "section": "Whether this set is an attractor",
+   "claim": "number 4000 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "step 1000 | 2000 | 3000 | 4000 | 5000 |",
+   "paper_text": "layout & 1000 & 2000 & 3000 & 4000 & 5000 \\\\ \\midrule two batches",
+   "paper_line": 1238,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0034",
+   "section": "Whether this set is an attractor",
+   "claim": "number 5000 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "| 2000 | 3000 | 4000 | 5000 |",
+   "paper_text": "1000 & 2000 & 3000 & 4000 & 5000 \\\\ \\midrule two batches of",
+   "paper_line": 1238,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0035",
+   "section": "Whether this set is an attractor",
+   "claim": "number 32 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "| Two batches of 32 | 0 | 2 | 3 | 4 | 5 |",
+   "paper_text": "64 starts in two batches of 32, in one batch of 64, and one",
+   "paper_line": 1218,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0036",
+   "section": "Whether this set is an attractor",
+   "claim": "number 64 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "| One batch of 64 | 0 | 2 | 4 | 4 | 5 |",
+   "paper_text": "& 3 & 4 & 5 \\\\ one batch of 64 & 0 & 2 & 4 & 4 & 5 \\\\ one",
+   "paper_line": 1240,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0037",
+   "section": "Whether this set is an attractor",
+   "claim": "number 64 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "periodic orbit, of the same 64 starts near the fixed start",
+   "paper_text": "periodic orbit, of the same 64 starts near the fixed start",
+   "paper_line": 1245,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0038",
+   "section": "Whether this set is an attractor",
+   "claim": "number 0.07248 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "Figure 4(a) (\\(\\alpha = 0.07248\\), \\(\\log_{10}T = -0.148\\);",
+   "paper_text": "Figure~\\ref{fig:strangeattractor}(a) ($\\alpha=0.07248$, $\\log_{10}T=-0.148$; float64,",
+   "paper_line": 1246,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0039",
+   "section": "Whether this set is an attractor",
+   "claim": "number -0.148 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "0.07248\\), \\(\\log_{10}T = -0.148\\); float64, 5000 steps).",
+   "paper_text": "($\\alpha=0.07248$, $\\log_{10}T=-0.148$; float64, 5000 steps; \\laterrepo{docs/batch-fate/bf1-receipt.json}).}",
+   "paper_line": 1246,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0040",
+   "section": "Whether this set is an attractor",
+   "claim": "number 5000 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "\\(\\log_{10}T = -0.148\\); float64, 5000 steps). Source: <a",
+   "paper_text": "$\\log_{10}T=-0.148$; float64, 5000 steps; \\laterrepo{docs/batch-fate/bf1-receipt.json}).}",
+   "paper_line": 1246,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0041",
+   "section": "Whether this set is an attractor",
+   "claim": "number 67,000 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "rate, about one capture in 67,000 steps",
+   "paper_text": "rate, about one capture in 67\\,000 steps of an uncaptured trajectory,",
+   "paper_line": 1255,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0042",
+   "section": "Whether this set is an attractor",
+   "claim": "number 64 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "trajectory, most of the 64 starts would be captured",
+   "paper_text": "uncaptured trajectory, most of the 64 starts would be captured within",
+   "paper_line": 1255,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0043",
+   "section": "Whether this set is an attractor",
+   "claim": "number 10 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "\\(10^5\\) steps. If the set is",
+   "paper_text": "starts would be captured within $10^5$ steps. If the set is an",
+   "paper_line": 1255,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0044",
+   "section": "Whether this set is an attractor",
+   "claim": "number 192 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "the maps: of 192 sampled chaos-labeled cells",
+   "paper_text": "occurs across the maps: of 192 sampled chaos-labeled cells",
+   "paper_line": 1257,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0045",
+   "section": "Whether this set is an attractor",
+   "claim": "number 16 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "each of the two main maps, 16 and",
+   "paper_text": "each of the two main maps, 16 and 49 ended on periodic orbits",
+   "paper_line": 1258,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0046",
+   "section": "Whether this set is an attractor",
+   "claim": "number 49 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "49 ended on periodic orbits",
+   "paper_text": "of the two main maps, 16 and 49 ended on periodic orbits within",
+   "paper_line": 1258,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0047",
+   "section": "Whether this set is an attractor",
+   "claim": "number 10 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "periodic orbits within \\(10^5\\) steps",
+   "paper_text": "on periodic orbits within $10^5$ steps (Section~\\ref{sec:methodsbrief}).",
+   "paper_line": 1258,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0048",
+   "section": "Other families, other sizes",
+   "claim": "number 13 in 'Other families, other sizes'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "of LFM3-1.7B, in which 13 of the 24 blocks are convolutions",
+   "paper_text": "scan of LFM3-1.7B, in which 13 of the 24 blocks are convolutions",
+   "paper_line": 4103,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0049",
+   "section": "Other families, other sizes",
+   "claim": "number 24 in 'Other families, other sizes'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "LFM3-1.7B, in which 13 of the 24 blocks are convolutions",
+   "paper_text": "LFM3-1.7B, in which 13 of the 24 blocks are convolutions rather",
+   "paper_line": 4103,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0050",
+   "section": "Steering makes tokens compete",
+   "claim": "number 16 in 'Steering makes tokens compete'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "detected period changes in 16 to 21% of the cells, against",
+   "paper_text": "detected period changes in 16 to 21\\,\\% of the cells, against",
+   "paper_line": 991,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0051",
+   "section": "Steering makes tokens compete",
+   "claim": "number 21 in 'Steering makes tokens compete'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "period changes in 16 to 21% of the cells, against",
+   "paper_text": "detected period changes in 16 to 21\\,\\% of the cells, against at",
+   "paper_line": 991,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0052",
+   "section": "Steering makes tokens compete",
+   "claim": "number 15 in 'Steering makes tokens compete'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "cells, against at most 15% between other neighboring",
+   "paper_text": "the cells, against at most 15\\,\\% between other neighboring",
+   "paper_line": 991,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0053",
+   "section": "Steering makes tokens compete",
+   "claim": "number 120 in 'Steering makes tokens compete'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "run finished 103 of the 120 angles within its limit.",
+   "paper_text": "first run finished 103 of the 120 angles within its limit. A",
+   "paper_line": 992,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0054",
+   "section": "Memory, sampling and a growing context",
+   "claim": "number 50 in 'Memory, sampling and a growing context'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "Feeding back only the 5 to 50",
+   "paper_text": "Feeding back only the 5 to 50 most probable tokens, as the",
+   "paper_line": 4091,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0055",
+   "section": "Memory, sampling and a growing context",
+   "claim": "number 15 in 'Memory, sampling and a growing context'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "implementation does with 15,",
+   "paper_text": "Thinking implementation does with 15, left the loop of Qwen2.5-0.5B",
+   "paper_line": 4092,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0056",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 15 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "distribution: it keeps the 15 most probable tokens and",
+   "paper_text": "distribution: it keeps the 15 most probable tokens and renormalizes",
+   "paper_line": 6152,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0057",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 50 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "probabilities, for \\(k = 50\\), 20, 10, 5, 3, 2 and",
+   "paper_text": "renormalized probabilities, for $k=50$, 20, 10, 5, 3, 2 and 1, and",
+   "paper_line": 6156,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0058",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 20 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "probabilities, for \\(k = 50\\), 20, 10, 5, 3, 2 and 1, and",
+   "paper_text": "probabilities, for $k=50$, 20, 10, 5, 3, 2 and 1, and for",
+   "paper_line": 6156,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0059",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 10 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "probabilities, for \\(k = 50\\), 20, 10, 5, 3, 2 and 1, and for",
+   "paper_text": "probabilities, for $k=50$, 20, 10, 5, 3, 2 and 1, and for comparison",
+   "paper_line": 6156,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0060",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 128 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "We scanned 128 temperatures between \\(\\log_{10}T",
+   "paper_text": "memory of one token. We scanned 128 temperatures between $\\log_{10}T=-1$",
+   "paper_line": 6157,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0061",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 0.3 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "\\(\\log_{10}T = -1\\) and 0.3 on two lines, one",
+   "paper_text": "between $\\log_{10}T=-1$ and $0.3$ on two lines, one without",
+   "paper_line": 6158,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0062",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 0.0743 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "direction at \\(\\alpha = 0.0743\\), in",
+   "paper_text": "philosophy direction at $\\alpha=0.0743$, in float64, with 500 transient",
+   "paper_line": 6158,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0063",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 500 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "float64, with 500 transient and 1500 measured",
+   "paper_text": "$\\alpha=0.0743$, in float64, with 500 transient and 1500 measured",
+   "paper_line": 6159,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0064",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 1500 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "with 500 transient and 1500 measured steps and one",
+   "paper_text": "float64, with 500 transient and 1500 measured steps and one twin",
+   "paper_line": 6159,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0065",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 10^{-6} in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "\\(10^{-6}\\). The setting 15 itself",
+   "paper_text": "steps and one twin at offset $10^{-6}$. The setting 15 itself was",
+   "paper_line": 6159,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0066",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 15 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "\\(10^{-6}\\). The setting 15 itself was not run; 10",
+   "paper_text": "offset $10^{-6}$. The setting 15 itself was not run; 10 and",
+   "paper_line": 6159,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0067",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 10 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "15 itself was not run; 10 and 20 bracket it.",
+   "paper_text": "setting 15 itself was not run; 10 and 20 bracket it. A finite-difference",
+   "paper_line": 6160,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0068",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 20 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "itself was not run; 10 and 20 bracket it.",
+   "paper_text": "itself was not run; 10 and 20 bracket it. A finite-difference",
+   "paper_line": 6160,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0069",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 50 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "Tokens kept, \\(k\\) | all | 50 | 20 | 10 | 5 | 3 | 2 |",
+   "paper_text": "\\toprule tokens kept, $k$ & all & 50 & 20 & 10 & 5 & 3 & 2 & 1 \\\\",
+   "paper_line": 6170,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0070",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 20 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "kept, \\(k\\) | all | 50 | 20 | 10 | 5 | 3 | 2 | 1 |",
+   "paper_text": "tokens kept, $k$ & all & 50 & 20 & 10 & 5 & 3 & 2 & 1 \\\\ \\midrule",
+   "paper_line": 6171,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0071",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 10 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "\\(k\\) | all | 50 | 20 | 10 | 5 | 3 | 2 | 1 |",
+   "paper_text": "kept, $k$ & all & 50 & 20 & 10 & 5 & 3 & 2 & 1 \\\\ \\midrule",
+   "paper_line": 6171,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0072",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 22 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "Steered line: chaotic | 22 | 8 | 14 | 2 | 3 | 0 |",
+   "paper_text": "($\\alpha=0.0743$)} \\\\ chaotic & 22 & 8 & 14 & 2 & 3 & 0 & 0 &",
+   "paper_line": 6173,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0073",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 14 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "line: chaotic | 22 | 8 | 14 | 2 | 3 | 0 | 0 | 0 |",
+   "paper_text": "($\\alpha=0.0743$)} \\\\ chaotic & 22 & 8 & 14 & 2 & 3 & 0 & 0 & 0 \\\\ irregular",
+   "paper_line": 6173,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0074",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 0.48 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "line: largest exponent | 0.48 | 0.37 | 0.32 | 0.24 |",
+   "paper_text": "0 & 0 \\\\ largest exponent & 0.48 & 0.37 & 0.32 & 0.24 & 0.11",
+   "paper_line": 6176,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0075",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 0.37 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "largest exponent | 0.48 | 0.37 | 0.32 | 0.24 | 0.11 |",
+   "paper_text": "\\\\ largest exponent & 0.48 & 0.37 & 0.32 & 0.24 & 0.11 & $-0.64$",
+   "paper_line": 6176,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0076",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 0.32 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "exponent | 0.48 | 0.37 | 0.32 | 0.24 | 0.11 | −0.64 |",
+   "paper_text": "largest exponent & 0.48 & 0.37 & 0.32 & 0.24 & 0.11 & $-0.64$ & $-0.21$",
+   "paper_line": 6177,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0077",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 0.24 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "| 0.48 | 0.37 | 0.32 | 0.24 | 0.11 | −0.64 | −0.21",
+   "paper_text": "exponent & 0.48 & 0.37 & 0.32 & 0.24 & 0.11 & $-0.64$ & $-0.21$",
+   "paper_line": 6177,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0078",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 0.11 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "| 0.37 | 0.32 | 0.24 | 0.11 | −0.64 | −0.21 | none",
+   "paper_text": "0.48 & 0.37 & 0.32 & 0.24 & 0.11 & $-0.64$ & $-0.21$ & -- \\\\",
+   "paper_line": 6177,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0079",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number -0.64 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "| 0.32 | 0.24 | 0.11 | −0.64 | −0.21 | none |",
+   "paper_text": "0.37 & 0.32 & 0.24 & 0.11 & $-0.64$ & $-0.21$ & -- \\\\ \\midrule",
+   "paper_line": 6177,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0080",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number -0.21 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "| 0.24 | 0.11 | −0.64 | −0.21 | none |",
+   "paper_text": "& 0.24 & 0.11 & $-0.64$ & $-0.21$ & -- \\\\ \\midrule",
+   "paper_line": 6177,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0081",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 0.21 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "line: largest exponent | 0.21 | −0.11 | 0.11 | −0.12",
+   "paper_text": "0 & 0 \\\\ largest exponent & 0.21 & $-0.11$ & 0.11 & $-0.12$",
+   "paper_line": 6181,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0082",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number -0.11 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "largest exponent | 0.21 | −0.11 | 0.11 | −0.12 | −0.41",
+   "paper_text": "largest exponent & 0.21 & $-0.11$ & 0.11 & $-0.12$ & $-0.41$",
+   "paper_line": 6182,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0083",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 0.11 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "exponent | 0.21 | −0.11 | 0.11 | −0.12 | −0.41 | −1.61",
+   "paper_text": "exponent & 0.21 & $-0.11$ & 0.11 & $-0.12$ & $-0.41$ & $-1.61$",
+   "paper_line": 6182,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0084",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number -0.12 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "| 0.21 | −0.11 | 0.11 | −0.12 | −0.41 | −1.61 | −1.29",
+   "paper_text": "& 0.21 & $-0.11$ & 0.11 & $-0.12$ & $-0.41$ & $-1.61$ & $-1.29$",
+   "paper_line": 6182,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0085",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number -0.41 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "−0.11 | 0.11 | −0.12 | −0.41 | −1.61 | −1.29 | none",
+   "paper_text": "$-0.11$ & 0.11 & $-0.12$ & $-0.41$ & $-1.61$ & $-1.29$ & -- \\\\",
+   "paper_line": 6182,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0086",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number -1.61 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "0.11 | −0.12 | −0.41 | −1.61 | −1.29 | none |",
+   "paper_text": "0.11 & $-0.12$ & $-0.41$ & $-1.61$ & $-1.29$ & -- \\\\ \\bottomrule",
+   "paper_line": 6182,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0087",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number -1.29 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "−0.12 | −0.41 | −1.61 | −1.29 | none |",
+   "paper_text": "$-0.12$ & $-0.41$ & $-1.61$ & $-1.29$ & -- \\\\ \\bottomrule",
+   "paper_line": 6182,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0088",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 128 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "class=\"figure-note\">Table U2: temperatures, of 128 on each line, at which",
+   "paper_text": "\\end{tabular} \\caption{Temperatures, of 128 on each line, at which the",
+   "paper_line": 6184,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0089",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 0.0743 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "steered line has \\(\\alpha = 0.0743\\) along philosophy. Every",
+   "paper_text": "on the steered line ($\\alpha=0.0743$ along philosophy) and on the",
+   "paper_line": 6231,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0090",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 50 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "the steered line at \\(k = 50\\) and 20, and on the unsteered",
+   "paper_text": "period. On the steered line at $k=50$ and 20, and on the unsteered",
+   "paper_line": 6187,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0091",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 20 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "line at \\(k = 50\\) and 20, and on the unsteered line",
+   "paper_text": "steered line at $k=50$ and 20, and on the unsteered line",
+   "paper_line": 6187,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0092",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 20 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "unsteered line at \\(k = 20\\), the largest exponent",
+   "paper_text": "on the unsteered line at $k=20$, the largest exponent belongs",
+   "paper_line": 6187,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0093",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 500 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "exponent is given. Float64, 500 transient and 1500 measured",
+   "paper_text": "exponent is given. Float64, 500 transient and 1500 measured",
+   "paper_line": 6189,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0094",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 1500 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "Float64, 500 transient and 1500 measured steps, one twin",
+   "paper_text": "Float64, 500 transient and 1500 measured steps, one twin at",
+   "paper_line": 6189,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0095",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 10^{-6} in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "steps, one twin at offset \\(10^{-6}\\), periods up to 64; exploratory.",
+   "paper_text": "steps, one twin at offset $10^{-6}$, periods up to 64; exploratory",
+   "paper_line": 6189,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0096",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 64 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "\\(10^{-6}\\), periods up to 64; exploratory. Source: <a",
+   "paper_text": "offset $10^{-6}$, periods up to 64; exploratory (\\laterrepo{docs/lf3-tk/topk-summary.json}).}",
+   "paper_line": 6189,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0097",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 22 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "distribution is chaotic at 22 of the 128 temperatures.",
+   "paper_text": "distribution is chaotic at 22 of the 128 temperatures. Keeping",
+   "paper_line": 6195,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0098",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 128 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "is chaotic at 22 of the 128 temperatures. Keeping 50",
+   "paper_text": "distribution is chaotic at 22 of the 128 temperatures. Keeping 50 tokens",
+   "paper_line": 6195,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0099",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 50 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "128 temperatures. Keeping 50 tokens leaves 8",
+   "paper_text": "the 128 temperatures. Keeping 50 tokens leaves 8 chaotic and",
+   "paper_line": 6195,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0100",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 20 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "irregular temperatures, keeping 20 leaves 14 and 3, keeping",
+   "paper_text": "irregular temperatures, keeping 20 leaves 14 and 3, keeping 10",
+   "paper_line": 6196,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0101",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 14 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "temperatures, keeping 20 leaves 14 and 3, keeping 10 leaves",
+   "paper_text": "temperatures, keeping 20 leaves 14 and 3, keeping 10 leaves 2",
+   "paper_line": 6196,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0102",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 10 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "leaves 14 and 3, keeping 10 leaves",
+   "paper_text": "20 leaves 14 and 3, keeping 10 leaves 2 chaotic ones and keeping",
+   "paper_line": 6196,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0103",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 17 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "temperatures also move: of the 17 temperatures with",
+   "paper_text": "temperatures also move: of the 17 temperatures with a positive",
+   "paper_line": 6198,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0104",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 20 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "positive exponent at \\(k = 20\\), 10 are among the 22",
+   "paper_text": "with a positive exponent at $k=20$, 10 are among the 22 of the",
+   "paper_line": 6198,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0105",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 10 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "exponent at \\(k = 20\\), 10 are among the 22 of the",
+   "paper_text": "positive exponent at $k=20$, 10 are among the 22 of the full",
+   "paper_line": 6198,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0106",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 22 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "20\\), 10 are among the 22 of the full distribution",
+   "paper_text": "at $k=20$, 10 are among the 22 of the full distribution and",
+   "paper_line": 6198,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0107",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 20 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "at \\(k = 20\\).",
+   "paper_text": "temperature is irregular at $k=20$. A second test follows two",
+   "paper_line": 6200,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0108",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number -0.0476 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "temperature \\(\\log_{10}T = -0.0476\\), where the full distribution",
+   "paper_text": "steered temperature $\\log_{10}T=-0.0476$, where the full distribution",
+   "paper_line": 6202,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0109",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 32 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "is chaotic, we started 32 pairs of copies on the",
+   "paper_text": "distribution is chaotic, we started 32 pairs of copies on the attractor",
+   "paper_line": 6203,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0110",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 10^{-2} in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "from \\(10^{-2}\\) to \\(10^{-10}\\). Every",
+   "paper_text": "each of five offsets from $10^{-2}$ to $10^{-10}$. Every pair",
+   "paper_line": 6203,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0111",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 10^{-10} in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "from \\(10^{-2}\\) to \\(10^{-10}\\). Every pair separated",
+   "paper_text": "offsets from $10^{-2}$ to $10^{-10}$. Every pair separated to a",
+   "paper_line": 6204,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0112",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 47 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "the largest offset and 47 at the smallest",
+   "paper_text": "steps at the largest offset and 47 at the smallest (Figure~\\ref{fig:topk}c).",
+   "paper_line": 6205,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0113",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 20 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "(Figure U1c). With 20 tokens kept the loop at",
+   "paper_text": "(Figure~\\ref{fig:topk}c). With 20 tokens kept the loop at this",
+   "paper_line": 6205,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0114",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 10^{-4} in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "U1d): copies offset by \\(10^{-4}\\) or less came",
+   "paper_text": "(Figure~\\ref{fig:topk}d): copies offset by $10^{-4}$ or less came together again",
+   "paper_line": 6206,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0115",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 10^{-2} in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "repeat. Copies offset by \\(10^{-2}\\), about 3% of the",
+   "paper_text": "every repeat. Copies offset by $10^{-2}$, about 3\\,\\% of the state's",
+   "paper_line": 6207,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0116",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 29 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "state's norm, mostly did not: 29 of the 32 pairs were still",
+   "paper_text": "state's norm, mostly did not: 29 of the 32 pairs were still",
+   "paper_line": 6207,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0117",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 32 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "mostly did not: 29 of the 32 pairs were still apart",
+   "paper_text": "norm, mostly did not: 29 of the 32 pairs were still apart after",
+   "paper_line": 6207,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0118",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 200 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "were still apart after 200 steps,",
+   "paper_text": "pairs were still apart after 200 steps, at a distance that had",
+   "paper_line": 6208,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0119",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 100 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "nor shrunk over the last 100. We did not",
+   "paper_text": "grown nor shrunk over the last 100. We did not determine whether",
+   "paper_line": 6208,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0120",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 128 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "Largest Lyapunov exponent at 128 temperatures on the steered",
+   "paper_text": "Largest Lyapunov exponent at 128 temperatures on the steered",
+   "paper_line": 6230,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0121",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 0.0743 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "steered line (\\(\\alpha = 0.0743\\) along philosophy) and",
+   "paper_text": "on the steered line ($\\alpha=0.0743$ along philosophy) and on the",
+   "paper_line": 6231,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0122",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number -0.0476 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "temperature \\(\\log_{10}T = -0.0476\\), median over 32 repeats,",
+   "paper_text": "steered temperature $\\log_{10}T=-0.0476$, median over 32 repeats, for",
+   "paper_line": 6234,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0123",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 32 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "-0.0476\\), median over 32 repeats, for five initial",
+   "paper_text": "$\\log_{10}T=-0.0476$, median over 32 repeats, for five initial offsets",
+   "paper_line": 6234,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0124",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 20 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "all tokens (c) and with 20 tokens kept (d); no renormalization.",
+   "paper_text": "with all tokens (c) and with 20 tokens kept (d); no renormalization.",
+   "paper_line": 6235,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0125",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 128,000 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "before every step. Over the 128,000 measured steps of each",
+   "paper_text": "before every step. Over the 128{,}000 measured steps of each line",
+   "paper_line": 6213,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0126",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 10^{-6} in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "offset \\(10^{-6}\\), the twin drew a different",
+   "paper_text": "steps of each line at offset $10^{-6}$, the twin drew a different",
+   "paper_line": 6214,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0127",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 508 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "drew a different token at 508 steps (unsteered) and",
+   "paper_text": "twin drew a different token at 508 steps (unsteered) and 399 (steered)",
+   "paper_line": 6214,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0128",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 399 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "399 (steered) with the full",
+   "paper_text": "at 508 steps (unsteered) and 399 (steered) with the full vocabulary,",
+   "paper_line": 6214,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0129",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 20 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "vocabulary, at 1 and 0 with 20 tokens kept, at 2 and 0",
+   "paper_text": "vocabulary, at 1 and 0 with 20 tokens kept, at 2 and 0 with",
+   "paper_line": 6215,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0130",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 50 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "with 50, and at none with 10 or",
+   "paper_text": "tokens kept, at 2 and 0 with 50, and at none with 10 or fewer.",
+   "paper_line": 6215,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0131",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 10 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "with 50, and at none with 10 or fewer. With 20 tokens",
+   "paper_text": "0 with 50, and at none with 10 or fewer. With 20 tokens kept",
+   "paper_line": 6215,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0132",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 20 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "with 10 or fewer. With 20 tokens kept the counts",
+   "paper_text": "none with 10 or fewer. With 20 tokens kept the counts were",
+   "paper_line": 6216,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0133",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 25 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "tokens kept the counts were 25 and",
+   "paper_text": "tokens kept the counts were 25 and 70 at offset $10^{-4}$",
+   "paper_line": 6216,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0134",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 70 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "70 at offset \\(10^{-4}\\) and",
+   "paper_text": "kept the counts were 25 and 70 at offset $10^{-4}$ and 2438",
+   "paper_line": 6216,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0135",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 10^{-4} in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "70 at offset \\(10^{-4}\\) and 2438 and 5647 at",
+   "paper_text": "counts were 25 and 70 at offset $10^{-4}$ and 2438 and 5647 at $10^{-2}$,",
+   "paper_line": 6216,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0136",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 2438 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "offset \\(10^{-4}\\) and 2438 and 5647 at \\(10^{-2}\\),",
+   "paper_text": "70 at offset $10^{-4}$ and 2438 and 5647 at $10^{-2}$, and",
+   "paper_line": 6216,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0137",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 5647 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "\\(10^{-4}\\) and 2438 and 5647 at \\(10^{-2}\\), and zero",
+   "paper_text": "offset $10^{-4}$ and 2438 and 5647 at $10^{-2}$, and zero at $10^{-8}$.",
+   "paper_line": 6216,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0138",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 10^{-2} in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "and 2438 and 5647 at \\(10^{-2}\\), and zero at",
+   "paper_text": "$10^{-4}$ and 2438 and 5647 at $10^{-2}$, and zero at $10^{-8}$. A",
+   "paper_line": 6216,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0139",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 10^{-8} in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "\\(10^{-8}\\). A sampled trajectory",
+   "paper_text": "at $10^{-2}$, and zero at $10^{-8}$. A sampled trajectory holds",
+   "paper_line": 6216,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0140",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 48 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "with the full vocabulary 48 of 480 runs parted, all",
+   "paper_text": "on; with the full vocabulary 48 of 480 runs parted, all at",
+   "paper_line": 6219,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0141",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 480 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "the full vocabulary 48 of 480 runs parted, all at offsets",
+   "paper_text": "with the full vocabulary 48 of 480 runs parted, all at offsets",
+   "paper_line": 6219,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0142",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 10^{-4} in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "parted, all at offsets of \\(10^{-4}\\) or",
+   "paper_text": "parted, all at offsets of $10^{-4}$ or more, and with 20 tokens",
+   "paper_line": 6220,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0143",
+   "section": "Feeding back only the most probable tokens",
+   "claim": "number 20 in 'Feeding back only the most probable tokens'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "more, and with 20 tokens kept one did.",
+   "paper_text": "$10^{-4}$ or more, and with 20 tokens kept one did. These",
+   "paper_line": 6220,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0144",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 12 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "direction added at layer 12, in float64 ([tools/real_inference_twins.py",
+   "paper_text": "philosophy direction added at layer 12, in float64 (\\laterrepo{tools/real_inference_twins.py}).",
+   "paper_line": 6243,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0145",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 10^{-8} in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "nudged by a relative \\(10^{-8}\\) or \\(10^{-3}\\) in a random",
+   "paper_text": "prompt was nudged by a relative $10^{-8}$ or $10^{-3}$ in a random direction,",
+   "paper_line": 6244,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0146",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 10^{-3} in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "relative \\(10^{-8}\\) or \\(10^{-3}\\) in a random",
+   "paper_text": "by a relative $10^{-8}$ or $10^{-3}$ in a random direction, and",
+   "paper_line": 6244,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0147",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 300 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "the nudge. We generated 300 tokens for 32 such pairs",
+   "paper_text": "through the nudge. We generated 300 tokens for 32 such pairs at",
+   "paper_line": 6246,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0148",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 32 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "generated 300 tokens for 32 such pairs",
+   "paper_text": "We generated 300 tokens for 32 such pairs at each setting,",
+   "paper_line": 6246,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0149",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 20 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "the model ships with (the 20 most",
+   "paper_text": "sampler the model ships with (the 20 most probable tokens, a cumulative-probability",
+   "paper_line": 6247,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0150",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 0.8 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "cumulative-probability cutoff of 0.8 and a repetition penalty",
+   "paper_text": "cumulative-probability cutoff of 0.8 and a repetition penalty of",
+   "paper_line": 6248,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0151",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 1.1 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "1.1) at the same temperature.",
+   "paper_text": "and a repetition penalty of 1.1) at the same temperature. We",
+   "paper_line": 6248,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0152",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 32 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "median of that rate over its 32 pairs.",
+   "paper_text": "median of that rate over its 32 pairs. The settings lie on",
+   "paper_line": 6251,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0153",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 15 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "settings lie on a line of 15 steering strengths, \\(\\alpha\\)",
+   "paper_text": "The settings lie on a line of 15 steering strengths, $\\alpha$",
+   "paper_line": 6253,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0154",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 0.073342 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "strengths, \\(\\alpha\\) from 0.073342 to",
+   "paper_text": "steering strengths, $\\alpha$ from 0.073342 to 0.073605 at $\\log_{10}T=-0.1530$,",
+   "paper_line": 6253,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0155",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 0.073605 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "0.073605 at \\(\\log_{10}T = -0.1530\\),",
+   "paper_text": "strengths, $\\alpha$ from 0.073342 to 0.073605 at $\\log_{10}T=-0.1530$, that",
+   "paper_line": 6253,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0156",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number -0.1530 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "0.073605 at \\(\\log_{10}T = -0.1530\\), that crosses the right",
+   "paper_text": "to 0.073605 at $\\log_{10}T=-0.1530$, that crosses the right edge",
+   "paper_line": 6253,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0157",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number -0.35 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "settings (exponents from \\(-0.35\\)",
+   "paper_text": "seven settings (exponents from $-0.35$ to $-0.10$ per step) and is",
+   "paper_line": 6255,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0158",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number -0.10 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "to \\(-0.10\\) per step) and is chaotic",
+   "paper_text": "(exponents from $-0.35$ to $-0.10$ per step) and is chaotic at",
+   "paper_line": 6255,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0159",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 0.14 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "chaotic at the other eight (0.14 to 0.22). As a",
+   "paper_text": "chaotic at the other eight (0.14 to 0.22). As a control without",
+   "paper_line": 6256,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0160",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 0.22 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "the other eight (0.14 to 0.22). As a",
+   "paper_text": "at the other eight (0.14 to 0.22). As a control without an edge",
+   "paper_line": 6256,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0161",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 15 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "has period 6 at all 15 settings (exponents from",
+   "paper_text": "soft map has period 6 at all 15 settings (exponents from $-0.78$",
+   "paper_line": 6257,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0162",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number -0.78 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "settings (exponents from \\(-0.78\\) to \\(-0.75\\)). Before",
+   "paper_text": "15 settings (exponents from $-0.78$ to $-0.75$). Before the run",
+   "paper_line": 6257,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0163",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number -0.75 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "(exponents from \\(-0.78\\) to \\(-0.75\\)). Before",
+   "paper_text": "(exponents from $-0.78$ to $-0.75$). Before the run we wrote",
+   "paper_line": 6258,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0164",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 0.0011 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "median rate stayed within 0.0011 per token of zero. With",
+   "paper_text": "every median rate stayed within 0.0011 per token of zero. With the",
+   "paper_line": 6262,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0165",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 305 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "nudge and plain sampling, 305 of the 480 pairs on the",
+   "paper_text": "larger nudge and plain sampling, 305 of the 480 pairs on the line",
+   "paper_line": 6263,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0166",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 480 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "plain sampling, 305 of the 480 pairs on the line differed:",
+   "paper_text": "plain sampling, 305 of the 480 pairs on the line differed:",
+   "paper_line": 6263,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0167",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 143 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "pairs on the line differed: 143 of",
+   "paper_text": "pairs on the line differed: 143 of 224 where the soft map is",
+   "paper_line": 6263,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0168",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 224 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "224 where the soft map is periodic",
+   "paper_text": "on the line differed: 143 of 224 where the soft map is periodic",
+   "paper_line": 6263,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0169",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 162 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "soft map is periodic and 162 of 256 where it is chaotic",
+   "paper_text": "the soft map is periodic and 162 of 256 where it is chaotic",
+   "paper_line": 6264,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0170",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 256 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "is periodic and 162 of 256 where it is chaotic (64",
+   "paper_text": "map is periodic and 162 of 256 where it is chaotic (64 and",
+   "paper_line": 6264,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0171",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 64 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "256 where it is chaotic (64 and 63%;",
+   "paper_text": "of 256 where it is chaotic (64 and 63\\,\\%; Figure~\\ref{fig:realinference}b).",
+   "paper_line": 6264,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0172",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 63 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "where it is chaotic (64 and 63%;",
+   "paper_text": "where it is chaotic (64 and 63\\,\\%; Figure~\\ref{fig:realinference}b).",
+   "paper_line": 6264,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0173",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 17 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "The counts per setting, 17 to 25 of 32, scatter as",
+   "paper_text": "Figure~\\ref{fig:realinference}b). The counts per setting, 17 to 25 of 32, scatter as equal",
+   "paper_line": 6265,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0174",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 25 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "counts per setting, 17 to 25 of 32, scatter as equal",
+   "paper_text": "The counts per setting, 17 to 25 of 32, scatter as equal fractions",
+   "paper_line": 6265,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0175",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 32 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "per setting, 17 to 25 of 32, scatter as equal fractions",
+   "paper_text": "counts per setting, 17 to 25 of 32, scatter as equal fractions",
+   "paper_line": 6265,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0176",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 0.69 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "allows, gives \\(p = 0.69\\)), with no change at the",
+   "paper_text": "would (a $\\chi^2$ test gives $p=0.69$), with no change at the edge.",
+   "paper_line": 6265,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0177",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 306 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "gives the same picture: 306 of 480 pairs, 17 to 25",
+   "paper_text": "edge, gives the same picture: 306 of 480 pairs, 17 to 25 per",
+   "paper_line": 6266,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0178",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 480 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "the same picture: 306 of 480 pairs, 17 to 25 per setting.",
+   "paper_text": "gives the same picture: 306 of 480 pairs, 17 to 25 per setting.",
+   "paper_line": 6266,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0179",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 17 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "picture: 306 of 480 pairs, 17 to 25 per setting. The",
+   "paper_text": "picture: 306 of 480 pairs, 17 to 25 per setting. The model's",
+   "paper_line": 6266,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0180",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 25 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "306 of 480 pairs, 17 to 25 per setting. The",
+   "paper_text": "picture: 306 of 480 pairs, 17 to 25 per setting. The model's own",
+   "paper_line": 6266,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0181",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 14 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "far fewer pairs differ: 14 of 480 on the report's",
+   "paper_text": "lets far fewer pairs differ: 14 of 480 on the paper's line",
+   "paper_line": 6267,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0182",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 480 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "fewer pairs differ: 14 of 480 on the report's line (6",
+   "paper_text": "far fewer pairs differ: 14 of 480 on the paper's line (6 of 224",
+   "paper_line": 6267,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0183",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 224 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "of 224 where the soft map is periodic,",
+   "paper_text": "480 on the paper's line (6 of 224 where the soft map is periodic,",
+   "paper_line": 6267,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0184",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 256 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "soft map is periodic, 8 of 256 where it is chaotic) and",
+   "paper_text": "soft map is periodic, 8 of 256 where it is chaotic) and 15",
+   "paper_line": 6268,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0185",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 15 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "where it is chaotic) and 15 of 480",
+   "paper_text": "256 where it is chaotic) and 15 of 480 on the second prompt's.",
+   "paper_line": 6268,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0186",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 480 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "it is chaotic) and 15 of 480",
+   "paper_text": "where it is chaotic) and 15 of 480 on the second prompt's. At",
+   "paper_line": 6268,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0187",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 0.0021 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "median rate stays within 0.0021 per token of zero, while",
+   "paper_text": "the median rate stays within 0.0021 per token of zero, while the",
+   "paper_line": 6269,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0188",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number -0.78 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "same settings range from \\(-0.78\\) to \\(+0.29\\) per step.",
+   "paper_text": "the same settings range from $-0.78$ to $+0.29$ per step. We also",
+   "paper_line": 6270,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0189",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 0.29 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "range from \\(-0.78\\) to \\(+0.29\\) per step.",
+   "paper_text": "settings range from $-0.78$ to $+0.29$ per step. We also followed",
+   "paper_line": 6270,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0190",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 611 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "texts had parted. Of the 611 pairs that",
+   "paper_text": "their texts had parted. Of the 611 pairs that parted under plain",
+   "paper_line": 6272,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0191",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 50 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "4 came together again (50 identical",
+   "paper_text": "lines, 4 came together again (50 identical tokens in a row),",
+   "paper_line": 6273,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0192",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 183 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "tokens in a row), and 183 parted after token 150,",
+   "paper_text": "identical tokens in a row), and 183 parted after token 150, too",
+   "paper_line": 6273,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0193",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 150 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "183 parted after token 150, too late for the test",
+   "paper_text": "and 183 parted after token 150, too late for the test that",
+   "paper_line": 6273,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0194",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 424 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "follows. For the other 424 we restarted each copy",
+   "paper_text": "that follows. For the other 424 we restarted each copy 50 tokens",
+   "paper_line": 6274,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0195",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 50 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "we restarted each copy 50 tokens after the parting,",
+   "paper_text": "424 we restarted each copy 50 tokens after the parting, from",
+   "paper_line": 6274,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0196",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 10^{-8} in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "\\(10^{-8}\\) (and once with none,",
+   "paper_text": "times with a fresh nudge of $10^{-8}$ (and once with none, as a",
+   "paper_line": 6275,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0197",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 423 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "none, as a control). In 423 of them every restart",
+   "paper_text": "with none, as a control). In 423 of them every restart reproduced",
+   "paper_line": 6275,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0198",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 100 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "reproduced its copy's next 100 tokens exactly; in the",
+   "paper_text": "reproduced its copy's next 100 tokens exactly; in the remaining",
+   "paper_line": 6276,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0199",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 0.014 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "the soft map equal within 0.014% (Figure U2e). Under plain",
+   "paper_text": "of the soft map equal within 0.014\\,\\% (Figure~\\ref{fig:realinference}e).",
+   "paper_line": 6281,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0200",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 78 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "and the larger nudge, 78 of 128 pairs differed in",
+   "paper_text": "sampling and the larger nudge, 78 of 128 pairs differed in the",
+   "paper_line": 6282,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0201",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 128 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "the larger nudge, 78 of 128 pairs differed in the periodic",
+   "paper_text": "and the larger nudge, 78 of 128 pairs differed in the periodic",
+   "paper_line": 6282,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0202",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 78 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "the periodic cells and 78 of 128",
+   "paper_text": "differed in the periodic cells and 78 of 128 in the chaotic ones.",
+   "paper_line": 6282,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0203",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 128 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "periodic cells and 78 of 128",
+   "paper_text": "the periodic cells and 78 of 128 in the chaotic ones. With the",
+   "paper_line": 6282,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0204",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 128 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "counts were 1 and 5 of 128.",
+   "paper_text": "the counts were 1 and 5 of 128. Fisher's exact test gives",
+   "paper_line": 6283,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0205",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 0.21 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "gives \\(p = 0.21\\) for that difference;",
+   "paper_text": "Fisher's exact test gives $p=0.21$ for that difference; the receipt",
+   "paper_line": 6283,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0206",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 10^{-3} in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "float64, exploratory; nudge \\(10^{-3}\\), 32 pairs per setting).",
+   "paper_text": "float64, exploratory; nudge $10^{-3}$, 32 pairs per setting). (a)",
+   "paper_line": 6301,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0207",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 32 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "exploratory; nudge \\(10^{-3}\\), 32 pairs per setting). (a)",
+   "paper_text": "exploratory; nudge $10^{-3}$, 32 pairs per setting). (a) The",
+   "paper_line": 6301,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0208",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 32 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "chaotic. (b) Pairs, of 32, whose texts differ within",
+   "paper_text": "it is chaotic. (b) Pairs, of 32, whose texts differ within",
+   "paper_line": 6306,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0209",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 300 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "whose texts differ within 300 tokens. Gray band: the",
+   "paper_text": "32, whose texts differ within 300 tokens. Gray band: the range",
+   "paper_line": 6306,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0210",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 15 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "fraction were the same at all 15 settings (95%). (c), (d)",
+   "paper_text": "fraction were the same at all 15 settings (95\\,\\%). (c,~d) The",
+   "paper_line": 6307,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0211",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 95 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "same at all 15 settings (95%). (c), (d) The same for",
+   "paper_text": "the same at all 15 settings (95\\,\\%). (c,~d) The same for a",
+   "paper_line": 6307,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0212",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 32 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "pairs of cells: pairs of 32 whose texts differ at the",
+   "paper_text": "matched pairs of cells: pairs of 32 whose texts differ at the periodic",
+   "paper_line": 6308,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0213",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 10^{-8} in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "pair. With the nudge \\(10^{-8}\\) no pair of texts differed",
+   "paper_text": "each pair. With the nudge $10^{-8}$ no pair of texts differed",
+   "paper_line": 6309,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0214",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 300 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "neither grows nor fades over 300 tokens. The texts part",
+   "paper_text": "neither grows nor fades over 300 tokens. The texts part only",
+   "paper_line": 6290,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0215",
+   "section": "Ordinary generation at the soft map's settings",
+   "claim": "number 300 in 'Ordinary generation at the soft map's settings'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "matched pairs of cells, 300 tokens, a nudge of the",
+   "paper_text": "four matched pairs of cells, 300 tokens, a nudge of the first",
+   "paper_line": 6293,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0216",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 24 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "built differently: of its 24 blocks, 13 are gated convolutions",
+   "paper_text": "is built differently: of its 24 blocks, 13 are gated convolutions",
+   "paper_line": 6519,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0217",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 13 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "differently: of its 24 blocks, 13 are gated convolutions",
+   "paper_text": "differently: of its 24 blocks, 13 are gated convolutions over",
+   "paper_line": 6519,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0218",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 256 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "to a sliding window of 256 tokens and 6 attend to",
+   "paper_text": "attend to a sliding window of 256 tokens and 6 attend to the",
+   "paper_line": 6520,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0219",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 12 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "12 of 24. The weights are",
+   "paper_text": "Qwen3.5) and steering at layer 12 of 24. The weights are stored",
+   "paper_line": 6524,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0220",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 24 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "12 of 24. The weights are stored",
+   "paper_text": "and steering at layer 12 of 24. The weights are stored in",
+   "paper_line": 6524,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0221",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 16 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "weights are stored in a 16-bit format, so the cast",
+   "paper_text": "The weights are stored in a 16-bit format, so the cast to",
+   "paper_line": 6524,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0222",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 10^{-15} in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "recomputation to within \\(10^{-15}\\)",
+   "paper_text": "full recomputation to within $10^{-15}$ (\\laterrepo{tools/lfm3_precision_check.py}).",
+   "paper_line": 6527,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0223",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 160 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "checkpoint is chaotic at 3 of 160 temperatures between",
+   "paper_text": "checkpoint is chaotic at 3 of 160 temperatures between $\\log_{10}T=-1$",
+   "paper_line": 6531,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0224",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 1.2 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "\\(\\log_{10}T = -1\\) and 1.2 and the post-trained one",
+   "paper_text": "between $\\log_{10}T=-1$ and $1.2$ and the post-trained one at",
+   "paper_line": 6531,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0225",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 12 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "the post-trained one at 12, with largest",
+   "paper_text": "and the post-trained one at 12, with largest exponents of",
+   "paper_line": 6531,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0226",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 0.45 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "exponents of 0.45 and 0.50 per step; all",
+   "paper_text": "12, with largest exponents of 0.45 and 0.50 per step; all 15 temperatures",
+   "paper_line": 6531,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0227",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 0.50 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "exponents of 0.45 and 0.50 per step; all 15 temperatures",
+   "paper_text": "largest exponents of 0.45 and 0.50 per step; all 15 temperatures",
+   "paper_line": 6532,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0228",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 15 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "and 0.50 per step; all 15 temperatures lie between",
+   "paper_text": "0.45 and 0.50 per step; all 15 temperatures lie between $\\log_{10}T=-0.08$",
+   "paper_line": 6532,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0229",
+   "section": "A model built mostly from convolutions",
+   "claim": "number -0.08 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "\\(\\log_{10}T = -0.08\\) and 0.18. On 32 × 32",
+   "paper_text": "temperatures lie between $\\log_{10}T=-0.08$ and $0.18$. On $32\\times32$",
+   "paper_line": 6532,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0230",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 0.18 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "\\(\\log_{10}T = -0.08\\) and 0.18. On 32 × 32 maps the base",
+   "paper_text": "between $\\log_{10}T=-0.08$ and $0.18$. On $32\\times32$ maps the",
+   "paper_line": 6532,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0231",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 32 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "= -0.08\\) and 0.18. On 32 × 32 maps the base checkpoint",
+   "paper_text": "$\\log_{10}T=-0.08$ and $0.18$. On $32\\times32$ maps the base checkpoint",
+   "paper_line": 6532,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0232",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 32 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "-0.08\\) and 0.18. On 32 × 32 maps the base checkpoint",
+   "paper_text": "$\\log_{10}T=-0.08$ and $0.18$. On $32\\times32$ maps the base checkpoint",
+   "paper_line": 6532,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0233",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 20 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "20 of 1024 cells with steering",
+   "paper_text": "base checkpoint is chaotic at 20 of 1024 cells with steering",
+   "paper_line": 6533,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0234",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 1024 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "20 of 1024 cells with steering along",
+   "paper_text": "checkpoint is chaotic at 20 of 1024 cells with steering along philosophy",
+   "paper_line": 6533,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0235",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 63 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "along philosophy and at 63 along hostility versus",
+   "paper_text": "steering along philosophy and at 63 along hostility-vs-kindness,",
+   "paper_line": 6533,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0236",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 162 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "the post-trained one at 162 and 280. In each scan the",
+   "paper_text": "and the post-trained one at 162 and 280. In each scan the post-trained",
+   "paper_line": 6534,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0237",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 280 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "post-trained one at 162 and 280. In each scan the post-trained",
+   "paper_text": "post-trained one at 162 and 280. In each scan the post-trained",
+   "paper_line": 6534,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0238",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 0.3 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "network factor between 0.3 and 6 nats",
+   "paper_text": "median network factor between 0.3 and 6 nats (Section~\\ref{sec:sizemain})",
+   "paper_line": 6535,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0239",
+   "section": "A model built mostly from convolutions",
+   "claim": "number -0.42 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "damping: \\(-0.42\\) for the base checkpoint",
+   "paper_text": "direction, toward less damping: $-0.42$ for the base checkpoint and",
+   "paper_line": 6536,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0240",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 0.53 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "base checkpoint and \\(+0.53\\) for the post-trained",
+   "paper_text": "for the base checkpoint and $+0.53$ for the post-trained one,",
+   "paper_line": 6536,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0241",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 0.27 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "corresponds to \\(\\alpha\\) between 0.27 and 0.55, against 0.043",
+   "paper_text": "corresponds to $\\alpha$ between 0.27 and 0.55, against 0.043 in",
+   "paper_line": 6539,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0242",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 0.55 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "\\(\\alpha\\) between 0.27 and 0.55, against 0.043 in Qwen2.5-0.5B",
+   "paper_text": "to $\\alpha$ between 0.27 and 0.55, against 0.043 in Qwen2.5-0.5B",
+   "paper_line": 6539,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0243",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 0.043 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "0.27 and 0.55, against 0.043 in Qwen2.5-0.5B",
+   "paper_text": "between 0.27 and 0.55, against 0.043 in Qwen2.5-0.5B (Section~\\ref{sec:map}),",
+   "paper_line": 6540,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0244",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 0.12 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "probe](#steering-as-a-probe)), and the maps stop at 0.12.",
+   "paper_text": "(Section~\\ref{sec:map}), and the maps stop at $0.12$. These labels are coarser",
+   "paper_line": 6540,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0245",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 10^{-6} in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "offset (\\(10^{-6}\\)), one prompt and 300",
+   "paper_text": "rests on one twin offset ($10^{-6}$), one prompt and 300 measured",
+   "paper_line": 6542,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0246",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 300 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "(\\(10^{-6}\\)), one prompt and 300 measured steps per map",
+   "paper_text": "($10^{-6}$), one prompt and 300 measured steps per map cell;",
+   "paper_line": 6542,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0247",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 160 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "largest Lyapunov exponent at 160 temperatures (1000 transient",
+   "paper_text": "largest Lyapunov exponent at 160 temperatures (1000 transient",
+   "paper_line": 6553,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0248",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 1000 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "exponent at 160 temperatures (1000 transient and 2000 measured",
+   "paper_text": "exponent at 160 temperatures (1000 transient and 2000 measured",
+   "paper_line": 6553,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0249",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 2000 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "temperatures (1000 transient and 2000 measured steps), drawn",
+   "paper_text": "temperatures (1000 transient and 2000 measured steps), drawn at $-1.5$",
+   "paper_line": 6553,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0250",
+   "section": "A model built mostly from convolutions",
+   "claim": "number -1.5 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "measured steps), drawn at \\(-1.5\\) where it is lower. Red:",
+   "paper_text": "measured steps), drawn at $-1.5$ where it is lower. Red: chaotic",
+   "paper_line": 6553,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0251",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 10^{-3} in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "chaotic (an exponent above \\(10^{-3}\\) and no detected period",
+   "paper_text": "chaotic (an exponent above $10^{-3}$ and no detected period up",
+   "paper_line": 6554,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0252",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 64 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "no detected period up to 64); blue: a detected period;",
+   "paper_text": "and no detected period up to 64); blue: a detected period;",
+   "paper_line": 6554,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0253",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 12 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "philosophy direction at layer 12: 32 × 32 cells, 300 transient",
+   "paper_text": "philosophy direction at layer 12: $32\\times32$ cells, 300 transient",
+   "paper_line": 6555,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0254",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 32 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "direction at layer 12: 32 × 32 cells, 300 transient",
+   "paper_text": "direction at layer 12: $32\\times32$ cells, 300 transient and 300",
+   "paper_line": 6555,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0255",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 32 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "direction at layer 12: 32 × 32 cells, 300 transient and",
+   "paper_text": "direction at layer 12: $32\\times32$ cells, 300 transient and 300",
+   "paper_line": 6555,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0256",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 300 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "layer 12: 32 × 32 cells, 300 transient and 300 measured",
+   "paper_text": "layer 12: $32\\times32$ cells, 300 transient and 300 measured",
+   "paper_line": 6555,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0257",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 300 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "cells, 300 transient and 300 measured steps, periods",
+   "paper_text": "layer 12: $32\\times32$ cells, 300 transient and 300 measured",
+   "paper_line": 6555,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0258",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 32 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "measured steps, periods up to 32; color: largest exponent,",
+   "paper_text": "measured steps, periods up to 32; color: largest exponent, clipped",
+   "paper_line": 6556,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0259",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 12 in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "chaotic cells; the 3 to 12 cells per map with neither",
+   "paper_text": "of chaotic cells; the 3 to 12 cells per map with neither",
+   "paper_line": 6557,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0260",
+   "section": "A model built mostly from convolutions",
+   "claim": "number 10^{-6} in 'A model built mostly from convolutions'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "rests on one twin offset, \\(10^{-6}\\). Plot script: <a",
+   "paper_text": "rests on one twin offset, $10^{-6}$ (\\laterrepo{tools/plot_lfm3.py}).}",
+   "paper_line": 6558,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0261",
+   "section": "A second system: recurrent depth",
+   "claim": "number 1.074 in 'A second system: recurrent depth'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "thresholds above (\\(\\lambda_c = 1.074\\) to",
+   "paper_text": "thresholds above ($\\lambda_c=1.074$--$1.126$) belong to five zero-shot",
+   "paper_line": 4482,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0262",
+   "section": "A second system: recurrent depth",
+   "claim": "number 1.126 in 'A second system: recurrent depth'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "1.126) belong to five zero-shot",
+   "paper_text": "above ($\\lambda_c=1.074$--$1.126$) belong to five zero-shot",
+   "paper_line": 4482,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0263",
+   "section": "A second system: recurrent depth",
+   "claim": "number -1.158 in 'A second system: recurrent depth'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "a real multiplier of \\(-1.158\\), stable",
+   "paper_text": "float32: a real multiplier $-1.158$, stable only for $\\lambda<0.927$).",
+   "paper_line": 4484,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0264",
+   "section": "A second system: recurrent depth",
+   "claim": "number 0.927 in 'A second system: recurrent depth'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "only for \\(\\lambda < 0.927\\)). Generation breaks earlier",
+   "paper_text": "$-1.158$, stable only for $\\lambda<0.927$). Generation breaks earlier",
+   "paper_line": 4484,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov10-0265",
+   "section": "A second system: recurrent depth",
+   "claim": "number 1.2 in 'A second system: recurrent depth'; added after arxiv-v1 at paper 3e831483",
+   "appears_as": "1.2 is the one [Wang et al.,",
+   "paper_text": "over tokens. The collapse at $1.2$ is the one \\citet{wang2026taps}",
+   "paper_line": 4486,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
   }
  ],
  "extensions": [

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Memory on praxagent Research Notes</title>
-    <link>http://127.0.0.1:8000/blog/tags/memory/</link>
+    <link>https://praxagent.ai/blog/tags/memory/</link>
     <description>Recent content in Memory on praxagent Research Notes</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 03 Nov 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://127.0.0.1:8000/blog/tags/memory/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://praxagent.ai/blog/tags/memory/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Too Many Secrets: Hiding bits and logic in a language-model feedback loop</title>
-      <link>http://127.0.0.1:8000/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/</link>
+      <link>https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/</link>
       <pubDate>Tue, 03 Nov 2026 00:00:00 +0000</pubDate>
-      <guid>http://127.0.0.1:8000/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/</guid>
+      <guid>https://praxagent.ai/blog/posts/2026/11/bits-in-language-model-dynamics-short-read/</guid>
       <description>Run as a feedback loop, a language model’s numerical behavior, rather than its words, carried complete requests and replies, held a written bit, and ran simple logic on it. A visual summary of what worked, what fell short, and why this is a channel rather than a secret.</description>
     </item>
   </channel>

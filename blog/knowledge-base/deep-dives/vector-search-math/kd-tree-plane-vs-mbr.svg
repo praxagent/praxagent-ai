@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="580" viewBox="0 0 1040 580" role="img" aria-labelledby="pm-title pm-desc">
+  <title id="pm-title">Plane distance can be small while the far points sit far away; a tight MBR captures that gap</title>
+  <desc id="pm-desc">Two side-by-side plots. In both, a query sits left of a vertical split plane with a dashed best-neighbor circle that crosses the plane, and four far-side points sit in a distant upper-right cluster. The left plot shades the whole far half-plane and marks the short horizontal distance from the query to the plane; because that distance is less than the best radius, the plane test cannot prune. The right plot draws a tight box only around the four far points and marks the longer distance from the query to that box; because the box distance exceeds the best radius, the MBR test can prune.</desc>
+  <defs>
+    <marker id="pmArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#A67C52"/>
+    </marker>
+    <style>
+      .t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}
+      .title{font-size:20px;font-weight:700}
+      .h{font-size:14px;font-weight:700}
+      .s{font-size:12px}
+      .m{font-size:11px;fill:#5A544C}
+      .xs{font-size:11px;fill:#5A544C}
+      .panel{fill:#FBF9F6;stroke:#C4B8A8;stroke-width:1.4}
+      .plot{fill:#FFFFFF;stroke:#DCD3C6;stroke-width:1}
+      .plane{stroke:#4B6787;stroke-width:2.8}
+      .point{fill:#4B6787;stroke:#FFFFFF;stroke-width:1.5}
+      .query{fill:#A67C52;stroke:#FFFFFF;stroke-width:1.5}
+      .ball{fill:#F7E8D8;fill-opacity:.35;stroke:#A67C52;stroke-width:2;stroke-dasharray:6 4}
+      .half{fill:#4B6787;fill-opacity:.12}
+      .mbr{fill:#5A7346;fill-opacity:.16;stroke:#5A7346;stroke-width:2.5}
+      .measure{stroke:#8B3A3A;stroke-width:2.2}
+      .flow{fill:none;stroke:#A67C52;stroke-width:2;marker-end:url(#pmArrow)}
+    </style>
+  </defs>
+
+  <rect width="1040" height="580" fill="#F7F4F0"/>
+  <text class="t title" x="24" y="34">Why a tight MBR can prune when the plane cannot</text>
+  <text class="t m" x="24" y="56">Same query, same split plane, same far points. Left: bound = whole half-plane. Right: bound = box of the points.</text>
+
+  <!-- LEFT PANEL -->
+  <rect class="panel" x="20" y="78" width="470" height="460" rx="12"/>
+  <text class="t h" x="40" y="108">A. Plane test</text>
+  <text class="t m" x="40" y="128">Ask only: is the plane closer than the best neighbor?</text>
+
+  <!-- plot frame -->
+  <rect class="plot" x="50" y="148" width="410" height="300"/>
+  <!-- far half-plane -->
+  <rect class="half" x="230" y="148" width="230" height="300"/>
+  <!-- split -->
+  <line class="plane" x1="230" y1="148" x2="230" y2="448"/>
+  <!-- Region labels kept away from the far-point cluster -->
+  <text class="t xs" x="140" y="170" text-anchor="middle" fill="#5A544C" font-weight="700">near side</text>
+  <text class="t xs" x="345" y="430" text-anchor="middle" fill="#3C5570" font-weight="700">far half-plane</text>
+  <text class="t xs" x="345" y="446" text-anchor="middle" fill="#3C5570">(includes empty space)</text>
+
+  <!-- query + ball: center (175, 320), r=70 crosses plane at 230 -->
+  <circle class="ball" cx="175" cy="320" r="70"/>
+  <circle class="query" cx="175" cy="320" r="8"/>
+  <text class="t s" x="120" y="325" text-anchor="end" fill="#A67C52" font-weight="700">q</text>
+
+  <!-- short plane-distance bracket at query y -->
+  <line class="measure" x1="175" y1="320" x2="230" y2="320"/>
+  <line class="measure" x1="175" y1="312" x2="175" y2="328"/>
+  <line class="measure" x1="230" y1="312" x2="230" y2="328"/>
+  <text class="t xs" x="202" y="308" text-anchor="middle" fill="#8B3A3A" font-weight="700">diff</text>
+
+  <!-- far cluster in the upper-right corner -->
+  <circle class="point" cx="390" cy="195" r="7"/>
+  <circle class="point" cx="410" cy="210" r="7"/>
+  <circle class="point" cx="405" cy="180" r="7"/>
+  <circle class="point" cx="425" cy="195" r="7"/>
+  <text class="t xs" x="408" y="165" text-anchor="middle" fill="#2C2924" font-weight="700">far points</text>
+
+  <!-- footer verdict, outside plot -->
+  <text class="t s" x="255" y="480" text-anchor="middle" font-weight="700">diff &lt; best radius</text>
+  <text class="t m" x="255" y="500" text-anchor="middle">Ball crosses the plane, so the far child stays open</text>
+  <text class="t m" x="255" y="518" text-anchor="middle">even though the far points are far from q.</text>
+
+  <!-- connector: arrow only, no overlapping words -->
+  <path class="flow" d="M500 300 H540"/>
+
+  <!-- RIGHT PANEL -->
+  <rect class="panel" x="550" y="78" width="470" height="460" rx="12"/>
+  <text class="t h" x="570" y="108">B. Tight MBR test</text>
+  <text class="t m" x="570" y="128">Ask: is the box of those far points closer than best?</text>
+
+  <rect class="plot" x="580" y="148" width="410" height="300"/>
+  <line class="plane" x1="760" y1="148" x2="760" y2="448"/>
+  <text class="t xs" x="670" y="170" text-anchor="middle" fill="#5A544C" font-weight="700">near side</text>
+  <text class="t xs" x="860" y="170" text-anchor="middle" fill="#5A544C" font-weight="700">far side</text>
+
+  <!-- same query/ball, shifted +530 -->
+  <circle class="ball" cx="705" cy="320" r="70"/>
+  <circle class="query" cx="705" cy="320" r="8"/>
+  <text class="t s" x="705" y="300" text-anchor="middle" fill="#A67C52" font-weight="700">q</text>
+
+  <!-- tight MBR around far cluster only -->
+  <rect class="mbr" x="900" y="170" width="70" height="60" rx="3"/>
+  <circle class="point" cx="910" cy="200" r="7"/>
+  <circle class="point" cx="930" cy="215" r="7"/>
+  <circle class="point" cx="925" cy="185" r="7"/>
+  <circle class="point" cx="945" cy="200" r="7"/>
+  <text class="t xs" x="935" y="160" text-anchor="middle" fill="#3F5A34" font-weight="700">tight MBR</text>
+
+  <!-- long box-distance: from query to left face of MBR (horizontal then note) -->
+  <line class="measure" x1="705" y1="320" x2="900" y2="230"/>
+  <circle cx="900" cy="230" r="4" fill="#8B3A3A"/>
+  <text class="t xs" x="800" y="260" text-anchor="middle" fill="#8B3A3A" font-weight="700">box distance</text>
+
+  <text class="t s" x="785" y="480" text-anchor="middle" font-weight="700">box distance &gt; best radius</text>
+  <text class="t m" x="785" y="500" text-anchor="middle">The empty far space is no longer part of the bound,</text>
+  <text class="t m" x="785" y="518" text-anchor="middle">so the far child can be pruned.</text>
+</svg>
