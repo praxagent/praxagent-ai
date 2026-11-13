@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-10",
+  "kind": "correction and update after an audit of the article against later findings; no new figures",
+  "extends": "revision-20261025.receipt.json (its figure and claim sources stay in force; its page_sha256 is that of the page before this revision)",
+  "source_article": {
+    "arxiv": "2610.31692v1",
+    "url": "https://arxiv.org/abs/2610.31692v1",
+    "title": "Chaos and bifurcations in continuous language-model feedback",
+    "latex_source": "/data2/chaos-journal-neural-shrimp/main.tex",
+    "latex_source_sha256": "6e8978f89002afd97600f8ab98d629061865a555bd608d9448f60a0ae5e04b30",
+    "source_commit": "29279a5389bfc4df25e5cfcc5e07d02e61cfafe1",
+    "note": "the article source as revised on 10 November 2026; the arXiv record is still version 1, which does not contain these changes"
+  },
+  "research_commit": "3e83148389687e6728186792b589a2b6d392b6f2",
+  "page_sha256": "09b0ad4dacb7f756004d9937b9830584bb7d94f7993b379f8f816fc985371251",
+  "previous_page_sha256": "a266801e521f1dd4f7faa533802ca4d964b5727009267e58a33e9fdbc7df377a",
+  "figures": "unchanged; see revision-20261025.receipt.json",
+  "claims": {
+    "attractor_video_caveat": "research repo docs/batch-fate/bf1-receipt.json and the full report's passage 'Whether this set is an attractor' (paper/llm/main.tex at the research commit): 64 further starts followed for 5000 steps in float64 in three batch layouts; 5, 5 and 4 captured by a periodic orbit; revised article Sec. VI, portrait paragraph",
+    "rotation_video_restarts": "research repo docs/morph-continuity.json (120 frames, 11 seam pairs) and docs/morph-fill-receipt.json: the first map and eleven later ones start from the fixed start; every other map continues from the final states of the previous angle",
+    "scope_ordinary_generation": "research repo docs/ri/ri1-receipt.json and the full report's passage on ordinary generation at the soft map's settings (exploratory); revised article Discussion"
+  },
+  "review": [
+    "Attractor video caption: added that some trajectories leave the chaotic set for a repeating cycle in longer runs, so the set may be a long-lived chaotic transient.",
+    "Rotation video caption: corrected the statement that every map continues from the previous angle; the first map and eleven later ones start afresh, and the film can jump at those eleven angles.",
+    "Scope paragraph: added one sentence on the exploratory test of ordinary sampled generation.",
+    "Footer: added a link to this receipt."
+  ]
+}

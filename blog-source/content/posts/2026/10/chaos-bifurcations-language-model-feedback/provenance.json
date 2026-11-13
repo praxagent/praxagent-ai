@@ -10,7 +10,7 @@
   "sha256": "aa66f33bc2b54da5c3f1f96f384a387c1394f4d06240e0360b0a08ed2a3ee716",
   "note": "Pinned to the final report, commit 13145281 (the supplementary report that accompanies the article of the same title). On 20 October 2026 the annotated release tag arxiv-v1 of the research repository points to this commit; the note links to the repository at that tag. Round 14 rebound every entry to this commit and recomputed its paper_line."
  },
- "verification": "For each entry, (1) appears_as occurs in index.md after replacing en dashes, em dashes and minus signs with hyphens and removing asterisks, as scripts/check_provenance.py checks; (2) paper_text occurs in its paper_file (paper/llm/main.tex, or paper/llm/figures/fig-readout-gain.tex for three entries) at the stated commit (13145281 for this manifest; an entry with paper_commit is checked at that commit instead: 1b718635 for the corrections of 26 October 2026, and 3e831483, a later commit of the report on the main branch, for the entries added or corrected on 10 November 2026, whose ids begin with nov10 or whose claims end with 'at paper 3e831483') after collapsing runs of whitespace to single spaces, and paper_line is the line of that file on which the phrase begins. For the memory extension run python verify_memory_update.py --verify --research-repo /path/to/neural-shrimp; this re-derives added numerical claims and verifies receipt, source and asset hashes. For the walkthroughs extension run python verify_walkthroughs.py --verify --research-repo /path/to/neural-shrimp; this re-renders every added number from its receipt and checks the copies against the pinned commit. For the huginn-item18 extension run python verify_walkthroughs.py --verify --extension huginn-item18-20261103 --research-repo /path/to/neural-shrimp; it re-renders the frozen test's numbers without item 18 from that receipt and checks the copy against the pinned commit.",
+ "verification": "For each entry, (1) appears_as occurs in index.md after replacing en dashes, em dashes and minus signs with hyphens and removing asterisks, as scripts/check_provenance.py checks; (2) paper_text occurs in its paper_file (paper/llm/main.tex, or paper/llm/figures/fig-readout-gain.tex for three entries) at the stated commit (13145281 for this manifest; an entry with paper_commit is checked at that commit instead: 1b718635 for the corrections of 26 October 2026, and 3e831483, a later commit of the report on the main branch, for the entries added or corrected on 10 November 2026, whose ids begin with nov10 or whose claims end with 'at paper 3e831483', and 3bde65ce, a still later commit, for the entries of the census of 12 November 2026, whose ids begin with nov12 or whose claims end with 'at paper 3bde65ce') after collapsing runs of whitespace to single spaces, and paper_line is the line of that file on which the phrase begins. For the memory extension run python verify_memory_update.py --verify --research-repo /path/to/neural-shrimp; this re-derives added numerical claims and verifies receipt, source and asset hashes. For the walkthroughs extension run python verify_walkthroughs.py --verify --research-repo /path/to/neural-shrimp; this re-renders every added number from its receipt and checks the copies against the pinned commit. For the huginn-item18 extension run python verify_walkthroughs.py --verify --extension huginn-item18-20261103 --research-repo /path/to/neural-shrimp; it re-renders the frozen test's numbers without item 18 from that receipt and checks the copy against the pinned commit.",
  "receipts": {
   "paper/llm/main.tex": "aa66f33bc2b54da5c3f1f96f384a387c1394f4d06240e0360b0a08ed2a3ee716",
   "paper/llm/figures/fig-readout-gain.tex": "e31af7a1cab1d1fb40cf5028255b22e4f8a4a154fe764948c0da3daa79217cb5",
@@ -130,7 +130,8 @@
   "mixed-junction-publication-production.json": "a61fef2f8af572f294be51354d4a4d9f00ee92f1c3341ad99d3be54ead27cd70",
   "mixed-junction-publication-visual-review.json": "7efb62c5016281401791858c1761122311926a21072e6445434e4a9ff0f401a4",
   "fig-memory-mixed-junction.receipt.json": "bf74d5568eabf1f22cbfcc9a9be04dec3f45bd325b60d58ea4ca94d9b91786d7",
-  "paper/llm/main.tex at 3e83148389687e6728186792b589a2b6d392b6f2": "5a944514b37e927aa3c3241e1957f91051c5493f2340baf7729a00e26097c671"
+  "paper/llm/main.tex at 3e83148389687e6728186792b589a2b6d392b6f2": "5a944514b37e927aa3c3241e1957f91051c5493f2340baf7729a00e26097c671",
+  "paper/llm/main.tex at 3bde65ceb3d6b5f98784d117f116f8e8d36dd682": "f272fad9417730a1ed52d3c6c94534e74e0d1bfacd9ea89f640c4953960b58eb"
  },
  "figures": [
   "fig-alpha0.png",
@@ -245,7 +246,8 @@
   "fig-free-orbit-words.png",
   "fig-topk.png",
   "fig-real-inference.png",
-  "fig-lfm3.png"
+  "fig-lfm3.png",
+  "fig-batch-fate-long.png"
  ],
  "figure_sha256": {
   "fig-alpha0.png": "100dc997a923e123038d5bf8d321eb77fd148cce36b959402c67556d154ef166",
@@ -360,7 +362,8 @@
   "fig-free-orbit-words.png": "f53393e40871f75adbdfcc47b40355341ca3c56b72953b73736d5749933c9145",
   "fig-topk.png": "1e28419917afcd2196e6b41cfbe5504d2169ca2c6d4918c414863a6e47a0bf91",
   "fig-real-inference.png": "4a4182d225470c528e71251e2cfd906bc86b5c8ae3d3bd3c1f3bd42d5a82ef82",
-  "fig-lfm3.png": "af320d5f52401d4c7833c683ee060e66ba97fbca6e1accb1147c02124c4961b5"
+  "fig-lfm3.png": "af320d5f52401d4c7833c683ee060e66ba97fbca6e1accb1147c02124c4961b5",
+  "fig-batch-fate-long.png": "f047369ada955686738cbe59cbcb644f0c70a92a2f0682ad6fc93ad7a9f04061"
  },
  "figure_sources": {
   "fig-alpha0.png": "paper/llm/figures/fig-alpha0.png (byte-identical copy)",
@@ -527,7 +530,8 @@
   "fig-free-orbit-words.png": "docs/figure-walkthroughs/fig-free-orbit-words.png at 840e6c9a2d931fb236055de0d9698a78f0400d4d (byte-identical copy; signed-coordinate revision)",
   "fig-topk.png": "paper/llm/figures/fig-topk.png at 0399fee2e9537a50993482aea8ec417e70286ac4 (byte-identical copy)",
   "fig-real-inference.png": "paper/llm/figures/fig-real-inference.png at 0399fee2e9537a50993482aea8ec417e70286ac4 (byte-identical copy)",
-  "fig-lfm3.png": "paper/llm/figures/fig-lfm3.png at 0399fee2e9537a50993482aea8ec417e70286ac4 (byte-identical copy)"
+  "fig-lfm3.png": "paper/llm/figures/fig-lfm3.png at 0399fee2e9537a50993482aea8ec417e70286ac4 (byte-identical copy)",
+  "fig-batch-fate-long.png": "paper/llm/figures/fig-batch-fate-long.png at bad2d5c576e913ab9472cd3b2faefa6d769f60ad (byte-identical copy)"
  },
  "other_files": {
   "og-card.png": {
@@ -45850,22 +45854,22 @@
   {
    "id": "nov10-0042",
    "section": "Whether this set is an attractor",
-   "claim": "number 64 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
-   "appears_as": "trajectory, most of the 64 starts would be captured",
-   "paper_text": "uncaptured trajectory, most of the 64 starts would be captured within",
-   "paper_line": 1255,
+   "claim": "number 64 in 'Whether this set is an attractor'; added after arxiv-v1; rebound on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "about 50 of the 64 starts are captured within",
+   "paper_text": "about 50 of the 64 starts are captured within $10^5$ steps",
+   "paper_line": 1261,
    "paper_file": "paper/llm/main.tex",
-   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
   },
   {
    "id": "nov10-0043",
    "section": "Whether this set is an attractor",
-   "claim": "number 10 in 'Whether this set is an attractor'; added after arxiv-v1 at paper 3e831483",
-   "appears_as": "\\(10^5\\) steps. If the set is",
-   "paper_text": "starts would be captured within $10^5$ steps. If the set is an",
-   "paper_line": 1255,
+   "claim": "number 10 in 'Whether this set is an attractor'; added after arxiv-v1; rebound on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "\\(10^5\\) steps (36 to 59 over the",
+   "paper_text": "captured within $10^5$ steps (36 to 59 over the",
+   "paper_line": 1261,
    "paper_file": "paper/llm/main.tex",
-   "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
   },
   {
    "id": "nov10-0044",
@@ -48086,6 +48090,406 @@
    "paper_line": 4486,
    "paper_file": "paper/llm/main.tex",
    "paper_commit": "3e83148389687e6728186792b589a2b6d392b6f2"
+  },
+  {
+   "id": "nov12-0001",
+   "section": "What the attractors look like",
+   "claim": "number 60,000 in 'What the attractors look like'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "60,000 steps, so it is a long-lived chaotic transient rather than an attractor",
+   "paper_text": "60\\,000 steps, so it is a long-lived chaotic transient rather than an attractor",
+   "paper_line": 1192,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0002",
+   "section": "What the attractors look like",
+   "claim": "numbers 10^5; 53; 64 in 'What the attractors look like'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "followed for \\(10^5\\) steps, 53 of 64 trajectories left it for a periodic orbit",
+   "paper_text": "followed for $10^5$ steps, 53 of 64 trajectories left it for a periodic orbit",
+   "paper_line": 1335,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0003",
+   "section": "Whether this set is an attractor",
+   "claim": "number 5000 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "Runs of 5000 steps cannot tell the two apart,",
+   "paper_text": "Runs of 5000 steps cannot tell the two apart,",
+   "paper_line": 1259,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0004",
+   "section": "Whether this set is an attractor",
+   "claim": "number 50 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "about 50 of the 64 starts are captured",
+   "paper_text": "about 50 of the 64 starts are captured within",
+   "paper_line": 1261,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0005",
+   "section": "Whether this set is an attractor",
+   "claim": "numbers 36; 59 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "(36 to 59 over the",
+   "paper_text": "(36 to 59 over the 95\\,\\%",
+   "paper_line": 1261,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0006",
+   "section": "Whether this set is an attractor",
+   "claim": "number 95 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "95% interval of that rate). If the set is an attractor whose",
+   "paper_text": "95\\,\\% interval of that rate). If the set is an attractor whose",
+   "paper_line": 1261,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0007",
+   "section": "Whether this set is an attractor",
+   "claim": "numbers 64; 10^5 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "the same 64 starts for \\(10^5\\) steps, as one batch in",
+   "paper_text": "the same 64 starts for $10^5$ steps, as one batch in float64 on the CPU",
+   "paper_line": 1265,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0008",
+   "section": "Whether this set is an attractor",
+   "claim": "numbers 10^5; 53; 64 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "\\(10^5\\), 53 of the 64 starts had been captured",
+   "paper_text": "By step $10^5$, 53 of the 64 starts had been captured",
+   "paper_line": 1267,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0009",
+   "section": "Whether this set is an attractor",
+   "claim": "numbers 32; 21 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "32 came in the first half of the run and 21 in the second",
+   "paper_text": "32 came in the first half of the run and 21 in the second",
+   "paper_line": 1268,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0010",
+   "section": "Whether this set is an attractor",
+   "claim": "numbers 899; 96,913 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "the first at step 899 and the last at step 96,913",
+   "paper_text": "the first at step 899 and the last at step 96\\,913",
+   "paper_line": 1268,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0011",
+   "section": "Whether this set is an attractor",
+   "claim": "number 9e-9 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "lies within a relative \\(9\\times10^{-9}\\) of one of them",
+   "paper_text": "lies within a relative $9\\times10^{-9}$ of one of them",
+   "paper_line": 1270,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0012",
+   "section": "Whether this set is an attractor",
+   "claim": "numbers 1000; 2000; 5000; 10^4; 2e4; 5e4; 10^5 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "| By step | 1000 | 2000 | 5000 | \\(10^4\\) | \\(2\\times10^4\\) | \\(5\\times10^4\\) | \\(10^5\\) |",
+   "paper_text": "by step & 1000 & 2000 & 5000 & $10^4$ & $2\\times10^4$ & $5\\times10^4$ & $10^5$ \\\\",
+   "paper_line": 1277,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0013",
+   "section": "Whether this set is an attractor",
+   "claim": "numbers 64; 10; 19; 32; 53 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "| Starts captured, of 64 | 1 | 2 | 5 | 10 | 19 | 32 | 53 |",
+   "paper_text": "starts captured, of 64 & 1 & 2 & 5 & 10 & 19 & 32 & 53 \\\\",
+   "paper_line": 1279,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0014",
+   "section": "Whether this set is an attractor",
+   "claim": "numbers 5000; 17; 34; 50 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "| Predicted from the 5000-step runs | | | | | 17 | 34 | 50 |",
+   "paper_text": "predicted from the 5000-step runs & & & & & 17 & 34 & 50 \\\\",
+   "paper_line": 1280,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0015",
+   "section": "Whether this set is an attractor",
+   "claim": "number 64 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "Table U3: starts captured by a periodic orbit when the 64 starts",
+   "paper_text": "Starts captured by a periodic orbit when the 64 starts of",
+   "paper_line": 1283,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0016",
+   "section": "Whether this set is an attractor",
+   "claim": "number 10^5 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "are followed for \\(10^5\\) steps (one batch, float64, CPU), with",
+   "paper_text": "are followed for $10^5$ steps (one batch, float64, CPU), with",
+   "paper_line": 1283,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0017",
+   "section": "Whether this set is an attractor",
+   "claim": "number 5000 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "predicted beforehand from the rate of the 5000-step runs",
+   "paper_text": "predicted beforehand from the rate of the 5000-step runs",
+   "paper_line": 1284,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0018",
+   "section": "Whether this set is an attractor",
+   "claim": "number 53 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "The run has 53",
+   "paper_text": "The run has 53 captures in",
+   "paper_line": 1289,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0019",
+   "section": "Whether this set is an attractor",
+   "claim": "number 3.19e6 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "captures in \\(3.19\\times10^{6}\\) steps of trajectories not yet captured, one in",
+   "paper_text": "captures in $3.19\\times10^{6}$ steps of trajectories not yet captured, one in",
+   "paper_line": 1289,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0020",
+   "section": "Whether this set is an attractor",
+   "claim": "numbers 60,000; 95; 46,000; 80,000; 67,000 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "about 60,000 steps (95% interval 46,000 to 80,000), against one in 67,000 for the",
+   "paper_text": "about 60\\,000 steps (95\\,\\% interval 46\\,000 to 80\\,000), against one in 67\\,000 for the",
+   "paper_line": 1290,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0021",
+   "section": "Whether this set is an attractor",
+   "claim": "numbers 1.7; 1.2; 2.1; 1.5; 1.9 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "the rate is 1.7, 1.2, 2.1, 1.5 and 1.9",
+   "paper_text": "the rate is 1.7, 1.2, 2.1, 1.5 and 1.9 captures per",
+   "paper_line": 1291,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0022",
+   "section": "Whether this set is an attractor",
+   "claim": "number 10^5 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "captures per \\(10^5\\) such steps",
+   "paper_text": "captures per $10^5$ such steps",
+   "paper_line": 1291,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0023",
+   "section": "Whether this set is an attractor",
+   "claim": "number 0.13 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "\\(p = 0.13\\)) and a Kolmogorov-Smirnov test",
+   "paper_text": "(exact binomial test, $p=0.13$) nor a Kolmogorov--Smirnov test",
+   "paper_line": 1292,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0024",
+   "section": "Whether this set is an attractor",
+   "claim": "number 0.57 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "(\\(p = 0.57\\)). Neither rejects a constant rate.",
+   "paper_text": "constant rate ($p=0.57$) rejects a constant rate.",
+   "paper_line": 1293,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0025",
+   "section": "Whether this set is an attractor",
+   "claim": "number 5000 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "Eight captures fall within 5000",
+   "paper_text": "Eight captures fall within 5000 steps near step",
+   "paper_line": 1293,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0026",
+   "section": "Whether this set is an attractor",
+   "claim": "numbers 59,000; 6.7; 2000 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "steps near step 59,000, where two were expected; 6.7% of 2000 simulated runs at a",
+   "paper_text": "steps near step 59\\,000, where two were expected; 6.7\\,\\% of 2000 simulated runs at a",
+   "paper_line": 1293,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0027",
+   "section": "Whether this set is an attractor",
+   "claim": "number 11 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "The 11 trajectories not captured were still on the chaotic set at the end.",
+   "paper_text": "The 11 trajectories not captured were still on the chaotic set at the end.",
+   "paper_line": 1294,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0028",
+   "section": "Whether this set is an attractor",
+   "claim": "numbers 500; 0.17 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "recorded every 500 steps, comes within 0.17 of the state norm",
+   "paper_text": "recorded every 500 steps, comes within 0.17 of the state norm",
+   "paper_line": 1295,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0029",
+   "section": "Whether this set is an attractor",
+   "claim": "number 2.6e-7 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "pair is a relative \\(2.6\\times10^{-7}\\) apart, where",
+   "paper_text": "is a relative $2.6\\times10^{-7}$ apart, where a capture requires",
+   "paper_line": 1297,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0030",
+   "section": "Whether this set is an attractor",
+   "claim": "number 10^-9 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "a capture requires \\(10^{-9}\\).",
+   "paper_text": "where a capture requires $10^{-9}$.",
+   "paper_line": 1297,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0031",
+   "section": "Whether this set is an attractor",
+   "claim": "numbers 64; 10^5 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "Figure U4: the 64 starts of Table U1 followed for \\(10^5\\) steps at the cell",
+   "paper_text": "followed for $10^5$ steps at the cell of",
+   "paper_line": 1313,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0032",
+   "section": "Whether this set is an attractor",
+   "claim": "numbers 5000; 95 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "the decay at the constant rate of the 5000-step runs; band: the 95% interval of that rate.",
+   "paper_text": "the decay at the constant rate of the 5000-step runs; band: the 95\\,\\% interval of that rate.",
+   "paper_line": 1316,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0033",
+   "section": "Whether this set is an attractor",
+   "claim": "numbers 11; 10^5 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "the 11 starts not captured within \\(10^5\\) steps",
+   "paper_text": "the 11 starts not captured within $10^5$ steps.",
+   "paper_line": 1318,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0034",
+   "section": "Whether this set is an attractor",
+   "claim": "number 5000 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "in the three layouts of the 5000-step runs, which ended at the dotted line",
+   "paper_text": "in the three layouts of the 5000-step runs, which ended at the dotted line.",
+   "paper_line": 1319,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0035",
+   "section": "Whether this set is an attractor",
+   "claim": "number 60,000 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "60,000 steps on average and then settles on a",
+   "paper_text": "about 60\\,000 steps on average and then settles on a",
+   "paper_line": 1300,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0036",
+   "section": "Whether this set is an attractor",
+   "claim": "numbers 600; 6000 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "were measured over 600 to 6000 steps, far",
+   "paper_text": "were measured over 600 to 6000 steps, far below that lifetime",
+   "paper_line": 1301,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0037",
+   "section": "Whether this set is an attractor",
+   "claim": "number 64 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "one cell of one model, 64 starts and one",
+   "paper_text": "It concerns one cell of one model, 64 starts and one realization of the rounding.",
+   "paper_line": 1303,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0038",
+   "section": "Whether this set is an attractor",
+   "claim": "number 11 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "The 11 remaining trajectories were not followed",
+   "paper_text": "The 11 remaining trajectories were not followed further",
+   "paper_line": 1303,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0039",
+   "section": "Whether this set is an attractor",
+   "claim": "number 64 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "a cycle longer than 64 steps would not have been",
+   "paper_text": "a cycle longer than 64 steps would not have been detected",
+   "paper_line": 1306,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "nov12-0040",
+   "section": "Whether this set is an attractor",
+   "claim": "number 0.06626 in 'Whether this set is an attractor'; added on 12 November 2026 at paper 3bde65ce",
+   "appears_as": "The banded set at \\(\\alpha = 0.06626\\) was not followed in this way.",
+   "paper_text": "The banded set at $\\alpha=0.06626$ was not followed in this way.",
+   "paper_line": 1306,
+   "paper_file": "paper/llm/main.tex",
+   "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
   }
  ],
  "extensions": [

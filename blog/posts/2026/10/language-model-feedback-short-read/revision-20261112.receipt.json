@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-12",
+  "kind": "update of one caption after a longer run; no new figures",
+  "extends": "revision-20261110.receipt.json (its claim sources stay in force except attractor_video_caveat, which this receipt replaces; its page_sha256 is that of the page before this revision)",
+  "source_article": {
+    "arxiv": "2610.31692v1",
+    "url": "https://arxiv.org/abs/2610.31692v1",
+    "title": "Chaos and bifurcations in continuous language-model feedback",
+    "latex_source": "/data2/chaos-journal-neural-shrimp/main.tex at the source commit",
+    "latex_source_sha256": "29f850964a47352af9f264f95e3d7997b2ee15598a477a699ba22a8f9671b272",
+    "source_commit": "2aa4ce4bf76ee2803ab047474ff50987d210afe3",
+    "note": "the article source as revised on 12 November 2026; the arXiv record is still version 1, which does not contain this change"
+  },
+  "research_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682",
+  "page_sha256": "6df9695504d3463b190db2ba5160158d91dc81bf9313efd1d0343013abb2f8a1",
+  "previous_page_sha256": "09b0ad4dacb7f756004d9937b9830584bb7d94f7993b379f8f816fc985371251",
+  "figures": "unchanged; see revision-20261025.receipt.json",
+  "claims": {
+    "attractor_video_caveat": "research repo docs/batch-fate/bfl1-receipt.json (commit bad2d5c576e913ab9472cd3b2faefa6d769f60ad) and the full report's passage 'Whether this set is an attractor' (paper/llm/main.tex at the research commit): the same 64 starts followed for 100,000 steps in float64 as one batch; 53 captured by a periodic orbit (52 on the period-4 orbit, one on a period-8 orbit); 53 captures in 3,189,769 steps of uncaptured trajectories, one in about 60,000 steps (95 % interval 46,000 to 80,000); a constant rate is not rejected; revised article Sec. VI, portrait paragraph"
+  },
+  "review": [
+    "Attractor video caption: the sentence on the 5000-step runs (5, 5 and 4 of 64 starts) is replaced by the result of the 100,000-step run: 53 of 64 starts left the chaotic set for a repeating cycle at a steady rate, so the set is a long-lived chaotic transient rather than an attractor.",
+    "Footer: added a link to this receipt."
+  ]
+}

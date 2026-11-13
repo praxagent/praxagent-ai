@@ -297,9 +297,11 @@ supplementary material to the article of the same title,
 [arXiv:2610.31692](https://arxiv.org/abs/2610.31692). The [21 October memory continuation](#memory-third-knob) is a separately
 pinned exploratory extension. [provenance.json](provenance.json) maps the base-release
 numbers to the report and the extension's numbers to its audited receipts. The tables
-and figures labeled U (Tables U1 and U2, Figures U1 to U3) were added on 10 November 2026.
+and figures labeled U (Tables U1 to U3, Figures U1 to U4) were added on 10 and 12 November 2026.
 They come from exploratory runs that the report describes at a
-[later commit](https://github.com/tdj28/neural-shrimp/blob/3e83148389687e6728186792b589a2b6d392b6f2/paper/llm/main.pdf) of its main branch, and the links in those
+[later commit](https://github.com/tdj28/neural-shrimp/blob/3e83148389687e6728186792b589a2b6d392b6f2/paper/llm/main.pdf) of its main branch
+(Table U3 and Figure U4, of 12 November, at a
+[still later one](https://github.com/tdj28/neural-shrimp/blob/3bde65ceb3d6b5f98784d117f116f8e8d36dd682/paper/llm/main.pdf)), and the links in those
 passages point to files at a later commit, not to the release tag. Base report,
 code, test designs and data receipts:
 [github.com/tdj28/neural-shrimp](https://github.com/tdj28/neural-shrimp/tree/arxiv-v1),
@@ -1157,7 +1159,7 @@ one chaotic cell confirmed at three twin offsets are `" I"`, `"The"`, `"!"`,
 
 {{< youtube id="HypewrMDbKU" title="116,736 neurons of a language model, in a repeating loop and in chaos" loading="lazy" class="video-embed" >}}
 
-<p class="figure-note">Video: a periodic and a chaotic orbit of the soft-token loop seen inside the network, narrated (26 s). Each step of the loop is one full pass through Qwen2.5-0.5B-Instruct, with the philosophy steering vector added at layer 12. In each grid the 24 blocks are the 24 layers, and each dot in a block is one of that layer’s 4,864 MLP neurons: 116,736 neurons in all, colored by their recorded activation at every step (orange positive, blue negative, black silent). Within each layer the neurons keep one fixed order, and colors are scaled per layer so that every layer is visible. At each step a wave runs up the layers (its timing is stylized), the most likely next tokens appear on top, and the state hops to its next point on the attractor drawn beside each grid. Left: the period-8 orbit of Table 4 at \(\alpha = 0.071674\), \(\log_{10}T = -0.115\), the orbit proved to exist below, whose eight activity patterns return in turn. Right: the chaotic attractor of this section (Figure 4) at \(\alpha = 0.07248\), \(\log_{10}T = -0.148\), where the largest Lyapunov exponent is positive and the pattern keeps changing, with no cycle. A ping sounds for each layer and a bell for each token. Activations recorded in float64; the narration is synthetic speech. Paper: <a href="https://arxiv.org/abs/2610.31692">arXiv:2610.31692</a> (the period-8 orbit is in its Table I, the chaotic attractor in its Fig. 20); code and data: <a href="https://github.com/tdj28/neural-shrimp">github.com/tdj28/neural-shrimp</a>. <a href="https://youtu.be/HypewrMDbKU">Watch on YouTube</a>.</p>
+<p class="figure-note">Video: a periodic and a chaotic orbit of the soft-token loop seen inside the network, narrated (26 s). Each step of the loop is one full pass through Qwen2.5-0.5B-Instruct, with the philosophy steering vector added at layer 12. In each grid the 24 blocks are the 24 layers, and each dot in a block is one of that layer’s 4,864 MLP neurons: 116,736 neurons in all, colored by their recorded activation at every step (orange positive, blue negative, black silent). Within each layer the neurons keep one fixed order, and colors are scaled per layer so that every layer is visible. At each step a wave runs up the layers (its timing is stylized), the most likely next tokens appear on top, and the state hops to its next point on the attractor drawn beside each grid. Left: the period-8 orbit of Table 4 at \(\alpha = 0.071674\), \(\log_{10}T = -0.115\), the orbit proved to exist below, whose eight activity patterns return in turn. Right: the chaotic set of this section (Figure 4) at \(\alpha = 0.07248\), \(\log_{10}T = -0.148\), where the largest Lyapunov exponent is positive and the pattern keeps changing, with no cycle. A ping sounds for each layer and a bell for each token. Activations recorded in float64; the narration is synthetic speech. Paper: <a href="https://arxiv.org/abs/2610.31692">arXiv:2610.31692</a> (the period-8 orbit is in its Table I, the chaotic attractor in its Fig. 20); code and data: <a href="https://github.com/tdj28/neural-shrimp">github.com/tdj28/neural-shrimp</a>. <a href="https://youtu.be/HypewrMDbKU">Watch on YouTube</a>.</p>
 
 A chaotic loop's state never settles into a cycle, but it does not wander everywhere
 either: the states gather on a set, an attractor, that can be drawn. We call it a *numerically
@@ -1170,13 +1172,15 @@ other 14 settle on a coexisting loop of period 4. The states live in 896
 dimensions, so the picture is a projection, onto the two directions along which
 the states vary most (61.6% of their variance; 77.4% with a third). The set
 appears as thin folded filaments, colored by the most probable next token, and
-zooming in shows layers within layers. Longer runs show that trajectories can
-leave this set for the period-4 loop, so it may be a long-lived chaotic transient
-rather than an attractor ([Whether this set is an attractor](#whether-attractor)).
+zooming in shows layers within layers. Runs a hundred times longer show that
+trajectories leave this set for a repeating loop at a steady rate, about one in
+60,000 steps, so it is a long-lived chaotic transient rather than an attractor
+([Whether this set is an attractor](#whether-attractor)). The portrait and the
+quantities below describe it over horizons far shorter than that lifetime.
 
 {{< youtube id="8zS9-ey3PQI" title="One chaotic trajectory of a language model talking to itself, with every word spoken" loading="lazy" class="video-embed" >}}
 
-<p class="figure-note">Video: one chaotic trajectory on this attractor, with every word spoken (87 s). At each step Qwen2.5-0.5B-Instruct reads back the probability-weighted average of its next-token embeddings and produces the next one, after the fixed short chat prompt and with the philosophy steering vector added at layer 12. At this setting (\(\alpha = 0.07248\), \(\log_{10}T = -0.148\)) the loop is chaotic: its largest Lyapunov exponent is positive, so nearby states separate exponentially while staying in a bounded region. The cloud shows states from many trajectories, projected onto the three leading principal coordinates of the 896-dimensional state (77.4% of the variance) and colored by the most probable next token. The bright dot follows one trajectory for 80 steps, and each token is spoken as it is written (⏎ marks a line break the loop writes). The loop is a map, not a flow: each step is one full pass through the network, so the dot jumps rather than glides, and a typical jump spans much of the attractor even in all 896 dimensions. The same words keep coming back (“The existence”, “The question”, “is there”), but never in quite the same order. Computed in float64; the narration and spoken tokens are synthetic speech. Paper: <a href="https://arxiv.org/abs/2610.31692">arXiv:2610.31692</a>; code and data: <a href="https://github.com/tdj28/neural-shrimp">github.com/tdj28/neural-shrimp</a>. <a href="https://youtu.be/8zS9-ey3PQI">Watch on YouTube</a>.</p>
+<p class="figure-note">Video: one chaotic trajectory on this set, with every word spoken (87 s). At each step Qwen2.5-0.5B-Instruct reads back the probability-weighted average of its next-token embeddings and produces the next one, after the fixed short chat prompt and with the philosophy steering vector added at layer 12. At this setting (\(\alpha = 0.07248\), \(\log_{10}T = -0.148\)) the loop is chaotic: its largest Lyapunov exponent is positive, so nearby states separate exponentially while staying in a bounded region. The cloud shows states from many trajectories, projected onto the three leading principal coordinates of the 896-dimensional state (77.4% of the variance) and colored by the most probable next token. The bright dot follows one trajectory for 80 steps, and each token is spoken as it is written (⏎ marks a line break the loop writes). The loop is a map, not a flow: each step is one full pass through the network, so the dot jumps rather than glides, and a typical jump spans much of the attractor even in all 896 dimensions. The same words keep coming back (“The existence”, “The question”, “is there”), but never in quite the same order. Computed in float64; the narration and spoken tokens are synthetic speech. Paper: <a href="https://arxiv.org/abs/2610.31692">arXiv:2610.31692</a>; code and data: <a href="https://github.com/tdj28/neural-shrimp">github.com/tdj28/neural-shrimp</a>. <a href="https://youtu.be/8zS9-ey3PQI">Watch on YouTube</a>.</p>
 
 {{< youtube id="7L5MehfrI3g" title="A language model’s feedback loop falling into an eight-step cycle" loading="lazy" class="video-embed" >}}
 
@@ -1215,7 +1219,7 @@ resolution of the slice (Figure 5).
 
 ![Six panels. (a) A cloud of colored dots in the plane of the first two principal coordinates, forming thin folded filaments in several colors, one per most probable next token, with a small box marking a zoom region. (b) and (c) Two successive magnifications of that region, showing parallel filaments in layers. (d) A lag-one plot of the first principal coordinate: black points on many folded, overlapping curves. (e) The local slope of the correlation sum against distance on a log axis, wandering between about 0.4 and 0.9 without a flat stretch, with a dashed line at 1.26. (f) One thin purple band of a second attractor, bent into a hook, with black points of the sampled unstable manifold lying exactly along it.](fig-strange-attractor.png)
 
-<p class="figure-note">Figure 4: projected geometry of a numerically observed chaotic attractor of the soft-token loop (Qwen2.5-0.5B-Instruct, philosophy direction at layer 12, \(\log_{10}T = -0.148\), float64). (a) 298,800 states of 498 trajectories at \(\alpha = 0.07248\), projected on their first two principal axes and colored by the most probable next token (the return symbol marks a line break). (b), (c) Magnifications of the boxed regions. (d) Lag-one plot of the first principal coordinate. (e) Local slope of the correlation sum over the first eight principal coordinates; dashed, the Kaplan–Yorke estimate 1.26; no decade of distance has a constant slope. (f) One of the three bands of the chaotic attractor at \(\alpha = 0.06626\) (purple) and sampled points of the unstable manifold of the embedded period-3 saddle (black). In longer runs some trajectories leave the set of (a) for a periodic orbit (see text). Source: byte-identical copy of the report's figure (<a href="provenance.json">provenance.json</a>).</p>
+<p class="figure-note">Figure 4: projected geometry of a chaotic set of the soft-token loop (Qwen2.5-0.5B-Instruct, philosophy direction at layer 12, \(\log_{10}T = -0.148\), float64). (a) 298,800 states of 498 trajectories at \(\alpha = 0.07248\), projected on their first two principal axes and colored by the most probable next token (the return symbol marks a line break). (b), (c) Magnifications of the boxed regions. (d) Lag-one plot of the first principal coordinate. (e) Local slope of the correlation sum over the first eight principal coordinates; dashed, the Kaplan–Yorke estimate 1.26; no decade of distance has a constant slope. (f) One of the three bands of the chaotic attractor at \(\alpha = 0.06626\) (purple) and sampled points of the unstable manifold of the embedded period-3 saddle (black). The set of (a) is a long-lived chaotic transient: followed for \(10^5\) steps, 53 of 64 trajectories left it for a periodic orbit (see text). Source: byte-identical copy of the report's figure (<a href="provenance.json">provenance.json</a>).</p>
 
 ![Two panels of a square plane of starting states, colored blue or orange by the loop each start falls into: a large blue region and a large orange region separated by a diagonal boundary that passes through a white star, the fixed start, with thin alternating blue and orange stripes in the lower left and a few isolated orange cells inside the blue; the right panel magnifies the region around the star.](fig-pair-basins.png)
 
@@ -1224,7 +1228,9 @@ resolution of the slice (Figure 5).
 ### Whether this set is an attractor {#whether-attractor}
 
 The portrait of Figure 4 follows each trajectory for 1000 steps, and longer runs
-show that trajectories can leave the chaotic set of Figure 4(a). The portrait
+show that trajectories can leave the chaotic set of Figure 4(a). The answer, reached
+in two stages below, is that this set is not an attractor: it is a chaotic set that
+holds a trajectory for tens of thousands of steps and then lets it go. The portrait
 itself gives a first sign. Of its 14 trajectories on the period-4 loop, three were
 on it when recording began at step 400, and eleven arrived during the 600 recorded
 steps.
@@ -1266,16 +1272,75 @@ did not refine them by Newton's method or compute their stability
 
 How many starts are captured therefore depends on how long the trajectories are
 followed and on the rounding, and which starts are captured is not a property of
-the start. The set of Figure 4(a) may be a long-lived *chaotic transient* rather
-than an attractor: motion near a *chaotic saddle*, a chaotic set that trajectories
-approach and follow for a long time but eventually leave
+the start. The set of Figure 4(a) may therefore be a long-lived *chaotic transient*
+rather than an attractor: motion near a *chaotic saddle*, a chaotic set that
+trajectories approach and follow for a long time but eventually leave
 ([Grebogi, Ott, and Yorke, 1983](#ref-grebogi-1983);
-[Lai and Tél, 2011](#ref-lai-2011)). These runs cannot tell the two apart. If
-trajectories keep leaving at the observed rate, about one capture in 67,000 steps
-of an uncaptured trajectory, most of the 64 starts would be captured within
-\(10^5\) steps. If the set is an attractor whose
+[Lai and Tél, 2011](#ref-lai-2011)). Runs of 5000 steps cannot tell the two apart,
+but they predict what longer runs would show. If trajectories keep leaving at the
+observed rate, about one capture in 67,000 steps of an uncaptured trajectory,
+about 50 of the 64 starts are captured within \(10^5\) steps (36 to 59 over the
+95% interval of that rate). If the set is an attractor whose
 {{< refterm "basin-of-attraction" "basin" >}} is finely interleaved with that of
-the period-4 loop, the captures would stop. The same kind of event occurs across
+the period-4 loop, the captures stop.
+
+We therefore followed the same 64 starts for \(10^5\) steps, as one batch in
+float64 on the CPU
+([tools/batch_fate_long.py](https://github.com/tdj28/neural-shrimp/blob/bad2d5c576e913ab9472cd3b2faefa6d769f60ad/tools/batch_fate_long.py)). The prediction and
+the criteria for reading the outcome were written down before the run. By step
+\(10^5\), 53 of the 64 starts had been captured (Table U3, Figure U4). The
+captures did not stop: 32 came in the first half of the run and 21 in the second,
+the first at step 899 and the last at step 96,913. Fifty-two are on the period-4
+loop and one is on the period-8 loop. These are the two loops of the shorter runs:
+every cycle saved here lies within a relative \(9\times10^{-9}\) of one of them.
+Every captured trajectory was still on its cycle at the end of the run.
+
+| By step | 1000 | 2000 | 5000 | \(10^4\) | \(2\times10^4\) | \(5\times10^4\) | \(10^5\) |
+|---|---|---|---|---|---|---|---|
+| Starts captured, of 64 | 1 | 2 | 5 | 10 | 19 | 32 | 53 |
+| Predicted from the 5000-step runs | | | | | 17 | 34 | 50 |
+
+<p class="figure-note">Table U3: starts captured by a periodic orbit when the 64 starts of Table U1 are followed for \(10^5\) steps (one batch, float64, CPU), with the numbers predicted beforehand from the rate of the 5000-step runs. Source: <a href="https://github.com/tdj28/neural-shrimp/blob/bad2d5c576e913ab9472cd3b2faefa6d769f60ad/docs/batch-fate/bfl1-receipt.json">docs/batch-fate/bfl1-receipt.json</a>.</p>
+
+The rate is steady. A steady rate means that at every step a trajectory still on
+the chaotic set has the same small chance of leaving it, however long it has
+already stayed, as a radioactive nucleus has the same chance of decaying whatever
+its age. The number of trajectories still on the set then falls exponentially,
+which is a straight line on the logarithmic axis of Figure U4(a). The run has 53
+captures in \(3.19\times10^{6}\) steps of trajectories not yet captured, one in
+about 60,000 steps (95% interval 46,000 to 80,000), against one in 67,000 for the
+shorter runs. Taken by fifths of the run, the rate is 1.7, 1.2, 2.1, 1.5 and 1.9
+captures per \(10^5\) such steps. Two tests ask whether the captures depart from
+a constant rate: a comparison of the two halves of the run (exact binomial test,
+\(p = 0.13\)) and a Kolmogorov–Smirnov test of the capture times
+(\(p = 0.57\)). Neither rejects a constant rate. Eight captures fall within 5000
+steps near step 59,000, where two were expected; 6.7% of 2000 simulated runs at a
+constant rate contain a cluster as improbable.
+
+The 11 trajectories not captured were still on the chaotic set at the end. None of
+their states, recorded every 500 steps, comes within 0.17 of the state norm of the
+period-4 loop, and no two recorded states of a trajectory coincide: the closest
+pair is a relative \(2.6\times10^{-7}\) apart, where
+a capture requires \(10^{-9}\).
+
+![Two panels. (a) A black staircase curve of the number of starts not yet captured, on a logarithmic vertical axis from 64 down to about 11, against the step from 0 to 100,000; it follows a dashed straight line and stays inside a light blue band that widens to the right. (b) One horizontal line per start, numbered 0 to 63, with a logarithmic axis of the capture step from 500 to 100,000: black dots, mostly between steps 10,000 and 100,000, one open diamond, eleven gray triangles at the right edge, and blue open squares, circles and triangles to the left of a dotted vertical line at step 5000.](fig-batch-fate-long.png)
+
+<p class="figure-note">Figure U4: the 64 starts of Table U1 followed for \(10^5\) steps at the cell of Figure 4(a) (one batch, float64, CPU). (a) Number of starts not yet captured by a periodic orbit, on a logarithmic axis, against the step (black). Dashed line: the decay at the constant rate of the 5000-step runs; band: the 95% interval of that rate. Both were fixed before this run. (b) The step at which each start was captured. Filled circles: captures on the period-4 loop; open diamond: the one capture on the period-8 loop; gray triangles at the right: the 11 starts not captured within \(10^5\) steps. Blue open symbols: captures of the same starts in the three layouts of the 5000-step runs, which ended at the dotted line. Source: byte-identical copy of the report's figure (<a href="provenance.json">provenance.json</a>); <a href="https://github.com/tdj28/neural-shrimp/blob/bad2d5c576e913ab9472cd3b2faefa6d769f60ad/tools/batch_fate_long_receipt.py">tools/batch_fate_long_receipt.py</a>.</p>
+
+At this cell the chaotic set of Figure 4(a) is therefore a long-lived chaotic
+transient for these starts, not an attractor. A trajectory stays on it for about
+60,000 steps on average and then settles on a repeating loop within a few hundred
+steps. While it stays, its motion is the chaos described above: the portrait, the
+Lyapunov exponents and the reconstruction were measured over 600 to 6000 steps, far
+below that lifetime, and describe the chaotic set over such horizons.
+
+The statement has limits. It concerns one cell of one model, 64 starts and one
+realization of the rounding. The 11 remaining trajectories were not followed
+further, so that every trajectory eventually leaves is an extrapolation of the
+steady rate. The captures are recurrence candidates, not refined by Newton's method
+or tested for stability, and a cycle longer than 64 steps would not have been
+detected. The banded set at \(\alpha = 0.06626\) was not followed in this way.
+The same kind of event occurs across
 the maps: of 192 sampled chaos-labeled cells in each of the two main maps, 16 and
 49 ended on periodic orbits within \(10^5\) steps
 ([Numerics and chaos labels](#numerics-and-chaos-labels)).
@@ -9504,6 +9569,7 @@ superstability or an identified native network mechanism
 | Cascade 3-cycle proof | The release record and verification code; the native evidence is kept outside the repository, with its checksums in the release record | [codex/certificate-ladder-task34](https://github.com/tdj28/neural-shrimp/blob/1b71863581386048c50d41b1f8137a6ba6adec25/codex/certificate-ladder-task34/cascade-p3-result.md) |
 | Reproduction kit for the period-8 orbit | A short script that recomputes the proved period-8 orbit from the released model in a few minutes on a desktop computer, with the steps written out | [tools/recreate_p8.py](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/tools/recreate_p8.py); [docs/reproduce-p8/README.md](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/reproduce-p8/README.md) |
 | Exploratory runs added on 10 November 2026 | Receipts of the longer runs at the portrait cell, the completed rotation, the top-k loop, ordinary generation and LFM3, and the status record of the Huginn chaos search; separate from the base release | [docs/batch-fate/bf1-receipt.json](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/batch-fate/bf1-receipt.json), [docs/batch-fate/bf1-audit-receipt.json](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/batch-fate/bf1-audit-receipt.json), [docs/morph-fill-receipt.json](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/morph-fill-receipt.json), [docs/morph-continuity.json](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/morph-continuity.json), [docs/lf3-tk/receipt.json](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/lf3-tk/receipt.json), [docs/ri/ri1-receipt.json](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/ri/ri1-receipt.json), [docs/huginn-status.md](https://github.com/tdj28/neural-shrimp/blob/0399fee2e9537a50993482aea8ec417e70286ac4/docs/huginn-status.md) |
+| Long run at the portrait cell, added on 12 November 2026 | Receipt of the run of Table U3 and Figure U4, the tool that ran it and the tool that wrote the receipt and the figure; separate from the base release | [docs/batch-fate/bfl1-receipt.json](https://github.com/tdj28/neural-shrimp/blob/bad2d5c576e913ab9472cd3b2faefa6d769f60ad/docs/batch-fate/bfl1-receipt.json), [tools/batch_fate_long.py](https://github.com/tdj28/neural-shrimp/blob/bad2d5c576e913ab9472cd3b2faefa6d769f60ad/tools/batch_fate_long.py), [tools/batch_fate_long_receipt.py](https://github.com/tdj28/neural-shrimp/blob/bad2d5c576e913ab9472cd3b2faefa6d769f60ad/tools/batch_fate_long_receipt.py) |
 
 The interval-arithmetic certificates are in the repository, with the verification
 code, the exact map and input specifications, and the release records and hashes of
