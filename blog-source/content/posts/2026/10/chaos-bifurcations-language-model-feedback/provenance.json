@@ -266,7 +266,7 @@
   "fig-false-chaos.png": "af09c5bf09891ac5f190b8d6abb47bf291fa3d80cf3a6dd09fb29bc689855437",
   "fig-feigenbaum-ratios.png": "c0383beb5eecd199218c5bbc242e5297e34f69fdc1587326e924d9665052d248",
   "fig-feigenbaum-tree.png": "c95654e75aee07564c6a456a1ebc872a96c0e2469ec8a74525ccb170ff1a9311",
-  "fig-fold.png": "33b29b768794bb6a90a8d0e2edb85cc955a981344e184f6757df1e2cda2d4e38",
+  "fig-fold.png": "0c8c8fb4bdf4c69c00427a00d83b0547afdbc7c455af6de4ae3fce5a97b96248",
   "fig-foliation.png": "08246b2896a8b44e628fdca35fdda50f3484f6081944b9d5dc1bac5ba48bc55d",
   "fig-gain-scale.png": "5e3a9167939c7cbf0b9c1252232aed402ecec980663fadc4861a75ca6fcdad21",
   "fig-hidden-bands.png": "9b40800041af3b63cadd01a401701f30b64c7e3f1029c2c9e26771d2a8defcb8",
@@ -357,7 +357,7 @@
   "fig-memory-mixed-junction-locations.pdf": "286ffbbcc83c676538e0eb35c2457f80e541d91add49a05afe34a3430d3c7ec1",
   "fig-branch-three-readings.png": "e729d76c1aee03c6fce2fdd70db0130b13364dc4127951008ece2c70cd6c6635",
   "fig-passage-steps.png": "85fb83c7b1b2f90ef71810c59844ce36510d92e902cce01a5a71e34ec4136bb4",
-  "fig-free-orbit-words.png": "733416866577354ad30a72ba0513750a786d913b663b486d11c16294387dc9ec",
+  "fig-free-orbit-words.png": "f53393e40871f75adbdfcc47b40355341ca3c56b72953b73736d5749933c9145",
   "fig-topk.png": "1e28419917afcd2196e6b41cfbe5504d2169ca2c6d4918c414863a6e47a0bf91",
   "fig-real-inference.png": "4a4182d225470c528e71251e2cfd906bc86b5c8ae3d3bd3c1f3bd42d5a82ef82",
   "fig-lfm3.png": "af320d5f52401d4c7833c683ee060e66ba97fbca6e1accb1147c02124c4961b5"
@@ -381,7 +381,7 @@
   "fig-false-chaos.png": "paper/llm/figures/fig-false-chaos.png (byte-identical copy)",
   "fig-feigenbaum-ratios.png": "paper/llm/figures/fig-feigenbaum-ratios.png (byte-identical copy)",
   "fig-feigenbaum-tree.png": "paper/llm/figures/fig-feigenbaum-tree.png (byte-identical copy)",
-  "fig-fold.png": "paper/llm/figures/fig-fold.png (byte-identical copy)",
+  "fig-fold.png": "paper/llm/figures/fig-fold.png at 840e6c9a2d931fb236055de0d9698a78f0400d4d (byte-identical copy; signed-coordinate revision)",
   "fig-foliation.png": "paper/llm/figures/fig-foliation.png (byte-identical copy)",
   "fig-gain-scale.png": "paper/llm/figures/fig-gain-scale.png (byte-identical copy)",
   "fig-hidden-bands.png": "paper/llm/figures/fig-hidden-bands.png (byte-identical copy)",
@@ -524,7 +524,7 @@
   },
   "fig-branch-three-readings.png": "docs/figure-walkthroughs/fig-branch-three-readings.png at 5b7a02a172e76950300b44a4f6168c6a8161d2fb (byte-identical copy)",
   "fig-passage-steps.png": "docs/figure-walkthroughs/fig-passage-steps.png at 5b7a02a172e76950300b44a4f6168c6a8161d2fb (byte-identical copy)",
-  "fig-free-orbit-words.png": "docs/figure-walkthroughs/fig-free-orbit-words.png at 5b7a02a172e76950300b44a4f6168c6a8161d2fb (byte-identical copy)",
+  "fig-free-orbit-words.png": "docs/figure-walkthroughs/fig-free-orbit-words.png at 840e6c9a2d931fb236055de0d9698a78f0400d4d (byte-identical copy; signed-coordinate revision)",
   "fig-topk.png": "paper/llm/figures/fig-topk.png at 0399fee2e9537a50993482aea8ec417e70286ac4 (byte-identical copy)",
   "fig-real-inference.png": "paper/llm/figures/fig-real-inference.png at 0399fee2e9537a50993482aea8ec417e70286ac4 (byte-identical copy)",
   "fig-lfm3.png": "paper/llm/figures/fig-lfm3.png at 0399fee2e9537a50993482aea8ec417e70286ac4 (byte-identical copy)"
@@ -8897,28 +8897,34 @@
    "id": "fold-0075",
    "section": "Saddle-node bottleneck",
    "claim": "number 10^{-5} in 'Saddle-node bottleneck' (generated: post phrase matched to the paper's source text)",
-   "appears_as": "trajectory at \\(\\varepsilon = 10^{-5}\\) alternates between laminar",
+   "appears_as": "trajectory at \\(\\varepsilon=10^{-5}\\)",
    "paper_text": "A free trajectory at $\\eps=10^{-5}$ alternates between laminar",
    "paper_line": 1606,
-   "paper_file": "paper/llm/main.tex"
+   "paper_file": "paper/llm/main.tex",
+   "previous_appears_as": "trajectory at \\(\\varepsilon = 10^{-5}\\) alternates between laminar",
+   "display_revision": "fold-panel-20261112; replaces the old coordinate-only shading description, preserving the historical evidence binding"
   },
   {
    "id": "fold-0076",
    "section": "Saddle-node bottleneck",
    "claim": "number 40 in 'Saddle-node bottleneck' (generated: post phrase matched to the paper's source text)",
-   "appears_as": "u\\rvert < U\\), shaded; 40 to 70 iterates each) and",
+   "appears_as": "Complete highlighted passages last 40 to 70",
    "paper_text": "bottleneck ($|u|<U$, shaded; 40 to 70 iterates each) and bursts",
    "paper_line": 1607,
-   "paper_file": "paper/llm/main.tex"
+   "paper_file": "paper/llm/main.tex",
+   "previous_appears_as": "u\\rvert < U\\), shaded; 40 to 70 iterates each) and",
+   "display_revision": "fold-panel-20261112; replaces the old coordinate-only shading description, preserving the historical evidence binding"
   },
   {
    "id": "fold-0077",
    "section": "Saddle-node bottleneck",
    "claim": "number 70 in 'Saddle-node bottleneck' (generated: post phrase matched to the paper's source text)",
-   "appears_as": "u\\rvert < U\\), shaded; 40 to 70 iterates each) and bursts",
+   "appears_as": "40 to 70 two-update intervals",
    "paper_text": "bottleneck ($|u|<U$, shaded; 40 to 70 iterates each) and bursts away",
    "paper_line": 1607,
-   "paper_file": "paper/llm/main.tex"
+   "paper_file": "paper/llm/main.tex",
+   "previous_appears_as": "u\\rvert < U\\), shaded; 40 to 70 iterates each) and bursts",
+   "display_revision": "fold-panel-20261112; replaces the old coordinate-only shading description, preserving the historical evidence binding"
   },
   {
    "id": "fold-0078",
@@ -52631,21 +52637,6 @@
      "style": ".2f"
     },
     {
-     "id": "walkthrough-194",
-     "section": "Reading panels (c) and (d) of Figure 26, step by step",
-     "claim": "flat_first.one_step_later_range.0",
-     "appears_as": "−0.0004",
-     "receipt": "walkthrough-free.json",
-     "receipt_sha256": "c52d4a3945a110262f2b5f30082795a9c9cf81f504d7a1438c2f88b23027f465",
-     "source_commit": "5b7a02a172e76950300b44a4f6168c6a8161d2fb",
-     "field": [
-      "flat_first",
-      "one_step_later_range",
-      "0"
-     ],
-     "style": ".4f"
-    },
-    {
      "id": "walkthrough-195",
      "section": "Reading panels (c) and (d) of Figure 26, step by step",
      "claim": "other_phase_lengths.0",
@@ -52658,34 +52649,6 @@
       "0"
      ],
      "style": "d"
-    },
-    {
-     "id": "walkthrough-196",
-     "section": "Reading panels (c) and (d) of Figure 26, step by step",
-     "claim": "one_step_reading_on_crawls.0",
-     "appears_as": "0.414",
-     "receipt": "walkthrough-free.json",
-     "receipt_sha256": "c52d4a3945a110262f2b5f30082795a9c9cf81f504d7a1438c2f88b23027f465",
-     "source_commit": "5b7a02a172e76950300b44a4f6168c6a8161d2fb",
-     "field": [
-      "one_step_reading_on_crawls",
-      "0"
-     ],
-     "style": ".3f"
-    },
-    {
-     "id": "walkthrough-197",
-     "section": "Reading panels (c) and (d) of Figure 26, step by step",
-     "claim": "one_step_reading_on_crawls.1",
-     "appears_as": "0.422",
-     "receipt": "walkthrough-free.json",
-     "receipt_sha256": "c52d4a3945a110262f2b5f30082795a9c9cf81f504d7a1438c2f88b23027f465",
-     "source_commit": "5b7a02a172e76950300b44a4f6168c6a8161d2fb",
-     "field": [
-      "one_step_reading_on_crawls",
-      "1"
-     ],
-     "style": ".3f"
     },
     {
      "id": "walkthrough-198",
@@ -53429,7 +53392,63 @@
      ],
      "style": ".1f"
     }
-   ]
+   ],
+   "figure_revisions": {
+    "fig-free-orbit-words.png": {
+     "source_commit": "840e6c9a2d931fb236055de0d9698a78f0400d4d",
+     "source_path": "docs/figure-walkthroughs/fig-free-orbit-words.png",
+     "sha256": "f53393e40871f75adbdfcc47b40355341ca3c56b72953b73736d5749933c9145",
+     "reason": "Same trajectory and readouts, signed phases and transverse-check panels replace misleading log-absolute view"
+    }
+   },
+   "retired_display_numbers_20261112": {
+    "reason": "Descriptions of the obsolete display or unverified longer horizon removed; original records retained here unchanged",
+    "entries": [
+     {
+      "id": "walkthrough-194",
+      "section": "Reading panels (c) and (d) of Figure 26, step by step",
+      "claim": "flat_first.one_step_later_range.0",
+      "appears_as": "−0.0004",
+      "receipt": "walkthrough-free.json",
+      "receipt_sha256": "c52d4a3945a110262f2b5f30082795a9c9cf81f504d7a1438c2f88b23027f465",
+      "source_commit": "5b7a02a172e76950300b44a4f6168c6a8161d2fb",
+      "field": [
+       "flat_first",
+       "one_step_later_range",
+       "0"
+      ],
+      "style": ".4f"
+     },
+     {
+      "id": "walkthrough-196",
+      "section": "Reading panels (c) and (d) of Figure 26, step by step",
+      "claim": "one_step_reading_on_crawls.0",
+      "appears_as": "0.414",
+      "receipt": "walkthrough-free.json",
+      "receipt_sha256": "c52d4a3945a110262f2b5f30082795a9c9cf81f504d7a1438c2f88b23027f465",
+      "source_commit": "5b7a02a172e76950300b44a4f6168c6a8161d2fb",
+      "field": [
+       "one_step_reading_on_crawls",
+       "0"
+      ],
+      "style": ".3f"
+     },
+     {
+      "id": "walkthrough-197",
+      "section": "Reading panels (c) and (d) of Figure 26, step by step",
+      "claim": "one_step_reading_on_crawls.1",
+      "appears_as": "0.422",
+      "receipt": "walkthrough-free.json",
+      "receipt_sha256": "c52d4a3945a110262f2b5f30082795a9c9cf81f504d7a1438c2f88b23027f465",
+      "source_commit": "5b7a02a172e76950300b44a4f6168c6a8161d2fb",
+      "field": [
+       "one_step_reading_on_crawls",
+       "1"
+      ],
+      "style": ".3f"
+     }
+    ]
+   }
   },
   {
    "id": "huginn-item18-20261103",
@@ -53516,6 +53535,66 @@
       "lower_one_sided_95"
      ],
      "style": "pct1"
+    }
+   ]
+  },
+  {
+   "id": "fold-panel-20261112",
+   "source_commit": "840e6c9a2d931fb236055de0d9698a78f0400d4d",
+   "description": "Same saved trajectory; signed local view, both phases and joint local-channel criterion. Original historical figure hashes retained here.",
+   "previous_figure_sha256": {
+    "fig-fold.png": "33b29b768794bb6a90a8d0e2edb85cc955a981344e184f6757df1e2cda2d4e38",
+    "fig-free-orbit-words.png": "733416866577354ad30a72ba0513750a786d913b663b486d11c16294387dc9ec"
+   },
+   "source_receipts": {
+    "fold-panel-revision.json": {
+     "source_path": "docs/fold-panel-revision.json",
+     "commit": "840e6c9a2d931fb236055de0d9698a78f0400d4d",
+     "sha256": "2205755feb0a46cf6f9c34ee7e7ec0777d84e768feff031fd5f96902d494858e"
+    }
+   },
+   "new_numbers": [
+    {
+     "id": "fold-panel-original_count",
+     "receipt": "fold-panel-revision.json",
+     "field": [
+      "natural",
+      "phase_samples",
+      0
+     ],
+     "style": "d",
+     "appears_as": "390"
+    },
+    {
+     "id": "fold-panel-shifted_count",
+     "receipt": "fold-panel-revision.json",
+     "field": [
+      "natural",
+      "phase_samples",
+      1
+     ],
+     "style": "d",
+     "appears_as": "55"
+    },
+    {
+     "id": "fold-panel-either_count",
+     "receipt": "fold-panel-revision.json",
+     "field": [
+      "natural",
+      "either_phase_samples"
+     ],
+     "style": "d",
+     "appears_as": "445"
+    },
+    {
+     "id": "fold-panel-horizon",
+     "receipt": "fold-panel-revision.json",
+     "field": [
+      "natural",
+      "horizon"
+     ],
+     "style": "d",
+     "appears_as": "600"
     }
    ]
   }

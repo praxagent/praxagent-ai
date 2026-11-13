@@ -3657,9 +3657,7 @@ type-I intermittency ([Pomeau and Manneville, 1980](#ref-pomeau-1980)), whose
 laminar phases lengthen as \(\varepsilon^{-1/2}\) toward the fold
 ([Hirsch, Huberman, and Scalapino, 1982](#ref-hirsch-1982)). Laminar is the
 fluid-dynamics term for the smooth stretches of a flow between turbulent
-bursts. The long flat stretches of Figure 26d are not bursts: they are laminar
-phases seen on the other word of the 2-cycle, as
-[Reading panels (c) and (d)](#reading-the-passages) shows.
+bursts. Figure 26d now shows both observation phases on a signed, linear axis: the blue trace recovers a slow passage that every-other-step sampling alone would hide. [Reading panels (c) and (d)](#reading-the-passages) explains the coordinate and the shading.
 
 The diagram below draws the bottleneck that these passages cross, from the normal
 form itself. Panel (a) shows the step that one
@@ -3670,9 +3668,9 @@ shows where the successive turns of one passage land.
 
 <p class="figure-note">Diagram: the bottleneck behind the stripes, drawn from the fold's normal form with the network's coefficients \(a = -4.834\) and \(b = -25.4285\), in the oriented critical coordinate \(v\); the channel runs from \(-U\) to \(U\), with \(U = 0.1/\lvert b\rvert\). It is a picture of the normal form, not a measurement. (a) The step of one iterate of \(G\), \(\Delta v = \lvert a\rvert\varepsilon + \lvert b\rvert v^2\): how far \(v\) moves in one turn, at each point of the channel. Before the fold (\(\varepsilon = -10^{-5}\), dashed) the step is zero at two points, which are fixed points of \(G\): the attracting 2-cycle (filled) and its unstable partner (open). At the fold (\(\varepsilon = 0\), dotted) the two merge at \(v = 0\). Beyond it (\(\varepsilon = 10^{-5}\), solid) the step never reaches zero, so no fixed point remains, but it stays small near \(v = 0\): that slow stretch is the ghost. (b) The 71 iterates of a full passage at \(\varepsilon = 10^{-5}\), from \(-U\) to \(U\). The dots crowd where the step is smallest, so most of the passage is spent near the middle of the channel; the network takes 71 iterates as well (Table 5). Schematically, a free trajectory leaves at \(U\), makes a burst and is reinjected slightly upstream of the middle, so its natural passage is shorter than a full one, on average 0.60 to 0.67 of the normal form's passage through the same channel. The orange bar marks the range of the median entry points (\(v \approx -7\times10^{-4}\) to \(-3\times10^{-4}\)), which the normal form itself does not predict. Source: drawn from the normal form with the report's coefficients (<a href="provenance.json">provenance.json</a>).</p>
 
-![Four panels of the fold of the 2-cycle ' is it'. (a) Two branches of 2-cycles, filled circles for the attracting one and open circles for its unstable partner, meet at a vertical line at the fold and end there; orange curves show the normal form's prediction, a sideways parabola. (b) The largest multiplier of the two-step map on both branches approaches 1 at the fold from above and below, along the normal form's predicted curves. (c) Passage times through the bottleneck beyond the fold, measured on the network as markers, one shape per distance from the fold (circles, squares, triangles and diamonds), and predicted by the normal form as lines, for four distances from the fold: 144, 71, 34 and 14 iterates. (d) For a free trajectory over 600 two-step iterates, the size of its critical coordinate, |u|, on a logarithmic axis: stretches inside a shaded band, the bottleneck, in which |u| dips sharply through zero and climbs out again, alternate with bursts that rise to order one; the band's label, bottleneck |u| < U, sits in an empty stretch of the band, clear of the trajectory.](fig-fold.png)
+![Four panels of the fold of the 2-cycle. Panels a and b show its collision with a saddle and the multiplier reaching one. Panel c compares measured passages with the normal form. Panel d shows signed position v/U on a linear axis for 600 two-update intervals: black and blue traces rise smoothly through zero and leave the local view. Blue reads each state one update later, recovering the phase-shifted passage. Vertical orange intervals pass both the coordinate and transverse checks at either reading; white intervals do not. Dashed lines mark position minus one and plus one. Gaps omit positions outside plus or minus three, not missing measurements.](fig-fold.png)
 
-<p class="figure-note">Figure 26: the fold behind the stripes, the 2-cycle <code>" is it"</code> at \(\log_{10}T = -0.115\) (Qwen2.5-0.5B-Instruct, philosophy direction at layer 12). (a) Continued in \(\alpha\), the attracting 2-cycle (filled) and its saddle partner (open) meet and vanish at \(\alpha_c = 0.06279827\); the vertical coordinate is the projection \(u\) of one point of each orbit on the fold's critical direction; orange, the normal form's fixed points \(u^* = \pm\sqrt{\lvert a\rvert(\alpha_c - \alpha)/\lvert b\rvert}\). (b) The largest multiplier of \(G = F^2\) on the two orbits reaches \(+1\) at the fold, following the normal form's \(1 \mp 2\sqrt{ab(\alpha_c - \alpha)}\) (open circles: a complex leading pair). (c) Controlled passages from the channel's beginning \(v = -U\) to its exit \(v = U\), measured on the network (markers, one shape per \(\varepsilon\)) and iterated from the normal form \(v' = v + \lvert a\rvert\varepsilon + \lvert b\rvert v^2\) (lines), take 144, 71, 34 and 14 iterates, as predicted. (d) A free trajectory at \(\varepsilon = 10^{-5}\) alternates between laminar phases in the bottleneck (\(\lvert u\rvert < U\), shaded; 40 to 70 iterates each) and bursts away from it. Branch residuals, fold, normal form and passages are float64; the branch multipliers in (b) are float32. No parameter is fitted in (c). A <a href="#reading-the-passages">step-by-step reading of panels (c) and (d)</a> follows below; the flat stretches in (d) are laminar phases on the other word of the 2-cycle, not bursts. Source: byte-identical copy of the report's figure (<a href="provenance.json">provenance.json</a>).</p>
+<p class="figure-note">Figure 26: the fold behind the stripes, the 2-cycle <code>" is it"</code> at \(\log_{10}T = -0.115\) (Qwen2.5-0.5B-Instruct, philosophy direction at layer 12). (a) Continued in \(\alpha\), the attracting 2-cycle (filled) and its saddle partner (open) meet and vanish at \(\alpha_c = 0.06279827\); the vertical coordinate is the projection \(u\) of one point of each orbit on the fold's critical direction; orange, the normal form's fixed points \(u^* = \pm\sqrt{\lvert a\rvert(\alpha_c - \alpha)/\lvert b\rvert}\). (b) The largest multiplier of \(G = F^2\) on the two orbits reaches \(+1\) at the fold, following the normal form's \(1 \mp 2\sqrt{ab(\alpha_c - \alpha)}\) (open circles: a complex leading pair). (c) Controlled passages from the channel's beginning \(v = -U\) to its exit \(v = U\), measured on the network (markers, one shape per \(\varepsilon\)) and iterated from the normal form \(v' = v + \lvert a\rvert\varepsilon + \lvert b\rvert v^2\) (lines), take 144, 71, 34 and 14 iterates, as predicted. (d) The measured free trajectory at \(\varepsilon=10^{-5}\), with signed position \(v/U\) on a linear axis. Black samples every two updates; blue reads each saved state one update later. Orange <em>time intervals</em> pass both \(|v|<U\) and a transverse-remainder cutoff of 0.05 at either reading. White means neither reading passes this local check, not that the dynamics are necessarily chaotic. Dashed lines mark \(v/U=\pm1\); values outside \(|v|\le3U\) are omitted rather than connected across distant excursions. Complete highlighted passages last 40 to 70 two-update intervals; the first and last are cut off by the displayed horizon. The smooth zero crossings and blue phase-shifted passages replace the misleading spikes and high plateau of the earlier absolute-value/log-scale rendering. Branch residuals, fold, normal form and passages are float64; branch multipliers in (b) are float32. No parameter is fitted in (c), and (d) is saved network output, not a normal-form simulation. See the <a href="#reading-the-passages">step-by-step explanation</a>. Source: byte-identical copy of the updated report figure; the saved-data checks and display changes are recorded in <a href="fold-panel-revision.json">fold-panel-revision.json</a>.</p>
 
 | \(\varepsilon = \alpha - \alpha_c\) | Full channel: measured / predicted | Midpoint start | Full channel after a transverse kick |
 |---|---|---|---|
@@ -3694,23 +3692,20 @@ shows where the successive turns of one passage land.
 of laps, because each lap moves the state only a tiny distance. Panel (c) follows that slow crossing one lap at a time from
 a chosen start. Panel (d) lets the loop run free. It crawls through the same channel while `" a"` slowly gains on `" it"`.
 When `" a"` finally wins, the sentence ends, `" is a is a . This is"`, and the loop falls back into the channel. Given
-where a crawl begins, the fold's formula predicts how long it takes, with nothing fitted. The long flat stretches of panel (d)
-turn out to be more crawling, seen on the other word of the cycle.
+where a crawl begins, the fold's formula predicts how long it takes, with nothing fitted. The blue trace in panel (d) catches the slow passages that return one update out of phase.
 {{< /panel >}}
 
 **The setting.** Everything here happens at \(\alpha = \alpha_c + \varepsilon\), just past the fold, with \(\varepsilon\)
 from \(3\times10^{-6}\) to \(10^{-4}\). The 2-cycle is gone, so the question is what the loop does instead. The unit of time
 in both panels is a *lap*: one iterate of \(G = F^2\), which is two steps of the loop, one turn around the vanished 2-cycle.
 
-**What the vertical axis of (c) measures.** The state has 896 numbers, but near the fold only one direction matters. A
-displacement has a part along that direction and a part outside it, and the part outside shrinks fast, to about 4% of itself
-on every lap (the next multiplier at the fold is 0.037). So one number is enough, and it is read in four pieces.
+**What the vertical axes of (c) and (d) measure.** The feedback state has 896 numbers. Near the fold, one direction becomes slow while the other linear modes are contracting (the next multiplier at the fold has modulus 0.037). The slow coordinate describes progress through the local channel; it is not enough on its own to decide whether a distant state is near that channel. Here is how it is constructed.
 
 - *The reference point.* \(x_c\) is one state of the 2-cycle at the moment it dies. The 2-cycle has two states, and this is
   the one the loop reaches after writing `" is"`.
 - *The coordinate.* \(u = \ell^{\top}(x - x_c)\) says how far a state lies from \(x_c\) along the critical direction. The
   left eigenvector \(\ell\) of the section above works like a slanted ruler: it reads that one direction and ignores the
-  other eigendirections, which a plain projection would mix in. Near \(x_c\) the reading is close to a true distance. Far
+  other eigendirections, which a plain projection would mix in. For a displacement purely along the normalized critical direction, its magnitude equals that displacement's length; in general it is not the full distance. Far
   from it the reading is not, because \(\ell\) has length 33 and stands almost at right angles to the
   critical direction.
 - *The orientation.* \(v\) is \(u\) with its sign chosen so that the drift runs upward. Here \(a\) and \(b\) are negative, so
@@ -3805,17 +3800,18 @@ displacement, runs for 100 laps to forget that start, and the next 600 laps are 
 \(\varepsilon = 10^{-5}\). This trajectory is one of four run at this \(\varepsilon\). Two of the others alternate in the same
 way. The fourth settles on a different loop, `" certainly . Hello"`, and never enters the channel.
 
-**Why the panel looks so spiky.** The panel plots \(\lvert u\rvert\), a size with the sign dropped, on a logarithmic axis. A
-crawl from \(-U\) to \(+U\) passes through zero, and a logarithmic axis has no zero: the curve plunges as \(u\) crosses it, and
-the depth of the plunge only reflects how close one lap happened to land. So every narrow dip is a quiet crossing of the
-middle of the channel, not an event. Do not confuse it with the steep fall right after each upward spike, which is the real
-return to the channel. Panel (b) of the figure below draws the same trajectory on a linear axis with the sign kept, in units
-of \(U\) and only within \(\pm3\), so the upward spikes leave the frame. The dips disappear, and each crawl becomes one climb,
-always upward.
+**How to read the corrected panel (d).** Its vertical axis is a signed position, not speed, probability, loss, or a chaos score. The dashed lines at \(-1\) and \(+1\) mark the chosen channel entrance and exit. Zero is the middle of the coordinate, not proof that all 896 components equal the old cycle's state.
 
-![Three stacked panels over the first 345 laps of the free trajectory of Figure 26d. (a) The article's view: the size of u on a logarithmic axis, with the bottleneck band shaded. Curves dip to sharp minima inside the band, rise out of it to peaks near 1, and one flat stretch near 0.4 runs from about lap 181 to 233. (b) The same numbers on a linear axis in units of U with the sign kept, drawn only within plus or minus 3: black curves climb steadily across the shaded channel from about 0 or -1 to the exit at +1; a blue curve, the coordinate read one step later, climbs across the channel in the same way between about laps 180 and 225, inside the flat stretch of panel (a). (c) Probabilities in percent at the step that writes " it": " it" near 27, " there" near 20 and " a" near 19 during each crawl; near each exit " a" rises and overtakes " it", reaching about 54 and 55 percent at the first two exits, before all three return to their levels.](fig-free-orbit-words.png)
+- **Black and blue:** black reads the trajectory every two updates; blue applies one more update to each of those saved states. A burst can shift the alternating pattern by one update, so the two readings keep us from overlooking a slow passage on the other beat. They are separate readings of the same trajectory, not two different simulations or a fitted curve.
+- **Orange time intervals:** at least one reading passes both \(|v|<U\) and \(d_\perp<0.05\), where \(d_\perp=\|x-x_c-uq\|\) is the remaining state displacement after subtracting the critical component (\(q\) is the normalized right critical eigenvector, with \(\ell^\top q=1\)). We recomputed this check from the saved full states. These thresholds define a local analysis window; they are not universal boundaries of chaos.
+- **White time intervals:** neither reading meets both conditions. White does not by itself prove chaos, and a trace can remain visible there while moving toward or away from the chosen channel.
+- **Gaps:** this is a close-up showing only \(|v|\le3U\). The omitted portions are outside the displayed coordinate range; they are not lost data or instantaneous jumps.
 
-<p class="figure-note">The first 345 laps of the free trajectory of Figure 26d, three ways. Finding: a crawl is one climb across the channel, and the spikes up are sentence ends. (a) is the article's panel over these laps. (b) keeps the sign, on a linear axis, and adds in blue the coordinate read one step later, which shows the crawl hidden in the flat stretch. (c) shows what the coordinate follows in words: at the step that writes <code>" it"</code>, each crawl is a slow drift among three tokens, and <code>" a"</code> overtakes <code>" it"</code> at the end of it. One trajectory, read after the fact to explain the figure, not a test. Source: <a href="walkthrough-free.json">walkthrough-free.json</a>, generator <a href="https://github.com/tdj28/neural-shrimp/blob/5b7a02a172e76950300b44a4f6168c6a8161d2fb/tools/figure_walkthroughs.py">figure_walkthroughs.py</a>, verified by <a href="verify_walkthroughs.py">verify_walkthroughs.py</a>.</p>
+**It does not jump when it reaches the middle.** At laps 11, 12, 13 and 14 the recorded signed coordinate is approximately \(-0.000065\), \(-0.000017\), \(+0.000031\) and \(+0.000080\). It crosses zero smoothly. The earlier figure plotted an absolute value on a logarithmic axis, which turned this ordinary crossing into a sharp downward spike. That plotting artifact is removed. Beyond the fold the forward move is smallest near zero, but remains positive: the fixed point is gone, so the state slows without stopping, crosses the middle, and then accelerates toward the exit. In the first passage it leaves the chosen channel around lap 48; the large excursion comes later, around laps 58–60.
+
+![Three panels over the first 345 two-update intervals. Panel a shows signed local position for the original reading in black and the one-update-later reading in blue; both cross zero smoothly, and orange vertical intervals require both channel checks. Panel b shows the transverse remainder for each reading and its 0.05 threshold on a logarithmic axis. Panel c shows the probabilities of it, there and a at the step selected for reading it; the probabilities change slowly through the channel, then change rapidly near an excursion.](fig-free-orbit-words.png)
+
+<p class="figure-note">The first 345 intervals of the same saved trajectory. (a) Signed position and both observation phases, as in Figure 26d. (b) The additional transverse check: a small projection alone does not establish closeness to the channel. The reading near the other phase can have a large remainder relative to this reference point. (c) The original token-probability measurements: at the step that writes <code>" it"</code>, each crawl is a slow drift among competing tokens, and <code>" a"</code> overtakes <code>" it"</code> near the excursion. This is a descriptive reading of one trajectory, not an independent test of chaos. The signed-position axis is linear; the transverse-magnitude axis is logarithmic. Source: <a href="walkthrough-free.json">original readout receipt</a> and <a href="fold-panel-revision.json">updated display and full-state checks</a>.</p>
 
 **One full cycle, in words.** We reran the published trajectory with the same inputs, this time recording the most probable
 tokens. Its coordinates came back identical, with a largest difference of 0.0 over
@@ -3848,34 +3844,16 @@ overtakes `" it"`, 24.6% to 23.5%. Now the text changes
 fast. At lap 59 the model writes `" a"` at 54% and then a full stop at
 91%. The state after that lap is mostly a soft full stop, far from the two states of the
 crawl, which is why \(\lvert u\rvert\) jumps to about 1.1, a reading on the slanted ruler (the true distance is
-0.46). That is the spike *upward*. At lap 60 the sentence
+0.46). That excursion is outside the corrected panel's local vertical range. At lap 60 the sentence
 restarts with `" This"` and `" is"`, and by lap 62 the state is back in the channel at \(v = −0.0003\). The text
 reads `" it is it is a is a . This is it is it is"`.
 
 These are the pieces of the stripe texts of Table 4, `". This"` followed by `"is X"` pairs. In a window that pattern repeats
 exactly, with a fixed number of `"is it"` pairs. Here the number of pairs changes from one sentence to the next.
 
-**The flat stretches are not bursts.** Laps 181 to 233 sit almost still at \(\lvert u\rvert \approx 0.42\), far outside the
-band. They are more crawling. The burst before them restarts the sentence in a different way. The usual ending puts three
-words between one `" is"` and the next, `" a . This"`, and `" is"` stays the second word of each lap. At lap 167 the text
-instead breaks the line and restarts with `"\n\nThe"`, only two words, so from there on `" is"` is the first word of each lap.
-Since the coordinate is read every two steps, it now lands on the other word of the 2-cycle, and because \(u\) is measured
-from \(x_c\), that other state reads about 0.42 instead of about 0. The text confirms it: these laps read `" is it"` where
-the crawls read `" it is"`. The same two-word restart ends the flat stretch at laps 236 and 237. This says where the beat
-moves, not why the model takes that restart.
+**Why the blue passage matters.** In the earlier every-other-step plot, laps 181 to 233 appeared nearly flat near \(|u|\approx0.42\). That was a change in which phase we were observing, not evidence of a long burst. The usual sentence ending places three tokens between one `" is"` and the next, `" a . This"`, leaving `" is"` on the same beat. The restart at lap 167 instead uses `"\n\nThe"` and changes the beat. The two-step reading then lands near the other point of the almost-repeating cycle. This describes the phase shift; it does not explain why that restart was chosen.
 
-We tested this directly by applying one more step of the loop to every saved state. During the flat stretch that reading climbs
-through the channel from −0.0004, staying inside it for 45 laps,
-the blue curve above, and then runs out past the exit while the flat reading has barely moved, so the flat stretch lasts 53
-laps. During an ordinary crawl it is the other way round: one step later the reading sits at about 0.42, from
-0.414 to 0.422 over the eight crawls. So the shaded band of
-panel (d) sees only the crawls on one word of the cycle. Counting both, this trajectory is in the channel for
-74% of the first 600 laps instead of 65%. Over
-the 1500 recorded laps, 46% are inside the band and another
-33% are on flat stretches. Only the first of those 8 stretches, and the
-start of the second, could be tested one step later, because the states were saved for 600 laps. The others sit at the same
-reading, 0.41 to 0.44, so we read them the same way. On that
-reading most of the time this loop is crawling, and the bursts proper are short.
+Applying one further update to the saved states exposes the slow passage directly: the blue reading satisfies both channel checks for 45 intervals, laps 180–224. It is now drawn as a rising curve rather than a high plateau. In the first 600 intervals, the original reading passes the two checks at 390 intervals (65%) and the shifted reading adds 55, giving 445 (74%) in total. The final blue passage is cut off at the end of the plot. Outside these 600 intervals, the older scalar record extends to 1500 laps, but we do not have the same saved full-state phase check; we do not extend the new shading to that unverified horizon.
 
 **Why the crawls differ in length.** A crawl lasts as long as the road ahead of it, so it depends on where the burst drops the
 state. The formula knows nothing about the bursts, but once the state has landed on the channel it predicts the rest with the

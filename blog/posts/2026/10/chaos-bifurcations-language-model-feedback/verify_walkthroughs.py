@@ -68,7 +68,12 @@ def main():
             raise ValueError(f"{entry['id']}: {shown} not in index.md")
     if args.research_repo:
         for fig in FIGURES.get(ext["id"], ()):
-            pinned = subprocess.check_output(["git", "show", f"{ext['source_commit']}:docs/figure-walkthroughs/{fig}"], cwd=args.research_repo)
+            revision = ext.get("figure_revisions", {}).get(fig)
+            commit = revision["source_commit"] if revision else ext['source_commit']
+            path = revision["source_path"] if revision else f"docs/figure-walkthroughs/{fig}"
+            pinned = subprocess.check_output(["git", "show", f"{commit}:{path}"], cwd=args.research_repo)
+            if revision and hashlib.sha256(pinned).hexdigest() != revision['sha256']:
+                raise ValueError(f"{fig}: revised figure hash mismatch")
             if pinned != (bundle / fig).read_bytes():
                 raise ValueError(f"{fig}: differs from the pinned commit")
     print(f"{ext['id']} verified: {len(ext['new_numbers'])} numbers, {len(ext['source_receipts'])} receipts")
