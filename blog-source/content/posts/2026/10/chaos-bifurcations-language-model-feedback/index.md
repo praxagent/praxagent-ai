@@ -2,7 +2,7 @@
 title: "Chaos and Bifurcations in Continuous Language-Model Feedback"
 slug: "chaos-bifurcations-language-model-feedback"
 date: 2026-10-26
-lastmod: 2026-10-26
+lastmod: 2026-11-13
 citation_enabled: true
 citation_version: "2026.10.26"
 tags: ["AI", "LLM", "machine-learning", "dynamical-systems", "chaos", "bifurcation-theory", "activation-steering", "soft-thinking", "reproducibility"]
@@ -3718,7 +3718,9 @@ bottleneck (40 to 70 iterates each) and bursts away from it (Figure
 26d). In a laminar phase it crawls through the bottleneck close to where the
 2-cycle was and moves almost periodically; a burst is a short excursion out of the
 channel, after which the trajectory is reinjected into it. This alternation is
-type-I intermittency ([Pomeau and Manneville, 1980](#ref-pomeau-1980)), whose
+the pattern associated with type-I intermittency ([Pomeau and Manneville, 1980](#ref-pomeau-1980)).
+The observed alternation alone does not establish persistent chaos; the [global-return follow-up](#global-return)
+shows that repeated passages can end in periodic capture. In the local theory its
 laminar phases lengthen as \(\varepsilon^{-1/2}\) toward the fold
 ([Hirsch, Huberman, and Scalapino, 1982](#ref-hirsch-1982)). Laminar is the
 fluid-dynamics term for the smooth stretches of a flow between turbulent
@@ -3951,6 +3953,95 @@ flat stretch lands upstream of the channel altogether, at −3.0\(U\) and then
 −1.2\(U\), so the state crosses nearly all of it. The −0.95 in the table
 is only the first lap inside the band, and that crawl takes nearly the full 71 laps of panel (c). This is why the laminar phases
 of panel (d) run from 40 to 70 laps: a full passage, 71 laps, is the most the band can hold.
+
+### Why it returns, and why a return can still end {#global-return}
+
+The slow-passage formula answers one question: once the state enters the channel, how long does it take to leave?
+It does not decide where the model goes afterward. Outside the channel, the rest of the network's dynamics can
+bring it back or send it toward another repeating loop. We followed those excursions directly, keeping the model,
+prompt, temperature and steering fixed at the setting of Figure 26d.
+
+**The position along the channel is not enough for every possible state.** The soft token has 896 components.
+The coordinate \(v\) measures its position along the slow direction; the remaining components describe its
+displacement sideways from that direction. We changed those sideways components while holding \(v\) fixed.
+One state returned; a nearby state at the same \(v\) settled toward a different three-step cycle. That cycle's
+most likely tokens are `" certainly"`, `"."`, and `"Hello"`. These are readings of soft probability distributions,
+not hard tokens that we feed back. The full-state recurrence and its stability were checked numerically; this is
+not an additional interval-arithmetic proof. [Exit test and orbit verification](https://github.com/tdj28/neural-shrimp/blob/cf0688bc659decd2a914b61d4451dc77b0cc1eef/docs/fold-global-return.json).
+
+**Coming back once does not mean coming back forever.** We placed 64 starting states along the line between
+the returning state and the state heading toward period 3, then followed each for up to 4,096 individual model
+updates. Of these, 63 returned at least once. By the end, 27 had approached the period-3 cycle, including 26 that
+first returned to the slow channel. The other 37 were still unresolved. This is a deliberately constructed line
+of initial states, so those counts do not estimate the probability of capture for arbitrary starts.
+[Audited counts and stopping rules](fold-return-mechanism.json).
+
+<picture>
+  <source media="(max-width: 640px)" srcset="fig-fold-return-fates-mobile.png">
+  <img src="fig-fold-return-fates.png" alt="Of 64 constructed initial states, 27 approach period 3, including 26 after returning; 37 remain unresolved at 4096 updates." loading="lazy" decoding="async">
+</picture>
+
+<p class="figure-note"><strong>Returning is compatible with eventual capture.</strong> Each horizontal row in panel (a) is one starting state, ordered along the interpolation line. Orange marks checked visits to the slow channel; pale gray marks other recorded states. Blue is the final interval matching the attracting period-3 orbit. White after blue is time we did not compute after the stopping check, not a claim that the state was plotted there forever. In panel (b), circles count visits before period-3 capture; triangles count visits in histories still unresolved at the horizon. All 64 starts are shown. The channel test checks both the slow coordinate and the sideways displacement; a visit needs three consecutive readings on the same beat of the nearly alternating motion. Source and full text equivalent: <a href="fig-fold-return-fates.receipt.json">figure receipt</a>.</p>
+
+The result changes how we should read the earlier free trajectory. Its repeated crawls are real. They demonstrate
+the fold's slow passage and repeated reinjection during the observed run. They do not alone demonstrate an
+indefinitely sustained chaotic attractor. A system can also have *transient chaos*: trajectories wander near a
+chaotic set that does not attract them permanently, before settling elsewhere
+([Lai and Tél, 2011](#ref-lai-2011)). Establishing that explanation here would require further diagnostics; long
+or irregular-looking motion alone is insufficient.
+
+**Natural departures are much more organized than arbitrary perturbations.** A slow passage can compress differences in the sideways directions. In the states we measured,
+the natural departures lie extremely close to a curve. Knowing \(v\) lets us reconstruct all the other state
+components using a fitted curve \(\widehat x(v)\). This is consistent with transverse contraction; it is not a
+proof of an exactly invariant curve for the whole network.
+
+We fitted the curve using development trajectories, then tested the first eligible natural departure from each
+of 31 wholly held-out starting trajectories. A departure here is recorded beyond the narrow orange band, after
+a sufficiently long slow passage. We made a pair: the actual exit state and the state reconstructed from its one
+coordinate. We then ran **both through the original network**.
+
+All 31 pairs reached the same next destination: 28 returned to the channel, and three approached period 3.
+For all 28 returning pairs, the time of re-entry and the time of the next departure agreed exactly, measured in
+individual model updates. The complete cycles lasted 105 to 227 updates. Their positions at the next departure
+differed by less than \(0.0014U\), where \(U\) is the channel's half-width.
+[Paired validation and error bounds](fold-return-mechanism.json).
+
+<picture>
+  <source media="(max-width: 640px)" srcset="fig-fold-return-map-mobile.png">
+  <img src="fig-fold-return-map.png" alt="Reconstructed natural exit states reproduce the next departure of all 28 returning held-out pairs; both trajectories use the full network." loading="lazy" decoding="async">
+</picture>
+
+<p class="figure-note"><strong>One number reconstructs the departure state; the network still computes the journey.</strong> Panel (a): position at the next departure (vertical axis) against the current one (horizontal axis), after an excursion and another slow passage. Filled dots start from the original full state; open circles start from its reconstruction using the slow coordinate alone. Their close overlap is the result being tested. Gray dots show the other measured adjacent return cycles. Panel (b): the differences hidden by that overlap, on a logarithmic scale. All 28 returning held-out pairs are shown. The three period-3 pairs have no next channel departure, so their matching destination is reported separately. The fit and test concern one parameter setting and one complete cycle. Source and full text equivalent: <a href="fig-fold-return-map.receipt.json">figure receipt</a>.</p>
+
+**What this solves, and what it leaves open.** We now have evidence that the natural exit state can be described
+by one coordinate accurately enough to reproduce the tested next journey. We have not replaced the network with
+a self-contained one-variable dynamical model. A simple interpolation predicting the next channel entry still had
+an error of \(0.2142U\), against \(0.2645U\) for always predicting the average entry. These are root-mean-square
+errors over 777 returned test exits, giving each starting trajectory equal weight. They concern the landing point,
+not the next-departure comparison in the figure. The accurately reconstructed state and the modest scalar forecast
+are different tests. [Prediction comparisons](fold-return-mechanism.json).
+
+A complete scalar model would look like
+
+\[
+v_{k+1}=P(v_k),\qquad t_{k+1}=t_k+\tau(v_k),
+\]
+
+with a separate outcome when the trajectory goes to period 3 instead of returning. Here \(k\) counts whole
+excursions and slow passages, not individual token updates. \(P\) would predict the next departure position and
+\(\tau\) the elapsed time. To earn that claim, we need to resolve the steep branches of the measured return map,
+fit them without smoothing away their structure, and test the model on fresh trajectories while it runs on its own
+for several cycles. If nearly identical \(v\) values still have incompatible outcomes, the model needs a branch
+label or an additional coordinate. Nearby parameter settings would test how far the description transfers.
+
+The question of persistent chaos needs a separate test. We would measure tangent growth and the fraction of a
+new, explicitly sampled ensemble that remains outside periodic capture as the horizon increases. Longer runs can
+strengthen numerical evidence; they cannot establish infinite-time behavior by themselves. A proof would need
+validated invariant-set geometry and chaotic dynamics for the full map. The right outcome may be a chaotic
+attractor, a chaotic transient before capture, or an irregular transient without established chaos. The present
+return study leaves those alternatives open. It does establish that the local slowdown, the global return, and
+the final destination are distinct parts of the explanation.
+
 
 ### The window law {#the-window-law}
 
@@ -9225,6 +9316,11 @@ object appears.
 
 ### Limitations {#limitations}
 
+- **Global return.** The natural-exit reconstruction is tested at one fixed parameter setting on held-out
+  trajectories from the same constructed initial-state line. The full network still advances the reconstructed
+  states. The result is not an autonomous scalar simulator or a test of indefinite recurrence. Some histories
+  approach period 3 after repeated returns; the remaining finite-horizon survivors do not establish persistent chaos.
+
 - **Memory intervention.** The continuation concerns one selected period-18
   child family in a changed feedback map. Steering and temperature follow its
   moving saddle. The trace-root estimate has a finite positive residual and no
@@ -9332,6 +9428,12 @@ directions are as chaotic as the concept directions, and in Llama-3.1-8B
 sparse-autoencoder feature, contrastive and random directions all are, with
 direction-dependent prevalence. What the direction selects is the text of the
 attractors ([Unsteered chaos and steering controls](#controls)).
+
+**The slowdown and the return are different parts of the explanation.** The [global-return study](#global-return)
+shows why a local formula can predict a crawl without predicting the next landing point. Natural exits admit a
+very accurate one-coordinate state reconstruction, but we still compute their excursions with the full network.
+A self-contained return model would have to predict both returns and escape to period 3, and pass tests over
+several cycles. Whether a chaotic invariant set organizes the long transients is a separate question.
 
 **Steering strength as a bifurcation parameter.** In the soft-token map, small
 changes of the steering strength switch the model between distinct repeating

@@ -247,7 +247,11 @@
   "fig-topk.png",
   "fig-real-inference.png",
   "fig-lfm3.png",
-  "fig-batch-fate-long.png"
+  "fig-batch-fate-long.png",
+  "fig-fold-return-fates.png",
+  "fig-fold-return-map.png",
+  "fig-fold-return-map-mobile.png",
+  "fig-fold-return-fates-mobile.png"
  ],
  "figure_sha256": {
   "fig-alpha0.png": "100dc997a923e123038d5bf8d321eb77fd148cce36b959402c67556d154ef166",
@@ -363,7 +367,11 @@
   "fig-topk.png": "1e28419917afcd2196e6b41cfbe5504d2169ca2c6d4918c414863a6e47a0bf91",
   "fig-real-inference.png": "4a4182d225470c528e71251e2cfd906bc86b5c8ae3d3bd3c1f3bd42d5a82ef82",
   "fig-lfm3.png": "af320d5f52401d4c7833c683ee060e66ba97fbca6e1accb1147c02124c4961b5",
-  "fig-batch-fate-long.png": "f047369ada955686738cbe59cbcb644f0c70a92a2f0682ad6fc93ad7a9f04061"
+  "fig-batch-fate-long.png": "f047369ada955686738cbe59cbcb644f0c70a92a2f0682ad6fc93ad7a9f04061",
+  "fig-fold-return-fates.png": "294e044ae2c7a70305997f002e3c6a618a196c139493f898637d0ca41bb8af8f",
+  "fig-fold-return-map.png": "89f4be152e85e8069f74335c2ffd68e94b38694d0154b5a58bdde083ef993857",
+  "fig-fold-return-map-mobile.png": "0e76a7a93253275e2f64bb13c8dbafe8bf37905d057500393cf26af5bd03db7d",
+  "fig-fold-return-fates-mobile.png": "9eda08eeb6ebe17549784ae0391d5e46f4424349b3a57d938f1f594764c63180"
  },
  "figure_sources": {
   "fig-alpha0.png": "paper/llm/figures/fig-alpha0.png (byte-identical copy)",
@@ -48490,6 +48498,173 @@
    "paper_line": 1306,
    "paper_file": "paper/llm/main.tex",
    "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "fgr2-line_starts",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "line_starts"
+   ],
+   "value": 64,
+   "appears_as": "64 starting states",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-horizon",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "horizon"
+   ],
+   "value": 4096,
+   "appears_as": "4,096 individual model",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-captured",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "captured"
+   ],
+   "value": 27,
+   "appears_as": "27 had approached",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-unresolved",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "unresolved"
+   ],
+   "value": 37,
+   "appears_as": "37 were still unresolved",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-returned_at_least_once",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "returned_at_least_once"
+   ],
+   "value": 63,
+   "appears_as": "63 returned at least once",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-returned_then_captured",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "returned_then_captured"
+   ],
+   "value": 26,
+   "appears_as": "26 that\nfirst returned",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-heldout_routes",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "heldout_routes"
+   ],
+   "value": 31,
+   "appears_as": "31 wholly held-out",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-heldout_returning_pairs",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "heldout_returning_pairs"
+   ],
+   "value": 28,
+   "appears_as": "28 returned to the channel",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-heldout_P3_pairs",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "heldout_P3_pairs"
+   ],
+   "value": 3,
+   "appears_as": "three approached period 3",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-max_cycle_time_error",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "max_cycle_time_error"
+   ],
+   "value": 0,
+   "appears_as": "agreed exactly",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-cycle_duration_range",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "cycle_duration_range"
+   ],
+   "value": [
+    105,
+    227
+   ],
+   "appears_as": "105 to 227 updates",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-max_next_departure_error_U",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "max_next_departure_error_U"
+   ],
+   "value": 0.001306632491476556,
+   "appears_as": "0.0014U",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-interpolation_entry_rmse_U",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "interpolation_entry_rmse_U"
+   ],
+   "value": 0.21424451508912729,
+   "appears_as": "0.2142U",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-constant_entry_rmse_U",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "constant_entry_rmse_U"
+   ],
+   "value": 0.26452289732273393,
+   "appears_as": "0.2645U",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-returned-test-exits",
+   "receipt": "fold-return-mechanism.json",
+   "field": [
+    "simple_prediction_comparisons",
+    "return_test_exits"
+   ],
+   "value": 777,
+   "appears_as": "777 returned test exits"
   }
  ],
  "extensions": [
@@ -53999,6 +54174,190 @@
      ],
      "style": "d",
      "appears_as": "600"
+    }
+   ]
+  },
+  {
+   "id": "fold-global-return-20261113",
+   "source_commit": "cf0688bc659decd2a914b61d4451dc77b0cc1eef",
+   "description": "Audited FGR1/FGR2 returns, P3 capture, state reconstruction and limits; no new scientific execution.",
+   "generator": {
+    "repository": "tdj28/neural-shrimp",
+    "path": "tools/publish_fold_return_figures.py",
+    "sha256": "c9f0c22d324b297a7fee82c7e9fabb6866b29d5a343ba5adf9963c786a774608"
+   },
+   "receipts": {
+    "fold-return-mechanism.json": "5e3bbed19e25a9eca0ed4bffccd88c94d0478689df19115c181cd0b2474d0eee",
+    "fig-fold-return-map.receipt.json": "873499f5781d9e8ca14e7aaf790debcc5e0e2bdbc11c85080b53fb376560ea1a",
+    "fig-fold-return-fates.receipt.json": "bbcbe4077623cd15bc92da320122b710867035bbceedcaabb74f6c6287517fa7"
+   },
+   "new_numbers": [
+    {
+     "id": "fgr2-line_starts",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "line_starts"
+     ],
+     "value": 64,
+     "appears_as": "64 starting states",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-horizon",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "horizon"
+     ],
+     "value": 4096,
+     "appears_as": "4,096 individual model",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-captured",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "captured"
+     ],
+     "value": 27,
+     "appears_as": "27 had approached",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-unresolved",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "unresolved"
+     ],
+     "value": 37,
+     "appears_as": "37 were still unresolved",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-returned_at_least_once",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "returned_at_least_once"
+     ],
+     "value": 63,
+     "appears_as": "63 returned at least once",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-returned_then_captured",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "returned_then_captured"
+     ],
+     "value": 26,
+     "appears_as": "26 that\nfirst returned",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-heldout_routes",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "heldout_routes"
+     ],
+     "value": 31,
+     "appears_as": "31 wholly held-out",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-heldout_returning_pairs",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "heldout_returning_pairs"
+     ],
+     "value": 28,
+     "appears_as": "28 returned to the channel",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-heldout_P3_pairs",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "heldout_P3_pairs"
+     ],
+     "value": 3,
+     "appears_as": "three approached period 3",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-max_cycle_time_error",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "max_cycle_time_error"
+     ],
+     "value": 0,
+     "appears_as": "agreed exactly",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-cycle_duration_range",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "cycle_duration_range"
+     ],
+     "value": [
+      105,
+      227
+     ],
+     "appears_as": "105 to 227 updates",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-max_next_departure_error_U",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "max_next_departure_error_U"
+     ],
+     "value": 0.001306632491476556,
+     "appears_as": "0.0014U",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-interpolation_entry_rmse_U",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "interpolation_entry_rmse_U"
+     ],
+     "value": 0.21424451508912729,
+     "appears_as": "0.2142U",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-constant_entry_rmse_U",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "constant_entry_rmse_U"
+     ],
+     "value": 0.26452289732273393,
+     "appears_as": "0.2645U",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-returned-test-exits",
+     "receipt": "fold-return-mechanism.json",
+     "field": [
+      "simple_prediction_comparisons",
+      "return_test_exits"
+     ],
+     "value": 777,
+     "appears_as": "777 returned test exits"
     }
    ]
   }

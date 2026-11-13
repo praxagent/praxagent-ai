@@ -112,7 +112,8 @@ blog: sync-prax-docs verify-late-chunking ## Compile blog-source/content/posts i
 		--exclude='*' \
 		"$(LATE_CHUNKING_BUNDLE)/" \
 		"$(LATE_CHUNKING_PUBLIC)/"
-	$(RSYNC) -a \
+	$(RSYNC) -a --prune-empty-dirs \
+		--exclude='__pycache__/' \
 		--include='*/' \
 		--include='README.md' \
 		--include='WEB.md' \
@@ -225,6 +226,7 @@ check: sync-prax-docs verify-late-chunking ## Validate Hugo, links, assets, prov
 	$(PYTHON) scripts/check_public_repo.py
 	$(PYTHON) scripts/check_site.py
 	$(PYTHON) scripts/check_provenance.py
+	$(PYTHON) blog-source/content/posts/2026/10/chaos-bifurcations-language-model-feedback/verify_fold_return.py
 	$(MAKE) check-search-assets
 	$(MAKE) check-browser
 	$(MAKE) check-search-browser
