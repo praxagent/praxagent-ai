@@ -12,7 +12,9 @@
     "fig-hidden-bands.receipt.json": "48bcae4e9225c5a441edfd6843526d92ad29e8643e85423eb09072c297668403",
     "fig-pair-basins.receipt.json": "5ff910a89bcb2aa8c6f024a6f6ac8707d1566f1c5b08ecb7fbea16395d3c9b70",
     "fig-passages.receipt.json": "440a6dd58d793dc26db84eecfa314b68e98cd98a2e1e40c5f30d1a9f221dbb88",
-    "fig-sync.receipt.json": "0f64495aef3b84d5728108ca996933aa7d7ac4068f3d1d34b021172f0cf45dbd"
+    "fig-sync.receipt.json": "0f64495aef3b84d5728108ca996933aa7d7ac4068f3d1d34b021172f0cf45dbd",
+    "fold-return-autonomous.json": "a951826b50bc36ea7182d031fc53de8265de303cbd0e47c953ae43394c0a55ee",
+    "fig-fold-growth-capture.receipt.json": "6ba42436365a4dd6e3a152eb0d0600c8a58d3fd488e90548af00efe33c1274a8"
   },
   "figures": [
     "islands-of-order.png",
@@ -23,7 +25,9 @@
     "fig-hidden-bands.png",
     "fig-pair-basins.png",
     "fig-passages.png",
-    "fig-sync.png"
+    "fig-sync.png",
+    "fig-fold-growth-capture-mobile.png",
+    "fig-fold-growth-capture.png"
   ],
   "numbers": [
     {
@@ -67,7 +71,146 @@
     "fig-hidden-bands.png": "9b40800041af3b63cadd01a401701f30b64c7e3f1029c2c9e26771d2a8defcb8",
     "fig-pair-basins.png": "3df5b5127854148a8cc3060e1d7474c05098a085908179381eef4bea0e440599",
     "fig-passages.png": "0c50d4cc00c81346d2654b75418d602445ad75d4ef3f508f556f46a45522fa55",
-    "fig-sync.png": "ddccb2407a28a212ff30ffdda8b4a0255cafbbe26855671a499b5593f0a042d9"
+    "fig-sync.png": "ddccb2407a28a212ff30ffdda8b4a0255cafbbe26855671a499b5593f0a042d9",
+    "fig-fold-growth-capture-mobile.png": "42d29ea553e541a15efbec6da63a5dc37a2fe71171797a68df1eb3cc1ea2f93c",
+    "fig-fold-growth-capture.png": "bd009282b2102a16561490e1894621b1f07609557a1968de3cb488b968dfddd9"
   },
-  "source_evidence": "receipts/evidence-summary.json"
+  "source_evidence": "receipts/evidence-summary.json",
+  "extensions": [
+    {
+      "id": "fold-autonomous-return-20261114",
+      "source_commit": "6343dc481f275afcb73b81b338a1597cbf2f21ed",
+      "description": "FGR3 frozen autonomous table, fresh capture predictions and exact pre-capture tangent growth; failed forecasts retained, finite-time claims only.",
+      "generator": {
+        "repository": "tdj28/neural-shrimp",
+        "path": "tools/publish_fold_autonomous_figures.py",
+        "sha256": "82606b1478e95a01daf994b781cfe7466b88610811f87d0069f10311b1d06040"
+      },
+      "receipts": {
+        "fold-return-autonomous.json": "a951826b50bc36ea7182d031fc53de8265de303cbd0e47c953ae43394c0a55ee",
+        "fig-fold-growth-capture.receipt.json": "6ba42436365a4dd6e3a152eb0d0600c8a58d3fd488e90548af00efe33c1274a8"
+      },
+      "frozen_design_url": "https://github.com/tdj28/neural-shrimp/blob/6343dc481f275afcb73b81b338a1597cbf2f21ed/docs/fold-return-autonomous-plan.json",
+      "scientific_receipt_url": "https://github.com/tdj28/neural-shrimp/blob/6343dc481f275afcb73b81b338a1597cbf2f21ed/docs/fold-return-autonomous.json",
+      "new_numbers": [
+        {
+          "id": "fgr3-fresh_starts",
+          "receipt": "fold-return-autonomous.json",
+          "field": [
+            "validation",
+            "rows"
+          ],
+          "value": 16,
+          "appears_as": "16 fresh starting states",
+          "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+        },
+        {
+          "id": "fgr3-captured",
+          "receipt": "fold-return-autonomous.json",
+          "field": [
+            "validation",
+            "outcomes",
+            "reference_p3"
+          ],
+          "value": 14,
+          "appears_as": "Fourteen approached",
+          "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+        },
+        {
+          "id": "fgr3-unresolved",
+          "receipt": "fold-return-autonomous.json",
+          "field": [
+            "validation",
+            "outcomes",
+            "unresolved_at_horizon"
+          ],
+          "value": 2,
+          "appears_as": "two remained unresolved",
+          "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+        },
+        {
+          "id": "fgr3-horizon",
+          "receipt": "fold-return-autonomous.json",
+          "field": [
+            "validation",
+            "survival",
+            2,
+            "updates"
+          ],
+          "value": 16384,
+          "appears_as": "16,384 updates",
+          "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+        },
+        {
+          "id": "fgr3-full_windows",
+          "receipt": "fold-return-autonomous.json",
+          "field": [
+            "growth",
+            "complete_network_windows"
+          ],
+          "value": 26,
+          "appears_as": "All 26 complete measurement windows",
+          "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+        },
+        {
+          "id": "fgr3-positive_then_capture",
+          "receipt": "fold-return-autonomous.json",
+          "field": [
+            "growth_summary",
+            "positive_then_P3_trajectories"
+          ],
+          "value": 13,
+          "appears_as": "Thirteen trajectories",
+          "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+        },
+        {
+          "id": "fgr3-samples",
+          "receipt": "fold-return-autonomous.json",
+          "field": [
+            "training",
+            "rows"
+          ],
+          "value": 1025,
+          "appears_as": "1,025 sampled departures",
+          "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+        },
+        {
+          "id": "fgr3-true_captures",
+          "receipt": "fold-return-autonomous.json",
+          "field": [
+            "validation",
+            "one_cycle_route",
+            "capture_true_positive"
+          ],
+          "value": 8,
+          "appears_as": "8 of the 14 captures",
+          "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+        },
+        {
+          "id": "fgr3-missed_captures",
+          "receipt": "fold-return-autonomous.json",
+          "field": [
+            "validation",
+            "one_cycle_route",
+            "capture_false_negative"
+          ],
+          "value": 6,
+          "appears_as": "missed 6",
+          "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+        },
+        {
+          "id": "fgr3-false_captures",
+          "receipt": "fold-return-autonomous.json",
+          "field": [
+            "validation",
+            "one_cycle_route",
+            "capture_false_positive"
+          ],
+          "value": 13,
+          "appears_as": "13 returns",
+          "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+        }
+      ]
+    }
+  ]
 }

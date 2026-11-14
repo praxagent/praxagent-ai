@@ -4,7 +4,7 @@ slug: "chaos-bifurcations-language-model-feedback"
 date: 2026-10-26
 lastmod: 2026-11-13
 citation_enabled: true
-citation_version: "2026.10.26"
+citation_version: "2026.11.13"
 tags: ["AI", "LLM", "machine-learning", "dynamical-systems", "chaos", "bifurcation-theory", "activation-steering", "soft-thinking", "reproducibility"]
 author: Timothy Jones
 author_id: "timothy-jones"
@@ -3987,8 +3987,7 @@ The result changes how we should read the earlier free trajectory. Its repeated 
 the fold's slow passage and repeated reinjection during the observed run. They do not alone demonstrate an
 indefinitely sustained chaotic attractor. A system can also have *transient chaos*: trajectories wander near a
 chaotic set that does not attract them permanently, before settling elsewhere
-([Lai and Tél, 2011](#ref-lai-2011)). Establishing that explanation here would require further diagnostics; long
-or irregular-looking motion alone is insufficient.
+([Lai and Tél, 2011](#ref-lai-2011)). The growth test below adds a separate diagnostic; long or irregular-looking motion alone is insufficient.
 
 **Natural departures are much more organized than arbitrary perturbations.** A slow passage can compress differences in the sideways directions. In the states we measured,
 the natural departures lie extremely close to a curve. Knowing \(v\) lets us reconstruct all the other state
@@ -4014,33 +4013,115 @@ differed by less than \(0.0014U\), where \(U\) is the channel's half-width.
 <p class="figure-note"><strong>One number reconstructs the departure state; the network still computes the journey.</strong> Panel (a): position at the next departure (vertical axis) against the current one (horizontal axis), after an excursion and another slow passage. Filled dots start from the original full state; open circles start from its reconstruction using the slow coordinate alone. Their close overlap is the result being tested. Gray dots show the other measured adjacent return cycles. Panel (b): the differences hidden by that overlap, on a logarithmic scale. All 28 returning held-out pairs are shown. The three period-3 pairs have no next channel departure, so their matching destination is reported separately. The fit and test concern one parameter setting and one complete cycle. Source and full text equivalent: <a href="fig-fold-return-map.receipt.json">figure receipt</a>.</p>
 
 **What this solves, and what it leaves open.** We now have evidence that the natural exit state can be described
-by one coordinate accurately enough to reproduce the tested next journey. We have not replaced the network with
-a self-contained one-variable dynamical model. A simple interpolation predicting the next channel entry still had
+by one coordinate accurately enough to reproduce the tested next journey. This does not yet give a reliable
+self-contained one-variable dynamical model; the further test below addresses that distinction directly. A simple interpolation predicting the next channel entry still had
 an error of \(0.2142U\), against \(0.2645U\) for always predicting the average entry. These are root-mean-square
 errors over 777 returned test exits, giving each starting trajectory equal weight. They concern the landing point,
 not the next-departure comparison in the figure. The accurately reconstructed state and the modest scalar forecast
 are different tests. [Prediction comparisons](fold-return-mechanism.json).
 
-A complete scalar model would look like
+### Can a small formula replace the network? We tested it {#autonomous-return-test}
 
-\[
-v_{k+1}=P(v_k),\qquad t_{k+1}=t_k+\tau(v_k),
-\]
+The reconstruction experiment above still asked the full language model to calculate each journey. We next
+built a separate lookup model that could run on its own. This is a substantially harder test: being able to
+summarize where the network is does not mean we can accurately predict where it will go.
 
-with a separate outcome when the trajectory goes to period 3 instead of returning. Here \(k\) counts whole
-excursions and slow passages, not individual token updates. \(P\) would predict the next departure position and
-\(\tau\) the elapsed time. To earn that claim, we need to resolve the steep branches of the measured return map,
-fit them without smoothing away their structure, and test the model on fresh trajectories while it runs on its own
-for several cycles. If nearly identical \(v\) values still have incompatible outcomes, the model needs a branch
-label or an additional coordinate. Nearby parameter settings would test how far the description transfers.
+The lookup model takes the departure coordinate \(q=v/U\). It returns either the next departure position and
+the number of model updates required to reach it, or a label saying that the trajectory approaches period 3.
+We sampled 1,025 departure states with the full network: a grid of 257 points followed by three rounds of
+256 additional points, concentrating on changes in destination, timing and position. The sampled interval
+was \(3\le q\le4.12\), extending slightly beyond the state curve's earlier fitting interval. Of these
+starts, 995 returned, 29 approached the reference 3-cycle, and one met a recurrence test without quite passing
+the reference-cycle matching threshold. That last case does not establish a new attractor.
 
-The question of persistent chaos needs a separate test. We would measure tangent growth and the fraction of a
-new, explicitly sampled ensemble that remains outside periodic capture as the horizon increases. Longer runs can
-strengthen numerical evidence; they cannot establish infinite-time behavior by themselves. A proof would need
-validated invariant-set geometry and chaotic dynamics for the full map. The right outcome may be a chaotic
-attractor, a chaotic transient before capture, or an irregular transient without established chaos. The present
-return study leaves those alternatives open. It does establish that the local slowdown, the global return, and
-the final destination are distinct parts of the explanation.
+Between two training samples with the same return time, we interpolated the next departure. Where neighboring
+samples disagreed on time or outcome, the lookup used the nearer sample and flagged the interval as unresolved.
+It refused to extrapolate outside the sampled range. We then froze the entire table **before generating the
+fresh test trajectories**. The test used 16 new starting states spread along the same constructed line, each
+followed for up to 16,384 network updates. We did not retrain on their results.
+
+**Predicting capture was the weak point.** Across the fresh histories there were 844 completed next-event
+checks: 830 returns and 14 approaches to period 3. Starting from each observed departure, the table correctly
+identified 8 captures, missed 6, and incorrectly called 13 returns captures. Only 38.1% of its capture predictions
+were right; it found 57.1% of the observed captures. Its total of 825 correct labels was worse than the 830
+correct labels from always predicting another return. Two final events were still unresolved and were excluded.
+This is why a high overall accuracy would be misleading: most events were returns, and those were easy to guess.
+
+For the 817 returns it classified correctly, the typical position error, measured by root-mean-square error,
+was \(0.3273U\), and the mean absolute timing error was 8.85 network updates. These tests supply the true
+current departure to the table every time. They give it more help than an autonomous simulation receives.
+
+<picture>
+  <source media="(max-width: 640px)" srcset="fig-fold-autonomous-test-mobile.png">
+  <img src="fig-fold-autonomous-test.png" alt="A finely structured measured return map and growing errors when a frozen numerical table predicts several cycles without network corrections." loading="lazy" decoding="async">
+</picture>
+
+<p class="figure-note"><strong>A good description of the state is not yet a reliable forecast.</strong> Left: every development sample, with the current departure across and the next departure up. The separate top strip marks trajectories stopped at a terminal outcome; it is not a departure coordinate. Right: prediction errors after letting the table feed its own output back into itself. Red circles show the piecewise table; blue squares show the nearest-sample baseline. The red fractions count how many of the network's returning trajectories the table still predicts will return. Later error scores exclude premature terminal predictions, so those fractions matter. The baseline uses a different continuing subset, stated below the plot. These are measured model forecasts, not an illustration of an assumed return law. <a href="fold-return-autonomous.json">Audited results and figure sources</a>.</p>
+
+**Letting the table run independently did not fix the problem.** At the first cycle its position error was
+\(0.3282U\). By the eighth it was \(0.4917U\), and that score covers only 12 of the 15 trajectories that
+actually still returned: the table had already predicted a terminal outcome for the other three. Its mean
+absolute elapsed-time error on those continuing predictions was 71.33 network updates. The nearest-sample
+baseline was not consistently worse. We therefore built an autonomous model, but it did **not** earn the claim
+that it can reliably replace the network. Neither the table nor the nearest-sample baseline left the sampled
+coordinate range during these rollouts, so this failure was not caused by refusing out-of-range inputs.
+
+A further check helps explain where the difficulty lies. At all 846 natural departures in the fresh histories,
+the original one-coordinate curve still reconstructed the full state to a maximum relative error below
+\(7.5\times10^{-14}\). Meanwhile, the table's position errors were much larger in intervals whose neighboring
+training samples disagreed on timing or destination: \(0.4439U\), versus \(0.06505U\) where the endpoints agreed
+on return time, considering correctly classified returns in each group. This comparison was made after the
+test and did not change the table. It points toward unresolved structure in the global journey, but does not
+prove that more samples alone will solve it. Tiny state errors can be amplified; an omitted coordinate could
+also matter. The failure of this table is not a proof that a scalar return model is impossible.
+
+
+### Sensitive motion can end in capture {#growth-before-capture}
+
+The fresh network trajectories give a clearer answer to the second question: can the wandering expand small
+differences before ending in a periodic cycle? **Thirteen of the fresh trajectories did both.** They showed
+positive tangent growth in both halves of a complete measurement window, and later approached the attracting
+3-cycle. This is numerical evidence of sensitivity before capture, consistent with chaotic transients.
+It is not proof of an indefinitely sustained chaotic attractor or a chaotic invariant set.
+
+Across all 16 starts, 14 approached period 3 and two remained unresolved after 16,384 updates. Eight were
+still uncaptured at 4,096 updates and six at 8,192. Here capture begins at the first state of 128 consecutive
+ordered matches to the reference cycle, using all state components. We are counting outcomes on the specified
+line of starting states, not estimating the fraction of all possible states or prompts that will escape.
+
+<picture>
+  <source media="(max-width: 640px)" srcset="fig-fold-growth-capture-mobile.png">
+  <img src="fig-fold-growth-capture.png" alt="Fourteen of sixteen fresh trajectories approach period three; every complete pre-capture measurement window has positive tangent growth, while the stable-cycle control contracts." loading="lazy" decoding="async">
+</picture>
+
+<p class="figure-note"><strong>Expanding differences and eventual repetition can occur in the same trajectory.</strong> Left: each downward step means another start has begun matching the stable three-step cycle. Two histories are still unresolved at the right-hand limit. Right: each red point measures how a tiny displacement grows along one saved trajectory; above zero means growth on average, below zero contraction. The three groups start their measurements at the labeled stages of the run. Each full window first aligns the displacement for 256 updates, then measures 768 updates. The vertical lines join the first-half and second-half averages; they are not statistical error bars. The open red point is a shorter, contracting window cut off by capture. The blue group checks the already stable 3-cycle using 16 initial displacement directions and 255 measured updates. One late survivor is captured during alignment and therefore has no rate to plot. Later groups contain fewer trajectories because earlier captures are excluded. <a href="fold-return-autonomous.json">Full audit, methods and figure hashes</a>.</p>
+
+For the growth measurement, we followed an infinitesimal displacement with the network's derivative at every
+recorded state, renormalizing it each time and averaging the logarithmic change in its length. This is a
+finite-time tangent-growth estimate. We chose the three window starts before seeing their growth: updates
+256, 4,096 and 12,288. There were 15, 8 and 3 complete windows at those starts. All 26 had positive averages
+in **both** measurement halves, ranging from 0.02744 to 0.11295 per individual update for the full windows.
+They cover 15 different trajectories; repeated windows from one trajectory are not independent samples.
+The independent check for repetition through period 64 found no candidate in those windows, but that absence
+alone would not establish chaos.
+
+We also retain the contracting cases. One trajectory approached period 3 early enough to leave only 83
+measurement updates after alignment; that shortened window had negative growth. The later growth windows
+include only trajectories that remain uncaptured long enough to measure them. The stable-cycle control was
+negative too, close to the contraction rate predicted by its independently computed orbit stability.
+We checked the derivative calculation with two small relative offsets, \(10^{-6}\) and \(3\times10^{-7}\),
+for the first 128 updates of each window. These compare local directional derivatives at the saved states;
+they are not full-window twin exponents. All copied padding after capture was excluded from the results.
+
+We can now say more than that the text looks irregular: the sampled trajectories amplify infinitesimal
+differences for substantial measured intervals, and many subsequently lock into a stable cycle. Calling this
+consistent with *transient chaos* is justified as a numerical interpretation. Proving the chaotic set itself,
+or the infinite-time fate of the two survivors, remains a separate mathematical task. Likewise, the failed
+lookup table leaves the autonomous global predictor unfinished. The local slowdown, the geometry of departure
+states, and prediction of the entire journey are distinct achievements with distinct tests.
+
+[Frozen design](https://github.com/tdj28/neural-shrimp/blob/6343dc481f275afcb73b81b338a1597cbf2f21ed/docs/fold-return-autonomous-plan.json) · [Completed scientific receipt](https://github.com/tdj28/neural-shrimp/blob/6343dc481f275afcb73b81b338a1597cbf2f21ed/docs/fold-return-autonomous.json).
+
 
 
 ### The window law {#the-window-law}
@@ -9318,8 +9399,9 @@ object appears.
 
 - **Global return.** The natural-exit reconstruction is tested at one fixed parameter setting on held-out
   trajectories from the same constructed initial-state line. The full network still advances the reconstructed
-  states. The result is not an autonomous scalar simulator or a test of indefinite recurrence. Some histories
-  approach period 3 after repeated returns; the remaining finite-horizon survivors do not establish persistent chaos.
+  states. That reconstruction result is not an autonomous scalar simulator. The separately frozen lookup model
+  failed fresh capture and multi-cycle prediction tests. Some histories approach period 3 after repeated returns;
+  the remaining finite-horizon survivors do not establish persistent chaos.
 
 - **Memory intervention.** The continuation concerns one selected period-18
   child family in a changed feedback map. Steering and temperature follow its
@@ -9431,9 +9513,10 @@ attractors ([Unsteered chaos and steering controls](#controls)).
 
 **The slowdown and the return are different parts of the explanation.** The [global-return study](#global-return)
 shows why a local formula can predict a crawl without predicting the next landing point. Natural exits admit a
-very accurate one-coordinate state reconstruction, but we still compute their excursions with the full network.
-A self-contained return model would have to predict both returns and escape to period 3, and pass tests over
-several cycles. Whether a chaotic invariant set organizes the long transients is a separate question.
+very accurate one-coordinate state reconstruction, but the frozen [autonomous table](#autonomous-return-test)
+failed fresh capture and multi-cycle prediction tests. The [growth test](#growth-before-capture) found expansion
+before eventual period-3 capture in 13 fresh trajectories. A reliable replacement for the global journey and a
+proof of a chaotic invariant set remain separate open questions.
 
 **Steering strength as a bifurcation parameter.** In the soft-token map, small
 changes of the steering strength switch the model between distinct repeating

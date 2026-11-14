@@ -227,6 +227,7 @@ check: sync-prax-docs verify-late-chunking ## Validate Hugo, links, assets, prov
 	$(PYTHON) scripts/check_site.py
 	$(PYTHON) scripts/check_provenance.py
 	$(PYTHON) blog-source/content/posts/2026/10/chaos-bifurcations-language-model-feedback/verify_fold_return.py
+	$(PYTHON) blog-source/content/posts/2026/10/chaos-bifurcations-language-model-feedback/verify_fold_autonomous.py
 	$(MAKE) check-search-assets
 	$(MAKE) check-browser
 	$(MAKE) check-search-browser

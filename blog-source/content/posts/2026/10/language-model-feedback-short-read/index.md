@@ -5,8 +5,8 @@ date: 2026-10-26
 author: Timothy Jones
 author_id: "timothy-jones"
 citation_enabled: true
-citation_version: "2026.10.26"
-lastmod: 2026-10-26
+citation_version: "2026.11.13"
+lastmod: 2026-11-13
 draft: false
 toc: false
 layout: "feedback-short-read"
@@ -237,6 +237,41 @@ cycles, of periods 2 and 3, coexist: the same model under the same settings has
 two different stable behaviors. The proofs certify these cycles, not the chaos
 around them.
 <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#proof">The proofs →</a>
+
+## The wandering can end in a repeating cycle {#returns-and-capture}
+
+The local theory explains why a trajectory slows near a vanished cycle. What happens after it leaves is a
+separate question. It may come back through the slow passage many times and eventually settle into another
+repeating pattern.
+
+We followed 16 fresh starting states at one such setting of the 0.5-billion-parameter Qwen model. Fourteen
+approached the same stable three-step cycle; two remained unresolved after 16,384 updates. These starts lie
+on a deliberately constructed line, so the counts do not estimate how often an arbitrary prompt or starting
+state will behave this way. Repeated returns alone would not prove permanent chaos.
+
+We then measured how an infinitesimal displacement grows along the recorded trajectories, using the network's
+own derivatives. All 26 complete measurement windows expanded on average in both halves. Thirteen trajectories
+showed this growth and later approached the three-step cycle. This is numerical evidence consistent with
+**chaotic transients**: sensitive motion that eventually gives way to repetition. It does not prove that the
+motion lasts forever, or establish a chaotic invariant set.
+
+<picture>
+  <source media="(max-width: 640px)" srcset="fig-fold-growth-capture-mobile.png">
+  <img src="fig-fold-growth-capture.png" alt="Fourteen of sixteen fresh trajectories approach period three; every complete pre-capture measurement window has positive tangent growth, while the stable-cycle control contracts." loading="lazy" decoding="async">
+</picture>
+
+<p class="feature-caption"><strong>Sensitivity can precede a repeating cycle.</strong> Left: each drop is another starting state approaching the stable three-step loop; two remain unresolved at the observation limit. Right: red points above zero show small displacements growing on average before capture. The vertical lines compare the two halves of each measurement, not statistical uncertainty. The open red point is a shorter, contracting window before early capture. Blue points check the stable cycle, where displacements shrink. Later groups are smaller because earlier captures are excluded. These are measurements at one setting, not a universal escape rate. <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#growth-before-capture">Methods, exclusions and limits →</a></p>
+
+
+Could a small model predict those journeys without running the language model? We tested a lookup table
+built from 1,025 sampled departures and frozen before the fresh test. Given each observed departure, it found
+8 of the 14 captures, missed 6, and falsely predicted capture on 13 returns. Letting it run independently for
+several journeys also produced large errors. One number described the natural departure state extremely well,
+but the table did not reliably predict the next journey or final destination.
+
+That distinction matters: the model's own derivatives explain the local slowdown, and a compact curve
+captures the geometry of its natural exits. A reliable replacement for the entire global journey remains
+unfinished. [The autonomous-model test and its limits →](/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#autonomous-return-test)
 
 ## The words can repeat while the state remains chaotic
 
