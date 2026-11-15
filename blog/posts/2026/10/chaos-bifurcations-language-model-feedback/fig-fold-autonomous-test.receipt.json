@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "study": "FGR3",
+  "kind": "returns",
+  "description": "Publication PNG copies of the audited scientific figure; desktop and mobile layouts use the same measured data.",
+  "provenance": {
+    "scientific_receipt": "fold-return-autonomous.json",
+    "scientific_receipt_sha256": "a951826b50bc36ea7182d031fc53de8265de303cbd0e47c953ae43394c0a55ee",
+    "scientific_figure_receipt_sha256": "b7a3402cab2e3b3522e069013753efc20b0f5a473d07541a5fa2c6ebbce3efc2",
+    "source_commit": "6343dc481f275afcb73b81b338a1597cbf2f21ed",
+    "outputs": {
+      "fig-fold-autonomous-test-mobile.png": "6716b5e568f699bbb09e2a8b866a96f6f6ba8b93f417683ff49d8635b5cac9b8",
+      "fig-fold-autonomous-test.png": "5c42a5789e523822d25eb248713426c7da1a2aca209e1686e89e784ae4b8665c"
+    }
+  }
+}

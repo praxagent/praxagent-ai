@@ -134,7 +134,14 @@
   "paper/llm/main.tex at 3bde65ceb3d6b5f98784d117f116f8e8d36dd682": "f272fad9417730a1ed52d3c6c94534e74e0d1bfacd9ea89f640c4953960b58eb",
   "fold-return-autonomous.json": "a951826b50bc36ea7182d031fc53de8265de303cbd0e47c953ae43394c0a55ee",
   "fig-fold-autonomous-test.receipt.json": "601ceec35578f3ffe497c2052c0218ce5d9a86a13ce079e2bf654540d5763fd0",
-  "fig-fold-growth-capture.receipt.json": "6ba42436365a4dd6e3a152eb0d0600c8a58d3fd488e90548af00efe33c1274a8"
+  "fig-fold-growth-capture.receipt.json": "6ba42436365a4dd6e3a152eb0d0600c8a58d3fd488e90548af00efe33c1274a8",
+  "fold-return-followup.json": "9d698faa194a9020fe6f2e6f9b9d1bb9313d46cd0514e845ab0819abae3c76b4",
+  "fig-fold-return-unwrapped.receipt.json": "d05df6e4b5c3511e40a2833b4c8eead8faab738e095505866bd6721293d5770c",
+  "fig-fold-return-zoom.receipt.json": "f7fffafdb02b80f3e3da627a7f3592d5a8dea6c942c11623b789583a8652eea7",
+  "fig-fold-return-escape-test.receipt.json": "7e78b91d0abdb9ae36672aa5b5a08cc63678cc6c2e3728c3c961aa737aa11914",
+  "fold-transient-figures.json": "a47880fe14e145296b144d16c83fd296945b5fa7825946f5ff82df9c3f7c387b",
+  "fig-fold-transient-capture.receipt.json": "8e76d4798be1e3090273b802ed156dda26c3e0d26516854e94683ac3514eba2b",
+  "fig-fold-twins-capture.receipt.json": "a8cb0092475ddc97275fd68daeb085e19c2a802a2733a524d913b333a34e7cfc"
  },
  "figures": [
   "fig-alpha0.png",
@@ -258,7 +265,17 @@
   "fig-fold-autonomous-test-mobile.png",
   "fig-fold-autonomous-test.png",
   "fig-fold-growth-capture-mobile.png",
-  "fig-fold-growth-capture.png"
+  "fig-fold-growth-capture.png",
+  "fig-fold-return-unwrapped.png",
+  "fig-fold-return-unwrapped-mobile.png",
+  "fig-fold-return-zoom.png",
+  "fig-fold-return-zoom-mobile.png",
+  "fig-fold-return-escape-test.png",
+  "fig-fold-return-escape-test-mobile.png",
+  "fig-fold-transient-capture.png",
+  "fig-fold-transient-capture-mobile.png",
+  "fig-fold-twins-capture.png",
+  "fig-fold-twins-capture-mobile.png"
  ],
  "figure_sha256": {
   "fig-alpha0.png": "100dc997a923e123038d5bf8d321eb77fd148cce36b959402c67556d154ef166",
@@ -382,7 +399,17 @@
   "fig-fold-autonomous-test-mobile.png": "6716b5e568f699bbb09e2a8b866a96f6f6ba8b93f417683ff49d8635b5cac9b8",
   "fig-fold-autonomous-test.png": "5c42a5789e523822d25eb248713426c7da1a2aca209e1686e89e784ae4b8665c",
   "fig-fold-growth-capture-mobile.png": "42d29ea553e541a15efbec6da63a5dc37a2fe71171797a68df1eb3cc1ea2f93c",
-  "fig-fold-growth-capture.png": "bd009282b2102a16561490e1894621b1f07609557a1968de3cb488b968dfddd9"
+  "fig-fold-growth-capture.png": "bd009282b2102a16561490e1894621b1f07609557a1968de3cb488b968dfddd9",
+  "fig-fold-return-unwrapped.png": "dd5f7a992ffa3ddfe8f63c441f4f7ed506153ebd9ec701a81d119bfe2b0ac8e9",
+  "fig-fold-return-unwrapped-mobile.png": "2d65c29b7c067d40748c96fc91cd61695a3b98750fa90a1e047fd481ff42a3b4",
+  "fig-fold-return-zoom.png": "2fbdaf41aaa1bde9fe79e8770be590a7941cdb0da2b2b845d3407f82a5bdfab3",
+  "fig-fold-return-zoom-mobile.png": "53b14a2ca250aba80bd225fce8f4c9e23ce5242f675f2b21b3106a7e898b14fa",
+  "fig-fold-return-escape-test.png": "133e1049d7ca9b106ff13377f3f0bcb51f3cc7cfc9c17dd996e066a6d41e3ee2",
+  "fig-fold-return-escape-test-mobile.png": "b411ab7164c39b07cd087f34403a299567f7de50c16bd6934e5be781a4bb1cb8",
+  "fig-fold-transient-capture.png": "a504428b1661f923b87fb717f8fc087d610ebccbbeb2fc6e3de6c726b4b953a5",
+  "fig-fold-transient-capture-mobile.png": "c239dbd48b8b0a92c031680576b0624daeb4b218a8662cd8e2b0df1f31f60855",
+  "fig-fold-twins-capture.png": "1155c2b2a164af16809d83d26ad9a5d8dcb70a658e0fefdd88e273524722ccb7",
+  "fig-fold-twins-capture-mobile.png": "2872456570801272b16e59959cd608b0df8f1bf0b49e3b66744256838e0bdd4a"
  },
  "figure_sources": {
   "fig-alpha0.png": "paper/llm/figures/fig-alpha0.png (byte-identical copy)",
@@ -570,6 +597,56 @@
    "receipt": "fold-return-autonomous.json",
    "kind": "growth",
    "source_commit": "6343dc481f275afcb73b81b338a1597cbf2f21ed"
+  },
+  "fig-fold-return-unwrapped.png": {
+   "receipt": "fold-return-followup.json",
+   "kind": "unwrapped",
+   "source_commit": "bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97"
+  },
+  "fig-fold-return-unwrapped-mobile.png": {
+   "receipt": "fold-return-followup.json",
+   "kind": "unwrapped",
+   "source_commit": "bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97"
+  },
+  "fig-fold-return-zoom.png": {
+   "receipt": "fold-return-followup.json",
+   "kind": "zoom",
+   "source_commit": "bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97"
+  },
+  "fig-fold-return-zoom-mobile.png": {
+   "receipt": "fold-return-followup.json",
+   "kind": "zoom",
+   "source_commit": "bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97"
+  },
+  "fig-fold-return-escape-test.png": {
+   "receipt": "fold-return-followup.json",
+   "kind": "escape-test",
+   "source_commit": "bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97"
+  },
+  "fig-fold-return-escape-test-mobile.png": {
+   "receipt": "fold-return-followup.json",
+   "kind": "escape-test",
+   "source_commit": "bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97"
+  },
+  "fig-fold-transient-capture.png": {
+   "receipt": "fold-transient-figures.json",
+   "kind": "transient",
+   "source_commit": "14ff9ab15cc100861a8597127144f4c0269ff99b"
+  },
+  "fig-fold-transient-capture-mobile.png": {
+   "receipt": "fold-transient-figures.json",
+   "kind": "transient",
+   "source_commit": "14ff9ab15cc100861a8597127144f4c0269ff99b"
+  },
+  "fig-fold-twins-capture.png": {
+   "receipt": "fold-transient-figures.json",
+   "kind": "twins",
+   "source_commit": "14ff9ab15cc100861a8597127144f4c0269ff99b"
+  },
+  "fig-fold-twins-capture-mobile.png": {
+   "receipt": "fold-transient-figures.json",
+   "kind": "twins",
+   "source_commit": "14ff9ab15cc100861a8597127144f4c0269ff99b"
   }
  },
  "other_files": {
@@ -54769,6 +54846,726 @@
      "value": 16384,
      "appears_as": "16,384 updates",
      "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    }
+   ]
+  },
+  {
+   "id": "fold-return-followup-20261114",
+   "source_commit": "bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97",
+   "description": "Follow-up to the FGR3 return test: unwrapped return (post-test), FGR4/FGR4b zoom with rounding control, frozen FGR5 escape-rate test (all three criteria passed).",
+   "receipts": {
+    "fold-return-followup.json": "9d698faa194a9020fe6f2e6f9b9d1bb9313d46cd0514e845ab0819abae3c76b4",
+    "fig-fold-return-unwrapped.receipt.json": "d05df6e4b5c3511e40a2833b4c8eead8faab738e095505866bd6721293d5770c",
+    "fig-fold-return-zoom.receipt.json": "f7fffafdb02b80f3e3da627a7f3592d5a8dea6c942c11623b789583a8652eea7",
+    "fig-fold-return-escape-test.receipt.json": "7e78b91d0abdb9ae36672aa5b5a08cc63678cc6c2e3728c3c961aa737aa11914"
+   },
+   "scientific_receipt_url": "https://github.com/tdj28/neural-shrimp/blob/bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97/docs/fold-return-followup.json",
+   "prediction_url": "https://github.com/tdj28/neural-shrimp/blob/22b11cd26c6f87b476203e93da51a5eeb70fbe46/docs/fold-return-fgr5-prediction.json",
+   "verifier": "verify_fold_followup.py",
+   "new_numbers": [
+    {
+     "id": "followup-long-run-returns",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "unwrap",
+      "long_run_returns"
+     ],
+     "value": 366,
+     "shown": "366",
+     "rule": "int",
+     "appears_as": "Of the 366 fresh returns that started there, 365 came back at the predicted time"
+    },
+    {
+     "id": "followup-long-run-correct",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "unwrap",
+      "long_run_time_correct_unwrapped"
+     ],
+     "value": 365,
+     "shown": "365",
+     "rule": "int",
+     "appears_as": "365 came back at the predicted time"
+    },
+    {
+     "id": "followup-long-run-median",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "unwrap",
+      "long_run_median_tau_error"
+     ],
+     "value": 0.0002469277464953734,
+     "shown": "2.5\\times10^{-4}",
+     "rule": "sci:1",
+     "appears_as": "\\(2.5\\times10^{-4}\\)"
+    },
+    {
+     "id": "followup-M-departures",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "unwrap",
+      "M_departures"
+     ],
+     "value": 446,
+     "shown": "446",
+     "rule": "int",
+     "appears_as": "That interval holds 446 of the"
+    },
+    {
+     "id": "followup-all-departures",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "unwrap",
+      "fresh_departures"
+     ],
+     "value": 846,
+     "shown": "846",
+     "rule": "int",
+     "appears_as": "846 fresh departures, all 14 fresh captures and all 30 table stops"
+    },
+    {
+     "id": "followup-M-captures",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "unwrap",
+      "M_captures"
+     ],
+     "value": 14,
+     "shown": "14",
+     "rule": "int",
+     "appears_as": "all 14 fresh captures"
+    },
+    {
+     "id": "followup-table-stops",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "unwrap",
+      "table_stops_in_M"
+     ],
+     "value": 30,
+     "shown": "30",
+     "rule": "int",
+     "appears_as": "all 30 table stops"
+    },
+    {
+     "id": "followup-short-windows",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "unwrap",
+      "short_window_returns"
+     ],
+     "value": 32,
+     "shown": "32",
+     "rule": "int",
+     "appears_as": "7 of their 32 fresh returns had the wrong time"
+    },
+    {
+     "id": "followup-bases-M",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "zoom",
+      "bases_inside_M"
+     ],
+     "value": 466,
+     "shown": "466",
+     "rule": "int",
+     "appears_as": "For the 466 coordinates"
+    },
+    {
+     "id": "followup-p-1e-4",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "zoom",
+      "levels_time_criterion",
+      "0.0001",
+      "fraction"
+     ],
+     "value": 0.6437768240343348,
+     "shown": "0.64",
+     "rule": "dp:2",
+     "appears_as": "was 0.64 at"
+    },
+    {
+     "id": "followup-p-1e-8",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "zoom",
+      "levels_time_criterion",
+      "1e-08",
+      "fraction"
+     ],
+     "value": 0.10944206008583691,
+     "shown": "0.11",
+     "rule": "dp:2",
+     "appears_as": "0.11 at \\(10^{-8}\\)"
+    },
+    {
+     "id": "followup-p-1e-10",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "zoom",
+      "levels_time_criterion",
+      "1e-10",
+      "fraction"
+     ],
+     "value": 0.055793991416309016,
+     "shown": "0.056",
+     "rule": "dp:3",
+     "appears_as": "still 0.056 at"
+    },
+    {
+     "id": "followup-alpha",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "zoom",
+      "alpha_time"
+     ],
+     "value": 0.18316145513531587,
+     "shown": "0.18",
+     "rule": "dp:2",
+     "appears_as": "\\(\\delta^{0.18}\\)"
+    },
+    {
+     "id": "followup-alpha-lo",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "zoom",
+      "alpha_time_bootstrap_95",
+      0
+     ],
+     "value": 0.16031469481051433,
+     "shown": "0.16",
+     "rule": "dp:2",
+     "appears_as": "bootstrap interval of 0.16 to 0.21"
+    },
+    {
+     "id": "followup-alpha-hi",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "zoom",
+      "alpha_time_bootstrap_95",
+      1
+     ],
+     "value": 0.21053901248802417,
+     "shown": "0.21",
+     "rule": "dp:2",
+     "appears_as": "0.16 to 0.21 for the power"
+    },
+    {
+     "id": "followup-rerun-changed",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "zoom",
+      "levels_time_criterion",
+      "0.0",
+      "uncertain"
+     ],
+     "value": 9,
+     "shown": "9",
+     "rule": "int",
+     "appears_as": "changed 9 of the outcomes"
+    },
+    {
+     "id": "followup-kappa",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "prediction",
+      "kappa"
+     ],
+     "value": 0.013032705648018617,
+     "shown": "0.0130",
+     "rule": "dp:4",
+     "appears_as": "\\(\\kappa=0.0130\\)"
+    },
+    {
+     "id": "followup-kappa-lo",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "prediction",
+      "kappa_bootstrap_2.5_50_97.5",
+      0
+     ],
+     "value": 0.006686654652273988,
+     "shown": "0.0067",
+     "rule": "dp:4",
+     "appears_as": "bootstrap interval of 0.0067 to 0.0204"
+    },
+    {
+     "id": "followup-kappa-hi",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "prediction",
+      "kappa_bootstrap_2.5_50_97.5",
+      2
+     ],
+     "value": 0.020435180838529632,
+     "shown": "0.0204",
+     "rule": "dp:4",
+     "appears_as": "0.0067 to 0.0204"
+    },
+    {
+     "id": "followup-departures",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "departures_with_observed_next_outcome"
+     ],
+     "value": 2417,
+     "shown": "2,417",
+     "rule": "int:comma",
+     "appears_as": "2,417 departures"
+    },
+    {
+     "id": "followup-endings",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "terminations_after_a_departure"
+     ],
+     "value": 42,
+     "shown": "42",
+     "rule": "int",
+     "appears_as": "and 42 of those"
+    },
+    {
+     "id": "followup-p3",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "outcomes",
+      "reference_p3"
+     ],
+     "value": 40,
+     "shown": "40",
+     "rule": "int",
+     "appears_as": "40 approached period 3"
+    },
+    {
+     "id": "followup-other",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "outcomes",
+      "other_recurrence_candidate"
+     ],
+     "value": 2,
+     "shown": "2",
+     "rule": "int",
+     "appears_as": "2 met another repeating orbit"
+    },
+    {
+     "id": "followup-unresolved",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "outcomes",
+      "unresolved_at_horizon"
+     ],
+     "value": 6,
+     "shown": "6",
+     "rule": "int",
+     "appears_as": "Six trajectories were still"
+    },
+    {
+     "id": "followup-kappa-obs",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "kappa_observed"
+     ],
+     "value": 0.01737691352916839,
+     "shown": "0.0174",
+     "rule": "dp:4",
+     "appears_as": "The observed rate is 0.0174 per departure"
+    },
+    {
+     "id": "followup-kappa-obs-lo",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "kappa_observed_95",
+      0
+     ],
+     "value": 0.012523750820222466,
+     "shown": "0.0125",
+     "rule": "dp:4",
+     "appears_as": "0.0125 to"
+    },
+    {
+     "id": "followup-kappa-obs-hi",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "kappa_observed_95",
+      1
+     ],
+     "value": 0.02348853900640904,
+     "shown": "0.0235",
+     "rule": "dp:4",
+     "appears_as": "0.0235, contains the predicted 0.0130"
+    },
+    {
+     "id": "followup-expected",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "expected_terminations_calibration"
+     ],
+     "value": 35.63438438438438,
+     "shown": "35.6",
+     "rule": "dp:1",
+     "appears_as": "predicted 35.6 endings"
+    },
+    {
+     "id": "followup-c3-pairs",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "C3_pointwise_long_runs",
+      "pairs"
+     ],
+     "value": 1074,
+     "shown": "1,074",
+     "rule": "int:comma",
+     "appears_as": "for 1,071 of 1,074 fresh returns"
+    },
+    {
+     "id": "followup-c3-correct",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "C3_pointwise_long_runs",
+      "time_correct"
+     ],
+     "value": 1071,
+     "shown": "1,071",
+     "rule": "int:comma",
+     "appears_as": "1,071 of 1,074"
+    },
+    {
+     "id": "followup-boot-lo",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "robustness",
+      "kappa_trajectory_bootstrap_95",
+      0
+     ],
+     "value": 0.012687794013661893,
+     "shown": "0.0127",
+     "rule": "dp:4",
+     "appears_as": "interval of 0.0127 to"
+    },
+    {
+     "id": "followup-boot-hi",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "robustness",
+      "kappa_trajectory_bootstrap_95",
+      1
+     ],
+     "value": 0.024350670835252625,
+     "shown": "0.0244",
+     "rule": "dp:4",
+     "appears_as": "0.0127 to 0.0244"
+    }
+   ]
+  },
+  {
+   "id": "fold-transient-figures-20261114",
+   "source_commit": "14ff9ab15cc100861a8597127144f4c0269ff99b",
+   "description": "What the post-fold transient looks like (FGR5 series) and twin copies nudged by 1e-12 to 1e-8; descriptive.",
+   "receipts": {
+    "fold-transient-figures.json": "a47880fe14e145296b144d16c83fd296945b5fa7825946f5ff82df9c3f7c387b",
+    "fig-fold-transient-capture.receipt.json": "8e76d4798be1e3090273b802ed156dda26c3e0d26516854e94683ac3514eba2b",
+    "fig-fold-twins-capture.receipt.json": "a8cb0092475ddc97275fd68daeb085e19c2a802a2733a524d913b333a34e7cfc"
+   },
+   "scientific_receipt_url": "https://github.com/tdj28/neural-shrimp/blob/14ff9ab15cc100861a8597127144f4c0269ff99b/docs/fold-transient-figures.json",
+   "verifier": "verify_fold_transient.py",
+   "new_numbers": [
+    {
+     "id": "transient-fresh",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "fresh_trajectories"
+     ],
+     "value": 48,
+     "shown": "48",
+     "rule": "int",
+     "appears_as": "all 48 fresh trajectories, one row each"
+    },
+    {
+     "id": "transient-wandering",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "fresh_still_wandering_at_end"
+     ],
+     "value": 6,
+     "shown": "six",
+     "rule": "word",
+     "appears_as": "; six trajectories were still wandering then"
+    },
+    {
+     "id": "transient-passages",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "slow_passages"
+     ],
+     "value": 2435,
+     "shown": "2,435",
+     "rule": "int:comma",
+     "appears_as": "over 2,435 passages"
+    },
+    {
+     "id": "transient-closest",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "passage_closest_approach_median"
+     ],
+     "value": 0.00013688733451999724,
+     "shown": "1.4\\times10^{-4}",
+     "rule": "sci:1",
+     "appears_as": "\\(1.4\\times10^{-4}\\) of its size"
+    },
+    {
+     "id": "transient-factor",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "cycle_factor_per_3_updates"
+     ],
+     "value": 0.6506506416018702,
+     "shown": "0.651",
+     "rule": "dp:3",
+     "appears_as": "by the same factor, 0.651, every three updates"
+    },
+    {
+     "id": "transient-captured",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "fresh_captured_within_1e-3"
+     ],
+     "value": 42,
+     "shown": "42",
+     "rule": "int",
+     "appears_as": "All 42 captured trajectories end on this one cycle"
+    },
+    {
+     "id": "transient-drift-lo",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "twins",
+      "drift_time_range",
+      0
+     ],
+     "value": 99,
+     "shown": "99",
+     "rule": "int",
+     "appears_as": "within 99 to"
+    },
+    {
+     "id": "transient-drift-hi",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "twins",
+      "drift_time_range",
+      1
+     ],
+     "value": 386,
+     "shown": "386",
+     "rule": "int",
+     "appears_as": "to 386 updates: growth of"
+    },
+    {
+     "id": "transient-growth-lo",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "twins",
+      "implied_growth_range",
+      0
+     ],
+     "value": 0.04275356936593719,
+     "shown": "0.043",
+     "rule": "dp:3",
+     "appears_as": "growth of 0.043 to"
+    },
+    {
+     "id": "transient-growth-hi",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "twins",
+      "implied_growth_range",
+      1
+     ],
+     "value": 0.1162921764138407,
+     "shown": "0.116",
+     "rule": "dp:3",
+     "appears_as": "to 0.116 per update, in line with"
+    },
+    {
+     "id": "transient-ref-mean",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "fgr3_growth_reference",
+      "mean_per_update"
+     ],
+     "value": 0.0734,
+     "shown": "0.0734",
+     "rule": "dp:4",
+     "appears_as": "grow at 0.0734 per update"
+    },
+    {
+     "id": "transient-ref-lo",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "fgr3_growth_reference",
+      "range_per_update",
+      0
+     ],
+     "value": 0.02744,
+     "shown": "0.027",
+     "rule": "dp:3",
+     "appears_as": "with the 0.027 to"
+    },
+    {
+     "id": "transient-ref-hi",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "fgr3_growth_reference",
+      "range_per_update",
+      1
+     ],
+     "value": 0.11295,
+     "shown": "0.113",
+     "rule": "dp:3",
+     "appears_as": "to 0.113 measured with derivatives"
+    },
+    {
+     "id": "transient-rerun-first",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "unnudged_rerun_vs_fgr5",
+      1,
+      "fgr5_first_within_1e-3"
+     ],
+     "value": 2297,
+     "shown": "2,297",
+     "rule": "int:comma",
+     "appears_as": "after 2,297 updates the first time"
+    },
+    {
+     "id": "transient-rerun-second",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "unnudged_rerun_vs_fgr5",
+      1,
+      "rerun_first_within_1e-3"
+     ],
+     "value": 8164,
+     "shown": "8,164",
+     "rule": "int:comma",
+     "appears_as": "and 8,164 the second"
+    },
+    {
+     "id": "transient-twin-capture-0",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "twin_copies",
+      0,
+      "first_within_1e-3_of_cycle"
+     ],
+     "value": 2005,
+     "shown": "2,005",
+     "rule": "int:comma",
+     "appears_as": "after 2,005"
+    },
+    {
+     "id": "transient-twin-capture-1",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "twin_copies",
+      2,
+      "first_within_1e-3_of_cycle"
+     ],
+     "value": 2417,
+     "shown": "2,417",
+     "rule": "int:comma",
+     "appears_as": ", 2,417"
+    },
+    {
+     "id": "transient-twin-capture-2",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "twin_copies",
+      1,
+      "first_within_1e-3_of_cycle"
+     ],
+     "value": 5097,
+     "shown": "5,097",
+     "rule": "int:comma",
+     "appears_as": ", 5,097"
+    },
+    {
+     "id": "transient-twin-capture-3",
+     "receipt": "fold-transient-figures.json",
+     "field": [
+      "numbers",
+      "twin_copies",
+      3,
+      "first_within_1e-3_of_cycle"
+     ],
+     "value": 5845,
+     "shown": "5,845",
+     "rule": "int:comma",
+     "appears_as": "and 5,845 updates"
     }
    ]
   }

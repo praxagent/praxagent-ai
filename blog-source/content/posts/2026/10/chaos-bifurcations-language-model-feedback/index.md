@@ -4113,14 +4113,190 @@ We checked the derivative calculation with two small relative offsets, \(10^{-6}
 for the first 128 updates of each window. These compare local directional derivatives at the saved states;
 they are not full-window twin exponents. All copied padding after capture was excluded from the results.
 
+**How "the network's derivatives" are computed.** One update of the loop is a function. It takes the
+state, a list of 896 numbers that blends the vocabulary's word vectors according to the previous step's
+probabilities, sends it through the network's 24 layers and the softmax, and blends the word vectors again with
+the new probabilities. Its derivative at a state answers one question: if the input moves a tiny amount in some
+direction, how does the output move? Written out in full it is a table of 896 by 896 numbers, the *Jacobian*.
+We never build that table. With {{< refterm "forward-mode-automatic-differentiation" "forward-mode automatic differentiation" >}},
+every number in the computation carries a second number beside it, its rate of change in the chosen direction,
+and every operation (each matrix product, the attention softmax, the normalization layers) updates both by the
+chain rule. One pass therefore returns the exact change of the next state, at about five times the cost of an
+ordinary update. Repeating this along a saved trajectory, shrinking the change back to unit length after each
+update and averaging the logarithm of how much it stretched, gives the growth rates above. That is the
+finite-time form of the Lyapunov exponent defined in [Numerics and chaos labels](#numerics-and-chaos-labels).
+
+**What the wandering looks like.** The 48 fresh trajectories of the [frozen test](#return-followup) were saved in
+full, and at every update the loop also has a most probable next word, so we can watch and read along.
+
+<picture>
+  <source media="(max-width: 640px)" srcset="fig-fold-transient-capture-mobile.png">
+  <img src="fig-fold-transient-capture.png" alt="Left: one trajectory's distance to the slow channel dips again and again, where the loop writes it is it is, with short bursts of other words between, until its distance to the three-step cycle plunges and the loop writes certainly.Hello forever. Right: all 48 fresh trajectories as rows of orange slow passages and red bursts that end in blue once the cycle is reached; six never reach it." loading="lazy" decoding="async">
+</picture>
+
+<p class="figure-note"><strong>Chaotic wandering that ends in a cycle.</strong> Left: one fresh trajectory. The orange line is the state's distance to the slow channel, relative to its size (the nearer of this state and the one before, since the loop alternates between two places). The blue line is its distance to the stable three-step cycle. The quotations are the loop's most probable words during a slow passage, during the last burst, and on the cycle. Right: all 48 fresh trajectories, one row each, sorted by when they reached the cycle. Orange marks a slow passage (this or the previous state within 3% of the channel center), red a burst, blue the cycle (within a thousandth of it). White follows the end of a run, after a verified capture or at 16,384 updates; six trajectories were still wandering then. <a href="fold-transient-figures.json">Receipt with the runs, audits and figure hashes</a>.</p>
+
+In each slow passage the state comes close to the channel center (the median closest approach, over
+2,435 passages, is \(1.4\times10^{-4}\) of its size), and the loop's
+most probable words alternate "it is it is…": it is echoing the two-step cycle that vanished at the fold.
+Between passages the state bursts away for a few updates and other words appear. Sooner or later a burst lands
+near the attracting three-step cycle. Then the distance to the cycle shrinks by the same factor,
+0.651, every three updates, until it reaches the last digits of float64
+arithmetic, and the loop says "certainly.Hello" forever. All 42 captured
+trajectories end on this one cycle, including the two that the stopping rule had recorded as another repeating
+orbit.
+
+**Twin copies.** The growth rate is a statement about infinitesimal nudges. To see it with real ones, we reran
+four of the fresh starts as one batch, each together with copies nudged by \(10^{-12}\), \(10^{-10}\) and
+\(10^{-8}\) of the state's size in one fixed random direction. This is a demonstration, not a test.
+
+<picture>
+  <source media="(max-width: 640px)" srcset="fig-fold-twins-capture-mobile.png">
+  <img src="fig-fold-twins-capture.png" alt="Left: three copies of one start, nudged by ten to the minus 12, minus 10 and minus 8, drift away from the original along dashed lines of the measured growth rate. Middle: the four copies as rows of slow passages and bursts that reach the cycle at different times. Right: every capture closes in on the cycle along one dashed line, the cycle's own contraction." loading="lazy" decoding="async">
+</picture>
+
+<p class="figure-note"><strong>Sensitive while it wanders, then captured.</strong> Left: distance of three nudged copies of one start from the unnudged copy. The dashed lines grow at 0.0734 per update, the average rate measured with the network's derivatives, from each copy's starting nudge. Middle: the four copies, one row each, in the colors of the previous figure: the same start, four different paths, four different moments of capture. Right: the distance to the cycle for every captured fresh trajectory, aligned where it first falls below 0.01; all close in along the dashed line, the cycle's own contraction of 0.651 every three updates. <a href="fold-transient-figures.json">Receipt</a>.</p>
+
+Every nudged copy drifted more than a thousandth away from its unnudged twin within 99 to 386 updates: growth of
+0.043 to 0.116 per update, in line with the 0.027 to 0.113 measured with derivatives. From then on the
+copies behave as different trajectories. Of the 16 copies, 15 reached the same three-step cycle within 16,384 updates, at very different times (for the start shown, after 2,005, 2,417, 5,097 and 5,845 updates); the remaining copy was still wandering when the run ended. Even the unnudged copies, rerun in another batch, did not repeat
+the original run: one start reached the cycle after 2,297 updates the first time and
+8,164 the second, because differences in the last digit of the arithmetic grow in the same
+way. That is a chaotic transient in one picture: the path is unpredictable in detail, and the destination is not.
+
 We can now say more than that the text looks irregular: the sampled trajectories amplify infinitesimal
 differences for substantial measured intervals, and many subsequently lock into a stable cycle. Calling this
 consistent with *transient chaos* is justified as a numerical interpretation. Proving the chaotic set itself,
 or the infinite-time fate of the two survivors, remains a separate mathematical task. Likewise, the failed
-lookup table leaves the autonomous global predictor unfinished. The local slowdown, the geometry of departure
-states, and prediction of the entire journey are distinct achievements with distinct tests.
+lookup table leaves the autonomous global predictor unfinished; the [follow-up below](#return-followup) finds
+where it fails and what still predicts. The local slowdown, the geometry of departure states, and prediction of
+the entire journey are distinct achievements with distinct tests.
 
 [Frozen design](https://github.com/tdj28/neural-shrimp/blob/6343dc481f275afcb73b81b338a1597cbf2f21ed/docs/fold-return-autonomous-plan.json) · [Completed scientific receipt](https://github.com/tdj28/neural-shrimp/blob/6343dc481f275afcb73b81b338a1597cbf2f21ed/docs/fold-return-autonomous.json).
+
+
+### Why the forecast failed, and what still predicts {#return-followup}
+
+The lookup table failed, but where, and why? We asked in three steps: a closer look at the data we already had,
+a zoom with the full network into the part of the range where the table failed, and a new frozen test on fresh
+trajectories. The test's design and its prediction were committed to the public repository before the new
+trajectories were generated or read.
+
+**Undoing the wraps.** A departure is the first reading past the line \(q=3\), and we only look at the state every
+second update, when it is back on the same side of the 2-cycle. So the recorded departure coordinate is really
+*how far past the line the state had got when we first looked*. It runs from 3 up to about 4.1, one channel step
+beyond the line. A start that arrives a little earlier is caught a little further past the line. A start that
+arrives a whole step earlier is caught just past the line, one look sooner. The coordinate therefore wraps
+around like the minute hand of a clock: as the arrival time changes smoothly, the recorded position climbs to
+4.1, jumps back to 3 and climbs again. Plotted against the current departure, as in the left panel above, a
+smooth change in timing can look like scattered points.
+
+The fix is to count the whole steps too. Write \(t\) for the number of updates to the departure, \(q_+\) for its
+coordinate and \(q_-\) for the reading one look earlier, which is still short of the line. The fraction of a step
+already taken past the line is \((q_+-3)/(q_+-q_-)\), so the departure time in channel steps is
+
+\[
+\tau=\frac{t}{2}-\frac{q_+-3}{q_+-q_-}.
+\]
+
+At a wrap, one side has the fraction near 1 at time \(t\) and the other has it near 0 at time \(t-2\), so
+\(\tau\) passes straight through. We call two neighboring table samples *joined* when both returned, their times
+have the same parity and their values of \(\tau\) differ by less than half a step.
+
+<picture>
+  <source media="(max-width: 640px)" srcset="fig-fold-return-unwrapped-mobile.png">
+  <img src="fig-fold-return-unwrapped.png" alt="With the wraps undone, the next departure time is one smooth curve below q of 3.05 and above 3.56, and scattered in the interval between, where all the table's stops and all the fresh captures lie; errors on the smooth runs are mostly below a thousandth of a step." loading="lazy" decoding="async">
+</picture>
+
+<p class="figure-note"><strong>Most of the scatter was a clock-hand effect.</strong> Left: the next departure time \(\tau\), in channel steps, against the current departure. Blue dots are the 995 table samples that returned; open orange circles are the 830 returns of the 16 fresh trajectories. Outside the gray band the points lie on one smooth curve. Inside it, the band we call \(M\), they scatter. Red ticks along the top mark the 30 table starts that stopped instead of returning, and crosses mark the last departure before each fresh capture: all of them lie in \(M\). Right: the error in \(\tau\) when the table is interpolated in \(\tau\), for fresh returns that started on the two smooth runs (log scale). The one cross is a return with the wrong time, a hair from a wrap. We drew the band after seeing these fresh trajectories, so this figure describes them; the frozen test below checks it on new ones. <a href="fold-return-followup.json">Receipt with every run, audit and figure hash</a>.</p>
+
+Two long runs of joined samples remain: \(q\) from 3 to 3.0503, and from 3.56 to 4.12. On them the return is one
+smooth curve. **Of the 366 fresh returns that started there, 365 came back at the predicted time**, and the
+median error in \(\tau\) was about a four-thousandth of a step (\(2.5\times10^{-4}\)). The original table did
+equally well there: its failure is confined to the interval \(M\) between the runs. That interval holds 446 of the
+846 fresh departures, all 14 fresh captures and all 30 table stops. Even short stretches of \(M\) that looked
+continuous between samples hid jumps: 7 of their 32 fresh returns had the wrong time. Because we drew this
+partition after seeing the fresh trajectories, these numbers are descriptive. The next two steps test it.
+
+**Zooming into \(M\).** Is \(M\) merely steep, or does it have structure at every scale? A further run (FGR4) drew
+1,024 departure coordinates, one at random in each of 1,024 equal slices of the range, and followed each through
+the full network to its next departure, or to period 3 or another repeating orbit. For the 466 coordinates
+inside \(M\) it also followed a partner a tiny distance \(\delta\) away, for \(\delta\) from \(10^{-3}\) down to
+\(10^{-8}\). An extension (FGR4b) added \(\delta=10^{-10}\) and exact reruns.
+
+The question is how often a pair *disagrees*: comes back at different times, or one returns while the other ends.
+For a map that is smooth apart from isolated jumps, a pair disagrees only when a jump falls between its two
+members, so halving \(\delta\) halves the chance. If instead the jumps are packed into a fractal set, more of them
+appear at every magnification, and the chance falls much more slowly, like \(\delta\) to a power below one. That
+power is the *uncertainty exponent*, introduced to measure exactly this *final-state sensitivity*
+([Grebogi, McDonald, Ott, and Yorke, 1983](#ref-grebogi-1983b)). Inside \(M\), the share of disagreeing pairs
+was 0.64 at \(\delta=10^{-4}\), 0.11 at \(10^{-8}\) and still 0.056 at \(10^{-10}\). **That is close to
+\(\delta^{0.18}\)**, with a bootstrap interval of 0.16 to 0.21 for the power, against the power of one a smooth
+map would give. An exponent this far below one is what the starts near the stable set of a chaotic saddle
+produce: the set of starts that would stay forever has gaps and clusters at every scale
+([Lai and Tél, 2011](#ref-lai-2011)).
+
+<picture>
+  <source media="(max-width: 640px)" srcset="fig-fold-return-zoom-mobile.png">
+  <img src="fig-fold-return-zoom.png" alt="Log-log plot: the share of neighboring starts whose next outcome differs falls only as delta to the power 0.18 from ten to the minus four down to ten to the minus ten, far above a line of slope one and above a rounding floor near two percent; a bar chart shows that all endings among 1024 uniform starts lie in the interval M, most near q of 3.5." loading="lazy" decoding="async">
+</picture>
+
+<p class="figure-note"><strong>Structure at every scale we could sample.</strong> Left: for the 466 starts inside \(M\), the share whose partner a distance \(\delta\) away (in units of \(q\)) comes back at a different time or ends differently; bars are 95% intervals. The solid line is the fitted power, 0.18. The dashed line falls in proportion to \(\delta\), as a smooth map would. The dotted line is the share changed by rerunning exactly the same start in another position of the batch: the rounding floor. Right: the share of the 1,024 uniform starts in each of 28 slices of \(q\) that end, in period 3 or another repeating orbit, instead of returning. Every ending lies in \(M\) (gray); in the busiest slice, near \(q=3.5\), 10 of 36 starts end. <a href="fold-return-followup.json">Receipt</a>.</p>
+
+The rerun control matters. Rerunning the 466 starts exactly, but in other positions within the batch of 16
+computed together, changed 9 of the outcomes, about 2%. The order of the floating-point additions depends on the
+position in the batch, and one journey through the network amplifies a difference in the last digit until it
+can decide the next return. The share at \(\delta=10^{-10}\) is still about three times this floor. So inside
+\(M\) no table of any finite resolution, and not even a repetition of the same float64 calculation, can fix the
+next return reliably. Because these runs start on the reconstructed curve itself, the structure belongs to the
+network's own return map, not to an error in the reconstruction.
+
+**Predicting how fast trajectories escape.** Pointwise prediction fails in \(M\), but statistics need not. We cut
+the range of \(q\) into 28 slices and counted, for each slice, where the uniform starts in it went next: into
+which slice, or out to period 3 or another repeating orbit. That table of fractions moves a whole distribution of
+departures forward by one journey. It is the classical finite approximation, due to Ulam, of the *transfer
+operator* of the return map; Li proved that such approximations converge for a broad class of one-dimensional
+maps ([Li, 1976](#ref-li-1976)), and for ours it is an estimate. Applied over and over, the distribution settles
+into a fixed shape whose total shrinks by the same factor \(\lambda\) each journey. Then \(\kappa=1-\lambda\) is
+the chance that a departure ends the wandering. From the 1,024 uniform starts alone, **\(\kappa=0.0130\)**, with a
+bootstrap interval of 0.0067 to 0.0204.
+
+We then froze a test (FGR5) before generating anything: 48 new fresh trajectories from the same line of starting
+states, with a new random seed, each followed for up to 16,384 updates, and three criteria fixed in advance. The
+prediction above was committed to the repository while the new runs were still going, and their outcomes were read
+only afterwards. **All three criteria passed.**
+
+- **The escape rate.** The trajectories made 2,417 departures whose next outcome was observed, and 42 of those
+  ended the wandering: 40 approached period 3 and 2 met another repeating orbit. Six trajectories were still
+  wandering at 16,384 updates. The observed rate is 0.0174 per departure, and its exact 95% interval, 0.0125 to
+  0.0235, contains the predicted 0.0130.
+- **Calibration.** Adding up each departure's slice fraction over the observed departures predicted 35.6 endings;
+  the 42 observed lie inside their interval.
+- **The smooth runs.** On the two smooth runs, the old table interpolated in \(\tau\) predicted the right return
+  time for 1,071 of 1,074 fresh returns.
+
+<picture>
+  <source media="(max-width: 640px)" srcset="fig-fold-return-escape-test-mobile.png">
+  <img src="fig-fold-return-escape-test.png" alt="The share of 48 fresh trajectories still wandering falls with the number of departures inside the shaded band of a decay predicted before the runs; a second panel shows the predicted escape rate of 0.013 per departure within the intervals of the observed rate of 0.017." loading="lazy" decoding="async">
+</picture>
+
+<p class="figure-note"><strong>A prediction made before the runs.</strong> Left: the share of the 48 new fresh trajectories still wandering, against the number of departures from the slow channel (orange), and the decay \((1-\kappa)^n\) predicted from the zoom before they were generated (blue, with the band from the bootstrap interval of \(\kappa\)). Right: the predicted rate and the observed rate, with the interval fixed in the test design and a second interval from resampling whole trajectories, added afterwards because the departures of one trajectory are not independent. <a href="fold-return-followup.json">Receipt</a>.</p>
+
+The prediction is not perfect. Its central value is about a quarter below the observed rate, as it was for the
+16 earlier fresh trajectories (14 endings in 844 departures). Part of the gap comes early: 11 trajectories ended
+within their first eight departures, faster than predicted, because starts on our line are not yet spread out like
+long-run departures. Leaving out each trajectory's first 5 to 20 departures gives rates of 0.0152 to 0.0155.
+Resampling whole trajectories, rather than treating departures as independent, gives an interval of 0.0127 to
+0.0244, which still contains the prediction. These two checks were added after the test and are labeled so.
+
+Put together, the picture is consistent. Where the return is smooth, one number predicts the next journey to a
+small fraction of a step. In \(M\) the return has structure at every scale we could sample, down to the last
+digits of float64 arithmetic, so no table can follow a single trajectory there for long. Yet the statistics,
+estimated from single journeys of the network, predict how quickly fresh trajectories escape to the stable
+3-cycle. That combination is what *transient chaos* organized by a fractal set of sensitive starts would
+produce. It remains numerical evidence at one prompt and one parameter setting, not a proof of a chaotic saddle.
+
+[Zoom design](https://github.com/tdj28/neural-shrimp/blob/bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97/docs/fold-return-fgr4-plan.json) · [Frozen test design](https://github.com/tdj28/neural-shrimp/blob/bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97/docs/fold-return-fgr5-plan.json) · [Prediction, committed before the outcomes were read](https://github.com/tdj28/neural-shrimp/blob/22b11cd26c6f87b476203e93da51a5eeb70fbe46/docs/fold-return-fgr5-prediction.json) · [Score](https://github.com/tdj28/neural-shrimp/blob/bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97/docs/fold-return-fgr5-score.json) · [Follow-up receipt](https://github.com/tdj28/neural-shrimp/blob/bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97/docs/fold-return-followup.json).
 
 
 
@@ -7779,8 +7955,16 @@ ghosts that line up the windows, and their flips start cascades into chaos.
 At the three sampled chaotic cells, the finite-time spectra suggest one expanding
 direction. This supports exploring one-dimensional descriptions of these orbits,
 as Feigenbaum's ratios also suggest, although no global one-dimensional reduction
-is established. Steering moves which continuations compete, and so where all of
-this happens.
+is established. Such a description would have to pass two tests. First, the position
+along a band at one visit must determine the position at the next, so that one
+number is enough to predict the next visit. Second, every periodic orbit that the
+reduced map allows must be an orbit of the full map, which Newton's method can
+check orbit by orbit. Where both tests pass, the kneading theory of one-humped maps
+([Milnor and Thurston, 1988](#ref-milnor-1988)) would say which sequences of L and R
+can occur and how fast their number grows with their length. The window labels of
+[Symbolic dynamics of the period-6 shrimp](#symbolic-dynamics) are a first,
+approximate use of that theory. Steering moves which continuations compete, and so
+where all of this happens.
 
 ## Beyond the one-token loop, and across model size {#beyond}
 
@@ -9400,8 +9584,11 @@ object appears.
 - **Global return.** The natural-exit reconstruction is tested at one fixed parameter setting on held-out
   trajectories from the same constructed initial-state line. The full network still advances the reconstructed
   states. That reconstruction result is not an autonomous scalar simulator. The separately frozen lookup model
-  failed fresh capture and multi-cycle prediction tests. Some histories approach period 3 after repeated returns;
-  the remaining finite-horizon survivors do not establish persistent chaos.
+  failed fresh capture and multi-cycle prediction tests; the follow-up confines that failure to an interval with
+  structure at every sampled scale, and its escape-rate prediction passed a frozen test at the same single
+  setting. Exact reruns in another batch position change about 2% of next outcomes in that interval. Some
+  histories approach period 3 after repeated returns; the remaining finite-horizon survivors do not establish
+  persistent chaos.
 
 - **Memory intervention.** The continuation concerns one selected period-18
   child family in a changed feedback map. Steering and temperature follow its
@@ -9514,9 +9701,11 @@ attractors ([Unsteered chaos and steering controls](#controls)).
 **The slowdown and the return are different parts of the explanation.** The [global-return study](#global-return)
 shows why a local formula can predict a crawl without predicting the next landing point. Natural exits admit a
 very accurate one-coordinate state reconstruction, but the frozen [autonomous table](#autonomous-return-test)
-failed fresh capture and multi-cycle prediction tests. The [growth test](#growth-before-capture) found expansion
-before eventual period-3 capture in 13 fresh trajectories. A reliable replacement for the global journey and a
-proof of a chaotic invariant set remain separate open questions.
+failed fresh capture and multi-cycle prediction tests. The [follow-up](#return-followup) shows why: the return is
+smooth on part of the range and has structure at every sampled scale on the rest, yet an escape rate estimated
+from single journeys passed a frozen test on new trajectories. The [growth test](#growth-before-capture) found
+expansion before eventual period-3 capture in 13 fresh trajectories. A pointwise replacement for the global
+journey and a proof of a chaotic invariant set remain open questions.
 
 **Steering strength as a bifurcation parameter.** In the soft-token map, small
 changes of the steering strength switch the model between distinct repeating
@@ -10287,6 +10476,10 @@ about large language models and for encouraging the publication of this work.
   changes in chaotic attractors, and transient
   chaos*](https://doi.org/10.1016/0167-2789(83)90126-4), *Physica D* 7(1–3),
   181–200.
+- <a id="ref-grebogi-1983b"></a>Grebogi, McDonald, Ott, and Yorke (1983), [*Final state
+  sensitivity: An obstruction to
+  predictability*](https://doi.org/10.1016/0375-9601(83)90945-3), *Physics Letters A* 99(9),
+  415–418.
 - <a id="ref-grossmann-1977"></a>Grossmann and Thomae (1977), [*Invariant
   Distributions and Stationary Correlation Functions of One-Dimensional Discrete
   Processes*](https://doi.org/10.1515/zna-1977-1204), *Zeitschrift für
@@ -10370,6 +10563,10 @@ about large language models and for encouraging the publication of this work.
   Phase transitions and emergent
   computation*](https://doi.org/10.1016/0167-2789(90)90064-V), *Physica D* 42(1–3),
   12–37.
+- <a id="ref-li-1976"></a>Li (1976), [*Finite approximation for the Frobenius–Perron
+  operator. A solution to Ulam's
+  conjecture*](https://doi.org/10.1016/0021-9045(76)90037-X), *Journal of Approximation
+  Theory* 17(2), 177–186.
 - <a id="ref-li-2025"></a>Li et al. (2025), [*Cognitive Activation and Chaotic
   Dynamics in Large Language Models: A Quasi-Lyapunov Analysis of Reasoning
   Mechanisms*](https://arxiv.org/abs/2503.13530), arXiv:2503.13530v1, 15 March

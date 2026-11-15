@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "study": "FGR3 follow-up (FGR4, FGR4b, FGR5)",
+  "kind": "zoom",
+  "description": "Publication PNG copies of the research figure; desktop and mobile layouts use the same audited data.",
+  "provenance": {
+    "scientific_receipt": "fold-return-followup.json",
+    "scientific_receipt_sha256": "9d698faa194a9020fe6f2e6f9b9d1bb9313d46cd0514e845ab0819abae3c76b4",
+    "source_commit": "bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97",
+    "outputs": {
+      "fig-fold-return-zoom.png": "2fbdaf41aaa1bde9fe79e8770be590a7941cdb0da2b2b845d3407f82a5bdfab3",
+      "fig-fold-return-zoom-mobile.png": "53b14a2ca250aba80bd225fce8f4c9e23ce5242f675f2b21b3106a7e898b14fa"
+    }
+  }
+}

@@ -131,7 +131,14 @@
   "mixed-junction-publication-visual-review.json": "7efb62c5016281401791858c1761122311926a21072e6445434e4a9ff0f401a4",
   "fig-memory-mixed-junction.receipt.json": "bf74d5568eabf1f22cbfcc9a9be04dec3f45bd325b60d58ea4ca94d9b91786d7",
   "paper/llm/main.tex at 3e83148389687e6728186792b589a2b6d392b6f2": "5a944514b37e927aa3c3241e1957f91051c5493f2340baf7729a00e26097c671",
-  "paper/llm/main.tex at 3bde65ceb3d6b5f98784d117f116f8e8d36dd682": "f272fad9417730a1ed52d3c6c94534e74e0d1bfacd9ea89f640c4953960b58eb"
+  "paper/llm/main.tex at 3bde65ceb3d6b5f98784d117f116f8e8d36dd682": "f272fad9417730a1ed52d3c6c94534e74e0d1bfacd9ea89f640c4953960b58eb",
+  "fold-return-autonomous.json": "a951826b50bc36ea7182d031fc53de8265de303cbd0e47c953ae43394c0a55ee",
+  "fig-fold-autonomous-test.receipt.json": "601ceec35578f3ffe497c2052c0218ce5d9a86a13ce079e2bf654540d5763fd0",
+  "fig-fold-growth-capture.receipt.json": "6ba42436365a4dd6e3a152eb0d0600c8a58d3fd488e90548af00efe33c1274a8",
+  "fold-return-followup.json": "9d698faa194a9020fe6f2e6f9b9d1bb9313d46cd0514e845ab0819abae3c76b4",
+  "fig-fold-return-unwrapped.receipt.json": "d05df6e4b5c3511e40a2833b4c8eead8faab738e095505866bd6721293d5770c",
+  "fig-fold-return-zoom.receipt.json": "f7fffafdb02b80f3e3da627a7f3592d5a8dea6c942c11623b789583a8652eea7",
+  "fig-fold-return-escape-test.receipt.json": "7e78b91d0abdb9ae36672aa5b5a08cc63678cc6c2e3728c3c961aa737aa11914"
  },
  "figures": [
   "fig-alpha0.png",
@@ -247,7 +254,21 @@
   "fig-topk.png",
   "fig-real-inference.png",
   "fig-lfm3.png",
-  "fig-batch-fate-long.png"
+  "fig-batch-fate-long.png",
+  "fig-fold-return-fates.png",
+  "fig-fold-return-map.png",
+  "fig-fold-return-map-mobile.png",
+  "fig-fold-return-fates-mobile.png",
+  "fig-fold-autonomous-test-mobile.png",
+  "fig-fold-autonomous-test.png",
+  "fig-fold-growth-capture-mobile.png",
+  "fig-fold-growth-capture.png",
+  "fig-fold-return-unwrapped.png",
+  "fig-fold-return-unwrapped-mobile.png",
+  "fig-fold-return-zoom.png",
+  "fig-fold-return-zoom-mobile.png",
+  "fig-fold-return-escape-test.png",
+  "fig-fold-return-escape-test-mobile.png"
  ],
  "figure_sha256": {
   "fig-alpha0.png": "100dc997a923e123038d5bf8d321eb77fd148cce36b959402c67556d154ef166",
@@ -363,7 +384,21 @@
   "fig-topk.png": "1e28419917afcd2196e6b41cfbe5504d2169ca2c6d4918c414863a6e47a0bf91",
   "fig-real-inference.png": "4a4182d225470c528e71251e2cfd906bc86b5c8ae3d3bd3c1f3bd42d5a82ef82",
   "fig-lfm3.png": "af320d5f52401d4c7833c683ee060e66ba97fbca6e1accb1147c02124c4961b5",
-  "fig-batch-fate-long.png": "f047369ada955686738cbe59cbcb644f0c70a92a2f0682ad6fc93ad7a9f04061"
+  "fig-batch-fate-long.png": "f047369ada955686738cbe59cbcb644f0c70a92a2f0682ad6fc93ad7a9f04061",
+  "fig-fold-return-fates.png": "294e044ae2c7a70305997f002e3c6a618a196c139493f898637d0ca41bb8af8f",
+  "fig-fold-return-map.png": "89f4be152e85e8069f74335c2ffd68e94b38694d0154b5a58bdde083ef993857",
+  "fig-fold-return-map-mobile.png": "0e76a7a93253275e2f64bb13c8dbafe8bf37905d057500393cf26af5bd03db7d",
+  "fig-fold-return-fates-mobile.png": "9eda08eeb6ebe17549784ae0391d5e46f4424349b3a57d938f1f594764c63180",
+  "fig-fold-autonomous-test-mobile.png": "6716b5e568f699bbb09e2a8b866a96f6f6ba8b93f417683ff49d8635b5cac9b8",
+  "fig-fold-autonomous-test.png": "5c42a5789e523822d25eb248713426c7da1a2aca209e1686e89e784ae4b8665c",
+  "fig-fold-growth-capture-mobile.png": "42d29ea553e541a15efbec6da63a5dc37a2fe71171797a68df1eb3cc1ea2f93c",
+  "fig-fold-growth-capture.png": "bd009282b2102a16561490e1894621b1f07609557a1968de3cb488b968dfddd9",
+  "fig-fold-return-unwrapped.png": "dd5f7a992ffa3ddfe8f63c441f4f7ed506153ebd9ec701a81d119bfe2b0ac8e9",
+  "fig-fold-return-unwrapped-mobile.png": "2d65c29b7c067d40748c96fc91cd61695a3b98750fa90a1e047fd481ff42a3b4",
+  "fig-fold-return-zoom.png": "2fbdaf41aaa1bde9fe79e8770be590a7941cdb0da2b2b845d3407f82a5bdfab3",
+  "fig-fold-return-zoom-mobile.png": "53b14a2ca250aba80bd225fce8f4c9e23ce5242f675f2b21b3106a7e898b14fa",
+  "fig-fold-return-escape-test.png": "133e1049d7ca9b106ff13377f3f0bcb51f3cc7cfc9c17dd996e066a6d41e3ee2",
+  "fig-fold-return-escape-test-mobile.png": "b411ab7164c39b07cd087f34403a299567f7de50c16bd6934e5be781a4bb1cb8"
  },
  "figure_sources": {
   "fig-alpha0.png": "paper/llm/figures/fig-alpha0.png (byte-identical copy)",
@@ -531,7 +566,57 @@
   "fig-topk.png": "paper/llm/figures/fig-topk.png at 0399fee2e9537a50993482aea8ec417e70286ac4 (byte-identical copy)",
   "fig-real-inference.png": "paper/llm/figures/fig-real-inference.png at 0399fee2e9537a50993482aea8ec417e70286ac4 (byte-identical copy)",
   "fig-lfm3.png": "paper/llm/figures/fig-lfm3.png at 0399fee2e9537a50993482aea8ec417e70286ac4 (byte-identical copy)",
-  "fig-batch-fate-long.png": "paper/llm/figures/fig-batch-fate-long.png at bad2d5c576e913ab9472cd3b2faefa6d769f60ad (byte-identical copy)"
+  "fig-batch-fate-long.png": "paper/llm/figures/fig-batch-fate-long.png at bad2d5c576e913ab9472cd3b2faefa6d769f60ad (byte-identical copy)",
+  "fig-fold-autonomous-test-mobile.png": {
+   "receipt": "fold-return-autonomous.json",
+   "kind": "returns",
+   "source_commit": "6343dc481f275afcb73b81b338a1597cbf2f21ed"
+  },
+  "fig-fold-autonomous-test.png": {
+   "receipt": "fold-return-autonomous.json",
+   "kind": "returns",
+   "source_commit": "6343dc481f275afcb73b81b338a1597cbf2f21ed"
+  },
+  "fig-fold-growth-capture-mobile.png": {
+   "receipt": "fold-return-autonomous.json",
+   "kind": "growth",
+   "source_commit": "6343dc481f275afcb73b81b338a1597cbf2f21ed"
+  },
+  "fig-fold-growth-capture.png": {
+   "receipt": "fold-return-autonomous.json",
+   "kind": "growth",
+   "source_commit": "6343dc481f275afcb73b81b338a1597cbf2f21ed"
+  },
+  "fig-fold-return-unwrapped.png": {
+   "receipt": "fold-return-followup.json",
+   "kind": "unwrapped",
+   "source_commit": "bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97"
+  },
+  "fig-fold-return-unwrapped-mobile.png": {
+   "receipt": "fold-return-followup.json",
+   "kind": "unwrapped",
+   "source_commit": "bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97"
+  },
+  "fig-fold-return-zoom.png": {
+   "receipt": "fold-return-followup.json",
+   "kind": "zoom",
+   "source_commit": "bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97"
+  },
+  "fig-fold-return-zoom-mobile.png": {
+   "receipt": "fold-return-followup.json",
+   "kind": "zoom",
+   "source_commit": "bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97"
+  },
+  "fig-fold-return-escape-test.png": {
+   "receipt": "fold-return-followup.json",
+   "kind": "escape-test",
+   "source_commit": "bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97"
+  },
+  "fig-fold-return-escape-test-mobile.png": {
+   "receipt": "fold-return-followup.json",
+   "kind": "escape-test",
+   "source_commit": "bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97"
+  }
  },
  "other_files": {
   "og-card.png": {
@@ -48490,6 +48575,173 @@
    "paper_line": 1306,
    "paper_file": "paper/llm/main.tex",
    "paper_commit": "3bde65ceb3d6b5f98784d117f116f8e8d36dd682"
+  },
+  {
+   "id": "fgr2-line_starts",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "line_starts"
+   ],
+   "value": 64,
+   "appears_as": "64 starting states",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-horizon",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "horizon"
+   ],
+   "value": 4096,
+   "appears_as": "4,096 individual model",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-captured",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "captured"
+   ],
+   "value": 27,
+   "appears_as": "27 had approached",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-unresolved",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "unresolved"
+   ],
+   "value": 37,
+   "appears_as": "37 were still unresolved",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-returned_at_least_once",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "returned_at_least_once"
+   ],
+   "value": 63,
+   "appears_as": "63 returned at least once",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-returned_then_captured",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "returned_then_captured"
+   ],
+   "value": 26,
+   "appears_as": "26 that\nfirst returned",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-heldout_routes",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "heldout_routes"
+   ],
+   "value": 31,
+   "appears_as": "31 wholly held-out",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-heldout_returning_pairs",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "heldout_returning_pairs"
+   ],
+   "value": 28,
+   "appears_as": "28 returned to the channel",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-heldout_P3_pairs",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "heldout_P3_pairs"
+   ],
+   "value": 3,
+   "appears_as": "three approached period 3",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-max_cycle_time_error",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "max_cycle_time_error"
+   ],
+   "value": 0,
+   "appears_as": "agreed exactly",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-cycle_duration_range",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "cycle_duration_range"
+   ],
+   "value": [
+    105,
+    227
+   ],
+   "appears_as": "105 to 227 updates",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-max_next_departure_error_U",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "max_next_departure_error_U"
+   ],
+   "value": 0.001306632491476556,
+   "appears_as": "0.0014U",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-interpolation_entry_rmse_U",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "interpolation_entry_rmse_U"
+   ],
+   "value": 0.21424451508912729,
+   "appears_as": "0.2142U",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-constant_entry_rmse_U",
+   "receipt": "fig-fold-return-map.receipt.json",
+   "field": [
+    "claims",
+    "constant_entry_rmse_U"
+   ],
+   "value": 0.26452289732273393,
+   "appears_as": "0.2645U",
+   "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+  },
+  {
+   "id": "fgr2-returned-test-exits",
+   "receipt": "fold-return-mechanism.json",
+   "field": [
+    "simple_prediction_comparisons",
+    "return_test_exits"
+   ],
+   "value": 777,
+   "appears_as": "777 returned test exits"
   }
  ],
  "extensions": [
@@ -53999,6 +54251,1023 @@
      ],
      "style": "d",
      "appears_as": "600"
+    }
+   ]
+  },
+  {
+   "id": "fold-global-return-20261113",
+   "source_commit": "cf0688bc659decd2a914b61d4451dc77b0cc1eef",
+   "description": "Audited FGR1/FGR2 returns, P3 capture, state reconstruction and limits; no new scientific execution.",
+   "generator": {
+    "repository": "tdj28/neural-shrimp",
+    "path": "tools/publish_fold_return_figures.py",
+    "sha256": "c9f0c22d324b297a7fee82c7e9fabb6866b29d5a343ba5adf9963c786a774608"
+   },
+   "receipts": {
+    "fold-return-mechanism.json": "5e3bbed19e25a9eca0ed4bffccd88c94d0478689df19115c181cd0b2474d0eee",
+    "fig-fold-return-map.receipt.json": "873499f5781d9e8ca14e7aaf790debcc5e0e2bdbc11c85080b53fb376560ea1a",
+    "fig-fold-return-fates.receipt.json": "bbcbe4077623cd15bc92da320122b710867035bbceedcaabb74f6c6287517fa7"
+   },
+   "new_numbers": [
+    {
+     "id": "fgr2-line_starts",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "line_starts"
+     ],
+     "value": 64,
+     "appears_as": "64 starting states",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-horizon",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "horizon"
+     ],
+     "value": 4096,
+     "appears_as": "4,096 individual model",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-captured",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "captured"
+     ],
+     "value": 27,
+     "appears_as": "27 had approached",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-unresolved",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "unresolved"
+     ],
+     "value": 37,
+     "appears_as": "37 were still unresolved",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-returned_at_least_once",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "returned_at_least_once"
+     ],
+     "value": 63,
+     "appears_as": "63 returned at least once",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-returned_then_captured",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "returned_then_captured"
+     ],
+     "value": 26,
+     "appears_as": "26 that\nfirst returned",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-heldout_routes",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "heldout_routes"
+     ],
+     "value": 31,
+     "appears_as": "31 wholly held-out",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-heldout_returning_pairs",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "heldout_returning_pairs"
+     ],
+     "value": 28,
+     "appears_as": "28 returned to the channel",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-heldout_P3_pairs",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "heldout_P3_pairs"
+     ],
+     "value": 3,
+     "appears_as": "three approached period 3",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-max_cycle_time_error",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "max_cycle_time_error"
+     ],
+     "value": 0,
+     "appears_as": "agreed exactly",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-cycle_duration_range",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "cycle_duration_range"
+     ],
+     "value": [
+      105,
+      227
+     ],
+     "appears_as": "105 to 227 updates",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-max_next_departure_error_U",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "max_next_departure_error_U"
+     ],
+     "value": 0.001306632491476556,
+     "appears_as": "0.0014U",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-interpolation_entry_rmse_U",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "interpolation_entry_rmse_U"
+     ],
+     "value": 0.21424451508912729,
+     "appears_as": "0.2142U",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-constant_entry_rmse_U",
+     "receipt": "fig-fold-return-map.receipt.json",
+     "field": [
+      "claims",
+      "constant_entry_rmse_U"
+     ],
+     "value": 0.26452289732273393,
+     "appears_as": "0.2645U",
+     "format_note": "next-departure upper bound rounded upward; RMSE rounded to nearest; other values exact"
+    },
+    {
+     "id": "fgr2-returned-test-exits",
+     "receipt": "fold-return-mechanism.json",
+     "field": [
+      "simple_prediction_comparisons",
+      "return_test_exits"
+     ],
+     "value": 777,
+     "appears_as": "777 returned test exits"
+    }
+   ]
+  },
+  {
+   "id": "fold-autonomous-return-20261114",
+   "source_commit": "6343dc481f275afcb73b81b338a1597cbf2f21ed",
+   "description": "FGR3 frozen autonomous table, fresh capture predictions and exact pre-capture tangent growth; failed forecasts retained, finite-time claims only.",
+   "generator": {
+    "repository": "tdj28/neural-shrimp",
+    "path": "tools/publish_fold_autonomous_figures.py",
+    "sha256": "82606b1478e95a01daf994b781cfe7466b88610811f87d0069f10311b1d06040"
+   },
+   "receipts": {
+    "fold-return-autonomous.json": "a951826b50bc36ea7182d031fc53de8265de303cbd0e47c953ae43394c0a55ee",
+    "fig-fold-autonomous-test.receipt.json": "601ceec35578f3ffe497c2052c0218ce5d9a86a13ce079e2bf654540d5763fd0",
+    "fig-fold-growth-capture.receipt.json": "6ba42436365a4dd6e3a152eb0d0600c8a58d3fd488e90548af00efe33c1274a8"
+   },
+   "frozen_design_url": "https://github.com/tdj28/neural-shrimp/blob/6343dc481f275afcb73b81b338a1597cbf2f21ed/docs/fold-return-autonomous-plan.json",
+   "scientific_receipt_url": "https://github.com/tdj28/neural-shrimp/blob/6343dc481f275afcb73b81b338a1597cbf2f21ed/docs/fold-return-autonomous.json",
+   "new_numbers": [
+    {
+     "id": "fgr3-samples",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "training",
+      "rows"
+     ],
+     "value": 1025,
+     "appears_as": "1,025 departure states",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-training_returns",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "training",
+      "outcomes",
+      "return"
+     ],
+     "value": 995,
+     "appears_as": "995 returned",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-training_P3",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "training",
+      "outcomes",
+      "reference_p3"
+     ],
+     "value": 29,
+     "appears_as": "29 approached",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-fresh_starts",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "validation",
+      "rows"
+     ],
+     "value": 16,
+     "appears_as": "16 new starting states",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-captured",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "validation",
+      "outcomes",
+      "reference_p3"
+     ],
+     "value": 14,
+     "appears_as": "14 approached period 3",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-unresolved",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "validation",
+      "outcomes",
+      "unresolved_at_horizon"
+     ],
+     "value": 2,
+     "appears_as": "two remained unresolved",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-event_count",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "validation",
+      "one_cycle_route",
+      "evaluated"
+     ],
+     "value": 844,
+     "appears_as": "844 completed",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-true_captures",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "validation",
+      "one_cycle_route",
+      "capture_true_positive"
+     ],
+     "value": 8,
+     "appears_as": "identified 8 captures",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-missed_captures",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "validation",
+      "one_cycle_route",
+      "capture_false_negative"
+     ],
+     "value": 6,
+     "appears_as": "missed 6",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-false_captures",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "validation",
+      "one_cycle_route",
+      "capture_false_positive"
+     ],
+     "value": 13,
+     "appears_as": "13 returns captures",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-precision",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "validation",
+      "one_cycle_route",
+      "capture_precision"
+     ],
+     "value": 0.38095238095238093,
+     "appears_as": "38.1%",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-recall",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "validation",
+      "one_cycle_route",
+      "capture_recall"
+     ],
+     "value": 0.5714285714285714,
+     "appears_as": "57.1%",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-correct_labels",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "validation",
+      "one_cycle_route",
+      "correct"
+     ],
+     "value": 825,
+     "appears_as": "825 correct labels",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-baseline_labels",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "validation",
+      "one_cycle_route",
+      "always_return_correct"
+     ],
+     "value": 830,
+     "appears_as": "830 correct labels",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-correct_returns",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "validation",
+      "one_cycle_return_errors",
+      "n"
+     ],
+     "value": 817,
+     "appears_as": "817 returns",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-reset_RMSE",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "validation",
+      "one_cycle_return_errors",
+      "coordinate_RMSE_U"
+     ],
+     "value": 0.32733336996005163,
+     "appears_as": "0.3273U",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-reset_time_MAE",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "validation",
+      "one_cycle_return_errors",
+      "time_MAE_updates"
+     ],
+     "value": 8.847001223990208,
+     "appears_as": "8.85 network updates",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-autonomous_first_RMSE",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "autonomous_rollout_horizons",
+      "piecewise",
+      0,
+      "coordinate_RMSE_U"
+     ],
+     "value": 0.3282118437586036,
+     "appears_as": "0.3282U",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-autonomous_eighth_RMSE",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "autonomous_rollout_horizons",
+      "piecewise",
+      3,
+      "coordinate_RMSE_U"
+     ],
+     "value": 0.4917341160424177,
+     "appears_as": "0.4917U",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-autonomous_eighth_time",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "autonomous_rollout_horizons",
+      "piecewise",
+      3,
+      "elapsed_MAE_updates"
+     ],
+     "value": 71.33333333333333,
+     "appears_as": "71.33 network updates",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-exits",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "post_test_diagnosis",
+      "natural_exits"
+     ],
+     "value": 846,
+     "appears_as": "846 natural departures",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-curve_bound",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "post_test_diagnosis",
+      "relative_reconstruction_error",
+      "maximum"
+     ],
+     "value": 7.477785112976253e-14,
+     "appears_as": "7.5\\times10^{-14}",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-mixed_intervals",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "post_test_diagnosis",
+      "interval_diagnostics",
+      0,
+      "coordinate_RMSE_U"
+     ],
+     "value": 0.443937389018091,
+     "appears_as": "0.4439U",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-matching_intervals",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "post_test_diagnosis",
+      "interval_diagnostics",
+      1,
+      "coordinate_RMSE_U"
+     ],
+     "value": 0.06504899480962521,
+     "appears_as": "0.06505U",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-full_windows",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "growth",
+      "complete_network_windows"
+     ],
+     "value": 26,
+     "appears_as": "All 26 had positive averages",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-both_halves",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "growth",
+      "positive_in_both_halves"
+     ],
+     "value": 26,
+     "appears_as": "in **both** measurement halves",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-positive_trajectories",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "growth_summary",
+      "distinct_positive_trajectories"
+     ],
+     "value": 15,
+     "appears_as": "15 different trajectories",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-positive_then_capture",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "growth_summary",
+      "positive_then_P3_trajectories"
+     ],
+     "value": 13,
+     "appears_as": "Thirteen of the fresh trajectories",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-complete_range",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "growth_summary",
+      "complete_window_mean_range"
+     ],
+     "value": [
+      0.027439622946684433,
+      0.1129475476710206
+     ],
+     "appears_as": "0.02744 to 0.11295",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    },
+    {
+     "id": "fgr3-horizon",
+     "receipt": "fold-return-autonomous.json",
+     "field": [
+      "validation",
+      "survival",
+      2,
+      "updates"
+     ],
+     "value": 16384,
+     "appears_as": "16,384 updates",
+     "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+    }
+   ]
+  },
+  {
+   "id": "fold-return-followup-20261114",
+   "source_commit": "bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97",
+   "description": "Follow-up to the FGR3 return test: unwrapped return (post-test), FGR4/FGR4b zoom with rounding control, frozen FGR5 escape-rate test (all three criteria passed).",
+   "receipts": {
+    "fold-return-followup.json": "9d698faa194a9020fe6f2e6f9b9d1bb9313d46cd0514e845ab0819abae3c76b4",
+    "fig-fold-return-unwrapped.receipt.json": "d05df6e4b5c3511e40a2833b4c8eead8faab738e095505866bd6721293d5770c",
+    "fig-fold-return-zoom.receipt.json": "f7fffafdb02b80f3e3da627a7f3592d5a8dea6c942c11623b789583a8652eea7",
+    "fig-fold-return-escape-test.receipt.json": "7e78b91d0abdb9ae36672aa5b5a08cc63678cc6c2e3728c3c961aa737aa11914"
+   },
+   "scientific_receipt_url": "https://github.com/tdj28/neural-shrimp/blob/bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97/docs/fold-return-followup.json",
+   "prediction_url": "https://github.com/tdj28/neural-shrimp/blob/22b11cd26c6f87b476203e93da51a5eeb70fbe46/docs/fold-return-fgr5-prediction.json",
+   "verifier": "verify_fold_followup.py",
+   "new_numbers": [
+    {
+     "id": "followup-long-run-returns",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "unwrap",
+      "long_run_returns"
+     ],
+     "value": 366,
+     "shown": "366",
+     "rule": "int",
+     "appears_as": "Of the 366 fresh returns that started there, 365 came back at the predicted time"
+    },
+    {
+     "id": "followup-long-run-correct",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "unwrap",
+      "long_run_time_correct_unwrapped"
+     ],
+     "value": 365,
+     "shown": "365",
+     "rule": "int",
+     "appears_as": "365 came back at the predicted time"
+    },
+    {
+     "id": "followup-long-run-median",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "unwrap",
+      "long_run_median_tau_error"
+     ],
+     "value": 0.0002469277464953734,
+     "shown": "2.5\\times10^{-4}",
+     "rule": "sci:1",
+     "appears_as": "\\(2.5\\times10^{-4}\\)"
+    },
+    {
+     "id": "followup-M-departures",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "unwrap",
+      "M_departures"
+     ],
+     "value": 446,
+     "shown": "446",
+     "rule": "int",
+     "appears_as": "That interval holds 446 of the"
+    },
+    {
+     "id": "followup-all-departures",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "unwrap",
+      "fresh_departures"
+     ],
+     "value": 846,
+     "shown": "846",
+     "rule": "int",
+     "appears_as": "846 fresh departures, all 14 fresh captures and all 30 table stops"
+    },
+    {
+     "id": "followup-M-captures",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "unwrap",
+      "M_captures"
+     ],
+     "value": 14,
+     "shown": "14",
+     "rule": "int",
+     "appears_as": "all 14 fresh captures"
+    },
+    {
+     "id": "followup-table-stops",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "unwrap",
+      "table_stops_in_M"
+     ],
+     "value": 30,
+     "shown": "30",
+     "rule": "int",
+     "appears_as": "all 30 table stops"
+    },
+    {
+     "id": "followup-short-windows",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "unwrap",
+      "short_window_returns"
+     ],
+     "value": 32,
+     "shown": "32",
+     "rule": "int",
+     "appears_as": "7 of their 32 fresh returns had the wrong time"
+    },
+    {
+     "id": "followup-bases-M",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "zoom",
+      "bases_inside_M"
+     ],
+     "value": 466,
+     "shown": "466",
+     "rule": "int",
+     "appears_as": "For the 466 coordinates"
+    },
+    {
+     "id": "followup-p-1e-4",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "zoom",
+      "levels_time_criterion",
+      "0.0001",
+      "fraction"
+     ],
+     "value": 0.6437768240343348,
+     "shown": "0.64",
+     "rule": "dp:2",
+     "appears_as": "was 0.64 at"
+    },
+    {
+     "id": "followup-p-1e-8",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "zoom",
+      "levels_time_criterion",
+      "1e-08",
+      "fraction"
+     ],
+     "value": 0.10944206008583691,
+     "shown": "0.11",
+     "rule": "dp:2",
+     "appears_as": "0.11 at \\(10^{-8}\\)"
+    },
+    {
+     "id": "followup-p-1e-10",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "zoom",
+      "levels_time_criterion",
+      "1e-10",
+      "fraction"
+     ],
+     "value": 0.055793991416309016,
+     "shown": "0.056",
+     "rule": "dp:3",
+     "appears_as": "still 0.056 at"
+    },
+    {
+     "id": "followup-alpha",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "zoom",
+      "alpha_time"
+     ],
+     "value": 0.18316145513531587,
+     "shown": "0.18",
+     "rule": "dp:2",
+     "appears_as": "\\(\\delta^{0.18}\\)"
+    },
+    {
+     "id": "followup-alpha-lo",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "zoom",
+      "alpha_time_bootstrap_95",
+      0
+     ],
+     "value": 0.16031469481051433,
+     "shown": "0.16",
+     "rule": "dp:2",
+     "appears_as": "bootstrap interval of 0.16 to 0.21"
+    },
+    {
+     "id": "followup-alpha-hi",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "zoom",
+      "alpha_time_bootstrap_95",
+      1
+     ],
+     "value": 0.21053901248802417,
+     "shown": "0.21",
+     "rule": "dp:2",
+     "appears_as": "0.16 to 0.21 for the power"
+    },
+    {
+     "id": "followup-rerun-changed",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "zoom",
+      "levels_time_criterion",
+      "0.0",
+      "uncertain"
+     ],
+     "value": 9,
+     "shown": "9",
+     "rule": "int",
+     "appears_as": "changed 9 of the outcomes"
+    },
+    {
+     "id": "followup-kappa",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "prediction",
+      "kappa"
+     ],
+     "value": 0.013032705648018617,
+     "shown": "0.0130",
+     "rule": "dp:4",
+     "appears_as": "\\(\\kappa=0.0130\\)"
+    },
+    {
+     "id": "followup-kappa-lo",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "prediction",
+      "kappa_bootstrap_2.5_50_97.5",
+      0
+     ],
+     "value": 0.006686654652273988,
+     "shown": "0.0067",
+     "rule": "dp:4",
+     "appears_as": "bootstrap interval of 0.0067 to 0.0204"
+    },
+    {
+     "id": "followup-kappa-hi",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "prediction",
+      "kappa_bootstrap_2.5_50_97.5",
+      2
+     ],
+     "value": 0.020435180838529632,
+     "shown": "0.0204",
+     "rule": "dp:4",
+     "appears_as": "0.0067 to 0.0204"
+    },
+    {
+     "id": "followup-departures",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "departures_with_observed_next_outcome"
+     ],
+     "value": 2417,
+     "shown": "2,417",
+     "rule": "int:comma",
+     "appears_as": "2,417 departures"
+    },
+    {
+     "id": "followup-endings",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "terminations_after_a_departure"
+     ],
+     "value": 42,
+     "shown": "42",
+     "rule": "int",
+     "appears_as": "and 42 of those"
+    },
+    {
+     "id": "followup-p3",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "outcomes",
+      "reference_p3"
+     ],
+     "value": 40,
+     "shown": "40",
+     "rule": "int",
+     "appears_as": "40 approached period 3"
+    },
+    {
+     "id": "followup-other",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "outcomes",
+      "other_recurrence_candidate"
+     ],
+     "value": 2,
+     "shown": "2",
+     "rule": "int",
+     "appears_as": "2 met another repeating orbit"
+    },
+    {
+     "id": "followup-unresolved",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "outcomes",
+      "unresolved_at_horizon"
+     ],
+     "value": 6,
+     "shown": "6",
+     "rule": "int",
+     "appears_as": "Six trajectories were still"
+    },
+    {
+     "id": "followup-kappa-obs",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "kappa_observed"
+     ],
+     "value": 0.01737691352916839,
+     "shown": "0.0174",
+     "rule": "dp:4",
+     "appears_as": "The observed rate is 0.0174 per departure"
+    },
+    {
+     "id": "followup-kappa-obs-lo",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "kappa_observed_95",
+      0
+     ],
+     "value": 0.012523750820222466,
+     "shown": "0.0125",
+     "rule": "dp:4",
+     "appears_as": "0.0125 to"
+    },
+    {
+     "id": "followup-kappa-obs-hi",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "kappa_observed_95",
+      1
+     ],
+     "value": 0.02348853900640904,
+     "shown": "0.0235",
+     "rule": "dp:4",
+     "appears_as": "0.0235, contains the predicted 0.0130"
+    },
+    {
+     "id": "followup-expected",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "expected_terminations_calibration"
+     ],
+     "value": 35.63438438438438,
+     "shown": "35.6",
+     "rule": "dp:1",
+     "appears_as": "predicted 35.6 endings"
+    },
+    {
+     "id": "followup-c3-pairs",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "C3_pointwise_long_runs",
+      "pairs"
+     ],
+     "value": 1074,
+     "shown": "1,074",
+     "rule": "int:comma",
+     "appears_as": "for 1,071 of 1,074 fresh returns"
+    },
+    {
+     "id": "followup-c3-correct",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "score",
+      "C3_pointwise_long_runs",
+      "time_correct"
+     ],
+     "value": 1071,
+     "shown": "1,071",
+     "rule": "int:comma",
+     "appears_as": "1,071 of 1,074"
+    },
+    {
+     "id": "followup-boot-lo",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "robustness",
+      "kappa_trajectory_bootstrap_95",
+      0
+     ],
+     "value": 0.012687794013661893,
+     "shown": "0.0127",
+     "rule": "dp:4",
+     "appears_as": "interval of 0.0127 to"
+    },
+    {
+     "id": "followup-boot-hi",
+     "receipt": "fold-return-followup.json",
+     "field": [
+      "numbers",
+      "robustness",
+      "kappa_trajectory_bootstrap_95",
+      1
+     ],
+     "value": 0.024350670835252625,
+     "shown": "0.0244",
+     "rule": "dp:4",
+     "appears_as": "0.0127 to 0.0244"
     }
    ]
   }

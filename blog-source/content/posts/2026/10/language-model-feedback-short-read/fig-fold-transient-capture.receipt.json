@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "study": "Transient-to-cycle figures (FGR5 series, twin demonstration)",
+  "kind": "transient",
+  "description": "Publication PNG copies of the research figure; desktop and mobile layouts use the same audited data.",
+  "provenance": {
+    "scientific_receipt": "fold-transient-figures.json",
+    "scientific_receipt_sha256": "a47880fe14e145296b144d16c83fd296945b5fa7825946f5ff82df9c3f7c387b",
+    "source_commit": "14ff9ab15cc100861a8597127144f4c0269ff99b",
+    "outputs": {
+      "fig-fold-transient-capture.png": "a504428b1661f923b87fb717f8fc087d610ebccbbeb2fc6e3de6c726b4b953a5",
+      "fig-fold-transient-capture-mobile.png": "c239dbd48b8b0a92c031680576b0624daeb4b218a8662cd8e2b0df1f31f60855"
+    }
+  }
+}

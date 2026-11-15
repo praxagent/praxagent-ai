@@ -249,18 +249,37 @@ approached the same stable three-step cycle; two remained unresolved after 16,38
 on a deliberately constructed line, so the counts do not estimate how often an arbitrary prompt or starting
 state will behave this way. Repeated returns alone would not prove permanent chaos.
 
+Here is what that wandering looks like, in a later run of 48 fresh starts whose
+states were all saved:
+
+<picture>
+  <source media="(max-width: 640px)" srcset="fig-fold-transient-capture-mobile.png">
+  <img src="fig-fold-transient-capture.png" alt="Left: one trajectory's distance to the slow channel dips again and again, where the loop writes it is it is, with short bursts of other words between, until its distance to the three-step cycle plunges and the loop writes certainly.Hello forever. Right: all 48 fresh trajectories as rows of orange slow passages and red bursts that end in blue once the cycle is reached; six never reach it." loading="lazy" decoding="async">
+</picture>
+
+<p class="feature-caption"><strong>What chaotic wandering looks like.</strong> Left: one trajectory. Orange shows how close the state is to the slow channel, where the loop echoes the vanished two-step cycle and writes "it is it is…". Blue shows how close it is to the stable three-step cycle. The trajectory keeps coming back to the channel, bursting into other words in between, until one burst lands near the cycle. Then it closes in on the cycle and writes "certainly.Hello" forever. Right: all 48 trajectories, one row each: slow passages in orange, bursts in red, the cycle in blue. Six were still wandering when the run ended. <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#growth-before-capture">How it was measured →</a></p>
+
 We then measured how an infinitesimal displacement grows along the recorded trajectories, using the network's
-own derivatives. All 26 complete measurement windows expanded on average in both halves. Thirteen trajectories
+own derivatives, computed exactly by carrying the displacement through every layer alongside the state. All 26 complete measurement windows expanded on average in both halves. Thirteen trajectories
 showed this growth and later approached the three-step cycle. This is numerical evidence consistent with
 **chaotic transients**: sensitive motion that eventually gives way to repetition. It does not prove that the
 motion lasts forever, or establish a chaotic invariant set.
+
+Nudging real copies shows the same thing directly:
+
+<picture>
+  <source media="(max-width: 640px)" srcset="fig-fold-twins-capture-mobile.png">
+  <img src="fig-fold-twins-capture.png" alt="Left: three copies of one start, nudged by ten to the minus 12, minus 10 and minus 8, drift away from the original along dashed lines of the measured growth rate. Middle: the four copies as rows of slow passages and bursts that reach the cycle at different times. Right: every capture closes in on the cycle along one dashed line, the cycle's own contraction." loading="lazy" decoding="async">
+</picture>
+
+<p class="feature-caption"><strong>Sensitive while it wanders, then captured.</strong> Left: copies of one start, nudged by a trillionth, a ten-billionth and a hundred-millionth of the state's size, drift away from the original at the rate measured with the network's derivatives (dashed), until they are as different as unrelated trajectories. Middle: the four copies, one row each: the same start, different paths, different moments of capture. Right: every capture closes in on the cycle at one rate, the cycle's own. <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#growth-before-capture">Twin copies and their limits →</a></p>
 
 <picture>
   <source media="(max-width: 640px)" srcset="fig-fold-growth-capture-mobile.png">
   <img src="fig-fold-growth-capture.png" alt="Fourteen of sixteen fresh trajectories approach period three; every complete pre-capture measurement window has positive tangent growth, while the stable-cycle control contracts." loading="lazy" decoding="async">
 </picture>
 
-<p class="feature-caption"><strong>Sensitivity can precede a repeating cycle.</strong> Left: each drop is another starting state approaching the stable three-step loop; two remain unresolved at the observation limit. Right: red points above zero show small displacements growing on average before capture. The vertical lines compare the two halves of each measurement, not statistical uncertainty. The open red point is a shorter, contracting window before early capture. Blue points check the stable cycle, where displacements shrink. Later groups are smaller because earlier captures are excluded. These are measurements at one setting, not a universal escape rate. <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#growth-before-capture">Methods, exclusions and limits →</a></p>
+<p class="feature-caption"><strong>Chaotic while it lasts, then a repeating cycle.</strong> Left: the 16 fresh starts over time. Each step down is one start settling into the stable three-step cycle; two were still wandering when we stopped at 16,384 updates. Right: how fast a tiny nudge to the state grows while a trajectory is still wandering, measured with the network's own derivatives. Each red dot is one stretch of one trajectory. Above zero means the nudge grows, the standard sign of chaos; a dot at 0.07, for example, means it grows by about 7% per update and doubles about every ten updates. All 26 full measurements are above zero. The thin line through each dot joins the averages of the first and second halves of its stretch: both halves grow, so the growth is not a brief burst. The three red groups start measuring at different times, shown on the axis; later groups have fewer dots because many trajectories had already settled. The open dot is a stretch cut short because its trajectory was already settling into the cycle, so its nudge shrank. Blue dots repeat the measurement on the stable cycle itself, where a nudge must shrink at a rate known in advance; they land on that rate, which checks the method. All of this is one prompt at one setting. <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#growth-before-capture">Methods, exclusions and limits →</a></p>
 
 
 Could a small model predict those journeys without running the language model? We tested a lookup table
@@ -269,9 +288,24 @@ built from 1,025 sampled departures and frozen before the fresh test. Given each
 several journeys also produced large errors. One number described the natural departure state extremely well,
 but the table did not reliably predict the next journey or final destination.
 
+A follow-up found why. Much of the apparent scatter came from how departures are recorded: the recorded
+position wraps around like a clock hand. With that undone, the next journey is a smooth function of the current
+departure on part of the range, where the table already worked. On the rest it has structure at every scale we
+could sample, down to the last digits of the arithmetic, so no table can follow a single trajectory there for long.
+Statistics still work. From single journeys alone we predicted that a departure ends the wandering with
+probability 0.0130. We committed that number before running 48 new trajectories, whose observed rate, 0.0174,
+has an interval that contains it.
+
+<picture>
+  <source media="(max-width: 640px)" srcset="fig-fold-return-escape-test-mobile.png">
+  <img src="fig-fold-return-escape-test.png" alt="The share of 48 new trajectories still wandering falls with the number of departures inside the band of a decay predicted before the runs; the predicted escape rate lies inside the intervals of the observed rate." loading="lazy" decoding="async">
+</picture>
+
+<p class="feature-caption"><strong>A prediction made before the runs.</strong> Left: the share of 48 new trajectories still wandering after each departure from the slow channel (orange) and the decay predicted beforehand from single journeys of the network (blue, with its uncertainty band). Right: the predicted escape rate per departure and the observed one, with two intervals. The prediction is about a quarter low, partly because some starts end early. <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#return-followup">The zoom, the frozen test and their limits →</a></p>
+
 That distinction matters: the model's own derivatives explain the local slowdown, and a compact curve
-captures the geometry of its natural exits. A reliable replacement for the entire global journey remains
-unfinished. [The autonomous-model test and its limits →](/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#autonomous-return-test)
+captures the geometry of its natural exits. A pointwise replacement for the entire global journey remains
+unfinished; a statistical one passed its first frozen test. [The autonomous-model test and its limits →](/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#autonomous-return-test)
 
 ## The words can repeat while the state remains chaotic
 

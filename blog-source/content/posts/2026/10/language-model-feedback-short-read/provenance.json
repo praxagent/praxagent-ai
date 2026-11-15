@@ -14,7 +14,12 @@
     "fig-passages.receipt.json": "440a6dd58d793dc26db84eecfa314b68e98cd98a2e1e40c5f30d1a9f221dbb88",
     "fig-sync.receipt.json": "0f64495aef3b84d5728108ca996933aa7d7ac4068f3d1d34b021172f0cf45dbd",
     "fold-return-autonomous.json": "a951826b50bc36ea7182d031fc53de8265de303cbd0e47c953ae43394c0a55ee",
-    "fig-fold-growth-capture.receipt.json": "6ba42436365a4dd6e3a152eb0d0600c8a58d3fd488e90548af00efe33c1274a8"
+    "fig-fold-growth-capture.receipt.json": "6ba42436365a4dd6e3a152eb0d0600c8a58d3fd488e90548af00efe33c1274a8",
+    "fold-return-followup.json": "9d698faa194a9020fe6f2e6f9b9d1bb9313d46cd0514e845ab0819abae3c76b4",
+    "fig-fold-return-escape-test.receipt.json": "7e78b91d0abdb9ae36672aa5b5a08cc63678cc6c2e3728c3c961aa737aa11914",
+    "fold-transient-figures.json": "a47880fe14e145296b144d16c83fd296945b5fa7825946f5ff82df9c3f7c387b",
+    "fig-fold-transient-capture.receipt.json": "8e76d4798be1e3090273b802ed156dda26c3e0d26516854e94683ac3514eba2b",
+    "fig-fold-twins-capture.receipt.json": "a8cb0092475ddc97275fd68daeb085e19c2a802a2733a524d913b333a34e7cfc"
   },
   "figures": [
     "islands-of-order.png",
@@ -27,7 +32,13 @@
     "fig-passages.png",
     "fig-sync.png",
     "fig-fold-growth-capture-mobile.png",
-    "fig-fold-growth-capture.png"
+    "fig-fold-growth-capture.png",
+    "fig-fold-return-escape-test.png",
+    "fig-fold-return-escape-test-mobile.png",
+    "fig-fold-transient-capture.png",
+    "fig-fold-transient-capture-mobile.png",
+    "fig-fold-twins-capture.png",
+    "fig-fold-twins-capture-mobile.png"
   ],
   "numbers": [
     {
@@ -73,7 +84,13 @@
     "fig-passages.png": "0c50d4cc00c81346d2654b75418d602445ad75d4ef3f508f556f46a45522fa55",
     "fig-sync.png": "ddccb2407a28a212ff30ffdda8b4a0255cafbbe26855671a499b5593f0a042d9",
     "fig-fold-growth-capture-mobile.png": "42d29ea553e541a15efbec6da63a5dc37a2fe71171797a68df1eb3cc1ea2f93c",
-    "fig-fold-growth-capture.png": "bd009282b2102a16561490e1894621b1f07609557a1968de3cb488b968dfddd9"
+    "fig-fold-growth-capture.png": "bd009282b2102a16561490e1894621b1f07609557a1968de3cb488b968dfddd9",
+    "fig-fold-return-escape-test.png": "133e1049d7ca9b106ff13377f3f0bcb51f3cc7cfc9c17dd996e066a6d41e3ee2",
+    "fig-fold-return-escape-test-mobile.png": "b411ab7164c39b07cd087f34403a299567f7de50c16bd6934e5be781a4bb1cb8",
+    "fig-fold-transient-capture.png": "a504428b1661f923b87fb717f8fc087d610ebccbbeb2fc6e3de6c726b4b953a5",
+    "fig-fold-transient-capture-mobile.png": "c239dbd48b8b0a92c031680576b0624daeb4b218a8662cd8e2b0df1f31f60855",
+    "fig-fold-twins-capture.png": "1155c2b2a164af16809d83d26ad9a5d8dcb70a658e0fefdd88e273524722ccb7",
+    "fig-fold-twins-capture-mobile.png": "2872456570801272b16e59959cd608b0df8f1bf0b49e3b66744256838e0bdd4a"
   },
   "source_evidence": "receipts/evidence-summary.json",
   "extensions": [
@@ -209,6 +226,84 @@
           "value": 13,
           "appears_as": "13 returns",
           "format_note": "Counts exact; displayed rates/errors rounded to nearest; maximum reconstruction bound rounded upward. Conditional cohorts and finite horizons remain explicit."
+        }
+      ]
+    },
+    {
+      "id": "fold-return-followup-20261114",
+      "source_commit": "bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97",
+      "description": "Follow-up to the FGR3 return test: unwrapped return (post-test), FGR4/FGR4b zoom with rounding control, frozen FGR5 escape-rate test (all three criteria passed).",
+      "receipts": {
+        "fold-return-followup.json": "9d698faa194a9020fe6f2e6f9b9d1bb9313d46cd0514e845ab0819abae3c76b4",
+        "fig-fold-return-escape-test.receipt.json": "7e78b91d0abdb9ae36672aa5b5a08cc63678cc6c2e3728c3c961aa737aa11914"
+      },
+      "scientific_receipt_url": "https://github.com/tdj28/neural-shrimp/blob/bfdb26eb7b7e2b7998fe345d2f18777e2f6f6f97/docs/fold-return-followup.json",
+      "prediction_url": "https://github.com/tdj28/neural-shrimp/blob/22b11cd26c6f87b476203e93da51a5eeb70fbe46/docs/fold-return-fgr5-prediction.json",
+      "verifier": "verify_fold_followup.py",
+      "new_numbers": [
+        {
+          "id": "followup-kappa",
+          "receipt": "fold-return-followup.json",
+          "field": [
+            "numbers",
+            "prediction",
+            "kappa"
+          ],
+          "value": 0.013032705648018617,
+          "shown": "0.0130",
+          "rule": "dp:4",
+          "appears_as": "with probability 0.0130"
+        },
+        {
+          "id": "followup-kappa-obs",
+          "receipt": "fold-return-followup.json",
+          "field": [
+            "numbers",
+            "score",
+            "kappa_observed"
+          ],
+          "value": 0.01737691352916839,
+          "shown": "0.0174",
+          "rule": "dp:4",
+          "appears_as": "whose observed rate, 0.0174,"
+        }
+      ]
+    },
+    {
+      "id": "fold-transient-figures-20261114",
+      "source_commit": "14ff9ab15cc100861a8597127144f4c0269ff99b",
+      "description": "What the post-fold transient looks like (FGR5 series) and twin copies nudged by 1e-12 to 1e-8; descriptive.",
+      "receipts": {
+        "fold-transient-figures.json": "a47880fe14e145296b144d16c83fd296945b5fa7825946f5ff82df9c3f7c387b",
+        "fig-fold-transient-capture.receipt.json": "8e76d4798be1e3090273b802ed156dda26c3e0d26516854e94683ac3514eba2b",
+        "fig-fold-twins-capture.receipt.json": "a8cb0092475ddc97275fd68daeb085e19c2a802a2733a524d913b333a34e7cfc"
+      },
+      "scientific_receipt_url": "https://github.com/tdj28/neural-shrimp/blob/14ff9ab15cc100861a8597127144f4c0269ff99b/docs/fold-transient-figures.json",
+      "verifier": "verify_fold_transient.py",
+      "new_numbers": [
+        {
+          "id": "transient-fresh",
+          "receipt": "fold-transient-figures.json",
+          "field": [
+            "numbers",
+            "fresh_trajectories"
+          ],
+          "value": 48,
+          "shown": "48",
+          "rule": "int",
+          "appears_as": "in a later run of 48 fresh starts"
+        },
+        {
+          "id": "transient-wandering",
+          "receipt": "fold-transient-figures.json",
+          "field": [
+            "numbers",
+            "fresh_still_wandering_at_end"
+          ],
+          "value": 6,
+          "shown": "six",
+          "rule": "word",
+          "appears_as": "Six were still wandering when the run ended"
         }
       ]
     }

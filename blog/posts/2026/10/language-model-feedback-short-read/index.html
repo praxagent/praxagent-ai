@@ -24,7 +24,7 @@
     <link rel="canonical" href="https://praxagent.ai/blog/posts/2026/10/language-model-feedback-short-read/">
 
 <meta property="article:published_time" content="2026-10-26">
-    <meta property="article:modified_time" content="2026-10-26">
+    <meta property="article:modified_time" content="2026-11-13">
     <meta property="article:author" content="https://orcid.org/0009-0007-5992-0652">
     <meta name="citation_title" content="The hidden order in a language model’s chaos">
     <meta name="citation_author" content="Timothy Jones">
@@ -34,10 +34,10 @@
     <meta name="citation_online_date" content="2026-10-26">
     <meta name="citation_journal_title" content="praxagent Research Notes">
     <meta name="citation_fulltext_html_url" content="https://praxagent.ai/blog/posts/2026/10/language-model-feedback-short-read/">
-    <meta name="citation_version" content="2026.10.26">
+    <meta name="citation_version" content="2026.11.13">
     <meta name="DC.rights" content="Copyright © 2026 praxagent. All rights reserved.">
     <link rel="author" href="https://orcid.org/0009-0007-5992-0652">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","author":{"@type":"Person","affiliation":{"@type":"Organization","name":"praxagent"},"familyName":"Jones","givenName":"Timothy","name":"Timothy Jones","sameAs":"https://orcid.org/0009-0007-5992-0652","url":"https://orcid.org/0009-0007-5992-0652"},"copyrightHolder":{"@type":"Organization","name":"praxagent"},"copyrightNotice":"Copyright © 2026 praxagent. All rights reserved.","copyrightYear":"2026","dateModified":"2026-10-26","datePublished":"2026-10-26","description":"Fed a blend of its own predictions, a language model moves between repeating text and chaos in the classical patterns of nonlinear dynamics. Its own derivatives predict parts of that structure, and computer proofs certify selected cycles.","headline":"The hidden order in a language model’s chaos","identifier":"https://praxagent.ai/blog/posts/2026/10/language-model-feedback-short-read/","image":"https://praxagent.ai/blog/posts/2026/10/language-model-feedback-short-read/og-card.png","inLanguage":"en-US","isAccessibleForFree":true,"isPartOf":{"@type":"CreativeWorkSeries","name":"praxagent Research Notes","url":"https://praxagent.ai/blog/"},"keywords":["AI","LLM","chaos","dynamical-systems"],"mainEntityOfPage":{"@id":"https://praxagent.ai/blog/posts/2026/10/language-model-feedback-short-read/","@type":"WebPage"},"publisher":{"@type":"Organization","name":"praxagent","url":"https://praxagent.ai"},"url":"https://praxagent.ai/blog/posts/2026/10/language-model-feedback-short-read/","usageInfo":"https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md","version":"2026.10.26"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","author":{"@type":"Person","affiliation":{"@type":"Organization","name":"praxagent"},"familyName":"Jones","givenName":"Timothy","name":"Timothy Jones","sameAs":"https://orcid.org/0009-0007-5992-0652","url":"https://orcid.org/0009-0007-5992-0652"},"copyrightHolder":{"@type":"Organization","name":"praxagent"},"copyrightNotice":"Copyright © 2026 praxagent. All rights reserved.","copyrightYear":"2026","dateModified":"2026-11-13","datePublished":"2026-10-26","description":"Fed a blend of its own predictions, a language model moves between repeating text and chaos in the classical patterns of nonlinear dynamics. Its own derivatives predict parts of that structure, and computer proofs certify selected cycles.","headline":"The hidden order in a language model’s chaos","identifier":"https://praxagent.ai/blog/posts/2026/10/language-model-feedback-short-read/","image":"https://praxagent.ai/blog/posts/2026/10/language-model-feedback-short-read/og-card.png","inLanguage":"en-US","isAccessibleForFree":true,"isPartOf":{"@type":"CreativeWorkSeries","name":"praxagent Research Notes","url":"https://praxagent.ai/blog/"},"keywords":["AI","LLM","chaos","dynamical-systems"],"mainEntityOfPage":{"@id":"https://praxagent.ai/blog/posts/2026/10/language-model-feedback-short-read/","@type":"WebPage"},"publisher":{"@type":"Organization","name":"praxagent","url":"https://praxagent.ai"},"url":"https://praxagent.ai/blog/posts/2026/10/language-model-feedback-short-read/","usageInfo":"https://github.com/praxagent/praxagent-ai/blob/main/CONTENT-LICENSE.md","version":"2026.11.13"}</script>
 
 
     <meta property="og:type" content="article">
@@ -366,6 +366,44 @@ cycles, of periods 2 and 3, coexist: the same model under the same settings has
 two different stable behaviors. The proofs certify these cycles, not the chaos
 around them.
 <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#proof">The proofs →</a></p>
+<h2 id="returns-and-capture">The wandering can end in a repeating cycle</h2>
+<p>The local theory explains why a trajectory slows near a vanished cycle. What happens after it leaves is a
+separate question. It may come back through the slow passage many times and eventually settle into another
+repeating pattern.</p>
+<p>We followed 16 fresh starting states at one such setting of the 0.5-billion-parameter Qwen model. Fourteen
+approached the same stable three-step cycle; two remained unresolved after 16,384 updates. These starts lie
+on a deliberately constructed line, so the counts do not estimate how often an arbitrary prompt or starting
+state will behave this way. Repeated returns alone would not prove permanent chaos.</p>
+<p>We then measured how an infinitesimal displacement grows along the recorded trajectories, using the network&rsquo;s
+own derivatives. All 26 complete measurement windows expanded on average in both halves. Thirteen trajectories
+showed this growth and later approached the three-step cycle. This is numerical evidence consistent with
+<strong>chaotic transients</strong>: sensitive motion that eventually gives way to repetition. It does not prove that the
+motion lasts forever, or establish a chaotic invariant set.</p>
+<picture>
+  <source media="(max-width: 640px)" srcset="fig-fold-growth-capture-mobile.png">
+  <img src="fig-fold-growth-capture.png" alt="Fourteen of sixteen fresh trajectories approach period three; every complete pre-capture measurement window has positive tangent growth, while the stable-cycle control contracts." loading="lazy" decoding="async">
+</picture>
+<p class="feature-caption"><strong>Sensitivity can precede a repeating cycle.</strong> Left: each drop is another starting state approaching the stable three-step loop; two remain unresolved at the observation limit. Right: red points above zero show small displacements growing on average before capture. The vertical lines compare the two halves of each measurement, not statistical uncertainty. The open red point is a shorter, contracting window before early capture. Blue points check the stable cycle, where displacements shrink. Later groups are smaller because earlier captures are excluded. These are measurements at one setting, not a universal escape rate. <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#growth-before-capture">Methods, exclusions and limits →</a></p>
+<p>Could a small model predict those journeys without running the language model? We tested a lookup table
+built from 1,025 sampled departures and frozen before the fresh test. Given each observed departure, it found
+8 of the 14 captures, missed 6, and falsely predicted capture on 13 returns. Letting it run independently for
+several journeys also produced large errors. One number described the natural departure state extremely well,
+but the table did not reliably predict the next journey or final destination.</p>
+<p>A follow-up found why. Much of the apparent scatter came from how departures are recorded: the recorded
+position wraps around like a clock hand. With that undone, the next journey is a smooth function of the current
+departure on part of the range, where the table already worked. On the rest it has structure at every scale we
+could sample, down to the last digits of the arithmetic, so no table can follow a single trajectory there for long.
+Statistics still work. From single journeys alone we predicted that a departure ends the wandering with
+probability 0.0130. We committed that number before running 48 new trajectories, whose observed rate, 0.0174,
+has an interval that contains it.</p>
+<picture>
+  <source media="(max-width: 640px)" srcset="fig-fold-return-escape-test-mobile.png">
+  <img src="fig-fold-return-escape-test.png" alt="The share of 48 new trajectories still wandering falls with the number of departures inside the band of a decay predicted before the runs; the predicted escape rate lies inside the intervals of the observed rate." loading="lazy" decoding="async">
+</picture>
+<p class="feature-caption"><strong>A prediction made before the runs.</strong> Left: the share of 48 new trajectories still wandering after each departure from the slow channel (orange) and the decay predicted beforehand from single journeys of the network (blue, with its uncertainty band). Right: the predicted escape rate per departure and the observed one, with two intervals. The prediction is about a quarter low, partly because some starts end early. <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#return-followup">The zoom, the frozen test and their limits →</a></p>
+<p>That distinction matters: the model&rsquo;s own derivatives explain the local slowdown, and a compact curve
+captures the geometry of its natural exits. A pointwise replacement for the entire global journey remains
+unfinished; a statistical one passed its first frozen test. <a href="/blog/posts/2026/10/chaos-bifurcations-language-model-feedback/#autonomous-return-test">The autonomous-model test and its limits →</a></p>
 <h2 id="the-words-can-repeat-while-the-state-remains-chaotic">The words can repeat while the state remains chaotic</h2>
 <p>At one measured setting, the displayed words repeat the same <strong>seven-token
 pattern for all 2,000 recorded steps</strong>. Yet the probabilities keep changing and
@@ -477,7 +515,7 @@ amplifies, and test the predictions against what the model actually does.</p>
 
     <div class="research-citation__recommended">
         <div class="research-citation__recommended-label">Recommended citation</div>
-        <p class="research-citation__text" id="research-note-citation-text">Jones, Timothy. (2026). The hidden order in a language model’s chaos (Version 2026.10.26) [Research note]. praxagent. https://praxagent.ai/blog/posts/2026/10/language-model-feedback-short-read/</p>
+        <p class="research-citation__text" id="research-note-citation-text">Jones, Timothy. (2026). The hidden order in a language model’s chaos (Version 2026.11.13) [Research note]. praxagent. https://praxagent.ai/blog/posts/2026/10/language-model-feedback-short-read/</p>
     </div>
 
     <dl class="research-citation__metadata">
@@ -491,11 +529,11 @@ amplifies, and test the predictions against what the model actually does.</p>
         </div>
         <div>
             <dt>Research content last revised</dt>
-            <dd><time datetime="2026-10-26">October 26, 2026</time></dd>
+            <dd><time datetime="2026-11-13">November 13, 2026</time></dd>
         </div>
         <div>
             <dt>Citation version</dt>
-            <dd>2026.10.26</dd>
+            <dd>2026.11.13</dd>
         </div>
         <div class="research-citation__canonical">
             <dt>Canonical page</dt>
@@ -509,7 +547,7 @@ amplifies, and test the predictions against what the model actually does.</p>
   author    = {Jones, Timothy},
   title     = {The hidden order in a language model’s chaos},
   year      = {2026},
-  version   = {2026.10.26},
+  version   = {2026.11.13},
   publisher = {praxagent},
   url       = {https://praxagent.ai/blog/posts/2026/10/language-model-feedback-short-read/},
   note      = {Research note}
