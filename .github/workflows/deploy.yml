@@ -3,9 +3,6 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: ["main"]
-  schedule:
-    # Pick up documentation changes from Prax without requiring changes there.
-    - cron: "17 09 * * *"
   workflow_dispatch:
 
 permissions:
