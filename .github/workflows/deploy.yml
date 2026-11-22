@@ -42,6 +42,9 @@ jobs:
           cache: "npm"
 
       - name: Install browser-test dependencies
+        env:
+          # Semantic search uses CPU inference; skip optional CUDA binaries.
+          ONNXRUNTIME_NODE_INSTALL_CUDA: skip
         run: npm ci
 
       - name: Cache pinned semantic-search model
