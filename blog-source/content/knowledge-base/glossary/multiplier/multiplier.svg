@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="400" viewBox="0 0 760 400" role="img" aria-labelledby="multiplier-title multiplier-desc">
+<title id="multiplier-title">Multipliers inside the unit circle make a fixed point attract; three ways out</title>
+<desc id="multiplier-desc">Conceptual diagram with toy values, not measured data. Left: the complex plane, with a horizontal real axis and a vertical imaginary axis, and the unit circle shaded. Four toy multipliers lie inside it: 0.5, -0.3, and the complex pair 0.4 plus and minus 0.5i, where i is the imaginary unit, the square root of -1. Arrows show three ways a multiplier can leave the circle as a parameter changes: 1, through -1 on the real axis; 2, through +1; 3, as a complex pair crossing elsewhere. Right: the usual bifurcation at each exit, not a guaranteed outcome. Through -1, a small nudge flips sign every step as it grows, and typically a cycle of period two is born or destroyed, a period doubling. Through +1, the nudge grows without flipping, and typically this fixed point merges with another and both vanish, a fold. As a complex pair, the nudge turns as it grows, by an angle that need not be small, and typically an invariant circle is born or destroyed, a Neimark-Sacker bifurcation. Footer: inside the unit circle small nudges eventually die away; each exit marks the usual bifurcation, not a certain one.</desc>
+<style>.t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}.title{font-size:15px;font-weight:700}.h{font-size:13px;font-weight:700}.s{font-size:12px}.m{font-size:11px;fill:#5A544C}.arrow{fill:none;stroke:#A67C52;stroke-width:1.8}.axis{stroke:#7F786D;stroke-width:1}</style>
+<rect width="760" height="400" fill="#F7F4F0"/>
+<text class="t title" x="24" y="28">Multipliers decide whether a fixed point attracts</text>
+<text class="t m" x="24" y="48">Toy values on the complex plane; not a measured spectrum.</text>
+<rect x="24" y="64" width="400" height="276" rx="10" fill="#FBF9F6" stroke="#C4B8A8"/>
+<line x1="34" y1="196" x2="414" y2="196" class="axis"/>
+<line x1="224" y1="80" x2="224" y2="308" class="axis"/>
+<circle cx="224" cy="196" r="100" fill="#E8F0F7" fill-opacity="0.6" stroke="#4B6787" stroke-width="1.6"/>
+<text class="t m" x="414" y="212" text-anchor="end">real axis</text>
+<text class="t m" x="218" y="86" text-anchor="end">imaginary axis</text>
+<text class="t m" x="102" y="212">-1</text>
+<text class="t m" x="328" y="212">+1</text>
+<text class="t m" x="154" y="140">unit circle</text>
+<circle cx="274.0" cy="196.0" r="4.5" fill="#4B6787"/>
+<circle cx="194.0" cy="196.0" r="4.5" fill="#4B6787"/>
+<circle cx="264.0" cy="146.0" r="4.5" fill="#4B6787"/>
+<circle cx="264.0" cy="246.0" r="4.5" fill="#4B6787"/>
+<text class="t m" x="266" y="187">0.5</text>
+<text class="t m" x="182" y="187">-0.3</text>
+<text class="t m" x="264" y="136" text-anchor="middle">0.4 + 0.5i</text>
+<text class="t m" x="264" y="264" text-anchor="middle">0.4 - 0.5i</text>
+<path d="M 152.0 196.0 L 97.0 196.0" class="arrow"/><path d="M 97.0 191.5 L 88.0 196.0 L 97.0 200.5 z" fill="#A67C52"/>
+<path d="M 296.0 196.0 L 351.0 196.0" class="arrow"/><path d="M 351.0 200.5 L 360.0 196.0 L 351.0 191.5 z" fill="#A67C52"/>
+<path d="M 274.0 116.0 L 285.0 94.0" class="arrow"/><path d="M 289.0 96.1 L 289.0 86.0 L 281.0 92.0 z" fill="#A67C52"/>
+<path d="M 274.0 276.0 L 285.0 298.0" class="arrow"/><path d="M 281.0 300.0 L 289.0 306.0 L 289.0 295.9 z" fill="#A67C52"/>
+<text class="t s" x="88" y="184">1</text>
+<text class="t s" x="354" y="184">2</text>
+<text class="t s" x="295" y="90">3</text>
+<text class="t m" x="40" y="330">Toy multipliers inside the circle (dots); arrows: ways out.</text>
+<rect x="440" y="64" width="296" height="86" rx="10" fill="#F3E8E0" stroke="#A67C52"/>
+<text class="t h" x="456" y="86">1  Through -1: period doubling</text>
+<text class="t s" x="456" y="106">A nudge flips sign every step as it</text>
+<text class="t s" x="456" y="122">grows; typically a period-two cycle is</text>
+<text class="t s" x="456" y="138">born or destroyed.</text>
+<rect x="440" y="159" width="296" height="86" rx="10" fill="#F3E8E0" stroke="#A67C52"/>
+<text class="t h" x="456" y="181">2  Through +1: fold</text>
+<text class="t s" x="456" y="201">The nudge grows without flipping;</text>
+<text class="t s" x="456" y="217">typically this fixed point merges with</text>
+<text class="t s" x="456" y="233">another and both vanish.</text>
+<rect x="440" y="254" width="296" height="86" rx="10" fill="#F3E8E0" stroke="#A67C52"/>
+<text class="t h" x="456" y="276">3  Complex pair: Neimark-Sacker</text>
+<text class="t s" x="456" y="296">The nudge turns as it grows, by an angle</text>
+<text class="t s" x="456" y="312">that need not be small; typically an</text>
+<text class="t s" x="456" y="328">invariant circle is born or destroyed.</text>
+<rect x="24" y="354" width="712" height="30" rx="8" fill="#EAF1E5" stroke="#6F8D5E"/>
+<text class="t s" x="40" y="373">Inside the unit circle small nudges eventually die away; each exit marks the usual bifurcation, not a certain one.</text>
+</svg>

@@ -1,0 +1,24 @@
+{{- /*
+  Same markup and classes as table-of-contents.html, built from the rendered h2 headings.
+  .TableOfContents is empty when a body is rendered inside a shortcode (feedback-feature uses RenderString).
+*/ -}}
+{{- $heads := findRESubmatch `<h2 id="([^"]+)"[^>]*>([\s\S]*?)</h2>` .Content -}}
+{{- if ge (len $heads) 2 -}}
+<details class="table-of-contents">
+    <summary class="table-of-contents-summary">
+        <span class="table-of-contents-label">On this page</span>
+        <span class="table-of-contents-count">
+            {{ len $heads }} sections
+        </span>
+    </summary>
+    <div class="table-of-contents-body">
+        <nav id="TableOfContents" aria-label="On this page">
+            <ul>
+                {{- range $heads }}
+                <li><a href="#{{ index . 1 }}">{{ index . 2 | safeHTML }}</a></li>
+                {{- end }}
+            </ul>
+        </nav>
+    </div>
+</details>
+{{- end -}}

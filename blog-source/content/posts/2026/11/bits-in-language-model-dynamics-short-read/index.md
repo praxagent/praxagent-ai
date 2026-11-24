@@ -5,8 +5,8 @@ date: 2026-11-03
 author: Timothy Jones
 author_id: "timothy-jones"
 citation_enabled: true
-citation_version: "2026.11.10"
-lastmod: 2026-11-10
+citation_version: "2026.11.24"
+lastmod: 2026-11-24
 draft: false
 toc: false
 layout: "feedback-short-read"
@@ -705,7 +705,7 @@ the map that are chaotic.
 
 ![All 144 sweep pulses on the Qwen map with the fold and flip curves, H and the two write endpoints; markers show hold, reset to 0, reset to 1 or toggle for each pulse, one panel per pulse length.](qwen-toggle-sweep.png)
 
-<p class="feature-caption"><strong>Where one pulse holds, resets or exchanges the two cycles.</strong> Each marker is one pulse applied to both phase-zero reference cycles, followed by 240 updates at \(H\). Warmer pulses reset to 0, more steering resets to 1, small pulses hold, and the nine toggles (stars) all sit far from \(H\): seven in chaotic regions, one in an undetermined patch, and the 30°, 12-update toggle used below inside the period-6 shrimp. The map shows where the loop settles if held at a setting for good, not what a 12-update visit does. The background is the earlier study’s fixed-start scan (<a href="#ref-jones">Jones, 2026</a>). Receipt: <code>public-toggle-xor.json</code>, in the study’s repository, not yet public.</p>
+<p class="feature-caption"><strong>Where one pulse holds, resets or exchanges the two cycles.</strong> Each marker is one pulse applied to both phase-zero reference cycles, followed by 240 updates at \(H\). Warmer pulses reset to 0, more steering resets to 1, small pulses hold, and the nine toggles (stars) all sit far from \(H\): seven in chaotic regions, one in an undetermined patch, and the 30°, 12-update toggle used below inside the period-6 shrimp. The map shows where the loop settles if held at a setting for good, not what a 12-update visit does. The background is the earlier study’s fixed-start scan (<a href="#ref-jones">Jones, 2026</a>). Receipt: <code>public-toggle-xor.json</code>, in the <a href="https://github.com/tdj28/shrimp-memory-release">public release</a>.</p>
 
 The toggles are real but narrow. In checks fixed before they ran, none toggled from
 all six phases of the cycle, and none kept toggling at more than three of eight
@@ -720,7 +720,7 @@ state carried across eight stages. For \(B = 10110010\), from both stored bits, 
 
 ![Distance of each lane to the two reference cycles over all 16 carried stages; after each yellow toggle pulse the lane converges onto the other cycle, after each grey idle stage it stays; all eight readouts per lane match A XOR B.](qwen-xor-chain.png)
 
-<p class="feature-caption"><strong>XOR on a phase-keeping schedule.</strong> Each curve is the distance from the carried 896-number state to one reference cycle. Yellow bands are the toggle pulse, grey bands idle updates at \(H\); every hold settles onto the cycle that \(A \oplus B\) requires, by more than ten orders of magnitude. The controller chose each pulse from \(B\) alone and never read \(A\). A finite demonstration with one pulse, not a reliability estimate. Receipt: <code>public-toggle-xor.json</code>, in the study’s repository, not yet public.</p>
+<p class="feature-caption"><strong>XOR on a phase-keeping schedule.</strong> Each curve is the distance from the carried 896-number state to one reference cycle. Yellow bands are the toggle pulse, grey bands idle updates at \(H\); every hold settles onto the cycle that \(A \oplus B\) requires, by more than ten orders of magnitude. The controller chose each pulse from \(B\) alone and never read \(A\). A finite demonstration with one pulse, not a reliability estimate. Receipt: <code>public-toggle-xor.json</code>, in the <a href="https://github.com/tdj28/shrimp-memory-release">public release</a>.</p>
 
 With \(B = 1\) the same pulse is NOT, so this register now has finite
 demonstrations of AND, OR, NOT and XOR. Why that matters: these four gates are
@@ -736,7 +736,26 @@ with a carry of 1, with all 24 readouts matching on two machines.
 
 ![Distance of both lanes to the two reference cycles while adding 11 + 6; bands mark toggles, waits and one write; the labels read the sum bits and carries of 17 and 18.](qwen-adder.png)
 
-<p class="feature-caption"><strong>Adding 11 + 6 in one loop.</strong> The carry existed only as which cycle the loop was on; the controller followed the digits. One fixed case on two machines, not a reliability estimate. Receipt: <code>public-toggle-xor.json</code>, in the study’s repository, not yet public.</p>
+<p class="feature-caption"><strong>Adding 11 + 6 in one loop.</strong> The carry existed only as which cycle the loop was on; the controller followed the digits. One fixed case on two machines, not a reliability estimate. Receipt: <code>public-toggle-xor.json</code>, in the <a href="https://github.com/tdj28/shrimp-memory-release">public release</a>.</p>
+
+Where exactly is the line between a stored 0 and a stored 1? We mapped it. On a
+flat slice through the 896-number state, through the point the toggle pulse is
+drawn to, we started the loop from 4,225 points on a grid, held each at \(H\) for
+240 updates and read which cycle it reached: 513,459 model runs, with a sixteen
+times finer zoom and a test of random kicks on top, about 1.4 million in all. The
+two basins come out as bands lying almost along the toggle's slow direction, and
+the toggle works because its two lanes land on opposite sides of one band edge
+that runs within about two ten-thousandths of that line. At sixteen times the magnification that edge
+is still one clean curve, unlike the riddled basins, interwoven at every scale,
+recently found in the training of neural networks
+(<a href="#ref-ly">Ly and Gong, 2026</a>). Kicks of half a percent of the state
+size in random directions left the stored bit alone 92 to 97 times in a hundred;
+kicks of one percent, about 80. That is the register's noise margin, and it is
+thin.
+
+![Basins of the two cycles at H on a plane through the pulse cycle: alternating bands along the slow direction, a zoom showing a single smooth edge, and the fraction of random kicks that return to their own cycle at three kick sizes.](qwen-basin-map.png)
+
+<p class="feature-caption"><strong>Where a 0 ends and a 1 begins.</strong> (a) The cycle reached from each of 65 × 65 starts on a plane through the pulse cycle (cross), spanned by its slow direction and the difference between the two cycles; stars are the two cycles, open markers the end states of the 12-, 18- and 24-update pulses. (b) A zoom one sixteenth as wide: one smooth edge, with four undecided starts on it. (c) The share of 500 random kicks per size that return to the cycle they left, with 95% intervals. Basins of this kind are distinct from the attracting regions found inside a single forward pass (<a href="#ref-finlayson">Finlayson et al., 2026</a>): these belong to the loop run for hundreds of passes. Receipt: <code>public-basin-map.json</code>, in the <a href="https://github.com/tdj28/shrimp-memory-release">public release</a>.</p>
 
 Speed is not the point: a calculator does this in a billionth of a second, and the
 loop needed 3,204 model runs. Every step depends on carefully kept timing, and that
@@ -747,17 +766,19 @@ than a mailbox, and that is what a monitor reading only the words would miss.
 
 The limits of these experiments are part of the result.
 
-**We are not releasing the code or full artifacts.** While our test harnesses
-passed settings between the two endpoints to verify each stage, we have chosen
-not to publicly release the runner scripts, the full eleven-sentence bank, the
-pinned prompt prefixes, or the layer-12 steering vectors. Even without running
-the model, an observer who knows the protocol structure can break small-alphabet
-messages: in our recorded Pythia runs, where each message reused only eight
-unique coordinates and included a checksum, an observer script recovered all
-470 bytes simply by trying all \(2^8 = 256\) binary label assignments against
-the checksum. Using a larger address bank (like the 48-address bank above) or
-leaving off a public checksum removes that shortcut, which is one more reason
-not to publish a turnkey package.
+**The Qwen register is released in full.** The code (instrument, runners, audits
+and analyses), the inputs, including the prompt prefix and the steering vector,
+and the plan and receipt of every register, logic and basin experiment are in
+the [public release](https://github.com/tdj28/shrimp-memory-release), with a
+worked example that regenerates the full-adder table from saved states. Not in
+it: the programs and sentences of the message exchanges and the prose tests, and
+the Pythia channel's runs. Even without running the model, an observer who knows
+the protocol structure can break small-alphabet messages: in our recorded Pythia
+runs, where each message reused only eight unique coordinates and included a
+checksum, an observer script recovered all 470 bytes simply by trying all
+\(2^8 = 256\) binary label assignments against the checksum. Using a larger
+address bank (like the 48-address bank above) or leaving off a public checksum
+removes that shortcut.
 
 **It is slow, finite and incomplete.** Pythia moved about 0.052 bytes per second.
 These are finite demonstrations rather than reliability estimates, and the
@@ -785,10 +806,9 @@ rounds differently by \(10^{-15}\). Alignment and sandbox monitors, on the other
 hand, almost exclusively inspect the words on the wire or watch for large GPU
 jobs, and would have no reason to suspect a small CPU-resident model of acting
 as a shared lookup table or state register unless the route is mapped in the
-open. We nevertheless withhold the turnkey runner code, the pinned prompt
-prefixes, and the layer-12 steering vectors so that this note documents the
-phenomenon and its host-level signatures rather than shipping a ready-made
-toolkit. These demonstrations establish the channel, not its secrecy.
+open. That is why the register's code and inputs are public: so that anyone can
+check the mechanism and the host-level signatures below against a running copy.
+These demonstrations establish the channel, not its secrecy.
 
 {{< panel "warning" >}}
 **What defenders can watch for.** Because a dynamical channel does its work in local model calls rather than in the words on the wire, text monitors alone can miss it, while host and runtime monitors have clear signals to look for:
@@ -816,6 +836,8 @@ toolkit. These demonstrations establish the channel, not its secrecy.
 12. <span id="ref-roger"></span> F. Roger and R. Greenblatt (2023). “Preventing Language Models From Hiding Their Reasoning.” Preprint, [arXiv:2310.18512](https://arxiv.org/abs/2310.18512).
 13. <span id="ref-fujisaka"></span> H. Fujisaka and T. Yamada (1983). “Stability Theory of Synchronized Motion in Coupled-Oscillator Systems.” *Progress of Theoretical Physics*, 69(1), 32–47. [doi:10.1143/PTP.69.32](https://doi.org/10.1143/PTP.69.32).
 14. <span id="ref-afraimovich"></span> V. S. Afraimovich, N. N. Verichev and M. I. Rabinovich (1986). “Stochastic synchronization of oscillation in dissipative systems.” *Radiophysics and Quantum Electronics*, 29, 795–803. [doi:10.1007/BF01034476](https://doi.org/10.1007/BF01034476).
+15. <span id="ref-ly"></span> A. Ly and P. Gong (2026). “Fractal basin geometry and the limits to predictability and reproducibility in deep learning.” *Nature Machine Intelligence*. [doi:10.1038/s42256-026-01336-3](https://doi.org/10.1038/s42256-026-01336-3); [arXiv:2510.05606](https://arxiv.org/abs/2510.05606).
+16. <span id="ref-finlayson"></span> M. Finlayson et al. (2026). “Language Model Activations Inhabit Privileged Error-Correcting Basins.” Preprint, [arXiv:2610.04183](https://arxiv.org/abs/2610.04183).
 
 <div class="feature-next">
 <p class="feature-kicker">The earlier study</p>

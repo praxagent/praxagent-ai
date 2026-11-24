@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="400" viewBox="0 0 760 400" role="img" aria-labelledby="block-triangular-matrix-title block-triangular-matrix-desc">
+<title id="block-triangular-matrix-title">A block-triangular Jacobian makes stability a running minimum over tokens</title>
+<desc id="block-triangular-matrix-desc">Conceptual diagram with toy values, not measured data. Left: a four-by-four grid of blocks for tokens 1 to 4. Diagonal blocks D1 to D4 hold each token's response to its own state; D3 is outlined and labeled unstable. Blocks below the diagonal, marked with a star, are effects of earlier tokens on later ones; blocks above the diagonal are zero, since a later token never affects an earlier one. Right: toy token margins 0.40, 0.25, -0.10 and 0.30 drawn as dots, and the running minimum drawn as a line through 0.40, 0.25, -0.10 and -0.10, which drops below zero, into the shaded region past the edge, at token 3 and stays there. Footer: eigenvalues come from the diagonal blocks alone, so a passage is only as stable as its weakest token.</desc>
+<style>.t{font-family:Inter,Arial,Helvetica,sans-serif;fill:#2C2924}.title{font-size:15px;font-weight:700}.h{font-size:13px;font-weight:700}.s{font-size:12px}.m{font-size:11px;fill:#5A544C}.arrow{fill:none;stroke:#A67C52;stroke-width:1.8}.axis{stroke:#7F786D;stroke-width:1}</style>
+<rect width="760" height="400" fill="#F7F4F0"/>
+<text class="t title" x="24" y="28">Block-triangular: only the diagonal blocks set the eigenvalues</text>
+<text class="t m" x="24" y="48">Four tokens with toy margins; not a measured passage.</text>
+<rect x="24" y="64" width="372" height="276" rx="10" fill="#FBF9F6" stroke="#C4B8A8"/>
+<text class="t m" x="112" y="82">state of token 1 to 4 (columns)</text>
+<text class="t m" x="36" y="212">token t</text>
+<text class="t m" x="36" y="226">(rows)</text>
+<rect x="112" y="96" width="52" height="52" rx="4" fill="#E8F0F7" stroke="#4B6787" stroke-width="1.2"/>
+<text class="t h" x="138" y="126" text-anchor="middle">D1</text>
+<rect x="168" y="96" width="52" height="52" rx="4" fill="#FBF9F6" stroke="#C4B8A8" stroke-width="0.8" stroke-dasharray="5 4"/>
+<text class="t m" x="194" y="128" text-anchor="middle">0</text>
+<rect x="224" y="96" width="52" height="52" rx="4" fill="#FBF9F6" stroke="#C4B8A8" stroke-width="0.8" stroke-dasharray="5 4"/>
+<text class="t m" x="250" y="128" text-anchor="middle">0</text>
+<rect x="280" y="96" width="52" height="52" rx="4" fill="#FBF9F6" stroke="#C4B8A8" stroke-width="0.8" stroke-dasharray="5 4"/>
+<text class="t m" x="306" y="128" text-anchor="middle">0</text>
+<rect x="112" y="152" width="52" height="52" rx="4" fill="#EDE8E1" stroke="#7F786D" stroke-width="0.8"/>
+<text class="t s" x="138" y="184" text-anchor="middle">*</text>
+<rect x="168" y="152" width="52" height="52" rx="4" fill="#E8F0F7" stroke="#4B6787" stroke-width="1.2"/>
+<text class="t h" x="194" y="182" text-anchor="middle">D2</text>
+<rect x="224" y="152" width="52" height="52" rx="4" fill="#FBF9F6" stroke="#C4B8A8" stroke-width="0.8" stroke-dasharray="5 4"/>
+<text class="t m" x="250" y="184" text-anchor="middle">0</text>
+<rect x="280" y="152" width="52" height="52" rx="4" fill="#FBF9F6" stroke="#C4B8A8" stroke-width="0.8" stroke-dasharray="5 4"/>
+<text class="t m" x="306" y="184" text-anchor="middle">0</text>
+<rect x="112" y="208" width="52" height="52" rx="4" fill="#EDE8E1" stroke="#7F786D" stroke-width="0.8"/>
+<text class="t s" x="138" y="240" text-anchor="middle">*</text>
+<rect x="168" y="208" width="52" height="52" rx="4" fill="#EDE8E1" stroke="#7F786D" stroke-width="0.8"/>
+<text class="t s" x="194" y="240" text-anchor="middle">*</text>
+<rect x="224" y="208" width="52" height="52" rx="4" fill="#F3E8E0" stroke="#A67C52" stroke-width="2.4"/>
+<text class="t h" x="250" y="232" text-anchor="middle">D3</text>
+<text class="t m" x="250" y="248" text-anchor="middle">unstable</text>
+<rect x="280" y="208" width="52" height="52" rx="4" fill="#FBF9F6" stroke="#C4B8A8" stroke-width="0.8" stroke-dasharray="5 4"/>
+<text class="t m" x="306" y="240" text-anchor="middle">0</text>
+<rect x="112" y="264" width="52" height="52" rx="4" fill="#EDE8E1" stroke="#7F786D" stroke-width="0.8"/>
+<text class="t s" x="138" y="296" text-anchor="middle">*</text>
+<rect x="168" y="264" width="52" height="52" rx="4" fill="#EDE8E1" stroke="#7F786D" stroke-width="0.8"/>
+<text class="t s" x="194" y="296" text-anchor="middle">*</text>
+<rect x="224" y="264" width="52" height="52" rx="4" fill="#EDE8E1" stroke="#7F786D" stroke-width="0.8"/>
+<text class="t s" x="250" y="296" text-anchor="middle">*</text>
+<rect x="280" y="264" width="52" height="52" rx="4" fill="#E8F0F7" stroke="#4B6787" stroke-width="1.2"/>
+<text class="t h" x="306" y="294" text-anchor="middle">D4</text>
+<text class="t m" x="40" y="330">* earlier token affects later one; 0 never the reverse</text>
+<rect x="412" y="64" width="324" height="276" rx="10" fill="#FBF9F6" stroke="#C4B8A8"/>
+<text class="t h" x="428" y="88">Token margins and the passage margin</text>
+<rect x="450" y="245.7" width="258" height="38.3" fill="#F3E8E0"/>
+<text class="t m" x="456" y="278.0">past the edge (below 0)</text>
+<line x1="450" y1="245.7" x2="708" y2="245.7" stroke="#A89B8C" stroke-dasharray="5 4"/>
+<text class="t m" x="436" y="249.7">0</text>
+<path d="M 470.0 169.1 L 542.7 169.1 L 542.7 197.9 L 615.3 197.9 L 615.3 264.9 L 688.0 264.9 L 688.0 264.9" fill="none" stroke="#2C2924" stroke-width="2"/>
+<circle cx="470.0" cy="169.1" r="5" fill="#4B6787" stroke="#FBF9F6" stroke-width="1"/>
+<text class="t m" x="456.0" y="300">token 1</text>
+<circle cx="542.7" cy="197.9" r="5" fill="#4B6787" stroke="#FBF9F6" stroke-width="1"/>
+<text class="t m" x="528.7" y="300">token 2</text>
+<circle cx="615.3" cy="264.9" r="5" fill="#4B6787" stroke="#FBF9F6" stroke-width="1"/>
+<text class="t m" x="601.3" y="300">token 3</text>
+<circle cx="688.0" cy="188.3" r="5" fill="#4B6787" stroke="#FBF9F6" stroke-width="1"/>
+<text class="t m" x="674.0" y="300">token 4</text>
+<circle cx="438" cy="106" r="4" fill="#4B6787"/>
+<text class="t m" x="450" y="110">dots: each token's own margin</text>
+<line x1="428" y1="122" x2="446" y2="122" stroke="#2C2924" stroke-width="2"/>
+<text class="t m" x="450" y="126">line: the passage margin, a running minimum</text>
+<rect x="24" y="354" width="712" height="30" rx="8" fill="#EAF1E5" stroke="#6F8D5E"/>
+<text class="t s" x="40" y="373">Eigenvalues come from the diagonal blocks alone, so a passage is only as stable as its weakest token.</text>
+</svg>
