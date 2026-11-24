@@ -2,7 +2,7 @@
 title: "Feigenbaum constants"
 slug: "feigenbaum-constant"
 summary: "Two universal numbers of period-doubling cascades in smooth one-hump maps with a quadratic top: the gaps between doublings shrink by δ ≈ 4.669, and distances on the cycle near the top of the hump by α ≈ 2.503."
-draft: true
+draft: false
 pro_reviewed: true
 og_image: "feigenbaum-constant-card.png"
 og_image_alt: "Ratios of successive gaps between period doublings of the logistic map for doubling index n = 2 to 7: 4.7514, 4.6563, 4.6682, 4.6687, 4.6691 and 4.6692, settling onto a dashed line at delta = 4.6692."
@@ -46,7 +46,5 @@ def gap_ratios(onsets):
 ## What a matching ratio does not prove
 
 Ratios close to \(\delta\) at finite order are numerical agreement with the universality class, not a proof of membership: other mechanisms can produce similar numbers over a few doublings, and onsets read from finite runs rather than computed carry their own bias. The constants also say nothing about what a system computes, only about the geometry of its cascade.
-
-The [field guide to the dynamics of looped transformers]({{< relref "posts/2026/11/looped-transformer-dynamics/index.md" >}}) compares a cascade inside a trained looped model with \(\delta\).
 
 See also: [period-doubling bifurcation]({{< relref "knowledge-base/glossary/period-doubling/index.md" >}}), [iterated map]({{< relref "knowledge-base/glossary/iterated-map/index.md" >}}), [Lyapunov exponent]({{< relref "knowledge-base/glossary/lyapunov-exponent/index.md" >}}).

@@ -2,7 +2,7 @@
 title: "Simultaneous confidence intervals"
 slug: "simultaneous-confidence-interval"
 summary: "A set of confidence intervals built so that, with at least the stated confidence, all of them cover their true values at the same time, rather than each one separately."
-draft: true
+draft: false
 pro_reviewed: true
 og_image: "simultaneous-confidence-interval-card.png"
 og_image_alt: "Left: the chance that at least one of m separate 95 percent intervals misses rises to 46 percent at m = 12, while Bonferroni intervals stay at or below 5 percent. Right: the price, Bonferroni intervals 1.46 times wider at m = 12."
@@ -57,7 +57,5 @@ def bonferroni_z(m, alpha=0.05):
 Bonferroni's construction is conservative. The union bound counts a repetition in which several intervals miss once for each of them, so the true chance of any miss is below \(\alpha\): only slightly for independent comparisons (0.049 at \(m=12\)), and far below when misses tend to come together, as for strongly correlated estimates. Constructions that use the joint distribution of the estimates, such as a multiplier taken from the distribution of the largest of the \(m\) errors measured in standard errors, can give the same guarantee with narrower intervals when that distribution is known or well estimated.
 
 Picking the most striking rows of the set after seeing the data is covered, because every interval covers at once; comparisons added to the set after seeing the data are not, so the set must be fixed in advance unless a method built for data-dependent selection is used. Coverage is a property of the procedure over repetitions, not the probability that one computed interval contains the truth. And a claim that an effect is negligible needs the whole interval inside the margin: "within ±0.01" means that both ends lie inside it.
-
-The [field guide to the dynamics of looped transformers]({{< relref "posts/2026/11/looped-transformer-dynamics/index.md" >}}) reports simultaneous 95% intervals wherever a figure or table compares many models or rows.
 
 See also: [p-value]({{< relref "knowledge-base/glossary/p-value/index.md" >}}), [bootstrap]({{< relref "knowledge-base/glossary/bootstrap/index.md" >}}), [standard deviation]({{< relref "knowledge-base/glossary/standard-deviation/index.md" >}}).

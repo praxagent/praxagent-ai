@@ -2,7 +2,7 @@
 title: "Non-normal matrix"
 slug: "non-normal-matrix"
 summary: "A matrix that does not commute with its conjugate transpose; its eigenvalues can all be small while a single step still stretches some vectors."
-draft: true
+draft: false
 pro_reviewed: true
 og_image: "non-normal-matrix-card.png"
 og_image_alt: "Length of A to the power k times v against k for a toy 2-by-2 matrix whose eigenvalues are both 0.5: the length jumps from 1 to about 4 at the first step, stays near 4, then decays, while the eigenvalue rate 0.5 to the k falls steadily from the start."
@@ -62,7 +62,5 @@ def lengths_of_powers(a, v, steps):
 ## What non-normality does and does not imply
 
 Non-normality is not instability. With \(\rho(A)<1\), every disturbance eventually decays, and some norm (a measure of vector length) adapted to \(A\), generally not the Euclidean one, shrinks every nonzero vector at every step. Nor does non-normality by itself mean growth: a non-normal matrix can have \(\sigma_{\max}<1\) and shrink every nonzero vector in one step. What fails is the inference from \(\rho<1\) to one-step Euclidean contraction, \(\sigma_{\max}<1\): convergence-rate and error bounds that need such contraction apply only once \(\sigma_{\max}<1\) has been checked directly. In many dimensions the transient factor can be large, and eigenvalues alone hide it. For an [iterated map]({{< relref "knowledge-base/glossary/iterated-map/index.md" >}}), a rule applied again and again to its own output, the [Jacobian]({{< relref "knowledge-base/glossary/jacobian/index.md" >}}) at a fixed point (a state the map leaves unchanged) is the matrix of first derivatives there, and its eigenvalues are the fixed point's [multipliers]({{< relref "knowledge-base/glossary/multiplier/index.md" >}}). So a fixed point can attract while one step still stretches some small disturbances.
-
-The [field guide to the dynamics of looped transformers]({{< relref "posts/2026/11/looped-transformer-dynamics/index.md" >}}) compares spectral radius with one-step stretch at the settled states of looped models.
 
 See also: [multiplier]({{< relref "knowledge-base/glossary/multiplier/index.md" >}}), [stability edge and margin]({{< relref "knowledge-base/glossary/stability-edge/index.md" >}}), [block-triangular matrix]({{< relref "knowledge-base/glossary/block-triangular-matrix/index.md" >}}).

@@ -2,7 +2,7 @@
 title: "Kaplan–Yorke dimension"
 slug: "kaplan-yorke-dimension"
 summary: "An estimate of a chaotic attractor's dimension from its Lyapunov exponents: the largest dimension in which small volumes do not shrink in the long run, plus the fraction of the next direction needed to make them shrink."
-draft: true
+draft: false
 pro_reviewed: true
 og_image: "kaplan-yorke-dimension-card.png"
 og_image_alt: "The Hénon attractor, a thin folded band of points, beside the running sum of its two Lyapunov exponents, 0.42 and then minus 1.20, which crosses zero at 1.26."
@@ -62,7 +62,5 @@ def kaplan_yorke(exponents):
 ## What the estimate does not establish
 
 The Kaplan–Yorke conjecture proposes that the estimate equals the information dimension of the attractor's natural measure, the long-run share of time an orbit spends in each region; that dimension says how fast the information needed to name the small cell holding the orbit grows as the cells shrink. The conjecture is proved for some classes of systems, not in general. The estimate is built from growth rates rather than from the set's geometry, and it can differ from dimensions of the set itself, such as the box-counting dimension, which says how fast the number of small boxes needed to cover the set grows as the boxes shrink. Computed from a finite orbit, the exponents are finite-time estimates, and so is the dimension. The formula uses only the exponents up to the one that first makes the running sum negative, so a few leading exponents suffice when that happens among them. When it does not, all one learns is that the estimate is at least the number of exponents computed; the helper above, which assumes a complete spectrum, would return only that lower bound. And a chaotic transient, a long wander that eventually settles, can show positive exponents and a positive estimate over a window even when no chaotic attractor exists.
-
-The [field guide to the dynamics of looped transformers]({{< relref "posts/2026/11/looped-transformer-dynamics/index.md" >}}) applies this estimate to looped transformers.
 
 See also: [Lyapunov exponent]({{< relref "knowledge-base/glossary/lyapunov-exponent/index.md" >}}), [Oseledets theorem]({{< relref "knowledge-base/glossary/oseledets-theorem/index.md" >}}), [period-doubling bifurcation]({{< relref "knowledge-base/glossary/period-doubling/index.md" >}}), [iterated map]({{< relref "knowledge-base/glossary/iterated-map/index.md" >}}).

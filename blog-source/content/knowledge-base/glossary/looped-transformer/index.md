@@ -2,7 +2,7 @@
 title: "Looped transformer"
 slug: "looped-transformer"
 summary: "A transformer that applies one shared group of layers to its own output several times, so the number of passes, and with it the depth, can be chosen when it runs."
-draft: true
+draft: false
 pro_reviewed: true
 og_image: "looped-transformer-card.png"
 og_image_alt: "An ordinary transformer drawn as eight distinct layers beside a looped transformer drawn as a prelude, one shared core that may hold several blocks and feeds its output back into itself for a chosen number of passes, with the input re-entering, and a coda."
@@ -58,7 +58,5 @@ def block_applications(prelude, core, coda, passes):
 ## What looping does not guarantee
 
 Running more passes does not imply that the state settles, and a settled state need not be a better prediction. A model trained to be read after exactly \(K\) passes was never asked what its later states mean, so reading it after more passes is a new use of the model, not a longer version of the old one. Whether extra passes help is a measured property of a model, a task and an input length, not a consequence of the architecture.
-
-The [field guide to the dynamics of looped transformers]({{< relref "posts/2026/11/looped-transformer-dynamics/index.md" >}}) treats released looped models as iterated maps and measures when extra passes help.
 
 See also: [transformer]({{< relref "knowledge-base/glossary/transformer/index.md" >}}), [residual stream]({{< relref "knowledge-base/glossary/residual-stream/index.md" >}}), [iterated map]({{< relref "knowledge-base/glossary/iterated-map/index.md" >}}), [causal attention]({{< relref "knowledge-base/glossary/causal-attention/index.md" >}}).

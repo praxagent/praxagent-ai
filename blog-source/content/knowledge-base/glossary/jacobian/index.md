@@ -2,7 +2,7 @@
 title: "Jacobian"
 slug: "jacobian"
 summary: "The matrix of first partial derivatives of a map: how each output responds to a small change in each input, and so, where the map is differentiable, its best linear stand-in near one point."
-draft: true
+draft: false
 pro_reviewed: true
 og_image: "jacobian-card.png"
 og_image_alt: "A small circle of inputs around a point, its exact image under a toy map beside the Jacobian's linear prediction, and the error of that prediction shrinking like the square of the circle's radius."
@@ -64,7 +64,5 @@ For an [iterated map]({{< relref "knowledge-base/glossary/iterated-map/index.md"
 ## What the Jacobian does not tell you
 
 The Jacobian is local. It describes the map near one point, for nudges small enough that the nonlinear remainder is negligible next to the nudge; a larger change can respond quite differently, and the Jacobian at another point can be entirely different. The partial derivatives can even exist where the map is not differentiable, and there \(J\) is no stand-in at all: \(f(x,y)=xy/(x^{2}+y^{2})\), with \(f(0,0)=0\), has both partial derivatives zero at the origin, yet equals \(1/2\) at every other point of the diagonal \(x=y\). At a fixed point, the eigenvalues describe what many repeated steps do to a small nudge, not how far one step can stretch it: a [non-normal]({{< relref "knowledge-base/glossary/non-normal-matrix/index.md" >}}) Jacobian with small eigenvalues can still amplify some nudges many times over. A finite-difference Jacobian is only as accurate as its step \(h\) allows: too large a step adds curvature, too small a step adds rounding error.
-
-The [field guide to the dynamics of looped transformers]({{< relref "posts/2026/11/looped-transformer-dynamics/index.md" >}}) works with the Jacobian of one pass of a looped model at a settled state, which is never written down but probed through Jacobian-vector products.
 
 See also: [multiplier]({{< relref "knowledge-base/glossary/multiplier/index.md" >}}), [forward-mode automatic differentiation]({{< relref "knowledge-base/glossary/forward-mode-automatic-differentiation/index.md" >}}), [Arnoldi iteration]({{< relref "knowledge-base/glossary/arnoldi-iteration/index.md" >}}), [block-triangular matrix]({{< relref "knowledge-base/glossary/block-triangular-matrix/index.md" >}}), [non-normal matrix]({{< relref "knowledge-base/glossary/non-normal-matrix/index.md" >}}).

@@ -2,7 +2,7 @@
 title: "Iterated map"
 slug: "iterated-map"
 summary: "A rule applied again and again to its own output; the sequence it produces can settle, approach a repeating cycle, or wander chaotically."
-draft: true
+draft: false
 pro_reviewed: true
 og_image: "iterated-map-card.png"
 og_image_alt: "Three cobweb diagrams of the logistic map: at r = 2.8 the path approaches a fixed point, at r = 3.2 it approaches a two-point cycle, and at r = 3.9 it shows no repeat in the 60 drawn steps."
@@ -49,6 +49,6 @@ def orbit(f, x0, steps):
 
 A finite orbit cannot by itself tell a long transient from an attractor, a long cycle from chaos, or a slow approach from a stall. In finite-precision arithmetic every step is rounded, so a computed orbit is a numerical observation; a chaotic one soon differs from the exact orbit of the same start, even when its statistics remain meaningful.
 
-In a [looped transformer]({{< relref "knowledge-base/glossary/looped-transformer/index.md" >}}) with its input held fixed, one pass of the shared core is an iterated map of the whole internal state; the [field guide to the dynamics of looped transformers]({{< relref "posts/2026/11/looped-transformer-dynamics/index.md" >}}) uses that view.
+In a [looped transformer]({{< relref "knowledge-base/glossary/looped-transformer/index.md" >}}) with its input held fixed, one pass of the shared core is an iterated map of the whole internal state.
 
 See also: [Lyapunov exponent]({{< relref "knowledge-base/glossary/lyapunov-exponent/index.md" >}}), [basin of attraction]({{< relref "knowledge-base/glossary/basin-of-attraction/index.md" >}}), [multiplier]({{< relref "knowledge-base/glossary/multiplier/index.md" >}}), [period-doubling bifurcation]({{< relref "knowledge-base/glossary/period-doubling/index.md" >}}).

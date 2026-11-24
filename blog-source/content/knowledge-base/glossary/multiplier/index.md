@@ -2,7 +2,7 @@
 title: "Multiplier (fixed-point stability)"
 slug: "multiplier"
 summary: "An eigenvalue of a map's Jacobian at a fixed point: the factor by which a small displacement along one direction is multiplied on every step."
-draft: true
+draft: false
 pro_reviewed: true
 og_image: "multiplier-card.png"
 og_image_alt: "The complex plane with the unit circle shaded: toy multipliers lie inside it, so the fixed point attracts, and three arrows show the ways a multiplier can leave: through minus 1, through plus 1, or as a complex pair elsewhere on the circle."
@@ -58,7 +58,5 @@ def multipliers_2x2(a, b, c, d):
 ## What multipliers do not tell you
 
 Multipliers describe only the linear response at one fixed point. They say nothing about states far away, about other fixed points, or about how large a disturbance grows before it decays: a matrix whose multipliers are all small can still stretch some vectors a great deal in one step (see [non-normal matrix]({{< relref "knowledge-base/glossary/non-normal-matrix/index.md" >}})). An eigensolver that returns only the leading multipliers can also miss the one that matters for a given question, such as the one nearest \(-1\).
-
-The [field guide to the dynamics of looped transformers]({{< relref "posts/2026/11/looped-transformer-dynamics/index.md" >}}) computes multipliers at the settled states of released looped models.
 
 See also: [monodromy]({{< relref "knowledge-base/glossary/monodromy/index.md" >}}), [stability edge and margin]({{< relref "knowledge-base/glossary/stability-edge/index.md" >}}), [non-normal matrix]({{< relref "knowledge-base/glossary/non-normal-matrix/index.md" >}}), [basin of attraction]({{< relref "knowledge-base/glossary/basin-of-attraction/index.md" >}}).

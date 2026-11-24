@@ -2,7 +2,7 @@
 title: "Stability edge and margin"
 slug: "stability-edge"
 summary: "For an update that moves a state only part of the way to a map's output, the step size below which a fixed point attracts and above which it is unstable, and how far the usual step lies below it."
-draft: true
+draft: false
 pro_reviewed: true
 og_image: "stability-edge-card.png"
 og_image_alt: "Three nested disks that all touch the point 1 on the complex plane: the unit disk for step 1, a smaller dashed disk for step 1.25 and a still smaller one for step 2. A toy multiplier at minus 0.6 lies on the boundary of the step-1.25 disk, and one at 0.9 lies inside all three."
@@ -62,7 +62,5 @@ def stability_edge(multipliers):
 ## What the edge does not tell you
 
 The edge is a statement about the linear stability of one fixed point. It does not say what motion follows past the edge, whether the relaxed loop started somewhere else ever reaches this fixed point, or whether a different step gives a better result for whatever the map computes. It is also only as good as the multipliers found: a minimum over a partial list can overestimate the true edge. A separate step for each part of the state can be analyzed part by part when the Jacobian is block triangular in those parts, with every block on one side of the diagonal zero: each diagonal block then has its own multipliers, relaxed by its own step, and its own edge. A causal model with one step per token is such a case, because each token's update depends only on itself and earlier tokens (see [block-triangular matrix]({{< relref "knowledge-base/glossary/block-triangular-matrix/index.md" >}})). Otherwise coupling between the parts can change the relaxed multipliers, so they must be computed for the whole state.
-
-The [field guide to the dynamics of looped transformers]({{< relref "posts/2026/11/looped-transformer-dynamics/index.md" >}}) tests predicted edges in released looped models.
 
 See also: [multiplier]({{< relref "knowledge-base/glossary/multiplier/index.md" >}}), [period-doubling bifurcation]({{< relref "knowledge-base/glossary/period-doubling/index.md" >}}), [block-triangular matrix]({{< relref "knowledge-base/glossary/block-triangular-matrix/index.md" >}}), [non-normal matrix]({{< relref "knowledge-base/glossary/non-normal-matrix/index.md" >}}).

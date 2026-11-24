@@ -2,8 +2,8 @@
 title: "Arnoldi iteration"
 slug: "arnoldi-iteration"
 summary: "A method that finds a few eigenvalues of a very large matrix using only its products with vectors, by building an orthonormal basis of the directions those products reach."
-draft: true
-pro_reviewed: false
+draft: false
+pro_reviewed: true
 og_image: "arnoldi-iteration-card.png"
 og_image_alt: "Left: the eigenvalues of a 200 by 200 matrix in the complex plane, a bulk inside radius 0.55 and four outliers, with Ritz values after 10 and 40 steps landing on the outliers. Right: the distance from each outlier to its nearest Ritz value, with one curve for the complex-conjugate pair, falling geometrically to about ten digits by step 40."
 ---
@@ -106,12 +106,10 @@ for k in (1, 2, 3, 4):
     print(k, f"{theta[i].real:+.6f}", f"{np.linalg.norm(A @ y - theta[i].real * y):.1e}")
 ```
 
-With a gap this wide, plain *power iteration*, which repeatedly multiplies one vector by \(A\) and watches how much it stretches, would also find \(-0.5\) in a few products. Arnoldi iteration earns its keep because the same products also give the next few Ritz values, including complex-conjugate pairs that power iteration cannot separate, each with its own residual. A small residual certifies that \(\theta\) is an eigenvalue of \(A\); it does not certify that no larger eigenvalue was missed, which is the subject of the next section.
+With a gap this wide, plain *power iteration*, which repeatedly multiplies one vector by \(A\) and watches how much it stretches, would also find \(-0.5\) in a few products. Arnoldi iteration earns its keep because the same products also give the next few Ritz values, including complex-conjugate pairs that power iteration cannot separate, each with its own residual. A small residual certifies that \(\theta\) is an exact eigenvalue of a matrix that differs from \(A\) by a perturbation stretching no vector by more than the residual. For a symmetric \(A\), \(\theta\) then lies within the residual of an eigenvalue of \(A\); for a strongly non-normal \(A\) it can lie much farther from one. The residual also does not certify that no larger eigenvalue was missed, which is the subject of the next section.
 
 ## What Ritz values do not tell you
 
 Arnoldi iteration finds extreme and outlying eigenvalues first, and it may need many steps, or in practice never get there, for eigenvalues inside a dense cluster. A run that stops early can therefore miss the eigenvalue that matters: for a stability question, a missed multiplier near \(-1\) or outside the unit circle makes a state look safer than it is. To aim at a chosen point \(\sigma\), such as \(-1\), *shift-invert* Arnoldi runs the same steps on \((A-\sigma I)^{-1}\), with \(I\) the identity matrix: an eigenvalue \(\mu\) of \(A\) becomes \(1/(\mu-\sigma)\), largest for \(\mu\) nearest \(\sigma\), at the cost of solving a linear system at every step. For strongly [non-normal]({{< relref "knowledge-base/glossary/non-normal-matrix/index.md" >}}) matrices, whose eigenvectors can be nearly parallel, Ritz values can wander before they settle and sit far from any eigenvalue for many steps. In floating point the basis slowly loses orthogonality, so practical codes reorthogonalize by repeating the subtraction. Before a Ritz value \(\theta\) is trusted, it should be confirmed by the residual \(\lVert Av-\theta v\rVert\) of its Ritz vector \(v=Q_k y\), where \(y\) is a unit eigenvector of \(H_k\) for \(\theta\).
-
-The [field guide to the dynamics of looped transformers]({{< relref "posts/2026/11/looped-transformer-dynamics/index.md" >}}) finds the leading multipliers of looped transformers with an Arnoldi eigensolver fed by Jacobian-vector products.
 
 See also: [multiplier]({{< relref "knowledge-base/glossary/multiplier/index.md" >}}), [Jacobian]({{< relref "knowledge-base/glossary/jacobian/index.md" >}}), [forward-mode automatic differentiation]({{< relref "knowledge-base/glossary/forward-mode-automatic-differentiation/index.md" >}}), [non-normal matrix]({{< relref "knowledge-base/glossary/non-normal-matrix/index.md" >}}).

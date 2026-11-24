@@ -2,7 +2,7 @@
 title: "Perplexity"
 slug: "perplexity"
 summary: "The exponential of a model's average next-token loss on a text, read as an effective number of choices: perplexity k means the same loss as giving every token that came next probability 1/k."
-draft: true
+draft: false
 pro_reviewed: true
 og_image: "perplexity-card.png"
 og_image_alt: "Perplexity rising exponentially with the average next-token loss, with marks at ln 2, ln 4 and ln 10 nats, beside two toy two-token texts, with probabilities one quarter and one quarter or one half and one eighth, that both have perplexity 4."
@@ -52,7 +52,5 @@ def perplexity(probs):
 ## What perplexity does not tell you
 
 Perplexity scores only the probabilities given to the tokens that came next, so it does not measure how uncertain the model was. A model that gives a wrong token 0.75 and the true one 0.25 has perplexity 4 on that token, like one that gives each of four tokens 0.25, yet its prediction is far more concentrated: its [next-token entropy]({{< relref "knowledge-base/glossary/next-token-entropy/index.md" >}}) is 0.56 nats against \(\ln4\approx1.39\). Perplexity is per token, so it depends on the [tokenizer]({{< relref "knowledge-base/glossary/tokenization/index.md" >}}): models that split the same text into different numbers of tokens are not comparable until both are converted to a common unit, such as nats per byte or per word. It depends on the text too, and a value means something only for the text it was measured on. The base of the logarithm does not matter if it is used consistently: 2 raised to the loss in bits gives the same number. An average hides individual tokens, so a small change in perplexity can come from many tiny changes or from a few large ones in opposite directions. And a single probability of zero would make the loss, and the perplexity, infinite.
-
-The [field guide to the dynamics of looped transformers]({{< relref "posts/2026/11/looped-transformer-dynamics/index.md" >}}) reports changes of next-token loss in nats per token and converts them to perplexity ratios.
 
 See also: [log loss]({{< relref "knowledge-base/glossary/log-loss/index.md" >}}), [nat]({{< relref "knowledge-base/glossary/nat/index.md" >}}), [tokenization]({{< relref "knowledge-base/glossary/tokenization/index.md" >}}), [next-token entropy]({{< relref "knowledge-base/glossary/next-token-entropy/index.md" >}}).

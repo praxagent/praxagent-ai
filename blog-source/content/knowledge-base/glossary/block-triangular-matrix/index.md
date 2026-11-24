@@ -2,7 +2,7 @@
 title: "Block-triangular matrix"
 slug: "block-triangular-matrix"
 summary: "A matrix whose blocks on one side of the diagonal are all zero; its eigenvalues are exactly those of its diagonal blocks."
-draft: true
+draft: false
 pro_reviewed: true
 og_image: "block-triangular-matrix-card.png"
 og_image_alt: "A four-by-four grid of token blocks with zeros above the diagonal and the third diagonal block marked unstable, beside a staircase plot in which the running minimum of the token margins drops below zero at token 3."
@@ -46,7 +46,7 @@ Toy values, no model. With two tokens of one number each,
 J=\begin{bmatrix}0.5 & 0\\ 3 & -1.2\end{bmatrix}
 \]
 
-has eigenvalues 0.5 and \(-1.2\), whatever the 3 below the diagonal. For a real multiplier \(\mu<1\), the stability edge is \(\lambda_c=2/(1-\mu)\), the largest step at which the fixed point still attracts, and the margin is \(m=\lambda_c-1\), how far the plain pass, step 1, sits inside the edge. Token 1's margin is \(2/0.5-1=3\) and token 2's is \(2/2.2-1\approx-0.091\), so \(M(2)\approx-0.091\): the pair fails at token 2. Give token 2 alone the step \(\lambda_2=0.8\). Its row becomes 0.2 times the identity row plus 0.8 times the old row:
+has eigenvalues 0.5 and \(-1.2\), whatever the 3 below the diagonal. For a real multiplier \(\mu<1\), the stability edge is \(\lambda_c=2/(1-\mu)\): the fixed point attracts at every shorter positive step and is unstable at every longer one, and the margin is \(m=\lambda_c-1\), how far the plain pass, step 1, sits inside the edge. Token 1's margin is \(2/0.5-1=3\) and token 2's is \(2/2.2-1\approx-0.091\), so \(M(2)\approx-0.091\): the pair fails at token 2. Give token 2 alone the step \(\lambda_2=0.8\). Its row becomes 0.2 times the identity row plus 0.8 times the old row:
 
 \[
 J'=\begin{bmatrix}0.5 & 0\\ 2.4 & -0.76\end{bmatrix},
@@ -81,7 +81,5 @@ def running_minimum(values):
 ## What the triangular structure does not tell you
 
 The structure fixes the eigenvalues, not the size of transients: large blocks below the diagonal can make the matrix strongly [non-normal]({{< relref "knowledge-base/glossary/non-normal-matrix/index.md" >}}). The statement that the margin can only fall assumes that appending text leaves the earlier tokens' fixed point unchanged. And if an eigenvalue belongs to one diagonal block \(D_t\) only, its eigenvector is zero before token \(t\) but can be largest at a later token, so locate an unstable token by its block, not by where the eigenvector is largest; if several blocks share the eigenvalue, assigning it to one token can be ambiguous.
-
-The [field guide to the dynamics of looped transformers]({{< relref "posts/2026/11/looped-transformer-dynamics/index.md" >}}) uses this structure to name the token at which a long passage stops settling.
 
 See also: [causal attention]({{< relref "knowledge-base/glossary/causal-attention/index.md" >}}), [multiplier]({{< relref "knowledge-base/glossary/multiplier/index.md" >}}), [stability edge and margin]({{< relref "knowledge-base/glossary/stability-edge/index.md" >}}), [non-normal matrix]({{< relref "knowledge-base/glossary/non-normal-matrix/index.md" >}}).

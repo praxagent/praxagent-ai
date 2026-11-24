@@ -2,7 +2,7 @@
 title: "Period-doubling bifurcation"
 slug: "period-doubling"
 summary: "The change at which a fixed point or cycle loses stability through a multiplier of -1 and a cycle of twice the period branches off; repeated doublings can cascade into chaos."
-draft: true
+draft: false
 pro_reviewed: true
 og_image: "period-doubling-card.png"
 og_image_alt: "Bifurcation diagram of the logistic map for r from 2.8 to 4: one branch splits into two at r = 3, into four near 3.4495 and into eight near 3.5441, then dissolves into a chaotic band past the accumulation near 3.5699."
@@ -60,7 +60,5 @@ def logistic_two_cycle(r):
 ## What a doubling does not establish
 
 One doubling is not chaos, and it does not imply a cascade: a cycle can also lose stability through a multiplier of \(+1\) or a complex pair, and many routes end before period 4. A cascade seen in finite runs needs its onsets computed before the ratios of its gaps are compared with the [Feigenbaum constants]({{< relref "knowledge-base/glossary/feigenbaum-constant/index.md" >}}).
-
-The [field guide to the dynamics of looped transformers]({{< relref "posts/2026/11/looped-transformer-dynamics/index.md" >}}) follows a cascade inside a trained looped model.
 
 See also: [multiplier]({{< relref "knowledge-base/glossary/multiplier/index.md" >}}), [Feigenbaum constants]({{< relref "knowledge-base/glossary/feigenbaum-constant/index.md" >}}), [monodromy]({{< relref "knowledge-base/glossary/monodromy/index.md" >}}), [Lyapunov exponent]({{< relref "knowledge-base/glossary/lyapunov-exponent/index.md" >}}).
